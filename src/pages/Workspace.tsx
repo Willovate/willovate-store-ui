@@ -7,6 +7,7 @@ import ElementEditor from '../components/ElementEditor'
 import AIAssistant from '../components/AIAssistant'
 import PageManagerModal from '../components/PageManagerModal'
 import ContactSupportModal from '../components/ContactSupportModal'
+import PublishSuccessModal from '../components/PublishSuccessModal'
 import { 
   Home, 
   Gauge, 
@@ -18,7 +19,11 @@ import {
   LayoutTemplate, 
   Star, 
   Settings, 
-  HelpCircle 
+  HelpCircle,
+  Eye,
+  Send,
+  ChevronDown,
+  Sparkles
 } from 'lucide-react'
 import '../styles/workspace.css'
 
@@ -37,6 +42,7 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
   const [showAI, setShowAI] = useState(false)
   const [showPageManager, setShowPageManager] = useState(false)
   const [showSupportModal, setShowSupportModal] = useState(false)
+  const [showPublishSuccess, setShowPublishSuccess] = useState(false)
   const [previewMode, setPreviewMode] = useState<'desktop' | 'tablet' | 'mobile'>('desktop')
   const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -68,13 +74,15 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
 
   useEffect(() => {
     const handler = (e: BeforeUnloadEvent) => {
-      if (hasUnsavedChanges) {
+      if (hasUnsavedChanges || saveStatus === 'saving') {
         e.preventDefault()
+        e.returnValue = ''
+        return ''
       }
     }
     window.addEventListener('beforeunload', handler)
     return () => window.removeEventListener('beforeunload', handler)
-  }, [hasUnsavedChanges])
+  }, [hasUnsavedChanges, saveStatus])
 
   useEffect(() => {
     return () => {
@@ -159,6 +167,12 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
       )}
       {showSupportModal && (
         <ContactSupportModal onClose={() => setShowSupportModal(false)} />
+      )}
+      {showPublishSuccess && website && (
+        <PublishSuccessModal 
+          websiteId={website.id} 
+          onClose={() => setShowPublishSuccess(false)} 
+        />
       )}
       {/* Left Sidebar (Main Menu) */}
       <aside className="workspace-sidebar">
@@ -247,7 +261,7 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
           <header className="workspace-topbar">
             <div className="topbar-left">
               <div className="topbar-page-switcher" onClick={() => setShowPageManager(true)} style={{ cursor: 'pointer' }}>
-                {selectedPage ? selectedPage.title : 'Home'} <span style={{ fontSize: '0.6rem' }}>▼</span>
+                {selectedPage ? selectedPage.title : 'Home'} <ChevronDown size={14} />
               </div>
             </div>
             
@@ -260,14 +274,18 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
             </div>
 
             <div className="topbar-right">
-              <button className="topbar-btn outline" onClick={() => setShowAI(!showAI)}>
-                <span style={{ color: '#6b46c1' }}></span> AI Assistant
+              <button 
+                className="topbar-btn outline" 
+                style={{ borderColor: '#d6bcfa', color: '#6b46c1', backgroundColor: '#fff' }} 
+                onClick={() => setShowAI(!showAI)}
+              >
+                <Sparkles size={16} /> AI Assistant
               </button>
               <button 
                 className="topbar-btn outline"
                 onClick={() => window.open(`/preview/${websiteId}`, '_blank')}
               >
-                <span>👁</span> Preview
+                <Eye size={16} /> Preview
               </button>
               <button 
                 className="topbar-btn primary"
@@ -276,18 +294,18 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
                     setSaveStatus('saving')
                     await updateWebsite(websiteId!, { isPublished: true })
                     setSaveStatus('saved')
-                    alert('Website published successfully!')
+                    setShowPublishSuccess(true)
                   } catch (err) {
                     setSaveStatus('error')
                     alert('Failed to publish website')
                   }
                 }}
               >
-                Publish <span>▼</span>
+                <Send size={14} /> Publish <ChevronDown size={14} />
               </button>
               <div className="topbar-user">
                 <div className="user-avatar">A</div>
-                <span style={{ fontSize: '0.6rem' }}>▼</span>
+                <ChevronDown size={14} />
               </div>
             </div>
           </header>

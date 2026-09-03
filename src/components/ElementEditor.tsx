@@ -251,7 +251,7 @@ export default function ElementEditor({ element, onClose, onUpdate, onDelete }: 
         {isSaving && <div style={{ fontSize: '0.8rem', color: '#6b46c1', marginTop: '1rem' }}>Saving...</div>}
       </div>
 
-      {onDelete && element.elementType !== 'hero' && (
+      {onDelete && element.elementType !== 'hero' && !element.isRequired && (
         <div style={{ padding: '1.5rem', borderTop: '1px solid #eef0f5' }}>
           <button 
             type="button"

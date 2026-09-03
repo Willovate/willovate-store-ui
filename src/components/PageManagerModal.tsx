@@ -29,6 +29,12 @@ export default function PageManagerModal({
     e.preventDefault()
     if (!newPageTitle.trim()) return
 
+    const isDuplicate = pages.some(p => p.title.toLowerCase() === newPageTitle.trim().toLowerCase())
+    if (isDuplicate) {
+      alert('A page with this name already exists.')
+      return
+    }
+
     setIsLoading(true)
     try {
       const slug = newPageTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-')
@@ -45,6 +51,12 @@ export default function PageManagerModal({
 
   const handleUpdate = async (pageId: string) => {
     if (!editTitle.trim()) return
+
+    const isDuplicate = pages.some(p => p.id !== pageId && p.title.toLowerCase() === editTitle.trim().toLowerCase())
+    if (isDuplicate) {
+      alert('A page with this name already exists.')
+      return
+    }
 
     setIsLoading(true)
     try {
@@ -130,7 +142,7 @@ export default function PageManagerModal({
                       >
                         Edit
                       </button>
-                      {!page.isHomePage && (
+                      {!page.isHomePage && pages.length > 1 && (
                         <button 
                           onClick={() => handleDelete(page.id)}
                           style={{ ...styles.iconBtn, color: '#e53e3e' }}
