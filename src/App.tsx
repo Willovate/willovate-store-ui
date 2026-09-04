@@ -4,6 +4,7 @@ import { getProducts } from './lib/api'
 import { formatCurrency } from './lib/currency'
 import { useCart } from './hooks/useCart'
 import type { Product } from './types'
+import { PublishFlow } from './components/PublishFlow'
 
 const STORE_PROMISES = [
   ['Free delivery', 'On orders over ₹2,500'],
@@ -65,6 +66,7 @@ function App() {
   const [error, setError] = useState<string | null>(null)
   const [reloadKey, setReloadKey] = useState(0)
   const [cartOpen, setCartOpen] = useState(false)
+  const [showPublish, setShowPublish] = useState(false)
   const [newsletterSent, setNewsletterSent] = useState(false)
   const deferredSearch = useDeferredValue(search)
   const cart = useCart()
@@ -101,6 +103,10 @@ function App() {
     setCartOpen(true)
   }
 
+  if (showPublish) {
+    return <PublishFlow onBack={() => setShowPublish(false)} />
+  }
+
   return (
     <div className="site-shell">
       <div className="announcement">
@@ -119,6 +125,9 @@ function App() {
         </nav>
         <button className="cart-trigger" type="button" onClick={() => setCartOpen(true)}>
           Bag <span>{cart.count}</span>
+        </button>
+        <button type="button" onClick={() => setShowPublish(true)}>
+          Publish Website
         </button>
       </header>
 
