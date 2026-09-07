@@ -57,7 +57,7 @@ function ProductCard({
   )
 }
 
-function App() {
+function MainApp() {
   const [products, setProducts] = useState<Product[]>([])
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('All')
@@ -308,4 +308,12 @@ function App() {
   )
 }
 
-export default App
+import { AuthProvider } from './auth/AuthContext'
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <MainApp />
+    </AuthProvider>
+  )
+}

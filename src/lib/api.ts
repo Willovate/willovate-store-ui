@@ -7,6 +7,17 @@ interface ProductFilters {
   category?: string
 }
 
+export function getAuthHeaders(token?: string | null): Record<string, string> {
+  const headers: Record<string, string> = {
+    Accept: 'application/json',
+  }
+  if (token) {
+    headers.Authorization = `Bearer ${token}`
+  }
+  return headers
+}
+
+
 export async function getProducts(
   filters: ProductFilters = {},
   signal?: AbortSignal,

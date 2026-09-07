@@ -5,7 +5,9 @@ import { AuthLayout } from '../auth/AuthLayout'
 import { AuthStatus } from '../auth/AuthStatus'
 import { PasswordField } from '../auth/PasswordField'
 import { SocialAuthButtons } from '../auth/SocialAuthButtons'
+import { useAuth } from '../auth/AuthContext'
 import { register, ApiError } from '../lib/api'
+
 
 type FieldName = 'fullName' | 'email' | 'password' | 'terms'
 
@@ -110,6 +112,8 @@ export default function SignupPage() {
     })
   }
 
+  const { setSession } = useAuth()
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
@@ -132,17 +136,20 @@ export default function SignupPage() {
     const { firstName, lastName } = parseFullName(values.fullName)
 
     try {
-      await register({
+      const authResponse = await register({
         email: values.email.trim(),
         password: values.password,
         firstName,
         lastName,
       })
 
+      setSession(authResponse)
+
       setStatus({
         tone: 'success',
         message: 'Account created successfully!',
       })
+
     } catch (err: unknown) {
       if (err instanceof ApiError && err.status === 409) {
         setStatus({
