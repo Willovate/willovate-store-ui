@@ -75,3 +75,31 @@ export async function register(data: import('../types').RegisterRequest): Promis
 
   return response.json() as Promise<import('../types').AuthResponse>
 }
+
+export async function login(data: import('../types').LoginRequest): Promise<import('../types').AuthResponse> {
+  const response = await fetch(`${API_URL}/api/auth/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+
+  if (!response.ok) {
+    let errorMessage = `Login failed with status ${response.status}`
+    try {
+      const errorJson = await response.json()
+      if (errorJson && typeof errorJson === 'object' && 'message' in errorJson && typeof errorJson.message === 'string') {
+        errorMessage = errorJson.message
+      } else if (errorJson && typeof errorJson === 'object' && 'title' in errorJson && typeof errorJson.title === 'string') {
+        errorMessage = errorJson.title
+      }
+    } catch {
+      // JSON parsing failed, use fallback message
+    }
+    throw new ApiError(errorMessage, response.status)
+  }
+
+  return response.json() as Promise<import('../types').AuthResponse>
+}

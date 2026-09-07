@@ -6,94 +6,66 @@ import { AuthStatus } from '../auth/AuthStatus'
 import { PasswordField } from '../auth/PasswordField'
 import { SocialAuthButtons } from '../auth/SocialAuthButtons'
 import { useAuth } from '../auth/AuthContext'
-import { register, ApiError } from '../lib/api'
+import { login, ApiError } from '../lib/api'
 
-
-type FieldName = 'fullName' | 'email' | 'password' | 'terms'
-
-interface SignupValues {
-  fullName: string
-  email: string
-  password: string
-  terms: boolean
+interface LoginPageProps {
+  onNavigateToSignup?: () => void
+  onNavigateHome?: () => void
+  onAuthSuccess?: () => void
 }
 
-type SignupErrors = Partial<Record<FieldName, string>>
+type FieldName = 'email' | 'password'
+
+interface LoginValues {
+  email: string
+  password: string
+}
+
+type LoginErrors = Partial<Record<FieldName, string>>
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-function parseFullName(fullName: string): { firstName: string; lastName: string } {
-  const trimmed = fullName.trim()
-  const spaceIndex = trimmed.indexOf(' ')
-  if (spaceIndex === -1) {
-    return { firstName: trimmed, lastName: '' }
-  }
-  return {
-    firstName: trimmed.slice(0, spaceIndex),
-    lastName: trimmed.slice(spaceIndex + 1).trim(),
-  }
-}
-
-function validateField(field: FieldName, values: SignupValues): string | undefined {
-  if (field === 'fullName' && !values.fullName.trim()) {
-    return 'Enter your full name.'
-  }
-
+function validateField(field: FieldName, values: LoginValues): string | undefined {
   if (field === 'email') {
     if (!values.email.trim()) return 'Enter your work email.'
     if (!emailPattern.test(values.email)) return 'Enter a valid email address.'
   }
 
   if (field === 'password') {
-    if (!values.password) return 'Create a password.'
-    if (values.password.length < 8) {
-      return 'Your password must contain at least 8 characters.'
-    }
-  }
-
-  if (field === 'terms' && !values.terms) {
-    return 'Please agree to the Terms and Privacy Policy.'
+    if (!values.password) return 'Enter your password.'
   }
 
   return undefined
 }
 
-function validateForm(values: SignupValues): SignupErrors {
+function validateForm(values: LoginValues): LoginErrors {
   return {
-    fullName: validateField('fullName', values),
     email: validateField('email', values),
     password: validateField('password', values),
-    terms: validateField('terms', values),
   }
 }
 
-interface SignupPageProps {
-  onNavigateToLogin?: () => void
-  onNavigateHome?: () => void
-  onAuthSuccess?: () => void
-}
-
-export default function SignupPage({
-  onNavigateToLogin,
+export default function LoginPage({
+  onNavigateToSignup,
   onNavigateHome,
   onAuthSuccess,
-}: SignupPageProps = {}) {
-  const [values, setValues] = useState<SignupValues>({
-    fullName: '',
+}: LoginPageProps) {
+  const [values, setValues] = useState<LoginValues>({
     email: '',
     password: '',
-    terms: false,
   })
-  const [errors, setErrors] = useState<SignupErrors>({})
+  const [errors, setErrors] = useState<LoginErrors>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [status, setStatus] = useState<{
     tone: 'error' | 'info' | 'success'
     message: ReactNode
   } | null>(null)
 
-  const updateValue = <Field extends keyof SignupValues>(
+  const { setSession } = useAuth()
+
+  const updateValue = <Field extends keyof LoginValues>(
     field: Field,
-    value: SignupValues[Field],
+    value: LoginValues[Field],
   ) => {
     const nextValues = { ...values, [field]: value }
 
@@ -122,8 +94,6 @@ export default function SignupPage({
     })
   }
 
-  const { setSession } = useAuth()
-
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
@@ -143,57 +113,33 @@ export default function SignupPage({
 
     setIsSubmitting(true)
 
-    const { firstName, lastName } = parseFullName(values.fullName)
-
     try {
-      const authResponse = await register({
+      const authResponse = await login({
         email: values.email.trim(),
         password: values.password,
-        firstName,
-        lastName,
       })
 
       setSession(authResponse)
 
       setStatus({
         tone: 'success',
-        message: 'Account created successfully!',
+        message: 'Welcome back! Logging you in...',
       })
 
       if (onAuthSuccess) {
         onAuthSuccess()
       }
     } catch (err: unknown) {
-      if (err instanceof ApiError && err.status === 409) {
+      if (err instanceof ApiError && (err.status === 401 || err.status === 404)) {
         setStatus({
           tone: 'error',
-          message: (
-            <>
-              An account with this email already exists.{' '}
-              <button
-                type="button"
-                className="auth-status-action"
-                onClick={onNavigateToLogin}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  padding: 0,
-                  textDecoration: 'underline',
-                  cursor: 'pointer',
-                  color: 'inherit',
-                  font: 'inherit',
-                }}
-              >
-                Log in
-              </button>
-            </>
-          ),
+          message: 'Invalid email or password. Please try again.',
         })
       } else {
         const errorMessage =
           err instanceof Error
             ? err.message
-            : 'An unexpected error occurred during account creation. Please try again.'
+            : 'An unexpected error occurred during login. Please try again.'
         setStatus({
           tone: 'error',
           message: errorMessage,
@@ -206,8 +152,8 @@ export default function SignupPage({
 
   return (
     <AuthLayout brandPanel={<AuthBrandPanel />}>
-      {onNavigateHome && (
-        <div style={{ marginBottom: '1rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+        {onNavigateHome && (
           <button
             type="button"
             onClick={onNavigateHome}
@@ -222,11 +168,12 @@ export default function SignupPage({
           >
             ← Back to Store
           </button>
-        </div>
-      )}
+        )}
+      </div>
+
       <AuthFormHeader
-        title="Create your account"
-        description="Start free. Build at your own pace."
+        title="Welcome back"
+        description="Log in to access your Willovate workspace."
       />
 
       <SocialAuthButtons
@@ -242,32 +189,9 @@ export default function SignupPage({
 
       <form className="auth-signup-form" noValidate onSubmit={handleSubmit}>
         <div className="auth-field">
-          <label htmlFor="signup-full-name">Full name</label>
+          <label htmlFor="login-email">Work email</label>
           <input
-            id="signup-full-name"
-            name="fullName"
-            type="text"
-            value={values.fullName}
-            placeholder="Enter your full name"
-            onChange={(event) => updateValue('fullName', event.target.value)}
-            onBlur={() => validateOnBlur('fullName')}
-            autoComplete="name"
-            aria-invalid={Boolean(errors.fullName)}
-            aria-describedby={errors.fullName ? 'signup-full-name-error' : undefined}
-            disabled={isSubmitting}
-            required
-          />
-          {errors.fullName && (
-            <p className="auth-field-error" id="signup-full-name-error" role="alert">
-              {errors.fullName}
-            </p>
-          )}
-        </div>
-
-        <div className="auth-field">
-          <label htmlFor="signup-email">Work email</label>
-          <input
-            id="signup-email"
+            id="login-email"
             name="email"
             type="email"
             value={values.email}
@@ -277,12 +201,12 @@ export default function SignupPage({
             autoComplete="email"
             inputMode="email"
             aria-invalid={Boolean(errors.email)}
-            aria-describedby={errors.email ? 'signup-email-error' : undefined}
+            aria-describedby={errors.email ? 'login-email-error' : undefined}
             disabled={isSubmitting}
             required
           />
           {errors.email && (
-            <p className="auth-field-error" id="signup-email-error" role="alert">
+            <p className="auth-field-error" id="login-email-error" role="alert">
               {errors.email}
             </p>
           )}
@@ -296,39 +220,17 @@ export default function SignupPage({
           disabled={isSubmitting}
         />
 
-        <div className="auth-terms">
-          <input
-            id="signup-terms"
-            name="terms"
-            type="checkbox"
-            checked={values.terms}
-            onChange={(event) => updateValue('terms', event.target.checked)}
-            onBlur={() => validateOnBlur('terms')}
-            aria-invalid={Boolean(errors.terms)}
-            aria-describedby={errors.terms ? 'signup-terms-error' : undefined}
-            disabled={isSubmitting}
-            required
-          />
-          <label htmlFor="signup-terms">
-            I agree to the <a href="#terms">Terms</a> and{' '}
-            <a href="#privacy">Privacy Policy</a>.
-          </label>
-        </div>
-        {errors.terms && (
-          <p className="auth-field-error auth-terms-error" id="signup-terms-error" role="alert">
-            {errors.terms}
-          </p>
-        )}
-
         <button className="auth-submit-button" type="submit" disabled={isSubmitting}>
-          {isSubmitting ? 'Creating account...' : 'Create account'}
+          {isSubmitting ? 'Logging in...' : 'Log in'}
           <span aria-hidden="true">→</span>
         </button>
       </form>
 
       <p className="auth-bottom-switch">
-        Already have an account?{' '}
-        <button type="button" onClick={onNavigateToLogin}>Log in</button>
+        Don&apos;t have an account?{' '}
+        <button type="button" onClick={onNavigateToSignup}>
+          Create account
+        </button>
       </p>
 
       <aside className="auth-security-callout">
