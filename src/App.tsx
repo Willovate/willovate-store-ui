@@ -4,6 +4,7 @@ import { getProducts } from './lib/api'
 import { formatCurrency } from './lib/currency'
 import { useCart } from './hooks/useCart'
 import { useAuth } from './auth/AuthContext'
+import { ProgressSteps } from './auth/ProgressSteps'
 import SignupPage from './pages/SignupPage'
 import LoginPage from './pages/LoginPage'
 import type { Product } from './types'
@@ -129,7 +130,10 @@ function MainApp() {
 
   if (currentView === 'tell-us-your-idea') {
     return (
-      <div style={{ padding: '3rem', textAlign: 'center', fontFamily: 'sans-serif' }}>
+      <div style={{ padding: '3rem', textAlign: 'center', fontFamily: 'sans-serif', maxWidth: '600px', margin: '0 auto' }}>
+        <div style={{ background: '#080d2a', padding: '1.5rem', borderRadius: '12px', marginBottom: '2rem' }}>
+          <ProgressSteps currentStep={2} />
+        </div>
         <p className="kicker" style={{ color: 'var(--color-primary, #4f46e5)', fontWeight: 600 }}>Willovate One Onboarding · Step 02/03</p>
         <h2>Tell Us Your Idea</h2>
         <p style={{ maxWidth: '400px', margin: '1rem auto', color: '#666' }}>
@@ -138,20 +142,15 @@ function MainApp() {
         <button
           type="button"
           onClick={() => setCurrentView('store')}
-          style={{
-            padding: '0.75rem 1.5rem',
-            borderRadius: '9999px',
-            border: 'none',
-            background: '#111',
-            color: '#fff',
-            cursor: 'pointer',
-          }}
+          className="primary-link"
+          style={{ cursor: 'pointer', margin: '0 auto' }}
         >
           Return to Store
         </button>
       </div>
     )
   }
+
 
   return (
     <div className="site-shell">

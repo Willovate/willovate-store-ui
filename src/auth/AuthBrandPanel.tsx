@@ -1,10 +1,9 @@
 import { WillovateLogo } from './WillovateLogo'
+import { ProgressSteps, type OnboardingStep } from './ProgressSteps'
 
-const steps = [
-  ['01 / 03', 'Create account'],
-  ['02 / 03', 'Tell us your idea'],
-  ['03 / 03', 'Review your starting point'],
-]
+interface AuthBrandPanelProps {
+  currentStep?: OnboardingStep
+}
 
 const ecosystemCards = [
   {
@@ -63,7 +62,7 @@ function EcosystemCard({
   )
 }
 
-export function AuthBrandPanel() {
+export function AuthBrandPanel({ currentStep = 1 }: AuthBrandPanelProps) {
   return (
     <aside className="auth-brand-panel">
       <div className="auth-brand-panel-copy">
@@ -91,15 +90,7 @@ export function AuthBrandPanel() {
         <span><i className="auth-tool-icon auth-tool-icon-marketing" />Marketing</span>
       </div>
 
-      <ol className="auth-steps" aria-label="Account setup progress">
-        {steps.map(([number, label], index) => (
-          <li className={index === 0 ? 'is-current' : ''} key={number}>
-            <span className="auth-step-dot" aria-hidden="true" />
-            <strong>{number}</strong>
-            <span>{label}</span>
-          </li>
-        ))}
-      </ol>
+      <ProgressSteps currentStep={currentStep} />
     </aside>
   )
 }
