@@ -27,3 +27,40 @@ export async function getProducts(
 
   return response.json() as Promise<PagedResponse<Product>>
 }
+
+export class ApiError extends Error {
+  status: number
+  constructor(message: string, status: number) {
+    super(message)
+    this.status = status
+    this.name = 'ApiError'
+  }
+}
+
+export async function register(data: import('../types').RegisterRequest): Promise<import('../types').AuthResponse> {
+  const response = await fetch(`${API_URL}/api/auth/register`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+
+  if (!response.ok) {
+    let errorMessage = `Registration failed with status ${response.status}`
+    try {
+      const errorJson = await response.json()
+      if (errorJson && typeof errorJson === 'object' && 'message' in errorJson && typeof errorJson.message === 'string') {
+        errorMessage = errorJson.message
+      } else if (errorJson && typeof errorJson === 'object' && 'title' in errorJson && typeof errorJson.title === 'string') {
+        errorMessage = errorJson.title
+      }
+    } catch {
+      // JSON parsing failed, use fallback message
+    }
+    throw new ApiError(errorMessage, response.status)
+  }
+
+  return response.json() as Promise<import('../types').AuthResponse>
+}

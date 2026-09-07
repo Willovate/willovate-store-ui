@@ -1,10 +1,11 @@
-import { useState, type FormEvent } from 'react'
+import { useState, type FormEvent, type ReactNode } from 'react'
 import { AuthBrandPanel } from '../auth/AuthBrandPanel'
 import { AuthFormHeader } from '../auth/AuthFormHeader'
 import { AuthLayout } from '../auth/AuthLayout'
 import { AuthStatus } from '../auth/AuthStatus'
 import { PasswordField } from '../auth/PasswordField'
 import { SocialAuthButtons } from '../auth/SocialAuthButtons'
+import { register, ApiError } from '../lib/api'
 
 type FieldName = 'fullName' | 'email' | 'password' | 'terms'
 
@@ -18,6 +19,18 @@ interface SignupValues {
 type SignupErrors = Partial<Record<FieldName, string>>
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+function parseFullName(fullName: string): { firstName: string; lastName: string } {
+  const trimmed = fullName.trim()
+  const spaceIndex = trimmed.indexOf(' ')
+  if (spaceIndex === -1) {
+    return { firstName: trimmed, lastName: '' }
+  }
+  return {
+    firstName: trimmed.slice(0, spaceIndex),
+    lastName: trimmed.slice(spaceIndex + 1).trim(),
+  }
+}
 
 function validateField(field: FieldName, values: SignupValues): string | undefined {
   if (field === 'fullName' && !values.fullName.trim()) {
@@ -63,7 +76,7 @@ export default function SignupPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [status, setStatus] = useState<{
     tone: 'error' | 'info' | 'success'
-    message: string
+    message: ReactNode
   } | null>(null)
 
   const updateValue = <Field extends keyof SignupValues>(
@@ -97,8 +110,10 @@ export default function SignupPage() {
     })
   }
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+
+    if (isSubmitting) return
 
     const nextErrors = validateForm(values)
     setErrors(nextErrors)
@@ -114,14 +129,61 @@ export default function SignupPage() {
 
     setIsSubmitting(true)
 
-    window.setTimeout(() => {
-      setIsSubmitting(false)
+    const { firstName, lastName } = parseFullName(values.fullName)
+
+    try {
+      await register({
+        email: values.email.trim(),
+        password: values.password,
+        firstName,
+        lastName,
+      })
+
       setStatus({
         tone: 'success',
-        message: 'Your account details are ready. Account creation is not connected yet.',
+        message: 'Account created successfully!',
       })
-    }, 900)
+    } catch (err: unknown) {
+      if (err instanceof ApiError && err.status === 409) {
+        setStatus({
+          tone: 'error',
+          message: (
+            <>
+              An account with this email already exists.{' '}
+              {/* TODO: Navigate to LoginPage when routing is introduced. */}
+              <button
+                type="button"
+                className="auth-status-action"
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  padding: 0,
+                  textDecoration: 'underline',
+                  cursor: 'pointer',
+                  color: 'inherit',
+                  font: 'inherit',
+                }}
+              >
+                Log in
+              </button>
+            </>
+          ),
+        })
+      } else {
+        const errorMessage =
+          err instanceof Error
+            ? err.message
+            : 'An unexpected error occurred during account creation. Please try again.'
+        setStatus({
+          tone: 'error',
+          message: errorMessage,
+        })
+      }
+    } finally {
+      setIsSubmitting(false)
+    }
   }
+
 
   return (
     <AuthLayout brandPanel={<AuthBrandPanel />}>

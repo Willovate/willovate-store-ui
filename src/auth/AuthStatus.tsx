@@ -1,6 +1,8 @@
+import type { ReactNode } from 'react'
+
 interface AuthStatusProps {
   tone: 'error' | 'info' | 'success'
-  children: string
+  children: ReactNode
 }
 
 export function AuthStatus({ tone, children }: AuthStatusProps) {
