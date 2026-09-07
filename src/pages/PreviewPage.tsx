@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import type { Website } from '../types'
 import { getWebsite } from '../lib/workspace-api'
 import PageEditor from '../components/PageEditor'
+import { PublishModal } from '../components/PublishModal'
 import '../styles/workspace.css'
 
 export default function PreviewPage() {
   const { websiteId } = useParams<{ websiteId: string }>()
+  const navigate = useNavigate()
   const [website, setWebsite] = useState<Website | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState('')
@@ -94,6 +96,10 @@ export default function PreviewPage() {
               <option key={p.id} value={p.id}>{p.title} {p.isHomePage ? '(Home)' : ''}</option>
             ))}
           </select>
+          <PublishModal
+            websiteId={websiteId!}
+            onBackToWorkspace={() => navigate(`/workspace/${websiteId}`)}
+          />
         </div>
       </div>
 

@@ -5,6 +5,7 @@ import './index.css'
 import App from './App.tsx'
 import WorkspacePage from './pages/WorkspacePage.tsx'
 import PreviewPage from './pages/PreviewPage.tsx'
+import SitePage from './pages/SitePage.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -13,6 +14,8 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/" element={<App />} />
         <Route path="/workspace/:websiteId" element={<WorkspacePage />} />
         <Route path="/preview/:websiteId" element={<PreviewPage />} />
+        <Route path="/site/:websiteId" element={<SitePage />} />
+        <Route path="/site/:websiteId/:slug" element={<SitePage />} />
       </Routes>
     </Router>
   </StrictMode>,

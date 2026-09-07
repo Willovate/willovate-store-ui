@@ -6,7 +6,7 @@ interface PublishSuccessModalProps {
 }
 
 export default function PublishSuccessModal({ websiteId, onClose }: PublishSuccessModalProps) {
-  const liveUrl = `https://${websiteId}.willovate.com`
+  const liveUrl = `${window.location.origin}/site/${websiteId}`
 
   const handleCopy = () => {
     navigator.clipboard.writeText(liveUrl)

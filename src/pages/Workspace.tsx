@@ -26,10 +26,13 @@ import {
   Sparkles
 } from 'lucide-react'
 import '../styles/workspace.css'
+import '../components/PublishFlow.css'
 
 interface WorkspaceProps {
   websiteId: string
 }
+
+type PublishStep = 'idle' | 'confirm' | 'publishing' | 'error'
 
 export default function Workspace({ websiteId }: WorkspaceProps) {
   const [website, setWebsite] = useState<Website | null>(null)
@@ -43,6 +46,7 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
   const [showPageManager, setShowPageManager] = useState(false)
   const [showSupportModal, setShowSupportModal] = useState(false)
   const [showPublishSuccess, setShowPublishSuccess] = useState(false)
+  const [publishStep, setPublishStep] = useState<PublishStep>('idle')
   const [previewMode, setPreviewMode] = useState<'desktop' | 'tablet' | 'mobile'>('desktop')
   const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -131,6 +135,17 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
     }
   }
 
+  const handleConfirmPublish = async () => {
+    setPublishStep('publishing')
+    try {
+      await updateWebsite(websiteId!, { isPublished: true })
+      setPublishStep('idle')
+      setShowPublishSuccess(true)
+    } catch (err) {
+      setPublishStep('error')
+    }
+  }
+
   if (isLoading) {
     return (
       <div className="workspace-wrapper">
@@ -174,6 +189,53 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
           onClose={() => setShowPublishSuccess(false)} 
         />
       )}
+
+      {publishStep === 'confirm' && (
+        <div className="publish-overlay" role="dialog" aria-modal="true" aria-label="Publish confirmation">
+          <div className="publish-modal">
+            <div className="publish-icon">🚀</div>
+            <h2>Ready to publish your website?</h2>
+            <p>Your website will be visible to visitors after publishing. Please review your website before publishing.</p>
+            <div className="publish-modal-actions">
+              <button type="button" className="publish-secondary" onClick={() => setPublishStep('idle')}>
+                Back
+              </button>
+              <button type="button" className="publish-primary" onClick={handleConfirmPublish}>
+                Publish Website
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {publishStep === 'publishing' && (
+        <div className="publish-overlay" role="status" aria-live="polite">
+          <div className="publish-modal">
+            <div className="publish-spinner" aria-hidden="true" />
+            <h2>Publishing...</h2>
+            <p>Please wait while we publish your website.</p>
+          </div>
+        </div>
+      )}
+
+      {publishStep === 'error' && (
+        <div className="publish-overlay" role="alert">
+          <div className="publish-modal">
+            <div className="publish-icon publish-icon-error">!</div>
+            <h2>Publishing failed</h2>
+            <p>Something went wrong while publishing your website. Please try again.</p>
+            <div className="publish-modal-actions">
+              <button type="button" className="publish-secondary" onClick={() => setPublishStep('idle')}>
+                Back to Workspace
+              </button>
+              <button type="button" className="publish-primary" onClick={() => setPublishStep('confirm')}>
+                Try Again
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Left Sidebar (Main Menu) */}
       <aside className="workspace-sidebar">
         <div className="sidebar-brand">
@@ -289,17 +351,7 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
               </button>
               <button 
                 className="topbar-btn primary"
-                onClick={async () => {
-                  try {
-                    setSaveStatus('saving')
-                    await updateWebsite(websiteId!, { isPublished: true })
-                    setSaveStatus('saved')
-                    setShowPublishSuccess(true)
-                  } catch (err) {
-                    setSaveStatus('error')
-                    alert('Failed to publish website')
-                  }
-                }}
+                onClick={() => setPublishStep('confirm')}
               >
                 <Send size={14} /> Publish <ChevronDown size={14} />
               </button>
