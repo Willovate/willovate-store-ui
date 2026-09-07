@@ -6,10 +6,11 @@ import '../styles/LandingPage.css'
    ========================================================================= */
 interface NavbarProps {
   onStartFree?: () => void
+  onGoToStore?: () => void
   onNavClick?: (section: string) => void
 }
 
-function Navbar({ onStartFree, onNavClick }: NavbarProps) {
+function Navbar({ onStartFree, onGoToStore, onNavClick }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const handleNavClick = (section: string) => {
@@ -21,31 +22,89 @@ function Navbar({ onStartFree, onNavClick }: NavbarProps) {
     <nav className="navbar">
       <div className="navbar-container">
         {/* Brand Logo */}
-        <a href="#" className="navbar-logo">
-          <div className="logo-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-              <path d="M4 6L8 18L12 10L16 18L20 6" stroke="url(#logoGrad)" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round"/>
-              <defs>
-                <linearGradient id="logoGrad" x1="4" y1="6" x2="20" y2="18" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#60A5FA" />
-                  <stop offset="1" stopColor="#A78BFA" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-          <span className="logo-text">Willovate One</span>
+        <a
+          href="#"
+          className="navbar-logo"
+          onClick={(e) => {
+            e.preventDefault()
+            handleNavClick('product')
+          }}
+          style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', textDecoration: 'none' }}
+        >
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="navLogoPurpleGrad" x1="4" y1="8" x2="16" y2="26" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#7C3AED" />
+                <stop offset="60%" stopColor="#6366F1" />
+                <stop offset="100%" stopColor="#3B82F6" />
+              </linearGradient>
+              <linearGradient id="navLogoBlueGrad" x1="12" y1="10" x2="28" y2="26" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#3B82F6" />
+                <stop offset="50%" stopColor="#2563EB" />
+                <stop offset="100%" stopColor="#1D4ED8" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M6 9.5L11.5 24.5C11.8 25.4 13 25.6 13.6 24.8L18.5 17.5"
+              stroke="url(#navLogoPurpleGrad)"
+              strokeWidth="4.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M13.8 17.2L18.5 24.5C19.1 25.4 20.3 25.3 20.7 24.3L26 9.5"
+              stroke="url(#navLogoBlueGrad)"
+              strokeWidth="4.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <span style={{ fontSize: '1.25rem', fontWeight: 800, letterSpacing: '-0.025em', display: 'flex', gap: '0.25rem' }}>
+            <span style={{ color: '#0f172a' }}>Willovate</span>
+            <span style={{ color: '#2563eb' }}>One</span>
+          </span>
         </a>
 
         {/* Desktop Navigation */}
         <div className="navbar-menu desktop">
           <a href="#product" onClick={() => handleNavClick('product')}>Product</a>
           <a href="#solutions" onClick={() => handleNavClick('solutions')}>Solutions</a>
-          <a href="#templates" onClick={() => handleNavClick('templates')}>Templates</a>
+          <a
+            href="#templates"
+            onClick={(e) => {
+              e.preventDefault()
+              handleNavClick('templates')
+            }}
+          >
+            Templates
+          </a>
           <a href="#pricing" onClick={() => handleNavClick('pricing')}>Pricing</a>
         </div>
 
         {/* Right CTA */}
-        <div className="navbar-right desktop">
+        <div className="navbar-right desktop" style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+          <button
+            className="btn-store-nav"
+            type="button"
+            onClick={onGoToStore}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.4rem',
+              padding: '0.45rem 0.95rem',
+              borderRadius: '9999px',
+              background: '#f6f4ee',
+              color: '#1d211c',
+              border: '1.5px solid #1d211c',
+              fontWeight: 700,
+              fontSize: '0.85rem',
+              cursor: 'pointer',
+              transition: 'all 0.15s ease',
+            }}
+          >
+            <span>🛍️</span>
+            <span>View Store</span>
+          </button>
           <a href="#login" className="nav-link">Log in</a>
           <button className="btn-start-free" type="button" onClick={onStartFree}>
             Start free
@@ -69,9 +128,42 @@ function Navbar({ onStartFree, onNavClick }: NavbarProps) {
           <div className="navbar-menu mobile">
             <a href="#product" onClick={() => handleNavClick('product')}>Product</a>
             <a href="#solutions" onClick={() => handleNavClick('solutions')}>Solutions</a>
-            <a href="#templates" onClick={() => handleNavClick('templates')}>Templates</a>
+            <a
+              href="#templates"
+              onClick={(e) => {
+                e.preventDefault()
+                handleNavClick('templates')
+              }}
+            >
+              Templates
+            </a>
             <a href="#pricing" onClick={() => handleNavClick('pricing')}>Pricing</a>
             <div className="mobile-actions">
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false)
+                  onGoToStore?.()
+                }}
+                style={{
+                  width: '100%',
+                  padding: '0.6rem 1rem',
+                  borderRadius: '8px',
+                  background: '#f6f4ee',
+                  color: '#1d211c',
+                  border: '1.5px solid #1d211c',
+                  fontWeight: 700,
+                  fontSize: '0.9rem',
+                  cursor: 'pointer',
+                  marginBottom: '0.5rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.5rem',
+                }}
+              >
+                🛍️ View Store
+              </button>
               <a href="#login" className="nav-link">Log in</a>
               <button className="btn-start-free" type="button" onClick={onStartFree}>
                 Start free
@@ -980,7 +1072,7 @@ function PlatformOverviewSection() {
 /* =========================================================================
    6. CURATED TEMPLATE GRID (LIGHT LUXURY BACKDROP - 6 COMPACT BOXES AS SS)
    ========================================================================= */
-function TemplateShowcaseSection() {
+function TemplateShowcaseSection({ onExploreTemplates }: { onExploreTemplates?: () => void }) {
   return (
     <section className="templates-section" id="templates">
       {/* Luxury Interactive Background Ambient Glows */}
@@ -1001,9 +1093,9 @@ function TemplateShowcaseSection() {
           <p className="templates-sub">
             Designer-made templates for every industry—built to be customized and uniquely yours.
           </p>
-          <a href="#templates" className="explore-all-link">
+          <button type="button" className="explore-all-link" onClick={onExploreTemplates}>
             Explore all templates <span className="arrow-icon">→</span>
-          </a>
+          </button>
         </div>
 
         {/* Right Side: 6 Compact Template Boxes (3 cols x 2 rows) */}
@@ -1692,13 +1784,19 @@ function FooterSection() {
   )
 }
 
-/* =========================================================================
-   MAIN MASTER LANDING PAGE COMPONENT (ALL-IN-ONE)
-   ========================================================================= */
-export function LandingPage() {
+interface LandingPageProps {
+  onStartFree?: () => void
+  onGoToStore?: () => void
+  onExploreTemplates?: () => void
+}
+
+export function LandingPage({ onGoToStore, onExploreTemplates }: LandingPageProps = {}) {
   const handleStartFree = () => {
-    const productSec = document.getElementById('product')
-    productSec?.scrollIntoView({ behavior: 'smooth' })
+    const target =
+      document.getElementById('categories') ||
+      document.getElementById('product') ||
+      document.getElementById('templates')
+    target?.scrollIntoView({ behavior: 'smooth' })
   }
 
   const handleExploreDemo = () => {
@@ -1719,6 +1817,7 @@ export function LandingPage() {
       {/* 1. Header / Navbar */}
       <Navbar
         onStartFree={handleStartFree}
+        onGoToStore={onGoToStore}
         onNavClick={(section) => {
           const el = document.getElementById(section)
           el?.scrollIntoView({ behavior: 'smooth' })
@@ -1743,7 +1842,7 @@ export function LandingPage() {
         <PlatformOverviewSection />
 
         {/* 6. "Not a template. Your brand." 6-Card Template Grid */}
-        <TemplateShowcaseSection />
+        <TemplateShowcaseSection onExploreTemplates={onExploreTemplates} />
 
         {/* 7. "Run everything without switching tools." Analytics Dashboard (Light Luxury) */}
         <DashboardPreviewSection />
