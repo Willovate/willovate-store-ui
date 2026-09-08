@@ -204,8 +204,18 @@ export default function SignupPage({
     }
   }
 
+  // Compute progress for the within-step indicator using existing validateField.
+  // A field counts as valid when validateField returns undefined.
+  const stepProgress =
+    [
+      validateField('fullName', values),
+      validateField('email', values),
+      validateField('password', values),
+      validateField('terms', values),
+    ].filter((e) => e === undefined).length / 4
+
   return (
-    <AuthLayout brandPanel={<AuthBrandPanel />}>
+    <AuthLayout brandPanel={<AuthBrandPanel stepProgress={stepProgress} />}>
       {onNavigateHome && (
         <div style={{ marginBottom: '1rem' }}>
           <button

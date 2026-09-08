@@ -3,6 +3,7 @@ import { ProgressSteps, type OnboardingStep } from './ProgressSteps'
 
 interface AuthBrandPanelProps {
   currentStep?: OnboardingStep
+  stepProgress?: number
 }
 
 const ecosystemCards = [
@@ -62,7 +63,7 @@ function EcosystemCard({
   )
 }
 
-export function AuthBrandPanel({ currentStep = 1 }: AuthBrandPanelProps) {
+export function AuthBrandPanel({ currentStep = 1, stepProgress }: AuthBrandPanelProps) {
   return (
     <aside className="auth-brand-panel">
       <div className="auth-brand-panel-copy">
@@ -90,7 +91,7 @@ export function AuthBrandPanel({ currentStep = 1 }: AuthBrandPanelProps) {
         <span><i className="auth-tool-icon auth-tool-icon-marketing" />Marketing</span>
       </div>
 
-      <ProgressSteps currentStep={currentStep} />
+      <ProgressSteps currentStep={currentStep} stepProgress={stepProgress} />
     </aside>
   )
 }

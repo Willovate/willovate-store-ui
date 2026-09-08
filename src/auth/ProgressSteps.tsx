@@ -1,9 +1,15 @@
-import type { ReactNode } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 
 export type OnboardingStep = 1 | 2 | 3
 
 export interface ProgressStepsProps {
   currentStep: OnboardingStep
+  /**
+   * Optional fraction (0 to 1) representing progress through the current step.
+   * When omitted the indicator behaves exactly as before (no sub-progress shown).
+   * The parent is responsible for computing and normalising this value.
+   */
+  stepProgress?: number
   className?: string
 }
 
@@ -13,10 +19,31 @@ export const ONBOARDING_STEPS = [
   { number: '03 / 03', label: 'Review your starting point' },
 ] as const
 
-export function ProgressSteps({ currentStep, className = '' }: ProgressStepsProps): ReactNode {
+export function ProgressSteps({
+  currentStep,
+  stepProgress,
+  className = '',
+}: ProgressStepsProps): ReactNode {
+  const hasProgress = stepProgress !== undefined
+  const clamped = hasProgress ? Math.max(0, Math.min(1, stepProgress)) : undefined
+
+  const olClass = [
+    'auth-steps',
+    `step-${currentStep}`,
+    hasProgress ? 'has-step-progress' : '',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ')
+
+  const style: CSSProperties | undefined = clamped !== undefined
+    ? ({ '--step-progress': clamped } as CSSProperties)
+    : undefined
+
   return (
     <ol
-      className={`auth-steps step-${currentStep} ${className}`.trim()}
+      className={olClass}
+      style={style}
       aria-label="Account setup progress"
       data-step={currentStep}
     >
