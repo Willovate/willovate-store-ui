@@ -2589,10 +2589,10 @@ const BUSINESS_TYPES: BusinessTypeItem[] = [
   {
     id: 'online-store',
     name: 'Online Store',
-    description: 'Sell products online and manage your orders',
-    tone: 'blue',
+    description: 'Sell products online and manage your orders.',
+    tone: 'purple',
     iconSvg: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
         <line x1="3" y1="6" x2="21" y2="6" />
         <path d="M16 10a4 4 0 0 1-8 0" />
@@ -2602,10 +2602,10 @@ const BUSINESS_TYPES: BusinessTypeItem[] = [
   {
     id: 'clothing-store',
     name: 'Clothing Store',
-    description: 'Create a beautiful online clothing store',
+    description: 'Create a beautiful online clothing store.',
     tone: 'blue',
     iconSvg: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z" />
       </svg>
     ),
@@ -2613,10 +2613,10 @@ const BUSINESS_TYPES: BusinessTypeItem[] = [
   {
     id: 'restaurant',
     name: 'Restaurant',
-    description: 'Show your menu and take orders online',
+    description: 'Show your menu and take orders online.',
     tone: 'orange',
     iconSvg: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
         <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
         <line x1="6" y1="1" x2="6" y2="4" />
@@ -2628,10 +2628,10 @@ const BUSINESS_TYPES: BusinessTypeItem[] = [
   {
     id: 'salon',
     name: 'Salon',
-    description: 'Showcase your services and take bookings',
+    description: 'Manage services and bookings.',
     tone: 'pink',
     iconSvg: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="6" cy="6" r="3" />
         <circle cx="6" cy="18" r="3" />
         <line x1="20" y1="4" x2="8.12" y2="15.88" />
@@ -2643,10 +2643,10 @@ const BUSINESS_TYPES: BusinessTypeItem[] = [
   {
     id: 'fitness',
     name: 'Fitness',
-    description: 'Promote your programs and membership online',
+    description: 'Promote your programs and manage memberships.',
     tone: 'green',
     iconSvg: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M6.5 6.5h11" />
         <path d="M6.5 17.5h11" />
         <path d="M6 20v-2a6 6 0 0 1 12 0v2" />
@@ -2657,10 +2657,10 @@ const BUSINESS_TYPES: BusinessTypeItem[] = [
   {
     id: 'education',
     name: 'Education',
-    description: 'Create courses and share knowledge online',
+    description: 'Create courses and share knowledge.',
     tone: 'purple',
     iconSvg: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
         <path d="M6 12v5c3 3 9 3 12 0v-5" />
       </svg>
@@ -2669,10 +2669,10 @@ const BUSINESS_TYPES: BusinessTypeItem[] = [
   {
     id: 'business-website',
     name: 'Business Website',
-    description: 'Build a professional website for your business',
+    description: 'Build a professional website for your business.',
     tone: 'gold',
     iconSvg: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
         <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
       </svg>
@@ -2681,58 +2681,79 @@ const BUSINESS_TYPES: BusinessTypeItem[] = [
   {
     id: 'other',
     name: 'Other',
-    description: 'Build something different or unique',
-    tone: 'gray',
+    description: 'Something different or unique.',
+    tone: 'indigo',
     iconSvg: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-        <circle cx="5" cy="12" r="2.5" />
-        <circle cx="12" cy="12" r="2.5" />
-        <circle cx="19" cy="12" r="2.5" />
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2l2.4 7.2L21.6 12l-7.2 2.4L12 21.6l-2.4-7.2L2.4 12l7.2-2.4L12 2z" />
       </svg>
     ),
   },
 ]
 
-const QUICK_EXAMPLES = [
-  'Travel booking website',
-  'Real estate platform',
-  'NGO & Charity foundation',
-  'Pet care clinic',
-  'Photography portfolio',
-  'SaaS software tool',
-  'Medical & Dental clinic',
-  'Event & Wedding planning',
+const OTHER_SUGGESTIONS = [
+  { icon: '🏠', label: 'Real Estate', prompt: 'Real estate platform with luxury villa listings' },
+  { icon: '➕', label: 'Healthcare', prompt: 'Modern medical and dental health clinic' },
+  { icon: '✈️', label: 'Travel & Tourism', prompt: 'Travel booking website with guided tours' },
+  { icon: '📷', label: 'Photography', prompt: 'Minimal photography and art director portfolio' },
+  { icon: '💼', label: 'Professional Services', prompt: 'Professional consulting and agency business' },
+  { icon: '📅', label: 'Events', prompt: 'Luxury wedding and event production agency' },
+  { icon: '🤍', label: 'NGO / Nonprofit', prompt: 'Environmental non-profit NGO foundation' },
+  { icon: '👤', label: 'Portfolio', prompt: 'Creative personal portfolio and resume showcase' },
 ]
 
 export function TemplateDirectoryPage({ onBack, onSelectBusinessType }: TemplateDirectoryPageProps) {
   const [selectedType, setSelectedType] = useState<string>('clothing-store')
   const [customPrompt, setCustomPrompt] = useState<string>('')
+  const [promptError, setPromptError] = useState<string | null>(null)
 
   const handleCardClick = (id: string) => {
     setSelectedType(id)
+    setPromptError(null)
   }
 
   const handleContinue = () => {
     const selected = BUSINESS_TYPES.find((b) => b.id === selectedType)
-    if (selected) {
-      onSelectBusinessType(selected.id, selected.name, selected.id === 'other' ? customPrompt : undefined)
-    } else {
+    if (!selected) {
       onSelectBusinessType('clothing-store', 'Clothing Store')
+      return
     }
+
+    if (selected.id === 'other') {
+      if (!customPrompt.trim()) {
+        setPromptError('Please write something to create templates, or choose a suggestion below.')
+        document.getElementById('custom-prompt-input')?.focus()
+        return
+      }
+    }
+
+    setPromptError(null)
+    onSelectBusinessType(selected.id, selected.name, selected.id === 'other' ? customPrompt.trim() : undefined)
   }
 
   return (
     <div className="directory-page">
       <header className="directory-header">
         <WillovateLogo onClick={onBack} />
-        <span className="directory-account">Already have an account? <a href="#login">Log in</a></span>
+        <span className="directory-account">
+          Already have an account? <a href="#login">Log in</a>
+        </span>
       </header>
 
       <main className="directory-main">
-        <div className="directory-stepper" aria-label="Template selection progress">
-          <div className="directory-step active"><span>1</span><b>What do you want to build?</b></div>
-          <div className="directory-line" />
-          <div className="directory-step"><span>2</span><b>Choose a template</b></div>
+        {/* Stepper Bar - Step 1 Active */}
+        <div className="stepper-container" aria-label="Step 1: What do you want to build?">
+          <div className="stepper-item">
+            <span className="stepper-circle active">1</span>
+            <span className="stepper-label active">What do you want to build?</span>
+          </div>
+
+          <div className="stepper-track step-1" />
+
+          <div className="stepper-item">
+            <span className="stepper-circle inactive">2</span>
+            <span className="stepper-label inactive">Choose a template</span>
+          </div>
         </div>
 
         <section className="directory-intro">
@@ -2740,14 +2761,14 @@ export function TemplateDirectoryPage({ onBack, onSelectBusinessType }: Template
           <p>Choose what you&apos;re building. We&apos;ll help you start with the right setup.</p>
         </section>
 
+        {/* 3-Column Grid for All 8 Categories */}
         <section className="business-grid" aria-label="Business types">
           {BUSINESS_TYPES.map((businessType) => {
             const isSelected = selectedType === businessType.id
-            const isOther = businessType.id === 'other'
 
             return (
               <div
-                className={`business-choice ${isSelected ? 'selected' : ''} ${isOther ? 'business-choice-wide' : ''}`}
+                className={`business-choice ${isSelected ? 'selected' : ''}`}
                 key={businessType.id}
                 onClick={() => handleCardClick(businessType.id)}
                 role="button"
@@ -2759,82 +2780,114 @@ export function TemplateDirectoryPage({ onBack, onSelectBusinessType }: Template
                   }
                 }}
               >
-                <div style={{ display: 'flex', width: '100%', gap: '14px', alignItems: 'flex-start' }}>
+                <div className="business-choice-content">
                   <span className={`business-icon ${businessType.tone}`}>
                     {businessType.iconSvg}
                   </span>
                   
-                  <div className="business-copy" style={{ flex: 1 }}>
+                  <div className="business-copy">
                     <strong>{businessType.name}</strong>
                     <small>{businessType.description}</small>
-
-                    {/* Custom prompt input box for Other matching screenshot */}
-                    {isOther && (
-                      <div className="custom-prompt-container" onClick={(e) => e.stopPropagation()}>
-                        <label className="custom-prompt-label">What are you building?</label>
-                        <div className="custom-textarea-wrapper">
-                          <textarea
-                            className="custom-prompt-textarea"
-                            value={customPrompt}
-                            onChange={(e) => setCustomPrompt(e.target.value.slice(0, 500))}
-                            placeholder="Example: A travel booking website, Real estate platform, NGO website, etc."
-                            maxLength={500}
-                            rows={2}
-                          />
-                          <span className="custom-prompt-counter">{customPrompt.length} / 500</span>
-                        </div>
-
-                        {/* Quick clickable preset suggestions */}
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginTop: '0.65rem' }}>
-                          <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 600, alignSelf: 'center', marginRight: '4px' }}>
-                            Suggestions:
-                          </span>
-                          {QUICK_EXAMPLES.map((ex) => (
-                            <button
-                              key={ex}
-                              type="button"
-                              onClick={(e) => {
-                                e.stopPropagation()
-                                setCustomPrompt(ex)
-                              }}
-                              style={{
-                                border: '1px solid #e2e8f0',
-                                background: customPrompt === ex ? '#eff6ff' : '#f8fafc',
-                                color: customPrompt === ex ? '#2563eb' : '#475569',
-                                borderColor: customPrompt === ex ? '#93c5fd' : '#e2e8f0',
-                                padding: '3px 8px',
-                                borderRadius: '4px',
-                                fontSize: '11px',
-                                cursor: 'pointer',
-                                fontWeight: 500,
-                              }}
-                            >
-                              {ex}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    )}
                   </div>
-
-                  <span className="business-radio" aria-hidden="true">
-                    {isSelected ? '✓' : ''}
-                  </span>
                 </div>
+
+                <span className="business-radio" aria-hidden="true">
+                  {isSelected && <span className="business-radio-dot" />}
+                </span>
               </div>
             )
           })}
         </section>
+
+        {/* Dedicated Full-Width Prompt Panel (Appears when 'Other' is Selected) */}
+        {selectedType === 'other' && (
+          <section className="other-prompt-panel" aria-label="Custom business prompt generator">
+            <div className="other-panel-header">
+              <div className="other-panel-badge">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l2.4 7.2L21.6 12l-7.2 2.4L12 21.6l-2.4-7.2L2.4 12l7.2-2.4L12 2z" />
+                </svg>
+              </div>
+              <div className="other-panel-title-group">
+                <h3>Other</h3>
+                <p>Tell us what you&apos;re building. We&apos;ll help you get started.</p>
+              </div>
+            </div>
+
+            <div className="other-panel-content">
+              <label className="other-prompt-label" htmlFor="custom-prompt-input">
+                What are you building?
+              </label>
+              <div className="other-textarea-wrapper">
+                <textarea
+                  id="custom-prompt-input"
+                  className="other-prompt-textarea"
+                  value={customPrompt}
+                  onChange={(e) => {
+                    setCustomPrompt(e.target.value.slice(0, 500))
+                    if (promptError) setPromptError(null)
+                  }}
+                  placeholder="Describe your business or idea..."
+                  maxLength={500}
+                  rows={3}
+                  style={promptError ? { borderColor: '#ef4444', boxShadow: '0 0 0 3px rgba(239, 68, 68, 0.15)' } : undefined}
+                />
+                <span className="other-prompt-counter">{customPrompt.length}/500</span>
+              </div>
+
+              {promptError && (
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.45rem',
+                  marginTop: '0.65rem',
+                  padding: '0.55rem 0.9rem',
+                  background: '#fef2f2',
+                  border: '1px solid #fecaca',
+                  borderRadius: '8px',
+                  color: '#b91c1c',
+                  fontSize: '0.84rem',
+                  fontWeight: 500,
+                }}>
+                  <span>⚠️</span>
+                  <span>{promptError}</span>
+                </div>
+              )}
+
+              <div className="other-suggestions-section">
+                <span className="other-suggestions-label">Suggestions</span>
+                <div className="other-suggestions-pills">
+                  {OTHER_SUGGESTIONS.map((item) => (
+                    <button
+                      key={item.label}
+                      type="button"
+                      className={`suggestion-pill ${customPrompt === item.prompt ? 'active' : ''}`}
+                      onClick={() => {
+                        setCustomPrompt(item.prompt)
+                        if (promptError) setPromptError(null)
+                      }}
+                    >
+                      <span className="pill-icon">{item.icon}</span>
+                      <span>{item.label}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
       </main>
 
       <footer className="directory-footer">
-        <button className="directory-back" type="button" onClick={onBack}>← <span>Back</span></button>
+        <button className="directory-back" type="button" onClick={onBack}>
+          ← Back
+        </button>
         <button
-          className="directory-continue"
+          className={`directory-continue ${selectedType ? 'active' : ''}`}
           type="button"
           onClick={handleContinue}
         >
-          Continue to Templates <span>→</span>
+          Continue to Templates →
         </button>
       </footer>
     </div>
@@ -2902,6 +2955,7 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
   // Modal preview state
   const [previewTemplate, setPreviewTemplate] = useState<Template | null>(null)
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+  const [promptError, setPromptError] = useState<string | null>(null)
 
   const templates = useMemo(() => {
     let list = [...categoryData.templates]
@@ -2944,7 +2998,11 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
   }
 
   const handleRegeneratePrompt = (newPromptText: string) => {
-    if (!newPromptText.trim()) return
+    if (!newPromptText || !newPromptText.trim()) {
+      setPromptError('Please write something to generate templates or choose a quick preset below.')
+      return
+    }
+    setPromptError(null)
     setActivePrompt(newPromptText.trim())
     setActiveTag('All')
     setSelectedTemplateId(null)
@@ -2986,19 +3044,23 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
         </span>
       </header>
 
-      {/* Stepper Bar */}
+      {/* Stepper Bar - Step 2 Active */}
       <section className="stepper-section">
-        <div className="directory-stepper" aria-label="Template selection progress">
-          <div className="directory-step">
-            <span>1</span>
-            <b>What do you want to build?</b>
+        <div className="stepper-container" aria-label="Step 2: Choose a template">
+          <div className="stepper-item">
+            <span className="stepper-circle completed">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </span>
+            <span className="stepper-label completed">What do you want to build?</span>
           </div>
 
-          <div className="directory-line directory-line-step2" />
+          <div className="stepper-track step-2" />
 
-          <div className="directory-step active">
-            <span>2</span>
-            <b>Choose a template</b>
+          <div className="stepper-item">
+            <span className="stepper-circle active">2</span>
+            <span className="stepper-label active">Choose a template</span>
           </div>
         </div>
 
@@ -3043,18 +3105,22 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
               <input
                 type="text"
                 value={promptInput}
-                onChange={(e) => setPromptInput(e.target.value)}
+                onChange={(e) => {
+                  setPromptInput(e.target.value)
+                  if (promptError) setPromptError(null)
+                }}
                 placeholder="e.g. Travel booking website, Real estate, Pet care clinic..."
                 style={{
                   flex: 1,
                   minWidth: '260px',
                   padding: '0.65rem 1rem',
-                  border: '1px solid #cbd5e1',
+                  border: promptError ? '1.5px solid #ef4444' : '1px solid #cbd5e1',
                   borderRadius: '8px',
                   fontSize: '0.9rem',
                   outline: 'none',
                   background: '#ffffff',
                   color: '#0f172a',
+                  boxShadow: promptError ? '0 0 0 3px rgba(239, 68, 68, 0.12)' : undefined,
                 }}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
@@ -3083,18 +3149,37 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
               </button>
             </div>
 
+            {promptError && (
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.45rem',
+                marginTop: '0.65rem',
+                padding: '0.45rem 0.85rem',
+                background: '#fef2f2',
+                border: '1px solid #fecaca',
+                borderRadius: '8px',
+                color: '#b91c1c',
+                fontSize: '0.82rem',
+                fontWeight: 500,
+              }}>
+                <span>⚠️</span>
+                <span>{promptError}</span>
+              </div>
+            )}
+
             {/* Quick Chips */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginTop: '0.85rem', alignItems: 'center' }}>
               <span style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 600 }}>Quick Presets:</span>
               {QUICK_PROMPT_CHIPS.map((chip) => {
-                const isActive = activePrompt.toLowerCase().includes(chip.key)
+                const isActive = promptInput.trim() === chip.value.trim() || (promptInput.toLowerCase().includes(chip.key.toLowerCase()) && chip.key !== '')
                 return (
                   <button
                     key={chip.label}
                     type="button"
                     onClick={() => {
                       setPromptInput(chip.value)
-                      handleRegeneratePrompt(chip.value)
+                      if (promptError) setPromptError(null)
                     }}
                     style={{
                       padding: '0.25rem 0.65rem',

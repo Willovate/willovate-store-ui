@@ -334,7 +334,7 @@ function App() {
       </header>
 
       <main id="top">
-        <section className="hero-section">
+        <section className="store-hero-section">
           <div className="hero-copy">
             <p className="kicker">Willovate collection · 01</p>
             <h1>Objects for a<br /><em>considered life.</em></h1>

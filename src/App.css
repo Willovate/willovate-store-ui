@@ -83,7 +83,7 @@
   font-size: 11px;
 }
 
-.hero-section {
+.store-hero-section {
   min-height: min(740px, calc(100vh - 120px));
   max-width: 1400px;
   margin: 0 auto;
@@ -851,7 +851,7 @@ footer p:last-child {
     display: none;
   }
 
-  .hero-section {
+  .store-hero-section {
     min-height: auto;
     grid-template-columns: 1fr;
     gap: 54px;
