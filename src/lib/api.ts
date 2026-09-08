@@ -103,3 +103,31 @@ export async function login(data: import('../types').LoginRequest): Promise<impo
 
   return response.json() as Promise<import('../types').AuthResponse>
 }
+
+export async function authenticateWithGoogle(idToken: string): Promise<import('../types').AuthResponse> {
+  const response = await fetch(`${API_URL}/api/auth/google`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify({ idToken }),
+  })
+
+  if (!response.ok) {
+    let errorMessage = `Google authentication failed with status ${response.status}`
+    try {
+      const errorJson = await response.json()
+      if (errorJson && typeof errorJson === 'object' && 'message' in errorJson && typeof errorJson.message === 'string') {
+        errorMessage = errorJson.message
+      } else if (errorJson && typeof errorJson === 'object' && 'title' in errorJson && typeof errorJson.title === 'string') {
+        errorMessage = errorJson.title
+      }
+    } catch {
+      // JSON parsing failed, use fallback message
+    }
+    throw new ApiError(errorMessage, response.status)
+  }
+
+  return response.json() as Promise<import('../types').AuthResponse>
+}

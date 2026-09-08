@@ -115,14 +115,33 @@ export default function SignupPage({
     }))
   }
 
-  const handleProviderSelect = (provider: 'Google' | 'Microsoft') => {
+  const { setSession } = useAuth()
+
+  const handleProviderSelect = (provider: 'Microsoft') => {
     setStatus({
       tone: 'info',
       message: `${provider} sign-in is not connected yet.`,
     })
   }
 
-  const { setSession } = useAuth()
+  const handleGoogleSuccess = () => {
+    setStatus({ tone: 'success', message: 'Google authentication successful!' })
+    if (onAuthSuccess) onAuthSuccess()
+  }
+
+  const handleGoogleError = (message: string) => {
+    setStatus({ tone: 'error', message })
+  }
+
+  const handleGoogleStart = () => {
+    if (isSubmitting) return
+    setIsSubmitting(true)
+    setStatus(null)
+  }
+
+  const handleGoogleEnd = () => {
+    setIsSubmitting(false)
+  }
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -242,6 +261,10 @@ export default function SignupPage({
       <SocialAuthButtons
         disabled={isSubmitting}
         onProviderSelect={handleProviderSelect}
+        onGoogleSuccess={handleGoogleSuccess}
+        onGoogleError={handleGoogleError}
+        onGoogleStart={handleGoogleStart}
+        onGoogleEnd={handleGoogleEnd}
       />
 
       <div className="auth-divider" aria-hidden="true">
