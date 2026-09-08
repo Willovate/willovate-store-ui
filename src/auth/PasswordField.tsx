@@ -57,7 +57,21 @@ export function PasswordField({
         </p>
       ) : (
         <p className="auth-field-helper" id={helperId}>
-          <span className="auth-password-shield" aria-hidden="true" />
+          <svg
+            className="auth-password-status-icon"
+            viewBox="0 0 16 16"
+            aria-hidden="true"
+          >
+            <circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" strokeWidth="1.2" />
+            <path
+              d="M5.2 8.2l2 2 3.6-3.8"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
           Use 8 or more characters.
         </p>
       )}

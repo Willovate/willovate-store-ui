@@ -2,7 +2,7 @@ import { GoogleAuthButton } from './GoogleAuthButton'
 import { MicrosoftAuthButton } from './MicrosoftAuthButton'
 
 interface SocialAuthButtonsProps {
-  onProviderSelect?: (provider: 'Microsoft') => void
+  onProviderSelect?: (provider: 'Google' | 'Microsoft') => void
   onGoogleSuccess?: () => void
   onGoogleError?: (message: string) => void
   onGoogleStart?: () => void
@@ -15,6 +15,7 @@ interface SocialAuthButtonsProps {
 }
 
 export function SocialAuthButtons({
+  onProviderSelect,
   onGoogleSuccess,
   onGoogleError,
   onGoogleStart,
@@ -29,7 +30,7 @@ export function SocialAuthButtons({
     <div className="auth-provider-buttons">
       <GoogleAuthButton
         onAuthSuccess={onGoogleSuccess}
-        onError={onGoogleError || (() => {})}
+        onError={onGoogleError || ((msg) => onProviderSelect?.('Google') ?? console.warn(msg))}
         onAuthStart={onGoogleStart}
         onAuthEnd={onGoogleEnd}
         disabled={disabled}
@@ -37,7 +38,7 @@ export function SocialAuthButtons({
 
       <MicrosoftAuthButton
         onAuthSuccess={onMicrosoftSuccess}
-        onError={onMicrosoftError || (() => {})}
+        onError={onMicrosoftError || ((msg) => onProviderSelect?.('Microsoft') ?? console.warn(msg))}
         onAuthStart={onMicrosoftStart}
         onAuthEnd={onMicrosoftEnd}
         disabled={disabled}

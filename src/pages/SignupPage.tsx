@@ -8,7 +8,6 @@ import { SocialAuthButtons } from '../auth/SocialAuthButtons'
 import { useAuth } from '../auth/AuthContext'
 import { register, ApiError } from '../lib/api'
 
-
 type FieldName = 'fullName' | 'email' | 'password' | 'terms'
 
 interface SignupValues {
@@ -235,8 +234,6 @@ export default function SignupPage({
     }
   }
 
-  // Compute progress for the within-step indicator using existing validateField.
-  // A field counts as valid when validateField returns undefined.
   const stepProgress =
     [
       validateField('fullName', values),
@@ -246,29 +243,16 @@ export default function SignupPage({
     ].filter((e) => e === undefined).length / 4
 
   return (
-    <AuthLayout brandPanel={<AuthBrandPanel stepProgress={stepProgress} />}>
-      {onNavigateHome && (
-        <div style={{ marginBottom: '1rem' }}>
-          <button
-            type="button"
-            onClick={onNavigateHome}
-            style={{
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              color: 'var(--color-text-secondary, #666)',
-              fontSize: '0.875rem',
-              padding: 0,
-            }}
-          >
-            ← Back to Store
-          </button>
-        </div>
-      )}
+    <AuthLayout
+      brandPanel={<AuthBrandPanel stepProgress={stepProgress} />}
+      onNavigateToLogin={onNavigateToLogin}
+      onNavigateHome={onNavigateHome}
+    >
       <AuthFormHeader
         title="Create your account"
         description="Start free. Build at your own pace."
       />
+
 
       <SocialAuthButtons
         disabled={isSubmitting}
@@ -281,7 +265,6 @@ export default function SignupPage({
         onMicrosoftStart={handleMicrosoftStart}
         onMicrosoftEnd={handleMicrosoftEnd}
       />
-
 
       <div className="auth-divider" aria-hidden="true">
         <span>or continue with email</span>
