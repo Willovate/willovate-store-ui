@@ -117,13 +117,6 @@ export default function SignupPage({
 
   const { setSession } = useAuth()
 
-  const handleProviderSelect = (provider: 'Microsoft') => {
-    setStatus({
-      tone: 'info',
-      message: `${provider} sign-in is not connected yet.`,
-    })
-  }
-
   const handleGoogleSuccess = () => {
     setStatus({ tone: 'success', message: 'Google authentication successful!' })
     if (onAuthSuccess) onAuthSuccess()
@@ -140,6 +133,25 @@ export default function SignupPage({
   }
 
   const handleGoogleEnd = () => {
+    setIsSubmitting(false)
+  }
+
+  const handleMicrosoftSuccess = () => {
+    setStatus({ tone: 'success', message: 'Microsoft authentication successful!' })
+    if (onAuthSuccess) onAuthSuccess()
+  }
+
+  const handleMicrosoftError = (message: string) => {
+    setStatus({ tone: 'error', message })
+  }
+
+  const handleMicrosoftStart = () => {
+    if (isSubmitting) return
+    setIsSubmitting(true)
+    setStatus(null)
+  }
+
+  const handleMicrosoftEnd = () => {
     setIsSubmitting(false)
   }
 
@@ -260,12 +272,16 @@ export default function SignupPage({
 
       <SocialAuthButtons
         disabled={isSubmitting}
-        onProviderSelect={handleProviderSelect}
         onGoogleSuccess={handleGoogleSuccess}
         onGoogleError={handleGoogleError}
         onGoogleStart={handleGoogleStart}
         onGoogleEnd={handleGoogleEnd}
+        onMicrosoftSuccess={handleMicrosoftSuccess}
+        onMicrosoftError={handleMicrosoftError}
+        onMicrosoftStart={handleMicrosoftStart}
+        onMicrosoftEnd={handleMicrosoftEnd}
       />
+
 
       <div className="auth-divider" aria-hidden="true">
         <span>or continue with email</span>
