@@ -11,6 +11,7 @@ export default function PageEditor({
   selectedElementId,
   onSelectElement,
 }: PageEditorProps) {
+  const isEditable = !!onSelectElement;
   // Find real database elements for the hero section (assume they are the ones with lowest display order or specific IDs)
   // To prevent absorbing newly added elements, we'll only take the first ones created (lowest display order)
   const sortedElements = [...page.elements].sort((a, b) => a.displayOrder - b.displayOrder)
@@ -56,8 +57,8 @@ export default function PageEditor({
 
       {/* Hero Section */}
       <div 
-        className={`luxe-hero ${selectedElementId === 'hero' ? 'selected' : ''}`}
-        onClick={() => {
+        className={`luxe-hero ${isEditable && selectedElementId === 'hero' ? 'selected' : ''}`}
+        onClick={isEditable ? () => {
           // Send a synthetic element for the whole "Hero Section" 
           // We will map these back to the real elements in ElementEditor
           onSelectElement?.({
@@ -85,8 +86,8 @@ export default function PageEditor({
               _buttonId: heroButtonEl?.id
             }
           })
-        }}
-        style={{ backgroundColor: bgColor, color: textColor }}
+        } : undefined}
+        style={{ backgroundColor: bgColor, color: textColor, cursor: isEditable ? 'pointer' : 'default' }}
       >
         <div className="luxe-hero-content">
           <div className="luxe-eyebrow" style={{ color: textColor }}>{eyebrow}</div>
@@ -173,16 +174,16 @@ export default function PageEditor({
           {extraElements.map(element => (
             <div 
               key={element.id}
-              onClick={() => onSelectElement?.(element)}
+              onClick={isEditable ? () => onSelectElement?.(element) : undefined}
               style={{
-                outline: selectedElementId === element.id ? '2px solid #6b46c1' : '1px dashed transparent',
-                cursor: 'pointer',
+                outline: (isEditable && selectedElementId === element.id) ? '2px solid #6b46c1' : (isEditable ? '1px dashed transparent' : 'none'),
+                cursor: isEditable ? 'pointer' : 'default',
                 padding: '1rem',
                 width: '100%',
                 maxWidth: '800px',
                 textAlign: (element.properties?.alignment as any) || 'center',
                 transition: 'outline 0.2s',
-                backgroundColor: selectedElementId === element.id ? 'rgba(107, 70, 193, 0.05)' : 'transparent'
+                backgroundColor: (isEditable && selectedElementId === element.id) ? 'rgba(107, 70, 193, 0.05)' : 'transparent'
               }}
             >
               {element.elementType === 'text' && (

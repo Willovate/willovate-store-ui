@@ -1,4 +1,5 @@
-import { useState, useEffect, useCallback, useRef } from 'react'
+﻿import { useState, useEffect, useCallback, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import type { Website, Page, PageElement } from '../types'
 import { getWebsite, updateWebsite, updateElement, createElement, deleteElement } from '../lib/workspace-api'
 import PageEditor from '../components/PageEditor'
@@ -46,9 +47,11 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
   const [showPageManager, setShowPageManager] = useState(false)
   const [showSupportModal, setShowSupportModal] = useState(false)
   const [showPublishSuccess, setShowPublishSuccess] = useState(false)
+  const [showUnsavedPreviewModal, setShowUnsavedPreviewModal] = useState(false)
   const [publishStep, setPublishStep] = useState<PublishStep>('idle')
   const [previewMode, setPreviewMode] = useState<'desktop' | 'tablet' | 'mobile'>('desktop')
   const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const navigate = useNavigate()
 
   const loadWebsite = useCallback(async (signal?: AbortSignal) => {
     try {
@@ -95,7 +98,7 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
   }, [])
 
   const handleSave = async () => {
-    if (!website) return
+    if (!website) return false
     setSaveStatus('saving')
     try {
       await updateWebsite(website.id, {
@@ -109,8 +112,10 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
       saveTimerRef.current = setTimeout(() => {
         setSaveStatus('idle')
       }, 3000)
+      return true
     } catch {
       setSaveStatus('error')
+      return false
     }
   }
 
@@ -236,6 +241,30 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
         </div>
       )}
 
+      {showUnsavedPreviewModal && (
+        <div className="publish-overlay" role="dialog" aria-modal="true" aria-label="Unsaved changes">
+          <div className="publish-modal">
+            <div className="publish-icon" style={{ backgroundColor: '#fff5f5', color: '#e53e3e' }}>!</div>
+            <h2>Unsaved Changes</h2>
+            <p>You have unsaved changes. Please save them before previewing so you can see the latest version of your website.</p>
+            <div className="publish-modal-actions">
+              <button type="button" className="publish-secondary" onClick={() => setShowUnsavedPreviewModal(false)}>
+                Continue Editing
+              </button>
+              <button type="button" className="publish-primary" onClick={async () => {
+                const success = await handleSave()
+                if (success) {
+                  setShowUnsavedPreviewModal(false)
+                  navigate(`/preview/${websiteId}`)
+                }
+              }}>
+                Save & Preview
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Left Sidebar (Main Menu) */}
       <aside className="workspace-sidebar">
         <div className="sidebar-brand">
@@ -345,7 +374,13 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
               </button>
               <button 
                 className="topbar-btn outline"
-                onClick={() => window.open(`/preview/${websiteId}`, '_blank')}
+                onClick={() => {
+                  if (hasUnsavedChanges) {
+                    setShowUnsavedPreviewModal(true)
+                  } else {
+                    navigate(`/preview/${websiteId}`)
+                  }
+                }}
               >
                 <Eye size={16} /> Preview
               </button>
@@ -466,3 +501,5 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
     </div>
   )
 }
+
+
