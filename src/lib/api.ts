@@ -7,6 +7,17 @@ interface ProductFilters {
   category?: string
 }
 
+export function getAuthHeaders(token?: string | null): Record<string, string> {
+  const headers: Record<string, string> = {
+    Accept: 'application/json',
+  }
+  if (token) {
+    headers.Authorization = `Bearer ${token}`
+  }
+  return headers
+}
+
+
 export async function getProducts(
   filters: ProductFilters = {},
   signal?: AbortSignal,
@@ -26,4 +37,125 @@ export async function getProducts(
   }
 
   return response.json() as Promise<PagedResponse<Product>>
+}
+
+export class ApiError extends Error {
+  status: number
+  constructor(message: string, status: number) {
+    super(message)
+    this.status = status
+    this.name = 'ApiError'
+  }
+}
+
+export async function register(data: import('../types').RegisterRequest): Promise<import('../types').AuthResponse> {
+  const response = await fetch(`${API_URL}/api/auth/register`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+
+  if (!response.ok) {
+    let errorMessage = `Registration failed with status ${response.status}`
+    try {
+      const errorJson = await response.json()
+      if (errorJson && typeof errorJson === 'object' && 'message' in errorJson && typeof errorJson.message === 'string') {
+        errorMessage = errorJson.message
+      } else if (errorJson && typeof errorJson === 'object' && 'title' in errorJson && typeof errorJson.title === 'string') {
+        errorMessage = errorJson.title
+      }
+    } catch {
+      // JSON parsing failed, use fallback message
+    }
+    throw new ApiError(errorMessage, response.status)
+  }
+
+  return response.json() as Promise<import('../types').AuthResponse>
+}
+
+export async function login(data: import('../types').LoginRequest): Promise<import('../types').AuthResponse> {
+  const response = await fetch(`${API_URL}/api/auth/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+
+  if (!response.ok) {
+    let errorMessage = `Login failed with status ${response.status}`
+    try {
+      const errorJson = await response.json()
+      if (errorJson && typeof errorJson === 'object' && 'message' in errorJson && typeof errorJson.message === 'string') {
+        errorMessage = errorJson.message
+      } else if (errorJson && typeof errorJson === 'object' && 'title' in errorJson && typeof errorJson.title === 'string') {
+        errorMessage = errorJson.title
+      }
+    } catch {
+      // JSON parsing failed, use fallback message
+    }
+    throw new ApiError(errorMessage, response.status)
+  }
+
+  return response.json() as Promise<import('../types').AuthResponse>
+}
+
+export async function authenticateWithGoogle(idToken: string): Promise<import('../types').AuthResponse> {
+  const response = await fetch(`${API_URL}/api/auth/google`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify({ idToken }),
+  })
+
+  if (!response.ok) {
+    let errorMessage = `Google authentication failed with status ${response.status}`
+    try {
+      const errorJson = await response.json()
+      if (errorJson && typeof errorJson === 'object' && 'message' in errorJson && typeof errorJson.message === 'string') {
+        errorMessage = errorJson.message
+      } else if (errorJson && typeof errorJson === 'object' && 'title' in errorJson && typeof errorJson.title === 'string') {
+        errorMessage = errorJson.title
+      }
+    } catch {
+      // JSON parsing failed, use fallback message
+    }
+    throw new ApiError(errorMessage, response.status)
+  }
+
+  return response.json() as Promise<import('../types').AuthResponse>
+}
+
+export async function authenticateWithMicrosoft(idToken: string): Promise<import('../types').AuthResponse> {
+  const response = await fetch(`${API_URL}/api/auth/microsoft`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify({ idToken }),
+  })
+
+  if (!response.ok) {
+    let errorMessage = `Microsoft authentication failed with status ${response.status}`
+    try {
+      const errorJson = await response.json()
+      if (errorJson && typeof errorJson === 'object' && 'message' in errorJson && typeof errorJson.message === 'string') {
+        errorMessage = errorJson.message
+      } else if (errorJson && typeof errorJson === 'object' && 'title' in errorJson && typeof errorJson.title === 'string') {
+        errorMessage = errorJson.title
+      }
+    } catch {
+      // JSON parsing failed, use fallback message
+    }
+    throw new ApiError(errorMessage, response.status)
+  }
+
+  return response.json() as Promise<import('../types').AuthResponse>
 }
