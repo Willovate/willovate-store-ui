@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import type { PageElement } from '../types'
-import { updateElement } from '../lib/workspace-api'
+import { updateElement, createElement } from '../lib/workspace-api'
 import { ArrowLeft, Trash2, Save, Check, AlertCircle } from 'lucide-react'
 
 const PRESET_BANNERS = [
@@ -49,15 +49,33 @@ export default function ElementEditor({ element, onClose, onUpdate, onOptimistic
     onOptimisticUpdate?.(newProps)
   }
 
+  const [createdHeroId, setCreatedHeroId] = useState<string | null>(null)
+
   const save = async (p = props) => {
     if (saveState === 'saving') return
     setSaveState('saving')
     try {
       if (element.id === 'hero') {
         const promises: Promise<unknown>[] = []
-        if (p._headingId) promises.push(updateElement(p._headingId, {
-          name: 'Main Hero Section', displayOrder: 0,
-          properties: {
+        const headingId = p._headingId || createdHeroId
+        if (headingId) {
+          promises.push(updateElement(headingId, {
+            name: 'Main Hero Section', displayOrder: 0,
+            properties: {
+              eyebrow: p.eyebrow, 
+              title: p.heading,
+              subtitle: p.description,
+              buttonText: p.buttonText,
+              buttonLink: p.buttonLink,
+              style_backgroundColor: p.style_backgroundColor,
+              style_textColor: p.style_textColor,
+              style_buttonColor: p.style_buttonColor,
+              style_buttonTextColor: p.style_buttonTextColor,
+              style_backgroundImage: p.style_backgroundImage,
+            }
+          }))
+        } else {
+          const newEl = await createElement(element.pageId, 'hero', 'Main Hero Section', {
             eyebrow: p.eyebrow, 
             title: p.heading,
             subtitle: p.description,
@@ -68,8 +86,10 @@ export default function ElementEditor({ element, onClose, onUpdate, onOptimistic
             style_buttonColor: p.style_buttonColor,
             style_buttonTextColor: p.style_buttonTextColor,
             style_backgroundImage: p.style_backgroundImage,
-          }
-        }))
+          }, 0)
+          setCreatedHeroId(newEl.id)
+          promises.push(Promise.resolve(newEl))
+        }
         await Promise.all(promises)
       } else {
         const realId = p._elementId || element.id;
@@ -98,10 +118,23 @@ export default function ElementEditor({ element, onClose, onUpdate, onOptimistic
     <span className="ee-char-count">{(props[key]?.length || 0)}/{max}</span>
   )
 
+  const handleFileUpload = (key: string, file: File) => {
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      const result = e.target?.result as string
+      if (result) {
+        set(key, result)
+        save()
+      }
+    }
+    reader.readAsDataURL(file)
+  }
+
   const field = (
     key: string,
     label: string,
-    opts?: { type?: string; placeholder?: string; maxLen?: number; textarea?: boolean }
+    opts?: { type?: string; placeholder?: string; maxLen?: number; textarea?: boolean; upload?: 'image' | 'video' }
   ) => (
     <div className="ee-field" key={key}>
       <div className="ee-field-label-row">
@@ -118,16 +151,32 @@ export default function ElementEditor({ element, onClose, onUpdate, onOptimistic
           onBlur={onBlur}
         />
       ) : (
-        <input
-          className="ee-input"
-          type={opts?.type || 'text'}
-          value={props[key] || ''}
-          placeholder={opts?.placeholder}
-          maxLength={opts?.maxLen}
-          onChange={e => set(key, e.target.value)}
-          onBlur={onBlur}
-          style={opts?.type === 'color' ? { height: 40, padding: '2px 4px', cursor: 'pointer' } : {}}
-        />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <input
+            className="ee-input"
+            type={opts?.type || 'text'}
+            value={props[key] || ''}
+            placeholder={opts?.placeholder}
+            maxLength={opts?.maxLen}
+            onChange={e => set(key, e.target.value)}
+            onBlur={onBlur}
+            style={opts?.type === 'color' ? { height: 40, padding: '2px 4px', cursor: 'pointer' } : {}}
+          />
+          {opts?.upload && (
+            <label style={{ fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', background: '#f5f5f5', padding: '0.5rem', borderRadius: '4px', border: '1px dashed #ccc' }}>
+              <span style={{ fontWeight: 500 }}>Upload from device</span>
+              <input 
+                type="file" 
+                accept={opts.upload === 'image' ? 'image/*' : 'video/*'} 
+                style={{ display: 'none' }}
+                onChange={(e) => {
+                  const file = e.target.files?.[0]
+                  if (file) handleFileUpload(key, file)
+                }}
+              />
+            </label>
+          )}
+        </div>
       )}
     </div>
   )
@@ -224,8 +273,22 @@ export default function ElementEditor({ element, onClose, onUpdate, onOptimistic
       case 'image':
         return (
           <>
-            {field('url', 'IMAGE URL', { placeholder: 'https://…' })}
+            {field('url', 'IMAGE URL', { placeholder: 'https://…', upload: 'image' })}
             {field('altText', 'ALT TEXT', { placeholder: 'Description of the image' })}
+          </>
+        )
+      case 'video':
+        return (
+          <>
+            {field('url', 'VIDEO URL', { placeholder: 'https://…', upload: 'video' })}
+          </>
+        )
+      case 'image_text':
+        return (
+          <>
+            {field('title', 'TITLE', { placeholder: 'About Us', maxLen: 60 })}
+            {field('content', 'CONTENT', { placeholder: 'We are a luxury brand...', maxLen: 500, textarea: true })}
+            {field('image', 'IMAGE URL', { placeholder: 'https://…', upload: 'image' })}
           </>
         )
       default:
@@ -252,7 +315,7 @@ export default function ElementEditor({ element, onClose, onUpdate, onOptimistic
           {colorField('style_textColor', 'TEXT COLOR', '#1a202c')}
           {colorField('style_buttonColor', 'BUTTON COLOR', '#111111')}
           {colorField('style_buttonTextColor', 'BUTTON TEXT COLOR', '#ffffff')}
-          {field('style_backgroundImage', 'BACKGROUND IMAGE URL', { placeholder: '/clean_hero_handbag.jpg' })}
+          {field('style_backgroundImage', 'BACKGROUND IMAGE URL', { placeholder: '/clean_hero_handbag.jpg', upload: 'image' })}
           <div className="ee-field">
             <label className="ee-label">OR CHOOSE A PRESET</label>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px', marginTop: '8px' }}>

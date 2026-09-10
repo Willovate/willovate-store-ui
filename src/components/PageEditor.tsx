@@ -37,12 +37,15 @@ function syntheticEl(
   }
 }
 
-/* ---------- fixed product catalogue (for display) ---------- */
 const DEFAULT_PRODUCTS = [
   { id: 'p1', name: 'Leather Handbag', price: '₹2,499', rating: 4.8, image: '/product_handbag.jpg', fallback: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=300&auto=format&fit=crop' },
   { id: 'p2', name: 'Classic Sneakers', price: '₹1,999', rating: 4.6, image: '/product_sneakers.jpg', fallback: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=300&auto=format&fit=crop' },
   { id: 'p3', name: 'Elegant Watch', price: '₹3,499', rating: 4.7, image: '/product_watch.jpg', fallback: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=300&auto=format&fit=crop' },
   { id: 'p4', name: 'Sunglasses', price: '₹1,299', rating: 4.5, image: '/product_sunglasses.jpg', fallback: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=300&auto=format&fit=crop' },
+  { id: 'p5', name: 'SPF 50 Sunscreen', price: '₹899', rating: 4.5, image: '/product_sunscreen.png', fallback: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=300&q=80' },
+  { id: 'p6', name: 'Linen Summer Shirt', price: '₹1,999', rating: 4.5, image: '/product_shirt.png', fallback: 'https://images.unsplash.com/photo-1596755094514-f87e32f8522b?w=300&q=80' },
+  { id: 'p7', name: 'Straw Sun Hat', price: '₹1,299', rating: 4.5, image: '/product_hat.png', fallback: 'https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?w=300&q=80' },
+  { id: 'p8', name: 'Summer Dress', price: '₹2,499', rating: 4.5, image: '/product_dress.png', fallback: 'https://images.unsplash.com/photo-1515347619152-19e34a78a6aa?w=300&q=80' },
 ]
 
 export default function PageEditor({ page, selectedElementId, onSelectElement }: PageEditorProps) {
@@ -310,6 +313,33 @@ export default function PageEditor({ page, selectedElementId, onSelectElement }:
                     <p className="pe-testi-text">"The absolute best quality and service. Will definitely be returning for more!"</p>
                     <p className="pe-testi-author">— Sarah J.</p>
                   </div>
+                </div>
+              )}
+
+              {el.elementType === 'newsletter' && (
+                <div className="pe-newsletter" style={{ padding: '4rem 2rem', background: '#F5EFE6', textAlign: 'center', margin: '2rem 0' }}>
+                  <h2 style={{ marginBottom: '1rem', color: '#111' }}>{(el.properties?.title as string) || 'Subscribe to our Newsletter'}</h2>
+                  <p style={{ color: '#555', marginBottom: '1.5rem' }}>{(el.properties?.subtitle as string) || 'Get 10% off your first order'}</p>
+                  <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem' }}>
+                    <input type="email" placeholder="Email address" style={{ padding: '0.75rem 1rem', border: '1px solid #ddd', borderRadius: '4px', width: '300px' }} readOnly />
+                    <button style={{ padding: '0.75rem 1.5rem', background: '#111', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
+                      {(el.properties?.buttonText as string) || 'Subscribe'}
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {el.elementType === 'video' && (
+                <div className="pe-video-block" style={{ width: '100%', maxWidth: '800px', margin: '2rem auto', aspectRatio: '16/9' }}>
+                  <iframe 
+                    width="100%" 
+                    height="100%" 
+                    src={(el.properties?.url as string) || 'https://www.youtube.com/embed/dQw4w9WgXcQ'} 
+                    title="Video player" 
+                    frameBorder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowFullScreen
+                  ></iframe>
                 </div>
               )}
 

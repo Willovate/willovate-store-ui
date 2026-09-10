@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
-import type { Website, Page, PageElement } from '../types'
+import type { Website, Theme, Page, PageElement } from '../types'
 import { getWebsite, updateWebsite, updateElement, createElement, deleteElement } from '../lib/workspace-api'
 import PageEditor from '../components/PageEditor'
 import SaveIndicator from '../components/SaveIndicator'
@@ -8,6 +8,8 @@ import AIAssistant from '../components/AIAssistant'
 import PageManagerModal from '../components/PageManagerModal'
 import ContactSupportModal from '../components/ContactSupportModal'
 import PublishSuccessModal from '../components/PublishSuccessModal'
+import ThemeLibrary from '../components/ThemeLibrary'
+import SectionsPanel from '../components/SectionsPanel'
 import {
   Home,
   Gauge,
@@ -32,6 +34,7 @@ import {
   Square,
   Image,
   Minus,
+  Palette
 } from 'lucide-react'
 import '../styles/workspace.css'
 
@@ -49,11 +52,16 @@ const ADD_ELEMENT_TYPES = [
   { type: 'services_grid', label: 'Services', icon: <LayoutTemplate size={14} /> },
   { type: 'image_text', label: 'Image & Text', icon: <LayoutTemplate size={14} /> },
   { type: 'testimonials', label: 'Testimonials', icon: <Users size={14} /> },
+  { type: 'newsletter', label: 'Newsletter', icon: <Send size={14} /> },
+  { type: 'video', label: 'Video Block', icon: <Monitor size={14} /> },
 ]
 
 export default function Workspace({ websiteId }: WorkspaceProps) {
   const [website, setWebsite] = useState<Website | null>(null)
-  const [selectedPage, setSelectedPage] = useState<Page | null>(null)
+  const [activeTheme, setActiveTheme] = useState<Theme | null>(null)
+  const [selectedPageId, setSelectedPageId] = useState<string | null>(null)
+  const [pagesState, setPagesState] = useState<Page[]>([])
+
   const [selectedElement, setSelectedElement] = useState<PageElement | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -63,23 +71,52 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
   const [showPageManager, setShowPageManager] = useState(false)
   const [showSupportModal, setShowSupportModal] = useState(false)
   const [showPublishSuccess, setShowPublishSuccess] = useState(false)
+  const [showThemeLibrary, setShowThemeLibrary] = useState(false)
   const [previewMode, setPreviewMode] = useState<'desktop' | 'tablet' | 'mobile'>('desktop')
   const [showAddMenu, setShowAddMenu] = useState(false)
   const [isAddingElement, setIsAddingElement] = useState(false)
   const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const addMenuRef = useRef<HTMLDivElement>(null)
 
+  const selectedPage = pagesState.find(p => p.id === selectedPageId) || null
+
   const loadWebsite = useCallback(async (signal?: AbortSignal) => {
     try {
       const w = await getWebsite(websiteId, signal)
       setWebsite(w)
-      setSelectedPage((prev) => {
-        if (prev) {
-          const match = w.pages.find((p) => p.id === prev.id)
-          if (match) return match
+
+      let themeToUse = activeTheme ? w.themes.find(t => t.id === activeTheme.id) : null
+      if (!themeToUse) {
+        themeToUse = w.themes.find(t => t.isLive) || w.themes[0] || null
+      }
+
+      if (themeToUse) {
+        setActiveTheme(themeToUse)
+        setPagesState(themeToUse.pages)
+
+        setSelectedPageId((prev) => {
+          let matchPage = themeToUse!.pages.find((p) => p.isHomePage) || themeToUse!.pages[0] || null
+          if (prev) {
+            const match = themeToUse!.pages.find((p) => p.id === prev)
+            if (match) matchPage = match
+          }
+          return matchPage ? matchPage.id : null
+        })
+      }
+
+      setSelectedElement(prevEl => {
+        if (!prevEl || !themeToUse) return prevEl
+        const pages = themeToUse.pages
+        for (const p of pages) {
+          if (prevEl.id === 'hero' && p.elements.some(e => e.elementType === 'hero')) {
+            return { ...prevEl, properties: { ...prevEl.properties, _headingId: p.elements.find(e => e.elementType === 'hero')!.id } }
+          }
+          const el = p.elements.find(e => e.id === prevEl.id)
+          if (el) return el
         }
-        return w.pages.find((p) => p.isHomePage) || w.pages[0] || null
+        return prevEl
       })
+
       setError(null)
     } catch (reason: unknown) {
       if (reason instanceof DOMException && reason.name === 'AbortError') return
@@ -87,7 +124,7 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
     } finally {
       setIsLoading(false)
     }
-  }, [websiteId])
+  }, [websiteId, activeTheme])
 
   useEffect(() => {
     const controller = new AbortController()
@@ -160,29 +197,41 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
     setIsAddingElement(true)
     try {
       const name = type.charAt(0).toUpperCase() + type.slice(1) + ' Block'
-      
+
       let initialProps: Record<string, unknown> = {}
       if (type === 'heading') initialProps = { content: 'New Heading' }
       else if (type === 'text') initialProps = { content: 'New text block. Click to edit.' }
       else if (type === 'button') initialProps = { label: 'Click Here' }
       else if (type === 'image') initialProps = { url: '' }
-      else if (type === 'banner_slider') initialProps = { 
+      else if (type === 'banner_slider') initialProps = {
         images: JSON.stringify([
           'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&auto=format&fit=crop',
           'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&auto=format&fit=crop',
           'https://images.unsplash.com/photo-1445205170230-053b83016050?w=1200&auto=format&fit=crop',
           'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?w=1200&auto=format&fit=crop',
           'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1509319117193-57bab727e09d?w=1200&auto=format&fit=crop'
-        ]) 
+          'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1485230895905-ef082490cc32?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1505022610485-0249ba5b36ee?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1483181957632-8bda974ce91c?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1479064555552-3ef4979f8908?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1550614000-4b95d4662d54?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?w=1200&auto=format&fit=crop'
+        ])
       }
       else if (type === 'services_grid') initialProps = { title: 'Our Services', subtitle: 'What we offer' }
       else if (type === 'image_text') initialProps = { title: 'About Us', content: 'We are a luxury fashion brand...', image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format&fit=crop' }
       else if (type === 'testimonials') initialProps = { title: 'Client Reviews' }
+      else if (type === 'newsletter') initialProps = { title: 'Subscribe to our Newsletter', subtitle: 'Get 10% off your first order', buttonText: 'Subscribe' }
+      else if (type === 'video') initialProps = { url: 'https://www.youtube.com/embed/dQw4w9WgXcQ' }
 
       await createElement(selectedPage.id, type, name, initialProps, 99)
       await loadWebsite()
@@ -237,17 +286,24 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
   return (
     <div className="ws-shell">
       {/* Modals */}
-      {showPageManager && (
+      {showPageManager && activeTheme && (
         <PageManagerModal
-          websiteId={website.id}
-          pages={website.pages}
+          websiteId={activeTheme.id}
+          pages={pagesState}
           onClose={() => setShowPageManager(false)}
           onRefresh={() => loadWebsite()}
           onSelectPage={(id) => {
-            const page = website.pages.find(p => p.id === id)
-            if (page) { setSelectedPage(page); setSelectedElement(null) }
+            setSelectedPageId(id)
+            setSelectedElement(null)
           }}
           activePageId={selectedPage?.id || ''}
+        />
+      )}
+      {showThemeLibrary && (
+        <ThemeLibrary
+          websiteId={website.id}
+          onClose={() => setShowThemeLibrary(false)}
+          onRefresh={() => loadWebsite()}
         />
       )}
       {showSupportModal && (
@@ -270,6 +326,15 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
             <li className="ws-nav-item ws-nav-active">
               <Home size={16} /> Workspace
             </li>
+            {selectedPage && (
+              <SectionsPanel
+                page={selectedPage}
+                selectedElementId={selectedElement?.id || null}
+                onSelectElement={(el) => setSelectedElement(selectedPage.elements.find(e => e.id === el) || null)}
+                onAddElement={handleAddElement}
+                onRefresh={() => loadWebsite()}
+              />
+            )}
             <li className="ws-nav-item">
               <Gauge size={16} /> Dashboard
             </li>
@@ -287,6 +352,13 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
             </li>
             <li className="ws-nav-item">
               <Megaphone size={16} /> Marketing &amp; Growth
+            </li>
+          </ul>
+
+          <p className="ws-sidebar-section-label" style={{ marginTop: '1.5rem' }}>Themes</p>
+          <ul>
+            <li className="ws-nav-item" onClick={() => setShowThemeLibrary(true)}>
+              <Palette size={16} /> Theme Library
             </li>
           </ul>
 
@@ -333,7 +405,7 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
 
         {/* TOP BAR */}
         <header className="ws-topbar">
-          <div className="ws-topbar-left">
+          <div className="ws-topbar-left" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <button
               className="ws-page-switcher"
               onClick={() => setShowPageManager(true)}
@@ -342,14 +414,28 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
               {selectedPage?.title || 'Home'}
               <ChevronDown size={14} />
             </button>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', fontWeight: 600, color: '#334155' }}>
+              <span>{activeTheme?.name || 'Theme'}</span>
+              <span style={{
+                background: activeTheme?.isLive ? '#10b981' : '#e2e8f0',
+                color: activeTheme?.isLive ? '#fff' : '#64748b',
+                padding: '0.1rem 0.4rem',
+                borderRadius: '10px',
+                fontSize: '0.65rem'
+              }}>
+                {activeTheme?.isLive ? 'LIVE' : 'DRAFT'}
+              </span>
+            </div>
           </div>
 
           <div className="ws-topbar-center">
-            <SaveIndicator
-              status={saveStatus}
-              hasUnsavedChanges={hasUnsavedChanges}
-              onSave={handleSave}
-            />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <SaveIndicator
+                status={saveStatus}
+                hasUnsavedChanges={hasUnsavedChanges}
+                onSave={handleSave}
+              />
+            </div>
           </div>
 
           <div className="ws-topbar-right">
@@ -494,11 +580,17 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
                     try {
                       await updateElement(heroEl.id, { name: heroEl.name, displayOrder: heroEl.displayOrder, properties: currentProps })
                       setHasUnsavedChanges(true)
-                      // Optimistically update the page in state
-                      setSelectedPage(prev => prev ? {
-                        ...prev,
-                        elements: prev.elements.map(e => e.id === heroEl.id ? { ...e, properties: currentProps } : e)
-                      } : prev)
+
+                      const newPages = pagesState.map(p => {
+                        if (p.id === selectedPage.id) {
+                          return {
+                            ...p,
+                            elements: p.elements.map(e => e.id === heroEl.id ? { ...e, properties: currentProps } : e)
+                          }
+                        }
+                        return p
+                      })
+                      setPagesState(newPages)
                     } catch (e) { console.error('Failed to apply banner', e) }
                   }
                 }}
@@ -512,29 +604,35 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
                   setSelectedElement(prev => prev ? { ...prev, properties: newProps } : null)
                   if (selectedElement?.id === 'hero') {
                     const headingId = newProps._headingId
-                    setSelectedPage(prev => {
-                      if (!prev) return prev
-                      return {
-                        ...prev,
-                        elements: prev.elements.map(e => 
-                          e.id === headingId 
-                            ? { ...e, properties: { ...e.properties, ...newProps } }
-                            : e
-                        )
+                    const newPages = pagesState.map(p => {
+                      if (p.id === selectedPage?.id) {
+                        return {
+                          ...p,
+                          elements: p.elements.map(e =>
+                            (headingId && e.id === headingId)
+                              ? { ...e, properties: { ...e.properties, ...newProps } }
+                              : e
+                          )
+                        }
                       }
+                      return p
                     })
+                    setPagesState(newPages)
                   } else {
-                    setSelectedPage(prev => {
-                      if (!prev) return prev
-                      return {
-                        ...prev,
-                        elements: prev.elements.map(e => 
-                          e.id === selectedElement?.id
-                            ? { ...e, properties: { ...e.properties, ...newProps } }
-                            : e
-                        )
+                    const newPages = pagesState.map(p => {
+                      if (p.id === selectedPage?.id) {
+                        return {
+                          ...p,
+                          elements: p.elements.map(e =>
+                            e.id === selectedElement?.id
+                              ? { ...e, properties: { ...e.properties, ...newProps } }
+                              : e
+                          )
+                        }
                       }
+                      return p
                     })
+                    setPagesState(newPages)
                   }
                 }}
                 onDelete={() => handleDeleteElement(selectedElement.id)}
@@ -548,8 +646,8 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
                 <div className="ws-props-empty-body">
                   <div className="ws-props-empty-icon">
                     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#cbd5e0" strokeWidth="1.5">
-                      <rect x="3" y="3" width="18" height="18" rx="3"/>
-                      <path d="M3 9h18M9 21V9"/>
+                      <rect x="3" y="3" width="18" height="18" rx="3" />
+                      <path d="M3 9h18M9 21V9" />
                     </svg>
                   </div>
                   <p className="ws-props-empty-hint">Click any section or element on the canvas to edit it.</p>
@@ -569,11 +667,11 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
 
                   <div className="ws-props-quick-actions" style={{ marginTop: '1.5rem' }}>
                     <p className="ws-props-section-label">PAGES</p>
-                    {website.pages.map(page => (
+                    {pagesState.map(page => (
                       <button
                         key={page.id}
                         className={`ws-quick-action-btn ${selectedPage?.id === page.id ? 'ws-quick-action-active' : ''}`}
-                        onClick={() => { setSelectedPage(page); setSelectedElement(null) }}
+                        onClick={() => { setSelectedPageId(page.id); setSelectedElement(null) }}
                       >
                         {page.isHomePage ? '🏠' : '📄'} {page.title}
                         {page.isHomePage && <span className="ws-home-badge">Home</span>}
@@ -587,6 +685,32 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
 
         </div>
       </div>
+
+      {showPageManager && (
+        <PageManagerModal
+          websiteId={websiteId}
+          onClose={() => setShowPageManager(false)}
+          onRefresh={() => loadWebsite()}
+        />
+      )}
+      {showThemeLibrary && (
+        <ThemeLibrary
+          websiteId={websiteId}
+          onClose={() => setShowThemeLibrary(false)}
+          onRefresh={() => loadWebsite()}
+        />
+      )}
+      {showPublishSuccess && (
+        <PublishSuccessModal
+          url={`https://${website?.slug || 'store'}.willovate.com`}
+          onClose={() => setShowPublishSuccess(false)}
+        />
+      )}
+      {showSupportModal && (
+        <ContactSupportModal
+          onClose={() => setShowSupportModal(false)}
+        />
+      )}
     </div>
   )
 }

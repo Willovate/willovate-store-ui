@@ -34,12 +34,21 @@ export interface Website {
   isPublished: boolean
   createdAt: string
   updatedAt: string
+  themes: Theme[]
+}
+
+export interface Theme {
+  id: string
+  websiteId: string
+  name: string
+  isLive: boolean
+  lastEdited: string
   pages: Page[]
 }
 
 export interface Page {
   id: string
-  websiteId: string
+  themeId: string
   title: string
   slug: string
   description: string | null

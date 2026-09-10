@@ -31,13 +31,14 @@ export default function PreviewPage() {
   }, [websiteId])
 
   const [selectedPageId, setSelectedPageId] = useState<string | null>(null)
+  const activeTheme = website?.themes?.find(t => t.isLive) || website?.themes?.[0]
 
   useEffect(() => {
-    if (website && !selectedPageId) {
-      const home = website.pages.find(p => p.isHomePage) || website.pages[0]
+    if (activeTheme && !selectedPageId) {
+      const home = activeTheme.pages.find(p => p.isHomePage) || activeTheme.pages[0]
       if (home) setSelectedPageId(home.id)
     }
-  }, [website, selectedPageId])
+  }, [activeTheme, selectedPageId])
 
   if (isLoading) {
     return (
@@ -47,7 +48,7 @@ export default function PreviewPage() {
     )
   }
 
-  if (error || !website) {
+  if (error || !website || !activeTheme) {
     return (
       <div style={{ display: 'flex', height: '100vh', alignItems: 'center', justifyContent: 'center', color: 'red' }}>
         <p>{error || 'Failed to load preview'}</p>
@@ -55,7 +56,7 @@ export default function PreviewPage() {
     )
   }
 
-  const activePage = website.pages.find(p => p.id === selectedPageId) || website.pages[0]
+  const activePage = activeTheme.pages.find(p => p.id === selectedPageId) || activeTheme.pages[0]
 
   return (
     <div className="preview-mode" style={{ minHeight: '100vh', background: 'white', display: 'flex', flexDirection: 'column' }}>
@@ -90,7 +91,7 @@ export default function PreviewPage() {
               cursor: 'pointer'
             }}
           >
-            {website.pages.map(p => (
+            {activeTheme.pages.map(p => (
               <option key={p.id} value={p.id}>{p.title} {p.isHomePage ? '(Home)' : ''}</option>
             ))}
           </select>

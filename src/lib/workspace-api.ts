@@ -1,4 +1,4 @@
-import type { Website, Page, PageElement } from '../types'
+import type { Website, Page, PageElement, Theme } from '../types'
 
 const API_URL = (import.meta.env.VITE_API_URL ?? 'http://localhost:5191').replace(/\/$/, '')
 
@@ -80,9 +80,58 @@ export async function deleteWebsite(websiteId: string, signal?: AbortSignal): Pr
   }
 }
 
+// Theme endpoints
+export async function getThemesByWebsite(websiteId: string, signal?: AbortSignal): Promise<Theme[]> {
+  const response = await fetch(`${API_URL}/api/websites/${websiteId}/themes`, {
+    headers: { Accept: 'application/json' },
+    signal,
+  })
+  if (!response.ok) throw new Error(`Failed to fetch themes: ${response.status}`)
+  return response.json() as Promise<Theme[]>
+}
+
+export async function createTheme(websiteId: string, name: string, duplicateFromLive: boolean = false, signal?: AbortSignal): Promise<Theme> {
+  const response = await fetch(`${API_URL}/api/websites/${websiteId}/themes`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify({ name, duplicateFromLive }),
+    signal,
+  })
+  if (!response.ok) throw new Error(`Failed to create theme: ${response.status}`)
+  return response.json() as Promise<Theme>
+}
+
+export async function updateTheme(themeId: string, updates: { name?: string; isLive?: boolean }, signal?: AbortSignal): Promise<Theme> {
+  const response = await fetch(`${API_URL}/api/websites/themes/${themeId}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify(updates),
+    signal,
+  })
+  if (!response.ok) throw new Error(`Failed to update theme: ${response.status}`)
+  return response.json() as Promise<Theme>
+}
+
+export async function deleteTheme(themeId: string, signal?: AbortSignal): Promise<void> {
+  const response = await fetch(`${API_URL}/api/websites/themes/${themeId}`, { method: 'DELETE', signal })
+  if (!response.ok) throw new Error(`Failed to delete theme: ${response.status}`)
+}
+
+export async function publishTheme(themeId: string, signal?: AbortSignal): Promise<Theme> {
+  const response = await fetch(`${API_URL}/api/websites/themes/${themeId}/publish`, { method: 'POST', signal })
+  if (!response.ok) throw new Error(`Failed to publish theme: ${response.status}`)
+  return response.json() as Promise<Theme>
+}
+
+export async function duplicateTheme(themeId: string, signal?: AbortSignal): Promise<Theme> {
+  const response = await fetch(`${API_URL}/api/websites/themes/${themeId}/duplicate`, { method: 'POST', signal })
+  if (!response.ok) throw new Error(`Failed to duplicate theme: ${response.status}`)
+  return response.json() as Promise<Theme>
+}
+
 // Page endpoints
-export async function getPagesByWebsite(websiteId: string, signal?: AbortSignal): Promise<Page[]> {
-  const response = await fetch(`${API_URL}/api/websites/${websiteId}/pages`, {
+export async function getPagesByTheme(themeId: string, signal?: AbortSignal): Promise<Page[]> {
+  const response = await fetch(`${API_URL}/api/websites/${themeId}/pages`, {
     headers: { Accept: 'application/json' },
     signal,
   })
@@ -108,7 +157,7 @@ export async function getPage(pageId: string, signal?: AbortSignal): Promise<Pag
 }
 
 export async function createPage(
-  websiteId: string,
+  themeId: string,
   title: string,
   slug: string,
   description?: string,
@@ -116,7 +165,7 @@ export async function createPage(
   isHomePage: boolean = false,
   signal?: AbortSignal,
 ): Promise<Page> {
-  const response = await fetch(`${API_URL}/api/websites/${websiteId}/pages`, {
+  const response = await fetch(`${API_URL}/api/websites/${themeId}/pages`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
     body: JSON.stringify({
