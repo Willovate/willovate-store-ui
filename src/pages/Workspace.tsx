@@ -8,28 +8,48 @@ import AIAssistant from '../components/AIAssistant'
 import PageManagerModal from '../components/PageManagerModal'
 import ContactSupportModal from '../components/ContactSupportModal'
 import PublishSuccessModal from '../components/PublishSuccessModal'
-import { 
-  Home, 
-  Gauge, 
-  ShoppingBag, 
-  FolderOpen, 
-  Users, 
-  BarChart2, 
-  Megaphone, 
-  LayoutTemplate, 
-  Star, 
-  Settings, 
+import {
+  Home,
+  Gauge,
+  ShoppingBag,
+  FolderOpen,
+  Users,
+  BarChart2,
+  Megaphone,
+  LayoutTemplate,
+  Star,
+  Settings,
   HelpCircle,
   Eye,
   Send,
   ChevronDown,
-  Sparkles
+  Sparkles,
+  Plus,
+  Monitor,
+  Tablet,
+  Smartphone,
+  Type,
+  Square,
+  Image,
+  Minus,
 } from 'lucide-react'
 import '../styles/workspace.css'
 
 interface WorkspaceProps {
   websiteId: string
 }
+
+const ADD_ELEMENT_TYPES = [
+  { type: 'heading', label: 'Heading', icon: <Type size={14} /> },
+  { type: 'text', label: 'Text Block', icon: <Type size={14} /> },
+  { type: 'button', label: 'Button', icon: <Square size={14} /> },
+  { type: 'image', label: 'Image', icon: <Image size={14} /> },
+  { type: 'divider', label: 'Divider', icon: <Minus size={14} /> },
+  { type: 'banner_slider', label: 'Banner Slider', icon: <Image size={14} /> },
+  { type: 'services_grid', label: 'Services', icon: <LayoutTemplate size={14} /> },
+  { type: 'image_text', label: 'Image & Text', icon: <LayoutTemplate size={14} /> },
+  { type: 'testimonials', label: 'Testimonials', icon: <Users size={14} /> },
+]
 
 export default function Workspace({ websiteId }: WorkspaceProps) {
   const [website, setWebsite] = useState<Website | null>(null)
@@ -44,7 +64,10 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
   const [showSupportModal, setShowSupportModal] = useState(false)
   const [showPublishSuccess, setShowPublishSuccess] = useState(false)
   const [previewMode, setPreviewMode] = useState<'desktop' | 'tablet' | 'mobile'>('desktop')
+  const [showAddMenu, setShowAddMenu] = useState(false)
+  const [isAddingElement, setIsAddingElement] = useState(false)
   const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const addMenuRef = useRef<HTMLDivElement>(null)
 
   const loadWebsite = useCallback(async (signal?: AbortSignal) => {
     try {
@@ -72,6 +95,18 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
     return () => controller.abort()
   }, [loadWebsite])
 
+  // Close add menu on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (addMenuRef.current && !addMenuRef.current.contains(e.target as Node)) {
+        setShowAddMenu(false)
+      }
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
+
+  // Unsaved changes warning
   useEffect(() => {
     const handler = (e: BeforeUnloadEvent) => {
       if (hasUnsavedChanges || saveStatus === 'saving') {
@@ -102,57 +137,107 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
       setSaveStatus('saved')
       setHasUnsavedChanges(false)
       if (saveTimerRef.current) clearTimeout(saveTimerRef.current)
-      saveTimerRef.current = setTimeout(() => {
-        setSaveStatus('idle')
-      }, 3000)
+      saveTimerRef.current = setTimeout(() => setSaveStatus('idle'), 3000)
     } catch {
       setSaveStatus('error')
     }
   }
 
   const handleDeleteElement = async (elementId: string) => {
+    if (!confirm('Are you sure you want to delete this element?')) return
     try {
       await deleteElement(elementId)
       setSelectedElement(null)
       loadWebsite()
-    } catch (err) {
-      alert('Failed to delete element')
+    } catch {
+      alert('Failed to delete element. It may be required by this page.')
     }
   }
 
   const handleAddElement = async (type: string) => {
-    if (!selectedPage) return
+    if (!selectedPage || isAddingElement) return
+    setShowAddMenu(false)
+    setIsAddingElement(true)
     try {
-      const name = type.charAt(0).toUpperCase() + type.slice(1)
-      await createElement(selectedPage.id, type, name, {}, 99)
-      loadWebsite()
-    } catch (err) {
-      alert('Failed to add element')
+      const name = type.charAt(0).toUpperCase() + type.slice(1) + ' Block'
+      
+      let initialProps: Record<string, unknown> = {}
+      if (type === 'heading') initialProps = { content: 'New Heading' }
+      else if (type === 'text') initialProps = { content: 'New text block. Click to edit.' }
+      else if (type === 'button') initialProps = { label: 'Click Here' }
+      else if (type === 'image') initialProps = { url: '' }
+      else if (type === 'banner_slider') initialProps = { 
+        images: JSON.stringify([
+          'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1445205170230-053b83016050?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1509319117193-57bab727e09d?w=1200&auto=format&fit=crop'
+        ]) 
+      }
+      else if (type === 'services_grid') initialProps = { title: 'Our Services', subtitle: 'What we offer' }
+      else if (type === 'image_text') initialProps = { title: 'About Us', content: 'We are a luxury fashion brand...', image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format&fit=crop' }
+      else if (type === 'testimonials') initialProps = { title: 'Client Reviews' }
+
+      await createElement(selectedPage.id, type, name, initialProps, 99)
+      await loadWebsite()
+    } catch {
+      alert('Failed to add element.')
+    } finally {
+      setIsAddingElement(false)
+    }
+  }
+
+  const handlePublish = async () => {
+    try {
+      setSaveStatus('saving')
+      await updateWebsite(websiteId, { isPublished: true })
+      setSaveStatus('saved')
+      setShowPublishSuccess(true)
+    } catch {
+      setSaveStatus('error')
+      alert('Failed to publish website. Please try again.')
     }
   }
 
   if (isLoading) {
     return (
-      <div className="workspace-wrapper">
-        <div style={{ margin: 'auto' }}>Loading workspace...</div>
+      <div className="ws-shell">
+        <div className="ws-loading">
+          <div className="ws-loading-spinner" />
+          <p>Loading workspace…</p>
+        </div>
       </div>
     )
   }
 
   if (error || !website) {
     return (
-      <div className="workspace-wrapper">
-        <div style={{ margin: 'auto', textAlign: 'center' }}>
-          <p>{error || 'Failed to load website'}</p>
-          <a href="/">Back to store</a>
+      <div className="ws-shell">
+        <div className="ws-error">
+          <div className="ws-error-icon">⚠️</div>
+          <h3>{error || 'Failed to load website'}</h3>
+          <p>Make sure the API is running at <strong>http://localhost:5191</strong></p>
+          <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+            <button className="ws-btn ws-btn-primary" onClick={() => { setIsLoading(true); loadWebsite() }}>
+              Retry
+            </button>
+            <a className="ws-btn ws-btn-outline" href="/">← Back to Store</a>
+          </div>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="workspace-wrapper">
-      {showPageManager && website && (
+    <div className="ws-shell">
+      {/* Modals */}
+      {showPageManager && (
         <PageManagerModal
           websiteId={website.id}
           pages={website.pages}
@@ -160,7 +245,7 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
           onRefresh={() => loadWebsite()}
           onSelectPage={(id) => {
             const page = website.pages.find(p => p.id === id)
-            if (page) setSelectedPage(page)
+            if (page) { setSelectedPage(page); setSelectedElement(null) }
           }}
           activePageId={selectedPage?.id || ''}
         />
@@ -168,248 +253,339 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
       {showSupportModal && (
         <ContactSupportModal onClose={() => setShowSupportModal(false)} />
       )}
-      {showPublishSuccess && website && (
-        <PublishSuccessModal 
-          websiteId={website.id} 
-          onClose={() => setShowPublishSuccess(false)} 
-        />
+      {showPublishSuccess && (
+        <PublishSuccessModal websiteId={website.id} onClose={() => setShowPublishSuccess(false)} />
       )}
-      {/* Left Sidebar (Main Menu) */}
-      <aside className="workspace-sidebar">
-        <div className="sidebar-brand">
-          <span className="sidebar-logo">W</span> Willovate One
+
+      {/* ── LEFT SIDEBAR ── */}
+      <aside className="ws-sidebar">
+        <div className="ws-sidebar-brand">
+          <span className="ws-sidebar-logo">W</span>
+          <span>Willovate One</span>
         </div>
-        
-        <div className="sidebar-section" style={{ marginTop: '1rem' }}>
-            <h3 className="sidebar-heading">Main Menu</h3>
-            <ul className="sidebar-nav">
-              <li className="sidebar-nav-item active">
-                <span className="sidebar-icon"><Home size={18} /></span>
-                Workspace
-              </li>
-              <li className="sidebar-nav-item">
-                <span className="sidebar-icon"><Gauge size={18} /></span>
-                Dashboard
-              </li>
-              <li className="sidebar-nav-item">
-                <span className="sidebar-icon"><ShoppingBag size={18} /></span>
-                Products
-              </li>
-              <li className="sidebar-nav-item">
-                <span className="sidebar-icon"><FolderOpen size={18} /></span>
-                Orders
-              </li>
-              <li className="sidebar-nav-item">
-                <span className="sidebar-icon"><Users size={18} /></span>
-                Customers
-              </li>
-              <li className="sidebar-nav-item">
-                <span className="sidebar-icon"><BarChart2 size={18} /></span>
-                Sales
-              </li>
-              <li className="sidebar-nav-item">
-                <span className="sidebar-icon"><Megaphone size={18} /></span>
-                Marketing & Growth
-              </li>
-            </ul>
+
+        <nav className="ws-sidebar-nav">
+          <p className="ws-sidebar-section-label">Main Menu</p>
+          <ul>
+            <li className="ws-nav-item ws-nav-active">
+              <Home size={16} /> Workspace
+            </li>
+            <li className="ws-nav-item">
+              <Gauge size={16} /> Dashboard
+            </li>
+            <li className="ws-nav-item">
+              <ShoppingBag size={16} /> Products
+            </li>
+            <li className="ws-nav-item">
+              <FolderOpen size={16} /> Orders
+            </li>
+            <li className="ws-nav-item">
+              <Users size={16} /> Customers
+            </li>
+            <li className="ws-nav-item">
+              <BarChart2 size={16} /> Sales
+            </li>
+            <li className="ws-nav-item">
+              <Megaphone size={16} /> Marketing &amp; Growth
+            </li>
+          </ul>
+
+          <p className="ws-sidebar-section-label" style={{ marginTop: '1.5rem' }}>Templates</p>
+          <ul>
+            <li className="ws-nav-item">
+              <LayoutTemplate size={16} /> Browse Templates
+            </li>
+            <li className="ws-nav-item">
+              <Star size={16} /> My Templates
+            </li>
+          </ul>
+
+          <p className="ws-sidebar-section-label" style={{ marginTop: '1.5rem' }}>Settings</p>
+          <ul>
+            <li className="ws-nav-item">
+              <Settings size={16} /> Settings
+            </li>
+          </ul>
+
+          <p className="ws-sidebar-section-label" style={{ marginTop: '1.5rem' }}>Support</p>
+          <ul>
+            <li className="ws-nav-item" onClick={() => setShowSupportModal(true)}>
+              <HelpCircle size={16} /> Need Help?
+            </li>
+          </ul>
+        </nav>
+
+        {/* Support Card */}
+        <div className="ws-support-card">
+          <div className="ws-support-card-icon">
+            <HelpCircle size={20} color="#6b46c1" />
+          </div>
+          <h4>Need help with your store?</h4>
+          <p>Contact us and our team will create a custom template as per your business needs.</p>
+          <button className="ws-support-card-btn" onClick={() => setShowSupportModal(true)}>
+            Contact Us
+          </button>
+        </div>
+      </aside>
+
+      {/* ── RIGHT MAIN COLUMN ── */}
+      <div className="ws-main-col">
+
+        {/* TOP BAR */}
+        <header className="ws-topbar">
+          <div className="ws-topbar-left">
+            <button
+              className="ws-page-switcher"
+              onClick={() => setShowPageManager(true)}
+              title="Manage pages"
+            >
+              {selectedPage?.title || 'Home'}
+              <ChevronDown size={14} />
+            </button>
           </div>
 
-          <div className="sidebar-section">
-            <h3 className="sidebar-heading">Templates</h3>
-            <ul className="sidebar-nav">
-              <li className="sidebar-nav-item">
-                <span className="sidebar-icon"><LayoutTemplate size={18} /></span>
-                Browse Templates
-              </li>
-              <li className="sidebar-nav-item">
-                <span className="sidebar-icon"><Star size={18} /></span>
-                My Templates
-              </li>
-            </ul>
+          <div className="ws-topbar-center">
+            <SaveIndicator
+              status={saveStatus}
+              hasUnsavedChanges={hasUnsavedChanges}
+              onSave={handleSave}
+            />
           </div>
 
-          <div className="sidebar-section">
-            <h3 className="sidebar-heading">Settings</h3>
-            <ul className="sidebar-nav">
-              <li className="sidebar-nav-item">
-                <span className="sidebar-icon"><Settings size={18} /></span>
-                Settings
-              </li>
-            </ul>
+          <div className="ws-topbar-right">
+            <button
+              className={`ws-btn ws-btn-ai ${showAI ? 'ws-btn-ai-active' : ''}`}
+              onClick={() => { setShowAI(!showAI); if (!showAI) setSelectedElement(null) }}
+              title="Open AI Assistant"
+            >
+              <Sparkles size={15} /> AI Assistant
+            </button>
+            <button
+              className="ws-btn ws-btn-outline"
+              onClick={() => window.open(`/preview/${websiteId}`, '_blank')}
+              title="Preview website"
+            >
+              <Eye size={15} /> Preview
+            </button>
+            <button
+              className="ws-btn ws-btn-primary"
+              onClick={handlePublish}
+              title="Publish website"
+            >
+              <Send size={14} /> Publish <ChevronDown size={14} />
+            </button>
+            <div className="ws-user-avatar" title="Account">A</div>
           </div>
+        </header>
 
-          <div className="sidebar-section" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-            <h3 className="sidebar-heading">Support</h3>
-            <ul className="sidebar-nav">
-              <li className="sidebar-nav-item">
-                <span className="sidebar-icon"><HelpCircle size={18} /></span>
-                Need Help?
-              </li>
-            </ul>
-            
-            <div className="sidebar-support-box">
-              <div className="sidebar-support-box-icon"><HelpCircle size={20} style={{ color: '#6b46c1' }} /></div>
-              <h4>Need help with your store?</h4>
-              <p>Contact us and our team will create a custom template as per your business needs.</p>
-              <button className="sidebar-support-btn" onClick={() => setShowSupportModal(true)}>Contact Us</button>
+        {/* CONTENT AREA */}
+        <div className="ws-content-row">
+
+          {/* ── CENTER CANVAS ── */}
+          <main className="ws-canvas-area">
+            {/* Canvas frame */}
+            <div className={`ws-canvas ws-canvas-${previewMode}`}>
+              {selectedPage ? (
+                <PageEditor
+                  page={selectedPage}
+                  selectedElementId={selectedElement?.id}
+                  onSelectElement={(el) => {
+                    setSelectedElement(el)
+                    setShowAI(false)
+                  }}
+                />
+              ) : (
+                <div className="ws-canvas-empty">No page selected</div>
+              )}
             </div>
-          </div>
-        </aside>
 
-        {/* Right Main Column */}
-        <div className="workspace-main-column">
-          <header className="workspace-topbar">
-            <div className="topbar-left">
-              <div className="topbar-page-switcher" onClick={() => setShowPageManager(true)} style={{ cursor: 'pointer' }}>
-                {selectedPage ? selectedPage.title : 'Home'} <ChevronDown size={14} />
-              </div>
-            </div>
-            
-            <div className="topbar-center">
-              <SaveIndicator
-                status={saveStatus}
-                hasUnsavedChanges={hasUnsavedChanges}
-                onSave={handleSave}
-              />
-            </div>
-
-            <div className="topbar-right">
-              <button 
-                className="topbar-btn outline" 
-                style={{ borderColor: '#d6bcfa', color: '#6b46c1', backgroundColor: '#fff' }} 
-                onClick={() => setShowAI(!showAI)}
+            {/* Viewport Controls */}
+            <div className="ws-viewport-controls">
+              <button
+                className={`ws-viewport-btn ${previewMode === 'desktop' ? 'active' : ''}`}
+                onClick={() => setPreviewMode('desktop')}
+                title="Desktop view"
               >
-                <Sparkles size={16} /> AI Assistant
+                <Monitor size={16} />
               </button>
-              <button 
-                className="topbar-btn outline"
-                onClick={() => window.open(`/preview/${websiteId}`, '_blank')}
+              <button
+                className={`ws-viewport-btn ${previewMode === 'tablet' ? 'active' : ''}`}
+                onClick={() => setPreviewMode('tablet')}
+                title="Tablet view"
               >
-                <Eye size={16} /> Preview
+                <Tablet size={16} />
               </button>
-              <button 
-                className="topbar-btn primary"
-                onClick={async () => {
-                  try {
-                    setSaveStatus('saving')
-                    await updateWebsite(websiteId!, { isPublished: true })
-                    setSaveStatus('saved')
-                    setShowPublishSuccess(true)
-                  } catch (err) {
-                    setSaveStatus('error')
-                    alert('Failed to publish website')
-                  }
-                }}
+              <button
+                className={`ws-viewport-btn ${previewMode === 'mobile' ? 'active' : ''}`}
+                onClick={() => setPreviewMode('mobile')}
+                title="Mobile view"
               >
-                <Send size={14} /> Publish <ChevronDown size={14} />
+                <Smartphone size={16} />
               </button>
-              <div className="topbar-user">
-                <div className="user-avatar">A</div>
-                <ChevronDown size={14} />
-              </div>
             </div>
-          </header>
 
-          <div className="workspace-content-row">
-            {/* Center Canvas */}
-            <main className="workspace-main">
-              <div className={`canvas-container preview-${previewMode}`}>
-                {selectedPage ? (
-                  <PageEditor
-                    page={selectedPage}
-                    selectedElementId={selectedElement?.id}
-                    onSelectElement={(el) => setSelectedElement(el)}
-                  />
-                ) : (
-                  <div style={{ margin: 'auto' }}>No page selected</div>
+            {/* Add Element Button */}
+            {selectedPage && (
+              <div className="ws-add-element-wrap" ref={addMenuRef}>
+                <button
+                  className="ws-add-element-btn"
+                  onClick={() => setShowAddMenu(!showAddMenu)}
+                  disabled={isAddingElement}
+                >
+                  <Plus size={16} />
+                  {isAddingElement ? 'Adding…' : 'Add Element'}
+                </button>
+                {showAddMenu && (
+                  <div className="ws-add-menu">
+                    {ADD_ELEMENT_TYPES.map(({ type, label, icon }) => (
+                      <button
+                        key={type}
+                        className="ws-add-menu-item"
+                        onClick={() => handleAddElement(type)}
+                      >
+                        {icon} {label}
+                      </button>
+                    ))}
+                  </div>
                 )}
               </div>
-              
-              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem', gap: '0.5rem' }}>
-                <button 
-                  onClick={() => setPreviewMode('desktop')}
-                  style={{ background: previewMode === 'desktop' ? '#f0ebf8' : 'white', border: previewMode === 'desktop' ? 'none' : '1px solid #e2e8f0', padding: '0.5rem 1rem', borderRadius: '6px', color: previewMode === 'desktop' ? '#6b46c1' : '#a0aec0', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-                </button>
-                <button 
-                  onClick={() => setPreviewMode('tablet')}
-                  style={{ background: previewMode === 'tablet' ? '#f0ebf8' : 'white', border: previewMode === 'tablet' ? 'none' : '1px solid #e2e8f0', padding: '0.5rem 1rem', borderRadius: '6px', color: previewMode === 'tablet' ? '#6b46c1' : '#a0aec0', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
-                </button>
-                <button 
-                  onClick={() => setPreviewMode('mobile')}
-                  style={{ background: previewMode === 'mobile' ? '#f0ebf8' : 'white', border: previewMode === 'mobile' ? 'none' : '1px solid #e2e8f0', padding: '0.5rem 1rem', borderRadius: '6px', color: previewMode === 'mobile' ? '#6b46c1' : '#a0aec0', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
-                </button>
-              </div>
-            </main>
+            )}
+          </main>
 
-        {/* Right Sidebar (Properties Panel) */}
-        <aside className="workspace-properties">
-          {showAI ? (
-            <div style={{ height: '100%', overflowY: 'auto' }}>
-              <AIAssistant 
+          {/* ── RIGHT PROPERTIES PANEL ── */}
+          <aside className="ws-props-panel">
+            {showAI ? (
+              <AIAssistant
                 onClose={() => setShowAI(false)}
                 onApplySuggestion={async (text, type) => {
-                  if (selectedPage) {
-                    const el = selectedPage.elements.find(e => e.elementType === type);
+                  if (!selectedPage) return
+                  // For the hero section (heading/text/button), update the hero element
+                  const heroEl = selectedPage.elements.find(e => e.elementType === 'hero')
+                  if (heroEl) {
+                    const currentProps = { ...(heroEl.properties || {}) }
+                    if (type === 'heading') currentProps.title = text
+                    else if (type === 'text') currentProps.subtitle = text
+                    else if (type === 'button') currentProps.buttonText = text
+                    try {
+                      await updateElement(heroEl.id, { name: heroEl.name, displayOrder: heroEl.displayOrder, properties: currentProps })
+                      setHasUnsavedChanges(true)
+                      loadWebsite()
+                    } catch (e) { console.error('Failed to apply AI suggestion', e) }
+                  } else {
+                    // Fallback: find by elementType for custom elements
+                    const el = selectedPage.elements.find(e => e.elementType === type)
                     if (el) {
-                      const newProps = { ...(el.properties || {}) };
-                      if (type === 'heading' || type === 'text') {
-                        newProps.content = text;
-                      } else if (type === 'button') {
-                        newProps.label = text;
-                      }
+                      const newProps = { ...(el.properties || {}) }
+                      if (type === 'heading' || type === 'text') newProps.content = text
+                      else if (type === 'button') newProps.label = text
                       try {
-                        await updateElement(el.id, {
-                          name: el.name,
-                          displayOrder: el.displayOrder,
-                          properties: newProps
-                        });
-                        setHasUnsavedChanges(true);
-                        const controller = new AbortController();
-                        loadWebsite(controller.signal);
-                      } catch (e) {
-                        console.error('Failed to apply AI suggestion', e);
-                      }
+                        await updateElement(el.id, { name: el.name, displayOrder: el.displayOrder, properties: newProps })
+                        setHasUnsavedChanges(true)
+                        loadWebsite()
+                      } catch (e) { console.error('Failed to apply AI suggestion', e) }
                     }
                   }
                 }}
+                onApplyBanner={async (imageUrl) => {
+                  if (!selectedPage) return
+                  const heroEl = selectedPage.elements.find(e => e.elementType === 'hero')
+                  if (heroEl) {
+                    const currentProps = { ...(heroEl.properties || {}), style_backgroundImage: imageUrl }
+                    try {
+                      await updateElement(heroEl.id, { name: heroEl.name, displayOrder: heroEl.displayOrder, properties: currentProps })
+                      setHasUnsavedChanges(true)
+                      // Optimistically update the page in state
+                      setSelectedPage(prev => prev ? {
+                        ...prev,
+                        elements: prev.elements.map(e => e.id === heroEl.id ? { ...e, properties: currentProps } : e)
+                      } : prev)
+                    } catch (e) { console.error('Failed to apply banner', e) }
+                  }
+                }}
               />
-            </div>
-          ) : selectedElement ? (
-            <div style={{ height: '100%', overflowY: 'auto' }}>
+            ) : selectedElement ? (
               <ElementEditor
                 element={selectedElement}
                 onClose={() => setSelectedElement(null)}
-                onUpdate={() => loadWebsite()}
+                onUpdate={() => { loadWebsite(); setHasUnsavedChanges(true) }}
+                onOptimisticUpdate={(newProps) => {
+                  setSelectedElement(prev => prev ? { ...prev, properties: newProps } : null)
+                  if (selectedElement?.id === 'hero') {
+                    const headingId = newProps._headingId
+                    setSelectedPage(prev => {
+                      if (!prev) return prev
+                      return {
+                        ...prev,
+                        elements: prev.elements.map(e => 
+                          e.id === headingId 
+                            ? { ...e, properties: { ...e.properties, ...newProps } }
+                            : e
+                        )
+                      }
+                    })
+                  } else {
+                    setSelectedPage(prev => {
+                      if (!prev) return prev
+                      return {
+                        ...prev,
+                        elements: prev.elements.map(e => 
+                          e.id === selectedElement?.id
+                            ? { ...e, properties: { ...e.properties, ...newProps } }
+                            : e
+                        )
+                      }
+                    })
+                  }
+                }}
                 onDelete={() => handleDeleteElement(selectedElement.id)}
               />
-            </div>
-          ) : (
-            <div className="workspace-properties">
-              <div className="props-header">
-                <h3>Workspace</h3>
-              </div>
-              <div className="props-tab-content">
-                <p className="props-empty">Add a new element or click an existing element to edit it.</p>
-                
-                <div style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <button className="sidebar-support-btn" style={{ textAlign: 'left', fontWeight: 'bold' }} onClick={() => handleAddElement('text')}>
-                    + Add Text Block
-                  </button>
-                  <button className="sidebar-support-btn" style={{ textAlign: 'left', fontWeight: 'bold' }} onClick={() => handleAddElement('button')}>
-                    + Add Button
-                  </button>
-                  <button className="sidebar-support-btn" style={{ textAlign: 'left', fontWeight: 'bold' }} onClick={() => handleAddElement('image')}>
-                    + Add Image
-                  </button>
+            ) : (
+              <div className="ws-props-empty">
+                <div className="ws-props-header">
+                  <h3>Workspace</h3>
+                  <p className="ws-props-website-name">{website.name}</p>
+                </div>
+                <div className="ws-props-empty-body">
+                  <div className="ws-props-empty-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#cbd5e0" strokeWidth="1.5">
+                      <rect x="3" y="3" width="18" height="18" rx="3"/>
+                      <path d="M3 9h18M9 21V9"/>
+                    </svg>
+                  </div>
+                  <p className="ws-props-empty-hint">Click any section or element on the canvas to edit it.</p>
+
+                  <div className="ws-props-quick-actions">
+                    <p className="ws-props-section-label">QUICK ACTIONS</p>
+                    <button className="ws-quick-action-btn" onClick={() => setShowPageManager(true)}>
+                      <FolderOpen size={14} /> Manage Pages
+                    </button>
+                    <button className="ws-quick-action-btn" onClick={() => { setShowAI(true) }}>
+                      <Sparkles size={14} /> Open AI Assistant
+                    </button>
+                    <button className="ws-quick-action-btn" onClick={() => setShowSupportModal(true)}>
+                      <HelpCircle size={14} /> Contact Support
+                    </button>
+                  </div>
+
+                  <div className="ws-props-quick-actions" style={{ marginTop: '1.5rem' }}>
+                    <p className="ws-props-section-label">PAGES</p>
+                    {website.pages.map(page => (
+                      <button
+                        key={page.id}
+                        className={`ws-quick-action-btn ${selectedPage?.id === page.id ? 'ws-quick-action-active' : ''}`}
+                        onClick={() => { setSelectedPage(page); setSelectedElement(null) }}
+                      >
+                        {page.isHomePage ? '🏠' : '📄'} {page.title}
+                        {page.isHomePage && <span className="ws-home-badge">Home</span>}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
-        </aside>
-      </div>
+            )}
+          </aside>
+
+        </div>
       </div>
     </div>
   )

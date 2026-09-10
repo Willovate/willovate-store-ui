@@ -1,67 +1,144 @@
 import { useState } from 'react'
+import { X, CheckCircle, Send, HelpCircle } from 'lucide-react'
 
 interface ContactSupportModalProps {
   onClose: () => void
 }
 
 export default function ContactSupportModal({ onClose }: ContactSupportModalProps) {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [category, setCategory] = useState('general')
   const [message, setMessage] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!message.trim()) return
-
-    setIsSubmitting(true)
-    
-    // Mock the support request API call
+    setSubmitting(true)
+    // Simulate API call
     setTimeout(() => {
-      setIsSubmitting(false)
-      setIsSuccess(true)
-    }, 1000)
+      setSubmitting(false)
+      setSubmitted(true)
+    }, 900)
+  }
+
+  const inputStyle: React.CSSProperties = {
+    width: '100%',
+    padding: '0.5rem 0.75rem',
+    border: '1px solid #e2e8f0',
+    borderRadius: 7,
+    fontSize: '0.875rem',
+    fontFamily: 'inherit',
+    outline: 'none',
+    boxSizing: 'border-box',
+    color: '#1a202c',
   }
 
   return (
-    <div className="modal-overlay" style={styles.overlay}>
-      <div className="modal-content" style={styles.modal}>
-        <div style={styles.header}>
-          <h2 style={styles.title}>Contact Support</h2>
-          <button style={styles.closeBtn} onClick={onClose}>×</button>
+    <div className="modal-backdrop" onClick={e => { if (e.target === e.currentTarget) onClose() }}>
+      <div className="modal-box" style={{ maxWidth: 500 }}>
+        <div className="modal-header">
+          <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <HelpCircle size={18} color="#6b46c1" /> Contact Support
+          </h2>
+          <button className="modal-close" onClick={onClose} aria-label="Close"><X size={14} /></button>
         </div>
 
-        <div style={styles.body}>
-          {isSuccess ? (
-            <div style={styles.successState}>
-              <div style={styles.successIcon}>✓</div>
-              <h3>Message Sent Successfully!</h3>
-              <p style={{ color: '#4a5568', marginTop: '0.5rem' }}>
-                Our support team has received your query and will get back to you shortly.
+        <div className="modal-body">
+          {submitted ? (
+            <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
+                <CheckCircle size={52} color="#38a169" />
+              </div>
+              <h3 style={{ margin: '0 0 0.5rem 0', color: '#1a202c', fontSize: '1.1rem' }}>Request Submitted!</h3>
+              <p style={{ color: '#718096', fontSize: '0.875rem', margin: '0 0 1.5rem 0', lineHeight: 1.6 }}>
+                Our support team has received your query and will get back to you within 24 hours.
               </p>
-              <button style={styles.primaryBtn} onClick={onClose}>
-                Close
+              <button
+                onClick={onClose}
+                style={{ padding: '0.6rem 1.75rem', background: '#6b46c1', color: '#fff', border: 'none', borderRadius: 7, fontWeight: 700, fontSize: '0.875rem', cursor: 'pointer' }}
+              >
+                Done
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit}>
-              <p style={{ color: '#4a5568', marginBottom: '1rem' }}>
-                Need help with your workspace? Describe your issue below and our team will assist you.
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <p style={{ margin: 0, color: '#718096', fontSize: '0.875rem', lineHeight: 1.5 }}>
+                Describe your issue below and our team will assist you shortly.
               </p>
-              <textarea
-                autoFocus
-                placeholder="How can we help you today?"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                style={styles.textarea}
-                rows={5}
-                disabled={isSubmitting}
-              />
-              <div style={styles.footer}>
-                <button type="button" onClick={onClose} style={styles.secondaryBtn} disabled={isSubmitting}>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: '#718096', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.35rem' }}>
+                    Your Name
+                  </label>
+                  <input style={inputStyle} placeholder="e.g. Nayan" value={name} onChange={e => setName(e.target.value)} disabled={submitting} />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: '#718096', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.35rem' }}>
+                    Email
+                  </label>
+                  <input style={inputStyle} type="email" placeholder="you@example.com" value={email} onChange={e => setEmail(e.target.value)} disabled={submitting} />
+                </div>
+              </div>
+
+              <div>
+                <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: '#718096', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.35rem' }}>
+                  Category
+                </label>
+                <select
+                  style={{ ...inputStyle, appearance: 'none', background: '#fff url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'12\' height=\'12\' viewBox=\'0 0 24 24\'%3E%3Cpath fill=\'%23718096\' d=\'M7 10l5 5 5-5H7z\'/%3E%3C/svg%3E") no-repeat right 0.75rem center', paddingRight: '2rem' }}
+                  value={category}
+                  onChange={e => setCategory(e.target.value)}
+                  disabled={submitting}
+                >
+                  <option value="general">General Question</option>
+                  <option value="template">Template Issue</option>
+                  <option value="editor">Editor / Workspace</option>
+                  <option value="ai">AI Assistant</option>
+                  <option value="billing">Billing</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div>
+                <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: '#718096', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.35rem' }}>
+                  Message <span style={{ color: '#e53e3e' }}>*</span>
+                </label>
+                <textarea
+                  autoFocus
+                  required
+                  placeholder="Describe your issue or question in detail…"
+                  value={message}
+                  onChange={e => setMessage(e.target.value)}
+                  rows={5}
+                  disabled={submitting}
+                  style={{ ...inputStyle, minHeight: 110, resize: 'vertical' }}
+                />
+                <div style={{ textAlign: 'right', fontSize: '0.7rem', color: '#a0aec0', marginTop: '0.25rem' }}>{message.length}/500</div>
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.6rem', paddingTop: '0.25rem' }}>
+                <button
+                  type="button"
+                  onClick={onClose}
+                  disabled={submitting}
+                  style={{ padding: '0.55rem 1rem', background: '#fff', border: '1px solid #e2e8f0', borderRadius: 7, fontSize: '0.8125rem', fontWeight: 600, color: '#4a5568', cursor: 'pointer' }}
+                >
                   Cancel
                 </button>
-                <button type="submit" style={styles.primaryBtn} disabled={isSubmitting || !message.trim()}>
-                  {isSubmitting ? 'Sending...' : 'Submit Request'}
+                <button
+                  type="submit"
+                  disabled={submitting || !message.trim()}
+                  style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', padding: '0.55rem 1.25rem', background: '#6b46c1', color: '#fff', border: 'none', borderRadius: 7, fontSize: '0.8125rem', fontWeight: 700, cursor: 'pointer', opacity: (!message.trim() || submitting) ? 0.65 : 1 }}
+                >
+                  {submitting ? (
+                    <><span style={{ display: 'inline-block', width: 12, height: 12, border: '2px solid rgba(255,255,255,0.4)', borderTopColor: '#fff', borderRadius: '50%', animation: 'ws-spin 0.7s linear infinite' }} /> Sending…</>
+                  ) : (
+                    <><Send size={13} /> Submit Request</>
+                  )}
                 </button>
               </div>
             </form>
@@ -70,100 +147,4 @@ export default function ContactSupportModal({ onClose }: ContactSupportModalProp
       </div>
     </div>
   )
-}
-
-const styles = {
-  overlay: {
-    position: 'fixed' as const,
-    top: 0, left: 0, right: 0, bottom: 0,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 1000
-  },
-  modal: {
-    backgroundColor: '#fff',
-    borderRadius: '8px',
-    width: '100%',
-    maxWidth: '500px',
-    boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)',
-    display: 'flex',
-    flexDirection: 'column' as const
-  },
-  header: {
-    padding: '1.25rem 1.5rem',
-    borderBottom: '1px solid #e2e8f0',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  title: {
-    margin: 0,
-    fontSize: '1.25rem',
-    fontWeight: 600,
-    color: '#1a202c'
-  },
-  closeBtn: {
-    background: 'none',
-    border: 'none',
-    fontSize: '1.5rem',
-    cursor: 'pointer',
-    color: '#a0aec0'
-  },
-  body: {
-    padding: '1.5rem'
-  },
-  textarea: {
-    width: '100%',
-    padding: '0.75rem',
-    border: '1px solid #e2e8f0',
-    borderRadius: '6px',
-    fontSize: '0.875rem',
-    resize: 'vertical' as const,
-    minHeight: '100px',
-    fontFamily: 'inherit'
-  },
-  footer: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    gap: '0.75rem',
-    marginTop: '1.5rem'
-  },
-  primaryBtn: {
-    backgroundColor: '#6b46c1',
-    color: '#fff',
-    border: 'none',
-    padding: '0.5rem 1rem',
-    borderRadius: '6px',
-    fontSize: '0.875rem',
-    fontWeight: 500,
-    cursor: 'pointer'
-  },
-  secondaryBtn: {
-    backgroundColor: '#edf2f7',
-    color: '#4a5568',
-    border: 'none',
-    padding: '0.5rem 1rem',
-    borderRadius: '6px',
-    fontSize: '0.875rem',
-    fontWeight: 500,
-    cursor: 'pointer'
-  },
-  successState: {
-    textAlign: 'center' as const,
-    padding: '2rem 1rem'
-  },
-  successIcon: {
-    width: '48px',
-    height: '48px',
-    backgroundColor: '#c6f6d5',
-    color: '#38a169',
-    borderRadius: '50%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '1.5rem',
-    margin: '0 auto 1rem auto'
-  }
 }

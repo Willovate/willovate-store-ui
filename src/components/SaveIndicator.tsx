@@ -1,3 +1,5 @@
+import { Check, Save, AlertTriangle, Clock } from 'lucide-react'
+
 interface SaveIndicatorProps {
   status: 'idle' | 'saving' | 'saved' | 'error'
   hasUnsavedChanges: boolean
@@ -6,34 +8,50 @@ interface SaveIndicatorProps {
 
 export default function SaveIndicator({ status, hasUnsavedChanges, onSave }: SaveIndicatorProps) {
   if (status === 'saving') {
-    return <div className="save-indicator" style={{ color: '#718096' }}><span>⟳</span> Saving...</div>
-  }
-
-  if (status === 'error') {
-    return <div className="save-indicator" style={{ color: '#e53e3e' }}><span>⚠</span> Save Failed</div>
-  }
-
-  if (hasUnsavedChanges) {
     return (
-      <div className="save-indicator" style={{ color: '#d69e2e', cursor: 'pointer' }} onClick={onSave}>
-        <span>●</span> Unsaved changes (Click to save)
+      <div className="save-indicator" style={{ color: '#d69e2e' }}>
+        <span style={{ display: 'inline-block', animation: 'ws-spin 0.8s linear infinite', fontSize: '0.9rem' }}>↻</span>
+        Saving…
       </div>
     )
   }
 
+  if (status === 'error') {
+    return (
+      <div className="save-indicator" style={{ color: '#e53e3e', cursor: 'pointer' }} onClick={onSave} title="Click to retry">
+        <AlertTriangle size={14} />
+        Save failed — Retry
+      </div>
+    )
+  }
+
+  if (status === 'saved') {
+    return (
+      <div className="save-indicator" style={{ color: '#38a169' }}>
+        <Check size={14} />
+        All changes saved
+      </div>
+    )
+  }
+
+  if (hasUnsavedChanges) {
+    return (
+      <button
+        className="save-indicator"
+        style={{ color: '#d69e2e', cursor: 'pointer', background: 'none', border: 'none', padding: 0, font: 'inherit', display: 'flex', alignItems: 'center', gap: '0.35rem', fontWeight: 600, fontSize: '0.8rem' }}
+        onClick={onSave}
+        title="Click to save"
+      >
+        <Clock size={14} />
+        Unsaved changes · Click to save
+      </button>
+    )
+  }
+
   return (
-    <div className="save-indicator" style={{ color: '#38a169' }}>
-      <span style={{ 
-        display: 'inline-flex', 
-        alignItems: 'center', 
-        justifyContent: 'center',
-        width: '18px', 
-        height: '18px', 
-        border: '1.5px solid #38a169', 
-        borderRadius: '50%', 
-        fontSize: '10px',
-        fontWeight: 'bold'
-      }}>✓</span> Saved
+    <div className="save-indicator" style={{ color: '#a0aec0', fontSize: '0.8rem' }}>
+      <Save size={13} />
+      Changes auto-saved
     </div>
   )
 }
