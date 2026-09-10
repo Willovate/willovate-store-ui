@@ -4,7 +4,7 @@ import { createPage, updatePage, deletePage } from '../lib/workspace-api'
 import { Plus, Pencil, Trash2, Check, X, Home } from 'lucide-react'
 
 interface PageManagerModalProps {
-  websiteId: string
+  themeId: string
   pages: Page[]
   onClose: () => void
   onRefresh: () => void
@@ -13,7 +13,7 @@ interface PageManagerModalProps {
 }
 
 export default function PageManagerModal({
-  websiteId, pages, onClose, onRefresh, onSelectPage, activePageId
+  themeId, pages, onClose, onRefresh, onSelectPage, activePageId
 }: PageManagerModalProps) {
   const [isCreating, setIsCreating] = useState(false)
   const [newTitle, setNewTitle] = useState('')
@@ -38,7 +38,7 @@ export default function PageManagerModal({
     setBusy(true); setErrorMsg(null)
     try {
       const slug = newTitle.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-')
-      await createPage(websiteId, newTitle.trim(), slug, '', pages.length)
+      await createPage(themeId, newTitle.trim(), slug, '', pages.length)
       setNewTitle(''); setIsCreating(false); onRefresh()
     } catch {
       setErrorMsg('Failed to create page. Please try again.')

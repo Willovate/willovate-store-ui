@@ -288,7 +288,7 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
       {/* Modals */}
       {showPageManager && activeTheme && (
         <PageManagerModal
-          websiteId={activeTheme.id}
+          themeId={activeTheme.id}
           pages={pagesState}
           onClose={() => setShowPageManager(false)}
           onRefresh={() => loadWebsite()}
@@ -686,31 +686,7 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
         </div>
       </div>
 
-      {showPageManager && (
-        <PageManagerModal
-          websiteId={websiteId}
-          onClose={() => setShowPageManager(false)}
-          onRefresh={() => loadWebsite()}
-        />
-      )}
-      {showThemeLibrary && (
-        <ThemeLibrary
-          websiteId={websiteId}
-          onClose={() => setShowThemeLibrary(false)}
-          onRefresh={() => loadWebsite()}
-        />
-      )}
-      {showPublishSuccess && (
-        <PublishSuccessModal
-          url={`https://${website?.slug || 'store'}.willovate.com`}
-          onClose={() => setShowPublishSuccess(false)}
-        />
-      )}
-      {showSupportModal && (
-        <ContactSupportModal
-          onClose={() => setShowSupportModal(false)}
-        />
-      )}
+
     </div>
   )
 }
