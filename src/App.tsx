@@ -116,6 +116,7 @@ function App() {
           <a href="#catalog">Shop</a>
           <a href="#story">Our story</a>
           <a href="#newsletter">Journal</a>
+          <a href="/workspace/a1b2c3d4-0000-0000-0000-000000000001" className="nav-workspace-link">✦ Customize</a>
         </nav>
         <button className="cart-trigger" type="button" onClick={() => setCartOpen(true)}>
           Bag <span>{cart.count}</span>
