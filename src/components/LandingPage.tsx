@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { WILLOVATE_LOGO_DATA_URI, BALANCED_FLOW_YOGI_DATA_URI } from '../constants/landingAssets'
 import '../styles/LandingPage.css'
 
 /* =========================================================================
@@ -32,7 +33,7 @@ function Navbar({ onStartFree, onNavClick }: NavbarProps) {
             }}
           >
             <img
-              src="/willovate-logo-cropped.png"
+              src={WILLOVATE_LOGO_DATA_URI}
               alt="Willovate One"
               className="navbar-logo-img"
             />
@@ -153,7 +154,7 @@ const HERO_SLIDES: TemplateSlide[] = [
     ctaText: 'Book a Class',
     theme: 'balanced-theme',
     badge: 'Yoga & Studio',
-    photoUrl: '/balanced-flow-yogi.png',
+    photoUrl: BALANCED_FLOW_YOGI_DATA_URI,
     features: [
       { title: 'Weekly Classes', subtitle: 'Heated & non-heated', icon: '🗓️' },
       { title: 'Online Courses', subtitle: 'Practice anywhere', icon: '💻' },
