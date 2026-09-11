@@ -44,6 +44,7 @@ export default function PageEditor({
           <a href="#">Shop</a>
           <a href="#">Collections</a>
           <a href="#">About</a>
+          <a href="#">Contact</a>
         </nav>
         <div className="luxe-icons">
           <span>🔍</span>
@@ -93,11 +94,10 @@ export default function PageEditor({
           <div className="luxe-eyebrow" style={{ color: textColor }}>{eyebrow}</div>
           <h1 className="luxe-heading" style={{ color: textColor }}>{headingText}</h1>
           <p className="luxe-description" style={{ whiteSpace: 'pre-line', color: textColor, opacity: 0.8 }}>{descriptionText}</p>
-          <button className="luxe-button" style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}>{buttonText}</button>
+          <button className="luxe-button" style={{ backgroundColor: buttonBgColor, color: buttonTextColor, borderRadius: '8px', padding: '1rem 3rem' }}>{buttonText}</button>
         </div>
         
-        {/* We use a placeholder since we don't have the exact image asset, but we mimic the layout */}
-        <div style={{ position: 'absolute', right: 0, bottom: 0, width: '55%', height: '100%', background: 'url(https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=800&auto=format&fit=crop) no-repeat center bottom / cover', zIndex: 1, borderTopLeftRadius: '20px' }}></div>
+        <div className="luxe-hero-image" style={{ background: 'url(https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=1200&auto=format&fit=crop) no-repeat center center / cover' }}></div>
       </div>
 
       {/* Trust Badges */}

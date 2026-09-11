@@ -261,10 +261,11 @@
   transition: max-width 0.3s ease;
   margin: 0 auto;
   width: 100%;
+  container-type: inline-size;
 }
 
 .canvas-container.preview-desktop {
-  max-width: 100%;
+  max-width: 1200px;
 }
 
 .canvas-container.preview-tablet {
@@ -402,11 +403,26 @@
   gap: 2rem;
 }
 
-.luxe-nav span {
+.luxe-nav a {
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   cursor: pointer;
+  text-decoration: none;
+  color: #4a5568;
+  font-weight: 500;
+  transition: color 0.2s;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid transparent;
+}
+
+.luxe-nav a:hover {
+  color: #1a202c;
+}
+
+.luxe-nav a.active {
+  color: #1a202c;
+  border-bottom-color: #1a202c;
 }
 
 .luxe-icons {
@@ -417,17 +433,22 @@
 .luxe-hero {
   display: flex;
   flex-direction: row;
-  min-height: 500px;
-  position: relative;
-  overflow: hidden;
+  min-height: 550px;
+  background-color: #f4ecd8;
 }
 
 .luxe-hero-content {
   flex: 1;
-  padding: 4rem;
+  padding: 5rem 6rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.luxe-hero-image {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
 }
 
 .luxe-eyebrow {
@@ -470,9 +491,8 @@
 
 /* Trust Badges */
 .luxe-trust-badges {
-  display: flex;
-  justify-content: space-between;
-  padding: 3rem 4rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   background-color: #fff;
   border-bottom: 1px solid #eef0f5;
 }
@@ -480,11 +500,18 @@
 .luxe-badge {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
+  padding: 3rem 2rem;
+  border-right: 1px solid #eef0f5;
+  justify-content: center;
+}
+.luxe-badge:last-child {
+  border-right: none;
 }
 
 .luxe-badge-icon {
-  font-size: 1.5rem;
+  font-size: 2rem;
+  color: #1a202c;
 }
 
 .luxe-badge-text h5 {
@@ -554,6 +581,63 @@
   font-size: 0.875rem;
   font-weight: 500;
   color: #4a5568;
+}
+
+/* Responsive Luxe Template via Container Queries */
+@container (max-width: 950px) {
+  .luxe-header {
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+  .luxe-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  .luxe-hero {
+    flex-direction: column;
+    min-height: auto;
+  }
+  .luxe-hero-content {
+    padding: 4rem 2rem;
+    align-items: center;
+    text-align: center;
+  }
+  .luxe-hero-image {
+    width: 100%;
+    height: 400px;
+  }
+  .luxe-trust-badges {
+    grid-template-columns: 1fr;
+  }
+  .luxe-badge {
+    border-right: none;
+    border-bottom: 1px solid #eef0f5;
+    padding: 2rem;
+    justify-content: flex-start;
+  }
+  .luxe-badge:last-child {
+    border-bottom: none;
+  }
+  .luxe-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@container (max-width: 500px) {
+  .luxe-grid {
+    grid-template-columns: 1fr;
+  }
+  .luxe-heading {
+    font-size: 2.5rem;
+  }
+  .luxe-hero-content {
+    padding: 3rem 1.5rem;
+  }
+  .luxe-hero-image {
+    height: 300px;
+  }
 }
 
 /* AI Assistant Panel Styles */
