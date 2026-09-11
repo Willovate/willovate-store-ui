@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import '../styles/LandingPage.css'
 
 /* =========================================================================
@@ -10,7 +10,7 @@ interface NavbarProps {
   onNavClick?: (section: string) => void
 }
 
-function Navbar({ onStartFree, onGoToStore, onNavClick }: NavbarProps) {
+function Navbar({ onStartFree, onNavClick }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const handleNavClick = (section: string) => {
@@ -19,113 +19,31 @@ function Navbar({ onStartFree, onGoToStore, onNavClick }: NavbarProps) {
   }
 
   return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        {/* Brand Logo */}
-        <a
-          href="#"
-          className="navbar-logo"
-          onClick={(e) => {
-            e.preventDefault()
-            handleNavClick('product')
-          }}
-          style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', textDecoration: 'none' }}
-        >
-          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="navLogoPurpleGrad" x1="4" y1="8" x2="16" y2="26" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stopColor="#7C3AED" />
-                <stop offset="60%" stopColor="#6366F1" />
-                <stop offset="100%" stopColor="#3B82F6" />
-              </linearGradient>
-              <linearGradient id="navLogoBlueGrad" x1="12" y1="10" x2="28" y2="26" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stopColor="#3B82F6" />
-                <stop offset="50%" stopColor="#2563EB" />
-                <stop offset="100%" stopColor="#1D4ED8" />
-              </linearGradient>
-            </defs>
-            <path
-              d="M6 9.5L11.5 24.5C11.8 25.4 13 25.6 13.6 24.8L18.5 17.5"
-              stroke="url(#navLogoPurpleGrad)"
-              strokeWidth="4.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M13.8 17.2L18.5 24.5C19.1 25.4 20.3 25.3 20.7 24.3L26 9.5"
-              stroke="url(#navLogoBlueGrad)"
-              strokeWidth="4.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <span style={{ fontSize: '1.25rem', fontWeight: 800, letterSpacing: '-0.025em', display: 'flex', gap: '0.25rem' }}>
-            <span style={{ color: '#0f172a' }}>Willovate</span>
-            <span style={{ color: '#2563eb' }}>One</span>
-          </span>
-        </a>
-
-        {/* Desktop Navigation */}
-        <div className="navbar-menu desktop">
-          <a href="#product" onClick={() => handleNavClick('product')}>Product</a>
-          <a href="#solutions" onClick={() => handleNavClick('solutions')}>Solutions</a>
+    <header className="navbar-wrapper">
+      <nav className="navbar">
+        <div className="navbar-container">
+          {/* Brand Logo with exact uploaded logo */}
           <a
-            href="#templates"
+            href="#"
+            className="navbar-logo"
             onClick={(e) => {
               e.preventDefault()
-              handleNavClick('templates')
+              handleNavClick('product')
             }}
           >
-            Templates
+            <img
+              src="/willovate-logo-cropped.png"
+              alt="Willovate One"
+              className="navbar-logo-img"
+            />
+            <span className="navbar-logo-text">
+              <span>Willovate</span>
+              <span>One</span>
+            </span>
           </a>
-          <a href="#pricing" onClick={() => handleNavClick('pricing')}>Pricing</a>
-        </div>
 
-        {/* Right CTA */}
-        <div className="navbar-right desktop" style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-          <button
-            className="btn-store-nav"
-            type="button"
-            onClick={onGoToStore}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.4rem',
-              padding: '0.45rem 0.95rem',
-              borderRadius: '9999px',
-              background: '#f6f4ee',
-              color: '#1d211c',
-              border: '1.5px solid #1d211c',
-              fontWeight: 700,
-              fontSize: '0.85rem',
-              cursor: 'pointer',
-              transition: 'all 0.15s ease',
-            }}
-          >
-            <span>🛍️</span>
-            <span>View Store</span>
-          </button>
-          <a href="#login" className="nav-link">Log in</a>
-          <button className="btn-start-free" type="button" onClick={onStartFree}>
-            Start free
-          </button>
-        </div>
-
-        {/* Mobile Hamburger Toggle */}
-        <button
-          className="mobile-menu-toggle"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle mobile menu"
-          type="button"
-        >
-          <span className={mobileMenuOpen ? 'open' : ''}></span>
-          <span className={mobileMenuOpen ? 'open' : ''}></span>
-          <span className={mobileMenuOpen ? 'open' : ''}></span>
-        </button>
-
-        {/* Mobile Slide-out Menu */}
-        {mobileMenuOpen && (
-          <div className="navbar-menu mobile">
+          {/* Desktop Navigation */}
+          <div className="navbar-menu desktop">
             <a href="#product" onClick={() => handleNavClick('product')}>Product</a>
             <a href="#solutions" onClick={() => handleNavClick('solutions')}>Solutions</a>
             <a
@@ -138,41 +56,54 @@ function Navbar({ onStartFree, onGoToStore, onNavClick }: NavbarProps) {
               Templates
             </a>
             <a href="#pricing" onClick={() => handleNavClick('pricing')}>Pricing</a>
-            <div className="mobile-actions">
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false)
-                  onGoToStore?.()
-                }}
-                style={{
-                  width: '100%',
-                  padding: '0.6rem 1rem',
-                  borderRadius: '8px',
-                  background: '#f6f4ee',
-                  color: '#1d211c',
-                  border: '1.5px solid #1d211c',
-                  fontWeight: 700,
-                  fontSize: '0.9rem',
-                  cursor: 'pointer',
-                  marginBottom: '0.5rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '0.5rem',
+          </div>
+
+          {/* Right CTA */}
+          <div className="navbar-right desktop">
+            <a href="#login" className="nav-link">Log in</a>
+            <button className="btn-start-free" type="button" onClick={onStartFree}>
+              Start free
+            </button>
+          </div>
+
+          {/* Mobile Hamburger Toggle */}
+          <button
+            className="mobile-menu-toggle"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle mobile menu"
+            type="button"
+          >
+            <span className={mobileMenuOpen ? 'open' : ''}></span>
+            <span className={mobileMenuOpen ? 'open' : ''}></span>
+            <span className={mobileMenuOpen ? 'open' : ''}></span>
+          </button>
+
+          {/* Mobile Slide-out Menu */}
+          {mobileMenuOpen && (
+            <div className="navbar-menu mobile">
+              <a href="#product" onClick={() => handleNavClick('product')}>Product</a>
+              <a href="#solutions" onClick={() => handleNavClick('solutions')}>Solutions</a>
+              <a
+                href="#templates"
+                onClick={(e) => {
+                  e.preventDefault()
+                  handleNavClick('templates')
                 }}
               >
-                🛍️ View Store
-              </button>
-              <a href="#login" className="nav-link">Log in</a>
-              <button className="btn-start-free" type="button" onClick={onStartFree}>
-                Start free
-              </button>
+                Templates
+              </a>
+              <a href="#pricing" onClick={() => handleNavClick('pricing')}>Pricing</a>
+              <div className="mobile-actions">
+                <a href="#login" className="nav-link">Log in</a>
+                <button className="btn-start-free" type="button" onClick={onStartFree}>
+                  Start free
+                </button>
+              </div>
             </div>
-          </div>
-        )}
-      </div>
-    </nav>
+          )}
+        </div>
+      </nav>
+    </header>
   )
 }
 
@@ -187,8 +118,8 @@ interface TemplateSlide {
   ctaText: string
   theme: string
   badge: string
+  photoUrl: string
   features?: { title: string; subtitle: string; icon: string }[]
-  previewVisual?: string
   clientLogos?: string[]
 }
 
@@ -201,7 +132,7 @@ const HERO_SLIDES: TemplateSlide[] = [
     ctaText: 'Shop Collection',
     theme: 'luxe-theme',
     badge: 'Fashion & Boutique',
-    previewVisual: '👗',
+    photoUrl: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&auto=format&fit=crop&q=80',
   },
   {
     id: 'consulting',
@@ -212,7 +143,7 @@ const HERO_SLIDES: TemplateSlide[] = [
     theme: 'consulting-theme',
     badge: 'Advisory & Capital',
     clientLogos: ['CME', 'pulse', 'Cloudly'],
-    previewVisual: '💼',
+    photoUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&auto=format&fit=crop&q=80',
   },
   {
     id: 'balanced',
@@ -222,13 +153,13 @@ const HERO_SLIDES: TemplateSlide[] = [
     ctaText: 'Book a Class',
     theme: 'balanced-theme',
     badge: 'Yoga & Studio',
+    photoUrl: '/balanced-flow-yogi.png',
     features: [
       { title: 'Weekly Classes', subtitle: 'Heated & non-heated', icon: '🗓️' },
       { title: 'Online Courses', subtitle: 'Practice anywhere', icon: '💻' },
       { title: 'Expert Teachers', subtitle: 'Learn from the best', icon: '👥' },
       { title: 'Memberships', subtitle: 'Plans for every lifestyle', icon: '💳' },
     ],
-    previewVisual: '🧘‍♀️',
   },
   {
     id: 'salon',
@@ -239,7 +170,7 @@ const HERO_SLIDES: TemplateSlide[] = [
     theme: 'salon-theme',
     badge: 'Salon & Spa',
     clientLogos: ['Hair', 'Color', 'Skin', 'Nails'],
-    previewVisual: '✨',
+    photoUrl: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&auto=format&fit=crop&q=80',
   },
   {
     id: 'masterclass',
@@ -249,11 +180,11 @@ const HERO_SLIDES: TemplateSlide[] = [
     ctaText: 'Start Learning',
     theme: 'masterclass-theme',
     badge: 'Online Masterclass',
+    photoUrl: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&auto=format&fit=crop&q=80',
     features: [
       { title: '8 Modules', subtitle: 'Self-paced', icon: '📚' },
       { title: 'Community', subtitle: '1.2k Members', icon: '⭐' },
     ],
-    previewVisual: '🧘',
   },
 ]
 
@@ -265,40 +196,29 @@ interface HeroSectionProps {
 
 function HeroSection({ onStartFree, onExploreDemo, onAICommand }: HeroSectionProps) {
   const [promptText, setPromptText] = useState(
-    'Create a premium yoga studio website with memberships, class bookings and online courses'
+    'Create a premium yoga studio with memberships, class bookings and online courses'
   )
-  const [activeIndex, setActiveIndex] = useState(2)
-
-  const handlePrev = () => setActiveIndex((p) => (p - 1 + HERO_SLIDES.length) % HERO_SLIDES.length)
-  const handleNext = () => setActiveIndex((p) => (p + 1) % HERO_SLIDES.length)
 
   const handlePromptSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (onAICommand && promptText.trim()) onAICommand(promptText)
   }
 
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') handlePrev()
-      if (e.key === 'ArrowRight') handleNext()
-    }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [])
-
   return (
     <section className="hero-section" id="product">
-      {/* ── layered cosmic background ── */}
+      {/* ── Layered cosmic background ── */}
       <div className="hero-bg-base" aria-hidden="true" />
       <div className="hero-bg-glow-center" aria-hidden="true" />
+      <div className="hero-bg-aurora" aria-hidden="true" />
       <div className="hero-bg-stars" aria-hidden="true" />
 
       {/* ── TOP COPY BLOCK ── */}
       <div className="hero-header-content">
         {/* Badge */}
         <div className="hero-ai-badge">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#93C5FD"/>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="badge-sparkle-svg">
+            <path d="M10 2C10 6.4 6.4 10 2 10C6.4 10 10 13.6 10 18C10 13.6 13.6 10 18 10C13.6 10 10 6.4 10 2Z" fill="#ffffff"/>
+            <path d="M19 2C19 3.65 17.65 5 16 5C17.65 5 19 6.35 19 8C19 6.35 20.35 5 22 5C20.35 5 19 3.65 19 2Z" fill="#ffffff"/>
           </svg>
           <span>AI BUSINESS BUILDER</span>
         </div>
@@ -336,38 +256,34 @@ function HeroSection({ onStartFree, onExploreDemo, onAICommand }: HeroSectionPro
 
       {/* ── SHOWCASE AREA ── */}
       <div className="showcase-area">
-        {/* Prompt search box with all 4 badges surrounding it */}
-        <div className="prompt-stage-container">
-          {/* Left badges column */}
-          <div className="prompt-badges-col prompt-badges-left">
-            <div className="fbadge fbadge--website">
-              <span className="fbadge-icon">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" strokeWidth="2">
-                  <rect x="2" y="3" width="20" height="14" rx="2" />
-                  <line x1="8" y1="21" x2="16" y2="21" />
-                  <line x1="12" y1="17" x2="12" y2="21" />
-                </svg>
-              </span>
-              <span>Website ready</span>
-              <span className="fbadge-check-sm">
-                <svg width="13" height="13" viewBox="0 0 14 14">
-                  <circle cx="7" cy="7" r="7" fill="#10B981" />
-                  <path d="M4 7L6.2 9.2L10 5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                </svg>
-              </span>
-            </div>
-            <div className="fbadge fbadge--payments">
-              <span className="fbadge-icon">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" strokeWidth="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-              </span>
-              <span>Payments active</span>
-              <span className="fbadge-check-sm">
-                <svg width="13" height="13" viewBox="0 0 14 14"><circle cx="7" cy="7" r="7" fill="#10B981"/><path d="M4 7L6.2 9.2L10 5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
-              </span>
-            </div>
+        {/* Floating Neural Badges + Center Prompt Bar */}
+        <div className="neural-stage-wrap">
+          <svg className="connector-svg" viewBox="0 0 1000 130" fill="none" preserveAspectRatio="none">
+            <path d="M 160 30 C 260 30, 310 65, 360 65" stroke="rgba(56, 189, 248, 0.6)" strokeWidth="1.5" />
+            <path d="M 160 100 C 260 100, 310 65, 360 65" stroke="rgba(139, 92, 246, 0.6)" strokeWidth="1.5" />
+            <path d="M 840 30 C 740 30, 690 65, 640 65" stroke="rgba(56, 189, 248, 0.6)" strokeWidth="1.5" />
+            <path d="M 840 100 C 740 100, 690 65, 640 65" stroke="rgba(52, 211, 153, 0.6)" strokeWidth="1.5" />
+          </svg>
+
+          {/* Left Badges */}
+          <div className="fbadge fbadge--website">
+            <span className="fbadge-check-sm">
+              <svg width="13" height="13" viewBox="0 0 14 14"><circle cx="7" cy="7" r="7" fill="#10B981"/><path d="M4 7L6.2 9.2L10 5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
+            </span>
+            <span>Website ready</span>
           </div>
 
-          {/* Center Prompt Bar */}
+          <div className="fbadge fbadge--payments">
+            <span className="fbadge-icon">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" strokeWidth="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            </span>
+            <span>Payments active</span>
+            <span className="fbadge-check-sm">
+              <svg width="13" height="13" viewBox="0 0 14 14"><circle cx="7" cy="7" r="7" fill="#10B981"/><path d="M4 7L6.2 9.2L10 5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
+            </span>
+          </div>
+
+          {/* Center Prompt Form */}
           <div className="prompt-wrap">
             <form className="prompt-form" onSubmit={handlePromptSubmit}>
               <span className="prompt-star" aria-hidden="true">
@@ -385,7 +301,7 @@ function HeroSection({ onStartFree, onExploreDemo, onAICommand }: HeroSectionPro
                 type="text"
                 value={promptText}
                 onChange={(e) => setPromptText(e.target.value)}
-                placeholder="Create a premium yoga studio website with memberships, class bookings and online courses"
+                placeholder="Create a premium yoga studio with memberships, class bookings and online courses"
                 aria-label="Describe your business"
               />
               <button className="prompt-submit" type="submit" aria-label="Generate">
@@ -396,51 +312,55 @@ function HeroSection({ onStartFree, onExploreDemo, onAICommand }: HeroSectionPro
             </form>
           </div>
 
-          {/* Right badges column */}
-          <div className="prompt-badges-col prompt-badges-right">
-            <div className="fbadge fbadge--bookings">
-              <span className="fbadge-icon">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              </span>
-              <span>Bookings connected</span>
-              <span className="fbadge-check-sm">
-                <svg width="13" height="13" viewBox="0 0 14 14"><circle cx="7" cy="7" r="7" fill="#10B981"/><path d="M4 7L6.2 9.2L10 5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
-              </span>
-            </div>
-            <div className="fbadge fbadge--courses">
-              <span className="fbadge-icon">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#34D399" strokeWidth="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-              </span>
-              <span>Course published</span>
-              <span className="fbadge-check-sm">
-                <svg width="13" height="13" viewBox="0 0 14 14"><circle cx="7" cy="7" r="7" fill="#10B981"/><path d="M4 7L6.2 9.2L10 5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
-              </span>
-            </div>
+          {/* Right Badges */}
+          <div className="fbadge fbadge--bookings">
+            <span className="fbadge-icon">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </span>
+            <span>Bookings connected</span>
+            <span className="fbadge-check-sm">
+              <svg width="13" height="13" viewBox="0 0 14 14"><circle cx="7" cy="7" r="7" fill="#10B981"/><path d="M4 7L6.2 9.2L10 5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
+            </span>
+          </div>
+
+          <div className="fbadge fbadge--courses">
+            <span className="fbadge-icon">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#34D399" strokeWidth="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </span>
+            <span>Course published</span>
+            <span className="fbadge-check-sm">
+              <svg width="13" height="13" viewBox="0 0 14 14"><circle cx="7" cy="7" r="7" fill="#10B981"/><path d="M4 7L6.2 9.2L10 5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
+            </span>
           </div>
         </div>
 
-        {/* Carousel nav arrows */}
-        <button className="c-arrow c-arrow--prev" type="button" onClick={handlePrev} aria-label="Previous">‹</button>
-        <button className="c-arrow c-arrow--next" type="button" onClick={handleNext} aria-label="Next">›</button>
+        {/* Downward light energy flare towards the center card */}
+        <div className="hero-downward-flare" aria-hidden="true">
+          <svg className="flare-rays-svg" viewBox="0 0 600 120" fill="none" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="downRayGrad" x1="0.5" y1="0" x2="0.5" y2="1">
+                <stop offset="0%" stopColor="rgba(99, 102, 241, 0.95)"/>
+                <stop offset="45%" stopColor="rgba(56, 189, 248, 0.65)"/>
+                <stop offset="100%" stopColor="rgba(139, 92, 246, 0)"/>
+              </linearGradient>
+            </defs>
+            <path d="M 300 0 L 120 120 L 480 120 Z" fill="url(#downRayGrad)" />
+            <path d="M 300 0 L 220 120 L 380 120 Z" fill="rgba(255, 255, 255, 0.2)" />
+          </svg>
+        </div>
 
-        {/* 3D Perspective Card Stage */}
+        {/* 3D Perspective Card Stage - Fixed Panoramic Arc (100% Match to Screenshot) */}
         <div className="stage-3d">
           {HERO_SLIDES.map((slide, index) => {
-            const raw = (index - activeIndex + HERO_SLIDES.length) % HERO_SLIDES.length
-            let pos = 'sc-center'
-            if (raw === 1) pos = 'sc-r1'
-            else if (raw === 2) pos = 'sc-r2'
-            else if (raw === 3) pos = 'sc-l2'
-            else if (raw === 4) pos = 'sc-l1'
-            const isCenter = raw === 0
+            const posClass = ['sc-l2', 'sc-l1', 'sc-center sc--active', 'sc-r1', 'sc-r2'][index] || 'sc-center'
+            const isCenter = index === 2
 
             return (
               <div
                 key={slide.id}
-                className={`sc ${pos}${isCenter ? ' sc--active' : ''}`}
-                onClick={() => !isCenter && setActiveIndex(index)}
+                className={`sc ${posClass}`}
               >
-                {/* Browser top bar */}
+                {/* Browser top window bar */}
                 <div className="sc-bar">
                   <div className="sc-dots">
                     <span className="sc-dot sc-dot--r" />
@@ -449,29 +369,34 @@ function HeroSection({ onStartFree, onExploreDemo, onAICommand }: HeroSectionPro
                   </div>
                   {isCenter ? (
                     <div className="sc-url-full">
-                      {slide.id === 'balanced' && (
-                        <span className="sc-brand-icon">
-                          <svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" fill="#10B981"/></svg>
-                        </span>
-                      )}
-                      <span className="sc-brand-label">{slide.id === 'balanced' ? 'Balanced Flow' : slide.name}</span>
-                      {slide.id === 'balanced' && (
-                        <span className="sc-nav-items">Classes &nbsp;·&nbsp; Programs &nbsp;·&nbsp; About &nbsp;·&nbsp; Pricing &nbsp;·&nbsp; Contact</span>
-                      )}
-                      <button className="sc-cta-pill" type="button">{slide.ctaText}</button>
+                      <span className="sc-brand-label">Balanced Flow</span>
+                      <span className="sc-nav-items">Classes &nbsp;·&nbsp; Programs &nbsp;·&nbsp; About &nbsp;·&nbsp; Pricing &nbsp;·&nbsp; Contact</span>
+                      <button className="sc-cta-pill" type="button">Book a Class</button>
                     </div>
                   ) : (
                     <span className="sc-mini-label">{slide.name}</span>
                   )}
+                  <div className="sc-win-controls" aria-hidden="true">
+                    <span>—</span>
+                    <span>□</span>
+                    <span>✕</span>
+                  </div>
                 </div>
 
-                {/* Card body */}
+                {/* Card body with realistic website mockups */}
                 <div className={`sc-body sc-body--${slide.id}`}>
                   {isCenter && slide.id === 'balanced' ? (
                     <>
-                      <div className="bf-split">
-                        <div className="bf-left">
-                          <p className="bf-eyebrow">Balanced Flow</p>
+                      {/* Full hero image background for center card */}
+                      <div className="bf-hero-layout">
+                        <img
+                          src={slide.photoUrl}
+                          alt="Yoga meditation in studio"
+                          className="bf-hero-bg-img"
+                          loading="eager"
+                        />
+                        <div className="bf-hero-overlay" />
+                        <div className="bf-hero-content">
                           <h2 className="bf-title">Move, breathe<br/>and thrive.</h2>
                           <p className="bf-sub">Yoga classes, online courses and wellness experiences for every body.</p>
                           <div className="bf-actions">
@@ -479,29 +404,18 @@ function HeroSection({ onStartFree, onExploreDemo, onAICommand }: HeroSectionPro
                             <button className="bf-btn-ghost" type="button">Explore Programs</button>
                           </div>
                         </div>
-                        <div className="bf-right">
-                          <div className="bf-photo">
-                            <span className="bf-yogi" aria-label="Yoga">🧘‍♀️</span>
-                          </div>
-                        </div>
                       </div>
                       <div className="bf-bar">
-                        <div className="bf-bar-item"><span>🗓️</span><strong>Weekly Classes</strong><small>Heated &amp; non-heated</small></div>
-                        <div className="bf-bar-item"><span>💻</span><strong>Online Courses</strong><small>Practice anywhere</small></div>
-                        <div className="bf-bar-item"><span>👥</span><strong>Expert Teachers</strong><small>Learn from the best</small></div>
-                        <div className="bf-bar-item"><span>💳</span><strong>Memberships</strong><small>Plans for every lifestyle</small></div>
+                        <div className="bf-bar-item"><span>🗓️</span><div><strong>Weekly Classes</strong><small>Heated &amp; non-heated</small></div></div>
+                        <div className="bf-bar-item"><span>💻</span><div><strong>Online Courses</strong><small>Practice anywhere</small></div></div>
+                        <div className="bf-bar-item"><span>👥</span><div><strong>Expert Teachers</strong><small>Learn from the best</small></div></div>
+                        <div className="bf-bar-item"><span>💳</span><div><strong>Memberships</strong><small>Plans for every lifestyle</small></div></div>
                       </div>
                     </>
                   ) : (
-                    <div className="side-layout">
-                      <div className={`side-photo side-photo--${slide.id}`}>
-                        <span className="side-emoji">{slide.previewVisual}</span>
-                      </div>
+                    <div className="side-card-split">
                       <div className="side-copy">
-                        {slide.id === 'consulting' && <span className="side-eyebrow">Elevate Consulting</span>}
-                        {slide.id === 'salon' && <span className="side-eyebrow glow-salon-label">GLOW SALON</span>}
-                        {slide.id === 'masterclass' && <span className="side-eyebrow">Mindful Living</span>}
-                        {slide.id === 'luxe' && <span className="side-eyebrow">LUXE MODE</span>}
+                        <span className="side-eyebrow">{slide.name}</span>
                         <h3 className="side-title">
                           {slide.tagline.split('\n').map((l, i) => <span key={i}>{l}<br/></span>)}
                         </h3>
@@ -514,6 +428,24 @@ function HeroSection({ onStartFree, onExploreDemo, onAICommand }: HeroSectionPro
                             {slide.clientLogos.map(l => <span key={l} className="side-chip">{l}</span>)}
                           </div>
                         )}
+                        {slide.id === 'salon' && (
+                          <div className="side-services-row">
+                            <span>Hair</span><span>·</span><span>Color</span><span>·</span><span>Skin</span><span>·</span><span>Nails</span>
+                          </div>
+                        )}
+                        {slide.id === 'masterclass' && (
+                          <div className="side-curriculum-pill">
+                            <span>Course Curriculum</span>
+                          </div>
+                        )}
+                      </div>
+                      <div className="side-photo-wrap">
+                        <img
+                          src={slide.photoUrl}
+                          alt={slide.name}
+                          className="side-photo-img"
+                          loading="eager"
+                        />
                       </div>
                     </div>
                   )}
@@ -523,42 +455,76 @@ function HeroSection({ onStartFree, onExploreDemo, onAICommand }: HeroSectionPro
           })}
         </div>
 
-        {/* Workflow timeline */}
-        <div className="wf-timeline">
-          <div className="wf-node">
-            <span className="wf-node-icon wf-node-icon--idle">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#94A3B8"/></svg>
-            </span>
-            <div><strong className="wf-label">Describe</strong><small className="wf-sub">Tell us your idea</small></div>
-          </div>
-          <div className="wf-line" />
-          <div className="wf-node wf-node--active">
-            <span className="wf-node-icon wf-node-icon--active">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            </span>
-            <div><strong className="wf-label">Review</strong><small className="wf-sub">See it come to life</small></div>
-          </div>
-          <div className="wf-line" />
-          <div className="wf-node">
-            <span className="wf-node-icon wf-node-icon--idle">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" strokeWidth="2"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-            </span>
-            <div><strong className="wf-label">Launch</strong><small className="wf-sub">Go live in minutes</small></div>
+        {/* Sweeping Luminous Workflow Timeline Arc */}
+        <div className="wf-arc-container">
+          <div className="wf-arc-beam" aria-hidden="true" />
+          <div className="wf-timeline-row">
+            <div className="wf-node wf-node--describe">
+              <span className="wf-star-icon">✦</span>
+              <div className="wf-node-text">
+                <strong className="wf-label">Describe</strong>
+                <small className="wf-sub">Tell us your idea</small>
+              </div>
+            </div>
+
+            <div className="wf-node wf-node--review active">
+              <div className="wf-lens-orb">
+                <span className="wf-lens-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                  </svg>
+                </span>
+                <div className="wf-lens-text">
+                  <strong className="wf-label">Review</strong>
+                  <small className="wf-sub">See it come to life</small>
+                </div>
+              </div>
+            </div>
+
+            <div className="wf-node wf-node--launch">
+              <span className="wf-rocket-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+                  <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+                  <path d="M9 12H4s.55-3.03 2-4.5c1.62-1.63 5-2 5-2"/>
+                  <path d="M12 9v5s3.03-.55 4.5-2c1.63-1.62 2-5 2-5"/>
+                </svg>
+              </span>
+              <div className="wf-node-text">
+                <strong className="wf-label">Launch</strong>
+                <small className="wf-sub">Go live in minutes</small>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Capabilities strip */}
       <div className="caps-strip">
-        <div className="cap"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span>Sell products</span></div>
+        <div className="cap">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span>Sell products</span>
+        </div>
         <div className="cap-div"/>
-        <div className="cap"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Offer services</span></div>
+        <div className="cap">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Offer services</span>
+        </div>
         <div className="cap-div"/>
-        <div className="cap"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Take bookings</span></div>
+        <div className="cap">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span>Take bookings</span>
+        </div>
         <div className="cap-div"/>
-        <div className="cap"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg><span>Teach courses</span></div>
+        <div className="cap">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          <span>Teach courses</span>
+        </div>
         <div className="cap-div"/>
-        <div className="cap"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg><span>Accept payments</span></div>
+        <div className="cap">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          <span>Accept payments</span>
+        </div>
       </div>
     </section>
   )
