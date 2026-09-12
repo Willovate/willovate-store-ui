@@ -1,5 +1,11 @@
 import { useDeferredValue, useEffect, useMemo, useState } from 'react'
 import './App.css'
+import { LandingPage } from './components/LandingPage'
+import {
+  CategoryTemplatesPage,
+  TemplateDirectoryPage,
+  TEMPLATE_REGISTRY,
+} from './components/TemplatesPage'
 import { getProducts } from './lib/api'
 import { formatCurrency } from './lib/currency'
 import { useCart } from './hooks/useCart'
@@ -58,6 +64,12 @@ function ProductCard({
 }
 
 function App() {
+  const [showStore, setShowStore] = useState(false)
+  const [currentPage, setCurrentPage] = useState<'landing' | 'directory' | 'templates' | 'workspace'>('landing')
+  const [selectedBusinessType, setSelectedBusinessType] = useState('clothing-store')
+  const [selectedBusinessTypeDisplay, setSelectedBusinessTypeDisplay] = useState('Clothing Store')
+  const [customPrompt, setCustomPrompt] = useState('Travel booking website')
+  const [selectedTemplateTitle, setSelectedTemplateTitle] = useState('Mino Store')
   const [products, setProducts] = useState<Product[]>([])
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('All')
@@ -68,6 +80,63 @@ function App() {
   const [newsletterSent, setNewsletterSent] = useState(false)
   const deferredSearch = useDeferredValue(search)
   const cart = useCart()
+
+  // URL Hash Synchronizer Supporting All 8 Categories
+  useEffect(() => {
+    const handleHash = () => {
+      const rawHash = window.location.hash.toLowerCase().replace(/^#/, '')
+
+      if (rawHash === 'store' || rawHash === 'shop' || rawHash === 'catalog') {
+        setShowStore(true)
+        setCurrentPage('landing')
+        document.title = 'Storefront | Willovate Store'
+        return
+      }
+
+      setShowStore(false)
+
+      if (rawHash === 'templates' || rawHash === 'directory') {
+        setCurrentPage('directory')
+        document.title = 'What do you want to build? | Willovate One'
+        return
+      }
+
+      if (rawHash === 'workspace') {
+        setCurrentPage('workspace')
+        document.title = 'Workspace | Willovate One'
+        return
+      }
+
+      // Check if hash matches any registered category templates
+      const matchedCategoryKey = Object.keys(TEMPLATE_REGISTRY).find((key) => {
+        return (
+          rawHash === `${key}-templates` ||
+          rawHash === `${key}-template` ||
+          rawHash === key ||
+          (key === 'clothing-store' && (rawHash === 'cloth-store-templet' || rawHash === 'cloth-store-templates')) ||
+          (key === 'restaurant' && (rawHash === 'restro' || rawHash === 'restro-templates')) ||
+          (key === 'other' && (rawHash === 'custom' || rawHash === 'custom-templates'))
+        )
+      })
+
+      if (matchedCategoryKey) {
+        const cat = TEMPLATE_REGISTRY[matchedCategoryKey]
+        setSelectedBusinessType(matchedCategoryKey)
+        setSelectedBusinessTypeDisplay(cat.displayName)
+        setCurrentPage('templates')
+        document.title = `${cat.displayName} Templates | Willovate One`
+        return
+      }
+
+      // Default: Landing page
+      setCurrentPage('landing')
+      document.title = 'Willovate One - The Unified Commerce & Store Platform'
+    }
+
+    handleHash()
+    window.addEventListener('hashchange', handleHash)
+    return () => window.removeEventListener('hashchange', handleHash)
+  }, [])
 
   useEffect(() => {
     const controller = new AbortController()
@@ -101,21 +170,163 @@ function App() {
     setCartOpen(true)
   }
 
+  // 1. All Templates / Category Selection (Step 1: What do you want to build?)
+  if (currentPage === 'directory') {
+    return (
+      <TemplateDirectoryPage
+        onBack={() => {
+          setCurrentPage('landing')
+          window.location.hash = ''
+        }}
+        onSelectBusinessType={(businessType, displayName, prompt) => {
+          setSelectedBusinessType(businessType)
+          setSelectedBusinessTypeDisplay(displayName)
+          if (prompt) setCustomPrompt(prompt)
+          setCurrentPage('templates')
+          window.location.hash = `${businessType}-templates`
+        }}
+      />
+    )
+  }
+
+  // 2. Templates Page (Step 2: Choose a template for ANY of the 8 categories)
+  if (currentPage === 'templates') {
+    return (
+      <CategoryTemplatesPage
+        businessType={selectedBusinessType}
+        businessTypeDisplay={selectedBusinessTypeDisplay}
+        customPrompt={customPrompt}
+        onBack={() => {
+          setCurrentPage('directory')
+          window.location.hash = 'templates'
+        }}
+        onComplete={(_projectId, _nextStepUrl, templateName) => {
+          setSelectedTemplateTitle(templateName)
+          setCurrentPage('workspace')
+          window.location.hash = 'workspace'
+        }}
+      />
+    )
+  }
+
+  // 3. Workspace View
+  if (currentPage === 'workspace') {
+    return (
+      <div style={{ padding: '3.5rem 1.5rem', textAlign: 'center', fontFamily: 'sans-serif', minHeight: '80vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ maxWidth: '560px', background: '#ffffff', padding: '2.5rem', borderRadius: '16px', border: '1px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}>
+          <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🎉</div>
+          <h1 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#0f172a', margin: '0 0 0.5rem 0' }}>Workspace Initialized!</h1>
+          <p style={{ color: '#64748b', fontSize: '0.95rem', margin: '0 0 1.75rem 0' }}>
+            Your <strong>{selectedTemplateTitle}</strong> template is loaded and ready for customization.
+          </p>
+          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <button
+              type="button"
+              onClick={() => {
+                setShowStore(true)
+                setCurrentPage('landing')
+                window.location.hash = 'store'
+              }}
+              style={{
+                padding: '0.65rem 1.4rem',
+                borderRadius: '8px',
+                backgroundColor: '#16a34a',
+                color: 'white',
+                border: 'none',
+                cursor: 'pointer',
+                fontWeight: 600,
+                fontSize: '0.9rem',
+              }}
+            >
+              🛍️ View Live Store
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setCurrentPage('templates')
+                window.location.hash = `${selectedBusinessType}-templates`
+              }}
+              style={{
+                padding: '0.65rem 1.4rem',
+                borderRadius: '8px',
+                backgroundColor: '#2563eb',
+                color: 'white',
+                border: 'none',
+                cursor: 'pointer',
+                fontWeight: 600,
+                fontSize: '0.9rem',
+              }}
+            >
+              ← Back to Templates
+            </button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // 4. Landing Page
+  if (!showStore) {
+    return (
+      <LandingPage
+        onGoToStore={() => {
+          setShowStore(true)
+          window.location.hash = 'store'
+        }}
+        onExploreTemplates={() => {
+          setCurrentPage('directory')
+          window.location.hash = 'templates'
+        }}
+      />
+    )
+  }
+
+  // 5. Storefront Page
   return (
     <div className="site-shell">
       <div className="announcement">
         <span>New season, considered slowly.</span>
         <a href="#catalog">Explore the collection <ArrowIcon /></a>
+        <button
+          type="button"
+          onClick={() => {
+            setShowStore(false)
+            window.location.hash = ''
+          }}
+          style={{
+            marginLeft: 'auto',
+            background: 'rgba(255,255,255,0.18)',
+            color: '#ffffff',
+            border: '1px solid rgba(255,255,255,0.3)',
+            padding: '0.25rem 0.85rem',
+            borderRadius: '4px',
+            fontSize: '0.8rem',
+            cursor: 'pointer',
+            fontWeight: 600,
+          }}
+        >
+          ← Return to Landing Page
+        </button>
       </div>
 
       <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="Willovate Store home">
+        <a
+          className="wordmark"
+          href="#top"
+          onClick={(e) => {
+            e.preventDefault()
+            setShowStore(false)
+            window.location.hash = ''
+          }}
+          aria-label="Willovate Store home"
+        >
           willovate<span>.</span>
         </a>
         <nav aria-label="Main navigation">
           <a href="#catalog">Shop</a>
           <a href="#story">Our story</a>
           <a href="#newsletter">Journal</a>
+
         </nav>
         <button className="cart-trigger" type="button" onClick={() => setCartOpen(true)}>
           Bag <span>{cart.count}</span>
@@ -123,7 +334,7 @@ function App() {
       </header>
 
       <main id="top">
-        <section className="hero-section">
+        <section className="store-hero-section">
           <div className="hero-copy">
             <p className="kicker">Willovate collection · 01</p>
             <h1>Objects for a<br /><em>considered life.</em></h1>
@@ -260,7 +471,17 @@ function App() {
       </main>
 
       <footer>
-        <a className="wordmark" href="#top">willovate<span>.</span></a>
+        <a
+          className="wordmark"
+          href="#top"
+          onClick={(e) => {
+            e.preventDefault()
+            setShowStore(false)
+            window.location.hash = ''
+          }}
+        >
+          willovate<span>.</span>
+        </a>
         <p>Thoughtful goods for modern life.</p>
         <p>© {new Date().getFullYear()} Willovate Store</p>
       </footer>
