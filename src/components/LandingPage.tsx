@@ -293,62 +293,66 @@ function HeroSection({ onStartFree, onExploreDemo, onAICommand }: HeroSectionPro
 
       {/* ── SHOWCASE AREA ── */}
       <div className="showcase-area">
+        {/* Showcase Area Atmospheric Background (Deep Navy #031A69 with #075BFF / #147BFF / #0A3FC7 Wind Glows) */}
+        <div className="showcase-bg-wrap" aria-hidden="true">
+          <div className="showcase-bg-deep" />
+          <div className="showcase-wind-left" />
+          <div className="showcase-wind-right" />
+          <div className="showcase-wind-center" />
+          <div className="showcase-wind-ribbon" />
+        </div>
+
         {/* Floating Neural Badges + Center Prompt Bar */}
         <div className="neural-stage-wrap">
-          <svg className="connector-svg" viewBox="0 0 1000 140" fill="none" preserveAspectRatio="none">
+          <svg className="connector-svg" viewBox="0 0 1000 120" fill="none" preserveAspectRatio="none">
             <defs>
-              <filter id="nodeGlow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="2.5" result="blur" />
+              <filter id="neuralGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="1.2" result="blur1" />
+                <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="blur2" />
+                <feMerge>
+                  <feMergeNode in="blur2" />
+                  <feMergeNode in="blur1" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="thinLineGlow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="0.3" result="blur" />
                 <feMerge>
                   <feMergeNode in="blur" />
                   <feMergeNode in="SourceGraphic" />
                 </feMerge>
               </filter>
-              <linearGradient id="lineGradLeftTop" x1="0%" y1="0%" x2="100%" y2="100%">
+              <linearGradient id="neuralLineGradLeft" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.85" />
-                <stop offset="100%" stopColor="#818cf8" stopOpacity="0.95" />
+                <stop offset="60%" stopColor="#60a5fa" stopOpacity="0.95" />
+                <stop offset="100%" stopColor="#93c5fd" stopOpacity="1" />
               </linearGradient>
-              <linearGradient id="lineGradRightTop" x1="100%" y1="0%" x2="0%" y2="100%">
+              <linearGradient id="neuralLineGradRight" x1="100%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.85" />
-                <stop offset="100%" stopColor="#c084fc" stopOpacity="0.95" />
-              </linearGradient>
-              <linearGradient id="lineGradLeftBot" x1="0%" y1="100%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.75" />
-                <stop offset="100%" stopColor="#818cf8" stopOpacity="0.9" />
-              </linearGradient>
-              <linearGradient id="lineGradRightBot" x1="100%" y1="100%" x2="0%" y2="0%">
-                <stop offset="0%" stopColor="#34d399" stopOpacity="0.75" />
-                <stop offset="100%" stopColor="#a855f7" stopOpacity="0.9" />
+                <stop offset="60%" stopColor="#60a5fa" stopOpacity="0.95" />
+                <stop offset="100%" stopColor="#93c5fd" stopOpacity="1" />
               </linearGradient>
             </defs>
 
-            {/* Top Left Line to Website ready */}
-            <path d="M 180 30 C 265 30, 285  70, 655 70" stroke="url(#lineGradLeftTop)" strokeWidth="0.6" filter="url(#nodeGlow)" />
-            <circle cx="180" cy="30" r="3.5" fill="#38bdf8" filter="url(#nodeGlow)" />
-            <circle cx="270" cy="50" r="2.5" fill="#60a5fa" filter="url(#nodeGlow)" />
-            <circle cx="345" cy="70" r="3.5" fill="#818cf8" filter="url(#nodeGlow)" />
+            {/* Top Left Line to Website ready - Hairline thin 0.3px */}
+            <path d="M 152 22 C 200 22, 235 42, 275 42" stroke="url(#neuralLineGradLeft)" strokeWidth="0.3" filter="url(#thinLineGlow)" />
+            {/* 4-point glowing star sparkle at prompt bar shoulder */}
+            <path d="M 275 38 Q 275 42 279 42 Q 275 42 275 46 Q 275 42 271 42 Q 275 42 275 38 Z" fill="#ffffff" filter="url(#neuralGlow)" />
+            {/* Intermediate node on line */}
+            <circle cx="212" cy="31" r="1.3" fill="#ffffff" filter="url(#neuralGlow)" />
 
-            {/* Top Right Line to Bookings connected */}
-            <path d="M 820 30 C 735 30, 715 70, 655 70" stroke="url(#lineGradRightTop)" strokeWidth="1.6" filter="url(#nodeGlow)" />
-            <circle cx="820" cy="30" r="3.5" fill="#38bdf8" filter="url(#nodeGlow)" />
-            <circle cx="730" cy="50" r="2.5" fill="#a78bfa" filter="url(#nodeGlow)" />
-            <circle cx="655" cy="70" r="3.5" fill="#c084fc" filter="url(#nodeGlow)" />
-
-            {/* Bottom Left Line to Payments active */}
-            <path d="M 140 120 C 230 120, 275 80, 345 75" stroke="url(#lineGradLeftBot)" strokeWidth="1.6" filter="url(#nodeGlow)" />
-            <circle cx="140" cy="120" r="3.5" fill="#38bdf8" filter="url(#nodeGlow)" />
-            <circle cx="240" cy="98" r="2.5" fill="#60a5fa" filter="url(#nodeGlow)" />
-
-            {/* Bottom Right Line to Course published */}
-            <path d="M 860 120 C 770 120, 725 80, 655 75" stroke="url(#lineGradRightBot)" strokeWidth="1.6" filter="url(#nodeGlow)" />
-            <circle cx="860" cy="120" r="3.5" fill="#34d399" filter="url(#nodeGlow)" />
-            <circle cx="760" cy="98" r="2.5" fill="#a855f7" filter="url(#nodeGlow)" />
+            {/* Top Right Line to Bookings connected - Hairline thin 0.3px */}
+            <path d="M 725 42 C 765 42, 800 22, 848 22" stroke="url(#neuralLineGradRight)" strokeWidth="0.3" filter="url(#thinLineGlow)" />
+            {/* 4-point glowing star sparkle at prompt bar shoulder */}
+            <path d="M 725 38 Q 725 42 729 42 Q 725 42 725 46 Q 725 42 721 42 Q 725 42 725 38 Z" fill="#ffffff" filter="url(#neuralGlow)" />
+            {/* Intermediate node on line */}
+            <circle cx="788" cy="31" r="1.3" fill="#ffffff" filter="url(#neuralGlow)" />
           </svg>
 
           {/* Left Badges */}
-          <div className="fbadge fbadge--website" style={{ transform: 'translate(44px, -4px)' }}>
+          <div className="fbadge fbadge--website">
             <span className="fbadge-icon">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#e0f2fe" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10" />
                 <line x1="2" y1="12" x2="22" y2="12" />
                 <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
@@ -356,20 +360,23 @@ function HeroSection({ onStartFree, onExploreDemo, onAICommand }: HeroSectionPro
             </span>
             <span>Website ready</span>
             <span className="fbadge-check-sm">
-              <svg width="13" height="13" viewBox="0 0 14 14">
-                <circle cx="7" cy="7" r="7" fill="#22c55e" />
-                <path d="M4 7L6.2 9.2L10 5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+              <svg width="14" height="14" viewBox="0 0 16 16">
+                <circle cx="8" cy="8" r="7.5" fill="#22c55e" />
+                <path d="M4.5 8L7 10.5L11.5 5.5" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
               </svg>
             </span>
           </div>
 
-          <div className="fbadge fbadge--payments" style={{ transform: 'translate(18px, -4px)' }}>
+          <div className="fbadge fbadge--payments">
             <span className="fbadge-icon">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#e0f2fe" strokeWidth="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
             </span>
             <span>Payments active</span>
             <span className="fbadge-check-sm">
-              <svg width="13" height="13" viewBox="0 0 14 14"><circle cx="7" cy="7" r="7" fill="#22c55e"/><path d="M4 7L6.2 9.2L10 5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
+              <svg width="14" height="14" viewBox="0 0 16 16">
+                <circle cx="8" cy="8" r="7.5" fill="#22c55e" />
+                <path d="M4.5 8L7 10.5L11.5 5.5" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+              </svg>
             </span>
           </div>
 
@@ -396,26 +403,44 @@ function HeroSection({ onStartFree, onExploreDemo, onAICommand }: HeroSectionPro
                 </svg>
               </button>
             </form>
+            {/* Pyramid Light Rays (Directly styled via CSS) */}
+            <div className="hero-pyramid-rays-wrap" aria-hidden="true" />
           </div>
 
           {/* Right Badges */}
-          <div className="fbadge fbadge--bookings" style={{ transform: 'translate(-14px, -4px)' }}>
+          <div className="fbadge fbadge--bookings">
             <span className="fbadge-icon">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e0f2fe" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="4" width="18" height="17" rx="3" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="9.5" x2="21" y2="9.5" />
+                <circle cx="8" cy="13" r="0.9" fill="#e0f2fe" stroke="none" />
+                <circle cx="12" cy="13" r="0.9" fill="#e0f2fe" stroke="none" />
+                <circle cx="16" cy="13" r="0.9" fill="#e0f2fe" stroke="none" />
+                <circle cx="8" cy="16.5" r="0.9" fill="#e0f2fe" stroke="none" />
+                <circle cx="12" cy="16.5" r="0.9" fill="#e0f2fe" stroke="none" />
+              </svg>
             </span>
             <span>Bookings connected</span>
             <span className="fbadge-check-sm">
-              <svg width="13" height="13" viewBox="0 0 14 14"><circle cx="7" cy="7" r="7" fill="#22c55e"/><path d="M4 7L6.2 9.2L10 5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
+              <svg width="14" height="14" viewBox="0 0 16 16">
+                <circle cx="8" cy="8" r="7.5" fill="#22c55e" />
+                <path d="M4.5 8L7 10.5L11.5 5.5" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+              </svg>
             </span>
           </div>
 
-          <div className="fbadge fbadge--courses" style={{ transform: 'translate(-18px, -2px)' }}>
+          <div className="fbadge fbadge--courses">
             <span className="fbadge-icon">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#e0f2fe" strokeWidth="1.8"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
             </span>
             <span>Course published</span>
             <span className="fbadge-check-sm">
-              <svg width="13" height="13" viewBox="0 0 14 14"><circle cx="7" cy="7" r="7" fill="#22c55e"/><path d="M4 7L6.2 9.2L10 5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
+              <svg width="14" height="14" viewBox="0 0 16 16">
+                <circle cx="8" cy="8" r="7.5" fill="#22c55e" />
+                <path d="M4.5 8L7 10.5L11.5 5.5" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+              </svg>
             </span>
           </div>
         </div>
@@ -2042,12 +2067,11 @@ function FooterSection() {
         <div className="footer-top-grid">
           <div className="footer-brand-col">
             <div className="footer-logo-row">
-              <div className="footer-logo-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                  <path d="M4 6L8 18L12 10L16 18L20 6" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <span className="footer-brand-text">Willovate One</span>
+              <img
+                src={WILLOVATE_LOGO_DATA_URI}
+                alt="Willovate One"
+                className="footer-logo-img"
+              />
             </div>
             <p className="footer-tagline">AI Business Builder for creators, entrepreneurs and dreamers.</p>
             <div className="footer-social-links">
