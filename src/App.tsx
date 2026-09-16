@@ -174,6 +174,7 @@ function App() {
   if (currentPage === 'directory') {
     return (
       <TemplateDirectoryPage
+        initialBusinessType={selectedBusinessType}
         onBack={() => {
           setCurrentPage('landing')
           window.location.hash = ''
