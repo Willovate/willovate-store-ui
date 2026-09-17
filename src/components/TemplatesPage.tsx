@@ -211,7 +211,7 @@ export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
     displayName: 'Clothing Store',
     badgeIcon: '👕',
     description: 'Professionally designed templates for your clothing store.',
-    filterTags: ['All', 'Minimal', 'Boutique', 'Streetwear', 'Luxury', 'Casual', 'Modern'],
+    filterTags: ['All', 'Minimal', 'Boutique', 'Streetwear', 'Luxury', 'Casual', 'Modern', 'Clean', 'Techwear', 'Activewear'],
     templates: [
       {
         id: 'tmpl_01_mino',
@@ -326,6 +326,63 @@ export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
         buttonColor: '#0f172a',
         isDark: false,
         modelImage: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_kuro_techwear',
+        slug: 'kuro-techwear',
+        name: 'Kuro Tactical Techwear',
+        businessType: 'clothing-store',
+        tags: ['Techwear', 'Streetwear', 'Modern'],
+        shortDescription: 'Obsidian dark-mode aesthetic with cyber-cyan accents and utility garments.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?w=600&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 97,
+        isActive: true,
+        brandName: 'KURO // LAB',
+        headline: 'Tactical Precision\nAll-Weather Utility',
+        subtitle: 'Modular attachments, waterproof seam-taped shells, and articulated ergonomic cuts.',
+        buttonText: 'Deploy Gear',
+        buttonColor: '#06b6d4',
+        isDark: true,
+        modelImage: 'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?w=600&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_solstice_linen',
+        slug: 'solstice-linen',
+        name: 'Solstice Linen & Resort',
+        businessType: 'clothing-store',
+        tags: ['Clean', 'Boutique', 'Casual'],
+        shortDescription: 'Warm Mediterranean terracotta palette and organic European flax resortwear.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 96,
+        isActive: true,
+        brandName: 'SOLSTICE',
+        headline: 'Sun-Drenched Living\nPure Organic Linen',
+        subtitle: 'Breezy silhouettes and unbleached European flax, woven for coastal escapes.',
+        buttonText: 'Shop Resort 2026',
+        buttonColor: '#c2410c',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_aeropulse_active',
+        slug: 'aeropulse-active',
+        name: 'AeroPulse Activewear',
+        businessType: 'clothing-store',
+        tags: ['Activewear', 'Modern'],
+        shortDescription: 'High-energy performance athleisure with electric volt accents and compression gear.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 95,
+        isActive: true,
+        brandName: 'AEROPULSE',
+        headline: 'Zero-Resistance Fit\nEngineered Activewear',
+        subtitle: 'Micro-compression seamless knitwear, sweat-wicking airflow zones, and 360° athletic mobility.',
+        buttonText: 'Power Your Training',
+        buttonColor: '#0f172a',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80',
       },
     ],
   },
@@ -1316,124 +1373,200 @@ export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
   },
 
   'health-beauty': {
-    displayName: 'Health & Beauty',
-    badgeIcon: '✨',
-    description: 'Clean skincare formulas, botanical wellness, fragrance and organic body care.',
-    filterTags: ['All', 'Skincare', 'Clean Beauty', 'Wellness', 'Haircare', 'Fragrance'],
+    displayName: 'Cosmetics & Beauty',
+    badgeIcon: '💄',
+    description: 'Designer beauty templates for cosmetics, luxury skincare, organic botanicals and grooming brands.',
+    filterTags: ['All', 'Luxury', 'Skincare', 'Makeup & Cosmetics', 'Clean & Organic', "Men's Grooming", 'Fragrance', 'Gen-Z & Trendy', 'Clinical & Lab', 'Minimal'],
     templates: [
       {
-        id: 'tmpl_hb_01_glow',
-        slug: 'pure-glow-botanics',
-        name: 'Glow Botanical Lab',
+        id: 'tmpl_cosm_01_lumiere',
+        slug: 'lumiere-beauty',
+        name: 'Lumière Beauty',
         businessType: 'health-beauty',
-        tags: ['Skincare', 'Clean Beauty'],
-        shortDescription: 'Plant-derived squalane oils, antioxidant serums and barrier repair creams.',
-        thumbnailUrl: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop&q=80',
+        tags: ['Luxury', 'Skincare', 'Makeup & Cosmetics'],
+        shortDescription: 'Luxury European cosmetic boutique with elegant ivory, champagne gold, serif display titles, and editorial photography.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&auto=format&fit=crop&q=80',
         fullPreviewUrl: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1600&auto=format&fit=crop&q=85',
         popularityScore: 99,
         isActive: true,
-        brandName: 'GLOW BOTANICS',
-        headline: 'Clean Actives\nRadiant Complexion',
-        subtitle: '100% cold-pressed plant extracts formulated without synthetic fragrance.',
-        buttonText: 'Shop Skincare',
-        buttonColor: '#0f172a',
+        brandName: 'LUMIÈRE BEAUTY',
+        headline: 'Beauty, Refined.',
+        subtitle: 'Discover thoughtfully selected beauty essentials designed to elevate your everyday ritual.',
+        buttonText: 'Discover The Ritual',
+        buttonColor: '#b58d3d',
         isDark: false,
-        modelImage: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop&q=80',
+        modelImage: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&auto=format&fit=crop&q=80',
       },
       {
-        id: 'tmpl_hb_02_scent',
-        slug: 'verre-atelier-parfum',
-        name: 'Verre Parfum',
+        id: 'tmpl_cosm_02_glowtheory',
+        slug: 'glow-theory',
+        name: 'Glow Theory',
         businessType: 'health-beauty',
-        tags: ['Fragrance', 'Wellness'],
-        shortDescription: 'Artisanal unisex perfumes, botanical room mists and cedarwood candles.',
-        thumbnailUrl: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=600&auto=format&fit=crop&q=80',
-        fullPreviewUrl: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=1600&auto=format&fit=crop&q=85',
+        tags: ['Gen-Z & Trendy', 'Skincare', 'Makeup & Cosmetics'],
+        shortDescription: 'Modern Gen-Z beauty brand in soft pink, lavender, and peach with bold typography, rounded cards, and dynamic badges.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 98,
+        isActive: true,
+        brandName: 'GLOW THEORY',
+        headline: 'Your Glow\nStarts Here.',
+        subtitle: 'Clean drops, juicy peptides, and barrier-friendly glazed formulas crafted for your daily dewy glow.',
+        buttonText: 'Shop the Glow',
+        buttonColor: '#ec4899',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_cosm_03_botanica',
+        slug: 'botanica',
+        name: 'Botanica Herbal',
+        businessType: 'health-beauty',
+        tags: ['Clean & Organic', 'Skincare'],
+        shortDescription: 'Natural, organic, and clean beauty with sage green palette, botanical shapes, and 100% wildcrafted extracts.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 97,
+        isActive: true,
+        brandName: 'BOTANICA',
+        headline: 'Beauty, Rooted\nin Nature.',
+        subtitle: 'Clean formulas. Conscious choices. Naturally beautiful results with wildcrafted botanical extracts.',
+        buttonText: 'Explore Wildcraft Range',
+        buttonColor: '#2e7d32',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_cosm_04_velvetrouge',
+        slug: 'velvet-rouge',
+        name: 'Velvet Rouge',
+        businessType: 'health-beauty',
+        tags: ['Luxury', 'Makeup & Cosmetics'],
+        shortDescription: 'High-fashion luxury cosmetics with deep burgundy, noir obsidian styling, metallic accents, and runway photography.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=800&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 96,
+        isActive: true,
+        brandName: 'VELVET ROUGE',
+        headline: 'Own Your Beauty.',
+        subtitle: 'Haute couture Parisian lipsticks, liquid velvet shadows, and unapologetic pigment perfection.',
+        buttonText: 'Explore Collection',
+        buttonColor: '#9f1239',
+        isDark: true,
+        modelImage: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=800&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_cosm_05_skinlab',
+        slug: 'skinlab',
+        name: 'SkinLab Derma',
+        businessType: 'health-beauty',
+        tags: ['Clinical & Lab', 'Skincare'],
+        shortDescription: 'Dermatology-inspired clinical skincare with pure white and cerulean aqua tones, structured cards, and active ingredient metrics.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1600&auto=format&fit=crop&q=85',
         popularityScore: 95,
         isActive: true,
-        brandName: 'VERRE PARFUM',
-        headline: 'Smoky Amber\n& Wild Vetiver',
-        subtitle: 'Slow-compounded natural fragrances inspired by coastal pine groves.',
-        buttonText: 'Explore Scents',
-        buttonColor: '#0f172a',
+        brandName: 'SKINLAB',
+        headline: 'Smarter Skincare\nStarts Here.',
+        subtitle: 'Dermatologist-tested multi-peptide actives, triple-ceramide matrix, and clinically backed skin barrier repair.',
+        buttonText: 'Find Your Routine',
+        buttonColor: '#0284c7',
         isDark: false,
-        modelImage: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=600&auto=format&fit=crop&q=80',
+        modelImage: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&auto=format&fit=crop&q=80',
       },
       {
-        id: 'tmpl_hb_03_hair',
-        slug: 'root-rituals-hair',
-        name: 'Root Rituals Care',
+        id: 'tmpl_cosm_06_blushbloom',
+        slug: 'blush-bloom',
+        name: 'Blush & Bloom',
         businessType: 'health-beauty',
-        tags: ['Haircare', 'Clean Beauty'],
-        shortDescription: 'Scalp serums, sulfate-free rosemary shampoos and silk hair wraps.',
-        thumbnailUrl: 'https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=600&auto=format&fit=crop&q=80',
+        tags: ['Makeup & Cosmetics', 'Clean & Organic'],
+        shortDescription: 'Feminine romantic beauty boutique with blush pink, rose gold, soft rounded sections, and elegant floral accents.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=800&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 94,
+        isActive: true,
+        brandName: 'BLUSH & BLOOM',
+        headline: 'Bloom Into Your\nBest Beauty.',
+        subtitle: 'Delicate crushed rose petals, feather-light cheek soufflés, and dreamy romantic beauty essentials.',
+        buttonText: 'Shop New Arrivals',
+        buttonColor: '#e11d48',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=800&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_cosm_07_glowmen',
+        slug: 'glowmen',
+        name: 'GlowMen Grooming',
+        businessType: 'health-beauty',
+        tags: ["Men's Grooming", 'Skincare'],
+        shortDescription: "Premium men's grooming store in charcoal, black, and subtle bronze with sharp product cards and masculine aesthetics.",
+        thumbnailUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 93,
+        isActive: true,
+        brandName: 'GLOWMEN',
+        headline: 'Elevate Your\nGrooming.',
+        subtitle: 'Precision beard balms, charcoal volcanic face wash, and high-performance matte hair clays engineered for men.',
+        buttonText: "Shop Men's Grooming",
+        buttonColor: '#ca8a04',
+        isDark: true,
+        modelImage: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_cosm_08_beautymarket',
+        slug: 'beauty-market',
+        name: 'Beauty Market',
+        businessType: 'health-beauty',
+        tags: ['Makeup & Cosmetics', 'Fragrance'],
+        shortDescription: 'Modern high-density beauty marketplace with search-focused mega header, trending deals, and multi-brand catalogs.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=800&auto=format&fit=crop&q=80',
         fullPreviewUrl: 'https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=1600&auto=format&fit=crop&q=85',
         popularityScore: 92,
         isActive: true,
-        brandName: 'ROOT RITUALS',
-        headline: 'Nourish The Root\nStrengthen The Strand',
-        subtitle: 'Infused with cold-pressed rosemary and organic biotin for healthy density.',
-        buttonText: 'View Haircare',
-        buttonColor: '#0f172a',
+        brandName: 'BEAUTY MARKET',
+        headline: 'Everything Beauty,\nAll in One Place.',
+        subtitle: 'Over 450+ verified luxury, indie, and clean cosmetic brands with same-day dispatch and member rewards.',
+        buttonText: 'Explore Beauty',
+        buttonColor: '#ff385c',
         isDark: false,
-        modelImage: 'https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=600&auto=format&fit=crop&q=80',
+        modelImage: 'https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=800&auto=format&fit=crop&q=80',
       },
       {
-        id: 'tmpl_hb_04_body',
-        slug: 'aura-wellness-salts',
-        name: 'Aura Bath & Body',
+        id: 'tmpl_cosm_09_minimalglow',
+        slug: 'minimal-glow',
+        name: 'Minimal Glow',
         businessType: 'health-beauty',
-        tags: ['Wellness', 'Clean Beauty'],
-        shortDescription: 'Dead sea mineral bath soaks, dry brushes and whipped shea body butters.',
-        thumbnailUrl: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&auto=format&fit=crop&q=80',
-        fullPreviewUrl: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1600&auto=format&fit=crop&q=85',
+        tags: ['Minimal', 'Skincare'],
+        shortDescription: 'Scandinavian minimal beauty brand with off-white, taupe, vast whitespace, and hyper-focused product essentials.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 91,
+        isActive: true,
+        brandName: 'MINIMAL GLOW',
+        headline: 'Less. Better.\nBeautiful.',
+        subtitle: 'Scandinavian minimalist formulas stripped to essential active nutrients. Zero filler, zero fragrance, pure skin harmony.',
+        buttonText: 'Discover Essentials',
+        buttonColor: '#1c1917',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_cosm_10_beautystudio',
+        slug: 'beauty-studio',
+        name: 'Beauty Studio',
+        businessType: 'health-beauty',
+        tags: ['Makeup & Cosmetics', 'Luxury'],
+        shortDescription: 'Premium beauty studio + cosmetic shop with warm terracotta, coral tones, layered sections, and routine builder.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=800&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=1600&auto=format&fit=crop&q=85',
         popularityScore: 90,
         isActive: true,
-        brandName: 'AURA BODY',
-        headline: 'Mineral Soaks\nDeep Relaxation',
-        subtitle: 'Magnesium rich crystal salts infused with French lavender essential oils.',
-        buttonText: 'Shop Bath',
-        buttonColor: '#ffffff',
-        isDark: true,
-        modelImage: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&auto=format&fit=crop&q=80',
-      },
-      {
-        id: 'tmpl_hb_05_serum',
-        slug: 'cellular-skin-science',
-        name: 'Cellular Science Skincare',
-        businessType: 'health-beauty',
-        tags: ['Skincare', 'Wellness'],
-        shortDescription: 'Clinical peptides, multi-molecular hyaluronic acid and bakuchiol oils.',
-        thumbnailUrl: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&auto=format&fit=crop&q=80',
-        fullPreviewUrl: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1600&auto=format&fit=crop&q=85',
-        popularityScore: 88,
-        isActive: true,
-        brandName: 'CELLULAR',
-        headline: 'Clinical Evidence\nGentle Care',
-        subtitle: 'Biocompatible skincare designed to strengthen the moisture barrier.',
-        buttonText: 'View Formulas',
-        buttonColor: '#0f172a',
+        brandName: 'BEAUTY STUDIO',
+        headline: 'Create Your\nBeauty Ritual.',
+        subtitle: 'Custom-blended makeup concentrates, masterclass shade formulations, and bespoke skincare protocols designed by salon artists.',
+        buttonText: 'Build Your Routine',
+        buttonColor: '#c2410c',
         isDark: false,
-        modelImage: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&auto=format&fit=crop&q=80',
-      },
-      {
-        id: 'tmpl_hb_06_tea',
-        slug: 'flora-clean-beauty',
-        name: 'Flora Eco Beauty',
-        businessType: 'health-beauty',
-        tags: ['Clean Beauty', 'Wellness'],
-        shortDescription: 'Refillable aluminum compacts, mineral blush drops and organic lip oils.',
-        thumbnailUrl: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&auto=format&fit=crop&q=80',
-        fullPreviewUrl: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=1600&auto=format&fit=crop&q=85',
-        popularityScore: 86,
-        isActive: true,
-        brandName: 'FLORA',
-        headline: 'Zero Waste\nPure Color Drops',
-        subtitle: 'Lightweight, nourishing pigments made from crushed berries and minerals.',
-        buttonText: 'Shop Colors',
-        buttonColor: '#0f172a',
-        isDark: false,
-        modelImage: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&auto=format&fit=crop&q=80',
+        modelImage: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=800&auto=format&fit=crop&q=80',
       },
     ],
   },
@@ -3431,6 +3564,370 @@ export const FLAGSHIP_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
     features: ['Mega Menu', 'Lookbook Gallery', 'Product Filtering', 'Sticky Header'],
   },
   {
+    id: 'tmpl_kuro_techwear',
+    slug: 'kuro-techwear',
+    name: 'Kuro Tactical Techwear',
+    businessType: 'clothing-store',
+    industryCategory: 'Clothing',
+    style: 'dark',
+    catalogSize: 'medium',
+    tags: ['Clothing', 'Techwear', 'Streetwear', 'Dark', 'Modern'],
+    shortDescription: 'Obsidian dark-mode aesthetic with cyber-cyan accents, modular technical specs, and utility streetwear garments.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 97,
+    isActive: true,
+    brandName: 'KURO // LAB',
+    headline: 'Tactical Precision\nAll-Weather Utility',
+    subtitle: 'Modular attachments, waterproof seam-taped shells, and articulated ergonomic cuts engineered for the urban perimeter.',
+    buttonText: 'Deploy Gear',
+    buttonColor: '#06b6d4',
+    isDark: true,
+    modelImage: 'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?w=800&auto=format&fit=crop&q=80',
+    accentColor: '#06b6d4',
+    badge: 'trending',
+    rating: 4.9,
+    reviewCount: 68,
+    layoutType: 'card-grid',
+    features: ['Waterproof Ratings', 'Modular Pouch Configurator', '360° Fabric Viewer', 'Reflective Detail Guide', 'Quick View'],
+  },
+  {
+    id: 'tmpl_solstice_linen',
+    slug: 'solstice-linen',
+    name: 'Solstice Linen & Resort',
+    businessType: 'clothing-store',
+    industryCategory: 'Clothing',
+    style: 'clean',
+    catalogSize: 'small',
+    tags: ['Clothing', 'Clean', 'Resortwear', 'Boutique', 'Casual', 'Sustainable'],
+    shortDescription: 'Warm Mediterranean terracotta palette, centered sun-lit layout, natural texture swatches, and conscious resortwear.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 96,
+    isActive: true,
+    brandName: 'SOLSTICE',
+    headline: 'Sun-Drenched Living\nPure Organic Linen',
+    subtitle: 'Breezy silhouettes and unbleached European flax, woven for coastal escapes, effortless layering, and slow afternoons.',
+    buttonText: 'Shop Resort 2026',
+    buttonColor: '#c2410c',
+    isDark: false,
+    modelImage: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=800&auto=format&fit=crop&q=80',
+    accentColor: '#c2410c',
+    badge: 'new',
+    rating: 4.9,
+    reviewCount: 39,
+    layoutType: 'centered',
+    features: ['Flax Fiber Origin Tracker', 'Sun-Safe UPF Ratings', 'Color Swatches', 'Eco-Packaging Pledge', 'Lookbook Gallery'],
+  },
+  {
+    id: 'tmpl_aeropulse_active',
+    slug: 'aeropulse-active',
+    name: 'AeroPulse Activewear',
+    businessType: 'clothing-store',
+    industryCategory: 'Clothing',
+    style: 'bold',
+    catalogSize: 'large',
+    tags: ['Clothing', 'Bold', 'Activewear', 'Athleisure', 'Modern', 'Performance'],
+    shortDescription: 'High-energy performance athleisure with electric volt accents, technical compression guides, and large athletic catalogs.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 95,
+    isActive: true,
+    brandName: 'AEROPULSE',
+    headline: 'Zero-Resistance Fit\nEngineered Activewear',
+    subtitle: 'Micro-compression seamless knitwear, sweat-wicking airflow zones, and 360° unrestricted athletic mobility.',
+    buttonText: 'Power Your Training',
+    buttonColor: '#0f172a',
+    isDark: false,
+    modelImage: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&auto=format&fit=crop&q=80',
+    accentColor: '#84cc16',
+    badge: 'popular',
+    rating: 4.8,
+    reviewCount: 82,
+    layoutType: 'bold-minimal',
+    features: ['Sweat-Wicking Airflow Matrix', 'Compression Fit Finder', 'Size & Height Recommender', 'Dynamic Swatches', 'Multi-Pack Bundles'],
+  },
+  {
+    id: 'tmpl_cosm_01_lumiere',
+    slug: 'lumiere-beauty',
+    name: 'Lumière Beauty',
+    businessType: 'health-beauty',
+    industryCategory: 'Cosmetics & Beauty',
+    style: 'luxury',
+    catalogSize: 'small',
+    tags: ['Cosmetics & Beauty', 'Luxury', 'Skincare', 'Makeup & Cosmetics', 'Editorial'],
+    shortDescription: 'Luxury European cosmetic boutique with elegant ivory, champagne gold, serif display titles, and editorial photography.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 99,
+    isActive: true,
+    brandName: 'LUMIÈRE BEAUTY',
+    headline: 'Beauty, Refined.',
+    subtitle: 'Discover thoughtfully selected beauty essentials designed to elevate your everyday ritual.',
+    buttonText: 'Discover The Ritual',
+    buttonColor: '#b58d3d',
+    accentColor: '#b58d3d',
+    isDark: false,
+    modelImage: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&auto=format&fit=crop&q=80',
+    badge: "editor's pick",
+    rating: 4.98,
+    reviewCount: 124,
+    layoutType: 'editorial',
+    features: ['Editorial Lookbook', 'Silk Formula Ingredients', 'Custom Fragrance Profiling', 'Concierge Consultation'],
+  },
+  {
+    id: 'tmpl_cosm_02_glowtheory',
+    slug: 'glow-theory',
+    name: 'Glow Theory',
+    businessType: 'health-beauty',
+    industryCategory: 'Cosmetics & Beauty',
+    style: 'playful',
+    catalogSize: 'medium',
+    tags: ['Cosmetics & Beauty', 'Gen-Z & Trendy', 'Skincare', 'Makeup & Cosmetics'],
+    shortDescription: 'Modern Gen-Z beauty brand in soft pink, lavender, and peach with bold typography, rounded cards, and dynamic badges.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 98,
+    isActive: true,
+    brandName: 'GLOW THEORY',
+    headline: 'Your Glow\nStarts Here.',
+    subtitle: 'Clean drops, juicy peptides, and barrier-friendly glazed formulas crafted for your daily dewy glow.',
+    buttonText: 'Shop the Glow',
+    buttonColor: '#ec4899',
+    accentColor: '#ec4899',
+    isDark: false,
+    modelImage: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&auto=format&fit=crop&q=80',
+    badge: 'trending',
+    rating: 4.91,
+    reviewCount: 210,
+    layoutType: 'split',
+    features: ['Juicy Lip Oil Shade Swapper', 'Dewy Skin Routine Quiz', 'Student Discount Club', 'TikTok Viral Edits'],
+  },
+  {
+    id: 'tmpl_cosm_03_botanica',
+    slug: 'botanica',
+    name: 'Botanica Herbal',
+    businessType: 'health-beauty',
+    industryCategory: 'Cosmetics & Beauty',
+    style: 'clean',
+    catalogSize: 'small',
+    tags: ['Cosmetics & Beauty', 'Clean & Organic', 'Skincare', 'Bath & Body'],
+    shortDescription: 'Natural, organic, and clean beauty with sage green palette, botanical shapes, and 100% wildcrafted extracts.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 97,
+    isActive: true,
+    brandName: 'BOTANICA',
+    headline: 'Beauty, Rooted\nin Nature.',
+    subtitle: 'Clean formulas. Conscious choices. Naturally beautiful results with wildcrafted botanical extracts.',
+    buttonText: 'Explore Wildcraft Range',
+    buttonColor: '#2e7d32',
+    accentColor: '#2e7d32',
+    isDark: false,
+    modelImage: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&auto=format&fit=crop&q=80',
+    badge: 'recommended',
+    rating: 4.95,
+    reviewCount: 156,
+    layoutType: 'centered',
+    features: ['Soil Association Organic Cert', 'Zero-Plastic Compostable Mailer', 'Batch Harvest Traceability', 'Cold-Pressed Extraction'],
+  },
+  {
+    id: 'tmpl_cosm_04_velvetrouge',
+    slug: 'velvet-rouge',
+    name: 'Velvet Rouge',
+    businessType: 'health-beauty',
+    industryCategory: 'Cosmetics & Beauty',
+    style: 'luxury',
+    catalogSize: 'small',
+    tags: ['Cosmetics & Beauty', 'Luxury', 'Makeup & Cosmetics', 'Editorial'],
+    shortDescription: 'High-fashion luxury cosmetics with deep burgundy, noir obsidian styling, metallic accents, and runway photography.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 96,
+    isActive: true,
+    brandName: 'VELVET ROUGE',
+    headline: 'Own Your Beauty.',
+    subtitle: 'Haute couture Parisian lipsticks, liquid velvet shadows, and unapologetic pigment perfection.',
+    buttonText: 'Explore Collection',
+    buttonColor: '#9f1239',
+    accentColor: '#9f1239',
+    isDark: true,
+    modelImage: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=800&auto=format&fit=crop&q=80',
+    badge: "editor's pick",
+    rating: 4.97,
+    reviewCount: 88,
+    layoutType: 'bold-minimal',
+    features: ['Virtual AR Pigment Try-On', 'Engraved Monogramming', 'Limited Runway Capsules', 'Private VIP Masterclasses'],
+  },
+  {
+    id: 'tmpl_cosm_05_skinlab',
+    slug: 'skinlab',
+    name: 'SkinLab Derma',
+    businessType: 'health-beauty',
+    industryCategory: 'Cosmetics & Beauty',
+    style: 'modern',
+    catalogSize: 'medium',
+    tags: ['Cosmetics & Beauty', 'Clinical & Lab', 'Skincare', 'Modern'],
+    shortDescription: 'Dermatology-inspired clinical skincare with pure white and cerulean aqua tones, structured cards, and active ingredient metrics.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 95,
+    isActive: true,
+    brandName: 'SKINLAB',
+    headline: 'Smarter Skincare\nStarts Here.',
+    subtitle: 'Dermatologist-tested multi-peptide actives, triple-ceramide matrix, and clinically backed skin barrier repair.',
+    buttonText: 'Find Your Routine',
+    buttonColor: '#0284c7',
+    accentColor: '#0284c7',
+    isDark: false,
+    modelImage: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&auto=format&fit=crop&q=80',
+    badge: 'popular',
+    rating: 4.89,
+    reviewCount: 312,
+    layoutType: 'card-grid',
+    features: ['Derm Diagnostic Engine', 'Clinical pH & Active Concentration', 'Allergy-Shield Patch Guarantee', 'Ingredient Interaction Checker'],
+  },
+  {
+    id: 'tmpl_cosm_06_blushbloom',
+    slug: 'blush-bloom',
+    name: 'Blush & Bloom',
+    businessType: 'health-beauty',
+    industryCategory: 'Cosmetics & Beauty',
+    style: 'playful',
+    catalogSize: 'small',
+    tags: ['Cosmetics & Beauty', 'Makeup & Cosmetics', 'Skincare', 'Clean & Organic'],
+    shortDescription: 'Feminine romantic beauty boutique with blush pink, rose gold, soft rounded sections, and elegant floral accents.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 94,
+    isActive: true,
+    brandName: 'BLUSH & BLOOM',
+    headline: 'Bloom Into Your\nBest Beauty.',
+    subtitle: 'Delicate crushed rose petals, feather-light cheek soufflés, and dreamy romantic beauty essentials.',
+    buttonText: 'Shop New Arrivals',
+    buttonColor: '#e11d48',
+    accentColor: '#e11d48',
+    isDark: false,
+    modelImage: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=800&auto=format&fit=crop&q=80',
+    badge: 'new',
+    rating: 4.93,
+    reviewCount: 94,
+    layoutType: 'editorial',
+    features: ['Bridal Vanity Bundles', 'Scented Petal Gift Packaging', 'Shade Match Consultations', 'Free Deluxe Floral Samples'],
+  },
+  {
+    id: 'tmpl_cosm_07_glowmen',
+    slug: 'glowmen',
+    name: 'GlowMen Grooming',
+    businessType: 'health-beauty',
+    industryCategory: 'Cosmetics & Beauty',
+    style: 'dark',
+    catalogSize: 'medium',
+    tags: ['Cosmetics & Beauty', "Men's Grooming", 'Haircare', 'Skincare', 'Dark'],
+    shortDescription: "Premium men's grooming store in charcoal, black, and subtle bronze with sharp product cards and masculine aesthetics.",
+    thumbnailUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 93,
+    isActive: true,
+    brandName: 'GLOWMEN',
+    headline: 'Elevate Your\nGrooming.',
+    subtitle: 'Precision beard balms, charcoal volcanic face wash, and high-performance matte hair clays engineered for men.',
+    buttonText: "Shop Men's Grooming",
+    buttonColor: '#ca8a04',
+    accentColor: '#ca8a04',
+    isDark: true,
+    modelImage: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&auto=format&fit=crop&q=80',
+    badge: 'trending',
+    rating: 4.88,
+    reviewCount: 176,
+    layoutType: 'split',
+    features: ['Beard Length & Grain Matcher', 'Matte Clay Hold Level Guide', 'Refill Subscription Packs', 'Anti-Razor Burn Formulations'],
+  },
+  {
+    id: 'tmpl_cosm_08_beautymarket',
+    slug: 'beauty-market',
+    name: 'Beauty Market',
+    businessType: 'health-beauty',
+    industryCategory: 'Cosmetics & Beauty',
+    style: 'modern',
+    catalogSize: 'large',
+    tags: ['Cosmetics & Beauty', 'Makeup & Cosmetics', 'Skincare', 'Haircare', 'Fragrance'],
+    shortDescription: 'Modern high-density beauty marketplace with search-focused mega header, trending deals, and multi-brand catalogs.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 92,
+    isActive: true,
+    brandName: 'BEAUTY MARKET',
+    headline: 'Everything Beauty,\nAll in One Place.',
+    subtitle: 'Over 450+ verified luxury, indie, and clean cosmetic brands with same-day dispatch and member rewards.',
+    buttonText: 'Explore Beauty',
+    buttonColor: '#ff385c',
+    accentColor: '#ff385c',
+    isDark: false,
+    modelImage: 'https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=800&auto=format&fit=crop&q=80',
+    badge: 'popular',
+    rating: 4.85,
+    reviewCount: 520,
+    layoutType: 'card-grid',
+    features: ['Flash Deal Countdown Timers', 'Multi-Brand Cross Cart Checkout', 'Beauty Rewards Point Bank', 'Same-Day Express Dispatch'],
+  },
+  {
+    id: 'tmpl_cosm_09_minimalglow',
+    slug: 'minimal-glow',
+    name: 'Minimal Glow',
+    businessType: 'health-beauty',
+    industryCategory: 'Cosmetics & Beauty',
+    style: 'minimal',
+    catalogSize: 'small',
+    tags: ['Cosmetics & Beauty', 'Minimal', 'Clean & Organic', 'Skincare'],
+    shortDescription: 'Scandinavian minimal beauty brand with off-white, taupe, vast whitespace, and hyper-focused product essentials.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 91,
+    isActive: true,
+    brandName: 'MINIMAL GLOW',
+    headline: 'Less. Better.\nBeautiful.',
+    subtitle: 'Scandinavian minimalist formulas stripped to essential active nutrients. Zero filler, zero fragrance, pure skin harmony.',
+    buttonText: 'Discover Essentials',
+    buttonColor: '#1c1917',
+    accentColor: '#1c1917',
+    isDark: false,
+    modelImage: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&auto=format&fit=crop&q=80',
+    badge: 'recommended',
+    rating: 4.96,
+    reviewCount: 115,
+    layoutType: 'centered',
+    features: ['Single-Origin Botanical Sources', 'Pure Transparency Ingredient Deck', '100% Recycled Miron Violet Glass', 'Carbon-Neutral Footprint'],
+  },
+  {
+    id: 'tmpl_cosm_10_beautystudio',
+    slug: 'beauty-studio',
+    name: 'Beauty Studio',
+    businessType: 'health-beauty',
+    industryCategory: 'Cosmetics & Beauty',
+    style: 'bold',
+    catalogSize: 'medium',
+    tags: ['Cosmetics & Beauty', 'Makeup & Cosmetics', 'Skincare', 'Beauty Tools', 'Luxury'],
+    shortDescription: 'Premium beauty studio + cosmetic shop with warm terracotta, coral tones, layered sections, and routine builder.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 90,
+    isActive: true,
+    brandName: 'BEAUTY STUDIO',
+    headline: 'Create Your\nBeauty Ritual.',
+    subtitle: 'Custom-blended makeup concentrates, masterclass shade formulations, and bespoke skincare protocols designed by salon artists.',
+    buttonText: 'Build Your Routine',
+    buttonColor: '#c2410c',
+    accentColor: '#c2410c',
+    isDark: false,
+    modelImage: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=800&auto=format&fit=crop&q=80',
+    badge: 'new',
+    rating: 4.92,
+    reviewCount: 142,
+    layoutType: 'bold-minimal',
+    features: ['Interactive 3-Step Routine Builder', 'Virtual Artist Masterclasses', 'Custom Formula Mixing Bar', 'Skin Cycle Tracker Tool'],
+  },
+  {
     id: 'tmpl_techwave_modern',
     slug: 'techwave-store',
     name: 'TechWave Gadgets',
@@ -3519,10 +4016,10 @@ export const FLAGSHIP_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
     slug: 'aura-spa',
     name: 'Aura Spa & Botanicals',
     businessType: 'salon',
-    industryCategory: 'Health & Beauty',
+    industryCategory: 'Cosmetics & Beauty',
     style: 'minimal',
     catalogSize: 'small',
-    tags: ['Health & Beauty', 'Minimal', 'Spa', 'Skincare'],
+    tags: ['Cosmetics & Beauty', 'Minimal', 'Spa', 'Skincare'],
     shortDescription: 'Serene rose-cream aesthetic with booking schedules and apothecary product showcase.',
     thumbnailUrl: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&auto=format&fit=crop&q=80',
     fullPreviewUrl: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1600&auto=format&fit=crop&q=85',
@@ -3827,10 +4324,10 @@ export const FLAGSHIP_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
     slug: 'glow-naturals',
     name: 'Glow Naturals Skincare',
     businessType: 'online-store',
-    industryCategory: 'Health & Beauty',
+    industryCategory: 'Cosmetics & Beauty',
     style: 'minimal',
     catalogSize: 'small',
-    tags: ['Health & Beauty', 'Minimal', 'Clean Beauty', 'Organic'],
+    tags: ['Cosmetics & Beauty', 'Minimal', 'Clean Beauty', 'Organic'],
     shortDescription: 'Pure botanical skincare essentials with ingredient spotlight drawers and quiz matchers.',
     thumbnailUrl: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&auto=format&fit=crop&q=80',
     fullPreviewUrl: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1600&auto=format&fit=crop&q=85',
@@ -4165,7 +4662,7 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
 
         {/* Feature Pills */}
         <div className="card-features-row">
-          {template.features.slice(0, 3).map((feat) => (
+          {(template.features || []).slice(0, 3).map((feat) => (
             <span key={feat} className="feat-bullet">
               ✓ {feat}
             </span>
@@ -4226,9 +4723,237 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
     }
   }, [isOpen, onClose])
 
-  if (!isOpen || !template) return null
+  const isDark = Boolean(template?.isDark)
 
-  const isDark = Boolean(template.isDark)
+  const eyebrowText = useMemo(() => {
+    if (!template) return '✦ VERIFIED EXCELLENCE'
+    if (template.id === 'tmpl_cosm_01_lumiere') return '★ HAUTE BEAUTÉ // ATELIER MONACO'
+    if (template.id === 'tmpl_cosm_02_glowtheory') return '✨ 100% CLEAN DEWY DROPS // GLAZED SKIN'
+    if (template.id === 'tmpl_cosm_03_botanica') return '🌿 CERTIFIED WILDCRAFTED BOTANICALS'
+    if (template.id === 'tmpl_cosm_04_velvetrouge') return '💄 COUTURE VELVET PIGMENTS // PARIS RUNWAY'
+    if (template.id === 'tmpl_cosm_05_skinlab') return '🔬 CLINICAL DERMA MATRIX // pH 5.5 TESTED'
+    if (template.id === 'tmpl_cosm_06_blushbloom') return '🌸 FRESH PETAL INFUSIONS // ROMANTIC RADIANCE'
+    if (template.id === 'tmpl_cosm_07_glowmen') return '⚡ HIGH-PERFORMANCE GROOMING // ACTIVE DEFENSE'
+    if (template.id === 'tmpl_cosm_08_beautymarket') return '🛍️ 450+ VERIFIED BEAUTY HOUSES // BESTSELLERS'
+    if (template.id === 'tmpl_cosm_09_minimalglow') return '❄️ SCANDINAVIAN PURITY // 0% FRAGRANCE'
+    if (template.id === 'tmpl_cosm_10_beautystudio') return '🎨 ARTIST FORMULATIONS // CUSTOM BLENDING'
+    if (template.id === 'tmpl_kuro_techwear') return '⚡ PROTOCOL // 3L WEATHERPROOF SHELL'
+    if (template.id === 'tmpl_solstice_linen') return '☀️ 100% ORGANIC FRENCH FLAX LINEN'
+    if (template.id === 'tmpl_aeropulse_active') return '▲ KINETIC 4-WAY STRETCH COMPRESSION'
+    if (template.style === 'editorial') return '✦ CURATED EDITORIAL // ISSUE NO. 14'
+    if (template.style === 'luxury') return '★ HAUTE COUTURE // ATELIER BESPOKE'
+    if (template.style === 'dark') return '⚡ SPEC // HIGH-GRADE FABRIC'
+    return '✦ VERIFIED EXCELLENCE'
+  }, [template])
+
+  const sampleProducts = useMemo(() => {
+    if (!template) return []
+    if (template.id === 'tmpl_cosm_01_lumiere') {
+      return [
+        { title: 'Élixir Royal Caviar Infusion', price: '$185.00', tag: 'Caviar Extract', img: 'https://images.unsplash.com/photo-1608248597359-597519159954?w=600&auto=format&fit=crop&q=80' },
+        { title: "Lumière L'Or Satin Crème", price: '$140.00', tag: '24K Gold Matrix', img: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Atelier Silk Velvet Eye Essence', price: '$95.00', tag: 'Hydro-Silk', img: 'https://images.unsplash.com/photo-1617897903246-719242758050?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_cosm_02_glowtheory') {
+      return [
+        { title: 'Glazed Strawberry Peptide Lip Oil', price: '$22.00', tag: 'High Shine', img: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Dew Drops Barrier Glow Serum', price: '$34.00', tag: 'Hyaluronic + B5', img: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Cloud Cushion Whipped Blush', price: '$26.00', tag: 'Dewy Tint', img: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_cosm_03_botanica') {
+      return [
+        { title: 'Alpine Herb Revitalizing Elixir', price: '$68.00', tag: 'Wildcrafted', img: 'https://images.unsplash.com/photo-1608248597359-597519159954?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Organic Chamomile Calming Cleanser', price: '$42.00', tag: 'Cold-Pressed', img: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Baobab Deep Moisture Barrier Balm', price: '$54.00', tag: 'Soil Assoc Cert', img: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_cosm_04_velvetrouge') {
+      return [
+        { title: 'Couture Matte Velvet Lipstick #01 Obsidian', price: '$48.00', tag: 'Ultra-Pigment', img: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Noir Chromatic Liquid Eyeshadow', price: '$42.00', tag: '16H Wear', img: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Velvet Satin Mineral Setting Powder', price: '$56.00', tag: 'Micro-Refined', img: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_cosm_05_skinlab') {
+      return [
+        { title: 'Multi-Peptide Matrix Serum 10%', price: '$72.00', tag: 'Clinical Grade', img: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Triple-Ceramide Barrier Defense Cream', price: '$58.00', tag: 'pH 5.5 Balanced', img: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Micro-Exfoliating BHA 2% Clarifier', price: '$46.00', tag: 'Derm Tested', img: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_cosm_06_blushbloom') {
+      return [
+        { title: 'Petal Soft Cream Cheek & Lip Soufflé', price: '$32.00', tag: 'Crushed Rose', img: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Romantic Rosewater Hydrating Mist', price: '$28.00', tag: 'Damask Rose', img: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Silk Petal Tinted Lip Glow Oil', price: '$26.00', tag: 'Floral Infusion', img: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_cosm_07_glowmen') {
+      return [
+        { title: 'Volcanic Charcoal Detox Face Wash', price: '$34.00', tag: 'Anti-Pollution', img: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Cedarwood Precision Beard Oil', price: '$38.00', tag: 'Argan + Jojoba', img: 'https://images.unsplash.com/photo-1608248597359-597519159954?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Matte Texture Styling Clay Hold #04', price: '$29.00', tag: 'Zero Shine', img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_cosm_08_beautymarket') {
+      return [
+        { title: 'Luxe Radiant Silk Foundation (40 Shades)', price: '$45.00', tag: 'Trending #1', img: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Hyaluronic Acid Plumping Ampoules', price: '$52.00', tag: 'Bestseller', img: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Volumizing Waterproof Lash Sculpt Mascara', price: '$28.00', tag: 'Award Winner', img: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_cosm_09_minimalglow') {
+      return [
+        { title: 'N°01 Pure Squalane Barrier Oil', price: '$48.00', tag: '100% Plant Squalane', img: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&auto=format&fit=crop&q=80' },
+        { title: 'N°02 Gentle Oat Amino Cleansing Gel', price: '$36.00', tag: 'Zero Fragrance', img: 'https://images.unsplash.com/photo-1608248597359-597519159954?w=600&auto=format&fit=crop&q=80' },
+        { title: 'N°03 Arctic Cloudberry Recovery Balm', price: '$54.00', tag: 'Omega 3-6-9', img: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_cosm_10_beautystudio') {
+      return [
+        { title: 'Bespoke Custom Pigment Drop Mix', price: '$65.00', tag: 'Studio Formulation', img: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Artisan Highlighting Glaze Wand', price: '$38.00', tag: 'Multi-Use', img: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Hydrating Primer Serum with Gold Mica', price: '$44.00', tag: 'Pro Artist Choice', img: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_kuro_techwear') {
+      return [
+        { title: 'Modular Cargo Shell Pants', price: '$195.00', tag: 'eVent® 3L', img: template.modelImage },
+        { title: 'Cybernetic Utility Rig Vest', price: '$140.00', tag: 'FIDLOCK®', img: 'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Waterproof Stealth Parka', price: '$280.00', tag: 'Seam-Taped', img: 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_solstice_linen') {
+      return [
+        { title: 'Breezy Oversized Linen Shirt', price: '$88.00', tag: 'French Flax', img: template.modelImage },
+        { title: 'Pleated Coastal Trousers', price: '$115.00', tag: '100% Organic', img: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Riviera Sun Kimono Wrap', price: '$135.00', tag: 'Hand-Dyed', img: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_aeropulse_active') {
+      return [
+        { title: 'AeroFlow Compression Tights', price: '$75.00', tag: '4-Way Stretch', img: template.modelImage },
+        { title: 'Seamless Thermal Base Layer', price: '$60.00', tag: 'Sweat-Wicking', img: 'https://images.unsplash.com/photo-1483721074573-586540da5703?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Kinetic Wind-Resistant Shell', price: '$125.00', tag: 'Ultralight', img: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_velvet_silk') {
+      return [
+        { title: 'Obsidian Mulberry Silk Blazer', price: '$340.00', tag: 'Mulberry Silk', img: template.modelImage },
+        { title: 'Pleated Silk Palazzo Pant', price: '$220.00', tag: 'Atelier Cut', img: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Couture Velvet Evening Cape', price: '$410.00', tag: 'Limited Run', img: 'https://images.unsplash.com/photo-1445205170230-053b83016050?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    return [
+      { title: 'Signature Edition No. 01', price: '$85.00', tag: 'Bestseller', img: template.modelImage },
+      { title: 'Minimalist Daily Essential', price: '$120.00', tag: 'New Arrival', img: template.modelImage },
+      { title: 'Artisan Crafted Accessory', price: '$65.00', tag: 'Limited', img: template.modelImage },
+    ]
+  }, [template])
+
+  const valueProps = useMemo(() => {
+    if (!template) return []
+    if (template.id === 'tmpl_cosm_01_lumiere') {
+      return [
+        { icon: '👑', title: 'Atelier Monaco Bespoke', sub: 'Caviar & gold extracts handcrafted in Monaco' },
+        { icon: '💎', title: 'White Glove Delivery', sub: 'Temperature-controlled global courier delivery' },
+        { icon: '⚜️', title: 'Private Skin Concierge', sub: '1-on-1 virtual consultation with Parisian aestheticians' },
+      ]
+    }
+    if (template.id === 'tmpl_cosm_02_glowtheory') {
+      return [
+        { icon: '🍓', title: 'Glazed & Clean Formulas', sub: '100% vegan, cruelty-free & barrier-safe actives' },
+        { icon: '⚡', title: 'TikTok Viral Rewards', sub: 'Free deluxe mini peptide drop with orders over $40' },
+        { icon: '💌', title: 'Lightning Dispatch', sub: 'Order by 2 PM for same-day express fulfillment' },
+      ]
+    }
+    if (template.id === 'tmpl_cosm_03_botanica') {
+      return [
+        { icon: '🌿', title: '100% Wildcrafted Extracts', sub: 'Soil Association certified organic herbs' },
+        { icon: '🌍', title: 'Zero-Plastic Packaging', sub: 'Compostable mailers & recycled amber glass' },
+        { icon: '💧', title: 'Fresh Cold-Pressed', sub: 'Whole-plant nutrient preservation extraction' },
+      ]
+    }
+    if (template.id === 'tmpl_cosm_04_velvetrouge') {
+      return [
+        { icon: '💄', title: 'Haute Parisian Pigments', sub: 'Micro-milled saturated velvet matte texture' },
+        { icon: '🖤', title: 'Obsidian Refillable Case', sub: 'Architectural weighted magnetic metal casing' },
+        { icon: '✨', title: 'Runway Capsule Drops', sub: 'Limited numbered seasonal designer editions' },
+      ]
+    }
+    if (template.id === 'tmpl_cosm_05_skinlab') {
+      return [
+        { icon: '🔬', title: 'Dermatologist Tested', sub: 'Clinically proven 98% barrier restoration' },
+        { icon: '📊', title: 'Optimal pH 5.5 Balance', sub: 'Formulated to match skin acid mantle' },
+        { icon: '🛡️', title: '60-Day Trial Guarantee', sub: '100% full refund if not visibly transformed' },
+      ]
+    }
+    if (template.id === 'tmpl_cosm_06_blushbloom') {
+      return [
+        { icon: '🌸', title: 'Crushed Floral Petals', sub: 'Real botanical essences infused into every batch' },
+        { icon: '🎁', title: 'Romantic Gift Packaging', sub: 'Silk ribbons & custom scented petal wrap included' },
+        { icon: '💖', title: 'Gentle on Sensitive Skin', sub: 'Hypoallergenic, dermatologist approved & non-comedogenic' },
+      ]
+    }
+    if (template.id === 'tmpl_cosm_07_glowmen') {
+      return [
+        { icon: '🌋', title: 'Volcanic Mineral Base', sub: 'Deep-pore cleansing engineered for thicker skin' },
+        { icon: '💈', title: 'Barber-Grade Precision', sub: 'Formulated with master grooming professionals' },
+        { icon: '🚀', title: 'Anti-Razor Burn Defense', sub: 'Soothing bisabolol & tea tree calming complex' },
+      ]
+    }
+    if (template.id === 'tmpl_cosm_08_beautymarket') {
+      return [
+        { icon: '🏬', title: '450+ Verified Brands', sub: '100% authentic guaranteed beauty marketplace' },
+        { icon: '🎁', title: 'Glow Rewards Bank', sub: 'Earn 5% cashback on every purchase' },
+        { icon: '📦', title: 'Mega Express Dispatch', sub: 'Free shipping on orders over $50 with live tracking' },
+      ]
+    }
+    if (template.id === 'tmpl_cosm_09_minimalglow') {
+      return [
+        { icon: '❄️', title: 'Nordic Purity Standard', sub: '7 ingredients or fewer per product, zero filler' },
+        { icon: '🚫', title: '0% Artificial Fragrance', sub: 'Hypoallergenic & certified safe for reactive skin' },
+        { icon: '♻️', title: 'Miron Violet Glass', sub: 'Biophotonic glass preserving active natural potency' },
+      ]
+    }
+    if (template.id === 'tmpl_cosm_10_beautystudio') {
+      return [
+        { icon: '🎨', title: 'Custom Shade Blending', sub: 'Personalized finish mixing calibrated by pro artists' },
+        { icon: '🎥', title: 'Masterclass Video Vault', sub: 'Complimentary access to pro beauty tutorials' },
+        { icon: '🪄', title: 'Routine Diagnostic', sub: 'Smart algorithm selects your exact active step regimen' },
+      ]
+    }
+    if (template.id === 'tmpl_kuro_techwear') {
+      return [
+        { icon: '🛡️', title: '20,000mm Weatherproof', sub: 'Taped seam construction' },
+        { icon: '⚙️', title: 'Modular FIDLOCK®', sub: 'Instant magnetic snaps' },
+        { icon: '⚡', title: 'Discreet Stealth Dispatch', sub: 'Global tracked delivery' },
+      ]
+    }
+    if (template.id === 'tmpl_solstice_linen') {
+      return [
+        { icon: '🌾', title: '100% Normandy Flax', sub: 'Certified organic European linen' },
+        { icon: '☀️', title: 'Natural UPF 50+ Sun Protection', sub: 'Cooling thermal weave' },
+        { icon: '🌿', title: 'Plastic-Free Packaging', sub: 'Biodegradable mailers' },
+      ]
+    }
+    if (template.id === 'tmpl_aeropulse_active') {
+      return [
+        { icon: '💨', title: 'HydroWick™ Vapor System', sub: 'Continuous sweat dispersal' },
+        { icon: '🔄', title: '4-Way Kinetic Flex', sub: 'Unrestricted muscle mobility' },
+        { icon: '⚡', title: '30-Day Training Trial', sub: 'Hassle-free fit exchanges' },
+      ]
+    }
+    return [
+      { icon: '📦', title: 'Complimentary Delivery', sub: 'On all continental orders' },
+      { icon: '🛡️', title: 'Guaranteed Craftsmanship', sub: '1-year comprehensive warranty' },
+      { icon: '⚡', title: 'Instant Digital Checkout', sub: 'Apple Pay, Google Pay, UPI' },
+    ]
+  }, [template])
+
+  if (!isOpen || !template) return null
 
   return (
     <div className="preview-modal-backdrop" onClick={onClose}>
@@ -4306,7 +5031,11 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                   color: '#ffffff',
                 }}
               >
-                <span>✨ Free Worldwide Express Shipping on orders over $150 • 30-Day Returns</span>
+                <span>
+                  {template.businessType === 'health-beauty'
+                    ? '✨ Free Deluxe Mini & Express Delivery on orders over $50 • 100% Cruelty-Free & Authentic'
+                    : '✨ Free Worldwide Express Shipping on orders over $150 • 30-Day Returns'}
+                </span>
               </div>
 
               {/* Storefront Navbar */}
@@ -4319,71 +5048,223 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                 <div className="store-nav-brand">{template.brandName}</div>
                 {device !== 'mobile' && (
                   <nav className="store-nav-links">
-                    <span className="nav-link active">Catalog</span>
-                    <span className="nav-link">New Releases</span>
-                    <span className="nav-link">About</span>
-                    <span className="nav-link">Support</span>
+                    {template.businessType === 'health-beauty' ? (
+                      <>
+                        <span className="nav-link active">Skincare</span>
+                        <span className="nav-link">Makeup</span>
+                        <span className="nav-link">Fragrance</span>
+                        <span className="nav-link">Routine Matcher</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="nav-link active">Catalog</span>
+                        <span className="nav-link">New Releases</span>
+                        <span className="nav-link">About</span>
+                        <span className="nav-link">Support</span>
+                      </>
+                    )}
                   </nav>
                 )}
                 <div className="store-nav-icons">
                   <span>⌕</span>
                   <span>♡</span>
-                  <span className="cart-badge-icon">👜 2</span>
+                  <span className="cart-badge-icon" style={{ backgroundColor: template.accentColor || '#2563eb' }}>
+                    {template.businessType === 'health-beauty' ? '💄 2' : '👜 2'}
+                  </span>
                 </div>
               </header>
 
               {/* Storefront Hero Stage */}
-              <section className="storefront-hero">
-                <div className="hero-copy-col">
-                  <span className="hero-pill-eyebrow" style={{ color: template.accentColor || '#2563eb' }}>
-                    ✦ VERIFIED EXCELLENCE
-                  </span>
-                  <h1 className="hero-headline">{template.headline}</h1>
-                  <p className="hero-subtitle">{template.subtitle}</p>
-                  <div className="hero-cta-group">
-                    <button
-                      type="button"
-                      className="hero-primary-cta"
-                      style={{
-                        backgroundColor: isDark ? '#ffffff' : (template.buttonColor || '#0f172a'),
-                        color: isDark ? '#0f172a' : '#ffffff',
-                      }}
-                    >
-                      {template.buttonText || 'Shop Collection'} →
-                    </button>
-                    <button type="button" className="hero-secondary-cta">
-                      Explore Lookbook
-                    </button>
+              <section className={`storefront-hero hero-layout-${template.layoutType || 'split'} style-${template.style || 'modern'}`}>
+                {template.layoutType === 'centered' ? (
+                  <div className="hero-centered-content">
+                    <span className="hero-pill-eyebrow" style={{ color: template.accentColor || '#2563eb' }}>
+                      {eyebrowText}
+                    </span>
+                    <h1 className="hero-headline">{template.headline}</h1>
+                    <p className="hero-subtitle">{template.subtitle}</p>
+                    <div className="hero-cta-group">
+                      <button
+                        type="button"
+                        className="hero-primary-cta"
+                        style={{
+                          backgroundColor: isDark ? '#ffffff' : (template.buttonColor || '#0f172a'),
+                          color: isDark ? '#0f172a' : '#ffffff',
+                        }}
+                      >
+                        {template.buttonText || 'Shop Collection'} →
+                      </button>
+                      <button type="button" className="hero-secondary-cta">
+                        Explore Lookbook
+                      </button>
+                    </div>
+                    <div className="hero-centered-media">
+                      <img src={template.modelImage} alt={template.name} className="hero-showcase-img" />
+                    </div>
                   </div>
-                </div>
-                <div className="hero-media-col">
-                  <img src={template.modelImage} alt={template.name} className="hero-showcase-img" />
-                </div>
+                ) : template.layoutType === 'editorial' ? (
+                  <div className="hero-editorial-content">
+                    <div className="editorial-eyebrow-row">
+                      <span className="hero-pill-eyebrow" style={{ color: template.accentColor || '#b58d3d' }}>
+                        {eyebrowText}
+                      </span>
+                      <span className="editorial-issue-tag">PARIS & MONACO ATELIER</span>
+                    </div>
+                    <div className="editorial-two-col">
+                      <div className="editorial-text-pane">
+                        <h1 className="hero-headline editorial-headline">{template.headline}</h1>
+                        <p className="hero-subtitle editorial-subtitle">{template.subtitle}</p>
+                        <div className="hero-cta-group">
+                          <button
+                            type="button"
+                            className="hero-primary-cta editorial-cta-btn"
+                            style={{
+                              backgroundColor: isDark ? '#ffffff' : (template.buttonColor || '#b58d3d'),
+                              color: isDark ? '#0f172a' : '#ffffff',
+                            }}
+                          >
+                            {template.buttonText || 'Discover The Ritual'} →
+                          </button>
+                          <button type="button" className="hero-secondary-cta">
+                            Read Journal
+                          </button>
+                        </div>
+                        <div className="editorial-quote-badge">
+                          <em>“A transformative ritual crafted with precious active botanicals.”</em>
+                        </div>
+                      </div>
+                      <div className="editorial-visual-pane">
+                        <div className="editorial-image-frame">
+                          <img src={template.modelImage} alt={template.name} className="hero-showcase-img editorial-img" />
+                          <div className="editorial-caption-overlay">
+                            <span className="overlay-badge-dot" style={{ backgroundColor: template.accentColor || '#b58d3d' }} />
+                            <span>Bespoke Formulation Release</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : template.layoutType === 'card-grid' ? (
+                  <div className="hero-cardgrid-content">
+                    <div className="cardgrid-header-strip">
+                      <div>
+                        <span className="hero-pill-eyebrow" style={{ color: template.accentColor || '#0284c7' }}>
+                          {eyebrowText}
+                        </span>
+                        <h1 className="hero-headline cardgrid-headline">{template.headline}</h1>
+                        <p className="hero-subtitle cardgrid-sub">{template.subtitle}</p>
+                      </div>
+                      <div className="cardgrid-cta-box">
+                        <button
+                          type="button"
+                          className="hero-primary-cta cardgrid-cta-btn"
+                          style={{
+                            backgroundColor: isDark ? '#ffffff' : (template.buttonColor || '#0284c7'),
+                            color: isDark ? '#0f172a' : '#ffffff',
+                          }}
+                        >
+                          {template.buttonText || 'Explore Range'} →
+                        </button>
+                      </div>
+                    </div>
+                    <div className="cardgrid-feature-shelf">
+                      <div className="grid-feature-card hero-feature-main">
+                        <img src={template.modelImage} alt={template.name} className="feature-card-img" />
+                        <div className="feature-card-overlay">
+                          <span className="feature-pill-tag">Bestseller Active</span>
+                          <strong>Multi-Target Formulation</strong>
+                        </div>
+                      </div>
+                      <div className="grid-feature-card stat-metric-box">
+                        <div className="metric-stat-number" style={{ color: template.accentColor || '#0284c7' }}>
+                          {template.id === 'tmpl_cosm_08_beautymarket' ? '450+' : '98%'}
+                        </div>
+                        <strong>{template.id === 'tmpl_cosm_08_beautymarket' ? 'Verified Brands' : 'Barrier Score'}</strong>
+                        <p>{template.id === 'tmpl_cosm_08_beautymarket' ? 'Fast express dispatch with 100% authentic guarantee' : 'Dermatologist backed repair tested across all skin types'}</p>
+                      </div>
+                      <div className="grid-feature-card action-quiz-box">
+                        <span className="quiz-star-icon">✨</span>
+                        <strong>Routine Diagnostic</strong>
+                        <p>Take the 60-second skin analyzer</p>
+                        <span className="quiz-btn-link" style={{ color: template.accentColor || '#0284c7' }}>
+                          Match My Skin →
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ) : template.layoutType === 'bold-minimal' ? (
+                  <div className="hero-boldminimal-content">
+                    <div className="boldminimal-inner">
+                      <span className="hero-pill-eyebrow boldminimal-eyebrow" style={{ color: template.accentColor || '#9f1239' }}>
+                        {eyebrowText}
+                      </span>
+                      <h1 className="hero-headline boldminimal-headline">{template.headline}</h1>
+                      <p className="hero-subtitle boldminimal-subtitle">{template.subtitle}</p>
+                      <div className="hero-cta-group boldminimal-cta-row">
+                        <button
+                          type="button"
+                          className="hero-primary-cta boldminimal-cta-btn"
+                          style={{
+                            backgroundColor: isDark ? '#ffffff' : (template.buttonColor || '#9f1239'),
+                            color: isDark ? '#090d16' : '#ffffff',
+                          }}
+                        >
+                          {template.buttonText || 'Explore Collection'} →
+                        </button>
+                        <button type="button" className="hero-secondary-cta boldminimal-secondary-btn">
+                          View Lookbook
+                        </button>
+                      </div>
+                    </div>
+                    <div className="boldminimal-media-stage">
+                      <img src={template.modelImage} alt={template.name} className="hero-showcase-img boldminimal-img" />
+                      <div className="boldminimal-corner-badge" style={{ backgroundColor: template.accentColor || '#9f1239' }}>
+                        ★ EXCLUSIVE
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <div className="hero-copy-col">
+                      <span className="hero-pill-eyebrow" style={{ color: template.accentColor || '#2563eb' }}>
+                        {eyebrowText}
+                      </span>
+                      <h1 className="hero-headline">{template.headline}</h1>
+                      <p className="hero-subtitle">{template.subtitle}</p>
+                      <div className="hero-cta-group">
+                        <button
+                          type="button"
+                          className="hero-primary-cta"
+                          style={{
+                            backgroundColor: isDark ? '#ffffff' : (template.buttonColor || '#0f172a'),
+                            color: isDark ? '#0f172a' : '#ffffff',
+                          }}
+                        >
+                          {template.buttonText || 'Shop Collection'} →
+                        </button>
+                        <button type="button" className="hero-secondary-cta">
+                          Explore Lookbook
+                        </button>
+                      </div>
+                    </div>
+                    <div className="hero-media-col">
+                      <img src={template.modelImage} alt={template.name} className="hero-showcase-img" />
+                    </div>
+                  </>
+                )}
               </section>
 
               {/* Value Props Strip */}
               <div className="storefront-value-props">
-                <div className="prop-item">
-                  <span className="prop-icon">📦</span>
-                  <div>
-                    <strong>Complimentary Delivery</strong>
-                    <small>On all continental orders</small>
+                {valueProps.map((prop, idx) => (
+                  <div key={idx} className="prop-item">
+                    <span className="prop-icon">{prop.icon}</span>
+                    <div>
+                      <strong>{prop.title}</strong>
+                      <small>{prop.sub}</small>
+                    </div>
                   </div>
-                </div>
-                <div className="prop-item">
-                  <span className="prop-icon">🛡️</span>
-                  <div>
-                    <strong>Guaranteed Craftsmanship</strong>
-                    <small>1-year comprehensive warranty</small>
-                  </div>
-                </div>
-                <div className="prop-item">
-                  <span className="prop-icon">⚡</span>
-                  <div>
-                    <strong>Instant Digital Checkout</strong>
-                    <small>Apple Pay, Google Pay, UPI</small>
-                  </div>
-                </div>
+                ))}
               </div>
 
               {/* Product Grid Sample */}
@@ -4393,14 +5274,10 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                   <span className="view-all-link">View all items →</span>
                 </div>
                 <div className="preview-product-cards-grid">
-                  {[
-                    { title: 'Signature Edition No. 01', price: '$85.00', tag: 'Bestseller' },
-                    { title: 'Minimalist Daily Essential', price: '$120.00', tag: 'New Arrival' },
-                    { title: 'Artisan Crafted Accessory', price: '$65.00', tag: 'Limited' },
-                  ].map((p, idx) => (
+                  {sampleProducts.map((p, idx) => (
                     <div key={idx} className="preview-sample-product-card">
                       <div className="product-media-wrapper">
-                        <img src={template.modelImage} alt={p.title} />
+                        <img src={p.img} alt={p.title} />
                         <span className="product-sample-tag">{p.tag}</span>
                       </div>
                       <div className="product-sample-info">
@@ -4408,8 +5285,8 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                         <div className="price-and-swatch">
                           <span>{p.price}</span>
                           <div className="sample-swatches">
-                            <span className="swatch dark" />
-                            <span className="swatch light" />
+                            <span className="swatch dark" style={{ backgroundColor: isDark ? template.accentColor : '#0f172a' }} />
+                            <span className="swatch light" style={{ backgroundColor: isDark ? '#334155' : '#f1f5f9' }} />
                           </div>
                         </div>
                       </div>
@@ -4471,7 +5348,7 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
               <div className="specs-list-group">
                 <h4>Included Core Features</h4>
                 <ul className="specs-features-list">
-                  {template.features.map((f) => (
+                  {(template.features || []).map((f) => (
                     <li key={f}>
                       <span className="check-bullet">✓</span> {f}
                     </li>
@@ -4681,8 +5558,8 @@ export const OTHER_CATEGORIES: OtherCategoryItem[] = [
   },
   {
     id: 'health-beauty',
-    name: 'Health & Beauty',
-    description: 'Organic skincare, botanicals, cosmetics & wellness.',
+    name: 'Cosmetics & Beauty',
+    description: 'Cosmetics, luxury makeup, skincare & fragrance brands.',
     tone: 'pink',
     iconSvg: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -4920,7 +5797,7 @@ export const ALL_OTHER_SUGGESTIONS: OtherSuggestionItem[] = [
   { id: 'electronics', label: 'Electronics', icon: '💻', prompt: 'Electronics, smartphones, audio and smart devices' },
   { id: 'food-beverages', label: 'Food & Beverages', icon: '☕', prompt: 'Specialty roasters, gourmet pantry and beverage store' },
   { id: 'furniture', label: 'Furniture', icon: '🛋️', prompt: 'Artisan furniture, modern home decor and interior design' },
-  { id: 'health-beauty', label: 'Health & Beauty', icon: '💖', prompt: 'Organic skincare, clean beauty and wellness products' },
+  { id: 'health-beauty', label: 'Cosmetics & Beauty', icon: '💄', prompt: 'Cosmetics, luxury makeup, skincare and fragrance' },
   { id: 'home-garden', label: 'Home & Garden', icon: '🌿', prompt: 'Indoor houseplants, designer planters and gardening goods' },
   { id: 'luggage-bags', label: 'Luggage & Bags', icon: '🎒', prompt: 'Handcrafted leather travel bags, totes and backpacks' },
   { id: 'office-supplies', label: 'Office Supplies', icon: '📁', prompt: 'Fine stationery, minimalist notebooks and desk equipment' },
@@ -5498,14 +6375,16 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
       </footer>
 
       {/* Interactive Multi-Device Preview Modal */}
-      <TemplatePreviewModal
-        template={previewTemplate}
-        isOpen={Boolean(previewTemplate)}
-        onClose={() => setPreviewTemplate(null)}
-        onUseTemplate={(templateId) => {
-          handleSelectTemplate(templateId)
-        }}
-      />
+      {previewTemplate && (
+        <TemplatePreviewModal
+          template={previewTemplate}
+          isOpen={Boolean(previewTemplate)}
+          onClose={() => setPreviewTemplate(null)}
+          onUseTemplate={(templateId) => {
+            handleSelectTemplate(templateId)
+          }}
+        />
+      )}
     </div>
   )
 }

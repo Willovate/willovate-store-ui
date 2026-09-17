@@ -2626,6 +2626,519 @@
   box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
+/* Centered Layout in Preview Modal */
+.storefront-hero.hero-layout-centered {
+  display: block;
+  text-align: center;
+  padding: 2.5rem 1.5rem 2rem 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero-centered-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-layout-centered .hero-headline {
+  font-size: 2.75rem;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-layout-centered .hero-subtitle {
+  max-width: 580px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-layout-centered .hero-cta-group {
+  justify-content: center;
+  margin-bottom: 1.75rem;
+}
+
+.hero-centered-media {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-centered-media img {
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* Techwear & Dark Grid Mode in Preview */
+.storefront-hero.style-dark.hero-layout-card-grid {
+  position: relative;
+  border-bottom: 1px solid rgba(6, 182, 212, 0.2);
+  background: radial-gradient(circle at top right, rgba(6, 182, 212, 0.08) 0%, transparent 65%);
+}
+
+.storefront-hero.style-dark .hero-pill-eyebrow {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: 0.12em;
+  font-weight: 800;
+  color: #06b6d4;
+  text-shadow: 0 0 12px rgba(6, 182, 212, 0.4);
+}
+
+.storefront-hero.style-dark .hero-primary-cta {
+  background: #06b6d4;
+  color: #090d16;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 0 18px rgba(6, 182, 212, 0.35);
+}
+
+.storefront-hero.style-dark .hero-primary-cta:hover {
+  background: #22d3ee;
+  box-shadow: 0 0 24px rgba(6, 182, 212, 0.5);
+}
+
+/* Bold Athletic / Activewear Styling in Preview */
+.storefront-hero.style-bold .hero-headline {
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.storefront-hero.style-bold .hero-pill-eyebrow {
+  font-weight: 900;
+  letter-spacing: 0.1em;
+}
+
+.storefront-hero.style-bold .hero-primary-cta {
+  border-radius: 9999px;
+  padding: 0.75rem 1.8rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Clean & Linen Resort Styling in Preview */
+.storefront-hero.style-clean .hero-headline {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.storefront-hero.style-clean .hero-pill-eyebrow {
+  letter-spacing: 0.14em;
+  font-size: 0.7rem;
+}
+
+.storefront-hero.style-clean .hero-primary-cta {
+  border-radius: 30px;
+  background: #c2410c;
+  color: #ffffff;
+}
+
+/* Editorial Layout in Preview Modal */
+.storefront-hero.hero-layout-editorial {
+  display: block;
+  padding: 2.25rem 1.75rem;
+}
+
+.hero-editorial-content {
+  width: 100%;
+}
+
+.editorial-eyebrow-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.editorial-issue-tag {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  opacity: 0.65;
+  text-transform: uppercase;
+}
+
+.editorial-two-col {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.editorial-headline {
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  font-size: 2.6rem;
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.editorial-subtitle {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  opacity: 0.85;
+  margin-bottom: 1.5rem;
+}
+
+.editorial-cta-btn {
+  border-radius: 40px;
+  padding: 0.75rem 1.8rem;
+  letter-spacing: 0.04em;
+}
+
+.editorial-quote-badge {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1rem;
+  border-left: 2px solid rgba(181, 141, 61, 0.5);
+  font-size: 0.82rem;
+  opacity: 0.75;
+  font-style: italic;
+}
+
+.editorial-image-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.14);
+}
+
+.editorial-img {
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+  display: block;
+}
+
+.editorial-caption-overlay {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.overlay-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+/* Card-Grid Layout in Preview Modal */
+.storefront-hero.hero-layout-card-grid {
+  display: block;
+  padding: 2rem 1.5rem;
+}
+
+.hero-cardgrid-content {
+  width: 100%;
+}
+
+.cardgrid-header-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.cardgrid-headline {
+  font-size: 2.2rem;
+  line-height: 1.2;
+  margin-bottom: 0.4rem;
+}
+
+.cardgrid-sub {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  max-width: 600px;
+  margin: 0;
+}
+
+.cardgrid-cta-btn {
+  white-space: nowrap;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.cardgrid-feature-shelf {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 1rem;
+}
+
+.grid-feature-card {
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 12px;
+  padding: 1.25rem;
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.grid-feature-card.hero-feature-main {
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  min-height: 180px;
+}
+
+.feature-card-img {
+  width: 100%;
+  height: 100%;
+  min-height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.feature-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, transparent 100%);
+  color: #ffffff;
+}
+
+.feature-pill-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.35rem;
+}
+
+.stat-metric-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.metric-stat-number {
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+
+.stat-metric-box strong {
+  font-size: 0.88rem;
+  margin-bottom: 0.25rem;
+}
+
+.stat-metric-box p {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.action-quiz-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quiz-star-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.action-quiz-box strong {
+  font-size: 0.88rem;
+  margin-bottom: 0.25rem;
+}
+
+.action-quiz-box p {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  margin: 0 0 0.75rem 0;
+  line-height: 1.4;
+}
+
+.quiz-btn-link {
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Bold-Minimal Layout in Preview Modal */
+.storefront-hero.hero-layout-bold-minimal {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  padding: 2.5rem 1.75rem;
+}
+
+.boldminimal-inner {
+  display: flex;
+  flex-direction: column;
+}
+
+.boldminimal-eyebrow {
+  letter-spacing: 0.12em;
+  font-weight: 900;
+}
+
+.boldminimal-headline {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.85rem;
+}
+
+.boldminimal-subtitle {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  opacity: 0.85;
+  margin-bottom: 1.5rem;
+  max-width: 520px;
+}
+
+.boldminimal-cta-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.boldminimal-cta-btn {
+  padding: 0.75rem 1.8rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  border-radius: 4px;
+}
+
+.boldminimal-secondary-btn {
+  border-radius: 4px;
+  padding: 0.75rem 1.4rem;
+}
+
+.boldminimal-media-stage {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.boldminimal-img {
+  width: 100%;
+  max-height: 340px;
+  object-fit: cover;
+  display: block;
+}
+
+.boldminimal-corner-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Luxury & Playful Style Refinements in Preview */
+.storefront-hero.style-luxury .hero-headline {
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  font-weight: 700;
+}
+
+.storefront-hero.style-luxury .hero-primary-cta {
+  border-radius: 30px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.storefront-hero.style-playful .hero-headline {
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.storefront-hero.style-playful .hero-primary-cta {
+  border-radius: 9999px;
+  padding: 0.75rem 1.6rem;
+  font-weight: 700;
+}
+
+.storefront-hero.style-playful .hero-showcase-img {
+  border-radius: 20px;
+}
+
+.storefront-hero.style-minimal .hero-headline {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.storefront-hero.style-minimal .hero-primary-cta {
+  border-radius: 0px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Responsive Overrides for Preview Frames */
+.frame-mobile .editorial-two-col {
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.frame-mobile .editorial-headline {
+  font-size: 1.85rem;
+}
+
+.frame-mobile .cardgrid-header-strip {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.frame-mobile .cardgrid-headline {
+  font-size: 1.65rem;
+}
+
+.frame-mobile .cardgrid-feature-shelf {
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+.frame-mobile .storefront-hero.hero-layout-bold-minimal {
+  grid-template-columns: 1fr;
+  padding: 1.5rem 1rem;
+}
+
+.frame-mobile .boldminimal-headline {
+  font-size: 1.85rem;
+}
+
+.frame-tablet .cardgrid-feature-shelf {
+  grid-template-columns: 1fr 1fr;
+}
+
 .storefront-value-props {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

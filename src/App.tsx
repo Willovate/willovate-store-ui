@@ -115,6 +115,18 @@ function App() {
           rawHash === key ||
           (key === 'clothing-store' && (rawHash === 'cloth-store-templet' || rawHash === 'cloth-store-templates')) ||
           (key === 'restaurant' && (rawHash === 'restro' || rawHash === 'restro-templates')) ||
+          (key === 'health-beauty' && (
+            rawHash === 'cosmetics-beauty' ||
+            rawHash === 'cosmetics-beauty-templates' ||
+            rawHash === 'cosmetics-beauty-template' ||
+            rawHash === 'cosmetics' ||
+            rawHash === 'cosmetics-templates' ||
+            rawHash === 'cosmetic' ||
+            rawHash === 'cosmetic-templates' ||
+            rawHash === 'cosmetic-store' ||
+            rawHash === 'beauty' ||
+            rawHash === 'beauty-templates'
+          )) ||
           (key === 'other' && (rawHash === 'custom' || rawHash === 'custom-templates'))
         )
       })
