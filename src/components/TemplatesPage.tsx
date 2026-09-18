@@ -1376,7 +1376,7 @@ export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
     displayName: 'Cosmetics & Beauty',
     badgeIcon: '💄',
     description: 'Designer beauty templates for cosmetics, luxury skincare, organic botanicals and grooming brands.',
-    filterTags: ['All', 'Luxury', 'Skincare', 'Makeup & Cosmetics', 'Clean & Organic', "Men's Grooming", 'Fragrance', 'Gen-Z & Trendy', 'Clinical & Lab', 'Minimal'],
+    filterTags: ['All', 'Luxury', 'Skincare', 'Makeup & Cosmetics', 'Clean & Organic', "Men's Grooming", 'Fragrance', 'Suncare & Body', 'Apothecary', 'Minimal'],
     templates: [
       {
         id: 'tmpl_cosm_01_lumiere',
@@ -1567,6 +1567,44 @@ export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
         buttonColor: '#c2410c',
         isDark: false,
         modelImage: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=800&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_cosm_11_solaris',
+        slug: 'solaris-bronze',
+        name: 'Solaris Sun & Bronze',
+        businessType: 'health-beauty',
+        tags: ['Luxury', 'Suncare & Body', 'Clean & Organic'],
+        shortDescription: 'Luxury suncare & bronzing cosmetics with shimmering dry body oils, mineral SPF 50+, and radiant golden hour aesthetic.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=800&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 89,
+        isActive: true,
+        brandName: 'SOLARIS SUNCARE',
+        headline: 'Luminous Sun &\nEndless Bronze.',
+        subtitle: 'Broad-spectrum mineral SPF 50+, shimmering dry body oils, and golden pearlescent drops crafted for year-round sun-kissed radiance.',
+        buttonText: 'Shop Bronzing Range',
+        buttonColor: '#d97706',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=800&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_cosm_12_auraderma',
+        slug: 'aura-derma',
+        name: 'Aura Derma Apothecary',
+        businessType: 'health-beauty',
+        tags: ['Clean & Organic', 'Skincare', 'Apothecary', 'Minimal'],
+        shortDescription: 'Small-batch botanical apothecary cosmetic store with UV amber glass bottles, antioxidant face tinctures, and cold-pressed facial elixirs.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1608248597359-597519159954?w=800&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1608248597359-597519159954?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 88,
+        isActive: true,
+        brandName: 'AURA DERMA',
+        headline: 'Pure Botanical Potency.\nFormulated by Herbalists.',
+        subtitle: 'Small-batch cold-pressed botanical serums, antioxidant facial tinctures, and clean plant-active cosmetic elixirs in biophotonic amber glass.',
+        buttonText: 'Shop Apothecary',
+        buttonColor: '#166534',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1608248597359-597519159954?w=800&auto=format&fit=crop&q=80',
       },
     ],
   },
@@ -1923,27 +1961,293 @@ export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
   'jewelry-accessories': {
     displayName: 'Jewelry & Accessories',
     badgeIcon: '💎',
-    description: 'Fine solid gold jewelry, lab-grown gemstones, luxury watches and artisan rings.',
-    filterTags: ['All', 'Fine Rings', 'Necklaces', 'Timepieces', 'Artisan Silver', 'Minimalist'],
+    description: 'Designer jewelry templates for fine gold, certified diamonds, sterling silver, pearls, streetwear chains, and luxury timepieces.',
+    filterTags: ['All', 'Solid Gold', 'Diamonds & Bridal', 'Sterling Silver', 'Baroque Pearls', 'Raw Gemstones', 'Urban Chains', "Men's Metals", 'Personalized', 'Tennis Bracelets'],
     templates: [
       {
-        id: 'tmpl_ja_01_gold',
-        slug: 'luna-fine-jewelry',
-        name: 'Luna Fine Jewelry',
+        id: 'tmpl_jewel_01_aurelia',
+        slug: 'aurelia-paris',
+        name: 'Aurelia Haute Joaillerie',
         businessType: 'jewelry-accessories',
-        tags: ['Fine Rings', 'Minimalist'],
-        shortDescription: '14k recycled solid gold bands, ethically sourced diamond studs and pendant chains.',
-        thumbnailUrl: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&auto=format&fit=crop&q=80',
+        tags: ['Diamonds & Bridal', 'Solid Gold'],
+        shortDescription: 'Parisian high jewelry boutique featuring certified D-flawless solitaires, platinum bands, and black-tie showcase.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&auto=format&fit=crop&q=80',
         fullPreviewUrl: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1600&auto=format&fit=crop&q=85',
         popularityScore: 99,
         isActive: true,
-        brandName: 'LUNA JEWELRY',
-        headline: 'Solid Gold\nMade For Every Day',
-        subtitle: 'Recycled 14k gold pieces designed to be worn without ever taking off.',
-        buttonText: 'Shop Fine Gold',
-        buttonColor: '#0f172a',
+        brandName: 'AURELIA PARIS',
+        headline: 'Eternal Radiance.\nAtelier Joaillerie.',
+        subtitle: 'Handcrafted Place Vendôme solitaires, certified D-flawless diamonds, and heirloom platinum settings.',
+        buttonText: 'Explore Haute Collection',
+        buttonColor: '#d4af37',
+        isDark: true,
+        modelImage: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_jewel_02_luna',
+        slug: 'luna-demi-fine',
+        name: 'Luna Demi-Fine',
+        businessType: 'jewelry-accessories',
+        tags: ['Solid Gold', 'Personalized'],
+        shortDescription: 'Modern 14K solid gold everyday essentials, waterproof vermeil chains, and dainty stackable ring sets.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 98,
+        isActive: true,
+        brandName: 'LUNA ESSENTIALS',
+        headline: 'Solid Gold For\nYour Everyday Story.',
+        subtitle: '14K recycled gold chains and dainty stacking bands designed to never tarnish or leave your skin.',
+        buttonText: 'Shop Everyday Gold',
+        buttonColor: '#ca8a04',
         isDark: false,
-        modelImage: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&auto=format&fit=crop&q=80',
+        modelImage: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_jewel_03_nordic',
+        slug: 'nordic-silversmith',
+        name: 'Nordic Silversmith',
+        businessType: 'jewelry-accessories',
+        tags: ['Sterling Silver'],
+        shortDescription: 'Scandinavian architectural 925 sterling silver jewelry with fluid wave curves and minimalist mirror finishes.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 97,
+        isActive: true,
+        brandName: 'NORDIC STERLING',
+        headline: 'Form. Fluidity.\nPure Sterling 925.',
+        subtitle: 'Copenhagen-inspired sculptural silver cuffs, fluid wave earrings, and mirror-finish geometric pendants.',
+        buttonText: 'Discover Silver Edit',
+        buttonColor: '#334155',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_jewel_04_maisonpearl',
+        slug: 'maison-pearl',
+        name: 'Maison Pearl Atelier',
+        businessType: 'jewelry-accessories',
+        tags: ['Baroque Pearls', 'Diamonds & Bridal'],
+        shortDescription: 'Vintage-inspired baroque freshwater pearls, iridescent keshi chokers, and 18K vermeil heirloom lockets.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=800&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 96,
+        isActive: true,
+        brandName: 'MAISON PEARL',
+        headline: 'Unruly Pearls.\nTimeless Romance.',
+        subtitle: 'Hand-selected baroque freshwater pearls, iridescent keshi chokers, and 18K vermeil vintage lockets.',
+        buttonText: 'Explore Pearl Vault',
+        buttonColor: '#be123c',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=800&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_jewel_05_terragems',
+        slug: 'terra-gemstones',
+        name: 'Terra Raw Gems',
+        businessType: 'jewelry-accessories',
+        tags: ['Raw Gemstones', 'Solid Gold'],
+        shortDescription: 'Raw uncut crystals, Colombian emeralds, moss agates, and bohemian talismans set in hand-hammered gold.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1569397288884-4d43d6738fbd?w=800&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1569397288884-4d43d6738fbd?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 95,
+        isActive: true,
+        brandName: 'TERRA GEMS',
+        headline: 'Born From Earth.\nSculpted By Nature.',
+        subtitle: 'Raw uncut emeralds, iridescent Australian opals, and organic gemstone talismans set in hand-hammered gold.',
+        buttonText: 'Explore Earth Gems',
+        buttonColor: '#15803d',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1569397288884-4d43d6738fbd?w=800&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_jewel_06_vandal',
+        slug: 'vandal-chains',
+        name: 'Vandal Heavy Chains',
+        businessType: 'jewelry-accessories',
+        tags: ['Urban Chains', "Men's Metals"],
+        shortDescription: 'Urban streetwear heavy Cuban links, iced VVS moissanite grillz, and heavyweight industrial hardware.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?w=800&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 94,
+        isActive: true,
+        brandName: 'VANDAL JEWELRY',
+        headline: 'Heavy Metals.\nZero Apologies.',
+        subtitle: 'Solid stainless steel 12mm Cuban links, iced VVS moissanite grillz, and heavyweight industrial hardware.',
+        buttonText: 'Cop The Drop',
+        buttonColor: '#84cc16',
+        isDark: true,
+        modelImage: 'https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?w=800&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_jewel_07_solitaire',
+        slug: 'solitaire-bridal',
+        name: 'Solitaire & Co. Bridal',
+        businessType: 'jewelry-accessories',
+        tags: ['Diamonds & Bridal', 'Solid Gold'],
+        shortDescription: 'Modern bridal atelier for custom solitaire engagement rings, lab diamonds, and seamless eternity bands.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 93,
+        isActive: true,
+        brandName: 'SOLITAIRE BRIDAL',
+        headline: 'The Ring They’ll\nNever Stop Looking At.',
+        subtitle: 'Custom oval, emerald, and radiant cut engagement rings paired with seamless eternity pavé bands.',
+        buttonText: 'Design Your Ring',
+        buttonColor: '#b45309',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_jewel_08_studioforge',
+        slug: 'studio-forge',
+        name: 'Studio Forge Metalsmith',
+        businessType: 'jewelry-accessories',
+        tags: ['Solid Gold', 'Sterling Silver'],
+        shortDescription: 'Independently cast lost-wax rings, hand-hammered raw brass, and textured organic metal jewelry.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1611087388916-b6c97e01735b?w=800&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1611087388916-b6c97e01735b?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 92,
+        isActive: true,
+        brandName: 'STUDIO FORGE',
+        headline: 'Hand-Hammered.\nForged In Heat.',
+        subtitle: 'Artisan metalsmith jewelry individually melted, hammered, and textured in our independent metal studio.',
+        buttonText: 'Shop Studio Pieces',
+        buttonColor: '#ea580c',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1611087388916-b6c97e01735b?w=800&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_jewel_09_titan',
+        slug: 'titan-onyx-men',
+        name: 'Titan & Onyx Men',
+        businessType: 'jewelry-accessories',
+        tags: ["Men's Metals", 'Urban Chains'],
+        shortDescription: 'Aerospace grade-5 titanium cuffs, natural black onyx signet rings, and forged Damascus steel bands.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=800&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 91,
+        isActive: true,
+        brandName: 'TITAN & ONYX',
+        headline: 'Engineered Precision.\nMen’s Modern Metals.',
+        subtitle: 'Scratch-resistant aircraft titanium, natural matte black onyx signets, and forged Damascus steel bands.',
+        buttonText: 'Shop Men’s Metals',
+        buttonColor: '#ca8a04',
+        isDark: true,
+        modelImage: 'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=800&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_jewel_10_engrave',
+        slug: 'atelier-engrave',
+        name: 'Atelier Engrave Studio',
+        businessType: 'jewelry-accessories',
+        tags: ['Personalized', 'Solid Gold'],
+        shortDescription: 'Personalized laser-engraved nameplates, coordinate bar bracelets, and custom birthstone heirloom lockets.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=800&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 90,
+        isActive: true,
+        brandName: 'ATELIER ENGRAVE',
+        headline: 'Make It Personal.\nWear Your Memory.',
+        subtitle: 'Precision laser-engraved nameplates, roman numeral coordinate cuffs, and custom fingerprint pendants.',
+        buttonText: 'Personalize Your Piece',
+        buttonColor: '#4f46e5',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=800&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_jewel_11_celestia',
+        slug: 'celestia-talismans',
+        name: 'Celestia Talismans',
+        businessType: 'jewelry-accessories',
+        tags: ['Solid Gold', 'Raw Gemstones'],
+        shortDescription: 'Deeply embossed constellation medals, zodiac talisman coins, and moon phase jewelry in midnight aesthetic.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1598560917505-59a3ad559071?w=800&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1598560917505-59a3ad559071?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 89,
+        isActive: true,
+        brandName: 'CELESTIA JEWELRY',
+        headline: 'Written In The Stars.\nCelestial Amulets.',
+        subtitle: 'Deeply embossed constellation coins, moon phase signets, and talisman lockets infused with stellar symbolism.',
+        buttonText: 'Find Your Zodiac',
+        buttonColor: '#eab308',
+        isDark: true,
+        modelImage: 'https://images.unsplash.com/photo-1598560917505-59a3ad559071?w=800&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_jewel_12_sculpt',
+        slug: 'sculpt-couture',
+        name: 'Sculpt Couture Atelier',
+        businessType: 'jewelry-accessories',
+        tags: ['Solid Gold', 'Sterling Silver'],
+        shortDescription: 'Avant-garde runway statement earrings, fluid collar neckpieces, and high-fashion editorial gallery jewelry.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=800&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 88,
+        isActive: true,
+        brandName: 'SCULPT ATELIER',
+        headline: 'Wearable Art.\nRunway Statements.',
+        subtitle: 'Bold oversized architectural earrings, fluid hammered collar neckpieces, and high-impact sculptural bangles.',
+        buttonText: 'View Runway Lookbook',
+        buttonColor: '#090d16',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=800&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_jewel_13_oceantide',
+        slug: 'ocean-tide-reclaimed',
+        name: 'Ocean & Tide Reclaimed',
+        businessType: 'jewelry-accessories',
+        tags: ['Sterling Silver', 'Raw Gemstones'],
+        shortDescription: 'Sustainable ocean jewelry hand-forged from 100% reclaimed beach silver, tumbled sea glass, and marine brass.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1608042314453-ae338d80c427?w=800&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1608042314453-ae338d80c427?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 87,
+        isActive: true,
+        brandName: 'OCEAN & TIDE',
+        headline: 'Reclaimed Marine Silver.\nShaped By Waves.',
+        subtitle: 'Eco-conscious jewelry crafted from certified recycled ocean-recovered metals and smooth frosted sea glass.',
+        buttonText: 'Shop Recycled Range',
+        buttonColor: '#0f766e',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1608042314453-ae338d80c427?w=800&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_jewel_14_riviera',
+        slug: 'riviera-tennis',
+        name: 'Riviera Tennis Atelier',
+        businessType: 'jewelry-accessories',
+        tags: ['Tennis Bracelets', 'Diamonds & Bridal'],
+        shortDescription: 'High jewelry continuous diamond tennis bracelets, graduated choker necklaces, and 18K white gold eternity drops.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1629224316810-9d8805b95e76?w=800&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1629224316810-9d8805b95e76?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 86,
+        isActive: true,
+        brandName: 'RIVIERA ATELIER',
+        headline: 'Unbroken Light.\nFine Diamond Tennis.',
+        subtitle: 'Hand-set 18K white gold & platinum continuous diamond tennis bracelets, collar necklaces, and eternity drop earrings.',
+        buttonText: 'Shop Tennis Collection',
+        buttonColor: '#0284c7',
+        isDark: true,
+        modelImage: 'https://images.unsplash.com/photo-1629224316810-9d8805b95e76?w=800&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_jewel_15_jewelvault',
+        slug: 'the-jewel-vault',
+        name: 'The Jewel Vault Marketplace',
+        businessType: 'jewelry-accessories',
+        tags: ['Solid Gold', 'Diamonds & Bridal', 'Tennis Bracelets', 'Urban Chains'],
+        shortDescription: 'High-density multi-brand jewelry vault featuring 500+ verified designer houses, instant ring sizer, and rewards.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=800&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 85,
+        isActive: true,
+        brandName: 'THE JEWEL VAULT',
+        headline: '500+ Designer Jewelers.\nAll In One Vault.',
+        subtitle: 'Curated multi-brand jewelry marketplace with authenticated diamond appraisal certificates, same-day dispatch, and vault rewards.',
+        buttonText: 'Browse Vault Catalog',
+        buttonColor: '#4338ca',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=800&auto=format&fit=crop&q=80',
       },
     ],
   },
@@ -3928,6 +4232,482 @@ export const FLAGSHIP_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
     features: ['Interactive 3-Step Routine Builder', 'Virtual Artist Masterclasses', 'Custom Formula Mixing Bar', 'Skin Cycle Tracker Tool'],
   },
   {
+    id: 'tmpl_cosm_11_solaris',
+    slug: 'solaris-bronze',
+    name: 'Solaris Sun & Bronze',
+    businessType: 'health-beauty',
+    industryCategory: 'Cosmetics & Beauty',
+    style: 'luxury',
+    catalogSize: 'small',
+    tags: ['Cosmetics & Beauty', 'Luxury', 'Suncare & Body', 'Clean & Organic'],
+    shortDescription: 'Luxury suncare & bronzing cosmetics with shimmering dry body oils, mineral SPF 50+, and radiant golden hour aesthetic.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 89,
+    isActive: true,
+    brandName: 'SOLARIS SUNCARE',
+    headline: 'Luminous Sun &\nEndless Bronze.',
+    subtitle: 'Broad-spectrum mineral SPF 50+, shimmering dry body oils, and golden pearlescent drops crafted for year-round sun-kissed radiance.',
+    buttonText: 'Shop Bronzing Range',
+    buttonColor: '#d97706',
+    accentColor: '#d97706',
+    isDark: false,
+    modelImage: 'https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=800&auto=format&fit=crop&q=80',
+    badge: 'trending',
+    rating: 4.94,
+    reviewCount: 168,
+    layoutType: 'split',
+    features: ['Broad-Spectrum Mineral SPF 50+', 'Non-Nano Zinc Sun Defense', 'Golden Hour Mica Shimmer', 'Water-Resistant Barrier Formula'],
+  },
+  {
+    id: 'tmpl_cosm_12_auraderma',
+    slug: 'aura-derma',
+    name: 'Aura Derma Apothecary',
+    businessType: 'health-beauty',
+    industryCategory: 'Cosmetics & Beauty',
+    style: 'clean',
+    catalogSize: 'small',
+    tags: ['Cosmetics & Beauty', 'Clean & Organic', 'Skincare', 'Apothecary', 'Minimal'],
+    shortDescription: 'Small-batch botanical apothecary cosmetic store with UV amber glass bottles, antioxidant face tinctures, and cold-pressed facial elixirs.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1608248597359-597519159954?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1608248597359-597519159954?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 88,
+    isActive: true,
+    brandName: 'AURA DERMA',
+    headline: 'Pure Botanical Potency.\nFormulated by Herbalists.',
+    subtitle: 'Small-batch cold-pressed botanical serums, antioxidant facial tinctures, and clean plant-active cosmetic elixirs in biophotonic amber glass.',
+    buttonText: 'Shop Apothecary',
+    buttonColor: '#166534',
+    accentColor: '#166534',
+    isDark: false,
+    modelImage: 'https://images.unsplash.com/photo-1608248597359-597519159954?w=800&auto=format&fit=crop&q=80',
+    badge: "editor's pick",
+    rating: 4.96,
+    reviewCount: 135,
+    layoutType: 'centered',
+    features: ['Small-Batch Herbalist Extraction', 'Biophotonic UV Glass Jars', 'Zero-Preservative Fresh Batch', 'Active Antioxidant Index'],
+  },
+  {
+    id: 'tmpl_jewel_01_aurelia',
+    slug: 'aurelia-paris',
+    name: 'Aurelia Haute Joaillerie',
+    businessType: 'jewelry-accessories',
+    industryCategory: 'Jewelry & Accessories',
+    style: 'luxury',
+    catalogSize: 'small',
+    tags: ['Jewelry & Accessories', 'Solid Gold', 'Diamonds & Bridal', 'Luxury', 'High Jewelry'],
+    shortDescription: 'Parisian high jewelry boutique featuring certified D-flawless solitaires, platinum bands, and black-tie showcase.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 99,
+    isActive: true,
+    brandName: 'AURELIA PARIS',
+    headline: 'Eternal Radiance.\nAtelier Joaillerie.',
+    subtitle: 'Handcrafted Place Vendôme solitaires, certified D-flawless diamonds, and heirloom platinum settings.',
+    buttonText: 'Explore Haute Collection',
+    buttonColor: '#d4af37',
+    accentColor: '#d4af37',
+    isDark: true,
+    modelImage: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&auto=format&fit=crop&q=80',
+    badge: "editor's pick",
+    rating: 4.98,
+    reviewCount: 164,
+    layoutType: 'editorial',
+    features: ['GIA Diamond Certificate Vault', 'Place Vendôme Atelier Booking', 'Platinum & 18K Solid Gold', 'Insured Armored Courier Delivery'],
+  },
+  {
+    id: 'tmpl_jewel_02_luna',
+    slug: 'luna-demi-fine',
+    name: 'Luna Demi-Fine',
+    businessType: 'jewelry-accessories',
+    industryCategory: 'Jewelry & Accessories',
+    style: 'clean',
+    catalogSize: 'medium',
+    tags: ['Jewelry & Accessories', 'Solid Gold', 'Personalized', 'Everyday Luxury', 'Clean'],
+    shortDescription: 'Modern 14K solid gold everyday essentials, waterproof vermeil chains, and dainty stackable ring sets.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 98,
+    isActive: true,
+    brandName: 'LUNA ESSENTIALS',
+    headline: 'Solid Gold For\nYour Everyday Story.',
+    subtitle: '14K recycled gold chains and dainty stacking bands designed to never tarnish or leave your skin.',
+    buttonText: 'Shop Everyday Gold',
+    buttonColor: '#ca8a04',
+    accentColor: '#ca8a04',
+    isDark: false,
+    modelImage: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80',
+    badge: 'trending',
+    rating: 4.92,
+    reviewCount: 218,
+    layoutType: 'split',
+    features: ['100% Waterproof & Sweatproof', '14K Recycled Fine Gold', 'Interactive Ring & Ear Stacking Builder', 'Tarnish-Free Lifetime Warranty'],
+  },
+  {
+    id: 'tmpl_jewel_03_nordic',
+    slug: 'nordic-silversmith',
+    name: 'Nordic Silversmith',
+    businessType: 'jewelry-accessories',
+    industryCategory: 'Jewelry & Accessories',
+    style: 'minimal',
+    catalogSize: 'small',
+    tags: ['Jewelry & Accessories', 'Sterling Silver', 'Minimal', 'Scandinavian', 'Modern'],
+    shortDescription: 'Scandinavian architectural 925 sterling silver jewelry with fluid wave curves and minimalist mirror finishes.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 97,
+    isActive: true,
+    brandName: 'NORDIC STERLING',
+    headline: 'Form. Fluidity.\nPure Sterling 925.',
+    subtitle: 'Copenhagen-inspired sculptural silver cuffs, fluid wave earrings, and mirror-finish geometric pendants.',
+    buttonText: 'Discover Silver Edit',
+    buttonColor: '#334155',
+    accentColor: '#334155',
+    isDark: false,
+    modelImage: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80',
+    badge: 'popular',
+    rating: 4.89,
+    reviewCount: 142,
+    layoutType: 'centered',
+    features: ['925 Solid Sterling Silver Stamp', 'Mirror & Brushed Silver Finishes', 'Fluid Sculptural Ergonomics', 'Eco Anti-Tarnish Suede Packaging'],
+  },
+  {
+    id: 'tmpl_jewel_04_maisonpearl',
+    slug: 'maison-pearl',
+    name: 'Maison Pearl Atelier',
+    businessType: 'jewelry-accessories',
+    industryCategory: 'Jewelry & Accessories',
+    style: 'playful',
+    catalogSize: 'medium',
+    tags: ['Jewelry & Accessories', 'Baroque Pearls', 'Diamonds & Bridal', 'Vintage', 'Romantic'],
+    shortDescription: 'Vintage-inspired baroque freshwater pearls, iridescent keshi chokers, and 18K vermeil heirloom lockets.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 96,
+    isActive: true,
+    brandName: 'MAISON PEARL',
+    headline: 'Unruly Pearls.\nTimeless Romance.',
+    subtitle: 'Hand-selected baroque freshwater pearls, iridescent keshi chokers, and 18K vermeil vintage lockets.',
+    buttonText: 'Explore Pearl Vault',
+    buttonColor: '#be123c',
+    accentColor: '#be123c',
+    isDark: false,
+    modelImage: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=800&auto=format&fit=crop&q=80',
+    badge: 'trending',
+    rating: 4.94,
+    reviewCount: 178,
+    layoutType: 'editorial',
+    features: ['Naturally Irregular Baroque Pearls', '18K Heavy Gold Vermeil (2.5µm)', 'Individual Pearl Grading Dossier', 'Signature Velvet Keepsake Case'],
+  },
+  {
+    id: 'tmpl_jewel_05_terragems',
+    slug: 'terra-gemstones',
+    name: 'Terra Raw Gems',
+    businessType: 'jewelry-accessories',
+    industryCategory: 'Jewelry & Accessories',
+    style: 'clean',
+    catalogSize: 'small',
+    tags: ['Jewelry & Accessories', 'Raw Gemstones', 'Solid Gold', 'Boho', 'Handcrafted'],
+    shortDescription: 'Raw uncut crystals, Colombian emeralds, moss agates, and bohemian talismans set in hand-hammered gold.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1569397288884-4d43d6738fbd?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1569397288884-4d43d6738fbd?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 95,
+    isActive: true,
+    brandName: 'TERRA GEMS',
+    headline: 'Born From Earth.\nSculpted By Nature.',
+    subtitle: 'Raw uncut emeralds, iridescent Australian opals, and organic gemstone talismans set in hand-hammered gold.',
+    buttonText: 'Explore Earth Gems',
+    buttonColor: '#15803d',
+    accentColor: '#15803d',
+    isDark: false,
+    modelImage: 'https://images.unsplash.com/photo-1569397288884-4d43d6738fbd?w=800&auto=format&fit=crop&q=80',
+    badge: 'new',
+    rating: 4.88,
+    reviewCount: 97,
+    layoutType: 'centered',
+    features: ['Conflict-Free Uncut Crystals', 'Natural Colombian Emeralds & Opals', 'Hand-Hammered Bezel Settings', 'Geological Origin Certificate'],
+  },
+  {
+    id: 'tmpl_jewel_06_vandal',
+    slug: 'vandal-chains',
+    name: 'Vandal Heavy Chains',
+    businessType: 'jewelry-accessories',
+    industryCategory: 'Jewelry & Accessories',
+    style: 'dark',
+    catalogSize: 'medium',
+    tags: ['Jewelry & Accessories', 'Urban Chains', "Men's Metals", 'Streetwear', 'Iced Out'],
+    shortDescription: 'Urban streetwear heavy Cuban links, iced VVS moissanite grillz, and heavyweight industrial hardware.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 94,
+    isActive: true,
+    brandName: 'VANDAL JEWELRY',
+    headline: 'Heavy Metals.\nZero Apologies.',
+    subtitle: 'Solid stainless steel 12mm Cuban links, iced VVS moissanite grillz, and heavyweight industrial hardware.',
+    buttonText: 'Cop The Drop',
+    buttonColor: '#84cc16',
+    accentColor: '#84cc16',
+    isDark: true,
+    modelImage: 'https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?w=800&auto=format&fit=crop&q=80',
+    badge: 'popular',
+    rating: 4.86,
+    reviewCount: 312,
+    layoutType: 'bold-minimal',
+    features: ['Solid 316L Heavy Stainless Steel', 'VVS Diamond-Tested Moissanite', 'Reinforced Double-Safety Clasps', 'Custom Streetwear Link Sizing'],
+  },
+  {
+    id: 'tmpl_jewel_07_solitaire',
+    slug: 'solitaire-bridal',
+    name: 'Solitaire & Co. Bridal',
+    businessType: 'jewelry-accessories',
+    industryCategory: 'Jewelry & Accessories',
+    style: 'luxury',
+    catalogSize: 'small',
+    tags: ['Jewelry & Accessories', 'Diamonds & Bridal', 'Solid Gold', 'Engagement', 'Luxury'],
+    shortDescription: 'Modern bridal atelier for custom solitaire engagement rings, lab diamonds, and seamless eternity bands.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 93,
+    isActive: true,
+    brandName: 'SOLITAIRE BRIDAL',
+    headline: 'The Ring They’ll\nNever Stop Looking At.',
+    subtitle: 'Custom oval, emerald, and radiant cut engagement rings paired with seamless eternity pavé bands.',
+    buttonText: 'Design Your Ring',
+    buttonColor: '#b45309',
+    accentColor: '#b45309',
+    isDark: false,
+    modelImage: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&auto=format&fit=crop&q=80',
+    badge: 'recommended',
+    rating: 4.97,
+    reviewCount: 184,
+    layoutType: 'bold-minimal',
+    features: ['Interactive 3D Cad Ring Builder', '4Cs Diamond Filter (GIA & IGI)', 'Complimentary At-Home Ring Sizer', 'Lifetime Resizing & Ultrasonic Spa'],
+  },
+  {
+    id: 'tmpl_jewel_08_studioforge',
+    slug: 'studio-forge',
+    name: 'Studio Forge Metalsmith',
+    businessType: 'jewelry-accessories',
+    industryCategory: 'Jewelry & Accessories',
+    style: 'bold',
+    catalogSize: 'small',
+    tags: ['Jewelry & Accessories', 'Solid Gold', 'Sterling Silver', 'Artisan', 'Metalsmith'],
+    shortDescription: 'Independently cast lost-wax rings, hand-hammered raw brass, and textured organic metal jewelry.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1611087388916-b6c97e01735b?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1611087388916-b6c97e01735b?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 92,
+    isActive: true,
+    brandName: 'STUDIO FORGE',
+    headline: 'Hand-Hammered.\nForged In Heat.',
+    subtitle: 'Artisan metalsmith jewelry individually melted, hammered, and textured in our independent metal studio.',
+    buttonText: 'Shop Studio Pieces',
+    buttonColor: '#ea580c',
+    accentColor: '#ea580c',
+    isDark: false,
+    modelImage: 'https://images.unsplash.com/photo-1611087388916-b6c97e01735b?w=800&auto=format&fit=crop&q=80',
+    badge: 'new',
+    rating: 4.87,
+    reviewCount: 65,
+    layoutType: 'bold-minimal',
+    features: ['Lost-Wax Casting Technique', '1-of-a-Kind Organic Fire Textures', '100% Recycled Studio Scrap Metals', 'Maker’s Anvil Mark Stamped By Hand'],
+  },
+  {
+    id: 'tmpl_jewel_09_titan',
+    slug: 'titan-onyx-men',
+    name: 'Titan & Onyx Men',
+    businessType: 'jewelry-accessories',
+    industryCategory: 'Jewelry & Accessories',
+    style: 'dark',
+    catalogSize: 'medium',
+    tags: ['Jewelry & Accessories', "Men's Metals", 'Urban Chains', 'Titanium', 'Modern'],
+    shortDescription: 'Aerospace grade-5 titanium cuffs, natural black onyx signet rings, and forged Damascus steel bands.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 91,
+    isActive: true,
+    brandName: 'TITAN & ONYX',
+    headline: 'Engineered Precision.\nMen’s Modern Metals.',
+    subtitle: 'Scratch-resistant aircraft titanium, natural matte black onyx signets, and forged Damascus steel bands.',
+    buttonText: 'Shop Men’s Metals',
+    buttonColor: '#ca8a04',
+    accentColor: '#ca8a04',
+    isDark: true,
+    modelImage: 'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=800&auto=format&fit=crop&q=80',
+    badge: 'popular',
+    rating: 4.91,
+    reviewCount: 194,
+    layoutType: 'split',
+    features: ['Grade 5 Aerospace Titanium', 'Natural Brazilian Onyx Stones', 'Scratchproof DLC Diamond Coating', 'Contoured Comfort-Fit Interior'],
+  },
+  {
+    id: 'tmpl_jewel_10_engrave',
+    slug: 'atelier-engrave',
+    name: 'Atelier Engrave Studio',
+    businessType: 'jewelry-accessories',
+    industryCategory: 'Jewelry & Accessories',
+    style: 'modern',
+    catalogSize: 'medium',
+    tags: ['Jewelry & Accessories', 'Personalized', 'Solid Gold', 'Gifts', 'Modern'],
+    shortDescription: 'Personalized laser-engraved nameplates, coordinate bar bracelets, and custom birthstone heirloom lockets.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 90,
+    isActive: true,
+    brandName: 'ATELIER ENGRAVE',
+    headline: 'Make It Personal.\nWear Your Memory.',
+    subtitle: 'Precision laser-engraved nameplates, roman numeral coordinate cuffs, and custom fingerprint pendants.',
+    buttonText: 'Personalize Your Piece',
+    buttonColor: '#4f46e5',
+    accentColor: '#4f46e5',
+    isDark: false,
+    modelImage: 'https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=800&auto=format&fit=crop&q=80',
+    badge: 'recommended',
+    rating: 4.93,
+    reviewCount: 246,
+    layoutType: 'card-grid',
+    features: ['Sub-Millimeter Live Laser Preview', 'GPS Coordinates & Date Inscription', 'Actual Handwriting & Fingerprint Transfer', 'Gift-Ready Keepsake Packaging'],
+  },
+  {
+    id: 'tmpl_jewel_11_celestia',
+    slug: 'celestia-talismans',
+    name: 'Celestia Talismans',
+    businessType: 'jewelry-accessories',
+    industryCategory: 'Jewelry & Accessories',
+    style: 'luxury',
+    catalogSize: 'small',
+    tags: ['Jewelry & Accessories', 'Solid Gold', 'Raw Gemstones', 'Celestial', 'Zodiac'],
+    shortDescription: 'Deeply embossed constellation medals, zodiac talisman coins, and moon phase jewelry in midnight aesthetic.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1598560917505-59a3ad559071?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1598560917505-59a3ad559071?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 89,
+    isActive: true,
+    brandName: 'CELESTIA JEWELRY',
+    headline: 'Written In The Stars.\nCelestial Amulets.',
+    subtitle: 'Deeply embossed constellation coins, moon phase signets, and talisman lockets infused with stellar symbolism.',
+    buttonText: 'Find Your Zodiac',
+    buttonColor: '#eab308',
+    accentColor: '#eab308',
+    isDark: true,
+    modelImage: 'https://images.unsplash.com/photo-1598560917505-59a3ad559071?w=800&auto=format&fit=crop&q=80',
+    badge: 'trending',
+    rating: 4.90,
+    reviewCount: 153,
+    layoutType: 'split',
+    features: ['12 Astrological Zodiac Crests', 'Moon Phase Lunar Cycles', 'Celestial Star Diamonds', 'Individualized Astrology Scroll'],
+  },
+  {
+    id: 'tmpl_jewel_12_sculpt',
+    slug: 'sculpt-couture',
+    name: 'Sculpt Couture Atelier',
+    businessType: 'jewelry-accessories',
+    industryCategory: 'Jewelry & Accessories',
+    style: 'editorial',
+    catalogSize: 'small',
+    tags: ['Jewelry & Accessories', 'Solid Gold', 'Sterling Silver', 'Editorial', 'Runway'],
+    shortDescription: 'Avant-garde runway statement earrings, fluid collar neckpieces, and high-fashion editorial gallery jewelry.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 88,
+    isActive: true,
+    brandName: 'SCULPT ATELIER',
+    headline: 'Wearable Art.\nRunway Statements.',
+    subtitle: 'Bold oversized architectural earrings, fluid hammered collar neckpieces, and high-impact sculptural bangles.',
+    buttonText: 'View Runway Lookbook',
+    buttonColor: '#090d16',
+    accentColor: '#090d16',
+    isDark: false,
+    modelImage: 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=800&auto=format&fit=crop&q=80',
+    badge: "editor's pick",
+    rating: 4.95,
+    reviewCount: 112,
+    layoutType: 'editorial',
+    features: ['Paris Runway Capsule Drops', 'Architectural Hollow Cast (Featherlight)', '8-Stage Liquid Mirror Polish', 'Numbered Certificate of Authenticity'],
+  },
+  {
+    id: 'tmpl_jewel_13_oceantide',
+    slug: 'ocean-tide-reclaimed',
+    name: 'Ocean & Tide Reclaimed',
+    businessType: 'jewelry-accessories',
+    industryCategory: 'Jewelry & Accessories',
+    style: 'clean',
+    catalogSize: 'small',
+    tags: ['Jewelry & Accessories', 'Sterling Silver', 'Raw Gemstones', 'Sustainable', 'Coastal'],
+    shortDescription: 'Sustainable ocean jewelry hand-forged from 100% reclaimed beach silver, tumbled sea glass, and marine brass.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1608042314453-ae338d80c427?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1608042314453-ae338d80c427?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 87,
+    isActive: true,
+    brandName: 'OCEAN & TIDE',
+    headline: 'Reclaimed Marine Silver.\nShaped By Waves.',
+    subtitle: 'Eco-conscious jewelry crafted from certified recycled ocean-recovered metals and smooth frosted sea glass.',
+    buttonText: 'Shop Recycled Range',
+    buttonColor: '#0f766e',
+    accentColor: '#0f766e',
+    isDark: false,
+    modelImage: 'https://images.unsplash.com/photo-1608042314453-ae338d80c427?w=800&auto=format&fit=crop&q=80',
+    badge: 'new',
+    rating: 4.89,
+    reviewCount: 79,
+    layoutType: 'centered',
+    features: ['100% Beach-Reclaimed Silver', 'Atlantic Frosted Sea Glass', '10% Contributed to Ocean Cleanups', 'Wave-Textured Sand Mold Casts'],
+  },
+  {
+    id: 'tmpl_jewel_14_riviera',
+    slug: 'riviera-tennis',
+    name: 'Riviera Tennis Atelier',
+    businessType: 'jewelry-accessories',
+    industryCategory: 'Jewelry & Accessories',
+    style: 'luxury',
+    catalogSize: 'medium',
+    tags: ['Jewelry & Accessories', 'Tennis Bracelets', 'Diamonds & Bridal', 'Luxury', 'Fine Jewelry'],
+    shortDescription: 'High jewelry continuous diamond tennis bracelets, graduated choker necklaces, and 18K white gold eternity drops.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1629224316810-9d8805b95e76?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1629224316810-9d8805b95e76?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 86,
+    isActive: true,
+    brandName: 'RIVIERA ATELIER',
+    headline: 'Unbroken Light.\nFine Diamond Tennis.',
+    subtitle: 'Hand-set 18K white gold & platinum continuous diamond tennis bracelets, collar necklaces, and eternity drop earrings.',
+    buttonText: 'Shop Tennis Collection',
+    buttonColor: '#0284c7',
+    accentColor: '#0284c7',
+    isDark: true,
+    modelImage: 'https://images.unsplash.com/photo-1629224316810-9d8805b95e76?w=800&auto=format&fit=crop&q=80',
+    badge: 'popular',
+    rating: 4.96,
+    reviewCount: 220,
+    layoutType: 'split',
+    features: ['18K White Gold & Solid Platinum', 'Continuous D-Color Diamond Setting', 'Double Safety Hidden Box Clasp', 'Complimentary Tennis Sizing Adjustment'],
+  },
+  {
+    id: 'tmpl_jewel_15_jewelvault',
+    slug: 'the-jewel-vault',
+    name: 'The Jewel Vault Marketplace',
+    businessType: 'jewelry-accessories',
+    industryCategory: 'Jewelry & Accessories',
+    style: 'modern',
+    catalogSize: 'large',
+    tags: ['Jewelry & Accessories', 'Solid Gold', 'Diamonds & Bridal', 'Tennis Bracelets', 'Marketplace'],
+    shortDescription: 'High-density multi-brand jewelry vault featuring 500+ verified designer houses, instant ring sizer, and rewards.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=800&auto=format&fit=crop&q=80',
+    fullPreviewUrl: 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=1600&auto=format&fit=crop&q=85',
+    popularityScore: 85,
+    isActive: true,
+    brandName: 'THE JEWEL VAULT',
+    headline: '500+ Designer Jewelers.\nAll In One Vault.',
+    subtitle: 'Curated multi-brand jewelry marketplace with authenticated diamond appraisal certificates, same-day dispatch, and vault rewards.',
+    buttonText: 'Browse Vault Catalog',
+    buttonColor: '#4338ca',
+    accentColor: '#4338ca',
+    isDark: false,
+    modelImage: 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=800&auto=format&fit=crop&q=80',
+    badge: 'recommended',
+    rating: 4.92,
+    reviewCount: 430,
+    layoutType: 'card-grid',
+    features: ['500+ Independent Designers', 'Digital Ring Sizer Augmented Tool', 'Multi-Brand Consolidated Cart', 'Escrow Insured Diamond Purchase'],
+  },
+  {
     id: 'tmpl_techwave_modern',
     slug: 'techwave-store',
     name: 'TechWave Gadgets',
@@ -4016,10 +4796,10 @@ export const FLAGSHIP_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
     slug: 'aura-spa',
     name: 'Aura Spa & Botanicals',
     businessType: 'salon',
-    industryCategory: 'Cosmetics & Beauty',
+    industryCategory: 'Salon & Spa',
     style: 'minimal',
     catalogSize: 'small',
-    tags: ['Cosmetics & Beauty', 'Minimal', 'Spa', 'Skincare'],
+    tags: ['Salon & Spa', 'Minimal', 'Spa', 'Wellness'],
     shortDescription: 'Serene rose-cream aesthetic with booking schedules and apothecary product showcase.',
     thumbnailUrl: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&auto=format&fit=crop&q=80',
     fullPreviewUrl: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1600&auto=format&fit=crop&q=85',
@@ -4324,10 +5104,10 @@ export const FLAGSHIP_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
     slug: 'glow-naturals',
     name: 'Glow Naturals Skincare',
     businessType: 'online-store',
-    industryCategory: 'Cosmetics & Beauty',
+    industryCategory: 'Online Store',
     style: 'minimal',
     catalogSize: 'small',
-    tags: ['Cosmetics & Beauty', 'Minimal', 'Clean Beauty', 'Organic'],
+    tags: ['Online Store', 'Minimal', 'Skincare', 'Clean Living'],
     shortDescription: 'Pure botanical skincare essentials with ingredient spotlight drawers and quiz matchers.',
     thumbnailUrl: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&auto=format&fit=crop&q=80',
     fullPreviewUrl: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1600&auto=format&fit=crop&q=85',
@@ -4455,6 +5235,10 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
     }
   }, [template.badge])
 
+  const fallbackHero = template.businessType === 'jewelry-accessories'
+    ? 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&auto=format&fit=crop&q=80'
+    : 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&auto=format&fit=crop&q=80'
+
   return (
     <div
       className={`marketplace-card ${isSelected ? 'selected' : ''}`}
@@ -4532,7 +5316,16 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
                 </span>
               </div>
               <div className="stage-image-box">
-                <img src={template.modelImage} alt={template.name} loading="lazy" />
+                <img
+                  src={template.modelImage}
+                  alt={template.name}
+                  loading="lazy"
+                  onError={(e) => {
+                    const t = e.currentTarget
+                    t.onerror = null
+                    t.src = fallbackHero
+                  }}
+                />
               </div>
             </div>
           )}
@@ -4542,7 +5335,16 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
               <h4 style={{ color: isDark ? '#ffffff' : '#0f172a' }}>{template.headline}</h4>
               <p style={{ color: isDark ? '#94a3b8' : '#64748b' }}>{template.subtitle}</p>
               <div className="centered-image-frame">
-                <img src={template.modelImage} alt={template.name} loading="lazy" />
+                <img
+                  src={template.modelImage}
+                  alt={template.name}
+                  loading="lazy"
+                  onError={(e) => {
+                    const t = e.currentTarget
+                    t.onerror = null
+                    t.src = fallbackHero
+                  }}
+                />
               </div>
             </div>
           )}
@@ -4559,7 +5361,16 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
                 <p style={{ color: isDark ? '#94a3b8' : '#64748b' }}>{template.subtitle}</p>
               </div>
               <div className="editorial-image-col">
-                <img src={template.modelImage} alt={template.name} loading="lazy" />
+                <img
+                  src={template.modelImage}
+                  alt={template.name}
+                  loading="lazy"
+                  onError={(e) => {
+                    const t = e.currentTarget
+                    t.onerror = null
+                    t.src = fallbackHero
+                  }}
+                />
               </div>
             </div>
           )}
@@ -4574,7 +5385,16 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
               </div>
               <div className="grid-cards-strip">
                 <div className="mini-card-thumb">
-                  <img src={template.modelImage} alt={template.name} loading="lazy" />
+                  <img
+                    src={template.modelImage}
+                    alt={template.name}
+                    loading="lazy"
+                    onError={(e) => {
+                      const t = e.currentTarget
+                      t.onerror = null
+                      t.src = fallbackHero
+                    }}
+                  />
                 </div>
                 <div className="mini-card-specs">
                   <div className="spec-line" />
@@ -4604,7 +5424,16 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
                   {template.buttonText || 'Start Now'} →
                 </span>
                 <div className="bold-avatar-thumb">
-                  <img src={template.modelImage} alt={template.name} loading="lazy" />
+                  <img
+                    src={template.modelImage}
+                    alt={template.name}
+                    loading="lazy"
+                    onError={(e) => {
+                      const t = e.currentTarget
+                      t.onerror = null
+                      t.src = fallbackHero
+                    }}
+                  />
                 </div>
               </div>
             </div>
@@ -4737,6 +5566,23 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
     if (template.id === 'tmpl_cosm_08_beautymarket') return '🛍️ 450+ VERIFIED BEAUTY HOUSES // BESTSELLERS'
     if (template.id === 'tmpl_cosm_09_minimalglow') return '❄️ SCANDINAVIAN PURITY // 0% FRAGRANCE'
     if (template.id === 'tmpl_cosm_10_beautystudio') return '🎨 ARTIST FORMULATIONS // CUSTOM BLENDING'
+    if (template.id === 'tmpl_cosm_11_solaris') return '☀️ SOLARIS SUNCARE // ENDLESS GOLDEN HOUR'
+    if (template.id === 'tmpl_cosm_12_auraderma') return '🌿 BOTANICAL APOTHECARY // BATCH NO. 28'
+    if (template.id === 'tmpl_jewel_01_aurelia') return '💎 PLACE VENDÔME // CERTIFIED SOLITAIRES'
+    if (template.id === 'tmpl_jewel_02_luna') return '✨ 14K RECYCLED SOLID GOLD // TARNISH-FREE'
+    if (template.id === 'tmpl_jewel_03_nordic') return '❄️ 925 SOLID STERLING // SCANDINAVIAN ARCHITECTURE'
+    if (template.id === 'tmpl_jewel_04_maisonpearl') return '🦪 NATURAL FRESHWATER BAROQUE // HEIRLOOM KESHIS'
+    if (template.id === 'tmpl_jewel_05_terragems') return '🌿 RAW EARTH CRYSTALS // UNCUT COLOMBIAN EMERALDS'
+    if (template.id === 'tmpl_jewel_06_vandal') return '⚡ 12MM CUBAN LINKS // VVS ICED MOISSANITE'
+    if (template.id === 'tmpl_jewel_07_solitaire') return '💍 BESPOKE BRIDAL ATELIER // LAB & NATURAL DIAMONDS'
+    if (template.id === 'tmpl_jewel_08_studioforge') return '🔥 LOST-WAX CASTING // HAND-HAMMERED METALS'
+    if (template.id === 'tmpl_jewel_09_titan') return '🛡️ GRADE-5 TITANIUM // BRAZILIAN MATTE ONYX'
+    if (template.id === 'tmpl_jewel_10_engrave') return '✒️ PRECISION LASER ENGRAVING // COORDINATES & DATES'
+    if (template.id === 'tmpl_jewel_11_celestia') return '⭐ 12 ZODIAC MEDALLIONS // MOON PHASE TALISMANS'
+    if (template.id === 'tmpl_jewel_12_sculpt') return '✦ RUNWAY STATEMENT COUTURE // SCULPTURAL MIRROR'
+    if (template.id === 'tmpl_jewel_13_oceantide') return '🌊 100% RECLAIMED BEACH SILVER // FROSTED SEA GLASS'
+    if (template.id === 'tmpl_jewel_14_riviera') return '💎 18K WHITE GOLD & PLATINUM // CONTINUOUS DIAMOND TENNIS'
+    if (template.id === 'tmpl_jewel_15_jewelvault') return '🏦 500+ VERIFIED DESIGNER HOUSES // CERTIFIED VAULT'
     if (template.id === 'tmpl_kuro_techwear') return '⚡ PROTOCOL // 3L WEATHERPROOF SHELL'
     if (template.id === 'tmpl_solstice_linen') return '☀️ 100% ORGANIC FRENCH FLAX LINEN'
     if (template.id === 'tmpl_aeropulse_active') return '▲ KINETIC 4-WAY STRETCH COMPRESSION'
@@ -4816,6 +5662,125 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
         { title: 'Bespoke Custom Pigment Drop Mix', price: '$65.00', tag: 'Studio Formulation', img: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&auto=format&fit=crop&q=80' },
         { title: 'Artisan Highlighting Glaze Wand', price: '$38.00', tag: 'Multi-Use', img: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&auto=format&fit=crop&q=80' },
         { title: 'Hydrating Primer Serum with Gold Mica', price: '$44.00', tag: 'Pro Artist Choice', img: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_cosm_11_solaris') {
+      return [
+        { title: 'Golden Hour Shimmering Body Elixir', price: '$62.00', tag: '24K Mineral Mica', img: 'https://images.unsplash.com/photo-1608248597359-597519159954?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Mineral Veil Hydrating SPF 50+ Drops', price: '$46.00', tag: 'Non-Nano Zinc', img: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Sunlit Terracotta Bronzing Soufflé', price: '$38.00', tag: 'Whipped Matte', img: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_cosm_12_auraderma') {
+      return [
+        { title: 'N°07 Herbal Recovery Concentrate', price: '$78.00', tag: 'Cold-Pressed', img: 'https://images.unsplash.com/photo-1608248597359-597519159954?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Antioxidant Botanical Nectar Serum', price: '$64.00', tag: 'Vitamin C + E', img: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Calming Blue Tansy Facial Elixir', price: '$58.00', tag: 'Organic Herbs', img: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_01_aurelia') {
+      return [
+        { title: 'Vendôme 2.5ct Emerald-Cut Solitaire', price: '$8,400.00', tag: 'D-Flawless Platinum', img: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Royal Pavé Diamond Eternity Band', price: '$3,250.00', tag: '18K White Gold', img: 'https://images.unsplash.com/photo-1598560917807-1bae44bd2be8?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Étoile Cushion Halo Diamond Pendant', price: '$1,850.00', tag: 'Certified VVS1', img: 'https://images.unsplash.com/photo-1589128777073-263566ae5e4d?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_02_luna') {
+      return [
+        { title: '14K Solid Gold Crystal Drop Pendant', price: '$240.00', tag: 'Waterproof Recycled', img: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Dainty Pavé Diamond Open Heart Charm', price: '$185.00', tag: '14K Yellow Gold', img: 'https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Petite Gold Leaf & Pearl Layering Chain', price: '$120.00', tag: 'Everyday Tarnish-Free', img: 'https://images.unsplash.com/photo-1590548784585-643d2b9f2925?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_03_nordic') {
+      return [
+        { title: 'Nordic Architectural Silver Ribbon Ring', price: '$165.00', tag: '925 Solid Silver', img: 'https://images.unsplash.com/photo-1589674781759-c21c37956a44?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Minimalist Pavé Diamond Heart Charm', price: '$210.00', tag: 'Solid Sterling', img: 'https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Copenhagen Fluid Layered Silver Chains', price: '$145.00', tag: 'Hand-Polished 925', img: 'https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_04_maisonpearl') {
+      return [
+        { title: 'Baroque Freshwater Keshi Choker', price: '$210.00', tag: 'Natural Iridescent', img: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Freshwater Keshi Pearl Drop Pendant', price: '$175.00', tag: '18K Gold Vermeil', img: 'https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Artisan Gold Toggle Bangle & Rings', price: '$145.00', tag: 'Heirloom Finish', img: 'https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_05_terragems') {
+      return [
+        { title: 'Raw Uncut Colombian Emerald Ring', price: '$380.00', tag: 'Hand-Hammered 14K', img: 'https://images.unsplash.com/photo-1569397288884-4d43d6738fbd?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Deep Emerald Faceted Gemstone Pendant', price: '$420.00', tag: 'Natural Green Crystal', img: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Natural Ruby & 22K Gold Choker Suite', price: '$560.00', tag: 'Handcrafted Gems', img: 'https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_06_vandal') {
+      return [
+        { title: '12mm Heavy Miami Cuban Link Chain', price: '$280.00', tag: 'Solid 316L Steel', img: 'https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Matte Onyx & Titanium Signet Band', price: '$195.00', tag: 'Heavy Urban', img: 'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Multi-Link Layered Heavy Chain Choker', price: '$240.00', tag: 'Industrial Streetwear', img: 'https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_07_solitaire') {
+      return [
+        { title: 'The Grand Oval Solitaire Diamond Ring', price: '$4,600.00', tag: '1.8ct IGI Lab Diamond', img: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Emerald Cut Solitaire with Pavé Band', price: '$3,900.00', tag: '18K Yellow Gold', img: 'https://images.unsplash.com/photo-1598560917807-1bae44bd2be8?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Solid 18K Interlocking Wedding Bands', price: '$1,850.00', tag: 'Matched Bridal Pair', img: 'https://images.unsplash.com/photo-1622398925373-3f91b1e275f5?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_08_studioforge') {
+      return [
+        { title: 'Chunky Molten Croissant Hoop Earrings', price: '$145.00', tag: 'Hand-Carved Lost-Wax', img: 'https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Hand-Hammered Heavy Brass Signet Ring', price: '$110.00', tag: 'Studio Cast', img: 'https://images.unsplash.com/photo-1778759335295-b332b4eaac15?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Crossover Sculptural Forged Metal Band', price: '$135.00', tag: 'Fire-Textured Finish', img: 'https://images.unsplash.com/photo-1589674781759-c21c37956a44?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_09_titan') {
+      return [
+        { title: 'Aerospace Grade-5 Titanium Beveled Cuff', price: '$175.00', tag: 'Ultra Lightweight', img: 'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Natural Matte Black Onyx Signet', price: '$195.00', tag: 'Forged Titanium Body', img: 'https://images.unsplash.com/photo-1589674781759-c21c37956a44?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Laser-Cut Precision Geometric Pendant', price: '$160.00', tag: 'Brushed Gunmetal', img: 'https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_10_engrave') {
+      return [
+        { title: 'Custom Latitude / Longitude Bar Pendant', price: '$130.00', tag: 'Laser Precision', img: 'https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Personalized Roman Numeral Gold Band', price: '$160.00', tag: 'Deep Fiber Laser', img: 'https://images.unsplash.com/photo-1622398925373-3f91b1e275f5?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Custom Engraved Pavé Heart Keepsake', price: '$195.00', tag: 'Laser Inscribed', img: 'https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_11_celestia') {
+      return [
+        { title: 'Constellation Zodiac Sun Medallion', price: '$230.00', tag: '18K Gold Embossed', img: 'https://images.unsplash.com/photo-1598560917505-59a3ad559071?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Moon Phase Dual Talisman Necklaces', price: '$280.00', tag: 'Solid 14K Gold', img: 'https://images.unsplash.com/photo-1531995811006-35cb42e1a022?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Delicate Celestial Leaf Charm Choker', price: '$195.00', tag: 'Amulet Edition', img: 'https://images.unsplash.com/photo-1590548784585-643d2b9f2925?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_12_sculpt') {
+      return [
+        { title: 'Runway Statement Architectural Earrings', price: '$280.00', tag: 'Liquid Mirror Brass', img: 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Sculptural Molten Twisted Hoop Pair', price: '$220.00', tag: 'Runway Couture', img: 'https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Architectural Fluid Ribbon Band', price: '$190.00', tag: 'Editorial Design', img: 'https://images.unsplash.com/photo-1589674781759-c21c37956a44?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_13_oceantide') {
+      return [
+        { title: 'Sea Glass & Carnelian Pebble Rings', price: '$140.00', tag: 'Natural Ocean Beach', img: 'https://images.unsplash.com/photo-1608042314453-ae338d80c427?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Deep Ocean Emerald Crystal Pendant', price: '$165.00', tag: 'Reclaimed Marine 925', img: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Marine Driftwood Gold Toggle Bangle', price: '$125.00', tag: '100% Eco-Friendly', img: 'https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_14_riviera') {
+      return [
+        { title: 'Riviera 5ct Brilliant Diamond Tennis Bracelet', price: '$4,800.00', tag: 'D-Color Platinum', img: 'https://images.unsplash.com/photo-1629224316810-9d8805b95e76?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Graduated Diamond Bezel Tennis Choker', price: '$6,200.00', tag: '18K White Gold', img: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Emerald-Cut Diamond Tennis Drop Earrings', price: '$3,400.00', tag: 'Certified VVS', img: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_15_jewelvault') {
+      return [
+        { title: 'Curated 18K Diamond Solitaire Studs', price: '$890.00', tag: 'Multi-Brand Vault', img: 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Designer Pavé Diamond Open Heart Pendant', price: '$340.00', tag: 'Vault Exclusive', img: 'https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d?w=600&auto=format&fit=crop&q=80' },
+        { title: '14K Gold Paperclip Link Layering Chain', price: '$420.00', tag: 'Italian Made', img: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&auto=format&fit=crop&q=80' },
       ]
     }
     if (template.id === 'tmpl_kuro_techwear') {
@@ -4925,6 +5890,125 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
         { icon: '🪄', title: 'Routine Diagnostic', sub: 'Smart algorithm selects your exact active step regimen' },
       ]
     }
+    if (template.id === 'tmpl_cosm_11_solaris') {
+      return [
+        { icon: '☀️', title: 'Reef-Safe Mineral SPF', sub: 'Non-nano zinc oxide with zero chemical filters' },
+        { icon: '✨', title: 'Golden Pearlescent Mica', sub: 'Ethically sourced mineral illumination' },
+        { icon: '💧', title: '72H Deep Seaweed Hydration', sub: 'Moisture-locking barrier hydration' },
+      ]
+    }
+    if (template.id === 'tmpl_cosm_12_auraderma') {
+      return [
+        { icon: '🌿', title: 'Small-Batch Herbalists', sub: 'Formulated in artisan botanical laboratory' },
+        { icon: '🏺', title: 'Amber Biophotonic Glass', sub: 'UV-protective apothecary bottles' },
+        { icon: '🌸', title: '100% Whole Plant Actives', sub: 'Zero synthetic preservatives or parabens' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_01_aurelia') {
+      return [
+        { icon: '💎', title: 'GIA Certified Solitaires', sub: 'Every diamond 0.5ct+ accompanied by original GIA dossier' },
+        { icon: '🛡️', title: 'Insured Armored Delivery', sub: 'Hand-delivered by secured armored couriers worldwide' },
+        { icon: '⚜️', title: 'Place Vendôme Atelier', sub: 'Handcrafted by master joaillerie artisans in Paris' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_02_luna') {
+      return [
+        { icon: '🌊', title: '100% Waterproof & Sweatproof', sub: 'Never tarnishes or leaves green marks in gym or shower' },
+        { icon: '♻️', title: '14K Recycled Solid Gold', sub: 'Ethically cast with certified recycled precious metals' },
+        { icon: '♾️', title: 'Lifetime Tarnish Guarantee', sub: 'Complimentary replating or replacement for life' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_03_nordic') {
+      return [
+        { icon: '❄️', title: '925 Sterling Purity', sub: 'Pure hypoallergenic silver with zero nickel or cadmium' },
+        { icon: '🏛️', title: 'Copenhagen Design Studio', sub: 'Architectural fluid geometry engineered for daily comfort' },
+        { icon: '📦', title: 'Eco Anti-Tarnish Cases', sub: 'Ships in micro-suede pouches with anti-oxidation strips' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_04_maisonpearl') {
+      return [
+        { icon: '🦪', title: 'Natural Freshwater Baroque', sub: 'Hand-selected irregular pearls with vibrant rainbow luster' },
+        { icon: '👑', title: '18K Heavy Gold Vermeil', sub: '2.5 micron thick gold layer over 925 sterling silver' },
+        { icon: '🎀', title: 'Heirloom Keepsake Box', sub: 'Signature velvet presentation box with silk grosgrain ribbon' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_05_terragems') {
+      return [
+        { icon: '⛰️', title: 'Conflict-Free Mined Gems', sub: 'Direct partnerships with small family artisanal gem mines' },
+        { icon: '🌿', title: 'Uncut Natural Formations', sub: 'Raw organic crystal surfaces preserving geological earth energy' },
+        { icon: '📜', title: 'Certificate of Mineral Origin', sub: 'Details exact Colombian & Australian excavation origin' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_06_vandal') {
+      return [
+        { icon: '⛓️', title: 'Solid 316L Stainless Steel', sub: 'Heavyweight industrial strength guaranteed never to snap' },
+        { icon: '💎', title: 'Diamond-Tested Moissanite', sub: 'VVS clarity stones that pass standard thermal diamond testers' },
+        { icon: '⚡', title: 'Double-Safety Box Clasps', sub: 'Reinforced secure click mechanisms for extreme durability' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_07_solitaire') {
+      return [
+        { icon: '💍', title: 'Interactive 3D Cad Design', sub: 'Inspect your custom bridal ring in photorealistic 360°' },
+        { icon: '📐', title: 'Free At-Home Sizer Kit', sub: 'Complimentary stainless ring sizing tool shipped to your door' },
+        { icon: '🕊️', title: 'Free Resizing & Spa Care', sub: 'Lifetime complimentary sizing adjustments and ultrasonic cleaning' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_08_studioforge') {
+      return [
+        { icon: '🔥', title: 'Lost-Wax Studio Casting', sub: 'Individually melted and poured by independent metalworkers' },
+        { icon: '🔨', title: 'Hand-Hammered Textures', sub: 'Every piece bears unique fire scales and organic maker’s marks' },
+        { icon: '🌲', title: 'Zero-Waste Metal Studio', sub: '100% studio scrap metal melted down and infinitely recast' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_09_titan') {
+      return [
+        { icon: '🛡️', title: 'Aerospace Grade-5 Titanium', sub: 'Ultra lightweight with twice the tensile strength of steel' },
+        { icon: '🖤', title: 'Natural Brazilian Onyx', sub: 'Hand-cut genuine matte black onyx gemstone inserts' },
+        { icon: '⚡', title: 'Scratchproof DLC Treatment', sub: 'Diamond-like carbon protective matte finish' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_10_engrave') {
+      return [
+        { icon: '✒️', title: 'Sub-Millimeter Laser Precision', sub: 'Deep fiber laser engraving that never rubs off or fades' },
+        { icon: '🔍', title: 'Live Instant Web Preview', sub: 'Type coordinates, dates, or upload actual handwriting live' },
+        { icon: '🚀', title: '24-Hour Custom Dispatch', sub: 'Personalized and securely shipped within one business day' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_11_celestia') {
+      return [
+        { icon: '⭐', title: '12 Astrological Zodiacs', sub: 'Deeply sculpted constellation stars and ancient zodiac crests' },
+        { icon: '🌙', title: 'Solid Gold & Star Diamonds', sub: '14K gold with conflict-free celestial diamond accents' },
+        { icon: '📜', title: 'Zodiac Parchment Keepsake', sub: 'Includes individualized stellar birth chart illumination' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_12_sculpt') {
+      return [
+        { icon: '🏛️', title: 'Runway Capsule Editions', sub: 'Limited numbered production worn at Paris Fashion Week' },
+        { icon: '🪶', title: 'Featherlight Hollow Cast', sub: 'Maximum sculptural volume with zero drag on earlobes' },
+        { icon: '🪞', title: 'Liquid Mirror Polish', sub: 'Hand-buffed 8-stage liquid mirror reflection finish' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_13_oceantide') {
+      return [
+        { icon: '🌊', title: '100% Reclaimed Beach Silver', sub: 'Recovered from coastal cleanups and refined to 925 silver' },
+        { icon: '🐚', title: 'Genuine Tumbled Sea Glass', sub: 'Naturally smoothed frosted sea glass from Atlantic shores' },
+        { icon: '🐬', title: '10% To Coral Restoration', sub: 'Portion of every piece funds ocean habitat preservation' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_14_riviera') {
+      return [
+        { icon: '💎', title: 'Continuous Diamond Setting', sub: 'Hand-set D-color VVS diamonds aligned seamlessly along 18K solid gold' },
+        { icon: '🔒', title: 'Double-Safety Hidden Clasp', sub: 'Precision dual-latch box mechanism designed for lifelong security' },
+        { icon: '📏', title: 'Complimentary Length Sizing', sub: 'Custom sizing and link adjustments tailored to your wrist before dispatch' },
+      ]
+    }
+    if (template.id === 'tmpl_jewel_15_jewelvault') {
+      return [
+        { icon: '🏦', title: '500+ Verified Jewelers', sub: 'Strict appraisal audit and authenticity guarantees for every house' },
+        { icon: '📱', title: 'Augmented Reality Sizer', sub: 'Measure your ring size instantly with your phone camera' },
+        { icon: '📦', title: 'Unified Insured Checkout', sub: 'Combine pieces across multiple designers in one insured box' },
+      ]
+    }
     if (template.id === 'tmpl_kuro_techwear') {
       return [
         { icon: '🛡️', title: '20,000mm Weatherproof', sub: 'Taped seam construction' },
@@ -4954,6 +6038,14 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
   }, [template])
 
   if (!isOpen || !template) return null
+
+  const fallbackHero = template.businessType === 'jewelry-accessories'
+    ? 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&auto=format&fit=crop&q=80'
+    : 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&auto=format&fit=crop&q=80'
+
+  const fallbackProduct = template.businessType === 'jewelry-accessories'
+    ? 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=600&auto=format&fit=crop&q=80'
+    : 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&auto=format&fit=crop&q=80'
 
   return (
     <div className="preview-modal-backdrop" onClick={onClose}>
@@ -5034,6 +6126,8 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                 <span>
                   {template.businessType === 'health-beauty'
                     ? '✨ Free Deluxe Mini & Express Delivery on orders over $50 • 100% Cruelty-Free & Authentic'
+                    : template.businessType === 'jewelry-accessories'
+                    ? '✨ Free Insured Global Express Shipping on orders over $150 • GIA & IGI Certified Stones • 100% Recycled Precious Metals'
                     : '✨ Free Worldwide Express Shipping on orders over $150 • 30-Day Returns'}
                 </span>
               </div>
@@ -5055,6 +6149,15 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                         <span className="nav-link">Fragrance</span>
                         <span className="nav-link">Routine Matcher</span>
                       </>
+                    ) : template.businessType === 'jewelry-accessories' ? (
+                      <>
+                        <span className="nav-link active">Fine Jewelry</span>
+                        <span className="nav-link">Rings & Bands</span>
+                        <span className="nav-link">Necklaces</span>
+                        <span className="nav-link">Earrings</span>
+                        <span className="nav-link">Men's Metals</span>
+                        <span className="nav-link">Ring Sizer</span>
+                      </>
                     ) : (
                       <>
                         <span className="nav-link active">Catalog</span>
@@ -5069,7 +6172,7 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                   <span>⌕</span>
                   <span>♡</span>
                   <span className="cart-badge-icon" style={{ backgroundColor: template.accentColor || '#2563eb' }}>
-                    {template.businessType === 'health-beauty' ? '💄 2' : '👜 2'}
+                    {template.businessType === 'health-beauty' ? '💄 2' : template.businessType === 'jewelry-accessories' ? '💎 2' : '👜 2'}
                   </span>
                 </div>
               </header>
@@ -5099,7 +6202,16 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                       </button>
                     </div>
                     <div className="hero-centered-media">
-                      <img src={template.modelImage} alt={template.name} className="hero-showcase-img" />
+                      <img
+                        src={template.modelImage}
+                        alt={template.name}
+                        className="hero-showcase-img"
+                        onError={(e) => {
+                          const t = e.currentTarget
+                          t.onerror = null
+                          t.src = fallbackHero
+                        }}
+                      />
                     </div>
                   </div>
                 ) : template.layoutType === 'editorial' ? (
@@ -5108,7 +6220,9 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                       <span className="hero-pill-eyebrow" style={{ color: template.accentColor || '#b58d3d' }}>
                         {eyebrowText}
                       </span>
-                      <span className="editorial-issue-tag">PARIS & MONACO ATELIER</span>
+                      <span className="editorial-issue-tag">
+                        {template.businessType === 'jewelry-accessories' ? 'PLACE VENDÔME & GENEVA ATELIER' : 'PARIS & MONACO ATELIER'}
+                      </span>
                     </div>
                     <div className="editorial-two-col">
                       <div className="editorial-text-pane">
@@ -5126,19 +6240,34 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                             {template.buttonText || 'Discover The Ritual'} →
                           </button>
                           <button type="button" className="hero-secondary-cta">
-                            Read Journal
+                            {template.businessType === 'jewelry-accessories' ? 'Atelier Journal' : 'Read Journal'}
                           </button>
                         </div>
                         <div className="editorial-quote-badge">
-                          <em>“A transformative ritual crafted with precious active botanicals.”</em>
+                          <em>
+                            {template.businessType === 'jewelry-accessories'
+                              ? '“Heirloom craftsmanship sculpted in certified precious metals that last a lifetime.”'
+                              : '“A transformative ritual crafted with precious active botanicals.”'}
+                          </em>
                         </div>
                       </div>
                       <div className="editorial-visual-pane">
                         <div className="editorial-image-frame">
-                          <img src={template.modelImage} alt={template.name} className="hero-showcase-img editorial-img" />
+                          <img
+                            src={template.modelImage}
+                            alt={template.name}
+                            className="hero-showcase-img editorial-img"
+                            onError={(e) => {
+                              const t = e.currentTarget
+                              t.onerror = null
+                              t.src = fallbackHero
+                            }}
+                          />
                           <div className="editorial-caption-overlay">
                             <span className="overlay-badge-dot" style={{ backgroundColor: template.accentColor || '#b58d3d' }} />
-                            <span>Bespoke Formulation Release</span>
+                            <span>
+                              {template.businessType === 'jewelry-accessories' ? 'Master Goldsmith Release' : 'Bespoke Formulation Release'}
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -5169,7 +6298,16 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                     </div>
                     <div className="cardgrid-feature-shelf">
                       <div className="grid-feature-card hero-feature-main">
-                        <img src={template.modelImage} alt={template.name} className="feature-card-img" />
+                        <img
+                          src={template.modelImage}
+                          alt={template.name}
+                          className="feature-card-img"
+                          onError={(e) => {
+                            const t = e.currentTarget
+                            t.onerror = null
+                            t.src = fallbackHero
+                          }}
+                        />
                         <div className="feature-card-overlay">
                           <span className="feature-pill-tag">Bestseller Active</span>
                           <strong>Multi-Target Formulation</strong>
@@ -5177,17 +6315,45 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                       </div>
                       <div className="grid-feature-card stat-metric-box">
                         <div className="metric-stat-number" style={{ color: template.accentColor || '#0284c7' }}>
-                          {template.id === 'tmpl_cosm_08_beautymarket' ? '450+' : '98%'}
+                          {template.id === 'tmpl_cosm_08_beautymarket'
+                            ? '450+'
+                            : template.id === 'tmpl_jewel_15_jewelvault'
+                            ? '500+'
+                            : template.id === 'tmpl_jewel_10_engrave'
+                            ? '0.01mm'
+                            : template.businessType === 'jewelry-accessories'
+                            ? '100%'
+                            : '98%'}
                         </div>
-                        <strong>{template.id === 'tmpl_cosm_08_beautymarket' ? 'Verified Brands' : 'Barrier Score'}</strong>
-                        <p>{template.id === 'tmpl_cosm_08_beautymarket' ? 'Fast express dispatch with 100% authentic guarantee' : 'Dermatologist backed repair tested across all skin types'}</p>
+                        <strong>
+                          {template.id === 'tmpl_cosm_08_beautymarket'
+                            ? 'Verified Brands'
+                            : template.id === 'tmpl_jewel_15_jewelvault'
+                            ? 'Designer Houses'
+                            : template.id === 'tmpl_jewel_10_engrave'
+                            ? 'Laser Precision'
+                            : template.businessType === 'jewelry-accessories'
+                            ? 'Recycled Precious Metals'
+                            : 'Barrier Score'}
+                        </strong>
+                        <p>
+                          {template.id === 'tmpl_cosm_08_beautymarket'
+                            ? 'Fast express dispatch with 100% authentic guarantee'
+                            : template.id === 'tmpl_jewel_15_jewelvault'
+                            ? 'Curated multi-brand jewelry marketplace with authenticated diamond appraisal certificates'
+                            : template.id === 'tmpl_jewel_10_engrave'
+                            ? 'Precision sub-millimeter deep fiber laser engraving that never wears down'
+                            : template.businessType === 'jewelry-accessories'
+                            ? 'Certified conflict-free stones and certified recycled 14K & 18K solid gold'
+                            : 'Dermatologist backed repair tested across all skin types'}
+                        </p>
                       </div>
                       <div className="grid-feature-card action-quiz-box">
-                        <span className="quiz-star-icon">✨</span>
-                        <strong>Routine Diagnostic</strong>
-                        <p>Take the 60-second skin analyzer</p>
+                        <span className="quiz-star-icon">{template.businessType === 'jewelry-accessories' ? '💍' : '✨'}</span>
+                        <strong>{template.businessType === 'jewelry-accessories' ? 'Ring Size Finder' : 'Routine Diagnostic'}</strong>
+                        <p>{template.businessType === 'jewelry-accessories' ? 'Instant AR camera & printable sizer guide' : 'Take the 60-second skin analyzer'}</p>
                         <span className="quiz-btn-link" style={{ color: template.accentColor || '#0284c7' }}>
-                          Match My Skin →
+                          {template.businessType === 'jewelry-accessories' ? 'Find My Ring Size →' : 'Match My Skin →'}
                         </span>
                       </div>
                     </div>
@@ -5217,9 +6383,18 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                       </div>
                     </div>
                     <div className="boldminimal-media-stage">
-                      <img src={template.modelImage} alt={template.name} className="hero-showcase-img boldminimal-img" />
+                      <img
+                        src={template.modelImage}
+                        alt={template.name}
+                        className="hero-showcase-img boldminimal-img"
+                        onError={(e) => {
+                          const t = e.currentTarget
+                          t.onerror = null
+                          t.src = fallbackHero
+                        }}
+                      />
                       <div className="boldminimal-corner-badge" style={{ backgroundColor: template.accentColor || '#9f1239' }}>
-                        ★ EXCLUSIVE
+                        {template.businessType === 'jewelry-accessories' ? '★ ATELIER EDITION' : '★ EXCLUSIVE'}
                       </div>
                     </div>
                   </div>
@@ -5248,11 +6423,70 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                       </div>
                     </div>
                     <div className="hero-media-col">
-                      <img src={template.modelImage} alt={template.name} className="hero-showcase-img" />
+                      <img
+                        src={template.modelImage}
+                        alt={template.name}
+                        className="hero-showcase-img"
+                        onError={(e) => {
+                          const t = e.currentTarget
+                          t.onerror = null
+                          t.src = fallbackHero
+                        }}
+                      />
                     </div>
                   </>
                 )}
               </section>
+
+              {/* Shopify-Style Category Navigation Strip for Jewelry & Accessories */}
+              {template.businessType === 'jewelry-accessories' && (
+                <section className="jewelry-collection-strip">
+                  <div className="jewelry-collection-strip-inner">
+                    <div className="collection-bubble-item">
+                      <div className="bubble-circle" style={{ borderColor: template.accentColor || '#d4af37' }}>
+                        <span>💍</span>
+                      </div>
+                      <span className="bubble-label">Rings & Bands</span>
+                    </div>
+                    <div className="collection-bubble-item">
+                      <div className="bubble-circle" style={{ borderColor: template.accentColor || '#d4af37' }}>
+                        <span>✨</span>
+                      </div>
+                      <span className="bubble-label">Necklaces</span>
+                    </div>
+                    <div className="collection-bubble-item">
+                      <div className="bubble-circle" style={{ borderColor: template.accentColor || '#d4af37' }}>
+                        <span>💎</span>
+                      </div>
+                      <span className="bubble-label">Solitaires</span>
+                    </div>
+                    <div className="collection-bubble-item">
+                      <div className="bubble-circle" style={{ borderColor: template.accentColor || '#d4af37' }}>
+                        <span>🦪</span>
+                      </div>
+                      <span className="bubble-label">Baroque Pearls</span>
+                    </div>
+                    <div className="collection-bubble-item">
+                      <div className="bubble-circle" style={{ borderColor: template.accentColor || '#d4af37' }}>
+                        <span>⚡</span>
+                      </div>
+                      <span className="bubble-label">Urban Chains</span>
+                    </div>
+                    <div className="collection-bubble-item">
+                      <div className="bubble-circle" style={{ borderColor: template.accentColor || '#d4af37' }}>
+                        <span>🛡️</span>
+                      </div>
+                      <span className="bubble-label">Men's Titanium</span>
+                    </div>
+                    <div className="collection-bubble-item">
+                      <div className="bubble-circle" style={{ borderColor: template.accentColor || '#d4af37' }}>
+                        <span>✒️</span>
+                      </div>
+                      <span className="bubble-label">Personalized</span>
+                    </div>
+                  </div>
+                </section>
+              )}
 
               {/* Value Props Strip */}
               <div className="storefront-value-props">
@@ -5277,7 +6511,15 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                   {sampleProducts.map((p, idx) => (
                     <div key={idx} className="preview-sample-product-card">
                       <div className="product-media-wrapper">
-                        <img src={p.img} alt={p.title} />
+                        <img
+                          src={p.img}
+                          alt={p.title}
+                          onError={(e) => {
+                            const t = e.currentTarget
+                            t.onerror = null
+                            t.src = fallbackProduct
+                          }}
+                        />
                         <span className="product-sample-tag">{p.tag}</span>
                       </div>
                       <div className="product-sample-info">
@@ -5285,8 +6527,18 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                         <div className="price-and-swatch">
                           <span>{p.price}</span>
                           <div className="sample-swatches">
-                            <span className="swatch dark" style={{ backgroundColor: isDark ? template.accentColor : '#0f172a' }} />
-                            <span className="swatch light" style={{ backgroundColor: isDark ? '#334155' : '#f1f5f9' }} />
+                            {template.businessType === 'jewelry-accessories' ? (
+                              <>
+                                <span className="swatch" style={{ backgroundColor: '#d4af37' }} title="14K / 18K Yellow Gold" />
+                                <span className="swatch" style={{ backgroundColor: '#f3e5d8' }} title="18K Rose Gold" />
+                                <span className="swatch" style={{ backgroundColor: '#cbd5e1' }} title="Solid Platinum / 925 Silver" />
+                              </>
+                            ) : (
+                              <>
+                                <span className="swatch dark" style={{ backgroundColor: isDark ? template.accentColor : '#0f172a' }} />
+                                <span className="swatch light" style={{ backgroundColor: isDark ? '#334155' : '#f1f5f9' }} />
+                              </>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -5295,13 +6547,48 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                 </div>
               </section>
 
+              {/* Complimentary Ring Sizer Interactive Callout */}
+              {template.businessType === 'jewelry-accessories' && (
+                <section className="storefront-ring-sizer-banner" style={{ borderColor: isDark ? 'rgba(255,255,255,0.1)' : '#e2e8f0' }}>
+                  <div className="sizer-banner-content">
+                    <span className="sizer-icon">📐</span>
+                    <div>
+                      <strong>Complimentary Ring Sizer Kit Included</strong>
+                      <p>Unsure of your ring size? Receive our stainless steel ring sizer guide free with any preview order.</p>
+                    </div>
+                  </div>
+                  <button type="button" className="sizer-order-btn" style={{ borderColor: template.accentColor || '#d4af37', color: template.accentColor || '#d4af37' }}>
+                    Request Free Sizer Kit →
+                  </button>
+                </section>
+              )}
+
+              {/* Press & Media Mention Strip */}
+              <section className="storefront-press-strip">
+                <span className="press-label">AS FEATURED IN</span>
+                <div className="press-brand-logos">
+                  <span>VOGUE</span>
+                  <span>ELLE</span>
+                  <span>HARPER’S BAZAAR</span>
+                  <span>GQ</span>
+                  <span>FORBES</span>
+                  <span>THE CUT</span>
+                </div>
+              </section>
+
               {/* Simulated Customer Testimonial */}
               <section className="storefront-testimonial-banner">
                 <div className="testimonial-stars">★★★★★</div>
                 <p className="testimonial-quote">
-                  “The best shopping experience we’ve ever launched. Conversions increased by 42% within two weeks.”
+                  {template.businessType === 'jewelry-accessories'
+                    ? '“The solitaire engagement ring exceeded all expectations. GIA certified, breathtaking fire in person, and arrived in gorgeous luxury packaging.”'
+                    : '“The best shopping experience we’ve ever launched. Conversions increased by 42% within two weeks.”'}
                 </p>
-                <small className="testimonial-author">— Verified Client Experience</small>
+                <small className="testimonial-author">
+                  {template.businessType === 'jewelry-accessories'
+                    ? '— Sarah & Marcus M., Verified Jewelry Purchase'
+                    : '— Verified Client Experience'}
+                </small>
               </section>
             </div>
           </div>

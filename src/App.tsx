@@ -127,6 +127,17 @@ function App() {
             rawHash === 'beauty' ||
             rawHash === 'beauty-templates'
           )) ||
+          (key === 'jewelry-accessories' && (
+            rawHash === 'jewelry' ||
+            rawHash === 'jewelry-templates' ||
+            rawHash === 'jewelry-template' ||
+            rawHash === 'jewelry-store' ||
+            rawHash === 'jewellery' ||
+            rawHash === 'jewellery-templates' ||
+            rawHash === 'jewellery-store' ||
+            rawHash === 'accessories' ||
+            rawHash === 'accessories-templates'
+          )) ||
           (key === 'other' && (rawHash === 'custom' || rawHash === 'custom-templates'))
         )
       })

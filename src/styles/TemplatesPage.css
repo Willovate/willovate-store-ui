@@ -3273,6 +3273,147 @@
   background: #cbd5e1;
 }
 
+/* Shopify Jewelry Collection Bubbles Strip */
+.jewelry-collection-strip {
+  padding: 1rem 1.5rem;
+  background: rgba(148, 163, 184, 0.04);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+  overflow-x: auto;
+}
+
+.jewelry-collection-strip-inner {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1.25rem;
+  min-width: max-content;
+}
+
+.collection-bubble-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.collection-bubble-item:hover {
+  transform: translateY(-2px);
+}
+
+.bubble-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid #d4af37;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 1.15rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.bubble-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  opacity: 0.9;
+  white-space: nowrap;
+}
+
+/* Complimentary Ring Sizer Banner */
+.storefront-ring-sizer-banner {
+  margin: 1.25rem 1.5rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: rgba(212, 175, 55, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.frame-mobile .storefront-ring-sizer-banner {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sizer-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.sizer-icon {
+  font-size: 1.5rem;
+}
+
+.sizer-banner-content strong {
+  display: block;
+  font-size: 0.82rem;
+  margin-bottom: 0.15rem;
+}
+
+.sizer-banner-content p {
+  font-size: 0.72rem;
+  opacity: 0.75;
+  margin: 0;
+}
+
+.sizer-order-btn {
+  background: transparent;
+  border: 1px solid #d4af37;
+  padding: 0.45rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.sizer-order-btn:hover {
+  background: rgba(212, 175, 55, 0.12);
+}
+
+/* Press & Media Mention Strip */
+.storefront-press-strip {
+  padding: 1.25rem 1.5rem;
+  background: rgba(148, 163, 184, 0.03);
+  border-top: 1px solid rgba(148, 163, 184, 0.1);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  text-align: center;
+}
+
+.press-label {
+  display: block;
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  opacity: 0.55;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+
+.press-brand-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.press-brand-logos span {
+  font-family: 'Times New Roman', serif, Georgia;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  opacity: 0.6;
+}
+
 .storefront-testimonial-banner {
   text-align: center;
   padding: 2rem 1.5rem;
