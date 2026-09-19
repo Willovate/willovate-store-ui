@@ -138,6 +138,15 @@ function App() {
             rawHash === 'accessories' ||
             rawHash === 'accessories-templates'
           )) ||
+          (key === 'sporting-goods' && (
+            rawHash === 'sports' ||
+            rawHash === 'sports-store' ||
+            rawHash === 'sports-templates' ||
+            rawHash === 'sports-store-templates' ||
+            rawHash === 'sport-templates' ||
+            rawHash === 'sports-template' ||
+            rawHash === 'sporting-goods-template'
+          )) ||
           (key === 'other' && (rawHash === 'custom' || rawHash === 'custom-templates'))
         )
       })

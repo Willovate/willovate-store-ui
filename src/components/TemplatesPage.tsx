@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import '../styles/TemplatesPage.css'
 
+
+
+
 /* =========================================================================
    1. TYPES & CONTRACTS
    ========================================================================= */
@@ -83,6 +86,1936 @@ export interface BusinessTypeItem {
 /* =========================================================================
    2. STATIC TEMPLATE REGISTRY (All 8 Categories)
    ========================================================================= */
+/* =========================================================================
+   SPORTS STORE TEMPLATES - DATA & CONFIGURATIONS
+   ========================================================================= */
+
+export interface SportsProduct {
+  id: string
+  name: string
+  category: string
+  price: string
+  compareAtPrice?: string
+  image: string
+  badge?: string
+  rating: number
+  reviewCount: number
+  colors?: string[]
+  sizes?: string[]
+  techSpecs?: string[]
+}
+
+export interface SportsTemplateConfig {
+  template: MarketplaceTemplate
+  announcement?: string
+  navItems: string[]
+  heroStats?: { label: string; value: string }[]
+  categories: { id: string; name: string; image: string; badge?: string; count?: string }[]
+  featuredProducts: SportsProduct[]
+  newArrivals?: SportsProduct[]
+  bestSellers?: SportsProduct[]
+  promoBanner?: {
+    tag: string
+    title: string
+    subtitle: string
+    code?: string
+    discount?: string
+    buttonText: string
+    image?: string
+    endDate?: string
+  }
+  techFeatures?: { icon: string; title: string; desc: string }[]
+  story?: {
+    eyebrow: string
+    title: string
+    quote: string
+    author: string
+    role: string
+    image: string
+    stats?: { num: string; label: string }[]
+  }
+  guides?: { title: string; tag: string; time: string; image: string; desc: string }[]
+  reviews?: { name: string; role: string; quote: string; rating: number; verified?: boolean }[]
+  faqs?: { q: string; a: string }[]
+  collections?: { title: string; tag: string; image: string; count?: string }[]
+  socialGallery?: { image: string; handle: string; likes: string }[]
+}
+
+export const SPORTS_TEMPLATES_CONFIG: Record<string, SportsTemplateConfig> = {
+  'sports-velocity': {
+    template: {
+      id: 'sports-velocity',
+      slug: 'sports-velocity',
+      name: 'Velocity',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'bold',
+      catalogSize: 'large',
+      tags: ['Performance Sports', 'Athletic', 'High Energy', 'Training', 'Footwear'],
+      shortDescription: 'High-energy, motion-inspired layout with aggressive volt typography, kinetic product grids, and athlete telemetry data.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 99,
+      isActive: true,
+      brandName: 'VELOCITY // LAB',
+      headline: 'BREAK THE SPEED OF SOUND.\nZERO DRAG. MAX FORCE.',
+      subtitle: 'Engineered with kinetic carbon-weave lattice and aerodynamic compression zones for elite competitive athletes.',
+      buttonText: 'Shop Speed Drop',
+      buttonColor: '#ccff00',
+      accentColor: '#ccff00',
+      isDark: true,
+      modelImage: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&auto=format&fit=crop&q=80',
+      badge: 'recommended',
+      rating: 4.96,
+      reviewCount: 142,
+      layoutType: 'bold-minimal',
+      features: ['Kinetic Zoom Viewer', 'Dynamic Size Finder', 'Live Telemetry Badges', 'Rapid Quick-Buy', 'Color Wave Swatches'],
+    },
+    announcement: '⚡ FLASH VELOCITY DROP: Free Global Express on orders over $120 • Use Code: HYPERSONIC',
+    navItems: ['Men', 'Women', 'Footwear', 'Performance Lab', 'Speedwear', 'Athletes'],
+    heroStats: [
+      { label: 'Energy Return', value: '88.4%' },
+      { label: 'Weight', value: '168g' },
+      { label: 'Tested By', value: '45+ Olympians' },
+    ],
+    categories: [
+      { id: 'men', name: "Men's Performance", image: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&auto=format&fit=crop&q=80', count: '64 Items' },
+      { id: 'women', name: "Women's Speed", image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80', count: '58 Items' },
+      { id: 'footwear', name: 'Kinetic Spikes & Flats', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80', count: '32 Items' },
+      { id: 'apparel', name: 'Aero Compression Gear', image: 'https://images.unsplash.com/photo-1506152983158-b4a74a01c721?w=600&auto=format&fit=crop&q=80', count: '41 Items' },
+    ],
+    featuredProducts: [
+      {
+        id: 'vel-01',
+        name: 'HyperSonic Carbon Pro 3',
+        category: 'Footwear',
+        price: '$230.00',
+        compareAtPrice: '$260.00',
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80',
+        badge: 'NEW RECORD',
+        rating: 4.9,
+        reviewCount: 88,
+        colors: ['#ccff00', '#0f172a', '#e11d48'],
+        sizes: ['US 8', 'US 9', 'US 10', 'US 11'],
+        techSpecs: ['Carbon-Weave Plate', 'Nitro-Infused Foam', '168g Featherweight'],
+      },
+      {
+        id: 'vel-02',
+        name: 'AeroShift Seamless Speed Top',
+        category: 'Apparel',
+        price: '$85.00',
+        image: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&auto=format&fit=crop&q=80',
+        badge: 'ZERO DRAG',
+        rating: 4.8,
+        reviewCount: 54,
+        colors: ['#0f172a', '#ccff00', '#64748b'],
+        sizes: ['S', 'M', 'L', 'XL'],
+        techSpecs: ['Hydrophobic Micro-Knit', 'Laser-Cut Venting'],
+      },
+      {
+        id: 'vel-03',
+        name: 'Kinetic 2-in-1 Sprint Short',
+        category: 'Apparel',
+        price: '$72.00',
+        image: 'https://images.unsplash.com/photo-1506152983158-b4a74a01c721?w=600&auto=format&fit=crop&q=80',
+        badge: 'BESTSELLER',
+        rating: 4.9,
+        reviewCount: 96,
+        colors: ['#0f172a', '#334155'],
+        sizes: ['S', 'M', 'L'],
+        techSpecs: ['4-Way Stretch Compression', 'Anti-Chafe Welded Seams'],
+      },
+      {
+        id: 'vel-04',
+        name: 'Vortex Hydration Speed Vest',
+        category: 'Accessories',
+        price: '$110.00',
+        image: 'https://images.unsplash.com/photo-1576243345690-4e4b79b63288?w=600&auto=format&fit=crop&q=80',
+        badge: 'ULTRA LIGHT',
+        rating: 4.7,
+        reviewCount: 42,
+        colors: ['#ccff00', '#0f172a'],
+        sizes: ['S/M', 'L/XL'],
+        techSpecs: ['Dual 500ml Flasks', 'Zero-Bounce Harness'],
+      },
+    ],
+    newArrivals: [
+      {
+        id: 'vel-05',
+        name: 'Quantum Aero Flight Jacket',
+        category: 'Outerwear',
+        price: '$195.00',
+        image: 'https://images.unsplash.com/photo-1556906781-9a412961c28c?w=600&auto=format&fit=crop&q=80',
+        badge: 'JUST DROPPED',
+        rating: 4.9,
+        reviewCount: 19,
+        colors: ['#0f172a', '#ccff00'],
+      },
+      {
+        id: 'vel-06',
+        name: 'Vector Carbon Fiber Bottle Cage',
+        category: 'Gear',
+        price: '$45.00',
+        image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80',
+        badge: '18 GRAMS',
+        rating: 4.8,
+        reviewCount: 31,
+      },
+    ],
+    promoBanner: {
+      tag: 'SEASON 04 CAMPAIGN',
+      title: 'PRECISION OVER POWER',
+      subtitle: 'Unlock 25% off all wind-tunnel certified performance apparel with instant membership sign-up.',
+      code: 'SPEED25',
+      discount: '25% OFF',
+      buttonText: 'Claim Your Advantage',
+      image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=1200&auto=format&fit=crop&q=80',
+    },
+    techFeatures: [
+      { icon: '⚡', title: 'Carbon Lattice Matrix', desc: 'Proprietary 3D-woven carbon plate returns 88.4% of kinetic energy with zero flex fatigue.' },
+      { icon: '💨', title: 'AeroFlow Dynamic Vents', desc: 'Wind-tunnel tested seam channels redirect turbulent airflow over shoulders and lats.' },
+      { icon: '🛡️', title: 'ShieldSeam Bonding', desc: 'Ultrasonic welded seams eliminate 100% of thread friction during continuous motion.' },
+    ],
+    story: {
+      eyebrow: 'ATHLETE DISPATCH // NO. 09',
+      title: '“IT’S NOT ABOUT RUNNING FASTER. IT’S ABOUT REDEFINING WHAT FAST FEELS LIKE.”',
+      quote: 'When every millisecond counts towards podium standing, you don’t compromise on kit. Velocity gives me the explosive snap I need out of every curve.',
+      author: 'Marcus Vance',
+      role: 'World Champion 200m Sprinter',
+      image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&auto=format&fit=crop&q=80',
+      stats: [
+        { num: '9.82s', label: 'Personal Best 100m' },
+        { num: '14', label: 'International Medals' },
+      ],
+    },
+  },
+
+  'sports-arena': {
+    template: {
+      id: 'sports-arena',
+      slug: 'sports-arena',
+      name: 'Arena',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'modern',
+      catalogSize: 'large',
+      tags: ['Team Sports', 'Stadium', 'Jerseys', 'Merchandise', 'Club Wear'],
+      shortDescription: 'Professional stadium-inspired club merchandise storefront with official jersey drops, squad numbering, and fan collections.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 98,
+      isActive: true,
+      brandName: 'ARENA CLUBHOUSE',
+      headline: 'HOME OF THE SQUAD.\nOFFICIAL MATCHWEAR 2026.',
+      subtitle: 'From historic match-day home kits to official training gear, wear the colors of champions with pride.',
+      buttonText: 'Shop Match Kits',
+      buttonColor: '#1e3a8a',
+      accentColor: '#fbbf24',
+      isDark: false,
+      modelImage: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&auto=format&fit=crop&q=80',
+      badge: 'popular',
+      rating: 4.92,
+      reviewCount: 118,
+      layoutType: 'split',
+      features: ['Official Jersey Badging', 'Squad Number Personalizer', 'Matchday Ticket Integrator', 'Club Loyalty Club', 'Stadium Pickup'],
+    },
+    announcement: '🏟️ MATCHDAY SPECIAL: Free Official League Badge Printing on all 2026/27 Home Kits',
+    navItems: ['Jerseys', 'Training', 'Fanwear', 'Accessories', 'Kids & Youth', 'Matchday Guide'],
+    categories: [
+      { id: 'football', name: 'Football / Soccer', image: 'https://images.unsplash.com/photo-1511886929837-354d827aae26?w=600&auto=format&fit=crop&q=80', count: '120+ Kits' },
+      { id: 'basketball', name: 'Basketball Squads', image: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600&auto=format&fit=crop&q=80', count: '85+ Items' },
+      { id: 'rugby', name: 'Rugby & Field', image: 'https://images.unsplash.com/photo-1519766304817-4f37bda74a29?w=600&auto=format&fit=crop&q=80', count: '45+ Items' },
+      { id: 'fan', name: 'Stadium Fan Gear', image: 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=600&auto=format&fit=crop&q=80', count: '60+ Accessories' },
+    ],
+    featuredProducts: [
+      {
+        id: 'arn-01',
+        name: '2026 Pro Authentic Home Match Kit',
+        category: 'Jerseys',
+        price: '$140.00',
+        image: 'https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=600&auto=format&fit=crop&q=80',
+        badge: 'AUTHENTIC PLAYER SPEC',
+        rating: 4.95,
+        reviewCount: 210,
+        colors: ['#1e3a8a', '#fbbf24', '#ffffff'],
+        sizes: ['S', 'M', 'L', 'XL', '2XL'],
+        techSpecs: ['Vapor-Knit Mesh', 'Heat-Pressed Crest', 'Match Authentic Cut'],
+      },
+      {
+        id: 'arn-02',
+        name: 'Stadium Travel Tracksuit Jacket',
+        category: 'Training',
+        price: '$95.00',
+        image: 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=600&auto=format&fit=crop&q=80',
+        badge: 'CLUB OFFICIAL',
+        rating: 4.8,
+        reviewCount: 88,
+        colors: ['#0f172a', '#1e3a8a'],
+        sizes: ['M', 'L', 'XL'],
+      },
+      {
+        id: 'arn-03',
+        name: 'Official Team Supporters Scarf & Beanie',
+        category: 'Fan Merchandise',
+        price: '$45.00',
+        image: 'https://images.unsplash.com/photo-1519766304817-4f37bda74a29?w=600&auto=format&fit=crop&q=80',
+        badge: 'MATCHDAY MUST',
+        rating: 4.9,
+        reviewCount: 145,
+      },
+      {
+        id: 'arn-04',
+        name: 'Pro Club Training Drill Top',
+        category: 'Training',
+        price: '$80.00',
+        image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=600&auto=format&fit=crop&q=80',
+        badge: 'BESTSELLER',
+        rating: 4.85,
+        reviewCount: 67,
+      },
+    ],
+    story: {
+      eyebrow: 'CLUB HERITAGE',
+      title: 'ONE CREST. ONE PASSION. 120 YEARS OF GLORY.',
+      quote: 'From grassroots pitches to Champions League nights under the stadium floodlights, every thread in this collection represents the loyalty of millions.',
+      author: 'David Sterling',
+      role: 'Club Sporting Director',
+      image: 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=800&auto=format&fit=crop&q=80',
+    },
+    promoBanner: {
+      tag: 'MEMBER ADVANTAGE',
+      title: 'FREE NAME & NUMBER CUSTOMIZATION',
+      subtitle: 'Order any 2026 match jersey today and get personalized lettering with official league fonts at zero extra charge.',
+      buttonText: 'Customize Your Kit Now',
+      image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=1200&auto=format&fit=crop&q=80',
+    },
+  },
+
+  'sports-apex': {
+    template: {
+      id: 'sports-apex',
+      slug: 'sports-apex',
+      name: 'Apex',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'luxury',
+      catalogSize: 'small',
+      tags: ['Premium Athletic', 'Luxury Athleisure', 'Minimalist', 'Editorial', 'Performance'],
+      shortDescription: 'Monochrome, restrained high-performance luxury athletic aesthetic with generous whitespace and editorial campaign photography.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 97,
+      isActive: true,
+      brandName: 'APEX ATELIER',
+      headline: 'REFINED PERFORMANCE.\nENGINEERED IN SILENCE.',
+      subtitle: 'The intersection of technical Swiss textiles, ergonomic cuts, and uncompromising minimalist luxury.',
+      buttonText: 'Explore Lookbook 08',
+      buttonColor: '#18181b',
+      accentColor: '#d4af37',
+      isDark: false,
+      modelImage: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&auto=format&fit=crop&q=80',
+      badge: "editor's pick",
+      rating: 4.98,
+      reviewCount: 76,
+      layoutType: 'editorial',
+      features: ['Editorial Lookbook', 'Swiss Technical Fabric Origins', 'Concierge Fit Sizing', 'Monogram Service', 'Limited Numbered Runs'],
+    },
+    announcement: '✦ APEX PRIVATE COLLECTION: Numbered Batch 08 Now Live • Worldwide Complimentary Courier Delivery',
+    navItems: ['Collection', 'Materials', 'Editorial', 'Archive', 'Bespoke Sizing', 'Journal'],
+    categories: [
+      { id: 'outerwear', name: 'Modular Technical Shells', image: 'https://images.unsplash.com/photo-1556906781-9a412961c28c?w=600&auto=format&fit=crop&q=80', count: '12 Editions' },
+      { id: 'knitwear', name: 'Merino Cashmere Base Layers', image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80', count: '8 Editions' },
+      { id: 'tailored', name: 'Precision Travel Trousers', image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&auto=format&fit=crop&q=80', count: '10 Editions' },
+    ],
+    featuredProducts: [
+      {
+        id: 'apx-01',
+        name: 'The Altitude 3L Waterproof Trench',
+        category: 'Outerwear',
+        price: '$580.00',
+        image: 'https://images.unsplash.com/photo-1556906781-9a412961c28c?w=600&auto=format&fit=crop&q=80',
+        badge: 'LIMITED TO 200 PIECES',
+        rating: 5.0,
+        reviewCount: 42,
+        colors: ['#18181b', '#3f3f46', '#e4e4e7'],
+        sizes: ['46', '48', '50', '52'],
+        techSpecs: ['Schoeller® C_Change Membrane', 'Magnetic Storm Flap', 'Made in Geneva'],
+      },
+      {
+        id: 'apx-02',
+        name: 'Merino Kinetic Half-Zip Knit',
+        category: 'Knitwear',
+        price: '$290.00',
+        image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80',
+        badge: 'NEW ARRIVAL',
+        rating: 4.9,
+        reviewCount: 28,
+        colors: ['#18181b', '#71717a'],
+      },
+      {
+        id: 'apx-03',
+        name: 'Aerotex Tailored Commute Pant',
+        category: 'Trousers',
+        price: '$320.00',
+        image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&auto=format&fit=crop&q=80',
+        badge: 'WATER REPELLENT',
+        rating: 4.95,
+        reviewCount: 37,
+      },
+    ],
+    techFeatures: [
+      { icon: '🇨🇭', title: 'Swiss Fabric Alchemy', desc: 'Crafted exclusively with Schoeller® and Loro Piana Storm System® membranes.' },
+      { icon: '✂️', title: 'Articulated Tailoring', desc: 'Pre-curved ergonomic sleeves and gussets that mold naturally to bodily movement.' },
+      { icon: '♾️', title: 'Guaranteed For Life', desc: 'Free repair service and hardware replacement for the lifetime of the garment.' },
+    ],
+    story: {
+      eyebrow: 'PHILOSOPHY',
+      title: 'THE DISCIPLINE OF SUBTRACTION',
+      quote: 'We removed logos, stripped away excess seams, and focused on pure technical perfection. Luxury isn’t loud; it’s the quiet confidence of superior craft.',
+      author: 'Elena Rostova',
+      role: 'Founder & Creative Director',
+      image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format&fit=crop&q=80',
+    },
+  },
+
+  'sports-sprint': {
+    template: {
+      id: 'sports-sprint',
+      slug: 'sports-sprint',
+      name: 'Sprint',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'clean',
+      catalogSize: 'medium',
+      tags: ['Running', 'Marathon', 'Lightweight', 'Footwear', 'Cadence'],
+      shortDescription: 'Pace-driven running ecommerce theme with pace calculator integration, shoe finder wizard, and split-second telemetry.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 96,
+      isActive: true,
+      brandName: 'SPRINT // RUN LAB',
+      headline: 'EVERY SECOND RECLAIMED.\nENGINEERED TO OUTRUN.',
+      subtitle: 'Precision road and marathon shoes with dual-density nitrogen foam and continuous carbon snap plates.',
+      buttonText: 'Find Your Shoe',
+      buttonColor: '#ea580c',
+      accentColor: '#ea580c',
+      isDark: false,
+      modelImage: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=800&auto=format&fit=crop&q=80',
+      badge: 'trending',
+      rating: 4.88,
+      reviewCount: 94,
+      layoutType: 'split',
+      features: ['Shoe Matcher Quiz', 'Marathon Pace Calculator', 'Drop & Stack Specs', 'Gait Analysis Booking', 'Run Club Perks'],
+    },
+    announcement: '🏃 MARATHON SEASON: Free 30-Day Road Trial on all carbon-plated racing shoes',
+    navItems: ['Road Shoes', 'Trail Running', 'Apparel', 'Hydration', 'Pace Guide', 'Run Club'],
+    heroStats: [
+      { label: 'Stack Height', value: '39.5mm' },
+      { label: 'Drop', value: '8mm' },
+      { label: 'Cushioning', value: 'Nitro Max' },
+    ],
+    categories: [
+      { id: 'road', name: 'Road Racing Shoes', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80', count: '28 Models' },
+      { id: 'trail', name: 'Grip Trail Runners', image: 'https://images.unsplash.com/photo-1483721074573-586540da5703?w=600&auto=format&fit=crop&q=80', count: '19 Models' },
+      { id: 'apparel', name: 'Ultralight Run Tops', image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80', count: '34 Items' },
+      { id: 'recovery', name: 'Compression & Recovery', image: 'https://images.unsplash.com/photo-1576243345690-4e4b79b63288?w=600&auto=format&fit=crop&q=80', count: '22 Items' },
+    ],
+    featuredProducts: [
+      {
+        id: 'spr-01',
+        name: 'Strata Carbon Marathon Racer',
+        category: 'Road Shoes',
+        price: '$245.00',
+        compareAtPrice: '$275.00',
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80',
+        badge: 'SUB-3 HR CHOICE',
+        rating: 4.95,
+        reviewCount: 162,
+        colors: ['#ea580c', '#0284c7', '#ffffff'],
+        sizes: ['US 7', 'US 8', 'US 9', 'US 10', 'US 11', 'US 12'],
+        techSpecs: ['Dual PEBA Nitro Foam', 'Spoon Carbon Plate', 'Vibram Litebase'],
+      },
+      {
+        id: 'spr-02',
+        name: 'AeroCloud 50g Singlet',
+        category: 'Apparel',
+        price: '$65.00',
+        image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80',
+        badge: '50 GRAMS',
+        rating: 4.8,
+        reviewCount: 71,
+      },
+      {
+        id: 'spr-03',
+        name: 'Enduro Hydration Race Vest 5L',
+        category: 'Gear',
+        price: '$135.00',
+        image: 'https://images.unsplash.com/photo-1576243345690-4e4b79b63288?w=600&auto=format&fit=crop&q=80',
+        badge: 'BEST FOR ULTRA',
+        rating: 4.9,
+        reviewCount: 84,
+      },
+    ],
+    guides: [
+      { title: 'The 16-Week Sub-3 Marathon Blueprint', tag: 'TRAINING PLAN', time: '8 min read', image: 'https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?w=600&auto=format&fit=crop&q=80', desc: 'Structured interval workouts, lactate threshold runs, and fueling strategies.' },
+      { title: 'Stack Height & Carbon Plates: What Actually Works?', tag: 'TECH GUIDE', time: '5 min read', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80', desc: 'How energy return changes based on your cadence, strike pattern, and body weight.' },
+    ],
+  },
+
+  'sports-ironcore': {
+    template: {
+      id: 'sports-ironcore',
+      slug: 'sports-ironcore',
+      name: 'Ironcore',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'dark',
+      catalogSize: 'large',
+      tags: ['Gym', 'Bodybuilding', 'Powerlifting', 'Strength Equipment', 'Dark Athletic'],
+      shortDescription: 'Dark industrial powerhouse theme with heavy plate textures, blood-orange accents, and strength equipment discovery.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 99,
+      isActive: true,
+      brandName: 'IRONCORE // HEAVY ATHLETICS',
+      headline: 'BRED IN THE DARK.\nFORGED IN IRON.',
+      subtitle: 'Commercial-grade calibrated plates, 2000lb barbells, and heavy oversized lifting gear built to withstand relentless punishment.',
+      buttonText: 'Equip The Rack',
+      buttonColor: '#f97316',
+      accentColor: '#f97316',
+      isDark: true,
+      modelImage: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&auto=format&fit=crop&q=80',
+      badge: 'popular',
+      rating: 4.97,
+      reviewCount: 185,
+      layoutType: 'bold-minimal',
+      features: ['Weight Capacity Calculator', 'Freight Shipping Estimator', 'Commercial Rack Configurator', 'Lifetime Barbell Warranty', 'Gym Discount Program'],
+    },
+    announcement: '🔥 RAW IRON DISPATCH: Free Curbside Freight on all Power Racks & Bumper Sets over $500',
+    navItems: ['Barbells', 'Plates & Bumpers', 'Racks & Cages', 'Lifting Apparel', 'Straps & Belts', 'Supplements'],
+    categories: [
+      { id: 'barbells', name: 'Olympic Barbells', image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80', count: '14 Specs' },
+      { id: 'plates', name: 'Calibrated Steel Plates', image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&auto=format&fit=crop&q=80', count: '10 Sets' },
+      { id: 'racks', name: '3x3 Heavy Power Cages', image: 'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=600&auto=format&fit=crop&q=80', count: '8 Rigs' },
+      { id: 'apparel', name: 'Oversized Lifting Hoodies', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop&q=80', count: '26 Items' },
+    ],
+    featuredProducts: [
+      {
+        id: 'irn-01',
+        name: 'The Cerakote Titan Bar 20kg',
+        category: 'Barbells',
+        price: '$345.00',
+        image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80',
+        badge: '215,000 PSI STEEL',
+        rating: 4.98,
+        reviewCount: 240,
+        colors: ['#f97316', '#000000', '#64748b'],
+        techSpecs: ['28.5mm Grip', 'Aggressive Volcano Knurl', '10 Needle Bearings'],
+      },
+      {
+        id: 'irn-02',
+        name: 'Calibrated Competition Steel Plates (Pair)',
+        category: 'Plates',
+        price: '$180.00',
+        image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&auto=format&fit=crop&q=80',
+        badge: 'IPF ACCURACY +/- 10G',
+        rating: 4.95,
+        reviewCount: 112,
+      },
+      {
+        id: 'irn-03',
+        name: '13mm Lever Heavy Powerlifting Belt',
+        category: 'Accessories',
+        price: '$125.00',
+        image: 'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=600&auto=format&fit=crop&q=80',
+        badge: 'TOP GRAIN LEATHER',
+        rating: 4.92,
+        reviewCount: 180,
+      },
+    ],
+    promoBanner: {
+      tag: 'HOME GYM BUNDLE',
+      title: 'THE IRON VAULT 500KG SYSTEM',
+      subtitle: 'Power cage, multi-grip pull-up bar, adjustable bench, 20kg bar, and 140kg bumper set in one delivery.',
+      buttonText: 'Configure Your Gym (-$350)',
+      image: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=1200&auto=format&fit=crop&q=80',
+    },
+    reviews: [
+      { name: 'Viktor Romanov', role: 'Powerlifting Coach', quote: 'The knurling on the Titan Bar bites just right without tearing skin on heavy triples. Best barbell we have ever racked in our facility.', rating: 5, verified: true },
+      { name: 'Marcus Brody', role: 'Garage Gym Enthusiast', quote: 'Unbeatable durability. The calibrated steel plates fit flush on the sleeve with zero rattle. 10/10 recommendation.', rating: 5, verified: true },
+    ],
+  },
+
+  'sports-peak': {
+    template: {
+      id: 'sports-peak',
+      slug: 'sports-peak',
+      name: 'Peak',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'editorial',
+      catalogSize: 'large',
+      tags: ['Outdoor', 'Hiking', 'Camping', 'Adventure', 'Alpine Gear'],
+      shortDescription: 'Alpine adventure and mountain exploration theme with topographical lines, weather resistance ratings, and trail guides.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1501555088652-021faa106b9b?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1501555088652-021faa106b9b?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 97,
+      isActive: true,
+      brandName: 'PEAK MOUNTAINEERING',
+      headline: 'BUILT FOR THE SUMMIT.\nTESTED IN THE WILD.',
+      subtitle: 'Technical alpine shells, ultralight expedition tents, and ergonomic trekking gear designed to survive unpredictable mountain terrain.',
+      buttonText: 'Explore Expedition Gear',
+      buttonColor: '#15803d',
+      accentColor: '#f97316',
+      isDark: false,
+      modelImage: 'https://images.unsplash.com/photo-1501555088652-021faa106b9b?w=800&auto=format&fit=crop&q=80',
+      badge: 'recommended',
+      rating: 4.94,
+      reviewCount: 129,
+      layoutType: 'editorial',
+      features: ['Weatherproof Ratings Index', 'Trail Elevation Planner', 'Pack Weight Optimizer', 'Eco-Pledge Recycled Materials', 'Offline Trail Maps'],
+    },
+    announcement: '🏔️ EXPEDITION DISPATCH: Free Waterproof Gear Bag with every shell purchase over $180',
+    navItems: ['Alpine Shells', 'Trekking Packs', 'Ultralight Tents', 'Trail Footwear', 'Climbing Hardware', 'Trail Journal'],
+    categories: [
+      { id: 'hiking', name: 'Hiking & Trekking Packs', image: 'https://images.unsplash.com/photo-1501555088652-021faa106b9b?w=600&auto=format&fit=crop&q=80', count: '24 Packs' },
+      { id: 'camping', name: '4-Season Alpine Tents', image: 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?w=600&auto=format&fit=crop&q=80', count: '16 Shelters' },
+      { id: 'boots', name: 'Vibram Mountain Boots', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80', count: '18 Models' },
+      { id: 'apparel', name: 'Merino Thermal Base', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop&q=80', count: '30 Items' },
+    ],
+    featuredProducts: [
+      {
+        id: 'pk-01',
+        name: 'StormBreaker 3L GORE-TEX Pro Jacket',
+        category: 'Alpine Shells',
+        price: '$450.00',
+        image: 'https://images.unsplash.com/photo-1501555088652-021faa106b9b?w=600&auto=format&fit=crop&q=80',
+        badge: '28,000MM WATERPROOF',
+        rating: 4.96,
+        reviewCount: 145,
+        colors: ['#15803d', '#f97316', '#0f172a'],
+        techSpecs: ['3L GORE-TEX Pro', 'RECCO® Rescue Reflector', 'Helmet Compatible Hood'],
+      },
+      {
+        id: 'pk-02',
+        name: 'Apex Nomad 55L Internal Frame Pack',
+        category: 'Trekking Packs',
+        price: '$280.00',
+        image: 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?w=600&auto=format&fit=crop&q=80',
+        badge: 'DYNEEMA® REINFORCED',
+        rating: 4.9,
+        reviewCount: 92,
+      },
+      {
+        id: 'pk-03',
+        name: 'Alpine Traverse Carbon Trekking Poles',
+        category: 'Gear',
+        price: '$110.00',
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80',
+        badge: '340G PER PAIR',
+        rating: 4.85,
+        reviewCount: 64,
+      },
+    ],
+    guides: [
+      { title: 'The High Sierra 100-Mile Packing Checklist', tag: 'EXPEDITION GUIDE', time: '10 min read', image: 'https://images.unsplash.com/photo-1501555088652-021faa106b9b?w=600&auto=format&fit=crop&q=80', desc: 'How to keep your base pack weight under 12 pounds without sacrificing camp comfort.' },
+    ],
+  },
+
+  'sports-rally': {
+    template: {
+      id: 'sports-rally',
+      slug: 'sports-rally',
+      name: 'Rally',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'minimal',
+      catalogSize: 'medium',
+      tags: ['Tennis', 'Racket Sports', 'Padel', 'Court Wear', 'Club Elegance'],
+      shortDescription: 'Classic country club elegance meets modern racket engineering with tournament white palettes and court essentials.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 95,
+      isActive: true,
+      brandName: 'RALLY COURT CLUB',
+      headline: 'PRECISION ON THE BASELINE.\nELEGANCE ON THE COURT.',
+      subtitle: 'Tournament-spec graphite rackets, clay-court footwear, and breathable pleated tennis apparel inspired by grand slam traditions.',
+      buttonText: 'Discover Courtwear',
+      buttonColor: '#15803d',
+      accentColor: '#15803d',
+      isDark: false,
+      modelImage: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=800&auto=format&fit=crop&q=80',
+      badge: 'new',
+      rating: 4.91,
+      reviewCount: 68,
+      layoutType: 'split',
+      features: ['Racket Stringing Configurator', 'Court Surface Footwear Filter', 'Grip Size Guide', 'Club Member Lounge', 'Demo Program'],
+    },
+    announcement: '🎾 GRAND SLAM SEASON: Complimentary Custom Stringing on all Pro Graphite Rackets',
+    navItems: ['Rackets', 'Court Apparel', 'Tennis Shoes', 'Bags & Totes', 'Balls & Strings', 'Club Journal'],
+    categories: [
+      { id: 'rackets', name: 'Pro Tour Rackets', image: 'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?w=600&auto=format&fit=crop&q=80', count: '18 Models' },
+      { id: 'apparel', name: 'Club Whites & Polos', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80', count: '32 Items' },
+      { id: 'shoes', name: 'Clay & Hard Court Shoes', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80', count: '14 Models' },
+      { id: 'padel', name: 'Padel & Pickleball', image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80', count: '20 Items' },
+    ],
+    featuredProducts: [
+      {
+        id: 'ral-01',
+        name: 'Grand Slam 98 Pro Carbon Racket',
+        category: 'Rackets',
+        price: '$260.00',
+        image: 'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?w=600&auto=format&fit=crop&q=80',
+        badge: 'TOUR PREFERRED',
+        rating: 4.95,
+        reviewCount: 88,
+        colors: ['#ffffff', '#15803d'],
+        techSpecs: ['98 sq. in. Head', '305g Unstrung', '16x19 Spin Pattern'],
+      },
+      {
+        id: 'ral-02',
+        name: 'The Heritage Court Polo Shirt',
+        category: 'Apparel',
+        price: '$85.00',
+        image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80',
+        badge: 'ORGANIC COTTON PIQUÉ',
+        rating: 4.88,
+        reviewCount: 45,
+      },
+      {
+        id: 'ral-03',
+        name: 'Vanguard 12-Racket Leather Bag',
+        category: 'Accessories',
+        price: '$195.00',
+        image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop&q=80',
+        badge: 'THERMAL LINED',
+        rating: 4.9,
+        reviewCount: 39,
+      },
+    ],
+  },
+
+  'sports-court': {
+    template: {
+      id: 'sports-court',
+      slug: 'sports-court',
+      name: 'Court',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'bold',
+      catalogSize: 'large',
+      tags: ['Basketball', 'Sneakers', 'Streetball', 'Hoop Culture', 'Urban Drops'],
+      shortDescription: 'Urban basketball culture powerhouse with sneaker drop countdowns, hardwood aesthetics, and graffiti-influenced typography.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1519861531473-9200262188bf?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1519861531473-9200262188bf?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 98,
+      isActive: true,
+      brandName: 'COURT // HOOP CULTURE',
+      headline: 'DEFY GRAVITY.\nOWN THE HARDWOOD.',
+      subtitle: 'High-traction signature basketball sneakers, vintage mesh jerseys, and court streetwear crafted for the blacktop.',
+      buttonText: 'Enter Sneaker Raffle',
+      buttonColor: '#dc2626',
+      accentColor: '#dc2626',
+      isDark: true,
+      modelImage: 'https://images.unsplash.com/photo-1519861531473-9200262188bf?w=800&auto=format&fit=crop&q=80',
+      badge: 'trending',
+      rating: 4.93,
+      reviewCount: 164,
+      layoutType: 'card-grid',
+      features: ['Live Drop Countdown', 'Raffle Draw System', 'Hardwood Grip Indicator', 'Shoe Heat Index', 'Custom Jersey Numbering'],
+    },
+    announcement: '🏀 FRIDAY DROP: Court Dunk High "Asphalt Black" drops at 10 AM EST • Exclusive App Access',
+    navItems: ['Kicks', 'Jerseys', 'Warmups', 'Balls & Hoops', 'Streetwear', 'Drop Calendar'],
+    categories: [
+      { id: 'shoes', name: 'Signature Hoops Kicks', image: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600&auto=format&fit=crop&q=80', count: '45 Drops' },
+      { id: 'jerseys', name: 'Throwback Mesh Jerseys', image: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600&auto=format&fit=crop&q=80', count: '38 Items' },
+      { id: 'apparel', name: 'Heavy Fleece Hoodies', image: 'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?w=600&auto=format&fit=crop&q=80', count: '29 Items' },
+      { id: 'gear', name: 'Indoor/Outdoor Balls', image: 'https://images.unsplash.com/photo-1519766304817-4f37bda74a29?w=600&auto=format&fit=crop&q=80', count: '12 Specs' },
+    ],
+    featuredProducts: [
+      {
+        id: 'crt-01',
+        name: 'Air Elevate 360 Basketball Shoe',
+        category: 'Kicks',
+        price: '$185.00',
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80',
+        badge: 'SOLDOUT IN 3 MINS (RESTOCK)',
+        rating: 4.97,
+        reviewCount: 220,
+        colors: ['#dc2626', '#000000', '#fbbf24'],
+        techSpecs: ['Zoom Air Pods', 'Herringbone Multi-Directional Grip', 'Carbon Midfoot Shank'],
+      },
+      {
+        id: 'crt-02',
+        name: 'All-City Vintage Reversible Mesh Jersey',
+        category: 'Jerseys',
+        price: '$75.00',
+        image: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600&auto=format&fit=crop&q=80',
+        badge: 'HEAVY MESH',
+        rating: 4.88,
+        reviewCount: 94,
+      },
+      {
+        id: 'crt-03',
+        name: 'Court Leather Official Game Ball Size 7',
+        category: 'Gear',
+        price: '$65.00',
+        image: 'https://images.unsplash.com/photo-1519766304817-4f37bda74a29?w=600&auto=format&fit=crop&q=80',
+        badge: 'GENUINE COMPOSITE',
+        rating: 4.92,
+        reviewCount: 81,
+      },
+    ],
+  },
+
+  'sports-striker': {
+    template: {
+      id: 'sports-striker',
+      slug: 'sports-striker',
+      name: 'Striker',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'modern',
+      catalogSize: 'large',
+      tags: ['Football', 'Soccer', 'Match Day', 'Boots', 'Kits'],
+      shortDescription: 'High-energy European football theme with turf stud configurator, authentic club kits, and matchday countdowns.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1511886929837-354d827aae26?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1511886929837-354d827aae26?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 97,
+      isActive: true,
+      brandName: 'STRIKER FOOTBALL CLUB',
+      headline: 'THE BEAUTIFUL GAME.\nPRECISION STRIKE BOOTS.',
+      subtitle: 'Next-gen laceless football boots with touch-texture zones, aerodynamic studs, and official club match kits.',
+      buttonText: 'Shop New Boots',
+      buttonColor: '#059669',
+      accentColor: '#10b981',
+      isDark: false,
+      modelImage: 'https://images.unsplash.com/photo-1511886929837-354d827aae26?w=800&auto=format&fit=crop&q=80',
+      badge: 'popular',
+      rating: 4.91,
+      reviewCount: 130,
+      layoutType: 'split',
+      features: ['Stud Ground Finder (FG / AG / SG)', 'Boot Customizer', 'Club Badge Selector', 'Pro Player Specs', 'Matchday Express'],
+    },
+    announcement: '⚽ DERBY WEEKEND: Free Custom Boot Embroidery & Flag Personalization on all Pro models',
+    navItems: ['Boots', 'Club Kits', 'Training Tops', 'Shinguards', 'Match Balls', 'Goalkeeper Hub'],
+    categories: [
+      { id: 'boots', name: 'Firm Ground & Turf Boots', image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=600&auto=format&fit=crop&q=80', count: '36 Models' },
+      { id: 'kits', name: 'Official League Kits', image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=600&auto=format&fit=crop&q=80', count: '54 Items' },
+      { id: 'training', name: 'Warmup Track Jackets', image: 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=600&auto=format&fit=crop&q=80', count: '28 Items' },
+      { id: 'goalkeeper', name: 'Grip Contact Gloves', image: 'https://images.unsplash.com/photo-1519766304817-4f37bda74a29?w=600&auto=format&fit=crop&q=80', count: '16 Pairs' },
+    ],
+    featuredProducts: [
+      {
+        id: 'stk-01',
+        name: 'Vortex Elite Laceless FG Football Boot',
+        category: 'Boots',
+        price: '$265.00',
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80',
+        badge: 'BALL TOUCH 360°',
+        rating: 4.94,
+        reviewCount: 178,
+        colors: ['#10b981', '#0f172a', '#ffffff'],
+        techSpecs: ['Speedframe Carbon Outsole', 'Knit Collar Support', 'All Conditions Control'],
+      },
+      {
+        id: 'stk-02',
+        name: 'FIFA Quality Pro Official Match Ball',
+        category: 'Gear',
+        price: '$160.00',
+        image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=600&auto=format&fit=crop&q=80',
+        badge: 'TOURNAMENT APPROVED',
+        rating: 4.9,
+        reviewCount: 62,
+      },
+    ],
+  },
+
+  'sports-wave': {
+    template: {
+      id: 'sports-wave',
+      slug: 'sports-wave',
+      name: 'Wave',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'clean',
+      catalogSize: 'medium',
+      tags: ['Swimming', 'Water Sports', 'Hydrodynamics', 'Swimwear', 'Open Water'],
+      shortDescription: 'Fluid, aquatic-inspired layout with hydrodynamic drag specs, chlorine resistance meters, and competition swimwear.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1519315901367-f34ff9154487?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1519315901367-f34ff9154487?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 94,
+      isActive: true,
+      brandName: 'WAVE // HYDRO LAB',
+      headline: 'FLOW WITHOUT FRICTION.\nZERO DRAG IN THE WATER.',
+      subtitle: 'FINA-approved technical racing jammers, mirrored anti-fog goggles, and thermal open-water wetsuits.',
+      buttonText: 'Shop Water Collection',
+      buttonColor: '#0284c7',
+      accentColor: '#06b6d4',
+      isDark: false,
+      modelImage: 'https://images.unsplash.com/photo-1519315901367-f34ff9154487?w=800&auto=format&fit=crop&q=80',
+      badge: 'new',
+      rating: 4.89,
+      reviewCount: 78,
+      layoutType: 'centered',
+      features: ['FINA Approved Badge', 'Chlorine Resistance Index', 'Goggle Lens Tint Selector', 'Thermal Wetsuit Guide', 'Club Team Caps'],
+    },
+    announcement: '🌊 AQUATIC CHAMPIONSHIPS: Free Silicone Swim Cap with every racing jammer or suit order',
+    navItems: ['Racing Suits', 'Training Swimwear', 'Goggles & Caps', 'Open Water Wetsuits', 'Training Paddles', 'Club Gear'],
+    categories: [
+      { id: 'racing', name: 'FINA Racing Jammers', image: 'https://images.unsplash.com/photo-1530549387789-4c1017266635?w=600&auto=format&fit=crop&q=80', count: '18 Suits' },
+      { id: 'goggles', name: 'Mirrored Racing Goggles', image: 'https://images.unsplash.com/photo-1519766304817-4f37bda74a29?w=600&auto=format&fit=crop&q=80', count: '15 Models' },
+      { id: 'wetsuits', name: 'Triathlon Open Water Wetsuits', image: 'https://images.unsplash.com/photo-1506152983158-b4a74a01c721?w=600&auto=format&fit=crop&q=80', count: '12 Models' },
+    ],
+    featuredProducts: [
+      {
+        id: 'wav-01',
+        name: 'HydroSkin Pro Tech Jammer',
+        category: 'Racing Suits',
+        price: '$210.00',
+        image: 'https://images.unsplash.com/photo-1530549387789-4c1017266635?w=600&auto=format&fit=crop&q=80',
+        badge: 'FINA APPROVED',
+        rating: 4.96,
+        reviewCount: 94,
+        colors: ['#0284c7', '#0f172a'],
+        techSpecs: ['Water-Repellent Nano Coating', 'Core Compression Ribs', 'Bonded Low-Profile Seams'],
+      },
+      {
+        id: 'wav-02',
+        name: 'VaporView Mirrored Titanium Goggles',
+        category: 'Goggles',
+        price: '$55.00',
+        image: 'https://images.unsplash.com/photo-1519766304817-4f37bda74a29?w=600&auto=format&fit=crop&q=80',
+        badge: 'ANTI-FOG POLARIZED',
+        rating: 4.9,
+        reviewCount: 110,
+      },
+    ],
+  },
+
+  'sports-ride': {
+    template: {
+      id: 'sports-ride',
+      slug: 'sports-ride',
+      name: 'Ride',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'modern',
+      catalogSize: 'large',
+      tags: ['Cycling', 'Road Bike', 'Gravel', 'Helmets', 'Aero Gear'],
+      shortDescription: 'Technical cycling enthusiast store with wind-tunnel drag metrics, gravel/road bike configurator, and high-vis safety gear.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 98,
+      isActive: true,
+      brandName: 'RIDE // VELO CYCLES',
+      headline: 'AERODYNAMIC PRECISION.\nFOR EVERY WATT PRODUCED.',
+      subtitle: 'Full carbon road and gravel machines, MIPS-certified aero helmets, and seamless Italian bib shorts for endurance cyclists.',
+      buttonText: 'Configure Your Bike',
+      buttonColor: '#0f172a',
+      accentColor: '#eab308',
+      isDark: false,
+      modelImage: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800&auto=format&fit=crop&q=80',
+      badge: 'popular',
+      rating: 4.95,
+      reviewCount: 135,
+      layoutType: 'card-grid',
+      features: ['Bike Sizing Calculator', 'Aero Watt-Savings Meter', 'Groupset Selector (Shimano/SRAM)', 'Free Tubeless Setup', 'Bike Delivery Guarantee'],
+    },
+    announcement: '🚴 VELO DISPATCH: Complimentary Shimano Di2 Electronic Tuning on all complete carbon bike builds',
+    navItems: ['Road Bikes', 'Gravel Bikes', 'Bibs & Jerseys', 'Aero Helmets', 'Wheelsets', 'Components'],
+    categories: [
+      { id: 'road', name: 'Aero Carbon Road Bikes', image: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=600&auto=format&fit=crop&q=80', count: '14 Models' },
+      { id: 'gravel', name: 'All-Terrain Gravel Bikes', image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80', count: '12 Models' },
+      { id: 'helmets', name: 'MIPS Certified Helmets', image: 'https://images.unsplash.com/photo-1556906781-9a412961c28c?w=600&auto=format&fit=crop&q=80', count: '16 Models' },
+      { id: 'apparel', name: 'Pro Bib Shorts & Jerseys', image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80', count: '32 Items' },
+    ],
+    featuredProducts: [
+      {
+        id: 'rid-01',
+        name: 'AeroMax SLR Carbon Road Bike (Shimano Ultegra Di2)',
+        category: 'Road Bikes',
+        price: '$4,800.00',
+        image: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=600&auto=format&fit=crop&q=80',
+        badge: '7.1KG COMPLETE',
+        rating: 4.98,
+        reviewCount: 65,
+        colors: ['#0f172a', '#eab308', '#ffffff'],
+        techSpecs: ['Toray T1000 Carbon', 'Internal Cable Routing', '50mm Carbon Wheels'],
+      },
+      {
+        id: 'rid-02',
+        name: 'Vortex MIPS Aero Road Helmet',
+        category: 'Helmets',
+        price: '$240.00',
+        image: 'https://images.unsplash.com/photo-1556906781-9a412961c28c?w=600&auto=format&fit=crop&q=80',
+        badge: 'SAVE 12 WATTS',
+        rating: 4.9,
+        reviewCount: 88,
+      },
+      {
+        id: 'rid-03',
+        name: 'Pro Endurance Chamois Bib Shorts',
+        category: 'Apparel',
+        price: '$180.00',
+        image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80',
+        badge: '7+ HOUR COMFORT',
+        rating: 4.92,
+        reviewCount: 104,
+      },
+    ],
+  },
+
+  'sports-combat': {
+    template: {
+      id: 'sports-combat',
+      slug: 'sports-combat',
+      name: 'Combat',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'dark',
+      catalogSize: 'medium',
+      tags: ['Boxing', 'Martial Arts', 'MMA', 'Gloves', 'Combat Gear'],
+      shortDescription: 'Intense, high-impact combat aesthetic with heavy bag gear, premium leather boxing gloves, and fighter stories.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1517438322307-e67111335449?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1517438322307-e67111335449?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 96,
+      isActive: true,
+      brandName: 'COMBAT // FIGHT SYSTEM',
+      headline: 'TEST YOUR WILL.\nFIGHT FOR THE GLORY.',
+      subtitle: 'Handmade Thai leather boxing gloves, impact-absorbing shin guards, and combat apparel crafted for real fighters.',
+      buttonText: 'Gear Up To Fight',
+      buttonColor: '#b91c1c',
+      accentColor: '#ef4444',
+      isDark: true,
+      modelImage: 'https://images.unsplash.com/photo-1517438322307-e67111335449?w=800&auto=format&fit=crop&q=80',
+      badge: 'trending',
+      rating: 4.94,
+      reviewCount: 112,
+      layoutType: 'bold-minimal',
+      features: ['Glove Ounce Recommender (10oz - 16oz)', 'Impact Foam Density Scale', 'Gym Batch Discounts', 'Pro Fighter Endorsements', 'Lifetime Stitch Guarantee'],
+    },
+    announcement: '🥊 FIGHT NIGHT SALE: Free Mexican-Style 180" Handwraps with all leather training gloves',
+    navItems: ['Boxing Gloves', 'MMA & Shin Guards', 'Heavy Bags', 'Handwraps', 'Apparel', 'Fight FAQ'],
+    categories: [
+      { id: 'gloves', name: 'Leather Sparring Gloves', image: 'https://images.unsplash.com/photo-1517438322307-e67111335449?w=600&auto=format&fit=crop&q=80', count: '22 Models' },
+      { id: 'protection', name: 'Shin Guards & Headgear', image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80', count: '18 Items' },
+      { id: 'heavybags', name: 'Heavy Leather Bags', image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&auto=format&fit=crop&q=80', count: '10 Models' },
+    ],
+    featuredProducts: [
+      {
+        id: 'cbt-01',
+        name: 'Pro Titan Leather Sparring Gloves (16oz)',
+        category: 'Boxing Gloves',
+        price: '$145.00',
+        image: 'https://images.unsplash.com/photo-1517438322307-e67111335449?w=600&auto=format&fit=crop&q=80',
+        badge: 'TOP GRADE COWHIDE',
+        rating: 4.96,
+        reviewCount: 180,
+        colors: ['#0f172a', '#b91c1c', '#ffffff'],
+        techSpecs: ['Multi-Layer Quad Foam', 'Ergonomic Thumb Lock', 'Reinforced Wrist Splint'],
+      },
+      {
+        id: 'cbt-02',
+        name: 'Thai Striker Shinguards',
+        category: 'MMA Gear',
+        price: '$95.00',
+        image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80',
+        badge: 'HIGH SHOCK ABSORPTION',
+        rating: 4.9,
+        reviewCount: 75,
+      },
+    ],
+    faqs: [
+      { q: 'What ounce gloves should I choose for sparring?', a: 'For safety of both you and your partner, 16oz gloves are standard for sparring. For bag and mitt work, 12oz to 14oz provide faster snap and wrist alignment.' },
+      { q: 'Are these real leather or synthetic?', a: 'Our Pro Series uses 100% genuine full-grain cowhide leather, conditioned to resist sweat breakdown and cracking.' },
+    ],
+  },
+
+  'sports-playfield': {
+    template: {
+      id: 'sports-playfield',
+      slug: 'sports-playfield',
+      name: 'Playfield',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'playful',
+      catalogSize: 'medium',
+      tags: ['Kids Sports', 'Family', 'Playful', 'Youth Athletics', 'Active Play'],
+      shortDescription: 'Bright, welcoming family and youth sports storefront with age-group filters, protective safety gear, and school sports equipment.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1526676037777-05a232554f77?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1526676037777-05a232554f77?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 95,
+      isActive: true,
+      brandName: 'PLAYFIELD YOUTH SPORTS',
+      headline: 'PLAY HARD. SMILE BIG.\nSPORTS FOR EVERY KID.',
+      subtitle: 'Kid-sized soccer goals, lightweight tennis rackets, protective helmet sets, and colorful activewear designed for fun and safety.',
+      buttonText: 'Shop by Child Age',
+      buttonColor: '#3b82f6',
+      accentColor: '#f59e0b',
+      isDark: false,
+      modelImage: 'https://images.unsplash.com/photo-1526676037777-05a232554f77?w=800&auto=format&fit=crop&q=80',
+      badge: 'new',
+      rating: 4.92,
+      reviewCount: 96,
+      layoutType: 'card-grid',
+      features: ['Shop by Age Finder (Ages 3–14)', 'Child Safety Certification', 'Growth Guarantee Size Exchange', 'Family Activity Guides', 'School Team Packs'],
+    },
+    announcement: '🎈 BACK TO PRACTICE: Free Water Bottle & Sticker Sheet with any youth sports gear set',
+    navItems: ['Ages 3-5', 'Ages 6-9', 'Ages 10-14', 'Soccer & Basketball', 'Bikes & Scooters', 'Safety Gear'],
+    categories: [
+      { id: 'age35', name: 'Early Active (Ages 3-5)', image: 'https://images.unsplash.com/photo-1526676037777-05a232554f77?w=600&auto=format&fit=crop&q=80', count: '28 Items' },
+      { id: 'age69', name: 'Junior League (Ages 6-9)', image: 'https://images.unsplash.com/photo-1517649763962-0c623266ddc0?w=600&auto=format&fit=crop&q=80', count: '42 Items' },
+      { id: 'age1014', name: 'Youth Academy (Ages 10-14)', image: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600&auto=format&fit=crop&q=80', count: '50 Items' },
+      { id: 'safety', name: 'Certified Safety Gear', image: 'https://images.unsplash.com/photo-1556906781-9a412961c28c?w=600&auto=format&fit=crop&q=80', count: '20 Items' },
+    ],
+    featuredProducts: [
+      {
+        id: 'ply-01',
+        name: 'Junior Pop-Up Dual Soccer Goal Set',
+        category: 'Soccer',
+        price: '$58.00',
+        image: 'https://images.unsplash.com/photo-1526676037777-05a232554f77?w=600&auto=format&fit=crop&q=80',
+        badge: 'POP-UP IN 10 SECONDS',
+        rating: 4.95,
+        reviewCount: 140,
+        colors: ['#3b82f6', '#f59e0b', '#10b981'],
+        techSpecs: ['Fiberglass Frame', 'Includes 4 Ground Stakes', 'Carry Case Included'],
+      },
+      {
+        id: 'ply-02',
+        name: 'All-Star Youth Helmet & Pad Bundle',
+        category: 'Safety',
+        price: '$45.00',
+        image: 'https://images.unsplash.com/photo-1517649763962-0c623266ddc0?w=600&auto=format&fit=crop&q=80',
+        badge: 'CPSC CERTIFIED',
+        rating: 4.9,
+        reviewCount: 95,
+      },
+    ],
+  },
+
+  'sports-endurance': {
+    template: {
+      id: 'sports-endurance',
+      slug: 'sports-endurance',
+      name: 'Endurance',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'clean',
+      catalogSize: 'medium',
+      tags: ['Fitness', 'Wellness', 'Pilates', 'Recovery', 'Mindful Movement'],
+      shortDescription: 'Calm, wellness-first athletic aesthetic with sage greens, organic studio textures, and mindfulness recovery gear.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 96,
+      isActive: true,
+      brandName: 'ENDURANCE WELLNESS',
+      headline: 'MINDFUL MOVEMENT.\nRESTORE. RECHARGE. THRIVE.',
+      subtitle: 'Buttery-soft seamless activewear, eco-cork yoga mats, and percussive therapy tools crafted for lifelong vitality.',
+      buttonText: 'Explore Studio Gear',
+      buttonColor: '#0f766e',
+      accentColor: '#14b8a6',
+      isDark: false,
+      modelImage: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&auto=format&fit=crop&q=80',
+      badge: 'recommended',
+      rating: 4.93,
+      reviewCount: 89,
+      layoutType: 'centered',
+      features: ['Eco Cork Material Index', 'Recovery Protocol Planner', 'Yoga Mat Thickness Guide', 'Virtual Studio Access', 'Sustainable Packaging'],
+    },
+    announcement: '🌿 MINDFUL LIVING: Complimentary Lavender Mat Spray with all organic yoga mat orders',
+    navItems: ['Studio Sets', 'Yoga & Pilates', 'Recovery & Massage', 'Resistance Tools', 'Mindful Journal', 'Classes'],
+    categories: [
+      { id: 'mats', name: 'Organic Cork Yoga Mats', image: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=600&auto=format&fit=crop&q=80', count: '12 Mats' },
+      { id: 'apparel', name: 'Buttery Soft Studio Sets', image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&auto=format&fit=crop&q=80', count: '28 Sets' },
+      { id: 'recovery', name: 'Percussive Massage Guns', image: 'https://images.unsplash.com/photo-1576243345690-4e4b79b63288?w=600&auto=format&fit=crop&q=80', count: '8 Tools' },
+    ],
+    featuredProducts: [
+      {
+        id: 'end-01',
+        name: 'The Sacred Cork 6mm Non-Slip Mat',
+        category: 'Yoga & Pilates',
+        price: '$98.00',
+        image: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=600&auto=format&fit=crop&q=80',
+        badge: '100% SUSTAINABLE CORK',
+        rating: 4.97,
+        reviewCount: 165,
+        colors: ['#0f766e', '#d97706'],
+        techSpecs: ['Natural Tree Rubber Base', 'Grip Increases With Sweat', 'Antimicrobial Surface'],
+      },
+      {
+        id: 'end-02',
+        name: 'CloudSculpt High-Waist Set',
+        category: 'Studio Sets',
+        price: '$110.00',
+        image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&auto=format&fit=crop&q=80',
+        badge: 'ZERO-COMPRESSION FEEL',
+        rating: 4.92,
+        reviewCount: 98,
+      },
+    ],
+  },
+
+  'sports-sportline': {
+    template: {
+      id: 'sports-sportline',
+      slug: 'sports-sportline',
+      name: 'Sportline',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'modern',
+      catalogSize: 'large',
+      tags: ['General Sporting Goods', 'Multi Sport', 'Mega Catalog', 'Equipment', 'Deals'],
+      shortDescription: 'High-density multi-sport marketplace with massive category filtering, brand showcases, and lightning deal counters.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1471295253337-3ceaaedca402?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1471295253337-3ceaaedca402?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 99,
+      isActive: true,
+      brandName: 'SPORTLINE MEGACENTER',
+      headline: 'ALL SPORTS. ALL GEAR.\nONE DESTINATION.',
+      subtitle: 'Over 10,000 products across 30+ sports categories with express shipping and price-match guarantee.',
+      buttonText: 'Browse All Sports',
+      buttonColor: '#1d4ed8',
+      accentColor: '#2563eb',
+      isDark: false,
+      modelImage: 'https://images.unsplash.com/photo-1471295253337-3ceaaedca402?w=800&auto=format&fit=crop&q=80',
+      badge: 'popular',
+      rating: 4.91,
+      reviewCount: 280,
+      layoutType: 'split',
+      features: ['Mega Multi-Category Filter', 'Live Daily Flash Deals', 'Price Match Promise', 'In-Store Pickup In 2 Hours', 'Verified Brand Guarantee'],
+    },
+    announcement: '⚡ MEGA DEALS: Up to 50% Off Top Brand Equipment • Free Shipping on Orders over $75',
+    navItems: ['All Sports', 'Apparel', 'Footwear', 'Fitness & Gym', 'Outdoor', 'Deals', 'Brands'],
+    categories: [
+      { id: 'running', name: 'Running & Cardio', image: 'https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?w=600&auto=format&fit=crop&q=80', count: '450+ Items' },
+      { id: 'football', name: 'Football & Soccer', image: 'https://images.unsplash.com/photo-1511886929837-354d827aae26?w=600&auto=format&fit=crop&q=80', count: '320+ Items' },
+      { id: 'gym', name: 'Strength & Conditioning', image: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&auto=format&fit=crop&q=80', count: '280+ Items' },
+      { id: 'rackets', name: 'Tennis & Rackets', image: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=600&auto=format&fit=crop&q=80', count: '190+ Items' },
+      { id: 'cycling', name: 'Cycling & Bikes', image: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=600&auto=format&fit=crop&q=80', count: '210+ Items' },
+      { id: 'outdoor', name: 'Camping & Hiking', image: 'https://images.unsplash.com/photo-1501555088652-021faa106b9b?w=600&auto=format&fit=crop&q=80', count: '340+ Items' },
+    ],
+    featuredProducts: [
+      {
+        id: 'spt-01',
+        name: 'Apex Pro Cross-Trainer Shoes',
+        category: 'Footwear',
+        price: '$130.00',
+        compareAtPrice: '$160.00',
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80',
+        badge: 'TOP VALUE',
+        rating: 4.88,
+        reviewCount: 310,
+        colors: ['#1d4ed8', '#0f172a', '#ffffff'],
+      },
+      {
+        id: 'spt-02',
+        name: 'All-Sport 50L Water-Resistant Duffel',
+        category: 'Bags',
+        price: '$65.00',
+        compareAtPrice: '$85.00',
+        image: 'https://images.unsplash.com/photo-1576243345690-4e4b79b63288?w=600&auto=format&fit=crop&q=80',
+        badge: '25% OFF',
+        rating: 4.9,
+        reviewCount: 175,
+      },
+    ],
+    promoBanner: {
+      tag: 'FLASH SALE',
+      title: 'WEEKEND ATHLETIC CLEARANCE',
+      subtitle: 'Save up to 40% on over 500 seasonal items. Limited quantities available.',
+      code: 'MEGA40',
+      discount: '40% OFF',
+      buttonText: 'Shop Flash Deals',
+      image: 'https://images.unsplash.com/photo-1471295253337-3ceaaedca402?w=1200&auto=format&fit=crop&q=80',
+    },
+  },
+}
+
+export const ALL_SPORTS_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = Object.values(SPORTS_TEMPLATES_CONFIG).map(
+  (cfg) => cfg.template
+)
+
+/* =========================================================================
+   SHOES & FOOTWEAR TEMPLATES - DATA & CONFIGURATIONS
+   ========================================================================= */
+
+export interface ShoesProduct {
+  id: string
+  name: string
+  category: string
+  price: string
+  compareAtPrice?: string
+  image: string
+  badge?: string
+  rating: number
+  reviewCount: number
+  colors?: string[]
+  sizes?: string[]
+  techSpecs?: string[]
+}
+
+export interface ShoesTemplateConfig {
+  template: MarketplaceTemplate
+  announcement?: string
+  navItems: string[]
+  heroStats?: { label: string; value: string }[]
+  categories: { id: string; name: string; image: string; badge?: string; count?: string }[]
+  featuredProducts: ShoesProduct[]
+  newArrivals?: ShoesProduct[]
+  bestSellers?: ShoesProduct[]
+  promoBanner?: {
+    tag: string
+    title: string
+    subtitle: string
+    code?: string
+    discount?: string
+    buttonText: string
+    image?: string
+    endDate?: string
+  }
+  techFeatures?: { icon: string; title: string; desc: string }[]
+  story?: {
+    eyebrow: string
+    title: string
+    quote: string
+    author: string
+    role: string
+    image: string
+    stats?: { num: string; label: string }[]
+  }
+  guides?: { title: string; tag: string; time: string; image: string; desc: string }[]
+  reviews?: { name: string; role: string; quote: string; rating: number; verified?: boolean }[]
+  faqs?: { q: string; a: string }[]
+  collections?: { title: string; tag: string; image: string; count?: string }[]
+  socialGallery?: { image: string; handle: string; likes: string }[]
+}
+
+export const SHOES_TEMPLATES_CONFIG: Record<string, ShoesTemplateConfig> = {
+  'shoes-sneakr': {
+    template: {
+      id: 'shoes-sneakr',
+      slug: 'shoes-sneakr',
+      name: 'SNEAKR',
+      businessType: 'shoes-footwear',
+      industryCategory: 'Shoes & Footwear',
+      style: 'bold',
+      catalogSize: 'large',
+      tags: ['Sneakers', 'Streetwear', 'Hype Drops', 'Limited Edition', 'High Top'],
+      shortDescription: 'Modern high-voltage sneaker boutique with live drop countdowns, heat-index badges, and deadstock verification.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 99,
+      isActive: true,
+      brandName: 'SNEAKR // LAB',
+      headline: 'NEXT-GEN SNEAKER DROPS.\nZERO GRAVITY. MAX IMPACT.',
+      subtitle: 'Engineered with responsive nitrogen air-cushioning, carbon midfoot shanks, and premium deconstructed canvas.',
+      buttonText: 'Enter Drop Raffle',
+      buttonColor: '#ccff00',
+      accentColor: '#ccff00',
+      isDark: true,
+      modelImage: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=800&auto=format&fit=crop&q=80',
+      badge: 'trending',
+      rating: 4.97,
+      reviewCount: 168,
+      layoutType: 'card-grid',
+      features: ['Live Raffle Timer', 'Deadstock Authenticity Guarantee', '3D Sneaker Rotator', 'Colorway Wave Selector', 'Sneakerhead Discord Access'],
+    },
+    announcement: '⚡ SATURDAY DROP: SNEAKR Proto-01 "Volt Spectrum" drops at 10 AM EST • Exclusive App Access',
+    navItems: ['Drops', 'Sneakers', 'Streetwear', 'Heat Index', 'Raffles', 'Archive'],
+    heroStats: [
+      { label: 'Energy Return', value: '86.2%' },
+      { label: 'Weight', value: '240g' },
+      { label: 'Sold Out', value: '4 Mins' },
+    ],
+    categories: [
+      { id: 'hightops', name: 'High Top Retros', image: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=600&auto=format&fit=crop&q=80', count: '38 Models' },
+      { id: 'lowtops', name: 'Low Top Street', image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&auto=format&fit=crop&q=80', count: '54 Models' },
+      { id: 'runners', name: 'Tech Foam Runners', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80', count: '29 Models' },
+      { id: 'collabs', name: 'Designer Collabs', image: 'https://images.unsplash.com/photo-1514989940723-e8e51635b782?w=600&auto=format&fit=crop&q=80', count: '14 Limited' },
+    ],
+    featuredProducts: [
+      {
+        id: 'snk-01',
+        name: 'SNEAKR Air Proto-01 "Volt Black"',
+        category: 'Limited Drops',
+        price: '$220.00',
+        compareAtPrice: '$260.00',
+        image: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=600&auto=format&fit=crop&q=80',
+        badge: 'SOLD OUT IN 4M (RESTOCK)',
+        rating: 4.98,
+        reviewCount: 214,
+        colors: ['#ccff00', '#000000', '#ffffff'],
+        sizes: ['US 8', 'US 9', 'US 10', 'US 11', 'US 12'],
+        techSpecs: ['Nitrogen Air Pods', 'Carbon Shank Plate', 'Deconstructed Ripstop'],
+      },
+      {
+        id: 'snk-02',
+        name: 'Vortex Low Retro "Solar Pink"',
+        category: 'Low Tops',
+        price: '$165.00',
+        image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&auto=format&fit=crop&q=80',
+        badge: 'NEW COLORWAY',
+        rating: 4.91,
+        reviewCount: 88,
+        colors: ['#f43f5e', '#000000', '#3b82f6'],
+        sizes: ['US 7', 'US 8', 'US 9', 'US 10', 'US 11'],
+      },
+      {
+        id: 'snk-03',
+        name: 'HyperKicks High-Top "Panda Matrix"',
+        category: 'High Tops',
+        price: '$180.00',
+        image: 'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=600&auto=format&fit=crop&q=80',
+        badge: 'BESTSELLER',
+        rating: 4.94,
+        reviewCount: 142,
+      },
+    ],
+    promoBanner: {
+      tag: 'EXCLUSIVE DROP ACCESS',
+      title: 'JOIN THE SNEAKR VAULT',
+      subtitle: 'Get early raffle tickets, zero-bot verification, and free global express delivery on all tier-1 drops.',
+      code: 'VAULTDROP',
+      discount: 'EARLY PASS',
+      buttonText: 'Unlock Vault Access',
+      image: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=1200&auto=format&fit=crop&q=80',
+    },
+    story: {
+      eyebrow: 'DESIGN DISPATCH // NO. 03',
+      title: '“WE DON’T FOLLOW TRENDS. WE ENGINEER THE SNEAKERS THAT DEFINE THEM.”',
+      quote: 'From midnight sketches in Brooklyn to precision molding in Tokyo, every SNEAKR drop is an obsession with street culture and kinetic technology.',
+      author: 'Kaelen Cruz',
+      role: 'Head of Footwear Innovation',
+      image: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=800&auto=format&fit=crop&q=80',
+    },
+  },
+
+  'shoes-sole': {
+    template: {
+      id: 'shoes-sole',
+      slug: 'shoes-sole',
+      name: 'SOLE',
+      businessType: 'shoes-footwear',
+      industryCategory: 'Shoes & Footwear',
+      style: 'luxury',
+      catalogSize: 'small',
+      tags: ['Luxury', 'Boutique', 'Italian Leather', 'Artisan', 'Handmade'],
+      shortDescription: 'Exquisite Florentine footwear atelier with hand-lasted calfskin, editorial lookbooks, and bespoke concierge fitting.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 98,
+      isActive: true,
+      brandName: 'SOLE ATELIER FIRENZE',
+      headline: 'SCULPTED IN FLORENCE.\nTHE TIMELESS ART OF THE LAST.',
+      subtitle: 'Hand-lasted Italian calfskin, hand-stitched welt construction, and understated luxury for discerning collectors.',
+      buttonText: 'Explore Atelier Lookbook',
+      buttonColor: '#1c1917',
+      accentColor: '#d4af37',
+      isDark: false,
+      modelImage: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800&auto=format&fit=crop&q=80',
+      badge: "editor's pick",
+      rating: 4.99,
+      reviewCount: 84,
+      layoutType: 'editorial',
+      features: ['Concierge Sizing Service', 'Numbered Atelier Editions', 'Hand-Polished Finish', 'Complimentary Cedar Shoe Trees', 'Lifetime Re-Crafting'],
+    },
+    announcement: '✦ SOLE ATELIER: Edition 04 Now Available • Complimentary Hand-Carved Cedar Shoe Trees with every pair',
+    navItems: ['Atelier Collection', 'Made to Order', 'Lookbook', 'Heritage', 'Shoe Care', 'Concierge'],
+    categories: [
+      { id: 'derbies', name: 'Artisan Derbies', image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&auto=format&fit=crop&q=80', count: '8 Editions' },
+      { id: 'loafers', name: 'Florentine Loafers', image: 'https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=600&auto=format&fit=crop&q=80', count: '12 Editions' },
+      { id: 'boots', name: 'Hand-Stitched Chelsea Boots', image: 'https://images.unsplash.com/photo-1520639888713-7851133b1ed0?w=600&auto=format&fit=crop&q=80', count: '6 Editions' },
+    ],
+    featuredProducts: [
+      {
+        id: 'sole-01',
+        name: 'The Michelangelo Calfskin Derby',
+        category: 'Atelier Collection',
+        price: '$580.00',
+        image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&auto=format&fit=crop&q=80',
+        badge: 'LIMITED TO 150 PAIRS',
+        rating: 5.0,
+        reviewCount: 38,
+        colors: ['#78350f', '#1c1917', '#9a3412'],
+        sizes: ['EU 40', 'EU 41', 'EU 42', 'EU 43', 'EU 44', 'EU 45'],
+        techSpecs: ['Full-Grain Tuscan Calfskin', 'Goodyear Welt Construction', 'Oak Bark Tanned Leather Sole'],
+      },
+      {
+        id: 'sole-02',
+        name: 'The Arno Penny Loafer',
+        category: 'Loafers',
+        price: '$490.00',
+        image: 'https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=600&auto=format&fit=crop&q=80',
+        badge: 'NEW EDITION',
+        rating: 4.96,
+        reviewCount: 29,
+      },
+    ],
+    story: {
+      eyebrow: 'FLORENTINE HERITAGE',
+      title: 'THREE GENERATIONS OF MASTER SHOEMAKING ON THE BANKS OF THE ARNO.',
+      quote: 'True luxury cannot be hurried. Each pair rests on the wooden last for 28 days before our artisans burnish the edges by hand.',
+      author: 'Matteo Bellini',
+      role: 'Master Cordwainer',
+      image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800&auto=format&fit=crop&q=80',
+    },
+  },
+
+  'shoes-kicks': {
+    template: {
+      id: 'shoes-kicks',
+      slug: 'shoes-kicks',
+      name: 'KICKS',
+      businessType: 'shoes-footwear',
+      industryCategory: 'Shoes & Footwear',
+      style: 'bold',
+      catalogSize: 'medium',
+      tags: ['Youth', 'Streetwear', 'Skate', 'Limited Edition', 'Deadstock'],
+      shortDescription: 'High-energy youth streetwear footwear brand with oversized typography, skate-ready soles, and hype drops.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 97,
+      isActive: true,
+      brandName: 'KICKS // STREET CO.',
+      headline: 'DEFY THE MAINSTREAM.\nAUTHENTIC STREETWEAR HEAT.',
+      subtitle: 'Oversized rubber midsoles, skate-tested vulcanized canvas, and verified deadstock drops.',
+      buttonText: 'Shop New Arrivals',
+      buttonColor: '#f43f5e',
+      accentColor: '#f43f5e',
+      isDark: true,
+      modelImage: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800&auto=format&fit=crop&q=80',
+      badge: 'popular',
+      rating: 4.93,
+      reviewCount: 142,
+      layoutType: 'card-grid',
+      features: ['Skate Durability Index', 'Deadstock Verified Badge', 'Split-Second Quick Buy', 'Colorway Swatches', 'Youth Sizing Chart'],
+    },
+    announcement: '🔥 KICKS DROP: Buy Any Sneaker & Get a Free Collector Sock 3-Pack • Code: STREETHEAT',
+    navItems: ['New Heat', 'Skate Kicks', 'Retro Lows', 'High Tops', 'Accessories', 'Community'],
+    categories: [
+      { id: 'skate', name: 'Skateboard Vulcanized', image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&auto=format&fit=crop&q=80', count: '32 Styles' },
+      { id: 'platform', name: 'Chunky Platforms', image: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=600&auto=format&fit=crop&q=80', count: '24 Styles' },
+      { id: 'retro', name: 'Retro Canvas', image: 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=600&auto=format&fit=crop&q=80', count: '40 Styles' },
+    ],
+    featuredProducts: [
+      {
+        id: 'kck-01',
+        name: 'KICKS Street Low "Cyber Berry"',
+        category: 'Skate Kicks',
+        price: '$115.00',
+        compareAtPrice: '$135.00',
+        image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&auto=format&fit=crop&q=80',
+        badge: 'TOP RATED',
+        rating: 4.95,
+        reviewCount: 178,
+        colors: ['#f43f5e', '#06b6d4', '#000000'],
+        sizes: ['US 6', 'US 7', 'US 8', 'US 9', 'US 10', 'US 11'],
+        techSpecs: ['Reinforced Ollie Patch', 'Impact Gel Insole', 'Vulcanized Waffle Sole'],
+      },
+      {
+        id: 'kck-02',
+        name: 'Overdrive Chunky Platform Sneaker',
+        category: 'Platforms',
+        price: '$130.00',
+        image: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=600&auto=format&fit=crop&q=80',
+        badge: 'HYPE DROP',
+        rating: 4.88,
+        reviewCount: 92,
+      },
+    ],
+  },
+
+  'shoes-runway': {
+    template: {
+      id: 'shoes-runway',
+      slug: 'shoes-runway',
+      name: 'RUNWAY',
+      businessType: 'shoes-footwear',
+      industryCategory: 'Shoes & Footwear',
+      style: 'editorial',
+      catalogSize: 'medium',
+      tags: ['Fashion', 'Runway', 'High Heel', 'Designer', 'Editorial'],
+      shortDescription: 'Haute couture fashion footwear showcase with architectural heels, Paris fashion week lookbooks, and statement silhouettes.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 96,
+      isActive: true,
+      brandName: 'RUNWAY COUTURE FOOTWEAR',
+      headline: 'AVANT-GARDE SILHOUETTES.\nPARIS & MILAN RUNWAY EDITIONS.',
+      subtitle: 'Architectural heels, pointed leather mules, and high-fashion runway statements crafted in micro-batch atelier releases.',
+      buttonText: 'View Runway Lookbook',
+      buttonColor: '#000000',
+      accentColor: '#d4af37',
+      isDark: false,
+      modelImage: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=800&auto=format&fit=crop&q=80',
+      badge: 'new',
+      rating: 4.92,
+      reviewCount: 64,
+      layoutType: 'editorial',
+      features: ['Runway 360 Lookbook', 'Heel Height Filter (45mm - 105mm)', 'VIP Fashion Week Access', 'Complimentary Sizing Concierge', 'Silk Storage Bag Included'],
+    },
+    announcement: '✨ PARIS FASHION WEEK EDITION: Complimentary Express Courier on all Runway Capsule pairs',
+    navItems: ['Runway Capsule', 'Architectural Heels', 'Designer Mules', 'Evening Boots', 'Lookbook', 'Atelier'],
+    categories: [
+      { id: 'heels', name: 'Sculptural Heels', image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&auto=format&fit=crop&q=80', count: '18 Designs' },
+      { id: 'mules', name: 'Pointed Satin Mules', image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&auto=format&fit=crop&q=80', count: '14 Designs' },
+      { id: 'boots', name: 'Knee-High Leather Boots', image: 'https://images.unsplash.com/photo-1520639888713-7851133b1ed0?w=600&auto=format&fit=crop&q=80', count: '10 Designs' },
+    ],
+    featuredProducts: [
+      {
+        id: 'rnw-01',
+        name: 'The Prism 95mm Architectural Pump',
+        category: 'Sculptural Heels',
+        price: '$460.00',
+        image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&auto=format&fit=crop&q=80',
+        badge: 'RUNWAY LOOK 14',
+        rating: 4.96,
+        reviewCount: 42,
+        colors: ['#000000', '#d4af37', '#ffffff'],
+        sizes: ['36', '37', '38', '39', '40', '41'],
+        techSpecs: ['95mm Sculpted Brass Heel', 'Italian Nappa Upper', 'Padded Insole'],
+      },
+    ],
+  },
+
+  'shoes-step': {
+    template: {
+      id: 'shoes-step',
+      slug: 'shoes-step',
+      name: 'STEP',
+      businessType: 'shoes-footwear',
+      industryCategory: 'Shoes & Footwear',
+      style: 'clean',
+      catalogSize: 'medium',
+      tags: ['Everyday', 'Comfort', 'Casual', 'Walking', 'Arch Support'],
+      shortDescription: 'Clean, friendly everyday footwear storefront with cloud memory-foam soles, ergonomic arch support, and slip-on ease.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 98,
+      isActive: true,
+      brandName: 'STEP EVERYDAY COMFORT',
+      headline: 'WALK ON CLOUDS.\nALL-DAY EFFORTLESS COMFORT.',
+      subtitle: 'Ergonomic arch support, ultra-breathable knit uppers, and cloud memory foam cushions for work, travel, and life.',
+      buttonText: 'Find Your Comfort Match',
+      buttonColor: '#2563eb',
+      accentColor: '#2563eb',
+      isDark: false,
+      modelImage: 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=800&auto=format&fit=crop&q=80',
+      badge: 'recommended',
+      rating: 4.94,
+      reviewCount: 198,
+      layoutType: 'split',
+      features: ['30-Day Cloud Comfort Guarantee', 'Machine Washable Footwear', 'Arch Support Recommender', 'Wide & Narrow Widths', 'Free Return Shipping'],
+    },
+    announcement: '☁️ 30-DAY COMFORT TRIAL: Walk in them for 30 days. If you don’t love them, returns are 100% free.',
+    navItems: ['Men', 'Women', 'Slip-Ons', 'Walking Shoes', 'Arch Support', 'Comfort Guide'],
+    categories: [
+      { id: 'slipons', name: 'Hands-Free Slip-Ons', image: 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=600&auto=format&fit=crop&q=80', count: '28 Models' },
+      { id: 'walking', name: 'All-Day Walkers', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80', count: '35 Models' },
+      { id: 'travel', name: 'Packable Travel Flats', image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&auto=format&fit=crop&q=80', count: '18 Models' },
+    ],
+    featuredProducts: [
+      {
+        id: 'stp-01',
+        name: 'The CloudStep Knit Slip-On Pro',
+        category: 'Slip-Ons',
+        price: '$98.00',
+        compareAtPrice: '$120.00',
+        image: 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=600&auto=format&fit=crop&q=80',
+        badge: 'TOP COMFORT CHOICE',
+        rating: 4.96,
+        reviewCount: 310,
+        colors: ['#2563eb', '#0f172a', '#94a3b8', '#ffffff'],
+        sizes: ['US 6', 'US 7', 'US 8', 'US 9', 'US 10', 'US 11', 'US 12'],
+        techSpecs: ['MemoryFoam 360 Insole', 'Machine Washable Knit', 'Hands-Free Heel Lock'],
+      },
+    ],
+  },
+
+  'shoes-trek': {
+    template: {
+      id: 'shoes-trek',
+      slug: 'shoes-trek',
+      name: 'TREK',
+      businessType: 'shoes-footwear',
+      industryCategory: 'Shoes & Footwear',
+      style: 'modern',
+      catalogSize: 'large',
+      tags: ['Outdoor', 'Hiking', 'Trail', 'Vibram', 'Waterproof'],
+      shortDescription: 'Rugged outdoor expedition footwear with Vibram Megagrip soles, GORE-TEX waterproof ratings, and trail terrain filters.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1520639888713-7851133b1ed0?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1520639888713-7851133b1ed0?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 97,
+      isActive: true,
+      brandName: 'TREK ALL-TERRAIN FOOTWEAR',
+      headline: 'BUILT FOR THE SUMMIT.\nVIBRAM® GRIP & GORE-TEX® PRO.',
+      subtitle: 'Ankle-stabilizing waterproof hiking boots and lightweight trail scramblers designed for rocky alpine descents.',
+      buttonText: 'Equip For The Trail',
+      buttonColor: '#15803d',
+      accentColor: '#ea580c',
+      isDark: false,
+      modelImage: 'https://images.unsplash.com/photo-1520639888713-7851133b1ed0?w=800&auto=format&fit=crop&q=80',
+      badge: 'popular',
+      rating: 4.95,
+      reviewCount: 154,
+      layoutType: 'split',
+      features: ['Vibram Megagrip Tested', '28,000mm Waterproof Guarantee', 'Terrain Difficulty Matcher', 'Gaiter Compatibility', 'Trail Tester Warranty'],
+    },
+    announcement: '🏔️ TRAIL SEASON: Free Merino Wool Hiking Socks with every GORE-TEX hiking boot purchase',
+    navItems: ['Alpine Boots', 'Trail Runners', 'Approach Shoes', 'Camp Slippers', 'Trail Journal', 'Boot Care'],
+    categories: [
+      { id: 'boots', name: '4-Season Alpine Boots', image: 'https://images.unsplash.com/photo-1520639888713-7851133b1ed0?w=600&auto=format&fit=crop&q=80', count: '16 Models' },
+      { id: 'trail', name: 'Grip Trail Scramblers', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80', count: '22 Models' },
+      { id: 'camp', name: 'Thermal Camp Mules', image: 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=600&auto=format&fit=crop&q=80', count: '12 Models' },
+    ],
+    featuredProducts: [
+      {
+        id: 'trk-01',
+        name: 'StormRidge 3L GORE-TEX Mountain Boot',
+        category: 'Alpine Boots',
+        price: '$285.00',
+        image: 'https://images.unsplash.com/photo-1520639888713-7851133b1ed0?w=600&auto=format&fit=crop&q=80',
+        badge: 'VIBRAM® MEGAGRIP',
+        rating: 4.97,
+        reviewCount: 188,
+        colors: ['#15803d', '#ea580c', '#1c1917'],
+        sizes: ['US 7', 'US 8', 'US 9', 'US 10', 'US 11', 'US 12'],
+        techSpecs: ['Vibram® Megagrip Lug 5mm', 'GORE-TEX® 3L Membrane', 'TPU Heel Stabilizer'],
+      },
+    ],
+  },
+
+  'shoes-stride': {
+    template: {
+      id: 'shoes-stride',
+      slug: 'shoes-stride',
+      name: 'STRIDE',
+      businessType: 'shoes-footwear',
+      industryCategory: 'Shoes & Footwear',
+      style: 'clean',
+      catalogSize: 'large',
+      tags: ['Running', 'Marathon', 'Carbon Plate', 'Performance', 'Athletic'],
+      shortDescription: 'Cadence-driven marathon running footwear with energy-returning PEBA foam, stack-height comparisons, and pace matchers.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 98,
+      isActive: true,
+      brandName: 'STRIDE // RUNNING LAB',
+      headline: 'EVERY STRIDE AMPLIFIED.\nCARBON-PLATED SPEED.',
+      subtitle: 'Sub-2:30 marathon racing shoes with energy-returning PEBA foam, 8mm heel drop, and featherlight engineered mesh.',
+      buttonText: 'Find Your Racing Shoe',
+      buttonColor: '#ea580c',
+      accentColor: '#ea580c',
+      isDark: false,
+      modelImage: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&auto=format&fit=crop&q=80',
+      badge: 'trending',
+      rating: 4.96,
+      reviewCount: 220,
+      layoutType: 'split',
+      features: ['Marathon Pace Matcher', 'Stack Height / Drop Comparison', 'Gait Analysis Booking', 'Run Club Telemetry', '30-Day Road Trial'],
+    },
+    announcement: '🏃 MARATHON SERIES: Free 30-Day Road Trial on all carbon-plated racing shoes',
+    navItems: ['Carbon Racers', 'Daily Trainers', 'Recovery Shoes', 'Trail Running', 'Pace Guide', 'Run Club'],
+    categories: [
+      { id: 'carbon', name: 'Carbon Plate Racers', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80', count: '14 Models' },
+      { id: 'trainer', name: 'Daily High-Mileage', image: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=600&auto=format&fit=crop&q=80', count: '20 Models' },
+      { id: 'recovery', name: 'Post-Run Slides', image: 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=600&auto=format&fit=crop&q=80', count: '10 Models' },
+    ],
+    featuredProducts: [
+      {
+        id: 'str-01',
+        name: 'HyperStrata Carbon Marathon Shoe',
+        category: 'Carbon Racers',
+        price: '$245.00',
+        compareAtPrice: '$275.00',
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80',
+        badge: 'SUB-3 HOUR MARATHON PICK',
+        rating: 4.97,
+        reviewCount: 260,
+        colors: ['#ea580c', '#0f172a', '#ffffff'],
+        sizes: ['US 7', 'US 8', 'US 9', 'US 10', 'US 11', 'US 12'],
+        techSpecs: ['Dual-Density PEBA Nitro Foam', 'Full-Length Spoon Carbon Plate', '185g Ultra-Light'],
+      },
+    ],
+  },
+
+  'shoes-classic': {
+    template: {
+      id: 'shoes-classic',
+      slug: 'shoes-classic',
+      name: 'CLASSIC',
+      businessType: 'shoes-footwear',
+      industryCategory: 'Shoes & Footwear',
+      style: 'luxury',
+      catalogSize: 'medium',
+      tags: ['Formal', 'Leather', 'Goodyear Welt', 'Brogues', 'Oxfords'],
+      shortDescription: 'Sophisticated traditional formal shoe merchant with Goodyear-welted French calfskin, leather care guides, and resoleable craftsmanship.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 97,
+      isActive: true,
+      brandName: 'THE CLASSIC SHOEMAKER',
+      headline: 'GOODYEAR WELTED PERFECTION.\nCRAFTED TO LAST DECADES.',
+      subtitle: 'Traditional British and French calfskin oxfords, hand-burnished brogues, and chelsea boots resoleable for life.',
+      buttonText: 'Discover Formal Collection',
+      buttonColor: '#78350f',
+      accentColor: '#b45309',
+      isDark: false,
+      modelImage: 'https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=800&auto=format&fit=crop&q=80',
+      badge: "editor's pick",
+      rating: 4.97,
+      reviewCount: 110,
+      layoutType: 'editorial',
+      features: ['Goodyear Welt 360°', 'Full-Grain French Calfskin', 'Lifetime Free Resoling Service', 'Cedar Shoe Tree Included', 'Custom Monogramming'],
+    },
+    announcement: '👞 HERITAGE CRAFT: Free Lifetime Resoling & Conditioning with all Goodyear-welted dress shoes',
+    navItems: ['Cap-Toe Oxfords', 'Wingtip Brogues', 'Double Monks', 'Chelsea Boots', 'Shoe Care', 'Leather Guide'],
+    categories: [
+      { id: 'oxfords', name: 'Cap-Toe Oxfords', image: 'https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=600&auto=format&fit=crop&q=80', count: '16 Models' },
+      { id: 'brogues', name: 'Hand-Burnished Brogues', image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&auto=format&fit=crop&q=80', count: '14 Models' },
+      { id: 'boots', name: 'Dress Chelsea Boots', image: 'https://images.unsplash.com/photo-1520639888713-7851133b1ed0?w=600&auto=format&fit=crop&q=80', count: '10 Models' },
+    ],
+    featuredProducts: [
+      {
+        id: 'cls-01',
+        name: 'The Sovereign Cap-Toe Oxford',
+        category: 'Cap-Toe Oxfords',
+        price: '$385.00',
+        image: 'https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=600&auto=format&fit=crop&q=80',
+        badge: 'GOODYEAR WELTED',
+        rating: 4.98,
+        reviewCount: 145,
+        colors: ['#78350f', '#000000', '#451a03'],
+        sizes: ['US 8', 'US 8.5', 'US 9', 'US 9.5', 'US 10', 'US 10.5', 'US 11', 'US 12'],
+        techSpecs: ['Du Puy French Calfskin', 'Goodyear 360° Welt', 'Dainite Studded Rubber Sole'],
+      },
+    ],
+  },
+
+  'shoes-junior': {
+    template: {
+      id: 'shoes-junior',
+      slug: 'shoes-junior',
+      name: 'JUNIOR',
+      businessType: 'shoes-footwear',
+      industryCategory: 'Shoes & Footwear',
+      style: 'playful',
+      catalogSize: 'medium',
+      tags: ['Kids', 'School', 'Toddler', 'Light-Up', 'Playful'],
+      shortDescription: 'Colorful, parent-friendly kids footwear storefront with age-group filters, growth guarantee size exchanges, and durable school shoes.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1514989940723-e8e51635b782?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1514989940723-e8e51635b782?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 95,
+      isActive: true,
+      brandName: 'JUNIOR ACTIVE STEPS',
+      headline: 'TINY FEET, BIG ADVENTURES.\nKID-PROOF & EASY ON/OFF.',
+      subtitle: 'Flexible non-marking soles, double hook-and-loop straps, and scuff-resistant toe bumpers designed for growing feet.',
+      buttonText: 'Shop by Child Age',
+      buttonColor: '#3b82f6',
+      accentColor: '#f59e0b',
+      isDark: false,
+      modelImage: 'https://images.unsplash.com/photo-1514989940723-e8e51635b782?w=800&auto=format&fit=crop&q=80',
+      badge: 'new',
+      rating: 4.93,
+      reviewCount: 96,
+      layoutType: 'centered',
+      features: ['Growth Guarantee (Free Size Swap within 90 days)', 'APMA Approved Ergonomics', 'Machine Washable', 'Dual Velcro Straps', 'School Uniform Approved'],
+    },
+    announcement: '🎈 BACK TO SCHOOL: Free Animal Charm & Water Bottle with every 2 pairs of kids shoes',
+    navItems: ['Toddler (0-3)', 'Little Kids (4-8)', 'Big Kids (9-12)', 'School Shoes', 'Sneakers', 'Size Finder'],
+    categories: [
+      { id: 'toddler', name: 'First Walkers (0-3 yrs)', image: 'https://images.unsplash.com/photo-1514989940723-e8e51635b782?w=600&auto=format&fit=crop&q=80', count: '24 Models' },
+      { id: 'school', name: 'School Uniform Shoes', image: 'https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=600&auto=format&fit=crop&q=80', count: '18 Models' },
+      { id: 'lightup', name: 'Light-Up Sneaker Fun', image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&auto=format&fit=crop&q=80', count: '20 Models' },
+    ],
+    featuredProducts: [
+      {
+        id: 'jnr-01',
+        name: 'Junior Stride Flex Play Sneaker',
+        category: 'Little Kids',
+        price: '$48.00',
+        image: 'https://images.unsplash.com/photo-1514989940723-e8e51635b782?w=600&auto=format&fit=crop&q=80',
+        badge: 'PARENTS CHOICE',
+        rating: 4.95,
+        reviewCount: 165,
+        colors: ['#3b82f6', '#f59e0b', '#10b981'],
+        sizes: ['Kids 10', 'Kids 11', 'Kids 12', 'Kids 13', 'Youth 1', 'Youth 2'],
+        techSpecs: ['APMA Podiatrist Approved', 'Scuff-Proof Rubber Toe', 'Hook & Loop Easy Close'],
+      },
+    ],
+  },
+
+  'shoes-solestudio': {
+    template: {
+      id: 'shoes-solestudio',
+      slug: 'shoes-solestudio',
+      name: 'SOLESTUDIO',
+      businessType: 'shoes-footwear',
+      industryCategory: 'Shoes & Footwear',
+      style: 'modern',
+      catalogSize: 'large',
+      tags: ['Marketplace', 'Multi-Brand', 'Mega Catalog', 'Sneakers', 'Deals'],
+      shortDescription: 'High-density mega footwear marketplace with over 500 brands, real-time size availability, and daily flash sales.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 99,
+      isActive: true,
+      brandName: 'SOLESTUDIO MEGACENTER',
+      headline: "10,000+ STYLES.\nTHE WORLD'S GREATEST FOOTWEAR.",
+      subtitle: 'All brands, all sizes, from everyday slip-ons to rare collector sneakers with instant 2-day delivery and free returns.',
+      buttonText: 'Browse 10,000+ Shoes',
+      buttonColor: '#1d4ed8',
+      accentColor: '#2563eb',
+      isDark: false,
+      modelImage: 'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=800&auto=format&fit=crop&q=80',
+      badge: 'popular',
+      rating: 4.91,
+      reviewCount: 340,
+      layoutType: 'card-grid',
+      features: ['500+ Top Brands Filter', 'Live Size & Width Inventory', 'Price Match Promise', 'In-Store Pickup in 2 Hours', 'Authenticity Guarantee'],
+    },
+    announcement: '⚡ MEGA FOOTWEAR SALE: Up to 40% Off 500+ Top Brand Shoes • Free 2-Day Shipping on $75+',
+    navItems: ['Men', 'Women', 'Kids', 'Sneakers', 'Running', 'Boots', 'Dress', 'Flash Deals'],
+    categories: [
+      { id: 'sneakers', name: 'Lifestyle Sneakers', image: 'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=600&auto=format&fit=crop&q=80', count: '4,200+ Styles' },
+      { id: 'running', name: 'Running & Cardio', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80', count: '1,800+ Styles' },
+      { id: 'boots', name: 'Boots & Winter', image: 'https://images.unsplash.com/photo-1520639888713-7851133b1ed0?w=600&auto=format&fit=crop&q=80', count: '1,200+ Styles' },
+      { id: 'formal', name: 'Dress & Formal', image: 'https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=600&auto=format&fit=crop&q=80', count: '950+ Styles' },
+    ],
+    featuredProducts: [
+      {
+        id: 'studio-01',
+        name: 'Apex Street Pro Cross-Trainer',
+        category: 'Sneakers',
+        price: '$125.00',
+        compareAtPrice: '$150.00',
+        image: 'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=600&auto=format&fit=crop&q=80',
+        badge: 'TOP VALUE',
+        rating: 4.89,
+        reviewCount: 420,
+        colors: ['#1d4ed8', '#0f172a', '#ffffff'],
+        sizes: ['US 7', 'US 8', 'US 9', 'US 10', 'US 11', 'US 12'],
+      },
+    ],
+    promoBanner: {
+      tag: 'FLASH FOOTWEAR STEAL',
+      title: 'WEEKEND SNEAKER BLOWOUT',
+      subtitle: 'Save up to 40% on over 1,000 top brand sneakers and athletic shoes. Limited sizes available.',
+      code: 'SOLE40',
+      discount: '40% OFF',
+      buttonText: 'Shop Footwear Clearance',
+      image: 'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=1200&auto=format&fit=crop&q=80',
+    },
+  },
+}
+
+export const ALL_SHOES_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = Object.values(SHOES_TEMPLATES_CONFIG).map(
+  (cfg) => cfg.template
+)
+
+
 export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
   'online-store': {
     displayName: 'Online Store',
@@ -1875,31 +3808,19 @@ export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
   },
 
   'sporting-goods': {
-    displayName: 'Sporting Goods',
+    displayName: 'Sports Store',
     badgeIcon: '⚽',
-    description: 'Performance athletic equipment, functional training tools, cycling and outdoor gear.',
-    filterTags: ['All', 'Athletic Wear', 'Outdoor Gear', 'Training Equipment', 'Running', 'Accessories'],
-    templates: [
-      {
-        id: 'tmpl_sg_01_apex',
-        slug: 'apex-trail-athletic',
-        name: 'Apex Trail Athletic',
-        businessType: 'sporting-goods',
-        tags: ['Outdoor Gear', 'Running'],
-        shortDescription: 'Ultra-lightweight trail running shoes, hydration vests and weatherproof technical shells.',
-        thumbnailUrl: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80',
-        fullPreviewUrl: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=1600&auto=format&fit=crop&q=85',
-        popularityScore: 98,
-        isActive: true,
-        brandName: 'APEX ATHLETIC',
-        headline: 'Built For The Peak\nTested On The Trail',
-        subtitle: 'Engineered for endurance in unpredictable mountain terrain.',
-        buttonText: 'Shop Mountain Gear',
-        buttonColor: '#ffffff',
-        isDark: true,
-        modelImage: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80',
-      },
-    ],
+    description: 'Performance athletic equipment, functional training tools, cycling, team sports, and outdoor gear.',
+    filterTags: ['All', 'Performance Sports', 'Team Sports', 'Running', 'Gym', 'Outdoor', 'Tennis', 'Basketball', 'Football', 'Swimming', 'Cycling', 'Boxing', 'Kids', 'Wellness'],
+    templates: ALL_SPORTS_MARKETPLACE_TEMPLATES,
+  },
+
+  'shoes-footwear': {
+    displayName: 'Shoes & Footwear',
+    badgeIcon: '👟',
+    description: 'Modern sneakers, luxury footwear boutiques, streetwear drops, athletic runners, formal leather, and outdoor boots.',
+    filterTags: ['All', 'Sneakers', 'Streetwear', 'Running', 'Luxury', 'Casual', 'Hiking & Trek', 'Formal & Leather', 'Kids', 'Marketplace'],
+    templates: ALL_SHOES_MARKETPLACE_TEMPLATES,
   },
 
   'toys-games': {
@@ -3811,6 +5732,8 @@ export const WillovateLogo: React.FC<{ onClick?: () => void }> = ({ onClick }) =
    5. FLAGSHIP MARKETPLACE TEMPLATES & DATA HELPERS
    ========================================================================= */
 export const FLAGSHIP_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
+  ...ALL_SPORTS_MARKETPLACE_TEMPLATES,
+  ...ALL_SHOES_MARKETPLACE_TEMPLATES,
   {
     id: 'tmpl_mino_minimal',
     slug: 'mino-store',
@@ -5237,6 +7160,10 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
 
   const fallbackHero = template.businessType === 'jewelry-accessories'
     ? 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&auto=format&fit=crop&q=80'
+    : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-')
+    ? 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=800&auto=format&fit=crop&q=80'
+    : template.businessType === 'sporting-goods' || template.id.startsWith('sports-')
+    ? 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&auto=format&fit=crop&q=80'
     : 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&auto=format&fit=crop&q=80'
 
   return (
@@ -5282,6 +7209,7 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
           style={{
             borderColor: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)',
             color: isDark ? '#94a3b8' : '#64748b',
+            paddingLeft: badgeConfig ? '7.5rem' : '0.85rem',
           }}
         >
           <span className="stage-brand-logo" style={{ color: isDark ? '#ffffff' : '#0f172a' }}>
@@ -5583,6 +7511,31 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
     if (template.id === 'tmpl_jewel_13_oceantide') return '🌊 100% RECLAIMED BEACH SILVER // FROSTED SEA GLASS'
     if (template.id === 'tmpl_jewel_14_riviera') return '💎 18K WHITE GOLD & PLATINUM // CONTINUOUS DIAMOND TENNIS'
     if (template.id === 'tmpl_jewel_15_jewelvault') return '🏦 500+ VERIFIED DESIGNER HOUSES // CERTIFIED VAULT'
+    if (template.id === 'sports-velocity') return '⚡ KINETIC AERO-WEAVE // 168G CARBON PRO'
+    if (template.id === 'sports-arena') return '🏟️ OFFICIAL MATCHWEAR 2026 // SQUAD SPEC'
+    if (template.id === 'sports-apex') return '✦ ATELIER PERFORMANCE // ITALIAN MERINO MESH'
+    if (template.id === 'sports-sprint') return '🏃 MARATHON PRO LAB // NITRO-INFUSED FOAM'
+    if (template.id === 'sports-ironcore') return '🔥 HEAVYWEIGHT GYM GEAR // MIL-SPEC STEEL'
+    if (template.id === 'sports-peak') return '🏔️ ALL-WEATHER ALPINE // 3L GORE-TEX'
+    if (template.id === 'sports-rally') return '🎾 TOURNAMENT SPEC // ULTRA-RESPONSIVE GRAPHITE'
+    if (template.id === 'sports-court') return '🏀 HARDWOOD SERIES // GRIP-LOCK SOLE'
+    if (template.id === 'sports-striker') return '⚽ MATCHDAY ELITE // AERODYNAMIC STRIKE'
+    if (template.id === 'sports-wave') return '🏊 HYDRO-CHRONO // ZERO-DRAG HYDROPHOBIC'
+    if (template.id === 'sports-ride') return '🚴 PRO VELODROME // WIND-TUNNEL CERTIFIED'
+    if (template.id === 'sports-combat') return '🥊 CHAMPIONSHIP LEATHER // 16OZ HANDCRAFTED'
+    if (template.id === 'sports-playfield') return '🎈 YOUTH ACTIVE // NON-TOXIC ERGONOMIC'
+    if (template.id === 'sports-endurance') return '🌿 MINDFUL RECOVERY // ORGANIC BAMBOO TECH'
+    if (template.id === 'sports-sportline') return '🏷️ 500+ SPORTS BRANDS // OFFICIAL GEAR'
+    if (template.id === 'shoes-sneakr') return '🔥 LIMITED SNEAKER DROP // HEAT ARCHIVE'
+    if (template.id === 'shoes-sole') return '✦ ITALIAN LEATHER ATELIER // FLORENCE'
+    if (template.id === 'shoes-kicks') return '⚡ STREETWEAR HEAT // DEADSTOCK VERIFIED'
+    if (template.id === 'shoes-runway') return '👠 PARIS RUNWAY FOOTWEAR // AVANT-GARDE'
+    if (template.id === 'shoes-step') return '☁️ CLOUD-FOAM ALL-DAY COMFORT // ZERO FATIGUE'
+    if (template.id === 'shoes-trek') return '🏔️ VIBRAM® OUTSOLE // ALL-TERRAIN TRAIL'
+    if (template.id === 'shoes-stride') return '🏃 NITRO-CHARGED RACING FOAM // MARATHON PRO'
+    if (template.id === 'shoes-classic') return '👞 ENGLISH GOODYEAR WELTED // BOX CALF'
+    if (template.id === 'shoes-junior') return '🎈 MEMORY FOAM & NON-MARKING // KIDS ACTIVE'
+    if (template.id === 'shoes-solestudio') return '👟 450+ VERIFIED FOOTWEAR DROPS // VERIFIED VAULT'
     if (template.id === 'tmpl_kuro_techwear') return '⚡ PROTOCOL // 3L WEATHERPROOF SHELL'
     if (template.id === 'tmpl_solstice_linen') return '☀️ 100% ORGANIC FRENCH FLAX LINEN'
     if (template.id === 'tmpl_aeropulse_active') return '▲ KINETIC 4-WAY STRETCH COMPRESSION'
@@ -5811,6 +7764,24 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
         { title: 'Couture Velvet Evening Cape', price: '$410.00', tag: 'Limited Run', img: 'https://images.unsplash.com/photo-1445205170230-053b83016050?w=600&auto=format&fit=crop&q=80' },
       ]
     }
+    if ((template.id.startsWith('sports-') || template.businessType === 'sporting-goods') && SPORTS_TEMPLATES_CONFIG[template.id]) {
+      const cfg = SPORTS_TEMPLATES_CONFIG[template.id]
+      return cfg.featuredProducts.slice(0, 3).map((p) => ({
+        title: p.name,
+        price: p.price,
+        tag: p.badge || p.category,
+        img: p.image,
+      }))
+    }
+    if ((template.id.startsWith('shoes-') || template.businessType === 'shoes-footwear') && SHOES_TEMPLATES_CONFIG[template.id]) {
+      const cfg = SHOES_TEMPLATES_CONFIG[template.id]
+      return cfg.featuredProducts.slice(0, 3).map((p) => ({
+        title: p.name,
+        price: p.price,
+        tag: p.badge || p.category,
+        img: p.image,
+      }))
+    }
     return [
       { title: 'Signature Edition No. 01', price: '$85.00', tag: 'Bestseller', img: template.modelImage },
       { title: 'Minimalist Daily Essential', price: '$120.00', tag: 'New Arrival', img: template.modelImage },
@@ -6030,6 +8001,139 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
         { icon: '⚡', title: '30-Day Training Trial', sub: 'Hassle-free fit exchanges' },
       ]
     }
+    if (template.id.startsWith('sports-') || template.businessType === 'sporting-goods') {
+      if (template.id === 'sports-velocity') {
+        return [
+          { icon: '⚡', title: 'Carbon Lattice Matrix', sub: 'Returns 88.4% of kinetic energy with zero flex fatigue' },
+          { icon: '💨', title: 'AeroFlow Dynamic Vents', sub: 'Wind-tunnel tested seam channels redirect turbulent airflow' },
+          { icon: '🛡️', title: '30-Day Speed Guarantee', sub: 'Free exchanges if your sprint times do not improve' },
+        ]
+      }
+      if (template.id === 'sports-arena') {
+        return [
+          { icon: '🏟️', title: 'Official League Badges', sub: '100% authentic player-spec club jerseys and printing' },
+          { icon: '⚡', title: 'Free Name Customization', sub: 'Official squad numbers and typography included' },
+          { icon: '📦', title: 'Matchday Fast Dispatch', sub: 'Priority delivery before the weekend kickoff' },
+        ]
+      }
+      if (template.id === 'sports-apex') {
+        return [
+          { icon: '🇨🇭', title: 'Swiss Fabric Alchemy', sub: 'Crafted exclusively with Schoeller® and technical merino' },
+          { icon: '✂️', title: 'Articulated Tailoring', sub: 'Pre-curved ergonomic sleeves for unrestricted movement' },
+          { icon: '♾️', title: 'Guaranteed For Life', sub: 'Complimentary repairs for the lifetime of the garment' },
+        ]
+      }
+      if (template.id === 'sports-sprint') {
+        return [
+          { icon: '🏃', title: '30-Day Road Trial', sub: 'Run 100 miles—if you do not love them, return for free' },
+          { icon: '⚡', title: 'Nitro-Infused Max Foam', sub: 'Ultra-responsive energy return cushioning' },
+          { icon: '📊', title: 'Pace Calculator Match', sub: 'Shoes calibrated to your target marathon split' },
+        ]
+      }
+      if (template.id === 'sports-ironcore') {
+        return [
+          { icon: '🔥', title: '215,000 PSI Steel', sub: 'Commercial grade knurled barbells with lifetime warranty' },
+          { icon: '⚖️', title: 'IPF Calibrated Accuracy', sub: 'Within +/- 10g of certified competition weight' },
+          { icon: '🚚', title: 'Curbside Freight Delivery', sub: 'Direct pallet delivery for heavy racks and bumper sets' },
+        ]
+      }
+      if (template.id === 'sports-peak') {
+        return [
+          { icon: '🏔️', title: '28,000mm Waterproof', sub: '3L GORE-TEX Pro alpine shells tested in high altitudes' },
+          { icon: '🪶', title: 'Ultralight Dyneema®', sub: 'Maximum tear strength at a fraction of standard pack weight' },
+          { icon: '🌲', title: 'Eco Recycled Materials', sub: '100% PFC-free durable water repellent treatment' },
+        ]
+      }
+      if (template.id === 'sports-rally') {
+        return [
+          { icon: '🎾', title: 'Complimentary Stringing', sub: 'Custom tension calibrated by tournament stringers' },
+          { icon: '🏛️', title: 'Club Whites Tradition', sub: 'Breathable organic cotton piqué tailored for center court' },
+          { icon: '🔄', title: '30-Day Demo Program', sub: 'Test any racket on your local court before committing' },
+        ]
+      }
+      if (template.id === 'sports-court') {
+        return [
+          { icon: '🏀', title: 'Hardwood Grip Lock', sub: 'Multi-directional herringbone traction for zero slip' },
+          { icon: '🔥', title: 'Verified Sneaker Authenticity', sub: 'Every pair inspected and certified deadstock' },
+          { icon: '⚡', title: 'Instant Raffle Draws', sub: 'Fair queue allocation for high-heat signature releases' },
+        ]
+      }
+      return [
+        { icon: '⚡', title: 'Athlete Tested & Certified', sub: 'Engineered for high-intensity competition performance' },
+        { icon: '🛡️', title: '30-Day Trial Guarantee', sub: 'Hassle-free size exchanges and returns' },
+        { icon: '📦', title: 'Free Express Delivery', sub: 'On all performance sports orders over $75' },
+      ]
+    }
+    if (template.id.startsWith('shoes-') || template.businessType === 'shoes-footwear') {
+      if (template.id === 'shoes-sneakr') {
+        return [
+          { icon: '🔥', title: '100% Verified Authentic', sub: 'Multi-point inspection and RFID verification on every sneaker' },
+          { icon: '⚡', title: 'Split-Second Instant Buy', sub: 'One-click checkout for high-heat releases before sellout' },
+          { icon: '📦', title: 'Double-Boxed Express Delivery', sub: 'Zero box damage guaranteed with reinforced shipping crates' },
+        ]
+      }
+      if (template.id === 'shoes-sole') {
+        return [
+          { icon: '✦', title: 'Hand-Lasted in Florence', sub: 'Full-grain Tuscan calfskin rested 28 days on wooden lasts' },
+          { icon: '🌲', title: 'Free Cedar Shoe Trees', sub: 'Complimentary hand-carved aromatic cedar shoe trees with every pair' },
+          { icon: '👞', title: 'Lifetime Recrafting Service', sub: 'Resole and welt restoration by our Italian master cordwainers' },
+        ]
+      }
+      if (template.id === 'shoes-kicks') {
+        return [
+          { icon: '🛹', title: 'Skate Durability Tested', sub: 'Reinforced ollie patches and vulcanized waffle soles' },
+          { icon: '🔥', title: 'Deadstock Certified', sub: 'Original factory packaging, extra laces, and collector stickers' },
+          { icon: '⚡', title: 'Free Collector Sock Pack', sub: 'Complimentary heavyweight ribbed socks with every order' },
+        ]
+      }
+      if (template.id === 'shoes-runway') {
+        return [
+          { icon: '👠', title: 'Paris Runway Editions', sub: 'Sculptural architectural heels and micro-batch artisan releases' },
+          { icon: '✨', title: 'Numbered Capsule Runs', sub: 'Individual certificate of authenticity and numbered shoebox' },
+          { icon: '🕊️', title: 'White Glove Concierge', sub: 'Complimentary private fit consultation and doorstep exchanges' },
+        ]
+      }
+      if (template.id === 'shoes-step') {
+        return [
+          { icon: '☁️', title: 'Cloud-Foam Cushioning', sub: 'Triple-density ergonomic footbeds engineered for all-day standing' },
+          { icon: '🔄', title: '30-Day Comfort Guarantee', sub: 'Wear them outside for 30 days—if not 100% comfortable, return for free' },
+          { icon: '🧼', title: 'Machine Washable Friendly', sub: 'Durable breathable knit uppers easy to wash and quick to dry' },
+        ]
+      }
+      if (template.id === 'shoes-trek') {
+        return [
+          { icon: '🏔️', title: 'Vibram® Megagrip Soles', sub: 'Maximum traction on wet rocks, muddy inclines, and loose scree' },
+          { icon: '💧', title: 'eVent® 100% Waterproof', sub: 'Breathable waterproof membrane keeps feet dry in torrential rains' },
+          { icon: '🛡️', title: 'Reinforced Rubber Rand', sub: '360-degree protective toe bumper protects against sharp rocks' },
+        ]
+      }
+      if (template.id === 'shoes-stride') {
+        return [
+          { icon: '🏃', title: '30-Day Road Trial', sub: 'Log 50 miles—if your pace doesn’t improve, return for full refund' },
+          { icon: '⚡', title: 'Nitro-Infused Max Cushion', sub: 'Supercritical nitrogen foam delivering 86% kinetic energy rebound' },
+          { icon: '📊', title: 'Complimentary Gait Match', sub: 'Interactive arch and strike diagnostic to select your exact shoe model' },
+        ]
+      }
+      if (template.id === 'shoes-classic') {
+        return [
+          { icon: '👞', title: 'Goodyear Welted Construction', sub: 'English bench-made footwear resoleable for decades of wear' },
+          { icon: '👑', title: 'Full-Grain Box Calfskin', sub: 'Tanned by historic European tanneries with deep burnished patina' },
+          { icon: '🌲', title: 'Shoe Care Kit Included', sub: 'Natural carnauba wax polish and horsehair brush included' },
+        ]
+      }
+      if (template.id === 'shoes-junior') {
+        return [
+          { icon: '🎈', title: 'Podiatrist Approved Design', sub: 'Natural foot-shape toe boxes allowing unrestricted growing room' },
+          { icon: '🛡️', title: 'Scuff-Resistant Armor Toes', sub: 'Durable rubber overlays withstand tough playground play' },
+          { icon: '📏', title: 'Printable Growth Sizer', sub: 'Free printable foot measurement chart shipped with every order' },
+        ]
+      }
+      return [
+        { icon: '👟', title: '100% Authenticity Verified', sub: 'Every pair inspected by veteran footwear authenticators' },
+        { icon: '🔄', title: '30-Day Road Trial & Free Swaps', sub: 'Hassle-free size exchanges with prepaid shipping labels' },
+        { icon: '⚡', title: 'Fast Express Delivery', sub: 'Double-boxed priority dispatch on all footwear orders' },
+      ]
+    }
     return [
       { icon: '📦', title: 'Complimentary Delivery', sub: 'On all continental orders' },
       { icon: '🛡️', title: 'Guaranteed Craftsmanship', sub: '1-year comprehensive warranty' },
@@ -6041,10 +8145,18 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
 
   const fallbackHero = template.businessType === 'jewelry-accessories'
     ? 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&auto=format&fit=crop&q=80'
+    : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-')
+    ? 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=800&auto=format&fit=crop&q=80'
+    : template.businessType === 'sporting-goods' || template.id.startsWith('sports-')
+    ? 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&auto=format&fit=crop&q=80'
     : 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&auto=format&fit=crop&q=80'
 
   const fallbackProduct = template.businessType === 'jewelry-accessories'
     ? 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=600&auto=format&fit=crop&q=80'
+    : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-')
+    ? 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80'
+    : template.businessType === 'sporting-goods' || template.id.startsWith('sports-')
+    ? 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80'
     : 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&auto=format&fit=crop&q=80'
 
   return (
@@ -6128,6 +8240,10 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                     ? '✨ Free Deluxe Mini & Express Delivery on orders over $50 • 100% Cruelty-Free & Authentic'
                     : template.businessType === 'jewelry-accessories'
                     ? '✨ Free Insured Global Express Shipping on orders over $150 • GIA & IGI Certified Stones • 100% Recycled Precious Metals'
+                    : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-')
+                    ? (SHOES_TEMPLATES_CONFIG[template.id]?.announcement || '👟 Free Express Delivery on Footwear Over $75 • 30-Day Road Trial • 100% Verified Authentic')
+                    : template.businessType === 'sporting-goods' || template.id.startsWith('sports-')
+                    ? (SPORTS_TEMPLATES_CONFIG[template.id]?.announcement || '⚡ Free Express Shipping on Orders Over $75 • 30-Day Athlete Guarantee • Official Performance Spec')
                     : '✨ Free Worldwide Express Shipping on orders over $150 • 30-Day Returns'}
                 </span>
               </div>
@@ -6158,6 +8274,22 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                         <span className="nav-link">Men's Metals</span>
                         <span className="nav-link">Ring Sizer</span>
                       </>
+                    ) : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-') ? (
+                      <>
+                        <span className="nav-link active">Sneakers</span>
+                        <span className="nav-link">Running</span>
+                        <span className="nav-link">Boots</span>
+                        <span className="nav-link">Casual</span>
+                        <span className="nav-link">Fit & Size Guide</span>
+                      </>
+                    ) : template.businessType === 'sporting-goods' || template.id.startsWith('sports-') ? (
+                      <>
+                        <span className="nav-link active">Men</span>
+                        <span className="nav-link">Women</span>
+                        <span className="nav-link">Footwear</span>
+                        <span className="nav-link">Performance Lab</span>
+                        <span className="nav-link">Gear Finder</span>
+                      </>
                     ) : (
                       <>
                         <span className="nav-link active">Catalog</span>
@@ -6172,7 +8304,7 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                   <span>⌕</span>
                   <span>♡</span>
                   <span className="cart-badge-icon" style={{ backgroundColor: template.accentColor || '#2563eb' }}>
-                    {template.businessType === 'health-beauty' ? '💄 2' : template.businessType === 'jewelry-accessories' ? '💎 2' : '👜 2'}
+                    {template.businessType === 'health-beauty' ? '💄 2' : template.businessType === 'jewelry-accessories' ? '💎 2' : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-') ? '👟 2' : template.businessType === 'sporting-goods' || template.id.startsWith('sports-') ? '⚡ 2' : '👜 2'}
                   </span>
                 </div>
               </header>
@@ -6221,7 +8353,7 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                         {eyebrowText}
                       </span>
                       <span className="editorial-issue-tag">
-                        {template.businessType === 'jewelry-accessories' ? 'PLACE VENDÔME & GENEVA ATELIER' : 'PARIS & MONACO ATELIER'}
+                        {template.businessType === 'jewelry-accessories' ? 'PLACE VENDÔME & GENEVA ATELIER' : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-') ? 'FLORENTINE CORDWAINER ATELIER' : 'PARIS & MONACO ATELIER'}
                       </span>
                     </div>
                     <div className="editorial-two-col">
@@ -6240,13 +8372,15 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                             {template.buttonText || 'Discover The Ritual'} →
                           </button>
                           <button type="button" className="hero-secondary-cta">
-                            {template.businessType === 'jewelry-accessories' ? 'Atelier Journal' : 'Read Journal'}
+                            {template.businessType === 'jewelry-accessories' ? 'Atelier Journal' : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-') ? 'Atelier Journal' : 'Read Journal'}
                           </button>
                         </div>
                         <div className="editorial-quote-badge">
                           <em>
                             {template.businessType === 'jewelry-accessories'
                               ? '“Heirloom craftsmanship sculpted in certified precious metals that last a lifetime.”'
+                              : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-')
+                              ? '“Hand-lasted Italian calfskin rested 28 days on wooden lasts for effortless contouring.”'
                               : '“A transformative ritual crafted with precious active botanicals.”'}
                           </em>
                         </div>
@@ -6266,7 +8400,7 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                           <div className="editorial-caption-overlay">
                             <span className="overlay-badge-dot" style={{ backgroundColor: template.accentColor || '#b58d3d' }} />
                             <span>
-                              {template.businessType === 'jewelry-accessories' ? 'Master Goldsmith Release' : 'Bespoke Formulation Release'}
+                              {template.businessType === 'jewelry-accessories' ? 'Master Goldsmith Release' : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-') ? 'Master Cordwainer Release' : 'Bespoke Formulation Release'}
                             </span>
                           </div>
                         </div>
@@ -6317,11 +8451,13 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                         <div className="metric-stat-number" style={{ color: template.accentColor || '#0284c7' }}>
                           {template.id === 'tmpl_cosm_08_beautymarket'
                             ? '450+'
-                            : template.id === 'tmpl_jewel_15_jewelvault'
+                            : template.id === 'tmpl_jewel_15_jewelvault' || template.id === 'shoes-solestudio'
                             ? '500+'
                             : template.id === 'tmpl_jewel_10_engrave'
                             ? '0.01mm'
                             : template.businessType === 'jewelry-accessories'
+                            ? '100%'
+                            : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-')
                             ? '100%'
                             : '98%'}
                         </div>
@@ -6330,10 +8466,14 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                             ? 'Verified Brands'
                             : template.id === 'tmpl_jewel_15_jewelvault'
                             ? 'Designer Houses'
+                            : template.id === 'shoes-solestudio'
+                            ? 'Verified Footwear Drops'
                             : template.id === 'tmpl_jewel_10_engrave'
                             ? 'Laser Precision'
                             : template.businessType === 'jewelry-accessories'
                             ? 'Recycled Precious Metals'
+                            : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-')
+                            ? 'Authenticity Verified'
                             : 'Barrier Score'}
                         </strong>
                         <p>
@@ -6341,19 +8481,23 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                             ? 'Fast express dispatch with 100% authentic guarantee'
                             : template.id === 'tmpl_jewel_15_jewelvault'
                             ? 'Curated multi-brand jewelry marketplace with authenticated diamond appraisal certificates'
+                            : template.id === 'shoes-solestudio'
+                            ? 'Curated footwear marketplace with authenticated sneakers, boots, and verified deadstock'
                             : template.id === 'tmpl_jewel_10_engrave'
                             ? 'Precision sub-millimeter deep fiber laser engraving that never wears down'
                             : template.businessType === 'jewelry-accessories'
                             ? 'Certified conflict-free stones and certified recycled 14K & 18K solid gold'
+                            : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-')
+                            ? 'Every pair inspected by master footwear authenticators with RFID tag certification'
                             : 'Dermatologist backed repair tested across all skin types'}
                         </p>
                       </div>
                       <div className="grid-feature-card action-quiz-box">
-                        <span className="quiz-star-icon">{template.businessType === 'jewelry-accessories' ? '💍' : '✨'}</span>
-                        <strong>{template.businessType === 'jewelry-accessories' ? 'Ring Size Finder' : 'Routine Diagnostic'}</strong>
-                        <p>{template.businessType === 'jewelry-accessories' ? 'Instant AR camera & printable sizer guide' : 'Take the 60-second skin analyzer'}</p>
+                        <span className="quiz-star-icon">{template.businessType === 'jewelry-accessories' ? '💍' : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-') ? '👟' : '✨'}</span>
+                        <strong>{template.businessType === 'jewelry-accessories' ? 'Ring Size Finder' : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-') ? '3D Foot Size Finder' : 'Routine Diagnostic'}</strong>
+                        <p>{template.businessType === 'jewelry-accessories' ? 'Instant AR camera & printable sizer guide' : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-') ? 'Find your exact width, arch & shoe size in 30s' : 'Take the 60-second skin analyzer'}</p>
                         <span className="quiz-btn-link" style={{ color: template.accentColor || '#0284c7' }}>
-                          {template.businessType === 'jewelry-accessories' ? 'Find My Ring Size →' : 'Match My Skin →'}
+                          {template.businessType === 'jewelry-accessories' ? 'Find My Ring Size →' : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-') ? 'Find My Shoe Size →' : 'Match My Skin →'}
                         </span>
                       </div>
                     </div>
@@ -6394,7 +8538,7 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                         }}
                       />
                       <div className="boldminimal-corner-badge" style={{ backgroundColor: template.accentColor || '#9f1239' }}>
-                        {template.businessType === 'jewelry-accessories' ? '★ ATELIER EDITION' : '★ EXCLUSIVE'}
+                        {template.businessType === 'jewelry-accessories' ? '★ ATELIER EDITION' : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-') ? '★ LIMITED DROP' : '★ EXCLUSIVE'}
                       </div>
                     </div>
                   </div>
@@ -6488,6 +8632,106 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                 </section>
               )}
 
+              {/* Category Navigation Strip for Sports Store */}
+              {(template.businessType === 'sporting-goods' || template.id.startsWith('sports-')) && (
+                <section className="jewelry-collection-strip sports-collection-strip">
+                  <div className="jewelry-collection-strip-inner">
+                    <div className="collection-bubble-item">
+                      <div className="bubble-circle" style={{ borderColor: template.accentColor || '#2563eb' }}>
+                        <span>⚡</span>
+                      </div>
+                      <span className="bubble-label">Speed & Sprint</span>
+                    </div>
+                    <div className="collection-bubble-item">
+                      <div className="bubble-circle" style={{ borderColor: template.accentColor || '#2563eb' }}>
+                        <span>🏟️</span>
+                      </div>
+                      <span className="bubble-label">Team Sports</span>
+                    </div>
+                    <div className="collection-bubble-item">
+                      <div className="bubble-circle" style={{ borderColor: template.accentColor || '#2563eb' }}>
+                        <span>🔥</span>
+                      </div>
+                      <span className="bubble-label">Gym & Iron</span>
+                    </div>
+                    <div className="collection-bubble-item">
+                      <div className="bubble-circle" style={{ borderColor: template.accentColor || '#2563eb' }}>
+                        <span>🏔️</span>
+                      </div>
+                      <span className="bubble-label">Trail & Alpine</span>
+                    </div>
+                    <div className="collection-bubble-item">
+                      <div className="bubble-circle" style={{ borderColor: template.accentColor || '#2563eb' }}>
+                        <span>🎾</span>
+                      </div>
+                      <span className="bubble-label">Racket Sports</span>
+                    </div>
+                    <div className="collection-bubble-item">
+                      <div className="bubble-circle" style={{ borderColor: template.accentColor || '#2563eb' }}>
+                        <span>🏀</span>
+                      </div>
+                      <span className="bubble-label">Basketball</span>
+                    </div>
+                    <div className="collection-bubble-item">
+                      <div className="bubble-circle" style={{ borderColor: template.accentColor || '#2563eb' }}>
+                        <span>🚴</span>
+                      </div>
+                      <span className="bubble-label">Cycling Velo</span>
+                    </div>
+                  </div>
+                </section>
+              )}
+
+              {/* Category Navigation Strip for Shoes & Footwear */}
+              {(template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-')) && (
+                <section className="jewelry-collection-strip shoes-collection-strip">
+                  <div className="jewelry-collection-strip-inner">
+                    <div className="collection-bubble-item">
+                      <div className="bubble-circle" style={{ borderColor: template.accentColor || '#f97316' }}>
+                        <span>👟</span>
+                      </div>
+                      <span className="bubble-label">Sneakers</span>
+                    </div>
+                    <div className="collection-bubble-item">
+                      <div className="bubble-circle" style={{ borderColor: template.accentColor || '#f97316' }}>
+                        <span>🏃</span>
+                      </div>
+                      <span className="bubble-label">Running</span>
+                    </div>
+                    <div className="collection-bubble-item">
+                      <div className="bubble-circle" style={{ borderColor: template.accentColor || '#f97316' }}>
+                        <span>👞</span>
+                      </div>
+                      <span className="bubble-label">Formal Oxfords</span>
+                    </div>
+                    <div className="collection-bubble-item">
+                      <div className="bubble-circle" style={{ borderColor: template.accentColor || '#f97316' }}>
+                        <span>🥾</span>
+                      </div>
+                      <span className="bubble-label">Trail Boots</span>
+                    </div>
+                    <div className="collection-bubble-item">
+                      <div className="bubble-circle" style={{ borderColor: template.accentColor || '#f97316' }}>
+                        <span>👠</span>
+                      </div>
+                      <span className="bubble-label">Designer Heels</span>
+                    </div>
+                    <div className="collection-bubble-item">
+                      <div className="bubble-circle" style={{ borderColor: template.accentColor || '#f97316' }}>
+                        <span>☁️</span>
+                      </div>
+                      <span className="bubble-label">Casual Slip-Ons</span>
+                    </div>
+                    <div className="collection-bubble-item">
+                      <div className="bubble-circle" style={{ borderColor: template.accentColor || '#f97316' }}>
+                        <span>🎈</span>
+                      </div>
+                      <span className="bubble-label">Kids & Youth</span>
+                    </div>
+                  </div>
+                </section>
+              )}
+
               {/* Value Props Strip */}
               <div className="storefront-value-props">
                 {valueProps.map((prop, idx) => (
@@ -6533,6 +8777,13 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                                 <span className="swatch" style={{ backgroundColor: '#f3e5d8' }} title="18K Rose Gold" />
                                 <span className="swatch" style={{ backgroundColor: '#cbd5e1' }} title="Solid Platinum / 925 Silver" />
                               </>
+                            ) : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-') ? (
+                              <>
+                                <span className="swatch shoe-size-chip" title="US 8">8</span>
+                                <span className="swatch shoe-size-chip" title="US 9">9</span>
+                                <span className="swatch shoe-size-chip" title="US 10">10</span>
+                                <span className="swatch shoe-size-chip" title="US 11">11</span>
+                              </>
                             ) : (
                               <>
                                 <span className="swatch dark" style={{ backgroundColor: isDark ? template.accentColor : '#0f172a' }} />
@@ -6563,16 +8814,70 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                 </section>
               )}
 
+              {/* Complimentary Fit & Sizing Interactive Callout for Sports Store */}
+              {(template.businessType === 'sporting-goods' || template.id.startsWith('sports-')) && (
+                <section className="storefront-ring-sizer-banner" style={{ borderColor: isDark ? 'rgba(255,255,255,0.1)' : '#e2e8f0' }}>
+                  <div className="sizer-banner-content">
+                    <span className="sizer-icon">⚡</span>
+                    <div>
+                      <strong>Pro Athlete Fit & Size Guarantee</strong>
+                      <p>Need help finding your exact size or discipline fit? Free 30-day trial with complimentary exchanges on all performance gear.</p>
+                    </div>
+                  </div>
+                  <button type="button" className="sizer-order-btn" style={{ borderColor: template.accentColor || '#2563eb', color: template.accentColor || '#2563eb' }}>
+                    Find Your Fit →
+                  </button>
+                </section>
+              )}
+
+              {/* Complimentary Fit & Sizing Interactive Callout for Shoes & Footwear */}
+              {(template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-')) && (
+                <section className="storefront-ring-sizer-banner shoes-sizer-banner" style={{ borderColor: isDark ? 'rgba(255,255,255,0.1)' : '#e2e8f0' }}>
+                  <div className="sizer-banner-content">
+                    <span className="sizer-icon">👟</span>
+                    <div>
+                      <strong>Pro Footwear Sizing & 3D Fit Guarantee</strong>
+                      <p>Unsure of your sneaker or boot sizing? Enjoy free 30-day wear trials and complimentary size exchanges with prepaid return labels.</p>
+                    </div>
+                  </div>
+                  <button type="button" className="sizer-order-btn" style={{ borderColor: template.accentColor || '#f97316', color: template.accentColor || '#f97316' }}>
+                    Open 3D Fit Guide →
+                  </button>
+                </section>
+              )}
+
               {/* Press & Media Mention Strip */}
               <section className="storefront-press-strip">
                 <span className="press-label">AS FEATURED IN</span>
                 <div className="press-brand-logos">
-                  <span>VOGUE</span>
-                  <span>ELLE</span>
-                  <span>HARPER’S BAZAAR</span>
-                  <span>GQ</span>
-                  <span>FORBES</span>
-                  <span>THE CUT</span>
+                  {template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-') ? (
+                    <>
+                      <span>COMPLEX</span>
+                      <span>HYPEBEAST</span>
+                      <span>SNEAKER NEWS</span>
+                      <span>GQ</span>
+                      <span>RUNNER’S WORLD</span>
+                      <span>HIGHSNOBIETY</span>
+                    </>
+                  ) : template.businessType === 'sporting-goods' || template.id.startsWith('sports-') ? (
+                    <>
+                      <span>ESPN</span>
+                      <span>SPORTS ILLUSTRATED</span>
+                      <span>RUNNER’S WORLD</span>
+                      <span>GQ SPORT</span>
+                      <span>MEN’S HEALTH</span>
+                      <span>THE ATHLETIC</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>VOGUE</span>
+                      <span>ELLE</span>
+                      <span>HARPER’S BAZAAR</span>
+                      <span>GQ</span>
+                      <span>FORBES</span>
+                      <span>THE CUT</span>
+                    </>
+                  )}
                 </div>
               </section>
 
@@ -6582,11 +8887,19 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                 <p className="testimonial-quote">
                   {template.businessType === 'jewelry-accessories'
                     ? '“The solitaire engagement ring exceeded all expectations. GIA certified, breathtaking fire in person, and arrived in gorgeous luxury packaging.”'
+                    : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-')
+                    ? (SHOES_TEMPLATES_CONFIG[template.id]?.story?.quote || '“The cushion responsiveness and lockdown fit are remarkable. Most comfortable sneaker in my entire rotation.”')
+                    : template.businessType === 'sporting-goods' || template.id.startsWith('sports-')
+                    ? (SPORTS_TEMPLATES_CONFIG[template.id]?.story?.quote || '“The energy return and aerodynamic fit are unmatched. Shaved 0.4s off my personal best on the first trial.”')
                     : '“The best shopping experience we’ve ever launched. Conversions increased by 42% within two weeks.”'}
                 </p>
                 <small className="testimonial-author">
                   {template.businessType === 'jewelry-accessories'
                     ? '— Sarah & Marcus M., Verified Jewelry Purchase'
+                    : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-')
+                    ? `— ${SHOES_TEMPLATES_CONFIG[template.id]?.story?.author || 'Alex Chen'}, ${SHOES_TEMPLATES_CONFIG[template.id]?.story?.role || 'Verified Footwear Buyer'}`
+                    : template.businessType === 'sporting-goods' || template.id.startsWith('sports-')
+                    ? `— ${SPORTS_TEMPLATES_CONFIG[template.id]?.story?.author || 'Marcus Vance'}, ${SPORTS_TEMPLATES_CONFIG[template.id]?.story?.role || 'World Champion Athlete'}`
                     : '— Verified Client Experience'}
                 </small>
               </section>
@@ -6894,7 +9207,7 @@ export const OTHER_CATEGORIES: OtherCategoryItem[] = [
   },
   {
     id: 'sporting-goods',
-    name: 'Sporting Goods',
+    name: 'Sports Store',
     description: 'Activewear, fitness equipment & outdoor gear.',
     tone: 'teal',
     iconSvg: (
@@ -6904,6 +9217,19 @@ export const OTHER_CATEGORIES: OtherCategoryItem[] = [
         <path d="M14.83 14.83l4.24 4.24" />
         <path d="M14.83 9.17l4.24-4.24" />
         <path d="M4.93 19.07l4.24-4.24" />
+      </svg>
+    ),
+  },
+  {
+    id: 'shoes-footwear',
+    name: 'Shoes & Footwear',
+    description: 'Sneakers, running shoes, formal leather & boots.',
+    tone: 'orange',
+    iconSvg: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M2 17c0 1.1.9 2 2 2h16a2 2 0 0 0 2-2v-4c0-.6-.4-1.2-.9-1.4l-5.6-2.5a4 4 0 0 0-3-.1L7.5 11l-4.6 2.1c-.6.3-.9.9-.9 1.5v2.4z" />
+        <path d="M7 11V7a2 2 0 0 1 2-2h3" />
+        <circle cx="17.5" cy="15.5" r="1.5" />
       </svg>
     ),
   },
@@ -7088,7 +9414,8 @@ export const ALL_OTHER_SUGGESTIONS: OtherSuggestionItem[] = [
   { id: 'home-garden', label: 'Home & Garden', icon: '🌿', prompt: 'Indoor houseplants, designer planters and gardening goods' },
   { id: 'luggage-bags', label: 'Luggage & Bags', icon: '🎒', prompt: 'Handcrafted leather travel bags, totes and backpacks' },
   { id: 'office-supplies', label: 'Office Supplies', icon: '📁', prompt: 'Fine stationery, minimalist notebooks and desk equipment' },
-  { id: 'sporting-goods', label: 'Sporting Goods', icon: '⚽', prompt: 'Athletic wear, workout equipment and outdoor adventure gear' },
+  { id: 'sporting-goods', label: 'Sports Store', icon: '⚽', prompt: 'Athletic wear, workout equipment and outdoor adventure gear' },
+  { id: 'shoes-footwear', label: 'Shoes & Footwear', icon: '👟', prompt: 'Sneaker boutique, athletic footwear, leather formal shoes and boots' },
   { id: 'toys-games', label: 'Toys & Games', icon: '🎮', prompt: 'Designer board games, puzzles and creative toys' },
   { id: 'vehicles-parts', label: 'Vehicles & Parts', icon: '🚗', prompt: 'Auto performance accessories, motorcycle gear and parts' },
   { id: 'jewelry-accessories', label: 'Jewelry & Accessories', icon: '💎', prompt: 'Fine handcrafted jewelry, gold rings and luxury watches' },
