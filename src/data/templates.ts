@@ -5,7 +5,9 @@ import {
 } from '../templates/Electronics'
 import {
   Haven, Forma, LumaLiving, OakAndCo, Nest,
-  Linea, Casa as CasaHF, Solace, Terra, ModHaus
+  Linea, Casa as CasaHF, Solace, Terra, ModHaus,
+  HomeFurniture11, HomeFurniture12, HomeFurniture13, HomeFurniture14, HomeFurniture15,
+  HomeFurniture16, HomeFurniture17, HomeFurniture18, HomeFurniture19, HomeFurniture20
 } from '../templates/HomeFurniture'
 import {
   GeneralStore01, GeneralStore02, GeneralStore03, GeneralStore04, GeneralStore05,
@@ -300,6 +302,16 @@ export const templates: TemplateConfig[] = [
   Solace,
   Terra,
   ModHaus,
+  HomeFurniture11,
+  HomeFurniture12,
+  HomeFurniture13,
+  HomeFurniture14,
+  HomeFurniture15,
+  HomeFurniture16,
+  HomeFurniture17,
+  HomeFurniture18,
+  HomeFurniture19,
+  HomeFurniture20,
   GeneralStore01,
   GeneralStore02,
   GeneralStore03,
