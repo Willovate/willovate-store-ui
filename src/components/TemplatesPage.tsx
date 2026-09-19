@@ -4369,6 +4369,252 @@ export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
     ],
   },
 
+  'grocery-store': {
+    displayName: 'Grocery Store',
+    badgeIcon: '🛒',
+    description: 'Fresh organic produce, artisan bakery, farm dairy and everyday household pantry.',
+    filterTags: ['All', 'Fresh Produce', 'Organic Dairy', 'Artisan Bakery', 'Farm Pantry', 'Supermarket'],
+    templates: [
+      {
+        id: 'tmpl_groc_01_harvest',
+        slug: 'harvest-market-organic',
+        name: 'Harvest Market',
+        businessType: 'grocery-store',
+        tags: ['Fresh Produce', 'Organic Dairy'],
+        shortDescription: 'Organic farm-to-table supermarket with fresh heirloom fruits, leafy greens and farm-fresh dairy.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 99,
+        isActive: true,
+        brandName: 'HARVEST MARKET',
+        headline: 'FARM FRESH ORGANICS\nDIRECT TO YOUR DOOR',
+        subtitle: 'Heirloom produce harvested at peak ripeness from local family farms.',
+        buttonText: 'Shop Fresh Produce',
+        buttonColor: '#16a34a',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_groc_02_pantry',
+        slug: 'daily-pantry-co',
+        name: 'Daily Pantry Co.',
+        businessType: 'grocery-store',
+        tags: ['Farm Pantry', 'Supermarket'],
+        shortDescription: 'Modern neighborhood grocery with 30-minute delivery, pantry essentials, and fresh family bundles.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=600&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 97,
+        isActive: true,
+        brandName: 'DAILY PANTRY CO.',
+        headline: 'EVERYDAY ESSENTIALS\nDELIVERED IN MINUTES',
+        subtitle: 'From fresh milk to pantry staples, get everything your kitchen needs fast.',
+        buttonText: 'Explore Aisles',
+        buttonColor: '#0f172a',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=600&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_groc_03_artisan',
+        slug: 'green-meadow-grocer',
+        name: 'Green Meadow Grocer',
+        businessType: 'grocery-store',
+        tags: ['Supermarket', 'Fresh Produce'],
+        shortDescription: 'Zero-waste bulk grocer with organic grains, cold-pressed oils and eco-friendly home refills.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1588964895597-cfccd6e2dbf9?w=600&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1588964895597-cfccd6e2dbf9?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 95,
+        isActive: true,
+        brandName: 'GREEN MEADOW',
+        headline: 'SUSTAINABLE GROCER\nZERO-WASTE PANTRY',
+        subtitle: 'Certified 100% organic dry goods, grains, and kitchen refills in compostable packaging.',
+        buttonText: 'Shop Bulk Goods',
+        buttonColor: '#15803d',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1588964895597-cfccd6e2dbf9?w=600&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_groc_04_farmstand',
+        slug: 'orchard-vine-stand',
+        name: 'Orchard & Vine Farmstand',
+        businessType: 'grocery-store',
+        tags: ['Fresh Produce', 'Organic Dairy'],
+        shortDescription: 'Seasonal fruits, crisp berries, cold-pressed orchard juices and raw wildflower honey.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=600&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 93,
+        isActive: true,
+        brandName: 'ORCHARD & VINE',
+        headline: 'SUN-RIPENED FRUITS\nHANDPICKED TODAY',
+        subtitle: 'Sweet organic orchard berries, heirloom citrus, and pure cold-pressed juices.',
+        buttonText: 'Shop Fruit Stand',
+        buttonColor: '#ea580c',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=600&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_groc_05_deli',
+        slug: 'corner-deli-provisions',
+        name: 'Corner Deli & Provisions',
+        businessType: 'grocery-store',
+        tags: ['Artisan Bakery', 'Farm Pantry'],
+        shortDescription: 'European gourmet grocer featuring imported aged cheeses, crusty sourdough, and cured meats.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=600&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 91,
+        isActive: true,
+        brandName: 'CORNER DELI',
+        headline: 'ARTISAN PROVISIONS\nEUROPEAN DELI & CHEESE',
+        subtitle: 'Carefully cured prosciutto, cave-aged cheddar, and freshly baked baguettes.',
+        buttonText: 'View Deli Counter',
+        buttonColor: '#78350f',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=600&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_groc_06_express',
+        slug: 'quickcart-supermarket',
+        name: 'QuickCart Supermarket',
+        businessType: 'grocery-store',
+        tags: ['Supermarket', 'Farm Pantry'],
+        shortDescription: 'Comprehensive online supermarket with club-size savings, fresh cuts, and weekly digital coupons.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1534723452862-4c874018d66d?w=600&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1534723452862-4c874018d66d?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 89,
+        isActive: true,
+        brandName: 'QUICKCART',
+        headline: 'WEEKLY GROCERY DEALS\nUNBEATABLE VALUE',
+        subtitle: 'Save on your household grocery list with weekly discounts and free express delivery.',
+        buttonText: 'Shop Weekly Specials',
+        buttonColor: '#2563eb',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1534723452862-4c874018d66d?w=600&auto=format&fit=crop&q=80',
+      },
+    ],
+  },
+
+  'home-decor': {
+    displayName: 'Home Décor Store',
+    badgeIcon: '🏺',
+    description: 'Artisan ceramics, sculptural lighting, organic textiles and curated living decor.',
+    filterTags: ['All', 'Ceramics & Vases', 'Textiles & Rugs', 'Wall Art', 'Candles & Scents', 'Sculptural Decor'],
+    templates: [
+      {
+        id: 'tmpl_decor_01_atelier',
+        slug: 'maison-decor-atelier',
+        name: 'Maison Décor Atelier',
+        businessType: 'home-decor',
+        tags: ['Ceramics & Vases', 'Sculptural Decor'],
+        shortDescription: 'Parisian interior aesthetics with sculptural ceramic vases, textured pedestals, and neutral linens.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 99,
+        isActive: true,
+        brandName: 'MAISON DÉCOR',
+        headline: 'SCULPTURAL OBJECTS\nFOR TRANQUIL LIVING',
+        subtitle: 'Organic ceramic forms and hand-thrown vessels crafted by European artisans.',
+        buttonText: 'Explore Vases',
+        buttonColor: '#1c1917',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_decor_02_nordic',
+        slug: 'nordic-hearth-living',
+        name: 'Nordic Hearth Living',
+        businessType: 'home-decor',
+        tags: ['Candles & Scents', 'Textiles & Rugs'],
+        shortDescription: 'Warm Scandinavian minimalist home decor, hand-poured soy candles, and textured wool throws.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 97,
+        isActive: true,
+        brandName: 'NORDIC HEARTH',
+        headline: 'WARM HYGGE INTERIORS\nNATURAL COMFORT',
+        subtitle: 'Soft amber candlelight, unbleached linen pillows, and brushed wool blankets.',
+        buttonText: 'Shop Cozy Accents',
+        buttonColor: '#475569',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_decor_03_terracotta',
+        slug: 'terra-studio-decor',
+        name: 'Terra Studio Décor',
+        businessType: 'home-decor',
+        tags: ['Ceramics & Vases', 'Textiles & Rugs'],
+        shortDescription: 'Earthy terracotta planters, hand-woven jute rugs, and raw clay centerpiece bowls.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=600&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 95,
+        isActive: true,
+        brandName: 'TERRA STUDIO',
+        headline: 'RAW EARTH TEXTURES\nORGANIC HOMEWARE',
+        subtitle: 'Sun-baked pottery and natural fiber textiles inspired by the Mediterranean.',
+        buttonText: 'Explore Clay Ware',
+        buttonColor: '#c2410c',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=600&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_decor_04_lumiere',
+        slug: 'lumiere-glass-light',
+        name: 'Lumière Glass & Light',
+        businessType: 'home-decor',
+        tags: ['Sculptural Decor', 'Candles & Scents'],
+        shortDescription: 'Hand-blown colored art glass, sculptural wall mirrors, and ambient brass lighting.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 93,
+        isActive: true,
+        brandName: 'LUMIÈRE STUDIO',
+        headline: 'HAND-BLOWN GLASS\nDIFFUSED AMBIENCE',
+        subtitle: 'Artisan lighting and reflective glass vessels that transform natural sunlight.',
+        buttonText: 'Shop Glass & Lamps',
+        buttonColor: '#d4af37',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_decor_05_botanical',
+        slug: 'botanical-living-studio',
+        name: 'Botanical Living Studio',
+        businessType: 'home-decor',
+        tags: ['Ceramics & Vases', 'Candles & Scents'],
+        shortDescription: 'Indoor garden decor, brass planters, floral ceramics, and natural essential oil reed diffusers.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=600&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 91,
+        isActive: true,
+        brandName: 'BOTANICAL LIVING',
+        headline: 'BOTANICAL HARMONY\nFOR EVERY ROOM',
+        subtitle: 'Infuse your home with sculptural planters and nature-inspired home fragrances.',
+        buttonText: 'View Greenery Decor',
+        buttonColor: '#15803d',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=600&auto=format&fit=crop&q=80',
+      },
+      {
+        id: 'tmpl_decor_06_gallery',
+        slug: 'curated-wall-object',
+        name: 'Curated Wall & Object',
+        businessType: 'home-decor',
+        tags: ['Wall Art', 'Sculptural Decor'],
+        shortDescription: 'Modern gallery wall art prints, sculptural marble pedestals, and architectural bookends.',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=600&auto=format&fit=crop&q=80',
+        fullPreviewUrl: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=1600&auto=format&fit=crop&q=85',
+        popularityScore: 89,
+        isActive: true,
+        brandName: 'CURATED OBJECTS',
+        headline: 'GALLERY WALLS\nSTATEMENT STATUES',
+        subtitle: 'Museum-quality giclée prints and solid travertine architectural bookends.',
+        buttonText: 'Explore Wall Art',
+        buttonColor: '#0f172a',
+        isDark: false,
+        modelImage: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=600&auto=format&fit=crop&q=80',
+      },
+    ],
+  },
+
   'other': {
     displayName: 'Other',
     badgeIcon: '✨',
@@ -7536,6 +7782,8 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
     if (template.id === 'shoes-classic') return '👞 ENGLISH GOODYEAR WELTED // BOX CALF'
     if (template.id === 'shoes-junior') return '🎈 MEMORY FOAM & NON-MARKING // KIDS ACTIVE'
     if (template.id === 'shoes-solestudio') return '👟 450+ VERIFIED FOOTWEAR DROPS // VERIFIED VAULT'
+    if (template.businessType === 'grocery-store') return '🥬 100% ORGANIC CERTIFIED // FARM FRESH TODAY'
+    if (template.businessType === 'home-decor') return '🏺 ARTISAN CERAMICS & TEXTILES // CURATED LIVING'
     if (template.id === 'tmpl_kuro_techwear') return '⚡ PROTOCOL // 3L WEATHERPROOF SHELL'
     if (template.id === 'tmpl_solstice_linen') return '☀️ 100% ORGANIC FRENCH FLAX LINEN'
     if (template.id === 'tmpl_aeropulse_active') return '▲ KINETIC 4-WAY STRETCH COMPRESSION'
@@ -7781,6 +8029,20 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
         tag: p.badge || p.category,
         img: p.image,
       }))
+    }
+    if (template.businessType === 'grocery-store') {
+      return [
+        { title: 'Organic Heirloom Baby Greens & Herbs', price: '$4.99', tag: 'Local Farm Fresh', img: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Raw Honeycomb & Wildflower Jars', price: '$12.50', tag: 'Pure Artisan', img: 'https://images.unsplash.com/photo-1588964895597-cfccd6e2dbf9?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Stone-Milled Heritage Sourdough Loaf', price: '$6.80', tag: 'Fresh Baked Daily', img: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&auto=format&fit=crop&q=80' },
+      ]
+    }
+    if (template.businessType === 'home-decor') {
+      return [
+        { title: 'Hand-Thrown Matte Sculptural Vase', price: '$85.00', tag: 'Studio Ceramic', img: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Natural French Flax Linen Cushion', price: '$58.00', tag: '100% Organic', img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&auto=format&fit=crop&q=80' },
+        { title: 'Hand-Poured Amber Santal Candle', price: '$34.00', tag: 'Pure Soy Wax', img: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600&auto=format&fit=crop&q=80' },
+      ]
     }
     return [
       { title: 'Signature Edition No. 01', price: '$85.00', tag: 'Bestseller', img: template.modelImage },
@@ -8134,6 +8396,20 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
         { icon: '⚡', title: 'Fast Express Delivery', sub: 'Double-boxed priority dispatch on all footwear orders' },
       ]
     }
+    if (template.businessType === 'grocery-store') {
+      return [
+        { icon: '🌱', title: '100% Certified Organic', sub: 'Sustainably grown heirloom produce from certified local farms' },
+        { icon: '🚚', title: 'Cold-Chain Fast Delivery', sub: 'Temperature controlled from farm gate to your kitchen counter' },
+        { icon: '🍎', title: '100% Freshness Guarantee', sub: 'Free instant replacement or refund if any produce is not perfect' },
+      ]
+    }
+    if (template.businessType === 'home-decor') {
+      return [
+        { icon: '🏺', title: 'Hand-Thrown Ceramics', sub: 'Small-batch artisanal pottery crafted by European ceramicists' },
+        { icon: '📦', title: 'Breakage-Free Guarantee', sub: 'Custom reinforced shock-absorbing molded pulp packaging' },
+        { icon: '✨', title: 'Complimentary Interior Advice', sub: '1-on-1 virtual styling session with our in-house decorators' },
+      ]
+    }
     return [
       { icon: '📦', title: 'Complimentary Delivery', sub: 'On all continental orders' },
       { icon: '🛡️', title: 'Guaranteed Craftsmanship', sub: '1-year comprehensive warranty' },
@@ -8147,6 +8423,10 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
     ? 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&auto=format&fit=crop&q=80'
     : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-')
     ? 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=800&auto=format&fit=crop&q=80'
+    : template.businessType === 'grocery-store'
+    ? 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&auto=format&fit=crop&q=80'
+    : template.businessType === 'home-decor'
+    ? 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=800&auto=format&fit=crop&q=80'
     : template.businessType === 'sporting-goods' || template.id.startsWith('sports-')
     ? 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&auto=format&fit=crop&q=80'
     : 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&auto=format&fit=crop&q=80'
@@ -8155,6 +8435,10 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
     ? 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=600&auto=format&fit=crop&q=80'
     : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-')
     ? 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80'
+    : template.businessType === 'grocery-store'
+    ? 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&auto=format&fit=crop&q=80'
+    : template.businessType === 'home-decor'
+    ? 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600&auto=format&fit=crop&q=80'
     : template.businessType === 'sporting-goods' || template.id.startsWith('sports-')
     ? 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80'
     : 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&auto=format&fit=crop&q=80'
@@ -8242,6 +8526,10 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                     ? '✨ Free Insured Global Express Shipping on orders over $150 • GIA & IGI Certified Stones • 100% Recycled Precious Metals'
                     : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-')
                     ? (SHOES_TEMPLATES_CONFIG[template.id]?.announcement || '👟 Free Express Delivery on Footwear Over $75 • 30-Day Road Trial • 100% Verified Authentic')
+                    : template.businessType === 'grocery-store'
+                    ? '🥦 Free Same-Day Delivery on Farm Fresh Orders over $35 • 100% Organic & Local'
+                    : template.businessType === 'home-decor'
+                    ? '🏺 Free Insured Shipping on Handcrafted Decor over $75 • 100% Breakage-Free Guarantee'
                     : template.businessType === 'sporting-goods' || template.id.startsWith('sports-')
                     ? (SPORTS_TEMPLATES_CONFIG[template.id]?.announcement || '⚡ Free Express Shipping on Orders Over $75 • 30-Day Athlete Guarantee • Official Performance Spec')
                     : '✨ Free Worldwide Express Shipping on orders over $150 • 30-Day Returns'}
@@ -8282,6 +8570,22 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                         <span className="nav-link">Casual</span>
                         <span className="nav-link">Fit & Size Guide</span>
                       </>
+                    ) : template.businessType === 'grocery-store' ? (
+                      <>
+                        <span className="nav-link active">Fresh Produce</span>
+                        <span className="nav-link">Dairy & Eggs</span>
+                        <span className="nav-link">Artisan Bakery</span>
+                        <span className="nav-link">Farm Pantry</span>
+                        <span className="nav-link">Weekly Deals</span>
+                      </>
+                    ) : template.businessType === 'home-decor' ? (
+                      <>
+                        <span className="nav-link active">Vases & Vessels</span>
+                        <span className="nav-link">Textiles & Rugs</span>
+                        <span className="nav-link">Wall Art</span>
+                        <span className="nav-link">Sculptural Decor</span>
+                        <span className="nav-link">Lookbook</span>
+                      </>
                     ) : template.businessType === 'sporting-goods' || template.id.startsWith('sports-') ? (
                       <>
                         <span className="nav-link active">Men</span>
@@ -8304,7 +8608,7 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                   <span>⌕</span>
                   <span>♡</span>
                   <span className="cart-badge-icon" style={{ backgroundColor: template.accentColor || '#2563eb' }}>
-                    {template.businessType === 'health-beauty' ? '💄 2' : template.businessType === 'jewelry-accessories' ? '💎 2' : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-') ? '👟 2' : template.businessType === 'sporting-goods' || template.id.startsWith('sports-') ? '⚡ 2' : '👜 2'}
+                    {template.businessType === 'health-beauty' ? '💄 2' : template.businessType === 'jewelry-accessories' ? '💎 2' : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-') ? '👟 2' : template.businessType === 'grocery-store' ? '🛒 2' : template.businessType === 'home-decor' ? '🏺 2' : template.businessType === 'sporting-goods' || template.id.startsWith('sports-') ? '⚡ 2' : '👜 2'}
                   </span>
                 </div>
               </header>
@@ -8850,7 +9154,25 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
               <section className="storefront-press-strip">
                 <span className="press-label">AS FEATURED IN</span>
                 <div className="press-brand-logos">
-                  {template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-') ? (
+                  {template.businessType === 'grocery-store' ? (
+                    <>
+                      <span>BON APPÉTIT</span>
+                      <span>FOOD & WINE</span>
+                      <span>SAVEUR</span>
+                      <span>ORGANIC LIFE</span>
+                      <span>EATER</span>
+                      <span>EPICURIOUS</span>
+                    </>
+                  ) : template.businessType === 'home-decor' ? (
+                    <>
+                      <span>ARCHITECTURAL DIGEST</span>
+                      <span>ELLE DECOR</span>
+                      <span>DWELL</span>
+                      <span>VOGUE LIVING</span>
+                      <span>HOUSE BEAUTIFUL</span>
+                      <span>DOMINO</span>
+                    </>
+                  ) : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-') ? (
                     <>
                       <span>COMPLEX</span>
                       <span>HYPEBEAST</span>
@@ -8889,6 +9211,10 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                     ? '“The solitaire engagement ring exceeded all expectations. GIA certified, breathtaking fire in person, and arrived in gorgeous luxury packaging.”'
                     : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-')
                     ? (SHOES_TEMPLATES_CONFIG[template.id]?.story?.quote || '“The cushion responsiveness and lockdown fit are remarkable. Most comfortable sneaker in my entire rotation.”')
+                    : template.businessType === 'grocery-store'
+                    ? '“The produce arrives crisp, vibrant, and packed with garden sweetness. Our family has switched entirely to weekly farm deliveries.”'
+                    : template.businessType === 'home-decor'
+                    ? '“The sculptural ceramic vase is the centerpiece of our dining room. Stunning texture and museum-worthy craft in person.”'
                     : template.businessType === 'sporting-goods' || template.id.startsWith('sports-')
                     ? (SPORTS_TEMPLATES_CONFIG[template.id]?.story?.quote || '“The energy return and aerodynamic fit are unmatched. Shaved 0.4s off my personal best on the first trial.”')
                     : '“The best shopping experience we’ve ever launched. Conversions increased by 42% within two weeks.”'}
@@ -8898,6 +9224,10 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                     ? '— Sarah & Marcus M., Verified Jewelry Purchase'
                     : template.businessType === 'shoes-footwear' || template.id.startsWith('shoes-')
                     ? `— ${SHOES_TEMPLATES_CONFIG[template.id]?.story?.author || 'Alex Chen'}, ${SHOES_TEMPLATES_CONFIG[template.id]?.story?.role || 'Verified Footwear Buyer'}`
+                    : template.businessType === 'grocery-store'
+                    ? '— Elena Rostova, Certified Organic Customer'
+                    : template.businessType === 'home-decor'
+                    ? '— Camille Laurent, Interior Designer'
                     : template.businessType === 'sporting-goods' || template.id.startsWith('sports-')
                     ? `— ${SPORTS_TEMPLATES_CONFIG[template.id]?.story?.author || 'Marcus Vance'}, ${SPORTS_TEMPLATES_CONFIG[template.id]?.story?.role || 'World Champion Athlete'}`
                     : '— Verified Client Experience'}
@@ -9386,6 +9716,33 @@ export const OTHER_CATEGORIES: OtherCategoryItem[] = [
     ),
   },
   {
+    id: 'grocery-store',
+    name: 'Grocery Store',
+    description: 'Fresh organic produce, artisan bakery, dairy & household pantry.',
+    tone: 'green',
+    iconSvg: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="9" cy="21" r="1" />
+        <circle cx="20" cy="21" r="1" />
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+      </svg>
+    ),
+  },
+  {
+    id: 'home-decor',
+    name: 'Home Décor Store',
+    description: 'Vases, sculptural ceramics, textiles, wall art & living accents.',
+    tone: 'gold',
+    iconSvg: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M9 21h6" />
+        <path d="M12 3v3" />
+        <path d="M6 10l6-4 6 4v11H6z" />
+        <circle cx="12" cy="14" r="2" />
+      </svg>
+    ),
+  },
+  {
     id: 'other-custom',
     name: 'Other',
     description: 'Something unique, custom, or specialized.',
@@ -9407,6 +9764,8 @@ export interface OtherSuggestionItem {
 
 export const ALL_OTHER_SUGGESTIONS: OtherSuggestionItem[] = [
   // 20 Categories from the industry catalog
+  { id: 'grocery-store', label: 'Grocery Store', icon: '🛒', prompt: 'Organic supermarket, fresh local produce, artisan bakery and pantry' },
+  { id: 'home-decor', label: 'Home Décor Store', icon: '🏺', prompt: 'Artisan home decor, ceramic vases, linen textiles and aesthetic living accents' },
   { id: 'electronics', label: 'Electronics', icon: '💻', prompt: 'Electronics, smartphones, audio and smart devices' },
   { id: 'food-beverages', label: 'Food & Beverages', icon: '☕', prompt: 'Specialty roasters, gourmet pantry and beverage store' },
   { id: 'furniture', label: 'Furniture', icon: '🛋️', prompt: 'Artisan furniture, modern home decor and interior design' },
