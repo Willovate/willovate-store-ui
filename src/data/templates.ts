@@ -7,6 +7,10 @@ import {
   Haven, Forma, LumaLiving, OakAndCo, Nest,
   Linea, Casa as CasaHF, Solace, Terra, ModHaus
 } from '../templates/HomeFurniture'
+import {
+  GeneralStore01, GeneralStore02, GeneralStore03, GeneralStore04, GeneralStore05,
+  GeneralStore06, GeneralStore07, GeneralStore08, GeneralStore09
+} from '../templates/GeneralStore'
 
 export const templates: TemplateConfig[] = [
   {
@@ -295,6 +299,15 @@ export const templates: TemplateConfig[] = [
   CasaHF,
   Solace,
   Terra,
-  ModHaus
+  ModHaus,
+  GeneralStore01,
+  GeneralStore02,
+  GeneralStore03,
+  GeneralStore04,
+  GeneralStore05,
+  GeneralStore06,
+  GeneralStore07,
+  GeneralStore08,
+  GeneralStore09
 ]
 

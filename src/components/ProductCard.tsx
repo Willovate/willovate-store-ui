@@ -8,7 +8,7 @@ export function ProductCard({
   product: Product
   onAdd: (product: Product) => void
 }) {
-  const hasDiscount = product.compareAtPrice !== null
+  const hasDiscount = product.compareAtPrice != null
 
   return (
     <article className="product-card">
