@@ -397,53 +397,75 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
               <div style={{ background: '#fff', border: '1px solid #eef0f5', borderRadius: '12px', display: 'flex', overflow: 'hidden', marginBottom: '2rem', boxShadow: '0 4px 6px rgba(0,0,0,0.02)' }}>
                 <div style={{ flex: 2, background: '#f9f9fa', padding: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                    {/* Preview placeholder image matching Mino store */}
-                   <div style={{ width: '100%', height: '300px', background: '#F5EFE6', borderRadius: '8px', padding: '2rem', position: 'relative', overflow: 'hidden', backgroundImage: 'url(https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=800&q=80)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                      <div style={{ background: 'rgba(255,255,255,0.9)', padding: '1.5rem', borderRadius: '8px', maxWidth: '300px' }}>
-                        <p style={{ fontSize: '0.8rem', fontWeight: 600, color: '#666', marginBottom: '0.5rem' }}>NEW COLLECTION</p>
-                        <h2 style={{ fontSize: '2rem', fontWeight: 700, lineHeight: 1.2, margin: '0 0 1rem 0' }}>Summer<br/>Collection</h2>
-                        <button style={{ background: '#111', color: '#fff', border: 'none', padding: '0.6rem 1.2rem', borderRadius: '4px', fontSize: '0.85rem' }}>Shop Now</button>
+                   <div style={{ width: '100%', height: '360px', background: '#fff', borderRadius: '8px', overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.5rem', borderBottom: '1px solid #f1f1f1' }}>
+                        <div style={{ fontWeight: 800, fontSize: '1.2rem', letterSpacing: '-0.5px' }}>MINO</div>
+                        <div style={{ display: 'flex', gap: '1.5rem', fontSize: '0.75rem', fontWeight: 600, color: '#111' }}>
+                          <span>Home</span><span>Shop</span><span>Collection</span><span>About</span><span>Contact</span>
+                        </div>
+                        <div style={{ display: 'flex', gap: '1rem', color: '#111' }}>
+                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                        </div>
+                      </div>
+                      <div style={{ flex: 1, background: '#F5EFE6', display: 'flex', position: 'relative' }}>
+                        <div style={{ flex: 1, padding: '3rem 2rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                          <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#444', marginBottom: '1rem', letterSpacing: '1px' }}>NEW COLLECTION</p>
+                          <h2 style={{ fontSize: '2.5rem', fontWeight: 800, lineHeight: 1.1, margin: '0 0 1rem 0', color: '#111' }}>Summer<br/>Collection</h2>
+                          <p style={{ fontSize: '0.85rem', color: '#555', marginBottom: '1.5rem', maxWidth: '250px' }}>Light, modern and made for you.<br/>Discover the latest styles.</p>
+                          <div><button style={{ background: '#111', color: '#fff', border: 'none', padding: '0.7rem 1.5rem', borderRadius: '4px', fontSize: '0.8rem', fontWeight: 600 }}>Shop Now</button></div>
+                        </div>
+                        <div style={{ flex: 1, position: 'relative' }}>
+                           <img src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=800&q=80" alt="Bag" style={{ position: 'absolute', right: '0', bottom: '0', width: '120%', height: '120%', objectFit: 'contain', objectPosition: 'bottom right' }} />
+                        </div>
+                        <div style={{ position: 'absolute', bottom: '1rem', width: '100%', display: 'flex', justifyContent: 'center', gap: '8px' }}>
+                          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#111' }}></div>
+                          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#ccc' }}></div>
+                          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#ccc' }}></div>
+                        </div>
                       </div>
                    </div>
                 </div>
                 <div style={{ flex: 1, padding: '2rem', borderLeft: '1px solid #eef0f5', display: 'flex', flexDirection: 'column' }}>
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: '0 0 0.5rem 0' }}>Mino Fashion Store</h3>
-                  <p style={{ color: '#4a5568', fontSize: '0.875rem', marginBottom: '2rem' }}>Minimal fashion store for everyday style.</p>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: '0 0 0.5rem 0', color: '#0f172a' }}>Mino Fashion Store</h3>
+                  <p style={{ color: '#64748b', fontSize: '0.875rem', marginBottom: '2rem' }}>Minimal fashion store for everyday style.</p>
                   
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #eef0f5', paddingBottom: '1rem', marginBottom: '1rem' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#4a5568', fontSize: '0.875rem' }}><LayoutTemplate size={16}/> Template</div>
-                    <span style={{ fontWeight: 600, fontSize: '0.875rem' }}>Mino</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#475569', fontSize: '0.875rem' }}><LayoutTemplate size={16}/> Template</div>
+                    <span style={{ fontWeight: 600, fontSize: '0.875rem', color: '#0f172a' }}>Mino</span>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '1rem', marginBottom: 'auto' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#4a5568', fontSize: '0.875rem' }}><Calendar size={16}/> Last updated</div>
-                    <span style={{ fontWeight: 600, fontSize: '0.875rem' }}>Today, 10:30 AM</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#475569', fontSize: '0.875rem' }}><Calendar size={16}/> Last updated</div>
+                    <span style={{ fontWeight: 600, fontSize: '0.875rem', color: '#0f172a' }}>11 May 2025, 10:30 AM</span>
                   </div>
 
-                  <button className="ws-btn ws-btn-outline" style={{ width: '100%', justifyContent: 'center', color: '#5c3ce6', borderColor: '#ddd6fe' }} onClick={() => setViewMode('editor')}>
+                  <button className="ws-btn ws-btn-outline" style={{ width: '100%', justifyContent: 'center', color: '#5c3ce6', borderColor: '#ddd6fe', fontWeight: 600 }} onClick={() => setViewMode('editor')}>
                     <Edit3 size={15}/> Edit
                   </button>
                 </div>
               </div>
 
               {/* AI Assistant Banner */}
-              <div style={{ background: 'linear-gradient(to right, #f5f3ff, #ede9fe)', borderRadius: '12px', padding: '2rem', position: 'relative', overflow: 'hidden' }}>
+              <div style={{ background: 'linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%)', borderRadius: '12px', padding: '2rem', position: 'relative', overflow: 'hidden' }}>
                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#5c3ce6', fontWeight: 700, marginBottom: '1rem' }}>
                     <Sparkles size={18}/> AI Assistant
                  </div>
-                 <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '1.25rem', fontWeight: 700 }}>What would you like to work on?</h3>
-                 <p style={{ margin: '0 0 1.5rem 0', color: '#4a5568', fontSize: '0.9rem' }}>Get help with your store, products, content and ideas.</p>
+                 <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '1.1rem', fontWeight: 700, color: '#0f172a' }}>What would you like to work on?</h3>
+                 <p style={{ margin: '0 0 1.5rem 0', color: '#475569', fontSize: '0.875rem' }}>Get help with your store, products, content and ideas.</p>
                  
-                 <div style={{ display: 'flex', alignItems: 'center', background: '#fff', borderRadius: '30px', padding: '0.5rem', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', marginBottom: '1.5rem' }}>
+                 <div style={{ display: 'flex', alignItems: 'center', background: '#fff', borderRadius: '30px', padding: '0.4rem', boxShadow: '0 1px 3px rgba(0,0,0,0.05)', marginBottom: '1.5rem' }}>
                     <div style={{ padding: '0.5rem 1rem', color: '#5c3ce6' }}><Sparkles size={18}/></div>
-                    <input type="text" placeholder="Ask AI Assistant anything..." style={{ flex: 1, border: 'none', outline: 'none', background: 'transparent', fontSize: '0.95rem' }} />
-                    <button style={{ background: '#5c3ce6', color: '#fff', border: 'none', borderRadius: '50%', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}><Send size={16}/></button>
+                    <input type="text" placeholder="Ask AI Assistant anything..." style={{ flex: 1, border: 'none', outline: 'none', background: 'transparent', fontSize: '0.9rem', color: '#334155' }} />
+                    <button style={{ background: '#5c3ce6', color: '#fff', border: 'none', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}><Send size={14}/></button>
                  </div>
 
-                 <div style={{ display: 'flex', gap: '1rem' }}>
-                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#4a5568', alignSelf: 'center' }}>Suggested actions</span>
-                    <button className="ws-btn ws-btn-outline" style={{ borderRadius: '20px', padding: '0.4rem 1rem' }}><Plus size={14}/> Create a product</button>
-                    <button className="ws-btn ws-btn-outline" style={{ borderRadius: '20px', padding: '0.4rem 1rem' }}><LayoutTemplate size={14}/> Improve storefront</button>
-                    <button className="ws-btn ws-btn-outline" style={{ borderRadius: '20px', padding: '0.4rem 1rem' }}><Type size={14}/> Write product description</button>
-                    <button className="ws-btn ws-btn-outline" style={{ borderRadius: '20px', padding: '0.4rem 1rem' }}><Sparkles size={14}/> Generate ideas</button>
+                 <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#0f172a', alignSelf: 'center', marginRight: '0.5rem' }}>Suggested actions</span>
+                    <button className="ws-btn ws-btn-outline" style={{ borderRadius: '20px', padding: '0.4rem 1rem', fontSize: '0.75rem', background: '#fff', borderColor: '#ddd6fe', color: '#5c3ce6' }}><Plus size={14}/> Create a product</button>
+                    <button className="ws-btn ws-btn-outline" style={{ borderRadius: '20px', padding: '0.4rem 1rem', fontSize: '0.75rem', background: '#fff', borderColor: '#ddd6fe', color: '#5c3ce6' }}><LayoutTemplate size={14}/> Improve storefront</button>
+                    <button className="ws-btn ws-btn-outline" style={{ borderRadius: '20px', padding: '0.4rem 1rem', fontSize: '0.75rem', background: '#fff', borderColor: '#ddd6fe', color: '#5c3ce6' }}><Type size={14}/> Write product description</button>
+                    <button className="ws-btn ws-btn-outline" style={{ borderRadius: '20px', padding: '0.4rem 1rem', fontSize: '0.75rem', background: '#fff', borderColor: '#ddd6fe', color: '#5c3ce6' }}><Sparkles size={14}/> Generate ideas</button>
                  </div>
               </div>
             </div>

@@ -4,7 +4,7 @@ import { updateElement, deleteElement } from '../lib/workspace-api'
 import {
   Eye, EyeOff, Trash2, Plus, ChevronDown, ChevronRight,
   LayoutTemplate, ChevronUp, GripVertical, Megaphone, Navigation,
-  AlignJustify, MoreHorizontal, Mail, FileText
+  AlignJustify, MoreHorizontal, Mail, FileText, Type
 } from 'lucide-react'
 
 interface SectionsPanelProps {
@@ -27,11 +27,18 @@ const FOOTER_ITEMS = [
 const FIXED_TEMPLATE_ITEMS = [
   { id: 'hero',          name: 'Hero',               icon: <LayoutTemplate size={14} color="#64748b" /> },
   { id: 'featured-title', name: 'Featured collection', icon: <LayoutTemplate size={14} color="#64748b" /> },
+  { id: 'heading-dummy',  name: 'Heading',            icon: <Type size={14} color="#64748b" /> },
+  { id: 'prod-grid',      name: 'Product grid',       icon: <LayoutTemplate size={14} color="#64748b" /> },
+  { id: 'coll-list',      name: 'Collection list',    icon: <LayoutTemplate size={14} color="#64748b" /> },
+  { id: 'img-text',       name: 'Image with text',    icon: <LayoutTemplate size={14} color="#64748b" /> },
+  { id: 'testimonials',   name: 'Testimonials',       icon: <LayoutTemplate size={14} color="#64748b" /> },
+  { id: 'newsletter',     name: 'Newsletter',         icon: <Mail size={14} color="#64748b" /> },
 ]
 
 // IDs that are synthetic (not DB-backed user elements)
 const SYNTHETIC_IDS = new Set([
   'announcement', 'nav', 'hero', 'badges', 'featured-title',
+  'heading-dummy', 'prod-grid', 'coll-list', 'img-text', 'testimonials', 'newsletter',
   'footer', 'email-signup', 'policies',
 ])
 const isSynthetic = (id: string) =>

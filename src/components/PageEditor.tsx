@@ -71,7 +71,7 @@ export default function PageEditor({ page, selectedElementId, onSelectElement, o
   const heroColor   = (heroEl?.properties?.style_textColor        as string) || '#111111'
   const btnBg       = (heroEl?.properties?.style_buttonColor      as string) || '#111111'
   const btnColor    = (heroEl?.properties?.style_buttonTextColor  as string) || '#ffffff'
-  const heroBgImage = (heroEl?.properties?.style_backgroundImage  as string) || '/clean_hero_handbag.jpg'
+  const heroBgImage = (heroEl?.properties?.style_backgroundImage  as string) || 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=800&q=80'
 
   /* Featured collection props */
   const featuredTitle = (page.elements.find(e => e.name === 'Featured Section')?.properties?.title as string) || 'Featured Collection'
@@ -107,15 +107,16 @@ export default function PageEditor({ page, selectedElementId, onSelectElement, o
       <header
         className={`pe-header ${isSelected('nav') ? 'pe-selected' : ''}`}
         onClick={() => onSelectElement?.(syntheticEl('nav', 'Navigation', page, 'nav', {
-          logoText: 'LUXE.', nav1: 'Home', nav2: 'Shop', nav3: 'Collections', nav4: 'About',
+          logoText: 'LUXORA', nav1: 'Home', nav2: 'Shop', nav3: 'Collections', nav4: 'About Us', nav5: 'Contact'
         }))}
       >
-        <div className="pe-logo">LUXE.</div>
+        <div className="pe-logo" style={{ fontWeight: 'bold', fontSize: '1.2rem', letterSpacing: '2px' }}>LUXORA</div>
         <nav className="pe-nav">
           <a href="#" className="pe-nav-link pe-nav-active">Home</a>
           <a href="#" className="pe-nav-link">Shop</a>
           <a href="#" className="pe-nav-link">Collections</a>
-          <a href="#" className="pe-nav-link">About</a>
+          <a href="#" className="pe-nav-link">About Us</a>
+          <a href="#" className="pe-nav-link">Contact</a>
         </nav>
         <div className="pe-header-icons">
           <button className="pe-icon-btn" aria-label="Search">
@@ -138,24 +139,39 @@ export default function PageEditor({ page, selectedElementId, onSelectElement, o
         style={{ 
           backgroundColor: heroBg, 
           color: heroColor,
-          backgroundImage: `url(${heroBgImage})`
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          overflow: 'hidden',
+          padding: 0,
+          border: '1px solid #0066ff',
+          borderRadius: '2px'
         }}
         onClick={selectHero}
       >
-        <div className="pe-hero-content">
-          <p className="pe-eyebrow" style={{ color: '#B57B43' }}>{eyebrow}</p>
-          <h1 className="pe-hero-heading" style={{ color: heroColor }}>{heading}</h1>
-          <p className="pe-hero-desc" style={{ color: '#555555' }}>{description}</p>
+        <div style={{ padding: '4rem', flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+          <h1 style={{ fontSize: '2.5rem', fontWeight: 600, color: heroColor, marginBottom: '1rem', fontFamily: 'serif' }}>{heading}</h1>
+          <p style={{ fontSize: '1rem', color: '#555', marginBottom: '2rem', maxWidth: '300px' }}>{description}</p>
           <a
             href={btnLink}
-            className="pe-cta-btn"
-            style={{ backgroundColor: btnBg, color: btnColor }}
+            style={{ backgroundColor: btnBg, color: btnColor, padding: '0.75rem 1.5rem', textDecoration: 'none', borderRadius: '4px', fontWeight: 500, fontSize: '0.9rem' }}
             onClick={e => e.preventDefault()}
           >
             {btnText}
           </a>
         </div>
-        {isSelected('hero') && <div className="pe-edit-label">Hero Section</div>}
+        <div style={{ flex: 1, position: 'relative', height: '100%', minHeight: '400px' }}>
+          <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, backgroundImage: `url(${heroBgImage})`, backgroundSize: 'cover', backgroundPosition: 'center', borderTopLeftRadius: '200px' }}></div>
+        </div>
+        
+        {/* Mock top/bottom + buttons shown in design */}
+        {isSelected('hero') && (
+           <>
+             <div style={{ position: 'absolute', top: '-12px', left: '50%', transform: 'translateX(-50%)', width: '24px', height: '24px', background: '#0066ff', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}><Plus size={16}/></div>
+             <div style={{ position: 'absolute', bottom: '-12px', left: '50%', transform: 'translateX(-50%)', width: '24px', height: '24px', background: '#0066ff', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}><Plus size={16}/></div>
+             <div style={{ position: 'absolute', top: '-24px', left: '0', background: '#0066ff', color: '#fff', padding: '2px 8px', fontSize: '0.75rem', fontWeight: 600, borderTopLeftRadius: '4px', borderTopRightRadius: '4px' }}>Hero</div>
+           </>
+        )}
       </section>
 
       {/* ── TRUST BADGES ── */}
@@ -215,38 +231,53 @@ export default function PageEditor({ page, selectedElementId, onSelectElement, o
             title: featuredTitle,
           }))}
         >
-          <h2 className="pe-section-title">{featuredTitle}</h2>
+          <h2 className="pe-section-title" style={{ fontFamily: 'serif', fontSize: '2rem', marginBottom: '2rem' }}>{featuredTitle}</h2>
           {isSelected('featured-title') && <div className="pe-edit-label">Section Title</div>}
         </div>
 
-        <div className="pe-product-grid">
-          {DEFAULT_PRODUCTS.map((prod, idx) => (
+        <div className="pe-product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem', marginBottom: '3rem' }}>
+          {[
+            { name: 'Canvas Tote Bag', price: '₹1,299.00', image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=300&q=80' },
+            { name: 'Scented Candle', price: '₹699.00', image: 'https://images.unsplash.com/photo-1602928321679-560bb453f190?w=300&q=80' },
+            { name: 'Ceramic Vase', price: '₹899.00', image: 'https://images.unsplash.com/photo-1612196808214-b7e239e5e6b7?w=300&q=80' },
+            { name: 'Linen Cushion', price: '₹1,199.00', image: 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=300&q=80' },
+          ].map((prod, idx) => (
             <div
-              key={prod.id}
+              key={idx}
               className={`pe-product-card ${isSelected(`product-${idx}`) ? 'pe-selected' : ''}`}
+              style={{ textAlign: 'left', padding: 0 }}
               onClick={() => onSelectElement?.(syntheticEl(`product-${idx}`, prod.name, page, 'product-card', {
                 name: prod.name,
                 price: prod.price,
-                rating: String(prod.rating),
                 image: prod.image,
               }))}
             >
-              <div className="pe-product-img-wrap">
+              <div className="pe-product-img-wrap" style={{ background: '#f8f8f8', padding: '2rem', borderRadius: '4px', marginBottom: '1rem', aspectRatio: '1/1', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <img
                   src={prod.image}
                   alt={prod.name}
-                  className="pe-product-img"
-                  onError={e => { (e.target as HTMLImageElement).src = prod.fallback }}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', mixBlendMode: 'multiply' }}
                 />
               </div>
               <div className="pe-product-info">
-                <div className="pe-product-stars">{renderStars(prod.rating)}</div>
-                <h4 className="pe-product-name">{prod.name}</h4>
-                <p className="pe-product-price">{prod.price}</p>
+                <h4 style={{ margin: '0 0 0.25rem 0', fontWeight: 600, fontSize: '0.9rem' }}>{prod.name}</h4>
+                <p style={{ margin: 0, color: '#111', fontSize: '0.9rem' }}>{prod.price}</p>
               </div>
               {isSelected(`product-${idx}`) && <div className="pe-edit-label">Product Card</div>}
             </div>
           ))}
+        </div>
+        
+        {/* Sub section to match screenshot */}
+        <div style={{ display: 'flex', background: '#F9F6F0', borderRadius: '4px', overflow: 'hidden' }}>
+          <div style={{ flex: 1 }}>
+            <img src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=800&q=80" alt="Lifestyle" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          </div>
+          <div style={{ flex: 1, padding: '3rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start' }}>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 600, margin: '0 0 1rem 0', fontFamily: 'serif' }}>Designed for your lifestyle</h3>
+            <p style={{ fontSize: '0.9rem', color: '#555', marginBottom: '2rem', maxWidth: '300px' }}>Simple, elegant and crafted with care to bring comfort into your everyday.</p>
+            <button style={{ background: '#111', color: '#fff', border: 'none', padding: '0.75rem 1.5rem', borderRadius: '4px', fontWeight: 500, fontSize: '0.9rem' }}>Explore Collection</button>
+          </div>
         </div>
       </section>
 
