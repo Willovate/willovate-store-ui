@@ -1,7 +1,11 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import type { Page, PageElement } from '../types'
 import { updateElement, deleteElement } from '../lib/workspace-api'
-import { Eye, EyeOff, Trash2, Plus, ChevronDown, ChevronRight, LayoutTemplate } from 'lucide-react'
+import {
+  Eye, EyeOff, Trash2, Plus, ChevronDown, ChevronRight,
+  LayoutTemplate, ChevronUp, GripVertical, Megaphone, Navigation,
+  AlignJustify, MoreHorizontal, Mail, FileText
+} from 'lucide-react'
 
 interface SectionsPanelProps {
   page: Page
@@ -11,125 +15,249 @@ interface SectionsPanelProps {
   onRefresh: () => void
 }
 
-export default function SectionsPanel({ page, selectedElementId, onSelectElement, onAddElement, onRefresh }: SectionsPanelProps) {
+const HEADER_ITEMS = [
+  { id: 'announcement', name: 'Announcement bar', icon: <Megaphone size={14} color="#64748b" /> },
+  { id: 'nav',          name: 'Header',           icon: <Navigation size={14} color="#64748b" /> },
+]
+const FOOTER_ITEMS = [
+  { id: 'email-signup',     name: 'Email signup',      icon: <Mail size={14} color="#64748b" /> },
+  { id: 'footer',           name: 'Footer',            icon: <AlignJustify size={14} color="#64748b" /> },
+  { id: 'policies',         name: 'Policies and links', icon: <FileText size={14} color="#64748b" /> },
+]
+const FIXED_TEMPLATE_ITEMS = [
+  { id: 'hero',          name: 'Hero',               icon: <LayoutTemplate size={14} color="#64748b" /> },
+  { id: 'featured-title', name: 'Featured collection', icon: <LayoutTemplate size={14} color="#64748b" /> },
+]
+
+// IDs that are synthetic (not DB-backed user elements)
+const SYNTHETIC_IDS = new Set([
+  'announcement', 'nav', 'hero', 'badges', 'featured-title',
+  'footer', 'email-signup', 'policies',
+])
+const isSynthetic = (id: string) =>
+  SYNTHETIC_IDS.has(id) || id.startsWith('product-')
+
+// Dots menu
+function DotsMenu({
+  isHidden,
+  isRequired,
+  busy,
+  onToggleVisibility,
+  onDelete,
+}: {
+  isHidden: boolean
+  isRequired: boolean
+  busy: boolean
+  onToggleVisibility: () => void
+  onDelete: () => void
+}) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
+
+  return (
+    <div ref={ref} style={{ position: 'relative' }}>
+      <button
+        className="ws-section-dots-btn"
+        onClick={e => { e.stopPropagation(); setOpen(o => !o) }}
+        title="Options"
+      >
+        <MoreHorizontal size={14} />
+      </button>
+      {open && (
+        <div className="ws-section-dots-menu">
+          <button
+            className="ws-section-dots-item"
+            disabled={busy}
+            onClick={e => { e.stopPropagation(); setOpen(false); onToggleVisibility() }}
+          >
+            {isHidden ? <Eye size={13} /> : <EyeOff size={13} />}
+            {isHidden ? 'Show' : 'Hide'}
+          </button>
+          {!isRequired && (
+            <button
+              className="ws-section-dots-item ws-section-dots-delete"
+              disabled={busy}
+              onClick={e => { e.stopPropagation(); setOpen(false); onDelete() }}
+            >
+              <Trash2 size={13} /> Delete
+            </button>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default function SectionsPanel({
+  page,
+  selectedElementId,
+  onSelectElement,
+  onAddElement,
+  onRefresh,
+}: SectionsPanelProps) {
   const [busy, setBusy] = useState(false)
-  const [expanded, setExpanded] = useState<boolean>(true)
+  const [headerOpen, setHeaderOpen] = useState(true)
+  const [templateOpen, setTemplateOpen] = useState(true)
+  const [footerOpen, setFooterOpen] = useState(true)
 
   const elements = [...page.elements].sort((a, b) => a.displayOrder - b.displayOrder)
+  const userElements = elements.filter(el => !isSynthetic(el.id))
 
   const toggleVisibility = async (element: PageElement) => {
     setBusy(true)
     try {
-      const isHidden = element.properties?.isHidden === true
       await updateElement(element.id, {
-        properties: { ...element.properties, isHidden: !isHidden }
+        properties: { ...element.properties, isHidden: !(element.properties?.isHidden === true) },
       })
       onRefresh()
     } catch {
-      alert('Failed to update element visibility.')
+      alert('Failed to update visibility.')
     } finally {
       setBusy(false)
     }
   }
 
   const handleDelete = async (elementId: string) => {
-    if (!confirm('Are you sure you want to delete this section?')) return
+    if (!confirm('Delete this section?')) return
     setBusy(true)
     try {
       await deleteElement(elementId)
       onRefresh()
     } catch {
-      alert('Failed to delete element.')
+      alert('Failed to delete section.')
     } finally {
       setBusy(false)
     }
   }
 
   const moveElement = async (elementId: string, direction: 'up' | 'down') => {
-    const idx = elements.findIndex(e => e.id === elementId)
-    if (direction === 'up' && idx > 0) {
-      // swap with idx - 1
-      setBusy(true)
-      try {
-        await updateElement(elementId, { displayOrder: elements[idx - 1].displayOrder })
-        await updateElement(elements[idx - 1].id, { displayOrder: elements[idx].displayOrder })
-        onRefresh()
-      } catch {
-      } finally { setBusy(false) }
-    } else if (direction === 'down' && idx < elements.length - 1) {
-      // swap with idx + 1
-      setBusy(true)
-      try {
-        await updateElement(elementId, { displayOrder: elements[idx + 1].displayOrder })
-        await updateElement(elements[idx + 1].id, { displayOrder: elements[idx].displayOrder })
-        onRefresh()
-      } catch {
-      } finally { setBusy(false) }
-    }
+    const idx = userElements.findIndex(e => e.id === elementId)
+    const target = direction === 'up' ? userElements[idx - 1] : userElements[idx + 1]
+    if (!target) return
+    setBusy(true)
+    try {
+      await updateElement(elementId, { displayOrder: target.displayOrder })
+      await updateElement(target.id, { displayOrder: userElements[idx].displayOrder })
+      onRefresh()
+    } catch { /* ignore */ } finally { setBusy(false) }
   }
+
+  /* ── Row components ── */
+  const SyntheticRow = ({ id, name, icon }: { id: string; name: string; icon: React.ReactNode }) => (
+    <div
+      className={`ws-section-item ${selectedElementId === id ? 'selected' : ''}`}
+      onClick={() => onSelectElement(id)}
+    >
+      <div className="ws-section-drag-handle" style={{ visibility: 'hidden' }}>
+        <GripVertical size={14} color="#94a3b8" />
+      </div>
+      <div className="ws-section-content">
+        {icon}
+        <span className="ws-section-name">{name}</span>
+      </div>
+      <div className="ws-section-actions">
+        <button className="ws-section-dots-btn" style={{ opacity: 0.4, cursor: 'default' }} onClick={e => e.stopPropagation()}>
+          <MoreHorizontal size={14} />
+        </button>
+      </div>
+    </div>
+  )
+
+  const ElementRow = ({ el, idx }: { el: PageElement; idx: number }) => {
+    const isHidden = el.properties?.isHidden === true
+    const isSelected = selectedElementId === el.id
+    return (
+      <div
+        className={`ws-section-item ${isSelected ? 'selected' : ''} ${isHidden ? 'hidden' : ''}`}
+        onClick={() => onSelectElement(el.id)}
+      >
+        <div className="ws-section-drag-handle" onClick={e => e.stopPropagation()}>
+          <GripVertical size={14} color="#94a3b8" />
+          <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '2px' }}>
+            <button disabled={busy || idx === 0} onClick={() => moveElement(el.id, 'up')}
+              style={{ border: 'none', background: 'none', cursor: 'pointer', padding: 0, color: '#64748b' }}>
+              <ChevronUp size={12} />
+            </button>
+            <button disabled={busy || idx === userElements.length - 1} onClick={() => moveElement(el.id, 'down')}
+              style={{ border: 'none', background: 'none', cursor: 'pointer', padding: 0, color: '#64748b' }}>
+              <ChevronDown size={12} />
+            </button>
+          </div>
+        </div>
+        <div className="ws-section-content">
+          <LayoutTemplate size={14} color="#64748b" />
+          <span className="ws-section-name">{el.name}</span>
+        </div>
+        <div className="ws-section-actions">
+          <DotsMenu
+            isHidden={isHidden}
+            isRequired={!!el.isRequired}
+            busy={busy}
+            onToggleVisibility={() => toggleVisibility(el)}
+            onDelete={() => handleDelete(el.id)}
+          />
+        </div>
+      </div>
+    )
+  }
+
+  const GroupHeader = ({ label, open, onToggle, count }: {
+    label: string; open: boolean; onToggle: () => void; count?: number
+  }) => (
+    <div className="ws-sections-header" onClick={onToggle}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        {open ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+        <span style={{ fontWeight: 600, fontSize: '0.85rem' }}>{label}</span>
+      </div>
+      {count !== undefined && <span style={{ fontSize: '0.75rem', color: '#64748b' }}>{count}</span>}
+    </div>
+  )
+
+  const AddBtn = ({ type = 'text' }: { type?: string }) => (
+    <button className="ws-add-section-btn" onClick={() => onAddElement(type)} disabled={busy}>
+      <Plus size={13} /> Add section
+    </button>
+  )
 
   return (
     <div className="ws-sections-panel">
-      <div className="ws-sections-header" onClick={() => setExpanded(!expanded)}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          {expanded ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
-          <span style={{ fontWeight: 600, fontSize: '0.85rem' }}>Page Sections</span>
-        </div>
-        <span style={{ fontSize: '0.75rem', color: '#64748b' }}>{elements.length}</span>
-      </div>
 
-      {expanded && (
+      {/* ── HEADER ── */}
+      <GroupHeader label="Header" open={headerOpen} onToggle={() => setHeaderOpen(v => !v)} />
+      {headerOpen && (
         <div className="ws-sections-list">
-          {elements.map((el, idx) => {
-            const isHidden = el.properties?.isHidden === true
-            const isSelected = selectedElementId === el.id
-
-            return (
-              <div 
-                key={el.id} 
-                className={`ws-section-item ${isSelected ? 'selected' : ''} ${isHidden ? 'hidden' : ''}`}
-                onClick={() => onSelectElement(el.id)}
-              >
-                <div className="ws-section-drag-handle" title="Reorder" onClick={e => e.stopPropagation()}>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                    <button disabled={busy || idx === 0} onClick={() => moveElement(el.id, 'up')} style={{ border: 'none', background: 'none', cursor: 'pointer', padding: 0, fontSize: '10px' }}>▲</button>
-                    <button disabled={busy || idx === elements.length - 1} onClick={() => moveElement(el.id, 'down')} style={{ border: 'none', background: 'none', cursor: 'pointer', padding: 0, fontSize: '10px' }}>▼</button>
-                  </div>
-                </div>
-
-                <div className="ws-section-content">
-                  <LayoutTemplate size={14} color="#64748b" />
-                  <span className="ws-section-name">{el.name}</span>
-                </div>
-
-                <div className="ws-section-actions">
-                  <button 
-                    className="ws-btn-icon" 
-                    onClick={(e) => { e.stopPropagation(); toggleVisibility(el) }}
-                    disabled={busy}
-                    title={isHidden ? "Show" : "Hide"}
-                  >
-                    {isHidden ? <EyeOff size={14} /> : <Eye size={14} />}
-                  </button>
-                  <button 
-                    className="ws-btn-icon" 
-                    onClick={(e) => { e.stopPropagation(); handleDelete(el.id) }}
-                    disabled={busy || el.isRequired}
-                    style={{ color: el.isRequired ? '#cbd5e1' : '#ef4444' }}
-                    title={el.isRequired ? "Required" : "Delete"}
-                  >
-                    <Trash2 size={14} />
-                  </button>
-                </div>
-              </div>
-            )
-          })}
-          
-          <button className="ws-add-section-btn" onClick={() => onAddElement('text')} disabled={busy}>
-            <Plus size={14} /> Add section
-          </button>
+          {HEADER_ITEMS.map(item => <SyntheticRow key={item.id} {...item} />)}
+          <AddBtn />
         </div>
       )}
+
+      {/* ── TEMPLATE ── */}
+      <GroupHeader label="Template" open={templateOpen} onToggle={() => setTemplateOpen(v => !v)} count={FIXED_TEMPLATE_ITEMS.length + userElements.length} />
+      {templateOpen && (
+        <div className="ws-sections-list">
+          {FIXED_TEMPLATE_ITEMS.map(item => <SyntheticRow key={item.id} {...item} />)}
+          {userElements.map((el, idx) => <ElementRow key={el.id} el={el} idx={idx} />)}
+          <AddBtn />
+        </div>
+      )}
+
+      {/* ── FOOTER ── */}
+      <GroupHeader label="Footer" open={footerOpen} onToggle={() => setFooterOpen(v => !v)} />
+      {footerOpen && (
+        <div className="ws-sections-list">
+          {FOOTER_ITEMS.map(item => <SyntheticRow key={item.id} {...item} />)}
+          <AddBtn />
+        </div>
+      )}
+
     </div>
   )
 }

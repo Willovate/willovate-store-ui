@@ -1,9 +1,11 @@
 import type { Page, PageElement } from '../types'
+import { Plus } from 'lucide-react'
 
 interface PageEditorProps {
   page: Page
   selectedElementId?: string
   onSelectElement?: (element: PageElement | null) => void
+  onAddElement?: (type: string) => void
 }
 
 /* ---------- helpers ---------- */
@@ -48,7 +50,7 @@ const DEFAULT_PRODUCTS = [
   { id: 'p8', name: 'Summer Dress', price: '₹2,499', rating: 4.5, image: '/product_dress.png', fallback: 'https://images.unsplash.com/photo-1515347619152-19e34a78a6aa?w=300&q=80' },
 ]
 
-export default function PageEditor({ page, selectedElementId, onSelectElement }: PageEditorProps) {
+export default function PageEditor({ page, selectedElementId, onSelectElement, onAddElement }: PageEditorProps) {
   const sorted = [...page.elements].sort((a, b) => a.displayOrder - b.displayOrder)
 
   /* Core hero elements (lowest display-order) */
@@ -87,6 +89,19 @@ export default function PageEditor({ page, selectedElementId, onSelectElement }:
 
   return (
     <div className="pe-template">
+
+      {/* ── ANNOUNCEMENT BAR ── */}
+      <div
+        className={`pe-announcement ${isSelected('announcement') ? 'pe-selected' : ''}`}
+        onClick={() => onSelectElement?.(syntheticEl('announcement', 'Announcement bar', page, 'announcement', {
+          text: 'Free shipping on orders above ₹499',
+          icon: '🚚',
+        }))}
+      >
+        <span>🚚</span>
+        <span>Free shipping on orders above ₹499</span>
+        {isSelected('announcement') && <div className="pe-edit-label">Announcement Bar</div>}
+      </div>
 
       {/* ── HEADER ── */}
       <header
@@ -346,13 +361,116 @@ export default function PageEditor({ page, selectedElementId, onSelectElement }:
               {isSelected(el.id) && <div className="pe-edit-label">{el.name}</div>}
             </div>
           ))}
+          <div style={{ padding: '2rem 0', display: 'flex', justifyContent: 'center' }}>
+            <button className="ws-btn-outline" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 1rem', borderRadius: '20px', border: '1px dashed #ccc', color: '#666', background: '#fafafa', cursor: 'pointer' }} onClick={() => onAddElement?.('text')}>
+              <Plus size={16} /> Add Section Here
+            </button>
+          </div>
         </section>
       )}
 
-      {/* ── FOOTER ── */}
-      <footer className="pe-footer">
-        <div className="pe-footer-brand">LUXE.</div>
-        <p className="pe-footer-copy">© 2025 LUXE. All rights reserved.</p>
+      {/* ── RICH FOOTER ── */}
+      <footer className="pe-footer-rich">
+        {/* Email signup */}
+        <div
+          className={`pe-footer-newsletter ${isSelected('email-signup') ? 'pe-selected' : ''}`}
+          onClick={() => onSelectElement?.(syntheticEl('email-signup', 'Email signup', page, 'email-signup', {
+            heading: 'Join our newsletter',
+            subtext: 'Get updates on new arrivals and exclusive offers.',
+            placeholder: 'Enter your email',
+            buttonText: 'Subscribe',
+          }))}
+        >
+          <div>
+            <h3 className="pe-footer-nl-title">Join our newsletter</h3>
+            <p className="pe-footer-nl-sub">Get updates on new arrivals and exclusive offers.</p>
+          </div>
+          <div className="pe-footer-nl-form">
+            <input type="email" placeholder="Enter your email" readOnly className="pe-footer-nl-input" />
+            <button className="pe-footer-nl-btn">Subscribe</button>
+          </div>
+          {isSelected('email-signup') && <div className="pe-edit-label">Email Signup</div>}
+        </div>
+
+        {/* Main footer columns */}
+        <div
+          className={`pe-footer-body ${isSelected('footer') ? 'pe-selected' : ''}`}
+          onClick={() => onSelectElement?.(syntheticEl('footer', 'Footer', page, 'footer', {
+            brand: 'LUXORA',
+            tagline: 'Timeless pieces for modern living.',
+          }))}
+        >
+          <div className="pe-footer-col pe-footer-col-brand">
+            <div className="pe-footer-brand-name">LUXORA</div>
+            <p className="pe-footer-tagline">Timeless pieces for modern living.</p>
+            <div className="pe-footer-social">
+              <a href="#" className="pe-social-icon" onClick={e => e.preventDefault()}
+                aria-label="Instagram">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                  <circle cx="12" cy="12" r="4"/>
+                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+                </svg>
+              </a>
+              <a href="#" className="pe-social-icon" onClick={e => e.preventDefault()}
+                aria-label="Facebook">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
+              </a>
+              <a href="#" className="pe-social-icon" onClick={e => e.preventDefault()}
+                aria-label="Pinterest">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div className="pe-footer-col">
+            <h4 className="pe-footer-col-title">Shop</h4>
+            <ul className="pe-footer-links">
+              <li><a href="#" onClick={e => e.preventDefault()}>All Products</a></li>
+              <li><a href="#" onClick={e => e.preventDefault()}>New Arrivals</a></li>
+              <li><a href="#" onClick={e => e.preventDefault()}>Best Sellers</a></li>
+            </ul>
+          </div>
+
+          <div className="pe-footer-col">
+            <h4 className="pe-footer-col-title">Help</h4>
+            <ul className="pe-footer-links">
+              <li><a href="#" onClick={e => e.preventDefault()}>Shipping & Delivery</a></li>
+              <li><a href="#" onClick={e => e.preventDefault()}>Returns & Exchanges</a></li>
+              <li><a href="#" onClick={e => e.preventDefault()}>FAQs</a></li>
+            </ul>
+          </div>
+
+          <div className="pe-footer-col">
+            <h4 className="pe-footer-col-title">Connect</h4>
+            <ul className="pe-footer-links">
+              <li><a href="#" onClick={e => e.preventDefault()}>Instagram</a></li>
+              <li><a href="#" onClick={e => e.preventDefault()}>Facebook</a></li>
+              <li><a href="#" onClick={e => e.preventDefault()}>Pinterest</a></li>
+            </ul>
+          </div>
+          {isSelected('footer') && <div className="pe-edit-label">Footer</div>}
+        </div>
+
+        {/* Policies bar */}
+        <div
+          className={`pe-footer-policies ${isSelected('policies') ? 'pe-selected' : ''}`}
+          onClick={() => onSelectElement?.(syntheticEl('policies', 'Policies and links', page, 'policies', {
+            copyright: '© 2026 Luxora. All rights reserved.',
+          }))}
+        >
+          <span>© 2026 Luxora. All rights reserved.</span>
+          <div className="pe-footer-policy-links">
+            <a href="#" onClick={e => e.preventDefault()}>Privacy Policy</a>
+            <a href="#" onClick={e => e.preventDefault()}>Terms of Service</a>
+            <a href="#" onClick={e => e.preventDefault()}>Refund Policy</a>
+          </div>
+          {isSelected('policies') && <div className="pe-edit-label">Policies</div>}
+        </div>
       </footer>
 
     </div>

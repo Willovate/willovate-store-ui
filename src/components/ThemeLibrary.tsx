@@ -19,6 +19,8 @@ export default function ThemeLibrary({ websiteId, onClose, onRefresh }: ThemeLib
   const [isCreating, setIsCreating] = useState(false)
   const [newName, setNewName] = useState('')
   const [duplicateLive, setDuplicateLive] = useState(true)
+  const [publishingId, setPublishingId] = useState<string | null>(null)
+  const [successMsg, setSuccessMsg] = useState<string | null>(null)
 
   useEffect(() => {
     loadThemes()
@@ -69,17 +71,25 @@ export default function ThemeLibrary({ websiteId, onClose, onRefresh }: ThemeLib
     }
   }
 
-  const handlePublish = async (themeId: string) => {
-    if (!confirm('Are you sure you want to publish this theme? It will become the live theme.')) return
+  const handlePublish = (themeId: string) => {
+    setPublishingId(themeId)
+  }
+
+  const confirmPublish = async () => {
+    if (!publishingId) return
     setBusy(true)
+    setErrorMsg(null)
     try {
-      await publishTheme(themeId)
+      await publishTheme(publishingId)
       await loadThemes()
       onRefresh()
+      setSuccessMsg('Theme published successfully! It is now live.')
+      setTimeout(() => setSuccessMsg(null), 4000)
     } catch {
       setErrorMsg('Failed to publish theme.')
     } finally {
       setBusy(false)
+      setPublishingId(null)
     }
   }
 
@@ -126,6 +136,13 @@ export default function ThemeLibrary({ websiteId, onClose, onRefresh }: ThemeLib
             </div>
           )}
 
+          {successMsg && (
+            <div style={{ background: '#f0fdf4', border: '1px solid #86efac', borderRadius: 7, padding: '0.6rem 0.9rem', marginBottom: '1rem', fontSize: '0.8125rem', color: '#166534', display: 'flex', justifyContent: 'space-between' }}>
+              {successMsg}
+              <button style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#166534' }} onClick={() => setSuccessMsg(null)}>×</button>
+            </div>
+          )}
+
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
             <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 600 }}>Themes</h3>
             <button className="ws-btn ws-btn-primary" onClick={() => setIsCreating(true)} disabled={busy || isCreating}>
@@ -166,9 +183,13 @@ export default function ThemeLibrary({ websiteId, onClose, onRefresh }: ThemeLib
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '1rem' }}>
               {themes.map(theme => (
                 <div key={theme.id} style={{ border: '1px solid #e2e8f0', borderRadius: 8, overflow: 'hidden', display: 'flex', flexDirection: 'column', background: theme.isLive ? '#f8fafc' : '#ffffff' }}>
-                  <div style={{ background: '#e2e8f0', height: 120, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8' }}>
-                    <Globe size={40} opacity={0.2} />
-                  </div>
+                  {theme.thumbnailUrl ? (
+                    <div style={{ height: 120, backgroundImage: `url(${theme.thumbnailUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+                  ) : (
+                    <div style={{ background: '#e2e8f0', height: 120, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8' }}>
+                      <Globe size={40} opacity={0.2} />
+                    </div>
+                  )}
                   <div style={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', flex: 1 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                       {editingId === theme.id ? (
@@ -200,21 +221,31 @@ export default function ThemeLibrary({ websiteId, onClose, onRefresh }: ThemeLib
                     <div style={{ fontSize: '0.75rem', color: '#64748b' }}>
                       Last edited: {new Date(theme.lastEdited).toLocaleDateString()}
                     </div>
+                    <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#0f172a' }}>
+                      {Number(theme.price) === 0 ? 'Free' : `$${Number(theme.price || 0).toFixed(2)}`}
+                    </div>
                   </div>
                   
-                  <div style={{ padding: '0.75rem 1rem', background: '#f8fafc', borderTop: '1px solid #e2e8f0', display: 'flex', gap: '0.5rem', justifyContent: 'flex-end' }}>
-                    <button className="ws-btn-icon" title="Duplicate" onClick={() => handleDuplicate(theme.id)} disabled={busy}>
-                      <Copy size={14} />
-                    </button>
-                    {!theme.isLive && (
-                      <>
-                        <button className="ws-btn-icon" title="Publish" onClick={() => handlePublish(theme.id)} disabled={busy}>
-                          <Star size={14} />
-                        </button>
+                  <div style={{ padding: '0.75rem 1rem', background: '#f8fafc', borderTop: '1px solid #e2e8f0', display: 'flex', gap: '0.5rem', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                      <button className="ws-btn-icon" title="Duplicate" onClick={() => handleDuplicate(theme.id)} disabled={busy}>
+                        <Copy size={14} />
+                      </button>
+                      {!theme.isLive && (
                         <button className="ws-btn-icon" title="Delete" onClick={() => handleDelete(theme.id)} disabled={busy} style={{ color: '#ef4444' }}>
                           <Trash2 size={14} />
                         </button>
-                      </>
+                      )}
+                    </div>
+                    {!theme.isLive && (
+                      <button 
+                        className="ws-btn ws-btn-primary" 
+                        style={{ padding: '0.3rem 0.75rem', fontSize: '0.75rem' }} 
+                        onClick={() => handlePublish(theme.id)} 
+                        disabled={busy}
+                      >
+                        Publish
+                      </button>
                     )}
                   </div>
                 </div>
@@ -223,6 +254,27 @@ export default function ThemeLibrary({ websiteId, onClose, onRefresh }: ThemeLib
           )}
         </div>
       </div>
+      
+      {publishingId && (
+        <div className="modal-backdrop" style={{ zIndex: 1100, background: 'rgba(0,0,0,0.5)' }}>
+          <div className="modal-box" style={{ maxWidth: 400, margin: '2rem' }}>
+            <div className="modal-header">
+              <h2>Confirm Publish</h2>
+            </div>
+            <div className="modal-body" style={{ padding: '1.5rem', fontSize: '0.9rem', color: '#334155' }}>
+              Are you sure you want to publish this theme? It will replace the currently live theme and be immediately visible to your users.
+            </div>
+            <div style={{ padding: '1rem', borderTop: '1px solid #e2e8f0', display: 'flex', gap: '0.75rem', justifyContent: 'flex-end', background: '#f8fafc' }}>
+              <button className="ws-btn ws-btn-outline" onClick={() => setPublishingId(null)} disabled={busy}>
+                Cancel
+              </button>
+              <button className="ws-btn ws-btn-primary" onClick={confirmPublish} disabled={busy}>
+                {busy ? 'Publishing...' : 'Yes, Publish'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

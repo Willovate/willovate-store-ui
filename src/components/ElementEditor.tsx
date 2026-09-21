@@ -206,7 +206,19 @@ export default function ElementEditor({ element, onClose, onUpdate, onOptimistic
 
   /* ── Render fields per element type ── */
   const renderContentFields = () => {
-    switch (element.id === 'hero' ? 'hero' : element.name === 'Navigation' ? 'nav' : element.name === 'Trust Badges' ? 'badges' : element.name === 'Featured Collection' ? 'featured' : element.elementType) {
+    // Determine which 'case' key to use
+    const key = (() => {
+      if (element.id === 'hero') return 'hero'
+      if (element.id === 'announcement') return 'announcement'
+      if (element.id === 'email-signup') return 'email-signup'
+      if (element.id === 'footer') return 'footer'
+      if (element.id === 'policies') return 'policies'
+      if (element.name === 'Navigation' || element.id === 'nav') return 'nav'
+      if (element.name === 'Trust Badges' || element.id === 'badges') return 'badges'
+      if (element.name === 'Featured Collection' || element.id === 'featured-title') return 'featured'
+      return element.elementType
+    })()
+    switch (key) {
       case 'hero':
         return (
           <>
@@ -215,6 +227,44 @@ export default function ElementEditor({ element, onClose, onUpdate, onOptimistic
             {field('description', 'DESCRIPTION', { placeholder: 'A short tagline…', maxLen: 200, textarea: true })}
             {field('buttonText', 'BUTTON TEXT', { placeholder: 'e.g. Shop Now', maxLen: 30 })}
             {field('buttonLink', 'BUTTON LINK', { placeholder: '/collections/summer' })}
+            {/* Image field with thumbnail */}
+            <div className="ee-field">
+              <label className="ee-label">IMAGE</label>
+              {props.style_backgroundImage && (
+                <div className="ee-image-preview">
+                  <img
+                    src={props.style_backgroundImage}
+                    alt="Hero background"
+                    className="ee-image-thumb"
+                    onError={e => { (e.target as HTMLImageElement).style.display = 'none' }}
+                  />
+                </div>
+              )}
+              <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <label className="ee-image-action-btn" style={{ flex: 1, cursor: 'pointer', textAlign: 'center' }}>
+                  Change
+                  <input
+                    type="file"
+                    accept="image/*"
+                    style={{ display: 'none' }}
+                    onChange={e => {
+                      const file = e.target.files?.[0]
+                      if (file) handleFileUpload('style_backgroundImage', file)
+                    }}
+                  />
+                </label>
+                <button
+                  className="ee-image-action-btn"
+                  style={{ flex: 1 }}
+                  onClick={() => {
+                    const url = prompt('Enter image URL:', props.style_backgroundImage || '')
+                    if (url !== null) { set('style_backgroundImage', url); save({ ...props, style_backgroundImage: url }) }
+                  }}
+                >
+                  Edit URL
+                </button>
+              </div>
+            </div>
           </>
         )
       case 'nav':
@@ -291,6 +341,35 @@ export default function ElementEditor({ element, onClose, onUpdate, onOptimistic
             {field('image', 'IMAGE URL', { placeholder: 'https://…', upload: 'image' })}
           </>
         )
+      case 'announcement':
+        return (
+          <>
+            {field('text', 'ANNOUNCEMENT TEXT', { placeholder: 'Free shipping on orders above ₹499', maxLen: 100 })}
+            {field('icon', 'ICON (emoji)', { placeholder: '🚚', maxLen: 4 })}
+          </>
+        )
+      case 'email-signup':
+        return (
+          <>
+            {field('heading', 'HEADING', { placeholder: 'Join our newsletter', maxLen: 60 })}
+            {field('subtext', 'SUBTEXT', { placeholder: 'Get updates on new arrivals…', maxLen: 120 })}
+            {field('placeholder', 'INPUT PLACEHOLDER', { placeholder: 'Enter your email', maxLen: 40 })}
+            {field('buttonText', 'BUTTON TEXT', { placeholder: 'Subscribe', maxLen: 20 })}
+          </>
+        )
+      case 'footer':
+        return (
+          <>
+            {field('brand', 'BRAND NAME', { placeholder: 'LUXORA', maxLen: 30 })}
+            {field('tagline', 'TAGLINE', { placeholder: 'Timeless pieces for modern living.', maxLen: 80 })}
+          </>
+        )
+      case 'policies':
+        return (
+          <>
+            {field('copyright', 'COPYRIGHT TEXT', { placeholder: '© 2026 Luxora. All rights reserved.', maxLen: 80 })}
+          </>
+        )
       default:
         return Object.keys(props)
           .filter(k => !k.startsWith('_'))
@@ -330,7 +409,7 @@ export default function ElementEditor({ element, onClose, onUpdate, onOptimistic
                     objectFit: 'cover', 
                     borderRadius: '4px', 
                     cursor: 'pointer', 
-                    border: props.style_backgroundImage === url ? '2px solid #046bd2' : '2px solid transparent' 
+                    border: props.style_backgroundImage === url ? '2px solid #5c3ce6' : '2px solid transparent'
                   }} 
                   onClick={() => { 
                     const newProps = { ...props, style_backgroundImage: url };

@@ -28,7 +28,7 @@
   width: 36px;
   height: 36px;
   border: 3px solid #e2e8f0;
-  border-top-color: #046bd2;
+  border-top-color: #5c3ce6;
   border-radius: 50%;
   animation: ws-spin 0.7s linear infinite;
 }
@@ -71,14 +71,14 @@
 }
 
 .ws-btn-primary {
-  background: #046bd2;
+  background: #5c3ce6;
   color: #fff;
-  border-color: #046bd2;
+  border-color: #5c3ce6;
 }
 
 .ws-btn-primary:hover {
-  background: #045cb4;
-  border-color: #045cb4;
+  background: #4a30b8;
+  border-color: #4a30b8;
 }
 
 .ws-btn-outline {
@@ -92,19 +92,19 @@
 }
 
 .ws-btn-ai {
-  background: #f0f5fa;
-  color: #046bd2;
-  border-color: #bfdbfe;
+  background: #f5f3ff;
+  color: #5c3ce6;
+  border-color: #ddd6fe;
 }
 
 .ws-btn-ai:hover {
-  background: #e0f2fe;
+  background: #ede9fe;
 }
 
 .ws-btn-ai.ws-btn-ai-active {
-  background: #046bd2;
+  background: #5c3ce6;
   color: #fff;
-  border-color: #046bd2;
+  border-color: #5c3ce6;
 }
 
 .ws-btn:disabled {
@@ -143,7 +143,7 @@
 .ws-sidebar-logo {
   width: 28px;
   height: 28px;
-  background: #046bd2;
+  background: #5c3ce6;
   color: #fff;
   border-radius: 7px;
   display: flex;
@@ -195,14 +195,14 @@
 }
 
 .ws-nav-active {
-  background: #f0f5fa !important;
-  color: #046bd2 !important;
+  background: #f5f3ff !important;
+  color: #5c3ce6 !important;
   font-weight: 600;
 }
 
 .ws-support-card {
   margin: 1rem 0.75rem 1.25rem;
-  background: #f0f5fa;
+  background: #f5f3ff;
   border-radius: 10px;
   padding: 1rem;
   flex-shrink: 0;
@@ -231,8 +231,8 @@
   margin-top: 0.75rem;
   padding: 0.45rem;
   background: #fff;
-  color: #046bd2;
-  border: 1px solid #bfdbfe;
+  color: #5c3ce6;
+  border: 1px solid #ddd6fe;
   border-radius: 6px;
   font-size: 0.8125rem;
   font-weight: 600;
@@ -241,7 +241,7 @@
 }
 
 .ws-support-card-btn:hover {
-  background: #e0f2fe;
+  background: #ede9fe;
 }
 
 
@@ -314,7 +314,7 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #046bd2, #3b82f6);
+  background: linear-gradient(135deg, #5c3ce6, #8b5cf6);
   color: #fff;
   display: flex;
   align-items: center;
@@ -410,9 +410,9 @@
 }
 
 .ws-viewport-btn.active {
-  background: #f0f5fa;
-  color: #046bd2;
-  border-color: #bfdbfe;
+  background: #f5f3ff;
+  color: #5c3ce6;
+  border-color: #ddd6fe;
 }
 
 /* Add element */
@@ -439,9 +439,9 @@
 }
 
 .ws-add-element-btn:hover:not(:disabled) {
-  border-color: #046bd2;
-  color: #046bd2;
-  background: #f0f5fa;
+  border-color: #5c3ce6;
+  color: #5c3ce6;
+  background: #f5f3ff;
 }
 
 .ws-add-menu {
@@ -474,8 +474,8 @@
 }
 
 .ws-add-menu-item:hover {
-  background: #f0f5fa;
-  color: #046bd2;
+  background: #f5f3ff;
+  color: #5c3ce6;
 }
 
 
@@ -569,22 +569,22 @@
 }
 
 .ws-quick-action-btn:hover {
-  background: #f0f5fa;
-  border-color: #bfdbfe;
-  color: #046bd2;
+  background: #f5f3ff;
+  border-color: #ddd6fe;
+  color: #5c3ce6;
 }
 
 .ws-quick-action-active {
-  background: #f0f5fa !important;
-  border-color: #bfdbfe !important;
-  color: #046bd2 !important;
+  background: #f5f3ff !important;
+  border-color: #ddd6fe !important;
+  color: #5c3ce6 !important;
   font-weight: 600;
 }
 
 .ws-home-badge {
   margin-left: auto;
-  background: #dbeafe;
-  color: #046bd2;
+  background: #ede9fe;
+  color: #5c3ce6;
   font-size: 0.625rem;
   font-weight: 700;
   padding: 0.1rem 0.4rem;
@@ -662,15 +662,15 @@
   font-size: 0.75rem;
   font-weight: 700;
   cursor: pointer;
-  border: 1px solid #046bd2;
-  background: #046bd2;
+  border: 1px solid #5c3ce6;
+  background: #5c3ce6;
   color: #fff;
   flex-shrink: 0;
   transition: all 0.15s;
 }
 
 .ee-save-btn:hover:not(:disabled) {
-  background: #045cb4;
+  background: #4a30b8;
 }
 
 .ee-save-btn.ee-saved {
@@ -721,8 +721,8 @@
 }
 
 .ee-tab-active {
-  color: #046bd2 !important;
-  border-bottom-color: #046bd2;
+  color: #5c3ce6 !important;
+  border-bottom-color: #5c3ce6;
 }
 
 .ee-fields {
@@ -781,8 +781,8 @@
 .ee-input:focus,
 .ee-textarea:focus {
   outline: none;
-  border-color: #046bd2;
-  box-shadow: 0 0 0 3px rgba(107, 70, 193, 0.12);
+  border-color: #5c3ce6;
+  box-shadow: 0 0 0 3px rgba(92, 60, 230, 0.12);
 }
 
 .ee-color-field {}
@@ -1789,4 +1789,327 @@
   background: #f1f5f9;
   color: #334155;
   border-color: #94a3b8;
+}
+
+
+/* ============================================================
+   SECTION DOTS MENU
+   ============================================================ */
+.ws-section-dots-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #64748b;
+  transition: background 0.12s;
+  flex-shrink: 0;
+}
+
+.ws-section-dots-btn:hover {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+.ws-section-dots-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 4px);
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  min-width: 140px;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.ws-section-dots-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.55rem 0.9rem;
+  background: none;
+  border: none;
+  font-size: 0.8125rem;
+  color: #2d3748;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.12s;
+}
+
+.ws-section-dots-item:hover {
+  background: #f5f3ff;
+  color: #5c3ce6;
+}
+
+.ws-section-dots-delete {
+  color: #e53e3e !important;
+  border-top: 1px solid #eef0f5;
+}
+
+.ws-section-dots-delete:hover {
+  background: #fff5f5 !important;
+  color: #c53030 !important;
+}
+
+
+/* ============================================================
+   ANNOUNCEMENT BAR (pe-announcement)
+   ============================================================ */
+.pe-announcement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.5rem;
+  background: #f5f5f0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  position: relative;
+  border-bottom: 1px solid #eee;
+  letter-spacing: 0.01em;
+}
+
+.pe-announcement:not(.pe-selected):hover {
+  outline: 1.5px dashed #3b82f6;
+  outline-offset: -1px;
+}
+
+
+/* ============================================================
+   RICH FOOTER (pe-footer-rich)
+   ============================================================ */
+.pe-footer-rich {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  margin-top: auto;
+}
+
+/* Newsletter strip */
+.pe-footer-newsletter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2rem 3rem;
+  background: #fafafa;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  position: relative;
+}
+
+.pe-footer-newsletter:not(.pe-selected):hover {
+  outline: 1.5px dashed #3b82f6;
+  outline-offset: -1px;
+}
+
+.pe-footer-nl-title {
+  margin: 0 0 0.35rem 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.pe-footer-nl-sub {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.pe-footer-nl-form {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.pe-footer-nl-input {
+  padding: 0.6rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  width: 220px;
+  background: #fff;
+}
+
+.pe-footer-nl-btn {
+  padding: 0.6rem 1.25rem;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* Main footer columns */
+.pe-footer-body {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 2rem;
+  padding: 3rem;
+  background: #111;
+  color: #ccc;
+  cursor: pointer;
+  position: relative;
+}
+
+.pe-footer-body:not(.pe-selected):hover {
+  outline: 1.5px dashed #3b82f6;
+  outline-offset: -1px;
+}
+
+.pe-footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.pe-footer-col-brand {
+  gap: 0.75rem;
+}
+
+.pe-footer-brand-name {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #fff;
+}
+
+.pe-footer-tagline {
+  font-size: 0.8rem;
+  color: #888;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.pe-footer-social {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.pe-social-icon {
+  color: #888;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s;
+}
+
+.pe-social-icon:hover {
+  color: #fff;
+}
+
+.pe-footer-col-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #fff;
+  margin: 0 0 0.5rem 0;
+}
+
+.pe-footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.pe-footer-links a {
+  font-size: 0.8rem;
+  color: #888;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.pe-footer-links a:hover {
+  color: #fff;
+}
+
+/* Policies bar */
+.pe-footer-policies {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 3rem;
+  background: #0d0d0d;
+  font-size: 0.75rem;
+  color: #666;
+  cursor: pointer;
+  position: relative;
+}
+
+.pe-footer-policies:not(.pe-selected):hover {
+  outline: 1.5px dashed #3b82f6;
+  outline-offset: -1px;
+}
+
+.pe-footer-policy-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.pe-footer-policy-links a {
+  color: #666;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.pe-footer-policy-links a:hover {
+  color: #aaa;
+}
+
+
+/* ============================================================
+   ELEMENT EDITOR – IMAGE PREVIEW
+   ============================================================ */
+.ee-image-preview {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 0.5rem;
+}
+
+.ee-image-thumb {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  display: block;
+}
+
+.ee-image-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 0.75rem;
+  background: #f7f8fb;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #4a5568;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+}
+
+.ee-image-action-btn:hover {
+  background: #f0ebff;
+  border-color: #c4b5fd;
+  color: #5c3ce6;
 }
