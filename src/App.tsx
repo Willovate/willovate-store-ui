@@ -148,7 +148,10 @@ function App() {
             rawHash === 'sports-store-templates' ||
             rawHash === 'sport-templates' ||
             rawHash === 'sports-template' ||
-            rawHash === 'sporting-goods-template'
+            rawHash === 'sporting-goods-template' ||
+            rawHash === 'velocity' ||
+            rawHash === 'velocity-store' ||
+            rawHash === 'sports-velocity'
           )) ||
           (key === 'other' && (rawHash === 'custom' || rawHash === 'custom-templates'))
         )
@@ -506,7 +509,7 @@ function App() {
         </section>
       </main>
 
-      <footer>
+      <footer className="app-default-footer">
         <a
           className="wordmark"
           href="#top"

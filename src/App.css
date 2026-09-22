@@ -634,7 +634,8 @@
   font-size: 13px;
 }
 
-footer {
+footer:not([class]),
+.app-default-footer {
   min-height: 126px;
   padding: 32px clamp(20px, 5vw, 76px);
   display: grid;
@@ -643,13 +644,15 @@ footer {
   border-top: 1px solid var(--line);
 }
 
-footer p {
+footer:not([class]) p,
+.app-default-footer p {
   margin: 0;
   color: var(--muted);
   font-size: 11px;
 }
 
-footer p:last-child {
+footer:not([class]) p:last-child,
+.app-default-footer p:last-child {
   justify-self: end;
 }
 
@@ -927,12 +930,14 @@ footer p:last-child {
     grid-column: auto;
   }
 
-  footer {
+  footer:not([class]),
+  .app-default-footer {
     grid-template-columns: 1fr auto;
     gap: 8px;
   }
 
-  footer > p:first-of-type {
+  footer:not([class]) > p:first-of-type,
+  .app-default-footer > p:first-of-type {
     display: none;
   }
 

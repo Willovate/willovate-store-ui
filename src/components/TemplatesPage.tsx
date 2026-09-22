@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react'
 import '../styles/TemplatesPage.css'
+import { VelocityStorefront } from './velocity/VelocityStorefront'
+export { VelocityStorefront }
 
 
 
@@ -398,84 +400,415 @@ export const SPORTS_TEMPLATES_CONFIG: Record<string, SportsTemplateConfig> = {
       name: 'Apex',
       businessType: 'sporting-goods',
       industryCategory: 'Sports Store',
-      style: 'luxury',
-      catalogSize: 'small',
-      tags: ['Premium Athletic', 'Luxury Athleisure', 'Minimalist', 'Editorial', 'Performance'],
-      shortDescription: 'Monochrome, restrained high-performance luxury athletic aesthetic with generous whitespace and editorial campaign photography.',
-      thumbnailUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&auto=format&fit=crop&q=80',
-      fullPreviewUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1600&auto=format&fit=crop&q=85',
-      popularityScore: 97,
+      style: 'dark',
+      catalogSize: 'medium',
+      tags: ['Hype Drops', 'Limited Edition', 'Streetwear Athletic', 'Exclusive', 'Drop Culture', 'Members Only'],
+      shortDescription: 'Dark cinematic hype-drop culture storefront — limited edition athlete drops, exclusive member access tiers, sold-out countdown timers, and a bold plasma-blue neon aesthetic unlike any other sports template.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 99,
       isActive: true,
-      brandName: 'APEX ATELIER',
-      headline: 'REFINED PERFORMANCE.\nENGINEERED IN SILENCE.',
-      subtitle: 'The intersection of technical Swiss textiles, ergonomic cuts, and uncompromising minimalist luxury.',
-      buttonText: 'Explore Lookbook 08',
-      buttonColor: '#18181b',
-      accentColor: '#d4af37',
-      isDark: false,
-      modelImage: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&auto=format&fit=crop&q=80',
+      brandName: 'APEX // DROP LAB',
+      headline: 'NOT FOR\nEVERYONE.',
+      subtitle: 'Limited drops. Athlete-designed collabs. Exclusive access for APEX members only. When it\'s gone — it\'s gone.',
+      buttonText: 'Enter Drop Lab',
+      buttonColor: '#0ea5e9',
+      accentColor: '#0ea5e9',
+      isDark: true,
+      modelImage: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&auto=format&fit=crop&q=80',
       badge: "editor's pick",
-      rating: 4.98,
-      reviewCount: 76,
-      layoutType: 'editorial',
-      features: ['Editorial Lookbook', 'Swiss Technical Fabric Origins', 'Concierge Fit Sizing', 'Monogram Service', 'Limited Numbered Runs'],
+      rating: 4.99,
+      reviewCount: 312,
+      layoutType: 'bold-minimal',
+      features: [
+        'Live Drop Countdown Timer',
+        'Sold-Out Hype Badges',
+        'APEX Members Early Access (24h before public)',
+        'Athlete Collab Ambassador Grid',
+        'Drop Calendar & Notify Me',
+        'Raffle Entry for Ultra-Limited Items',
+        'Member Tier System (Core / Pro / Elite)',
+        'One-Tap Instant Checkout on Drops',
+        'Real-Time Stock Burn Counter',
+        'Dark Cinema Full-Screen Hero',
+        'Plasma-Blue Neon Accent System',
+        'Exclusive QR Membership Card',
+      ],
     },
-    announcement: '✦ APEX PRIVATE COLLECTION: Numbered Batch 08 Now Live • Worldwide Complimentary Courier Delivery',
-    navItems: ['Collection', 'Materials', 'Editorial', 'Archive', 'Bespoke Sizing', 'Journal'],
-    categories: [
-      { id: 'outerwear', name: 'Modular Technical Shells', image: 'https://images.unsplash.com/photo-1556906781-9a412961c28c?w=600&auto=format&fit=crop&q=80', count: '12 Editions' },
-      { id: 'knitwear', name: 'Merino Cashmere Base Layers', image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80', count: '8 Editions' },
-      { id: 'tailored', name: 'Precision Travel Trousers', image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&auto=format&fit=crop&q=80', count: '10 Editions' },
+
+    /* ── Announcement Bar ── */
+    announcement: '⚡ APEX DROP LAB: "SHADOW SERIES 03" drops SATURDAY 06:00 IST — Members get 24H early access. Join free →',
+
+    /* ── Navigation ── */
+    navItems: ['Drops', 'Live Now', 'Members', 'Collabs', 'Archive', 'Join APEX'],
+
+    /* ── Hero Stats — Drop Culture Metrics ── */
+    heroStats: [
+      { label: 'Units Per Drop', value: '500' },
+      { label: 'Avg Sell-Out Time', value: '< 4min' },
+      { label: 'Active Members', value: '82K+' },
     ],
+
+    /* ── Shop by Drop Category ── */
+    categories: [
+      {
+        id: 'live-drops',
+        name: 'LIVE NOW — Shadow Series 03',
+        image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&auto=format&fit=crop&q=80',
+        badge: '🔴 LIVE DROP',
+        count: '500 Units Only',
+      },
+      {
+        id: 'footwear',
+        name: 'Signature Collab Footwear',
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80',
+        badge: '92% SOLD',
+        count: '40 Pairs Left',
+      },
+      {
+        id: 'apparel',
+        name: 'Drop Lab Apparel',
+        image: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&auto=format&fit=crop&q=80',
+        badge: 'MEMBERS FIRST',
+        count: '200 Units',
+      },
+      {
+        id: 'collab',
+        name: 'Athlete Collab Series',
+        image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&auto=format&fit=crop&q=80',
+        badge: 'SIGNED EDITION',
+        count: '12 Left',
+      },
+      {
+        id: 'archive',
+        name: 'Archive Vault',
+        image: 'https://images.unsplash.com/photo-1556906781-9a412961c28c?w=600&auto=format&fit=crop&q=80',
+        badge: 'SOLD OUT RELICS',
+        count: 'Display Only',
+      },
+    ],
+
+    /* ── Featured Drop Products ── */
     featuredProducts: [
       {
-        id: 'apx-01',
-        name: 'The Altitude 3L Waterproof Trench',
-        category: 'Outerwear',
-        price: '$580.00',
-        image: 'https://images.unsplash.com/photo-1556906781-9a412961c28c?w=600&auto=format&fit=crop&q=80',
-        badge: 'LIMITED TO 200 PIECES',
+        id: 'apx-drop-01',
+        name: 'Shadow Series 03 — Phantom Hoodie',
+        category: 'Apparel',
+        price: '$195.00',
+        compareAtPrice: '$240.00',
+        image: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&auto=format&fit=crop&q=80',
+        badge: '🔴 DROPPING NOW',
         rating: 5.0,
-        reviewCount: 42,
-        colors: ['#18181b', '#3f3f46', '#e4e4e7'],
-        sizes: ['46', '48', '50', '52'],
-        techSpecs: ['Schoeller® C_Change Membrane', 'Magnetic Storm Flap', 'Made in Geneva'],
+        reviewCount: 0,
+        colors: ['#0a0a0a', '#0ea5e9', '#7c3aed'],
+        sizes: ['XS', 'S', 'M', 'L', 'XL'],
+        techSpecs: [
+          'Drop #: SHADOW-03-PH',
+          'Units: 500 Worldwide',
+          'Fabric: 400GSM French Terry',
+          'Detail: Tonal embroidered APEX crest',
+          'Ships: Within 72h of drop close',
+        ],
       },
       {
-        id: 'apx-02',
-        name: 'Merino Kinetic Half-Zip Knit',
-        category: 'Knitwear',
-        price: '$290.00',
-        image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80',
-        badge: 'NEW ARRIVAL',
-        rating: 4.9,
-        reviewCount: 28,
-        colors: ['#18181b', '#71717a'],
-      },
-      {
-        id: 'apx-03',
-        name: 'Aerotex Tailored Commute Pant',
-        category: 'Trousers',
+        id: 'apx-drop-02',
+        name: 'Collab 07 × Aryan Kapoor — Speed Trainer',
+        category: 'Footwear',
         price: '$320.00',
-        image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&auto=format&fit=crop&q=80',
-        badge: 'WATER REPELLENT',
-        rating: 4.95,
-        reviewCount: 37,
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80',
+        badge: '⚡ 40 PAIRS LEFT',
+        rating: 5.0,
+        reviewCount: 128,
+        colors: ['#0a0a0a', '#0ea5e9'],
+        sizes: ['UK 6', 'UK 7', 'UK 8', 'UK 9', 'UK 10', 'UK 11'],
+        techSpecs: [
+          'Collab: Aryan Kapoor × APEX Drop Lab',
+          'Units: 250 pairs globally',
+          'Sole: Responsive Nitro² Compound',
+          'Upper: Recycled 4D-Knit Mesh',
+          'Certificate of Authenticity included',
+        ],
+      },
+      {
+        id: 'apx-drop-03',
+        name: 'Shadow Series 03 — Compression Set',
+        category: 'Apparel',
+        price: '$140.00',
+        image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80',
+        badge: 'MEMBERS ONLY',
+        rating: 4.97,
+        reviewCount: 44,
+        colors: ['#0a0a0a', '#0ea5e9', '#4f46e5'],
+        sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+        techSpecs: [
+          'Drop #: SHADOW-03-CS',
+          '2-Piece: Long Sleeve + Legging',
+          'Fabric: NanoFlex® Performance Compression',
+          'Detail: Glow-edge plasma seam tape',
+          'APEX Members: 24h early access',
+        ],
+      },
+      {
+        id: 'apx-drop-04',
+        name: 'APEX Elite Membership Card — Annual',
+        category: 'Accessories',
+        price: '$49.00',
+        image: 'https://images.unsplash.com/photo-1556906781-9a412961c28c?w=600&auto=format&fit=crop&q=80',
+        badge: '🏆 ELITE TIER',
+        rating: 4.99,
+        reviewCount: 890,
+        colors: ['#0a0a0a'],
+        techSpecs: [
+          '24H Early Access to all drops',
+          'Exclusive collab invitations',
+          'Free express shipping on every order',
+          'Members raffle entry — ultra-limited items',
+          'Personalized drop calendar alerts',
+        ],
       },
     ],
-    techFeatures: [
-      { icon: '🇨🇭', title: 'Swiss Fabric Alchemy', desc: 'Crafted exclusively with Schoeller® and Loro Piana Storm System® membranes.' },
-      { icon: '✂️', title: 'Articulated Tailoring', desc: 'Pre-curved ergonomic sleeves and gussets that mold naturally to bodily movement.' },
-      { icon: '♾️', title: 'Guaranteed For Life', desc: 'Free repair service and hardware replacement for the lifetime of the garment.' },
+
+    /* ── New Arrivals / Upcoming Drops ── */
+    newArrivals: [
+      {
+        id: 'apx-upcoming-01',
+        name: 'Drop 08 — Obsidian Run Series (Preview)',
+        category: 'Footwear',
+        price: '$280.00',
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80',
+        badge: '🗓 DROPS SAT 06:00',
+        rating: 4.9,
+        reviewCount: 0,
+        colors: ['#0a0a0a', '#1e293b', '#0ea5e9'],
+        techSpecs: ['Collab: APEX × Priya Menon', '300 pairs only', 'Notify Me now open'],
+      },
+      {
+        id: 'apx-upcoming-02',
+        name: 'Core Tee — Plasma Edition',
+        category: 'Apparel',
+        price: '$75.00',
+        image: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&auto=format&fit=crop&q=80',
+        badge: '⏳ 2 DAYS LEFT',
+        rating: 4.95,
+        reviewCount: 0,
+        colors: ['#0ea5e9', '#0a0a0a'],
+      },
+      {
+        id: 'apx-upcoming-03',
+        name: 'APEX × Vikram Nair — Signed Weightlifting Belt',
+        category: 'Equipment',
+        price: '$180.00',
+        image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&auto=format&fit=crop&q=80',
+        badge: '🖊 SIGNED + NUMBERED',
+        rating: 5.0,
+        reviewCount: 12,
+        colors: ['#0a0a0a'],
+        techSpecs: ['Limited to 50 units', 'Hand-signed by Vikram Nair', 'Numbered certificate'],
+      },
     ],
-    story: {
-      eyebrow: 'PHILOSOPHY',
-      title: 'THE DISCIPLINE OF SUBTRACTION',
-      quote: 'We removed logos, stripped away excess seams, and focused on pure technical perfection. Luxury isn’t loud; it’s the quiet confidence of superior craft.',
-      author: 'Elena Rostova',
-      role: 'Founder & Creative Director',
-      image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format&fit=crop&q=80',
+
+    /* ── Best Sellers / Archive Hits ── */
+    bestSellers: [
+      {
+        id: 'apx-arch-01',
+        name: 'Shadow Series 01 — Phantom Tee (Archive)',
+        category: 'Apparel',
+        price: '$120.00',
+        image: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&auto=format&fit=crop&q=80',
+        badge: '🚫 SOLD OUT',
+        rating: 5.0,
+        reviewCount: 640,
+        techSpecs: ['500 units — all claimed in 3m 47s', 'Archive display only'],
+      },
+      {
+        id: 'apx-arch-02',
+        name: 'Collab 04 × Riya Sharma — Volt Runner',
+        category: 'Footwear',
+        price: '$295.00',
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80',
+        badge: '🚫 SOLD OUT',
+        rating: 5.0,
+        reviewCount: 412,
+        techSpecs: ['200 pairs — sold in 1m 52s', 'Resale floor: $480'],
+      },
+    ],
+
+    /* ── Promo Banner ── */
+    promoBanner: {
+      tag: '⚡ SHADOW SERIES 03 — LIVE NOW',
+      title: 'THE DROP IS LIVE. 500 UNITS. FIRST COME, FIRST SERVED.',
+      subtitle: 'APEX Members got in 24 hours ago. Public window opens NOW. Once it\'s gone, it hits the archive — permanently.',
+      code: 'APEXDROP',
+      discount: 'FREE SHIPPING',
+      buttonText: 'Enter the Drop Now →',
+      image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200&auto=format&fit=crop&q=80',
     },
+
+    /* ── Tech Features — APEX Drop Lab Unique Sections ── */
+    techFeatures: [
+      {
+        icon: '⏱',
+        title: 'Live Countdown — Every Drop',
+        desc: 'Every release runs a precision countdown timer. When it hits zero, the drop opens simultaneously for all members. No bots. No bypasses.',
+      },
+      {
+        icon: '🔐',
+        title: 'Members Get In First',
+        desc: 'APEX Core, Pro, and Elite members unlock drops 24 hours before public. Elite members get raffle access for ultra-limited items that never go to general sale.',
+      },
+      {
+        icon: '🔥',
+        title: 'Real-Time Burn Counter',
+        desc: 'Watch stock disappear in real-time. Every product page shows a live unit counter updating every second — so you know exactly how many are left.',
+      },
+      {
+        icon: '✍️',
+        title: 'Athlete-Designed, Athlete-Signed',
+        desc: 'Every collab drop is co-designed by the athlete — not just slapping a name on it. Numbered editions come with a signed certificate of authenticity.',
+      },
+    ],
+
+    /* ── Brand Story — Drop Lab Manifesto ── */
+    story: {
+      eyebrow: 'APEX DROP LAB // WHY WE EXIST',
+      title: '"WE BUILD FOR THE 1%. THE REST WATCH FROM THE OUTSIDE."',
+      quote: 'We got tired of brands releasing thousands of units and calling it "limited". At APEX, 500 is the ceiling — and we mean it. Every drop is athlete-designed, co-signed, and numbered. If you miss it, you miss it. That\'s the deal.',
+      author: 'Rahul Singhania',
+      role: 'Founder, APEX Drop Lab',
+      image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&auto=format&fit=crop&q=80',
+      stats: [
+        { num: '82K+', label: 'APEX Members Active' },
+        { num: '< 4min', label: 'Average Drop Sell-Out' },
+        { num: '23', label: 'Drops Completed' },
+      ],
+    },
+
+    /* ── Editorial Guides — Drop Culture Content ── */
+    guides: [
+      {
+        title: 'How to Never Miss an APEX Drop Again: The Complete Member Playbook',
+        tag: 'MEMBER GUIDE',
+        time: '5 min read',
+        image: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&auto=format&fit=crop&q=80',
+        desc: 'Drop calendar, notification setup, tier benefits breakdown — everything you need to stay ahead of every release.',
+      },
+      {
+        title: 'Shadow Series 01 → 03: How the Design Evolved',
+        tag: 'DROP HISTORY',
+        time: '8 min read',
+        image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&auto=format&fit=crop&q=80',
+        desc: 'A visual walkthrough of how each Shadow Series drop pushed the design language further — and what Drop 04 will change.',
+      },
+      {
+        title: 'Collab 07 × Aryan Kapoor: Designing the Speed Trainer from Scratch',
+        tag: 'ATHLETE STORY',
+        time: '10 min read',
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80',
+        desc: '"I wanted a shoe that looked like 11pm under stadium lights." Aryan on the 9-month process behind Collab 07.',
+      },
+    ],
+
+    /* ── Customer Reviews ── */
+    reviews: [
+      {
+        name: 'Aarav Mehta',
+        role: 'APEX Elite Member since Drop 01',
+        quote: 'I\'ve copped every drop since Shadow 01. The quality justifies the scarcity — this isn\'t hype for hype\'s sake. The 400GSM French Terry on the Phantom Hoodie is insane.',
+        rating: 5,
+        verified: true,
+      },
+      {
+        name: 'Tara Krishnan',
+        role: 'APEX Pro Member, Mumbai',
+        quote: 'The member early access is genuinely worth it. I was in on the Collab 07 shoe 24 hours before public and got my size. Public sold out in 2 minutes. Worth every rupee.',
+        rating: 5,
+        verified: true,
+      },
+      {
+        name: 'Dev Anand',
+        role: 'Streetwear & Fitness Collector',
+        quote: 'Shadow Series 01 is already trading at 2.4x resale. Bought it to wear, not flip — but it\'s good to know APEX actually holds value. Legitimately the best athletic drop brand in India.',
+        rating: 5,
+        verified: true,
+      },
+      {
+        name: 'Prisha Nair',
+        role: 'APEX Core Member, Bangalore',
+        quote: 'The drop experience itself is addictive. Live counter, countdown, instant checkout. And the packaging when it arrives — matte black box, no logo on the outside. Quietly flex.',
+        rating: 5,
+        verified: true,
+      },
+    ],
+
+    /* ── FAQs — Drop Culture Specific ── */
+    faqs: [
+      {
+        q: 'How do I get early access to drops?',
+        a: 'Join APEX Members (free Core tier or paid Pro/Elite) to unlock early access. Core members get 12-hour early access, Pro get 24 hours, Elite get 48 hours + raffle entry for ultra-limited items.',
+      },
+      {
+        q: 'What happens if I miss a drop?',
+        a: 'Once a drop closes, it moves to the Archive permanently — no restocks, ever. Keep your notification alerts on and upgrade your membership tier to avoid missing future drops.',
+      },
+      {
+        q: 'Are the limited unit counts real?',
+        a: 'Yes — always. We publish production manifests for every drop (total units, colourways, sizes). The burn counter on each product page updates live from our inventory system.',
+      },
+      {
+        q: 'How do raffles work for ultra-limited items?',
+        a: 'Elite Members are automatically entered into raffles for items under 100 units. Winners are drawn randomly and notified via email 48 hours before the drop opens. Pro members can purchase raffle entry add-on.',
+      },
+      {
+        q: 'Can I return or exchange a drop item?',
+        a: 'Due to the limited nature of drops, all sales are final. Please consult our sizing chart carefully before purchase. If you receive a defective item, contact us within 7 days for a replacement.',
+      },
+    ],
+
+    /* ── Collections ── */
+    collections: [
+      {
+        title: 'Shadow Series',
+        tag: 'FLAGSHIP DROP LINE',
+        image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&auto=format&fit=crop&q=80',
+        count: '03 Drops / 1,500 Units',
+      },
+      {
+        title: 'Collab Lab',
+        tag: 'ATHLETE CO-DESIGNS',
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80',
+        count: '07 Collabs Done',
+      },
+      {
+        title: 'Archive Vault',
+        tag: 'SOLD-OUT HISTORY',
+        image: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&auto=format&fit=crop&q=80',
+        count: '23 Drops Archived',
+      },
+    ],
+
+    /* ── Social / UGC Gallery ── */
+    socialGallery: [
+      {
+        image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&auto=format&fit=crop&q=80',
+        handle: '@aarav_drops',
+        likes: '8.4K',
+      },
+      {
+        image: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=400&auto=format&fit=crop&q=80',
+        handle: '@tara.fits',
+        likes: '12.1K',
+      },
+      {
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&auto=format&fit=crop&q=80',
+        handle: '@dev_collects',
+        likes: '6.7K',
+      },
+      {
+        image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&auto=format&fit=crop&q=80',
+        handle: '@prisha_apex_life',
+        likes: '4.9K',
+      },
+    ],
   },
 
   'sports-sprint': {
@@ -1002,66 +1335,439 @@ export const SPORTS_TEMPLATES_CONFIG: Record<string, SportsTemplateConfig> = {
       industryCategory: 'Sports Store',
       style: 'modern',
       catalogSize: 'large',
-      tags: ['Cycling', 'Road Bike', 'Gravel', 'Helmets', 'Aero Gear'],
-      shortDescription: 'Technical cycling enthusiast store with wind-tunnel drag metrics, gravel/road bike configurator, and high-vis safety gear.',
+      tags: ['Cycling', 'Road Bike', 'Gravel', 'Helmets', 'Aero Gear', 'Components', 'E-Bike'],
+      shortDescription: 'Athens Spoke-inspired cycling store — clean white canvas, amber yellow accents, spec-heavy product cards, mega menu, countdown promos, and editorial gear storytelling for serious cyclists.',
       thumbnailUrl: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800&auto=format&fit=crop&q=80',
       fullPreviewUrl: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=1600&auto=format&fit=crop&q=85',
-      popularityScore: 98,
+      popularityScore: 99,
       isActive: true,
-      brandName: 'RIDE // VELO CYCLES',
-      headline: 'AERODYNAMIC PRECISION.\nFOR EVERY WATT PRODUCED.',
-      subtitle: 'Full carbon road and gravel machines, MIPS-certified aero helmets, and seamless Italian bib shorts for endurance cyclists.',
+      brandName: 'VELO CYCLES // SPOKE EDITION',
+      headline: 'ENGINEERED FOR\nEVERY WATT.',
+      subtitle: 'Full carbon road and gravel machines, MIPS-certified aero helmets, pro groupsets, and Italian bib shorts — gear that performs as hard as you ride.',
       buttonText: 'Configure Your Bike',
-      buttonColor: '#0f172a',
+      buttonColor: '#111827',
       accentColor: '#eab308',
       isDark: false,
       modelImage: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800&auto=format&fit=crop&q=80',
       badge: 'popular',
-      rating: 4.95,
-      reviewCount: 135,
+      rating: 4.96,
+      reviewCount: 248,
       layoutType: 'card-grid',
-      features: ['Bike Sizing Calculator', 'Aero Watt-Savings Meter', 'Groupset Selector (Shimano/SRAM)', 'Free Tubeless Setup', 'Bike Delivery Guarantee'],
+      features: [
+        'Bike Sizing Calculator',
+        'Aero Watt-Savings Meter',
+        'Groupset Selector (Shimano / SRAM / Campagnolo)',
+        'Mega Menu with Category Image Tiles',
+        'Stock Counter & Low-Stock Alerts',
+        'Image Rollover & Zoom on Product Cards',
+        'Countdown Timer on Promo Banners',
+        'Slide-out Cart with Free-Shipping Progress Bar',
+        'Quick Buy Panel (no page reload)',
+        'Before / After Component Comparison Slider',
+        'FAQ Accordion Page',
+        'Press & Blog Editorial Section',
+        'Color Swatch Filters on Collection Pages',
+        'Breadcrumb Navigation',
+        'Free Tubeless Setup on Road Builds',
+        'Bike Delivery White-Glove Guarantee',
+      ],
     },
-    announcement: '🚴 VELO DISPATCH: Complimentary Shimano Di2 Electronic Tuning on all complete carbon bike builds',
-    navItems: ['Road Bikes', 'Gravel Bikes', 'Bibs & Jerseys', 'Aero Helmets', 'Wheelsets', 'Components'],
-    categories: [
-      { id: 'road', name: 'Aero Carbon Road Bikes', image: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=600&auto=format&fit=crop&q=80', count: '14 Models' },
-      { id: 'gravel', name: 'All-Terrain Gravel Bikes', image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80', count: '12 Models' },
-      { id: 'helmets', name: 'MIPS Certified Helmets', image: 'https://images.unsplash.com/photo-1556906781-9a412961c28c?w=600&auto=format&fit=crop&q=80', count: '16 Models' },
-      { id: 'apparel', name: 'Pro Bib Shorts & Jerseys', image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80', count: '32 Items' },
+
+    /* ── Announcement Bar ── */
+    announcement: '🚴 SPOKE SEASON SALE: Free Shimano Di2 Electronic Groupset Tuning on all carbon road bikes over $3,500 • Code: SPOKE25',
+
+    /* ── Navigation ── */
+    navItems: ['Road Bikes', 'Gravel & Endurance', 'Helmets', 'Bibs & Jerseys', 'Wheelsets', 'Components', 'Sale'],
+
+    /* ── Hero Stats ── */
+    heroStats: [
+      { label: 'Watt Savings (Aero)', value: '12W' },
+      { label: 'Complete Bike Weight', value: '6.9kg' },
+      { label: 'Day White-Glove Trial', value: '60-' },
     ],
+
+    /* ── Shop by Category ── */
+    categories: [
+      {
+        id: 'road',
+        name: 'Aero Carbon Road Bikes',
+        image: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=600&auto=format&fit=crop&q=80',
+        badge: 'PRO BUILD',
+        count: '14 Models',
+      },
+      {
+        id: 'gravel',
+        name: 'Gravel & Endurance',
+        image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80',
+        badge: 'ALL-TERRAIN',
+        count: '12 Models',
+      },
+      {
+        id: 'helmets',
+        name: 'MIPS Aero Helmets',
+        image: 'https://images.unsplash.com/photo-1556906781-9a412961c28c?w=600&auto=format&fit=crop&q=80',
+        badge: 'WIND-TUNNEL TESTED',
+        count: '18 Models',
+      },
+      {
+        id: 'components',
+        name: 'Groupsets & Components',
+        image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&auto=format&fit=crop&q=80',
+        badge: 'SHIMANO / SRAM',
+        count: '120+ Parts',
+      },
+      {
+        id: 'apparel',
+        name: 'Pro Bibs & Race Jerseys',
+        image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80',
+        badge: "EDITOR'S PICK",
+        count: '38 Items',
+      },
+      {
+        id: 'wheelsets',
+        name: 'Carbon Wheelsets',
+        image: 'https://images.unsplash.com/photo-1576243345690-4e4b79b63288?w=600&auto=format&fit=crop&q=80',
+        badge: '< 1,400G',
+        count: '22 Sets',
+      },
+    ],
+
+    /* ── Featured Products (Athens Spoke: spec-heavy cards) ── */
     featuredProducts: [
       {
         id: 'rid-01',
-        name: 'AeroMax SLR Carbon Road Bike (Shimano Ultegra Di2)',
+        name: 'AeroMax SLR Di2 Carbon Road Bike',
         category: 'Road Bikes',
         price: '$4,800.00',
+        compareAtPrice: '$5,400.00',
         image: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=600&auto=format&fit=crop&q=80',
-        badge: '7.1KG COMPLETE',
+        badge: 'ONLY 3 LEFT',
         rating: 4.98,
-        reviewCount: 65,
-        colors: ['#0f172a', '#eab308', '#ffffff'],
-        techSpecs: ['Toray T1000 Carbon', 'Internal Cable Routing', '50mm Carbon Wheels'],
+        reviewCount: 92,
+        colors: ['#111827', '#eab308', '#ffffff', '#dc2626'],
+        sizes: ['48cm', '51cm', '54cm', '56cm', '58cm'],
+        techSpecs: [
+          'Toray T1000 UD Carbon Frame',
+          'Shimano Ultegra Di2 12-Speed',
+          'Internal Cable Routing',
+          '50mm Carbon Clincher Wheelset',
+          'Complete Weight: 6.9kg',
+        ],
       },
       {
         id: 'rid-02',
         name: 'Vortex MIPS Aero Road Helmet',
         category: 'Helmets',
         price: '$240.00',
+        compareAtPrice: '$295.00',
         image: 'https://images.unsplash.com/photo-1556906781-9a412961c28c?w=600&auto=format&fit=crop&q=80',
         badge: 'SAVE 12 WATTS',
-        rating: 4.9,
-        reviewCount: 88,
+        rating: 4.92,
+        reviewCount: 148,
+        colors: ['#111827', '#eab308', '#dc2626', '#3b82f6'],
+        sizes: ['S (52-56cm)', 'M (56-59cm)', 'L (59-62cm)'],
+        techSpecs: [
+          'MIPS Rotational Protection',
+          'Wind-Tunnel Validated: -12W @ 45km/h',
+          '19 Aero Optimised Vents',
+          'Weight: 248g',
+          'Koroyd® Impact Absorption Layer',
+        ],
       },
       {
         id: 'rid-03',
-        name: 'Pro Endurance Chamois Bib Shorts',
+        name: 'Italian Chamois Pro Bib Short',
         category: 'Apparel',
         price: '$180.00',
         image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80',
         badge: '7+ HOUR COMFORT',
-        rating: 4.92,
-        reviewCount: 104,
+        rating: 4.94,
+        reviewCount: 184,
+        colors: ['#111827', '#1e3a8a'],
+        sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+        techSpecs: [
+          'Elastic Interface® Road Pad (7hr+)',
+          '200g Italian Lycra® Compression',
+          'Flat-Lock Anti-Chafe Seams',
+          'Silicon Leg Gripper Bands',
+        ],
+      },
+      {
+        id: 'rid-04',
+        name: 'Shimano Ultegra R8150 Di2 Groupset',
+        category: 'Components',
+        price: '$1,450.00',
+        compareAtPrice: '$1,680.00',
+        image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&auto=format&fit=crop&q=80',
+        badge: 'PRO SPEC',
+        rating: 4.97,
+        reviewCount: 56,
+        colors: ['#4b5563'],
+        techSpecs: [
+          'Shimano Ultegra Di2 12-Speed Electronic',
+          'Includes: Shifters, FD, RD, Crankset, Cassette, Chain',
+          'Synchro Shift & Semi-Synchro Shift Modes',
+          'Wireless Rear Derailleur',
+          'Compatible: Road & Gravel',
+        ],
+      },
+    ],
+
+    /* ── New Arrivals ── */
+    newArrivals: [
+      {
+        id: 'rid-05',
+        name: 'Zipp 303 Firecrest Carbon Tubeless Wheelset',
+        category: 'Wheelsets',
+        price: '$1,320.00',
+        image: 'https://images.unsplash.com/photo-1576243345690-4e4b79b63288?w=600&auto=format&fit=crop&q=80',
+        badge: 'JUST DROPPED',
+        rating: 4.95,
+        reviewCount: 38,
+        colors: ['#111827'],
+        techSpecs: ['Rim Depth: 45mm', 'Weight: 1,378g (pair)', 'Hookless Tubeless Ready', 'ABLC+ Dimple Pattern'],
+      },
+      {
+        id: 'rid-06',
+        name: 'Supacaz Super Sticky Kush Bar Tape',
+        category: 'Accessories',
+        price: '$32.00',
+        image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80',
+        badge: 'NEW COLORWAYS',
+        rating: 4.88,
+        reviewCount: 224,
+        colors: ['#eab308', '#111827', '#dc2626', '#3b82f6', '#10b981'],
+      },
+      {
+        id: 'rid-07',
+        name: 'Elite Direto XR-T Smart Trainer',
+        category: 'Training',
+        price: '$680.00',
+        compareAtPrice: '$749.00',
+        image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&auto=format&fit=crop&q=80',
+        badge: '9% OFF',
+        rating: 4.90,
+        reviewCount: 112,
+        colors: ['#111827'],
+        techSpecs: ['Max Power: 1,800W', 'Accuracy: ±1.5%', 'ANT+ & Bluetooth', 'Compatible: Zwift, TrainerRoad'],
+      },
+    ],
+
+    /* ── Best Sellers ── */
+    bestSellers: [
+      {
+        id: 'rid-bs-01',
+        name: 'Wahoo ELEMNT Roam GPS Bike Computer',
+        category: 'Accessories',
+        price: '$380.00',
+        image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80',
+        badge: 'BEST SELLER',
+        rating: 4.93,
+        reviewCount: 304,
+        techSpecs: ['3.0" Full Colour Display', 'Preloaded Maps', 'ANT+ & Bluetooth', '17hr Battery'],
+      },
+      {
+        id: 'rid-bs-02',
+        name: 'Assos Equipe RS S9 Long Sleeve Jersey',
+        category: 'Apparel',
+        price: '$225.00',
+        image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80',
+        badge: 'PRO TOUR WORN',
+        rating: 4.96,
+        reviewCount: 88,
+        colors: ['#111827', '#eab308', '#dc2626'],
+        sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+        techSpecs: ['FTS-Speed® Fabric', 'Race Fit Cut', '3 Deep Rear Pockets', 'Wind-Resistant Front Panel'],
+      },
+      {
+        id: 'rid-bs-03',
+        name: 'Pirelli P ZERO Race Tubeless Tyre (Pair)',
+        category: 'Components',
+        price: '$88.00',
+        compareAtPrice: '$110.00',
+        image: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=600&auto=format&fit=crop&q=80',
+        badge: 'TOUR DE FRANCE TYRE',
+        rating: 4.91,
+        reviewCount: 416,
+        techSpecs: ['Width: 26c / 28c / 30c', 'SmartNET Silica Compound', 'TLR Ready', 'TPI: 127'],
+      },
+    ],
+
+    /* ── Promo Banner (Athens Spoke: countdown timer + code) ── */
+    promoBanner: {
+      tag: 'SPOKE SEASON SALE — ENDS SUNDAY',
+      title: 'SUMMER BUILD SEASON. SAVE 25% ON COMPLETE BIKE BUILDS.',
+      subtitle: 'Every complete road or gravel build over $3,500 gets free professional assembly, a 60-day fit guarantee, and complimentary Di2 electronic tuning — this weekend only.',
+      code: 'SPOKE25',
+      discount: '25% OFF',
+      buttonText: 'Shop the Sale Now',
+      image: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=1200&auto=format&fit=crop&q=80',
+      endDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString(),
+    },
+
+    /* ── Tech Features (Athens Spoke: before/after specs section) ── */
+    techFeatures: [
+      {
+        icon: '💨',
+        title: 'Wind-Tunnel Validated Aero',
+        desc: 'Every frame and helmet in our range is independently tested in the Eindhoven wind-tunnel. Our AeroMax frame saves 12 watts at 45km/h vs. the benchmark.',
+      },
+      {
+        icon: '⚖️',
+        title: 'Sub-7kg Complete Builds',
+        desc: 'T1000 UD carbon layup, titanium hardware, and sub-1,400g wheelsets combine to produce UCI-legal race machines that weigh under 6.9kg fully built.',
+      },
+      {
+        icon: '🔧',
+        title: 'Professional Assembly Included',
+        desc: 'Every bike is hand-built, torqued to spec, and road-tested by a certified mechanic before despatch. Arrive ride-ready, straight out of the box.',
+      },
+      {
+        icon: '🛡️',
+        title: '5-Year Frame Warranty',
+        desc: 'Our frames carry an industry-leading 5-year manufacturer warranty against defects. Components are covered by their respective brand warranty programmes.',
+      },
+    ],
+
+    /* ── Brand Story ── */
+    story: {
+      eyebrow: 'VELO CYCLES // SPOKE EDITION — OUR PHILOSOPHY',
+      title: '"A BIKE IS NOT JUST EQUIPMENT. IT IS THE EXTENSION OF YOUR AMBITION."',
+      quote: 'We built Velo Cycles because we were tired of choosing between performance and price. Every bike we spec, every groupset we select, and every helmet we stock has been ridden by us first — because we race too.',
+      author: 'James Hewitt',
+      role: 'Founder & Head Bike Fitter, Velo Cycles',
+      image: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800&auto=format&fit=crop&q=80',
+      stats: [
+        { num: '2011', label: 'Founded in Bristol, UK' },
+        { num: '4,200+', label: 'Bikes Built & Delivered' },
+        { num: '60-Day', label: 'Fit Guarantee Window' },
+      ],
+    },
+
+    /* ── Editorial Guides (Athens Spoke: blog/press section) ── */
+    guides: [
+      {
+        title: 'Road vs Gravel: Which Bike Should You Buy in 2026?',
+        tag: "BUYER'S GUIDE",
+        time: '7 min read',
+        image: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=600&auto=format&fit=crop&q=80',
+        desc: 'We break down geometry, tyre clearance, gearing, and budget across 14 road and gravel builds to help you make the right call.',
+      },
+      {
+        title: 'The Complete Guide to Bike Fitting: Why It Matters More Than Your Frame',
+        tag: 'FIT GUIDE',
+        time: '9 min read',
+        image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80',
+        desc: 'Saddle height, cleat position, stack and reach — get these wrong and no carbon bike will save your knees. Here\'s what to know.',
+      },
+      {
+        title: 'Shimano Di2 vs SRAM eTap AXS: The 2026 Electronic Groupset Showdown',
+        tag: 'TECH REVIEW',
+        time: '11 min read',
+        image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&auto=format&fit=crop&q=80',
+        desc: 'We tested both systems for 3,000km across road, gravel, and sportive conditions. Our verdict might surprise you.',
+      },
+    ],
+
+    /* ── Customer Reviews (Athens Spoke: verified + roles) ── */
+    reviews: [
+      {
+        name: 'Tom Ashby',
+        role: 'Cat 2 Road Racer, Manchester Wheelers CC',
+        quote: 'The AeroMax is genuinely fast. I\'ve gained 4-5 minutes on my local 40km TT course since switching. The Di2 setup from Velo was immaculate — every cable length perfect.',
+        rating: 5,
+        verified: true,
+      },
+      {
+        name: 'Sarah Whitfield',
+        role: 'Audax & Gravel Cyclist, 10,000km/yr',
+        quote: 'Ordered the gravel build with the 303 wheels. Velo assembled it perfectly and the fit advice over email was genuinely expert. Best online bike buying experience I\'ve had.',
+        rating: 5,
+        verified: true,
+      },
+      {
+        name: 'Mark Davies',
+        role: 'Century Rider, Bristol Cycling Club',
+        quote: 'I was sceptical about buying a high-end bike online, but the 60-day fit guarantee gave me confidence. The bike arrived immaculate and rides like a dream. The Vortex helmet is a game-changer too.',
+        rating: 5,
+        verified: true,
+      },
+      {
+        name: 'Priya Shetty',
+        role: 'Triathlete, Age Group AG45 Qualifier',
+        quote: 'The bib shorts are worth every penny. Wore them for an 8-hour ride and zero discomfort. Fast delivery, beautifully packaged, and the customer service team actually knows cycling.',
+        rating: 5,
+        verified: true,
+      },
+    ],
+
+    /* ── FAQ (Athens Spoke: accordion page) ── */
+    faqs: [
+      {
+        q: 'Do your bikes come fully assembled and ready to ride?',
+        a: 'Yes. Every complete bike is hand-built by our certified mechanics, torqued to manufacturer spec, and subjected to a full pre-delivery road test before despatch. You receive it 95% assembled — just fit the front wheel, handlebar, and pedals.',
+      },
+      {
+        q: 'What does the 60-day fit guarantee cover?',
+        a: 'If your position or sizing is off within 60 days of delivery, we\'ll cover the cost of one professional bike fit session at any of our partner studios nationwide. We\'ll also respec any contact points (stem, saddle, seatpost) at no charge.',
+      },
+      {
+        q: 'Can I choose my own groupset, wheelset, and components?',
+        a: 'Absolutely. Our Bike Configurator lets you mix and match frames, groupsets (Shimano, SRAM, or Campagnolo), wheelsets, tyres, and finishing kit. We\'ll confirm compatibility before building.',
+      },
+      {
+        q: 'What is your return and warranty policy?',
+        a: 'Frames carry a 5-year manufacturer warranty. Unused bikes in original packaging can be returned within 14 days. Ridden bikes are covered under the 60-day fit guarantee. Components are covered by their respective brand warranties.',
+      },
+      {
+        q: 'Do you offer finance or payment plans?',
+        a: 'Yes. We offer 0% interest finance for 12 months on orders over $500, and 6.9% APR instalment plans for up to 36 months. Apply at checkout — approval is instant for most applicants.',
+      },
+    ],
+
+    /* ── Curated Collections ── */
+    collections: [
+      {
+        title: 'Race Ready',
+        tag: 'UCI LEGAL ROAD BUILDS',
+        image: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=600&auto=format&fit=crop&q=80',
+        count: '14 Bikes',
+      },
+      {
+        title: 'Gravel Season',
+        tag: 'ADVENTURE & ENDURANCE',
+        image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80',
+        count: '12 Bikes',
+      },
+      {
+        title: 'Component Lab',
+        tag: 'UPGRADES & PARTS',
+        image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&auto=format&fit=crop&q=80',
+        count: '120+ Parts',
+      },
+    ],
+
+    /* ── Social / UGC Gallery ── */
+    socialGallery: [
+      {
+        image: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=400&auto=format&fit=crop&q=80',
+        handle: '@tom_ashby_cycling',
+        likes: '1.4K',
+      },
+      {
+        image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=400&auto=format&fit=crop&q=80',
+        handle: '@sarah_gravel_life',
+        likes: '2.1K',
+      },
+      {
+        image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&auto=format&fit=crop&q=80',
+        handle: '@priya_tri_life',
+        likes: '876',
+      },
+      {
+        image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&auto=format&fit=crop&q=80',
+        handle: '@mark_davies_rides',
+        likes: '1.9K',
       },
     ],
   },
@@ -1330,6 +2036,322 @@ export const SPORTS_TEMPLATES_CONFIG: Record<string, SportsTemplateConfig> = {
       buttonText: 'Shop Flash Deals',
       image: 'https://images.unsplash.com/photo-1471295253337-3ceaaedca402?w=1200&auto=format&fit=crop&q=80',
     },
+  },
+
+  'sports-streamline': {
+    template: {
+      id: 'sports-streamline',
+      slug: 'sports-streamline',
+      name: 'Streamline',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'modern',
+      catalogSize: 'large',
+      tags: ['Performance Sports', 'Athletic', 'Modern', 'Mobile-First', 'Editorial'],
+      shortDescription: 'Immersive, mobile-first sports storefront with full-width video hero, quick buy, sticky cart, and editorial product storytelling — inspired by Shopify Streamline.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 99,
+      isActive: true,
+      brandName: 'STREAMLINE SPORT',
+      headline: 'MOVE WITHOUT\nLIMITS.',
+      subtitle: 'Performance activewear and gear engineered for athletes who refuse to compromise. From first sprint to victory lap.',
+      buttonText: 'Shop the Collection',
+      buttonColor: '#111827',
+      accentColor: '#10b981',
+      isDark: false,
+      modelImage: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&auto=format&fit=crop&q=80',
+      badge: 'recommended',
+      rating: 4.97,
+      reviewCount: 210,
+      layoutType: 'split',
+      features: [
+        'Full-Width Video Hero',
+        'Quick Buy & Sticky Cart',
+        'Color Swatches with Instant Preview',
+        'Product Image Rollover',
+        'Editorial Storytelling Sections',
+        '20+ Drag-and-Drop Sections',
+        'Mobile-First Responsive Design',
+      ],
+    },
+    announcement: '🎯 STREAMLINE SPORT: Free Express Shipping on orders over ₹2,499 • New Season Collection Live Now',
+    navItems: ['Men', 'Women', 'Footwear', 'Training', 'New Arrivals', 'Collections'],
+    heroStats: [
+      { label: 'Athlete Tested', value: '10,000+' },
+      { label: 'Performance Rating', value: '4.97★' },
+      { label: 'Day Free Trial', value: '30-' },
+    ],
+    categories: [
+      {
+        id: 'mens-performance',
+        name: "Men's Performance",
+        image: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&auto=format&fit=crop&q=80',
+        badge: 'NEW SEASON',
+        count: '82 Items',
+      },
+      {
+        id: 'womens-speed',
+        name: "Women's Athletic",
+        image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80',
+        badge: 'TRENDING',
+        count: '74 Items',
+      },
+      {
+        id: 'footwear',
+        name: 'Performance Footwear',
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80',
+        badge: 'BESTSELLER',
+        count: '48 Models',
+      },
+      {
+        id: 'training-gear',
+        name: 'Training & Gym Gear',
+        image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&auto=format&fit=crop&q=80',
+        badge: 'EDITOR\'S PICK',
+        count: '56 Items',
+      },
+    ],
+    featuredProducts: [
+      {
+        id: 'slm-01',
+        name: 'AirStride Pro Running Shoe',
+        category: 'Footwear',
+        price: '$175.00',
+        compareAtPrice: '$210.00',
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80',
+        badge: 'BEST SELLER',
+        rating: 4.95,
+        reviewCount: 284,
+        colors: ['#10b981', '#111827', '#ffffff', '#f59e0b'],
+        sizes: ['US 6', 'US 7', 'US 8', 'US 9', 'US 10', 'US 11', 'US 12'],
+        techSpecs: ['Responsive Foam Midsole', 'Engineered Mesh Upper', 'Rubber Outsole Grip', '220g Featherlight'],
+      },
+      {
+        id: 'slm-02',
+        name: 'Performance Compression Tee',
+        category: 'Apparel',
+        price: '$65.00',
+        image: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&auto=format&fit=crop&q=80',
+        badge: 'NEW ARRIVAL',
+        rating: 4.88,
+        reviewCount: 142,
+        colors: ['#111827', '#10b981', '#64748b', '#ffffff'],
+        sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+        techSpecs: ['4-Way Stretch Fabric', 'Moisture-Wicking Tech', 'Anti-Odor Treatment'],
+      },
+      {
+        id: 'slm-03',
+        name: 'FlexCore Training Short',
+        category: 'Apparel',
+        price: '$58.00',
+        compareAtPrice: '$72.00',
+        image: 'https://images.unsplash.com/photo-1506152983158-b4a74a01c721?w=600&auto=format&fit=crop&q=80',
+        badge: 'SALE',
+        rating: 4.91,
+        reviewCount: 198,
+        colors: ['#111827', '#10b981', '#1e3a8a'],
+        sizes: ['S', 'M', 'L', 'XL'],
+        techSpecs: ['Lightweight DryFit', 'Hidden Phone Pocket', 'Flat Seam Construction'],
+      },
+      {
+        id: 'slm-04',
+        name: 'Elite Recovery Compression Legging',
+        category: 'Apparel',
+        price: '$95.00',
+        image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80',
+        badge: 'PRO SPEC',
+        rating: 4.93,
+        reviewCount: 116,
+        colors: ['#111827', '#10b981', '#7c3aed'],
+        sizes: ['XS', 'S', 'M', 'L', 'XL'],
+        techSpecs: ['Graduated 20-30mmHg Compression', 'Seamless Knit', 'Targeted Muscle Support'],
+      },
+    ],
+    newArrivals: [
+      {
+        id: 'slm-05',
+        name: 'WindBreaker Packable Shell Jacket',
+        category: 'Outerwear',
+        price: '$145.00',
+        image: 'https://images.unsplash.com/photo-1556906781-9a412961c28c?w=600&auto=format&fit=crop&q=80',
+        badge: 'JUST IN',
+        rating: 4.89,
+        reviewCount: 64,
+        colors: ['#111827', '#10b981', '#2563eb'],
+      },
+      {
+        id: 'slm-06',
+        name: 'Performance Grip Training Gloves',
+        category: 'Accessories',
+        price: '$38.00',
+        image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80',
+        badge: 'NEW DROP',
+        rating: 4.82,
+        reviewCount: 48,
+        colors: ['#111827', '#10b981'],
+      },
+      {
+        id: 'slm-07',
+        name: 'Hydro 32oz Insulated Sport Bottle',
+        category: 'Accessories',
+        price: '$42.00',
+        image: 'https://images.unsplash.com/photo-1576243345690-4e4b79b63288?w=600&auto=format&fit=crop&q=80',
+        badge: 'STAFF FAVOURITE',
+        rating: 4.87,
+        reviewCount: 89,
+        colors: ['#10b981', '#111827', '#f59e0b', '#ef4444'],
+      },
+    ],
+    bestSellers: [
+      {
+        id: 'slm-bs-01',
+        name: 'TrailBlaze GTX Hiking Boot',
+        category: 'Footwear',
+        price: '$220.00',
+        compareAtPrice: '$255.00',
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80',
+        badge: 'TOP RATED',
+        rating: 4.96,
+        reviewCount: 310,
+        colors: ['#92400e', '#111827', '#4b5563'],
+        techSpecs: ['GORE-TEX Waterproof', 'Vibram Sole', 'Ankle Support System'],
+      },
+    ],
+    promoBanner: {
+      tag: 'SEASON LAUNCH',
+      title: 'NEW SEASON. NEW GEAR. NEW GOALS.',
+      subtitle: 'Shop the complete 2026 performance collection. Free express delivery on all orders above ₹2,499 — no code needed.',
+      code: 'STREAMLINE15',
+      discount: '15% OFF',
+      buttonText: 'Shop New Season',
+      image: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=1200&auto=format&fit=crop&q=80',
+    },
+    techFeatures: [
+      {
+        icon: '⚡',
+        title: 'Quick Buy',
+        desc: 'Add any product to cart without leaving the page — one tap, instant checkout flow.',
+      },
+      {
+        icon: '🎨',
+        title: 'Color Swatches',
+        desc: 'Instant product preview on hover across all colorways with real-time image swap.',
+      },
+      {
+        icon: '📱',
+        title: 'Mobile-First',
+        desc: 'Every interaction optimised for thumb reach — designed for on-the-go athletes.',
+      },
+    ],
+    story: {
+      eyebrow: 'OUR STORY // BUILT FOR ATHLETES',
+      title: '"PERFORMANCE IS NOT JUST WHAT YOU WEAR. IT\'S HOW YOU\'RE MADE TO FEEL."',
+      quote: 'We started Streamline Sport with one mission: to create gear that doesn\'t slow you down. Every stitch, every fabric choice, every sole is engineered to make you faster, stronger, and more confident.',
+      author: 'Priya Kapoor',
+      role: 'Co-Founder & Head of Product Design',
+      image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&auto=format&fit=crop&q=80',
+      stats: [
+        { num: '2018', label: 'Founded in Mumbai' },
+        { num: '10,000+', label: 'Athletes Equipped' },
+        { num: '4.97★', label: 'Average Rating' },
+      ],
+    },
+    guides: [
+      {
+        title: 'How to Choose the Right Running Shoe for Your Gait',
+        tag: 'BUYER\'S GUIDE',
+        time: '6 min read',
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80',
+        desc: 'Pronation, arch type, and terrain — everything you need to find your perfect match.',
+      },
+      {
+        title: 'The 8-Week Strength & Conditioning Blueprint',
+        tag: 'TRAINING PLAN',
+        time: '10 min read',
+        image: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&auto=format&fit=crop&q=80',
+        desc: 'Build functional strength with progressive overload, compound lifts, and mobility work.',
+      },
+    ],
+    reviews: [
+      {
+        name: 'Arjun Mehta',
+        role: 'Marathon Runner, Pune',
+        quote: 'The AirStride Pro completely changed my training. Lighter than anything I\'ve run in and the energy return is unreal. Personal best by 4 minutes!',
+        rating: 5,
+        verified: true,
+      },
+      {
+        name: 'Sneha Iyer',
+        role: 'CrossFit Coach, Bangalore',
+        quote: 'I recommend Streamline Sport to every athlete I train. The compression gear is elite quality at a price that actually makes sense.',
+        rating: 5,
+        verified: true,
+      },
+      {
+        name: 'Vikram Das',
+        role: 'Triathlete, Chennai',
+        quote: 'Fast shipping, premium quality, and the quick buy feature on mobile is so smooth. Ordered at 11 PM, delivered by next morning.',
+        rating: 5,
+        verified: true,
+      },
+    ],
+    collections: [
+      {
+        title: 'Run Ready',
+        tag: 'RUNNING',
+        image: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=600&auto=format&fit=crop&q=80',
+        count: '36 Items',
+      },
+      {
+        title: 'Gym & Train',
+        tag: 'TRAINING',
+        image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80',
+        count: '54 Items',
+      },
+      {
+        title: 'Outdoor Explore',
+        tag: 'OUTDOOR',
+        image: 'https://images.unsplash.com/photo-1501555088652-021faa106b9b?w=600&auto=format&fit=crop&q=80',
+        count: '28 Items',
+      },
+    ],
+    socialGallery: [
+      {
+        image: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=400&auto=format&fit=crop&q=80',
+        handle: '@streamline_sport',
+        likes: '2.4K',
+      },
+      {
+        image: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=400&auto=format&fit=crop&q=80',
+        handle: '@arjun_runs',
+        likes: '1.8K',
+      },
+      {
+        image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&auto=format&fit=crop&q=80',
+        handle: '@snehafit',
+        likes: '3.1K',
+      },
+      {
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&auto=format&fit=crop&q=80',
+        handle: '@vikram_tri',
+        likes: '956',
+      },
+    ],
+    faqs: [
+      {
+        q: 'What is the Streamline Sport return policy?',
+        a: 'We offer a 30-day hassle-free return window on all unworn items. If you\'re not happy, we\'ll sort it — no questions asked.',
+      },
+      {
+        q: 'Do you offer size exchanges?',
+        a: 'Yes! Free size exchanges within 30 days of purchase. Use our live chat to initiate an exchange and we\'ll dispatch the new size within 24 hours.',
+      },
+      {
+        q: 'Is the gear suitable for professional athletes?',
+        a: 'Absolutely. Our gear is tested by competitive runners, CrossFit athletes, and triathletes. Many of our products are used in national-level competition.',
+      },
+    ],
   },
 }
 
@@ -8206,7 +9228,7 @@ export const CUSTOMER_REVIEWS = [
 
 export interface SportsStorefrontProps {
   template?: MarketplaceTemplate | null
-  device?: 'desktop' | 'tablet' | 'mobile' | 'fullscreen'
+  device?: 'desktop' | 'mobile' | 'fullscreen'
   customAccentColor?: string | null
   onColorChange?: (color: string) => void
   onUseTemplate?: (templateId: string) => void
@@ -8225,10 +9247,22 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   const templateKey = (template?.id && SPORTS_TEMPLATES_CONFIG[template.id])
     ? template.id
     : 'sports-velocity'
-  const config = SPORTS_TEMPLATES_CONFIG[templateKey]
 
+  const config = SPORTS_TEMPLATES_CONFIG[templateKey]
   const isDark = config.template.isDark !== undefined ? config.template.isDark : (template?.isDark ?? true)
   const activeAccent = customAccentColor || config.template.accentColor || template?.accentColor || '#ccff00'
+
+  // If Velocity template, render the full dedicated premium Velocity storefront
+  if (templateKey === 'sports-velocity') {
+    return (
+      <VelocityStorefront
+        device={device}
+        customAccentColor={activeAccent}
+        onClose={_onClose}
+        onUseTemplate={onUseTemplate}
+      />
+    )
+  }
   const brandName = config.template.brandName || template?.brandName || 'APEX ATHLETICS'
   const headline = config.template.headline || 'GEAR UP.\nPLAY HARDER.'
   const subtitle = config.template.subtitle || 'Performance-driven sportswear and equipment built for every move, workout, and victory.'
@@ -8605,7 +9639,6 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
               ‹
             </button>
             <div className="announcement-ticker-track">
-              <span className="announcement-badge-pill">OFFER</span>
               <span className="announcement-text">{tickerMessages[tickerIndex]}</span>
             </div>
             <button
@@ -10156,7 +11189,7 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
   onClose,
   onUseTemplate,
 }) => {
-  const [device, setDevice] = useState<'desktop' | 'tablet' | 'mobile' | 'fullscreen'>('desktop')
+  const [device, setDevice] = useState<'desktop' | 'mobile' | 'fullscreen'>('desktop')
   const [selectedColorOverride, setSelectedColorOverride] = useState<{ templateId: string; color: string } | null>(null)
   const viewportRef = useRef<HTMLDivElement | null>(null)
 
@@ -10195,7 +11228,7 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
   const availableSwatches = useMemo(() => {
     if (!template) return []
     const defaults = [
-      { name: 'Default', hex: template.accentColor || '#2563eb' },
+      { name: 'Default', hex: template.accentColor || '#ccff00' },
       { name: 'Electric Volt', hex: '#ccff00' },
       { name: 'Vivid Cyan', hex: '#06b6d4' },
       { name: 'Hyper Orange', hex: '#ff6b00' },
@@ -10212,6 +11245,7 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
       return true
     })
   }, [template])
+
 
   const eyebrowText = useMemo(() => {
     if (!template) return '✦ VERIFIED EXCELLENCE'
@@ -10944,7 +11978,7 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
             </div>
           </div>
 
-          {/* Device Switcher Controls */}
+          {/* Device Switcher Controls (Desktop & Mobile) */}
           <div className="toolbar-device-switcher" role="radiogroup" aria-label="Device Viewport">
             <button
               type="button"
@@ -10953,14 +11987,6 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
               title="Desktop View (100%)"
             >
               🖥️ Desktop
-            </button>
-            <button
-              type="button"
-              className={`device-btn ${device === 'tablet' ? 'active' : ''}`}
-              onClick={() => setDevice('tablet')}
-              title="Tablet View (768px)"
-            >
-              📱 Tablet
             </button>
             <button
               type="button"
@@ -10980,27 +12006,11 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
             </button>
           </div>
 
-          {/* Theme Color Switcher Swatches */}
-          <div className="toolbar-theme-picker" title="Live Theme Color Switcher">
-            <span className="toolbar-theme-label">Color:</span>
-            <div className="toolbar-swatches-row">
-              {availableSwatches.map((swatch) => (
-                <button
-                  key={swatch.hex}
-                  type="button"
-                  className={`toolbar-swatch-circle ${activeThemeColor.toLowerCase() === swatch.hex.toLowerCase() ? 'active' : ''}`}
-                  style={{ backgroundColor: swatch.hex }}
-                  onClick={() => handleColorSelect(swatch.hex)}
-                  title={`${swatch.name} (${swatch.hex})`}
-                  aria-label={`Select ${swatch.name} color`}
-                />
-              ))}
-            </div>
+          <div className="toolbar-actions-group">
+            <button type="button" className="toolbar-close-btn" onClick={onClose} aria-label="Close preview">
+              ✕
+            </button>
           </div>
-
-          <button type="button" className="toolbar-close-btn" onClick={onClose} aria-label="Close preview">
-            ✕
-          </button>
         </div>
 
         {/* Modal Workspace / Body */}
@@ -11800,23 +12810,6 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
               </div>
 
               <div className="specs-list-group">
-                <h4>Included Core Features</h4>
-                <ul className="specs-features-list">
-                  {(template.features || []).map((f) => (
-                    <li key={f}>
-                      <span className="check-bullet">✓</span> {f}
-                    </li>
-                  ))}
-                  <li>
-                    <span className="check-bullet">✓</span> Core Web Vitals performance optimized
-                  </li>
-                  <li>
-                    <span className="check-bullet">✓</span> Instant zero-code store customizer
-                  </li>
-                </ul>
-              </div>
-
-              <div className="specs-list-group">
                 <h4>Color Scheme <span className="specs-subtext">(Click to apply live)</span></h4>
                 <div className="palette-strip interactive-palette">
                   {availableSwatches.map((swatch) => (
@@ -11831,6 +12824,23 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                     />
                   ))}
                 </div>
+              </div>
+
+              <div className="specs-list-group">
+                <h4>Included Core Features</h4>
+                <ul className="specs-features-list">
+                  {(template.features || []).map((f) => (
+                    <li key={f}>
+                      <span className="check-bullet">✓</span> {f}
+                    </li>
+                  ))}
+                  <li>
+                    <span className="check-bullet">✓</span> Core Web Vitals performance optimized
+                  </li>
+                  <li>
+                    <span className="check-bullet">✓</span> Instant zero-code store customizer
+                  </li>
+                </ul>
               </div>
             </div>
           </aside>
