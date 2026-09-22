@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState, useMemo, useRef } from 'react'
 import '../styles/TemplatesPage.css'
 
 
@@ -7694,6 +7694,2151 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
   )
 }
 
+
+/* =========================================================================
+   6.5. COMPLETE PRODUCTION-GRADE SPORTS STOREFRONT TEMPLATE
+   Brand: APEX ATHLETICS // LAB
+   ========================================================================= */
+
+export interface ApexSportsStoreItem {
+  id: string
+  name: string
+  category: 'Footwear' | 'Apparel' | 'Equipment' | 'Accessories'
+  price: number
+  compareAtPrice?: number
+  badge?: string
+  badgeType?: 'bestseller' | 'new' | 'sale' | 'spec'
+  rating: number
+  reviewCount: number
+  primaryImage: string
+  hoverImage: string
+  gallery?: string[]
+  colors: { name: string; hex: string; img?: string }[]
+  sizes: string[]
+  shortDesc: string
+  specs: string[]
+  isFeatured?: boolean
+  isNewArrival?: boolean
+  isBestseller?: boolean
+}
+
+export const APEX_FEATURED_PRODUCTS: ApexSportsStoreItem[] = [
+  {
+    id: 'apex-fp-1',
+    name: 'Performance Running Shoes',
+    category: 'Footwear',
+    price: 4999,
+    compareAtPrice: 6499,
+    badge: 'BESTSELLER',
+    badgeType: 'bestseller',
+    rating: 4.9,
+    reviewCount: 148,
+    primaryImage: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&auto=format&fit=crop&q=80',
+    hoverImage: 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=800&auto=format&fit=crop&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=800&auto=format&fit=crop&q=80',
+    ],
+    colors: [
+      { name: 'Volt Lime / Stealth', hex: '#CCFF00' },
+      { name: 'Obsidian Black', hex: '#0F172A' },
+      { name: 'Hyper Crimson', hex: '#FF4500' },
+    ],
+    sizes: ['UK 7', 'UK 8', 'UK 9', 'UK 10', 'UK 11'],
+    shortDesc: 'Ultra-responsive nitrogen-infused foam midsole paired with full-length carbon propulsion plate for maximum kinetic energy return.',
+    specs: ['Carbon Propulsion Plate', '168g Featherweight', '88.4% Energy Return', 'Breathable AeroMesh'],
+    isFeatured: true,
+  },
+  {
+    id: 'apex-fp-2',
+    name: 'Pro Training T-Shirt',
+    category: 'Apparel',
+    price: 1499,
+    compareAtPrice: 1999,
+    badge: 'NEW',
+    badgeType: 'new',
+    rating: 4.8,
+    reviewCount: 92,
+    primaryImage: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&auto=format&fit=crop&q=80',
+    hoverImage: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&auto=format&fit=crop&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&auto=format&fit=crop&q=80',
+    ],
+    colors: [
+      { name: 'Pitch Black', hex: '#0F172A' },
+      { name: 'Heather Graphite', hex: '#64748B' },
+      { name: 'Electric Cobalt', hex: '#0066FF' },
+    ],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    shortDesc: 'Seamless ergonomic knit construction engineered with strategic micro-perforations to channel airflow and wick sweat during high-intensity training.',
+    specs: ['Zone-Mapped Breathability', 'Anti-Odor Polygiene Tech', '4-Way Stretch Knit', 'Bonded Chafe-Free Seams'],
+    isFeatured: true,
+  },
+  {
+    id: 'apex-fp-3',
+    name: 'Elite Football',
+    category: 'Equipment',
+    price: 1299,
+    compareAtPrice: 1699,
+    badge: 'MATCH SPEC',
+    badgeType: 'spec',
+    rating: 4.9,
+    reviewCount: 76,
+    primaryImage: 'https://images.unsplash.com/photo-1614632537423-1e6c2e7e0aab?w=800&auto=format&fit=crop&q=80',
+    hoverImage: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&auto=format&fit=crop&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1614632537423-1e6c2e7e0aab?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&auto=format&fit=crop&q=80',
+    ],
+    colors: [
+      { name: 'Optic White / Volt', hex: '#FFFFFF' },
+      { name: 'Solar Orange / Cyan', hex: '#FF5500' },
+    ],
+    sizes: ['Size 5 (Official FIFA Pro)', 'Size 4 (Youth Academy)'],
+    shortDesc: 'Thermally bonded 12-panel aerodynamic casing with micro-textured synthetic leather surface for pinpoint trajectory control in all weather conditions.',
+    specs: ['FIFA Quality Pro Certified', 'Thermal-Bonded Seamless', 'Zero Water Uptake', 'High-Response Latex Bladder'],
+    isFeatured: true,
+  },
+  {
+    id: 'apex-fp-4',
+    name: 'Performance Gym Shorts',
+    category: 'Apparel',
+    price: 1799,
+    compareAtPrice: 2299,
+    badge: '2-IN-1 COMPRESSION',
+    badgeType: 'spec',
+    rating: 4.7,
+    reviewCount: 84,
+    primaryImage: 'https://images.unsplash.com/photo-1506152983158-b4a74a01c721?w=800&auto=format&fit=crop&q=80',
+    hoverImage: 'https://images.unsplash.com/photo-1483721074573-586540da5703?w=800&auto=format&fit=crop&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1506152983158-b4a74a01c721?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1483721074573-586540da5703?w=800&auto=format&fit=crop&q=80',
+    ],
+    colors: [
+      { name: 'Shadow Black', hex: '#0F172A' },
+      { name: 'Army Olive', hex: '#3F4A3C' },
+      { name: 'Deep Slate', hex: '#334155' },
+    ],
+    sizes: ['S', 'M', 'L', 'XL'],
+    shortDesc: 'Lightweight stretch woven outer shell coupled with integrated compression liner featuring bounce-free internal phone pocket and towel loop.',
+    specs: ['Built-in Compression Liner', 'Zip Security Pocket', 'Moisture-Wicking Finish', 'Side Split Hem for Mobility'],
+    isFeatured: true,
+  },
+]
+
+export const APEX_NEW_ARRIVALS: ApexSportsStoreItem[] = [
+  {
+    id: 'apex-na-1',
+    name: 'AeroShield Sports Jacket',
+    category: 'Apparel',
+    price: 3899,
+    compareAtPrice: 4999,
+    badge: 'NEW DROP',
+    badgeType: 'new',
+    rating: 4.9,
+    reviewCount: 38,
+    primaryImage: 'https://images.unsplash.com/photo-1556906781-9a412961c28c?w=800&auto=format&fit=crop&q=80',
+    hoverImage: 'https://images.unsplash.com/photo-1544441893-675973e31985?w=800&auto=format&fit=crop&q=80',
+    colors: [
+      { name: 'Cyber Volt / Onyx', hex: '#CCFF00' },
+      { name: 'Midnight Charcoal', hex: '#1E293B' },
+    ],
+    sizes: ['S', 'M', 'L', 'XL'],
+    shortDesc: 'Windproof, water-repellent ultralight shell designed for all-weather road running and outdoor circuit training.',
+    specs: ['DWR 10,000mm Rating', 'Reflective 360° Trim', 'Packable Pocket Design', 'Laser-Cut Underarm Vents'],
+    isNewArrival: true,
+  },
+  {
+    id: 'apex-na-2',
+    name: 'Endurance Training Backpack 30L',
+    category: 'Accessories',
+    price: 2499,
+    compareAtPrice: 3199,
+    badge: 'NEW',
+    badgeType: 'new',
+    rating: 4.8,
+    reviewCount: 52,
+    primaryImage: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&auto=format&fit=crop&q=80',
+    hoverImage: 'https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=800&auto=format&fit=crop&q=80',
+    colors: [
+      { name: 'Matte Stealth Black', hex: '#0F172A' },
+      { name: 'Combat Olive', hex: '#334155' },
+    ],
+    sizes: ['30L Standard Pro'],
+    shortDesc: 'Heavy-duty 900D Cordura pack equipped with dedicated ventilated shoe compartment, 16" laptop sleeve, and external gear straps.',
+    specs: ['Ventilated Shoe Garage', 'Waterproof PU Base', 'Ergonomic Air-Mesh Straps', 'Hydration Bladder Ready'],
+    isNewArrival: true,
+  },
+  {
+    id: 'apex-na-3',
+    name: 'HyperDunk Hardwood Basketball Shoes',
+    category: 'Footwear',
+    price: 5499,
+    compareAtPrice: 6999,
+    badge: 'LIMITED',
+    badgeType: 'spec',
+    rating: 5.0,
+    reviewCount: 29,
+    primaryImage: 'https://images.unsplash.com/photo-1579338559194-a162d19bf842?w=800&auto=format&fit=crop&q=80',
+    hoverImage: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=800&auto=format&fit=crop&q=80',
+    colors: [
+      { name: 'Court Red / Black', hex: '#DC2626' },
+      { name: 'Pure Platinum', hex: '#E2E8F0' },
+    ],
+    sizes: ['UK 8', 'UK 9', 'UK 10', 'UK 11', 'UK 12'],
+    shortDesc: 'Mid-cut ankle lockdown system with multi-directional herringbone traction pod designed for explosive cutting and lateral stability.',
+    specs: ['Air Cushion Heel Unit', 'Reinforced TPU Shank', 'Herringbone Grip Pods', 'Padded Ankle Collar'],
+    isNewArrival: true,
+  },
+  {
+    id: 'apex-na-4',
+    name: 'Zone-Vent Compression Base Layer',
+    category: 'Apparel',
+    price: 1699,
+    compareAtPrice: 2199,
+    badge: 'NEW',
+    badgeType: 'new',
+    rating: 4.7,
+    reviewCount: 64,
+    primaryImage: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800&auto=format&fit=crop&q=80',
+    hoverImage: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&auto=format&fit=crop&q=80',
+    colors: [
+      { name: 'Stealth Black', hex: '#0F172A' },
+      { name: 'Glacier Silver', hex: '#94A3B8' },
+    ],
+    sizes: ['S', 'M', 'L', 'XL'],
+    shortDesc: 'Graduated muscle compression shirt promoting venous return, reducing muscle oscillation, and accelerating post-workout recovery.',
+    specs: ['True Graduated Compression', 'Moisture-Transport System', 'UPF 50+ Sun Shield', 'Zero-Chafe Flatlock Stitch'],
+    isNewArrival: true,
+  },
+  {
+    id: 'apex-na-5',
+    name: 'Insulated Sport Hydro Bottle 1L',
+    category: 'Accessories',
+    price: 899,
+    compareAtPrice: 1199,
+    badge: 'HOT',
+    badgeType: 'sale',
+    rating: 4.9,
+    reviewCount: 110,
+    primaryImage: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=800&auto=format&fit=crop&q=80',
+    hoverImage: 'https://images.unsplash.com/photo-1576243345690-4e4b79b63288?w=800&auto=format&fit=crop&q=80',
+    colors: [
+      { name: 'Matte Onyx', hex: '#0F172A' },
+      { name: 'Volt Lime', hex: '#CCFF00' },
+      { name: 'Brushed Steel', hex: '#CBD5E1' },
+    ],
+    sizes: ['1000ml (34oz)'],
+    shortDesc: 'Triple-insulated pro vacuum flask keeping liquids ice-cold for 36 hours. 100% leak-proof athletic chug cap with silicone grip.',
+    specs: ['18/8 Pro Kitchen Steel', '36h Cold / 18h Hot', '100% BPA & Toxin Free', 'Sweat-Proof Powder Coat'],
+    isNewArrival: true,
+  },
+  {
+    id: 'apex-na-6',
+    name: 'Carbon-Glide Pro Running Shoes',
+    category: 'Footwear',
+    price: 6299,
+    compareAtPrice: 7999,
+    badge: 'PRO SPEC',
+    badgeType: 'spec',
+    rating: 4.9,
+    reviewCount: 41,
+    primaryImage: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800&auto=format&fit=crop&q=80',
+    hoverImage: 'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=800&auto=format&fit=crop&q=80',
+    colors: [
+      { name: 'Aero White / Cyan', hex: '#0284C7' },
+      { name: 'Neon Volt / Black', hex: '#CCFF00' },
+    ],
+    sizes: ['UK 7', 'UK 8', 'UK 9', 'UK 10', 'UK 11'],
+    shortDesc: 'Marathon race-day racing shoe engineered with ultra-critical PEBA foam and dual-curved carbon plate for world-record pace efficiency.',
+    specs: ['Dual-Curved Carbon Spoon', 'Supercritical PEBA Midsole', '152g Racing Weight', 'Vibram Litebase Outsole'],
+    isNewArrival: true,
+  },
+]
+
+export const APEX_BESTSELLERS: ApexSportsStoreItem[] = [
+  {
+    id: 'apex-bs-1',
+    name: 'SpeedFuel Electrolyte Hydration Pack',
+    category: 'Accessories',
+    price: 799,
+    compareAtPrice: 999,
+    badge: 'BESTSELLER',
+    badgeType: 'bestseller',
+    rating: 4.9,
+    reviewCount: 210,
+    primaryImage: 'https://images.unsplash.com/photo-1579722821273-0f6c7d44362f?w=800&auto=format&fit=crop&q=80',
+    hoverImage: 'https://images.unsplash.com/photo-1579722821273-0f6c7d44362f?w=800&auto=format&fit=crop&q=80',
+    colors: [{ name: 'Lemon Lime Burst', hex: '#CCFF00' }, { name: 'Orange Citrus', hex: '#FF5500' }],
+    sizes: ['30 Single-Serve Sticks'],
+    shortDesc: 'Rapid absorption electrolyte powder with sodium, potassium, magnesium, and bio-available zinc to prevent cramping during high-heat training.',
+    specs: ['Zero Artificial Sugars', '4x Electrolyte Density', 'Informed-Sport Certified', 'Fast Dissolve Formula'],
+    isBestseller: true,
+  },
+  {
+    id: 'apex-bs-2',
+    name: 'Pro Agility Speed Ladder & 10 Cones Set',
+    category: 'Equipment',
+    price: 1199,
+    compareAtPrice: 1599,
+    badge: 'BESTSELLER',
+    badgeType: 'bestseller',
+    rating: 4.8,
+    reviewCount: 145,
+    primaryImage: 'https://images.unsplash.com/photo-1517649763962-0c623266ddc0?w=800&auto=format&fit=crop&q=80',
+    hoverImage: 'https://images.unsplash.com/photo-1517649763962-0c623266ddc0?w=800&auto=format&fit=crop&q=80',
+    colors: [{ name: 'High-Vis Volt & Orange', hex: '#CCFF00' }],
+    sizes: ['6m (20ft) 12-Rung Ladder'],
+    shortDesc: 'Tangle-free heavy nylon speed ladder with adjustable heavy-duty rungs, ground stakes, and 10 flexible agility field disc cones.',
+    specs: ['Heavy-Duty PVC Rungs', 'Non-Slip Webbing', 'Field Carry Bag Included', '10 Agility Disc Cones'],
+    isBestseller: true,
+  },
+  {
+    id: 'apex-bs-3',
+    name: 'Seamless High-Impact Sports Bra',
+    category: 'Apparel',
+    price: 1899,
+    compareAtPrice: 2399,
+    badge: 'BESTSELLER',
+    badgeType: 'bestseller',
+    rating: 4.9,
+    reviewCount: 182,
+    primaryImage: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&auto=format&fit=crop&q=80',
+    hoverImage: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&auto=format&fit=crop&q=80',
+    colors: [{ name: 'Obsidian Black', hex: '#0F172A' }, { name: 'Desert Coral', hex: '#FB7185' }],
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    shortDesc: 'Engineered encapsulation structure providing 70% bounce reduction without underwire. Breathable racerback with brushed underband.',
+    specs: ['High-Impact Support', 'Encapsulated Molded Cups', 'Zero-Bounce Band', 'Sweat-Wicking AeroKnit'],
+    isBestseller: true,
+  },
+  {
+    id: 'apex-bs-4',
+    name: 'Pro Grade Carbon Tennis Racquet 300g',
+    category: 'Equipment',
+    price: 8499,
+    compareAtPrice: 10499,
+    badge: 'TOUR MATCH',
+    badgeType: 'spec',
+    rating: 5.0,
+    reviewCount: 67,
+    primaryImage: 'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?w=800&auto=format&fit=crop&q=80',
+    hoverImage: 'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?w=800&auto=format&fit=crop&q=80',
+    colors: [{ name: 'Matte Black / Volt', hex: '#CCFF00' }],
+    sizes: ['Grip 2 (4 1/4")', 'Grip 3 (4 3/8")', 'Grip 4 (4 1/2")'],
+    shortDesc: 'High-modulus braided graphite frame with 98 sq in head size and 16x19 spin string pattern for supreme control and heavy baseline topspin.',
+    specs: ['100% Braided Graphite', '98 sq. in. Head Size', '300g Unstrung Weight', 'Spin-Boost Grommet Tech'],
+    isBestseller: true,
+  },
+  {
+    id: 'apex-bs-5',
+    name: 'PowerGrip Leather Weightlifting Gloves',
+    category: 'Accessories',
+    price: 999,
+    compareAtPrice: 1299,
+    badge: 'BESTSELLER',
+    badgeType: 'bestseller',
+    rating: 4.7,
+    reviewCount: 198,
+    primaryImage: 'https://images.unsplash.com/photo-1584863265045-f9d10ca7fa61?w=800&auto=format&fit=crop&q=80',
+    hoverImage: 'https://images.unsplash.com/photo-1584863265045-f9d10ca7fa61?w=800&auto=format&fit=crop&q=80',
+    colors: [{ name: 'Heavy Gunmetal', hex: '#1E293B' }],
+    sizes: ['M', 'L', 'XL'],
+    shortDesc: 'Reinforced genuine cowhide palms with high-density gel padding and integrated 18-inch elastic wrist stabilization wrap.',
+    specs: ['Genuine Grain Cowhide', '18" Integrated Wrist Wrap', 'Anatomical Gel Palms', 'Quick-Off Finger Pulls'],
+    isBestseller: true,
+  },
+  {
+    id: 'apex-bs-6',
+    name: 'Heavyweight Steel Speed Jump Rope',
+    category: 'Accessories',
+    price: 699,
+    compareAtPrice: 899,
+    badge: 'BESTSELLER',
+    badgeType: 'bestseller',
+    rating: 4.8,
+    reviewCount: 312,
+    primaryImage: 'https://images.unsplash.com/photo-1598289431512-b97b0917affc?w=800&auto=format&fit=crop&q=80',
+    hoverImage: 'https://images.unsplash.com/photo-1598289431512-b97b0917affc?w=800&auto=format&fit=crop&q=80',
+    colors: [{ name: 'Anodized Black', hex: '#0F172A' }, { name: 'Volt Lime', hex: '#CCFF00' }],
+    sizes: ['3m Adjustable Cable'],
+    shortDesc: 'Dual 360° stainless steel ball bearings with knurled aluminum anti-slip handles and 2.5mm coated wire cable for lightning-fast double-unders.',
+    specs: ['Dual 360° Ball Bearings', 'Aero-Grade Aluminum Knurl', 'Tool-Free Length Adjust', 'Kink-Resistant Coated Steel'],
+    isBestseller: true,
+  },
+]
+
+export const ALL_SPORTS_STORE_PRODUCTS: ApexSportsStoreItem[] = [
+  ...APEX_FEATURED_PRODUCTS,
+  ...APEX_NEW_ARRIVALS,
+  ...APEX_BESTSELLERS,
+]
+
+export const SHOP_BY_SPORT_CATEGORIES = [
+  {
+    id: 'running',
+    name: 'Running',
+    subtitle: 'Marathon shoes, race vests & compression',
+    image: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&auto=format&fit=crop&q=80',
+    itemCount: '124 Items',
+    badge: 'POPULAR',
+  },
+  {
+    id: 'football',
+    name: 'Football',
+    subtitle: 'FIFA spec balls, agility studs & shin pads',
+    image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&auto=format&fit=crop&q=80',
+    itemCount: '86 Items',
+    badge: 'MATCH SPEC',
+  },
+  {
+    id: 'cricket',
+    name: 'Cricket',
+    subtitle: 'English willow bats, match pads & gloves',
+    image: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=800&auto=format&fit=crop&q=80',
+    itemCount: '94 Items',
+    badge: 'CLUB PRO',
+  },
+  {
+    id: 'basketball',
+    name: 'Basketball',
+    subtitle: 'Hardwood court shoes, jerseys & balls',
+    image: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&auto=format&fit=crop&q=80',
+    itemCount: '68 Items',
+    badge: 'HARDWOOD',
+  },
+  {
+    id: 'tennis',
+    name: 'Tennis',
+    subtitle: 'Graphite racquets, strings & tour gear',
+    image: 'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?w=800&auto=format&fit=crop&q=80',
+    itemCount: '52 Items',
+    badge: 'TOURNAMENT',
+  },
+  {
+    id: 'gym',
+    name: 'Gym & Training',
+    subtitle: 'Lifting belts, wraps, dri-fit & weights',
+    image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&auto=format&fit=crop&q=80',
+    itemCount: '142 Items',
+    badge: 'HEAVYWEIGHT',
+  },
+]
+
+export const WHY_ATHLETES_CHOOSE_US = [
+  {
+    id: 'free-shipping',
+    title: 'Free Shipping',
+    desc: 'Free delivery on orders over ₹1,999 across all India pin codes',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="1" y="3" width="15" height="13" />
+        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+        <circle cx="5.5" cy="18.5" r="2.5" />
+        <circle cx="18.5" cy="18.5" r="2.5" />
+      </svg>
+    ),
+  },
+  {
+    id: 'easy-returns',
+    title: 'Easy Returns',
+    desc: 'Hassle-free 30-day wear & road trial guarantee with free exchanges',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="1 4 1 10 7 10" />
+        <polyline points="23 20 23 14 17 14" />
+        <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15" />
+      </svg>
+    ),
+  },
+  {
+    id: 'secure-payments',
+    title: 'Secure Payments',
+    desc: '100% secure checkout via UPI, Cards, NetBanking & Cash on Delivery',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+        <line x1="1" y1="10" x2="23" y2="10" />
+      </svg>
+    ),
+  },
+  {
+    id: 'performance-tested',
+    title: 'Performance Tested',
+    desc: 'Lab and field certified durability built for grueling active training',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        <polyline points="9 12 11 14 15 10" />
+      </svg>
+    ),
+  },
+]
+
+export const CUSTOMER_REVIEWS = [
+  {
+    quote: 'Excellent running shoes. Lightweight, comfortable and perfect for my daily training. Completed my first full marathon with zero hotspots or blisters!',
+    rating: 5,
+    author: 'Rahul M.',
+    role: 'Marathon Runner, Mumbai',
+    product: 'Performance Running Shoes (Volt Lime)',
+    verified: true,
+  },
+  {
+    quote: 'The quality of the training gear is excellent. Delivery was also very fast. The 2-in-1 compression shorts stay rock solid during heavy deadlifts.',
+    rating: 5,
+    author: 'Arjun S.',
+    role: 'Strength & Conditioning Coach, Bengaluru',
+    product: 'Performance Gym Shorts & Pro Tee',
+    verified: true,
+  },
+  {
+    quote: 'Elite basketball shoes with incredible traction and ankle lock. Shipped within 48 hours and the grip on indoor hardwood courts is unmatched.',
+    rating: 5,
+    author: 'Vikram R.',
+    role: 'State League Guard, Delhi',
+    product: 'HyperDunk Hardwood Basketball Shoes',
+    verified: true,
+  },
+]
+
+export interface SportsStorefrontProps {
+  template?: MarketplaceTemplate | null
+  device?: 'desktop' | 'tablet' | 'mobile' | 'fullscreen'
+  onUseTemplate?: (templateId: string) => void
+  onClose?: () => void
+}
+
+export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
+  template,
+  device = 'desktop',
+  onUseTemplate,
+  onClose: _onClose,
+}) => {
+  // Brand details
+  const brandName = template?.brandName || 'APEX ATHLETICS'
+
+  // Top Announcement State
+  const [announcementVisible, setAnnouncementVisible] = useState(true)
+  const [tickerIndex, setTickerIndex] = useState(0)
+  const tickerMessages = [
+    'FREE SHIPPING ON ORDERS OVER ₹1,999 • 30-DAY ATHLETE ROAD TEST',
+    'NEW SEASON GEAR — SHOP NOW • USE CODE: APEX10 FOR 10% OFF',
+    'EXPRESS 24H DISPATCH ACROSS INDIA • 100% PRO SPEC GUARANTEED',
+  ]
+
+  // Cart Drawer State
+  const [cartOpen, setCartOpen] = useState(false)
+  const [cartItems, setCartItems] = useState<
+    {
+      id: string
+      name: string
+      price: number
+      compareAtPrice?: number
+      color: string
+      size: string
+      quantity: number
+      image: string
+    }[]
+  >([
+    {
+      id: 'apex-fp-1',
+      name: 'Performance Running Shoes',
+      price: 4999,
+      compareAtPrice: 6499,
+      color: 'Volt Lime / Stealth',
+      size: 'UK 9',
+      quantity: 1,
+      image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&auto=format&fit=crop&q=80',
+    },
+    {
+      id: 'apex-fp-2',
+      name: 'Pro Training T-Shirt',
+      price: 1499,
+      compareAtPrice: 1999,
+      color: 'Pitch Black',
+      size: 'L',
+      quantity: 1,
+      image: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&auto=format&fit=crop&q=80',
+    },
+  ])
+
+  // Wishlist State (stored as set of product IDs)
+  const [wishlist, setWishlist] = useState<Set<string>>(new Set(['apex-fp-1', 'apex-na-3', 'apex-bs-4']))
+
+  // Quick View Modal State
+  const [quickViewProduct, setQuickViewProduct] = useState<ApexSportsStoreItem | null>(null)
+  const [selectedColor, setSelectedColor] = useState<string>('')
+  const [selectedSize, setSelectedSize] = useState<string>('')
+  const [selectedQty, setSelectedQty] = useState<number>(1)
+  const [activeModalImage, setActiveModalImage] = useState<string>('')
+
+  // Search Modal State
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+
+  // Mobile Menu Drawer State
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  // Filter Tab in Featured Collection
+  const [activeFeaturedTab, setActiveFeaturedTab] = useState<'All' | 'Footwear' | 'Apparel' | 'Equipment'>('All')
+
+  // Newsletter Section State
+  const [newsletterEmail, setNewsletterEmail] = useState('')
+  const [newsletterSubmitted, setNewsletterSubmitted] = useState(false)
+
+  // Promo Code State in Cart Drawer
+  const [promoCode, setPromoCode] = useState('')
+  const [promoApplied, setPromoApplied] = useState(false)
+
+  // Toast notification state
+  const [toastMessage, setToastMessage] = useState<string | null>(null)
+
+  const showToast = (msg: string) => {
+    setToastMessage(msg)
+    setTimeout(() => {
+      setToastMessage((curr) => (curr === msg ? null : curr))
+    }, 3200)
+  }
+
+  // Auto rotate announcement
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTickerIndex((prev) => (prev + 1) % tickerMessages.length)
+    }, 4500)
+    return () => clearInterval(timer)
+  }, [tickerMessages.length])
+
+  // Cart Calculations
+  const cartSubtotal = useMemo(() => {
+    return cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)
+  }, [cartItems])
+
+  const discountAmount = useMemo(() => {
+    return promoApplied ? Math.round(cartSubtotal * 0.1) : 0
+  }, [promoApplied, cartSubtotal])
+
+  const cartTotal = Math.max(0, cartSubtotal - discountAmount)
+  const totalCartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0)
+  const freeShippingThreshold = 1999
+  const freeShippingProgress = Math.min(100, Math.round((cartSubtotal / freeShippingThreshold) * 100))
+  const remainingForFreeShipping = Math.max(0, freeShippingThreshold - cartSubtotal)
+
+  // Cart actions
+  const handleAddToCart = (product: ApexSportsStoreItem, colorOpt?: string, sizeOpt?: string, qty = 1) => {
+    const color = colorOpt || (product.colors && product.colors[0]?.name) || 'Standard'
+    const size = sizeOpt || (product.sizes && product.sizes[0]) || 'Standard'
+
+    setCartItems((prev) => {
+      const existingIdx = prev.findIndex((i) => i.id === product.id && i.color === color && i.size === size)
+      if (existingIdx > -1) {
+        const next = [...prev]
+        next[existingIdx] = { ...next[existingIdx], quantity: next[existingIdx].quantity + qty }
+        return next
+      }
+      return [
+        ...prev,
+        {
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          compareAtPrice: product.compareAtPrice,
+          color,
+          size,
+          quantity: qty,
+          image: product.primaryImage,
+        },
+      ]
+    })
+    showToast(`Added "${product.name}" to bag`)
+    setCartOpen(true)
+  }
+
+  const handleUpdateCartQty = (idx: number, delta: number) => {
+    setCartItems((prev) => {
+      const next = [...prev]
+      const newQty = next[idx].quantity + delta
+      if (newQty <= 0) {
+        return next.filter((_, i) => i !== idx)
+      }
+      next[idx] = { ...next[idx], quantity: newQty }
+      return next
+    })
+  }
+
+  const handleRemoveCartItem = (idx: number) => {
+    setCartItems((prev) => prev.filter((_, i) => i !== idx))
+  }
+
+  // Wishlist toggle
+  const handleToggleWishlist = (productId: string, productName: string) => {
+    setWishlist((prev) => {
+      const next = new Set(prev)
+      if (next.has(productId)) {
+        next.delete(productId)
+        showToast(`Removed "${productName}" from wishlist`)
+      } else {
+        next.add(productId)
+        showToast(`Added "${productName}" to wishlist ♡`)
+      }
+      return next
+    })
+  }
+
+  // Open Quick View Modal
+  const handleOpenQuickView = (product: ApexSportsStoreItem) => {
+    setQuickViewProduct(product)
+    setSelectedColor((product.colors && product.colors[0]?.name) || 'Standard')
+    setSelectedSize((product.sizes && product.sizes[0]) || 'Standard')
+    setSelectedQty(1)
+    setActiveModalImage(product.primaryImage)
+  }
+
+  // Carousel ref and scroll handlers
+  const carouselRef = useRef<HTMLDivElement>(null)
+  const handleScrollCarousel = (direction: 'left' | 'right') => {
+    if (carouselRef.current) {
+      const scrollAmount = direction === 'left' ? -340 : 340
+      carouselRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' })
+    }
+  }
+
+  // Filtered Featured products
+  const displayedFeaturedProducts = useMemo(() => {
+    if (activeFeaturedTab === 'All') return APEX_FEATURED_PRODUCTS
+    return APEX_FEATURED_PRODUCTS.filter((p) => p.category === activeFeaturedTab)
+  }, [activeFeaturedTab])
+
+  // Search results
+  const searchResults = useMemo(() => {
+    if (!searchQuery.trim()) return []
+    const q = searchQuery.toLowerCase()
+    return ALL_SPORTS_STORE_PRODUCTS.filter((p) => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q))
+  }, [searchQuery])
+
+  return (
+    <div className={`sports-storefront-wrapper theme-sports-velocity sports-device-${device}`}>
+      {/* Toast Notification */}
+      {toastMessage && (
+        <div className="sports-floating-toast" role="alert">
+          <span className="toast-icon">⚡</span>
+          <span className="toast-text">{toastMessage}</span>
+        </div>
+      )}
+
+      {/* 1. TOP ANNOUNCEMENT BAR */}
+      {announcementVisible && (
+        <aside className="sports-top-announcement" aria-label="Store Announcements">
+          <div className="sports-announcement-container">
+            <button
+              type="button"
+              className="announcement-nav-arrow"
+              onClick={() => setTickerIndex((prev) => (prev - 1 + tickerMessages.length) % tickerMessages.length)}
+              aria-label="Previous announcement"
+            >
+              ‹
+            </button>
+            <div className="announcement-ticker-track">
+              <span className="announcement-badge-pill">OFFER</span>
+              <span className="announcement-text">{tickerMessages[tickerIndex]}</span>
+            </div>
+            <button
+              type="button"
+              className="announcement-nav-arrow"
+              onClick={() => setTickerIndex((prev) => (prev + 1) % tickerMessages.length)}
+              aria-label="Next announcement"
+            >
+              ›
+            </button>
+            <div className="announcement-right-tools">
+              <span className="announcement-currency">🇮🇳 IND (₹ INR)</span>
+              <button
+                type="button"
+                className="announcement-dismiss-btn"
+                onClick={() => setAnnouncementVisible(false)}
+                aria-label="Dismiss announcement bar"
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+        </aside>
+      )}
+
+      {/* 2. STICKY SHOPIFY-STYLE HEADER */}
+      <header className="sports-main-header">
+        <div className="sports-container sports-header-inner">
+          {/* Mobile Hamburger Button */}
+          <button
+            type="button"
+            className="sports-mobile-menu-trigger"
+            onClick={() => setMobileMenuOpen(true)}
+            aria-label="Open mobile navigation menu"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+
+          {/* Left / Brand Logo */}
+          <div className="sports-brand-container">
+            <a href="#sports-hero" className="sports-logo-link">
+              <div className="sports-brand-emblem">
+                <svg width="34" height="34" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+                  <polygon points="4,32 18,4 26,4 12,32" fill="#CCFF00" />
+                  <polygon points="16,32 26,12 32,12 22,32" fill="#FFFFFF" />
+                </svg>
+              </div>
+              <div className="sports-brand-titles">
+                <span className="sports-brand-main">
+                  APEX<strong>ATHLETICS</strong>
+                </span>
+                <span className="sports-brand-lab">PERFORMANCE // LAB</span>
+              </div>
+            </a>
+          </div>
+
+          {/* Center Navigation Links (Desktop) */}
+          <nav className="sports-desktop-nav" aria-label="Main Store Navigation">
+            <a href="#sports-hero" className="sports-nav-item active">Home</a>
+            <a href="#featured-gear" className="sports-nav-item">Shop</a>
+            <a href="#shop-by-sport" className="sports-nav-item">Men</a>
+            <a href="#shop-by-sport" className="sports-nav-item">Women</a>
+            <a href="#featured-gear" className="sports-nav-item">Footwear</a>
+            <a href="#shop-by-sport" className="sports-nav-item has-badge">
+              Sports
+              <span className="nav-dropdown-tag">6</span>
+            </a>
+            <a href="#bestsellers" className="sports-nav-item">Accessories</a>
+            <a href="#new-arrivals" className="sports-nav-item new-drop-link">
+              New Arrivals
+              <span className="nav-hot-dot" />
+            </a>
+          </nav>
+
+          {/* Right Header Actions */}
+          <div className="sports-header-actions">
+            {/* Search Trigger */}
+            <button
+              type="button"
+              className="sports-action-btn search-trigger"
+              onClick={() => setSearchOpen(true)}
+              aria-label="Search equipment & sportswear"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+              <span className="action-label desktop-only">Search</span>
+            </button>
+
+            {/* Account Link */}
+            <button
+              type="button"
+              className="sports-action-btn account-trigger desktop-only"
+              onClick={() => showToast('Athlete Pro Portal: Ready to sign in')}
+              aria-label="Account Profile"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+              <span className="action-label">Account</span>
+            </button>
+
+            {/* Wishlist Link */}
+            <button
+              type="button"
+              className="sports-action-btn wishlist-trigger"
+              onClick={() => showToast(`Wishlist contains ${wishlist.size} saved items`)}
+              aria-label={`Wishlist: ${wishlist.size} items`}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+              </svg>
+              <span className="header-badge-count">{wishlist.size}</span>
+            </button>
+
+            {/* Cart Trigger Button with live count and price */}
+            <button
+              type="button"
+              className="sports-cart-button"
+              onClick={() => setCartOpen(true)}
+              aria-label={`Shopping Cart: ${totalCartCount} items`}
+            >
+              <span className="cart-icon-wrap">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                  <line x1="3" y1="6" x2="21" y2="6" />
+                  <path d="M16 10a4 4 0 0 1-8 0" />
+                </svg>
+                <span className="cart-badge-bubble">{totalCartCount}</span>
+              </span>
+              <span className="cart-price-sum desktop-only">₹{cartSubtotal.toLocaleString('en-IN')}</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* MOBILE SLIDE-OUT DRAWER */}
+      {mobileMenuOpen && (
+        <div className="sports-mobile-drawer-overlay" onClick={() => setMobileMenuOpen(false)}>
+          <div className="sports-mobile-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className="mobile-drawer-header">
+              <div className="sports-brand-container">
+                <span className="sports-brand-main">
+                  APEX<strong>ATHLETICS</strong>
+                </span>
+              </div>
+              <button
+                type="button"
+                className="drawer-close-btn"
+                onClick={() => setMobileMenuOpen(false)}
+                aria-label="Close navigation"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="mobile-drawer-search">
+              <input
+                type="search"
+                placeholder="Search gear, shoes, apparel..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    setMobileMenuOpen(false)
+                    setSearchOpen(true)
+                  }
+                }}
+              />
+            </div>
+
+            <nav className="mobile-drawer-nav">
+              <a href="#sports-hero" onClick={() => setMobileMenuOpen(false)}>Home</a>
+              <a href="#featured-gear" onClick={() => setMobileMenuOpen(false)}>Featured Gear</a>
+              <a href="#shop-by-sport" onClick={() => setMobileMenuOpen(false)}>Shop by Sport</a>
+              <a href="#new-arrivals" onClick={() => setMobileMenuOpen(false)}>New Arrivals (Drop 2026)</a>
+              <a href="#bestsellers" onClick={() => setMobileMenuOpen(false)}>Bestsellers Carousel</a>
+              <a href="#brand-story" onClick={() => setMobileMenuOpen(false)}>Our Story ("Made to Move")</a>
+              <a href="#reviews" onClick={() => setMobileMenuOpen(false)}>Athlete Reviews</a>
+            </nav>
+
+            <div className="mobile-drawer-footer">
+              <div className="drawer-free-shipping-pill">
+                <span>⚡</span>
+                <p>Free Express Shipping on orders over ₹1,999</p>
+              </div>
+              <button
+                type="button"
+                className="mobile-drawer-cta-btn"
+                onClick={() => {
+                  setMobileMenuOpen(false)
+                  setCartOpen(true)
+                }}
+              >
+                View Bag (₹{cartSubtotal.toLocaleString('en-IN')})
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 3. HERO SECTION */}
+      <section className="sports-hero-stage" id="sports-hero">
+        <div className="sports-hero-backdrop-media">
+          <img
+            src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=1600&auto=format&fit=crop&q=85"
+            alt="Elite track runner accelerating at high speed in stadium"
+            className="hero-backdrop-img"
+          />
+          <div className="hero-gradient-scrim" />
+          <div className="hero-speed-lines" />
+        </div>
+
+        <div className="sports-container sports-hero-content-layer">
+          <div className="sports-hero-grid">
+            <div className="sports-hero-copy">
+              <div className="hero-kicker-pill">
+                <span className="kicker-glow-dot" />
+                <span>SEASON 2026 // COMPETITION CAPSULE</span>
+              </div>
+
+              <h1 className="hero-display-headline">
+                GEAR UP.<br />
+                <span className="headline-accent-volt">PLAY HARDER.</span>
+              </h1>
+
+              <p className="hero-lead-paragraph">
+                Performance-driven sportswear and equipment built for every move, every workout, and every victory.
+              </p>
+
+              <div className="hero-cta-actions">
+                <a href="#featured-gear" className="sports-btn-primary hero-primary-btn">
+                  SHOP NOW
+                  <span className="btn-arrow-icon">→</span>
+                </a>
+                <a href="#shop-by-sport" className="sports-btn-secondary hero-secondary-btn">
+                  EXPLORE COLLECTION
+                </a>
+              </div>
+
+              {/* Telemetry & Athlete Proof Bar */}
+              <div className="hero-telemetry-strip">
+                <div className="telemetry-stat-cell">
+                  <span className="stat-value">88.4%</span>
+                  <span className="stat-caption">Energy Return</span>
+                </div>
+                <div className="telemetry-divider" />
+                <div className="telemetry-stat-cell">
+                  <span className="stat-value">168g</span>
+                  <span className="stat-caption">Featherweight</span>
+                </div>
+                <div className="telemetry-divider" />
+                <div className="telemetry-stat-cell">
+                  <span className="stat-value">50+</span>
+                  <span className="stat-caption">Olympians Tested</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. SHOP BY SPORT (CATEGORY CARDS) */}
+      <section className="sports-section sports-disciplines-section" id="shop-by-sport">
+        <div className="sports-container">
+          <div className="sports-section-header">
+            <div>
+              <span className="sports-section-eyebrow">CHOOSE YOUR DISCIPLINE</span>
+              <h2 className="sports-section-title">SHOP BY SPORT</h2>
+              <p className="sports-section-desc">
+                Engineered for your specific discipline. Choose your sport to explore pro-grade gear.
+              </p>
+            </div>
+            <a href="#featured-gear" className="sports-header-action-link">
+              View All 6 Disciplines →
+            </a>
+          </div>
+
+          <div className="sports-categories-grid">
+            {SHOP_BY_SPORT_CATEGORIES.map((cat) => (
+              <div
+                key={cat.id}
+                className="sports-category-card"
+                onClick={() => {
+                  showToast(`Filtering for ${cat.name} gear...`)
+                }}
+              >
+                <img src={cat.image} alt={cat.name} className="category-bg-photo" loading="lazy" />
+                <div className="category-scrim-overlay" />
+                <div className="category-badge-chip">{cat.badge}</div>
+                <div className="category-text-block">
+                  <span className="category-item-count">{cat.itemCount}</span>
+                  <h3 className="category-title-name">{cat.name}</h3>
+                  <p className="category-sub-desc">{cat.subtitle}</p>
+                  <div className="category-cta-row">
+                    <span className="category-action-link">Shop Now</span>
+                    <span className="category-action-arrow">→</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. FEATURED COLLECTION ("FEATURED GEAR") */}
+      <section className="sports-section sports-featured-section" id="featured-gear">
+        <div className="sports-container">
+          <div className="sports-section-header">
+            <div>
+              <span className="sports-section-eyebrow">ENGINEERED PERFORMANCE</span>
+              <h2 className="sports-section-title">FEATURED GEAR</h2>
+              <p className="sports-section-desc">
+                High-demand athletic innovations rigorously battle-tested by professional athletes.
+              </p>
+            </div>
+
+            {/* Category Filter Pills */}
+            <div className="sports-filter-pills-row" role="tablist">
+              {(['All', 'Footwear', 'Apparel', 'Equipment'] as const).map((tab) => (
+                <button
+                  key={tab}
+                  type="button"
+                  className={`filter-pill-btn ${activeFeaturedTab === tab ? 'active' : ''}`}
+                  onClick={() => setActiveFeaturedTab(tab)}
+                  role="tab"
+                  aria-selected={activeFeaturedTab === tab}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* 4-Product Grid */}
+          <div className="sports-product-grid four-col-grid">
+            {displayedFeaturedProducts.map((product) => {
+              const isSaved = wishlist.has(product.id)
+              const discountPct = product.compareAtPrice
+                ? Math.round(((product.compareAtPrice - product.price) / product.compareAtPrice) * 100)
+                : 0
+
+              return (
+                <article key={product.id} className="sports-product-card">
+                  <div className="product-media-stage">
+                    {/* Primary Image */}
+                    <img
+                      src={product.primaryImage}
+                      alt={product.name}
+                      className="product-photo primary-photo"
+                      loading="lazy"
+                    />
+                    {/* Secondary Image on Hover */}
+                    <img
+                      src={product.hoverImage}
+                      alt={`${product.name} alternate view`}
+                      className="product-photo hover-photo"
+                      loading="lazy"
+                    />
+
+                    {/* Badge */}
+                    {product.badge && (
+                      <span className={`product-status-badge badge-${product.badgeType || 'bestseller'}`}>
+                        {product.badge}
+                      </span>
+                    )}
+
+                    {/* Discount Badge */}
+                    {discountPct > 0 && (
+                      <span className="product-discount-badge">-{discountPct}%</span>
+                    )}
+
+                    {/* Wishlist Button */}
+                    <button
+                      type="button"
+                      className={`product-wishlist-btn ${isSaved ? 'saved' : ''}`}
+                      onClick={() => handleToggleWishlist(product.id, product.name)}
+                      aria-label={isSaved ? 'Remove from wishlist' : 'Add to wishlist'}
+                    >
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill={isSaved ? '#CCFF00' : 'none'} stroke={isSaved ? '#CCFF00' : 'currentColor'} strokeWidth="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                      </svg>
+                    </button>
+
+                    {/* Quick View Button */}
+                    <button
+                      type="button"
+                      className="product-quick-view-btn"
+                      onClick={() => handleOpenQuickView(product)}
+                    >
+                      Quick View
+                    </button>
+                  </div>
+
+                  <div className="product-details-body">
+                    <div className="product-category-meta">
+                      <span>{product.category}</span>
+                      <div className="product-stars-row">
+                        <span className="star-char">★</span>
+                        <strong>{product.rating.toFixed(1)}</strong>
+                        <small>({product.reviewCount})</small>
+                      </div>
+                    </div>
+
+                    <h3 className="product-item-title">
+                      <a href="#quick-view" onClick={(e) => { e.preventDefault(); handleOpenQuickView(product) }}>
+                        {product.name}
+                      </a>
+                    </h3>
+
+                    {/* Color Swatches */}
+                    <div className="product-swatches-strip">
+                      {product.colors && product.colors.map((c, i) => (
+                        <span
+                          key={i}
+                          className="color-swatch-dot"
+                          style={{ backgroundColor: c.hex }}
+                          title={c.name}
+                        />
+                      ))}
+                      <span className="swatch-count-text">+{product.colors ? product.colors.length : 0} colors</span>
+                    </div>
+
+                    {/* Pricing */}
+                    <div className="product-price-container">
+                      <span className="product-sale-price">₹{product.price.toLocaleString('en-IN')}</span>
+                      {product.compareAtPrice && (
+                        <del className="product-original-price">
+                          ₹{product.compareAtPrice.toLocaleString('en-IN')}
+                        </del>
+                      )}
+                    </div>
+
+                    {/* Quick Add CTA */}
+                    <button
+                      type="button"
+                      className="product-quick-add-btn"
+                      onClick={() => handleAddToCart(product)}
+                    >
+                      <span>+ Quick Add</span>
+                    </button>
+                  </div>
+                </article>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. PROMOTIONAL BANNER ("BUILT FOR PERFORMANCE") */}
+      <section className="sports-section sports-promo-section">
+        <div className="sports-container">
+          <div className="sports-promo-banner-card">
+            <img
+              src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=1600&auto=format&fit=crop&q=85"
+              alt="Athlete training in modern performance athletic facility"
+              className="promo-backdrop-photo"
+              loading="lazy"
+            />
+            <div className="promo-overlay-tint" />
+            <div className="promo-diagonal-accent" />
+
+            <div className="promo-banner-copy">
+              <div className="promo-coupon-tag">LIMITED DROP PROMO</div>
+              <h2 className="promo-banner-headline">BUILT FOR PERFORMANCE</h2>
+              <p className="promo-banner-paragraph">
+                Upgrade your training with equipment designed to keep up with you. From carbon-infused plates to thermal-regulating textiles, elevate your game today.
+              </p>
+              <div className="promo-coupon-callout">
+                <span className="coupon-prefix">USE CODE:</span>
+                <strong className="coupon-code">APEX10</strong>
+                <span className="coupon-suffix">FOR EXTRA 10% OFF</span>
+              </div>
+              <div className="promo-cta-buttons">
+                <a href="#featured-gear" className="sports-btn-primary promo-primary-btn">
+                  SHOP PERFORMANCE GEAR
+                  <span>→</span>
+                </a>
+                <a href="#brand-story" className="sports-btn-secondary promo-secondary-btn">
+                  LEARN MORE
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. NEW ARRIVALS */}
+      <section className="sports-section sports-arrivals-section" id="new-arrivals">
+        <div className="sports-container">
+          <div className="sports-section-header">
+            <div>
+              <span className="sports-section-eyebrow">SPRING / SUMMER 2026 DROP</span>
+              <h2 className="sports-section-title">NEW ARRIVALS</h2>
+              <p className="sports-section-desc">
+                The latest drop of cutting-edge sportswear and elite training accessories.
+              </p>
+            </div>
+            <a href="#featured-gear" className="sports-header-action-link">
+              View Entire Drop (32 Items) →
+            </a>
+          </div>
+
+          <div className="sports-product-grid three-col-grid">
+            {APEX_NEW_ARRIVALS.map((product) => {
+              const isSaved = wishlist.has(product.id)
+              const discountPct = product.compareAtPrice
+                ? Math.round(((product.compareAtPrice - product.price) / product.compareAtPrice) * 100)
+                : 0
+
+              return (
+                <article key={product.id} className="sports-product-card">
+                  <div className="product-media-stage">
+                    <img src={product.primaryImage} alt={product.name} className="product-photo primary-photo" loading="lazy" />
+                    <img src={product.hoverImage} alt={product.name} className="product-photo hover-photo" loading="lazy" />
+
+                    {product.badge && (
+                      <span className={`product-status-badge badge-${product.badgeType || 'new'}`}>
+                        {product.badge}
+                      </span>
+                    )}
+
+                    {discountPct > 0 && (
+                      <span className="product-discount-badge">-{discountPct}%</span>
+                    )}
+
+                    <button
+                      type="button"
+                      className={`product-wishlist-btn ${isSaved ? 'saved' : ''}`}
+                      onClick={() => handleToggleWishlist(product.id, product.name)}
+                      aria-label="Wishlist"
+                    >
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill={isSaved ? '#CCFF00' : 'none'} stroke={isSaved ? '#CCFF00' : 'currentColor'} strokeWidth="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                      </svg>
+                    </button>
+
+                    <button
+                      type="button"
+                      className="product-quick-view-btn"
+                      onClick={() => handleOpenQuickView(product)}
+                    >
+                      Quick View
+                    </button>
+                  </div>
+
+                  <div className="product-details-body">
+                    <div className="product-category-meta">
+                      <span>{product.category}</span>
+                      <div className="product-stars-row">
+                        <span className="star-char">★</span>
+                        <strong>{product.rating.toFixed(1)}</strong>
+                        <small>({product.reviewCount})</small>
+                      </div>
+                    </div>
+
+                    <h3 className="product-item-title">
+                      <a href="#quick-view" onClick={(e) => { e.preventDefault(); handleOpenQuickView(product) }}>
+                        {product.name}
+                      </a>
+                    </h3>
+
+                    <div className="product-price-container">
+                      <span className="product-sale-price">₹{product.price.toLocaleString('en-IN')}</span>
+                      {product.compareAtPrice && (
+                        <del className="product-original-price">
+                          ₹{product.compareAtPrice.toLocaleString('en-IN')}
+                        </del>
+                      )}
+                    </div>
+
+                    <button
+                      type="button"
+                      className="product-quick-add-btn"
+                      onClick={() => handleAddToCart(product)}
+                    >
+                      <span>+ Add to Cart</span>
+                    </button>
+                  </div>
+                </article>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 8. BESTSELLERS (HORIZONTAL PRODUCT CAROUSEL) */}
+      <section className="sports-section sports-bestsellers-section" id="bestsellers">
+        <div className="sports-container">
+          <div className="sports-section-header carousel-header">
+            <div>
+              <span className="sports-section-eyebrow">MOST POPULAR WITH ATHLETES</span>
+              <h2 className="sports-section-title">BESTSELLERS</h2>
+              <p className="sports-section-desc">
+                Tested, trusted, and re-ordered by over 25,000 active sportsmen and fitness enthusiasts.
+              </p>
+            </div>
+
+            {/* Carousel Navigation Buttons */}
+            <div className="carousel-nav-arrows">
+              <button
+                type="button"
+                className="carousel-arrow-btn prev"
+                onClick={() => handleScrollCarousel('left')}
+                aria-label="Scroll bestsellers left"
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                className="carousel-arrow-btn next"
+                onClick={() => handleScrollCarousel('right')}
+                aria-label="Scroll bestsellers right"
+              >
+                ›
+              </button>
+            </div>
+          </div>
+
+          {/* Smooth Scroll Track */}
+          <div className="sports-carousel-track" ref={carouselRef}>
+            {APEX_BESTSELLERS.map((product) => {
+              const isSaved = wishlist.has(product.id)
+              return (
+                <article key={product.id} className="carousel-product-card">
+                  <div className="product-media-stage">
+                    <img src={product.primaryImage} alt={product.name} className="product-photo" loading="lazy" />
+                    {product.badge && (
+                      <span className="product-status-badge badge-bestseller">{product.badge}</span>
+                    )}
+
+                    <button
+                      type="button"
+                      className={`product-wishlist-btn ${isSaved ? 'saved' : ''}`}
+                      onClick={() => handleToggleWishlist(product.id, product.name)}
+                      aria-label="Wishlist"
+                    >
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill={isSaved ? '#CCFF00' : 'none'} stroke={isSaved ? '#CCFF00' : 'currentColor'} strokeWidth="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                      </svg>
+                    </button>
+                  </div>
+
+                  <div className="product-details-body">
+                    <div className="product-category-meta">
+                      <span>{product.category}</span>
+                      <div className="product-stars-row">
+                        <span className="star-char">★</span>
+                        <strong>{product.rating.toFixed(1)}</strong>
+                        <small>({product.reviewCount})</small>
+                      </div>
+                    </div>
+
+                    <h3 className="product-item-title">
+                      <a href="#quick-view" onClick={(e) => { e.preventDefault(); handleOpenQuickView(product) }}>
+                        {product.name}
+                      </a>
+                    </h3>
+
+                    <div className="product-price-container">
+                      <span className="product-sale-price">₹{product.price.toLocaleString('en-IN')}</span>
+                      {product.compareAtPrice && (
+                        <del className="product-original-price">
+                          ₹{product.compareAtPrice.toLocaleString('en-IN')}
+                        </del>
+                      )}
+                    </div>
+
+                    <button
+                      type="button"
+                      className="product-quick-add-btn"
+                      onClick={() => handleAddToCart(product)}
+                    >
+                      <span>+ Quick Add</span>
+                    </button>
+                  </div>
+                </article>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 9. BRAND / PERFORMANCE STORY ("MADE TO MOVE") */}
+      <section className="sports-section sports-story-section" id="brand-story">
+        <div className="sports-container">
+          <div className="sports-story-layout">
+            <div className="sports-story-content">
+              <span className="sports-section-eyebrow">OUR COMMITMENT TO SPEED & MOTION</span>
+              <h2 className="story-headline">MADE TO MOVE</h2>
+              <p className="story-paragraph">
+                From your first training session to your biggest competition, our gear is designed to support every step, sprint, jump, and challenge.
+              </p>
+              <p className="story-paragraph secondary">
+                We believe athletic breakthroughs happen when science meets determination. We collaborate directly with international sprinters, football clubs, and marathon coaches to test and refine our carbon lattice weaves, sweat-channeling knits, and zero-drag geometries.
+              </p>
+
+              {/* Verified Performance Badges */}
+              <div className="story-stats-grid">
+                <div className="story-stat-card">
+                  <strong className="story-stat-number">50+</strong>
+                  <span className="story-stat-label">Pro Athletes Tested</span>
+                </div>
+                <div className="story-stat-card">
+                  <strong className="story-stat-number">1.2M+</strong>
+                  <span className="story-stat-label">Kilometers Run</span>
+                </div>
+                <div className="story-stat-card">
+                  <strong className="story-stat-number">100%</strong>
+                  <span className="story-stat-label">Sweat-Proof Tested</span>
+                </div>
+              </div>
+
+              <div className="story-cta-wrap">
+                <button
+                  type="button"
+                  className="sports-btn-primary story-btn"
+                  onClick={() => showToast('Opening APEX Performance Lab Story...')}
+                >
+                  OUR STORY
+                  <span>→</span>
+                </button>
+              </div>
+            </div>
+
+            <div className="sports-story-media-stage">
+              <div className="story-image-frame">
+                <img
+                  src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=900&auto=format&fit=crop&q=80"
+                  alt="Athlete preparing in high performance gym"
+                  className="story-featured-img"
+                  loading="lazy"
+                />
+                <div className="story-quote-card">
+                  <div className="quote-star-pill">★★★★★ VERIFIED ATHLETE SPEC</div>
+                  <p>
+                    "The energy return and zero-chafe fit are unmatched. Shaved 0.4s off my personal best on the first trial."
+                  </p>
+                  <small>— Marcus Vance, World Championship Sprinter</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 10. WHY SHOP WITH US ("WHY ATHLETES CHOOSE US") */}
+      <section className="sports-section sports-trust-section">
+        <div className="sports-container">
+          <div className="sports-section-header center-align">
+            <span className="sports-section-eyebrow">WORLD-CLASS ATHLETE SERVICE</span>
+            <h2 className="sports-section-title">WHY ATHLETES CHOOSE US</h2>
+            <p className="sports-section-desc">
+              Built for performance. Backed by industry-leading buyer guarantees and rapid fulfillment.
+            </p>
+          </div>
+
+          <div className="sports-trust-grid">
+            {WHY_ATHLETES_CHOOSE_US.map((feat) => (
+              <div key={feat.id} className="sports-trust-card">
+                <div className="trust-icon-box">{feat.icon}</div>
+                <h3 className="trust-card-title">{feat.title}</h3>
+                <p className="trust-card-desc">{feat.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 11. CUSTOMER REVIEWS ("WHAT ATHLETES SAY") */}
+      <section className="sports-section sports-reviews-section" id="reviews">
+        <div className="sports-container">
+          <div className="sports-section-header center-align">
+            <span className="sports-section-eyebrow">VERIFIED ROAD & FIELD FEEDBACK</span>
+            <h2 className="sports-section-title">WHAT ATHLETES SAY</h2>
+            <p className="sports-section-desc">
+              Real feedback from runners, lifters, and club champions training every day.
+            </p>
+          </div>
+
+          <div className="sports-reviews-grid">
+            {CUSTOMER_REVIEWS.map((rev, i) => (
+              <div key={i} className="sports-testimonial-card">
+                <div className="testimonial-rating-stars">★★★★★</div>
+                <p className="testimonial-quote-text">"{rev.quote}"</p>
+                <div className="testimonial-author-row">
+                  <div className="author-avatar-badge">{rev.author.charAt(0)}</div>
+                  <div>
+                    <h4 className="author-full-name">{rev.author}</h4>
+                    <span className="author-discipline">{rev.role}</span>
+                    <span className="author-gear-tag">Purchased: {rev.product}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 12. NEWSLETTER SECTION */}
+      <section className="sports-section sports-newsletter-section">
+        <div className="sports-container">
+          <div className="sports-newsletter-box">
+            <span className="newsletter-eyebrow">EXCLUSIVE VIP ATHLETE ACCESS</span>
+            <h2 className="newsletter-headline">GET 10% OFF YOUR FIRST ORDER</h2>
+            <p className="newsletter-lead">
+              Sign up for new arrivals, exclusive offers and sports inspiration.
+            </p>
+
+            {newsletterSubmitted ? (
+              <div className="newsletter-success-alert" role="status">
+                <span className="alert-check">✓</span>
+                <div>
+                  <strong>You are officially on the APEX athlete roster!</strong>
+                  <p>Your 10% discount code <strong>APEX10</strong> has been applied to your session.</p>
+                </div>
+              </div>
+            ) : (
+              <form
+                className="sports-newsletter-form"
+                onSubmit={(e) => {
+                  e.preventDefault()
+                  if (newsletterEmail) {
+                    setNewsletterSubmitted(true)
+                    setPromoApplied(true)
+                    showToast('Coupon APEX10 unlocked! 10% discount applied to your bag.')
+                  }
+                }}
+              >
+                <div className="newsletter-input-group">
+                  <span className="input-mail-icon">✉</span>
+                  <input
+                    type="email"
+                    className="newsletter-email-input"
+                    placeholder="Enter your email"
+                    value={newsletterEmail}
+                    onChange={(e) => setNewsletterEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                <button type="submit" className="sports-btn-primary newsletter-submit-btn">
+                  GET MY 10% OFF
+                </button>
+              </form>
+            )}
+            <span className="newsletter-guarantee-note">
+              🔒 No spam. Instant unsubscribe anytime. Read our Privacy Policy.
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* 13. COMPLETE E-COMMERCE FOOTER */}
+      <footer className="sports-master-footer">
+        <div className="sports-container">
+          <div className="sports-footer-top-row">
+            {/* Column 1: Logo & Mission */}
+            <div className="footer-col brand-col">
+              <div className="sports-brand-container">
+                <div className="sports-brand-emblem">
+                  <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
+                    <polygon points="4,32 18,4 26,4 12,32" fill="#CCFF00" />
+                    <polygon points="16,32 26,12 32,12 22,32" fill="#FFFFFF" />
+                  </svg>
+                </div>
+                <div className="sports-brand-titles">
+                  <span className="sports-brand-main">
+                    APEX<strong>ATHLETICS</strong>
+                  </span>
+                  <span className="sports-brand-lab">PERFORMANCE LAB</span>
+                </div>
+              </div>
+              <p className="footer-brand-bio">
+                Engineered sportswear, high-traction footwear, and tournament-grade equipment crafted for runners, trainers, and athletes who demand the absolute best.
+              </p>
+              <div className="footer-social-icons">
+                <a href="#instagram" aria-label="Instagram" className="social-icon-circle">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                  </svg>
+                </a>
+                <a href="#facebook" aria-label="Facebook" className="social-icon-circle">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                  </svg>
+                </a>
+                <a href="#youtube" aria-label="YouTube" className="social-icon-circle">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" />
+                    <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor" />
+                  </svg>
+                </a>
+                <a href="#twitter" aria-label="Twitter X" className="social-icon-circle">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M4 4l16 16m0-16L4 20" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            {/* Column 2: SHOP */}
+            <div className="footer-col">
+              <h4 className="footer-col-title">SHOP</h4>
+              <ul className="footer-links-list">
+                <li><a href="#shop-by-sport">Men's Apparel</a></li>
+                <li><a href="#shop-by-sport">Women's Training</a></li>
+                <li><a href="#featured-gear">Footwear & Spikes</a></li>
+                <li><a href="#bestsellers">Sports Accessories</a></li>
+                <li><a href="#new-arrivals">New Arrivals 2026</a></li>
+                <li><a href="#promo">End of Season Sale</a></li>
+              </ul>
+            </div>
+
+            {/* Column 3: HELP */}
+            <div className="footer-col">
+              <h4 className="footer-col-title">HELP</h4>
+              <ul className="footer-links-list">
+                <li><a href="#contact" onClick={(e) => { e.preventDefault(); showToast('Support: support@apexathletics.in') }}>Contact Us</a></li>
+                <li><a href="#shipping" onClick={(e) => { e.preventDefault(); showToast('Free express shipping over ₹1,999') }}>Shipping Policy</a></li>
+                <li><a href="#returns" onClick={(e) => { e.preventDefault(); showToast('30-Day trial returns accepted') }}>Returns & Exchange</a></li>
+                <li><a href="#faq" onClick={(e) => { e.preventDefault(); showToast('All orders ship via BlueDart / Delhivery') }}>FAQ</a></li>
+                <li><a href="#track" onClick={(e) => { e.preventDefault(); showToast('Enter your order ID on the tracking portal') }}>Track Order</a></li>
+                <li><a href="#sizes" onClick={(e) => { e.preventDefault(); showToast('Footwear & apparel true-to-size guide') }}>Size & Fit Guide</a></li>
+              </ul>
+            </div>
+
+            {/* Column 4: ABOUT */}
+            <div className="footer-col">
+              <h4 className="footer-col-title">ABOUT</h4>
+              <ul className="footer-links-list">
+                <li><a href="#brand-story">Our Story</a></li>
+                <li><a href="#lab">Performance Lab</a></li>
+                <li><a href="#careers">Careers</a></li>
+                <li><a href="#locator">Store Locator</a></li>
+                <li><a href="#privacy">Privacy Policy</a></li>
+                <li><a href="#terms">Terms & Conditions</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="sports-footer-bottom-bar">
+            <p className="copyright-text">
+              © 2026 {brandName}. All rights reserved. Built for champions.
+            </p>
+            <div className="footer-payment-badges">
+              <span className="payment-pill">UPI / QR</span>
+              <span className="payment-pill">RuPay</span>
+              <span className="payment-pill">VISA</span>
+              <span className="payment-pill">Mastercard</span>
+              <span className="payment-pill">NetBanking</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      {/* 14. INTERACTIVE SLIDE-OUT CART DRAWER */}
+      {cartOpen && (
+        <div className="sports-cart-drawer-backdrop" onClick={() => setCartOpen(false)}>
+          <aside className="sports-cart-drawer-panel" onClick={(e) => e.stopPropagation()}>
+            <div className="cart-drawer-header">
+              <div className="cart-title-row">
+                <span className="cart-icon-graphic">🛒</span>
+                <h3>YOUR ATHLETE BAG</h3>
+                <span className="cart-total-badge">{totalCartCount} items</span>
+              </div>
+              <button
+                type="button"
+                className="cart-close-icon-btn"
+                onClick={() => setCartOpen(false)}
+                aria-label="Close bag"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Free Shipping Progress Meter */}
+            <div className="cart-free-shipping-tracker">
+              <div className="shipping-progress-text">
+                {cartSubtotal >= freeShippingThreshold ? (
+                  <span className="free-shipping-unlocked">
+                    🎉 <strong>UNLOCKED:</strong> Free Express Delivery on this order!
+                  </span>
+                ) : (
+                  <span>
+                    Add <strong>₹{remainingForFreeShipping.toLocaleString('en-IN')}</strong> more for <strong>FREE Shipping</strong>
+                  </span>
+                )}
+              </div>
+              <div className="shipping-progress-bar-rail">
+                <div
+                  className="shipping-progress-bar-fill"
+                  style={{ width: `${freeShippingProgress}%` }}
+                />
+              </div>
+            </div>
+
+            {/* Cart Items List */}
+            <div className="cart-items-scroll-pane">
+              {cartItems.length === 0 ? (
+                <div className="cart-empty-state">
+                  <span className="empty-cart-icon">🛍️</span>
+                  <h4>Your bag is empty</h4>
+                  <p>Check out the new arrivals or featured shoes to gear up.</p>
+                  <button
+                    type="button"
+                    className="sports-btn-primary"
+                    onClick={() => setCartOpen(false)}
+                  >
+                    Start Shopping
+                  </button>
+                </div>
+              ) : (
+                cartItems.map((item, idx) => (
+                  <div key={`${item.id}-${item.color}-${item.size}-${idx}`} className="cart-line-item">
+                    <img src={item.image} alt={item.name} className="cart-item-thumb" />
+                    <div className="cart-item-info">
+                      <h4 className="cart-item-name">{item.name}</h4>
+                      <div className="cart-item-variant-line">
+                        <span>{item.color}</span> • <span>{item.size}</span>
+                      </div>
+                      <div className="cart-item-price-row">
+                        <strong>₹{item.price.toLocaleString('en-IN')}</strong>
+                        {item.compareAtPrice && (
+                          <del>₹{item.compareAtPrice.toLocaleString('en-IN')}</del>
+                        )}
+                      </div>
+                      <div className="cart-item-qty-actions">
+                        <div className="qty-stepper">
+                          <button
+                            type="button"
+                            onClick={() => handleUpdateCartQty(idx, -1)}
+                            aria-label="Decrease quantity"
+                          >
+                            −
+                          </button>
+                          <span>{item.quantity}</span>
+                          <button
+                            type="button"
+                            onClick={() => handleUpdateCartQty(idx, 1)}
+                            aria-label="Increase quantity"
+                          >
+                            +
+                          </button>
+                        </div>
+                        <button
+                          type="button"
+                          className="cart-remove-link"
+                          onClick={() => handleRemoveCartItem(idx)}
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+
+            {/* Cart Drawer Bottom Bar & Checkout */}
+            {cartItems.length > 0 && (
+              <div className="cart-drawer-footer">
+                {/* Promo Code Input */}
+                <div className="cart-promo-section">
+                  <div className="promo-input-row">
+                    <input
+                      type="text"
+                      placeholder="Promo Code (try APEX10)"
+                      value={promoCode}
+                      onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (promoCode === 'APEX10' || promoCode === 'SPEED10') {
+                          setPromoApplied(true)
+                          showToast('Coupon APEX10 applied: 10% OFF!')
+                        } else {
+                          showToast('Invalid promo code. Use APEX10')
+                        }
+                      }}
+                    >
+                      Apply
+                    </button>
+                  </div>
+                  {promoApplied && (
+                    <div className="promo-applied-badge">
+                      <span>✓ APEX10: 10% Discount Applied</span>
+                      <button type="button" onClick={() => setPromoApplied(false)}>✕</button>
+                    </div>
+                  )}
+                </div>
+
+                <div className="cart-totals-breakdown">
+                  <div className="total-row">
+                    <span>Subtotal</span>
+                    <span>₹{cartSubtotal.toLocaleString('en-IN')}</span>
+                  </div>
+                  {promoApplied && (
+                    <div className="total-row discount-row">
+                      <span>Athlete Discount (10%)</span>
+                      <span>-₹{discountAmount.toLocaleString('en-IN')}</span>
+                    </div>
+                  )}
+                  <div className="total-row">
+                    <span>Estimated Shipping</span>
+                    <span className="free-tag">
+                      {cartSubtotal >= freeShippingThreshold ? 'FREE' : '₹149'}
+                    </span>
+                  </div>
+                  <div className="total-row final-total">
+                    <strong>Total</strong>
+                    <strong>
+                      ₹{(cartTotal + (cartSubtotal >= freeShippingThreshold ? 0 : 149)).toLocaleString('en-IN')}
+                    </strong>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  className="sports-btn-primary cart-checkout-btn"
+                  onClick={() => {
+                    showToast('Redirecting to 100% Encrypted Checkout...')
+                    if (onUseTemplate && template) {
+                      onUseTemplate(template.id)
+                    }
+                  }}
+                >
+                  CHECKOUT NOW • ₹{(cartTotal + (cartSubtotal >= freeShippingThreshold ? 0 : 149)).toLocaleString('en-IN')}
+                </button>
+                <div className="cart-payment-guarantee-note">
+                  🔒 256-bit Encrypted Checkout • 30-Day Road Trial
+                </div>
+              </div>
+            )}
+          </aside>
+        </div>
+      )}
+
+      {/* 15. INTERACTIVE QUICK VIEW MODAL */}
+      {quickViewProduct && (
+        <div className="sports-quickview-backdrop" onClick={() => setQuickViewProduct(null)}>
+          <div className="sports-quickview-modal" onClick={(e) => e.stopPropagation()}>
+            <button
+              type="button"
+              className="quickview-close-btn"
+              onClick={() => setQuickViewProduct(null)}
+              aria-label="Close product view"
+            >
+              ✕
+            </button>
+
+            <div className="quickview-grid">
+              {/* Media Gallery */}
+              <div className="quickview-media-col">
+                <div className="quickview-main-image-frame">
+                  <img src={activeModalImage} alt={quickViewProduct.name} />
+                  {quickViewProduct.badge && (
+                    <span className="quickview-status-badge">{quickViewProduct.badge}</span>
+                  )}
+                </div>
+                {quickViewProduct.gallery && (
+                  <div className="quickview-thumb-strip">
+                    {quickViewProduct.gallery.map((imgUrl, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        className={`thumb-btn ${activeModalImage === imgUrl ? 'active' : ''}`}
+                        onClick={() => setActiveModalImage(imgUrl)}
+                      >
+                        <img src={imgUrl} alt="Thumbnail view" />
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Product Info & Purchase Form */}
+              <div className="quickview-info-col">
+                <div className="quickview-category-line">
+                  <span>{quickViewProduct.category}</span>
+                  <div className="quickview-stars">
+                    <span>★★★★★</span>
+                    <strong>{quickViewProduct.rating.toFixed(1)}</strong>
+                    <small>({quickViewProduct.reviewCount} reviews)</small>
+                  </div>
+                </div>
+
+                <h2 className="quickview-product-title">{quickViewProduct.name}</h2>
+
+                <div className="quickview-pricing-row">
+                  <span className="quickview-price">₹{quickViewProduct.price.toLocaleString('en-IN')}</span>
+                  {quickViewProduct.compareAtPrice && (
+                    <del className="quickview-compare">
+                      ₹{quickViewProduct.compareAtPrice.toLocaleString('en-IN')}
+                    </del>
+                  )}
+                  {quickViewProduct.compareAtPrice && (
+                    <span className="quickview-save-pill">
+                      Save ₹{(quickViewProduct.compareAtPrice - quickViewProduct.price).toLocaleString('en-IN')} (
+                      {Math.round(((quickViewProduct.compareAtPrice - quickViewProduct.price) / quickViewProduct.compareAtPrice) * 100)}% OFF)
+                    </span>
+                  )}
+                </div>
+
+                <p className="quickview-desc">{quickViewProduct.shortDesc}</p>
+
+                {/* Color Selector */}
+                <div className="quickview-variant-group">
+                  <label className="variant-label">
+                    Color: <strong>{selectedColor}</strong>
+                  </label>
+                  <div className="quickview-swatches">
+                    {quickViewProduct.colors && quickViewProduct.colors.map((c, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        className={`swatch-circle-btn ${selectedColor === c.name ? 'active' : ''}`}
+                        style={{ backgroundColor: c.hex }}
+                        onClick={() => setSelectedColor(c.name)}
+                        title={c.name}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Size Selector */}
+                <div className="quickview-variant-group">
+                  <div className="size-label-row">
+                    <label className="variant-label">
+                      Size: <strong>{selectedSize}</strong>
+                    </label>
+                    <button
+                      type="button"
+                      className="size-guide-btn"
+                      onClick={() => showToast('Size Guide: Standard athletic fit. If between sizes, size up 0.5.')}
+                    >
+                      📏 Size Guide
+                    </button>
+                  </div>
+                  <div className="quickview-sizes-grid">
+                    {quickViewProduct.sizes && quickViewProduct.sizes.map((s) => (
+                      <button
+                        key={s}
+                        type="button"
+                        className={`size-chip-btn ${selectedSize === s ? 'active' : ''}`}
+                        onClick={() => setSelectedSize(s)}
+                      >
+                        {s}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Quantity & Add to Cart */}
+                <div className="quickview-actions-row">
+                  <div className="qty-stepper large">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedQty((q) => Math.max(1, q - 1))}
+                    >
+                      −
+                    </button>
+                    <span>{selectedQty}</span>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedQty((q) => q + 1)}
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="sports-btn-primary quickview-add-cart-btn"
+                    onClick={() => {
+                      handleAddToCart(quickViewProduct, selectedColor, selectedSize, selectedQty)
+                      setQuickViewProduct(null)
+                    }}
+                  >
+                    ADD TO BAG • ₹{(quickViewProduct.price * selectedQty).toLocaleString('en-IN')}
+                  </button>
+                </div>
+
+                <div className="quickview-buy-now-row">
+                  <button
+                    type="button"
+                    className="quickview-buy-now-btn"
+                    onClick={() => {
+                      handleAddToCart(quickViewProduct, selectedColor, selectedSize, selectedQty)
+                      setQuickViewProduct(null)
+                      showToast('Instant Buy: Proceeding directly to checkout...')
+                    }}
+                  >
+                    ⚡ BUY NOW WITH 1-CLICK
+                  </button>
+                </div>
+
+                {/* Technical Highlights */}
+                <div className="quickview-specs-box">
+                  <h4>Engineered Spec Highlights:</h4>
+                  <ul>
+                    {quickViewProduct.specs.map((spec, i) => (
+                      <li key={i}>
+                        <span className="spec-check-mark">✓</span>
+                        <span>{spec}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 16. INSTANT SEARCH MODAL */}
+      {searchOpen && (
+        <div className="sports-search-backdrop" onClick={() => setSearchOpen(false)}>
+          <div className="sports-search-dialog" onClick={(e) => e.stopPropagation()}>
+            <div className="search-dialog-header">
+              <span className="search-dialog-icon">⌕</span>
+              <input
+                type="search"
+                placeholder="Search shoes, shorts, jackets, footballs, racquets..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                autoFocus
+              />
+              <button
+                type="button"
+                className="search-dialog-close"
+                onClick={() => setSearchOpen(false)}
+                aria-label="Close search"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="search-dialog-results">
+              {searchQuery.trim() === '' ? (
+                <div className="search-suggestions">
+                  <span className="suggestions-title">POPULAR ATHLETIC SEARCHES:</span>
+                  <div className="suggestion-tags">
+                    {['Running Shoes', 'Training Shorts', 'Gym T-Shirt', 'Football', 'Tennis Racquet', 'Hydro Bottle'].map((tag) => (
+                      <button
+                        key={tag}
+                        type="button"
+                        className="suggestion-tag-btn"
+                        onClick={() => setSearchQuery(tag)}
+                      >
+                        {tag}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ) : searchResults.length === 0 ? (
+                <div className="search-no-results">
+                  <p>No gear found matching "<strong>{searchQuery}</strong>". Try searching for "shoes" or "running".</p>
+                </div>
+              ) : (
+                <div className="search-results-list">
+                  {searchResults.map((p) => (
+                    <div
+                      key={p.id}
+                      className="search-result-item"
+                      onClick={() => {
+                        setSearchOpen(false)
+                        handleOpenQuickView(p)
+                      }}
+                    >
+                      <img src={p.primaryImage} alt={p.name} />
+                      <div className="search-result-copy">
+                        <h4>{p.name}</h4>
+                        <span className="search-result-cat">{p.category}</span>
+                        <strong>₹{p.price.toLocaleString('en-IN')}</strong>
+                      </div>
+                      <span className="search-view-arrow">→</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
 /* =========================================================================
    7. MULTI-DEVICE TEMPLATE PREVIEW MODAL COMPONENT
    ========================================================================= */
@@ -7710,7 +9855,7 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
   onClose,
   onUseTemplate,
 }) => {
-  const [device, setDevice] = useState<'desktop' | 'tablet' | 'mobile'>('desktop')
+  const [device, setDevice] = useState<'desktop' | 'tablet' | 'mobile' | 'fullscreen'>('desktop')
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -8485,6 +10630,14 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
             >
               📲 Mobile
             </button>
+            <button
+              type="button"
+              className={`device-btn ${device === 'fullscreen' ? 'active' : ''}`}
+              onClick={() => setDevice(device === 'fullscreen' ? 'desktop' : 'fullscreen')}
+              title="Fullscreen Live View"
+            >
+              ⛶ Fullscreen
+            </button>
           </div>
 
           <button type="button" className="toolbar-close-btn" onClick={onClose} aria-label="Close preview">
@@ -8511,7 +10664,16 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                 </div>
               )}
 
-              {/* Announcement Bar */}
+              {(template.businessType === 'sporting-goods' || template.id.startsWith('sports-')) ? (
+                <SportsStorefront
+                  template={template}
+                  device={device}
+                  onUseTemplate={onUseTemplate}
+                  onClose={onClose}
+                />
+              ) : (
+                <>
+{/* Announcement Bar */}
               <div
                 className="store-announcement-bar"
                 style={{
@@ -9233,6 +11395,8 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                     : '— Verified Client Experience'}
                 </small>
               </section>
+                </>
+              )}
             </div>
           </div>
 
@@ -10045,7 +12209,13 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
   const [sortBy, setSortBy] = useState<string>('popular')
 
   // Preview Modal state
-  const [previewTemplate, setPreviewTemplate] = useState<MarketplaceTemplate | null>(null)
+  const [previewTemplate, setPreviewTemplate] = useState<MarketplaceTemplate | null>(() => {
+    const rawHash = typeof window !== 'undefined' ? window.location.hash.toLowerCase().replace(/^#/, '') : ''
+    if (rawHash === 'sports-storefront' || rawHash === 'apex-sports' || rawHash === 'sports-preview') {
+      return FLAGSHIP_MARKETPLACE_TEMPLATES.find((t) => t.businessType === 'sporting-goods') || null
+    }
+    return null
+  })
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 
   // Strictly retrieve templates ONLY for the chosen category / card
@@ -10119,6 +12289,19 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
 
     return [...flagshipList, ...regTemplates]
   }, [businessType, customPrompt])
+
+  // Auto-launch preview if URL hash changes to #sports-storefront, #apex-sports, or #sports-preview
+  useEffect(() => {
+    const handleHash = () => {
+      const rawHash = window.location.hash.toLowerCase().replace(/^#/, '')
+      if (rawHash === 'sports-storefront' || rawHash === 'apex-sports' || rawHash === 'sports-preview') {
+        const match = categoryTemplates[0] || FLAGSHIP_MARKETPLACE_TEMPLATES.find((t) => t.businessType === 'sporting-goods')
+        if (match) setPreviewTemplate(match)
+      }
+    }
+    window.addEventListener('hashchange', handleHash)
+    return () => window.removeEventListener('hashchange', handleHash)
+  }, [categoryTemplates])
 
   // Sub-filter tags available specifically for this category's templates
   const availableTags = useMemo(() => {
@@ -10247,6 +12430,31 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
 
       {/* Main Content Area showing ONLY the chosen card's templates */}
       <main className="marketplace-body-container">
+        {/* Sports Storefront Showcase Hero Banner */}
+        {businessType === 'sporting-goods' && (
+          <section className="sports-storefront-feature-banner" aria-label="Live Storefront Showcase">
+            <div className="sports-feature-banner-content">
+              <div className="sports-feature-badge-row">
+                <span className="sports-feature-badge">⚡ PRODUCTION SHOPIFY-STYLE STORE</span>
+                <span className="sports-feature-tag">14+ Sections • Interactive Cart & Modals</span>
+              </div>
+              <h2 className="sports-feature-title">APEX ATHLETICS // PERFORMANCE LAB</h2>
+              <p className="sports-feature-desc">
+                Complete sports e-commerce storefront with live cart drawer, currency switcher (₹ INR), quick view modal, multi-device viewports, product swatches, and athletic performance branding.
+              </p>
+            </div>
+            <div className="sports-feature-actions">
+              <button
+                type="button"
+                className="sports-launch-preview-btn"
+                onClick={() => setPreviewTemplate(categoryTemplates[0] || null)}
+              >
+                ⛶ Open Live Storefront Preview →
+              </button>
+            </div>
+          </section>
+        )}
+
         {/* Category Controls: Filter Tags & Sorting */}
         <div className="category-control-row">
           <div className="control-filter-pills">

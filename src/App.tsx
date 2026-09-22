@@ -141,6 +141,9 @@ function App() {
           (key === 'sporting-goods' && (
             rawHash === 'sports' ||
             rawHash === 'sports-store' ||
+            rawHash === 'sports-storefront' ||
+            rawHash === 'apex-sports' ||
+            rawHash === 'sports-preview' ||
             rawHash === 'sports-templates' ||
             rawHash === 'sports-store-templates' ||
             rawHash === 'sport-templates' ||
