@@ -4,6 +4,8 @@ import { getProducts } from './lib/api'
 import { formatCurrency } from './lib/currency'
 import { useCart } from './hooks/useCart'
 import type { Product } from './types'
+import { AdminApp } from './admin/AdminApp'
+import { useHashRoute } from './admin/hooks/useHashRoute'
 
 const STORE_PROMISES = [
   ['Free delivery', 'On orders over ₹2,500'],
@@ -23,14 +25,19 @@ function ProductCard({
   onAdd: (product: Product) => void
 }) {
   const hasDiscount = product.compareAtPrice !== null
+  const mainImage = product.imageUrls?.[0]
 
   return (
     <article className="product-card">
       <div className={`product-visual theme-${product.visualTheme}`}>
-        {product.isFeatured && <span className="product-badge">Editor’s pick</span>}
-        <div className="product-shape" aria-hidden="true">
-          <span>{product.name.slice(0, 1)}</span>
-        </div>
+        {product.isFeatured && <span className="product-badge">Editor's pick</span>}
+        {mainImage ? (
+          <img src={mainImage} alt={product.name} className="product-img" />
+        ) : (
+          <div className="product-shape" aria-hidden="true">
+            <span>{product.name.slice(0, 1)}</span>
+          </div>
+        )}
         <button
           className="quick-add"
           type="button"
@@ -57,7 +64,9 @@ function ProductCard({
   )
 }
 
-function App() {
+// ── Storefront (all existing App content, renamed) ─────────────────────────
+
+function StoreApp() {
   const [products, setProducts] = useState<Product[]>([])
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('All')
@@ -110,6 +119,7 @@ function App() {
 
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="Willovate Store home">
+          <img src="/willovate_icon.svg" alt="Willovate logo" className="site-header__logo-mark" />
           willovate<span>.</span>
         </a>
         <nav aria-label="Main navigation">
@@ -248,7 +258,7 @@ function App() {
           <h2>A slower kind of inbox.</h2>
           <p>New objects, maker stories and small ways to live with more intention.</p>
           {newsletterSent ? (
-            <p className="newsletter-success" role="status">You’re on the list. Welcome to Willovate.</p>
+            <p className="newsletter-success" role="status">You're on the list. Welcome to Willovate.</p>
           ) : (
             <form onSubmit={(event) => { event.preventDefault(); setNewsletterSent(true) }}>
               <label className="sr-only" htmlFor="newsletter-email">Email address</label>
@@ -260,9 +270,16 @@ function App() {
       </main>
 
       <footer>
-        <a className="wordmark" href="#top">willovate<span>.</span></a>
+        <a className="wordmark" href="#top">
+          <img src="/willovate_icon.svg" alt="Willovate logo" className="site-header__logo-mark" />
+          willovate<span>.</span>
+        </a>
         <p>Thoughtful goods for modern life.</p>
-        <p>© {new Date().getFullYear()} Willovate Store</p>
+        <p>
+          © {new Date().getFullYear()} Willovate Store
+          {' · '}
+          <a href="#/admin/products" style={{ fontSize: '10px', opacity: 0.45 }}>Admin</a>
+        </p>
       </footer>
 
       {cartOpen && (
@@ -306,6 +323,14 @@ function App() {
       )}
     </div>
   )
+}
+
+// ── App — thin hash router ─────────────────────────────────────────────────
+
+function App() {
+  const hash = useHashRoute()
+  if (hash.startsWith('#/admin')) return <AdminApp hash={hash} />
+  return <StoreApp />
 }
 
 export default App
