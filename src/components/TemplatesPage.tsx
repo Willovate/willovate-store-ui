@@ -8207,6 +8207,8 @@ export const CUSTOMER_REVIEWS = [
 export interface SportsStorefrontProps {
   template?: MarketplaceTemplate | null
   device?: 'desktop' | 'tablet' | 'mobile' | 'fullscreen'
+  customAccentColor?: string | null
+  onColorChange?: (color: string) => void
   onUseTemplate?: (templateId: string) => void
   onClose?: () => void
 }
@@ -8214,20 +8216,47 @@ export interface SportsStorefrontProps {
 export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   template,
   device = 'desktop',
+  customAccentColor,
+  onColorChange: _onColorChange,
   onUseTemplate,
   onClose: _onClose,
 }) => {
-  // Brand details
-  const brandName = template?.brandName || 'APEX ATHLETICS'
+  // Find matching template configuration
+  const templateKey = (template?.id && SPORTS_TEMPLATES_CONFIG[template.id])
+    ? template.id
+    : 'sports-velocity'
+  const config = SPORTS_TEMPLATES_CONFIG[templateKey]
+
+  const isDark = config.template.isDark !== undefined ? config.template.isDark : (template?.isDark ?? true)
+  const activeAccent = customAccentColor || config.template.accentColor || template?.accentColor || '#ccff00'
+  const brandName = config.template.brandName || template?.brandName || 'APEX ATHLETICS'
+  const headline = config.template.headline || 'GEAR UP.\nPLAY HARDER.'
+  const subtitle = config.template.subtitle || 'Performance-driven sportswear and equipment built for every move, workout, and victory.'
+  const heroImage = config.template.fullPreviewUrl || config.template.thumbnailUrl || config.template.modelImage
+  const buttonText = config.template.buttonText || 'SHOP NOW'
+  const heroStats = config.heroStats || [
+    { label: 'Energy Return', value: '88.4%' },
+    { label: 'Featherweight', value: '168g' },
+    { label: 'Olympians Tested', value: '50+' },
+  ]
 
   // Top Announcement State
   const [announcementVisible, setAnnouncementVisible] = useState(true)
   const [tickerIndex, setTickerIndex] = useState(0)
-  const tickerMessages = [
-    'FREE SHIPPING ON ORDERS OVER ₹1,999 • 30-DAY ATHLETE ROAD TEST',
-    'NEW SEASON GEAR — SHOP NOW • USE CODE: APEX10 FOR 10% OFF',
-    'EXPRESS 24H DISPATCH ACROSS INDIA • 100% PRO SPEC GUARANTEED',
-  ]
+  const tickerMessages = useMemo(() => {
+    if (config.announcement) {
+      return [
+        config.announcement,
+        `NEW ${brandName} 2026 CAPSULE • 30-DAY TRIAL GUARANTEED`,
+        'EXPRESS 24H DISPATCH ACROSS INDIA • 100% ATHLETE SPEC',
+      ]
+    }
+    return [
+      'FREE SHIPPING ON ORDERS OVER ₹1,999 • 30-DAY ATHLETE ROAD TEST',
+      'NEW SEASON GEAR — SHOP NOW • USE CODE: APEX10 FOR 10% OFF',
+      'EXPRESS 24H DISPATCH ACROSS INDIA • 100% PRO SPEC GUARANTEED',
+    ]
+  }, [config.announcement, brandName])
 
   // Cart Drawer State
   const [cartOpen, setCartOpen] = useState(false)
@@ -8405,21 +8434,156 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
     }
   }
 
+  // Categories list mapped from template config
+  const categoriesList = useMemo(() => {
+    if (config.categories && config.categories.length > 0) {
+      return config.categories.map((c, i) => ({
+        id: c.id,
+        name: c.name,
+        subtitle: `Engineered ${c.name.toLowerCase()} for training and competition`,
+        image: c.image,
+        badge: i === 0 ? 'PRO ELITE' : i === 1 ? 'TOURNAMENT' : i === 2 ? 'CORE SPEC' : 'NEW DROP',
+        itemCount: c.count || '48+ Gear Items',
+      }))
+    }
+    return SHOP_BY_SPORT_CATEGORIES
+  }, [config.categories])
+
+  // Template-specific featured products
+  const templateFeaturedProducts = useMemo<ApexSportsStoreItem[]>(() => {
+    if (config.featuredProducts && config.featuredProducts.length > 0) {
+      return config.featuredProducts.map((p, idx) => {
+        const cat = (p.category === 'Footwear' || p.category === 'Apparel' || p.category === 'Equipment' || p.category === 'Accessories')
+          ? p.category
+          : (idx % 3 === 0 ? 'Footwear' : idx % 3 === 1 ? 'Apparel' : 'Equipment')
+        const priceNum = typeof p.price === 'number'
+          ? p.price
+          : (parseFloat(String(p.price).replace(/[^0-9.]/g, ''))
+              ? Math.round(parseFloat(String(p.price).replace(/[^0-9.]/g, '')) * (String(p.price).includes('$') ? 80 : 1))
+              : 4999)
+        const compPrice = p.compareAtPrice
+          ? (parseFloat(String(p.compareAtPrice).replace(/[^0-9.]/g, ''))
+              ? Math.round(parseFloat(String(p.compareAtPrice).replace(/[^0-9.]/g, '')) * (String(p.compareAtPrice).includes('$') ? 80 : 1))
+              : undefined)
+          : undefined
+
+        return {
+          id: p.id || `${templateKey}-fp-${idx}`,
+          name: p.name,
+          category: cat,
+          price: priceNum,
+          compareAtPrice: compPrice,
+          badge: p.badge || (compPrice ? 'SALE' : 'PRO SPEC'),
+          badgeType: (compPrice ? 'sale' : (idx === 0 ? 'bestseller' : 'new')) as 'sale' | 'bestseller' | 'new',
+          rating: p.rating || 4.9,
+          reviewCount: p.reviewCount || 48 + idx * 12,
+          primaryImage: p.image,
+          hoverImage: p.image,
+          gallery: [p.image],
+          colors: (p.colors && p.colors.length > 0)
+            ? p.colors.map((c, ci) => ({ name: `Color ${ci + 1}`, hex: c }))
+            : [{ name: 'Standard Edition', hex: activeAccent }, { name: 'Stealth Black', hex: '#0f172a' }],
+          sizes: p.sizes || ['S', 'M', 'L', 'XL'],
+          shortDesc: `Competition-grade ${p.name} engineered for elite athletes.`,
+          specs: p.techSpecs || ['Tournament Spec Certified', 'Aerodynamic Ergonomic Contour', 'Pro-Traction Weave'],
+          isFeatured: true,
+        }
+      })
+    }
+    return APEX_FEATURED_PRODUCTS
+  }, [config.featuredProducts, templateKey, activeAccent])
+
+  // Template-specific new arrivals
+  const templateNewArrivals = useMemo<ApexSportsStoreItem[]>(() => {
+    if (config.newArrivals && config.newArrivals.length > 0) {
+      return config.newArrivals.map((p, idx) => {
+        const cat = (p.category === 'Footwear' || p.category === 'Apparel' || p.category === 'Equipment' || p.category === 'Accessories')
+          ? p.category
+          : (idx % 3 === 0 ? 'Footwear' : idx % 3 === 1 ? 'Apparel' : 'Equipment')
+        const priceNum = typeof p.price === 'number'
+          ? p.price
+          : (parseFloat(String(p.price).replace(/[^0-9.]/g, ''))
+              ? Math.round(parseFloat(String(p.price).replace(/[^0-9.]/g, '')) * (String(p.price).includes('$') ? 80 : 1))
+              : 3999)
+        const compPrice = p.compareAtPrice
+          ? (parseFloat(String(p.compareAtPrice).replace(/[^0-9.]/g, ''))
+              ? Math.round(parseFloat(String(p.compareAtPrice).replace(/[^0-9.]/g, '')) * (String(p.compareAtPrice).includes('$') ? 80 : 1))
+              : undefined)
+          : undefined
+
+        return {
+          id: p.id || `${templateKey}-na-${idx}`,
+          name: p.name,
+          category: cat,
+          price: priceNum,
+          compareAtPrice: compPrice,
+          badge: p.badge || 'NEW DROP',
+          badgeType: 'new' as const,
+          rating: p.rating || 4.9,
+          reviewCount: p.reviewCount || 24 + idx * 8,
+          primaryImage: p.image,
+          hoverImage: p.image,
+          gallery: [p.image],
+          colors: (p.colors && p.colors.length > 0)
+            ? p.colors.map((c, ci) => ({ name: `Color ${ci + 1}`, hex: c }))
+            : [{ name: 'Standard Edition', hex: activeAccent }, { name: 'Stealth Black', hex: '#0f172a' }],
+          sizes: p.sizes || ['S', 'M', 'L', 'XL'],
+          shortDesc: `Fresh drop: ${p.name} featuring advanced athletic textiles.`,
+          specs: p.techSpecs || ['Season 2026 Collection', 'Lightweight Construction', 'Moisture-Wicking'],
+          isNewArrival: true,
+        }
+      })
+    }
+    return APEX_NEW_ARRIVALS
+  }, [config.newArrivals, templateKey, activeAccent])
+
   // Filtered Featured products
   const displayedFeaturedProducts = useMemo(() => {
-    if (activeFeaturedTab === 'All') return APEX_FEATURED_PRODUCTS
-    return APEX_FEATURED_PRODUCTS.filter((p) => p.category === activeFeaturedTab)
-  }, [activeFeaturedTab])
+    if (activeFeaturedTab === 'All') return templateFeaturedProducts
+    return templateFeaturedProducts.filter((p) => p.category === activeFeaturedTab)
+  }, [activeFeaturedTab, templateFeaturedProducts])
 
   // Search results
   const searchResults = useMemo(() => {
     if (!searchQuery.trim()) return []
     const q = searchQuery.toLowerCase()
-    return ALL_SPORTS_STORE_PRODUCTS.filter((p) => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q))
-  }, [searchQuery])
+    const all = [...templateFeaturedProducts, ...templateNewArrivals, ...APEX_BESTSELLERS]
+    return all.filter((p) => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q))
+  }, [searchQuery, templateFeaturedProducts, templateNewArrivals])
+
+  const storyData = config.story || {
+    eyebrow: 'MADE TO MOVE // PERFORMANCE HERITAGE',
+    title: 'THE PURSUIT OF UNCOMPROMISING SPEED & RESILIENCE',
+    quote: '“True greatness is not given on game day. It is forged in early morning workouts, repetitious drills, and relentless dedication to standard.”',
+    author: 'Coach Marcus Vance',
+    role: 'Olympic Sprint Performance Director',
+    image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&auto=format&fit=crop&q=80',
+    stats: [
+      { num: '88.4%', label: 'Kinetic Energy Efficiency' },
+      { num: '14,000+', label: 'Athletes Geared Across India' },
+      { num: '30-Day', label: 'Trial Guarantee Road Test' },
+    ],
+  }
+
+  const promoData = config.promoBanner || {
+    tag: 'LIMITED ATHLETE DROP',
+    title: 'NEW COMPETITION RACING SUITS & TRACK FLATS',
+    subtitle: 'Engineered with carbon-infused matrix fibers to maximize propulsion and reduce fatigue across all training distances.',
+    buttonText: 'SHOP THE CAPSULE',
+    image: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=1600&auto=format&fit=crop&q=85',
+    discountCode: 'APEX10',
+  }
 
   return (
-    <div className={`sports-storefront-wrapper theme-sports-velocity sports-device-${device}`}>
+    <div
+      className={`sports-storefront-wrapper theme-${templateKey} ${isDark ? 'is-theme-dark' : 'is-theme-light'} sports-device-${device}`}
+      style={{
+        '--sports-accent': activeAccent,
+        '--sports-accent-glow': `${activeAccent}55`,
+        backgroundColor: isDark ? (templateKey === 'sports-ironcore' ? '#09090b' : '#080c14') : '#ffffff',
+        color: isDark ? '#f8fafc' : '#0f172a',
+      } as React.CSSProperties}
+    >
       {/* Toast Notification */}
       {toastMessage && (
         <div className="sports-floating-toast" role="alert">
@@ -8489,35 +8653,42 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
             <a href="#sports-hero" className="sports-logo-link">
               <div className="sports-brand-emblem">
                 <svg width="34" height="34" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-                  <polygon points="4,32 18,4 26,4 12,32" fill="#CCFF00" />
-                  <polygon points="16,32 26,12 32,12 22,32" fill="#FFFFFF" />
+                  <polygon points="4,32 18,4 26,4 12,32" fill={activeAccent} />
+                  <polygon points="16,32 26,12 32,12 22,32" fill={isDark ? '#FFFFFF' : '#0f172a'} />
                 </svg>
               </div>
               <div className="sports-brand-titles">
-                <span className="sports-brand-main">
-                  APEX<strong>ATHLETICS</strong>
+                <span className="sports-brand-main" style={{ color: isDark ? '#ffffff' : '#0f172a' }}>
+                  {brandName}
                 </span>
-                <span className="sports-brand-lab">PERFORMANCE // LAB</span>
+                <span className="sports-brand-lab" style={{ color: isDark ? '#64748b' : '#94a3b8' }}>
+                  {config.template.tags?.[0]?.toUpperCase() || 'PERFORMANCE // LAB'}
+                </span>
               </div>
             </a>
           </div>
 
           {/* Center Navigation Links (Desktop) */}
           <nav className="sports-desktop-nav" aria-label="Main Store Navigation">
-            <a href="#sports-hero" className="sports-nav-item active">Home</a>
-            <a href="#featured-gear" className="sports-nav-item">Shop</a>
-            <a href="#shop-by-sport" className="sports-nav-item">Men</a>
-            <a href="#shop-by-sport" className="sports-nav-item">Women</a>
-            <a href="#featured-gear" className="sports-nav-item">Footwear</a>
-            <a href="#shop-by-sport" className="sports-nav-item has-badge">
-              Sports
-              <span className="nav-dropdown-tag">6</span>
-            </a>
-            <a href="#bestsellers" className="sports-nav-item">Accessories</a>
-            <a href="#new-arrivals" className="sports-nav-item new-drop-link">
-              New Arrivals
-              <span className="nav-hot-dot" />
-            </a>
+            {(config.navItems || ['Home', 'Shop', 'Men', 'Women', 'Footwear', 'Accessories']).map((nav, idx) => (
+              <a
+                key={nav}
+                href="#featured-gear"
+                className={`sports-nav-item ${idx === 0 ? 'active' : ''}`}
+                style={idx === 0 ? { color: isDark ? '#ffffff' : '#0f172a' } : undefined}
+                onClick={(e) => {
+                  if (nav === 'Home') {
+                    const hero = document.getElementById('sports-hero')
+                    if (hero) {
+                      e.preventDefault()
+                      hero.scrollIntoView({ behavior: 'smooth' })
+                    }
+                  }
+                }}
+              >
+                {nav}
+              </a>
+            ))}
           </nav>
 
           {/* Right Header Actions */}
@@ -8536,19 +8707,21 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
               <span className="action-label desktop-only">Search</span>
             </button>
 
-            {/* Account Link */}
-            <button
-              type="button"
-              className="sports-action-btn account-trigger desktop-only"
-              onClick={() => showToast('Athlete Pro Portal: Ready to sign in')}
-              aria-label="Account Profile"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-              <span className="action-label">Account</span>
-            </button>
+            {/* Account Link (Shown ONLY in Fullscreen desktop mode, completely removed from Mobile/Tablet view) */}
+            {device === 'fullscreen' && (
+              <button
+                type="button"
+                className="sports-action-btn account-trigger desktop-only"
+                onClick={() => showToast('Athlete Pro Portal: Ready to sign in')}
+                aria-label="Account Profile"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+                <span className="action-label desktop-only">Account</span>
+              </button>
+            )}
 
             {/* Wishlist Link */}
             <button
@@ -8557,16 +8730,20 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
               onClick={() => showToast(`Wishlist contains ${wishlist.size} saved items`)}
               aria-label={`Wishlist: ${wishlist.size} items`}
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill={wishlist.size > 0 ? activeAccent : 'none'} stroke={wishlist.size > 0 ? activeAccent : 'currentColor'} strokeWidth="2.2">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
               </svg>
-              <span className="header-badge-count">{wishlist.size}</span>
+              <span className="header-badge-count" style={{ backgroundColor: activeAccent, color: '#0b0e14' }}>{wishlist.size}</span>
             </button>
 
             {/* Cart Trigger Button with live count and price */}
             <button
               type="button"
               className="sports-cart-button"
+              style={{
+                backgroundColor: activeAccent,
+                color: (activeAccent === '#ccff00' || activeAccent === '#facc15' || activeAccent === '#fbbf24' || activeAccent === '#a3e635' || activeAccent === '#ffffff' || activeAccent === '#38bdf8') ? '#0b0e14' : '#ffffff',
+              }}
               onClick={() => setCartOpen(true)}
               aria-label={`Shopping Cart: ${totalCartCount} items`}
             >
@@ -8576,7 +8753,7 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
                   <line x1="3" y1="6" x2="21" y2="6" />
                   <path d="M16 10a4 4 0 0 1-8 0" />
                 </svg>
-                <span className="cart-badge-bubble">{totalCartCount}</span>
+                <span className="cart-badge-bubble" style={{ borderColor: activeAccent, color: activeAccent }}>{totalCartCount}</span>
               </span>
               <span className="cart-price-sum desktop-only">₹{cartSubtotal.toLocaleString('en-IN')}</span>
             </button>
@@ -8587,11 +8764,11 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
       {/* MOBILE SLIDE-OUT DRAWER */}
       {mobileMenuOpen && (
         <div className="sports-mobile-drawer-overlay" onClick={() => setMobileMenuOpen(false)}>
-          <div className="sports-mobile-drawer" onClick={(e) => e.stopPropagation()}>
+          <div className="sports-mobile-drawer" onClick={(e) => e.stopPropagation()} style={{ background: isDark ? '#0f141e' : '#ffffff', color: isDark ? '#ffffff' : '#0f172a' }}>
             <div className="mobile-drawer-header">
               <div className="sports-brand-container">
-                <span className="sports-brand-main">
-                  APEX<strong>ATHLETICS</strong>
+                <span className="sports-brand-main" style={{ color: isDark ? '#ffffff' : '#0f172a' }}>
+                  {brandName}
                 </span>
               </div>
               <button
@@ -8627,6 +8804,16 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
               <a href="#bestsellers" onClick={() => setMobileMenuOpen(false)}>Bestsellers Carousel</a>
               <a href="#brand-story" onClick={() => setMobileMenuOpen(false)}>Our Story ("Made to Move")</a>
               <a href="#reviews" onClick={() => setMobileMenuOpen(false)}>Athlete Reviews</a>
+              <a
+                href="#account"
+                onClick={(e) => {
+                  e.preventDefault()
+                  setMobileMenuOpen(false)
+                  showToast('Athlete Pro Portal: Ready to sign in')
+                }}
+              >
+                Athlete Pro Portal (Account)
+              </a>
             </nav>
 
             <div className="mobile-drawer-footer">
@@ -8653,8 +8840,8 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
       <section className="sports-hero-stage" id="sports-hero">
         <div className="sports-hero-backdrop-media">
           <img
-            src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=1600&auto=format&fit=crop&q=85"
-            alt="Elite track runner accelerating at high speed in stadium"
+            src={heroImage}
+            alt={headline}
             className="hero-backdrop-img"
           />
           <div className="hero-gradient-scrim" />
@@ -8664,46 +8851,70 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
         <div className="sports-container sports-hero-content-layer">
           <div className="sports-hero-grid">
             <div className="sports-hero-copy">
-              <div className="hero-kicker-pill">
-                <span className="kicker-glow-dot" />
-                <span>SEASON 2026 // COMPETITION CAPSULE</span>
+              <div
+                className="hero-kicker-pill"
+                style={{
+                  borderColor: `${activeAccent}66`,
+                  color: isDark ? activeAccent : '#0f172a',
+                  background: `${activeAccent}18`,
+                }}
+              >
+                <span className="kicker-glow-dot" style={{ backgroundColor: activeAccent, boxShadow: `0 0 8px ${activeAccent}` }} />
+                <span>{config.template.tags?.[0]?.toUpperCase() || 'SEASON 2026'} // {config.template.style?.toUpperCase() || 'COMPETITION'}</span>
               </div>
 
-              <h1 className="hero-display-headline">
-                GEAR UP.<br />
-                <span className="headline-accent-volt">PLAY HARDER.</span>
+              <h1 className="hero-display-headline" style={{ color: isDark ? '#ffffff' : '#0f172a' }}>
+                {headline.split('\n').map((line, i) => (
+                  <React.Fragment key={i}>
+                    {i > 0 && <br />}
+                    <span style={i === 1 ? { color: activeAccent, textShadow: isDark ? `0 0 25px ${activeAccent}66` : 'none' } : undefined}>
+                      {line}
+                    </span>
+                  </React.Fragment>
+                ))}
               </h1>
 
-              <p className="hero-lead-paragraph">
-                Performance-driven sportswear and equipment built for every move, every workout, and every victory.
+              <p className="hero-lead-paragraph" style={{ color: isDark ? '#cbd5e1' : '#475569' }}>
+                {subtitle}
               </p>
 
               <div className="hero-cta-actions">
-                <a href="#featured-gear" className="sports-btn-primary hero-primary-btn">
-                  SHOP NOW
+                <a
+                  href="#featured-gear"
+                  className="sports-btn-primary hero-primary-btn"
+                  style={{
+                    backgroundColor: activeAccent,
+                    color: (activeAccent === '#ccff00' || activeAccent === '#facc15' || activeAccent === '#fbbf24' || activeAccent === '#a3e635' || activeAccent === '#ffffff' || activeAccent === '#38bdf8') ? '#0b0e14' : '#ffffff',
+                    boxShadow: `0 4px 18px ${activeAccent}44`,
+                  }}
+                >
+                  {buttonText}
                   <span className="btn-arrow-icon">→</span>
                 </a>
-                <a href="#shop-by-sport" className="sports-btn-secondary hero-secondary-btn">
+                <a
+                  href="#shop-by-sport"
+                  className="sports-btn-secondary hero-secondary-btn"
+                  style={{
+                    borderColor: isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.15)',
+                    color: isDark ? '#ffffff' : '#0f172a',
+                    background: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.04)',
+                  }}
+                >
                   EXPLORE COLLECTION
                 </a>
               </div>
 
               {/* Telemetry & Athlete Proof Bar */}
-              <div className="hero-telemetry-strip">
-                <div className="telemetry-stat-cell">
-                  <span className="stat-value">88.4%</span>
-                  <span className="stat-caption">Energy Return</span>
-                </div>
-                <div className="telemetry-divider" />
-                <div className="telemetry-stat-cell">
-                  <span className="stat-value">168g</span>
-                  <span className="stat-caption">Featherweight</span>
-                </div>
-                <div className="telemetry-divider" />
-                <div className="telemetry-stat-cell">
-                  <span className="stat-value">50+</span>
-                  <span className="stat-caption">Olympians Tested</span>
-                </div>
+              <div className="hero-telemetry-strip" style={{ borderColor: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)', background: isDark ? 'rgba(15,23,42,0.6)' : 'rgba(255,255,255,0.85)' }}>
+                {heroStats.map((st, sidx) => (
+                  <React.Fragment key={st.label}>
+                    {sidx > 0 && <div className="telemetry-divider" />}
+                    <div className="telemetry-stat-cell">
+                      <span className="stat-value" style={{ color: activeAccent }}>{st.value}</span>
+                      <span className="stat-caption" style={{ color: isDark ? '#94a3b8' : '#64748b' }}>{st.label}</span>
+                    </div>
+                  </React.Fragment>
+                ))}
               </div>
             </div>
           </div>
@@ -8715,19 +8926,19 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
         <div className="sports-container">
           <div className="sports-section-header">
             <div>
-              <span className="sports-section-eyebrow">CHOOSE YOUR DISCIPLINE</span>
-              <h2 className="sports-section-title">SHOP BY SPORT</h2>
-              <p className="sports-section-desc">
+              <span className="sports-section-eyebrow" style={{ color: activeAccent }}>CHOOSE YOUR DISCIPLINE</span>
+              <h2 className="sports-section-title" style={{ color: isDark ? '#ffffff' : '#0f172a' }}>SHOP BY SPORT</h2>
+              <p className="sports-section-desc" style={{ color: isDark ? '#94a3b8' : '#64748b' }}>
                 Engineered for your specific discipline. Choose your sport to explore pro-grade gear.
               </p>
             </div>
-            <a href="#featured-gear" className="sports-header-action-link">
-              View All 6 Disciplines →
+            <a href="#featured-gear" className="sports-header-action-link" style={{ color: activeAccent }}>
+              View All Disciplines →
             </a>
           </div>
 
           <div className="sports-categories-grid">
-            {SHOP_BY_SPORT_CATEGORIES.map((cat) => (
+            {categoriesList.map((cat) => (
               <div
                 key={cat.id}
                 className="sports-category-card"
@@ -8737,14 +8948,14 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
               >
                 <img src={cat.image} alt={cat.name} className="category-bg-photo" loading="lazy" />
                 <div className="category-scrim-overlay" />
-                <div className="category-badge-chip">{cat.badge}</div>
+                <div className="category-badge-chip" style={{ backgroundColor: activeAccent, color: '#0b0e14' }}>{cat.badge}</div>
                 <div className="category-text-block">
                   <span className="category-item-count">{cat.itemCount}</span>
                   <h3 className="category-title-name">{cat.name}</h3>
                   <p className="category-sub-desc">{cat.subtitle}</p>
                   <div className="category-cta-row">
-                    <span className="category-action-link">Shop Now</span>
-                    <span className="category-action-arrow">→</span>
+                    <span className="category-action-link" style={{ color: activeAccent }}>Shop Now</span>
+                    <span className="category-action-arrow" style={{ color: activeAccent }}>→</span>
                   </div>
                 </div>
               </div>
@@ -8897,33 +9108,41 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
         </div>
       </section>
 
-      {/* 6. PROMOTIONAL BANNER ("BUILT FOR PERFORMANCE") */}
+      {/* 6. PROMOTIONAL BANNER */}
       <section className="sports-section sports-promo-section">
         <div className="sports-container">
           <div className="sports-promo-banner-card">
             <img
-              src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=1600&auto=format&fit=crop&q=85"
-              alt="Athlete training in modern performance athletic facility"
+              src={promoData.image}
+              alt={promoData.title}
               className="promo-backdrop-photo"
               loading="lazy"
             />
             <div className="promo-overlay-tint" />
-            <div className="promo-diagonal-accent" />
+            <div className="promo-diagonal-accent" style={{ background: `linear-gradient(135deg, ${activeAccent}22 0%, transparent 60%)` }} />
 
             <div className="promo-banner-copy">
-              <div className="promo-coupon-tag">LIMITED DROP PROMO</div>
-              <h2 className="promo-banner-headline">BUILT FOR PERFORMANCE</h2>
-              <p className="promo-banner-paragraph">
-                Upgrade your training with equipment designed to keep up with you. From carbon-infused plates to thermal-regulating textiles, elevate your game today.
+              <div className="promo-coupon-tag" style={{ background: activeAccent, color: '#0b0e14' }}>
+                {promoData.tag}
+              </div>
+              <h2 className="promo-banner-headline" style={{ color: '#ffffff' }}>
+                {promoData.title}
+              </h2>
+              <p className="promo-banner-paragraph" style={{ color: '#cbd5e1' }}>
+                {promoData.subtitle}
               </p>
               <div className="promo-coupon-callout">
                 <span className="coupon-prefix">USE CODE:</span>
-                <strong className="coupon-code">APEX10</strong>
+                <strong className="coupon-code" style={{ color: activeAccent }}>{(promoData as any).discountCode || (promoData as any).code || 'APEX10'}</strong>
                 <span className="coupon-suffix">FOR EXTRA 10% OFF</span>
               </div>
               <div className="promo-cta-buttons">
-                <a href="#featured-gear" className="sports-btn-primary promo-primary-btn">
-                  SHOP PERFORMANCE GEAR
+                <a
+                  href="#featured-gear"
+                  className="sports-btn-primary promo-primary-btn"
+                  style={{ backgroundColor: activeAccent, color: '#0b0e14' }}
+                >
+                  {promoData.buttonText || 'SHOP PERFORMANCE GEAR'}
                   <span>→</span>
                 </a>
                 <a href="#brand-story" className="sports-btn-secondary promo-secondary-btn">
@@ -8940,32 +9159,32 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
         <div className="sports-container">
           <div className="sports-section-header">
             <div>
-              <span className="sports-section-eyebrow">SPRING / SUMMER 2026 DROP</span>
-              <h2 className="sports-section-title">NEW ARRIVALS</h2>
-              <p className="sports-section-desc">
+              <span className="sports-section-eyebrow" style={{ color: activeAccent }}>SPRING / SUMMER 2026 DROP</span>
+              <h2 className="sports-section-title" style={{ color: isDark ? '#ffffff' : '#0f172a' }}>NEW ARRIVALS</h2>
+              <p className="sports-section-desc" style={{ color: isDark ? '#94a3b8' : '#64748b' }}>
                 The latest drop of cutting-edge sportswear and elite training accessories.
               </p>
             </div>
-            <a href="#featured-gear" className="sports-header-action-link">
-              View Entire Drop (32 Items) →
+            <a href="#featured-gear" className="sports-header-action-link" style={{ color: activeAccent }}>
+              View Entire Drop ({templateNewArrivals.length} Items) →
             </a>
           </div>
 
           <div className="sports-product-grid three-col-grid">
-            {APEX_NEW_ARRIVALS.map((product) => {
+            {templateNewArrivals.map((product) => {
               const isSaved = wishlist.has(product.id)
               const discountPct = product.compareAtPrice
                 ? Math.round(((product.compareAtPrice - product.price) / product.compareAtPrice) * 100)
                 : 0
 
               return (
-                <article key={product.id} className="sports-product-card">
+                <article key={product.id} className="sports-product-card" style={{ background: isDark ? '#121722' : '#ffffff', borderColor: isDark ? 'rgba(255,255,255,0.08)' : '#e2e8f0' }}>
                   <div className="product-media-stage">
                     <img src={product.primaryImage} alt={product.name} className="product-photo primary-photo" loading="lazy" />
                     <img src={product.hoverImage} alt={product.name} className="product-photo hover-photo" loading="lazy" />
 
                     {product.badge && (
-                      <span className={`product-status-badge badge-${product.badgeType || 'new'}`}>
+                      <span className={`product-status-badge badge-${product.badgeType || 'new'}`} style={{ backgroundColor: activeAccent, color: '#0b0e14' }}>
                         {product.badge}
                       </span>
                     )}
@@ -8980,7 +9199,7 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
                       onClick={() => handleToggleWishlist(product.id, product.name)}
                       aria-label="Wishlist"
                     >
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill={isSaved ? '#CCFF00' : 'none'} stroke={isSaved ? '#CCFF00' : 'currentColor'} strokeWidth="2">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill={isSaved ? activeAccent : 'none'} stroke={isSaved ? activeAccent : 'currentColor'} strokeWidth="2">
                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                       </svg>
                     </button>
@@ -8998,20 +9217,20 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
                     <div className="product-category-meta">
                       <span>{product.category}</span>
                       <div className="product-stars-row">
-                        <span className="star-char">★</span>
+                        <span className="star-char" style={{ color: activeAccent }}>★</span>
                         <strong>{product.rating.toFixed(1)}</strong>
                         <small>({product.reviewCount})</small>
                       </div>
                     </div>
 
                     <h3 className="product-item-title">
-                      <a href="#quick-view" onClick={(e) => { e.preventDefault(); handleOpenQuickView(product) }}>
+                      <a href="#quick-view" style={{ color: isDark ? '#ffffff' : '#0f172a' }} onClick={(e) => { e.preventDefault(); handleOpenQuickView(product) }}>
                         {product.name}
                       </a>
                     </h3>
 
                     <div className="product-price-container">
-                      <span className="product-sale-price">₹{product.price.toLocaleString('en-IN')}</span>
+                      <span className="product-sale-price" style={{ color: isDark ? '#ffffff' : '#0f172a' }}>₹{product.price.toLocaleString('en-IN')}</span>
                       {product.compareAtPrice && (
                         <del className="product-original-price">
                           ₹{product.compareAtPrice.toLocaleString('en-IN')}
@@ -9022,6 +9241,7 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
                     <button
                       type="button"
                       className="product-quick-add-btn"
+                      style={{ backgroundColor: activeAccent, color: (activeAccent === '#ccff00' || activeAccent === '#facc15' || activeAccent === '#fbbf24' || activeAccent === '#a3e635' || activeAccent === '#ffffff' || activeAccent === '#38bdf8') ? '#0b0e14' : '#ffffff' }}
                       onClick={() => handleAddToCart(product)}
                     >
                       <span>+ Add to Cart</span>
@@ -9039,9 +9259,9 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
         <div className="sports-container">
           <div className="sports-section-header carousel-header">
             <div>
-              <span className="sports-section-eyebrow">MOST POPULAR WITH ATHLETES</span>
-              <h2 className="sports-section-title">BESTSELLERS</h2>
-              <p className="sports-section-desc">
+              <span className="sports-section-eyebrow" style={{ color: activeAccent }}>MOST POPULAR WITH ATHLETES</span>
+              <h2 className="sports-section-title" style={{ color: isDark ? '#ffffff' : '#0f172a' }}>BESTSELLERS</h2>
+              <p className="sports-section-desc" style={{ color: isDark ? '#94a3b8' : '#64748b' }}>
                 Tested, trusted, and re-ordered by over 25,000 active sportsmen and fitness enthusiasts.
               </p>
             </div>
@@ -9072,11 +9292,11 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
             {APEX_BESTSELLERS.map((product) => {
               const isSaved = wishlist.has(product.id)
               return (
-                <article key={product.id} className="carousel-product-card">
+                <article key={product.id} className="carousel-product-card" style={{ background: isDark ? '#121722' : '#ffffff', borderColor: isDark ? 'rgba(255,255,255,0.08)' : '#e2e8f0' }}>
                   <div className="product-media-stage">
                     <img src={product.primaryImage} alt={product.name} className="product-photo" loading="lazy" />
                     {product.badge && (
-                      <span className="product-status-badge badge-bestseller">{product.badge}</span>
+                      <span className="product-status-badge badge-bestseller" style={{ backgroundColor: activeAccent, color: '#0b0e14' }}>{product.badge}</span>
                     )}
 
                     <button
@@ -9085,7 +9305,7 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
                       onClick={() => handleToggleWishlist(product.id, product.name)}
                       aria-label="Wishlist"
                     >
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill={isSaved ? '#CCFF00' : 'none'} stroke={isSaved ? '#CCFF00' : 'currentColor'} strokeWidth="2">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill={isSaved ? activeAccent : 'none'} stroke={isSaved ? activeAccent : 'currentColor'} strokeWidth="2">
                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                       </svg>
                     </button>
@@ -9095,20 +9315,20 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
                     <div className="product-category-meta">
                       <span>{product.category}</span>
                       <div className="product-stars-row">
-                        <span className="star-char">★</span>
+                        <span className="star-char" style={{ color: activeAccent }}>★</span>
                         <strong>{product.rating.toFixed(1)}</strong>
                         <small>({product.reviewCount})</small>
                       </div>
                     </div>
 
                     <h3 className="product-item-title">
-                      <a href="#quick-view" onClick={(e) => { e.preventDefault(); handleOpenQuickView(product) }}>
+                      <a href="#quick-view" style={{ color: isDark ? '#ffffff' : '#0f172a' }} onClick={(e) => { e.preventDefault(); handleOpenQuickView(product) }}>
                         {product.name}
                       </a>
                     </h3>
 
                     <div className="product-price-container">
-                      <span className="product-sale-price">₹{product.price.toLocaleString('en-IN')}</span>
+                      <span className="product-sale-price" style={{ color: isDark ? '#ffffff' : '#0f172a' }}>₹{product.price.toLocaleString('en-IN')}</span>
                       {product.compareAtPrice && (
                         <del className="product-original-price">
                           ₹{product.compareAtPrice.toLocaleString('en-IN')}
@@ -9119,6 +9339,7 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
                     <button
                       type="button"
                       className="product-quick-add-btn"
+                      style={{ backgroundColor: activeAccent, color: (activeAccent === '#ccff00' || activeAccent === '#facc15' || activeAccent === '#fbbf24' || activeAccent === '#a3e635' || activeAccent === '#ffffff' || activeAccent === '#38bdf8') ? '#0b0e14' : '#ffffff' }}
                       onClick={() => handleAddToCart(product)}
                     >
                       <span>+ Quick Add</span>
@@ -9131,41 +9352,51 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
         </div>
       </section>
 
-      {/* 9. BRAND / PERFORMANCE STORY ("MADE TO MOVE") */}
+      {/* 9. BRAND / PERFORMANCE STORY */}
       <section className="sports-section sports-story-section" id="brand-story">
         <div className="sports-container">
           <div className="sports-story-layout">
             <div className="sports-story-content">
-              <span className="sports-section-eyebrow">OUR COMMITMENT TO SPEED & MOTION</span>
-              <h2 className="story-headline">MADE TO MOVE</h2>
-              <p className="story-paragraph">
-                From your first training session to your biggest competition, our gear is designed to support every step, sprint, jump, and challenge.
+              <span className="sports-section-eyebrow" style={{ color: activeAccent }}>
+                {storyData.eyebrow}
+              </span>
+              <h2 className="story-headline" style={{ color: isDark ? '#ffffff' : '#0f172a' }}>
+                {storyData.title}
+              </h2>
+              <p className="story-paragraph" style={{ color: isDark ? '#cbd5e1' : '#475569' }}>
+                {storyData.quote}
               </p>
-              <p className="story-paragraph secondary">
-                We believe athletic breakthroughs happen when science meets determination. We collaborate directly with international sprinters, football clubs, and marathon coaches to test and refine our carbon lattice weaves, sweat-channeling knits, and zero-drag geometries.
+              <p className="story-paragraph secondary" style={{ color: isDark ? '#94a3b8' : '#64748b' }}>
+                Engineered in direct collaboration with professional athletes, tournament clubs, and coaches to test and refine our carbon weaves, sweat-channeling knits, and ergonomic zero-drag geometries.
               </p>
 
               {/* Verified Performance Badges */}
               <div className="story-stats-grid">
-                <div className="story-stat-card">
-                  <strong className="story-stat-number">50+</strong>
-                  <span className="story-stat-label">Pro Athletes Tested</span>
-                </div>
-                <div className="story-stat-card">
-                  <strong className="story-stat-number">1.2M+</strong>
-                  <span className="story-stat-label">Kilometers Run</span>
-                </div>
-                <div className="story-stat-card">
-                  <strong className="story-stat-number">100%</strong>
-                  <span className="story-stat-label">Sweat-Proof Tested</span>
-                </div>
+                {(storyData.stats || [
+                  { num: '88.4%', label: 'Kinetic Energy Efficiency' },
+                  { num: '14,000+', label: 'Athletes Geared Across India' },
+                  { num: '30-Day', label: 'Trial Guarantee Road Test' },
+                ]).map((st) => (
+                  <div
+                    key={st.label}
+                    className="story-stat-card"
+                    style={{
+                      background: isDark ? '#121722' : '#ffffff',
+                      borderColor: isDark ? 'rgba(255,255,255,0.08)' : '#e2e8f0',
+                    }}
+                  >
+                    <strong className="story-stat-number" style={{ color: activeAccent }}>{st.num}</strong>
+                    <span className="story-stat-label" style={{ color: isDark ? '#94a3b8' : '#64748b' }}>{st.label}</span>
+                  </div>
+                ))}
               </div>
 
               <div className="story-cta-wrap">
                 <button
                   type="button"
                   className="sports-btn-primary story-btn"
-                  onClick={() => showToast('Opening APEX Performance Lab Story...')}
+                  style={{ backgroundColor: activeAccent, color: '#0b0e14' }}
+                  onClick={() => showToast(`Opening ${brandName} Performance Lab Story...`)}
                 >
                   OUR STORY
                   <span>→</span>
@@ -9176,17 +9407,28 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
             <div className="sports-story-media-stage">
               <div className="story-image-frame">
                 <img
-                  src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=900&auto=format&fit=crop&q=80"
-                  alt="Athlete preparing in high performance gym"
+                  src={storyData.image}
+                  alt={storyData.title}
                   className="story-featured-img"
                   loading="lazy"
                 />
-                <div className="story-quote-card">
-                  <div className="quote-star-pill">★★★★★ VERIFIED ATHLETE SPEC</div>
-                  <p>
-                    "The energy return and zero-chafe fit are unmatched. Shaved 0.4s off my personal best on the first trial."
+                <div
+                  className="story-quote-card"
+                  style={{
+                    background: isDark ? 'rgba(18, 23, 34, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+                    borderColor: isDark ? 'rgba(255,255,255,0.1)' : '#e2e8f0',
+                    color: isDark ? '#ffffff' : '#0f172a',
+                  }}
+                >
+                  <div className="quote-star-pill" style={{ color: activeAccent }}>
+                    ★★★★★ VERIFIED ATHLETE SPEC
+                  </div>
+                  <p style={{ color: isDark ? '#f1f5f9' : '#1e293b' }}>
+                    {storyData.quote}
                   </p>
-                  <small>— Marcus Vance, World Championship Sprinter</small>
+                  <small style={{ color: isDark ? '#94a3b8' : '#64748b' }}>
+                    — {storyData.author}, {storyData.role}
+                  </small>
                 </div>
               </div>
             </div>
@@ -9195,50 +9437,70 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
       </section>
 
       {/* 10. WHY SHOP WITH US ("WHY ATHLETES CHOOSE US") */}
+      {/* 10. WHY SHOP WITH US */}
       <section className="sports-section sports-trust-section">
         <div className="sports-container">
           <div className="sports-section-header center-align">
-            <span className="sports-section-eyebrow">WORLD-CLASS ATHLETE SERVICE</span>
-            <h2 className="sports-section-title">WHY ATHLETES CHOOSE US</h2>
-            <p className="sports-section-desc">
+            <span className="sports-section-eyebrow" style={{ color: activeAccent }}>WORLD-CLASS ATHLETE SERVICE</span>
+            <h2 className="sports-section-title" style={{ color: isDark ? '#ffffff' : '#0f172a' }}>WHY ATHLETES CHOOSE US</h2>
+            <p className="sports-section-desc" style={{ color: isDark ? '#94a3b8' : '#64748b' }}>
               Built for performance. Backed by industry-leading buyer guarantees and rapid fulfillment.
             </p>
           </div>
 
           <div className="sports-trust-grid">
             {WHY_ATHLETES_CHOOSE_US.map((feat) => (
-              <div key={feat.id} className="sports-trust-card">
-                <div className="trust-icon-box">{feat.icon}</div>
-                <h3 className="trust-card-title">{feat.title}</h3>
-                <p className="trust-card-desc">{feat.desc}</p>
+              <div key={feat.id} className="sports-trust-card" style={{ background: isDark ? '#121722' : '#ffffff', borderColor: isDark ? 'rgba(255,255,255,0.08)' : '#e2e8f0' }}>
+                <div className="trust-icon-box" style={{ borderColor: `${activeAccent}44`, color: activeAccent }}>{feat.icon}</div>
+                <h3 className="trust-card-title" style={{ color: isDark ? '#ffffff' : '#0f172a' }}>{feat.title}</h3>
+                <p className="trust-card-desc" style={{ color: isDark ? '#94a3b8' : '#64748b' }}>{feat.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 11. CUSTOMER REVIEWS ("WHAT ATHLETES SAY") */}
+      {/* 11. CUSTOMER REVIEWS */}
       <section className="sports-section sports-reviews-section" id="reviews">
         <div className="sports-container">
           <div className="sports-section-header center-align">
-            <span className="sports-section-eyebrow">VERIFIED ROAD & FIELD FEEDBACK</span>
-            <h2 className="sports-section-title">WHAT ATHLETES SAY</h2>
-            <p className="sports-section-desc">
+            <span className="sports-section-eyebrow" style={{ color: activeAccent }}>VERIFIED ROAD & FIELD FEEDBACK</span>
+            <h2 className="sports-section-title" style={{ color: isDark ? '#ffffff' : '#0f172a' }}>WHAT ATHLETES SAY</h2>
+            <p className="sports-section-desc" style={{ color: isDark ? '#94a3b8' : '#64748b' }}>
               Real feedback from runners, lifters, and club champions training every day.
             </p>
           </div>
 
           <div className="sports-reviews-grid">
-            {CUSTOMER_REVIEWS.map((rev, i) => (
-              <div key={i} className="sports-testimonial-card">
-                <div className="testimonial-rating-stars">★★★★★</div>
-                <p className="testimonial-quote-text">"{rev.quote}"</p>
+            {(config.reviews && config.reviews.length > 0 ? config.reviews : CUSTOMER_REVIEWS).map((rev, i) => (
+              <div
+                key={i}
+                className="sports-testimonial-card"
+                style={{
+                  background: isDark ? '#121722' : '#ffffff',
+                  borderColor: isDark ? 'rgba(255,255,255,0.08)' : '#e2e8f0',
+                }}
+              >
+                <div className="testimonial-rating-stars" style={{ color: activeAccent }}>★★★★★</div>
+                <p className="testimonial-quote-text" style={{ color: isDark ? '#e2e8f0' : '#1e293b' }}>
+                  "{rev.quote}"
+                </p>
                 <div className="testimonial-author-row">
-                  <div className="author-avatar-badge">{rev.author.charAt(0)}</div>
+                  <div className="author-avatar-badge" style={{ background: activeAccent, color: '#0b0e14' }}>
+                    {((rev as any).name || (rev as any).author || 'A').charAt(0)}
+                  </div>
                   <div>
-                    <h4 className="author-full-name">{rev.author}</h4>
-                    <span className="author-discipline">{rev.role}</span>
-                    <span className="author-gear-tag">Purchased: {rev.product}</span>
+                    <h4 className="author-full-name" style={{ color: isDark ? '#ffffff' : '#0f172a' }}>
+                      {(rev as any).name || (rev as any).author || 'Verified Athlete'}
+                    </h4>
+                    <span className="author-discipline" style={{ color: isDark ? '#94a3b8' : '#64748b' }}>
+                      {rev.role}
+                    </span>
+                    {(rev as any).product && (
+                      <span className="author-gear-tag" style={{ color: activeAccent }}>
+                        Purchased: {(rev as any).product}
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -9250,18 +9512,18 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
       {/* 12. NEWSLETTER SECTION */}
       <section className="sports-section sports-newsletter-section">
         <div className="sports-container">
-          <div className="sports-newsletter-box">
-            <span className="newsletter-eyebrow">EXCLUSIVE VIP ATHLETE ACCESS</span>
-            <h2 className="newsletter-headline">GET 10% OFF YOUR FIRST ORDER</h2>
-            <p className="newsletter-lead">
-              Sign up for new arrivals, exclusive offers and sports inspiration.
+          <div className="sports-newsletter-box" style={{ background: isDark ? '#121722' : '#f8fafc', borderColor: isDark ? 'rgba(255,255,255,0.08)' : '#e2e8f0' }}>
+            <span className="newsletter-eyebrow" style={{ color: activeAccent }}>EXCLUSIVE VIP ATHLETE ACCESS</span>
+            <h2 className="newsletter-headline" style={{ color: isDark ? '#ffffff' : '#0f172a' }}>GET 10% OFF YOUR FIRST ORDER</h2>
+            <p className="newsletter-lead" style={{ color: isDark ? '#94a3b8' : '#64748b' }}>
+              Sign up for new arrivals, exclusive offers and sports inspiration from {brandName}.
             </p>
 
             {newsletterSubmitted ? (
               <div className="newsletter-success-alert" role="status">
                 <span className="alert-check">✓</span>
                 <div>
-                  <strong>You are officially on the APEX athlete roster!</strong>
+                  <strong>You are officially on the {brandName} athlete roster!</strong>
                   <p>Your 10% discount code <strong>APEX10</strong> has been applied to your session.</p>
                 </div>
               </div>
@@ -9288,7 +9550,11 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
                     required
                   />
                 </div>
-                <button type="submit" className="sports-btn-primary newsletter-submit-btn">
+                <button
+                  type="submit"
+                  className="sports-btn-primary newsletter-submit-btn"
+                  style={{ backgroundColor: activeAccent, color: (activeAccent === '#ccff00' || activeAccent === '#facc15' || activeAccent === '#fbbf24' || activeAccent === '#a3e635' || activeAccent === '#ffffff' || activeAccent === '#38bdf8') ? '#0b0e14' : '#ffffff' }}
+                >
                   GET MY 10% OFF
                 </button>
               </form>
@@ -9309,19 +9575,21 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
               <div className="sports-brand-container">
                 <div className="sports-brand-emblem">
                   <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
-                    <polygon points="4,32 18,4 26,4 12,32" fill="#CCFF00" />
+                    <polygon points="4,32 18,4 26,4 12,32" fill={activeAccent} />
                     <polygon points="16,32 26,12 32,12 22,32" fill="#FFFFFF" />
                   </svg>
                 </div>
                 <div className="sports-brand-titles">
                   <span className="sports-brand-main">
-                    APEX<strong>ATHLETICS</strong>
+                    {brandName}
                   </span>
-                  <span className="sports-brand-lab">PERFORMANCE LAB</span>
+                  <span className="sports-brand-lab">
+                    {config.template.tags?.[0]?.toUpperCase() || 'PERFORMANCE LAB'}
+                  </span>
                 </div>
               </div>
               <p className="footer-brand-bio">
-                Engineered sportswear, high-traction footwear, and tournament-grade equipment crafted for runners, trainers, and athletes who demand the absolute best.
+                Engineered sportswear, high-traction footwear, and tournament-grade equipment crafted for athletes who demand the absolute best.
               </p>
               <div className="footer-social-icons">
                 <a href="#instagram" aria-label="Instagram" className="social-icon-circle">
@@ -9354,12 +9622,11 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
             <div className="footer-col">
               <h4 className="footer-col-title">SHOP</h4>
               <ul className="footer-links-list">
-                <li><a href="#shop-by-sport">Men's Apparel</a></li>
-                <li><a href="#shop-by-sport">Women's Training</a></li>
-                <li><a href="#featured-gear">Footwear & Spikes</a></li>
-                <li><a href="#bestsellers">Sports Accessories</a></li>
-                <li><a href="#new-arrivals">New Arrivals 2026</a></li>
-                <li><a href="#promo">End of Season Sale</a></li>
+                {(config.navItems || ['Men Apparel', 'Women Training', 'Footwear', 'Accessories', 'New Arrivals']).slice(0, 6).map((navItem) => (
+                  <li key={navItem}>
+                    <a href="#featured-gear">{navItem}</a>
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -9367,10 +9634,10 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
             <div className="footer-col">
               <h4 className="footer-col-title">HELP</h4>
               <ul className="footer-links-list">
-                <li><a href="#contact" onClick={(e) => { e.preventDefault(); showToast('Support: support@apexathletics.in') }}>Contact Us</a></li>
+                <li><a href="#contact" onClick={(e) => { e.preventDefault(); showToast(`Support: support@${brandName.toLowerCase().replace(/[^a-z0-9]/g, '')}.in`) }}>Contact Us</a></li>
                 <li><a href="#shipping" onClick={(e) => { e.preventDefault(); showToast('Free express shipping over ₹1,999') }}>Shipping Policy</a></li>
                 <li><a href="#returns" onClick={(e) => { e.preventDefault(); showToast('30-Day trial returns accepted') }}>Returns & Exchange</a></li>
-                <li><a href="#faq" onClick={(e) => { e.preventDefault(); showToast('All orders ship via BlueDart / Delhivery') }}>FAQ</a></li>
+                <li><a href="#faq" onClick={(e) => { e.preventDefault(); showToast('All orders ship via express courier') }}>FAQ</a></li>
                 <li><a href="#track" onClick={(e) => { e.preventDefault(); showToast('Enter your order ID on the tracking portal') }}>Track Order</a></li>
                 <li><a href="#sizes" onClick={(e) => { e.preventDefault(); showToast('Footwear & apparel true-to-size guide') }}>Size & Fit Guide</a></li>
               </ul>
@@ -9388,6 +9655,39 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
                 <li><a href="#terms">Terms & Conditions</a></li>
               </ul>
             </div>
+
+            {/* Column 5: JOIN THE ATHLETE CLUB */}
+            <div className="footer-col footer-newsletter-col">
+              <h4 className="footer-col-title">JOIN THE ATHLETE CLUB</h4>
+              <p className="footer-newsletter-desc">
+                Subscribe for exclusive drop alerts, athlete telemetry insights, and 10% off your tournament order.
+              </p>
+              <form
+                className="footer-mini-form"
+                onSubmit={(e) => {
+                  e.preventDefault()
+                  showToast('Welcome to the Athlete Club! Check inbox for 10% code.')
+                }}
+              >
+                <input
+                  type="email"
+                  placeholder="Athlete email..."
+                  required
+                  className="footer-email-input"
+                />
+                <button
+                  type="submit"
+                  className="footer-submit-btn"
+                  style={{ backgroundColor: activeAccent, color: '#0b0e14' }}
+                >
+                  JOIN
+                </button>
+              </form>
+              <div className="footer-trust-perk">
+                <span style={{ color: activeAccent }}>✓</span>
+                <span>Zero spam • Instant 10% off welcome code</span>
+              </div>
+            </div>
           </div>
 
           <div className="sports-footer-bottom-bar">
@@ -9400,6 +9700,7 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
               <span className="payment-pill">VISA</span>
               <span className="payment-pill">Mastercard</span>
               <span className="payment-pill">NetBanking</span>
+              <span className="payment-pill">Apple Pay</span>
             </div>
           </div>
         </div>
@@ -9856,6 +10157,21 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
   onUseTemplate,
 }) => {
   const [device, setDevice] = useState<'desktop' | 'tablet' | 'mobile' | 'fullscreen'>('desktop')
+  const [selectedColorOverride, setSelectedColorOverride] = useState<{ templateId: string; color: string } | null>(null)
+  const viewportRef = useRef<HTMLDivElement | null>(null)
+
+  // Reset scroll to top whenever template or device or isOpen changes
+  useEffect(() => {
+    if (viewportRef.current) {
+      viewportRef.current.scrollTop = 0
+    }
+  }, [template?.id, device, isOpen])
+
+  const handleColorSelect = (color: string) => {
+    if (template) {
+      setSelectedColorOverride({ templateId: template.id, color })
+    }
+  }
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -9872,6 +10188,30 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
   }, [isOpen, onClose])
 
   const isDark = Boolean(template?.isDark)
+  const activeThemeColor = (selectedColorOverride && selectedColorOverride.templateId === template?.id)
+    ? selectedColorOverride.color
+    : (template?.accentColor || '#2563eb')
+
+  const availableSwatches = useMemo(() => {
+    if (!template) return []
+    const defaults = [
+      { name: 'Default', hex: template.accentColor || '#2563eb' },
+      { name: 'Electric Volt', hex: '#ccff00' },
+      { name: 'Vivid Cyan', hex: '#06b6d4' },
+      { name: 'Hyper Orange', hex: '#ff6b00' },
+      { name: 'Crimson Red', hex: '#ef4444' },
+      { name: 'Royal Gold', hex: '#d4af37' },
+      { name: 'Cobalt Blue', hex: '#2563eb' },
+      { name: 'Emerald Green', hex: '#10b981' },
+    ]
+    const seen = new Set<string>()
+    return defaults.filter((item) => {
+      const lower = item.hex.toLowerCase()
+      if (seen.has(lower)) return false
+      seen.add(lower)
+      return true
+    })
+  }, [template])
 
   const eyebrowText = useMemo(() => {
     if (!template) return '✦ VERIFIED EXCELLENCE'
@@ -10640,6 +10980,24 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
             </button>
           </div>
 
+          {/* Theme Color Switcher Swatches */}
+          <div className="toolbar-theme-picker" title="Live Theme Color Switcher">
+            <span className="toolbar-theme-label">Color:</span>
+            <div className="toolbar-swatches-row">
+              {availableSwatches.map((swatch) => (
+                <button
+                  key={swatch.hex}
+                  type="button"
+                  className={`toolbar-swatch-circle ${activeThemeColor.toLowerCase() === swatch.hex.toLowerCase() ? 'active' : ''}`}
+                  style={{ backgroundColor: swatch.hex }}
+                  onClick={() => handleColorSelect(swatch.hex)}
+                  title={`${swatch.name} (${swatch.hex})`}
+                  aria-label={`Select ${swatch.name} color`}
+                />
+              ))}
+            </div>
+          </div>
+
           <button type="button" className="toolbar-close-btn" onClick={onClose} aria-label="Close preview">
             ✕
           </button>
@@ -10648,7 +11006,7 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
         {/* Modal Workspace / Body */}
         <div className="preview-modal-body">
           {/* Main Simulated Storefront Frame */}
-          <div className={`preview-viewport-container device-${device}`}>
+          <div ref={viewportRef} className={`preview-viewport-container device-${device}`}>
             <div
               className={`simulated-frame frame-${device}`}
               style={{
@@ -10668,6 +11026,8 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                 <SportsStorefront
                   template={template}
                   device={device}
+                  customAccentColor={activeThemeColor}
+                  onColorChange={handleColorSelect}
                   onUseTemplate={onUseTemplate}
                   onClose={onClose}
                 />
@@ -11457,12 +11817,19 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
               </div>
 
               <div className="specs-list-group">
-                <h4>Color Scheme</h4>
-                <div className="palette-strip">
-                  <span className="palette-circle" style={{ backgroundColor: template.accentColor || '#2563eb' }} title="Accent Color" />
-                  <span className="palette-circle" style={{ backgroundColor: isDark ? '#0f172a' : '#000000' }} title="Primary Color" />
-                  <span className="palette-circle" style={{ backgroundColor: '#64748b' }} title="Secondary Color" />
-                  <span className="palette-circle" style={{ backgroundColor: isDark ? '#1e293b' : '#f8fafc' }} title="Surface Color" />
+                <h4>Color Scheme <span className="specs-subtext">(Click to apply live)</span></h4>
+                <div className="palette-strip interactive-palette">
+                  {availableSwatches.map((swatch) => (
+                    <button
+                      key={swatch.hex}
+                      type="button"
+                      className={`palette-circle-btn ${activeThemeColor.toLowerCase() === swatch.hex.toLowerCase() ? 'active-palette-circle' : ''}`}
+                      style={{ backgroundColor: swatch.hex }}
+                      onClick={() => handleColorSelect(swatch.hex)}
+                      title={`${swatch.name} (${swatch.hex})`}
+                      aria-label={`Apply ${swatch.name} theme`}
+                    />
+                  ))}
                 </div>
               </div>
             </div>

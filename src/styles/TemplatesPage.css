@@ -5061,13 +5061,6 @@
   }
 }
 
-.simulated-frame.frame-mobile .sports-header-inner {
-  padding: 0.5rem 0;
-}
-
-.simulated-frame.frame-mobile .sports-nav-links {
-  display: none;
-}
 
 .simulated-frame.frame-mobile .sports-hero {
   padding: 2.5rem 0;
@@ -6798,7 +6791,61 @@
   display: grid;
   grid-template-columns: 1.6fr 1fr 1fr 1fr;
   gap: 3rem;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1.6fr;
+  gap: 2.5rem;
   padding-bottom: 3.5rem;
+}
+
+.footer-newsletter-col .footer-col-desc {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin: 0 0 1rem 0;
+  line-height: 1.5;
+}
+
+.footer-newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.footer-input-pill-group {
+  display: flex;
+  background: #182030;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.footer-input-pill-group input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.footer-submit-arrow-btn {
+  background: var(--sports-accent, #ccff00);
+  border: none;
+  color: #0b0e14;
+  padding: 0 0.9rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.footer-submit-arrow-btn:hover {
+  opacity: 0.88;
+}
+
+.footer-security-note {
+  font-size: 0.72rem;
+  color: #64748b;
+  margin: 0;
 }
 
 .footer-brand-bio {
@@ -7752,17 +7799,399 @@
   grid-template-columns: 1fr;
 }
 
-.simulated-frame.frame-tablet .sports-footer-top-row {
-  grid-template-columns: 1fr 1fr;
-}
-
+/* =========================================================================
+   Tablet-Style Header for Desktop, Tablet, and Mobile (Fullscreen Unchanged)
+   ========================================================================= */
+.simulated-frame.frame-desktop .sports-desktop-nav,
+.simulated-frame.frame-desktop .desktop-only,
+.simulated-frame.frame-desktop .account-trigger,
+.simulated-frame.frame-tablet .sports-desktop-nav,
+.simulated-frame.frame-tablet .desktop-only,
+.simulated-frame.frame-tablet .account-trigger,
 .simulated-frame.frame-mobile .sports-desktop-nav,
-.simulated-frame.frame-mobile .desktop-only {
+.simulated-frame.frame-mobile .desktop-only,
+.simulated-frame.frame-mobile .account-trigger,
+.sports-storefront-wrapper.sports-device-desktop .sports-desktop-nav,
+.sports-storefront-wrapper.sports-device-desktop .desktop-only,
+.sports-storefront-wrapper.sports-device-desktop .account-trigger,
+.sports-storefront-wrapper.sports-device-tablet .sports-desktop-nav,
+.sports-storefront-wrapper.sports-device-tablet .desktop-only,
+.sports-storefront-wrapper.sports-device-tablet .account-trigger,
+.sports-storefront-wrapper.sports-device-mobile .sports-desktop-nav,
+.sports-storefront-wrapper.sports-device-mobile .desktop-only,
+.sports-storefront-wrapper.sports-device-mobile .account-trigger {
   display: none !important;
 }
 
-.simulated-frame.frame-mobile .sports-mobile-menu-trigger {
-  display: inline-flex;
+.simulated-frame.frame-desktop .sports-mobile-menu-trigger,
+.simulated-frame.frame-tablet .sports-mobile-menu-trigger,
+.simulated-frame.frame-mobile .sports-mobile-menu-trigger,
+.sports-storefront-wrapper.sports-device-desktop .sports-mobile-menu-trigger,
+.sports-storefront-wrapper.sports-device-tablet .sports-mobile-menu-trigger,
+.sports-storefront-wrapper.sports-device-mobile .sports-mobile-menu-trigger {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.simulated-frame.frame-desktop .sports-header-inner,
+.simulated-frame.frame-tablet .sports-header-inner,
+.sports-storefront-wrapper.sports-device-desktop .sports-header-inner,
+.sports-storefront-wrapper.sports-device-tablet .sports-header-inner {
+  padding: 0 1.25rem;
+  gap: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Precise, Zero-Overflow Mobile Header Alignment */
+.simulated-frame.frame-mobile .sports-header-inner,
+.sports-storefront-wrapper.sports-device-mobile .sports-header-inner {
+  padding: 0 0.65rem !important;
+  gap: 0.35rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+.simulated-frame.frame-mobile .sports-mobile-menu-trigger,
+.sports-storefront-wrapper.sports-device-mobile .sports-mobile-menu-trigger {
+  width: 32px !important;
+  height: 32px !important;
+  padding: 0.25rem !important;
+  flex-shrink: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.simulated-frame.frame-mobile .sports-mobile-menu-trigger svg,
+.sports-storefront-wrapper.sports-device-mobile .sports-mobile-menu-trigger svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.simulated-frame.frame-mobile .sports-brand-container,
+.sports-storefront-wrapper.sports-device-mobile .sports-brand-container {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.simulated-frame.frame-mobile .sports-logo-link,
+.sports-storefront-wrapper.sports-device-mobile .sports-logo-link {
+  gap: 0.35rem !important;
+  min-width: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.simulated-frame.frame-mobile .sports-brand-emblem,
+.sports-storefront-wrapper.sports-device-mobile .sports-brand-emblem {
+  flex-shrink: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.simulated-frame.frame-mobile .sports-brand-emblem svg,
+.sports-storefront-wrapper.sports-device-mobile .sports-brand-emblem svg {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+.simulated-frame.frame-mobile .sports-brand-titles,
+.sports-storefront-wrapper.sports-device-mobile .sports-brand-titles {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  line-height: 1.05 !important;
+}
+
+.simulated-frame.frame-mobile .sports-brand-main,
+.sports-storefront-wrapper.sports-device-mobile .sports-brand-main {
+  font-size: 0.82rem !important;
+  line-height: 1.1 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  letter-spacing: 0.02em !important;
+}
+
+.simulated-frame.frame-mobile .sports-brand-lab,
+.sports-storefront-wrapper.sports-device-mobile .sports-brand-lab {
+  font-size: 0.48rem !important;
+  letter-spacing: 0.05em !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.simulated-frame.frame-mobile .sports-header-actions,
+.sports-storefront-wrapper.sports-device-mobile .sports-header-actions {
+  flex-shrink: 0 !important;
+  gap: 0.25rem !important;
+  margin-left: auto !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.simulated-frame.frame-mobile .sports-action-btn:not(.account-trigger):not(.desktop-only),
+.sports-storefront-wrapper.sports-device-mobile .sports-action-btn:not(.account-trigger):not(.desktop-only),
+.simulated-frame.frame-mobile .search-trigger,
+.simulated-frame.frame-mobile .wishlist-trigger,
+.sports-storefront-wrapper.sports-device-mobile .search-trigger,
+.sports-storefront-wrapper.sports-device-mobile .wishlist-trigger {
+  width: 32px !important;
+  height: 32px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 6px !important;
+  flex-shrink: 0 !important;
+}
+
+.simulated-frame.frame-mobile .sports-action-btn:not(.account-trigger):not(.desktop-only) svg,
+.sports-storefront-wrapper.sports-device-mobile .sports-action-btn:not(.account-trigger):not(.desktop-only) svg,
+.simulated-frame.frame-mobile .search-trigger svg,
+.simulated-frame.frame-mobile .wishlist-trigger svg,
+.sports-storefront-wrapper.sports-device-mobile .search-trigger svg,
+.sports-storefront-wrapper.sports-device-mobile .wishlist-trigger svg {
+  width: 17px !important;
+  height: 17px !important;
+}
+
+/* Strictly hide Account and any text action labels in mobile view */
+.simulated-frame.frame-mobile .account-trigger,
+.sports-storefront-wrapper.sports-device-mobile .account-trigger,
+.simulated-frame.frame-mobile .sports-action-btn.account-trigger,
+.sports-storefront-wrapper.sports-device-mobile .sports-action-btn.account-trigger,
+.simulated-frame.frame-mobile .sports-header-actions .account-trigger,
+.sports-storefront-wrapper.sports-device-mobile .sports-header-actions .account-trigger,
+.simulated-frame.frame-mobile .action-label,
+.sports-storefront-wrapper.sports-device-mobile .action-label {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+.simulated-frame.frame-mobile .header-badge-count,
+.sports-storefront-wrapper.sports-device-mobile .header-badge-count {
+  top: -2px !important;
+  right: -2px !important;
+  width: 14px !important;
+  height: 14px !important;
+  font-size: 0.55rem !important;
+}
+
+.simulated-frame.frame-mobile .sports-cart-button,
+.sports-storefront-wrapper.sports-device-mobile .sports-cart-button {
+  width: 32px !important;
+  height: 32px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+
+.simulated-frame.frame-mobile .sports-cart-button .cart-icon-wrap,
+.sports-storefront-wrapper.sports-device-mobile .sports-cart-button .cart-icon-wrap {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+}
+
+.simulated-frame.frame-mobile .sports-cart-button .cart-icon-wrap svg,
+.sports-storefront-wrapper.sports-device-mobile .sports-cart-button .cart-icon-wrap svg {
+  width: 17px !important;
+  height: 17px !important;
+}
+
+.simulated-frame.frame-mobile .cart-badge-bubble,
+.sports-storefront-wrapper.sports-device-mobile .cart-badge-bubble {
+  top: -4px !important;
+  right: -5px !important;
+  width: 15px !important;
+  height: 15px !important;
+  font-size: 0.55rem !important;
+}
+
+.simulated-frame.frame-mobile .cart-price-sum,
+.sports-storefront-wrapper.sports-device-mobile .cart-price-sum {
+  display: none !important;
+}
+
+.simulated-frame.frame-desktop .sports-top-announcement .announcement-currency,
+.simulated-frame.frame-tablet .sports-top-announcement .announcement-currency,
+.simulated-frame.frame-mobile .sports-top-announcement .announcement-currency,
+.sports-storefront-wrapper.sports-device-desktop .sports-top-announcement .announcement-currency,
+.sports-storefront-wrapper.sports-device-tablet .sports-top-announcement .announcement-currency,
+.sports-storefront-wrapper.sports-device-mobile .sports-top-announcement .announcement-currency {
+  display: none !important;
+}
+
+.simulated-frame.frame-desktop .sports-announcement-container,
+.simulated-frame.frame-tablet .sports-announcement-container,
+.simulated-frame.frame-mobile .sports-announcement-container,
+.sports-storefront-wrapper.sports-device-desktop .sports-announcement-container,
+.sports-storefront-wrapper.sports-device-tablet .sports-announcement-container,
+.sports-storefront-wrapper.sports-device-mobile .sports-announcement-container {
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* =========================================================================
+   Tablet-Style Footer for Desktop, Tablet, and Mobile (Fullscreen Unchanged)
+   ========================================================================= */
+.simulated-frame.frame-desktop .sports-footer-top-row,
+.simulated-frame.frame-tablet .sports-footer-top-row,
+.simulated-frame.frame-mobile .sports-footer-top-row,
+.sports-storefront-wrapper.sports-device-desktop .sports-footer-top-row,
+.sports-storefront-wrapper.sports-device-tablet .sports-footer-top-row,
+.sports-storefront-wrapper.sports-device-mobile .sports-footer-top-row {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 2.5rem 2rem !important;
+  padding-bottom: 2.5rem !important;
+}
+
+.simulated-frame.frame-desktop .sports-footer-top-row .brand-col,
+.simulated-frame.frame-tablet .sports-footer-top-row .brand-col,
+.simulated-frame.frame-mobile .sports-footer-top-row .brand-col,
+.sports-storefront-wrapper.sports-device-desktop .sports-footer-top-row .brand-col,
+.sports-storefront-wrapper.sports-device-tablet .sports-footer-top-row .brand-col,
+.sports-storefront-wrapper.sports-device-mobile .sports-footer-top-row .brand-col {
+  grid-column: 1 / -1 !important;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.simulated-frame.frame-desktop .sports-footer-top-row .footer-newsletter-col,
+.simulated-frame.frame-tablet .sports-footer-top-row .footer-newsletter-col,
+.simulated-frame.frame-mobile .sports-footer-top-row .footer-newsletter-col,
+.sports-storefront-wrapper.sports-device-desktop .sports-footer-top-row .footer-newsletter-col,
+.sports-storefront-wrapper.sports-device-tablet .sports-footer-top-row .footer-newsletter-col,
+.sports-storefront-wrapper.sports-device-mobile .sports-footer-top-row .footer-newsletter-col {
+  grid-column: 1 / -1 !important;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.simulated-frame.frame-desktop .sports-footer-bottom-bar,
+.simulated-frame.frame-tablet .sports-footer-bottom-bar,
+.simulated-frame.frame-mobile .sports-footer-bottom-bar,
+.sports-storefront-wrapper.sports-device-desktop .sports-footer-bottom-bar,
+.sports-storefront-wrapper.sports-device-tablet .sports-footer-bottom-bar,
+.sports-storefront-wrapper.sports-device-mobile .sports-footer-bottom-bar {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  padding-top: 1.5rem;
+}
+
+.simulated-frame.frame-desktop .footer-payment-badges,
+.simulated-frame.frame-tablet .footer-payment-badges,
+.simulated-frame.frame-mobile .footer-payment-badges,
+.sports-storefront-wrapper.sports-device-desktop .footer-payment-badges,
+.sports-storefront-wrapper.sports-device-tablet .footer-payment-badges,
+.sports-storefront-wrapper.sports-device-mobile .footer-payment-badges {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Light Theme Dividers for Tablet-Style Footer */
+.sports-storefront-wrapper.is-theme-light .sports-footer-top-row .brand-col {
+  border-bottom-color: #e2e8f0 !important;
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-footer-top-row .footer-newsletter-col {
+  border-top-color: #e2e8f0 !important;
+}
+
+/* =========================================================================
+   Fullscreen Mode: Preserve Full Wide Desktop Layout (Zero Changes)
+   ========================================================================= */
+.preview-viewport-container.device-fullscreen .sports-desktop-nav,
+.simulated-frame.frame-fullscreen .sports-desktop-nav,
+.sports-storefront-wrapper.sports-device-fullscreen .sports-desktop-nav {
+  display: flex !important;
+}
+
+.preview-viewport-container.device-fullscreen .sports-mobile-menu-trigger,
+.simulated-frame.frame-fullscreen .sports-mobile-menu-trigger,
+.sports-storefront-wrapper.sports-device-fullscreen .sports-mobile-menu-trigger {
+  display: none !important;
+}
+
+.preview-viewport-container.device-fullscreen .desktop-only,
+.simulated-frame.frame-fullscreen .desktop-only,
+.sports-storefront-wrapper.sports-device-fullscreen .desktop-only {
+  display: inline !important;
+}
+
+.preview-viewport-container.device-fullscreen .sports-header-actions .desktop-only,
+.simulated-frame.frame-fullscreen .sports-header-actions .desktop-only,
+.sports-storefront-wrapper.sports-device-fullscreen .sports-header-actions .desktop-only {
+  display: inline-block !important;
+}
+
+.preview-viewport-container.device-fullscreen .sports-header-actions .account-trigger,
+.simulated-frame.frame-fullscreen .sports-header-actions .account-trigger,
+.sports-storefront-wrapper.sports-device-fullscreen .sports-header-actions .account-trigger {
+  display: inline-flex !important;
+}
+
+.preview-viewport-container.device-fullscreen .sports-top-announcement .announcement-currency,
+.simulated-frame.frame-fullscreen .sports-top-announcement .announcement-currency,
+.sports-storefront-wrapper.sports-device-fullscreen .sports-top-announcement .announcement-currency {
+  display: inline-block !important;
+}
+
+.preview-viewport-container.device-fullscreen .sports-footer-top-row,
+.simulated-frame.frame-fullscreen .sports-footer-top-row,
+.sports-storefront-wrapper.sports-device-fullscreen .sports-footer-top-row {
+  display: grid !important;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1.6fr !important;
+  gap: 2.5rem !important;
+}
+
+.preview-viewport-container.device-fullscreen .sports-footer-top-row .brand-col,
+.simulated-frame.frame-fullscreen .sports-footer-top-row .brand-col,
+.sports-storefront-wrapper.sports-device-fullscreen .sports-footer-top-row .brand-col {
+  grid-column: auto !important;
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+
+.preview-viewport-container.device-fullscreen .sports-footer-top-row .footer-newsletter-col,
+.simulated-frame.frame-fullscreen .sports-footer-top-row .footer-newsletter-col,
+.sports-storefront-wrapper.sports-device-fullscreen .sports-footer-top-row .footer-newsletter-col {
+  grid-column: auto !important;
+  border-top: none !important;
+  padding-top: 0 !important;
+}
+
+.preview-viewport-container.device-fullscreen .sports-footer-bottom-bar,
+.simulated-frame.frame-fullscreen .sports-footer-bottom-bar,
+.sports-storefront-wrapper.sports-device-fullscreen .sports-footer-bottom-bar {
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  text-align: left !important;
 }
 
 .simulated-frame.frame-mobile .hero-display-headline {
@@ -7837,10 +8266,6 @@
   flex-direction: column;
 }
 
-.simulated-frame.frame-mobile .sports-footer-top-row {
-  grid-template-columns: 1fr;
-  gap: 2rem;
-}
 
 .simulated-frame.frame-mobile .quickview-grid {
   grid-template-columns: 1fr;
@@ -7877,7 +8302,9 @@
 
 @media (max-width: 768px) {
   .sports-desktop-nav,
-  .desktop-only {
+  .desktop-only,
+  .account-trigger,
+  .sports-action-btn.account-trigger {
     display: none !important;
   }
   .sports-mobile-menu-trigger {
@@ -7912,6 +8339,169 @@
   }
   .quickview-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .sports-header-inner {
+    padding: 0 0.65rem !important;
+    gap: 0.35rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
+  .sports-mobile-menu-trigger {
+    width: 32px !important;
+    height: 32px !important;
+    padding: 0.25rem !important;
+    flex-shrink: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .sports-mobile-menu-trigger svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .sports-brand-container {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .sports-logo-link {
+    gap: 0.35rem !important;
+    min-width: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .sports-brand-emblem {
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .sports-brand-emblem svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .sports-brand-titles {
+    min-width: 0 !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    line-height: 1.05 !important;
+  }
+
+  .sports-brand-main {
+    font-size: 0.82rem !important;
+    line-height: 1.1 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    letter-spacing: 0.02em !important;
+  }
+
+  .sports-brand-lab {
+    font-size: 0.48rem !important;
+    letter-spacing: 0.05em !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .sports-header-actions {
+    flex-shrink: 0 !important;
+    gap: 0.25rem !important;
+    margin-left: auto !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .sports-action-btn:not(.account-trigger):not(.desktop-only),
+  .search-trigger,
+  .wishlist-trigger {
+    width: 32px !important;
+    height: 32px !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 6px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .sports-action-btn:not(.account-trigger):not(.desktop-only) svg,
+  .search-trigger svg,
+  .wishlist-trigger svg {
+    width: 17px !important;
+    height: 17px !important;
+  }
+
+  /* Strictly hide Account and action labels on mobile */
+  .account-trigger,
+  .sports-action-btn.account-trigger,
+  .action-label {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+  }
+
+  .header-badge-count {
+    top: -2px !important;
+    right: -2px !important;
+    width: 14px !important;
+    height: 14px !important;
+    font-size: 0.55rem !important;
+  }
+
+  .sports-cart-button {
+    width: 32px !important;
+    height: 32px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+  }
+
+  .sports-cart-button .cart-icon-wrap {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+  }
+
+  .sports-cart-button .cart-icon-wrap svg {
+    width: 17px !important;
+    height: 17px !important;
+  }
+
+  .cart-badge-bubble {
+    top: -4px !important;
+    right: -5px !important;
+    width: 15px !important;
+    height: 15px !important;
+    font-size: 0.55rem !important;
+  }
+
+  .cart-price-sum {
+    display: none !important;
   }
 }
 
@@ -8034,4 +8624,455 @@
     width: 100%;
     justify-content: center;
   }
+}
+
+/* =========================================================================
+   LIGHT THEME STYLING FOR SPORTS STOREFRONTS (Apex, Arena, Sprint, Rally, etc.)
+   ========================================================================= */
+.sports-storefront-wrapper.is-theme-light {
+  background-color: #ffffff;
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-main-header {
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-brand-main {
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-brand-lab {
+  color: #64748b;
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-nav-item {
+  color: #475569;
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-nav-item:hover,
+.sports-storefront-wrapper.is-theme-light .sports-nav-item.active {
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-action-btn {
+  color: #334155;
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-action-btn:hover {
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-mobile-menu-trigger {
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-hero-stage {
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.sports-storefront-wrapper.is-theme-light .hero-pill-badge {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #0f172a;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.sports-storefront-wrapper.is-theme-light .hero-display-headline {
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .hero-lead-paragraph {
+  color: #475569;
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-btn-secondary {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: #cbd5e1;
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-btn-secondary:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.sports-storefront-wrapper.is-theme-light .hero-telemetry-strip {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.sports-storefront-wrapper.is-theme-light .telemetry-stat-cell .stat-value {
+  color: var(--sports-accent, #0284c7);
+}
+
+.sports-storefront-wrapper.is-theme-light .telemetry-stat-cell .stat-caption {
+  color: #64748b;
+}
+
+.sports-storefront-wrapper.is-theme-light .telemetry-divider {
+  background: #e2e8f0;
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-section-title {
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-section-desc {
+  color: #64748b;
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-filter-pills-row {
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+}
+
+.sports-storefront-wrapper.is-theme-light .filter-pill-btn {
+  color: #64748b;
+}
+
+.sports-storefront-wrapper.is-theme-light .filter-pill-btn.active {
+  background: var(--sports-accent, #0284c7);
+  color: #ffffff;
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-product-card {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-product-card:hover {
+  border-color: var(--sports-accent, #0284c7);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.sports-storefront-wrapper.is-theme-light .product-media-stage {
+  background: #f8fafc;
+}
+
+.sports-storefront-wrapper.is-theme-light .product-card-title {
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .price-current {
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .price-compare {
+  color: #94a3b8;
+}
+
+.sports-storefront-wrapper.is-theme-light .quick-add-bag-btn {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .quick-add-bag-btn:hover {
+  background: var(--sports-accent, #0284c7);
+  border-color: var(--sports-accent, #0284c7);
+  color: #ffffff;
+}
+
+.sports-storefront-wrapper.is-theme-light .card-action-icon-btn {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #334155;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.sports-storefront-wrapper.is-theme-light .card-action-icon-btn:hover {
+  background: #f8fafc;
+  color: var(--sports-accent, #0284c7);
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-story-section {
+  background: #f8fafc;
+  border-top: 1px solid #f1f5f9;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.sports-storefront-wrapper.is-theme-light .story-lead-heading {
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .story-quote-box {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.sports-storefront-wrapper.is-theme-light .story-quote-body {
+  color: #334155;
+}
+
+.sports-storefront-wrapper.is-theme-light .speaker-name {
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .speaker-role {
+  color: #64748b;
+}
+
+.sports-storefront-wrapper.is-theme-light .pillar-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+.sports-storefront-wrapper.is-theme-light .pillar-card h4 {
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .pillar-card p {
+  color: #64748b;
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-trust-section {
+  background: #ffffff;
+  border-top: 1px solid #f1f5f9;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-trust-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.sports-storefront-wrapper.is-theme-light .trust-title {
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .trust-desc {
+  color: #64748b;
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-reviews-section {
+  background: #f8fafc;
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-review-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.sports-storefront-wrapper.is-theme-light .testimonial-quote-text {
+  color: #334155;
+}
+
+.sports-storefront-wrapper.is-theme-light .author-full-name {
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .author-discipline {
+  color: #64748b;
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-newsletter-section {
+  background: #ffffff;
+}
+
+.sports-storefront-wrapper.is-theme-light .newsletter-headline {
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .newsletter-lead {
+  color: #64748b;
+}
+
+.sports-storefront-wrapper.is-theme-light .newsletter-email-input {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .newsletter-email-input:focus {
+  border-color: var(--sports-accent, #0284c7);
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-quickview-modal {
+  background: #ffffff;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
+}
+
+.sports-storefront-wrapper.is-theme-light .quickview-title {
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .quickview-price-row {
+  border-color: #e2e8f0;
+}
+
+.sports-storefront-wrapper.is-theme-light .quickview-specs-box {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  color: #334155;
+}
+
+.sports-storefront-wrapper.is-theme-light .quickview-specs-box h4 {
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .quickview-close-btn {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-cart-drawer {
+  background: #ffffff;
+  color: #0f172a;
+  border-left: 1px solid #e2e8f0;
+}
+
+.sports-storefront-wrapper.is-theme-light .cart-drawer-header {
+  border-bottom-color: #e2e8f0;
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .cart-drawer-header h3 {
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .cart-item-card {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+
+.sports-storefront-wrapper.is-theme-light .cart-item-name {
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .cart-totals-breakdown {
+  border-top-color: #e2e8f0;
+  color: #334155;
+}
+
+.sports-storefront-wrapper.is-theme-light .cart-promo-section input {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-search-dialog {
+  background: #ffffff;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
+}
+
+.sports-storefront-wrapper.is-theme-light .search-dialog-header input {
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .sports-mobile-drawer {
+  background: #ffffff;
+  color: #0f172a;
+  border-right-color: #e2e8f0;
+}
+
+.sports-storefront-wrapper.is-theme-light .mobile-drawer-header {
+  border-bottom-color: #e2e8f0;
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .mobile-drawer-header h3 {
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .mobile-drawer-search input {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  color: #0f172a;
+}
+
+.sports-storefront-wrapper.is-theme-light .mobile-nav-link {
+  color: #334155;
+  border-bottom-color: #f1f5f9;
+}
+
+/* =========================================================================
+   TOOLBAR THEME PICKER & INTERACTIVE PALETTE STYLES
+   ========================================================================= */
+.toolbar-theme-picker {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.3rem 0.65rem;
+  border-radius: 8px;
+}
+
+.toolbar-theme-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.toolbar-swatches-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.toolbar-swatch-circle {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.toolbar-swatch-circle:hover {
+  transform: scale(1.25);
+}
+
+.toolbar-swatch-circle.active {
+  border-color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6);
+  transform: scale(1.15);
+}
+
+.palette-strip.interactive-palette {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.palette-circle-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.palette-circle-btn:hover {
+  transform: scale(1.2);
+}
+
+.palette-circle-btn.active-palette-circle {
+  border-color: #ffffff;
+  box-shadow: 0 0 0 2px #3b82f6;
+  transform: scale(1.15);
+}
+
+.specs-subtext {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #94a3b8;
+  text-transform: none;
+  margin-left: 0.4rem;
 }
