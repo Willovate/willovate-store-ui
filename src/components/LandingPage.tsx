@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import '../styles/LandingPage.css'
 
 /**
@@ -934,145 +934,267 @@ function HeroSection({ onStartFree, onExploreDemo, onAICommand }: HeroSectionPro
    ========================================================================= */
 type CategoryType = 'sell' | 'serve' | 'book' | 'teach'
 
+interface CategoryProduct {
+  name: string
+  category: string
+  price: string
+  image: string
+}
+
 interface CategoryData {
   id: CategoryType
   label: string
-  icon: string
   title: string
   headline: string
   description: string
-  features: string[]
   ctaText: string
   templateName: string
   templateSubtitle: string
   templateBadge: string
-  products: { name: string; category: string; price: string; imageText: string; colorTheme: string }[]
+  navLinks: string[]
+  actionText: string
+  products: CategoryProduct[]
 }
 
 const CATEGORIES: Record<CategoryType, CategoryData> = {
   sell: {
     id: 'sell',
     label: 'Sell',
-    icon: '🛍️',
     title: 'Sell',
-    headline: 'Launch a high-converting storefront.',
-    description: 'Sell physical goods, digital downloads, and subscriptions. Manage inventory, process global payments, and handle order fulfillment—all from one unified dashboard.',
-    features: ['Custom store design', 'Integrated checkout', 'Automated tax & shipping', 'Real-time inventory'],
-    ctaText: 'Explore Shop Builder',
-    templateName: 'LUXE MODE',
-    templateSubtitle: 'Summer Collection Edit',
-    templateBadge: 'E-commerce Store',
+    headline: 'Timeless pieces, designed to last.',
+    description:
+      'Launch a beautiful store. Sell physical products or digital downloads. Manage inventory, orders and payments — all in one place.',
+    ctaText: 'Explore this path',
+    templateName: 'LUVÉ',
+    templateSubtitle: 'Summer edit',
+    templateBadge: 'New arrivals',
+    navLinks: ['Shop', 'Collections', 'About', 'Blog'],
+    actionText: 'Shop collection',
     products: [
-      { name: 'Leather Tote Bag', category: 'Accessories', price: '$189', imageText: '👜', colorTheme: 'theme-sand' },
-      { name: 'Classic Sunglasses', category: 'Eyewear', price: '$95', imageText: '🕶️', colorTheme: 'theme-gold' },
-      { name: 'Woven Straw Hat', category: 'Apparel', price: '$65', imageText: '👒', colorTheme: 'theme-cream' },
-      { name: 'Linen Midi Dress', category: 'Apparel', price: '$220', imageText: '👗', colorTheme: 'theme-rose' },
-      { name: 'Minimalist Watch', category: 'Accessories', price: '$165', imageText: '⌚', colorTheme: 'theme-navy' },
-      { name: 'Canvas Slip-on', category: 'Footwear', price: '$110', imageText: '👟', colorTheme: 'theme-teal' },
+      {
+        name: 'Tote Bag',
+        category: 'Italian calf leather',
+        price: '$129',
+        image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&auto=format&fit=crop&q=80',
+      },
+      {
+        name: 'Classic Aviators',
+        category: 'UV400 protection',
+        price: '$85',
+        image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400&auto=format&fit=crop&q=80',
+      },
+      {
+        name: 'Straw Fedora',
+        category: 'Woven toquilla palm',
+        price: '$49',
+        image: 'https://images.unsplash.com/photo-1521369909029-2afed882baee?w=400&auto=format&fit=crop&q=80',
+      },
+      {
+        name: 'Silk Slip Dress',
+        category: '100% mulberry silk',
+        price: '$199',
+        image: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&auto=format&fit=crop&q=80',
+      },
+      {
+        name: 'Minimalist Watch',
+        category: 'Brushed steel',
+        price: '$165',
+        image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&auto=format&fit=crop&q=80',
+      },
+      {
+        name: 'Canvas Loafer',
+        category: 'Natural linen',
+        price: '$110',
+        image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&auto=format&fit=crop&q=80',
+      },
     ],
   },
   serve: {
     id: 'serve',
     label: 'Serve',
-    icon: '💼',
     title: 'Serve',
-    headline: 'Package and deliver high-ticket services.',
-    description: 'Showcase client portfolios, send interactive proposals, collect digital signatures, and automate client onboarding with smart intake forms.',
-    features: ['Client onboarding', 'Proposal generator', 'Automated invoicing', 'Contract signatures'],
-    ctaText: 'Explore Service Hub',
-    templateName: 'ELEVATE CONSULTING',
-    templateSubtitle: 'Strategy & Growth Advisory',
-    templateBadge: 'Agency & Advisory',
+    headline: 'Tailored strategic advisory for scaling businesses.',
+    description:
+      'Package and deliver high-ticket services. Showcase client portfolios, send proposals, and collect client payments — all in one place.',
+    ctaText: 'Explore this path',
+    templateName: 'ELEVATE',
+    templateSubtitle: 'Strategic counsel',
+    templateBadge: 'Advisory & Growth',
+    navLinks: ['Services', 'Case Studies', 'About', 'Contact'],
+    actionText: 'Book consultation',
     products: [
-      { name: 'Strategy Sprint', category: 'Advisory', price: '$750', imageText: '📈', colorTheme: 'theme-blue' },
-      { name: 'Brand Identity', category: 'Creative', price: '$1,800', imageText: '🎨', colorTheme: 'theme-purple' },
-      { name: 'Quarterly Retainer', category: 'Management', price: '$3,200', imageText: '💼', colorTheme: 'theme-navy' },
-      { name: 'Audit & Roadmap', category: 'Consulting', price: '$950', imageText: '🧭', colorTheme: 'theme-teal' },
-      { name: 'Marketing Automation', category: 'Tech', price: '$1,400', imageText: '⚙️', colorTheme: 'theme-gold' },
-      { name: 'SEO Acceleration', category: 'Growth', price: '$850', imageText: '🚀', colorTheme: 'theme-sky' },
+      {
+        name: 'Strategy Sprint',
+        category: '1-week deep dive',
+        price: '$750',
+        image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400&auto=format&fit=crop&q=80',
+      },
+      {
+        name: 'Brand Identity',
+        category: 'Full visual system',
+        price: '$1,800',
+        image: 'https://images.unsplash.com/photo-1542744094-3a31f272c490?w=400&auto=format&fit=crop&q=80',
+      },
+      {
+        name: 'Advisory Retainer',
+        category: 'Executive advisory',
+        price: '$3,200',
+        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&auto=format&fit=crop&q=80',
+      },
+      {
+        name: 'Growth Audit',
+        category: 'Diagnostic roadmap',
+        price: '$950',
+        image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&auto=format&fit=crop&q=80',
+      },
+      {
+        name: 'Marketing Stack',
+        category: 'Automation sprint',
+        price: '$1,400',
+        image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&auto=format&fit=crop&q=80',
+      },
+      {
+        name: 'SEO Accelerator',
+        category: 'Organic growth',
+        price: '$850',
+        image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&auto=format&fit=crop&q=80',
+      },
     ],
   },
   book: {
     id: 'book',
     label: 'Book',
-    icon: '📅',
     title: 'Book',
-    headline: 'Fill your calendar on autopilot.',
-    description: 'Seamless appointment scheduling for wellness studios, aesthetic salons, coaches, and consultants. Sync Google/Outlook calendars, send SMS reminders, and collect upfront deposits.',
-    features: ['24/7 online booking', 'Calendar two-way sync', 'Automated SMS/Email reminders', 'Staff scheduling'],
-    ctaText: 'Explore Booking System',
+    headline: 'Restorative practices for body and mind.',
+    description:
+      'Fill your calendar on autopilot. Seamless appointment scheduling, client intake forms, and automated reminders — all in one place.',
+    ctaText: 'Explore this path',
     templateName: 'GLOW & FLOW',
-    templateSubtitle: 'Sanctuary & Studio Appointments',
-    templateBadge: 'Studio & Appointments',
+    templateSubtitle: 'Mindful sessions',
+    templateBadge: 'Studio & Sanctuary',
+    navLinks: ['Classes', 'Workshops', 'Instructors', 'Pricing'],
+    actionText: 'View schedule',
     products: [
-      { name: 'Signature Flow', category: 'Yoga Class', price: '$35', imageText: '🧘', colorTheme: 'theme-lavender' },
-      { name: 'Hydrating Facial', category: 'Esthetics', price: '$120', imageText: '✨', colorTheme: 'theme-peach' },
-      { name: 'Master Hair Styling', category: 'Salon', price: '$85', imageText: '✂️', colorTheme: 'theme-sand' },
-      { name: 'Private Sound Bath', category: 'Holistic', price: '$150', imageText: '🔔', colorTheme: 'theme-teal' },
-      { name: 'Aromatherapy Session', category: 'Therapy', price: '$95', imageText: '🌿', colorTheme: 'theme-emerald' },
-      { name: 'Couples Massage', category: 'Bodywork', price: '$220', imageText: '💆', colorTheme: 'theme-rose' },
+      {
+        name: 'Signature Flow',
+        category: 'Heated & non-heated',
+        price: '$35',
+        image: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=400&auto=format&fit=crop&q=80',
+      },
+      {
+        name: 'Hydrating Facial',
+        category: 'Botanical esthetics',
+        price: '$120',
+        image: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=400&auto=format&fit=crop&q=80',
+      },
+      {
+        name: 'Private Sound Bath',
+        category: 'Singing bowls',
+        price: '$150',
+        image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&auto=format&fit=crop&q=80',
+      },
+      {
+        name: 'Restorative Massage',
+        category: 'Deep tissue therapy',
+        price: '$180',
+        image: 'https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=400&auto=format&fit=crop&q=80',
+      },
+      {
+        name: 'Aroma Therapy',
+        category: 'Herbal botanicals',
+        price: '$95',
+        image: 'https://images.unsplash.com/photo-1512290900672-1f416d80a18e?w=400&auto=format&fit=crop&q=80',
+      },
+      {
+        name: 'Master Styling',
+        category: 'Bespoke salon',
+        price: '$85',
+        image: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=400&auto=format&fit=crop&q=80',
+      },
     ],
   },
   teach: {
     id: 'teach',
     label: 'Teach',
-    icon: '🎓',
     title: 'Teach',
-    headline: 'Build courses and thriving communities.',
-    description: 'Host cohort masterclasses, on-demand video lessons, downloadable workbooks, and paid monthly memberships with community discussion spaces.',
-    features: ['Drip video lessons', 'Cohort masterclasses', 'Paid community access', 'Certificate generator'],
-    ctaText: 'Explore Course Studio',
+    headline: 'Practical modules crafted by industry leaders.',
+    description:
+      'Build courses and thriving communities. Host video masterclasses, workbooks, and paid monthly memberships — all in one place.',
+    ctaText: 'Explore this path',
     templateName: 'MINDFUL LIVING',
-    templateSubtitle: 'Modern Learning & Memberships',
-    templateBadge: 'Courses & Community',
+    templateSubtitle: 'Learn & grow',
+    templateBadge: 'Academy & Cohorts',
+    navLinks: ['Courses', 'Community', 'Library', 'About'],
+    actionText: 'Explore courses',
     products: [
-      { name: 'Mindful Living', category: '8 Modules', price: '$149', imageText: '📚', colorTheme: 'theme-sky' },
-      { name: 'Creative Branding', category: 'Video Course', price: '$299', imageText: '🎬', colorTheme: 'theme-purple' },
-      { name: 'Live Lab Pass', category: 'Monthly Access', price: '$49/mo', imageText: '🎙️', colorTheme: 'theme-emerald' },
-      { name: 'Solo Founder Pack', category: 'Resource Pack', price: '$79', imageText: '📦', colorTheme: 'theme-amber' },
-      { name: 'Web Design Intensive', category: 'Cohort Lab', price: '$450', imageText: '💻', colorTheme: 'theme-blue' },
-      { name: 'Financial Mastery', category: 'Workbook Series', price: '$89', imageText: '📊', colorTheme: 'theme-gold' },
+      {
+        name: 'Mindful Living',
+        category: '8 video modules',
+        price: '$149',
+        image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&auto=format&fit=crop&q=80',
+      },
+      {
+        name: 'Creative Branding',
+        category: 'Video series',
+        price: '$299',
+        image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&auto=format&fit=crop&q=80',
+      },
+      {
+        name: 'Live Lab Pass',
+        category: 'Monthly community',
+        price: '$49/mo',
+        image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&auto=format&fit=crop&q=80',
+      },
+      {
+        name: 'Design Intensive',
+        category: '6-week cohort',
+        price: '$450',
+        image: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=400&auto=format&fit=crop&q=80',
+      },
+      {
+        name: 'Founder Pack',
+        category: 'Resource templates',
+        price: '$79',
+        image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&auto=format&fit=crop&q=80',
+      },
+      {
+        name: 'Financial Mastery',
+        category: 'Workbook series',
+        price: '$89',
+        image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=400&auto=format&fit=crop&q=80',
+      },
     ],
   },
 }
 
 function BuildingCategoriesSection() {
   const [activeTab, setActiveTab] = useState<CategoryType>('sell')
-  const [slideOffset, setSlideOffset] = useState(0)
+  const productsScrollRef = useRef<HTMLDivElement>(null)
 
   const current = CATEGORIES[activeTab]
-  const maxSlide = Math.max(0, current.products.length - 4)
-
-  const nextSlide = () => {
-    setSlideOffset((prev) => (prev >= maxSlide ? 0 : prev + 1))
-  }
-
-  const prevSlide = () => {
-    setSlideOffset((prev) => (prev <= 0 ? maxSlide : prev - 1))
-  }
 
   const handleTabChange = (tab: CategoryType) => {
     setActiveTab(tab)
-    setSlideOffset(0)
+    if (productsScrollRef.current) {
+      productsScrollRef.current.scrollTo({ left: 0, behavior: 'smooth' })
+    }
+  }
+
+  const handleProductsWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    if (e.deltaY !== 0 && !e.shiftKey) {
+      e.currentTarget.scrollLeft += e.deltaY
+    }
   }
 
   return (
     <section className="categories-section" id="solutions">
-      {/* Invisible glowing transition divider */}
-      <div className="section-divider-glow" aria-hidden="true" />
       <div className="categories-ambient-glow" aria-hidden="true" />
 
       <div className="categories-container">
-        {/* Section Header */}
-        <div className="categories-header-block">
-          <span className="categories-kicker">SOLUTIONS BY INDUSTRY</span>
-          <h2 className="categories-heading">What are you building?</h2>
-          <p className="categories-subtitle">
-            Choose your business model. Willovate crafts the entire site architecture, checkout flow, and backend tools in seconds.
-          </p>
-        </div>
+        {/* Section Heading */}
+        <h2 className="categories-heading">What are you building?</h2>
 
-        {/* Tab Buttons */}
+        {/* Tab Buttons Segmented Bar */}
         <div className="category-tabs-row" role="tablist">
           {(['sell', 'serve', 'book', 'teach'] as CategoryType[]).map((tab) => (
             <button
@@ -1083,92 +1205,88 @@ function BuildingCategoriesSection() {
               className={`category-tab-btn ${activeTab === tab ? 'active' : ''}`}
               onClick={() => handleTabChange(tab)}
             >
-              <span className="tab-icon">{CATEGORIES[tab].icon}</span>
-              <span>{CATEGORIES[tab].label}</span>
+              {CATEGORIES[tab].label}
             </button>
           ))}
         </div>
 
-        {/* Expansive Full-Page Showcase Stage */}
+        {/* 2-Column Showcase Stage */}
         <div className="category-showcase-stage">
-          {/* Left Info Column */}
+          {/* Left Column: Title, Paragraph, Outline CTA */}
           <div className="category-left-col">
-            <span className="category-tag-pill">{current.title} Solution</span>
-            <h3 className="category-item-headline">{current.headline}</h3>
-            <p className="category-item-desc">{current.description}</p>
-            
-            <div className="category-feature-list">
-              {current.features.map((feat) => (
-                <div key={feat} className="cat-feature-item">
-                  <span className="cat-feature-check">✓</span>
-                  <span>{feat}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="category-cta-row">
-              <a href="#templates" className="btn-category-cta">
-                {current.ctaText} <span className="arrow-icon">→</span>
-              </a>
-            </div>
+            <h3 className="category-editorial-title">{current.title}</h3>
+            <p className="category-editorial-desc">{current.description}</p>
+            <a href="#templates" className="btn-explore-path">
+              {current.ctaText}
+            </a>
           </div>
 
-          {/* Right Showcase Browser Mockup */}
-          <div className="category-right-col">
-            <div className="template-browser-mockup">
-              <div className="mockup-header-bar">
-                <div className="mockup-dots">
-                  <span className="dot dot-red"></span>
-                  <span className="dot dot-yellow"></span>
-                  <span className="dot dot-green"></span>
-                </div>
-                <div className="mockup-brand-title">{current.templateName}</div>
-                <div className="mockup-badge">{current.templateBadge}</div>
-              </div>
-
-              <div className="mockup-hero-banner">
-                <div>
-                  <h4 className="mockup-h4">{current.templateSubtitle}</h4>
-                  <p className="mockup-sub">Curated pieces, designed to last.</p>
-                </div>
-                <div className="slider-controls">
-                  <button className="slider-arrow-btn" type="button" onClick={prevSlide} aria-label="Previous">‹</button>
-                  <button className="slider-arrow-btn" type="button" onClick={nextSlide} aria-label="Next">›</button>
-                </div>
-              </div>
-
-              <div className="slider-overflow-viewport">
-                <div
-                  className="mockup-slider-track"
-                  style={{ transform: `translateX(-${slideOffset * 26}%)` }}
-                >
-                  {current.products.map((item) => (
-                    <div key={item.name} className={`mockup-product-card ${item.colorTheme}`}>
-                      <div className="product-card-visual">
-                        <span className="product-emoji">{item.imageText}</span>
-                      </div>
-                      <div className="product-card-meta">
-                        <div className="prod-name-cat">
-                          <strong>{item.name}</strong>
-                          <small>{item.category}</small>
-                        </div>
-                        <span className="prod-price-tag">{item.price}</span>
-                      </div>
-                    </div>
+          {/* Right Column: Luxury Storefront Card */}
+          <div className="category-showcase-card-wrapper">
+            <div className="luxury-storefront-card">
+              {/* Card Top Nav */}
+              <div className="luxury-card-header">
+                <div className="luxury-card-brand">{current.templateName}</div>
+                <div className="luxury-card-nav-links">
+                  {current.navLinks.map((link) => (
+                    <span key={link}>{link}</span>
                   ))}
+                  <span className="luxury-card-cart">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                      <line x1="3" y1="6" x2="21" y2="6" />
+                      <path d="M16 10a4 4 0 0 1-8 0" />
+                    </svg>
+                    Cart (0)
+                  </span>
                 </div>
               </div>
 
-              <div className="slider-pagination-dots">
-                {Array.from({ length: maxSlide + 1 }).map((_, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    className={`pag-dot ${slideOffset === idx ? 'active' : ''}`}
-                    onClick={() => setSlideOffset(idx)}
-                    aria-label={`Slide ${idx + 1}`}
-                  />
-                ))}
+              {/* Card Main Body */}
+              <div className="luxury-card-body">
+                {/* Left Mini Hero */}
+                <div className="luxury-card-hero">
+                  <span className="luxury-card-tag">{current.templateBadge}</span>
+                  <h4 className="luxury-card-title">{current.templateSubtitle}</h4>
+                  <p className="luxury-card-sub">{current.headline}</p>
+                  <button type="button" className="btn-luxury-card-action">
+                    {current.actionText}
+                  </button>
+                </div>
+
+                {/* Right Product Grid Viewport - Single Row Scrollable */}
+                <div
+                  className="luxury-card-products-viewport"
+                  ref={productsScrollRef}
+                  onWheel={handleProductsWheel}
+                >
+                  <div className="luxury-card-products-track">
+                    {current.products.map((item) => (
+                      <div key={item.name} className="luxury-product-card">
+                        <div className="luxury-product-img-wrap">
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="luxury-product-img"
+                            loading="lazy"
+                            onError={(e) => {
+                              const t = e.currentTarget
+                              t.onerror = null
+                              t.src = 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=360&auto=format&fit=crop&q=80'
+                            }}
+                          />
+                        </div>
+                        <div className="luxury-product-info">
+                          <div className="luxury-product-title-row">
+                            <span className="luxury-product-name">{item.name}</span>
+                            <span className="luxury-product-detail">{item.category}</span>
+                          </div>
+                          <span className="luxury-product-price">{item.price}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
