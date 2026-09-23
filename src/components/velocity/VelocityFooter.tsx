@@ -175,11 +175,11 @@ export const VelocityFooter: React.FC<VelocityFooterProps> = ({ onNavigateCatego
             <p>© {new Date().getFullYear()} VELOCITY SPORTSWEAR INTERNATIONAL AG. ALL RIGHTS RESERVED.</p>
             <div className="legal-links-inline">
               <a href="#privacy">Privacy Policy</a>
-              <span className="dot-sep">•</span>
+              <span className="velocity-dot-sep">•</span>
               <a href="#terms">Terms of Service</a>
-              <span className="dot-sep">•</span>
+              <span className="velocity-dot-sep">•</span>
               <a href="#cookies">Cookie Preferences</a>
-              <span className="dot-sep">•</span>
+              <span className="velocity-dot-sep">•</span>
               <a href="#accessibility">Accessibility</a>
             </div>
           </div>

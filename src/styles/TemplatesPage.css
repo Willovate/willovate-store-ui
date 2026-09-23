@@ -2333,41 +2333,58 @@
   justify-content: center;
   z-index: 1000;
   padding: 1rem;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .preview-modal-dialog {
   background: #0f172a;
   border-radius: 12px;
-  width: 98vw;
-  max-width: 1720px;
-  height: 96vh;
+  width: 100%;
+  max-width: min(1720px, calc(100vw - 2rem));
+  height: calc(100vh - 2rem);
+  max-height: 96vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
 }
 
 /* Modal Top Toolbar */
 .preview-modal-toolbar {
   background: #1e293b;
   border-bottom: 1px solid #334155;
-  padding: 0.75rem 1.5rem;
+  padding: 0.65rem clamp(0.75rem, 1.5vw, 1.5rem);
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
+  gap: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.toolbar-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+  flex-shrink: 1;
 }
 
 .toolbar-info h2 {
   font-size: 1.15rem;
   font-weight: 800;
   color: #ffffff;
-  margin: 0 0 0.2rem 0;
+  margin: 0;
+  white-space: nowrap;
 }
 
 .toolbar-tags {
   display: flex;
   gap: 0.35rem;
+  flex-wrap: wrap;
 }
 
 .toolbar-tag-pill {
@@ -2462,9 +2479,27 @@
 .preview-viewport-container {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 0;
   display: block;
   background: #080c14;
+}
+
+.preview-viewport-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.preview-viewport-container::-webkit-scrollbar-track {
+  background: rgba(8, 12, 20, 0.6);
+}
+
+.preview-viewport-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+}
+
+.preview-viewport-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.35);
 }
 
 .preview-viewport-container.device-mobile {
@@ -2511,9 +2546,31 @@
 .frame-mobile {
   width: 390px;
   max-width: 100%;
+  height: 820px;
+  max-height: calc(100vh - 120px);
   border: 12px solid #1e293b;
   border-radius: 36px;
   box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  transform: translateZ(0) !important;
+}
+
+.simulated-frame.frame-mobile .velocity-storefront-wrapper,
+.simulated-frame.frame-mobile .sports-storefront-wrapper {
+  flex: 1 !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  position: relative !important;
+  transform: translateZ(0) !important;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
 .mobile-chrome-notch {
@@ -2615,13 +2672,13 @@
   margin-bottom: 0.5rem;
 }
 
-.hero-headline {
+.template-hero-headline {
   font-size: 3rem;
   line-height:1.2;
   white-space: pre-line;
 }
 
-.frame-mobile .hero-headline {
+.frame-mobile .template-hero-headline {
   font-size: 1.5rem;
 }
 
@@ -2681,7 +2738,7 @@
   align-items: center;
 }
 
-.hero-layout-centered .hero-headline {
+.hero-layout-centered .template-hero-headline {
   font-size: 2.75rem;
   max-width: 720px;
   margin-left: auto;
@@ -2743,7 +2800,7 @@
 }
 
 /* Bold Athletic / Activewear Styling in Preview */
-.storefront-hero.style-bold .hero-headline {
+.storefront-hero.style-bold .template-hero-headline {
   font-weight: 900;
   letter-spacing: -0.02em;
   text-transform: uppercase;
@@ -2763,7 +2820,7 @@
 }
 
 /* Clean & Linen Resort Styling in Preview */
-.storefront-hero.style-clean .hero-headline {
+.storefront-hero.style-clean .template-hero-headline {
   font-weight: 700;
   letter-spacing: -0.01em;
 }
@@ -3103,7 +3160,7 @@
 }
 
 /* Luxury & Playful Style Refinements in Preview */
-.storefront-hero.style-luxury .hero-headline {
+.storefront-hero.style-luxury .template-hero-headline {
   font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
   font-weight: 700;
 }
@@ -3115,7 +3172,7 @@
   font-size: 0.8rem;
 }
 
-.storefront-hero.style-playful .hero-headline {
+.storefront-hero.style-playful .template-hero-headline {
   font-weight: 800;
   letter-spacing: -0.01em;
 }
@@ -3130,7 +3187,7 @@
   border-radius: 20px;
 }
 
-.storefront-hero.style-minimal .hero-headline {
+.storefront-hero.style-minimal .template-hero-headline {
   font-weight: 600;
   letter-spacing: -0.02em;
 }
@@ -7861,20 +7918,14 @@
 }
 
 /* =========================================================================
-   Tablet-Style Header for Desktop, Tablet, and Mobile (Fullscreen Unchanged)
+   Tablet/Mobile-Style Header for Tablet and Mobile (Desktop and Fullscreen Unchanged)
    ========================================================================= */
-.simulated-frame.frame-desktop .sports-desktop-nav,
-.simulated-frame.frame-desktop .desktop-only,
-.simulated-frame.frame-desktop .account-trigger,
 .simulated-frame.frame-tablet .sports-desktop-nav,
 .simulated-frame.frame-tablet .desktop-only,
 .simulated-frame.frame-tablet .account-trigger,
 .simulated-frame.frame-mobile .sports-desktop-nav,
 .simulated-frame.frame-mobile .desktop-only,
 .simulated-frame.frame-mobile .account-trigger,
-.sports-storefront-wrapper.sports-device-desktop .sports-desktop-nav,
-.sports-storefront-wrapper.sports-device-desktop .desktop-only,
-.sports-storefront-wrapper.sports-device-desktop .account-trigger,
 .sports-storefront-wrapper.sports-device-tablet .sports-desktop-nav,
 .sports-storefront-wrapper.sports-device-tablet .desktop-only,
 .sports-storefront-wrapper.sports-device-tablet .account-trigger,
@@ -7884,10 +7935,8 @@
   display: none !important;
 }
 
-.simulated-frame.frame-desktop .sports-mobile-menu-trigger,
 .simulated-frame.frame-tablet .sports-mobile-menu-trigger,
 .simulated-frame.frame-mobile .sports-mobile-menu-trigger,
-.sports-storefront-wrapper.sports-device-desktop .sports-mobile-menu-trigger,
 .sports-storefront-wrapper.sports-device-tablet .sports-mobile-menu-trigger,
 .sports-storefront-wrapper.sports-device-mobile .sports-mobile-menu-trigger {
   display: inline-flex !important;
@@ -8006,10 +8055,16 @@
 .sports-storefront-wrapper.sports-device-mobile .sports-action-btn:not(.account-trigger):not(.desktop-only),
 .simulated-frame.frame-mobile .search-trigger,
 .simulated-frame.frame-mobile .wishlist-trigger,
+.simulated-frame.frame-mobile .cart-trigger,
 .sports-storefront-wrapper.sports-device-mobile .search-trigger,
-.sports-storefront-wrapper.sports-device-mobile .wishlist-trigger {
+.sports-storefront-wrapper.sports-device-mobile .wishlist-trigger,
+.sports-storefront-wrapper.sports-device-mobile .cart-trigger,
+.velocity-storefront-wrapper.device-mobile .search-trigger,
+.velocity-storefront-wrapper.device-mobile .wishlist-trigger,
+.velocity-storefront-wrapper.device-mobile .cart-trigger {
   width: 32px !important;
   height: 32px !important;
+  min-width: 32px !important;
   padding: 0 !important;
   display: inline-flex !important;
   align-items: center !important;
@@ -8022,10 +8077,26 @@
 .sports-storefront-wrapper.sports-device-mobile .sports-action-btn:not(.account-trigger):not(.desktop-only) svg,
 .simulated-frame.frame-mobile .search-trigger svg,
 .simulated-frame.frame-mobile .wishlist-trigger svg,
+.simulated-frame.frame-mobile .cart-trigger svg,
 .sports-storefront-wrapper.sports-device-mobile .search-trigger svg,
-.sports-storefront-wrapper.sports-device-mobile .wishlist-trigger svg {
+.sports-storefront-wrapper.sports-device-mobile .wishlist-trigger svg,
+.sports-storefront-wrapper.sports-device-mobile .cart-trigger svg,
+.velocity-storefront-wrapper.device-mobile .search-trigger svg,
+.velocity-storefront-wrapper.device-mobile .wishlist-trigger svg,
+.velocity-storefront-wrapper.device-mobile .cart-trigger svg {
   width: 17px !important;
   height: 17px !important;
+}
+
+.simulated-frame.frame-mobile .action-badge,
+.sports-storefront-wrapper.sports-device-mobile .action-badge,
+.velocity-storefront-wrapper.device-mobile .action-badge {
+  top: -4px !important;
+  right: -4px !important;
+  min-width: 15px !important;
+  height: 15px !important;
+  font-size: 0.55rem !important;
+  padding: 0 !important;
 }
 
 /* Strictly hide Account and any text action labels in mobile view */
@@ -8281,12 +8352,131 @@
   font-size: 1rem;
 }
 
+.simulated-frame.frame-mobile .promo-banner-card,
 .simulated-frame.frame-mobile .sports-promo-banner-card {
-  padding: 2.5rem 1.5rem;
+  padding: 1.75rem 1rem !important;
+  border-radius: 14px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
 }
 
+.simulated-frame.frame-mobile .promo-content-grid {
+  grid-template-columns: 1fr !important;
+  gap: 1.5rem !important;
+  padding: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.simulated-frame.frame-mobile .promo-title,
 .simulated-frame.frame-mobile .promo-banner-headline {
-  font-size: 1.8rem;
+  font-size: clamp(1.25rem, 5vw, 1.6rem) !important;
+  line-height: 1.15 !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  margin-bottom: 0.75rem !important;
+}
+
+.simulated-frame.frame-mobile .promo-desc {
+  font-size: 0.85rem !important;
+  line-height: 1.45 !important;
+  margin-bottom: 1.25rem !important;
+  max-width: 100% !important;
+  word-break: break-word !important;
+}
+
+.simulated-frame.frame-mobile .promo-code-box {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 0.5rem 0.75rem !important;
+  gap: 0.4rem !important;
+  margin-bottom: 1.25rem !important;
+}
+
+.simulated-frame.frame-mobile .promo-code-text {
+  font-size: 0.95rem !important;
+  letter-spacing: 0.05em !important;
+}
+
+.simulated-frame.frame-mobile .copy-code-btn {
+  padding: 0.35rem 0.6rem !important;
+  font-size: 0.72rem !important;
+  flex-shrink: 0 !important;
+}
+
+.simulated-frame.frame-mobile .promo-cta-row {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.65rem !important;
+  align-items: stretch !important;
+  width: 100% !important;
+}
+
+.simulated-frame.frame-mobile .promo-shop-btn {
+  width: 100% !important;
+  justify-content: center !important;
+  min-height: 44px !important;
+  padding: 0.7rem 1rem !important;
+  font-size: 0.88rem !important;
+  box-sizing: border-box !important;
+}
+
+.simulated-frame.frame-mobile .free-shipping-tag {
+  font-size: 0.72rem !important;
+  text-align: center !important;
+  display: block !important;
+  line-height: 1.4 !important;
+  word-break: break-word !important;
+}
+
+.simulated-frame.frame-mobile .promo-timer-col {
+  padding: 1.15rem 0.65rem !important;
+  border-radius: 12px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.simulated-frame.frame-mobile .timer-headline {
+  font-size: 0.72rem !important;
+  margin-bottom: 0.75rem !important;
+  text-align: center !important;
+}
+
+.simulated-frame.frame-mobile .countdown-clock {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.3rem !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.simulated-frame.frame-mobile .time-block {
+  min-width: 48px !important;
+  max-width: 68px !important;
+  flex: 1 1 0 !important;
+  padding: 0.4rem 0.2rem !important;
+  box-sizing: border-box !important;
+  border-radius: 8px !important;
+}
+
+.simulated-frame.frame-mobile .time-number {
+  font-size: 1.25rem !important;
+  line-height: 1 !important;
+}
+
+.simulated-frame.frame-mobile .time-colon {
+  font-size: 1.1rem !important;
+  padding: 0 1px !important;
+}
+
+.simulated-frame.frame-mobile .time-unit {
+  font-size: 0.52rem !important;
+  letter-spacing: 0.04em !important;
 }
 
 .simulated-frame.frame-mobile .sports-story-layout {

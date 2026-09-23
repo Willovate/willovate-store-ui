@@ -85,7 +85,8 @@ export const VelocityHeader: React.FC<VelocityHeaderProps> = ({
     : undefined
 
   return (
-    <header className={`velocity-header ${scrolled ? 'is-scrolled' : ''}`}>
+    <>
+      <header className={`velocity-header ${scrolled ? 'is-scrolled' : ''}`}>
       {/* 1. TOP ANNOUNCEMENT BAR */}
       {!announcementDismissed && (
         <div className="velocity-announcement-bar">
@@ -294,127 +295,128 @@ export const VelocityHeader: React.FC<VelocityHeaderProps> = ({
           </div>
         )}
       </div>
+    </header>
 
-      {/* 4. MOBILE DRAWER NAVIGATION */}
-      {mobileMenuOpen && (
-        <div className="velocity-mobile-drawer-backdrop" onClick={() => setMobileMenuOpen(false)}>
-          <aside
-            className="velocity-mobile-drawer"
-            onClick={(e) => e.stopPropagation()}
-            aria-label="Mobile Navigation"
-          >
-            <div className="mobile-drawer-header">
-              <div className="mobile-drawer-logo">
-                <span className="volt-dot" /> VELOCITY
-              </div>
+    {/* 4. MOBILE DRAWER NAVIGATION */}
+    {mobileMenuOpen && (
+      <div className="velocity-mobile-drawer-backdrop" onClick={() => setMobileMenuOpen(false)}>
+        <aside
+          className="velocity-mobile-drawer"
+          onClick={(e) => e.stopPropagation()}
+          aria-label="Mobile Navigation"
+        >
+          <div className="mobile-drawer-header">
+            <div className="mobile-drawer-logo">
+              <span className="volt-dot" /> VELOCITY
+            </div>
+            <button
+              type="button"
+              className="mobile-drawer-close"
+              onClick={() => setMobileMenuOpen(false)}
+              aria-label="Close menu"
+            >
+              ×
+            </button>
+          </div>
+
+          <div className="mobile-drawer-body">
+            <div className="mobile-search-bar">
               <button
                 type="button"
-                className="mobile-drawer-close"
-                onClick={() => setMobileMenuOpen(false)}
-                aria-label="Close menu"
+                className="mobile-search-btn"
+                onClick={() => {
+                  setMobileMenuOpen(false)
+                  onOpenSearch()
+                }}
               >
-                ×
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                <span>Search shoes, apparel, sports...</span>
               </button>
             </div>
 
-            <div className="mobile-drawer-body">
-              <div className="mobile-search-bar">
-                <button
-                  type="button"
-                  className="mobile-search-btn"
-                  onClick={() => {
-                    setMobileMenuOpen(false)
-                    onOpenSearch()
-                  }}
-                >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <circle cx="11" cy="11" r="8" />
-                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                  </svg>
-                  <span>Search shoes, apparel, sports...</span>
-                </button>
-              </div>
-
-              <ul className="mobile-nav-list">
-                {navItems.map((item) => {
-                  const hasMega = item.hasMega && VELOCITY_MEGA_MENUS[item.label]
-                  const isOpen = mobileActiveSubmenu === item.label
-                  return (
-                    <li key={item.label} className="mobile-nav-item">
-                      <div className="mobile-nav-row">
+            <ul className="mobile-nav-list">
+              {navItems.map((item) => {
+                const hasMega = item.hasMega && VELOCITY_MEGA_MENUS[item.label]
+                const isOpen = mobileActiveSubmenu === item.label
+                return (
+                  <li key={item.label} className="mobile-nav-item">
+                    <div className="mobile-nav-row">
+                      <button
+                        type="button"
+                        className="mobile-nav-main-link"
+                        onClick={() => handleNavClick(item.category)}
+                      >
+                        {item.label}
+                        {item.label === 'Sale' && <span className="sale-pill">SALE</span>}
+                      </button>
+                      {hasMega && (
                         <button
                           type="button"
-                          className="mobile-nav-main-link"
-                          onClick={() => handleNavClick(item.category)}
+                          className="mobile-submenu-toggle"
+                          onClick={() => setMobileActiveSubmenu(isOpen ? null : item.label)}
+                          aria-label={`Toggle ${item.label} submenu`}
                         >
-                          {item.label}
-                          {item.label === 'Sale' && <span className="sale-pill">SALE</span>}
+                          {isOpen ? '−' : '+'}
                         </button>
-                        {hasMega && (
-                          <button
-                            type="button"
-                            className="mobile-submenu-toggle"
-                            onClick={() => setMobileActiveSubmenu(isOpen ? null : item.label)}
-                            aria-label={`Toggle ${item.label} submenu`}
-                          >
-                            {isOpen ? '−' : '+'}
-                          </button>
-                        )}
-                      </div>
-
-                      {hasMega && isOpen && (
-                        <div className="mobile-submenu-panel">
-                          {VELOCITY_MEGA_MENUS[item.label].columns.map((col, cIdx) => (
-                            <div key={cIdx} className="mobile-sub-group">
-                              <span className="mobile-sub-group-title">{col.title}</span>
-                              {col.links.map((link, lIdx) => (
-                                <button
-                                  key={lIdx}
-                                  type="button"
-                                  className="mobile-sub-link"
-                                  onClick={() => handleSubLinkClick(link.category, link.sport, link.subCategory)}
-                                >
-                                  {link.label}
-                                </button>
-                              ))}
-                            </div>
-                          ))}
-                        </div>
                       )}
-                    </li>
-                  )
-                })}
-              </ul>
+                    </div>
 
-              <div className="mobile-drawer-footer">
-                <div className="mobile-quick-actions">
-                  <button
-                    type="button"
-                    className="mobile-action-btn"
-                    onClick={() => {
-                      setMobileMenuOpen(false)
-                      onOpenWishlist()
-                    }}
-                  >
-                    ♡ Wishlist ({wishlistCount})
-                  </button>
-                  <button
-                    type="button"
-                    className="mobile-action-btn"
-                    onClick={() => {
-                      setMobileMenuOpen(false)
-                      onOpenCart()
-                    }}
-                  >
-                    🛍️ Shopping Bag ({cartCount})
-                  </button>
-                </div>
-                <p className="mobile-motto">MOVE WITHOUT LIMITS // VELOCITY 2026</p>
+                    {hasMega && isOpen && (
+                      <div className="mobile-submenu-panel">
+                        {VELOCITY_MEGA_MENUS[item.label].columns.map((col, cIdx) => (
+                          <div key={cIdx} className="mobile-sub-group">
+                            <span className="mobile-sub-group-title">{col.title}</span>
+                            {col.links.map((link, lIdx) => (
+                              <button
+                                key={lIdx}
+                                type="button"
+                                className="mobile-sub-link"
+                                onClick={() => handleSubLinkClick(link.category, link.sport, link.subCategory)}
+                              >
+                                {link.label}
+                              </button>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </li>
+                )
+              })}
+            </ul>
+
+            <div className="mobile-drawer-footer">
+              <div className="mobile-quick-actions">
+                <button
+                  type="button"
+                  className="mobile-action-btn"
+                  onClick={() => {
+                    setMobileMenuOpen(false)
+                    onOpenWishlist()
+                  }}
+                >
+                  ♡ Wishlist ({wishlistCount})
+                </button>
+                <button
+                  type="button"
+                  className="mobile-action-btn"
+                  onClick={() => {
+                    setMobileMenuOpen(false)
+                    onOpenCart()
+                  }}
+                >
+                  🛍️ Shopping Bag ({cartCount})
+                </button>
               </div>
+              <p className="mobile-motto">MOVE WITHOUT LIMITS // VELOCITY 2026</p>
             </div>
-          </aside>
-        </div>
-      )}
-    </header>
+          </div>
+        </aside>
+      </div>
+    )}
+  </>
   )
 }

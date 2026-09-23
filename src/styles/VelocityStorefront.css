@@ -27,7 +27,7 @@
 
 /* Reset & Container */
 .velocity-storefront-wrapper {
-  background-color: var(--vel-bg);
+  background-color: #5672aa;
   color: var(--vel-text);
   font-family: var(--vel-font-display);
   line-height: 1.5;
@@ -175,6 +175,8 @@
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--vel-border-subtle);
   transition: all 0.3s ease;
+  container-type: inline-size;
+  container-name: velocity-header;
 }
 
 .velocity-header.is-scrolled {
@@ -199,7 +201,7 @@
   max-width: 1440px;
   margin: 0 auto;
   position: relative;
-  padding: 0 2.5rem;
+  padding: 0 clamp(1rem, 2vw, 2.5rem);
   box-sizing: border-box;
 }
 
@@ -220,7 +222,7 @@
 
 .announcement-dismiss {
   position: absolute;
-  right: 2.5rem;
+  right: clamp(1rem, 2vw, 2.5rem);
   background: transparent;
   border: none;
   color: var(--vel-text-muted);
@@ -231,26 +233,29 @@
 /* Navbar */
 .velocity-navbar-container {
   position: relative;
+  width: 100%;
 }
 
 .velocity-navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.15rem 2.5rem;
+  padding: 0.85rem clamp(1rem, 2vw, 2.5rem);
   max-width: 1440px;
   margin: 0 auto;
   width: 100%;
   box-sizing: border-box;
-  gap: 1.5rem;
+  gap: clamp(0.6rem, 1.2vw, 1.5rem);
+  background-color: #3c79ea;
 }
 
 .velocity-logo-link {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
+  gap: clamp(0.5rem, 0.75vw, 0.85rem);
   text-decoration: none;
   color: #ffffff;
+  flex-shrink: 0;
 }
 
 .velocity-logo-symbol {
@@ -259,6 +264,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .logo-svg {
@@ -272,30 +278,35 @@
 }
 
 .velocity-brand-name {
-  font-size: 1.35rem;
+  font-size: clamp(1.15rem, 1.3vw, 1.35rem);
   font-weight: 900;
   letter-spacing: 0.12em;
   line-height: 1;
+  white-space: nowrap;
 }
 
 .velocity-brand-tagline {
-  font-size: 0.55rem;
+  font-size: clamp(0.48rem, 0.52vw, 0.55rem);
   color: var(--vel-volt);
   font-weight: 800;
   letter-spacing: 0.18em;
   margin-top: 2px;
+  white-space: nowrap;
 }
 
 /* Desktop Navigation */
 .velocity-desktop-nav {
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .nav-items-list {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: clamp(0.2rem, 0.45vw, 0.65rem);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -306,17 +317,17 @@
   background: transparent;
   border: none;
   color: #ffffff;
-  font-size: 0.92rem;
+  font-size: clamp(0.78rem, 0.86vw, 0.92rem);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 0.6rem 0.85rem;
+  letter-spacing: 0.04em;
+  padding: 0.5rem clamp(0.32rem, 0.55vw, 0.85rem);
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s;
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.35rem;
   white-space: nowrap !important;
 }
 
@@ -333,7 +344,7 @@
 .velocity-header-actions {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: clamp(0.35rem, 0.5vw, 0.65rem);
   flex-shrink: 0;
 }
 
@@ -341,16 +352,17 @@
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--vel-border-subtle);
   color: #ffffff;
-  padding: 0.55rem 0.85rem;
+  padding: 0.5rem clamp(0.45rem, 0.6vw, 0.85rem);
   border-radius: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
   font-size: 0.82rem;
   font-weight: 600;
   position: relative;
   transition: all 0.2s;
+  white-space: nowrap;
 }
 
 .action-icon-btn:hover {
@@ -378,6 +390,41 @@
 .cart-badge {
   background: var(--vel-volt);
   color: #080c14;
+}
+
+/* Fluid Desktop Header Scaling (<= 1280px / 100% Zoom on Laptops) */
+@media (max-width: 1280px) and (min-width: 769px) {
+  .velocity-header-actions .action-label {
+    display: none !important;
+  }
+  .velocity-header-actions .action-icon-btn {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    padding: 0 !important;
+    justify-content: center !important;
+  }
+  .velocity-header-actions .action-icon-btn svg {
+    width: 19px !important;
+    height: 19px !important;
+  }
+}
+
+@container velocity-header (max-width: 1280px) {
+  .velocity-header-actions .action-label {
+    display: none !important;
+  }
+  .velocity-header-actions .action-icon-btn {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    padding: 0 !important;
+    justify-content: center !important;
+  }
+  .velocity-header-actions .action-icon-btn svg {
+    width: 19px !important;
+    height: 19px !important;
+  }
 }
 
 /* Mobile Hamburger Button */
@@ -554,14 +601,30 @@
 
 .velocity-mobile-drawer {
   width: 85%;
-  max-width: 380px;
+  max-width: 340px;
   background: #0b101c;
   height: 100%;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  padding: 1.5rem;
+  padding: 1.25rem 1rem;
   border-right: 1px solid var(--vel-border);
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(204, 255, 0, 0.3) transparent;
+}
+
+.velocity-mobile-drawer::-webkit-scrollbar {
+  width: 4px;
+}
+
+.velocity-mobile-drawer::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.velocity-mobile-drawer::-webkit-scrollbar-thumb {
+  background: rgba(204, 255, 0, 0.3);
+  border-radius: 4px;
 }
 
 .mobile-drawer-header {
@@ -785,9 +848,8 @@
   letter-spacing: 0.1em;
 }
 
-.hero-headline {
-  font-size: clamp(3rem, 5.5vw, 4.6rem);
-  font-weight: 900;
+.velocity-hero-headline {
+  font-family: "Playfair Display", serif;
   line-height: 1.04;
   letter-spacing: -0.02em;
   text-transform: uppercase;
@@ -2296,7 +2358,7 @@
 
 .newsletter-privacy-note {
   font-size: 0.75rem;
-  color: var(--vel-text-dim);
+  color: black;
 }
 
 .newsletter-success-box {
@@ -2592,7 +2654,7 @@ footer.velocity-footer {
   color: #ffffff;
 }
 
-.dot-sep {
+.velocity-dot-sep {
   color: var(--vel-border);
 }
 
@@ -4893,20 +4955,63 @@ footer.velocity-footer {
   }
 
   .velocity-navbar {
-    padding: 0.75rem 1rem !important;
+    padding: 0.6rem 0.75rem !important;
+    gap: 0.5rem !important;
+    box-sizing: border-box !important;
+  }
+
+  .velocity-logo-link {
+    gap: 0.5rem !important;
+    min-width: 0 !important;
+    flex-shrink: 1 !important;
   }
 
   .velocity-logo-symbol svg {
-    width: 26px !important;
-    height: 26px !important;
+    width: 24px !important;
+    height: 24px !important;
   }
 
   .velocity-brand-name {
-    font-size: 1.15rem !important;
+    font-size: 1.05rem !important;
+    letter-spacing: 0.05em !important;
   }
 
   .velocity-brand-tagline {
     display: none !important;
+  }
+
+  .velocity-header-actions {
+    gap: 0.35rem !important;
+    flex-shrink: 0 !important;
+    margin-left: auto !important;
+  }
+
+  .action-icon-btn {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    padding: 0 !important;
+    border-radius: 8px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    flex-shrink: 0 !important;
+  }
+
+  .action-icon-btn svg {
+    width: 18px !important;
+    height: 18px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .action-icon-btn .action-badge {
+    top: -4px !important;
+    right: -4px !important;
+    min-width: 16px !important;
+    height: 16px !important;
+    font-size: 0.6rem !important;
+    padding: 0 2px !important;
   }
 
   .announcement-text {
@@ -4920,7 +5025,7 @@ footer.velocity-footer {
     padding: 4rem 0 3rem 0 !important;
   }
 
-  .hero-headline {
+  .velocity-hero-headline {
     font-size: clamp(2.2rem, 8vw, 3rem) !important;
     line-height: 1.05 !important;
   }
@@ -5140,41 +5245,133 @@ footer.velocity-footer {
   }
 
   /* 7. Promotional Banner: Stacked Layout */
+  .velocity-promo-banner-section {
+    padding: 2rem 0 !important;
+  }
+
+  .promo-banner-card {
+    padding: 1.75rem 1rem !important;
+    border-radius: 14px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
   .promo-content-grid {
     grid-template-columns: 1fr !important;
-    gap: 1.75rem !important;
-    padding: 2rem 1.25rem !important;
+    gap: 1.5rem !important;
+    padding: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .promo-title {
-    font-size: 1.75rem !important;
+    font-size: clamp(1.25rem, 5vw, 1.6rem) !important;
     line-height: 1.15 !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .promo-desc {
+    font-size: 0.85rem !important;
+    line-height: 1.45 !important;
+    margin-bottom: 1.25rem !important;
+    max-width: 100% !important;
+    word-break: break-word !important;
   }
 
   .promo-code-box {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
     width: 100% !important;
-    flex-wrap: wrap !important;
-    gap: 0.5rem !important;
+    box-sizing: border-box !important;
+    padding: 0.5rem 0.75rem !important;
+    gap: 0.4rem !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .promo-code-text {
+    font-size: 0.95rem !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  .copy-code-btn {
+    padding: 0.35rem 0.6rem !important;
+    font-size: 0.72rem !important;
+    flex-shrink: 0 !important;
+  }
+
+  .promo-cta-row {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.65rem !important;
+    align-items: stretch !important;
+    width: 100% !important;
   }
 
   .promo-shop-btn {
     width: 100% !important;
     justify-content: center !important;
-    min-height: 48px !important;
+    min-height: 44px !important;
+    padding: 0.7rem 1rem !important;
+    font-size: 0.88rem !important;
+    box-sizing: border-box !important;
+  }
+
+  .free-shipping-tag {
+    font-size: 0.72rem !important;
+    text-align: center !important;
+    display: block !important;
+    line-height: 1.4 !important;
+    word-break: break-word !important;
+  }
+
+  .promo-timer-col {
+    padding: 1.15rem 0.65rem !important;
+    border-radius: 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .timer-headline {
+    font-size: 0.72rem !important;
+    margin-bottom: 0.75rem !important;
+    text-align: center !important;
   }
 
   .countdown-clock {
-    gap: 0.35rem !important;
+    display: flex !important;
+    align-items: center !important;
     justify-content: center !important;
+    gap: 0.3rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .time-block {
-    min-width: 60px !important;
-    padding: 0.6rem !important;
+    min-width: 48px !important;
+    max-width: 68px !important;
+    flex: 1 1 0 !important;
+    padding: 0.4rem 0.2rem !important;
+    box-sizing: border-box !important;
+    border-radius: 8px !important;
   }
 
   .time-number {
-    font-size: 1.6rem !important;
+    font-size: 1.25rem !important;
+    line-height: 1 !important;
+  }
+
+  .time-colon {
+    font-size: 1.1rem !important;
+    padding: 0 1px !important;
+  }
+
+  .time-unit {
+    font-size: 0.52rem !important;
+    letter-spacing: 0.04em !important;
   }
 
   /* 8. Sports Category Cards (Curated Campaigns Showcase) */
@@ -5450,6 +5647,41 @@ footer.velocity-footer {
     font-size: 0.95rem !important;
   }
 
+  /* Mobile Modals (Search, Wishlist, QuickView, Size Guide) */
+  .velocity-search-modal-backdrop,
+  .velocity-wishlist-modal-backdrop,
+  .velocity-quickview-backdrop,
+  .velocity-size-guide-backdrop {
+    padding: 1rem 0.5rem !important;
+    align-items: center !important;
+  }
+
+  .velocity-search-modal,
+  .velocity-wishlist-modal,
+  .quickview-dialog,
+  .size-guide-dialog {
+    width: 95% !important;
+    max-width: 95% !important;
+    max-height: 88vh !important;
+    border-radius: 14px !important;
+    box-sizing: border-box !important;
+    margin: auto !important;
+  }
+
+  .search-input-header {
+    padding: 1rem 0.75rem !important;
+    gap: 0.5rem !important;
+  }
+
+  .search-input-box {
+    font-size: 0.9rem !important;
+  }
+
+  .wishlist-modal-header {
+    padding-bottom: 0.75rem !important;
+    margin-bottom: 1rem !important;
+  }
+
   /* 14. Mobile Footer: Collapsible Accordions & Clean Flow (No Colored Box) */
   .velocity-footer {
     padding: 2.5rem 0 1.5rem 0 !important;
@@ -5569,20 +5801,63 @@ footer.velocity-footer {
   }
 
   .velocity-navbar {
-    padding: 0.75rem 1rem !important;
+    padding: 0.6rem 0.75rem !important;
+    gap: 0.5rem !important;
+    box-sizing: border-box !important;
+  }
+
+  .velocity-logo-link {
+    gap: 0.5rem !important;
+    min-width: 0 !important;
+    flex-shrink: 1 !important;
   }
 
   .velocity-logo-symbol svg {
-    width: 26px !important;
-    height: 26px !important;
+    width: 24px !important;
+    height: 24px !important;
   }
 
   .velocity-brand-name {
-    font-size: 1.15rem !important;
+    font-size: 1.05rem !important;
+    letter-spacing: 0.05em !important;
   }
 
   .velocity-brand-tagline {
     display: none !important;
+  }
+
+  .velocity-header-actions {
+    gap: 0.35rem !important;
+    flex-shrink: 0 !important;
+    margin-left: auto !important;
+  }
+
+  .action-icon-btn {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    padding: 0 !important;
+    border-radius: 8px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    flex-shrink: 0 !important;
+  }
+
+  .action-icon-btn svg {
+    width: 18px !important;
+    height: 18px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .action-icon-btn .action-badge {
+    top: -4px !important;
+    right: -4px !important;
+    min-width: 16px !important;
+    height: 16px !important;
+    font-size: 0.6rem !important;
+    padding: 0 2px !important;
   }
 
   .announcement-text {
@@ -5595,7 +5870,7 @@ footer.velocity-footer {
     padding: 4rem 0 3rem 0 !important;
   }
 
-  .hero-headline {
+  .velocity-hero-headline {
     font-size: clamp(2.2rem, 8vw, 3rem) !important;
     line-height: 1.05 !important;
   }
@@ -5809,41 +6084,133 @@ footer.velocity-footer {
     scroll-snap-align: start !important;
   }
 
+  .velocity-promo-banner-section {
+    padding: 2rem 0 !important;
+  }
+
+  .promo-banner-card {
+    padding: 1.75rem 1rem !important;
+    border-radius: 14px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
   .promo-content-grid {
     grid-template-columns: 1fr !important;
-    gap: 1.75rem !important;
-    padding: 2rem 1.25rem !important;
+    gap: 1.5rem !important;
+    padding: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .promo-title {
-    font-size: 1.75rem !important;
+    font-size: clamp(1.25rem, 5vw, 1.6rem) !important;
     line-height: 1.15 !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .promo-desc {
+    font-size: 0.85rem !important;
+    line-height: 1.45 !important;
+    margin-bottom: 1.25rem !important;
+    max-width: 100% !important;
+    word-break: break-word !important;
   }
 
   .promo-code-box {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
     width: 100% !important;
-    flex-wrap: wrap !important;
-    gap: 0.5rem !important;
+    box-sizing: border-box !important;
+    padding: 0.5rem 0.75rem !important;
+    gap: 0.4rem !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .promo-code-text {
+    font-size: 0.95rem !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  .copy-code-btn {
+    padding: 0.35rem 0.6rem !important;
+    font-size: 0.72rem !important;
+    flex-shrink: 0 !important;
+  }
+
+  .promo-cta-row {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.65rem !important;
+    align-items: stretch !important;
+    width: 100% !important;
   }
 
   .promo-shop-btn {
     width: 100% !important;
     justify-content: center !important;
-    min-height: 48px !important;
+    min-height: 44px !important;
+    padding: 0.7rem 1rem !important;
+    font-size: 0.88rem !important;
+    box-sizing: border-box !important;
+  }
+
+  .free-shipping-tag {
+    font-size: 0.72rem !important;
+    text-align: center !important;
+    display: block !important;
+    line-height: 1.4 !important;
+    word-break: break-word !important;
+  }
+
+  .promo-timer-col {
+    padding: 1.15rem 0.65rem !important;
+    border-radius: 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .timer-headline {
+    font-size: 0.72rem !important;
+    margin-bottom: 0.75rem !important;
+    text-align: center !important;
   }
 
   .countdown-clock {
-    gap: 0.35rem !important;
+    display: flex !important;
+    align-items: center !important;
     justify-content: center !important;
+    gap: 0.3rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .time-block {
-    min-width: 60px !important;
-    padding: 0.6rem !important;
+    min-width: 48px !important;
+    max-width: 68px !important;
+    flex: 1 1 0 !important;
+    padding: 0.4rem 0.2rem !important;
+    box-sizing: border-box !important;
+    border-radius: 8px !important;
   }
 
   .time-number {
-    font-size: 1.6rem !important;
+    font-size: 1.25rem !important;
+    line-height: 1 !important;
+  }
+
+  .time-colon {
+    font-size: 1.1rem !important;
+    padding: 0 1px !important;
+  }
+
+  .time-unit {
+    font-size: 0.52rem !important;
+    letter-spacing: 0.04em !important;
   }
 
   .asymmetric-categories-grid {
@@ -6111,6 +6478,41 @@ footer.velocity-footer {
   .cart-checkout-btn {
     min-height: 50px !important;
     font-size: 0.95rem !important;
+  }
+
+  /* Mobile Modals (Search, Wishlist, QuickView, Size Guide) */
+  .velocity-search-modal-backdrop,
+  .velocity-wishlist-modal-backdrop,
+  .velocity-quickview-backdrop,
+  .velocity-size-guide-backdrop {
+    padding: 1rem 0.5rem !important;
+    align-items: center !important;
+  }
+
+  .velocity-search-modal,
+  .velocity-wishlist-modal,
+  .quickview-dialog,
+  .size-guide-dialog {
+    width: 95% !important;
+    max-width: 95% !important;
+    max-height: 88vh !important;
+    border-radius: 14px !important;
+    box-sizing: border-box !important;
+    margin: auto !important;
+  }
+
+  .search-input-header {
+    padding: 1rem 0.75rem !important;
+    gap: 0.5rem !important;
+  }
+
+  .search-input-box {
+    font-size: 0.9rem !important;
+  }
+
+  .wishlist-modal-header {
+    padding-bottom: 0.75rem !important;
+    margin-bottom: 1rem !important;
   }
 
   .velocity-footer {

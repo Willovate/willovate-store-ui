@@ -12152,7 +12152,7 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                     <span className="hero-pill-eyebrow" style={{ color: template.accentColor || '#2563eb' }}>
                       {eyebrowText}
                     </span>
-                    <h1 className="hero-headline">{template.headline}</h1>
+                    <h1 className="template-hero-headline">{template.headline}</h1>
                     <p className="hero-subtitle">{template.subtitle}</p>
                     <div className="hero-cta-group">
                       <button
@@ -12194,7 +12194,7 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                     </div>
                     <div className="editorial-two-col">
                       <div className="editorial-text-pane">
-                        <h1 className="hero-headline editorial-headline">{template.headline}</h1>
+                        <h1 className="template-hero-headline editorial-headline">{template.headline}</h1>
                         <p className="hero-subtitle editorial-subtitle">{template.subtitle}</p>
                         <div className="hero-cta-group">
                           <button
@@ -12250,7 +12250,7 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                         <span className="hero-pill-eyebrow" style={{ color: template.accentColor || '#0284c7' }}>
                           {eyebrowText}
                         </span>
-                        <h1 className="hero-headline cardgrid-headline">{template.headline}</h1>
+                        <h1 className="template-hero-headline cardgrid-headline">{template.headline}</h1>
                         <p className="hero-subtitle cardgrid-sub">{template.subtitle}</p>
                       </div>
                       <div className="cardgrid-cta-box">
@@ -12344,7 +12344,7 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                       <span className="hero-pill-eyebrow boldminimal-eyebrow" style={{ color: template.accentColor || '#9f1239' }}>
                         {eyebrowText}
                       </span>
-                      <h1 className="hero-headline boldminimal-headline">{template.headline}</h1>
+                      <h1 className="template-hero-headline boldminimal-headline">{template.headline}</h1>
                       <p className="hero-subtitle boldminimal-subtitle">{template.subtitle}</p>
                       <div className="hero-cta-group boldminimal-cta-row">
                         <button
@@ -12384,7 +12384,7 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                       <span className="hero-pill-eyebrow" style={{ color: template.accentColor || '#2563eb' }}>
                         {eyebrowText}
                       </span>
-                      <h1 className="hero-headline">{template.headline}</h1>
+                      <h1 className="template-hero-headline">{template.headline}</h1>
                       <p className="hero-subtitle">{template.subtitle}</p>
                       <div className="hero-cta-group">
                         <button

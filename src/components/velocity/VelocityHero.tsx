@@ -35,7 +35,7 @@ export const VelocityHero: React.FC<VelocityHeroProps> = ({
           </div>
 
           {/* Massive Editorial Headline */}
-          <h1 className="hero-headline">
+          <h1 className="velocity-hero-headline">
             MOVE WITHOUT <br />
             <span className="headline-volt-glow">LIMITS.</span>
           </h1>

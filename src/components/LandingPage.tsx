@@ -261,7 +261,7 @@ function HeroSection({ onStartFree, onExploreDemo, onAICommand }: HeroSectionPro
         </div>
 
         {/* Headline */}
-        <h1 className="hero-headline">
+        <h1 className="landing-hero-headline">
           <span className="h1-white">Imagine it.</span>
           <span className="h1-gradient">Willovate brings it to life.</span>
         </h1>

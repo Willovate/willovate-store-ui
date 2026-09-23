@@ -55,7 +55,7 @@ export const VelocityPromoBanner: React.FC<VelocityPromoBannerProps> = ({ onShop
             <div className="promo-copy-col">
               <span className="promo-kicker-pill">LIMITED TIME FLASH SALE</span>
               <h2 className="promo-title">
-                SAVE 15% ON YOUR <br />
+                SAVE 15% ON YOUR <br className="d-none-mobile" />
                 <span className="volt-text">NEXT PERSONAL RECORD</span>
               </h2>
               <p className="promo-desc">
