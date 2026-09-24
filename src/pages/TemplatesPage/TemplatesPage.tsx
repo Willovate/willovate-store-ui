@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react'
 import './TemplatesPage.css'
 import { VelocityStorefront } from '../../templates/sports/Velocity'
-export { VelocityStorefront }
+import { ArenaStorefront } from '../../templates/sports/Arena'
+export { VelocityStorefront, ArenaStorefront }
 
 // Re-export domain types
 export type {
@@ -305,12 +306,29 @@ export interface SportsStorefrontProps {
 }
 
 export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
+  template,
   device = 'desktop',
   customAccentColor,
   onColorChange: _onColorChange,
   onUseTemplate,
   onClose,
 }) => {
+  const isArena =
+    template &&
+    (template.slug === 'sports-arena' ||
+      template.id === 'sports-arena' ||
+      template.name?.toLowerCase().includes('arena'))
+
+  if (isArena) {
+    return (
+      <ArenaStorefront
+        deviceView={device}
+        customAccentColor={customAccentColor || undefined}
+        onBack={onClose}
+      />
+    )
+  }
+
   return (
     <VelocityStorefront
       device={device}

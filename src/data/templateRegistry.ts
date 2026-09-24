@@ -1,6 +1,7 @@
 import type { ComponentType } from 'react'
 import type { CategoryData, MarketplaceTemplate, Template } from '../types'
 import { VelocityStorefront } from '../templates/sports/Velocity'
+import { ArenaStorefront } from '../templates/sports/Arena'
 import { ALL_SPORTS_MARKETPLACE_TEMPLATES } from './sportsTemplatesData'
 
 export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
@@ -8,8 +9,8 @@ export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
     displayName: 'Sports Store',
     badgeIcon: '⚽',
     description: 'High-energy performance athletic wear, running shoes, and competition gear.',
-    filterTags: ['All', 'Performance Sports', 'Athletic', 'Footwear'],
-    templates: ALL_SPORTS_MARKETPLACE_TEMPLATES, // Only Sports Store has the Velocity template!
+    filterTags: ['All', 'Performance Sports', 'Athletic', 'Footwear', 'Football', 'Cricket'],
+    templates: ALL_SPORTS_MARKETPLACE_TEMPLATES,
   },
   'online-store': {
     displayName: 'Online Store',
@@ -69,6 +70,14 @@ export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
   },
 }
 
-export function getTemplateComponent(_template?: MarketplaceTemplate | Template | null): ComponentType<any> {
+export function getTemplateComponent(template?: MarketplaceTemplate | Template | null): ComponentType<any> {
+  if (
+    template &&
+    (template.slug === 'sports-arena' ||
+      template.id === 'sports-arena' ||
+      template.name?.toLowerCase().includes('arena'))
+  ) {
+    return ArenaStorefront
+  }
   return VelocityStorefront
 }

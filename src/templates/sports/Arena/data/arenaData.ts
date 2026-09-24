@@ -1,0 +1,572 @@
+import type { ArenaProduct, ArenaMegaMenuItem, ArenaSport } from '../types'
+
+export const ARENA_PRODUCTS: ArenaProduct[] = [
+  // FOOTBALL
+  {
+    id: 'arn-fb-01',
+    name: 'Vanguard Elite Matchday Jersey',
+    sport: 'football',
+    category: 'jerseys',
+    price: 130,
+    compareAtPrice: 155,
+    image: 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=800&auto=format&fit=crop&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&auto=format&fit=crop&q=80',
+    ],
+    badge: 'OFFICIAL KIT',
+    rating: 4.95,
+    reviewCount: 168,
+    inStock: true,
+    isOfficialKit: true,
+    brand: 'Arena Pro',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: [
+      { name: 'Stadium Obsidian', hex: '#0f172a' },
+      { name: 'Championship Gold', hex: '#f59e0b' },
+      { name: 'Pure White', hex: '#ffffff' },
+    ],
+    description:
+      'Engineered for 90 minutes of unrelenting match intensity. Features AeroWeave 4D micro-ventilation to channel cooling airflow directly across athlete heat zones.',
+    techSpecs: [
+      { label: 'Fabric Tech', value: 'AeroWeave 4D Micro-Mesh' },
+      { label: 'Weight', value: '142 grams (Player Spec)' },
+      { label: 'Fit Profile', value: 'Athletic Aerodynamic Cut' },
+      { label: 'Certification', value: 'FIFA Pro Match Approved' },
+    ],
+    details: [
+      'Heat-applied silicone crest for weightless chest comfort',
+      'Bonded raglan seams eliminate friction under armpits',
+      'Moisture-wicking hydrophobic yarns dry 40% faster than cotton',
+      'Official competition authenticity tag at hem',
+    ],
+  },
+  {
+    id: 'arn-fb-02',
+    name: 'Phantom Strike Carbon FG Cleats',
+    sport: 'football',
+    category: 'boots',
+    price: 260,
+    compareAtPrice: 295,
+    image: 'https://images.unsplash.com/photo-1511886929837-354d827aae26?w=800&auto=format&fit=crop&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1511886929837-354d827aae26?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=800&auto=format&fit=crop&q=80',
+    ],
+    badge: 'NEW DROP',
+    rating: 4.9,
+    reviewCount: 94,
+    inStock: true,
+    brand: 'Arena Pro',
+    sizes: ['US 7.5', 'US 8.5', 'US 9.5', 'US 10.5', 'US 11.5'],
+    colors: [
+      { name: 'Solar Amber', hex: '#ff5500' },
+      { name: 'Pitch Black', hex: '#090a0f' },
+    ],
+    description:
+      'Explosive acceleration through a full-length aerospace carbon fiber soleplate. GripKnock 3D touch micro-texturing ensures pinpoint ball control in all weather.',
+    techSpecs: [
+      { label: 'Chassis', value: 'Full Carbon Fiber Springplate' },
+      { label: 'Upper', value: 'Ultra-thin VaporKnit Skin' },
+      { label: 'Stud Pattern', value: 'Rotational Chevron Blades' },
+    ],
+    details: [
+      'Instant energy rebound upon toe-off',
+      'Anatomical heel cup locks foot securely without slippage',
+      'Engineered for firm natural turf pitches',
+    ],
+  },
+  {
+    id: 'arn-fb-03',
+    name: 'Apex Aerodynamic Match Ball',
+    sport: 'football',
+    category: 'balls',
+    price: 95,
+    image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&auto=format&fit=crop&q=80',
+    gallery: ['https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&auto=format&fit=crop&q=80'],
+    badge: 'FIFA APPROVED',
+    rating: 4.88,
+    reviewCount: 72,
+    inStock: true,
+    brand: 'MatchGrade',
+    sizes: ['Size 5 (Official Match)', 'Size 4 (Academy)'],
+    colors: [{ name: 'Stadium White / Electric Amber', hex: '#ff5500' }],
+    description:
+      'Thermally bonded 12-panel seamless construction guarantees true spherical flight aerodynamics and zero water absorption in driving rain.',
+    techSpecs: [
+      { label: 'Construction', value: 'Seamless Thermobonded' },
+      { label: 'Bladder', value: 'Butyl Latex High-Retention' },
+      { label: 'Surface', value: 'Micro-Dimpled PU Casing' },
+    ],
+    details: ['FIFA Quality Pro Certified', 'True-arc ball trajectory in wind tests', 'Supplied in presentation stadium box'],
+  },
+  {
+    id: 'arn-fb-04',
+    name: 'Stadium Pro Training Anorak',
+    sport: 'football',
+    category: 'training',
+    price: 110,
+    compareAtPrice: 135,
+    image: 'https://images.unsplash.com/photo-1556906781-9a412961c28c?w=800&auto=format&fit=crop&q=80',
+    gallery: ['https://images.unsplash.com/photo-1556906781-9a412961c28c?w=800&auto=format&fit=crop&q=80'],
+    rating: 4.79,
+    reviewCount: 45,
+    inStock: true,
+    brand: 'Arena Pro',
+    sizes: ['S', 'M', 'L', 'XL'],
+    colors: [
+      { name: 'Charcoal Grey', hex: '#1e2430' },
+      { name: 'Stadium Crimson', hex: '#ef4444' },
+    ],
+    description:
+      'Lightweight thermal barrier engineered for pre-match warmups and sideline drills in blustery conditions.',
+    techSpecs: [
+      { label: 'Membrane', value: 'StormShield Hydrophobic' },
+      { label: 'Ventilation', value: 'Back Venting Flap' },
+    ],
+    details: ['Packable hood with cinch toggles', 'Zippered stash pockets for whistle & GPS tracker'],
+  },
+
+  // CRICKET
+  {
+    id: 'arn-ck-01',
+    name: 'Gladiator Limited Grade 1 English Willow Bat',
+    sport: 'cricket',
+    category: 'equipment',
+    price: 380,
+    compareAtPrice: 420,
+    image: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=800&auto=format&fit=crop&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=800&auto=format&fit=crop&q=80',
+    ],
+    badge: 'GRADE 1 PRO',
+    rating: 4.98,
+    reviewCount: 83,
+    inStock: true,
+    isLimitedDrop: true,
+    brand: 'MatchGrade',
+    sizes: ['Short Handle (SH)', 'Long Handle (LH)'],
+    colors: [
+      { name: 'Natural Willow / Amber Wrap', hex: '#ff5500' },
+      { name: 'Carbon Black Wrap', hex: '#111827' },
+    ],
+    description:
+      'Hand-crafted from reserve-grade clefts of unbleached English Willow. Massive 40mm contoured edges paired with a featherlight balance point for maximum power dispatch.',
+    techSpecs: [
+      { label: 'Willow Type', value: 'Grade 1+ English Willow' },
+      { label: 'Grain Count', value: '8 - 12 Straight Grains' },
+      { label: 'Edge Profile', value: '38 - 42mm Power Swell' },
+      { label: 'Weight', value: '2lb 8oz - 2lb 10oz' },
+    ],
+    details: [
+      'Pre-knocked in with protective toe guard fitted',
+      'Multi-piece cane handle with triple rubber flex spring',
+      'Includes premium padded bat sleeve with shoulder sling',
+    ],
+  },
+  {
+    id: 'arn-ck-02',
+    name: 'Titanium Shield Pro Batting Helmet',
+    sport: 'cricket',
+    category: 'equipment',
+    price: 165,
+    image: 'https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?w=800&auto=format&fit=crop&q=80',
+    gallery: ['https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?w=800&auto=format&fit=crop&q=80'],
+    badge: 'TEST GRADE',
+    rating: 4.92,
+    reviewCount: 61,
+    inStock: true,
+    brand: 'Arena Pro',
+    sizes: ['Small (54-56cm)', 'Medium (57-58cm)', 'Large (59-61cm)'],
+    colors: [
+      { name: 'Midnight Navy', hex: '#0f172a' },
+      { name: 'Stadium Green', hex: '#064e3b' },
+      { name: 'Deep Maroon', hex: '#7f1d1d' },
+    ],
+    description:
+      'Impact-diffusing carbon-composite shell backed by high-density EPS foam and an ultralight titanium faceguard for uncompromised vision.',
+    techSpecs: [
+      { label: 'Grille Material', value: 'High-Tensile Titanium' },
+      { label: 'Safety Standard', value: 'BS 7928:2013 Tested' },
+    ],
+    details: [
+      'Micro-metric dial retention system for custom skull lock',
+      'Removable sweatband with anti-microbial treatment',
+    ],
+  },
+  {
+    id: 'arn-ck-03',
+    name: 'Championship White Test Series Jersey',
+    sport: 'cricket',
+    category: 'jerseys',
+    price: 85,
+    image: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=800&auto=format&fit=crop&q=80',
+    gallery: ['https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=800&auto=format&fit=crop&q=80'],
+    badge: 'CLASSIC TEST',
+    rating: 4.86,
+    reviewCount: 49,
+    inStock: true,
+    isOfficialKit: true,
+    brand: 'Arena Pro',
+    sizes: ['S', 'M', 'L', 'XL'],
+    colors: [{ name: 'Ivory Cream & Stadium Trim', hex: '#fafaf9' }],
+    description:
+      'Honoring timeless tradition with cutting-edge comfort. Engineered for day-long endurance under blistering heat with UPF 50+ sun reflection.',
+    techSpecs: [
+      { label: 'Fabric', value: 'Bio-Poly Breathable Pique' },
+      { label: 'Sun Shield', value: 'UPF 50+ Ultra Block' },
+    ],
+    details: ['Traditional polo collar with concealed 2-button placket', 'Laser-perforated lateral vents'],
+  },
+
+  // BASKETBALL
+  {
+    id: 'arn-bb-01',
+    name: 'Overdrive High-Altitude Basketball Shoes',
+    sport: 'basketball',
+    category: 'boots',
+    price: 210,
+    compareAtPrice: 240,
+    image: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=800&auto=format&fit=crop&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&auto=format&fit=crop&q=80',
+    ],
+    badge: 'ALL-STAR EDITION',
+    rating: 4.96,
+    reviewCount: 112,
+    inStock: true,
+    brand: 'Arena Pro',
+    sizes: ['US 8', 'US 9', 'US 10', 'US 11', 'US 12', 'US 13'],
+    colors: [
+      { name: 'Neon Amber / Jet', hex: '#ff5500' },
+      { name: 'Court Violet / Ice', hex: '#8b5cf6' },
+    ],
+    description:
+      'Engineered for explosive vertical launch and sudden lateral deceleration. Powered by dual NitroBurst zoom pods and an external TPU torsion bridge.',
+    techSpecs: [
+      { label: 'Cushioning', value: 'Dual NitroBurst Gas Pods' },
+      { label: 'Traction', value: 'Herringbone Radial Suction' },
+      { label: 'Ankle Lock', value: 'Molded Carbon Lateral Cage' },
+    ],
+    details: [
+      'Micro-molded multidirectional tread for indoor hardwood',
+      'Padded Achilles collar absorbs sharp transition torque',
+      'Reinforced toe bumper against step-ons in the paint',
+    ],
+  },
+  {
+    id: 'arn-bb-02',
+    name: 'Metropolis Pro Hardwood Jersey',
+    sport: 'basketball',
+    category: 'jerseys',
+    price: 115,
+    image: 'https://images.unsplash.com/photo-1519766304817-4f37bda74a29?w=800&auto=format&fit=crop&q=80',
+    gallery: ['https://images.unsplash.com/photo-1519766304817-4f37bda74a29?w=800&auto=format&fit=crop&q=80'],
+    badge: 'AUTHENTIC JERSEY',
+    rating: 4.91,
+    reviewCount: 88,
+    inStock: true,
+    isOfficialKit: true,
+    brand: 'Stadium Elite',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: [
+      { name: 'Deep Onyx / Stadium Orange', hex: '#ff5500' },
+      { name: 'Championship Gold', hex: '#eab308' },
+    ],
+    description:
+      'Authentic player-cut jersey featuring open-hole breathability mesh and tailored armholes for unrestricted shot release from beyond the arc.',
+    techSpecs: [
+      { label: 'Material', value: 'Recycled AeroMesh 220gsm' },
+      { label: 'Trim', value: 'Ribbed Stretch Arm & Neck Bindings' },
+    ],
+    details: ['Heat-sealed twill lettering & numbers', 'Split droptail hem for active coverage'],
+  },
+  {
+    id: 'arn-bb-03',
+    name: 'Precision Grip Composite Leather Basketball',
+    sport: 'basketball',
+    category: 'balls',
+    price: 75,
+    image: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&auto=format&fit=crop&q=80',
+    gallery: ['https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&auto=format&fit=crop&q=80'],
+    rating: 4.87,
+    reviewCount: 65,
+    inStock: true,
+    brand: 'MatchGrade',
+    sizes: ['Size 7 (Official Mens 29.5")'],
+    colors: [{ name: 'Deep Amber Grain', hex: '#c2410c' }],
+    description:
+      'Cushioned-core carcass with deep pebbling and moisture-absorbing microfibers for flawless fingertip feel from tip-off to final buzzer.',
+    techSpecs: [
+      { label: 'Cover', value: 'Microfiber Composite Leather' },
+      { label: 'Channels', value: 'Pebbled Deep-Groove Channels' },
+    ],
+    details: ['Indoor court optimization', 'Maintains consistent bounce rebound radius across temperatures'],
+  },
+
+  // TENNIS
+  {
+    id: 'arn-tn-01',
+    name: 'AeroTour 300 Pro Racket',
+    sport: 'tennis',
+    category: 'equipment',
+    price: 245,
+    compareAtPrice: 280,
+    image: 'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?w=800&auto=format&fit=crop&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?w=800&auto=format&fit=crop&q=80',
+    ],
+    badge: 'GRAND SLAM TECH',
+    rating: 4.97,
+    reviewCount: 76,
+    inStock: true,
+    brand: 'Arena Pro',
+    sizes: ['Grip 2 (4 1/4")', 'Grip 3 (4 3/8")', 'Grip 4 (4 1/2")'],
+    colors: [
+      { name: 'Matte Charcoal / Fluoro Amber', hex: '#ff5500' },
+      { name: 'Pure Cyan / White', hex: '#06b6d4' },
+    ],
+    description:
+      'Graphene-infused aerodynamic frame geometry slices through the air for maximum topspin generation and surgical baseline placement.',
+    techSpecs: [
+      { label: 'Head Size', value: '98 sq. in. / 632 cm²' },
+      { label: 'Unstrung Weight', value: '305g / 10.8oz' },
+      { label: 'String Pattern', value: '16 x 19 Spin Matrix' },
+      { label: 'Balance', value: '315mm / 9 pts HL' },
+    ],
+    details: [
+      'Shock-dampening kinetic core reduces elbow vibration by 32%',
+      'SpinGrommet channels maximize string snapback for heavy ball action',
+      'Supplied unstrung or custom strung to player specification',
+    ],
+  },
+  {
+    id: 'arn-tn-02',
+    name: 'Center Court All-Surface Tennis Shoes',
+    sport: 'tennis',
+    category: 'boots',
+    price: 160,
+    image: 'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?w=800&auto=format&fit=crop&q=80',
+    gallery: ['https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?w=800&auto=format&fit=crop&q=80'],
+    badge: 'PRO TOUR',
+    rating: 4.89,
+    reviewCount: 52,
+    inStock: true,
+    brand: 'Arena Pro',
+    sizes: ['US 8', 'US 8.5', 'US 9', 'US 9.5', 'US 10', 'US 11'],
+    colors: [
+      { name: 'White / Stadium Gold', hex: '#f59e0b' },
+      { name: 'Graphite / Amber', hex: '#ff5500' },
+    ],
+    description:
+      'Ultra-durable DragGuard rubber compound on medial toe with lateral outriggers preventing ankle rollover on aggressive hardcourt slide recoveries.',
+    techSpecs: [
+      { label: 'Outsole', value: 'AuraGrip 6-Month Durability Rubber' },
+      { label: 'Midsole', value: 'High-Density EVA with TPU Shank' },
+    ],
+    details: ['Non-marking outsole safe for indoor and clay courts', 'Molded sockliner with arch support'],
+  },
+
+  // TRAINING & ACCESSORIES
+  {
+    id: 'arn-tr-01',
+    name: 'HydroSteel 1.2L Insulated Stadium Bottle',
+    sport: 'training',
+    category: 'accessories',
+    price: 45,
+    image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&auto=format&fit=crop&q=80',
+    gallery: ['https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&auto=format&fit=crop&q=80'],
+    rating: 4.93,
+    reviewCount: 140,
+    inStock: true,
+    brand: 'Arena Pro',
+    sizes: ['1200ml (40oz)'],
+    colors: [
+      { name: 'Matte Obsidian', hex: '#0f172a' },
+      { name: 'Brushed Steel', hex: '#94a3b8' },
+      { name: 'Solar Orange', hex: '#ff5500' },
+    ],
+    description:
+      'Double-wall vacuum insulation keeps ice-cold electrolyte beverages chilled for 36 hours throughout double sessions.',
+    techSpecs: [
+      { label: 'Material', value: '18/8 Kitchen-Grade Stainless Steel' },
+      { label: 'Cap', value: 'High-Flow Chug Spout with Magnetic Cap' },
+    ],
+    details: ['BPA and phthalate free', 'Condensation-free powder coat grip finish', 'Dishwasher safe'],
+  },
+  {
+    id: 'arn-tr-02',
+    name: 'Vortex Carbon Gym Duffel 45L',
+    sport: 'training',
+    category: 'accessories',
+    price: 95,
+    compareAtPrice: 120,
+    image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&auto=format&fit=crop&q=80',
+    gallery: ['https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&auto=format&fit=crop&q=80'],
+    badge: 'WATERPROOF',
+    rating: 4.88,
+    reviewCount: 97,
+    inStock: true,
+    brand: 'Arena Pro',
+    sizes: ['45 Liters'],
+    colors: [{ name: 'Stealth Black & Amber Lining', hex: '#ff5500' }],
+    description:
+      'Ballistic nylon duffel featuring a ventilated cleat/boot compartment, water-resistant base, and padded ergonomic shoulder harness.',
+    techSpecs: [
+      { label: 'Fabric', value: '1680D Ballistic Cordura' },
+      { label: 'Zippers', value: 'YKK Aquaguard Sealing Zippers' },
+    ],
+    details: [
+      'Separated moisture-sealed wet laundry pocket',
+      'Fleece-lined padded compartment for phone & sports watch',
+    ],
+  },
+  {
+    id: 'arn-tr-03',
+    name: 'CorePulse Speed Agility Ladder & Cones Kit',
+    sport: 'training',
+    category: 'equipment',
+    price: 55,
+    image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&auto=format&fit=crop&q=80',
+    gallery: ['https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&auto=format&fit=crop&q=80'],
+    rating: 4.82,
+    reviewCount: 38,
+    inStock: true,
+    brand: 'Arena Pro',
+    sizes: ['6m (20ft) / 12 Rungs'],
+    colors: [{ name: 'High-Vis Fluoro Orange', hex: '#ff5500' }],
+    description:
+      'Professional footwork and reactive agility set used in premier football and cricket academy training grounds.',
+    techSpecs: [
+      { label: 'Rungs', value: 'Tear-Proof Shatterless Heavy Plastic' },
+      { label: 'Cones', value: '10 Disc Cones with Carry Spindle' },
+    ],
+    details: [
+      'Includes quick-clip storage strap and drill guide manual',
+      'Heavy-duty nylon straps resist scuffing across astroturf and grass',
+    ],
+  },
+]
+
+export const ARENA_SPORTS_CATEGORIES: {
+  id: ArenaSport
+  title: string
+  subtitle: string
+  image: string
+  tag: string
+  itemCount: string
+}[] = [
+  {
+    id: 'football',
+    title: 'Football',
+    subtitle: 'Matchday kits, carbon cleats & FIFA match balls',
+    image: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800&auto=format&fit=crop&q=80',
+    tag: 'CHAMPIONS LEAGUE READY',
+    itemCount: '64 Gear Items',
+  },
+  {
+    id: 'cricket',
+    title: 'Cricket',
+    subtitle: 'Grade 1 English Willow, titanium helmets & pads',
+    image: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=800&auto=format&fit=crop&q=80',
+    tag: 'TEST & T20 ELITE',
+    itemCount: '48 Gear Items',
+  },
+  {
+    id: 'basketball',
+    title: 'Basketball',
+    subtitle: 'Explosive high-tops, authentic jerseys & balls',
+    image: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&auto=format&fit=crop&q=80',
+    tag: 'HARDWOOD DOMINANCE',
+    itemCount: '52 Gear Items',
+  },
+  {
+    id: 'tennis',
+    title: 'Tennis',
+    subtitle: 'Spin-matrix rackets, clay/hardcourt tour shoes',
+    image: 'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?w=800&auto=format&fit=crop&q=80',
+    tag: 'GRAND SLAM SPEC',
+    itemCount: '38 Gear Items',
+  },
+]
+
+export const ARENA_MEGA_MENUS: Record<string, ArenaMegaMenuItem> = {
+  football: {
+    title: 'Football Department',
+    items: [
+      { name: 'Club & National Jerseys', category: 'jerseys', count: '24' },
+      { name: 'Firm Ground (FG) Boots', category: 'boots', count: '18' },
+      { name: 'FIFA Quality Match Balls', category: 'balls', count: '12' },
+      { name: 'Training Bibs & Tracksuits', category: 'training', count: '16' },
+      { name: 'Shinguards & Grip Socks', category: 'accessories', count: '22' },
+    ],
+    featuredImage: 'https://images.unsplash.com/photo-1511886929837-354d827aae26?w=600&auto=format&fit=crop&q=80',
+    featuredTitle: 'Phantom Strike FG',
+    featuredSubtitle: 'Carbon fiber sprint chassis designed for devastating wing speed.',
+  },
+  cricket: {
+    title: 'Cricket Department',
+    items: [
+      { name: 'Grade 1 English Willow Bats', category: 'equipment', count: '16' },
+      { name: 'Pro Batting Pads & Legguards', category: 'equipment', count: '14' },
+      { name: 'High-Density Batting Gloves', category: 'equipment', count: '19' },
+      { name: 'Titanium Grille Helmets', category: 'equipment', count: '8' },
+      { name: 'Test Whites & T20 Jerseys', category: 'jerseys', count: '15' },
+    ],
+    featuredImage: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=600&auto=format&fit=crop&q=80',
+    featuredTitle: 'Gladiator Limited Bat',
+    featuredSubtitle: 'Hand-shaped English Willow clefts for devastating boundaries.',
+  },
+  basketball: {
+    title: 'Basketball Department',
+    items: [
+      { name: 'High-Traction Hardwood Shoes', category: 'boots', count: '26' },
+      { name: 'Authentic Game Jerseys', category: 'jerseys', count: '20' },
+      { name: 'Indoor/Outdoor Match Balls', category: 'balls', count: '10' },
+      { name: 'Shooting Sleeves & Braces', category: 'accessories', count: '14' },
+    ],
+    featuredImage: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=600&auto=format&fit=crop&q=80',
+    featuredTitle: 'Overdrive High-Altitude',
+    featuredSubtitle: 'Dual NitroBurst pods give you unrivaled court launch.',
+  },
+}
+
+export const ARENA_TESTIMONIALS = [
+  {
+    id: 't-1',
+    author: 'Mateo Silva',
+    role: 'Top-tier European Striker',
+    sport: 'Football',
+    quote:
+      'The Phantom Strike cleats gave me that microsecond advantage against center-backs. Arena understands what match-intensity demands.',
+    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80',
+    rating: 5,
+    verified: true,
+  },
+  {
+    id: 't-2',
+    author: 'Vikram Rajput',
+    role: 'International Top-Order Batsman',
+    sport: 'Cricket',
+    quote:
+      'The balance on the Gladiator Grade 1 bat is unmatched. Massive profile yet lifts like a feather through the off-side cover drive.',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80',
+    rating: 5,
+    verified: true,
+  },
+  {
+    id: 't-3',
+    author: 'Damian Cross',
+    role: 'Point Guard, All-Star Conference',
+    sport: 'Basketball',
+    quote:
+      'Cutting hard on the break requires footwear that holds like glue. Arena Overdrive is the best court grip I have worn in 7 seasons.',
+    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&auto=format&fit=crop&q=80',
+    rating: 5,
+    verified: true,
+  },
+]
