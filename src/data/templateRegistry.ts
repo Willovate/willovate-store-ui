@@ -5,6 +5,8 @@ import { ArenaStorefront } from '../templates/sports/Arena'
 import { SprintStorefront } from '../templates/sports/Sprint'
 import { ProGearStorefront } from '../templates/sports/ProGear'
 import { FitCoreStorefront } from '../templates/sports/FitCore'
+import { GameDayStorefront } from '../templates/sports/GameDay'
+import { PeakStorefront } from '../templates/sports/Peak'
 import { ALL_SPORTS_MARKETPLACE_TEMPLATES } from './sportsTemplatesData'
 
 export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
@@ -12,7 +14,7 @@ export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
     displayName: 'Sports Store',
     badgeIcon: '⚽',
     description: 'High-energy performance athletic wear, running shoes, and competition gear.',
-    filterTags: ['All', 'Performance Sports', 'Athletic', 'Footwear', 'Running', 'Football', 'Cricket', 'Equipment', 'Gym'],
+    filterTags: ['All', 'Performance Sports', 'Athletic', 'Footwear', 'Running', 'Football', 'Cricket', 'Equipment', 'Gym', 'Outdoor', 'Hiking'],
     templates: ALL_SPORTS_MARKETPLACE_TEMPLATES,
   },
   'online-store': {
@@ -76,11 +78,19 @@ export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
 export function getTemplateComponent(template?: MarketplaceTemplate | Template | null): ComponentType<any> {
   if (
     template &&
-    (template.slug === 'sports-progear' ||
-      template.id === 'sports-progear' ||
-      template.name?.toLowerCase().includes('progear'))
+    (template.slug === 'sports-peak' ||
+      template.id === 'sports-peak' ||
+      template.name?.toLowerCase().includes('peak'))
   ) {
-    return ProGearStorefront
+    return PeakStorefront
+  }
+  if (
+    template &&
+    (template.slug === 'sports-gameday' ||
+      template.id === 'sports-gameday' ||
+      template.name?.toLowerCase().includes('gameday'))
+  ) {
+    return GameDayStorefront
   }
   if (
     template &&
@@ -89,6 +99,14 @@ export function getTemplateComponent(template?: MarketplaceTemplate | Template |
       template.name?.toLowerCase().includes('fitcore'))
   ) {
     return FitCoreStorefront
+  }
+  if (
+    template &&
+    (template.slug === 'sports-progear' ||
+      template.id === 'sports-progear' ||
+      template.name?.toLowerCase().includes('progear'))
+  ) {
+    return ProGearStorefront
   }
   if (
     template &&
@@ -108,4 +126,3 @@ export function getTemplateComponent(template?: MarketplaceTemplate | Template |
   }
   return VelocityStorefront
 }
-

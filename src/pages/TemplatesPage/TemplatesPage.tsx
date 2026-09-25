@@ -5,7 +5,9 @@ import { ArenaStorefront } from '../../templates/sports/Arena'
 import { SprintStorefront } from '../../templates/sports/Sprint'
 import { ProGearStorefront } from '../../templates/sports/ProGear'
 import { FitCoreStorefront } from '../../templates/sports/FitCore'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront }
+import { GameDayStorefront } from '../../templates/sports/GameDay'
+import { PeakStorefront } from '../../templates/sports/Peak'
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront }
 
 // Re-export domain types
 export type {
@@ -316,6 +318,38 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   onUseTemplate,
   onClose,
 }) => {
+  const isPeak =
+    template &&
+    (template.slug === 'sports-peak' ||
+      template.id === 'sports-peak' ||
+      template.name?.toLowerCase().includes('peak'))
+
+  if (isPeak) {
+    return (
+      <PeakStorefront
+        deviceView={device}
+        customAccentColor={customAccentColor || undefined}
+        onBack={onClose}
+      />
+    )
+  }
+
+  const isGameDay =
+    template &&
+    (template.slug === 'sports-gameday' ||
+      template.id === 'sports-gameday' ||
+      template.name?.toLowerCase().includes('gameday'))
+
+  if (isGameDay) {
+    return (
+      <GameDayStorefront
+        deviceView={device}
+        customAccentColor={customAccentColor || undefined}
+        onBack={onClose}
+      />
+    )
+  }
+
   const isProGear =
     template &&
     (template.slug === 'sports-progear' ||

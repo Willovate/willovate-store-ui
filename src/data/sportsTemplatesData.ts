@@ -1,4 +1,4 @@
-﻿import type { MarketplaceTemplate } from '../types'
+import type { MarketplaceTemplate } from '../types'
 
 export interface SportsProduct {
   id: string
@@ -772,6 +772,115 @@ export const SPORTS_TEMPLATES_CONFIG: Record<string, SportsTemplateConfig> = {
         icon: '🔥',
         title: 'Custom Heat-Press Printing',
         desc: 'Add your player name and number with stadium-quality heat-press. Ships in 2-3 days.',
+      },
+    ],
+  },
+  'sports-peak': {
+    template: {
+      id: 'sports-peak',
+      slug: 'sports-peak',
+      name: 'Peak',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'bold',
+      catalogSize: 'large',
+      tags: ['Hiking', 'Trekking', 'Camping', 'Cycling', 'Trail Running', 'Outdoor'],
+      shortDescription:
+        'Technical outdoor adventure storefront for hiking, high-altitude trekking, wild camping, gravel cycling, and mountain trail running.',
+      thumbnailUrl:
+        'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl:
+        'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 97,
+      isActive: true,
+      brandName: 'PEAK',
+      headline: 'FIND YOUR NEXT ADVENTURE.',
+      subtitle:
+        'Expedition-grade apparel, technical packs, and alpine equipment built for unyielding weather and remote terrain.',
+      buttonText: 'Explore Outdoor',
+      buttonColor: '#4d7c0f',
+      accentColor: '#4d7c0f',
+      isDark: false,
+      modelImage:
+        'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&auto=format&fit=crop&q=80',
+      badge: 'new',
+      rating: 4.95,
+      reviewCount: 310,
+      layoutType: 'editorial',
+      features: [
+        'Explore by 5 Outdoor Disciplines: Hiking, Trekking, Camping, Cycling, Trail Running',
+        'Field-Engineered Waterproofing, Wind Protection, and Breathability Tech Specs',
+        'Technical Product Pages with Material, Weight, Temperature Rating, and Terrain Specs',
+        'Field Notes & Himalayan Adventure Stories Editorial',
+      ],
+    },
+    announcement: 'FREE SHIPPING ON ORDERS ABOVE ₹1,999 • 30-NIGHT FIELD TEST TRAIL GUARANTEE',
+    navItems: [
+      'Hiking',
+      'Trekking',
+      'Camping',
+      'Cycling',
+      'Trail Running',
+      'Outdoor Clothing',
+      'Footwear',
+      'Accessories',
+    ],
+    heroStats: [
+      { label: 'Waterproof', value: '28,000mm' },
+      { label: 'Thermal Limit', value: '-20°C' },
+      { label: 'Free Freight', value: '₹1,999' },
+    ],
+    categories: [
+      {
+        id: 'hiking',
+        name: 'Hiking',
+        image: 'https://images.unsplash.com/photo-1501555088652-021faa106b9b?w=600&auto=format&fit=crop&q=80',
+        badge: 'ALL TERRAIN',
+        count: '180+ Items',
+      },
+      {
+        id: 'trekking',
+        name: 'Trekking',
+        image: 'https://images.unsplash.com/photo-1464207687429-7505649dae38?w=600&auto=format&fit=crop&q=80',
+        badge: 'ALPINE',
+        count: '140+ Items',
+      },
+      {
+        id: 'camping',
+        name: 'Camping',
+        image: 'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=600&auto=format&fit=crop&q=80',
+        badge: 'WILD',
+        count: '120+ Items',
+      },
+    ],
+    featuredProducts: [
+      {
+        id: 'pk-hk-01',
+        name: 'Summit Ridge 40L Trekking Pack',
+        category: 'Packs',
+        price: '₹8,499',
+        compareAtPrice: '₹10,999',
+        image: 'https://images.unsplash.com/photo-1501555088652-021faa106b9b?w=800&auto=format&fit=crop&q=80',
+        badge: 'BESTSELLER',
+        rating: 4.9,
+        reviewCount: 412,
+      },
+    ],
+    techFeatures: [
+      {
+        icon: '🏔️',
+        title: 'High-Altitude Field Tested',
+        desc: 'Tested above 4,000m on Himalayan routes before entering production.',
+      },
+      {
+        icon: '🌧️',
+        title: 'Gore-Tex & DWR Protection',
+        desc: 'Advanced barrier membranes seal out deluge rainfall and alpine sleet.',
+      },
+      {
+        icon: '🌿',
+        title: '30-Night Trail Guarantee',
+        desc: 'Test your gear on the trail. If it falls short of expectations, exchange with ease.',
       },
     ],
   },
