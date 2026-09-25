@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from 'react'
-import type { PeakProduct, PeakProductColor, PeakCartItem, PeakActivity } from './types'
+import React, { useEffect, useState } from 'react'
+import type { PeakActivity, PeakCartItem, PeakProduct, PeakProductColor } from './types'
 import { PEAK_PRODUCTS } from './data/peakData'
-
+import { PeakAdventureStories } from './components/PeakAdventureStories'
+import { PeakBestSellers } from './components/PeakBestSellers'
+import { PeakBuiltForElements } from './components/PeakBuiltForElements'
+import { PeakCartDrawer } from './components/PeakCartDrawer'
+import { PeakCollectionPage } from './components/PeakCollectionPage'
+import { PeakExploreActivity } from './components/PeakExploreActivity'
+import { PeakFooter } from './components/PeakFooter'
 import { PeakHeader } from './components/PeakHeader'
 import { PeakHero } from './components/PeakHero'
-import { PeakExploreActivity } from './components/PeakExploreActivity'
-import { PeakOutdoorEssentials } from './components/PeakOutdoorEssentials'
-import { PeakBuiltForElements } from './components/PeakBuiltForElements'
-import { PeakTrailPicks } from './components/PeakTrailPicks'
-import { PeakAdventureStories } from './components/PeakAdventureStories'
 import { PeakNewArrivals } from './components/PeakNewArrivals'
-import { PeakBestSellers } from './components/PeakBestSellers'
-import { PeakReviews } from './components/PeakReviews'
 import { PeakNewsletter } from './components/PeakNewsletter'
-import { PeakFooter } from './components/PeakFooter'
+import { PeakOutdoorEssentials } from './components/PeakOutdoorEssentials'
 import { PeakProductPage } from './components/PeakProductPage'
-import { PeakCollectionPage } from './components/PeakCollectionPage'
-import { PeakCartDrawer } from './components/PeakCartDrawer'
-
+import { PeakReviews } from './components/PeakReviews'
+import { PeakTrailPicks } from './components/PeakTrailPicks'
 import './styles/PeakStorefront.css'
 
 export interface PeakStorefrontProps {
@@ -26,45 +24,35 @@ export interface PeakStorefrontProps {
   customAccentColor?: string
 }
 
+const PEAK_ACTIVITIES: PeakActivity[] = ['hiking', 'trekking', 'camping', 'cycling', 'trail-running']
+const PEAK_CATEGORIES = ['outdoor-clothing', 'footwear', 'accessories', 'equipment', 'backpacks']
+
 export const PeakStorefront: React.FC<PeakStorefrontProps> = ({
   onBack: _onBack,
-  deviceView: _deviceView = 'desktop',
+  deviceView = 'desktop',
   customAccentColor,
 }) => {
   const [viewMode, setViewMode] = useState<'home' | 'collection' | 'product'>('home')
   const [selectedProduct, setSelectedProduct] = useState<PeakProduct | null>(null)
-  const [collectionActivity, setCollectionActivity] = useState<string | undefined>(undefined)
-  const [collectionCategory, setCollectionCategory] = useState<string | undefined>(undefined)
-
-  // Seeded cart with Summit Ridge pack
-  const [cart, setCart] = useState<PeakCartItem[]>([
-    {
-      product: PEAK_PRODUCTS[0],
-      quantity: 1,
-      selectedSize: 'M/L',
-      selectedColor: PEAK_PRODUCTS[0].colors[0],
-    },
-  ])
-
-  const [wishlist, setWishlist] = useState<string[]>(['pk-oc-01', 'pk-cp-01'])
+  const [collectionActivity, setCollectionActivity] = useState<string | undefined>()
+  const [collectionCategory, setCollectionCategory] = useState<string | undefined>()
+  const [cart, setCart] = useState<PeakCartItem[]>([])
+  const [wishlist, setWishlist] = useState<string[]>([])
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
-  const [toastMessage, setToastMessage] = useState<string | null>(null)
-
-  const showToast = (msg: string) => setToastMessage(msg)
+  const [toastMessage, setToastMessage] = useState('')
 
   useEffect(() => {
     if (!toastMessage) return
-    const t = setTimeout(() => setToastMessage(null), 3000)
-    return () => clearTimeout(t)
+    const timeoutId = window.setTimeout(() => setToastMessage(''), 2800)
+    return () => window.clearTimeout(timeoutId)
   }, [toastMessage])
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [viewMode, selectedProduct])
 
-  // Navigation handlers
   const handleNavigateHome = () => {
     setViewMode('home')
     setSelectedProduct(null)
@@ -72,18 +60,15 @@ export const PeakStorefront: React.FC<PeakStorefrontProps> = ({
     setCollectionCategory(undefined)
   }
 
-  const handleNavigateCollection = (filterKey?: string) => {
-    // Check if it matches an activity
-    const isActivity = ['hiking', 'trekking', 'camping', 'cycling', 'trail-running'].includes(
-      filterKey || ''
+  const handleNavigateCollection = (filter?: string) => {
+    const normalizedFilter = filter?.toLowerCase().replace(/\s+/g, '-')
+    const selectedActivity = PEAK_ACTIVITIES.find((activity) => activity === normalizedFilter)
+    setCollectionActivity(selectedActivity)
+    setCollectionCategory(
+      normalizedFilter && PEAK_CATEGORIES.includes(normalizedFilter)
+        ? normalizedFilter
+        : undefined,
     )
-    if (isActivity) {
-      setCollectionActivity(filterKey)
-      setCollectionCategory(undefined)
-    } else {
-      setCollectionActivity(undefined)
-      setCollectionCategory(filterKey)
-    }
     setSelectedProduct(null)
     setViewMode('collection')
   }
@@ -93,75 +78,76 @@ export const PeakStorefront: React.FC<PeakStorefrontProps> = ({
     setViewMode('product')
   }
 
+  const handleSelectActivity = (activity: PeakActivity) => {
+    setCollectionActivity(activity)
+    setCollectionCategory(undefined)
+    setSelectedProduct(null)
+    setViewMode('collection')
+  }
+
   const handleAddToCart = (
     product: PeakProduct,
     size: string,
-    color: PeakProductColor
+    color: PeakProductColor,
   ) => {
-    setCart((prev) => {
-      const idx = prev.findIndex(
+    setCart((previousCart) => {
+      const matchingItem = previousCart.findIndex(
         (item) =>
           item.product.id === product.id &&
           item.selectedSize === size &&
-          item.selectedColor.name === color.name
+          item.selectedColor.name === color.name,
       )
-      if (idx > -1) {
-        const copy = [...prev]
-        copy[idx].quantity += 1
-        return copy
+      if (matchingItem >= 0) {
+        return previousCart.map((item, index) =>
+          index === matchingItem ? { ...item, quantity: item.quantity + 1 } : item,
+        )
       }
-      return [...prev, { product, quantity: 1, selectedSize: size, selectedColor: color }]
+      return [...previousCart, { product, quantity: 1, selectedSize: size, selectedColor: color }]
     })
-    showToast(`Added ${product.name} to your Expedition Pack.`)
+    setToastMessage(`${product.name} added to your expedition pack.`)
     setIsCartOpen(true)
   }
 
   const handleUpdateQuantity = (index: number, quantity: number) => {
     if (quantity <= 0) {
-      handleRemoveItem(index)
+      setCart((previousCart) => previousCart.filter((_, itemIndex) => itemIndex !== index))
       return
     }
-    setCart((prev) => {
-      const copy = [...prev]
-      copy[index].quantity = quantity
-      return copy
-    })
+    setCart((previousCart) =>
+      previousCart.map((item, itemIndex) =>
+        itemIndex === index ? { ...item, quantity } : item,
+      ),
+    )
   }
 
   const handleRemoveItem = (index: number) => {
-    setCart((prev) => prev.filter((_, i) => i !== index))
-    showToast('Item removed from expedition pack.')
+    setCart((previousCart) => previousCart.filter((_, itemIndex) => itemIndex !== index))
   }
 
   const handleToggleWishlist = (productId: string) => {
-    setWishlist((prev) => {
-      if (prev.includes(productId)) {
-        showToast('Removed from trail wishlist.')
-        return prev.filter((id) => id !== productId)
-      }
-      showToast('Saved to trail wishlist.')
-      return [...prev, productId]
-    })
+    setWishlist((previousWishlist) =>
+      previousWishlist.includes(productId)
+        ? previousWishlist.filter((id) => id !== productId)
+        : [...previousWishlist, productId],
+    )
   }
 
-  const cartCount = cart.reduce((a, b) => a + b.quantity, 0)
-
-  // Search filter
   const searchResults = searchQuery.trim()
-    ? PEAK_PRODUCTS.filter(
-        (p) =>
-          p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          p.activity.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          p.category.toLowerCase().includes(searchQuery.toLowerCase())
+    ? PEAK_PRODUCTS.filter((product) =>
+        `${product.name} ${product.activity} ${product.category}`
+          .toLowerCase()
+          .includes(searchQuery.trim().toLowerCase()),
       )
     : []
+  const cartCount = cart.reduce((count, item) => count + item.quantity, 0)
 
   return (
     <div
       className="peak-storefront"
+      data-device-view={deviceView}
       style={
         customAccentColor
-          ? ({ '--pk-accent-pine': customAccentColor, '--pk-accent-moss': customAccentColor } as React.CSSProperties)
+          ? ({ '--pk-accent-moss': customAccentColor } as React.CSSProperties)
           : undefined
       }
     >
@@ -169,52 +155,26 @@ export const PeakStorefront: React.FC<PeakStorefrontProps> = ({
         cartCount={cartCount}
         wishlistCount={wishlist.length}
         onOpenCart={() => setIsCartOpen(true)}
-        onOpenSearch={() => setIsSearchOpen(true)}
-        onOpenWishlist={() => {
-          showToast(`You have ${wishlist.length} items saved in your expedition wishlist.`)
-          handleNavigateCollection()
+        onOpenSearch={() => {
+          setSearchQuery('')
+          setIsSearchOpen(true)
         }}
+        onOpenWishlist={() => handleNavigateCollection()}
         onNavigateHome={handleNavigateHome}
         onNavigateCollection={handleNavigateCollection}
       />
 
       <main>
-        {/* HOME VIEW */}
         {viewMode === 'home' && (
           <>
             <PeakHero
               onExploreOutdoor={() => handleNavigateCollection()}
-              onExploreActivity={(act) => handleNavigateCollection(act)}
+              onExploreActivity={(activity) =>
+                handleNavigateCollection(activity)
+              }
             />
-
-            <PeakExploreActivity
-              onSelectActivity={(act: PeakActivity) => handleNavigateCollection(act)}
-            />
-
-            <PeakOutdoorEssentials
-              onSelectCategory={(cat) => handleNavigateCollection(cat)}
-            />
-
-            <PeakBuiltForElements />
-
-            <PeakTrailPicks
-              onSelectProduct={handleSelectProduct}
-              onAddToCart={handleAddToCart}
-              wishlist={wishlist}
-              onToggleWishlist={handleToggleWishlist}
-              onViewAll={() => handleNavigateCollection()}
-            />
-
-            <PeakAdventureStories />
-
-            <PeakNewArrivals
-              onSelectProduct={handleSelectProduct}
-              onAddToCart={handleAddToCart}
-              wishlist={wishlist}
-              onToggleWishlist={handleToggleWishlist}
-              onViewAll={() => handleNavigateCollection()}
-            />
-
+            <PeakExploreActivity onSelectActivity={handleSelectActivity} />
+            <PeakOutdoorEssentials onSelectCategory={handleNavigateCollection} />
             <PeakBestSellers
               onSelectProduct={handleSelectProduct}
               onAddToCart={handleAddToCart}
@@ -222,43 +182,50 @@ export const PeakStorefront: React.FC<PeakStorefrontProps> = ({
               onToggleWishlist={handleToggleWishlist}
               onViewAll={() => handleNavigateCollection()}
             />
-
-            <PeakReviews />
-
-            <PeakNewsletter />
-          </>
-        )}
-
-        {/* COLLECTION VIEW */}
-        {viewMode === 'collection' && (
-          <>
-            <PeakCollectionPage
-              initialActivity={collectionActivity}
-              initialCategory={collectionCategory}
+            <PeakBuiltForElements />
+            <PeakNewArrivals
               onSelectProduct={handleSelectProduct}
               onAddToCart={handleAddToCart}
               wishlist={wishlist}
               onToggleWishlist={handleToggleWishlist}
-              onNavigateHome={handleNavigateHome}
+              onViewAll={() => handleNavigateCollection()}
             />
+            <PeakTrailPicks
+              onSelectProduct={handleSelectProduct}
+              onAddToCart={handleAddToCart}
+              wishlist={wishlist}
+              onToggleWishlist={handleToggleWishlist}
+              onViewAll={() => handleNavigateCollection()}
+            />
+            <PeakAdventureStories />
+            <PeakReviews />
             <PeakNewsletter />
           </>
         )}
 
-        {/* PRODUCT VIEW */}
+        {viewMode === 'collection' && (
+          <PeakCollectionPage
+            key={`${collectionActivity || 'all'}-${collectionCategory || 'all'}`}
+            initialActivity={collectionActivity}
+            initialCategory={collectionCategory}
+            onSelectProduct={handleSelectProduct}
+            onAddToCart={handleAddToCart}
+            wishlist={wishlist}
+            onToggleWishlist={handleToggleWishlist}
+            onNavigateHome={handleNavigateHome}
+          />
+        )}
+
         {viewMode === 'product' && selectedProduct && (
-          <>
-            <PeakProductPage
-              product={selectedProduct}
-              onAddToCart={handleAddToCart}
-              isWishlisted={wishlist.includes(selectedProduct.id)}
-              onToggleWishlist={handleToggleWishlist}
-              onNavigateHome={handleNavigateHome}
-              onNavigateCollection={handleNavigateCollection}
-            />
-            <PeakReviews />
-            <PeakNewsletter />
-          </>
+          <PeakProductPage
+            key={selectedProduct.id}
+            product={selectedProduct}
+            onAddToCart={handleAddToCart}
+            isWishlisted={wishlist.includes(selectedProduct.id)}
+            onToggleWishlist={handleToggleWishlist}
+            onNavigateHome={handleNavigateHome}
+            onNavigateCollection={handleNavigateCollection}
+          />
         )}
       </main>
 
@@ -267,179 +234,74 @@ export const PeakStorefront: React.FC<PeakStorefrontProps> = ({
         onNavigateCollection={handleNavigateCollection}
       />
 
-      {/* Cart Drawer */}
       <PeakCartDrawer
         isOpen={isCartOpen}
         onClose={() => setIsCartOpen(false)}
         cart={cart}
         onUpdateQuantity={handleUpdateQuantity}
         onRemoveItem={handleRemoveItem}
-        onCheckout={() => {
-          alert('Peak Trail Checkout: Expediting your mountain gear dispatch.')
-        }}
+        onCheckout={() => setToastMessage('Your expedition checkout is ready.')}
       />
 
-      {/* Search Modal */}
       {isSearchOpen && (
         <div
-          className="pk-drawer-backdrop"
-          style={{ justifyContent: 'center', alignItems: 'flex-start' }}
-          onClick={() => {
-            setIsSearchOpen(false)
-            setSearchQuery('')
-          }}
+          className="pk-search-backdrop"
+          onClick={() => setIsSearchOpen(false)}
+          role="presentation"
         >
-          <div
-            style={{
-              background: 'var(--pk-snow)',
-              border: '1px solid var(--pk-border-light)',
-              borderRadius: '12px',
-              maxWidth: '620px',
-              width: '92%',
-              margin: '80px auto auto',
-              padding: '28px',
-              boxShadow: 'var(--pk-shadow-deep)',
-            }}
-            onClick={(e) => e.stopPropagation()}
+          <section
+            className="pk-search-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="pk-search-title"
+            onClick={(event) => event.stopPropagation()}
           >
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                marginBottom: '16px',
-              }}
-            >
-              <h3
-                style={{
-                  margin: 0,
-                  fontFamily: 'var(--pk-font-display)',
-                  fontSize: '1.2rem',
-                  fontWeight: 700,
-                  color: 'var(--pk-text-dark)',
-                }}
-              >
-                SEARCH EXPEDITION GEAR
-              </h3>
-              <button
-                type="button"
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  fontSize: '1.1rem',
-                  color: 'var(--pk-stone-muted)',
-                  cursor: 'pointer',
-                }}
-                onClick={() => {
-                  setIsSearchOpen(false)
-                  setSearchQuery('')
-                }}
-              >
-                ✕
+            <div className="pk-search-dialog-header">
+              <h2 id="pk-search-title">Find your next adventure</h2>
+              <button type="button" onClick={() => setIsSearchOpen(false)} aria-label="Close search">
+                ×
               </button>
             </div>
-
             <input
-              type="text"
-              placeholder="Search shells, boots, packs, tents, merino..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
               autoFocus
-              className="pk-newsletter-input"
-              style={{
-                width: '100%',
-                background: 'var(--pk-cream-alt)',
-                color: 'var(--pk-text-dark)',
-                borderColor: 'var(--pk-border-light)',
-                marginBottom: '16px',
-              }}
+              className="pk-search-dialog-input"
+              type="search"
+              placeholder="Search packs, footwear, camping gear..."
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
             />
-
-            {searchQuery && (
-              <div
-                style={{
-                  maxHeight: '320px',
-                  overflowY: 'auto',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '8px',
-                }}
-              >
-                {searchResults.length === 0 ? (
-                  <p style={{ color: 'var(--pk-stone-muted)', fontSize: '0.85rem' }}>
-                    No outdoor gear matched "{searchQuery}".
-                  </p>
-                ) : (
+            <div className="pk-search-results">
+              {searchQuery.trim() &&
+                (searchResults.length ? (
                   searchResults.map((product) => (
-                    <div
+                    <button
+                      className="pk-search-result"
                       key={product.id}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '12px',
-                        padding: '10px',
-                        background: 'var(--pk-cream-alt)',
-                        borderRadius: '6px',
-                        cursor: 'pointer',
-                      }}
+                      type="button"
                       onClick={() => {
                         setIsSearchOpen(false)
-                        setSearchQuery('')
                         handleSelectProduct(product)
                       }}
                     >
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        style={{ width: 48, height: 48, objectFit: 'cover', borderRadius: 4 }}
-                      />
-                      <div style={{ flex: 1 }}>
-                        <div
-                          style={{
-                            fontSize: '0.85rem',
-                            fontWeight: 700,
-                            color: 'var(--pk-text-dark)',
-                          }}
-                        >
-                          {product.name}
-                        </div>
-                        <div
-                          style={{
-                            fontSize: '0.7rem',
-                            color: 'var(--pk-accent-moss)',
-                            fontFamily: 'var(--pk-font-label)',
-                            letterSpacing: '0.1em',
-                            textTransform: 'uppercase',
-                          }}
-                        >
-                          {product.activity} · {product.category}
-                        </div>
-                      </div>
-                      <div
-                        style={{
-                          fontFamily: 'var(--pk-font-display)',
-                          fontWeight: 700,
-                          color: 'var(--pk-text-dark)',
-                        }}
-                      >
-                        ₹{product.price.toLocaleString('en-IN')}
-                      </div>
-                    </div>
+                      <img src={product.image} alt="" />
+                      <span>
+                        <strong>{product.name}</strong>
+                        <small>
+                          {product.activity.replace('-', ' ')} · {product.category.replace('-', ' ')}
+                        </small>
+                      </span>
+                      <b>₹{product.price.toLocaleString('en-IN')}</b>
+                    </button>
                   ))
-                )}
-              </div>
-            )}
-          </div>
+                ) : (
+                  <p className="pk-search-empty">No expedition gear matched that search.</p>
+                ))}
+            </div>
+          </section>
         </div>
       )}
 
-      {/* Toast Notification */}
-      {toastMessage && (
-        <div className="pk-toast">
-          <span>🌲</span>
-          <span>{toastMessage}</span>
-        </div>
-      )}
+      {toastMessage && <div className="pk-toast" role="status">{toastMessage}</div>}
     </div>
   )
 }

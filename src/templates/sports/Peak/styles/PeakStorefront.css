@@ -1935,3 +1935,96 @@
   from { opacity: 0; transform: translateX(-50%) translateY(12px); }
   to { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
+
+.pk-search-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: min(12vh, 100px) 20px 24px;
+  background: rgba(13, 18, 8, 0.72);
+}
+
+.pk-search-dialog {
+  width: min(680px, 100%);
+  max-height: 78vh;
+  overflow-y: auto;
+  padding: 26px;
+  border: 1px solid var(--pk-border-earth);
+  border-radius: var(--pk-radius-md);
+  background: var(--pk-cream);
+  box-shadow: var(--pk-shadow-deep);
+}
+
+.pk-search-dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.pk-search-dialog-header h2 {
+  color: var(--pk-earth-mid);
+  font-family: var(--pk-font-display);
+  font-size: 1.5rem;
+}
+
+.pk-search-dialog-header button {
+  border: 0;
+  background: transparent;
+  color: var(--pk-stone-muted);
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.pk-search-dialog-input {
+  width: 100%;
+  padding: 14px 15px;
+  border: 1px solid var(--pk-border-light);
+  border-radius: var(--pk-radius-sm);
+  background: var(--pk-snow);
+  color: var(--pk-text-dark);
+  font: inherit;
+  outline-color: var(--pk-accent-moss);
+}
+
+.pk-search-results { margin-top: 12px; }
+
+.pk-search-result {
+  display: grid;
+  grid-template-columns: 52px 1fr auto;
+  align-items: center;
+  gap: 13px;
+  width: 100%;
+  padding: 11px 2px;
+  border: 0;
+  border-bottom: 1px solid var(--pk-border-light);
+  background: transparent;
+  color: var(--pk-text-dark);
+  text-align: left;
+}
+
+.pk-search-result img {
+  width: 52px;
+  height: 58px;
+  border-radius: var(--pk-radius-sm);
+  object-fit: cover;
+}
+
+.pk-search-result strong,
+.pk-search-result small { display: block; }
+.pk-search-result strong { font-family: var(--pk-font-display); font-size: 0.95rem; }
+.pk-search-result small { margin-top: 4px; color: var(--pk-stone-muted); font-size: 0.68rem; text-transform: capitalize; }
+.pk-search-result b { color: var(--pk-accent-pine); font-size: 0.75rem; }
+.pk-search-empty { padding: 18px 0 4px; color: var(--pk-stone-muted); font-size: 0.82rem; }
+
+@media (max-width: 560px) {
+  .pk-search-dialog { padding: 19px; }
+  .pk-search-dialog-header h2 { font-size: 1.2rem; }
+  .pk-search-result { grid-template-columns: 46px 1fr; }
+  .pk-search-result img { width: 46px; height: 52px; }
+  .pk-search-result b { grid-column: 2; }
+}

@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { PEAK_PRODUCTS, PEAK_ACTIVITIES, PEAK_STORIES, PEAK_REVIEWS } from './data/peakData'
 import { ALL_SPORTS_MARKETPLACE_TEMPLATES } from '../../../data/sportsTemplatesData'
+import { getTemplateComponent } from '../../../data/templateRegistry'
+import { PeakStorefront } from './PeakStorefront'
 import type { MarketplaceTemplate } from '../../../types'
 
 describe('Peak Theme', () => {
@@ -44,5 +46,10 @@ describe('Peak Theme', () => {
     expect(peak).toBeDefined()
     expect(peak?.name).toBe('Peak')
     expect(peak?.badge).toBe('new')
+  })
+
+  it('resolves to its own storefront instead of the Velocity fallback', () => {
+    const peak = ALL_SPORTS_MARKETPLACE_TEMPLATES.find((template) => template.id === 'sports-peak')
+    expect(getTemplateComponent(peak)).toBe(PeakStorefront)
   })
 })
