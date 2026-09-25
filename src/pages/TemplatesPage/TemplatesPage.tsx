@@ -5,8 +5,7 @@ import { ArenaStorefront } from '../../templates/sports/Arena'
 import { SprintStorefront } from '../../templates/sports/Sprint'
 import { ProGearStorefront } from '../../templates/sports/ProGear'
 import { FitCoreStorefront } from '../../templates/sports/FitCore'
-import { GameDayStorefront } from '../../templates/sports/GameDay'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront }
 
 // Re-export domain types
 export type {
@@ -317,22 +316,6 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   onUseTemplate,
   onClose,
 }) => {
-  const isGameDay =
-    template &&
-    (template.slug === 'sports-gameday' ||
-      template.id === 'sports-gameday' ||
-      template.name?.toLowerCase().includes('gameday'))
-
-  if (isGameDay) {
-    return (
-      <GameDayStorefront
-        deviceView={device}
-        customAccentColor={customAccentColor || undefined}
-        onBack={onClose}
-      />
-    )
-  }
-
   const isProGear =
     template &&
     (template.slug === 'sports-progear' ||

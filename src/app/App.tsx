@@ -152,10 +152,7 @@ function App() {
             rawHash === 'sporting-goods-template' ||
             rawHash === 'velocity' ||
             rawHash === 'velocity-store' ||
-            rawHash === 'sports-velocity' ||
-            rawHash === 'gameday' ||
-            rawHash === 'game-day' ||
-            rawHash === 'sports-gameday'
+            rawHash === 'sports-velocity'
           )) ||
           (key === 'other' && (rawHash === 'custom' || rawHash === 'custom-templates'))
         )

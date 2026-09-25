@@ -5,7 +5,6 @@ import { ArenaStorefront } from '../templates/sports/Arena'
 import { SprintStorefront } from '../templates/sports/Sprint'
 import { ProGearStorefront } from '../templates/sports/ProGear'
 import { FitCoreStorefront } from '../templates/sports/FitCore'
-import { GameDayStorefront } from '../templates/sports/GameDay'
 import { ALL_SPORTS_MARKETPLACE_TEMPLATES } from './sportsTemplatesData'
 
 export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
@@ -77,11 +76,11 @@ export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
 export function getTemplateComponent(template?: MarketplaceTemplate | Template | null): ComponentType<any> {
   if (
     template &&
-    (template.slug === 'sports-gameday' ||
-      template.id === 'sports-gameday' ||
-      template.name?.toLowerCase().includes('gameday'))
+    (template.slug === 'sports-progear' ||
+      template.id === 'sports-progear' ||
+      template.name?.toLowerCase().includes('progear'))
   ) {
-    return GameDayStorefront
+    return ProGearStorefront
   }
   if (
     template &&
@@ -90,14 +89,6 @@ export function getTemplateComponent(template?: MarketplaceTemplate | Template |
       template.name?.toLowerCase().includes('fitcore'))
   ) {
     return FitCoreStorefront
-  }
-  if (
-    template &&
-    (template.slug === 'sports-progear' ||
-      template.id === 'sports-progear' ||
-      template.name?.toLowerCase().includes('progear'))
-  ) {
-    return ProGearStorefront
   }
   if (
     template &&
@@ -117,3 +108,4 @@ export function getTemplateComponent(template?: MarketplaceTemplate | Template |
   }
   return VelocityStorefront
 }
+
