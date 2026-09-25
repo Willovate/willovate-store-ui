@@ -2,7 +2,11 @@ import React, { useEffect, useState, useMemo, useRef } from 'react'
 import './TemplatesPage.css'
 import { VelocityStorefront } from '../../templates/sports/Velocity'
 import { ArenaStorefront } from '../../templates/sports/Arena'
-export { VelocityStorefront, ArenaStorefront }
+import { SprintStorefront } from '../../templates/sports/Sprint'
+import { ProGearStorefront } from '../../templates/sports/ProGear'
+import { FitCoreStorefront } from '../../templates/sports/FitCore'
+import { GameDayStorefront } from '../../templates/sports/GameDay'
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront }
 
 // Re-export domain types
 export type {
@@ -313,6 +317,70 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   onUseTemplate,
   onClose,
 }) => {
+  const isGameDay =
+    template &&
+    (template.slug === 'sports-gameday' ||
+      template.id === 'sports-gameday' ||
+      template.name?.toLowerCase().includes('gameday'))
+
+  if (isGameDay) {
+    return (
+      <GameDayStorefront
+        deviceView={device}
+        customAccentColor={customAccentColor || undefined}
+        onBack={onClose}
+      />
+    )
+  }
+
+  const isProGear =
+    template &&
+    (template.slug === 'sports-progear' ||
+      template.id === 'sports-progear' ||
+      template.name?.toLowerCase().includes('progear'))
+
+  if (isProGear) {
+    return (
+      <ProGearStorefront
+        deviceView={device}
+        customAccentColor={customAccentColor || undefined}
+        onBack={onClose}
+      />
+    )
+  }
+
+  const isFitCore =
+    template &&
+    (template.slug === 'sports-fitcore' ||
+      template.id === 'sports-fitcore' ||
+      template.name?.toLowerCase().includes('fitcore'))
+
+  if (isFitCore) {
+    return (
+      <FitCoreStorefront
+        deviceView={device}
+        customAccentColor={customAccentColor || undefined}
+        onBack={onClose}
+      />
+    )
+  }
+
+  const isSprint =
+    template &&
+    (template.slug === 'sports-sprint' ||
+      template.id === 'sports-sprint' ||
+      template.name?.toLowerCase().includes('sprint'))
+
+  if (isSprint) {
+    return (
+      <SprintStorefront
+        deviceView={device}
+        customAccentColor={customAccentColor || undefined}
+        onBack={onClose}
+      />
+    )
+  }
+
   const isArena =
     template &&
     (template.slug === 'sports-arena' ||
@@ -328,6 +396,7 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
       />
     )
   }
+
 
   return (
     <VelocityStorefront

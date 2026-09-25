@@ -2,6 +2,10 @@ import type { ComponentType } from 'react'
 import type { CategoryData, MarketplaceTemplate, Template } from '../types'
 import { VelocityStorefront } from '../templates/sports/Velocity'
 import { ArenaStorefront } from '../templates/sports/Arena'
+import { SprintStorefront } from '../templates/sports/Sprint'
+import { ProGearStorefront } from '../templates/sports/ProGear'
+import { FitCoreStorefront } from '../templates/sports/FitCore'
+import { GameDayStorefront } from '../templates/sports/GameDay'
 import { ALL_SPORTS_MARKETPLACE_TEMPLATES } from './sportsTemplatesData'
 
 export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
@@ -9,7 +13,7 @@ export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
     displayName: 'Sports Store',
     badgeIcon: '⚽',
     description: 'High-energy performance athletic wear, running shoes, and competition gear.',
-    filterTags: ['All', 'Performance Sports', 'Athletic', 'Footwear', 'Football', 'Cricket'],
+    filterTags: ['All', 'Performance Sports', 'Athletic', 'Footwear', 'Running', 'Football', 'Cricket', 'Equipment', 'Gym'],
     templates: ALL_SPORTS_MARKETPLACE_TEMPLATES,
   },
   'online-store': {
@@ -71,6 +75,38 @@ export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
 }
 
 export function getTemplateComponent(template?: MarketplaceTemplate | Template | null): ComponentType<any> {
+  if (
+    template &&
+    (template.slug === 'sports-gameday' ||
+      template.id === 'sports-gameday' ||
+      template.name?.toLowerCase().includes('gameday'))
+  ) {
+    return GameDayStorefront
+  }
+  if (
+    template &&
+    (template.slug === 'sports-fitcore' ||
+      template.id === 'sports-fitcore' ||
+      template.name?.toLowerCase().includes('fitcore'))
+  ) {
+    return FitCoreStorefront
+  }
+  if (
+    template &&
+    (template.slug === 'sports-progear' ||
+      template.id === 'sports-progear' ||
+      template.name?.toLowerCase().includes('progear'))
+  ) {
+    return ProGearStorefront
+  }
+  if (
+    template &&
+    (template.slug === 'sports-sprint' ||
+      template.id === 'sports-sprint' ||
+      template.name?.toLowerCase().includes('sprint'))
+  ) {
+    return SprintStorefront
+  }
   if (
     template &&
     (template.slug === 'sports-arena' ||
