@@ -1,6 +1,6 @@
 import type { Website, Page, PageElement, Theme } from '../types'
 
-const API_URL = (import.meta.env.VITE_API_URL ?? 'http://localhost:5191').replace(/\/$/, '')
+const API_URL = (import.meta.env.VITE_API_URL ?? 'http://localhost:5192').replace(/\/$/, '')
 
 // Website endpoints
 export async function getWebsite(websiteId: string, signal?: AbortSignal): Promise<Website> {

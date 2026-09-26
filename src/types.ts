@@ -67,7 +67,7 @@ export interface PageElement {
   elementType: string
   name: string
   displayOrder: number
-  properties: Record<string, unknown> | null
+  properties: Record<string, any> | null
   isEditable: boolean
   isRequired: boolean
   createdAt: string

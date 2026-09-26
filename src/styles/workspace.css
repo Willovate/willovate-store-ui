@@ -1,14 +1,49 @@
-/* ============================================================
-   WORKSPACE SHELL
-   ============================================================ */
+:root{
+  --bg:#ffffff; --ink:#1b1d26; --muted:#6b6f7b; --line:#e6e7ec; --soft:#f4f5f8;
+  --accent:#4f46e5;        /* Publish, active tab, active rail icon */
+  --selected-row:#e9ecfb;  /* selected row in left tree */
+  --select-blue:#2f6fed;   /* canvas selection outline, tab, "+" buttons, "Add section" text */
+  --canvas-bg:#f4f4f6;
+  /* storefront (Luxora) */
+  --lux-bg:#fbf8f3; --lux-ink:#231f1a; --lux-announce:#efe3d3;
+  --lux-footer:#f1ebe1; --lux-band:#f1e9dd; --lux-card-border:#ece4d8; --lux-btn:#1a1816;
+}
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
 .ws-shell {
   display: flex;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
-  background: #f4f5f7;
-  color: #1a202c;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.editor-layout {
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  /* The editor must always occupy one viewport.  Without the minmax(0, 1fr)
+     track, tall inspector content can expand this row and push the sidebars
+     below the fold. */
+  grid-template-rows: 64px minmax(0, 1fr);
+  /* Give the preview the remaining space on desktop instead of letting the
+     two utility panels dominate the workspace. */
+  grid-template-columns: 64px 230px minmax(0, 1fr) 260px;
+}
+
+@media (max-width: 1200px) {
+  .editor-layout {
+    grid-template-columns: 64px 210px minmax(0, 1fr) 240px;
+  }
 }
 
 /* ── Loading & Error ── */
@@ -110,6 +145,230 @@
 .ws-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+/* Online-store dashboard card */
+.ws-store-preview-card button:focus-visible {
+  outline: 3px solid #a5b4fc;
+  outline-offset: 3px;
+}
+
+/* Dashboard proportions match the Online Store workspace design. */
+.ws-dashboard-shell { background: #fbfcff !important; }
+.ws-dashboard-topbar { height: 84px !important; padding: 0 2rem !important; }
+.ws-dashboard-topbar .ws-sidebar-brand { height: auto; border: 0; padding: 0; }
+.ws-dashboard-sidebar { width: 285px !important; }
+.ws-dashboard-main { background: #fbfcff; }
+.ws-store-dashboard { max-width: 1225px !important; padding: 2.2rem 2.5rem !important; gap: 1.25rem !important; }
+.ws-store-summary-card {
+  min-height: 454px;
+  overflow: hidden;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 425px);
+}
+.ws-store-preview-pane { flex: 1 1 auto !important; min-width: 0; padding: 1.45rem !important; }
+.ws-store-hero {
+  position: relative;
+  width: 100%;
+  height: auto !important;
+  aspect-ratio: 1.9 / 1;
+  overflow: hidden;
+  background: #f5efe6;
+}
+.ws-store-hero img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+.ws-store-hero-copy {
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: 1;
+  width: 46%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 8% 5.5%;
+  box-sizing: border-box;
+  background: linear-gradient(90deg, #f8f4ed 0%, #f8f4ed 88%, rgba(248, 244, 237, 0) 100%);
+  color: #111827;
+}
+.ws-store-hero-copy p {
+  margin: 0 0 0.55rem;
+  font-size: clamp(0.5rem, 1vw, 0.68rem);
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  color: #bd6d2c;
+}
+.ws-store-hero-copy h2 {
+  margin: 0 0 0.55rem;
+  font-size: clamp(1.35rem, 3vw, 2.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+.ws-store-hero-copy > span {
+  font-size: clamp(0.62rem, 1vw, 0.85rem);
+  line-height: 1.35;
+  color: #4b5563;
+}
+.ws-store-hero-copy button {
+  margin-top: 0.9rem;
+  padding: 0.55rem 0.9rem;
+  border: 0;
+  border-radius: 4px;
+  background: #111;
+  color: #fff;
+  font-size: clamp(0.58rem, 1vw, 0.75rem);
+  font-weight: 700;
+  cursor: pointer;
+}
+.ws-store-hero-copy button span { margin-left: 0.5rem; }
+.ws-store-hero-copy button:focus-visible {
+  outline: 3px solid #a5b4fc;
+  outline-offset: 3px;
+}
+
+/* Keep every dashboard navigation item visible at standard desktop heights. */
+@media (min-width: 801px) {
+  .ws-dashboard-sidebar .ws-sidebar-nav {
+    flex: 0 1 auto !important;
+    padding: 0.55rem 0.75rem !important;
+    overflow-y: hidden !important;
+  }
+  .ws-dashboard-sidebar .ws-nav-item {
+    padding: 0.3rem 0.65rem !important;
+    line-height: 1.25;
+  }
+  .ws-dashboard-sidebar .ws-sidebar-section-label {
+    margin-bottom: 0.2rem !important;
+  }
+  .ws-dashboard-sidebar .ws-sidebar-nav > div { margin: 0.3rem 0.5rem !important; }
+  .ws-dashboard-sidebar .ws-support-card {
+    margin: 0 0.75rem 0.75rem !important;
+    padding: 0.65rem !important;
+  }
+  .ws-dashboard-sidebar .ws-support-card p {
+    margin-bottom: 0.45rem !important;
+    font-size: 0.7rem !important;
+    line-height: 1.3 !important;
+  }
+  .ws-dashboard-sidebar .ws-support-card h4 { font-size: 0.8rem !important; }
+  .ws-dashboard-sidebar .ws-support-card button { padding: 0.42rem !important; }
+}
+.ws-store-details-pane { min-width: 0; padding: 2.25rem 2rem !important; }
+.ws-store-details-pane h3 { white-space: nowrap; }
+.ws-store-details-pane { box-sizing: border-box; }
+.ws-store-details-title { letter-spacing: -0.025em; }
+.ws-store-details-description {
+  line-height: 1.45;
+  max-width: 30ch;
+}
+.ws-store-meta-row {
+  min-height: 48px;
+  gap: 0.75rem;
+}
+.ws-store-meta-label {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+.ws-store-meta-value {
+  min-width: 0;
+  text-align: right;
+  line-height: 1.35;
+}
+.ws-ai-dashboard-panel { min-height: 290px; padding: 1.5rem 1.75rem !important; }
+
+@media (max-width: 1280px) {
+  /* Keep the navigation compact so the storefront preview remains the focus. */
+  .ws-dashboard-sidebar { width: 200px !important; }
+  .ws-store-dashboard { padding: 1.75rem 1.5rem !important; }
+  .ws-store-summary-card {
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr) 250px;
+  }
+  .ws-store-details-pane { padding: 1.5rem 1.25rem !important; }
+  .ws-store-meta-row { gap: 0.5rem; }
+  .ws-store-meta-label,
+  .ws-store-meta-value { font-size: 0.8rem !important; }
+  .ws-store-preview-header { padding: 0.7rem 0.9rem !important; gap: 0.65rem; }
+  .ws-store-preview-logo { font-size: 1rem !important; }
+  .ws-store-preview-nav { gap: 0.75rem !important; }
+  .ws-store-preview-icons { gap: 0.45rem !important; }
+}
+
+@media (max-width: 800px) {
+  .ws-dashboard-topbar { height: 64px !important; padding: 0 1rem !important; }
+  .ws-dashboard-sidebar { width: 220px !important; }
+  .ws-store-dashboard {
+    padding: 1.25rem !important;
+  }
+
+  .ws-store-dashboard-header {
+    align-items: flex-start !important;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .ws-store-dashboard-actions {
+    width: 100%;
+  }
+
+  .ws-store-summary-card {
+    display: flex !important;
+    flex-direction: column;
+  }
+
+  .ws-store-preview-pane {
+    border-radius: 20px 20px 0 0 !important;
+    padding: 1rem !important;
+  }
+
+  .ws-store-details-pane {
+    border-left: 0 !important;
+    border-top: 1px solid #eef0f5;
+    flex-basis: auto !important;
+    min-width: 0;
+  }
+
+  .ws-store-hero { aspect-ratio: 1.7 / 1; }
+}
+
+@media (max-width: 520px) {
+  .ws-dashboard-sidebar { display: none !important; }
+  .ws-dashboard-topbar .ws-sidebar-brand span { font-size: 1rem !important; }
+  .ws-dashboard-topbar .ws-topbar-left { gap: 0.5rem !important; }
+  .ws-dashboard-topbar .ws-topbar-right { gap: 0.5rem !important; }
+  .ws-dashboard-topbar .ws-topbar-right > button { padding: 0.45rem !important; font-size: 0; }
+  .ws-store-dashboard {
+    padding: 1rem !important;
+  }
+
+  .ws-store-dashboard-actions > *:first-child {
+    flex: 1;
+  }
+
+  .ws-store-preview-card > div:first-child {
+    padding: 0.65rem 0.75rem !important;
+  }
+
+  .ws-store-preview-card > div:first-child > div:nth-child(2) {
+    display: none !important;
+  }
+
+  .ws-store-hero { aspect-ratio: 1.35 / 1; }
+
+  .ws-store-preview-card h2 {
+    font-size: 1.45rem !important;
+  }
+
+  .ws-store-details-pane {
+    padding: 1.25rem !important;
+  }
 }
 
 
@@ -258,7 +517,10 @@
 
 /* ── TOP BAR ── */
 .ws-topbar {
-  height: 60px;
+  grid-column: 1 / -1;
+  grid-row: 1;
+  position: relative;
+  height: 64px;
   background: #fff;
   border-bottom: 1px solid #eef0f5;
   display: flex;
@@ -281,6 +543,40 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Keep the desktop toolbar in one horizontal flow.  The previous absolutely
+   centered viewport picker could sit on top of the Saved indicator when the
+   page selector was wide. */
+@media (min-width: 901px) {
+  .ws-topbar {
+    justify-content: flex-start;
+  }
+
+  .ws-topbar-center {
+    position: static !important;
+    left: auto !important;
+    transform: none !important;
+    flex: 0 0 auto;
+    margin-left: auto;
+    margin-right: 0.75rem;
+  }
+
+  .ws-topbar-right {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 901px) {
+  .ws-save-status span {
+    display: none;
+  }
+
+  .ws-save-status {
+    width: 10px;
+    overflow: hidden;
+    flex: 0 0 10px;
+  }
 }
 
 .ws-topbar-right {
@@ -338,38 +634,55 @@
 
 /* ── CANVAS AREA ── */
 .ws-canvas-area {
-  flex: 1;
+  grid-column: 2;
+  grid-row: 2;
+  min-height: 0;
+  min-width: 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding: 1.5rem 1.5rem 1rem;
-  gap: 0.75rem;
-  background: #f4f5f7;
+  background: #f0f0f2;
 }
 
-.ws-canvas {
+.storefront-frame-container {
   flex: 1;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.06);
+  min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  transition: max-width 0.25s ease;
-  margin: 0 auto;
-  width: 100%;
+  padding: 16px 14px;
   position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
-.ws-canvas-desktop {
+/* ws-canvas-wrapper: dynamically sized by JS to match scaled canvas */
+.ws-canvas-wrapper {
+  flex-shrink: 0;
+  margin: 0 auto;
+  position: relative;
   max-width: 100%;
 }
 
+.ws-canvas {
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10), 0 8px 24px rgba(0, 0, 0, 0.07);
+  transform-origin: top left;
+  /* NOT absolute - let it be in flow, wrapper JS sets its height */
+  position: relative;
+  max-width: none;
+}
+
+.ws-canvas-desktop {
+  width: 1200px;
+}
+
 .ws-canvas-tablet {
-  max-width: 768px;
+  width: 768px;
 }
 
 .ws-canvas-mobile {
-  max-width: 390px;
+  width: 390px;
 }
 
 .ws-canvas-empty {
@@ -482,13 +795,27 @@
 /* ============================================================
    RIGHT PROPERTIES PANEL
    ============================================================ */
-.ws-props-panel {
-  width: 300px;
-  flex-shrink: 0;
-  background: #fff;
-  border-left: 1px solid #eef0f5;
+.editor-left-panel {
+  grid-column: 1;
+  grid-row: 2;
+  border-right: 1px solid #E5E7EB;
   display: flex;
   flex-direction: column;
+  background: #fff;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.ws-props-panel {
+  grid-column: 4;
+  grid-row: 2;
+  background: #fff;
+  border-left: 1px solid #E5E7EB;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
   overflow: hidden;
 }
 
@@ -599,6 +926,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  min-height: 0;
   background: #fff;
 }
 
@@ -1142,7 +1470,9 @@
 }
 
 .pe-featured-header {
-  display: inline-block;
+  display: block;
+  width: 100%;
+  text-align: center;
   cursor: pointer;
   position: relative;
   margin-bottom: 1.5rem;
@@ -1153,6 +1483,17 @@
   font-weight: 700;
   color: #111;
   margin: 0;
+}
+
+.featured {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.featured__title {
+  width: 100%;
+  text-align: center;
 }
 
 .pe-product-grid {
@@ -2112,4 +2453,240 @@
   background: #f0ebff;
   border-color: #c4b5fd;
   color: #5c3ce6;
+}
+
+/* Element Editor Panel Styles */
+.ee-panel { display: flex; flex-direction: column; height: 100%; }
+.ee-fields { padding: 1rem; overflow-y: auto; flex: 1; }
+.ee-field { margin-bottom: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.ee-field-label-row { display: flex; justify-content: space-between; align-items: center; }
+.ee-label { font-size: 0.75rem; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+.ee-char-count { font-size: 0.75rem; color: #94a3b8; }
+.ee-input, .ee-textarea { width: 100%; border: 1px solid #e2e8f0; border-radius: 6px; padding: 0.5rem 0.75rem; font-size: 0.875rem; color: #1e293b; background: #fff; transition: all 0.2s; box-sizing: border-box; }
+.ee-input:focus, .ee-textarea:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1); }
+.ee-textarea { min-height: 80px; resize: vertical; }
+.ee-color-row { display: flex; gap: 0.5rem; align-items: center; }
+.ee-color-swatch { width: 32px; height: 32px; border-radius: 4px; border: 1px solid #e2e8f0; padding: 0; cursor: pointer; }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.ws-sidebar-nav::-webkit-scrollbar,
+.ws-main-col::-webkit-scrollbar,
+.ws-canvas-area::-webkit-scrollbar,
+.editor-left-panel > div::-webkit-scrollbar,
+.editor-right-panel > div::-webkit-scrollbar,
+.ee-fields::-webkit-scrollbar,
+.storefront-frame-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.ws-sidebar-nav,
+.ws-main-col,
+.ws-canvas-area,
+.editor-left-panel > div,
+.editor-right-panel > div,
+.ee-fields,
+.storefront-frame-container {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+
+/* Canvas Selection Outline */
+.pe-selected {
+  outline: 2px solid var(--select-blue);
+  outline-offset: -2px;
+  position: relative;
+}
+.pe-selected::before, .pe-selected::after {
+  content: "+";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 24px;
+  background-color: var(--select-blue);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  z-index: 10;
+  cursor: pointer;
+  line-height: 1;
+}
+.pe-selected::before { top: -12px; }
+.pe-selected::after { bottom: -12px; }
+
+.pe-edit-label {
+  position: absolute;
+  top: -24px;
+  left: -2px;
+  background: var(--select-blue);
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  z-index: 10;
+}
+
+.ws-section-item:not(:hover) .ws-hover-handle { opacity: 0; }
+.ws-section-item:hover .ws-hover-handle { opacity: 1; }
+
+/* The editor sidebars contain fixed editing controls, so make their standard
+   desktop view fit within the available workspace height instead of requiring
+   a scroll just to reach the footer or Delete action. */
+@media (min-width: 901px) {
+  .editor-left-panel > div:first-child {
+    height: 42px !important;
+    padding-top: 10px !important;
+    padding-bottom: 6px !important;
+  }
+
+  .ws-sections-panel {
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+    overflow-y: hidden !important;
+  }
+
+  .ws-sections-header {
+    height: 20px !important;
+    padding: 0 16px !important;
+    margin-top: 2px !important;
+  }
+
+  .ws-sections-list {
+    padding: 0 !important;
+    gap: 0 !important;
+  }
+
+  .ws-section-item {
+    height: 28px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .ws-add-section-row,
+  .ws-add-section-btn {
+    height: 28px !important;
+  }
+
+  .ws-add-section-btn {
+    margin-top: 0 !important;
+  }
+
+  .ws-section-divider {
+    margin-top: 4px !important;
+    margin-bottom: 4px !important;
+  }
+
+  .ws-footer-add-section {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    background: #fff;
+    border-top: 1px solid #f1f5f9;
+  }
+
+  .ee-editor-panel {
+    min-height: 0;
+  }
+
+  .ee-editor-header {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    flex: 0 0 auto;
+  }
+
+  .ee-editor-tabs button {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+  }
+
+  .ee-scroll-area {
+    padding: 8px 12px !important;
+    overflow-y: hidden !important;
+  }
+
+  .ee-scroll-area .ee-field {
+    margin-bottom: 7px !important;
+  }
+
+  .ee-scroll-area .ee-field textarea {
+    min-height: 48px !important;
+    padding-top: 7px !important;
+    padding-bottom: 7px !important;
+  }
+
+  .ee-scroll-area .ee-field input,
+  .ee-scroll-area .ee-field select {
+    height: 36px !important;
+  }
+
+  .ee-delete-section {
+    margin-top: 12px !important;
+    padding-top: 8px !important;
+  }
+
+  .ee-delete-section button {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+  }
+}
+
+/* Keep the editor controls usable without forcing a horizontal page scroll. */
+@media (max-width: 1100px) {
+  .editor-layout { grid-template-columns: 56px 205px minmax(0, 1fr) 240px; }
+  .storefront-frame-container { padding: 14px 12px; }
+}
+
+@media (max-width: 900px) {
+  .editor-layout { grid-template-columns: 52px minmax(0, 1fr) 260px; }
+  .ws-sidebar-mini { width: 52px !important; }
+  .editor-left-panel { display: none; }
+  .editor-right-panel.ws-props-panel {
+    grid-column: 3;
+    grid-row: 2;
+    position: relative;
+    width: 260px;
+    height: auto;
+    box-shadow: none;
+  }
+  .ws-canvas-area { grid-column: 2 !important; }
+  .ws-topbar { gap: .5rem; }
+  .ws-topbar-left { gap: 10px !important; }
+  .ws-topbar-center { position: static !important; transform: none !important; order: 3; }
+  .ws-topbar-right { gap: 6px !important; }
+  .storefront-frame-container { padding: 16px 12px; }
+}
+
+@media (max-width: 640px) {
+  .editor-layout { grid-template-columns: 52px minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+  .ws-topbar { height: auto; min-height: 64px; padding: 8px !important; flex-wrap: wrap; }
+  .ws-topbar-left > div:first-child span,
+  .ws-topbar-left > button,
+  .ws-topbar-left > div:last-child,
+  .ws-topbar-right .ws-btn-outline,
+  .ws-topbar-right .ws-btn-icon,
+  .ws-topbar-right > div:last-child { display: none !important; }
+  .ws-topbar-left { order: 1; }
+  .ws-topbar-center { order: 2; margin-left: auto; }
+  .ws-topbar-right { order: 3; }
+  .ws-viewport-btn { width: 30px; height: 30px; }
+  .ws-btn { padding: .45rem .65rem; }
+  .editor-right-panel.ws-props-panel {
+    grid-column: 2;
+    grid-row: 2;
+    position: absolute;
+    z-index: 15;
+    right: 0;
+    width: min(300px, calc(100vw - 52px));
+    height: calc(100vh - 64px);
+    box-shadow: -6px 0 18px rgba(15, 23, 42, .12);
+  }
+  .storefront-frame-container { padding: 12px 8px; }
+  .pe-selected::before, .pe-selected::after { width: 20px; height: 20px; font-size: 14px; }
 }

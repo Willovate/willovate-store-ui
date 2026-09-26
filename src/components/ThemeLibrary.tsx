@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import type { Theme } from '../types'
 import { getThemesByWebsite, createTheme, updateTheme, deleteTheme, publishTheme, duplicateTheme } from '../lib/workspace-api'
-import { Plus, Copy, Edit2, Trash2, Globe, X, Star } from 'lucide-react'
+import { Plus, Copy, Edit2, Trash2, Globe, X } from 'lucide-react'
 
 interface ThemeLibraryProps {
   websiteId: string
@@ -183,8 +183,8 @@ export default function ThemeLibrary({ websiteId, onClose, onRefresh }: ThemeLib
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '1rem' }}>
               {themes.map(theme => (
                 <div key={theme.id} style={{ border: '1px solid #e2e8f0', borderRadius: 8, overflow: 'hidden', display: 'flex', flexDirection: 'column', background: theme.isLive ? '#f8fafc' : '#ffffff' }}>
-                  {theme.thumbnailUrl ? (
-                    <div style={{ height: 120, backgroundImage: `url(${theme.thumbnailUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+                  {(theme as any).thumbnailUrl ? (
+                    <div style={{ height: 120, backgroundImage: `url(${(theme as any).thumbnailUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
                   ) : (
                     <div style={{ background: '#e2e8f0', height: 120, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8' }}>
                       <Globe size={40} opacity={0.2} />
@@ -222,7 +222,7 @@ export default function ThemeLibrary({ websiteId, onClose, onRefresh }: ThemeLib
                       Last edited: {new Date(theme.lastEdited).toLocaleDateString()}
                     </div>
                     <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#0f172a' }}>
-                      {Number(theme.price) === 0 ? 'Free' : `$${Number(theme.price || 0).toFixed(2)}`}
+                      {Number((theme as any).price) === 0 ? 'Free' : `$${Number((theme as any).price || 0).toFixed(2)}`}
                     </div>
                   </div>
                   

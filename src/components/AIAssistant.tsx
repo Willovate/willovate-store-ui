@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from 'react'
 
-const API_BASE = 'http://localhost:5191'
+const API_BASE = 'http://localhost:5192'
 
 interface AIAssistantProps {
   onClose: () => void
   onApplySuggestion: (suggestion: string, elementType: string) => void
   onApplyBanner?: (imageUrl: string) => void
+  initialPrompt?: string
 }
 
 interface AiAction {
@@ -23,7 +24,7 @@ interface Message {
   rejected?: boolean
 }
 
-export default function AIAssistant({ onClose, onApplySuggestion, onApplyBanner }: AIAssistantProps) {
+export default function AIAssistant({ onClose, onApplySuggestion, onApplyBanner, initialPrompt }: AIAssistantProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       type: 'ai',
@@ -38,6 +39,12 @@ export default function AIAssistant({ onClose, onApplySuggestion, onApplyBanner 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, isLoading])
+
+  useEffect(() => {
+    if (initialPrompt && messages.length === 1) {
+      handleSendMessage(initialPrompt)
+    }
+  }, [initialPrompt])
 
   const handleApply = (index: number) => {
     const msg = messages[index]
@@ -63,11 +70,11 @@ export default function AIAssistant({ onClose, onApplySuggestion, onApplyBanner 
     )
   }
 
-  const handleSendMessage = async () => {
-    const text = input.trim()
+  const handleSendMessage = async (overrideText?: string) => {
+    const text = (overrideText || input).trim()
     if (!text) return
 
-    setInput('')
+    if (!overrideText) setInput('')
     setMessages(prev => [...prev, { type: 'user', content: text }])
     setIsLoading(true)
 
@@ -95,7 +102,7 @@ export default function AIAssistant({ onClose, onApplySuggestion, onApplyBanner 
         {
           type: 'ai',
           content:
-            "I'm having trouble connecting to the AI service right now. Please make sure the API server is running at http://localhost:5191 and try again.",
+            "I'm having trouble connecting to the AI service right now. Please make sure the API server is running at http://localhost:5192 and try again.",
         },
       ])
     } finally {
@@ -199,7 +206,7 @@ export default function AIAssistant({ onClose, onApplySuggestion, onApplyBanner 
         />
         <button
           className="ai-send-btn"
-          onClick={handleSendMessage}
+          onClick={() => handleSendMessage()}
           disabled={!input.trim() || isLoading}
         >
           →

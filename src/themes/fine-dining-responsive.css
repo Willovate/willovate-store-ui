@@ -1,0 +1,74 @@
+/* Keep every desktop navigation action visible in medium-width previews. */
+@media (min-width: 761px) and (max-width: 980px) {
+  .fd-nav {
+    padding: 0 4%;
+  }
+
+  .fd-brand {
+    font-size: 18px;
+  }
+
+  .fd-nav nav {
+    gap: 15px;
+  }
+
+  .fd-nav nav a {
+    font-size: 10px;
+  }
+
+  .fd-reserve {
+    font-size: 10px;
+    padding: 10px 12px;
+    white-space: nowrap;
+  }
+}
+
+/* At compact tablet widths, reserve space for the brand and avoid nav/CTA collisions. */
+@media (min-width: 761px) and (max-width: 900px) {
+  .fd-nav nav,
+  .fd-nav > .fd-reserve {
+    display: none;
+  }
+
+  .fd-hamburger {
+    background: transparent;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px;
+  }
+
+  .fd-hamburger i {
+    background: var(--fd-ink);
+    display: block;
+    height: 1px;
+    width: 24px;
+  }
+
+  .fd-mobile {
+    background: var(--fd-paper);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    left: 0;
+    padding: 28px 6%;
+    position: absolute;
+    right: 0;
+    top: 76px;
+  }
+
+  .fd-mobile a {
+    font-family: Georgia, serif;
+    text-decoration: none;
+  }
+
+  .fd-mobile button {
+    background: var(--fd-accent);
+    border: 0;
+    color: var(--fd-paper);
+    padding: 13px;
+    text-align: left;
+  }
+}

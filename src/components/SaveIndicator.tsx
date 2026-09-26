@@ -1,4 +1,4 @@
-import { Check, Save, AlertTriangle, Clock } from 'lucide-react'
+import { AlertTriangle, Clock, CheckCircle2 } from 'lucide-react'
 
 interface SaveIndicatorProps {
   status: 'idle' | 'saving' | 'saved' | 'error'
@@ -27,9 +27,9 @@ export default function SaveIndicator({ status, hasUnsavedChanges, onSave }: Sav
 
   if (status === 'saved') {
     return (
-      <div className="save-indicator" style={{ color: '#38a169' }}>
-        <Check size={14} />
-        All changes saved
+      <div className="save-indicator" style={{ color: '#10b981', display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 600, fontSize: '0.85rem' }}>
+        <CheckCircle2 size={16} strokeWidth={2} />
+        Saved
       </div>
     )
   }
@@ -49,9 +49,9 @@ export default function SaveIndicator({ status, hasUnsavedChanges, onSave }: Sav
   }
 
   return (
-    <div className="save-indicator" style={{ color: '#a0aec0', fontSize: '0.8rem' }}>
-      <Save size={13} />
-      Changes auto-saved
+    <div className="save-indicator" style={{ color: '#10b981', display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 600, fontSize: '0.85rem' }}>
+      <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#10b981' }}></div>
+      Saved
     </div>
   )
 }

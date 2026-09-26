@@ -1,6 +1,6 @@
 import type { PagedResponse, Product } from '../types'
 
-const API_URL = (import.meta.env.VITE_API_URL ?? 'http://localhost:5191').replace(/\/$/, '')
+const API_URL = (import.meta.env.VITE_API_URL ?? 'http://localhost:5192').replace(/\/$/, '')
 
 interface ProductFilters {
   search?: string
