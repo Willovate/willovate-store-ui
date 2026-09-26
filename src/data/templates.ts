@@ -13,6 +13,10 @@ import {
   GeneralStore01, GeneralStore02, GeneralStore03, GeneralStore04, GeneralStore05,
   GeneralStore06, GeneralStore07, GeneralStore08, GeneralStore09
 } from '../templates/GeneralStore'
+import {
+  FoodGrocery01, FoodGrocery02, FoodGrocery03, FoodGrocery04, FoodGrocery05,
+  FoodGrocery06, FoodGrocery07, FoodGrocery08, FoodGrocery09, FoodGrocery10
+} from '../templates/FoodGrocery'
 
 export const templates: TemplateConfig[] = [
   {
@@ -320,6 +324,16 @@ export const templates: TemplateConfig[] = [
   GeneralStore06,
   GeneralStore07,
   GeneralStore08,
-  GeneralStore09
+  GeneralStore09,
+  FoodGrocery01,
+  FoodGrocery02,
+  FoodGrocery03,
+  FoodGrocery04,
+  FoodGrocery05,
+  FoodGrocery06,
+  FoodGrocery07,
+  FoodGrocery08,
+  FoodGrocery09,
+  FoodGrocery10
 ]
 
