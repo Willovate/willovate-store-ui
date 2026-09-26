@@ -1344,31 +1344,7 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
 
       {/* Main Content Area */}
       <main className="marketplace-body-container">
-        {/* Sports Storefront Showcase Hero Banner - shown ONLY when sporting-goods is selected */}
-        {businessType === 'sporting-goods' && (
-          <section className="sports-storefront-feature-banner" aria-label="Live Storefront Showcase">
-            <div className="sports-feature-banner-content">
-              <div className="sports-feature-badge-row">
-                <span className="sports-feature-badge">⚡ PRODUCTION SHOPIFY-STYLE STORE</span>
-                <span className="sports-feature-tag">14+ Sections • Interactive Cart & Modals</span>
-              </div>
-              <h2 className="sports-feature-title">VELOCITY // PERFORMANCE LAB</h2>
-              <p className="sports-feature-desc">
-                High-energy sports e-commerce storefront with live cart drawer, currency switcher, quick view modal, multi-device viewports, product swatches, and athletic performance branding.
-              </p>
-            </div>
-            <div className="sports-feature-actions">
-              <button
-                type="button"
-                className="sports-launch-preview-btn"
-                onClick={() => setPreviewTemplate(categoryTemplates[0] || null)}
-              >
-                ⛶ Open Live Storefront Preview →
-              </button>
-            </div>
-          </section>
-        )}
-
+       
         {/* Category Controls: Filter Tags & Sorting (only when templates exist) */}
         {categoryTemplates.length > 0 && (
           <div className="category-control-row">
