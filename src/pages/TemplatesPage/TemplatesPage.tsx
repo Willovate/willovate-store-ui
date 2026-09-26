@@ -7,7 +7,10 @@ import { ProGearStorefront } from '../../templates/sports/ProGear'
 import { FitCoreStorefront } from '../../templates/sports/FitCore'
 import { GameDayStorefront } from '../../templates/sports/GameDay'
 import { PeakStorefront } from '../../templates/sports/Peak'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront }
+import { StreetAthleteStorefront } from '../../templates/sports/StreetAthlete'
+import { EliteSportStorefront } from '../../templates/sports/EliteSport'
+import { MinoStorefront } from '../../templates/clothing/Mino'
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront }
 
 // Re-export domain types
 export type {
@@ -318,6 +321,24 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   onUseTemplate,
   onClose,
 }) => {
+  if (
+    template && 
+    (template.slug === 'sports-elitesport' ||
+      template.id === 'sports-elitesport' ||
+      template.name?.toLowerCase() === 'elitesport')
+  ) {
+    return <EliteSportStorefront deviceView={device} />
+  }
+
+  if (
+    template &&
+    (template.slug === 'sports-streetathlete' ||
+      template.id === 'sports-streetathlete' ||
+      template.name?.toLowerCase() === 'streetathlete')
+  ) {
+    return <StreetAthleteStorefront deviceView={device} />
+  }
+
   const isPeak =
     template &&
     (template.slug === 'sports-peak' ||
@@ -414,6 +435,18 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
     )
   }
 
+  if (template && template.businessType !== 'sporting-goods') {
+    return (
+      <MinoStorefront
+        template={template}
+        device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
+        customAccentColor={customAccentColor}
+        onColorChange={_onColorChange}
+        onUseTemplate={onUseTemplate}
+        onClose={onClose}
+      />
+    )
+  }
 
   return (
     <VelocityStorefront
@@ -879,7 +912,7 @@ export function TemplateDirectoryPage({ initialBusinessType, onBack, onSelectBus
 
     // When 'other' is selected:
     if (selectedSuggestion) {
-      const catKey = TEMPLATE_REGISTRY[selectedSuggestion.id] ? selectedSuggestion.id : 'sporting-goods'
+      const catKey = TEMPLATE_REGISTRY[selectedSuggestion.id] ? selectedSuggestion.id : 'other'
       onSelectBusinessType(catKey, selectedSuggestion.label, customPrompt || selectedSuggestion.prompt)
       return
     }
@@ -888,7 +921,7 @@ export function TemplateDirectoryPage({ initialBusinessType, onBack, onSelectBus
       const match = ALL_OTHER_SUGGESTIONS.find(
         (s) => customPrompt.toLowerCase().includes(s.label.toLowerCase()) || s.label.toLowerCase().includes(customPrompt.toLowerCase())
       )
-      const catKey = match && TEMPLATE_REGISTRY[match.id] ? match.id : (customPrompt.toLowerCase().includes('sport') ? 'sporting-goods' : 'other')
+      const catKey = match && TEMPLATE_REGISTRY[match.id] ? match.id : 'other'
       onSelectBusinessType(catKey, match ? match.label : 'Other', customPrompt.trim())
       return
     }
@@ -1052,10 +1085,37 @@ export interface CategoryTemplatesPageProps {
   onComplete?: (projectId: string, nextStepUrl: string, templateName: string, message: string) => void
 }
 
+const CLOTHING_REFERENCE_TEMPLATE: MarketplaceTemplate = {
+  id: 'clothing-reference',
+  slug: 'clothing-reference',
+  name: 'Mino Atelier',
+  businessType: 'clothing-store',
+  industryCategory: 'Clothing Store',
+  style: 'minimal',
+  catalogSize: 'large',
+  tags: ['Clothing', 'Fashion', 'Minimal', 'Everyday'],
+  shortDescription: 'A clean, fashion-led storefront shown as a visual reference for this category.',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80',
+  fullPreviewUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1600&auto=format&fit=crop&q=85',
+  popularityScore: 90,
+  isActive: true,
+  brandName: 'MINO',
+  headline: 'New Collection\nMinimal Style',
+  subtitle: 'Everyday pieces, redefined.',
+  buttonText: 'Explore Collection',
+  buttonColor: '#0f172a',
+  isDark: false,
+  modelImage: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80',
+  badge: 'recommended',
+  rating: 4.9,
+  reviewCount: 128,
+  layoutType: 'editorial',
+  features: ['Minimal clothing storefront', 'Editorial collection presentation', 'Responsive storefront preview'],
+}
+
 export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
   businessType = 'online-store',
   businessTypeDisplay,
-  customPrompt = '',
   sessionId: _sessionId = 'sess_onboarding_101',
   onBack,
   onComplete,
@@ -1067,19 +1127,21 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
 
   const displayTitle = businessTypeDisplay || resolvedCategory?.displayName || 'Online Store'
 
-  // Retrieve templates strictly for the chosen category / card
+  // Sports keeps its full catalog; other categories use the clothing reference storefront.
   const categoryTemplates: MarketplaceTemplate[] = useMemo(() => {
-    const isSports =
-      businessType === 'sporting-goods' ||
-      (businessType === 'other' && customPrompt && customPrompt.toLowerCase().includes('sport'))
-
-    if (isSports) {
+    if (businessType === 'sporting-goods') {
       return ALL_SPORTS_MARKETPLACE_TEMPLATES
     }
 
-    // All other cards' templates are empty (clean and clear)
-    return []
-  }, [businessType, customPrompt])
+    return [{
+      ...CLOTHING_REFERENCE_TEMPLATE,
+      id: `clothing-reference-${businessType}`,
+      slug: `clothing-reference-${businessType}`,
+      businessType,
+      industryCategory: displayTitle,
+      shortDescription: `A clothing-store reference storefront for ${displayTitle}.`,
+    }]
+  }, [businessType, displayTitle])
 
   // Selection state
   const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(categoryTemplates[0]?.id || null)
@@ -1097,6 +1159,15 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
     return null
   })
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+
+  const previousBusinessType = useRef(businessType)
+  useEffect(() => {
+    if (previousBusinessType.current === businessType) return
+    previousBusinessType.current = businessType
+    setSelectedTemplateId(categoryTemplates[0]?.id || null)
+    setActiveTag('All')
+    setPreviewTemplate(null)
+  }, [businessType, categoryTemplates])
 
   // Auto-launch preview if URL hash changes to #sports-storefront, #velocity, or #sports-preview
   useEffect(() => {
@@ -1319,16 +1390,13 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
           <div className="marketplace-empty-state">
             <div className="empty-icon">🔍</div>
             <h3>No templates found for {displayTitle}</h3>
-            <p>Templates for this category are coming soon. Check out the Sports Store (Velocity) template to explore our live store features.</p>
+            <p>There are no templates for this filter yet. View the available reference storefront instead.</p>
             <button
               type="button"
               className="empty-clear-btn"
-              onClick={() => {
-                if (onBack) onBack()
-                else window.location.hash = 'templates'
-              }}
+              onClick={() => setActiveTag('All')}
             >
-              ← Choose Another Category
+              Show Available Reference
             </button>
           </div>
         )}

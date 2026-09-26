@@ -1216,7 +1216,15 @@ function BuildingCategoriesSection() {
           <div className="category-left-col">
             <h3 className="category-editorial-title">{current.title}</h3>
             <p className="category-editorial-desc">{current.description}</p>
-            <a href="#templates" className="btn-explore-path">
+            <a
+              href="#templates"
+              className="btn-explore-path"
+              onClick={(e) => {
+                e.preventDefault()
+                const el = document.getElementById('templates')
+                el?.scrollIntoView({ behavior: 'smooth' })
+              }}
+            >
               {current.ctaText}
             </a>
           </div>
@@ -1555,7 +1563,13 @@ function PlatformOverviewSection() {
 /* =========================================================================
    6. CURATED TEMPLATE GRID (LIGHT LUXURY BACKDROP - 6 COMPACT BOXES AS SS)
    ========================================================================= */
-function TemplateShowcaseSection({ onExploreTemplates }: { onExploreTemplates?: () => void }) {
+function TemplateShowcaseSection({
+  onExploreTemplates,
+  onSelectCategory,
+}: {
+  onExploreTemplates?: () => void
+  onSelectCategory?: (category: string) => void
+}) {
   return (
     <section className="templates-section" id="templates">
       {/* Luxury Interactive Background Ambient Glows */}
@@ -1584,11 +1598,31 @@ function TemplateShowcaseSection({ onExploreTemplates }: { onExploreTemplates?: 
         {/* Right Side: 6 Compact Template Boxes (3 cols x 2 rows) */}
         <div className="templates-right-grid">
           {/* Card 1: LUXE */}
-          <div className="template-mini-card card-luxe">
+          <div
+            className="template-mini-card card-luxe"
+            role="button"
+            tabIndex={0}
+            onClick={() => (onSelectCategory ? onSelectCategory('clothing-store') : onExploreTemplates?.())}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                onSelectCategory ? onSelectCategory('clothing-store') : onExploreTemplates?.()
+              }
+            }}
+          >
             <div className="tm-card-content">
               <div className="tm-brand">LUXE</div>
               <h3 className="tm-headline">Summer<br />Collection</h3>
-              <button className="tm-btn" type="button">Shop Collection</button>
+              <button
+                className="tm-btn"
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onSelectCategory ? onSelectCategory('clothing-store') : onExploreTemplates?.()
+                }}
+              >
+                Shop Collection
+              </button>
             </div>
             <div className="tm-card-visual tm-vis-fashion">
               <div className="tm-photo-mockup photo-fashion">
@@ -1598,11 +1632,31 @@ function TemplateShowcaseSection({ onExploreTemplates }: { onExploreTemplates?: 
           </div>
 
           {/* Card 2: The Restaurant */}
-          <div className="template-mini-card card-dining">
+          <div
+            className="template-mini-card card-dining"
+            role="button"
+            tabIndex={0}
+            onClick={() => (onSelectCategory ? onSelectCategory('restaurant') : onExploreTemplates?.())}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                onSelectCategory ? onSelectCategory('restaurant') : onExploreTemplates?.()
+              }
+            }}
+          >
             <div className="tm-card-content">
               <div className="tm-brand">The Restaurant</div>
               <h3 className="tm-headline">Taste the<br />experience</h3>
-              <button className="tm-btn" type="button">Reserve a table</button>
+              <button
+                className="tm-btn"
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onSelectCategory ? onSelectCategory('restaurant') : onExploreTemplates?.()
+                }}
+              >
+                Reserve a table
+              </button>
             </div>
             <div className="tm-card-visual tm-vis-dining">
               <div className="tm-photo-mockup photo-dining">
@@ -1612,11 +1666,31 @@ function TemplateShowcaseSection({ onExploreTemplates }: { onExploreTemplates?: 
           </div>
 
           {/* Card 3: Stronger Every Day (Gym / Athlete) */}
-          <div className="template-mini-card card-fitness">
+          <div
+            className="template-mini-card card-fitness"
+            role="button"
+            tabIndex={0}
+            onClick={() => (onSelectCategory ? onSelectCategory('sporting-goods') : onExploreTemplates?.())}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                onSelectCategory ? onSelectCategory('sporting-goods') : onExploreTemplates?.()
+              }
+            }}
+          >
             <div className="tm-card-content">
               <div className="tm-brand">Iron Lab</div>
               <h3 className="tm-headline">Stronger<br />Every Day</h3>
-              <button className="tm-btn" type="button">Join Now</button>
+              <button
+                className="tm-btn"
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onSelectCategory ? onSelectCategory('sporting-goods') : onExploreTemplates?.()
+                }}
+              >
+                Join Now
+              </button>
             </div>
             <div className="tm-card-visual tm-vis-fitness">
               <div className="tm-photo-mockup photo-fitness">
@@ -1626,11 +1700,31 @@ function TemplateShowcaseSection({ onExploreTemplates }: { onExploreTemplates?: 
           </div>
 
           {/* Card 4: Consulting (Strategy. Execution. Impact.) */}
-          <div className="template-mini-card card-consulting">
+          <div
+            className="template-mini-card card-consulting"
+            role="button"
+            tabIndex={0}
+            onClick={() => (onSelectCategory ? onSelectCategory('business-website') : onExploreTemplates?.())}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                onSelectCategory ? onSelectCategory('business-website') : onExploreTemplates?.()
+              }
+            }}
+          >
             <div className="tm-card-content">
               <div className="tm-brand">Elevate</div>
               <h3 className="tm-headline">Strategy.<br />Execution.<br />Impact.</h3>
-              <button className="tm-btn" type="button">Book Consultation</button>
+              <button
+                className="tm-btn"
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onSelectCategory ? onSelectCategory('business-website') : onExploreTemplates?.()
+                }}
+              >
+                Book Consultation
+              </button>
             </div>
             <div className="tm-card-visual tm-vis-consulting">
               <div className="tm-photo-mockup photo-consulting">
@@ -1640,11 +1734,31 @@ function TemplateShowcaseSection({ onExploreTemplates }: { onExploreTemplates?: 
           </div>
 
           {/* Card 5: Glow Studio (Beauty that moves with you.) */}
-          <div className="template-mini-card card-beauty">
+          <div
+            className="template-mini-card card-beauty"
+            role="button"
+            tabIndex={0}
+            onClick={() => (onSelectCategory ? onSelectCategory('salon') : onExploreTemplates?.())}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                onSelectCategory ? onSelectCategory('salon') : onExploreTemplates?.()
+              }
+            }}
+          >
             <div className="tm-card-content">
               <div className="tm-brand">Glow Studio</div>
               <h3 className="tm-headline">Beauty that<br />moves with you.</h3>
-              <button className="tm-btn" type="button">Book Appointment</button>
+              <button
+                className="tm-btn"
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onSelectCategory ? onSelectCategory('salon') : onExploreTemplates?.()
+                }}
+              >
+                Book Appointment
+              </button>
             </div>
             <div className="tm-card-visual tm-vis-beauty">
               <div className="tm-photo-mockup photo-beauty">
@@ -1654,11 +1768,31 @@ function TemplateShowcaseSection({ onExploreTemplates }: { onExploreTemplates?: 
           </div>
 
           {/* Card 6: Prana (Build skills. Shape futures.) */}
-          <div className="template-mini-card card-wellness">
+          <div
+            className="template-mini-card card-wellness"
+            role="button"
+            tabIndex={0}
+            onClick={() => (onSelectCategory ? onSelectCategory('education') : onExploreTemplates?.())}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                onSelectCategory ? onSelectCategory('education') : onExploreTemplates?.()
+              }
+            }}
+          >
             <div className="tm-card-content">
               <div className="tm-brand">Prana</div>
               <h3 className="tm-headline">Build skills.<br />Shape futures.</h3>
-              <button className="tm-btn" type="button">Explore courses</button>
+              <button
+                className="tm-btn"
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onSelectCategory ? onSelectCategory('education') : onExploreTemplates?.()
+                }}
+              >
+                Explore courses
+              </button>
             </div>
             <div className="tm-card-visual tm-vis-wellness">
               <div className="tm-photo-mockup photo-wellness">
@@ -2270,9 +2404,10 @@ interface LandingPageProps {
   onStartFree?: () => void
   onGoToStore?: () => void
   onExploreTemplates?: () => void
+  onSelectCategory?: (category: string) => void
 }
 
-export function LandingPage({ onGoToStore, onExploreTemplates }: LandingPageProps = {}) {
+export function LandingPage({ onGoToStore, onExploreTemplates, onSelectCategory }: LandingPageProps = {}) {
   const handleStartFree = () => {
     const target =
       document.getElementById('categories') ||
@@ -2301,16 +2436,10 @@ export function LandingPage({ onGoToStore, onExploreTemplates }: LandingPageProp
         onStartFree={handleStartFree}
         onGoToStore={onGoToStore}
         onNavClick={(section) => {
-          if (section === 'templates') {
-            if (onExploreTemplates) {
-              onExploreTemplates()
-            } else {
-              window.location.hash = 'templates'
-            }
-            return
-          }
           const el = document.getElementById(section)
-          el?.scrollIntoView({ behavior: 'smooth' })
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth' })
+          }
         }}
       />
 
@@ -2332,7 +2461,10 @@ export function LandingPage({ onGoToStore, onExploreTemplates }: LandingPageProp
         <PlatformOverviewSection />
 
         {/* 6. "Not a template. Your brand." 6-Card Template Grid */}
-        <TemplateShowcaseSection onExploreTemplates={onExploreTemplates} />
+        <TemplateShowcaseSection
+          onExploreTemplates={onExploreTemplates}
+          onSelectCategory={onSelectCategory}
+        />
 
         {/* 7. "Run everything without switching tools." Analytics Dashboard (Light Luxury) */}
         <DashboardPreviewSection />

@@ -96,9 +96,19 @@ function App() {
 
       setShowStore(false)
 
-      if (rawHash === 'templates' || rawHash === 'directory') {
+      if (rawHash === 'directory' || rawHash === 'all-templates' || rawHash === 'explore-templates') {
         setCurrentPage('directory')
         document.title = 'What do you want to build? | Willovate One'
+        return
+      }
+
+      if (rawHash === 'templates') {
+        setCurrentPage('landing')
+        document.title = 'Willovate One - The Unified Commerce & Store Platform'
+        setTimeout(() => {
+          const el = document.getElementById('templates')
+          el?.scrollIntoView({ behavior: 'smooth' })
+        }, 50)
         return
       }
 
@@ -243,7 +253,7 @@ function App() {
         customPrompt={customPrompt}
         onBack={() => {
           setCurrentPage('directory')
-          window.location.hash = 'templates'
+          window.location.hash = 'directory'
         }}
         onComplete={(_projectId, _nextStepUrl, templateName) => {
           setSelectedTemplateTitle(templateName)
@@ -282,7 +292,14 @@ function App() {
         }}
         onExploreTemplates={() => {
           setCurrentPage('directory')
-          window.location.hash = 'templates'
+          window.location.hash = 'directory'
+        }}
+        onSelectCategory={(businessType) => {
+          const cat = TEMPLATE_REGISTRY[businessType]
+          setSelectedBusinessType(businessType)
+          setSelectedBusinessTypeDisplay(cat ? cat.displayName : businessType)
+          setCurrentPage('templates')
+          window.location.hash = `${businessType}-templates`
         }}
       />
     )

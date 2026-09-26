@@ -1,5 +1,6 @@
 import type { ComponentType } from 'react'
 import type { CategoryData, MarketplaceTemplate, Template } from '../types'
+import { MinoStorefront } from '../templates/clothing/Mino'
 import { VelocityStorefront } from '../templates/sports/Velocity'
 import { ArenaStorefront } from '../templates/sports/Arena'
 import { SprintStorefront } from '../templates/sports/Sprint'
@@ -7,6 +8,8 @@ import { ProGearStorefront } from '../templates/sports/ProGear'
 import { FitCoreStorefront } from '../templates/sports/FitCore'
 import { GameDayStorefront } from '../templates/sports/GameDay'
 import { PeakStorefront } from '../templates/sports/Peak'
+import { StreetAthleteStorefront } from '../templates/sports/StreetAthlete'
+import { EliteSportStorefront } from '../templates/sports/EliteSport'
 import { ALL_SPORTS_MARKETPLACE_TEMPLATES } from './sportsTemplatesData'
 
 export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
@@ -78,6 +81,22 @@ export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
 export function getTemplateComponent(template?: MarketplaceTemplate | Template | null): ComponentType<any> {
   if (
     template &&
+    (template.slug === 'sports-elitesport' ||
+      template.id === 'sports-elitesport' ||
+      template.name?.toLowerCase() === 'elitesport')
+  ) {
+    return EliteSportStorefront
+  }
+  if (
+    template &&
+    (template.slug === 'sports-streetathlete' ||
+      template.id === 'sports-streetathlete' ||
+      template.name?.toLowerCase() === 'streetathlete')
+  ) {
+    return StreetAthleteStorefront
+  }
+  if (
+    template &&
     (template.slug === 'sports-peak' ||
       template.id === 'sports-peak' ||
       template.name?.toLowerCase().includes('peak'))
@@ -123,6 +142,9 @@ export function getTemplateComponent(template?: MarketplaceTemplate | Template |
       template.name?.toLowerCase().includes('arena'))
   ) {
     return ArenaStorefront
+  }
+  if (template && template.businessType !== 'sporting-goods') {
+    return MinoStorefront
   }
   return VelocityStorefront
 }
