@@ -21,7 +21,7 @@ export const FoodGrocery06: TemplateConfig = {
     { id: 's3', type: 'category-grid', props: { title: 'Shop by Diet', categories: [{ name: 'Vegan', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=600' }, { name: 'Keto', image: 'https://images.unsplash.com/photo-1607532941433-304659e8198a?auto=format&fit=crop&q=80&w=600' }, { name: 'Gluten-Free', image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&q=80&w=600' }] } },
     { id: 's4', type: 'catalog', props: {
       products: [
-        { id: 'fg06-1', name: 'Almond Butter', description: 'Unsweetened', price: 7.99, imageUrl: 'https://images.unsplash.com/photo-1598284799047-981881765c82?auto=format&fit=crop&q=80&w=600', category: 'Pantry', stockQuantity: 100, visualTheme: 'default', isFeatured: false, slug: 'almond-butter', compareAtPrice: null },
+        { id: 'fg06-1', name: 'Almond Butter', description: 'Unsweetened', price: 7.99, imageUrl: 'https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?auto=format&fit=crop&q=80&w=600', category: 'Pantry', stockQuantity: 100, visualTheme: 'default', isFeatured: false, slug: 'almond-butter', compareAtPrice: null },
         { id: 'fg06-2', name: 'Chia Seeds', description: 'Superfood', price: 5.99, imageUrl: 'https://images.unsplash.com/photo-1515543904379-3d757afe72e4?auto=format&fit=crop&q=80&w=600', category: 'Superfoods', stockQuantity: 100, visualTheme: 'default', isFeatured: false, slug: 'chia-seeds', compareAtPrice: null }
       ]
     }},
