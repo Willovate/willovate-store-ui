@@ -167,7 +167,9 @@ function App() {
             rawHash === 'sports-gameday' ||
             rawHash === 'peak' ||
             rawHash === 'sports-peak' ||
-            rawHash === 'outdoor'
+            rawHash === 'outdoor' ||
+            rawHash === 'motion' ||
+            rawHash === 'sports-motion'
           )) ||
           (key === 'other' && (rawHash === 'custom' || rawHash === 'custom-templates'))
         )

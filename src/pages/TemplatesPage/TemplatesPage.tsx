@@ -9,8 +9,9 @@ import { GameDayStorefront } from '../../templates/sports/GameDay'
 import { PeakStorefront } from '../../templates/sports/Peak'
 import { StreetAthleteStorefront } from '../../templates/sports/StreetAthlete'
 import { EliteSportStorefront } from '../../templates/sports/EliteSport'
+import { MotionStorefront } from '../../templates/sports/Motion'
 import { MinoStorefront } from '../../templates/clothing/Mino'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront }
 
 // Re-export domain types
 export type {
@@ -321,6 +322,21 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   onUseTemplate,
   onClose,
 }) => {
+  if (
+    template &&
+    (template.slug === 'sports-motion' ||
+      template.id === 'sports-motion' ||
+      template.name?.toLowerCase() === 'motion')
+  ) {
+    return (
+      <MotionStorefront
+        deviceView={device}
+        customAccentColor={customAccentColor || undefined}
+        onBack={onClose}
+      />
+    )
+  }
+
   if (
     template && 
     (template.slug === 'sports-elitesport' ||

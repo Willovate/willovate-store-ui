@@ -10,6 +10,7 @@ import { GameDayStorefront } from '../templates/sports/GameDay'
 import { PeakStorefront } from '../templates/sports/Peak'
 import { StreetAthleteStorefront } from '../templates/sports/StreetAthlete'
 import { EliteSportStorefront } from '../templates/sports/EliteSport'
+import { MotionStorefront } from '../templates/sports/Motion'
 import { ALL_SPORTS_MARKETPLACE_TEMPLATES } from './sportsTemplatesData'
 
 export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
@@ -79,6 +80,14 @@ export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
 }
 
 export function getTemplateComponent(template?: MarketplaceTemplate | Template | null): ComponentType<any> {
+  if (
+    template &&
+    (template.slug === 'sports-motion' ||
+      template.id === 'sports-motion' ||
+      template.name?.toLowerCase() === 'motion')
+  ) {
+    return MotionStorefront
+  }
   if (
     template &&
     (template.slug === 'sports-elitesport' ||

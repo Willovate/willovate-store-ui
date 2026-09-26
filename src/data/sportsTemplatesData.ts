@@ -978,6 +978,126 @@ export const SPORTS_TEMPLATES_CONFIG: Record<string, SportsTemplateConfig> = {
       },
     ],
   },
+  'sports-motion': {
+    template: {
+      id: 'sports-motion',
+      slug: 'sports-motion',
+      name: 'Motion',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'bold',
+      catalogSize: 'large',
+      tags: ['Futuristic', 'Sports Tech', 'Running', 'Smart Gear', 'Carbon', 'Biometrics'],
+      shortDescription:
+        'Next-generation futuristic sports technology storefront featuring biometric-responsive sportswear, carbon-fusion footwear, and real-time kinetic telemetry.',
+      thumbnailUrl:
+        'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl:
+        'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 99,
+      isActive: true,
+      brandName: 'MOTION',
+      headline: 'THE FUTURE OF PERFORMANCE',
+      subtitle:
+        'Biometric-responsive sportswear, carbon-fusion footwear, and real-time kinetic gear engineered to break the human boundary.',
+      buttonText: 'Explore Technology',
+      buttonColor: '#00f5d4',
+      accentColor: '#00f5d4',
+      isDark: true,
+      modelImage:
+        'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&auto=format&fit=crop&q=80',
+      badge: 'new',
+      rating: 4.98,
+      reviewCount: 382,
+      layoutType: 'editorial',
+      features: [
+        'Interactive Performance Technology Cards: Speed, Recovery, Precision',
+        'Smart Gear Ecosystem: Haptic Hydration, Biometric Telemetry, EMG Sensing',
+        'Engineered For Motion: 94.2% Kinetic Return & Micro-Graphene Heat Diffusion',
+        'Technical PDP with Laboratory Specifications, Materials, and Instant Checkout',
+      ],
+    },
+    announcement: 'KINETIC INTELLIGENCE · QUANTUM RECOVERY ARCHITECTURE · FREE TELEMETRY SHIPPING OVER ₹2,499',
+    navItems: [
+      'Performance',
+      'Running',
+      'Training',
+      'Footwear',
+      'Smart Gear',
+      'Technology',
+      'Collections',
+      'New',
+    ],
+    heroStats: [
+      { label: 'Energy Return', value: '94.2%' },
+      { label: 'Carbon Chassis', value: '168g' },
+      { label: 'Telemetry Latency', value: '0.02s' },
+    ],
+    categories: [
+      {
+        id: 'footwear',
+        name: 'Carbon Footwear',
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80',
+        badge: 'PROPULSION',
+        count: '32 Items',
+      },
+      {
+        id: 'smart-gear',
+        name: 'Smart Telemetry',
+        image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=600&auto=format&fit=crop&q=80',
+        badge: 'CONNECTED',
+        count: '18 Items',
+      },
+      {
+        id: 'training',
+        name: 'Graphene Training',
+        image: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&auto=format&fit=crop&q=80',
+        badge: 'NEURAL FIT',
+        count: '46 Items',
+      },
+    ],
+    featuredProducts: [
+      {
+        id: 'mo-shoe-01',
+        name: 'AeroKinetics 01 Carbon Racer',
+        category: 'Footwear',
+        price: '₹18,999',
+        compareAtPrice: '₹22,499',
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&auto=format&fit=crop&q=80',
+        badge: 'KINETIC-CORE V4',
+        rating: 4.9,
+        reviewCount: 324,
+      },
+      {
+        id: 'mo-smart-01',
+        name: 'PulseWeave Smart Hydration Vest',
+        category: 'Smart Gear',
+        price: '₹9,999',
+        compareAtPrice: '₹12,499',
+        image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&auto=format&fit=crop&q=80',
+        badge: 'TELEMETRY V2',
+        rating: 4.9,
+        reviewCount: 146,
+      },
+    ],
+    techFeatures: [
+      {
+        icon: '⚡',
+        title: 'Supercritical PEBA Propulsion',
+        desc: 'Nitrogen-infused foam paired with dual-strut carbon rocker for continuous forward momentum.',
+      },
+      {
+        icon: '◈',
+        title: 'Micro-Graphene Thermal Dissipation',
+        desc: 'Directs metabolic thermal spikes away from the torso to preserve peak output.',
+      },
+      {
+        icon: '📡',
+        title: 'Real-Time Biometric Telemetry',
+        desc: 'Sub-millisecond electromyography sensor integration seamlessly reads muscle tension.',
+      },
+    ],
+  },
 }
 
 export const ALL_SPORTS_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = Object.values(SPORTS_TEMPLATES_CONFIG).map(
