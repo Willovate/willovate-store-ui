@@ -184,6 +184,92 @@ export const SECTION_SCHEMAS: SectionSchema[] = [
         { name: 'url', label: 'URL', type: 'link' },
       ]
     }
+  },
+  {
+    type: 'text',
+    name: 'Text Block',
+    settings: [
+      { name: 'content', label: 'Text', type: 'richtext', tab: 'content' },
+      { name: 'alignment', label: 'Alignment', type: 'select', options: [{label: 'Left', value: 'left'}, {label: 'Center', value: 'center'}, {label: 'Right', value: 'right'}], tab: 'style' }
+    ]
+  },
+  {
+    type: 'button',
+    name: 'Button',
+    settings: [
+      { name: 'label', label: 'Label', type: 'text', tab: 'content' },
+      { name: 'link', label: 'Link', type: 'link', tab: 'content' },
+      { name: 'alignment', label: 'Alignment', type: 'select', options: [{label: 'Left', value: 'left'}, {label: 'Center', value: 'center'}, {label: 'Right', value: 'right'}], tab: 'style' },
+      { name: 'style_buttonColor', label: 'Button color', type: 'color', tab: 'style' },
+      { name: 'style_textColor', label: 'Text color', type: 'color', tab: 'style' }
+    ]
+  },
+  {
+    type: 'image',
+    name: 'Image',
+    settings: [
+      { name: 'url', label: 'Image', type: 'image', tab: 'content' },
+      { name: 'caption', label: 'Caption', type: 'text', tab: 'content' },
+      { name: 'alt', label: 'Alt text', type: 'text', tab: 'content' }
+    ]
+  },
+  {
+    type: 'divider',
+    name: 'Divider',
+    settings: [
+      { name: 'spacing', label: 'Spacing', type: 'select', options: [{label: 'Small', value: 'small'}, {label: 'Medium', value: 'medium'}, {label: 'Large', value: 'large'}], tab: 'style' },
+      { name: 'color', label: 'Color', type: 'color', tab: 'style' }
+    ]
+  },
+  {
+    type: 'banner_slider',
+    name: 'Banner Slider',
+    settings: [
+      { name: 'autoplay', label: 'Autoplay', type: 'toggle', tab: 'style' }
+    ],
+    blocks: {
+      type: 'slide',
+      name: 'Slide',
+      fields: [
+        { name: 'image', label: 'Image', type: 'image' },
+        { name: 'link', label: 'Link', type: 'link' }
+      ]
+    }
+  },
+  {
+    type: 'services_grid',
+    name: 'Services',
+    settings: [
+      { name: 'title', label: 'Heading', type: 'text', tab: 'content' },
+      { name: 'subtitle', label: 'Subtitle', type: 'text', tab: 'content' }
+    ],
+    blocks: {
+      type: 'service',
+      name: 'Service',
+      fields: [
+        { name: 'title', label: 'Title', type: 'text' },
+        { name: 'description', label: 'Description', type: 'textarea' },
+        { name: 'icon', label: 'Icon (URL)', type: 'image' }
+      ]
+    }
+  },
+  {
+    type: 'image_text',
+    name: 'Image & Text',
+    settings: [
+      { name: 'title', label: 'Heading', type: 'text', tab: 'content' },
+      { name: 'content', label: 'Text', type: 'textarea', tab: 'content' },
+      { name: 'image', label: 'Image', type: 'image', tab: 'content' },
+      { name: 'layout', label: 'Layout', type: 'select', options: [{label: 'Image left', value: 'left'}, {label: 'Image right', value: 'right'}], tab: 'style' }
+    ]
+  },
+  {
+    type: 'video',
+    name: 'Video',
+    settings: [
+      { name: 'url', label: 'Video URL (YouTube/Vimeo)', type: 'link', tab: 'content' },
+      { name: 'autoplay', label: 'Autoplay', type: 'toggle', tab: 'style' }
+    ]
   }
 ];
 

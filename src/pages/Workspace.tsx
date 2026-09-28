@@ -311,6 +311,7 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
   }
 
   const handlePublish = async () => {
+    if (!confirm('Are you sure you want to publish these changes to your live storefront?')) return
     try {
       setSaveStatus('saving')
       await updateWebsite(websiteId, { isPublished: true })
@@ -422,8 +423,8 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
               <nav className="ws-sidebar-nav" style={{ padding: '1rem', flex: 1, display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
                 <p className="ws-sidebar-section-label" style={{ color: '#1e1b4b', fontSize: '0.7rem', fontWeight: 800, letterSpacing: '1px', marginBottom: '0.4rem', padding: '0 0.5rem' }}>MAIN MENU</p>
                 <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem', padding: 0, margin: 0, listStyle: 'none' }}>
-                  <li className="ws-nav-item ws-nav-active" style={{ background: '#EEF2FF', color: '#4F46E5', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }} onClick={() => setViewMode('editor')}><Home size={18} /> Workspace</li>
-                  <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}><BarChart3 size={18} /> Dashboard</li>
+                  <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}><Home size={18} /> Workspace</li>
+                  <li className="ws-nav-item ws-nav-active" style={{ background: '#EEF2FF', color: '#4F46E5', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}><AppWindow size={18} /> Online Store</li>
                   <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}><ShoppingBag size={18} /> Products</li>
                   <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}><Folder size={18} /> Orders</li>
                   <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}><Users size={18} /> Customers</li>
@@ -439,7 +440,7 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
                     <SlidersHorizontal size={18} /> Browse Templates
                     <div style={{ width: '56px', background: '#FF4500', color: '#fff', fontSize: '10px', fontWeight: 800, padding: '2px 0', textAlign: 'center', borderRadius: '12px', marginLeft: 'auto' }}>NEW</div>
                   </li>
-                  <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}><Bookmark size={18} /> My Templates</li>
+                  <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }} onClick={() => setShowThemeLibrary(true)}><Bookmark size={18} /> My Templates</li>
                 </ul>
 
                 <div style={{ height: '1px', background: '#f1f5f9', margin: '0.5rem' }}></div>
@@ -591,10 +592,7 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
                 <button className="ws-page-switcher" onClick={() => setShowPageManager(true)} title="Manage pages" style={{ background: '#fff', border: '1px solid var(--line)', color: 'var(--ink)', borderRadius: '8px', padding: '0 1rem', fontWeight: 500, fontSize: '14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '235px', height: '36px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><Home size={16} color="var(--muted)"/> {selectedPage?.title || 'Home'}</div> <ChevronDown size={16} color="var(--muted)" />
                 </button>
-                <div className="ws-save-status" aria-live="polite" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: saveStatus === 'saving' ? '#f59e0b' : '#22C55E' }} />
-                  <span style={{ color: '#6B7280', fontSize: '13px' }}>{saveStatus === 'saving' ? 'Saving' : 'Saved'}</span>
-                </div>
+                <SaveIndicator status={saveStatus} hasUnsavedChanges={hasUnsavedChanges} onSave={handleSave} />
               </div>
               <div className="ws-topbar-center" style={{ display: 'flex', position: 'absolute', left: '50%', transform: 'translateX(-50%)', alignItems: 'center' }}>
                 <div style={{ display: 'flex', gap: '4px' }}>

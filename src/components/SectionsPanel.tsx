@@ -165,6 +165,7 @@ export default function SectionsPanel({
   onRefresh,
 }: SectionsPanelProps) {
   const [busy, setBusy] = useState(false)
+  const [draggedId, setDraggedId] = useState<string | null>(null)
 
   const elements = [...page.elements].sort((a, b) => a.displayOrder - b.displayOrder)
   // Filter out: (a) elements whose ID is a known synthetic key, (b) product-* entries,
@@ -201,6 +202,51 @@ export default function SectionsPanel({
     }
   }
 
+  const handleDragStart = (e: React.DragEvent, id: string) => {
+    setDraggedId(id)
+    e.dataTransfer.effectAllowed = 'move'
+    // Optional: Set a drag image or specific data
+  }
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault() // Necessary to allow dropping
+    e.dataTransfer.dropEffect = 'move'
+  }
+
+  const handleDrop = async (e: React.DragEvent, targetId: string) => {
+    e.preventDefault()
+    if (!draggedId || draggedId === targetId) {
+      setDraggedId(null)
+      return
+    }
+
+    const draggedIdx = userElements.findIndex(el => el.id === draggedId)
+    const targetIdx = userElements.findIndex(el => el.id === targetId)
+    
+    if (draggedIdx === -1 || targetIdx === -1) {
+      setDraggedId(null)
+      return
+    }
+
+    const newElements = [...userElements]
+    const [draggedElement] = newElements.splice(draggedIdx, 1)
+    newElements.splice(targetIdx, 0, draggedElement)
+
+    setBusy(true)
+    try {
+      // Update display orders in backend
+      await Promise.all(newElements.map((el, idx) => 
+        updateElement(el.id, { displayOrder: idx })
+      ))
+      onRefresh()
+    } catch {
+      alert('Failed to reorder sections.')
+    } finally {
+      setBusy(false)
+      setDraggedId(null)
+    }
+  }
+
 
 
   /* ── Row functions ── */
@@ -210,19 +256,39 @@ export default function SectionsPanel({
     return <Square size={16} strokeWidth={1.5} color={color} />;
   }
 
-  const renderRow = (id: string, name: string, isHidden: boolean, idx: number, isReq: boolean = false, el?: PageElement, hasChevron: boolean = false) => {
+  const renderRow = (id: string, name: string, isHidden: boolean, idx: number, isReq: boolean = false, el?: PageElement, hasChevron: boolean = false, isDraggable: boolean = false) => {
     const isSelected = selectedElementId === id;
+    const isDragging = draggedId === id;
     const color = isSelected ? '#4F46E5' : '#1F2937';
 
     return (
       <div
         className={`ws-section-item ${isSelected ? 'selected' : ''} ${isHidden ? 'hidden' : ''}`}
         onClick={() => onSelectElement(id)}
-        style={{ display: 'flex', alignItems: 'center', height: '32px', borderRadius: '4px', padding: '0 8px', margin: '1px 8px', gap: '8px', cursor: 'pointer', background: isSelected ? '#EEF0FF' : 'transparent', color: color, opacity: isHidden ? 0.6 : 1 }}
-        onMouseEnter={e => { if(!isSelected) e.currentTarget.style.background = '#F3F4F6' }}
-        onMouseLeave={e => { if(!isSelected) e.currentTarget.style.background = 'transparent' }}
+        draggable={isDraggable}
+        onDragStart={isDraggable ? (e) => handleDragStart(e, id) : undefined}
+        onDragOver={isDraggable ? handleDragOver : undefined}
+        onDrop={isDraggable ? (e) => handleDrop(e, id) : undefined}
+        onDragEnd={() => setDraggedId(null)}
+        style={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          height: '32px', 
+          borderRadius: '4px', 
+          padding: '0 8px', 
+          margin: '1px 8px', 
+          gap: '8px', 
+          cursor: isDraggable ? 'grab' : 'pointer', 
+          background: isSelected ? '#EEF0FF' : 'transparent', 
+          color: color, 
+          opacity: isDragging ? 0.4 : (isHidden ? 0.6 : 1),
+          border: isDragging ? '1px dashed #4F46E5' : '1px solid transparent',
+          transition: 'all 0.15s ease'
+        }}
+        onMouseEnter={e => { if(!isSelected && !isDragging) e.currentTarget.style.background = '#F3F4F6' }}
+        onMouseLeave={e => { if(!isSelected && !isDragging) e.currentTarget.style.background = 'transparent' }}
       >
-        <div className="ws-drag-handle-container ws-hover-handle" style={{ color: '#9CA3AF', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '16px', opacity: isSelected ? 1 : undefined }}>
+        <div className="ws-drag-handle-container ws-hover-handle" style={{ color: '#9CA3AF', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '16px', opacity: isSelected ? 1 : undefined, cursor: isDraggable ? 'grab' : 'default' }}>
           <GripVertical size={14} />
         </div>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -277,7 +343,7 @@ export default function SectionsPanel({
       {renderGroupHeader({ label: "Template" })}
       <div className="ws-sections-list" style={{ display: 'flex', flexDirection: 'column' }}>
         {FIXED_TEMPLATE_ITEMS.map((item, idx) => <div key={item.id}>{renderRow(item.id, item.name, false, idx, true, undefined, false)}</div>)}
-        {userElements.map((el, idx) => <div key={el.id}>{renderRow(el.id, el.name, el.properties?.isHidden === true, FIXED_TEMPLATE_ITEMS.length + idx, false, el, false)}</div>)}
+        {userElements.map((el, idx) => <div key={el.id}>{renderRow(el.id, el.name, el.properties?.isHidden === true, FIXED_TEMPLATE_ITEMS.length + idx, false, el, false, true)}</div>)}
         {renderAddBtn()}
       </div>
 
