@@ -192,7 +192,7 @@ export const ArenaStorefront: React.FC<ArenaStorefrontProps> = ({
 
   return (
     <div
-      className={`arena-root arena-storefront device-${deviceView}`}
+      className={`arena-root simulated-frame frame-${deviceView}`}
       data-device-view={deviceView}
       style={rootStyle}
     >
