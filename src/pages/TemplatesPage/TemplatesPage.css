@@ -2941,7 +2941,19 @@
 }
 
 .simulated-frame.frame-mobile .velocity-storefront-wrapper,
-.simulated-frame.frame-mobile .sports-storefront-wrapper {
+.simulated-frame.frame-mobile .sports-storefront-wrapper,
+.simulated-frame.frame-mobile .elite-sport,
+.simulated-frame.frame-mobile .motion-theme,
+.simulated-frame.frame-mobile .street-athlete-theme,
+.simulated-frame.frame-mobile .peak-theme,
+.simulated-frame.frame-mobile .peak-storefront-root,
+.simulated-frame.frame-mobile .sprint-storefront-root,
+.simulated-frame.frame-mobile .fitcore-storefront,
+.simulated-frame.frame-mobile .gameday-storefront,
+.simulated-frame.frame-mobile .progear-storefront,
+.simulated-frame.frame-mobile .arena-storefront,
+.simulated-frame.frame-mobile .mino-storefront,
+.simulated-frame.frame-mobile > div {
   flex: 1 !important;
   height: 100% !important;
   max-height: 100% !important;
