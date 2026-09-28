@@ -69,7 +69,7 @@ export {
 } from '../../data/marketplaceTemplatesData'
 
 import { TEMPLATE_REGISTRY } from '../../data/templateRegistry'
-import { ALL_SPORTS_MARKETPLACE_TEMPLATES, SPORTS_TEMPLATES_CONFIG } from '../../data/sportsTemplatesData'
+import { ALL_SPORTS_MARKETPLACE_TEMPLATES } from '../../data/sportsTemplatesData'
 
 /* =========================================================================
    INLINE WILLOVATE ONE LOGO
@@ -111,8 +111,7 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
   onPreview,
 }) => {
   const isDark = Boolean(template.isDark)
-  const sportsConfig = SPORTS_TEMPLATES_CONFIG[template.id] || null
-  const featuredProduct = sportsConfig?.featuredProducts?.[0] || null
+  const layout = template.layoutType || 'bold-minimal'
 
   const badgeConfig = useMemo(() => {
     if (!template.badge) return null
@@ -133,35 +132,6 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
   }, [template.badge])
 
   const fallbackHero = 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&auto=format&fit=crop&q=80'
-  const heroImage = template.thumbnailUrl || template.modelImage || template.fullPreviewUrl || fallbackHero
-
-  const announcementText = useMemo(() => {
-    if (sportsConfig?.announcement) {
-      return sportsConfig.announcement.split('•')[0].trim()
-    }
-    return '⚡ FLASH DROP • FREE EXPRESS DELIVERY OVER ₹999'
-  }, [sportsConfig])
-
-  const storeDomain = useMemo(() => {
-    const clean = (template.brandName || template.name)
-      .toLowerCase()
-      .replace(/[^a-z0-9]/g, '')
-    return `${clean}.willovate.store`
-  }, [template.brandName, template.name])
-
-  const contrastColor = useMemo(() => {
-    const hex = (template.accentColor || '#3b82f6').replace('#', '')
-    if (hex.length === 6) {
-      const r = parseInt(hex.substring(0, 2), 16)
-      const g = parseInt(hex.substring(2, 4), 16)
-      const b = parseInt(hex.substring(4, 6), 16)
-      const yiq = (r * 299 + g * 587 + b * 114) / 1000
-      return yiq >= 155 ? '#0f172a' : '#ffffff'
-    }
-    return '#ffffff'
-  }, [template.accentColor])
-
-  const heroStat = sportsConfig?.heroStats?.[0] || { label: 'Performance Gear', value: '120+ Items' }
 
   return (
     <div
@@ -177,46 +147,14 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
       }}
       aria-label={`${template.name} - ${template.industryCategory} template`}
     >
-      {/* Top Visual Browser Canvas Stage */}
+      {/* Top Preview Canvas Stage */}
       <div
-        className={`marketplace-preview-stage ${isDark ? 'is-dark' : 'is-light'}`}
+        className={`marketplace-preview-stage layout-${layout}`}
         style={{
-          backgroundColor: isDark ? '#0b1120' : '#f8fafc',
+          backgroundColor: isDark ? '#0f172a' : '#f8fafc',
           color: isDark ? '#f8fafc' : '#0f172a',
         }}
       >
-        {/* Simulated Browser Chrome / Top Bar */}
-        <div className="stage-browser-bar">
-          <div className="browser-traffic-dots" aria-hidden="true">
-            <span className="dot dot-red" />
-            <span className="dot dot-yellow" />
-            <span className="dot dot-green" />
-          </div>
-          <div className="browser-url-pill">
-            <svg
-              className="url-lock-icon"
-              viewBox="0 0 24 24"
-              width="10"
-              height="10"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M12 2a4 4 0 0 0-4 4v2H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2h-1V6a4 4 0 0 0-4-4zm-2 6V6a2 2 0 1 1 4 0v2h-4z" />
-            </svg>
-            <span className="browser-domain">{storeDomain}</span>
-          </div>
-          <div className="browser-status-chip">
-            <span className="live-pulse-dot" />
-            <span className="live-status-text">LIVE DEMO</span>
-          </div>
-        </div>
-
-        {/* Micro Storefront Announcement Ticker */}
-        <div className="stage-store-announcement">
-          <span>{announcementText}</span>
-        </div>
-
-        {/* Floating Category/Status Badge */}
         {badgeConfig && (
           <div
             className="card-floating-badge"
@@ -231,116 +169,48 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
           </div>
         )}
 
-        {/* Storefront Simulated Navigation Bar */}
+        {/* Mini simulated browser/store header */}
         <div
           className="stage-mini-header"
           style={{
-            borderColor: isDark ? 'rgba(255,255,255,0.09)' : 'rgba(0,0,0,0.06)',
-            color: isDark ? '#cbd5e1' : '#475569',
+            borderColor: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)',
+            color: isDark ? '#94a3b8' : '#64748b',
+            paddingLeft: badgeConfig ? '7.5rem' : '0.85rem',
           }}
         >
-          <div className="stage-brand-group">
-            <span
-              className="brand-color-dot"
-              style={{ backgroundColor: template.accentColor || '#2563eb' }}
-            />
-            <span className="stage-brand-logo" style={{ color: isDark ? '#ffffff' : '#0f172a' }}>
-              {template.brandName || template.name}
-            </span>
-          </div>
+          <span className="stage-brand-logo" style={{ color: isDark ? '#ffffff' : '#0f172a' }}>
+            {template.brandName}
+          </span>
           <div className="stage-nav-links">
-            <span className="active">Shop</span>
+            <span>Shop</span>
             <span>Catalog</span>
-            <span>Sale</span>
+            <span>About</span>
           </div>
           <div className="stage-nav-actions">
-            <span className="mini-icon">⌕</span>
-            <div className="mini-cart-pill">
-              <span className="mini-icon">👜</span>
-              <span
-                className="cart-badge-count"
-                style={{
-                  backgroundColor: template.accentColor || '#ff3b30',
-                  color: contrastColor,
-                }}
-              >
-                2
-              </span>
-            </div>
+            <span>⌕</span>
+            <span>👜</span>
           </div>
         </div>
 
-        {/* Hero Stage with Full-Bleed Storefront Visual & Inside Peek Showcase */}
-        <div className="stage-hero-showcase">
-          {/* Background hero image with smooth zoom */}
-          <div className="stage-hero-media">
-            <img
-              src={heroImage}
-              alt={template.name}
-              className="stage-hero-bg-img"
-              loading="lazy"
-              onError={(e) => {
-                const t = e.currentTarget
-                t.onerror = null
-                t.src = fallbackHero
-              }}
-            />
-            <div
-              className={`stage-hero-gradient ${isDark ? 'gradient-dark' : 'gradient-light'}`}
-            />
-          </div>
-
-          {/* Left Hero Content: Headline & Action */}
-          <div className="stage-hero-copy">
-            <span
-              className="stage-eyebrow"
-              style={{ color: template.accentColor || '#38bdf8' }}
-            >
-              {template.industryCategory}
-            </span>
-            <h4
-              className="stage-mega-title"
-              style={{ color: isDark ? '#ffffff' : '#0f172a' }}
-            >
+        {/* Hero stage */}
+        <div className="stage-hero-content">
+          <div className="layout-bold-minimal-box">
+            <h4 className="bold-mega-title" style={{ color: isDark ? '#ffffff' : '#0f172a' }}>
               {template.headline}
             </h4>
-            <p
-              className="stage-subtitle"
-              style={{ color: isDark ? '#cbd5e1' : '#475569' }}
-            >
-              {template.subtitle}
-            </p>
-            <div className="stage-hero-btn-row">
+            <p style={{ color: isDark ? '#cbd5e1' : '#475569' }}>{template.subtitle}</p>
+            <div className="bold-action-row">
               <span
-                className="stage-accent-btn"
-                style={{
-                  backgroundColor: template.accentColor || '#2563eb',
-                  color: contrastColor,
-                }}
+                className="bold-accent-pill"
+                style={{ backgroundColor: template.accentColor || '#84cc16', color: '#0f172a' }}
               >
-                {template.buttonText || 'Shop Collection'} →
+                {template.buttonText || 'Start Now'} →
               </span>
-              <div className="stage-telemetry-pill">
-                <span
-                  className="telemetry-dot"
-                  style={{ backgroundColor: template.accentColor || '#10b981' }}
-                />
-                <span>{heroStat.value} {heroStat.label}</span>
-              </div>
-            </div>
-          </div>
-
-          {/* The "Inside Look" Floating Product Peek Card (Real Store Experience) */}
-          <div className="stage-inside-peek-card">
-            <div className="peek-card-header">
-              <span className="peek-tag">{featuredProduct?.badge || 'BEST SELLER'}</span>
-              <span className="peek-in-store-dot" title="Live in store" />
-            </div>
-            <div className="peek-card-content">
-              <div className="peek-image-frame">
+              <div className="bold-avatar-thumb">
                 <img
-                  src={featuredProduct?.image || template.modelImage || heroImage}
-                  alt={featuredProduct?.name || 'Featured product'}
+                  src={template.modelImage}
+                  alt={template.name}
+                  loading="lazy"
                   onError={(e) => {
                     const t = e.currentTarget
                     t.onerror = null
@@ -348,42 +218,12 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
                   }}
                 />
               </div>
-              <div className="peek-info-frame">
-                <span className="peek-item-title">
-                  {featuredProduct?.name || `${template.name} Pro Kit`}
-                </span>
-                <div className="peek-price-line">
-                  <span className="peek-price">
-                    {featuredProduct?.price || '₹1,999'}
-                  </span>
-                  {featuredProduct?.compareAtPrice && (
-                    <del className="peek-compare-price">
-                      {featuredProduct.compareAtPrice}
-                    </del>
-                  )}
-                </div>
-                <div className="peek-footer-row">
-                  <span className="peek-rating-stars">
-                    ★ {featuredProduct?.rating?.toFixed(1) || '4.9'}
-                  </span>
-                  <span
-                    className="peek-quick-add"
-                    style={{
-                      borderColor: template.accentColor || '#2563eb',
-                      color: isDark ? '#ffffff' : '#0f172a',
-                    }}
-                  >
-                    + Add
-                  </span>
-                </div>
-              </div>
             </div>
           </div>
         </div>
 
         {/* Hover Quick Action Overlay */}
         <div className="marketplace-hover-overlay">
-          <div className="hover-overlay-pill">✨ Interactive Theme Storefront</div>
           <button
             type="button"
             className="overlay-preview-btn"
@@ -392,7 +232,7 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
               onPreview(template)
             }}
           >
-            👁️ Live Store Demo
+            👁️ Quick Preview
           </button>
           <button
             type="button"
@@ -402,30 +242,22 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
               onSelect(template.id)
             }}
           >
-            {isSelected ? 'Selected ✓' : 'Use This Template →'}
+            {isSelected ? 'Selected ✓' : 'Select Template'}
           </button>
-          <span className="hover-device-caption">
-            Desktop & Mobile Responsive • Instant Sync
-          </span>
         </div>
       </div>
 
-      {/* Card Information Footer (Shopify Theme Store style) */}
+      {/* Card Information Footer */}
       <div className="marketplace-card-info">
         <div className="card-title-row">
           <div className="title-and-industry">
-            <div className="card-theme-name-group">
-              <h3 className="card-theme-name">{template.name}</h3>
-              <span className="theme-verified-badge" title="Willovate Verified Theme">
-                ✓ Official
-              </span>
-            </div>
+            <h3 className="card-theme-name">{template.name}</h3>
             <span className="card-industry-label">{template.industryCategory}</span>
           </div>
           <div className="card-rating">
             <span className="rating-star">★</span>
             <span className="rating-val">{template.rating?.toFixed(1) || '4.9'}</span>
-            <span className="rating-reviews">({template.reviewCount || '284'})</span>
+            <span className="rating-reviews">({template.reviewCount || '32'})</span>
           </div>
         </div>
 
@@ -433,77 +265,37 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
         <div className="card-tags-row">
           <span className="tag-chip style-chip">{template.style}</span>
           <span className="tag-chip size-chip">
-            {template.catalogSize === 'small'
-              ? '1–15 items'
-              : template.catalogSize === 'medium'
-              ? '15–50 items'
-              : '50+ items'}
+            {template.catalogSize === 'small' ? '1–15 items' : template.catalogSize === 'medium' ? '15–50 items' : '50+ items'}
           </span>
-          <span className="tag-chip opt-chip">Conversion Ready</span>
         </div>
 
         <p className="card-short-desc">{template.shortDescription}</p>
 
-        {/* Feature Highlights */}
+        {/* Feature Pills */}
         <div className="card-features-row">
           {(template.features || []).slice(0, 3).map((feat) => (
             <span key={feat} className="feat-bullet">
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              <span>{feat}</span>
+              ✓ {feat}
             </span>
           ))}
         </div>
 
-        {/* Bottom CTA Row: Color Palette Swatches & Action Button */}
+        {/* Bottom CTA Row */}
         <div className="card-bottom-action">
-          <div className="palette-and-plan">
-            <div className="card-palette-preview" title="Storefront Color Palette">
-              <span
-                className="palette-swatch primary-swatch"
-                style={{ backgroundColor: template.accentColor || '#2563eb' }}
-              />
-              <span
-                className="palette-swatch secondary-swatch"
-                style={{ backgroundColor: isDark ? '#0f172a' : '#f1f5f9' }}
-              />
-            </div>
-            <span className="theme-plan-badge">Included in Plan</span>
+          <div className="card-palette-preview">
+            <span className="palette-swatch" style={{ backgroundColor: template.accentColor || '#1e293b' }} />
+            <span className="palette-swatch secondary" style={{ backgroundColor: isDark ? '#1e293b' : '#f1f5f9' }} />
           </div>
-
-          <div className="card-action-group">
-            <button
-              type="button"
-              className="card-quick-preview-link"
-              onClick={(e) => {
-                e.stopPropagation()
-                onPreview(template)
-              }}
-            >
-              Preview
-            </button>
-            <button
-              type="button"
-              className={`card-select-btn ${isSelected ? 'active' : ''}`}
-              onClick={(e) => {
-                e.stopPropagation()
-                onSelect(template.id)
-              }}
-            >
-              {isSelected ? 'Selected ✓' : 'Select'}
-            </button>
-          </div>
+          <button
+            type="button"
+            className={`card-select-btn ${isSelected ? 'active' : ''}`}
+            onClick={(e) => {
+              e.stopPropagation()
+              onSelect(template.id)
+            }}
+          >
+            {isSelected ? 'Selected ✓' : 'Select'}
+          </button>
         </div>
       </div>
     </div>
