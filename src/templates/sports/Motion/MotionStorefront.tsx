@@ -287,7 +287,6 @@ const NAV_CATEGORIES = ['Performance', 'Running', 'Training', 'Footwear', 'Smart
 export const MotionStorefront: React.FC<MotionStorefrontProps> = ({
   deviceView = 'desktop',
   customAccentColor,
-  onBack,
 }) => {
   const [view, setView] = useState<'home' | 'collection' | 'product'>('home')
   const [activeCategory, setActiveCategory] = useState<string>('Performance')
