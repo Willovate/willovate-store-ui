@@ -8,14 +8,25 @@ interface VelocityQuickViewModalProps {
   onSelectProduct: (product: VelocityProduct) => void
 }
 
-export const VelocityQuickViewModal: React.FC<VelocityQuickViewModalProps> = ({
+export const VelocityQuickViewModal: React.FC<VelocityQuickViewModalProps> = (props) => {
+  if (!props.product) return null
+
+  return <VelocityQuickViewContent {...props} product={props.product} />
+}
+
+interface VelocityQuickViewContentProps {
+  product: VelocityProduct
+  onClose: () => void
+  onAddToCart: (product: VelocityProduct, size: string, color: VelocityColor, qty: number) => void
+  onSelectProduct: (product: VelocityProduct) => void
+}
+
+const VelocityQuickViewContent: React.FC<VelocityQuickViewContentProps> = ({
   product,
   onClose,
   onAddToCart,
   onSelectProduct,
 }) => {
-  if (!product) return null
-
   const [activeImgIndex, setActiveImgIndex] = useState(0)
   const [selectedColor, setSelectedColor] = useState<VelocityColor>(product.colors[0])
   const [selectedSize, setSelectedSize] = useState<string>(product.sizes[0] || 'M')
@@ -23,13 +34,17 @@ export const VelocityQuickViewModal: React.FC<VelocityQuickViewModalProps> = ({
   const [isAdded, setIsAdded] = useState(false)
 
   const hasDiscount = product.compareAtPrice > product.price
+
   const discountPercent = hasDiscount
-    ? Math.round(((product.compareAtPrice - product.price) / product.compareAtPrice) * 100)
+    ? Math.round(
+        ((product.compareAtPrice - product.price) / product.compareAtPrice) * 100
+      )
     : 0
 
   const handleAdd = () => {
     setIsAdded(true)
     onAddToCart(product, selectedSize, selectedColor, qty)
+
     setTimeout(() => {
       setIsAdded(false)
       onClose()
@@ -63,8 +78,11 @@ export const VelocityQuickViewModal: React.FC<VelocityQuickViewModalProps> = ({
                 alt={product.name}
                 className="quickview-main-img"
               />
+
               {hasDiscount && (
-                <span className="quickview-discount-tag">−{discountPercent}%</span>
+                <span className="quickview-discount-tag">
+                  −{discountPercent}%
+                </span>
               )}
             </div>
 
@@ -74,7 +92,9 @@ export const VelocityQuickViewModal: React.FC<VelocityQuickViewModalProps> = ({
                   <button
                     key={i}
                     type="button"
-                    className={`thumb-btn ${activeImgIndex === i ? 'is-active' : ''}`}
+                    className={`thumb-btn ${
+                      activeImgIndex === i ? 'is-active' : ''
+                    }`}
                     onClick={() => setActiveImgIndex(i)}
                   >
                     <img src={img} alt={`Thumbnail ${i + 1}`} />
@@ -99,23 +119,35 @@ export const VelocityQuickViewModal: React.FC<VelocityQuickViewModalProps> = ({
                 {Array.from({ length: 5 }).map((_, i) => (
                   <span
                     key={i}
-                    className={`star-icon ${i < Math.floor(product.rating) ? 'is-filled' : ''}`}
+                    className={`star-icon ${
+                      i < Math.floor(product.rating) ? 'is-filled' : ''
+                    }`}
                   >
                     ★
                   </span>
                 ))}
               </div>
+
               <span className="rating-num">{product.rating}</span>
-              <span className="reviews-num">({product.reviewCount} reviews)</span>
+
+              <span className="reviews-num">
+                ({product.reviewCount} reviews)
+              </span>
             </div>
 
             <div className="quickview-price-row">
               <span className="current-price">${product.price}</span>
+
               {hasDiscount && (
-                <del className="compare-price">${product.compareAtPrice}</del>
+                <del className="compare-price">
+                  ${product.compareAtPrice}
+                </del>
               )}
+
               {hasDiscount && (
-                <span className="saved-amount-tag">Save ${product.compareAtPrice - product.price}</span>
+                <span className="saved-amount-tag">
+                  Save ${product.compareAtPrice - product.price}
+                </span>
               )}
             </div>
 
@@ -126,15 +158,19 @@ export const VelocityQuickViewModal: React.FC<VelocityQuickViewModalProps> = ({
               <label className="options-label">
                 Color: <strong>{selectedColor.name}</strong>
               </label>
+
               <div className="color-swatches-grid">
                 {product.colors.map((c) => (
                   <button
                     key={c.name}
                     type="button"
-                    className={`color-swatch-btn ${selectedColor.name === c.name ? 'is-selected' : ''}`}
+                    className={`color-swatch-btn ${
+                      selectedColor.name === c.name ? 'is-selected' : ''
+                    }`}
                     onClick={() => setSelectedColor(c)}
                     style={{ backgroundColor: c.hex }}
                     title={c.name}
+                    aria-label={`Select ${c.name} color`}
                   />
                 ))}
               </div>
@@ -147,12 +183,15 @@ export const VelocityQuickViewModal: React.FC<VelocityQuickViewModalProps> = ({
                   Size: <strong>{selectedSize}</strong>
                 </label>
               </div>
+
               <div className="size-pills-grid">
                 {product.sizes.map((s) => (
                   <button
                     key={s}
                     type="button"
-                    className={`size-pill-btn ${selectedSize === s ? 'is-selected' : ''}`}
+                    className={`size-pill-btn ${
+                      selectedSize === s ? 'is-selected' : ''
+                    }`}
                     onClick={() => setSelectedSize(s)}
                   >
                     {s}
@@ -171,7 +210,9 @@ export const VelocityQuickViewModal: React.FC<VelocityQuickViewModalProps> = ({
                 >
                   −
                 </button>
+
                 <span>{qty}</span>
+
                 <button
                   type="button"
                   onClick={() => setQty(qty + 1)}
@@ -183,10 +224,14 @@ export const VelocityQuickViewModal: React.FC<VelocityQuickViewModalProps> = ({
 
               <button
                 type="button"
-                className={`quickview-add-btn volt-btn ${isAdded ? 'is-added' : ''}`}
+                className={`quickview-add-btn volt-btn ${
+                  isAdded ? 'is-added' : ''
+                }`}
                 onClick={handleAdd}
               >
-                {isAdded ? '✓ Added to Bag' : `Add to Bag • $${product.price * qty}`}
+                {isAdded
+                  ? '✓ Added to Bag'
+                  : `Add to Bag • $${product.price * qty}`}
               </button>
             </div>
 
@@ -198,7 +243,7 @@ export const VelocityQuickViewModal: React.FC<VelocityQuickViewModalProps> = ({
                 onSelectProduct(product)
               }}
             >
-              View Full Product Specifications & Sizing →
+              View Full Product Specifications &amp; Sizing →
             </button>
           </div>
         </div>
@@ -206,4 +251,3 @@ export const VelocityQuickViewModal: React.FC<VelocityQuickViewModalProps> = ({
     </div>
   )
 }
-
