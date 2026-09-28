@@ -194,6 +194,7 @@ export const ArenaStorefront: React.FC<ArenaStorefrontProps> = ({
   return (
     <div
       className={`arena-root simulated-frame frame-${deviceView}`}
+      data-device-view={deviceView}
       style={rootStyle}
     >
       {/* Back to Template Selector button if inside preview modal */}

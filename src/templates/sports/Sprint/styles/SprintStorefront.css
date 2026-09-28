@@ -30,6 +30,9 @@
   font-size: 15px;
   line-height: 1.6;
   min-height: 100vh;
+  width: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
 }
@@ -1773,15 +1776,20 @@
   }
 
   .sprint-categories-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
 
   .sprint-category-card {
-    height: 280px;
+    height: 220px;
   }
 
   .sprint-product-grid,
-  .sprint-essentials-grid,
+  .sprint-essentials-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
   .sprint-reviews-grid {
     grid-template-columns: 1fr;
   }
@@ -1810,41 +1818,57 @@
   }
 }
 
-/* Simulated frame mobile override */
+/* Simulated frame mobile override: .sprint-root[data-device-view='mobile'] */
+.sprint-root[data-device-view='mobile'] .sprint-header,
 .simulated-frame.frame-mobile .sprint-header {
   padding: 0 1rem;
 }
 
+.sprint-root[data-device-view='mobile'] .sprint-nav-menu,
 .simulated-frame.frame-mobile .sprint-nav-menu {
-  display: none;
+  display: none !important;
 }
 
+.sprint-root[data-device-view='mobile'] .sprint-mobile-toggle,
 .simulated-frame.frame-mobile .sprint-mobile-toggle {
-  display: flex;
+  display: flex !important;
 }
 
+.sprint-root[data-device-view='mobile'] .sprint-hero-bg,
 .simulated-frame.frame-mobile .sprint-hero-bg {
   width: 100%;
   opacity: 0.2;
 }
 
+.sprint-root[data-device-view='mobile'] .sprint-categories-grid,
+.sprint-root[data-device-view='mobile'] .sprint-product-grid,
+.sprint-root[data-device-view='mobile'] .sprint-essentials-grid,
 .simulated-frame.frame-mobile .sprint-categories-grid,
 .simulated-frame.frame-mobile .sprint-product-grid,
-.simulated-frame.frame-mobile .sprint-essentials-grid,
+.simulated-frame.frame-mobile .sprint-essentials-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.sprint-root[data-device-view='mobile'] .sprint-reviews-grid,
 .simulated-frame.frame-mobile .sprint-reviews-grid {
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr !important;
 }
 
+.sprint-root[data-device-view='mobile'] .sprint-pdp-grid,
 .simulated-frame.frame-mobile .sprint-pdp-grid {
-  grid-template-columns: 1fr;
-  padding: 1.25rem;
+  grid-template-columns: 1fr !important;
+  padding: 1.25rem !important;
 }
 
+.sprint-root[data-device-view='mobile'] .sprint-collection-layout,
 .simulated-frame.frame-mobile .sprint-collection-layout {
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr !important;
 }
 
+.sprint-root[data-device-view='mobile'] .sprint-sidebar,
 .simulated-frame.frame-mobile .sprint-sidebar {
-  display: none;
+  display: none !important;
 }
+
 

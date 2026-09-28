@@ -22,8 +22,11 @@
   color: var(--arena-text);
   font-family: var(--arena-font-sans);
   min-height: 100vh;
+  width: 100%;
   position: relative;
   overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   line-height: 1.5;
   box-sizing: border-box;
 }
@@ -2509,8 +2512,11 @@
     display: flex;
   }
 
-  .arena-collection-grid {
-    grid-template-columns: 1fr;
+  .arena-collection-grid,
+  .arena-products-grid,
+  .arena-sports-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
 
   .arena-product-page-grid {
@@ -2536,37 +2542,53 @@
   }
 }
 
-/* Mobile simulated preview container override */
+/* Mobile simulated preview container override: .arena-root[data-device-view='mobile'] */
+.arena-root[data-device-view='mobile'] .arena-header,
 .simulated-frame.frame-mobile .arena-header {
   padding: 0 1rem;
 }
 
+.arena-root[data-device-view='mobile'] .arena-nav-menu,
 .simulated-frame.frame-mobile .arena-nav-menu {
-  display: none;
+  display: none !important;
 }
 
+.arena-root[data-device-view='mobile'] .arena-mobile-toggle,
 .simulated-frame.frame-mobile .arena-mobile-toggle {
-  display: flex;
+  display: flex !important;
 }
 
+.arena-root[data-device-view='mobile'] .arena-sports-grid,
+.arena-root[data-device-view='mobile'] .arena-products-grid,
+.arena-root[data-device-view='mobile'] .arena-collection-grid,
 .simulated-frame.frame-mobile .arena-sports-grid,
 .simulated-frame.frame-mobile .arena-products-grid,
-.simulated-frame.frame-mobile .arena-testimonials-grid {
-  grid-template-columns: 1fr;
+.simulated-frame.frame-mobile .arena-collection-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
 }
 
+.arena-root[data-device-view='mobile'] .arena-testimonials-grid,
+.simulated-frame.frame-mobile .arena-testimonials-grid {
+  grid-template-columns: 1fr !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-collection-page,
 .simulated-frame.frame-mobile .arena-collection-page {
   padding: 1.5rem 1rem 3.5rem;
 }
 
+.arena-root[data-device-view='mobile'] .arena-collection-layout,
 .simulated-frame.frame-mobile .arena-collection-layout {
   grid-template-columns: 1fr;
 }
 
+.arena-root[data-device-view='mobile'] .arena-collection-sidebar,
 .simulated-frame.frame-mobile .arena-collection-sidebar {
   display: none;
 }
 
+.arena-root[data-device-view='mobile'] .arena-collection-sidebar.mobile-open,
 .simulated-frame.frame-mobile .arena-collection-sidebar.mobile-open {
   display: flex;
   position: fixed;
@@ -2581,19 +2603,19 @@
   padding: 2rem 1.5rem;
 }
 
+.arena-root[data-device-view='mobile'] .arena-mobile-filter-btn,
 .simulated-frame.frame-mobile .arena-mobile-filter-btn {
   display: flex;
 }
 
-.simulated-frame.frame-mobile .arena-collection-grid {
-  grid-template-columns: 1fr;
-}
-
+.arena-root[data-device-view='mobile'] .arena-hero-headline,
 .simulated-frame.frame-mobile .arena-hero-headline {
   font-size: 3rem;
 }
 
+.arena-root[data-device-view='mobile'] .arena-product-page-grid,
 .simulated-frame.frame-mobile .arena-product-page-grid {
   grid-template-columns: 1fr;
   padding: 1rem;
 }
+

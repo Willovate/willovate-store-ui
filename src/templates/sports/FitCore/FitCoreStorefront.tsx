@@ -36,7 +36,7 @@ export interface FitCoreStorefrontProps {
 
 export const FitCoreStorefront: React.FC<FitCoreStorefrontProps> = ({
   onBack: _onBack,
-  deviceView: _deviceView = 'desktop',
+  deviceView = 'desktop',
   customAccentColor,
 }) => {
   const [viewMode, setViewMode] = useState<'home' | 'collection' | 'product'>('home')
@@ -202,6 +202,7 @@ export const FitCoreStorefront: React.FC<FitCoreStorefrontProps> = ({
   return (
     <div
       className="fitcore-storefront"
+      data-device-view={deviceView}
       style={
         customAccentColor
           ? ({ '--fc-accent-crimson': customAccentColor } as React.CSSProperties)

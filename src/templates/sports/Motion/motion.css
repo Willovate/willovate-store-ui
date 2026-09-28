@@ -51,8 +51,11 @@
   background-color: var(--mo-bg-deep);
   color: var(--mo-text-primary);
   min-height: 100vh;
+  width: 100%;
   position: relative;
   overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -1654,3 +1657,80 @@
   background: var(--mo-cyan);
   box-shadow: 0 0 8px var(--mo-cyan);
 }
+
+/* ─────────────────────────────────────────────────────────────
+   DUAL RESPONSIVE SELECTORS: SIMULATED PREVIEW [data-device-view='mobile']
+───────────────────────────────────────────────────────────── */
+.motion-theme[data-device-view='mobile'] .mo-menu-toggle {
+  display: inline-flex !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-nav {
+  display: none !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-header-inner {
+  height: 58px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-ticker {
+  font-size: 0.62rem !important;
+  padding: 6px 10px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-ticker span:nth-child(2),
+.motion-theme[data-device-view='mobile'] .mo-ticker span:nth-child(3),
+.motion-theme[data-device-view='mobile'] .mo-ticker span:nth-child(4) {
+  display: none !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-hero {
+  min-height: 520px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-hero-title {
+  font-size: 2.2rem !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-hero-stats {
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 12px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-product-grid,
+.motion-theme[data-device-view='mobile'] .mo-tech-grid,
+.motion-theme[data-device-view='mobile'] .mo-category-grid,
+.motion-theme[data-device-view='mobile'] .mo-collection-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-card-body {
+  padding: 12px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-card-name {
+  font-size: 0.85rem !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-card-price {
+  font-size: 1.05rem !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-footer-grid {
+  grid-template-columns: 1fr !important;
+  gap: 24px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-pdp-layout {
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-sticky-atc {
+  position: sticky !important;
+  bottom: 0 !important;
+  z-index: 50 !important;
+  display: flex !important;
+}
+

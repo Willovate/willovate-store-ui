@@ -50,6 +50,7 @@ export function StreetAthleteStorefront({ deviceView = 'desktop' }: StreetAthlet
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [cartOpen, setCartOpen] = useState(false)
+  const [mobileNavOpen, setMobileNavOpen] = useState(false)
   const [notice, setNotice] = useState('')
   const sizes = selectedProduct?.category === 'Sneakers'
     ? sneakerSizes
@@ -85,6 +86,18 @@ export function StreetAthleteStorefront({ deviceView = 'desktop' }: StreetAthlet
     setCartOpen(true)
   }
 
+  const updateQuantity = (index: number, delta: number) => {
+    setCart((current) => {
+      const item = current[index]
+      if (!item) return current
+      const newQty = item.quantity + delta
+      if (newQty <= 0) {
+        return current.filter((_, i) => i !== index)
+      }
+      return current.map((line, i) => i === index ? { ...line, quantity: newQty } : line)
+    })
+  }
+
   const addTheLook = () => {
     const outfit = products.filter((product) => ['after-hours-01', 'off-grid-hoodie', 'track-jogger', 'side-street-cap', 'cross-town-bag'].includes(product.id))
     setCart((current) => [...current, ...outfit.map((product) => ({ product, size: defaultSize(product), quantity: 1 }))])
@@ -100,6 +113,7 @@ export function StreetAthleteStorefront({ deviceView = 'desktop' }: StreetAthlet
     setActiveCategory(category === 'Sneakers' ? 'Sneakers' : category)
     setView('collection')
     setSearchQuery('')
+    setMobileNavOpen(false)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
@@ -122,11 +136,18 @@ export function StreetAthleteStorefront({ deviceView = 'desktop' }: StreetAthlet
     </article>
   )
 
+  const cartSubtotal = cart.reduce((sum, line) => sum + line.product.price * line.quantity, 0)
+  const freeShippingThreshold = 4999
+  const remainingForFreeShipping = Math.max(0, freeShippingThreshold - cartSubtotal)
+
   return (
     <div className="street-athlete" data-device-view={deviceView}>
       <div className="sa-ticker"><span>BUILT FOR THE STREETS</span><i>✳</i><span>FREE SHIPPING OVER ₹4,999</span><i>✳</i><span>BUILT FOR THE STREETS</span></div>
       <header className="sa-header">
-        <button className="sa-wordmark" onClick={() => { setView('home'); setActiveCategory('All') }} aria-label="StreetAthlete home">STREET<span>ATHLETE</span><b>®</b></button>
+        <button className="sa-hamburger" onClick={() => setMobileNavOpen(true)} aria-label="Open menu">
+          <span>☰</span>
+        </button>
+        <button className="sa-wordmark" onClick={() => { setView('home'); setActiveCategory('All'); setMobileNavOpen(false) }} aria-label="StreetAthlete home">STREET<span>ATHLETE</span><b>®</b></button>
         <nav className="sa-nav" aria-label="Shop categories">{navItems.map((item) => <button key={item} onClick={() => navigate(item)}>{item}</button>)}</nav>
         <div className="sa-header-actions">
           <button onClick={() => setSearchOpen((open) => !open)}>Search</button>
@@ -135,6 +156,28 @@ export function StreetAthleteStorefront({ deviceView = 'desktop' }: StreetAthlet
           <button onClick={() => setCartOpen(true)}>Cart <sup>{cart.reduce((count, line) => count + line.quantity, 0)}</sup></button>
         </div>
       </header>
+      {mobileNavOpen && (
+        <div className="sa-overlay" onClick={() => setMobileNavOpen(false)}>
+          <aside className="sa-mobile-nav-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className="sa-drawer-heading">
+              <button className="sa-wordmark" onClick={() => { setView('home'); setActiveCategory('All'); setMobileNavOpen(false) }}>STREET<span>ATHLETE</span><b>®</b></button>
+              <button onClick={() => setMobileNavOpen(false)} aria-label="Close menu">×</button>
+            </div>
+            <nav className="sa-mobile-nav-links">
+              {navItems.map((item) => (
+                <button key={item} className="sa-mobile-nav-item" onClick={() => navigate(item)}>
+                  <span>{item}</span>
+                  <i>↗</i>
+                </button>
+              ))}
+            </nav>
+            <div className="sa-mobile-nav-footer">
+              <button onClick={() => { navigate('Wishlist'); setMobileNavOpen(false) }}>Saved Items ({wishlist.length})</button>
+              <button onClick={() => { setNotice('Account sign-in is coming soon'); setMobileNavOpen(false) }}>Sign In / Register</button>
+            </div>
+          </aside>
+        </div>
+      )}
       {searchOpen && <form className="sa-search" onSubmit={(event) => { event.preventDefault(); setView('collection'); setActiveCategory('All') }}><label htmlFor="sa-search-input">SEARCH THE ROTATION</label><input id="sa-search-input" autoFocus placeholder="Sneakers, layers, essentials..." value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} /><button type="button" onClick={() => { setSearchOpen(false); setSearchQuery('') }}>CLOSE ×</button></form>}
 
       {view === 'home' && <main>
@@ -182,7 +225,86 @@ export function StreetAthleteStorefront({ deviceView = 'desktop' }: StreetAthlet
 
       <footer className="sa-footer"><div className="sa-footer-top"><button className="sa-wordmark" onClick={() => { setView('home'); setActiveCategory('All') }}>STREET<span>ATHLETE</span><b>®</b></button><p>BUILT FOR<br />THE STREETS.</p><div className="sa-newsletter"><label htmlFor="sa-email">GET THE DROP BEFORE THE DROP.</label><form onSubmit={(event) => { event.preventDefault(); setNotice('You’re on the list. Watch this space.') }}><input id="sa-email" type="email" placeholder="YOUR EMAIL ADDRESS" required /><button aria-label="Subscribe">↗</button></form></div></div><div className="sa-footer-bottom"><span>© STREETATHLETE 2025</span><span>MADE FOR THE EVERYDAY, NOT THE SCOREBOARD.</span><div><button onClick={() => setNotice('Instagram: @streetathlete')}>INSTAGRAM ↗</button><button onClick={() => setNotice('Contact: hello@streetathlete.com')}>CONTACT ↗</button></div></div></footer>
 
-      {cartOpen && <div className="sa-overlay" onClick={() => setCartOpen(false)}><aside className="sa-cart-drawer" onClick={(event) => event.stopPropagation()}><div className="sa-drawer-heading"><div><span className="sa-kicker">YOUR EVERYDAY ROTATION</span><h2>THE BAG ({cart.reduce((count, line) => count + line.quantity, 0)})</h2></div><button onClick={() => setCartOpen(false)} aria-label="Close bag">×</button></div>{cart.length ? <><div className="sa-cart-lines">{cart.map((line, index) => <article key={`${line.product.id}-${line.size}-${index}`}><img src={line.product.image} alt="" /><div><b>{line.product.name}</b><span>{line.size} · QTY {line.quantity}</span><span>{money(line.product.price * line.quantity)}</span></div><button aria-label={`Remove ${line.product.name}`} onClick={() => setCart((current) => current.filter((_, lineIndex) => lineIndex !== index))}>×</button></article>)}</div><div className="sa-cart-total"><span>SUBTOTAL</span><b>{money(cart.reduce((sum, line) => sum + line.product.price * line.quantity, 0))}</b></div><button className="sa-add-button" onClick={() => setNotice('Checkout is ready')}>CHECK OUT ↗</button></> : <p className="sa-empty">Your bag is taking a walk. Add something good.</p>}</aside></div>}
+      {cartOpen && (
+        <div className="sa-overlay" onClick={() => setCartOpen(false)}>
+          <aside className="sa-cart-drawer" onClick={(event) => event.stopPropagation()}>
+            <div className="sa-drawer-heading">
+              <div>
+                <span className="sa-kicker">YOUR EVERYDAY ROTATION</span>
+                <h2>THE BAG ({cart.reduce((count, line) => count + line.quantity, 0)})</h2>
+              </div>
+              <button onClick={() => setCartOpen(false)} aria-label="Close bag">×</button>
+            </div>
+            
+            {/* Free Shipping Progress */}
+            <div className="sa-shipping-meter">
+              <div className="sa-shipping-meter-text">
+                {remainingForFreeShipping > 0 ? (
+                  <>Add <strong>{money(remainingForFreeShipping)}</strong> for <strong>FREE EXPRESS SHIPPING</strong></>
+                ) : (
+                  <span className="sa-shipping-unlocked">✓ YOU UNLOCKED FREE SHIPPING!</span>
+                )}
+              </div>
+              <div className="sa-shipping-meter-bar">
+                <div 
+                  className="sa-shipping-meter-fill" 
+                  style={{ width: `${Math.min(100, Math.round((cartSubtotal / freeShippingThreshold) * 100))}%` }} 
+                />
+              </div>
+            </div>
+
+            {cart.length ? (
+              <>
+                <div className="sa-cart-lines">
+                  {cart.map((line, index) => (
+                    <article key={`${line.product.id}-${line.size}-${index}`}>
+                      <img src={line.product.image} alt={line.product.name} />
+                      <div className="sa-cart-line-info">
+                        <b>{line.product.name}</b>
+                        <span className="sa-cart-line-meta">{line.size}</span>
+                        <div className="sa-cart-stepper">
+                          <button 
+                            type="button" 
+                            onClick={() => updateQuantity(index, -1)}
+                            aria-label="Decrease quantity"
+                          >
+                            −
+                          </button>
+                          <span>{line.quantity}</span>
+                          <button 
+                            type="button" 
+                            onClick={() => updateQuantity(index, 1)}
+                            aria-label="Increase quantity"
+                          >
+                            +
+                          </button>
+                        </div>
+                        <span className="sa-cart-line-price">{money(line.product.price * line.quantity)}</span>
+                      </div>
+                      <button 
+                        className="sa-cart-remove" 
+                        aria-label={`Remove ${line.product.name}`} 
+                        onClick={() => setCart((current) => current.filter((_, lineIndex) => lineIndex !== index))}
+                      >
+                        ×
+                      </button>
+                    </article>
+                  ))}
+                </div>
+                <div className="sa-cart-total">
+                  <span>SUBTOTAL</span>
+                  <b>{money(cartSubtotal)}</b>
+                </div>
+                <button className="sa-add-button sa-drawer-checkout-btn" onClick={() => setNotice('Checkout is ready')}>
+                  PROCEED TO CHECKOUT ↗
+                </button>
+              </>
+            ) : (
+              <p className="sa-empty">Your bag is taking a walk. Add something good.</p>
+            )}
+          </aside>
+        </div>
+      )}
       {notice && <button className="sa-toast" onClick={() => setNotice('')}>{notice} <span>×</span></button>}
     </div>
   )

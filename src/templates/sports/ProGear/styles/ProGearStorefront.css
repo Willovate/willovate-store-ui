@@ -36,6 +36,9 @@
   font-size: 14px;
   line-height: 1.5;
   min-height: 100vh;
+  width: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
 }
@@ -1629,7 +1632,11 @@
   }
 
   .progear-sports-grid-8,
-  .progear-product-grid,
+  .progear-product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
   .progear-why-grid {
     grid-template-columns: 1fr;
   }
@@ -1666,53 +1673,71 @@
   }
 }
 
-/* Simulated Frame Mobile Override */
+/* Simulated Frame Mobile Override: .progear-root[data-device-view='mobile'] */
+.progear-root[data-device-view='mobile'] .progear-main-header,
 .simulated-frame.frame-mobile .progear-main-header {
   grid-template-columns: 1fr auto;
   padding: 0.75rem 1rem;
 }
 
+.progear-root[data-device-view='mobile'] .progear-search-bar,
 .simulated-frame.frame-mobile .progear-search-bar {
   grid-column: 1 / -1;
   order: 3;
 }
 
+.progear-root[data-device-view='mobile'] .progear-nav-strip,
 .simulated-frame.frame-mobile .progear-nav-strip {
-  display: none;
+  display: none !important;
 }
 
+.progear-root[data-device-view='mobile'] .progear-mobile-toggle,
 .simulated-frame.frame-mobile .progear-mobile-toggle {
-  display: flex;
+  display: flex !important;
 }
 
+.progear-root[data-device-view='mobile'] .progear-hero-inner,
 .simulated-frame.frame-mobile .progear-hero-inner {
   grid-template-columns: 1fr;
 }
 
+.progear-root[data-device-view='mobile'] .progear-sports-grid-8,
+.progear-root[data-device-view='mobile'] .progear-product-grid,
 .simulated-frame.frame-mobile .progear-sports-grid-8,
-.simulated-frame.frame-mobile .progear-product-grid,
+.simulated-frame.frame-mobile .progear-product-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-why-grid,
 .simulated-frame.frame-mobile .progear-why-grid {
   grid-template-columns: 1fr;
 }
 
+.progear-root[data-device-view='mobile'] .progear-kit-card,
 .simulated-frame.frame-mobile .progear-kit-card {
   grid-template-columns: 1fr;
 }
 
+.progear-root[data-device-view='mobile'] .progear-kit-media,
 .simulated-frame.frame-mobile .progear-kit-media {
   height: 180px;
 }
 
+.progear-root[data-device-view='mobile'] .progear-pdp-grid,
 .simulated-frame.frame-mobile .progear-pdp-grid {
   grid-template-columns: 1fr;
   padding: 1.25rem;
 }
 
+.progear-root[data-device-view='mobile'] .progear-collection-layout,
 .simulated-frame.frame-mobile .progear-collection-layout {
   grid-template-columns: 1fr;
 }
 
+.progear-root[data-device-view='mobile'] .progear-sidebar,
 .simulated-frame.frame-mobile .progear-sidebar {
-  display: none;
+  display: none !important;
 }
+
 

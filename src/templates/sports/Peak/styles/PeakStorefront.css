@@ -2028,3 +2028,242 @@
   .pk-search-result img { width: 46px; height: 52px; }
   .pk-search-result b { grid-column: 2; }
 }
+
+/* ─────────────────────────────────────────────────────────────
+   PEAK MOBILE HAMBURGER & MENU DRAWER
+───────────────────────────────────────────────────────────── */
+.pk-hamburger-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--pk-earth-deep);
+  padding: 6px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+.pk-mobile-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 18, 8, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1200;
+  display: flex;
+  justify-content: flex-start;
+  animation: pk-fade 0.2s ease;
+}
+
+.pk-mobile-menu-drawer {
+  width: min(340px, 85vw);
+  height: 100%;
+  background: var(--pk-earth-deep);
+  color: var(--pk-cream);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 12px 0 40px rgba(0, 0, 0, 0.35);
+  animation: pk-slide-right 0.25s ease;
+}
+
+.pk-mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.pk-mobile-menu-header .pk-logo-name {
+  color: var(--pk-cream);
+}
+
+.pk-mobile-menu-close {
+  background: none;
+  border: none;
+  color: var(--pk-cream);
+  font-size: 1.2rem;
+  padding: 6px;
+  cursor: pointer;
+}
+
+.pk-mobile-menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px 0;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.pk-mobile-menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 8px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: var(--pk-cream);
+  font-family: var(--pk-font-label);
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: left;
+  cursor: pointer;
+  transition: var(--pk-transition);
+}
+
+.pk-mobile-menu-item:hover {
+  color: var(--pk-accent-sage);
+  padding-left: 14px;
+}
+
+.pk-mobile-menu-footer {
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pk-mobile-footer-btn {
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--pk-radius-sm);
+  color: var(--pk-cream);
+  font-family: var(--pk-font-label);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+}
+
+.pk-mobile-footer-btn:hover {
+  background: var(--pk-accent-pine);
+  border-color: var(--pk-accent-pine);
+}
+
+@keyframes pk-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pk-slide-right {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   DUAL RESPONSIVE SELECTORS: @media (max-width: 768px) AND [data-device-view='mobile']
+───────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .pk-hamburger-btn { display: inline-flex !important; }
+  .pk-nav { display: none !important; }
+  .pk-header-inner { height: 58px; gap: 12px; }
+  .pk-logo-name { font-size: 1.25rem; }
+  .pk-topbar { font-size: 0.62rem; padding: 6px 10px; }
+  .pk-topbar span:nth-child(2),
+  .pk-topbar span:nth-child(3),
+  .pk-topbar span:nth-child(4),
+  .pk-topbar span:nth-child(5) { display: none; }
+  
+  .pk-mobile-pills {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding: 8px 12px;
+    background: var(--pk-cream-alt);
+    border-bottom: 1px solid var(--pk-border-light);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .pk-mobile-pills::-webkit-scrollbar { display: none; }
+  .pk-activity-pill {
+    padding: 5px 12px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    white-space: nowrap;
+    border-radius: var(--pk-radius-full);
+    border: 1px solid var(--pk-border-light);
+    background: var(--pk-snow);
+    color: var(--pk-text-dark);
+  }
+
+  .pk-hero { min-height: 520px; }
+  .pk-hero-title { font-size: clamp(2.2rem, 8vw, 3.2rem) !important; }
+  .pk-hero-stats { gap: 14px; }
+
+  .pk-activity-grid,
+  .pk-essentials-grid,
+  .pk-product-grid,
+  .pk-stories-grid,
+  .pk-reviews-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .pk-built-grid,
+  .pk-footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .pk-pdp-layout {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+}
+
+/* Simulated Mobile Preview Frame Selector */
+.peak-storefront[data-device-view='mobile'] {
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  width: 100% !important;
+}
+
+.peak-storefront[data-device-view='mobile'] .pk-hamburger-btn { display: inline-flex !important; }
+.peak-storefront[data-device-view='mobile'] .pk-nav { display: none !important; }
+.peak-storefront[data-device-view='mobile'] .pk-header-inner { height: 58px !important; gap: 12px !important; }
+.peak-storefront[data-device-view='mobile'] .pk-logo-name { font-size: 1.25rem !important; }
+.peak-storefront[data-device-view='mobile'] .pk-topbar { font-size: 0.62rem !important; padding: 6px 10px !important; }
+.peak-storefront[data-device-view='mobile'] .pk-topbar span:nth-child(2),
+.peak-storefront[data-device-view='mobile'] .pk-topbar span:nth-child(3),
+.peak-storefront[data-device-view='mobile'] .pk-topbar span:nth-child(4),
+.peak-storefront[data-device-view='mobile'] .pk-topbar span:nth-child(5) { display: none !important; }
+
+.peak-storefront[data-device-view='mobile'] .pk-mobile-pills {
+  display: flex !important;
+  gap: 6px !important;
+  overflow-x: auto !important;
+  padding: 8px 12px !important;
+  background: var(--pk-cream-alt) !important;
+  border-bottom: 1px solid var(--pk-border-light) !important;
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: none !important;
+}
+
+.peak-storefront[data-device-view='mobile'] .pk-activity-grid,
+.peak-storefront[data-device-view='mobile'] .pk-essentials-grid,
+.peak-storefront[data-device-view='mobile'] .pk-product-grid,
+.peak-storefront[data-device-view='mobile'] .pk-stories-grid,
+.peak-storefront[data-device-view='mobile'] .pk-reviews-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.peak-storefront[data-device-view='mobile'] .pk-built-grid,
+.peak-storefront[data-device-view='mobile'] .pk-footer-grid {
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+}
+
+.peak-storefront[data-device-view='mobile'] .pk-pdp-layout {
+  grid-template-columns: 1fr !important;
+  gap: 24px !important;
+}
+

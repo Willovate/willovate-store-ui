@@ -68,8 +68,7 @@ export const FitCoreHeader: React.FC<FitCoreHeaderProps> = ({
             {/* Mobile Menu Toggle */}
             <button
               type="button"
-              className="fitcore-action-btn"
-              style={{ display: 'none' }}
+              className="fitcore-action-btn fitcore-mobile-menu-toggle"
               aria-label="Open Navigation Menu"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
@@ -243,6 +242,63 @@ export const FitCoreHeader: React.FC<FitCoreHeaderProps> = ({
           </div>
         )}
       </header>
+
+      {/* Mobile Drawer Menu */}
+      {isMobileMenuOpen && (
+        <div className="fitcore-mobile-drawer-backdrop" onClick={() => setIsMobileMenuOpen(false)}>
+          <div className="fitcore-mobile-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className="fitcore-mobile-drawer-header">
+              <div className="fitcore-logo-text">FIT<span>CORE</span></div>
+              <button
+                type="button"
+                className="fitcore-mobile-drawer-close"
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="fitcore-mobile-nav-list">
+              {navItems.map((item) => (
+                <button
+                  key={item.label}
+                  type="button"
+                  className={`fitcore-mobile-nav-link ${item.isSale ? 'sale' : ''}`}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false)
+                    onNavigateCollection(item.workout, item.category)
+                  }}
+                >
+                  <span>{item.label}</span>
+                  <span>↗</span>
+                </button>
+              ))}
+            </div>
+            <div className="fitcore-mobile-drawer-footer">
+              <button
+                type="button"
+                className="fitcore-mobile-quick-btn"
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  onOpenSearch()
+                }}
+              >
+                ⌕ Search FitCore
+              </button>
+              <button
+                type="button"
+                className="fitcore-mobile-quick-btn"
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  onOpenWishlist()
+                }}
+              >
+                ♥ Wishlist ({wishlistCount})
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }

@@ -55,6 +55,12 @@ export const PeakHeader: React.FC<PeakHeaderProps> = ({
   onNavigateCollection,
 }) => {
   const [activeMega, setActiveMega] = useState<string | null>(null)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const handleMobileNav = (filter?: string) => {
+    setIsMobileMenuOpen(false)
+    onNavigateCollection(filter)
+  }
 
   return (
     <header className="pk-header">
@@ -70,6 +76,20 @@ export const PeakHeader: React.FC<PeakHeaderProps> = ({
       {/* Main */}
       <div className="pk-container">
         <div className="pk-header-inner">
+          {/* Mobile Hamburger Button */}
+          <button
+            type="button"
+            className="pk-hamburger-btn"
+            onClick={() => setIsMobileMenuOpen(true)}
+            aria-label="Open mobile navigation menu"
+          >
+            <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+
           {/* Logo */}
           <button className="pk-logo" onClick={onNavigateHome} aria-label="Peak Home">
             <div className="pk-logo-mark">
@@ -169,6 +189,65 @@ export const PeakHeader: React.FC<PeakHeaderProps> = ({
           </button>
         ))}
       </div>
+
+      {/* Mobile Navigation Drawer */}
+      {isMobileMenuOpen && (
+        <div className="pk-mobile-menu-backdrop" onClick={() => setIsMobileMenuOpen(false)}>
+          <aside className="pk-mobile-menu-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className="pk-mobile-menu-header">
+              <div className="pk-logo-mark">
+                <span className="pk-logo-name">PEAK</span>
+                <span className="pk-logo-mountain">▲</span>
+              </div>
+              <button
+                type="button"
+                className="pk-mobile-menu-close"
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                ✕
+              </button>
+            </div>
+
+            <nav className="pk-mobile-menu-links">
+              {NAV_ITEMS.map((item) => (
+                <button
+                  key={item}
+                  type="button"
+                  className="pk-mobile-menu-item"
+                  onClick={() => handleMobileNav(item.toLowerCase().replace(' ', '-'))}
+                >
+                  <span>{item}</span>
+                  <span>↗</span>
+                </button>
+              ))}
+            </nav>
+
+            <div className="pk-mobile-menu-footer">
+              <button
+                type="button"
+                className="pk-mobile-footer-btn"
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  onOpenWishlist()
+                }}
+              >
+                Wishlist ({wishlistCount})
+              </button>
+              <button
+                type="button"
+                className="pk-mobile-footer-btn"
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  onOpenCart()
+                }}
+              >
+                Expedition Pack ({cartCount})
+              </button>
+            </div>
+          </aside>
+        </div>
+      )}
     </header>
   )
 }

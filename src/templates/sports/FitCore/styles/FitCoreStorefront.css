@@ -2439,3 +2439,200 @@
     display: none;
   }
 }
+
+/* Mobile Menu Toggle & Mobile Drawer */
+.fitcore-mobile-menu-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .fitcore-mobile-menu-toggle {
+    display: inline-flex !important;
+  }
+}
+
+.fitcore-mobile-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: flex-start;
+  animation: fcFadeIn 0.2s ease both;
+}
+
+.fitcore-mobile-drawer {
+  width: min(340px, 85vw);
+  height: 100%;
+  background: #0f141c;
+  border-right: 1px solid var(--fc-border-dark);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  box-shadow: 10px 0 40px rgba(0, 0, 0, 0.6);
+  animation: fcSlideRight 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.fitcore-mobile-drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--fc-border-dark);
+}
+
+.fitcore-mobile-drawer-close {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.fitcore-mobile-nav-list {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0;
+  gap: 4px;
+}
+
+.fitcore-mobile-nav-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 12px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: #f1f5f9;
+  font-family: var(--fc-font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: left;
+  cursor: pointer;
+  transition: var(--fc-transition);
+}
+
+.fitcore-mobile-nav-link:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--fc-accent-coral);
+  padding-left: 18px;
+}
+
+.fitcore-mobile-nav-link.sale {
+  color: var(--fc-accent-coral);
+}
+
+.fitcore-mobile-drawer-footer {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--fc-border-dark);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fitcore-mobile-quick-btn {
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--fc-border-dark);
+  border-radius: 6px;
+  color: #e2e8f0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+}
+
+.fitcore-mobile-quick-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes fcFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fcSlideRight {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+/* Simulated Mobile Preview Frame Target (.fitcore-storefront[data-device-view='mobile']) */
+.fitcore-storefront[data-device-view='mobile'] .fitcore-top-bar {
+  font-size: 0.7rem !important;
+  padding: 6px 12px !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-header-inner {
+  height: 60px !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-mobile-menu-toggle {
+  display: inline-flex !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-nav-list {
+  display: none !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-hero {
+  min-height: 70vh !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-hero-title {
+  font-size: 2.4rem !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-hero-stats {
+  gap: 16px !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-workout-grid {
+  grid-template-columns: 1fr !important;
+  gap: 12px !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-grid-4,
+.fitcore-storefront[data-device-view='mobile'] .fitcore-catalog-grid {
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 10px !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-card-body {
+  padding: 10px 12px 12px !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-card-title {
+  font-size: 0.85rem !important;
+  height: auto !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-price-current {
+  font-size: 1.1rem !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-tech-grid,
+.fitcore-storefront[data-device-view='mobile'] .fitcore-stories-grid,
+.fitcore-storefront[data-device-view='mobile'] .fitcore-reviews-grid,
+.fitcore-storefront[data-device-view='mobile'] .fitcore-footer-grid {
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-card-quick-bar {
+  display: none !important;
+}
+

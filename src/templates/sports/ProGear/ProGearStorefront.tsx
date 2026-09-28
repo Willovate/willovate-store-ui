@@ -228,6 +228,7 @@ export const ProGearStorefront: React.FC<ProGearStorefrontProps> = ({
   return (
     <div
       className={`progear-root simulated-frame frame-${deviceView}`}
+      data-device-view={deviceView}
       style={rootStyle}
     >
       {/* Sticky Header with 8-Sport Mega Menus & Search */}

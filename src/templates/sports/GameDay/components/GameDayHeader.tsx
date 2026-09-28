@@ -55,6 +55,12 @@ export const GameDayHeader: React.FC<GameDayHeaderProps> = ({
   onNavigateCollection,
 }) => {
   const [activeMega, setActiveMega] = useState<string | null>(null)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const handleMobileNav = (sport?: string) => {
+    setIsMobileMenuOpen(false)
+    onNavigateCollection(sport)
+  }
 
   return (
     <header className="gd-header">
@@ -66,6 +72,20 @@ export const GameDayHeader: React.FC<GameDayHeaderProps> = ({
       {/* Main Bar */}
       <div className="gd-container">
         <div className="gd-header-inner">
+          {/* Mobile Hamburger Button */}
+          <button
+            type="button"
+            className="gd-hamburger-btn"
+            onClick={() => setIsMobileMenuOpen(true)}
+            aria-label="Open navigation menu"
+          >
+            <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+
           {/* Logo */}
           <button className="gd-logo" onClick={onNavigateHome} aria-label="GameDay Home">
             <span className="gd-logo-name">
@@ -164,6 +184,64 @@ export const GameDayHeader: React.FC<GameDayHeaderProps> = ({
           </button>
         ))}
       </div>
+
+      {/* Mobile Menu Drawer */}
+      {isMobileMenuOpen && (
+        <div className="gd-mobile-menu-backdrop" onClick={() => setIsMobileMenuOpen(false)}>
+          <aside className="gd-mobile-menu-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className="gd-mobile-menu-header">
+              <span className="gd-logo-name">
+                GAME<span>DAY</span>
+              </span>
+              <button
+                type="button"
+                className="gd-mobile-menu-close"
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                ✕
+              </button>
+            </div>
+
+            <nav className="gd-mobile-menu-links">
+              {NAV_ITEMS.map((item) => (
+                <button
+                  key={item}
+                  type="button"
+                  className="gd-mobile-menu-item"
+                  onClick={() => handleMobileNav(item.toLowerCase().replace(' ', '-'))}
+                >
+                  <span>{item}</span>
+                  <span>↗</span>
+                </button>
+              ))}
+            </nav>
+
+            <div className="gd-mobile-menu-footer">
+              <button
+                type="button"
+                className="gd-mobile-footer-btn"
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  onOpenWishlist()
+                }}
+              >
+                Fan Wishlist ({wishlistCount})
+              </button>
+              <button
+                type="button"
+                className="gd-mobile-footer-btn"
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  onOpenCart()
+                }}
+              >
+                Match Day Bag ({cartCount})
+              </button>
+            </div>
+          </aside>
+        </div>
+      )}
     </header>
   )
 }

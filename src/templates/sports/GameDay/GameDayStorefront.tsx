@@ -28,7 +28,7 @@ export interface GameDayStorefrontProps {
 
 export const GameDayStorefront: React.FC<GameDayStorefrontProps> = ({
   onBack: _onBack,
-  deviceView: _deviceView = 'desktop',
+  deviceView = 'desktop',
   customAccentColor,
 }) => {
   const [viewMode, setViewMode] = useState<'home' | 'collection' | 'product'>('home')
@@ -155,6 +155,7 @@ export const GameDayStorefront: React.FC<GameDayStorefrontProps> = ({
   return (
     <div
       className="gameday-storefront"
+      data-device-view={deviceView}
       style={customAccentColor ? ({ '--gd-gold': customAccentColor } as React.CSSProperties) : undefined}
     >
       <GameDayHeader
