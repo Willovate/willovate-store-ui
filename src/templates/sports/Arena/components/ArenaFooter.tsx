@@ -53,11 +53,22 @@ export const ArenaFooter: React.FC<ArenaFooterProps> = ({
               The definitive pro-grade sporting equipment house. Built for international athletes,
               club warriors, and next-generation champions.
             </p>
-            <div className="arena-footer-socials">
+            <div style={{ display: 'flex', gap: '0.75rem' }}>
               {['Instagram', 'X', 'YouTube', 'TikTok', 'Strava'].map((platform) => (
                 <span
                   key={platform}
-                  className="arena-footer-social-pill"
+                  style={{
+                    background: 'rgba(255,255,255,0.05)',
+                    padding: '0.4rem 0.65rem',
+                    borderRadius: '4px',
+                    fontSize: '0.72rem',
+                    fontWeight: 700,
+                    color: '#94a3b8',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = '#ff5500')}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = '#94a3b8')}
                 >
                   {platform}
                 </span>
@@ -142,7 +153,7 @@ export const ArenaFooter: React.FC<ArenaFooterProps> = ({
                   border: '1px solid rgba(34, 197, 94, 0.3)',
                   color: '#4ade80',
                   padding: '0.75rem',
-                  borderRadius: '6px',
+                  borderRadius: '4px',
                   fontSize: '0.8rem',
                   fontWeight: 700,
                 }}
@@ -150,18 +161,27 @@ export const ArenaFooter: React.FC<ArenaFooterProps> = ({
                 ✓ Welcome to Arena Pro! Check your inbox for code ARENAPRO.
               </div>
             ) : (
-              <form onSubmit={handleSubscribe} className="arena-footer-form">
+              <form onSubmit={handleSubscribe} style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
                 <input
                   type="email"
                   required
                   placeholder="Enter your athlete email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="arena-footer-input"
+                  style={{
+                    background: '#090b10',
+                    border: '1px solid var(--arena-border)',
+                    borderRadius: '4px',
+                    color: '#ffffff',
+                    padding: '0.65rem 0.85rem',
+                    fontSize: '0.82rem',
+                    outline: 'none',
+                  }}
                 />
                 <button
                   type="submit"
-                  className="arena-footer-btn"
+                  className="arena-cta-primary"
+                  style={{ padding: '0.65rem 1rem', fontSize: '0.8rem', letterSpacing: '0.08em' }}
                 >
                   Join Pro Circle
                 </button>
@@ -175,17 +195,17 @@ export const ArenaFooter: React.FC<ArenaFooterProps> = ({
           <div>
             © 2026 ARENA Athletics Inc. Powered by <strong>Willovate</strong>. All rights reserved.
           </div>
-          <div className="arena-footer-legal-links">
-            <a href="#privacy">
+          <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+            <a href="#privacy" style={{ color: 'var(--arena-text-dim)', textDecoration: 'none' }}>
               Privacy Statement
             </a>
-            <a href="#terms">
+            <a href="#terms" style={{ color: 'var(--arena-text-dim)', textDecoration: 'none' }}>
               Terms of Competition
             </a>
-            <a href="#shipping">
+            <a href="#shipping" style={{ color: 'var(--arena-text-dim)', textDecoration: 'none' }}>
               Shipping Policy
             </a>
-            <a href="#compliance">
+            <a href="#compliance" style={{ color: 'var(--arena-text-dim)', textDecoration: 'none' }}>
               Pro Compliance
             </a>
           </div>
