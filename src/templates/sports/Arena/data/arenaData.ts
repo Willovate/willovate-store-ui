@@ -464,7 +464,7 @@ export const ARENA_SPORTS_CATEGORIES: {
     id: 'football',
     title: 'Football',
     subtitle: 'Matchday kits, carbon cleats & FIFA match balls',
-    image: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800&auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&auto=format&fit=crop&q=80',
     tag: 'CHAMPIONS LEAGUE READY',
     itemCount: '64 Gear Items',
   },

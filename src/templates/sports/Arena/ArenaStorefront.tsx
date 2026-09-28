@@ -44,7 +44,6 @@ const INITIAL_FILTER_STATE: ArenaCollectionFilterState = {
 }
 
 export const ArenaStorefront: React.FC<ArenaStorefrontProps> = ({
-  onBack,
   deviceView = 'desktop',
   customAccentColor,
 }) => {
@@ -197,34 +196,6 @@ export const ArenaStorefront: React.FC<ArenaStorefrontProps> = ({
       data-device-view={deviceView}
       style={rootStyle}
     >
-      {/* Back to Template Selector button if inside preview modal */}
-      {onBack && (
-        <button
-          type="button"
-          onClick={onBack}
-          style={{
-            position: 'fixed',
-            top: '1rem',
-            left: '1rem',
-            zIndex: 9999,
-            background: 'rgba(9, 11, 16, 0.85)',
-            border: '1px solid rgba(255, 85, 0, 0.4)',
-            color: '#ffffff',
-            padding: '0.45rem 0.9rem',
-            borderRadius: '6px',
-            fontSize: '0.8rem',
-            fontWeight: 800,
-            cursor: 'pointer',
-            backdropFilter: 'blur(8px)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-          }}
-        >
-          <span>← Back to Catalog</span>
-        </button>
-      )}
-
       {/* Sticky Dark Header */}
       <ArenaHeader
         onNavigateHome={handleNavigateHome}

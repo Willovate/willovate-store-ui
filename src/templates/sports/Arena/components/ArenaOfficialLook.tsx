@@ -65,7 +65,7 @@ export const ArenaOfficialLook: React.FC<ArenaOfficialLookProps> = ({
             </div>
           </div>
 
-          <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
+          <div className="arena-official-actions">
             <button
               type="button"
               className="btn-arena-primary"

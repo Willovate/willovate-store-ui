@@ -2444,12 +2444,54 @@
 }
 
 @media (max-width: 768px) {
+  .arena-announcement-strip {
+    font-size: 0.68rem;
+    padding: 0.35rem 0.6rem;
+    gap: 0.4rem;
+  }
+
   .arena-header {
-    padding: 0 1rem;
+    padding: 0 0.85rem;
+  }
+
+  .arena-header-inner {
+    height: 58px;
+    gap: 8px;
+  }
+
+  .arena-brand-title {
+    font-size: 1.5rem;
+    gap: 0.2rem;
+  }
+
+  .arena-brand-tagline {
+    font-size: 0.5rem;
+    letter-spacing: 0.15em;
   }
 
   .arena-nav-menu {
     display: none;
+  }
+
+  .arena-header-actions {
+    gap: 4px;
+  }
+
+  .arena-action-btn {
+    width: 34px;
+    height: 34px;
+  }
+
+  .arena-account-btn {
+    display: none;
+  }
+
+  .arena-cart-badge {
+    top: -2px;
+    right: -2px;
+    font-size: 0.55rem;
+    min-width: 15px;
+    height: 15px;
   }
 
   .arena-mobile-toggle {
@@ -2457,27 +2499,263 @@
   }
 
   .arena-hero-section {
-    padding: 3rem 1.25rem;
-    min-height: 70vh;
+    padding: 2.5rem 1rem;
+    min-height: auto;
   }
 
-  .arena-hero-stats-row {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+  .arena-hero-content {
+    gap: 1rem;
+  }
+
+  .arena-hero-headline {
+    font-size: clamp(2.2rem, 8vw, 3rem);
+    line-height: 0.95;
+  }
+
+  .arena-hero-sub {
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .arena-hero-cta-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
     width: 100%;
   }
 
+  .btn-arena-primary,
+  .btn-arena-secondary {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    padding: 0.85rem 1.5rem;
+    font-size: 0.82rem;
+  }
+
+  .arena-hero-stats-row {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    width: 100%;
+    padding-top: 1.2rem;
+    margin-top: 1.2rem;
+  }
+
+  .arena-stat-val {
+    font-size: 1.3rem;
+  }
+
+  .arena-stat-lbl {
+    font-size: 0.58rem;
+  }
+
   .arena-section {
-    padding: 3.5rem 1.25rem;
+    padding: 2.5rem 1rem;
   }
 
   .arena-section-header {
     flex-direction: column;
     align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 1.5rem;
   }
 
-  .arena-sports-grid,
+  .arena-section-title {
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+    line-height: 1;
+  }
+
+  .arena-sports-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .arena-sport-card {
+    height: 210px;
+    padding: 14px 12px;
+    border-radius: 10px;
+  }
+
+  .arena-sport-card-tag {
+    font-size: 0.58rem;
+    margin-bottom: 2px;
+  }
+
+  .arena-sport-card-title {
+    font-size: 1.35rem;
+    line-height: 1;
+  }
+
+  .arena-sport-card-desc {
+    display: none;
+  }
+
+  .arena-sport-card-link {
+    font-size: 0.68rem;
+    margin-top: 4px;
+  }
+
+  .arena-filter-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 8px;
+    padding-bottom: 6px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    width: 100%;
+  }
+
+  .arena-filter-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .arena-tab-pill {
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 6px 14px;
+    font-size: 0.72rem;
+  }
+
   .arena-products-grid,
+  .arena-collection-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .arena-product-card {
+    border-radius: 10px;
+  }
+
+  .arena-product-img-wrapper {
+    height: 150px;
+  }
+
+  .arena-product-card-body {
+    padding: 10px;
+  }
+
+  .arena-product-title {
+    font-size: 0.82rem;
+    line-height: 1.25;
+  }
+
+  .arena-product-sport-tag {
+    font-size: 0.58rem;
+  }
+
+  .arena-product-rating-row {
+    font-size: 0.68rem;
+  }
+
+  .arena-price-current {
+    font-size: 0.95rem;
+  }
+
+  .arena-price-original {
+    font-size: 0.7rem;
+  }
+
+  .arena-quick-add-btn {
+    padding: 6px 10px;
+    font-size: 0.68rem;
+  }
+
+  .arena-official-section {
+    padding: 2.5rem 1rem;
+  }
+
+  .arena-official-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .arena-official-visual img {
+    height: 240px;
+  }
+
+  .arena-official-badge-float {
+    bottom: 12px;
+    left: 12px;
+    padding: 0.5rem 0.8rem;
+  }
+
+  .arena-official-badge-float strong {
+    font-size: 0.78rem;
+  }
+
+  .arena-official-badge-float span {
+    font-size: 0.65rem;
+  }
+
+  .arena-official-features {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin: 0.75rem 0;
+  }
+
+  .arena-official-feature-box {
+    padding: 10px 12px;
+  }
+
+  .arena-official-feature-box h4 {
+    font-size: 0.82rem;
+  }
+
+  .arena-official-feature-box p {
+    font-size: 0.72rem;
+  }
+
+  .arena-official-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .arena-official-actions .btn-arena-primary,
+  .arena-official-actions .btn-arena-secondary {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .arena-pro-split-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .arena-tech-card {
+    padding: 1rem;
+    gap: 0.85rem;
+  }
+
+  .arena-tech-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
+
+  .arena-tech-body h4 {
+    font-size: 0.92rem;
+  }
+
+  .arena-tech-body p {
+    font-size: 0.76rem;
+  }
+
+  .arena-limited-section {
+    grid-template-columns: 1fr;
+    padding: 2rem 1.25rem;
+    gap: 1.5rem;
+  }
+
+  .arena-countdown-strip {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    justify-content: center;
+  }
+
   .arena-testimonials-grid {
     grid-template-columns: 1fr;
   }
@@ -2512,28 +2790,14 @@
     display: flex;
   }
 
-  .arena-collection-grid,
-  .arena-products-grid,
-  .arena-sports-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-  }
-
   .arena-product-page-grid {
     grid-template-columns: 1fr;
-    padding: 1.5rem;
-  }
-
-  .arena-limited-section {
-    padding: 2rem 1.5rem;
-  }
-
-  .arena-countdown-strip {
-    flex-wrap: wrap;
+    padding: 1rem;
   }
 
   .arena-footer-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
   .arena-footer-bottom {
@@ -2542,10 +2806,37 @@
   }
 }
 
-/* Mobile simulated preview container override: .arena-root[data-device-view='mobile'] */
+/* =========================================================================
+   DUAL RESPONSIVE SELECTORS: SIMULATED PREVIEW [data-device-view='mobile']
+   ========================================================================= */
+.arena-root[data-device-view='mobile'] .arena-announcement-strip,
+.simulated-frame.frame-mobile .arena-announcement-strip {
+  font-size: 0.68rem !important;
+  padding: 0.35rem 0.6rem !important;
+  gap: 0.4rem !important;
+}
+
 .arena-root[data-device-view='mobile'] .arena-header,
 .simulated-frame.frame-mobile .arena-header {
-  padding: 0 1rem;
+  padding: 0 0.85rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-header-inner,
+.simulated-frame.frame-mobile .arena-header-inner {
+  height: 58px !important;
+  gap: 8px !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-brand-title,
+.simulated-frame.frame-mobile .arena-brand-title {
+  font-size: 1.5rem !important;
+  gap: 0.2rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-brand-tagline,
+.simulated-frame.frame-mobile .arena-brand-tagline {
+  font-size: 0.5rem !important;
+  letter-spacing: 0.15em !important;
 }
 
 .arena-root[data-device-view='mobile'] .arena-nav-menu,
@@ -2553,19 +2844,345 @@
   display: none !important;
 }
 
+.arena-root[data-device-view='mobile'] .arena-header-actions,
+.simulated-frame.frame-mobile .arena-header-actions {
+  gap: 4px !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-action-btn,
+.simulated-frame.frame-mobile .arena-action-btn {
+  width: 34px !important;
+  height: 34px !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-account-btn,
+.simulated-frame.frame-mobile .arena-account-btn {
+  display: none !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-cart-badge,
+.simulated-frame.frame-mobile .arena-cart-badge {
+  top: -2px !important;
+  right: -2px !important;
+  font-size: 0.55rem !important;
+  min-width: 15px !important;
+  height: 15px !important;
+}
+
 .arena-root[data-device-view='mobile'] .arena-mobile-toggle,
 .simulated-frame.frame-mobile .arena-mobile-toggle {
   display: flex !important;
 }
 
+.arena-root[data-device-view='mobile'] .arena-hero-section,
+.simulated-frame.frame-mobile .arena-hero-section {
+  padding: 2.5rem 1rem !important;
+  min-height: auto !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-hero-content,
+.simulated-frame.frame-mobile .arena-hero-content {
+  gap: 1rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-hero-headline,
+.simulated-frame.frame-mobile .arena-hero-headline {
+  font-size: clamp(2.2rem, 8vw, 3rem) !important;
+  line-height: 0.95 !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-hero-sub,
+.simulated-frame.frame-mobile .arena-hero-sub {
+  font-size: 0.88rem !important;
+  line-height: 1.5 !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-hero-cta-row,
+.simulated-frame.frame-mobile .arena-hero-cta-row {
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+.arena-root[data-device-view='mobile'] .btn-arena-primary,
+.arena-root[data-device-view='mobile'] .btn-arena-secondary,
+.simulated-frame.frame-mobile .btn-arena-primary,
+.simulated-frame.frame-mobile .btn-arena-secondary {
+  width: 100% !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 0.85rem 1.5rem !important;
+  font-size: 0.82rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-hero-stats-row,
+.simulated-frame.frame-mobile .arena-hero-stats-row {
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 0.75rem !important;
+  width: 100% !important;
+  padding-top: 1.2rem !important;
+  margin-top: 1.2rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-stat-val,
+.simulated-frame.frame-mobile .arena-stat-val {
+  font-size: 1.3rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-stat-lbl,
+.simulated-frame.frame-mobile .arena-stat-lbl {
+  font-size: 0.58rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-section,
+.simulated-frame.frame-mobile .arena-section {
+  padding: 2.5rem 1rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-section-header,
+.simulated-frame.frame-mobile .arena-section-header {
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-section-title,
+.simulated-frame.frame-mobile .arena-section-title {
+  font-size: clamp(1.6rem, 6vw, 2.2rem) !important;
+  line-height: 1 !important;
+}
+
 .arena-root[data-device-view='mobile'] .arena-sports-grid,
+.simulated-frame.frame-mobile .arena-sports-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-sport-card,
+.simulated-frame.frame-mobile .arena-sport-card {
+  height: 210px !important;
+  padding: 14px 12px !important;
+  border-radius: 10px !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-sport-card-tag,
+.simulated-frame.frame-mobile .arena-sport-card-tag {
+  font-size: 0.58rem !important;
+  margin-bottom: 2px !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-sport-card-title,
+.simulated-frame.frame-mobile .arena-sport-card-title {
+  font-size: 1.35rem !important;
+  line-height: 1 !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-sport-card-desc,
+.simulated-frame.frame-mobile .arena-sport-card-desc {
+  display: none !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-sport-card-link,
+.simulated-frame.frame-mobile .arena-sport-card-link {
+  font-size: 0.68rem !important;
+  margin-top: 4px !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-filter-tabs,
+.simulated-frame.frame-mobile .arena-filter-tabs {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  gap: 8px !important;
+  padding-bottom: 6px !important;
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: none !important;
+  width: 100% !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-filter-tabs::-webkit-scrollbar,
+.simulated-frame.frame-mobile .arena-filter-tabs::-webkit-scrollbar {
+  display: none !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-tab-pill,
+.simulated-frame.frame-mobile .arena-tab-pill {
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+  padding: 6px 14px !important;
+  font-size: 0.72rem !important;
+}
+
 .arena-root[data-device-view='mobile'] .arena-products-grid,
 .arena-root[data-device-view='mobile'] .arena-collection-grid,
-.simulated-frame.frame-mobile .arena-sports-grid,
 .simulated-frame.frame-mobile .arena-products-grid,
 .simulated-frame.frame-mobile .arena-collection-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 10px !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-product-card,
+.simulated-frame.frame-mobile .arena-product-card {
+  border-radius: 10px !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-product-img-wrapper,
+.simulated-frame.frame-mobile .arena-product-img-wrapper {
+  height: 150px !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-product-card-body,
+.simulated-frame.frame-mobile .arena-product-card-body {
+  padding: 10px !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-product-title,
+.simulated-frame.frame-mobile .arena-product-title {
+  font-size: 0.82rem !important;
+  line-height: 1.25 !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-product-sport-tag,
+.simulated-frame.frame-mobile .arena-product-sport-tag {
+  font-size: 0.58rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-product-rating-row,
+.simulated-frame.frame-mobile .arena-product-rating-row {
+  font-size: 0.68rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-price-current,
+.simulated-frame.frame-mobile .arena-price-current {
+  font-size: 0.95rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-price-original,
+.simulated-frame.frame-mobile .arena-price-original {
+  font-size: 0.7rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-quick-add-btn,
+.simulated-frame.frame-mobile .arena-quick-add-btn {
+  padding: 6px 10px !important;
+  font-size: 0.68rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-official-section,
+.simulated-frame.frame-mobile .arena-official-section {
+  padding: 2.5rem 1rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-official-grid,
+.simulated-frame.frame-mobile .arena-official-grid {
+  grid-template-columns: 1fr !important;
+  gap: 1.5rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-official-visual img,
+.simulated-frame.frame-mobile .arena-official-visual img {
+  height: 240px !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-official-badge-float,
+.simulated-frame.frame-mobile .arena-official-badge-float {
+  bottom: 12px !important;
+  left: 12px !important;
+  padding: 0.5rem 0.8rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-official-badge-float strong,
+.simulated-frame.frame-mobile .arena-official-badge-float strong {
+  font-size: 0.78rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-official-badge-float span,
+.simulated-frame.frame-mobile .arena-official-badge-float span {
+  font-size: 0.65rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-official-features,
+.simulated-frame.frame-mobile .arena-official-features {
+  grid-template-columns: 1fr !important;
+  gap: 10px !important;
+  margin: 0.75rem 0 !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-official-feature-box,
+.simulated-frame.frame-mobile .arena-official-feature-box {
+  padding: 10px 12px !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-official-feature-box h4,
+.simulated-frame.frame-mobile .arena-official-feature-box h4 {
+  font-size: 0.82rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-official-feature-box p,
+.simulated-frame.frame-mobile .arena-official-feature-box p {
+  font-size: 0.72rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-official-actions,
+.simulated-frame.frame-mobile .arena-official-actions {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 10px !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-official-actions .btn-arena-primary,
+.arena-root[data-device-view='mobile'] .arena-official-actions .btn-arena-secondary,
+.simulated-frame.frame-mobile .arena-official-actions .btn-arena-primary,
+.simulated-frame.frame-mobile .arena-official-actions .btn-arena-secondary {
+  width: 100% !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-pro-split-grid,
+.simulated-frame.frame-mobile .arena-pro-split-grid {
+  grid-template-columns: 1fr !important;
+  gap: 2rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-tech-card,
+.simulated-frame.frame-mobile .arena-tech-card {
+  padding: 1rem !important;
+  gap: 0.85rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-tech-icon,
+.simulated-frame.frame-mobile .arena-tech-icon {
+  width: 36px !important;
+  height: 36px !important;
+  font-size: 1.1rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-tech-body h4,
+.simulated-frame.frame-mobile .arena-tech-body h4 {
+  font-size: 0.92rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-tech-body p,
+.simulated-frame.frame-mobile .arena-tech-body p {
+  font-size: 0.76rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-limited-section,
+.simulated-frame.frame-mobile .arena-limited-section {
+  grid-template-columns: 1fr !important;
+  padding: 2rem 1.25rem !important;
+  gap: 1.5rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-countdown-strip,
+.simulated-frame.frame-mobile .arena-countdown-strip {
+  flex-wrap: wrap !important;
+  gap: 0.4rem !important;
+  justify-content: center !important;
 }
 
 .arena-root[data-device-view='mobile'] .arena-testimonials-grid,
@@ -2575,47 +3192,54 @@
 
 .arena-root[data-device-view='mobile'] .arena-collection-page,
 .simulated-frame.frame-mobile .arena-collection-page {
-  padding: 1.5rem 1rem 3.5rem;
+  padding: 1.5rem 1rem 3.5rem !important;
 }
 
 .arena-root[data-device-view='mobile'] .arena-collection-layout,
 .simulated-frame.frame-mobile .arena-collection-layout {
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr !important;
 }
 
 .arena-root[data-device-view='mobile'] .arena-collection-sidebar,
 .simulated-frame.frame-mobile .arena-collection-sidebar {
-  display: none;
+  display: none !important;
 }
 
 .arena-root[data-device-view='mobile'] .arena-collection-sidebar.mobile-open,
 .simulated-frame.frame-mobile .arena-collection-sidebar.mobile-open {
-  display: flex;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1005;
-  background: #0d1017;
-  overflow-y: auto;
-  border-radius: 0;
-  padding: 2rem 1.5rem;
+  display: flex !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 1005 !important;
+  background: #0d1017 !important;
+  overflow-y: auto !important;
+  border-radius: 0 !important;
+  padding: 2rem 1.5rem !important;
 }
 
 .arena-root[data-device-view='mobile'] .arena-mobile-filter-btn,
 .simulated-frame.frame-mobile .arena-mobile-filter-btn {
-  display: flex;
-}
-
-.arena-root[data-device-view='mobile'] .arena-hero-headline,
-.simulated-frame.frame-mobile .arena-hero-headline {
-  font-size: 3rem;
+  display: flex !important;
 }
 
 .arena-root[data-device-view='mobile'] .arena-product-page-grid,
 .simulated-frame.frame-mobile .arena-product-page-grid {
-  grid-template-columns: 1fr;
-  padding: 1rem;
+  grid-template-columns: 1fr !important;
+  padding: 1rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-footer-grid,
+.simulated-frame.frame-mobile .arena-footer-grid {
+  grid-template-columns: 1fr !important;
+  gap: 1.5rem !important;
+}
+
+.arena-root[data-device-view='mobile'] .arena-footer-bottom,
+.simulated-frame.frame-mobile .arena-footer-bottom {
+  flex-direction: column !important;
+  align-items: flex-start !important;
 }
 

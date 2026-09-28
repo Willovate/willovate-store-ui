@@ -13,7 +13,7 @@ export const ArenaHero: React.FC<ArenaHeroProps> = ({
     <section className="arena-hero-section">
       {/* Stadium Night Background Image */}
       <img
-        src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=1600&auto=format&fit=crop&q=85"
+        src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1600&auto=format&fit=crop&q=85"
         alt="Illuminated Sports Stadium"
         className="arena-hero-bg"
       />

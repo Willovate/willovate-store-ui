@@ -252,7 +252,7 @@ export const ArenaHeader: React.FC<ArenaHeaderProps> = ({
 
             <button
               type="button"
-              className="arena-action-btn"
+              className="arena-action-btn arena-account-btn"
               onClick={onOpenAccount}
               aria-label="Account details"
               title="Account"
