@@ -405,24 +405,6 @@ export const MotionStorefront: React.FC<MotionStorefrontProps> = ({
     >
       <div className="mo-cyber-grid" />
 
-      {/* Optional onBack link in preview modal */}
-      {onBack && (
-        <div style={{ background: '#04070d', borderBottom: '1px solid var(--mo-border)', padding: '6px 16px' }}>
-          <button
-            onClick={onBack}
-            style={{
-              fontFamily: 'var(--mo-font-mono)',
-              fontSize: '0.72rem',
-              color: 'var(--mo-cyan)',
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-            }}
-          >
-            ← Back to Marketplace
-          </button>
-        </div>
-      )}
-
       {/* Announcement Ticker */}
       <div className="mo-ticker">
         <span className="mo-ticker-badge">MOTION TELEMETRY 2.4</span>
@@ -470,7 +452,7 @@ export const MotionStorefront: React.FC<MotionStorefrontProps> = ({
                   <line x1="21" y1="21" x2="16.65" y2="16.65" />
                 </svg>
               </button>
-              <button className="mo-icon-btn" onClick={() => triggerToast('Motion biometric account sync initialized')} aria-label="Account">
+              <button className="mo-icon-btn mo-account-btn" onClick={() => triggerToast('Motion biometric account sync initialized')} aria-label="Account">
                 <svg width="19" height="19" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                   <circle cx="12" cy="7" r="4" />
