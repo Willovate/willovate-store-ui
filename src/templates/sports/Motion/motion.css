@@ -504,6 +504,15 @@
   margin-bottom: 48px;
 }
 
+@media (max-width: 768px) {
+  .mo-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+}
+
 /* Primary Tech Button */
 .mo-btn-primary {
   display: inline-flex;
@@ -634,8 +643,14 @@
   left: -16px;
 }
 
-@media (max-width: 640px) {
-  .mo-floating-badge { display: none; }
+@media (max-width: 768px) {
+  .mo-floating-badge { display: none !important; }
+  .mo-hero-visual { margin-top: 16px; }
+  .mo-hero-image-card img {
+    aspect-ratio: 16/10;
+    max-height: 240px;
+    width: 100%;
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -1765,6 +1780,10 @@
 /* ─────────────────────────────────────────────────────────────
    DUAL RESPONSIVE SELECTORS: SIMULATED PREVIEW [data-device-view='mobile']
 ───────────────────────────────────────────────────────────── */
+.motion-theme[data-device-view='mobile'] .mo-container {
+  padding: 0 14px !important;
+}
+
 .motion-theme[data-device-view='mobile'] .mo-menu-toggle {
   display: inline-flex !important;
 }
@@ -1831,38 +1850,199 @@
   display: none !important;
 }
 
+/* Hero Section on mobile */
 .motion-theme[data-device-view='mobile'] .mo-hero {
-  min-height: 520px !important;
-  padding: 40px 0 !important;
+  min-height: auto !important;
+  padding: 28px 0 36px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-hero-grid {
+  grid-template-columns: 1fr !important;
+  gap: 24px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-hero-eyebrow {
+  font-size: 0.65rem !important;
+  margin-bottom: 12px !important;
 }
 
 .motion-theme[data-device-view='mobile'] .mo-hero-title {
-  font-size: 2.2rem !important;
+  font-size: clamp(1.9rem, 7vw, 2.4rem) !important;
+  line-height: 1.05 !important;
+  margin-bottom: 14px !important;
 }
 
-.motion-theme[data-device-view='mobile'] .mo-hero-stats {
+.motion-theme[data-device-view='mobile'] .mo-hero-desc {
+  font-size: 0.88rem !important;
+  line-height: 1.55 !important;
+  margin-bottom: 22px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-hero-actions {
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 10px !important;
+  margin-bottom: 28px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-hero-actions .mo-btn-primary,
+.motion-theme[data-device-view='mobile'] .mo-hero-actions .mo-btn-secondary {
+  width: 100% !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 14px 20px !important;
+  font-size: 0.78rem !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-hero-hud {
   grid-template-columns: repeat(2, 1fr) !important;
   gap: 12px !important;
+  padding-top: 18px !important;
 }
 
+.motion-theme[data-device-view='mobile'] .mo-hud-metric-val {
+  font-size: 1.2rem !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-floating-badge {
+  display: none !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-hero-visual {
+  margin-top: 10px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-hero-image-card img {
+  aspect-ratio: 16/10 !important;
+  max-height: 220px !important;
+  width: 100% !important;
+}
+
+/* Sections & Titles on mobile */
 .motion-theme[data-device-view='mobile'] .mo-section {
-  padding: 48px 0 !important;
+  padding: 40px 0 !important;
 }
 
 .motion-theme[data-device-view='mobile'] .mo-section-head {
   flex-direction: column !important;
   align-items: flex-start !important;
   gap: 8px !important;
-  margin-bottom: 24px !important;
+  margin-bottom: 20px !important;
 }
 
 .motion-theme[data-device-view='mobile'] .mo-section-title {
-  font-size: 1.8rem !important;
+  font-size: 1.65rem !important;
   line-height: 1.1 !important;
 }
 
+.motion-theme[data-device-view='mobile'] .mo-section-head .mo-btn-secondary {
+  width: 100% !important;
+  justify-content: center !important;
+  padding: 10px 16px !important;
+  font-size: 0.75rem !important;
+}
+
+/* Performance Technology (1 Column on Mobile) */
+.motion-theme[data-device-view='mobile'] .mo-tech-grid {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-tech-card-image {
+  height: 180px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-tech-card-content {
+  padding: 16px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-tech-card-title {
+  font-size: 1.35rem !important;
+  margin-bottom: 6px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-tech-card-desc {
+  font-size: 0.82rem !important;
+  line-height: 1.5 !important;
+  margin-bottom: 14px !important;
+}
+
+/* Smart Gear (1 Column on Mobile) */
+.motion-theme[data-device-view='mobile'] .mo-smartgear-grid {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-smartgear-card {
+  min-height: 260px !important;
+  padding: 20px !important;
+  border-radius: var(--mo-radius-md) !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-smartgear-card-content h3 {
+  font-size: 1.35rem !important;
+  margin-bottom: 6px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-smartgear-card-content p {
+  font-size: 0.82rem !important;
+  line-height: 1.5 !important;
+  margin-bottom: 16px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-smartgear-card-content .mo-btn-primary {
+  width: 100% !important;
+  justify-content: center !important;
+  padding: 12px 16px !important;
+  font-size: 0.75rem !important;
+}
+
+/* Engineered Section (1 Column on Mobile) */
+.motion-theme[data-device-view='mobile'] .mo-engineered-grid {
+  grid-template-columns: 1fr !important;
+  gap: 14px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-matrix-card {
+  padding: 20px 18px !important;
+  border-radius: var(--mo-radius-md) !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-matrix-num {
+  font-size: 0.72rem !important;
+  margin-bottom: 8px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-matrix-title {
+  font-size: 1.15rem !important;
+  margin-bottom: 6px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-matrix-desc {
+  font-size: 0.82rem !important;
+  line-height: 1.5 !important;
+}
+
+/* Technology Story (1 Column on Mobile) */
+.motion-theme[data-device-view='mobile'] .mo-story-grid {
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-story-visual img {
+  aspect-ratio: 16/10 !important;
+  width: 100% !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-story-grid .mo-btn-primary {
+  width: 100% !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+/* Collection Page View on Mobile */
 .motion-theme[data-device-view='mobile'] .mo-collection {
-  padding: 24px 0 60px !important;
+  padding: 20px 0 60px !important;
 }
 
 .motion-theme[data-device-view='mobile'] .mo-collection-toolbar {
@@ -1900,9 +2080,9 @@
   font-size: 0.78rem !important;
 }
 
+/* Products Grid (Clean 2 Columns on Mobile) */
 .motion-theme[data-device-view='mobile'] .mo-products-grid,
 .motion-theme[data-device-view='mobile'] .mo-product-grid,
-.motion-theme[data-device-view='mobile'] .mo-tech-grid,
 .motion-theme[data-device-view='mobile'] .mo-category-grid,
 .motion-theme[data-device-view='mobile'] .mo-collection-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
@@ -1968,14 +2148,32 @@
   font-size: 0.82rem !important;
 }
 
+/* Footer on Mobile */
+.motion-theme[data-device-view='mobile'] .mo-footer {
+  padding: 40px 0 24px !important;
+}
+
 .motion-theme[data-device-view='mobile'] .mo-footer-grid {
   grid-template-columns: 1fr !important;
   gap: 24px !important;
 }
 
+/* PDP on Mobile */
+.motion-theme[data-device-view='mobile'] .mo-pdp {
+  padding: 20px 0 60px !important;
+}
+
 .motion-theme[data-device-view='mobile'] .mo-pdp-layout {
   grid-template-columns: 1fr !important;
   gap: 20px !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-pdp-title {
+  font-size: 1.6rem !important;
+}
+
+.motion-theme[data-device-view='mobile'] .mo-pdp-price {
+  font-size: 1.4rem !important;
 }
 
 .motion-theme[data-device-view='mobile'] .mo-sticky-atc {

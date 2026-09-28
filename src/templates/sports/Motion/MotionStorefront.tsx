@@ -223,7 +223,7 @@ export const MOTION_PRODUCTS: MotionProduct[] = [
     category: 'Smart Gear',
     price: 11999,
     compareAtPrice: 14999,
-    image: 'https://images.unsplash.com/photo-1510519138195-068d828884bb?w=1000&auto=format&fit=crop&q=85',
+    image: 'https://images.unsplash.com/photo-1576243345690-4e4b79b63288?w=1000&auto=format&fit=crop&q=85',
     alternateImage: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=1000&auto=format&fit=crop&q=85',
     technologyBadge: 'NEURAL-CORE',
     technology: 'Optical photoplethysmography with multi-spectral EMG muscle firing sensors',
@@ -719,7 +719,7 @@ export const MotionStorefront: React.FC<MotionStorefrontProps> = ({
                 <div className="mo-smartgear-card">
                   <div className="mo-smartgear-card-bg">
                     <img
-                      src="https://images.unsplash.com/photo-1510519138195-068d828884bb?w=1000&auto=format&fit=crop&q=85"
+                      src="https://images.unsplash.com/photo-1576243345690-4e4b79b63288?w=1000&auto=format&fit=crop&q=85"
                       alt="Biometric Sensor Band"
                     />
                   </div>
