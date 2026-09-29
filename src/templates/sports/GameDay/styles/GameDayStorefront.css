@@ -2234,68 +2234,447 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
-   DUAL RESPONSIVE SELECTORS: @media (max-width: 768px) AND [data-device-view='mobile']
+   DUAL RESPONSIVE SELECTORS: @media (max-width: 768px) AND SIMULATED MOBILE
 ───────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .gd-hamburger-btn { display: inline-flex !important; }
-  .gd-nav { display: none !important; }
-  .gd-header-inner { height: 58px; gap: 12px; }
-  .gd-announcement { font-size: 0.62rem; padding: 6px 10px; }
-  
+  /* Announcement */
+  .gd-announcement {
+    font-size: 0.62rem !important;
+    padding: 6px 12px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: block !important;
+  }
+
+  /* Header & Navigation */
+  .gd-hamburger-btn {
+    display: inline-flex !important;
+  }
+  .gd-nav {
+    display: none !important;
+  }
+  .gd-header-inner {
+    height: 56px !important;
+    gap: 8px !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+  }
+  .gd-logo-name {
+    font-size: 1.35rem !important;
+  }
+  .gd-logo-tagline {
+    font-size: 0.48rem !important;
+  }
+  .gd-header-actions {
+    gap: 2px !important;
+  }
+  .gd-icon-btn {
+    padding: 6px !important;
+  }
+  .gd-action-account {
+    display: none !important;
+  }
+
+  /* Mobile Pills */
   .gd-mobile-pills {
-    display: flex;
-    gap: 6px;
-    overflow-x: auto;
-    padding: 8px 12px;
-    background: var(--gd-bg-surface);
-    border-bottom: 1px solid var(--gd-border-dark);
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    display: flex !important;
+    gap: 6px !important;
+    overflow-x: auto !important;
+    padding: 8px 12px !important;
+    background: var(--gd-bg-surface) !important;
+    border-bottom: 1px solid var(--gd-border-dark) !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
   }
-  .gd-mobile-pills::-webkit-scrollbar { display: none; }
+  .gd-mobile-pills::-webkit-scrollbar {
+    display: none !important;
+  }
   .gd-sport-pill {
-    padding: 5px 12px;
-    font-size: 0.68rem;
-    font-weight: 700;
-    white-space: nowrap;
-    border-radius: var(--gd-radius-full);
-    border: 1px solid var(--gd-border-dark);
-    background: var(--gd-bg-elevated);
-    color: var(--gd-text-white);
+    padding: 5px 12px !important;
+    font-size: 0.68rem !important;
+    font-weight: 700 !important;
+    white-space: nowrap !important;
+    border-radius: var(--gd-radius-full) !important;
+    border: 1px solid var(--gd-border-dark) !important;
+    background: var(--gd-bg-elevated) !important;
+    color: var(--gd-text-white) !important;
   }
 
-  .gd-hero { min-height: 500px; }
-  .gd-hero-title { font-size: clamp(2.2rem, 8vw, 3.4rem) !important; }
-  .gd-hero-stats { gap: 14px; }
+  /* Hero Section */
+  .gd-hero {
+    min-height: auto !important;
+    padding: 44px 0 36px !important;
+  }
+  .gd-hero-live-badge {
+    margin-bottom: 12px !important;
+    padding: 4px 10px !important;
+    font-size: 0.6rem !important;
+  }
+  .gd-hero-tagline {
+    font-size: 0.72rem !important;
+    margin-bottom: 8px !important;
+  }
+  .gd-hero-title {
+    font-size: clamp(2.2rem, 8vw, 3rem) !important;
+    line-height: 1.02 !important;
+    word-break: break-word !important;
+    margin: 0 0 14px !important;
+  }
+  .gd-hero-subtitle {
+    font-size: 0.88rem !important;
+    line-height: 1.5 !important;
+    max-width: 100% !important;
+    margin-bottom: 22px !important;
+  }
+  .gd-hero-actions {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 10px !important;
+    margin-bottom: 24px !important;
+  }
+  .gd-hero-actions .gd-btn-primary,
+  .gd-hero-actions .gd-btn-secondary {
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+    display: flex !important;
+    padding: 13px 20px !important;
+  }
+  .gd-hero-stats {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+  .gd-hero-stat-num {
+    font-size: 1.25rem !important;
+  }
+  .gd-hero-stat-label {
+    font-size: 0.62rem !important;
+  }
 
-  .gd-sports-grid,
-  .gd-product-grid,
-  .gd-essentials-grid,
-  .gd-stories-grid,
-  .gd-reviews-grid {
+  /* Choose Your Sport */
+  .gd-sports-section {
+    padding: 48px 0 !important;
+  }
+  .gd-sports-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+  .gd-sport-card-content {
+    padding: 12px 10px !important;
+  }
+  .gd-sport-card-name {
+    font-size: 1rem !important;
+  }
+
+  /* Jersey Collection Editorial & Grid */
+  .gd-jersey-section {
+    padding: 48px 0 !important;
+  }
+  .gd-jersey-editorial {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    margin-top: 20px !important;
+  }
+  .gd-jersey-featured {
+    min-height: 320px !important;
+  }
+  .gd-jersey-featured-content {
+    bottom: 20px !important;
+    left: 16px !important;
+    right: 16px !important;
+  }
+  .gd-jersey-featured-name {
+    font-size: 1.35rem !important;
+  }
+  .gd-jersey-featured-price {
+    font-size: 1.05rem !important;
+  }
+  .gd-jersey-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+  .gd-jersey-card img {
+    height: 130px !important;
+  }
+  .gd-jersey-card-info {
+    padding: 10px 8px !important;
+  }
+  .gd-jersey-card-name {
+    font-size: 0.78rem !important;
+    line-height: 1.2 !important;
+  }
+  .gd-jersey-card-price {
+    font-size: 0.88rem !important;
+  }
+
+  /* Fan Essentials */
+  .gd-essentials-section {
+    padding: 48px 0 !important;
+  }
+  .gd-essentials-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 10px !important;
   }
 
-  .gd-limited-layout,
-  .gd-footer-grid {
+  /* Products Grid (Trending / Collection) */
+  .gd-products-section {
+    padding: 48px 0 !important;
+  }
+  .gd-products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+  .gd-product-card {
+    border-radius: 8px !important;
+  }
+  .gd-product-info {
+    padding: 10px 8px !important;
+  }
+  .gd-product-sport {
+    font-size: 0.58rem !important;
+    margin-bottom: 3px !important;
+  }
+  .gd-product-name {
+    font-size: 0.8rem !important;
+    line-height: 1.25 !important;
+    min-height: 30px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  .gd-product-rating {
+    font-size: 0.62rem !important;
+    margin-bottom: 6px !important;
+  }
+  .gd-product-pricing {
+    gap: 4px !important;
+    flex-wrap: wrap !important;
+  }
+  .gd-product-price {
+    font-size: 0.95rem !important;
+  }
+  .gd-product-compare {
+    font-size: 0.72rem !important;
+  }
+  .gd-product-badge {
+    font-size: 0.52rem !important;
+    padding: 2px 6px !important;
+    top: 6px !important;
+    left: 6px !important;
+  }
+  .gd-product-wishlist {
+    width: 26px !important;
+    height: 26px !important;
+    top: 6px !important;
+    right: 6px !important;
+    font-size: 0.75rem !important;
+  }
+  .gd-product-quick-add {
+    position: static !important;
+    bottom: auto !important;
+    opacity: 1 !important;
+    transform: none !important;
+    width: 100% !important;
+    margin-top: 8px !important;
+    padding: 8px 4px !important;
+    font-size: 0.65rem !important;
+    border-radius: 4px !important;
+    display: block !important;
+  }
+
+  /* Limited Edition */
+  .gd-limited-section {
+    padding: 48px 0 !important;
+  }
+  .gd-limited-inner {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  .gd-limited-img-wrap img {
+    height: 260px !important;
+  }
+  .gd-limited-title {
+    font-size: 1.6rem !important;
+  }
+  .gd-limited-desc {
+    font-size: 0.85rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 18px !important;
+  }
+  .gd-limited-features {
+    margin-bottom: 18px !important;
+    gap: 8px !important;
+  }
+  .gd-limited-features li {
+    font-size: 0.8rem !important;
+  }
+  .gd-limited-price-row {
+    margin-bottom: 14px !important;
+  }
+  .gd-limited-price {
+    font-size: 1.7rem !important;
+  }
+  .gd-limited-inner div:last-child > div[style] {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 10px !important;
+  }
+  .gd-limited-inner .gd-btn-primary,
+  .gd-limited-inner .gd-btn-secondary {
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+    display: flex !important;
+  }
+
+  /* Match Stories */
+  .gd-stories-section {
+    padding: 48px 0 !important;
+  }
+  .gd-stories-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  /* Reviews */
+  .gd-reviews-section {
+    padding: 48px 0 !important;
+  }
+  .gd-reviews-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  /* Newsletter */
+  .gd-newsletter-section {
+    padding: 48px 0 !important;
+  }
+  .gd-newsletter-inner {
     grid-template-columns: 1fr !important;
     gap: 20px !important;
   }
+  .gd-newsletter-title {
+    font-size: 1.6rem !important;
+  }
+  .gd-newsletter-form {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+  .gd-newsletter-form button {
+    width: 100% !important;
+  }
 
-  .gd-pdp-layout {
+  /* Footer */
+  .gd-footer-grid {
     grid-template-columns: 1fr !important;
-    gap: 20px !important;
+    gap: 28px !important;
+  }
+  .gd-footer-bottom {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  /* Cart Drawer Full Width on Mobile */
+  .gd-cart-drawer {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* PDP */
+  .gd-product-layout {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  .gd-gallery-main {
+    aspect-ratio: 1/1 !important;
+  }
+  .gd-product-full-name {
+    font-size: 1.6rem !important;
+  }
+  .gd-custom-inputs {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+  .gd-custom-number-input {
+    width: 100% !important;
   }
 }
 
-/* Simulated Mobile Preview Frame Selector */
-.gameday-storefront[data-device-view='mobile'] .gd-hamburger-btn { display: inline-flex !important; }
-.gameday-storefront[data-device-view='mobile'] .gd-nav { display: none !important; }
-.gameday-storefront[data-device-view='mobile'] .gd-header-inner { height: 58px !important; gap: 12px !important; }
-.gameday-storefront[data-device-view='mobile'] .gd-announcement { font-size: 0.62rem !important; padding: 6px 10px !important; }
+/* ─────────────────────────────────────────────────────────────
+   SIMULATED MOBILE VIEW OVERRIDES: [data-device-view='mobile'], .device-mobile, .frame-mobile
+───────────────────────────────────────────────────────────── */
+.gameday-storefront[data-device-view='mobile'] .gd-announcement,
+.gameday-storefront.device-mobile .gd-announcement,
+.simulated-frame.frame-mobile .gameday-storefront .gd-announcement {
+  font-size: 0.62rem !important;
+  padding: 6px 12px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  display: block !important;
+}
 
-.gameday-storefront[data-device-view='mobile'] .gd-mobile-pills {
+.gameday-storefront[data-device-view='mobile'] .gd-hamburger-btn,
+.gameday-storefront.device-mobile .gd-hamburger-btn,
+.simulated-frame.frame-mobile .gameday-storefront .gd-hamburger-btn {
+  display: inline-flex !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-nav,
+.gameday-storefront.device-mobile .gd-nav,
+.simulated-frame.frame-mobile .gameday-storefront .gd-nav {
+  display: none !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-header-inner,
+.gameday-storefront.device-mobile .gd-header-inner,
+.simulated-frame.frame-mobile .gameday-storefront .gd-header-inner {
+  height: 56px !important;
+  gap: 8px !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-logo-name,
+.gameday-storefront.device-mobile .gd-logo-name,
+.simulated-frame.frame-mobile .gameday-storefront .gd-logo-name {
+  font-size: 1.35rem !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-logo-tagline,
+.gameday-storefront.device-mobile .gd-logo-tagline,
+.simulated-frame.frame-mobile .gameday-storefront .gd-logo-tagline {
+  font-size: 0.48rem !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-header-actions,
+.gameday-storefront.device-mobile .gd-header-actions,
+.simulated-frame.frame-mobile .gameday-storefront .gd-header-actions {
+  gap: 2px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-icon-btn,
+.gameday-storefront.device-mobile .gd-icon-btn,
+.simulated-frame.frame-mobile .gameday-storefront .gd-icon-btn {
+  padding: 6px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-action-account,
+.gameday-storefront.device-mobile .gd-action-account,
+.simulated-frame.frame-mobile .gameday-storefront .gd-action-account {
+  display: none !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-mobile-pills,
+.gameday-storefront.device-mobile .gd-mobile-pills,
+.simulated-frame.frame-mobile .gameday-storefront .gd-mobile-pills {
   display: flex !important;
   gap: 6px !important;
   overflow-x: auto !important;
@@ -2306,23 +2685,479 @@
   scrollbar-width: none !important;
 }
 
+.gameday-storefront[data-device-view='mobile'] .gd-mobile-pills::-webkit-scrollbar,
+.gameday-storefront.device-mobile .gd-mobile-pills::-webkit-scrollbar,
+.simulated-frame.frame-mobile .gameday-storefront .gd-mobile-pills::-webkit-scrollbar {
+  display: none !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-sport-pill,
+.gameday-storefront.device-mobile .gd-sport-pill,
+.simulated-frame.frame-mobile .gameday-storefront .gd-sport-pill {
+  padding: 5px 12px !important;
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important;
+  border-radius: var(--gd-radius-full) !important;
+  border: 1px solid var(--gd-border-dark) !important;
+  background: var(--gd-bg-elevated) !important;
+  color: var(--gd-text-white) !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-hero,
+.gameday-storefront.device-mobile .gd-hero,
+.simulated-frame.frame-mobile .gameday-storefront .gd-hero {
+  min-height: auto !important;
+  padding: 44px 0 36px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-hero-live-badge,
+.gameday-storefront.device-mobile .gd-hero-live-badge,
+.simulated-frame.frame-mobile .gameday-storefront .gd-hero-live-badge {
+  margin-bottom: 12px !important;
+  padding: 4px 10px !important;
+  font-size: 0.6rem !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-hero-tagline,
+.gameday-storefront.device-mobile .gd-hero-tagline,
+.simulated-frame.frame-mobile .gameday-storefront .gd-hero-tagline {
+  font-size: 0.72rem !important;
+  margin-bottom: 8px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-hero-title,
+.gameday-storefront.device-mobile .gd-hero-title,
+.simulated-frame.frame-mobile .gameday-storefront .gd-hero-title {
+  font-size: clamp(2.2rem, 8vw, 3rem) !important;
+  line-height: 1.02 !important;
+  word-break: break-word !important;
+  margin: 0 0 14px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-hero-subtitle,
+.gameday-storefront.device-mobile .gd-hero-subtitle,
+.simulated-frame.frame-mobile .gameday-storefront .gd-hero-subtitle {
+  font-size: 0.88rem !important;
+  line-height: 1.5 !important;
+  max-width: 100% !important;
+  margin-bottom: 22px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-hero-actions,
+.gameday-storefront.device-mobile .gd-hero-actions,
+.simulated-frame.frame-mobile .gameday-storefront .gd-hero-actions {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  gap: 10px !important;
+  margin-bottom: 24px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-hero-actions .gd-btn-primary,
+.gameday-storefront[data-device-view='mobile'] .gd-hero-actions .gd-btn-secondary,
+.gameday-storefront.device-mobile .gd-hero-actions .gd-btn-primary,
+.gameday-storefront.device-mobile .gd-hero-actions .gd-btn-secondary,
+.simulated-frame.frame-mobile .gameday-storefront .gd-hero-actions .gd-btn-primary,
+.simulated-frame.frame-mobile .gameday-storefront .gd-hero-actions .gd-btn-secondary {
+  width: 100% !important;
+  text-align: center !important;
+  justify-content: center !important;
+  display: flex !important;
+  padding: 13px 20px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-hero-stats,
+.gameday-storefront.device-mobile .gd-hero-stats,
+.simulated-frame.frame-mobile .gameday-storefront .gd-hero-stats {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 8px !important;
+  width: 100% !important;
+  text-align: center !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-hero-stat-num,
+.gameday-storefront.device-mobile .gd-hero-stat-num,
+.simulated-frame.frame-mobile .gameday-storefront .gd-hero-stat-num {
+  font-size: 1.25rem !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-hero-stat-label,
+.gameday-storefront.device-mobile .gd-hero-stat-label,
+.simulated-frame.frame-mobile .gameday-storefront .gd-hero-stat-label {
+  font-size: 0.62rem !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-sports-section,
+.gameday-storefront.device-mobile .gd-sports-section,
+.simulated-frame.frame-mobile .gameday-storefront .gd-sports-section {
+  padding: 48px 0 !important;
+}
+
 .gameday-storefront[data-device-view='mobile'] .gd-sports-grid,
-.gameday-storefront[data-device-view='mobile'] .gd-product-grid,
 .gameday-storefront[data-device-view='mobile'] .gd-essentials-grid,
-.gameday-storefront[data-device-view='mobile'] .gd-stories-grid,
-.gameday-storefront[data-device-view='mobile'] .gd-reviews-grid {
+.gameday-storefront[data-device-view='mobile'] .gd-products-grid,
+.gameday-storefront.device-mobile .gd-sports-grid,
+.gameday-storefront.device-mobile .gd-essentials-grid,
+.gameday-storefront.device-mobile .gd-products-grid,
+.simulated-frame.frame-mobile .gameday-storefront .gd-sports-grid,
+.simulated-frame.frame-mobile .gameday-storefront .gd-essentials-grid,
+.simulated-frame.frame-mobile .gameday-storefront .gd-products-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 10px !important;
 }
 
-.gameday-storefront[data-device-view='mobile'] .gd-limited-layout,
-.gameday-storefront[data-device-view='mobile'] .gd-footer-grid {
+.gameday-storefront[data-device-view='mobile'] .gd-jersey-section,
+.gameday-storefront.device-mobile .gd-jersey-section,
+.simulated-frame.frame-mobile .gameday-storefront .gd-jersey-section {
+  padding: 48px 0 !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-jersey-editorial,
+.gameday-storefront.device-mobile .gd-jersey-editorial,
+.simulated-frame.frame-mobile .gameday-storefront .gd-jersey-editorial {
+  grid-template-columns: 1fr !important;
+  gap: 14px !important;
+  margin-top: 20px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-jersey-featured,
+.gameday-storefront.device-mobile .gd-jersey-featured,
+.simulated-frame.frame-mobile .gameday-storefront .gd-jersey-featured {
+  min-height: 320px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-jersey-featured-content,
+.gameday-storefront.device-mobile .gd-jersey-featured-content,
+.simulated-frame.frame-mobile .gameday-storefront .gd-jersey-featured-content {
+  bottom: 20px !important;
+  left: 16px !important;
+  right: 16px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-jersey-featured-name,
+.gameday-storefront.device-mobile .gd-jersey-featured-name,
+.simulated-frame.frame-mobile .gameday-storefront .gd-jersey-featured-name {
+  font-size: 1.35rem !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-jersey-featured-price,
+.gameday-storefront.device-mobile .gd-jersey-featured-price,
+.simulated-frame.frame-mobile .gameday-storefront .gd-jersey-featured-price {
+  font-size: 1.05rem !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-jersey-grid,
+.gameday-storefront.device-mobile .gd-jersey-grid,
+.simulated-frame.frame-mobile .gameday-storefront .gd-jersey-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-jersey-card img,
+.gameday-storefront.device-mobile .gd-jersey-card img,
+.simulated-frame.frame-mobile .gameday-storefront .gd-jersey-card img {
+  height: 130px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-jersey-card-info,
+.gameday-storefront.device-mobile .gd-jersey-card-info,
+.simulated-frame.frame-mobile .gameday-storefront .gd-jersey-card-info {
+  padding: 10px 8px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-jersey-card-name,
+.gameday-storefront.device-mobile .gd-jersey-card-name,
+.simulated-frame.frame-mobile .gameday-storefront .gd-jersey-card-name {
+  font-size: 0.78rem !important;
+  line-height: 1.2 !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-jersey-card-price,
+.gameday-storefront.device-mobile .gd-jersey-card-price,
+.simulated-frame.frame-mobile .gameday-storefront .gd-jersey-card-price {
+  font-size: 0.88rem !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-product-card,
+.gameday-storefront.device-mobile .gd-product-card,
+.simulated-frame.frame-mobile .gameday-storefront .gd-product-card {
+  border-radius: 8px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-product-info,
+.gameday-storefront.device-mobile .gd-product-info,
+.simulated-frame.frame-mobile .gameday-storefront .gd-product-info {
+  padding: 10px 8px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-product-sport,
+.gameday-storefront.device-mobile .gd-product-sport,
+.simulated-frame.frame-mobile .gameday-storefront .gd-product-sport {
+  font-size: 0.58rem !important;
+  margin-bottom: 3px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-product-name,
+.gameday-storefront.device-mobile .gd-product-name,
+.simulated-frame.frame-mobile .gameday-storefront .gd-product-name {
+  font-size: 0.8rem !important;
+  line-height: 1.25 !important;
+  min-height: 30px !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-product-rating,
+.gameday-storefront.device-mobile .gd-product-rating,
+.simulated-frame.frame-mobile .gameday-storefront .gd-product-rating {
+  font-size: 0.62rem !important;
+  margin-bottom: 6px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-product-pricing,
+.gameday-storefront.device-mobile .gd-product-pricing,
+.simulated-frame.frame-mobile .gameday-storefront .gd-product-pricing {
+  gap: 4px !important;
+  flex-wrap: wrap !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-product-price,
+.gameday-storefront.device-mobile .gd-product-price,
+.simulated-frame.frame-mobile .gameday-storefront .gd-product-price {
+  font-size: 0.95rem !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-product-compare,
+.gameday-storefront.device-mobile .gd-product-compare,
+.simulated-frame.frame-mobile .gameday-storefront .gd-product-compare {
+  font-size: 0.72rem !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-product-badge,
+.gameday-storefront.device-mobile .gd-product-badge,
+.simulated-frame.frame-mobile .gameday-storefront .gd-product-badge {
+  font-size: 0.52rem !important;
+  padding: 2px 6px !important;
+  top: 6px !important;
+  left: 6px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-product-wishlist,
+.gameday-storefront.device-mobile .gd-product-wishlist,
+.simulated-frame.frame-mobile .gameday-storefront .gd-product-wishlist {
+  width: 26px !important;
+  height: 26px !important;
+  top: 6px !important;
+  right: 6px !important;
+  font-size: 0.75rem !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-product-quick-add,
+.gameday-storefront.device-mobile .gd-product-quick-add,
+.simulated-frame.frame-mobile .gameday-storefront .gd-product-quick-add {
+  position: static !important;
+  bottom: auto !important;
+  opacity: 1 !important;
+  transform: none !important;
+  width: 100% !important;
+  margin-top: 8px !important;
+  padding: 8px 4px !important;
+  font-size: 0.65rem !important;
+  border-radius: 4px !important;
+  display: block !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-limited-section,
+.gameday-storefront.device-mobile .gd-limited-section,
+.simulated-frame.frame-mobile .gameday-storefront .gd-limited-section {
+  padding: 48px 0 !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-limited-inner,
+.gameday-storefront.device-mobile .gd-limited-inner,
+.simulated-frame.frame-mobile .gameday-storefront .gd-limited-inner {
+  grid-template-columns: 1fr !important;
+  gap: 24px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-limited-img-wrap img,
+.gameday-storefront.device-mobile .gd-limited-img-wrap img,
+.simulated-frame.frame-mobile .gameday-storefront .gd-limited-img-wrap img {
+  height: 260px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-limited-title,
+.gameday-storefront.device-mobile .gd-limited-title,
+.simulated-frame.frame-mobile .gameday-storefront .gd-limited-title {
+  font-size: 1.6rem !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-limited-desc,
+.gameday-storefront.device-mobile .gd-limited-desc,
+.simulated-frame.frame-mobile .gameday-storefront .gd-limited-desc {
+  font-size: 0.85rem !important;
+  line-height: 1.5 !important;
+  margin-bottom: 18px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-limited-features,
+.gameday-storefront.device-mobile .gd-limited-features,
+.simulated-frame.frame-mobile .gameday-storefront .gd-limited-features {
+  margin-bottom: 18px !important;
+  gap: 8px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-limited-features li,
+.gameday-storefront.device-mobile .gd-limited-features li,
+.simulated-frame.frame-mobile .gameday-storefront .gd-limited-features li {
+  font-size: 0.8rem !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-limited-price-row,
+.gameday-storefront.device-mobile .gd-limited-price-row,
+.simulated-frame.frame-mobile .gameday-storefront .gd-limited-price-row {
+  margin-bottom: 14px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-limited-price,
+.gameday-storefront.device-mobile .gd-limited-price,
+.simulated-frame.frame-mobile .gameday-storefront .gd-limited-price {
+  font-size: 1.7rem !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-limited-inner div:last-child > div[style],
+.gameday-storefront.device-mobile .gd-limited-inner div:last-child > div[style],
+.simulated-frame.frame-mobile .gameday-storefront .gd-limited-inner div:last-child > div[style] {
+  flex-direction: column !important;
+  width: 100% !important;
+  gap: 10px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-limited-inner .gd-btn-primary,
+.gameday-storefront[data-device-view='mobile'] .gd-limited-inner .gd-btn-secondary,
+.gameday-storefront.device-mobile .gd-limited-inner .gd-btn-primary,
+.gameday-storefront.device-mobile .gd-limited-inner .gd-btn-secondary,
+.simulated-frame.frame-mobile .gameday-storefront .gd-limited-inner .gd-btn-primary,
+.simulated-frame.frame-mobile .gameday-storefront .gd-limited-inner .gd-btn-secondary {
+  width: 100% !important;
+  text-align: center !important;
+  justify-content: center !important;
+  display: flex !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-stories-section,
+.gameday-storefront.device-mobile .gd-stories-section,
+.simulated-frame.frame-mobile .gameday-storefront .gd-stories-section {
+  padding: 48px 0 !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-stories-grid,
+.gameday-storefront.device-mobile .gd-stories-grid,
+.simulated-frame.frame-mobile .gameday-storefront .gd-stories-grid {
+  grid-template-columns: 1fr !important;
+  gap: 14px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-reviews-section,
+.gameday-storefront.device-mobile .gd-reviews-section,
+.simulated-frame.frame-mobile .gameday-storefront .gd-reviews-section {
+  padding: 48px 0 !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-reviews-grid,
+.gameday-storefront.device-mobile .gd-reviews-grid,
+.simulated-frame.frame-mobile .gameday-storefront .gd-reviews-grid {
+  grid-template-columns: 1fr !important;
+  gap: 12px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-newsletter-section,
+.gameday-storefront.device-mobile .gd-newsletter-section,
+.simulated-frame.frame-mobile .gameday-storefront .gd-newsletter-section {
+  padding: 48px 0 !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-newsletter-inner,
+.gameday-storefront.device-mobile .gd-newsletter-inner,
+.simulated-frame.frame-mobile .gameday-storefront .gd-newsletter-inner {
   grid-template-columns: 1fr !important;
   gap: 20px !important;
 }
 
-.gameday-storefront[data-device-view='mobile'] .gd-pdp-layout {
+.gameday-storefront[data-device-view='mobile'] .gd-newsletter-title,
+.gameday-storefront.device-mobile .gd-newsletter-title,
+.simulated-frame.frame-mobile .gameday-storefront .gd-newsletter-title {
+  font-size: 1.6rem !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-newsletter-form,
+.gameday-storefront.device-mobile .gd-newsletter-form,
+.simulated-frame.frame-mobile .gameday-storefront .gd-newsletter-form {
+  flex-direction: column !important;
+  width: 100% !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-newsletter-form button,
+.gameday-storefront.device-mobile .gd-newsletter-form button,
+.simulated-frame.frame-mobile .gameday-storefront .gd-newsletter-form button {
+  width: 100% !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-footer-grid,
+.gameday-storefront.device-mobile .gd-footer-grid,
+.simulated-frame.frame-mobile .gameday-storefront .gd-footer-grid {
   grid-template-columns: 1fr !important;
-  gap: 20px !important;
+  gap: 28px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-footer-bottom,
+.gameday-storefront.device-mobile .gd-footer-bottom,
+.simulated-frame.frame-mobile .gameday-storefront .gd-footer-bottom {
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-cart-drawer,
+.gameday-storefront.device-mobile .gd-cart-drawer,
+.simulated-frame.frame-mobile .gameday-storefront .gd-cart-drawer {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-product-layout,
+.gameday-storefront.device-mobile .gd-product-layout,
+.simulated-frame.frame-mobile .gameday-storefront .gd-product-layout {
+  grid-template-columns: 1fr !important;
+  gap: 24px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-gallery-main,
+.gameday-storefront.device-mobile .gd-gallery-main,
+.simulated-frame.frame-mobile .gameday-storefront .gd-gallery-main {
+  aspect-ratio: 1/1 !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-product-full-name,
+.gameday-storefront.device-mobile .gd-product-full-name,
+.simulated-frame.frame-mobile .gameday-storefront .gd-product-full-name {
+  font-size: 1.6rem !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-custom-inputs,
+.gameday-storefront.device-mobile .gd-custom-inputs,
+.simulated-frame.frame-mobile .gameday-storefront .gd-custom-inputs {
+  grid-template-columns: 1fr !important;
+  gap: 8px !important;
+}
+
+.gameday-storefront[data-device-view='mobile'] .gd-custom-number-input,
+.gameday-storefront.device-mobile .gd-custom-number-input,
+.simulated-frame.frame-mobile .gameday-storefront .gd-custom-number-input {
+  width: 100% !important;
 }
 
