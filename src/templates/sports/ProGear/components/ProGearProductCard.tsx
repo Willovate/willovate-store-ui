@@ -77,10 +77,8 @@ export const ProGearProductCard: React.FC<ProGearProductCardProps> = ({
       {/* Body Details */}
       <div className="progear-card-body">
         <div className="progear-card-brand-row">
-          <span>{product.brand}</span>
-          <span style={{ color: 'var(--pg-primary)', fontWeight: 800 }}>
-            {product.sport.toUpperCase()}
-          </span>
+          <span className="progear-card-brand">{product.brand}</span>
+          <span className="progear-card-sport">{product.sport.toUpperCase()}</span>
         </div>
 
         <h3 className="progear-card-title" title={product.name}>
@@ -92,10 +90,10 @@ export const ProGearProductCard: React.FC<ProGearProductCardProps> = ({
           <span className="progear-star-badge">
             ★ {product.rating.toFixed(1)}
           </span>
-          <span style={{ color: 'var(--pg-text-muted)' }}>
+          <span className="progear-card-reviews">
             ({product.reviewCount})
           </span>
-          <span style={{ marginLeft: 'auto', fontSize: '0.7rem', color: 'var(--pg-text-dim)' }}>
+          <span className="progear-card-level">
             {product.playerLevel}
           </span>
         </div>
