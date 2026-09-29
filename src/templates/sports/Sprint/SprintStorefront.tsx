@@ -192,7 +192,7 @@ export const SprintStorefront: React.FC<SprintStorefrontProps> = ({
 
   return (
     <div
-      className={`sprint-root simulated-frame frame-${deviceView}`}
+      className={`sprint-root sprint-storefront device-${deviceView}`}
       data-device-view={deviceView}
       style={rootStyle}
     >
