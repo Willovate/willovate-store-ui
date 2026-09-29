@@ -1,5 +1,5 @@
 import React from 'react';
-import { RestaurantPage, type RestaurantThemeConfig } from '../components/RestaurantCore';
+import { AnnouncementBar, RestaurantNavbar, RestaurantHero, FeaturesStrip, RestaurantStory, RestaurantMenu, PromoSection, RestaurantGallery, Testimonials, LocationCTA, RestaurantFooter, type RestaurantThemeConfig } from '../components/RestaurantCore';
 
 const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
 
@@ -16,7 +16,7 @@ const theme: RestaurantThemeConfig = {
       { src: img('photo-1579871494447-9811cf80d66c'), alt: 'Chef at work' },
       { src: img('photo-1553621042-f6e147245754'), alt: 'Nigiri selection' },
       { src: img('photo-1611143669185-af224c5e3252'), alt: 'Restaurant interior' },
-      { src: img('photo-1583623025817-d180a2221d05'), alt: 'Sake pouring' },
+      { src: img('photo-1414235077428-338989a2e8c0'), alt: 'Sake pouring' },
       { src: img('photo-1617196034183-421b4917c92d'), alt: 'Sushi preparation' },
       { src: img('photo-1558985250-27a406d64cb3'), alt: 'Japanese tableware' },
     ],
@@ -39,7 +39,7 @@ const theme: RestaurantThemeConfig = {
   menu: [
     { tab: 'Omakase', items: [
       { name: 'The Signature Omakase', price: '$150', desc: '18 courses including seasonal appetizers, premium nigiri, tamago, and dessert.', tags: ['Signature'], image: img('photo-1553621042-f6e147245754') },
-      { name: 'Premium Sake Pairing', price: '$85', desc: '6 curated pours from boutique Japanese breweries.', image: img('photo-1583623025817-d180a2221d05') },
+      { name: 'Premium Sake Pairing', price: '$85', desc: '6 curated pours from boutique Japanese breweries.', image: img('photo-1414235077428-338989a2e8c0') },
     ]},
   ],
   testimonials: [
@@ -49,4 +49,20 @@ const theme: RestaurantThemeConfig = {
   features: ['12-Seat Counter', 'Daily Fish Deliveries', 'Sake Sommelier', 'Intimate Atmosphere'],
 };
 
-export default function MinimalOmakase() { return <RestaurantPage theme={theme} />; }
+export default function MinimalOmakase() {
+  return (
+    <div style={{ backgroundColor: theme.palette.background, fontFamily: theme.typography.body, overflowX: 'hidden', minHeight: '100vh' }}>
+      <AnnouncementBar text={`🍣 ${theme.tagline}`} palette={theme.palette} />
+      <RestaurantNavbar theme={theme} />
+      <RestaurantHero theme={theme} />
+      <RestaurantGallery theme={theme} />
+      <RestaurantStory theme={theme} />
+      <RestaurantMenu theme={theme} />
+      <FeaturesStrip theme={theme} />
+      <PromoSection theme={theme} />
+      <Testimonials theme={theme} />
+      <LocationCTA theme={theme} />
+      <RestaurantFooter theme={theme} />
+    </div>
+  );
+}

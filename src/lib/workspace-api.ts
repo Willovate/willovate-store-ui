@@ -52,7 +52,7 @@ export async function createWebsite(
 
 export async function updateWebsite(
   websiteId: string,
-  updates: { name?: string; description?: string; themeColor?: string; isPublished?: boolean },
+  updates: { name?: string; description?: string; themeColor?: string; isPublished?: boolean; templateId?: string },
   signal?: AbortSignal,
 ): Promise<Website> {
   const response = await fetch(`${API_URL}/api/websites/${websiteId}`, {

@@ -139,4 +139,32 @@ export const templateCategories: TemplateCategory[] = [{
       ['Kebab Kingdom', 'kebab-kingdom', 'kebab-kingdom', 'photo-1529042410759-befb1204b468', 'Warm Middle Eastern-inspired skewer dining with elegant spice notes.', ['kebab', 'warm', 'skewers']],
     ]),
   ],
+},
+{
+  id: 'e-commerce',
+  name: 'E-commerce',
+  slug: 'e-commerce',
+  description: 'Online stores, retail, and digital products.',
+  coverImage: image('photo-1441986300917-64674bd600d8'),
+  subsectionCount: 0,
+  subsections: []
+},
+{
+  id: 'fashion-store',
+  name: 'Fashion Store',
+  slug: 'fashion-store',
+  description: 'Modern fashion and apparel storefronts.',
+  coverImage: image('photo-1483985988355-763728e1935b'),
+  subsectionCount: 2,
+  subsections: [
+    curatedSection('streetwear', 'Streetwear', 'Bold and edgy streetwear brands.', [
+      ['Urban Edge', 'urban-edge', 'urban-edge', 'photo-1515886657613-9f3515b0c78f', 'A bold, high-contrast streetwear aesthetic.', ['bold', 'streetwear', 'dark']],
+      ['Neon Hype', 'neon-hype', 'neon-hype', 'photo-1523381210434-271e8be1f52b', 'Vibrant neon colors and dynamic layouts.', ['neon', 'vibrant', 'modern']],
+    ]),
+    curatedSection('minimalist', 'Minimalist', 'Clean, refined aesthetics for luxury and basics.', [
+      ['Clean Canvas', 'clean-canvas', 'clean-canvas', 'photo-1434389678219-c6e8e81d4546', 'Pure minimalism focusing on product details.', ['minimal', 'clean', 'white']],
+      ['Essential Edit', 'essential-edit', 'essential-edit', 'photo-1489987707023-af7e9e8c8c7b', 'Soft earth tones and elegant typography.', ['elegant', 'earth-tones', 'basics']],
+    ]),
+  ]
 }]
+

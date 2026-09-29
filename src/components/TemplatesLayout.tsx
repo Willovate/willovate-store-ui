@@ -5,11 +5,14 @@ import {
   SlidersHorizontal, Bookmark, Settings, HelpCircle, ChevronDown
 } from 'lucide-react';
 import '../styles/workspace.css';
+import { useState } from 'react';
+import ContactSupportModal from './ContactSupportModal';
 
 export default function TemplatesLayout({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
   const location = useLocation();
   const workspacePath = '/workspace/a1b2c3d4-0000-0000-0000-000000000001';
+  const [showSupportModal, setShowSupportModal] = useState(false);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100vh', background: '#f8fafc' }}>
@@ -85,7 +88,10 @@ export default function TemplatesLayout({ children }: { children: ReactNode }) {
               <h4 style={{ fontSize: '0.85rem', fontWeight: 700, margin: 0 }}>Need Help?</h4>
             </div>
             <p style={{ fontSize: '0.75rem', color: '#1e1b4b', margin: '0 0 0.75rem 0', lineHeight: 1.4, fontWeight: 500 }}>Our support team is here to help you with anything.</p>
-            <button style={{ width: '100%', padding: '0.5rem', background: 'transparent', color: '#5c3ce6', border: '1px solid #ddd6fe', borderRadius: '8px', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer' }}>
+            <button 
+              onClick={() => setShowSupportModal(true)}
+              style={{ width: '100%', padding: '0.5rem', background: 'transparent', color: '#5c3ce6', border: '1px solid #ddd6fe', borderRadius: '8px', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer' }}
+            >
               Contact Support
             </button>
           </div>
@@ -96,6 +102,10 @@ export default function TemplatesLayout({ children }: { children: ReactNode }) {
           {children}
         </main>
       </div>
+
+      {showSupportModal && (
+        <ContactSupportModal onClose={() => setShowSupportModal(false)} />
+      )}
     </div>
   );
 }

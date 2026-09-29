@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { ArrowLeft } from 'lucide-react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import TemplatesLayout from '../components/TemplatesLayout'
 import TemplateThemeCard from '../components/TemplateThemeCard'
 import { templateCategories, type TemplateTheme } from '../data/templateCategories'
@@ -10,6 +10,8 @@ export default function BrowseTemplateSubsection() {
   const { categorySlug, subsectionSlug } = useParams()
   const category = templateCategories.find(item => item.slug === categorySlug)
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const targetWebsiteId = searchParams.get('websiteId')
   const subsection = category?.subsections.find(item => item.slug === subsectionSlug)
   const [themes, setThemes] = useState<TemplateTheme[]>(() => subsection?.themes ?? [])
   const [liveThemeId, setLiveThemeId] = useState<string | null>(null)
@@ -42,7 +44,7 @@ export default function BrowseTemplateSubsection() {
   return (
     <TemplatesLayout>
       <div className="template-subsection-page">
-        <Link to={category ? `/browse-templates/${category.slug}` : '/browse-templates'} className="browse-template-back">
+        <Link to={category ? `/browse-templates/${category.slug}${targetWebsiteId ? `?websiteId=${targetWebsiteId}` : ''}` : targetWebsiteId ? `/browse-templates?websiteId=${targetWebsiteId}` : '/browse-templates'} className="browse-template-back">
           <ArrowLeft size={17} /> Back to {category?.name ?? 'Browse Templates'}
         </Link>
         {subsection ? (
@@ -57,11 +59,9 @@ export default function BrowseTemplateSubsection() {
                 <TemplateThemeCard
                   key={theme.id}
                   theme={theme}
-                  isLive={liveThemeId === theme.id}
-                  onPublish={publishTheme}
-                  onDuplicate={duplicateTheme}
-                  onDelete={deleteTheme}
-                  onPreview={() => navigate(`/browse-templates/${categorySlug}/${subsectionSlug}/${theme.slug}`)}
+                  categoryName={subsection.name}
+                  onPreview={() => navigate(`/browse-templates/${categorySlug}/${subsectionSlug}/${theme.slug}${targetWebsiteId ? `?websiteId=${targetWebsiteId}` : ''}`)}
+                  onUse={(themeId) => navigate(`/browse-templates/${categorySlug}/${subsectionSlug}/${theme.slug}${targetWebsiteId ? `?websiteId=${targetWebsiteId}` : ''}`)}
                 />
               ))}
             </div>

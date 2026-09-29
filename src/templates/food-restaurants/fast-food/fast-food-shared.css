@@ -1,0 +1,146 @@
+.fast-food-theme {
+  scroll-behavior: smooth;
+}
+
+.ff-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 5%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.ff-nav a {
+  margin: 0 1rem;
+  transition: opacity 0.2s;
+}
+
+.ff-nav a:hover {
+  opacity: 0.7;
+}
+
+.ff-hero {
+  display: flex;
+  align-items: center;
+  padding: 5% 5%;
+  position: relative;
+  overflow: hidden;
+}
+
+.ff-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.ff-hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.ff-section {
+  padding: 6rem 5%;
+}
+
+.ff-title {
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.ff-subtitle {
+  margin-bottom: 3rem;
+  max-width: 600px;
+}
+
+.ff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.ff-card {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  position: relative;
+}
+
+.ff-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.ff-card img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.ff-card-content {
+  padding: 1.5rem;
+}
+
+.ff-btn {
+  border: none;
+  cursor: pointer;
+  padding: 0.8rem 2rem;
+  font-weight: 700;
+  transition: all 0.2s;
+}
+
+.ff-btn:hover {
+  transform: scale(1.05);
+}
+
+.ff-btn:active {
+  transform: scale(0.95);
+}
+
+.ff-story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .ff-story {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ff-gallery-item {
+  overflow: hidden;
+  position: relative;
+  border-radius: 16px;
+}
+
+.ff-gallery-item img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.ff-gallery-item:hover img {
+  transform: scale(1.1);
+}
+
+.ff-gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ff-gallery-item:hover .ff-gallery-overlay {
+  opacity: 1;
+}
+
+.ff-footer {
+  padding: 4rem 5%;
+}

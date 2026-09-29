@@ -1,5 +1,5 @@
 import React from 'react';
-import { RestaurantPage, type RestaurantThemeConfig } from '../components/RestaurantCore';
+import { AnnouncementBar, RestaurantNavbar, RestaurantHero, FeaturesStrip, RestaurantStory, RestaurantMenu, PromoSection, RestaurantGallery, Testimonials, LocationCTA, RestaurantFooter, type RestaurantThemeConfig } from '../components/RestaurantCore';
 
 const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
 
@@ -17,7 +17,7 @@ const theme: RestaurantThemeConfig = {
       { src: img('photo-1560624052-449f5ddf0c31'), alt: 'Beetroot carpaccio' },
       { src: img('photo-1528605248644-14dd04022da1'), alt: 'Botanical interior' },
       { src: img('photo-1519708227418-c8fd9a32b7a2'), alt: 'Scallop dish' },
-      { src: img('photo-1515003197210-e0cd71810b5f'), alt: 'Gourmet prep' },
+      { src: img('photo-1544148103-0773bf10d330'), alt: 'Gourmet prep' },
       { src: img('photo-1547592180-85f173990554'), alt: 'Wine pour' },
     ],
   },
@@ -39,10 +39,10 @@ const theme: RestaurantThemeConfig = {
   menu: [
     { tab: 'First Course', items: [
       { name: 'Beetroot Carpaccio', price: '$22', desc: 'Thinly sliced heirloom beets, goat cheese mousse, candied walnuts, micro-arugula.', tags: ['Vegan Option'], image: img('photo-1560624052-449f5ddf0c31') },
-      { name: 'Lobster Bisque', price: '$26', desc: 'Butter-poached lobster, cognac cream, chive oil.', image: img('photo-1515003197210-e0cd71810b5f') },
+      { name: 'Lobster Bisque', price: '$26', desc: 'Butter-poached lobster, cognac cream, chive oil.', image: img('photo-1544148103-0773bf10d330') },
     ]},
     { tab: 'Main Course', items: [
-      { name: 'Herb-Crusted Rack of Lamb', price: '$58', desc: 'Mint infused pea purée, roasted root vegetables, rosemary jus.', tags: ['Signature'], image: img('photo-1544025162-d76538a679db') },
+      { name: 'Herb-Crusted Rack of Lamb', price: '$58', desc: 'Mint infused pea purée, roasted root vegetables, rosemary jus.', tags: ['Signature'], image: img('photo-1497935586351-b67a49e012bf') },
       { name: 'Pan-Roasted Duck Breast', price: '$52', desc: 'Cherry gastrique, sweet potato fondant, charred endive.', image: img('photo-1519708227418-c8fd9a32b7a2') },
     ]},
   ],
@@ -53,4 +53,19 @@ const theme: RestaurantThemeConfig = {
   features: ['Botanical Decor', 'Avant-Garde Cuisine', 'Craft Cocktails', 'Intimate Seating'],
 };
 
-export default function VelvetTable() { return <RestaurantPage theme={theme} />; }
+export default function VelvetTable() {
+  return (
+    <div style={{ backgroundColor: theme.palette.background, fontFamily: theme.typography.body, overflowX: 'hidden', minHeight: '100vh' }}>
+      <RestaurantNavbar theme={theme} />
+      <RestaurantHero theme={theme} />
+      <FeaturesStrip theme={theme} />
+      <PromoSection theme={theme} />
+      <RestaurantMenu theme={theme} />
+      <RestaurantStory theme={theme} />
+      <RestaurantGallery theme={theme} />
+      <Testimonials theme={theme} />
+      <LocationCTA theme={theme} />
+      <RestaurantFooter theme={theme} />
+    </div>
+  );
+}

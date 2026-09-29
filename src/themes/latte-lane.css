@@ -1,1 +1,46 @@
 .ll-site{background:#fff1e4;color:#653222;font-family:Arial,sans-serif;overflow:hidden}.ll-site *{box-sizing:border-box}.ll-site a{color:inherit;text-decoration:none}.ll-nav{align-items:center;display:flex;justify-content:space-between;padding:18px 6%}.ll-nav>a:first-child{font-family:Georgia,serif;font-size:25px;line-height:.65}.ll-nav>a:first-child i{color:#d96f4d;font-family:cursive;font-size:34px;font-weight:400;margin-left:16px}.ll-nav nav{display:flex;gap:25px}.ll-nav nav a{font-size:11px}.ll-order,.ll-add{background:#653222!important;border:0!important;color:#fff1e4!important;font-size:11px;font-weight:bold;padding:13px 17px}.ll-hero{background:#f4b9a8;min-height:620px;position:relative}.ll-copy{left:8%;position:absolute;top:19%;width:45%;z-index:1}.ll-copy span,.ll-specials header span,.ll-make span,.ll-popular span,.ll-club span{font-size:10px;font-weight:bold;letter-spacing:.13em}.ll-copy h1,.ll-specials h2,.ll-make h2,.ll-popular h2,.ll-club h2{font-family:Georgia,serif;font-size:clamp(55px,7vw,110px);font-weight:400;letter-spacing:-.09em;line-height:.8;margin:22px 0}.ll-copy i,.ll-specials i,.ll-make i,.ll-popular i{color:#d96f4d;font-family:cursive;font-weight:400}.ll-copy p{line-height:1.7;max-width:310px}.ll-copy>a{background:#653222;color:#fff1e4;display:inline-block;font-size:11px;font-weight:bold;margin-top:20px;padding:15px}.ll-hero>img{bottom:0;height:92%;object-fit:cover;position:absolute;right:8%;width:39%}.ll-sticker{background:#fff1e4;border:2px dashed #653222;border-radius:50%;font-size:10px;font-weight:bold;height:115px;padding-top:43px;position:absolute;right:5%;text-align:center;top:9%;transform:rotate(12deg);width:115px;z-index:2}.ll-star{bottom:5%;color:#d96f4d;font-size:80px;left:47%;position:absolute}.ll-specials{padding:100px 7%}.ll-specials header{display:flex;justify-content:space-between}.ll-specials h2{font-size:60px}.ll-specials>div{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.ll-specials button{background:#fffaf4;border:0;border-radius:28px;color:#653222;padding:14px;text-align:left;transform:rotate(-1deg);transition:transform .2s}.ll-specials button:nth-child(2){transform:translateY(30px) rotate(2deg)}.ll-specials button.active{outline:3px solid #d96f4d;transform:translateY(-8px)}.ll-specials img{aspect-ratio:1;object-fit:cover;width:100%}.ll-specials h3{font-family:Georgia,serif;font-size:23px;margin:13px 0 5px}.ll-specials button span{font-size:9px;letter-spacing:.1em}.ll-detail{background:#d96f4d;color:#fff;padding:15px 25px;text-align:center}.ll-make{align-items:center;background:#d7dfc9;display:grid;grid-template-columns:1fr 1fr;padding:100px 13%}.ll-make h2{font-size:65px}.ll-make p{line-height:1.6;max-width:330px}.ll-builder{background:#fffaf4;border-radius:32px;padding:32px}.ll-builder h3{font-family:Georgia,serif;font-size:26px;margin:0}.ll-builder h3 b{float:right;font-family:Arial;font-size:14px}.ll-builder fieldset{border:0;border-top:1px dashed #b99484;margin:22px 0;padding:14px 0 0}.ll-builder legend{font-size:9px;font-weight:bold;letter-spacing:.1em}.ll-builder fieldset button{background:#fff1e4;border:0;border-radius:99px;color:#653222;margin:4px;padding:9px 11px}.ll-builder fieldset button.active{background:#d96f4d;color:#fff}.ll-add{border-radius:99px;width:100%}.ll-popular{display:grid;grid-template-columns:1fr 1fr}.ll-popular img{height:500px;object-fit:cover;width:100%}.ll-popular div{align-self:center;padding:15%}.ll-popular h2{font-size:64px}.ll-popular p{font-family:Georgia,serif;font-size:23px;line-height:1.3}.ll-popular b{font-size:9px;letter-spacing:.1em}.ll-club{background:#653222;color:#fff1e4;padding:100px 12%;text-align:center}.ll-club h2{font-size:65px}.ll-club form{display:flex;margin:30px auto 0;max-width:520px}.ll-club input{border:0;min-width:0;padding:15px;width:100%}.ll-club button{background:#d96f4d;border:0;color:#fff;padding:0 17px}.ll-footer{display:flex;justify-content:space-between;padding:24px 6%}.ll-footer b{font-family:Georgia,serif;font-size:22px}.ll-footer span,.ll-footer a{font-size:10px}@media(max-width:700px){.ll-nav nav{display:none}.ll-order{font-size:9px}.ll-hero{min-height:690px}.ll-copy{left:8%;top:9%;width:80%}.ll-copy h1{font-size:66px}.ll-hero>img{height:48%;right:8%;width:65%}.ll-sticker{right:4%;top:45%}.ll-star{left:7%;top:46%}.ll-specials{padding:70px 7%}.ll-specials header{display:block}.ll-specials>div{grid-template-columns:1fr}.ll-specials button:nth-child(2){transform:none}.ll-make,.ll-popular{grid-template-columns:1fr}.ll-make{gap:35px;padding:75px 10%}.ll-popular img{height:350px}.ll-popular div{padding:18% 10%}.ll-club{padding:70px 8%}.ll-club form{flex-direction:column;gap:8px}.ll-club button{padding:14px}.ll-footer{flex-wrap:wrap;gap:12px}}
+/* ── Build Your Cup – live image preview ── */
+.ll-make > div:first-child { display: flex; flex-direction: column; gap: 0; }
+
+.ll-make-preview {
+  position: relative;
+  margin-top: 28px;
+  border-radius: 20px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 4 / 5;
+  box-shadow: 0 12px 36px rgba(101, 50, 34, 0.18);
+}
+
+.ll-cup-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  animation: cupFadeIn 0.45s ease;
+}
+
+@keyframes cupFadeIn {
+  from { opacity: 0; transform: scale(1.04); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.ll-cup-badge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(101, 50, 34, 0.78));
+  color: #fff1e4;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  padding: 28px 16px 14px;
+  text-transform: uppercase;
+  animation: cupFadeIn 0.35s ease;
+}
+
+@media (max-width: 700px) {
+  .ll-make-preview { max-width: 100%; }
+}

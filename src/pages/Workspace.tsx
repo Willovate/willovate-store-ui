@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import type { Website, Theme, Page, PageElement } from '../types'
 import { getWebsite, updateWebsite, updateElement, createElement, createTheme, deleteElement, publishTheme } from '../lib/workspace-api'
 import PageEditor from '../components/PageEditor'; import { getSyntheticElement } from '../utils/editorUtils';
@@ -58,7 +58,10 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
   const [activeTheme, setActiveTheme] = useState<Theme | null>(null)
   const [selectedPageId, setSelectedPageId] = useState<string | null>(null)
   const [pagesState, setPagesState] = useState<Page[]>([])
-  const [viewMode, setViewMode] = useState<'dashboard' | 'editor'>('dashboard')
+  const location = useLocation()
+  const [viewMode, setViewMode] = useState<'dashboard' | 'editor'>(
+    location.state?.viewMode === 'editor' ? 'editor' : 'dashboard'
+  )
   const [history, setHistory] = useState<string[]>([])
   const [historyIndex, setHistoryIndex] = useState(-1)
 
@@ -436,7 +439,7 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
 
                 <p className="ws-sidebar-section-label" style={{ color: '#1e1b4b', fontSize: '0.7rem', fontWeight: 800, letterSpacing: '1px', marginBottom: '0.4rem', padding: '0 0.5rem' }}>TEMPLATES</p>
                 <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem', padding: 0, margin: 0, listStyle: 'none' }}>
-                  <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }} onClick={() => navigate('/browse-templates')}>
+                  <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }} onClick={() => navigate(`/browse-templates?websiteId=${website?.id}`)}>
                     <SlidersHorizontal size={18} /> Browse Templates
                     <div style={{ width: '56px', background: '#FF4500', color: '#fff', fontSize: '10px', fontWeight: 800, padding: '2px 0', textAlign: 'center', borderRadius: '12px', marginLeft: 'auto' }}>NEW</div>
                   </li>
@@ -629,14 +632,14 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
               </div>
               <div
                 className="ws-icon-btn"
-                onClick={() => navigate('/browse-templates')}
+                onClick={() => navigate(`/browse-templates?websiteId=${website?.id}`)}
                 title="Browse templates"
                 role="button"
                 tabIndex={0}
                 onKeyDown={(event) => {
                   if (event.key === 'Enter' || event.key === ' ') {
                     event.preventDefault()
-                    navigate('/browse-templates')
+                    navigate(`/browse-templates?websiteId=${website?.id}`)
                   }
                 }}
                 style={{ width: '40px', height: '40px', color: '#6B7280', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}

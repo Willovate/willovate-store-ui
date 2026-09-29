@@ -1,63 +1,114 @@
-import React from 'react';
-import { RestaurantPage, type RestaurantThemeConfig } from '../components/RestaurantCore';
+import React, { useState, useEffect } from 'react';
+import { ArrowLeft, Clock, MapPin, Phone, ChevronRight, ShoppingBag, Instagram, Facebook, Twitter } from 'lucide-react';
+import { useReveal } from '../components/RestaurantCore';
 
 const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
 
-const theme: RestaurantThemeConfig = {
-  id: 'slice-society', name: 'Slice Society', tagline: 'NY-style by the slice, all day every day',
-  category: 'pizza',
-  palette: { primary: '#ff0055', secondary: '#111111', background: '#fffef0', surface: '#ffffff', text: '#111111', textLight: '#555555', heroOverlay: 'linear-gradient(135deg, rgba(17,17,17,0.85) 0%, rgba(17,17,17,0.5) 100%)' },
-  typography: { heading: '"Oswald", sans-serif', body: '"Inter", sans-serif' },
-  images: {
-    hero: img('photo-1534308983496-4fabb1a015ee'), heroAlt: 'New York-style cheese pizza slice held in hand',
-    story: img('photo-1576458088443-04a19bb13da6'), storyAlt: 'Pizza counter in a classic New York pizzeria',
-    promo: img('photo-1571407970349-bc81e7e96d47'), promoAlt: 'Rows of New York pizza slices ready to serve',
-    gallery: [
-      { src: img('photo-1534308983496-4fabb1a015ee'), alt: 'Foldable New York-style cheese slice fresh from the oven' },
-      { src: img('photo-1576458088443-04a19bb13da6'), alt: 'Classic NY pizza counter with multiple whole pies on display' },
-      { src: img('photo-1571407970349-bc81e7e96d47'), alt: 'Pepperoni pizza slices lined up at the counter' },
-      { src: img('photo-1528137871618-79d2761e3fd5'), alt: 'Cheese pull from a classic NY-style pizza slice' },
-      { src: img('photo-1440516851687-7a8a3a48e2d4'), alt: 'Pizza in a cardboard box — a New York staple' },
-      { src: img('photo-1467003909585-2f8a72700288'), alt: 'Hand tossing pizza dough high in the air' },
-    ],
-  },
-  content: {
-    heroHeadline: 'A Slice Above The Rest.',
-    heroSub: 'New York-style pizza by the slice, the way it was meant to be — big, foldable, and absolutely delicious.',
-    storyTitle: 'From Brooklyn to Your Block.',
-    storyBody: [
-      'Slice Society started in a 12-seat shop in Brooklyn in 1999. One oven, one recipe, and the longest line on the block. We still use that same recipe.',
-      'Real NY pizza has a thin, crispy crust that you fold in half. It has to be big enough to drip grease on your shirt. Anything less is just flatbread with toppings.',
-    ],
-    promoTitle: 'One Slice.\nThat\'s All It Takes.',
-    promoCTA: 'Get a Slice Now',
-    ctaPrimary: 'Order a Pie', ctaSecondary: 'See Slices',
-    address: '88 Fulton St, Brooklyn, NY 11201',
-    hours: 'Mon–Sun: 11am – 2am (Late Night Fridays!)',
-    phone: '+1 (718) 555-0247',
-  },
-  menu: [
-    { tab: 'By the Slice', items: [
-      { name: 'Classic Cheese', price: '$4', desc: 'Low-moisture mozzarella, crushed plum tomato sauce, hand-tossed dough.', tags: ['Classic'], image: img('photo-1574071318508-1cdbab80d002') },
-      { name: 'Pepperoni Slam', price: '$5', desc: 'Cup-and-char pepperoni, extra mozz, tomato sauce.', tags: ['Bestseller'], image: img('photo-1555939594-58d7cb561ad1') },
-      { name: 'White Slice', price: '$5', desc: 'Ricotta, garlic oil, mozzarella, fresh parsley.', tags: ['No Sauce'], image: img('photo-1534308983496-4fabb1a015ee') },
-    ]},
-    { tab: 'Whole Pies', items: [
-      { name: '18" Plain Pie', price: '$20', desc: '8 big slices, serves 2–3 hungry New Yorkers.' },
-      { name: 'The Society Special', price: '$28', desc: 'Pepperoni, sausage, peppers, onions, mushrooms, extra cheese.', image: img('photo-1558030137-a56c1b002c99') },
-      { name: 'Grandma Pie', price: '$25', desc: 'Thick Sicilian crust, crushed tomato on top, garlic, mozz.', tags: ['Thick Crust'], image: img('photo-1628840042765-356cda07504e') },
-    ]},
-    { tab: 'Sides', items: [
-      { name: 'Garlic Knots (6)', price: '$6', desc: 'Baked in-house, tossed in garlic butter and parsley.', image: img('photo-1588315029754-2dd089d39a1a') },
-      { name: 'Caesar Salad', price: '$9', desc: 'Romaine, house dressing, croutons, parmesan.', image: img('photo-1574071318508-1cdbab80d002') },
-    ]},
-  ],
-  testimonials: [
-    { name: 'Tony R.', quote: 'I moved from Brooklyn to LA and I flew back just for this pizza. No joke. Best slice on Earth.', rating: 5 },
-    { name: 'Amanda S.', quote: 'The Grandma Pie is INCREDIBLE. Thick, saucy, cheesy — it\'s like a hug in pizza form.', rating: 5 },
-    { name: 'Marco D.', quote: 'I come here every Friday. The pepperoni cup-and-char is a religious experience.', rating: 5 },
-  ],
-  features: ['NY-Style by the Slice', 'Open Late', 'Whole Pies Ready in 20 min', 'Delivery Available'],
+const PIZZA_IMAGES = {
+  hero: img('photo-1513104890138-7c749659a591'),
+  story: img('photo-1590947132387-155cc02f3212'),
+  promo: img('photo-1565299624946-b28f40a0ae38'),
+  dough: img('photo-1541592106381-b31e9677c0e5'),
+  oven: img('photo-1593560708920-61dd98c46a4e'),
+  cheese: img('photo-1481070555726-e2fe8357725c'),
+  restaurant: img('photo-1555396273-367ea4eb4db5'),
+  box: img('photo-1544982503-9f984c14501a'),
 };
 
-export default function SliceSociety() { return <RestaurantPage theme={theme} />; }
+export default function SliceSociety() {
+  const [scrolled, setScrolled] = useState(false);
+  const [activeMenuTab, setActiveMenuTab] = useState('slices');
+  
+  const heroRef = useReveal(100);
+  const storyRef = useReveal(200);
+  
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const theme = {
+    name: 'Slice Society',
+    palette: { primary: '#e63946', secondary: '#1d3557', surface: '#f1faee', text: '#111', background: '#fff' }
+  };
+
+  return (
+    <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif' }}>
+      <nav style={{ position: 'fixed', top: 0, width: '100%', padding: '1rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.3s', backgroundColor: scrolled ? 'rgba(255,255,255,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid #eaeaea' : 'none', backdropFilter: scrolled ? 'blur(10px)' : 'none' }}>
+        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+          <a href="/browse-templates/food-and-restaurant/pizza" style={{ color: scrolled ? theme.palette.text : '#fff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
+            <ArrowLeft size={16} /> Back
+          </a>
+          <div style={{ fontSize: '1.5rem', fontWeight: 900, fontFamily: '"Oswald", sans-serif', color: scrolled ? theme.palette.primary : '#fff', textTransform: 'uppercase', letterSpacing: '1px' }}>
+            {theme.name}
+          </div>
+        </div>
+        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+          <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', padding: '0.75rem 1.5rem', borderRadius: '50px', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', boxShadow: '0 4px 14px rgba(230, 57, 70, 0.4)' }}>
+            <ShoppingBag size={18} /> Order Now
+          </button>
+        </div>
+      </nav>
+
+      <header style={{ height: '100vh', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0, backgroundColor: '#000' }}>
+          <img src={PIZZA_IMAGES.hero} alt="Pizza" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.6, transform: 'scale(1.05)' }} />
+        </div>
+        <div ref={heroRef as any} style={{ position: 'relative', zIndex: 10, color: '#fff', maxWidth: '800px', padding: '0 2rem' }}>
+          <h1 style={{ fontFamily: '"Oswald", sans-serif', fontSize: 'clamp(3rem, 8vw, 6rem)', fontWeight: 900, textTransform: 'uppercase', lineHeight: 1, marginBottom: '1rem' }}>A Slice Above<br/><span style={{ color: theme.palette.primary }}>The Rest.</span></h1>
+          <p style={{ fontSize: '1.25rem', fontWeight: 500, marginBottom: '2.5rem' }}>New York-style pizza by the slice, big, foldable, and delicious.</p>
+        </div>
+      </header>
+      
+      <section style={{ padding: '6rem 5%', backgroundColor: theme.palette.surface }}>
+        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <h2 style={{ fontFamily: '"Oswald", sans-serif', fontSize: '2.5rem', textTransform: 'uppercase', color: theme.palette.secondary }}>Signature Slices</h2>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
+          {[
+            { name: 'The Brooklyn', desc: 'Classic pepperoni with hot honey drizzle', img: PIZZA_IMAGES.promo },
+            { name: 'White Truffle', desc: 'Ricotta, mozzarella, mushroom, truffle oil', img: PIZZA_IMAGES.cheese },
+            { name: 'Spicy Meatball', desc: 'House meatballs, jalapeño, red onion', img: PIZZA_IMAGES.box },
+          ].map((pizza, i) => (
+            <div key={i} style={{ backgroundColor: '#fff', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}>
+              <img src={pizza.img} alt={pizza.name} style={{ width: '100%', height: '250px', objectFit: 'cover' }} />
+              <div style={{ padding: '1.5rem' }}>
+                <h3 style={{ fontFamily: '"Oswald", sans-serif', fontSize: '1.5rem', marginBottom: '0.5rem' }}>{pizza.name}</h3>
+                <p style={{ color: '#666', marginBottom: '1rem' }}>{pizza.desc}</p>
+                <button style={{ background: 'transparent', border: 'none', color: theme.palette.primary, fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>Order Slice <ChevronRight size={16} /></button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section ref={storyRef as any} style={{ display: 'flex', flexWrap: 'wrap' }}>
+        <div style={{ flex: '1 1 50%', minHeight: '400px' }}>
+          <img src={PIZZA_IMAGES.story} alt="Chef" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        </div>
+        <div style={{ flex: '1 1 50%', padding: '5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', backgroundColor: '#fff' }}>
+          <h2 style={{ fontFamily: '"Oswald", sans-serif', fontSize: '3rem', textTransform: 'uppercase', color: theme.palette.secondary, marginBottom: '1.5rem' }}>From Brooklyn to Your Block.</h2>
+          <p style={{ fontSize: '1.1rem', lineHeight: 1.8, color: '#555', marginBottom: '2.5rem' }}>Slice Society started in a 12-seat shop in Brooklyn in 1999. One oven, one recipe, and the longest line on the block.</p>
+        </div>
+      </section>
+
+      <section style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', height: '300px' }}>
+        <img src={PIZZA_IMAGES.dough} alt="Dough" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        <img src={PIZZA_IMAGES.oven} alt="Oven" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        <img src={PIZZA_IMAGES.restaurant} alt="Restaurant" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        <img src={PIZZA_IMAGES.box} alt="Delivery" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+      </section>
+
+      <footer style={{ backgroundColor: '#111', color: '#fff', padding: '4rem 5% 2rem', textAlign: 'center' }}>
+        <h2 style={{ fontFamily: '"Oswald", sans-serif', fontSize: '2.5rem', textTransform: 'uppercase', marginBottom: '2rem' }}>{theme.name}</h2>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '3rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
+          <div><MapPin size={24} style={{ color: theme.palette.primary, margin: '0 auto 1rem' }} /><p>88 Fulton St, Brooklyn</p></div>
+          <div><Clock size={24} style={{ color: theme.palette.primary, margin: '0 auto 1rem' }} /><p>Mon–Sun: 11am – 2am</p></div>
+          <div><Phone size={24} style={{ color: theme.palette.primary, margin: '0 auto 1rem' }} /><p>+1 (718) 555-0247</p></div>
+        </div>
+        <p style={{ color: '#555', fontSize: '0.9rem' }}>© 2026 {theme.name}. All rights reserved.</p>
+      </footer>
+    </div>
+  );
+}

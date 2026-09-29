@@ -112,7 +112,10 @@ export function RestaurantNavbar({ theme }: { theme: RestaurantThemeConfig }) {
 
   return (
     <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, backgroundColor: bg, borderBottom: border, backdropFilter: scrolled ? 'blur(12px)' : 'none', transition: 'all 0.35s ease', padding: '0 5%', height: '70px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-      <div style={{ fontFamily: theme.typography.heading, fontSize: '1.6rem', fontWeight: 900, color: scrolled ? theme.palette.primary : '#fff', letterSpacing: '-0.03em' }}>
+      <div style={{ fontFamily: theme.typography.heading, fontSize: '1.6rem', fontWeight: 900, color: scrolled ? theme.palette.primary : '#fff', letterSpacing: '-0.03em', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <a href={`/browse-templates/food-and-restaurant/${theme.category}`} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: scrolled ? theme.palette.textLight : 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 600, fontFamily: theme.typography.body }}>
+          <ChevronLeft size={18} /> Back
+        </a>
         {theme.name}
       </div>
 
