@@ -167,7 +167,7 @@
   align-items: center;
   justify-content: space-between;
   height: 72px;
-  gap: 24px;
+  gap: 16px;
 }
 
 .fitcore-brand-group {
@@ -176,6 +176,7 @@
   gap: 12px;
   text-decoration: none;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .fitcore-logo-mark {
@@ -204,6 +205,13 @@
 }
 
 /* Nav links */
+.fitcore-nav {
+  display: flex;
+  align-items: center;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
 .fitcore-nav-list {
   display: flex;
   align-items: center;
@@ -211,20 +219,22 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  flex-wrap: nowrap;
 }
 
 .fitcore-nav-item {
   position: relative;
+  flex-shrink: 0;
 }
 
 .fitcore-nav-btn {
   background: transparent;
   border: none;
   color: #e2e8f0;
-  padding: 8px 12px;
-  font-size: 0.85rem;
+  padding: 6px 10px;
+  font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   cursor: pointer;
   transition: var(--fc-transition);
@@ -232,6 +242,8 @@
   align-items: center;
   gap: 4px;
   border-radius: var(--fc-radius-sm);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .fitcore-nav-btn:hover,
@@ -248,15 +260,16 @@
 .fitcore-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  flex-shrink: 0;
 }
 
 .fitcore-action-btn {
   background: transparent;
   border: 1px solid transparent;
   color: #cbd5e1;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: var(--fc-radius-sm);
   display: flex;
   align-items: center;
@@ -264,6 +277,7 @@
   cursor: pointer;
   transition: var(--fc-transition);
   position: relative;
+  flex-shrink: 0;
 }
 
 .fitcore-action-btn:hover {
@@ -274,8 +288,8 @@
 
 .fitcore-badge-count {
   position: absolute;
-  top: 4px;
-  right: 4px;
+  top: 3px;
+  right: 3px;
   background: var(--fc-accent-crimson);
   color: #ffffff;
   font-size: 0.65rem;
@@ -2291,6 +2305,15 @@
    RESPONSIVE BREAKPOINTS
    ========================================================================== */
 @media (max-width: 1024px) {
+  .fitcore-nav-btn {
+    padding: 6px 7px;
+    font-size: 0.78rem;
+  }
+
+  .fitcore-header-inner {
+    gap: 10px;
+  }
+
   .fitcore-workout-grid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -2342,16 +2365,67 @@
 
 @media (max-width: 768px) {
   .fitcore-top-bar {
-    font-size: 0.7rem;
-    padding: 6px 12px;
+    font-size: 0.65rem;
+    padding: 6px 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .fitcore-header-inner {
-    height: 60px;
+    height: 56px;
+    gap: 8px;
+    justify-content: space-between;
   }
 
   .fitcore-nav-list {
-    display: none;
+    display: none !important;
+  }
+
+  .fitcore-mobile-menu-toggle {
+    display: inline-flex !important;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    flex-shrink: 0;
+  }
+
+  .fitcore-brand-group {
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .fitcore-logo-mark {
+    width: 28px;
+    height: 28px;
+  }
+
+  .fitcore-logo-text {
+    font-size: 1.35rem;
+  }
+
+  .fitcore-actions {
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .fitcore-action-account {
+    display: none !important;
+  }
+
+  .fitcore-action-btn {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    padding: 0;
+  }
+
+  .fitcore-badge-count {
+    top: 2px;
+    right: 2px;
+    font-size: 0.6rem;
+    min-width: 15px;
+    height: 15px;
   }
 
   .fitcore-hero {
@@ -2417,6 +2491,29 @@
   .fitcore-bundle-summary {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  /* Cart & Mobile Drawer in 768px */
+  .fitcore-drawer-backdrop {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 10000 !important;
+  }
+
+  .fitcore-cart-drawer {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+  }
+
+  .fitcore-drawer-header,
+  .fitcore-shipping-bar,
+  .fitcore-drawer-items,
+  .fitcore-drawer-footer {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }
 
@@ -2571,68 +2668,200 @@
 }
 
 /* Simulated Mobile Preview Frame Target (.fitcore-storefront[data-device-view='mobile']) */
-.fitcore-storefront[data-device-view='mobile'] .fitcore-top-bar {
-  font-size: 0.7rem !important;
-  padding: 6px 12px !important;
+.fitcore-storefront[data-device-view='mobile'] .fitcore-top-bar,
+.fitcore-storefront.device-mobile .fitcore-top-bar,
+.simulated-frame.frame-mobile .fitcore-top-bar {
+  font-size: 0.65rem !important;
+  padding: 6px 10px !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
 }
 
-.fitcore-storefront[data-device-view='mobile'] .fitcore-header-inner {
-  height: 60px !important;
+.fitcore-storefront[data-device-view='mobile'] .fitcore-header-inner,
+.fitcore-storefront.device-mobile .fitcore-header-inner,
+.simulated-frame.frame-mobile .fitcore-header-inner {
+  height: 56px !important;
+  gap: 8px !important;
+  justify-content: space-between !important;
 }
 
-.fitcore-storefront[data-device-view='mobile'] .fitcore-mobile-menu-toggle {
+.fitcore-storefront[data-device-view='mobile'] .fitcore-mobile-menu-toggle,
+.fitcore-storefront.device-mobile .fitcore-mobile-menu-toggle,
+.simulated-frame.frame-mobile .fitcore-mobile-menu-toggle {
   display: inline-flex !important;
+  width: 34px !important;
+  height: 34px !important;
+  padding: 0 !important;
+  flex-shrink: 0 !important;
 }
 
-.fitcore-storefront[data-device-view='mobile'] .fitcore-nav-list {
+.fitcore-storefront[data-device-view='mobile'] .fitcore-brand-group,
+.fitcore-storefront.device-mobile .fitcore-brand-group,
+.simulated-frame.frame-mobile .fitcore-brand-group {
+  gap: 8px !important;
+  flex-shrink: 0 !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-logo-mark,
+.fitcore-storefront.device-mobile .fitcore-logo-mark,
+.simulated-frame.frame-mobile .fitcore-logo-mark {
+  width: 28px !important;
+  height: 28px !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-logo-text,
+.fitcore-storefront.device-mobile .fitcore-logo-text,
+.simulated-frame.frame-mobile .fitcore-logo-text {
+  font-size: 1.35rem !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-nav-list,
+.fitcore-storefront.device-mobile .fitcore-nav-list,
+.simulated-frame.frame-mobile .fitcore-nav-list {
   display: none !important;
 }
 
-.fitcore-storefront[data-device-view='mobile'] .fitcore-hero {
+.fitcore-storefront[data-device-view='mobile'] .fitcore-actions,
+.fitcore-storefront.device-mobile .fitcore-actions,
+.simulated-frame.frame-mobile .fitcore-actions {
+  gap: 4px !important;
+  flex-shrink: 0 !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-action-account,
+.fitcore-storefront.device-mobile .fitcore-action-account,
+.simulated-frame.frame-mobile .fitcore-action-account {
+  display: none !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-action-btn,
+.fitcore-storefront.device-mobile .fitcore-action-btn,
+.simulated-frame.frame-mobile .fitcore-action-btn {
+  width: 34px !important;
+  height: 34px !important;
+  flex-shrink: 0 !important;
+  padding: 0 !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-badge-count,
+.fitcore-storefront.device-mobile .fitcore-badge-count,
+.simulated-frame.frame-mobile .fitcore-badge-count {
+  top: 2px !important;
+  right: 2px !important;
+  font-size: 0.6rem !important;
+  min-width: 15px !important;
+  height: 15px !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-hero,
+.fitcore-storefront.device-mobile .fitcore-hero,
+.simulated-frame.frame-mobile .fitcore-hero {
   min-height: 70vh !important;
 }
 
-.fitcore-storefront[data-device-view='mobile'] .fitcore-hero-title {
+.fitcore-storefront[data-device-view='mobile'] .fitcore-hero-title,
+.fitcore-storefront.device-mobile .fitcore-hero-title,
+.simulated-frame.frame-mobile .fitcore-hero-title {
   font-size: 2.4rem !important;
 }
 
-.fitcore-storefront[data-device-view='mobile'] .fitcore-hero-stats {
+.fitcore-storefront[data-device-view='mobile'] .fitcore-hero-stats,
+.fitcore-storefront.device-mobile .fitcore-hero-stats,
+.simulated-frame.frame-mobile .fitcore-hero-stats {
   gap: 16px !important;
 }
 
-.fitcore-storefront[data-device-view='mobile'] .fitcore-workout-grid {
+.fitcore-storefront[data-device-view='mobile'] .fitcore-workout-grid,
+.fitcore-storefront.device-mobile .fitcore-workout-grid,
+.simulated-frame.frame-mobile .fitcore-workout-grid {
   grid-template-columns: 1fr !important;
   gap: 12px !important;
 }
 
 .fitcore-storefront[data-device-view='mobile'] .fitcore-grid-4,
-.fitcore-storefront[data-device-view='mobile'] .fitcore-catalog-grid {
+.fitcore-storefront[data-device-view='mobile'] .fitcore-catalog-grid,
+.fitcore-storefront.device-mobile .fitcore-grid-4,
+.fitcore-storefront.device-mobile .fitcore-catalog-grid,
+.simulated-frame.frame-mobile .fitcore-grid-4,
+.simulated-frame.frame-mobile .fitcore-catalog-grid {
   grid-template-columns: repeat(2, 1fr) !important;
   gap: 10px !important;
 }
 
-.fitcore-storefront[data-device-view='mobile'] .fitcore-card-body {
+.fitcore-storefront[data-device-view='mobile'] .fitcore-card-body,
+.fitcore-storefront.device-mobile .fitcore-card-body,
+.simulated-frame.frame-mobile .fitcore-card-body {
   padding: 10px 12px 12px !important;
 }
 
-.fitcore-storefront[data-device-view='mobile'] .fitcore-card-title {
+.fitcore-storefront[data-device-view='mobile'] .fitcore-card-title,
+.fitcore-storefront.device-mobile .fitcore-card-title,
+.simulated-frame.frame-mobile .fitcore-card-title {
   font-size: 0.85rem !important;
   height: auto !important;
 }
 
-.fitcore-storefront[data-device-view='mobile'] .fitcore-price-current {
+.fitcore-storefront[data-device-view='mobile'] .fitcore-price-current,
+.fitcore-storefront.device-mobile .fitcore-price-current,
+.simulated-frame.frame-mobile .fitcore-price-current {
   font-size: 1.1rem !important;
 }
 
 .fitcore-storefront[data-device-view='mobile'] .fitcore-tech-grid,
 .fitcore-storefront[data-device-view='mobile'] .fitcore-stories-grid,
 .fitcore-storefront[data-device-view='mobile'] .fitcore-reviews-grid,
-.fitcore-storefront[data-device-view='mobile'] .fitcore-footer-grid {
+.fitcore-storefront[data-device-view='mobile'] .fitcore-footer-grid,
+.fitcore-storefront.device-mobile .fitcore-tech-grid,
+.fitcore-storefront.device-mobile .fitcore-stories-grid,
+.fitcore-storefront.device-mobile .fitcore-reviews-grid,
+.fitcore-storefront.device-mobile .fitcore-footer-grid,
+.simulated-frame.frame-mobile .fitcore-tech-grid,
+.simulated-frame.frame-mobile .fitcore-stories-grid,
+.simulated-frame.frame-mobile .fitcore-reviews-grid,
+.simulated-frame.frame-mobile .fitcore-footer-grid {
   grid-template-columns: 1fr !important;
   gap: 20px !important;
 }
 
-.fitcore-storefront[data-device-view='mobile'] .fitcore-card-quick-bar {
+.fitcore-storefront[data-device-view='mobile'] .fitcore-card-quick-bar,
+.fitcore-storefront.device-mobile .fitcore-card-quick-bar,
+.simulated-frame.frame-mobile .fitcore-card-quick-bar {
   display: none !important;
+}
+
+/* Drawer in Simulated Mobile View */
+.fitcore-storefront[data-device-view='mobile'] .fitcore-drawer-backdrop,
+.fitcore-storefront.device-mobile .fitcore-drawer-backdrop,
+.simulated-frame.frame-mobile .fitcore-drawer-backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 10000 !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-cart-drawer,
+.fitcore-storefront.device-mobile .fitcore-cart-drawer,
+.simulated-frame.frame-mobile .fitcore-cart-drawer {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-drawer-header,
+.fitcore-storefront[data-device-view='mobile'] .fitcore-shipping-bar,
+.fitcore-storefront[data-device-view='mobile'] .fitcore-drawer-items,
+.fitcore-storefront[data-device-view='mobile'] .fitcore-drawer-footer,
+.fitcore-storefront.device-mobile .fitcore-drawer-header,
+.fitcore-storefront.device-mobile .fitcore-shipping-bar,
+.fitcore-storefront.device-mobile .fitcore-drawer-items,
+.fitcore-storefront.device-mobile .fitcore-drawer-footer,
+.simulated-frame.frame-mobile .fitcore-drawer-header,
+.simulated-frame.frame-mobile .fitcore-shipping-bar,
+.simulated-frame.frame-mobile .fitcore-drawer-items,
+.simulated-frame.frame-mobile .fitcore-drawer-footer {
+  padding-left: 14px !important;
+  padding-right: 14px !important;
 }
 
