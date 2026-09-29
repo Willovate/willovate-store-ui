@@ -61,21 +61,22 @@ export const SprintHeader: React.FC<SprintHeaderProps> = ({
   }
 
   return (
-    <header className="sprint-header-wrap">
-      {/* Top Announcement Strip */}
-      <div className="sprint-announcement-strip">
-        <span className="sprint-announcement-badge">30-DAY TRIAL</span>
-        <span className="sprint-announcement-text">
-          Free Express Delivery Over $120 • Love Every Mile Or Return Free
-        </span>
-      </div>
-
-      <div className="sprint-header">
-        {/* Brand Logo */}
-        <div className="sprint-brand-link" onClick={onNavigateHome}>
-          <div className="sprint-brand-title">SPRINT</div>
-          <span className="sprint-brand-tagline">RUN YOUR WAY</span>
+    <>
+      <header className="sprint-header-wrap">
+        {/* Top Announcement Strip */}
+        <div className="sprint-announcement-strip">
+          <span className="sprint-announcement-badge">30-DAY TRIAL</span>
+          <span className="sprint-announcement-text">
+            Free Express Delivery Over $120 • Love Every Mile Or Return Free
+          </span>
         </div>
+
+        <div className="sprint-header">
+          {/* Brand Logo */}
+          <div className="sprint-brand-link" onClick={onNavigateHome}>
+            <div className="sprint-brand-title">SPRINT</div>
+            <span className="sprint-brand-tagline">RUN YOUR WAY</span>
+          </div>
 
         {/* Desktop Navigation */}
         <nav className="sprint-nav-menu" aria-label="Main Navigation">
@@ -273,165 +274,166 @@ export const SprintHeader: React.FC<SprintHeaderProps> = ({
           </button>
         </div>
       </div>
+    </header>
 
-      {/* Mobile Drawer (Clean Minimal Running Navigation) */}
-      {mobileMenuOpen && (
-        <div className="sprint-mobile-nav-backdrop" onClick={() => setMobileMenuOpen(false)}>
-          <div className="sprint-mobile-nav-drawer" onClick={(e) => e.stopPropagation()}>
-            {/* Header */}
-            <div className="sprint-mobile-drawer-header">
-              <div className="sprint-brand-link" onClick={() => { onNavigateHome(); setMobileMenuOpen(false); }}>
-                <div className="sprint-brand-title" style={{ fontSize: '1.3rem' }}>SPRINT</div>
-                <span className="sprint-brand-tagline" style={{ fontSize: '0.52rem' }}>RUN YOUR WAY</span>
-              </div>
+    {/* Mobile Drawer (Clean Minimal Running Navigation) */}
+    {mobileMenuOpen && (
+      <div className="sprint-mobile-nav-backdrop" onClick={() => setMobileMenuOpen(false)}>
+        <div className="sprint-mobile-nav-drawer" onClick={(e) => e.stopPropagation()}>
+          {/* Header */}
+          <div className="sprint-mobile-drawer-header">
+            <div className="sprint-brand-link" onClick={() => { onNavigateHome(); setMobileMenuOpen(false); }}>
+              <div className="sprint-brand-title" style={{ fontSize: '1.3rem' }}>SPRINT</div>
+              <span className="sprint-brand-tagline" style={{ fontSize: '0.52rem' }}>RUN YOUR WAY</span>
+            </div>
+            <button
+              type="button"
+              className="sprint-mobile-close-btn"
+              onClick={() => setMobileMenuOpen(false)}
+              aria-label="Close menu"
+            >
+              ✕
+            </button>
+          </div>
+
+          {/* Quick Actions Row */}
+          <div className="sprint-mobile-quick-actions">
+            <button
+              type="button"
+              className="sprint-mobile-action-pill"
+              onClick={() => { setMobileMenuOpen(false); onOpenSearch(); }}
+            >
+              <span>🔍 Search</span>
+            </button>
+            <button
+              type="button"
+              className="sprint-mobile-action-pill"
+              onClick={() => { setMobileMenuOpen(false); onOpenCart(); }}
+            >
+              <span>🛍️ Bag ({cartCount})</span>
+            </button>
+            <button
+              type="button"
+              className="sprint-mobile-action-pill"
+              onClick={() => { setMobileMenuOpen(false); onOpenWishlist(); }}
+            >
+              <span>♡ Saved ({wishlistCount})</span>
+            </button>
+          </div>
+
+          {/* Nav Links */}
+          <nav className="sprint-mobile-nav-list">
+            <div className="sprint-mobile-nav-section-title">Running Shoes</div>
+            <div className="sprint-mobile-nav-group">
               <button
                 type="button"
-                className="sprint-mobile-close-btn"
-                onClick={() => setMobileMenuOpen(false)}
-                aria-label="Close menu"
+                className="sprint-mobile-nav-btn"
+                onClick={() => handleMobileNav(undefined, 'shoes')}
               >
-                ✕
+                <span>👟 All Running Shoes</span>
+                <span className="sprint-mobile-nav-arrow">→</span>
+              </button>
+              <button
+                type="button"
+                className="sprint-mobile-nav-btn"
+                onClick={() => handleMobileNav('road', 'shoes')}
+              >
+                <span>🏃 Road Running</span>
+                <span className="sprint-mobile-nav-arrow">→</span>
+              </button>
+              <button
+                type="button"
+                className="sprint-mobile-nav-btn"
+                onClick={() => handleMobileNav('trail', 'shoes')}
+              >
+                <span>🌲 Trail & Mountain</span>
+                <span className="sprint-mobile-nav-arrow">→</span>
+              </button>
+              <button
+                type="button"
+                className="sprint-mobile-nav-btn"
+                onClick={() => handleMobileNav('race', 'shoes')}
+              >
+                <span>⚡ Racing & Carbon</span>
+                <span className="sprint-mobile-nav-arrow">→</span>
+              </button>
+              <button
+                type="button"
+                className="sprint-mobile-nav-btn"
+                onClick={() => handleMobileNav('daily', 'shoes')}
+              >
+                <span>🔄 Daily Training</span>
+                <span className="sprint-mobile-nav-arrow">→</span>
               </button>
             </div>
 
-            {/* Quick Actions Row */}
-            <div className="sprint-mobile-quick-actions">
+            <div className="sprint-mobile-nav-section-title">Gender & Apparel</div>
+            <div className="sprint-mobile-nav-group">
               <button
                 type="button"
-                className="sprint-mobile-action-pill"
-                onClick={() => { setMobileMenuOpen(false); onOpenSearch(); }}
+                className="sprint-mobile-nav-btn"
+                onClick={() => handleMobileNav(undefined, undefined, 'men')}
               >
-                <span>🔍 Search</span>
+                <span>Men's Running</span>
+                <span className="sprint-mobile-nav-arrow">→</span>
               </button>
               <button
                 type="button"
-                className="sprint-mobile-action-pill"
-                onClick={() => { setMobileMenuOpen(false); onOpenCart(); }}
+                className="sprint-mobile-nav-btn"
+                onClick={() => handleMobileNav(undefined, undefined, 'women')}
               >
-                <span>🛍️ Bag ({cartCount})</span>
+                <span>Women's Running</span>
+                <span className="sprint-mobile-nav-arrow">→</span>
               </button>
               <button
                 type="button"
-                className="sprint-mobile-action-pill"
-                onClick={() => { setMobileMenuOpen(false); onOpenWishlist(); }}
+                className="sprint-mobile-nav-btn"
+                onClick={() => handleMobileNav(undefined, 'shorts')}
               >
-                <span>♡ Saved ({wishlistCount})</span>
+                <span>Running Apparel</span>
+                <span className="sprint-mobile-nav-arrow">→</span>
+              </button>
+              <button
+                type="button"
+                className="sprint-mobile-nav-btn"
+                onClick={() => handleMobileNav(undefined, 'accessories')}
+              >
+                <span>Accessories & Belts</span>
+                <span className="sprint-mobile-nav-arrow">→</span>
               </button>
             </div>
 
-            {/* Nav Links */}
-            <nav className="sprint-mobile-nav-list">
-              <div className="sprint-mobile-nav-section-title">Running Shoes</div>
-              <div className="sprint-mobile-nav-group">
-                <button
-                  type="button"
-                  className="sprint-mobile-nav-btn"
-                  onClick={() => handleMobileNav(undefined, 'shoes')}
-                >
-                  <span>👟 All Running Shoes</span>
-                  <span className="sprint-mobile-nav-arrow">→</span>
-                </button>
-                <button
-                  type="button"
-                  className="sprint-mobile-nav-btn"
-                  onClick={() => handleMobileNav('road', 'shoes')}
-                >
-                  <span>🏃 Road Running</span>
-                  <span className="sprint-mobile-nav-arrow">→</span>
-                </button>
-                <button
-                  type="button"
-                  className="sprint-mobile-nav-btn"
-                  onClick={() => handleMobileNav('trail', 'shoes')}
-                >
-                  <span>🌲 Trail & Mountain</span>
-                  <span className="sprint-mobile-nav-arrow">→</span>
-                </button>
-                <button
-                  type="button"
-                  className="sprint-mobile-nav-btn"
-                  onClick={() => handleMobileNav('race', 'shoes')}
-                >
-                  <span>⚡ Racing & Carbon</span>
-                  <span className="sprint-mobile-nav-arrow">→</span>
-                </button>
-                <button
-                  type="button"
-                  className="sprint-mobile-nav-btn"
-                  onClick={() => handleMobileNav('daily', 'shoes')}
-                >
-                  <span>🔄 Daily Training</span>
-                  <span className="sprint-mobile-nav-arrow">→</span>
-                </button>
-              </div>
+            <div className="sprint-mobile-nav-section-title">Featured</div>
+            <div className="sprint-mobile-nav-group">
+              <button
+                type="button"
+                className="sprint-mobile-nav-btn highlight"
+                onClick={() => handleMobileNav()}
+              >
+                <span>🔥 New Arrivals & Drops</span>
+                <span className="sprint-mobile-nav-arrow">→</span>
+              </button>
+              <button
+                type="button"
+                className="sprint-mobile-nav-btn"
+                onClick={() => handleMobileNav()}
+              >
+                <span>🏷️ Special Offers & Sale</span>
+                <span className="sprint-mobile-nav-arrow">→</span>
+              </button>
+            </div>
+          </nav>
 
-              <div className="sprint-mobile-nav-section-title">Gender & Apparel</div>
-              <div className="sprint-mobile-nav-group">
-                <button
-                  type="button"
-                  className="sprint-mobile-nav-btn"
-                  onClick={() => handleMobileNav(undefined, undefined, 'men')}
-                >
-                  <span>Men's Running</span>
-                  <span className="sprint-mobile-nav-arrow">→</span>
-                </button>
-                <button
-                  type="button"
-                  className="sprint-mobile-nav-btn"
-                  onClick={() => handleMobileNav(undefined, undefined, 'women')}
-                >
-                  <span>Women's Running</span>
-                  <span className="sprint-mobile-nav-arrow">→</span>
-                </button>
-                <button
-                  type="button"
-                  className="sprint-mobile-nav-btn"
-                  onClick={() => handleMobileNav(undefined, 'shorts')}
-                >
-                  <span>Running Apparel</span>
-                  <span className="sprint-mobile-nav-arrow">→</span>
-                </button>
-                <button
-                  type="button"
-                  className="sprint-mobile-nav-btn"
-                  onClick={() => handleMobileNav(undefined, 'accessories')}
-                >
-                  <span>Accessories & Belts</span>
-                  <span className="sprint-mobile-nav-arrow">→</span>
-                </button>
-              </div>
-
-              <div className="sprint-mobile-nav-section-title">Featured</div>
-              <div className="sprint-mobile-nav-group">
-                <button
-                  type="button"
-                  className="sprint-mobile-nav-btn highlight"
-                  onClick={() => handleMobileNav()}
-                >
-                  <span>🔥 New Arrivals & Drops</span>
-                  <span className="sprint-mobile-nav-arrow">→</span>
-                </button>
-                <button
-                  type="button"
-                  className="sprint-mobile-nav-btn"
-                  onClick={() => handleMobileNav()}
-                >
-                  <span>🏷️ Special Offers & Sale</span>
-                  <span className="sprint-mobile-nav-arrow">→</span>
-                </button>
-              </div>
-            </nav>
-
-            {/* Trial Guarantee Banner */}
-            <div className="sprint-mobile-drawer-footer">
-              <div className="sprint-mobile-guarantee-pill">
-                <strong>30-DAY TRIAL:</strong> Love every mile or return free
-              </div>
+          {/* Trial Guarantee Banner */}
+          <div className="sprint-mobile-drawer-footer">
+            <div className="sprint-mobile-guarantee-pill">
+              <strong>30-DAY TRIAL:</strong> Love every mile or return free
             </div>
           </div>
         </div>
-      )}
-    </header>
-  )
+      </div>
+    )}
+  </>
+)
 }
 
