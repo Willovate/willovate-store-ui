@@ -68,6 +68,17 @@ export function StreetAthleteStorefront({ deviceView = 'desktop' }: StreetAthlet
     return result
   }, [activeCategory, searchQuery, wishlist])
 
+  const searchResults = useMemo(() => {
+    if (!searchQuery.trim()) return []
+    const q = searchQuery.toLowerCase().trim()
+    return products.filter((p) =>
+      p.name.toLowerCase().includes(q) ||
+      p.category.toLowerCase().includes(q) ||
+      p.description.toLowerCase().includes(q) ||
+      (p.badge?.toLowerCase().includes(q) ?? false)
+    )
+  }, [searchQuery])
+
   const openProduct = (product: StreetProduct) => {
     setSelectedProduct(product)
     setSelectedSize(defaultSize(product))
@@ -178,7 +189,160 @@ export function StreetAthleteStorefront({ deviceView = 'desktop' }: StreetAthlet
           </aside>
         </div>
       )}
-      {searchOpen && <form className="sa-search" onSubmit={(event) => { event.preventDefault(); setView('collection'); setActiveCategory('All') }}><label htmlFor="sa-search-input">SEARCH THE ROTATION</label><input id="sa-search-input" autoFocus placeholder="Sneakers, layers, essentials..." value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} /><button type="button" onClick={() => { setSearchOpen(false); setSearchQuery('') }}>CLOSE ×</button></form>}
+      {/* Professional Search Modal */}
+      {searchOpen && (
+        <div
+          className="sa-search-modal-backdrop"
+          onClick={() => {
+            setSearchOpen(false)
+            setSearchQuery('')
+          }}
+        >
+          <div
+            className="sa-search-modal"
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-label="Search StreetAthlete"
+          >
+            {/* Modal Top Bar */}
+            <div className="sa-search-modal-top">
+              <div className="sa-search-modal-title-wrap">
+                <span className="sa-search-kicker">SEARCH STREETATHLETE</span>
+                <h3 className="sa-search-heading">THE ROTATION</h3>
+              </div>
+              <button
+                type="button"
+                className="sa-search-modal-close"
+                onClick={() => {
+                  setSearchOpen(false)
+                  setSearchQuery('')
+                }}
+                aria-label="Close search"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Input Bar */}
+            <div className="sa-search-bar-wrap">
+              <svg className="sa-search-bar-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+              <input
+                id="sa-search-modal-input"
+                className="sa-search-bar-input"
+                autoFocus
+                placeholder="Search sneakers, hoodies, tees, caps, accessories..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                aria-label="Search products"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  className="sa-search-bar-clear"
+                  onClick={() => setSearchQuery('')}
+                  aria-label="Clear search text"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+
+            {/* Trending Suggestions when no query */}
+            {!searchQuery.trim() && (
+              <div className="sa-search-suggestions">
+                <span className="sa-search-suggestions-title">POPULAR SEARCHES</span>
+                <div className="sa-search-tags">
+                  {['Sneakers', 'Hoodies', 'T-Shirts', 'Joggers', 'Accessories', 'New Drops', 'After Hours'].map((tag) => (
+                    <button
+                      key={tag}
+                      type="button"
+                      className="sa-search-tag"
+                      onClick={() => {
+                        if (tag === 'New Drops' || tag === 'Sneakers' || tag === 'Hoodies') {
+                          navigate(tag)
+                          setSearchOpen(false)
+                        } else {
+                          setSearchQuery(tag)
+                        }
+                      }}
+                    >
+                      {tag} ↗
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Live Search Results */}
+            {searchQuery.trim() && (
+              <div className="sa-search-results">
+                <div className="sa-search-results-header">
+                  <span>{searchResults.length} {searchResults.length === 1 ? 'PRODUCT FOUND' : 'PRODUCTS FOUND'}</span>
+                </div>
+
+                {searchResults.length === 0 ? (
+                  <div className="sa-search-empty">
+                    <p className="sa-search-empty-title">NO MATCHES FOR "{searchQuery}"</p>
+                    <p className="sa-search-empty-sub">Try searching for sneakers, hoodies, tees, joggers or accessories.</p>
+                  </div>
+                ) : (
+                  <div className="sa-search-results-list">
+                    {searchResults.map((product) => (
+                      <div
+                        key={product.id}
+                        className="sa-search-result-card"
+                        onClick={() => {
+                          setSearchOpen(false)
+                          setSearchQuery('')
+                          openProduct(product)
+                        }}
+                      >
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="sa-search-result-img"
+                        />
+                        <div className="sa-search-result-info">
+                          <div className="sa-search-result-meta">
+                            <span className="sa-search-result-cat">{product.category.toUpperCase()}</span>
+                            {product.badge && <span className="sa-search-result-badge">{product.badge}</span>}
+                          </div>
+                          <h4 className="sa-search-result-name">{product.name}</h4>
+                          <p className="sa-search-result-desc">{product.description}</p>
+                        </div>
+                        <div className="sa-search-result-action">
+                          <span className="sa-search-result-price">{money(product.price)}</span>
+                          <span className="sa-search-result-link">VIEW ↗</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Search Modal Footer */}
+            {searchQuery.trim() && searchResults.length > 0 && (
+              <div className="sa-search-modal-footer">
+                <button
+                  type="button"
+                  className="sa-search-view-all-btn"
+                  onClick={() => {
+                    setView('collection')
+                    setActiveCategory('All')
+                    setSearchOpen(false)
+                  }}
+                >
+                  VIEW ALL RESULTS IN COLLECTION →
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {view === 'home' && <main>
         <section className="sa-hero">
