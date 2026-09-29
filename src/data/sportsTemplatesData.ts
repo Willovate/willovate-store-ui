@@ -183,8 +183,12 @@ export const SPORTS_TEMPLATES_CONFIG: Record<string, SportsTemplateConfig> = {
       badge: 'recommended',
       rating: 4.96,
       reviewCount: 142,
+      features: [
+        'High-Velocity Hero Showcase with Real-Time Stride & Kinetic Telemetry',
+        'Kinetic Zoom Viewer & Dynamic Size Finder for Performance Runners',
+        'Speedwear Product Pages with Carbon Plate Specs and Rapid Quick-Buy',
+      ],
       layoutType: 'bold-minimal',
-      features: ['Kinetic Zoom Viewer', 'Dynamic Size Finder', 'Live Telemetry Badges', 'Rapid Quick-Buy', 'Color Wave Swatches'],
     },
     announcement: '⚡ FLASH VELOCITY DROP: Free Global Express on orders over $120 • Use Code: HYPERSONIC',
     navItems: ['Men', 'Women', 'Footwear', 'Performance Lab', 'Speedwear', 'Athletes'],
