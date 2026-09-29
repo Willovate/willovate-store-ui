@@ -261,33 +261,42 @@
 .progear-nav-inner {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1.25rem;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 0.65rem;
   position: relative;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.progear-nav-inner::-webkit-scrollbar {
+  display: none;
 }
 
 .progear-nav-item {
   position: relative;
-  padding: 0.75rem 0;
+  padding: 0.65rem 0;
+  flex-shrink: 0;
 }
 
 .progear-nav-link {
   background: transparent;
   border: none;
   font-family: var(--pg-font);
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   color: var(--pg-text);
   cursor: pointer;
-  padding: 0.25rem 0.4rem;
+  padding: 0.2rem 0.35rem;
   border-radius: var(--pg-radius-sm);
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.25rem;
+  white-space: nowrap;
   transition: color 0.15s ease;
 }
 
@@ -296,22 +305,46 @@
   color: var(--pg-primary);
 }
 
+.progear-nav-quick-links {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.progear-nav-kits-btn {
+  color: var(--pg-primary) !important;
+  font-weight: 800 !important;
+}
+
+.progear-nav-all-btn {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
+
 /* Universal Mega Menu Dropdown */
 .progear-mega-menu {
   position: absolute;
   top: 100%;
   left: 0;
-  width: 780px;
+  width: min(640px, 85vw);
   background: #ffffff;
   border: 1px solid var(--pg-border);
   border-top: 3px solid var(--pg-primary);
   border-radius: 0 0 var(--pg-radius) var(--pg-radius);
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
-  padding: 1.75rem;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.15);
+  padding: 1.5rem;
   display: none;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 2rem;
-  z-index: 99;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 1.5rem;
+  z-index: 999;
+}
+
+/* Right-anchored mega menu for right half items to prevent off-screen overflow */
+.progear-nav-item:nth-child(n+5) .progear-mega-menu {
+  left: auto;
+  right: 0;
 }
 
 .progear-nav-item:hover .progear-mega-menu {
@@ -1613,10 +1646,18 @@
 @media (max-width: 768px) {
   .progear-announcement-strip {
     font-size: 0.68rem;
-    padding: 0.35rem 0.75rem;
-    gap: 0.5rem;
-    overflow-x: auto;
-    white-space: nowrap;
+    padding: 0.35rem 0.5rem;
+    gap: 0.4rem;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .progear-announcement-divider,
+  .progear-announcement-sub {
+    display: none !important;
   }
 
   .progear-main-header {
@@ -1630,8 +1671,9 @@
   }
 
   .progear-brand-tagline {
-    font-size: 0.55rem;
-    letter-spacing: 0.08em;
+    font-size: 0.52rem;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
   }
 
   .progear-search-bar {
@@ -1654,11 +1696,32 @@
   }
 
   .progear-header-actions {
-    gap: 0.4rem;
+    gap: 0.35rem;
   }
 
   .progear-action-item {
-    padding: 0.3rem 0.45rem;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .progear-header-cart-btn {
+    background: transparent !important;
+    padding: 0 !important;
+  }
+
+  .progear-cart-badge {
+    top: -4px;
+    right: -4px;
+    left: auto;
+    width: 16px;
+    height: 16px;
+    font-size: 0.6rem;
   }
 
   .progear-action-text {
@@ -1783,24 +1846,32 @@
     gap: 1rem;
   }
 
+  .progear-kits-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+
   .progear-kit-card {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
   }
 
   .progear-kit-media {
-    height: 180px;
+    height: 200px !important;
+    width: 100% !important;
   }
 
   .progear-kit-body {
-    padding: 1rem;
+    padding: 1.25rem !important;
   }
 
   .progear-kit-title {
-    font-size: 1.1rem;
+    font-size: 1.15rem !important;
+    line-height: 1.25 !important;
   }
 
   .progear-kit-desc {
-    font-size: 0.82rem;
+    font-size: 0.84rem !important;
   }
 
   .progear-kit-pricing-row {
@@ -1891,10 +1962,22 @@
 .progear-root.device-mobile .progear-announcement-strip,
 .simulated-frame.frame-mobile .progear-announcement-strip {
   font-size: 0.68rem !important;
-  padding: 0.35rem 0.75rem !important;
-  gap: 0.5rem !important;
-  overflow-x: auto !important;
-  white-space: nowrap !important;
+  padding: 0.35rem 0.5rem !important;
+  gap: 0.4rem !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  justify-content: center !important;
+  text-align: center !important;
+  overflow: hidden !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-announcement-divider,
+.progear-root[data-device-view='mobile'] .progear-announcement-sub,
+.progear-root.device-mobile .progear-announcement-divider,
+.progear-root.device-mobile .progear-announcement-sub,
+.simulated-frame.frame-mobile .progear-announcement-divider,
+.simulated-frame.frame-mobile .progear-announcement-sub {
+  display: none !important;
 }
 
 .progear-root[data-device-view='mobile'] .progear-main-header,
@@ -1914,8 +1997,9 @@
 .progear-root[data-device-view='mobile'] .progear-brand-tagline,
 .progear-root.device-mobile .progear-brand-tagline,
 .simulated-frame.frame-mobile .progear-brand-tagline {
-  font-size: 0.55rem !important;
-  letter-spacing: 0.08em !important;
+  font-size: 0.52rem !important;
+  letter-spacing: 0.06em !important;
+  white-space: nowrap !important;
 }
 
 .progear-root[data-device-view='mobile'] .progear-search-bar,
@@ -1948,13 +2032,38 @@
 .progear-root[data-device-view='mobile'] .progear-header-actions,
 .progear-root.device-mobile .progear-header-actions,
 .simulated-frame.frame-mobile .progear-header-actions {
-  gap: 0.4rem !important;
+  gap: 0.35rem !important;
 }
 
 .progear-root[data-device-view='mobile'] .progear-action-item,
 .progear-root.device-mobile .progear-action-item,
 .simulated-frame.frame-mobile .progear-action-item {
-  padding: 0.3rem 0.45rem !important;
+  width: 34px !important;
+  height: 34px !important;
+  padding: 0 !important;
+  border-radius: 6px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-header-cart-btn,
+.progear-root.device-mobile .progear-header-cart-btn,
+.simulated-frame.frame-mobile .progear-header-cart-btn {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-cart-badge,
+.progear-root.device-mobile .progear-cart-badge,
+.simulated-frame.frame-mobile .progear-cart-badge {
+  top: -4px !important;
+  right: -4px !important;
+  left: auto !important;
+  width: 16px !important;
+  height: 16px !important;
+  font-size: 0.6rem !important;
 }
 
 .progear-root[data-device-view='mobile'] .progear-action-text,
@@ -2126,22 +2235,44 @@
   gap: 1rem !important;
 }
 
+.progear-root[data-device-view='mobile'] .progear-kits-grid,
+.progear-root.device-mobile .progear-kits-grid,
+.simulated-frame.frame-mobile .progear-kits-grid {
+  grid-template-columns: 1fr !important;
+  gap: 1.25rem !important;
+}
+
 .progear-root[data-device-view='mobile'] .progear-kit-card,
 .progear-root.device-mobile .progear-kit-card,
 .simulated-frame.frame-mobile .progear-kit-card {
   grid-template-columns: 1fr !important;
+  width: 100% !important;
 }
 
 .progear-root[data-device-view='mobile'] .progear-kit-media,
 .progear-root.device-mobile .progear-kit-media,
 .simulated-frame.frame-mobile .progear-kit-media {
-  height: 180px !important;
+  height: 200px !important;
+  width: 100% !important;
 }
 
 .progear-root[data-device-view='mobile'] .progear-kit-body,
 .progear-root.device-mobile .progear-kit-body,
 .simulated-frame.frame-mobile .progear-kit-body {
-  padding: 1rem !important;
+  padding: 1.25rem !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-kit-title,
+.progear-root.device-mobile .progear-kit-title,
+.simulated-frame.frame-mobile .progear-kit-title {
+  font-size: 1.15rem !important;
+  line-height: 1.25 !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-kit-desc,
+.progear-root.device-mobile .progear-kit-desc,
+.simulated-frame.frame-mobile .progear-kit-desc {
+  font-size: 0.84rem !important;
 }
 
 .progear-root[data-device-view='mobile'] .progear-kit-pricing-row,

@@ -60,9 +60,13 @@ export const ProGearHeader: React.FC<ProGearHeaderProps> = ({
       {/* 1. Announcement Bar */}
       <div className="progear-announcement-strip">
         <span className="progear-announcement-badge">PRO DISPATCH</span>
-        <span>FREE SHIPPING ON ORDERS ABOVE ₹999 ACROSS ALL PIN CODES</span>
-        <span style={{ opacity: 0.6 }}>|</span>
-        <span style={{ color: '#93c5fd' }}>⚡ SAME-DAY DISPATCH BEFORE 2 PM</span>
+        <span className="progear-announcement-text">
+          FREE SHIPPING ON ORDERS ABOVE ₹999 ACROSS ALL PIN CODES
+        </span>
+        <span className="progear-announcement-divider" style={{ opacity: 0.6 }}>|</span>
+        <span className="progear-announcement-sub" style={{ color: '#93c5fd' }}>
+          ⚡ SAME-DAY DISPATCH BEFORE 2 PM
+        </span>
       </div>
 
       {/* 2. Main Marketplace Top Bar */}
@@ -170,10 +174,9 @@ export const ProGearHeader: React.FC<ProGearHeaderProps> = ({
           {/* Cart */}
           <button
             type="button"
-            className="progear-action-item"
+            className="progear-action-item progear-header-cart-btn"
             onClick={onOpenCart}
             title="View Cart"
-            style={{ background: 'var(--pg-primary-light)', padding: '0.4rem 0.8rem' }}
           >
             <span className="progear-action-icon" style={{ color: 'var(--pg-primary)' }}>
               🛒
@@ -314,22 +317,20 @@ export const ProGearHeader: React.FC<ProGearHeaderProps> = ({
           })}
 
           {/* Quick links to Kits & Pro Picks */}
-          <div style={{ marginLeft: 'auto', display: 'flex', gap: '0.75rem' }}>
+          <div className="progear-nav-quick-links">
             <button
               type="button"
-              className="progear-nav-link"
-              style={{ color: 'var(--pg-primary)', fontWeight: 800 }}
+              className="progear-nav-link progear-nav-kits-btn"
               onClick={() => onNavigateCollection(undefined, 'bundle')}
             >
-              <span>🎒 Equipment Kits</span>
+              <span>🎒 Kits</span>
             </button>
             <button
               type="button"
-              className="progear-nav-link"
-              style={{ color: '#0f172a', fontWeight: 800 }}
+              className="progear-nav-link progear-nav-all-btn"
               onClick={() => onNavigateCollection()}
             >
-              <span>⚡ All Marketplace</span>
+              <span>⚡ All Gear</span>
             </button>
           </div>
         </div>
