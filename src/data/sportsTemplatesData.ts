@@ -317,9 +317,9 @@ export const SPORTS_TEMPLATES_CONFIG: Record<string, SportsTemplateConfig> = {
       shortDescription:
         'Championship stadium-grade sports marketplace featuring pro athlete editorial layouts, 3 mega menus, dynamic filter drawers, and player edition kits.',
       thumbnailUrl:
-        'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&auto=format&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800&auto=format&fit=crop&q=80',
       fullPreviewUrl:
-        'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1600&auto=format&fit=crop&q=85',
+        'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=1600&auto=format&fit=crop&q=85',
       popularityScore: 98,
       isActive: true,
       brandName: 'ARENA',
@@ -331,7 +331,7 @@ export const SPORTS_TEMPLATES_CONFIG: Record<string, SportsTemplateConfig> = {
       accentColor: '#ff5500',
       isDark: true,
       modelImage:
-        'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&auto=format&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800&auto=format&fit=crop&q=80',
       badge: 'trending',
       rating: 4.98,
       reviewCount: 284,
