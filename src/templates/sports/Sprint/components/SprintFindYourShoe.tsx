@@ -41,6 +41,10 @@ export const SprintFindYourShoe: React.FC<SprintFindYourShoeProps> = ({
               alt={cat.title}
               className="sprint-category-card-img"
               loading="lazy"
+              onError={(e) => {
+                e.currentTarget.src =
+                  'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=900&auto=format&fit=crop&q=80'
+              }}
             />
             <div className="sprint-category-overlay">
               <span className="sprint-category-tag">{cat.tag}</span>

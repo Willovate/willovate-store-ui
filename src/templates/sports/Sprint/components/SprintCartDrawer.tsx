@@ -124,6 +124,10 @@ export const SprintCartDrawer: React.FC<SprintCartDrawerProps> = ({
                     src={item.product.image}
                     alt={item.product.name}
                     className="sprint-cart-item-img"
+                    onError={(e) => {
+                      e.currentTarget.src =
+                        'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=900&auto=format&fit=crop&q=80'
+                    }}
                   />
                   <div>
                     <h4 style={{ fontSize: '0.88rem', fontWeight: 700, margin: '0 0 0.2rem 0' }}>

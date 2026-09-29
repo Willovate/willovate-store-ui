@@ -42,6 +42,10 @@ export const SprintEssentials: React.FC<SprintEssentialsProps> = ({
                 alt={item.title}
                 className="sprint-essential-img"
                 loading="lazy"
+                onError={(e) => {
+                  e.currentTarget.src =
+                    'https://images.unsplash.com/photo-1556906781-9a412961c28c?w=800&auto=format&fit=crop&q=80'
+                }}
               />
             </div>
             <div className="sprint-essential-body">

@@ -16,6 +16,10 @@ export const SprintProductCard: React.FC<SprintProductCardProps> = ({
   onSelectProduct,
   onQuickAdd,
 }) => {
+  const discountPercent = product.compareAtPrice
+    ? Math.round(((product.compareAtPrice - product.price) / product.compareAtPrice) * 100)
+    : 0
+
   return (
     <article
       className="sprint-product-card"
@@ -49,14 +53,20 @@ export const SprintProductCard: React.FC<SprintProductCardProps> = ({
           alt={product.name}
           className="sprint-card-img"
           loading="lazy"
+          onError={(e) => {
+            e.currentTarget.src =
+              'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=900&auto=format&fit=crop&q=80'
+          }}
         />
       </div>
 
       {/* Body */}
       <div className="sprint-card-body">
         <div className="sprint-card-type-row">
-          <span>{product.runningType} running</span>
-          {product.cushionLevel && <span>{product.cushionLevel} cushion</span>}
+          <span className="sprint-card-type-badge">{product.runningType} running</span>
+          {product.cushionLevel && (
+            <span className="sprint-card-cushion">{product.cushionLevel} cushion</span>
+          )}
         </div>
 
         <h3 className="sprint-card-title">{product.name}</h3>
@@ -76,6 +86,9 @@ export const SprintProductCard: React.FC<SprintProductCardProps> = ({
             <span className="sprint-card-price">${product.price}</span>
             {product.compareAtPrice && (
               <span className="sprint-card-compare">${product.compareAtPrice}</span>
+            )}
+            {discountPercent > 0 && (
+              <span className="sprint-card-discount">{discountPercent}% OFF</span>
             )}
           </div>
 
