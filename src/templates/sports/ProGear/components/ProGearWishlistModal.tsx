@@ -25,8 +25,9 @@ export const ProGearWishlistModal: React.FC<ProGearWishlistModalProps> = ({
   const wishlistProducts = products.filter((p) => wishlistIds.includes(p.id))
 
   return (
-    <div className="progear-pdp-backdrop" onClick={onClose}>
+    <div className="progear-pdp-backdrop progear-wishlist-backdrop" onClick={onClose}>
       <div
+        className="progear-wishlist-modal-card"
         style={{
           background: '#ffffff',
           borderRadius: 'var(--pg-radius-lg)',
@@ -102,6 +103,10 @@ export const ProGearWishlistModal: React.FC<ProGearWishlistModalProps> = ({
                     objectFit: 'contain',
                     background: '#f8fafc',
                     borderRadius: '4px',
+                  }}
+                  onError={(e) => {
+                    e.currentTarget.src =
+                      'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&auto=format&fit=crop&q=80'
                   }}
                 />
 

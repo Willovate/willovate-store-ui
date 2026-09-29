@@ -67,6 +67,10 @@ export const ProGearProductCard: React.FC<ProGearProductCardProps> = ({
           alt={product.name}
           className="progear-card-img"
           loading="lazy"
+          onError={(e) => {
+            e.currentTarget.src =
+              'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&auto=format&fit=crop&q=80'
+          }}
         />
       </div>
 

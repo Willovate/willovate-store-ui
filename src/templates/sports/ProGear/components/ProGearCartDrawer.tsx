@@ -137,6 +137,10 @@ export const ProGearCartDrawer: React.FC<ProGearCartDrawerProps> = ({
                   src={item.product.image}
                   alt={item.product.name}
                   className="progear-cart-item-img"
+                  onError={(e) => {
+                    e.currentTarget.src =
+                      'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&auto=format&fit=crop&q=80'
+                  }}
                 />
 
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -222,6 +226,10 @@ export const ProGearCartDrawer: React.FC<ProGearCartDrawerProps> = ({
                         src={rec.image}
                         alt={rec.name}
                         style={{ width: '40px', height: '40px', objectFit: 'contain', background: '#ffffff', borderRadius: '4px', border: '1px solid var(--pg-border)' }}
+                        onError={(e) => {
+                          e.currentTarget.src =
+                            'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&auto=format&fit=crop&q=80'
+                        }}
                       />
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0f172a', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>

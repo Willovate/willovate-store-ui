@@ -42,6 +42,10 @@ export const ProGearShopBySport: React.FC<ProGearShopBySportProps> = ({
               alt={cat.name}
               className="progear-sport-img"
               loading="lazy"
+              onError={(e) => {
+                e.currentTarget.src =
+                  'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&auto=format&fit=crop&q=80'
+              }}
             />
             <div className="progear-sport-overlay">
               <h3 className="progear-sport-name">{cat.name}</h3>

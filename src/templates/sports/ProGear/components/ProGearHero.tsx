@@ -92,10 +92,14 @@ export const ProGearHero: React.FC<ProGearHeroProps> = ({
         <div className="progear-hero-visual">
           <div className="progear-hero-img-wrap">
             <img
-              src="https://images.unsplash.com/photo-1517649763962-0c623266ddc0?w=1000&auto=format&fit=crop&q=80"
+              src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=1200&auto=format&fit=crop&q=85"
               alt="Professional Athlete Sports Equipment"
               className="progear-hero-img"
               loading="eager"
+              onError={(e) => {
+                e.currentTarget.src =
+                  'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=1200&auto=format&fit=crop&q=85'
+              }}
             />
           </div>
 

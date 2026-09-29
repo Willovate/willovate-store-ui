@@ -1318,6 +1318,10 @@
   gap: 1rem;
 }
 
+.progear-mobile-filter-btn {
+  display: none;
+}
+
 .progear-collection-layout {
   display: grid;
   grid-template-columns: 280px 1fr;
@@ -1607,15 +1611,58 @@
 }
 
 @media (max-width: 768px) {
+  .progear-announcement-strip {
+    font-size: 0.68rem;
+    padding: 0.35rem 0.75rem;
+    gap: 0.5rem;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
   .progear-main-header {
     grid-template-columns: 1fr auto;
-    padding: 0.75rem 1rem;
+    padding: 0.65rem 0.85rem;
+    gap: 0.75rem;
+  }
+
+  .progear-brand-title {
+    font-size: 1.25rem;
+  }
+
+  .progear-brand-tagline {
+    font-size: 0.55rem;
+    letter-spacing: 0.08em;
   }
 
   .progear-search-bar {
     grid-column: 1 / -1;
     order: 3;
-    margin-top: 0.5rem;
+    margin-top: 0.25rem;
+  }
+
+  .progear-search-sport-select {
+    display: none;
+  }
+
+  .progear-search-input {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .progear-search-btn {
+    padding: 0.5rem 0.85rem;
+  }
+
+  .progear-header-actions {
+    gap: 0.4rem;
+  }
+
+  .progear-action-item {
+    padding: 0.3rem 0.45rem;
+  }
+
+  .progear-action-text {
+    display: none !important;
   }
 
   .progear-nav-strip {
@@ -1626,19 +1673,114 @@
     display: flex;
   }
 
+  .progear-hero {
+    padding: 2rem 1rem 2.5rem;
+  }
+
   .progear-hero-inner {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.75rem;
+  }
+
+  .progear-hero-title {
+    font-size: clamp(2rem, 7vw, 2.5rem);
+    line-height: 1.1;
+  }
+
+  .progear-hero-desc {
+    font-size: 0.88rem;
+  }
+
+  .progear-hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .progear-hero-actions button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .progear-hero-img-wrap {
+    height: 240px;
+    border-radius: var(--pg-radius-lg);
+    overflow: hidden;
+  }
+
+  .progear-hero-img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .progear-hero-floating-badge {
+    position: static;
+    margin-top: 0.75rem;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .progear-sports-grid-8,
   .progear-product-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
+    gap: 8px;
+  }
+
+  .progear-sport-card {
+    height: 140px;
+  }
+
+  .progear-sport-name {
+    font-size: 0.95rem;
+  }
+
+  .progear-sport-tagline {
+    display: none;
+  }
+
+  .progear-sport-count {
+    font-size: 0.72rem;
+  }
+
+  .progear-card-media {
+    height: 130px;
+  }
+
+  .progear-card-body {
+    padding: 0.65rem;
+    gap: 0.35rem;
+  }
+
+  .progear-card-title {
+    font-size: 0.8rem;
+    min-height: 2.3em;
+    line-height: 1.25;
+  }
+
+  .progear-card-price {
+    font-size: 0.95rem;
+  }
+
+  .progear-card-compare {
+    font-size: 0.75rem;
+  }
+
+  .progear-card-discount {
+    font-size: 0.65rem;
+  }
+
+  .progear-card-add-btn {
+    padding: 0.5rem 0.5rem;
+    font-size: 0.74rem;
+  }
+
+  .progear-card-specs-preview {
+    display: none;
   }
 
   .progear-why-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
   .progear-kit-card {
@@ -1646,13 +1788,63 @@
   }
 
   .progear-kit-media {
-    height: 200px;
+    height: 180px;
+  }
+
+  .progear-kit-body {
+    padding: 1rem;
+  }
+
+  .progear-kit-title {
+    font-size: 1.1rem;
+  }
+
+  .progear-kit-desc {
+    font-size: 0.82rem;
+  }
+
+  .progear-kit-pricing-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .progear-kit-pricing-row button {
+    width: 100%;
+  }
+
+  .progear-pdp-backdrop {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .progear-pdp-card {
+    width: 100%;
+    max-height: 95vh;
+    border-radius: var(--pg-radius-lg) var(--pg-radius-lg) 0 0;
   }
 
   .progear-pdp-grid {
     grid-template-columns: 1fr;
-    padding: 1.5rem;
-    gap: 2rem;
+    padding: 1.25rem;
+    gap: 1.5rem;
+  }
+
+  .progear-pdp-title {
+    font-size: 1.35rem;
+  }
+
+  .progear-pdp-actions {
+    flex-direction: column;
+  }
+
+  .progear-collection-page {
+    padding: 1.25rem 1rem 3rem;
+  }
+
+  .progear-collection-hero {
+    padding: 1.5rem 1rem;
+    margin-bottom: 1rem;
   }
 
   .progear-collection-layout {
@@ -1663,81 +1855,444 @@
     display: none;
   }
 
+  .progear-mobile-filter-btn {
+    display: inline-flex !important;
+  }
+
+  .progear-footer {
+    padding: 3rem 1rem 2rem;
+  }
+
   .progear-footer-grid {
     grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
   }
 
   .progear-footer-bottom {
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.75rem;
   }
 }
 
-/* Simulated Frame Mobile Override: .progear-root[data-device-view='mobile'] */
+/* =========================================================================
+   SIMULATED FRAME & DEVICE-MOBILE SPECIFIC OVERRIDES
+   Ensures absolute pixel perfection in the device switcher
+   ========================================================================= */
+.progear-root[data-device-view='mobile'],
+.progear-root.device-mobile,
+.simulated-frame.frame-mobile .progear-root {
+  width: 100%;
+  max-width: 100%;
+}
+
+.progear-root[data-device-view='mobile'] .progear-announcement-strip,
+.progear-root.device-mobile .progear-announcement-strip,
+.simulated-frame.frame-mobile .progear-announcement-strip {
+  font-size: 0.68rem !important;
+  padding: 0.35rem 0.75rem !important;
+  gap: 0.5rem !important;
+  overflow-x: auto !important;
+  white-space: nowrap !important;
+}
+
 .progear-root[data-device-view='mobile'] .progear-main-header,
+.progear-root.device-mobile .progear-main-header,
 .simulated-frame.frame-mobile .progear-main-header {
-  grid-template-columns: 1fr auto;
-  padding: 0.75rem 1rem;
+  grid-template-columns: 1fr auto !important;
+  padding: 0.65rem 0.85rem !important;
+  gap: 0.75rem !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-brand-title,
+.progear-root.device-mobile .progear-brand-title,
+.simulated-frame.frame-mobile .progear-brand-title {
+  font-size: 1.25rem !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-brand-tagline,
+.progear-root.device-mobile .progear-brand-tagline,
+.simulated-frame.frame-mobile .progear-brand-tagline {
+  font-size: 0.55rem !important;
+  letter-spacing: 0.08em !important;
 }
 
 .progear-root[data-device-view='mobile'] .progear-search-bar,
+.progear-root.device-mobile .progear-search-bar,
 .simulated-frame.frame-mobile .progear-search-bar {
-  grid-column: 1 / -1;
-  order: 3;
+  grid-column: 1 / -1 !important;
+  order: 3 !important;
+  margin-top: 0.25rem !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-search-sport-select,
+.progear-root.device-mobile .progear-search-sport-select,
+.simulated-frame.frame-mobile .progear-search-sport-select {
+  display: none !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-search-input,
+.progear-root.device-mobile .progear-search-input,
+.simulated-frame.frame-mobile .progear-search-input {
+  font-size: 0.8rem !important;
+  padding: 0.5rem 0.75rem !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-search-btn,
+.progear-root.device-mobile .progear-search-btn,
+.simulated-frame.frame-mobile .progear-search-btn {
+  padding: 0.5rem 0.85rem !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-header-actions,
+.progear-root.device-mobile .progear-header-actions,
+.simulated-frame.frame-mobile .progear-header-actions {
+  gap: 0.4rem !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-action-item,
+.progear-root.device-mobile .progear-action-item,
+.simulated-frame.frame-mobile .progear-action-item {
+  padding: 0.3rem 0.45rem !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-action-text,
+.progear-root.device-mobile .progear-action-text,
+.simulated-frame.frame-mobile .progear-action-text {
+  display: none !important;
 }
 
 .progear-root[data-device-view='mobile'] .progear-nav-strip,
+.progear-root.device-mobile .progear-nav-strip,
 .simulated-frame.frame-mobile .progear-nav-strip {
   display: none !important;
 }
 
 .progear-root[data-device-view='mobile'] .progear-mobile-toggle,
+.progear-root.device-mobile .progear-mobile-toggle,
 .simulated-frame.frame-mobile .progear-mobile-toggle {
   display: flex !important;
 }
 
+.progear-root[data-device-view='mobile'] .progear-hero,
+.progear-root.device-mobile .progear-hero,
+.simulated-frame.frame-mobile .progear-hero {
+  padding: 2rem 1rem 2.5rem !important;
+}
+
 .progear-root[data-device-view='mobile'] .progear-hero-inner,
+.progear-root.device-mobile .progear-hero-inner,
 .simulated-frame.frame-mobile .progear-hero-inner {
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr !important;
+  gap: 1.75rem !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-hero-title,
+.progear-root.device-mobile .progear-hero-title,
+.simulated-frame.frame-mobile .progear-hero-title {
+  font-size: clamp(2rem, 7vw, 2.5rem) !important;
+  line-height: 1.1 !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-hero-desc,
+.progear-root.device-mobile .progear-hero-desc,
+.simulated-frame.frame-mobile .progear-hero-desc {
+  font-size: 0.88rem !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-hero-actions,
+.progear-root.device-mobile .progear-hero-actions,
+.simulated-frame.frame-mobile .progear-hero-actions {
+  flex-direction: column !important;
+  width: 100% !important;
+  gap: 0.75rem !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-hero-actions button,
+.progear-root.device-mobile .progear-hero-actions button,
+.simulated-frame.frame-mobile .progear-hero-actions button {
+  width: 100% !important;
+  justify-content: center !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-hero-img-wrap,
+.progear-root.device-mobile .progear-hero-img-wrap,
+.simulated-frame.frame-mobile .progear-hero-img-wrap {
+  height: 240px !important;
+  border-radius: var(--pg-radius-lg) !important;
+  overflow: hidden !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-hero-img,
+.progear-root.device-mobile .progear-hero-img,
+.simulated-frame.frame-mobile .progear-hero-img {
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-hero-floating-badge,
+.progear-root.device-mobile .progear-hero-floating-badge,
+.simulated-frame.frame-mobile .progear-hero-floating-badge {
+  position: static !important;
+  margin-top: 0.75rem !important;
+  width: 100% !important;
 }
 
 .progear-root[data-device-view='mobile'] .progear-sports-grid-8,
 .progear-root[data-device-view='mobile'] .progear-product-grid,
+.progear-root.device-mobile .progear-sports-grid-8,
+.progear-root.device-mobile .progear-product-grid,
 .simulated-frame.frame-mobile .progear-sports-grid-8,
 .simulated-frame.frame-mobile .progear-product-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 10px !important;
+  gap: 8px !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-sport-card,
+.progear-root.device-mobile .progear-sport-card,
+.simulated-frame.frame-mobile .progear-sport-card {
+  height: 140px !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-sport-name,
+.progear-root.device-mobile .progear-sport-name,
+.simulated-frame.frame-mobile .progear-sport-name {
+  font-size: 0.95rem !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-sport-tagline,
+.progear-root.device-mobile .progear-sport-tagline,
+.simulated-frame.frame-mobile .progear-sport-tagline {
+  display: none !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-card-media,
+.progear-root.device-mobile .progear-card-media,
+.simulated-frame.frame-mobile .progear-card-media {
+  height: 130px !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-card-body,
+.progear-root.device-mobile .progear-card-body,
+.simulated-frame.frame-mobile .progear-card-body {
+  padding: 0.65rem !important;
+  gap: 0.35rem !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-card-title,
+.progear-root.device-mobile .progear-card-title,
+.simulated-frame.frame-mobile .progear-card-title {
+  font-size: 0.8rem !important;
+  min-height: 2.3em !important;
+  line-height: 1.25 !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-card-price,
+.progear-root.device-mobile .progear-card-price,
+.simulated-frame.frame-mobile .progear-card-price {
+  font-size: 0.95rem !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-card-compare,
+.progear-root.device-mobile .progear-card-compare,
+.simulated-frame.frame-mobile .progear-card-compare {
+  font-size: 0.75rem !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-card-discount,
+.progear-root.device-mobile .progear-card-discount,
+.simulated-frame.frame-mobile .progear-card-discount {
+  font-size: 0.65rem !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-card-add-btn,
+.progear-root.device-mobile .progear-card-add-btn,
+.simulated-frame.frame-mobile .progear-card-add-btn {
+  padding: 0.5rem 0.5rem !important;
+  font-size: 0.74rem !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-card-specs-preview,
+.progear-root.device-mobile .progear-card-specs-preview,
+.simulated-frame.frame-mobile .progear-card-specs-preview {
+  display: none !important;
 }
 
 .progear-root[data-device-view='mobile'] .progear-why-grid,
+.progear-root.device-mobile .progear-why-grid,
 .simulated-frame.frame-mobile .progear-why-grid {
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr !important;
+  gap: 1rem !important;
 }
 
 .progear-root[data-device-view='mobile'] .progear-kit-card,
+.progear-root.device-mobile .progear-kit-card,
 .simulated-frame.frame-mobile .progear-kit-card {
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr !important;
 }
 
 .progear-root[data-device-view='mobile'] .progear-kit-media,
+.progear-root.device-mobile .progear-kit-media,
 .simulated-frame.frame-mobile .progear-kit-media {
-  height: 180px;
+  height: 180px !important;
 }
 
-.progear-root[data-device-view='mobile'] .progear-pdp-grid,
-.simulated-frame.frame-mobile .progear-pdp-grid {
-  grid-template-columns: 1fr;
-  padding: 1.25rem;
+.progear-root[data-device-view='mobile'] .progear-kit-body,
+.progear-root.device-mobile .progear-kit-body,
+.simulated-frame.frame-mobile .progear-kit-body {
+  padding: 1rem !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-kit-pricing-row,
+.progear-root.device-mobile .progear-kit-pricing-row,
+.simulated-frame.frame-mobile .progear-kit-pricing-row {
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 0.75rem !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-kit-pricing-row button,
+.progear-root.device-mobile .progear-kit-pricing-row button,
+.simulated-frame.frame-mobile .progear-kit-pricing-row button {
+  width: 100% !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-collection-page,
+.progear-root.device-mobile .progear-collection-page,
+.simulated-frame.frame-mobile .progear-collection-page {
+  padding: 1.25rem 1rem 3rem !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-collection-hero,
+.progear-root.device-mobile .progear-collection-hero,
+.simulated-frame.frame-mobile .progear-collection-hero {
+  padding: 1.5rem 1rem !important;
+  margin-bottom: 1rem !important;
 }
 
 .progear-root[data-device-view='mobile'] .progear-collection-layout,
+.progear-root.device-mobile .progear-collection-layout,
 .simulated-frame.frame-mobile .progear-collection-layout {
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr !important;
 }
 
 .progear-root[data-device-view='mobile'] .progear-sidebar,
+.progear-root.device-mobile .progear-sidebar,
 .simulated-frame.frame-mobile .progear-sidebar {
   display: none !important;
 }
+
+.progear-root[data-device-view='mobile'] .progear-mobile-filter-btn,
+.progear-root.device-mobile .progear-mobile-filter-btn,
+.simulated-frame.frame-mobile .progear-mobile-filter-btn {
+  display: inline-flex !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-footer,
+.progear-root.device-mobile .progear-footer,
+.simulated-frame.frame-mobile .progear-footer {
+  padding: 3rem 1rem 2rem !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-footer-grid,
+.progear-root.device-mobile .progear-footer-grid,
+.simulated-frame.frame-mobile .progear-footer-grid {
+  grid-template-columns: 1fr !important;
+  gap: 2rem !important;
+  margin-bottom: 2rem !important;
+}
+
+/* Modals & Drawers Mobile Overlay Fix */
+.progear-root[data-device-view='mobile'] .progear-cart-backdrop,
+.progear-root.device-mobile .progear-cart-backdrop,
+.simulated-frame.frame-mobile .progear-cart-backdrop {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 10000 !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-cart-drawer,
+.progear-root.device-mobile .progear-cart-drawer,
+.simulated-frame.frame-mobile .progear-cart-drawer {
+  width: 100vw !important;
+  max-width: 100% !important;
+  height: 100% !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-pdp-backdrop,
+.progear-root.device-mobile .progear-pdp-backdrop,
+.simulated-frame.frame-mobile .progear-pdp-backdrop {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 10000 !important;
+  padding: 0 !important;
+  align-items: flex-end !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-pdp-card,
+.progear-root.device-mobile .progear-pdp-card,
+.simulated-frame.frame-mobile .progear-pdp-card {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 95vh !important;
+  max-height: 95vh !important;
+  border-radius: var(--pg-radius-lg) var(--pg-radius-lg) 0 0 !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-pdp-grid,
+.progear-root.device-mobile .progear-pdp-grid,
+.simulated-frame.frame-mobile .progear-pdp-grid {
+  grid-template-columns: 1fr !important;
+  padding: 1.25rem !important;
+  gap: 1.5rem !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-pdp-title,
+.progear-root.device-mobile .progear-pdp-title,
+.simulated-frame.frame-mobile .progear-pdp-title {
+  font-size: 1.35rem !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-pdp-actions,
+.progear-root.device-mobile .progear-pdp-actions,
+.simulated-frame.frame-mobile .progear-pdp-actions {
+  flex-direction: column !important;
+}
+
+/* Search & Wishlist Modal Overrides on Mobile */
+.progear-root[data-device-view='mobile'] .progear-search-backdrop,
+.progear-root.device-mobile .progear-search-backdrop,
+.simulated-frame.frame-mobile .progear-search-backdrop,
+.progear-root[data-device-view='mobile'] .progear-wishlist-backdrop,
+.progear-root.device-mobile .progear-wishlist-backdrop,
+.simulated-frame.frame-mobile .progear-wishlist-backdrop {
+  align-items: center !important;
+  padding: 1rem !important;
+}
+
+.progear-root[data-device-view='mobile'] .progear-search-modal-card,
+.progear-root.device-mobile .progear-search-modal-card,
+.simulated-frame.frame-mobile .progear-search-modal-card,
+.progear-root[data-device-view='mobile'] .progear-wishlist-modal-card,
+.progear-root.device-mobile .progear-wishlist-modal-card,
+.simulated-frame.frame-mobile .progear-wishlist-modal-card {
+  width: 100% !important;
+  max-width: 100% !important;
+  max-height: 85vh !important;
+  border-radius: var(--pg-radius-lg) !important;
+}
+
+
 
 

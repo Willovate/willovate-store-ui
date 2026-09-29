@@ -44,6 +44,10 @@ export const ProGearCompleteYourKit: React.FC<ProGearCompleteYourKitProps> = ({
                   alt={bundle.title}
                   className="progear-kit-img"
                   loading="lazy"
+                  onError={(e) => {
+                    e.currentTarget.src =
+                      'https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=1200&auto=format&fit=crop&q=85'
+                  }}
                 />
                 <span className="progear-kit-badge">{bundle.badge}</span>
               </div>

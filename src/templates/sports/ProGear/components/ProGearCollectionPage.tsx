@@ -417,8 +417,8 @@ export const ProGearCollectionPage: React.FC<ProGearCollectionPageProps> = ({
           {/* Mobile Filter Toggle Button */}
           <button
             type="button"
-            className="progear-btn-secondary"
-            style={{ padding: '0.4rem 0.8rem', fontSize: '0.78rem', display: 'none' }}
+            className="progear-btn-secondary progear-mobile-filter-btn"
+            style={{ padding: '0.4rem 0.8rem', fontSize: '0.78rem' }}
             onClick={() => setMobileFilterOpen(true)}
           >
             ⚙ Filters ({activeFilterCount})

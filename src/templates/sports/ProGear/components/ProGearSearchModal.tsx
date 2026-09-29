@@ -36,8 +36,9 @@ export const ProGearSearchModal: React.FC<ProGearSearchModalProps> = ({
   if (!isOpen) return null
 
   return (
-    <div className="progear-pdp-backdrop" onClick={onClose}>
+    <div className="progear-pdp-backdrop progear-search-backdrop" onClick={onClose}>
       <div
+        className="progear-search-modal-card"
         style={{
           background: '#ffffff',
           borderRadius: 'var(--pg-radius-lg)',
@@ -184,6 +185,10 @@ export const ProGearSearchModal: React.FC<ProGearSearchModalProps> = ({
                     objectFit: 'contain',
                     background: '#f8fafc',
                     borderRadius: '4px',
+                  }}
+                  onError={(e) => {
+                    e.currentTarget.src =
+                      'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&auto=format&fit=crop&q=80'
                   }}
                 />
                 <div style={{ flex: 1, minWidth: 0 }}>

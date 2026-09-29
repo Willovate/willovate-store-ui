@@ -84,6 +84,10 @@ export const ProGearProductPage: React.FC<ProGearProductPageProps> = ({
                 src={selectedImage}
                 alt={product.name}
                 className="progear-pdp-main-img"
+                onError={(e) => {
+                  e.currentTarget.src =
+                    'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&auto=format&fit=crop&q=80'
+                }}
               />
             </div>
 
@@ -97,6 +101,10 @@ export const ProGearProductPage: React.FC<ProGearProductPageProps> = ({
                     alt={`${product.name} thumbnail ${idx + 1}`}
                     className={`progear-pdp-thumb ${selectedImage === img ? 'active' : ''}`}
                     onClick={() => setSelectedImage(img)}
+                    onError={(e) => {
+                      e.currentTarget.src =
+                        'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&auto=format&fit=crop&q=80'
+                    }}
                   />
                 ))}
               </div>
