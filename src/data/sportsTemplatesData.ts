@@ -65,9 +65,9 @@ export const SPORTS_TEMPLATES_CONFIG: Record<string, SportsTemplateConfig> = {
       shortDescription:
         'Premium fitness and activewear storefront for strength training, running, HIIT, yoga, recovery, and gym equipment.',
       thumbnailUrl:
-        'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&auto=format&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&auto=format&fit=crop&q=80',
       fullPreviewUrl:
-        'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=1600&auto=format&fit=crop&q=85',
+        'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=1600&auto=format&fit=crop&q=85',
       popularityScore: 96,
       isActive: true,
       brandName: 'FITCORE',
@@ -79,7 +79,7 @@ export const SPORTS_TEMPLATES_CONFIG: Record<string, SportsTemplateConfig> = {
       accentColor: '#ff3b30',
       isDark: true,
       modelImage:
-        'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&auto=format&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&auto=format&fit=crop&q=80',
       badge: 'new',
       rating: 4.96,
       reviewCount: 284,
@@ -317,9 +317,9 @@ export const SPORTS_TEMPLATES_CONFIG: Record<string, SportsTemplateConfig> = {
       shortDescription:
         'Championship stadium-grade sports marketplace featuring pro athlete editorial layouts, 3 mega menus, dynamic filter drawers, and player edition kits.',
       thumbnailUrl:
-        'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800&auto=format&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&auto=format&fit=crop&q=80',
       fullPreviewUrl:
-        'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=1600&auto=format&fit=crop&q=85',
+        'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1600&auto=format&fit=crop&q=85',
       popularityScore: 98,
       isActive: true,
       brandName: 'ARENA',
@@ -331,7 +331,7 @@ export const SPORTS_TEMPLATES_CONFIG: Record<string, SportsTemplateConfig> = {
       accentColor: '#ff5500',
       isDark: true,
       modelImage:
-        'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800&auto=format&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&auto=format&fit=crop&q=80',
       badge: 'trending',
       rating: 4.98,
       reviewCount: 284,
@@ -474,7 +474,7 @@ export const SPORTS_TEMPLATES_CONFIG: Record<string, SportsTemplateConfig> = {
       shortDescription:
         'Minimalist, light-themed running and performance footwear store with clean typography, multi-angle shoe galleries, and technical stride specs.',
       thumbnailUrl:
-        'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&auto=format&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=800&auto=format&fit=crop&q=80',
       fullPreviewUrl:
         'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=1600&auto=format&fit=crop&q=85',
       popularityScore: 97,
@@ -592,9 +592,9 @@ export const SPORTS_TEMPLATES_CONFIG: Record<string, SportsTemplateConfig> = {
       shortDescription:
         'Large-scale sports equipment marketplace with 8 sports departments, bundled kit packs, PIN code delivery validation, and competition specs.',
       thumbnailUrl:
-        'https://images.unsplash.com/photo-1517649763962-0c623266ddc0?w=800&auto=format&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=800&auto=format&fit=crop&q=80',
       fullPreviewUrl:
-        'https://images.unsplash.com/photo-1517649763962-0c623266ddc0?w=1600&auto=format&fit=crop&q=85',
+        'https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=1600&auto=format&fit=crop&q=85',
       popularityScore: 98,
       isActive: true,
       brandName: 'PROGEAR',
@@ -606,7 +606,7 @@ export const SPORTS_TEMPLATES_CONFIG: Record<string, SportsTemplateConfig> = {
       accentColor: '#1d4ed8',
       isDark: false,
       modelImage:
-        'https://images.unsplash.com/photo-1517649763962-0c623266ddc0?w=800&auto=format&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=800&auto=format&fit=crop&q=80',
       badge: 'new',
       rating: 4.98,
       reviewCount: 420,
@@ -790,8 +790,8 @@ export const SPORTS_TEMPLATES_CONFIG: Record<string, SportsTemplateConfig> = {
       catalogSize: 'large',
       tags: ['Luxury Performance', 'Running', 'Training', 'Footwear', 'Technical', 'Premium'],
       shortDescription: 'Refined performance sportswear and technical footwear presented through cinematic editorial photography, considered material stories, and a calm luxury storefront.',
-      thumbnailUrl: 'https://images.unsplash.com/photo-1538805060514-97d9cc17730c?w=800&auto=format&fit=crop&q=80',
-      fullPreviewUrl: 'https://images.unsplash.com/photo-1538805060514-97d9cc17730c?w=1600&auto=format&fit=crop&q=85',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=1600&auto=format&fit=crop&q=85',
       popularityScore: 99,
       isActive: true,
       brandName: 'ELITESPORT',
@@ -848,7 +848,7 @@ export const SPORTS_TEMPLATES_CONFIG: Record<string, SportsTemplateConfig> = {
       buttonColor: '#d6ff32',
       accentColor: '#f15a32',
       isDark: true,
-      modelImage: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800&auto=format&fit=crop&q=80',
+      modelImage: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=800&auto=format&fit=crop&q=80',
       badge: 'new',
       rating: 4.9,
       reviewCount: 128,
@@ -995,7 +995,7 @@ export const SPORTS_TEMPLATES_CONFIG: Record<string, SportsTemplateConfig> = {
       shortDescription:
         'Next-generation futuristic sports technology storefront featuring biometric-responsive sportswear, carbon-fusion footwear, and real-time kinetic telemetry.',
       thumbnailUrl:
-        'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&auto=format&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&auto=format&fit=crop&q=80',
       fullPreviewUrl:
         'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1600&auto=format&fit=crop&q=85',
       popularityScore: 99,

@@ -69,8 +69,7 @@ export {
 } from '../../data/marketplaceTemplatesData'
 
 import { TEMPLATE_REGISTRY } from '../../data/templateRegistry'
-import { ALL_SPORTS_MARKETPLACE_TEMPLATES, SPORTS_TEMPLATES_CONFIG } from '../../data/sportsTemplatesData'
-
+import { ALL_SPORTS_MARKETPLACE_TEMPLATES } from '../../data/sportsTemplatesData'
 /* =========================================================================
    INLINE WILLOVATE ONE LOGO
    ========================================================================= */
