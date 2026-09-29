@@ -111,8 +111,6 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
   onPreview,
 }) => {
   const isDark = Boolean(template.isDark)
-  const sportsConfig = SPORTS_TEMPLATES_CONFIG[template.id] || null
-  const featuredProduct = sportsConfig?.featuredProducts?.[0] || null
 
   const badgeConfig = useMemo(() => {
     if (!template.badge) return null
@@ -135,33 +133,12 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
   const fallbackHero = 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&auto=format&fit=crop&q=80'
   const heroImage = template.thumbnailUrl || template.modelImage || template.fullPreviewUrl || fallbackHero
 
-  const announcementText = useMemo(() => {
-    if (sportsConfig?.announcement) {
-      return sportsConfig.announcement.split('•')[0].trim()
-    }
-    return '⚡ FLASH DROP • FREE EXPRESS DELIVERY OVER ₹999'
-  }, [sportsConfig])
-
   const storeDomain = useMemo(() => {
     const clean = (template.brandName || template.name)
       .toLowerCase()
       .replace(/[^a-z0-9]/g, '')
     return `${clean}.willovate.store`
   }, [template.brandName, template.name])
-
-  const contrastColor = useMemo(() => {
-    const hex = (template.accentColor || '#3b82f6').replace('#', '')
-    if (hex.length === 6) {
-      const r = parseInt(hex.substring(0, 2), 16)
-      const g = parseInt(hex.substring(2, 4), 16)
-      const b = parseInt(hex.substring(4, 6), 16)
-      const yiq = (r * 299 + g * 587 + b * 114) / 1000
-      return yiq >= 155 ? '#0f172a' : '#ffffff'
-    }
-    return '#ffffff'
-  }, [template.accentColor])
-
-  const heroStat = sportsConfig?.heroStats?.[0] || { label: 'Performance Gear', value: '120+ Items' }
 
   return (
     <div
@@ -177,14 +154,8 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
       }}
       aria-label={`${template.name} - ${template.industryCategory} template`}
     >
-      {/* Top Visual Browser Canvas Stage */}
-      <div
-        className={`marketplace-preview-stage ${isDark ? 'is-dark' : 'is-light'}`}
-        style={{
-          backgroundColor: isDark ? '#0b1120' : '#f8fafc',
-          color: isDark ? '#f8fafc' : '#0f172a',
-        }}
-      >
+      {/* Top Visual Browser Canvas Stage - Shopify Theme Store Clean Showcase */}
+      <div className="marketplace-preview-stage">
         {/* Simulated Browser Chrome / Top Bar */}
         <div className="stage-browser-bar">
           <div className="browser-traffic-dots" aria-hidden="true">
@@ -211,11 +182,6 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
           </div>
         </div>
 
-        {/* Micro Storefront Announcement Ticker */}
-        <div className="stage-store-announcement">
-          <span>{announcementText}</span>
-        </div>
-
         {/* Floating Category/Status Badge */}
         {badgeConfig && (
           <div
@@ -231,182 +197,63 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
           </div>
         )}
 
-        {/* Storefront Simulated Navigation Bar */}
-        <div
-          className="stage-mini-header"
-          style={{
-            borderColor: isDark ? 'rgba(255,255,255,0.09)' : 'rgba(0,0,0,0.06)',
-            color: isDark ? '#cbd5e1' : '#475569',
-          }}
-        >
-          <div className="stage-brand-group">
-            <span
-              className="brand-color-dot"
-              style={{ backgroundColor: template.accentColor || '#2563eb' }}
-            />
-            <span className="stage-brand-logo" style={{ color: isDark ? '#ffffff' : '#0f172a' }}>
-              {template.brandName || template.name}
-            </span>
-          </div>
-          <div className="stage-nav-links">
-            <span className="active">Shop</span>
-            <span>Catalog</span>
-            <span>Sale</span>
-          </div>
-          <div className="stage-nav-actions">
-            <span className="mini-icon">⌕</span>
-            <div className="mini-cart-pill">
-              <span className="mini-icon">👜</span>
-              <span
-                className="cart-badge-count"
-                style={{
-                  backgroundColor: template.accentColor || '#ff3b30',
-                  color: contrastColor,
-                }}
-              >
-                2
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Hero Stage with Full-Bleed Storefront Visual & Inside Peek Showcase */}
+        {/* Main Hero Media Stage - Clean, Sharp, Authentic Theme Visual */}
         <div className="stage-hero-showcase">
-          {/* Background hero image with smooth zoom */}
-          <div className="stage-hero-media">
-            <img
-              src={heroImage}
-              alt={template.name}
-              className="stage-hero-bg-img"
-              loading="lazy"
-              onError={(e) => {
-                const t = e.currentTarget
-                t.onerror = null
-                t.src = fallbackHero
-              }}
-            />
-            <div
-              className={`stage-hero-gradient ${isDark ? 'gradient-dark' : 'gradient-light'}`}
-            />
-          </div>
+          <img
+            src={heroImage}
+            alt={template.name}
+            className="stage-hero-bg-img"
+            loading="lazy"
+            onError={(e) => {
+              const t = e.currentTarget
+              t.onerror = null
+              t.src = fallbackHero
+            }}
+          />
+          <div className="stage-hero-gradient" />
 
-          {/* Left Hero Content: Headline & Action */}
-          <div className="stage-hero-copy">
-            <span
-              className="stage-eyebrow"
-              style={{ color: template.accentColor || '#38bdf8' }}
-            >
-              {template.industryCategory}
-            </span>
-            <h4
-              className="stage-mega-title"
-              style={{ color: isDark ? '#ffffff' : '#0f172a' }}
-            >
-              {template.headline}
-            </h4>
-            <p
-              className="stage-subtitle"
-              style={{ color: isDark ? '#cbd5e1' : '#475569' }}
-            >
-              {template.subtitle}
-            </p>
-            <div className="stage-hero-btn-row">
+          {/* Sleek Theme Brand Tag Overlay at Bottom of Visual */}
+          <div className="stage-brand-banner">
+            <div className="stage-brand-banner-info">
               <span
-                className="stage-accent-btn"
-                style={{
-                  backgroundColor: template.accentColor || '#2563eb',
-                  color: contrastColor,
-                }}
-              >
-                {template.buttonText || 'Shop Collection'} →
+                className="brand-color-dot"
+                style={{ backgroundColor: template.accentColor || '#2563eb' }}
+              />
+              <span className="stage-brand-title">
+                {template.brandName || template.name}
               </span>
-              <div className="stage-telemetry-pill">
-                <span
-                  className="telemetry-dot"
-                  style={{ backgroundColor: template.accentColor || '#10b981' }}
-                />
-                <span>{heroStat.value} {heroStat.label}</span>
-              </div>
+              <span className="stage-brand-sub">
+                {template.headline?.split('\n')[0] || template.subtitle || template.style}
+              </span>
             </div>
-          </div>
-
-          {/* The "Inside Look" Floating Product Peek Card (Real Store Experience) */}
-          <div className="stage-inside-peek-card">
-            <div className="peek-card-header">
-              <span className="peek-tag">{featuredProduct?.badge || 'BEST SELLER'}</span>
-              <span className="peek-in-store-dot" title="Live in store" />
-            </div>
-            <div className="peek-card-content">
-              <div className="peek-image-frame">
-                <img
-                  src={featuredProduct?.image || template.modelImage || heroImage}
-                  alt={featuredProduct?.name || 'Featured product'}
-                  onError={(e) => {
-                    const t = e.currentTarget
-                    t.onerror = null
-                    t.src = fallbackHero
-                  }}
-                />
-              </div>
-              <div className="peek-info-frame">
-                <span className="peek-item-title">
-                  {featuredProduct?.name || `${template.name} Pro Kit`}
-                </span>
-                <div className="peek-price-line">
-                  <span className="peek-price">
-                    {featuredProduct?.price || '₹1,999'}
-                  </span>
-                  {featuredProduct?.compareAtPrice && (
-                    <del className="peek-compare-price">
-                      {featuredProduct.compareAtPrice}
-                    </del>
-                  )}
-                </div>
-                <div className="peek-footer-row">
-                  <span className="peek-rating-stars">
-                    ★ {featuredProduct?.rating?.toFixed(1) || '4.9'}
-                  </span>
-                  <span
-                    className="peek-quick-add"
-                    style={{
-                      borderColor: template.accentColor || '#2563eb',
-                      color: isDark ? '#ffffff' : '#0f172a',
-                    }}
-                  >
-                    + Add
-                  </span>
-                </div>
-              </div>
-            </div>
+            <span className="stage-style-pill">{template.style}</span>
           </div>
         </div>
 
-        {/* Hover Quick Action Overlay */}
+        {/* Hover Action Overlay (Clean & Sharp — NO BLUR!) */}
         <div className="marketplace-hover-overlay">
-          <div className="hover-overlay-pill">✨ Interactive Theme Storefront</div>
-          <button
-            type="button"
-            className="overlay-preview-btn"
-            onClick={(e) => {
-              e.stopPropagation()
-              onPreview(template)
-            }}
-          >
-            👁️ Live Store Demo
-          </button>
-          <button
-            type="button"
-            className="overlay-select-btn"
-            onClick={(e) => {
-              e.stopPropagation()
-              onSelect(template.id)
-            }}
-          >
-            {isSelected ? 'Selected ✓' : 'Use This Template →'}
-          </button>
-          <span className="hover-device-caption">
-            Desktop & Mobile Responsive • Instant Sync
-          </span>
+          <div className="hover-action-buttons">
+            <button
+              type="button"
+              className="overlay-preview-btn"
+              onClick={(e) => {
+                e.stopPropagation()
+                onPreview(template)
+              }}
+            >
+              👁️ Live Preview
+            </button>
+            <button
+              type="button"
+              className={`overlay-select-btn ${isSelected ? 'active' : ''}`}
+              onClick={(e) => {
+                e.stopPropagation()
+                onSelect(template.id)
+              }}
+            >
+              {isSelected ? 'Selected ✓' : 'Select Template →'}
+            </button>
+          </div>
         </div>
       </div>
 
