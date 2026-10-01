@@ -10,8 +10,12 @@ import { PeakStorefront } from '../../templates/sports/Peak'
 import { StreetAthleteStorefront } from '../../templates/sports/StreetAthlete'
 import { EliteSportStorefront } from '../../templates/sports/EliteSport'
 import { MotionStorefront } from '../../templates/sports/Motion'
-import { MinoStorefront } from '../../templates/clothing/Mino'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront }
+import { BelleFashionStorefront } from '../../templates/fashion/Belle'
+import {
+  BELLE_FASHION_TEMPLATE,
+  ALL_FASHION_MARKETPLACE_TEMPLATES,
+} from '../../data/fashionTemplatesData'
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront }
 
 // Re-export domain types
 export type {
@@ -51,6 +55,11 @@ export type {
   ShoesProduct,
   ShoesTemplateConfig,
 } from '../../data/shoesTemplatesData'
+
+export {
+  BELLE_FASHION_TEMPLATE,
+  ALL_FASHION_MARKETPLACE_TEMPLATES,
+} from '../../data/fashionTemplatesData'
 
 export {
   TEMPLATE_REGISTRY,
@@ -505,9 +514,28 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
     )
   }
 
+  if (
+    template &&
+    (template.slug === 'fashion-belle' ||
+      template.id === 'fashion-belle' ||
+      template.name?.toLowerCase().includes('belle') ||
+      template.businessType === 'clothing-store')
+  ) {
+    return (
+      <BelleFashionStorefront
+        template={template}
+        device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
+        customAccentColor={customAccentColor}
+        onColorChange={_onColorChange}
+        onUseTemplate={onUseTemplate}
+        onClose={onClose}
+      />
+    )
+  }
+
   if (template && template.businessType !== 'sporting-goods') {
     return (
-      <MinoStorefront
+      <BelleFashionStorefront
         template={template}
         device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
         customAccentColor={customAccentColor}
@@ -802,8 +830,8 @@ export const BUSINESS_TYPES: BusinessTypeItem[] = [
   },
   {
     id: 'clothing-store',
-    name: 'Clothing Store',
-    description: 'Create a beautiful online clothing store.',
+    name: 'Fashion Store',
+    description: 'High-end fashion editorial storefronts and designer collections.',
     tone: 'blue',
     iconSvg: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -1155,33 +1183,7 @@ export interface CategoryTemplatesPageProps {
   onComplete?: (projectId: string, nextStepUrl: string, templateName: string, message: string) => void
 }
 
-const CLOTHING_REFERENCE_TEMPLATE: MarketplaceTemplate = {
-  id: 'clothing-reference',
-  slug: 'clothing-reference',
-  name: 'Mino Atelier',
-  businessType: 'clothing-store',
-  industryCategory: 'Clothing Store',
-  style: 'minimal',
-  catalogSize: 'large',
-  tags: ['Clothing', 'Fashion', 'Minimal', 'Everyday'],
-  shortDescription: 'A clean, fashion-led storefront shown as a visual reference for this category.',
-  thumbnailUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80',
-  fullPreviewUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1600&auto=format&fit=crop&q=85',
-  popularityScore: 90,
-  isActive: true,
-  brandName: 'MINO',
-  headline: 'New Collection\nMinimal Style',
-  subtitle: 'Everyday pieces, redefined.',
-  buttonText: 'Explore Collection',
-  buttonColor: '#0f172a',
-  isDark: false,
-  modelImage: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80',
-  badge: 'recommended',
-  rating: 4.9,
-  reviewCount: 128,
-  layoutType: 'editorial',
-  features: ['Minimal clothing storefront', 'Editorial collection presentation', 'Responsive storefront preview'],
-}
+const CLOTHING_REFERENCE_TEMPLATE: MarketplaceTemplate = BELLE_FASHION_TEMPLATE
 
 export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
   businessType = 'online-store',
@@ -1197,10 +1199,13 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
 
   const displayTitle = businessTypeDisplay || resolvedCategory?.displayName || 'Online Store'
 
-  // Sports keeps its full catalog; other categories use the clothing reference storefront.
+  // Sports keeps its full catalog; clothing-store uses fashion templates.
   const categoryTemplates: MarketplaceTemplate[] = useMemo(() => {
     if (businessType === 'sporting-goods') {
       return ALL_SPORTS_MARKETPLACE_TEMPLATES
+    }
+    if (businessType === 'clothing-store') {
+      return ALL_FASHION_MARKETPLACE_TEMPLATES
     }
 
     return [{
@@ -1209,7 +1214,7 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
       slug: `clothing-reference-${businessType}`,
       businessType,
       industryCategory: displayTitle,
-      shortDescription: `A clothing-store reference storefront for ${displayTitle}.`,
+      shortDescription: `A high-end fashion storefront for ${displayTitle}.`,
     }]
   }, [businessType, displayTitle])
 
@@ -1226,6 +1231,16 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
     if (rawHash === 'sports-storefront' || rawHash === 'velocity' || rawHash === 'sports-preview' || rawHash === 'velocity-preview') {
       return ALL_SPORTS_MARKETPLACE_TEMPLATES[0] || null
     }
+    if (
+      rawHash === 'fashion' ||
+      rawHash === 'fashion-store' ||
+      rawHash === 'fashion-templates' ||
+      rawHash === 'belle' ||
+      rawHash === 'belle-fashion' ||
+      rawHash === 'fashion-belle'
+    ) {
+      return BELLE_FASHION_TEMPLATE
+    }
     return null
   })
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
@@ -1239,13 +1254,22 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
     setPreviewTemplate(null)
   }, [businessType, categoryTemplates])
 
-  // Auto-launch preview if URL hash changes to #sports-storefront, #velocity, or #sports-preview
+  // Auto-launch preview if URL hash changes to sports or fashion presets
   useEffect(() => {
     const handleHash = () => {
       const rawHash = window.location.hash.toLowerCase().replace(/^#/, '')
       if (rawHash === 'sports-storefront' || rawHash === 'velocity' || rawHash === 'sports-preview' || rawHash === 'velocity-preview') {
         const match = ALL_SPORTS_MARKETPLACE_TEMPLATES[0]
         if (match) setPreviewTemplate(match)
+      } else if (
+        rawHash === 'fashion' ||
+        rawHash === 'fashion-store' ||
+        rawHash === 'fashion-templates' ||
+        rawHash === 'belle' ||
+        rawHash === 'belle-fashion' ||
+        rawHash === 'fashion-belle'
+      ) {
+        setPreviewTemplate(BELLE_FASHION_TEMPLATE)
       }
     }
     window.addEventListener('hashchange', handleHash)

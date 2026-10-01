@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react'
 import type { CategoryData, MarketplaceTemplate, Template } from '../types'
-import { MinoStorefront } from '../templates/clothing/Mino'
+import { BelleFashionStorefront } from '../templates/fashion/Belle'
 import { VelocityStorefront } from '../templates/sports/Velocity'
 import { ArenaStorefront } from '../templates/sports/Arena'
 import { SprintStorefront } from '../templates/sports/Sprint'
@@ -12,6 +12,7 @@ import { StreetAthleteStorefront } from '../templates/sports/StreetAthlete'
 import { EliteSportStorefront } from '../templates/sports/EliteSport'
 import { MotionStorefront } from '../templates/sports/Motion'
 import { ALL_SPORTS_MARKETPLACE_TEMPLATES } from './sportsTemplatesData'
+import { ALL_FASHION_MARKETPLACE_TEMPLATES } from './fashionTemplatesData'
 
 export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
   'sporting-goods': {
@@ -29,11 +30,11 @@ export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
     templates: [], // Clean and empty
   },
   'clothing-store': {
-    displayName: 'Clothing Store',
-    badgeIcon: '👕',
-    description: 'Create a beautiful online clothing store.',
-    filterTags: ['All'],
-    templates: [], // Clean and empty
+    displayName: 'Fashion Store',
+    badgeIcon: '👗',
+    description: 'High-end fashion editorial storefronts, ready-to-wear luxury collections, and seasonal lookbooks.',
+    filterTags: ['All', 'Luxury', 'Editorial', 'Minimal', 'Haute Couture', 'Clothing'],
+    templates: ALL_FASHION_MARKETPLACE_TEMPLATES,
   },
   'restaurant': {
     displayName: 'Restaurant',
@@ -152,8 +153,17 @@ export function getTemplateComponent(template?: MarketplaceTemplate | Template |
   ) {
     return ArenaStorefront
   }
+  if (
+    template &&
+    (template.slug === 'fashion-belle' ||
+      template.id === 'fashion-belle' ||
+      template.name?.toLowerCase().includes('belle') ||
+      template.businessType === 'clothing-store')
+  ) {
+    return BelleFashionStorefront
+  }
   if (template && template.businessType !== 'sporting-goods') {
-    return MinoStorefront
+    return BelleFashionStorefront
   }
   return VelocityStorefront
 }

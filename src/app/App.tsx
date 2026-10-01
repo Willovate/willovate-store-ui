@@ -124,7 +124,19 @@ function App() {
           rawHash === `${key}-templates` ||
           rawHash === `${key}-template` ||
           rawHash === key ||
-          (key === 'clothing-store' && (rawHash === 'cloth-store-templet' || rawHash === 'cloth-store-templates')) ||
+          (key === 'clothing-store' && (
+            rawHash === 'cloth-store-templet' ||
+            rawHash === 'cloth-store-templates' ||
+            rawHash === 'clothing-store' ||
+            rawHash === 'clothing-store-templates' ||
+            rawHash === 'fashion' ||
+            rawHash === 'fashion-store' ||
+            rawHash === 'fashion-templates' ||
+            rawHash === 'fashion-store-templates' ||
+            rawHash === 'belle' ||
+            rawHash === 'belle-fashion' ||
+            rawHash === 'fashion-belle'
+          )) ||
           (key === 'restaurant' && (rawHash === 'restro' || rawHash === 'restro-templates')) ||
           (key === 'health-beauty' && (
             rawHash === 'cosmetics-beauty' ||
