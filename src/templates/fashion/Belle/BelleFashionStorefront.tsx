@@ -39,6 +39,8 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
 
   // Modals & Drawers
   const [cartOpen, setCartOpen] = useState(false)
+  const [wishlistOpen, setWishlistOpen] = useState(false)
+  const [filterDrawerOpen, setFilterDrawerOpen] = useState(false)
   const [quickViewProduct, setQuickViewProduct] = useState<BelleProduct | null>(null)
   const [sizeGuideOpen, setSizeGuideOpen] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -47,21 +49,8 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null)
   const [mobileActiveCategory, setMobileActiveCategory] = useState<string | null>(null)
 
-  // User Commerce State
-  const [cartItems, setCartItems] = useState<BelleCartItem[]>([
-    {
-      product: BELLE_PRODUCTS[0], // Cashmere Belted Trench Coat
-      size: 'M',
-      color: 'Camel Tan',
-      quantity: 1,
-    },
-    {
-      product: BELLE_PRODUCTS[10], // Calfskin Top Handle Bag
-      size: 'One Size',
-      color: 'Saddle Brown',
-      quantity: 1,
-    },
-  ])
+  // User Commerce State (local until the shared commerce API is connected)
+  const [cartItems, setCartItems] = useState<BelleCartItem[]>([])
   const [wishlist, setWishlist] = useState<string[]>([BELLE_PRODUCTS[1].id, BELLE_PRODUCTS[4].id])
   const [toastMessage, setToastMessage] = useState<string | null>(null)
 
@@ -79,6 +68,8 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
   const [filterPriceMax, setFilterPriceMax] = useState<number>(30000)
   const [filterOnlySale, setFilterOnlySale] = useState(false)
   const [filterSize, setFilterSize] = useState<string>('All')
+  const [filterColor, setFilterColor] = useState<string>('All')
+  const [pagination, setPagination] = useState({ filterKey: '', count: 8 })
 
   // PDP Specific State
   const activeProduct = useMemo(() => {
@@ -99,14 +90,6 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
   const [qvSelectedColor, setQvSelectedColor] = useState<string>('')
   const [qvSelectedSize, setQvSelectedSize] = useState<string>('')
   const [qvQuantity, setQvQuantity] = useState<number>(1)
-
-  // Update PDP internal state when product changes
-  useEffect(() => {
-    setPdpSelectedImage(activeProduct.gallery[0] || activeProduct.image)
-    setPdpSelectedColor(activeProduct.colors[0]?.name || '')
-    setPdpSelectedSize(activeProduct.sizes[0] || 'M')
-    setPdpQuantity(1)
-  }, [activeProduct])
 
   // Countdown timer for Sale Section
   const [timeLeft, setTimeLeft] = useState({ hours: 14, minutes: 28, seconds: 45 })
@@ -185,7 +168,12 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
 
   // Open PDP
   const openProduct = (productId: string) => {
-    setSelectedProductId(productId)
+    const product = BELLE_PRODUCTS.find((item) => item.id === productId) || BELLE_PRODUCTS[0]
+    setSelectedProductId(product.id)
+    setPdpSelectedImage(product.gallery[0] || product.image)
+    setPdpSelectedColor(product.colors[0]?.name || '')
+    setPdpSelectedSize(product.sizes[0] || 'M')
+    setPdpQuantity(1)
     setViewMode('product')
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -233,6 +221,10 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
       list = list.filter((p) => p.sizes.includes(filterSize))
     }
 
+    if (filterColor !== 'All') {
+      list = list.filter((p) => p.colors.some((color) => color.name === filterColor))
+    }
+
     // Sort
     if (collectionSort === 'price-low') {
       list.sort((a, b) => (a.salePrice || a.price) - (b.salePrice || b.price))
@@ -245,7 +237,23 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
     }
 
     return list
-  }, [selectedCategory, filterGender, filterPriceMax, filterOnlySale, filterSize, collectionSort])
+  }, [selectedCategory, filterGender, filterPriceMax, filterOnlySale, filterSize, filterColor, collectionSort])
+
+  const collectionFilterKey = [selectedCategory, filterGender, filterPriceMax, filterOnlySale, filterSize, filterColor, collectionSort].join('|')
+  const visibleCollectionProducts = collectionProducts.slice(0, pagination.filterKey === collectionFilterKey ? pagination.count : 8)
+  const availableColors = Array.from(new Set(BELLE_PRODUCTS.flatMap((product) => product.colors.map((color) => color.name)))).sort()
+  const wishlistProducts = BELLE_PRODUCTS.filter((product) => wishlist.includes(product.id))
+  const selectedCollectionCard = BELLE_CATEGORY_CARDS.find((card) => card.linkCategory === selectedCategory) ?? BELLE_CATEGORY_CARDS[0]
+
+  const resetCollectionFilters = () => {
+    setSelectedCategory('All')
+    setFilterGender('All')
+    setFilterPriceMax(30000)
+    setFilterSize('All')
+    setFilterColor('All')
+    setFilterOnlySale(false)
+    setFilterDrawerOpen(false)
+  }
 
   // Search results
   const searchResults = useMemo(() => {
@@ -288,7 +296,7 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
     <div
       className={`belle-theme-root device-${effectiveDevice}`}
       style={{
-        ...(customAccentColor ? ({ '--belle-primary': customAccentColor } as React.CSSProperties) : {}),
+        ...(customAccentColor ? ({ '--belle-accent-noir': customAccentColor } as React.CSSProperties) : {}),
       }}
     >
       {/* Toast Notification */}
@@ -446,10 +454,7 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
             <button
               type="button"
               className="belle-action-btn"
-              onClick={() => {
-                openCollection('Collections')
-                triggerToast(`Wishlist contains ${wishlist.length} item(s)`)
-              }}
+              onClick={() => setWishlistOpen(true)}
               aria-label="Wishlist"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -798,6 +803,9 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
 
           {/* SECTION 4: FULL-WIDTH EDITORIAL PROMO BANNER */}
           <section className="belle-promo-banner">
+            <div className="belle-promo-image" aria-hidden="true">
+              <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1800&auto=format&fit=crop&q=85" alt="" loading="lazy" />
+            </div>
             <div className="belle-promo-banner-inner">
               <span className="belle-promo-tag">THE LUXURY CAPSULE</span>
               <h2 className="belle-promo-heading">Understated Grandeur. Pure Silk & Cashmere.</h2>
@@ -953,6 +961,16 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
                       >
                         VIEW PIECE →
                       </button>
+                      <button
+                        type="button"
+                        className="belle-popup-add"
+                        onClick={() => {
+                          const product = BELLE_PRODUCTS.find((item) => item.id === activeHotspot.productId)
+                          if (product) addToCart(product, product.sizes[0] || 'M', product.colors[0]?.name || 'Standard')
+                        }}
+                      >
+                        ADD TO BAG
+                      </button>
                     </div>
                   </div>
                 )}
@@ -989,6 +1007,9 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
 
           {/* SECTION 8: SALE COUNTDOWN SPOTLIGHT */}
           <section className="belle-sale-spotlight">
+            <div className="belle-sale-image">
+              <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=1400&auto=format&fit=crop&q=85" alt="Models wearing pieces from the seasonal edit" loading="lazy" />
+            </div>
             <div className="belle-sale-inner">
               <div className="belle-sale-timer-wrap">
                 <span className="belle-sale-subtitle">LIMITED SEASONAL PROMOTION</span>
@@ -1144,9 +1165,37 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
             </p>
           </div>
 
+          <div className="belle-collection-banner">
+            <img src={selectedCollectionCard.image} alt={`${selectedCategory} collection`} />
+            <div>
+              <span>THE BELLE EDIT</span>
+              <p>Considered pieces for the way you move through the world.</p>
+            </div>
+          </div>
+
           <div className="belle-collection-container">
+            {filterDrawerOpen && (
+              <button
+                type="button"
+                className="belle-filter-backdrop"
+                aria-label="Close filters"
+                onClick={() => setFilterDrawerOpen(false)}
+              />
+            )}
+
             {/* Filter Sidebar */}
-            <aside className="belle-collection-sidebar">
+            <aside className={`belle-collection-sidebar ${filterDrawerOpen ? 'is-open' : ''}`}>
+              <div className="belle-filter-drawer-heading">
+                <h2>Filter pieces</h2>
+                <button
+                  type="button"
+                  className="belle-drawer-close"
+                  aria-label="Close filters"
+                  onClick={() => setFilterDrawerOpen(false)}
+                >
+                  ✕
+                </button>
+              </div>
               <div className="belle-filter-group">
                 <h4>Category</h4>
                 <div className="belle-filter-options">
@@ -1213,6 +1262,20 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
               </div>
 
               <div className="belle-filter-group">
+                <label htmlFor="belle-color-filter">Color</label>
+                <select
+                  id="belle-color-filter"
+                  value={filterColor}
+                  onChange={(e) => setFilterColor(e.target.value)}
+                >
+                  <option value="All">All colors</option>
+                  {availableColors.map((color) => (
+                    <option key={color} value={color}>{color}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="belle-filter-group">
                 <label className="belle-checkbox-label">
                   <input
                     type="checkbox"
@@ -1223,18 +1286,15 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
                 </label>
               </div>
 
+              <button type="button" className="belle-btn-text reset-filters" onClick={resetCollectionFilters}>
+                Reset All Filters
+              </button>
               <button
                 type="button"
-                className="belle-btn-text reset-filters"
-                onClick={() => {
-                  setSelectedCategory('All')
-                  setFilterGender('All')
-                  setFilterPriceMax(30000)
-                  setFilterSize('All')
-                  setFilterOnlySale(false)
-                }}
+                className="belle-btn-primary belle-filter-apply"
+                onClick={() => setFilterDrawerOpen(false)}
               >
-                Reset All Filters
+                Show {collectionProducts.length} pieces
               </button>
             </aside>
 
@@ -1244,6 +1304,14 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
               <div className="belle-collection-toolbar">
                 <div className="belle-toolbar-left">
                   <span>Showing {collectionProducts.length} items</span>
+                  <button
+                    type="button"
+                    className="belle-filter-trigger"
+                    onClick={() => setFilterDrawerOpen(true)}
+                    aria-expanded={filterDrawerOpen}
+                  >
+                    <span aria-hidden="true">☷</span> Filters
+                  </button>
                 </div>
                 <div className="belle-toolbar-right">
                   <div className="belle-sort-wrap">
@@ -1288,13 +1356,7 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
                   <button
                     type="button"
                     className="belle-btn-secondary"
-                    onClick={() => {
-                      setSelectedCategory('All')
-                      setFilterGender('All')
-                      setFilterPriceMax(30000)
-                      setFilterSize('All')
-                      setFilterOnlySale(false)
-                    }}
+                    onClick={resetCollectionFilters}
                   >
                     View All Products
                   </button>
@@ -1303,7 +1365,7 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
                 <div
                   className={`belle-products-grid ${collectionLayout === 'list' ? 'is-list-view' : ''}`}
                 >
-                  {collectionProducts.map((product) => (
+                  {visibleCollectionProducts.map((product) => (
                     <div key={product.id} className="belle-product-card">
                       <div
                         className="belle-product-thumb"
@@ -1392,6 +1454,18 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
                     </div>
                   ))}
                 </div>
+              )}
+              {collectionProducts.length > visibleCollectionProducts.length && (
+                <button
+                  type="button"
+                  className="belle-load-more"
+                  onClick={() => setPagination((current) => ({
+                    filterKey: collectionFilterKey,
+                    count: (current.filterKey === collectionFilterKey ? current.count : 8) + 8,
+                  }))}
+                >
+                  Load more pieces
+                </button>
               )}
             </div>
           </div>
@@ -1730,7 +1804,7 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
       {/* QUICK VIEW MODAL */}
       {quickViewProduct && (
         <div className="belle-modal-overlay" onClick={() => setQuickViewProduct(null)}>
-          <div className="belle-qv-modal" onClick={(e) => e.stopPropagation()}>
+          <div className="belle-qv-modal" role="dialog" aria-modal="true" aria-labelledby="belle-qv-title" onClick={(e) => e.stopPropagation()}>
             <button
               type="button"
               className="belle-modal-close"
@@ -1744,7 +1818,7 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
               </div>
               <div className="belle-qv-info">
                 <span className="belle-card-category">{quickViewProduct.category}</span>
-                <h2>{quickViewProduct.name}</h2>
+                <h2 id="belle-qv-title">{quickViewProduct.name}</h2>
                 <div className="belle-card-prices">
                   {quickViewProduct.salePrice ? (
                     <>
@@ -1790,6 +1864,15 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
                   </div>
                 </div>
 
+                <div className="belle-qv-quantity-row">
+                  <span>Quantity</span>
+                  <div className="belle-qty-stepper small">
+                    <button type="button" aria-label="Decrease quantity" onClick={() => setQvQuantity((quantity) => Math.max(1, quantity - 1))}>−</button>
+                    <span>{qvQuantity}</span>
+                    <button type="button" aria-label="Increase quantity" onClick={() => setQvQuantity((quantity) => quantity + 1)}>+</button>
+                  </div>
+                </div>
+
                 {/* Actions */}
                 <div className="belle-qv-actions">
                   <button
@@ -1801,6 +1884,13 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
                     }}
                   >
                     ADD TO BAG
+                  </button>
+                  <button
+                    type="button"
+                    className="belle-btn-secondary full-width"
+                    onClick={() => toggleWishlist(quickViewProduct.id)}
+                  >
+                    {wishlist.includes(quickViewProduct.id) ? 'REMOVE FROM WISHLIST' : 'SAVE TO WISHLIST'}
                   </button>
                   <button
                     type="button"
@@ -2022,6 +2112,42 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
               </div>
             )}
           </div>
+        </div>
+      )}
+
+      {wishlistOpen && (
+        <div className="belle-cart-drawer-overlay" onClick={() => setWishlistOpen(false)}>
+          <aside
+            className="belle-wishlist-drawer"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="belle-wishlist-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="belle-cart-drawer-header">
+              <h2 id="belle-wishlist-title">SAVED PIECES ({wishlistProducts.length})</h2>
+              <button type="button" className="belle-drawer-close" aria-label="Close wishlist" onClick={() => setWishlistOpen(false)}>✕</button>
+            </div>
+            {wishlistProducts.length === 0 ? (
+              <div className="belle-cart-empty">
+                <p>Your saved pieces will be gathered here.</p>
+                <button type="button" className="belle-btn-secondary" onClick={() => { setWishlistOpen(false); openCollection('All') }}>EXPLORE COLLECTION</button>
+              </div>
+            ) : (
+              <div className="belle-wishlist-items">
+                {wishlistProducts.map((product) => (
+                  <article className="belle-wishlist-item" key={product.id}>
+                    <button type="button" className="belle-wishlist-product" onClick={() => { setWishlistOpen(false); openProduct(product.id) }}>
+                      <img src={product.image} alt={product.name} />
+                      <span><strong>{product.name}</strong><small>₹{(product.salePrice || product.price).toLocaleString()}</small></span>
+                    </button>
+                    <button type="button" className="belle-wishlist-remove" onClick={() => toggleWishlist(product.id)}>Remove</button>
+                  </article>
+                ))}
+              </div>
+            )}
+            <button type="button" className="belle-btn-secondary full-width" onClick={() => setWishlistOpen(false)}>CONTINUE SHOPPING</button>
+          </aside>
         </div>
       )}
 
