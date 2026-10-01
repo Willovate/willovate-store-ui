@@ -11,11 +11,13 @@ import { StreetAthleteStorefront } from '../../templates/sports/StreetAthlete'
 import { EliteSportStorefront } from '../../templates/sports/EliteSport'
 import { MotionStorefront } from '../../templates/sports/Motion'
 import { BelleFashionStorefront } from '../../templates/fashion/Belle'
+import { VogalFashionStorefront } from '../../templates/fashion/Vogal'
 import {
   BELLE_FASHION_TEMPLATE,
+  VOGAL_FASHION_TEMPLATE,
   ALL_FASHION_MARKETPLACE_TEMPLATES,
 } from '../../data/fashionTemplatesData'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront }
 
 // Re-export domain types
 export type {
@@ -58,6 +60,7 @@ export type {
 
 export {
   BELLE_FASHION_TEMPLATE,
+  VOGAL_FASHION_TEMPLATE,
   ALL_FASHION_MARKETPLACE_TEMPLATES,
 } from '../../data/fashionTemplatesData'
 
@@ -510,6 +513,24 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
         deviceView={device}
         customAccentColor={customAccentColor || undefined}
         onBack={onClose}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'fashion-vogal' ||
+      template.id === 'fashion-vogal' ||
+      template.name?.toLowerCase().includes('vogal'))
+  ) {
+    return (
+      <VogalFashionStorefront
+        template={template}
+        device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
+        customAccentColor={customAccentColor}
+        onColorChange={_onColorChange}
+        onUseTemplate={onUseTemplate}
+        onClose={onClose}
       />
     )
   }
@@ -1241,6 +1262,13 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
     ) {
       return BELLE_FASHION_TEMPLATE
     }
+    if (
+      rawHash === 'vogal' ||
+      rawHash === 'fashion-vogal' ||
+      rawHash === 'vogal-fashion'
+    ) {
+      return VOGAL_FASHION_TEMPLATE
+    }
     return null
   })
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
@@ -1270,6 +1298,12 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
         rawHash === 'fashion-belle'
       ) {
         setPreviewTemplate(BELLE_FASHION_TEMPLATE)
+      } else if (
+        rawHash === 'vogal' ||
+        rawHash === 'fashion-vogal' ||
+        rawHash === 'vogal-fashion'
+      ) {
+        setPreviewTemplate(VOGAL_FASHION_TEMPLATE)
       }
     }
     window.addEventListener('hashchange', handleHash)

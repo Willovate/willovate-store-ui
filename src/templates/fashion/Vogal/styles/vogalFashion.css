@@ -1,0 +1,2331 @@
+/* =========================================================================
+   VOGAL FASHION STOREFRONT STYLESHEET
+   Inspired by the Vogal Multipurpose Shopify Theme
+   Contemporary Urban Luxury, High-Impact Typography, Sleek Interactions
+   ========================================================================= */
+
+:root {
+  --vogal-primary: #09090b;
+  --vogal-primary-hover: #27272a;
+  --vogal-accent: #e11d48; /* Crimson / Couture Rose Accent */
+  --vogal-accent-light: #ffe4e6;
+  --vogal-bg-white: #ffffff;
+  --vogal-bg-subtle: #f8f8f9;
+  --vogal-bg-alt: #f1f1f4;
+  --vogal-text-main: #09090b;
+  --vogal-text-muted: #71717a;
+  --vogal-text-light: #a1a1aa;
+  --vogal-border: #e4e4e7;
+  --vogal-border-light: #f4f4f5;
+  --vogal-font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --vogal-font-heading: 'Syne', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --vogal-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --vogal-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --vogal-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
+  --vogal-shadow-drawer: -6px 0 24px rgba(0, 0, 0, 0.15);
+  --vogal-radius-sm: 4px;
+  --vogal-radius-md: 8px;
+  --vogal-radius-lg: 16px;
+  --vogal-radius-full: 9999px;
+  --vogal-transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset & Box Sizing for Theme Root */
+.vogal-theme-root {
+  font-family: var(--vogal-font-main);
+  color: var(--vogal-text-main);
+  background-color: var(--vogal-bg-white);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.vogal-theme-root *,
+.vogal-theme-root *::before,
+.vogal-theme-root *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.vogal-theme-root button {
+  font-family: inherit;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.vogal-theme-root input,
+.vogal-theme-root select {
+  font-family: inherit;
+}
+
+.vogal-theme-root a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.vogal-theme-root img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   1. TOP PROMO BAR & SCROLLING MARQUEE TICKER
+───────────────────────────────────────────────────────────── */
+.vogal-top-bar {
+  background-color: var(--vogal-primary);
+  color: #ffffff;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  height: 38px;
+  display: flex;
+  align-items: center;
+}
+
+.vogal-marquee-track {
+  display: flex;
+  white-space: nowrap;
+  animation: vogal-marquee 28s linear infinite;
+}
+
+.vogal-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.vogal-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 28px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.vogal-marquee-dot {
+  color: var(--vogal-accent);
+}
+
+@keyframes vogal-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   2. HEADER & NAVIGATION
+───────────────────────────────────────────────────────────── */
+.vogal-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--vogal-border);
+  transition: var(--vogal-transition);
+}
+
+.vogal-header-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 32px;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo */
+.vogal-logo {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+}
+
+.vogal-logo h1 {
+  font-family: var(--vogal-font-heading);
+  font-size: 1.95rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--vogal-primary);
+}
+
+.vogal-logo-tagline {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  color: var(--vogal-accent);
+  margin-top: 2px;
+  text-transform: uppercase;
+}
+
+/* Desktop Nav Menu */
+.vogal-desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.vogal-nav-wrapper {
+  position: relative;
+}
+
+.vogal-nav-link {
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--vogal-text-main);
+  padding: 26px 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.18s ease;
+  position: relative;
+}
+
+.vogal-nav-link:hover,
+.vogal-nav-link.is-active {
+  color: var(--vogal-accent);
+}
+
+.vogal-nav-link.is-active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--vogal-accent);
+}
+
+.vogal-badge-sale-pill {
+  background-color: var(--vogal-accent);
+  color: #ffffff;
+  font-size: 0.62rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: var(--vogal-radius-full);
+  letter-spacing: 0.04em;
+}
+
+/* Mega Menu Dropdown */
+.vogal-mega-dropdown {
+  position: absolute;
+  top: 100%;
+  left: -200px;
+  width: 860px;
+  background-color: #ffffff;
+  box-shadow: var(--vogal-shadow-lg);
+  border: 1px solid var(--vogal-border);
+  border-top: 2px solid var(--vogal-primary);
+  border-radius: 0 0 var(--vogal-radius-md) var(--vogal-radius-md);
+  padding: 32px;
+  z-index: 200;
+  animation: vogal-fade-in 0.18s ease;
+}
+
+.vogal-mega-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) 1.25fr;
+  gap: 32px;
+}
+
+.vogal-mega-col h4 {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--vogal-text-main);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--vogal-border-light);
+}
+
+.vogal-mega-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.vogal-mega-col a {
+  font-size: 0.84rem;
+  color: var(--vogal-text-muted);
+  transition: all 0.15s ease;
+}
+
+.vogal-mega-col a:hover {
+  color: var(--vogal-accent);
+  transform: translateX(4px);
+  display: inline-block;
+}
+
+.vogal-mega-featured-card {
+  position: relative;
+  border-radius: var(--vogal-radius-sm);
+  overflow: hidden;
+  height: 100%;
+  min-height: 220px;
+}
+
+.vogal-mega-featured-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.vogal-mega-featured-card:hover img {
+  transform: scale(1.05);
+}
+
+.vogal-mega-featured-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.75) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  color: #ffffff;
+}
+
+.vogal-mega-featured-overlay span {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  background-color: var(--vogal-accent);
+  padding: 3px 8px;
+  border-radius: var(--vogal-radius-sm);
+  width: fit-content;
+  margin-bottom: 8px;
+}
+
+.vogal-mega-featured-overlay h5 {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 8px;
+}
+
+.vogal-mega-featured-overlay button {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Header Actions */
+.vogal-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.vogal-icon-btn {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--vogal-text-main);
+  transition: background-color 0.18s ease;
+}
+
+.vogal-icon-btn:hover {
+  background-color: var(--vogal-bg-subtle);
+  color: var(--vogal-accent);
+}
+
+.vogal-icon-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background-color: var(--vogal-primary);
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vogal-mobile-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  width: 26px;
+  padding: 4px 0;
+}
+
+.vogal-mobile-hamburger span {
+  display: block;
+  height: 2px;
+  background-color: var(--vogal-text-main);
+  border-radius: 2px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   3. HERO SECTION
+───────────────────────────────────────────────────────────── */
+.vogal-hero {
+  position: relative;
+  background-color: var(--vogal-bg-subtle);
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.vogal-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.vogal-hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+}
+
+.vogal-hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(9, 9, 11, 0.88) 0%,
+    rgba(9, 9, 11, 0.65) 45%,
+    rgba(9, 9, 11, 0.2) 100%
+  );
+}
+
+.vogal-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 80px 32px;
+  width: 100%;
+  color: #ffffff;
+}
+
+.vogal-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--vogal-accent);
+  margin-bottom: 20px;
+}
+
+.vogal-hero-title {
+  font-family: var(--vogal-font-heading);
+  font-size: clamp(2.5rem, 6vw, 5.2rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  max-width: 820px;
+  margin-bottom: 24px;
+}
+
+.vogal-hero-desc {
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  color: #e4e4e7;
+  max-width: 600px;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.vogal-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Primary & Secondary Buttons */
+.vogal-btn-primary {
+  background-color: #ffffff;
+  color: var(--vogal-primary);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  border-radius: var(--vogal-radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--vogal-transition);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.vogal-btn-primary:hover {
+  background-color: var(--vogal-accent);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.vogal-btn-dark {
+  background-color: var(--vogal-primary);
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  border-radius: var(--vogal-radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--vogal-transition);
+}
+
+.vogal-btn-dark:hover {
+  background-color: var(--vogal-accent);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.vogal-btn-secondary {
+  background-color: transparent;
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 16px 34px;
+  border: 1.5px solid #ffffff;
+  border-radius: var(--vogal-radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--vogal-transition);
+}
+
+.vogal-btn-secondary:hover {
+  background-color: #ffffff;
+  color: var(--vogal-primary);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   4. CIRCULAR / PILL CATEGORY CAROUSEL
+───────────────────────────────────────────────────────────── */
+.vogal-categories-bar {
+  padding: 56px 0 24px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.vogal-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 20px;
+  padding: 0 32px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.vogal-categories-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.vogal-cat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  group: true;
+}
+
+.vogal-cat-avatar-wrap {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--vogal-border);
+  padding: 3px;
+  transition: var(--vogal-transition);
+}
+
+.vogal-cat-avatar-wrap img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.vogal-cat-card:hover .vogal-cat-avatar-wrap {
+  border-color: var(--vogal-accent);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(225, 29, 72, 0.2);
+}
+
+.vogal-cat-card:hover img {
+  transform: scale(1.1);
+}
+
+.vogal-cat-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-top: 10px;
+  color: var(--vogal-text-main);
+  transition: color 0.18s ease;
+}
+
+.vogal-cat-card:hover .vogal-cat-name {
+  color: var(--vogal-accent);
+}
+
+.vogal-cat-count {
+  font-size: 0.7rem;
+  color: var(--vogal-text-muted);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   5. FEATURED COLLECTION WITH TABBED FILTER
+───────────────────────────────────────────────────────────── */
+.vogal-section {
+  padding: 64px 32px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.vogal-section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.vogal-section-subtitle {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--vogal-accent);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.vogal-section-title {
+  font-family: var(--vogal-font-heading);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--vogal-text-main);
+}
+
+/* Tab buttons */
+.vogal-tabs-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 44px;
+  flex-wrap: wrap;
+}
+
+.vogal-tab-btn {
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  border-radius: var(--vogal-radius-full);
+  border: 1.5px solid var(--vogal-border);
+  color: var(--vogal-text-muted);
+  transition: var(--vogal-transition);
+}
+
+.vogal-tab-btn:hover {
+  border-color: var(--vogal-text-main);
+  color: var(--vogal-text-main);
+}
+
+.vogal-tab-btn.is-active {
+  background-color: var(--vogal-primary);
+  border-color: var(--vogal-primary);
+  color: #ffffff;
+}
+
+/* Product Cards Grid */
+.vogal-product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px 24px;
+}
+
+.vogal-product-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease;
+}
+
+.vogal-card-image-wrap {
+  position: relative;
+  aspect-ratio: 3/4;
+  background-color: var(--vogal-bg-subtle);
+  border-radius: var(--vogal-radius-sm);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.vogal-card-img-primary,
+.vogal-card-img-alt {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.35s ease, transform 0.5s ease;
+}
+
+.vogal-card-img-alt {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.vogal-card-image-wrap:hover .vogal-card-img-alt {
+  opacity: 1;
+}
+
+.vogal-card-image-wrap:hover .vogal-card-img-primary {
+  opacity: 0;
+}
+
+.vogal-card-image-wrap:hover img {
+  transform: scale(1.04);
+}
+
+/* Badges */
+.vogal-card-badges {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 4;
+}
+
+.vogal-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: var(--vogal-radius-sm);
+  text-transform: uppercase;
+}
+
+.vogal-badge.sale {
+  background-color: var(--vogal-accent);
+  color: #ffffff;
+}
+
+.vogal-badge.hot,
+.vogal-badge.trending {
+  background-color: var(--vogal-primary);
+  color: #ffffff;
+}
+
+.vogal-badge.new {
+  background-color: #0284c7;
+  color: #ffffff;
+}
+
+/* Wishlist Button */
+.vogal-card-wishlist {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: var(--vogal-shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--vogal-text-main);
+  transition: var(--vogal-transition);
+  z-index: 5;
+}
+
+.vogal-card-wishlist:hover,
+.vogal-card-wishlist.is-active {
+  background-color: var(--vogal-accent);
+  color: #ffffff;
+}
+
+/* Quick View floating button */
+.vogal-card-quickview-btn {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(4px);
+  color: var(--vogal-primary);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 11px;
+  border-radius: var(--vogal-radius-sm);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: var(--vogal-transition);
+  z-index: 5;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.vogal-card-image-wrap:hover .vogal-card-quickview-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.vogal-card-quickview-btn:hover {
+  background-color: var(--vogal-primary);
+  color: #ffffff;
+}
+
+/* Product Info */
+.vogal-card-info {
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.vogal-card-category {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--vogal-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.vogal-card-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--vogal-text-main);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.vogal-card-title:hover {
+  color: var(--vogal-accent);
+}
+
+.vogal-card-prices {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.vogal-price-current {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: var(--vogal-text-main);
+}
+
+.vogal-price-orig {
+  font-size: 0.85rem;
+  color: var(--vogal-text-light);
+  text-decoration: line-through;
+}
+
+/* Color swatches */
+.vogal-card-swatches {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.vogal-swatch-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.vogal-swatch-dot:hover {
+  transform: scale(1.25);
+}
+
+/* Quick Add Button */
+.vogal-card-quickadd {
+  margin-top: 8px;
+  width: 100%;
+  padding: 10px;
+  background-color: var(--vogal-bg-subtle);
+  border: 1px solid var(--vogal-border);
+  border-radius: var(--vogal-radius-sm);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--vogal-text-main);
+  transition: var(--vogal-transition);
+}
+
+.vogal-card-quickadd:hover {
+  background-color: var(--vogal-primary);
+  border-color: var(--vogal-primary);
+  color: #ffffff;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   6. SPLIT EDITORIAL PROMO BANNERS
+───────────────────────────────────────────────────────────── */
+.vogal-split-banners {
+  padding: 40px 32px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.vogal-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.vogal-promo-card {
+  position: relative;
+  min-height: 480px;
+  border-radius: var(--vogal-radius-sm);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  cursor: pointer;
+}
+
+.vogal-promo-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vogal-promo-card:hover img {
+  transform: scale(1.05);
+}
+
+.vogal-promo-overlay {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 44px 36px;
+  background: linear-gradient(180deg, rgba(9, 9, 11, 0) 0%, rgba(9, 9, 11, 0.85) 100%);
+  color: #ffffff;
+}
+
+.vogal-promo-sub {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: var(--vogal-accent);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.vogal-promo-heading {
+  font-family: var(--vogal-font-heading);
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+
+.vogal-promo-desc {
+  font-size: 0.95rem;
+  color: #d4d4d8;
+  max-width: 440px;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   7. SHOP THE LOOK (HOTSPOT OUTFIT PINS)
+───────────────────────────────────────────────────────────── */
+.vogal-stl-section {
+  padding: 80px 32px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.vogal-stl-container {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 40px;
+  align-items: center;
+  background-color: var(--vogal-bg-subtle);
+  border-radius: var(--vogal-radius-md);
+  padding: 40px;
+}
+
+.vogal-stl-image-wrap {
+  position: relative;
+  aspect-ratio: 4/5;
+  border-radius: var(--vogal-radius-sm);
+  overflow: hidden;
+}
+
+.vogal-stl-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Pulsating Hotspot Pins */
+.vogal-pin {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background-color: var(--vogal-primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.vogal-pin:hover,
+.vogal-pin.is-active {
+  background-color: var(--vogal-accent);
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+.vogal-pin-pulse {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid var(--vogal-accent);
+  animation: vogal-ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes vogal-ping {
+  75%, 100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* Hotspot Popover on the Image */
+.vogal-pin-popover {
+  position: absolute;
+  background-color: #ffffff;
+  border-radius: var(--vogal-radius-sm);
+  box-shadow: var(--vogal-shadow-lg);
+  padding: 12px;
+  width: 220px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  z-index: 20;
+  animation: vogal-fade-in 0.2s ease;
+}
+
+.vogal-pin-popover img {
+  width: 60px;
+  height: 75px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.vogal-pin-popover-info {
+  flex: 1;
+}
+
+.vogal-pin-popover-info h5 {
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 4px;
+}
+
+.vogal-pin-popover-info span {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--vogal-accent);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.vogal-pin-popover-info button {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--vogal-primary);
+  text-decoration: underline;
+}
+
+/* Right Side: Outfit Item List */
+.vogal-stl-sidebar h3 {
+  font-family: var(--vogal-font-heading);
+  font-size: 2rem;
+  font-weight: 900;
+  margin-bottom: 12px;
+}
+
+.vogal-stl-sidebar p {
+  color: var(--vogal-text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 28px;
+}
+
+.vogal-stl-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.vogal-stl-item-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background-color: #ffffff;
+  padding: 14px 18px;
+  border-radius: var(--vogal-radius-sm);
+  border: 1px solid var(--vogal-border);
+  transition: var(--vogal-transition);
+}
+
+.vogal-stl-item-row:hover {
+  border-color: var(--vogal-text-main);
+  box-shadow: var(--vogal-shadow-sm);
+}
+
+.vogal-stl-item-row img {
+  width: 54px;
+  height: 68px;
+  object-fit: cover;
+  border-radius: var(--vogal-radius-sm);
+}
+
+.vogal-stl-item-meta {
+  flex: 1;
+}
+
+.vogal-stl-item-meta h4 {
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.vogal-stl-item-meta span {
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   8. DEAL OF THE WEEK (COUNTDOWN BANNER)
+───────────────────────────────────────────────────────────── */
+.vogal-countdown-banner {
+  background-color: var(--vogal-primary);
+  color: #ffffff;
+  padding: 80px 32px;
+  margin: 40px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.vogal-countdown-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.vogal-countdown-copy span.eyebrow {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  color: var(--vogal-accent);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.vogal-countdown-copy h2 {
+  font-family: var(--vogal-font-heading);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 18px;
+}
+
+.vogal-countdown-copy p {
+  color: #a1a1aa;
+  font-size: 1.05rem;
+  margin-bottom: 36px;
+  line-height: 1.6;
+}
+
+/* Countdown boxes */
+.vogal-timer-grid {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.vogal-timer-box {
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--vogal-radius-sm);
+  padding: 16px 20px;
+  min-width: 82px;
+  text-align: center;
+}
+
+.vogal-timer-num {
+  font-family: var(--vogal-font-heading);
+  font-size: 2.2rem;
+  font-weight: 900;
+  line-height: 1;
+  display: block;
+  color: #ffffff;
+}
+
+.vogal-timer-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #a1a1aa;
+  margin-top: 6px;
+  display: block;
+}
+
+.vogal-timer-sep {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--vogal-accent);
+}
+
+.vogal-countdown-media {
+  position: relative;
+  aspect-ratio: 4/3;
+  border-radius: var(--vogal-radius-sm);
+  overflow: hidden;
+}
+
+.vogal-countdown-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   9. REVIEWS & EDITORIAL PRAISE
+───────────────────────────────────────────────────────────── */
+.vogal-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.vogal-test-card {
+  background-color: var(--vogal-bg-subtle);
+  border: 1px solid var(--vogal-border);
+  border-radius: var(--vogal-radius-sm);
+  padding: 36px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.vogal-test-stars {
+  color: #f59e0b;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+.vogal-test-quote {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--vogal-text-main);
+  margin-bottom: 24px;
+}
+
+.vogal-test-author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.vogal-test-author img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.vogal-test-author-info h4 {
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.vogal-test-author-info span {
+  font-size: 0.74rem;
+  color: var(--vogal-text-muted);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   10. INSTAGRAM GRID & COMMUNITY
+───────────────────────────────────────────────────────────── */
+.vogal-insta-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+
+.vogal-insta-tile {
+  position: relative;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.vogal-insta-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.vogal-insta-tile:hover img {
+  transform: scale(1.08);
+}
+
+.vogal-insta-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(9, 9, 11, 0.6);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.vogal-insta-tile:hover .vogal-insta-overlay {
+  opacity: 1;
+}
+
+.vogal-insta-overlay span.handle {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   11. BRAND TRUST BADGES
+───────────────────────────────────────────────────────────── */
+.vogal-trust-strip {
+  border-top: 1px solid var(--vogal-border);
+  border-bottom: 1px solid var(--vogal-border);
+  padding: 48px 32px;
+  background-color: var(--vogal-bg-subtle);
+}
+
+.vogal-trust-grid {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+.vogal-trust-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.vogal-trust-icon {
+  font-size: 1.6rem;
+  background-color: #ffffff;
+  border: 1px solid var(--vogal-border);
+  width: 48px;
+  height: 48px;
+  border-radius: var(--vogal-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.vogal-trust-text h4 {
+  font-size: 0.88rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.vogal-trust-text p {
+  font-size: 0.78rem;
+  color: var(--vogal-text-muted);
+  line-height: 1.4;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   12. VIP NEWSLETTER CLUB
+───────────────────────────────────────────────────────────── */
+.vogal-newsletter-section {
+  padding: 80px 32px;
+  background-color: #ffffff;
+}
+
+.vogal-newsletter-card {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.vogal-newsletter-card h2 {
+  font-family: var(--vogal-font-heading);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+}
+
+.vogal-newsletter-card p {
+  color: var(--vogal-text-muted);
+  font-size: 1rem;
+  margin-bottom: 32px;
+}
+
+.vogal-nl-form {
+  display: flex;
+  gap: 12px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.vogal-nl-form input {
+  flex: 1;
+  padding: 16px 20px;
+  border: 1.5px solid var(--vogal-border);
+  border-radius: var(--vogal-radius-sm);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.18s ease;
+}
+
+.vogal-nl-form input:focus {
+  border-color: var(--vogal-primary);
+}
+
+.vogal-nl-success {
+  background-color: var(--vogal-accent-light);
+  color: var(--vogal-accent);
+  padding: 16px 24px;
+  border-radius: var(--vogal-radius-sm);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   13. MULTI-COLUMN FOOTER
+───────────────────────────────────────────────────────────── */
+.vogal-footer {
+  background-color: var(--vogal-primary);
+  color: #ffffff;
+  padding-top: 80px;
+}
+
+.vogal-footer-grid {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 32px 64px;
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, 1fr) 1.2fr;
+  gap: 48px;
+}
+
+.vogal-footer-brand h2 {
+  font-family: var(--vogal-font-heading);
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  margin-bottom: 14px;
+}
+
+.vogal-footer-brand p {
+  color: #a1a1aa;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  max-width: 320px;
+  margin-bottom: 24px;
+}
+
+.vogal-footer-col h4 {
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.vogal-footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.vogal-footer-col a {
+  font-size: 0.85rem;
+  color: #a1a1aa;
+  transition: color 0.15s ease;
+}
+
+.vogal-footer-col a:hover {
+  color: var(--vogal-accent);
+}
+
+.vogal-footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 28px 32px;
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #71717a;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.vogal-payment-icons {
+  display: flex;
+  gap: 8px;
+}
+
+.vogal-payment-pill {
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #d4d4d8;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 4px 8px;
+  border-radius: var(--vogal-radius-sm);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   14. COLLECTION LISTING VIEW
+───────────────────────────────────────────────────────────── */
+.vogal-collection-page {
+  padding: 40px 32px 100px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.vogal-collection-banner {
+  text-align: center;
+  margin-bottom: 48px;
+  padding: 32px 0;
+  background-color: var(--vogal-bg-subtle);
+  border-radius: var(--vogal-radius-md);
+}
+
+.vogal-collection-banner h1 {
+  font-family: var(--vogal-font-heading);
+  font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+}
+
+.vogal-collection-banner p {
+  color: var(--vogal-text-muted);
+  font-size: 0.95rem;
+}
+
+.vogal-collection-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* Filter Sidebar */
+.vogal-filters-sidebar {
+  background-color: #ffffff;
+  border: 1px solid var(--vogal-border);
+  border-radius: var(--vogal-radius-sm);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.vogal-filter-group h4 {
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  color: var(--vogal-text-main);
+}
+
+.vogal-filter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.vogal-filter-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.86rem;
+  cursor: pointer;
+  color: var(--vogal-text-muted);
+  transition: color 0.15s ease;
+}
+
+.vogal-filter-label:hover {
+  color: var(--vogal-text-main);
+}
+
+.vogal-filter-label input {
+  accent-color: var(--vogal-primary);
+}
+
+.vogal-price-range {
+  width: 100%;
+  accent-color: var(--vogal-primary);
+}
+
+.vogal-size-pills-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.vogal-filter-size-btn {
+  padding: 6px 14px;
+  border: 1px solid var(--vogal-border);
+  border-radius: var(--vogal-radius-sm);
+  font-size: 0.78rem;
+  font-weight: 700;
+  transition: var(--vogal-transition);
+}
+
+.vogal-filter-size-btn:hover {
+  border-color: var(--vogal-text-main);
+}
+
+.vogal-filter-size-btn.is-active {
+  background-color: var(--vogal-primary);
+  border-color: var(--vogal-primary);
+  color: #ffffff;
+}
+
+/* Collection Toolbar */
+.vogal-collection-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--vogal-border);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.vogal-sort-select {
+  padding: 8px 16px;
+  border: 1.5px solid var(--vogal-border);
+  border-radius: var(--vogal-radius-sm);
+  font-size: 0.84rem;
+  font-weight: 600;
+  outline: none;
+  background-color: #ffffff;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   15. PRODUCT DETAIL PAGE (PDP)
+───────────────────────────────────────────────────────────── */
+.vogal-pdp-view {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 40px 32px 100px;
+}
+
+.vogal-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--vogal-text-muted);
+  margin-bottom: 36px;
+}
+
+.vogal-breadcrumb span {
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.vogal-breadcrumb span:hover {
+  color: var(--vogal-text-main);
+}
+
+.vogal-breadcrumb span.curr {
+  font-weight: 700;
+  color: var(--vogal-text-main);
+}
+
+.vogal-pdp-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 64px;
+  align-items: start;
+}
+
+/* PDP Gallery */
+.vogal-pdp-gallery {
+  display: flex;
+  gap: 20px;
+}
+
+.vogal-pdp-thumbs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 90px;
+}
+
+.vogal-pdp-thumb-btn {
+  aspect-ratio: 3/4;
+  border-radius: var(--vogal-radius-sm);
+  overflow: hidden;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.18s ease;
+}
+
+.vogal-pdp-thumb-btn.is-active {
+  border-color: var(--vogal-primary);
+}
+
+.vogal-pdp-thumb-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vogal-pdp-main-img-wrap {
+  flex: 1;
+  position: relative;
+  aspect-ratio: 3/4;
+  background-color: var(--vogal-bg-subtle);
+  border-radius: var(--vogal-radius-sm);
+  overflow: hidden;
+}
+
+.vogal-pdp-main-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* PDP Info Column */
+.vogal-pdp-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.vogal-pdp-cat {
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--vogal-accent);
+}
+
+.vogal-pdp-title {
+  font-family: var(--vogal-font-heading);
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.vogal-pdp-reviews-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--vogal-text-muted);
+}
+
+.vogal-pdp-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.vogal-pdp-price-main {
+  font-size: 1.85rem;
+  font-weight: 900;
+}
+
+.vogal-pdp-price-compare {
+  font-size: 1.25rem;
+  color: var(--vogal-text-light);
+  text-decoration: line-through;
+}
+
+.vogal-pdp-desc {
+  font-size: 0.98rem;
+  color: #3f3f46;
+  line-height: 1.65;
+}
+
+/* Color & Size Selectors */
+.vogal-pdp-swatches-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vogal-pdp-swatch-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  outline: 1px solid var(--vogal-border);
+  cursor: pointer;
+  transition: transform 0.15s ease, outline-color 0.15s ease;
+}
+
+.vogal-pdp-swatch-btn.is-active {
+  outline: 2px solid var(--vogal-primary);
+  transform: scale(1.1);
+}
+
+.vogal-pdp-sizes-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.vogal-pdp-size-pill {
+  padding: 10px 20px;
+  border: 1.5px solid var(--vogal-border);
+  border-radius: var(--vogal-radius-sm);
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: var(--vogal-transition);
+}
+
+.vogal-pdp-size-pill:hover {
+  border-color: var(--vogal-text-main);
+}
+
+.vogal-pdp-size-pill.is-active {
+  background-color: var(--vogal-primary);
+  border-color: var(--vogal-primary);
+  color: #ffffff;
+}
+
+/* Stepper & Actions */
+.vogal-pdp-atc-row {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.vogal-qty-stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid var(--vogal-border);
+  border-radius: var(--vogal-radius-sm);
+  height: 52px;
+}
+
+.vogal-qty-stepper button {
+  width: 44px;
+  height: 100%;
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vogal-qty-stepper span {
+  width: 44px;
+  text-align: center;
+  font-weight: 800;
+}
+
+.vogal-pdp-atc-btn {
+  flex: 1;
+  height: 52px;
+}
+
+.vogal-pdp-wishlist-btn {
+  width: 52px;
+  height: 52px;
+  border: 1.5px solid var(--vogal-border);
+  border-radius: var(--vogal-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  transition: var(--vogal-transition);
+}
+
+.vogal-pdp-wishlist-btn:hover,
+.vogal-pdp-wishlist-btn.is-active {
+  background-color: var(--vogal-accent);
+  border-color: var(--vogal-accent);
+  color: #ffffff;
+}
+
+/* Accordions */
+.vogal-accordion-block {
+  border-top: 1px solid var(--vogal-border);
+  margin-top: 24px;
+}
+
+.vogal-acc-item {
+  border-bottom: 1px solid var(--vogal-border);
+}
+
+.vogal-acc-btn {
+  width: 100%;
+  padding: 18px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.vogal-acc-body {
+  padding-bottom: 18px;
+  font-size: 0.9rem;
+  color: var(--vogal-text-muted);
+  line-height: 1.6;
+}
+
+.vogal-acc-body ul {
+  padding-left: 20px;
+}
+
+/* Frequently Bought Together Bundle */
+.vogal-fbt-wrap {
+  margin-top: 80px;
+  padding: 44px;
+  background-color: var(--vogal-bg-subtle);
+  border-radius: var(--vogal-radius-md);
+}
+
+.vogal-fbt-flex {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.vogal-fbt-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background-color: #ffffff;
+  padding: 12px 16px;
+  border-radius: var(--vogal-radius-sm);
+  border: 1px solid var(--vogal-border);
+  cursor: pointer;
+}
+
+.vogal-fbt-card img {
+  width: 64px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   16. CART DRAWER
+───────────────────────────────────────────────────────────── */
+.vogal-cart-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(9, 9, 11, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 500;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.vogal-cart-drawer {
+  width: min(440px, 94vw);
+  height: 100%;
+  background-color: #ffffff;
+  box-shadow: var(--vogal-shadow-drawer);
+  display: flex;
+  flex-direction: column;
+  animation: vogal-slide-left 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes vogal-slide-left {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.vogal-cart-header {
+  padding: 24px 28px;
+  border-bottom: 1px solid var(--vogal-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.vogal-cart-header h3 {
+  font-family: var(--vogal-font-heading);
+  font-size: 1.3rem;
+  font-weight: 900;
+}
+
+/* Free Shipping Goal */
+.vogal-cart-shipping-bar {
+  padding: 16px 28px;
+  background-color: var(--vogal-bg-subtle);
+  border-bottom: 1px solid var(--vogal-border);
+  font-size: 0.8rem;
+}
+
+.vogal-progress-track {
+  height: 4px;
+  background-color: var(--vogal-border);
+  border-radius: var(--vogal-radius-full);
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.vogal-progress-fill {
+  height: 100%;
+  background-color: var(--vogal-accent);
+  transition: width 0.3s ease;
+}
+
+.vogal-cart-items-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.vogal-cart-item-row {
+  display: flex;
+  gap: 16px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--vogal-border-light);
+}
+
+.vogal-cart-item-row img {
+  width: 76px;
+  height: 98px;
+  object-fit: cover;
+  border-radius: var(--vogal-radius-sm);
+}
+
+.vogal-cart-item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.vogal-cart-item-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.vogal-cart-item-meta {
+  font-size: 0.76rem;
+  color: var(--vogal-text-muted);
+}
+
+.vogal-cart-footer {
+  padding: 24px 28px;
+  border-top: 1px solid var(--vogal-border);
+  background-color: #ffffff;
+}
+
+.vogal-cart-subtotal-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   17. QUICK VIEW & SIZE GUIDE MODALS
+───────────────────────────────────────────────────────────── */
+.vogal-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(9, 9, 11, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.vogal-modal-card {
+  background-color: #ffffff;
+  border-radius: var(--vogal-radius-sm);
+  box-shadow: var(--vogal-shadow-lg);
+  max-width: 860px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: vogal-zoom-in 0.22s ease;
+}
+
+@keyframes vogal-zoom-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.vogal-modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: var(--vogal-shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  font-size: 1.1rem;
+  transition: transform 0.15s ease;
+}
+
+.vogal-modal-close-btn:hover {
+  transform: rotate(90deg);
+}
+
+/* Size Table */
+.vogal-size-table-wrap {
+  padding: 36px;
+}
+
+.vogal-size-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.vogal-size-table th,
+.vogal-size-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--vogal-border);
+  font-size: 0.85rem;
+}
+
+.vogal-size-table th {
+  background-color: var(--vogal-bg-subtle);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   18. TOAST NOTIFICATION
+───────────────────────────────────────────────────────────── */
+.vogal-toast {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  background-color: var(--vogal-primary);
+  color: #ffffff;
+  padding: 14px 24px;
+  border-radius: var(--vogal-radius-sm);
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  box-shadow: var(--vogal-shadow-lg);
+  z-index: 1000;
+  animation: vogal-slide-up 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-left: 3px solid var(--vogal-accent);
+}
+
+@keyframes vogal-slide-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes vogal-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   19. RESPONSIVE BREAKPOINTS (TABLET & MOBILE)
+───────────────────────────────────────────────────────────── */
+@media (max-width: 1080px) {
+  .vogal-product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .vogal-categories-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .vogal-pdp-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .vogal-stl-container {
+    grid-template-columns: 1fr;
+  }
+
+  .vogal-countdown-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .vogal-footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .vogal-desktop-nav {
+    display: none;
+  }
+
+  .vogal-mobile-hamburger {
+    display: flex;
+  }
+
+  .vogal-product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 12px;
+  }
+
+  .vogal-categories-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+
+  .vogal-cat-avatar-wrap {
+    width: 72px;
+    height: 72px;
+  }
+
+  .vogal-split-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vogal-testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vogal-insta-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .vogal-trust-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vogal-collection-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .vogal-footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vogal-header-inner {
+    padding: 0 20px;
+  }
+
+  .vogal-hero-content {
+    padding: 60px 20px;
+  }
+
+  .vogal-section {
+    padding: 48px 20px;
+  }
+}

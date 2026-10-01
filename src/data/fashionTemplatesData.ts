@@ -37,6 +37,44 @@ export const BELLE_FASHION_TEMPLATE: MarketplaceTemplate = {
   ],
 }
 
+export const VOGAL_FASHION_TEMPLATE: MarketplaceTemplate = {
+  id: 'fashion-vogal',
+  slug: 'fashion-vogal',
+  name: 'Vogal',
+  businessType: 'clothing-store',
+  industryCategory: 'Fashion Store',
+  style: 'modern',
+  catalogSize: 'large',
+  tags: ['Fashion', 'Modern', 'Streetwear', 'Tailoring', 'Denim', 'Contemporary', 'Multipurpose'],
+  shortDescription: 'A cutting-edge multipurpose modern fashion storefront featuring scrolling tickers, tabbed curations, hotspot outfit pins, and flash sale countdowns.',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&auto=format&fit=crop&q=80',
+  fullPreviewUrl: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=1600&auto=format&fit=crop&q=85',
+  popularityScore: 99,
+  isActive: true,
+  brandName: 'VOGAL',
+  headline: 'Defining Modern Silhouettes.',
+  subtitle: 'Japanese memory nylon, Kurabo selvedge, and deconstructed Italian tailoring.',
+  buttonText: 'Shop Drops',
+  buttonColor: '#09090b',
+  isDark: false,
+  modelImage: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&auto=format&fit=crop&q=80',
+  badge: 'trending',
+  rating: 4.97,
+  reviewCount: 418,
+  layoutType: 'card-grid',
+  accentColor: '#e11d48',
+  features: [
+    'Continuous marquee ticker announcement bar',
+    'Circular department quick-filter pills',
+    'Tabbed collections (Trending, New, Best Sellers, Sale)',
+    'Dual split editorial promo banners',
+    'Interactive Shop the Look hotspot pins',
+    'Deal of the Week live countdown timer',
+    'Slide-out quick view and cart drawer with shipping threshold bar',
+  ],
+}
+
 export const ALL_FASHION_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   BELLE_FASHION_TEMPLATE,
+  VOGAL_FASHION_TEMPLATE,
 ]

@@ -135,7 +135,11 @@ function App() {
             rawHash === 'fashion-store-templates' ||
             rawHash === 'belle' ||
             rawHash === 'belle-fashion' ||
-            rawHash === 'fashion-belle'
+            rawHash === 'fashion-belle' ||
+            rawHash === 'vogal' ||
+            rawHash === 'fashion-vogal' ||
+            rawHash === 'vogal-fashion' ||
+            rawHash === 'vogal-templates'
           )) ||
           (key === 'restaurant' && (rawHash === 'restro' || rawHash === 'restro-templates')) ||
           (key === 'health-beauty' && (
