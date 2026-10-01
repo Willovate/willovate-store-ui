@@ -13,17 +13,16 @@ import {
   OPTIMAL_TRUST_PROMISES,
   OPTIMAL_BRANDS,
   OPTIMAL_NAV_LINKS,
-  OPTIMAL_SIZES,
 } from './data/optimalData'
 import './styles/optimalFashion.css'
 
 export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
-  template,
+  template: _template,
   device = 'desktop',
   customAccentColor,
-  onUseTemplate,
-  onClose,
-  onBack,
+  onUseTemplate: _onUseTemplate,
+  onClose: _onClose,
+  onBack: _onBack,
 }) => {
   // Navigation & View State
   const [activeView, setActiveView] = useState<'home' | 'collection' | 'pdp'>('home')
@@ -2038,3 +2037,5 @@ export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
     </div>
   )
 }
+
+export default OptimalFashionStorefront

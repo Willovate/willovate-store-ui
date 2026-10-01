@@ -95,10 +95,10 @@ export const OPTIMAL_FASHION_TEMPLATE: MarketplaceTemplate = {
   buttonColor: '#2563eb',
   isDark: false,
   modelImage: 'https://images.unsplash.com/photo-1544441893-675973e31985?w=800&auto=format&fit=crop&q=80',
-  badge: 'featured',
+  badge: 'popular',
   rating: 4.99,
   reviewCount: 512,
-  layoutType: 'grid-hybrid',
+  layoutType: 'card-grid',
   accentColor: '#2563eb',
   features: [
     'Header search bar with category selector dropdown',
