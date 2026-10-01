@@ -1,0 +1,5 @@
+export { OptimalFashionStorefront } from './OptimalFashionStorefront'
+export { App } from './App'
+export { default } from './OptimalFashionStorefront'
+export * from './types'
+export * from './data/optimalData'

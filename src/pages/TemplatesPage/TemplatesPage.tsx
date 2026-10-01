@@ -12,12 +12,14 @@ import { EliteSportStorefront } from '../../templates/sports/EliteSport'
 import { MotionStorefront } from '../../templates/sports/Motion'
 import { BelleFashionStorefront } from '../../templates/fashion/Belle'
 import { VogalFashionStorefront } from '../../templates/fashion/Vogal'
+import { OptimalFashionStorefront } from '../../templates/fashion/Optimal'
 import {
   BELLE_FASHION_TEMPLATE,
   VOGAL_FASHION_TEMPLATE,
+  OPTIMAL_FASHION_TEMPLATE,
   ALL_FASHION_MARKETPLACE_TEMPLATES,
 } from '../../data/fashionTemplatesData'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront }
 
 // Re-export domain types
 export type {
@@ -61,6 +63,7 @@ export type {
 export {
   BELLE_FASHION_TEMPLATE,
   VOGAL_FASHION_TEMPLATE,
+  OPTIMAL_FASHION_TEMPLATE,
   ALL_FASHION_MARKETPLACE_TEMPLATES,
 } from '../../data/fashionTemplatesData'
 
@@ -525,6 +528,24 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   ) {
     return (
       <VogalFashionStorefront
+        template={template}
+        device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
+        customAccentColor={customAccentColor}
+        onColorChange={_onColorChange}
+        onUseTemplate={onUseTemplate}
+        onClose={onClose}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'fashion-optimal' ||
+      template.id === 'fashion-optimal' ||
+      template.name?.toLowerCase().includes('optimal'))
+  ) {
+    return (
+      <OptimalFashionStorefront
         template={template}
         device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
         customAccentColor={customAccentColor}
@@ -1269,6 +1290,13 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
     ) {
       return VOGAL_FASHION_TEMPLATE
     }
+    if (
+      rawHash === 'optimal' ||
+      rawHash === 'fashion-optimal' ||
+      rawHash === 'optimal-fashion'
+    ) {
+      return OPTIMAL_FASHION_TEMPLATE
+    }
     return null
   })
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
@@ -1304,6 +1332,12 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
         rawHash === 'vogal-fashion'
       ) {
         setPreviewTemplate(VOGAL_FASHION_TEMPLATE)
+      } else if (
+        rawHash === 'optimal' ||
+        rawHash === 'fashion-optimal' ||
+        rawHash === 'optimal-fashion'
+      ) {
+        setPreviewTemplate(OPTIMAL_FASHION_TEMPLATE)
       }
     }
     window.addEventListener('hashchange', handleHash)

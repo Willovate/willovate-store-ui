@@ -74,7 +74,47 @@ export const VOGAL_FASHION_TEMPLATE: MarketplaceTemplate = {
   ],
 }
 
+export const OPTIMAL_FASHION_TEMPLATE: MarketplaceTemplate = {
+  id: 'fashion-optimal',
+  slug: 'fashion-optimal',
+  name: 'Optimal',
+  businessType: 'clothing-store',
+  industryCategory: 'Fashion Store',
+  style: 'clean',
+  catalogSize: 'large',
+  tags: ['Fashion', 'Multipurpose', 'Department Store', 'Deals', 'Outerwear', 'Tailoring', 'Clean', 'Modern'],
+  shortDescription: 'A versatile, high-converting modern multipurpose fashion storefront with category search dropdown, vertical department flyout, and deals stock progress bar.',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1544441893-675973e31985?w=800&auto=format&fit=crop&q=80',
+  fullPreviewUrl: 'https://images.unsplash.com/photo-1544441893-675973e31985?w=1600&auto=format&fit=crop&q=85',
+  popularityScore: 100,
+  isActive: true,
+  brandName: 'OPTIMAL',
+  headline: 'The Multipurpose\nFashion Destination',
+  subtitle: 'Technical down outerwear, Sartorial tailoring, and artisanal leather goods.',
+  buttonText: 'Browse Store',
+  buttonColor: '#2563eb',
+  isDark: false,
+  modelImage: 'https://images.unsplash.com/photo-1544441893-675973e31985?w=800&auto=format&fit=crop&q=80',
+  badge: 'featured',
+  rating: 4.99,
+  reviewCount: 512,
+  layoutType: 'grid-hybrid',
+  accentColor: '#2563eb',
+  features: [
+    'Header search bar with category selector dropdown',
+    'Browse All Categories vertical flyout menu',
+    'Hero split carousel with side promotional cards',
+    'Deals of the Day live countdown with stock progress bar',
+    'Explore by department circular tiles',
+    'Tabbed featured product collection with color swatches',
+    'Frequently Bought Together 3-piece bundle calculator',
+    'Slide-over shopping cart with free shipping meter',
+    'Rich 4-column department store footer',
+  ],
+}
+
 export const ALL_FASHION_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   BELLE_FASHION_TEMPLATE,
   VOGAL_FASHION_TEMPLATE,
+  OPTIMAL_FASHION_TEMPLATE,
 ]

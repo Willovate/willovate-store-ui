@@ -2,6 +2,7 @@ import type { ComponentType } from 'react'
 import type { CategoryData, MarketplaceTemplate, Template } from '../types'
 import { BelleFashionStorefront } from '../templates/fashion/Belle'
 import { VogalFashionStorefront } from '../templates/fashion/Vogal'
+import { OptimalFashionStorefront } from '../templates/fashion/Optimal'
 import { VelocityStorefront } from '../templates/sports/Velocity'
 import { ArenaStorefront } from '../templates/sports/Arena'
 import { SprintStorefront } from '../templates/sports/Sprint'
@@ -161,6 +162,14 @@ export function getTemplateComponent(template?: MarketplaceTemplate | Template |
       template.name?.toLowerCase().includes('vogal'))
   ) {
     return VogalFashionStorefront
+  }
+  if (
+    template &&
+    (template.slug === 'fashion-optimal' ||
+      template.id === 'fashion-optimal' ||
+      template.name?.toLowerCase().includes('optimal'))
+  ) {
+    return OptimalFashionStorefront
   }
   if (
     template &&
