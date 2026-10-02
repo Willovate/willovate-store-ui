@@ -3,6 +3,7 @@ import type { CategoryData, MarketplaceTemplate, Template } from '../types'
 import { BelleFashionStorefront } from '../templates/fashion/Belle'
 import { VogalFashionStorefront } from '../templates/fashion/Vogal'
 import { OptimalFashionStorefront } from '../templates/fashion/Optimal'
+import { NaturyaFashionStorefront } from '../templates/fashion/Naturya'
 import { VelocityStorefront } from '../templates/sports/Velocity'
 import { ArenaStorefront } from '../templates/sports/Arena'
 import { SprintStorefront } from '../templates/sports/Sprint'
@@ -170,6 +171,14 @@ export function getTemplateComponent(template?: MarketplaceTemplate | Template |
       template.name?.toLowerCase().includes('optimal'))
   ) {
     return OptimalFashionStorefront
+  }
+  if (
+    template &&
+    (template.slug === 'fashion-naturya' ||
+      template.id === 'fashion-naturya' ||
+      template.name?.toLowerCase().includes('naturya'))
+  ) {
+    return NaturyaFashionStorefront
   }
   if (
     template &&

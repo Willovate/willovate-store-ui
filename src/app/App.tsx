@@ -143,7 +143,11 @@ function App() {
             rawHash === 'optimal' ||
             rawHash === 'fashion-optimal' ||
             rawHash === 'optimal-fashion' ||
-            rawHash === 'optimal-templates'
+            rawHash === 'optimal-templates' ||
+            rawHash === 'naturya' ||
+            rawHash === 'fashion-naturya' ||
+            rawHash === 'naturya-fashion' ||
+            rawHash === 'naturya-templates'
           )) ||
           (key === 'restaurant' && (rawHash === 'restro' || rawHash === 'restro-templates')) ||
           (key === 'health-beauty' && (

@@ -13,13 +13,15 @@ import { MotionStorefront } from '../../templates/sports/Motion'
 import { BelleFashionStorefront } from '../../templates/fashion/Belle'
 import { VogalFashionStorefront } from '../../templates/fashion/Vogal'
 import { OptimalFashionStorefront } from '../../templates/fashion/Optimal'
+import { NaturyaFashionStorefront } from '../../templates/fashion/Naturya'
 import {
   BELLE_FASHION_TEMPLATE,
   VOGAL_FASHION_TEMPLATE,
   OPTIMAL_FASHION_TEMPLATE,
+  NATURYA_FASHION_TEMPLATE,
   ALL_FASHION_MARKETPLACE_TEMPLATES,
 } from '../../data/fashionTemplatesData'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront }
 
 // Re-export domain types
 export type {
@@ -64,6 +66,7 @@ export {
   BELLE_FASHION_TEMPLATE,
   VOGAL_FASHION_TEMPLATE,
   OPTIMAL_FASHION_TEMPLATE,
+  NATURYA_FASHION_TEMPLATE,
   ALL_FASHION_MARKETPLACE_TEMPLATES,
 } from '../../data/fashionTemplatesData'
 
@@ -546,6 +549,24 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   ) {
     return (
       <OptimalFashionStorefront
+        template={template}
+        device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
+        customAccentColor={customAccentColor}
+        onColorChange={_onColorChange}
+        onUseTemplate={onUseTemplate}
+        onClose={onClose}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'fashion-naturya' ||
+      template.id === 'fashion-naturya' ||
+      template.name?.toLowerCase().includes('naturya'))
+  ) {
+    return (
+      <NaturyaFashionStorefront
         template={template}
         device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
         customAccentColor={customAccentColor}
@@ -1297,6 +1318,13 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
     ) {
       return OPTIMAL_FASHION_TEMPLATE
     }
+    if (
+      rawHash === 'naturya' ||
+      rawHash === 'fashion-naturya' ||
+      rawHash === 'naturya-fashion'
+    ) {
+      return NATURYA_FASHION_TEMPLATE
+    }
     return null
   })
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
@@ -1338,6 +1366,12 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
         rawHash === 'optimal-fashion'
       ) {
         setPreviewTemplate(OPTIMAL_FASHION_TEMPLATE)
+      } else if (
+        rawHash === 'naturya' ||
+        rawHash === 'fashion-naturya' ||
+        rawHash === 'naturya-fashion'
+      ) {
+        setPreviewTemplate(NATURYA_FASHION_TEMPLATE)
       }
     }
     window.addEventListener('hashchange', handleHash)

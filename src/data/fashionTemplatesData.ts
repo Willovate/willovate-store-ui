@@ -113,8 +113,48 @@ export const OPTIMAL_FASHION_TEMPLATE: MarketplaceTemplate = {
   ],
 }
 
+export const NATURYA_FASHION_TEMPLATE: MarketplaceTemplate = {
+  id: 'fashion-naturya',
+  slug: 'fashion-naturya',
+  name: 'Naturya',
+  businessType: 'clothing-store',
+  industryCategory: 'Fashion Store',
+  style: 'minimal',
+  catalogSize: 'large',
+  tags: ['Fashion', 'Minimalist', 'Earth-Tone', 'Contemporary', 'Outerwear', 'Tailoring', 'Linen', 'Lifestyle'],
+  shortDescription: 'A clean, contemporary earth-tone fashion storefront with hero slide storytelling, triple banner trios, category pills, and Judge.me review cards.',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format&fit=crop&q=80',
+  fullPreviewUrl: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&auto=format&fit=crop&q=85',
+  popularityScore: 99,
+  isActive: true,
+  brandName: 'NATURYA',
+  headline: 'Bold Colors,\nEffortless Elegance',
+  subtitle: 'A modern collection combining street style with refined tailoring and earth tones.',
+  buttonText: 'Discovery Now',
+  buttonColor: '#181818',
+  isDark: false,
+  modelImage: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format&fit=crop&q=80',
+  badge: 'new',
+  rating: 4.96,
+  reviewCount: 298,
+  layoutType: 'editorial',
+  accentColor: '#a79d80',
+  features: [
+    '3-slide editorial hero with Page 1/2/3 pagination',
+    '4-card customer guarantee value strip',
+    'Triple editorial banner cards with hover depth',
+    'You are interested in Women / Men collection tabs',
+    'Shop by category visual rounded pills',
+    'Urban Oasis editorial lifestyle split showcase',
+    'Happy Clients 5-star review cards',
+    'Instagram Shop 6-grid UGC gallery',
+    'Shopping cart slide-out with $1,000 free shipping goal meter',
+  ],
+}
+
 export const ALL_FASHION_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   BELLE_FASHION_TEMPLATE,
   VOGAL_FASHION_TEMPLATE,
   OPTIMAL_FASHION_TEMPLATE,
+  NATURYA_FASHION_TEMPLATE,
 ]
