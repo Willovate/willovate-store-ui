@@ -231,6 +231,45 @@ export const FRAGRANCE_FASHION_TEMPLATE: MarketplaceTemplate = {
   ],
 }
 
+export const JENIE_FASHION_TEMPLATE: MarketplaceTemplate = {
+  id: 'fashion-jenie',
+  slug: 'jenie-denim',
+  name: 'Jenie Denim',
+  businessType: 'Jeans & Denim Fashion',
+  tags: ['Jeans', 'Denim', 'Vintage', 'Indigo', 'Streetwear', 'Sustainable'],
+  style: 'modern',
+  catalogSize: 'large',
+  shortDescription:
+    'Modern Denim & Indigo Lifestyle store inspired by Jenie Shopify 2.0 theme. Features slideshow hero, 3-category curated cards, multi-tab product grids, and UGC Instagram stream.',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800&auto=format&fit=crop&q=80',
+  fullPreviewUrl: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=1600&auto=format&fit=crop&q=85',
+  popularityScore: 99,
+  isActive: true,
+  brandName: 'Jenie',
+  headline: 'Confidence – Jeans\nThat Move With You',
+  subtitle: 'Timeless denim for every adventure. Handpicked styles designed for comfort, durability, and everyday charm.',
+  buttonText: 'Explore More',
+  buttonColor: '#1E2C3D',
+  isDark: false,
+  modelImage: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800&auto=format&fit=crop&q=80',
+  badge: 'new',
+  rating: 4.96,
+  reviewCount: 388,
+  layoutType: 'card-grid',
+  accentColor: '#1E2C3D',
+  features: [
+    '3-column wide sticky header with language/currency dropdowns',
+    'Hero slideshow banner with "Confidence – Jeans That Move With You"',
+    'Curated collection cards: Denim, Vintage, Slimfit with arrow hover',
+    'Top Ratting denim carousel with wash swatches & size selector',
+    'Full-width promotional banner "Denim Staples and Beyond"',
+    'Multi-tab product grid: Lastest Products, Best Sellers, Featured Products',
+    'Full-bleed Instagram UGC gallery "Made by us, Shared by you"',
+    'Slide-over shopping bag with item counters and subtotal',
+    'Dedicated denim technical PDP with stretch and wash guides',
+  ],
+}
+
 export const ALL_FASHION_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   BELLE_FASHION_TEMPLATE,
   VOGAL_FASHION_TEMPLATE,
@@ -238,4 +277,5 @@ export const ALL_FASHION_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   NATURYA_FASHION_TEMPLATE,
   TRENDY_FASHION_TEMPLATE,
   FRAGRANCE_FASHION_TEMPLATE,
+  JENIE_FASHION_TEMPLATE,
 ]

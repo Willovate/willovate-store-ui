@@ -16,6 +16,7 @@ import { OptimalFashionStorefront } from '../../templates/fashion/Optimal'
 import { NaturyaFashionStorefront } from '../../templates/fashion/Naturya'
 import { TrendyFashionStorefront } from '../../templates/fashion/Trendy'
 import { FragranceFashionStorefront } from '../../templates/fashion/Fragrance'
+import { JenieFashionStorefront } from '../../templates/fashion/Jenie'
 import {
   BELLE_FASHION_TEMPLATE,
   VOGAL_FASHION_TEMPLATE,
@@ -23,9 +24,10 @@ import {
   NATURYA_FASHION_TEMPLATE,
   TRENDY_FASHION_TEMPLATE,
   FRAGRANCE_FASHION_TEMPLATE,
+  JENIE_FASHION_TEMPLATE,
   ALL_FASHION_MARKETPLACE_TEMPLATES,
 } from '../../data/fashionTemplatesData'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront }
 
 // Re-export domain types
 export type {
@@ -607,6 +609,25 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   ) {
     return (
       <FragranceFashionStorefront
+        template={template}
+        device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
+        customAccentColor={customAccentColor}
+        onColorChange={_onColorChange}
+        onUseTemplate={onUseTemplate}
+        onClose={onClose}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'fashion-jenie' ||
+      template.id === 'fashion-jenie' ||
+      template.slug === 'jenie-denim' ||
+      template.name?.toLowerCase().includes('jenie'))
+  ) {
+    return (
+      <JenieFashionStorefront
         template={template}
         device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
         customAccentColor={customAccentColor}
