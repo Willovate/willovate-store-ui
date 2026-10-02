@@ -6,9 +6,9 @@ export const LumaLiving: TemplateConfig = {
   description: 'Interior design magazine meets ecommerce.',
   categories: [{ id: 'home', name: 'Home & Furniture' }],
   tags: [{ id: 'editorial', name: 'Editorial' }, { id: 'lifestyle', name: 'Lifestyle' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1598928506311-c55dd71358a9?auto=format&fit=crop&q=80&w=800',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1598928506311-c55dd71358a9?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {

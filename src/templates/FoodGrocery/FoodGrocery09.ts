@@ -6,9 +6,9 @@ export const FoodGrocery09: TemplateConfig = {
   description: 'Rustic farm-to-table and farm heritage goods.',
   categories: [{ id: 'food', name: 'Food & Grocery' }],
   tags: [{ id: 'heritage', name: 'Heritage' }, { id: 'farm', name: 'Farm' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1592424041796-7bb09153be03?auto=format&fit=crop&q=80&w=800',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1592424041796-7bb09153be03?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {

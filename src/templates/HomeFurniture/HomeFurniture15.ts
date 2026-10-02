@@ -6,9 +6,9 @@ export const HomeFurniture15: TemplateConfig = {
   description: 'Complete-room shopping experience. Lifestyle-first ecommerce.',
   categories: [{ id: 'home', name: 'Home & Furniture' }],
   tags: [{ id: 'lifestyle', name: 'Lifestyle' }, { id: 'complete', name: 'Complete' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80&w=800',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {

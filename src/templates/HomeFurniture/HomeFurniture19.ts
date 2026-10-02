@@ -6,9 +6,9 @@ export const HomeFurniture19: TemplateConfig = {
   description: 'Interior design and home styling marketplace. Design-studio aesthetic.',
   categories: [{ id: 'home', name: 'Home & Furniture' }],
   tags: [{ id: 'studio', name: 'Studio' }, { id: 'design', name: 'Design' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=800',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {

@@ -6,9 +6,9 @@ export const Solace: TemplateConfig = {
   description: 'A premium luxury furniture showroom aesthetic.',
   categories: [{ id: 'home', name: 'Home & Furniture' }],
   tags: [{ id: 'luxury', name: 'Luxury' }, { id: 'premium', name: 'Premium' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=800',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1615529162924-f8605388461d?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1615529162924-f8605388461d?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: true,
   theme: {

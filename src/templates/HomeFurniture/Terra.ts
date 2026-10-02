@@ -6,9 +6,9 @@ export const Terra: TemplateConfig = {
   description: 'Natural, sustainable home goods.',
   categories: [{ id: 'home', name: 'Home & Furniture' }],
   tags: [{ id: 'sustainable', name: 'Sustainable' }, { id: 'organic', name: 'Organic' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1593696140826-c58b021acf8b?auto=format&fit=crop&q=80&w=800', // Reusing an organic looking one, but let's change
+  thumbnailUrl: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=800', // Reusing an organic looking one, but let's change
   previewImages: [
-    'https://images.unsplash.com/photo-1593696140826-c58b021acf8b?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {

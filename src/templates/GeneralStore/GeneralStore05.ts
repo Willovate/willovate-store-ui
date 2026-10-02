@@ -6,9 +6,9 @@ export const GeneralStore05: TemplateConfig = {
   description: 'Modern digital bazaar. Rich product discovery, category navigation and promotional blocks.',
   categories: [{ id: 'general', name: 'General Store' }],
   tags: [{ id: 'vibrant', name: 'Vibrant' }, { id: 'discovery', name: 'Discovery' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=800',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {

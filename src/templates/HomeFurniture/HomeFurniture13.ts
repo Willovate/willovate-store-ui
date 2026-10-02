@@ -6,9 +6,9 @@ export const HomeFurniture13: TemplateConfig = {
   description: 'Modern minimalist furniture brand. Architectural minimalism, large whitespace, strong typography.',
   categories: [{ id: 'home', name: 'Home & Furniture' }],
   tags: [{ id: 'minimalist', name: 'Minimalist' }, { id: 'modern', name: 'Modern' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&q=80&w=800',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {

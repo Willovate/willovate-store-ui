@@ -6,9 +6,9 @@ export const FoodGrocery08: TemplateConfig = {
   description: 'A bold Gen-Z snack and food-drop ecommerce brand.',
   categories: [{ id: 'food', name: 'Food & Grocery' }],
   tags: [{ id: 'bold', name: 'Bold' }, { id: 'hype', name: 'Hype' }, { id: 'snacks', name: 'Snacks' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1599598425947-33002629ee98?auto=format&fit=crop&q=80&w=800',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1599598425947-33002629ee98?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: true,
   navigation: [

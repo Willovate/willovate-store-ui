@@ -6,9 +6,9 @@ export const FoodGrocery01: TemplateConfig = {
   description: 'A premium, modern grocery marketplace designed for freshness and speed.',
   categories: [{ id: 'food', name: 'Food & Grocery' }],
   tags: [{ id: 'modern', name: 'Modern' }, { id: 'supermarket', name: 'Supermarket' }, { id: 'premium', name: 'Premium' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=800',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: true,
   theme: {

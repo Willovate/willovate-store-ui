@@ -6,9 +6,9 @@ export const FoodGrocery03: TemplateConfig = {
   description: 'Minimal, utilitarian everyday staples.',
   categories: [{ id: 'food', name: 'Food & Grocery' }],
   tags: [{ id: 'minimal', name: 'Minimal' }, { id: 'bulk', name: 'Bulk' }, { id: 'staples', name: 'Staples' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1584473457406-624047641d0f?auto=format&fit=crop&q=80&w=800',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1584473457406-624047641d0f?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: true,
   navigation: [

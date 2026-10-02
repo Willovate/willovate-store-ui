@@ -6,9 +6,9 @@ export const FoodGrocery02: TemplateConfig = {
   description: 'Farm-to-table editorial and seasonal abundance.',
   categories: [{ id: 'food', name: 'Food & Grocery' }],
   tags: [{ id: 'organic', name: 'Organic' }, { id: 'editorial', name: 'Editorial' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1476140417676-e8d1a16631b3?auto=format&fit=crop&q=80&w=800',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1476140417676-e8d1a16631b3?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {

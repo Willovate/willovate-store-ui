@@ -6,9 +6,9 @@ export const HomeFurniture11: TemplateConfig = {
   description: 'Premium contemporary furniture studio. Editorial, architectural, and sophisticated.',
   categories: [{ id: 'home', name: 'Home & Furniture' }],
   tags: [{ id: 'premium', name: 'Premium' }, { id: 'editorial', name: 'Editorial' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80&w=800',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {

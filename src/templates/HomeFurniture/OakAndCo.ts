@@ -6,9 +6,9 @@ export const OakAndCo: TemplateConfig = {
   description: 'Handcrafted wooden furniture with an artisan aesthetic.',
   categories: [{ id: 'home', name: 'Home & Furniture' }],
   tags: [{ id: 'wood', name: 'Wood' }, { id: 'artisan', name: 'Artisan' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1628148817290-72ee3ef2f7b8?auto=format&fit=crop&q=80&w=800',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1555529771-835f59fc5efe?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1628148817290-72ee3ef2f7b8?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1555529771-835f59fc5efe?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {

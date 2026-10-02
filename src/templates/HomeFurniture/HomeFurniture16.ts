@@ -6,9 +6,9 @@ export const HomeFurniture16: TemplateConfig = {
   description: 'Scandinavian-inspired furniture and home goods. Minimal, bright, functional and calm.',
   categories: [{ id: 'home', name: 'Home & Furniture' }],
   tags: [{ id: 'scandinavian', name: 'Scandinavian' }, { id: 'bright', name: 'Bright' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=800',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {

@@ -6,9 +6,9 @@ export const HomeFurniture20: TemplateConfig = {
   description: 'Premium luxury home marketplace. Elegant editorial/luxury ecommerce.',
   categories: [{ id: 'home', name: 'Home & Furniture' }],
   tags: [{ id: 'luxury', name: 'Luxury' }, { id: 'premium', name: 'Premium' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=800',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: true,
   theme: {

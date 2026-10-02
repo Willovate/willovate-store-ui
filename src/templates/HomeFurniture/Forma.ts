@@ -6,9 +6,9 @@ export const Forma: TemplateConfig = {
   description: 'High-end architectural furniture studio.',
   categories: [{ id: 'home', name: 'Home & Furniture' }],
   tags: [{ id: 'minimal', name: 'Minimal' }, { id: 'architectural', name: 'Architectural' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=800',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {
