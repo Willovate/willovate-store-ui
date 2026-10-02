@@ -147,7 +147,11 @@ function App() {
             rawHash === 'naturya' ||
             rawHash === 'fashion-naturya' ||
             rawHash === 'naturya-fashion' ||
-            rawHash === 'naturya-templates'
+            rawHash === 'naturya-templates' ||
+            rawHash === 'trendy' ||
+            rawHash === 'fashion-trendy' ||
+            rawHash === 'trendy-fashion' ||
+            rawHash === 'trendy-templates'
           )) ||
           (key === 'restaurant' && (rawHash === 'restro' || rawHash === 'restro-templates')) ||
           (key === 'health-beauty' && (
