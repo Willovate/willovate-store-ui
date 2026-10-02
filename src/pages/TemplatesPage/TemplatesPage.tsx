@@ -14,14 +14,16 @@ import { BelleFashionStorefront } from '../../templates/fashion/Belle'
 import { VogalFashionStorefront } from '../../templates/fashion/Vogal'
 import { OptimalFashionStorefront } from '../../templates/fashion/Optimal'
 import { NaturyaFashionStorefront } from '../../templates/fashion/Naturya'
+import { TrendyFashionStorefront } from '../../templates/fashion/Trendy'
 import {
   BELLE_FASHION_TEMPLATE,
   VOGAL_FASHION_TEMPLATE,
   OPTIMAL_FASHION_TEMPLATE,
   NATURYA_FASHION_TEMPLATE,
+  TRENDY_FASHION_TEMPLATE,
   ALL_FASHION_MARKETPLACE_TEMPLATES,
 } from '../../data/fashionTemplatesData'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront }
 
 // Re-export domain types
 export type {
@@ -567,6 +569,24 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   ) {
     return (
       <NaturyaFashionStorefront
+        template={template}
+        device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
+        customAccentColor={customAccentColor}
+        onColorChange={_onColorChange}
+        onUseTemplate={onUseTemplate}
+        onClose={onClose}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'fashion-trendy' ||
+      template.id === 'fashion-trendy' ||
+      template.name?.toLowerCase().includes('trendy'))
+  ) {
+    return (
+      <TrendyFashionStorefront
         template={template}
         device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
         customAccentColor={customAccentColor}
@@ -1325,6 +1345,14 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
     ) {
       return NATURYA_FASHION_TEMPLATE
     }
+    if (
+      rawHash === 'trendy' ||
+      rawHash === 'fashion-trendy' ||
+      rawHash === 'trendy-fashion' ||
+      rawHash === 'trendy-templates'
+    ) {
+      return TRENDY_FASHION_TEMPLATE
+    }
     return null
   })
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
@@ -1372,6 +1400,13 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
         rawHash === 'naturya-fashion'
       ) {
         setPreviewTemplate(NATURYA_FASHION_TEMPLATE)
+      } else if (
+        rawHash === 'trendy' ||
+        rawHash === 'fashion-trendy' ||
+        rawHash === 'trendy-fashion' ||
+        rawHash === 'trendy-templates'
+      ) {
+        setPreviewTemplate(TRENDY_FASHION_TEMPLATE)
       }
     }
     window.addEventListener('hashchange', handleHash)
