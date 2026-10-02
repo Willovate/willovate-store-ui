@@ -5,6 +5,7 @@ import { VogalFashionStorefront } from '../templates/fashion/Vogal'
 import { OptimalFashionStorefront } from '../templates/fashion/Optimal'
 import { NaturyaFashionStorefront } from '../templates/fashion/Naturya'
 import { TrendyFashionStorefront } from '../templates/fashion/Trendy'
+import { FragranceFashionStorefront } from '../templates/fashion/Fragrance'
 import { VelocityStorefront } from '../templates/sports/Velocity'
 import { ArenaStorefront } from '../templates/sports/Arena'
 import { SprintStorefront } from '../templates/sports/Sprint'
@@ -188,6 +189,14 @@ export function getTemplateComponent(template?: MarketplaceTemplate | Template |
       template.name?.toLowerCase().includes('trendy'))
   ) {
     return TrendyFashionStorefront
+  }
+  if (
+    template &&
+    (template.slug === 'fashion-fragrance' ||
+      template.id === 'fashion-fragrance' ||
+      template.name?.toLowerCase().includes('fragrance'))
+  ) {
+    return FragranceFashionStorefront
   }
   if (
     template &&

@@ -15,15 +15,17 @@ import { VogalFashionStorefront } from '../../templates/fashion/Vogal'
 import { OptimalFashionStorefront } from '../../templates/fashion/Optimal'
 import { NaturyaFashionStorefront } from '../../templates/fashion/Naturya'
 import { TrendyFashionStorefront } from '../../templates/fashion/Trendy'
+import { FragranceFashionStorefront } from '../../templates/fashion/Fragrance'
 import {
   BELLE_FASHION_TEMPLATE,
   VOGAL_FASHION_TEMPLATE,
   OPTIMAL_FASHION_TEMPLATE,
   NATURYA_FASHION_TEMPLATE,
   TRENDY_FASHION_TEMPLATE,
+  FRAGRANCE_FASHION_TEMPLATE,
   ALL_FASHION_MARKETPLACE_TEMPLATES,
 } from '../../data/fashionTemplatesData'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront }
 
 // Re-export domain types
 export type {
@@ -587,6 +589,24 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   ) {
     return (
       <TrendyFashionStorefront
+        template={template}
+        device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
+        customAccentColor={customAccentColor}
+        onColorChange={_onColorChange}
+        onUseTemplate={onUseTemplate}
+        onClose={onClose}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'fashion-fragrance' ||
+      template.id === 'fashion-fragrance' ||
+      template.name?.toLowerCase().includes('fragrance'))
+  ) {
+    return (
+      <FragranceFashionStorefront
         template={template}
         device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
         customAccentColor={customAccentColor}
@@ -1353,6 +1373,14 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
     ) {
       return TRENDY_FASHION_TEMPLATE
     }
+    if (
+      rawHash === 'fragrance' ||
+      rawHash === 'fashion-fragrance' ||
+      rawHash === 'fragrance-fashion' ||
+      rawHash === 'fragrance-templates'
+    ) {
+      return FRAGRANCE_FASHION_TEMPLATE
+    }
     return null
   })
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
@@ -1407,6 +1435,13 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
         rawHash === 'trendy-templates'
       ) {
         setPreviewTemplate(TRENDY_FASHION_TEMPLATE)
+      } else if (
+        rawHash === 'fragrance' ||
+        rawHash === 'fashion-fragrance' ||
+        rawHash === 'fragrance-fashion' ||
+        rawHash === 'fragrance-templates'
+      ) {
+        setPreviewTemplate(FRAGRANCE_FASHION_TEMPLATE)
       }
     }
     window.addEventListener('hashchange', handleHash)

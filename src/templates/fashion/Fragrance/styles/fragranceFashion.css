@@ -1,0 +1,2077 @@
+/* =========================================================================
+   FRAGRANCE WORKDO LUXURY PERFUME STOREFRONT STYLES
+   ========================================================================= */
+
+:root {
+  --frg-primary: #013d29;
+  --frg-primary-dark: #002410;
+  --frg-accent: #c5a059;
+  --frg-accent-gold: #d4af37;
+  --frg-accent-hover: #b08d43;
+  --frg-navy: #002332;
+  --frg-text: #2c3539;
+  --frg-muted: #6b7280;
+  --frg-cream-bg: #faf8f5;
+  --frg-light-bg: #f4efe9;
+  --frg-card-bg: #ffffff;
+  --frg-border: #e8e3d9;
+  --frg-border-gold: rgba(212, 175, 55, 0.35);
+  --frg-gold-glow: 0 4px 20px rgba(197, 160, 89, 0.25);
+  --frg-radius-sm: 4px;
+  --frg-radius-md: 8px;
+  --frg-radius-lg: 16px;
+  --frg-radius-pill: 9999px;
+  --frg-shadow: 0 4px 16px rgba(1, 61, 41, 0.06);
+  --frg-shadow-lg: 0 14px 34px rgba(1, 61, 41, 0.12);
+  --frg-font-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --frg-font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --frg-transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fragrance-storefront {
+  font-family: var(--frg-font-sans);
+  color: var(--frg-text);
+  background-color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* CONTAINER */
+.fragrance-container {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* TOP ANNOUNCEMENT BAR */
+.fragrance-topbar {
+  background-color: var(--frg-primary-dark);
+  color: #d1d5db;
+  font-size: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.fragrance-topbar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.fragrance-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  color: #f3f4f6;
+}
+
+.fragrance-topbar-left .gold-sparkle {
+  color: var(--frg-accent-gold);
+}
+
+.fragrance-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.fragrance-topbar-links {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.fragrance-topbar-link {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 11.5px;
+  cursor: pointer;
+  transition: var(--frg-transition);
+}
+
+.fragrance-topbar-link:hover {
+  color: var(--frg-accent-gold);
+}
+
+.fragrance-topbar-select {
+  background: transparent;
+  color: #f1f5f9;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: var(--frg-radius-sm);
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+  outline: none;
+}
+
+.fragrance-topbar-select option {
+  background: var(--frg-navy);
+  color: #ffffff;
+}
+
+/* MAIN HEADER */
+.fragrance-header {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--frg-border);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  transition: var(--frg-transition);
+}
+
+.fragrance-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  gap: 24px;
+}
+
+.fragrance-brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.fragrance-brand-title {
+  font-family: var(--frg-font-serif);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--frg-primary);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.fragrance-brand-subtitle {
+  font-size: 9px;
+  background-color: var(--frg-accent);
+  color: #ffffff;
+  padding: 2px 6px;
+  border-radius: var(--frg-radius-pill);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  font-family: var(--frg-font-sans);
+}
+
+/* NAVIGATION */
+.fragrance-nav {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.fragrance-nav-item {
+  background: none;
+  border: none;
+  font-family: var(--frg-font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--frg-primary);
+  padding: 8px 0;
+  cursor: pointer;
+  position: relative;
+  transition: var(--frg-transition);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.fragrance-nav-item:hover,
+.fragrance-nav-item.active {
+  color: var(--frg-accent-hover);
+}
+
+.fragrance-nav-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--frg-accent);
+  border-radius: 2px;
+}
+
+/* HEADER ACTIONS */
+.fragrance-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.fragrance-search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.fragrance-search-input {
+  width: 190px;
+  padding: 8px 14px 8px 34px;
+  border: 1px solid var(--frg-border);
+  border-radius: var(--frg-radius-pill);
+  font-size: 13px;
+  outline: none;
+  transition: var(--frg-transition);
+  background-color: var(--frg-cream-bg);
+}
+
+.fragrance-search-input:focus {
+  width: 240px;
+  border-color: var(--frg-accent);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.15);
+}
+
+.fragrance-search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--frg-muted);
+  pointer-events: none;
+}
+
+.fragrance-icon-btn {
+  background: none;
+  border: none;
+  color: var(--frg-primary);
+  position: relative;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: var(--frg-transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fragrance-icon-btn:hover {
+  background-color: var(--frg-cream-bg);
+  color: var(--frg-accent);
+}
+
+.fragrance-icon-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background-color: var(--frg-accent);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  height: 18px;
+  min-width: 18px;
+  padding: 0 4px;
+  border-radius: var(--frg-radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.fragrance-mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: var(--frg-primary);
+  cursor: pointer;
+  padding: 4px;
+}
+
+/* =========================================================================
+   HERO SECTION: "Old Wood Perfume" Luxury Presentation
+   ========================================================================= */
+.fragrance-hero {
+  background: linear-gradient(135deg, #013d29 0%, #002410 100%);
+  color: #ffffff;
+  padding: 70px 0 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.fragrance-hero::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.fragrance-hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 50px;
+  position: relative;
+  z-index: 2;
+}
+
+.fragrance-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(212, 175, 55, 0.18);
+  color: var(--frg-accent-gold);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  padding: 6px 14px;
+  border-radius: var(--frg-radius-pill);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.fragrance-hero-title {
+  font-family: var(--frg-font-serif);
+  font-size: 52px;
+  line-height: 1.1;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.fragrance-hero-title span {
+  color: var(--frg-accent-gold);
+}
+
+.fragrance-hero-desc {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #e2e8f0;
+  margin-bottom: 24px;
+  max-width: 580px;
+}
+
+/* Scent Pyramids Preview on Hero */
+.fragrance-hero-notes-bar {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.fragrance-note-pill {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 6px 14px;
+  border-radius: var(--frg-radius-pill);
+  font-size: 12px;
+  color: #f1f5f9;
+}
+
+.fragrance-note-pill strong {
+  color: var(--frg-accent-gold);
+}
+
+.fragrance-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.fragrance-btn-primary {
+  background-color: var(--frg-accent);
+  color: #ffffff;
+  padding: 13px 28px;
+  border-radius: var(--frg-radius-pill);
+  font-weight: 700;
+  font-size: 13.5px;
+  border: 1px solid var(--frg-accent);
+  cursor: pointer;
+  transition: var(--frg-transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  box-shadow: var(--frg-gold-glow);
+}
+
+.fragrance-btn-primary:hover {
+  background-color: var(--frg-accent-gold);
+  border-color: var(--frg-accent-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
+}
+
+.fragrance-btn-secondary {
+  background-color: transparent;
+  color: #ffffff;
+  padding: 13px 26px;
+  border-radius: var(--frg-radius-pill);
+  font-weight: 700;
+  font-size: 13.5px;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: var(--frg-transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.04em;
+}
+
+.fragrance-btn-secondary:hover {
+  background-color: #ffffff;
+  color: var(--frg-primary);
+  border-color: #ffffff;
+}
+
+/* Hero Bottle Visual */
+.fragrance-hero-visual {
+  position: relative;
+}
+
+.fragrance-hero-img-card {
+  position: relative;
+  border-radius: var(--frg-radius-lg);
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+  border: 1.5px solid rgba(212, 175, 55, 0.3);
+  background-color: #001f16;
+}
+
+.fragrance-hero-img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  display: block;
+}
+
+.fragrance-hero-floating-card {
+  position: absolute;
+  bottom: 24px;
+  left: -20px;
+  background: rgba(0, 36, 16, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: var(--frg-radius-md);
+  padding: 14px 20px;
+  box-shadow: var(--frg-shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: #ffffff;
+  max-width: 270px;
+}
+
+.fragrance-floating-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.2);
+  color: var(--frg-accent-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.fragrance-floating-content h4 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.fragrance-floating-content p {
+  margin: 3px 0 0 0;
+  font-size: 11.5px;
+  color: #cbd5e1;
+}
+
+/* =========================================================================
+   PROMISES / VALUE STRIP
+   ========================================================================= */
+.fragrance-promises-strip {
+  padding: 34px 0;
+  background-color: var(--frg-cream-bg);
+  border-bottom: 1px solid var(--frg-border);
+}
+
+.fragrance-promises-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.fragrance-promise-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.fragrance-promise-icon {
+  font-size: 24px;
+  width: 48px;
+  height: 48px;
+  background-color: #ffffff;
+  border: 1px solid var(--frg-border-gold);
+  border-radius: var(--frg-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--frg-accent-gold);
+}
+
+.fragrance-promise-title {
+  margin: 0;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--frg-primary);
+}
+
+.fragrance-promise-desc {
+  margin: 3px 0 0 0;
+  font-size: 12px;
+  color: var(--frg-muted);
+}
+
+/* =========================================================================
+   SECTION HEADINGS & CONTROLS
+   ========================================================================= */
+.fragrance-section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.fragrance-section-eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--frg-accent);
+  margin-bottom: 8px;
+}
+
+.fragrance-section-title {
+  font-family: var(--frg-font-serif);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--frg-primary);
+  margin: 0 0 10px 0;
+  letter-spacing: -0.01em;
+}
+
+.fragrance-section-desc {
+  font-size: 15px;
+  color: var(--frg-muted);
+  max-width: 620px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* =========================================================================
+   PRODUCT CARD STYLING (Faithful to Fragrance WorkDo)
+   ========================================================================= */
+.fragrance-product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 26px;
+}
+
+.fragrance-product-card {
+  background-color: #ffffff;
+  border: 1px solid var(--frg-border);
+  border-radius: var(--frg-radius-md);
+  overflow: hidden;
+  transition: var(--frg-transition);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.fragrance-product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--frg-shadow-lg);
+  border-color: var(--frg-accent);
+}
+
+.fragrance-card-media {
+  position: relative;
+  aspect-ratio: 1;
+  background-color: #f7f6f2;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.fragrance-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.fragrance-product-card:hover .fragrance-card-img {
+  transform: scale(1.06);
+}
+
+.fragrance-card-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 10;
+  padding: 4px 8px;
+  border-radius: var(--frg-radius-sm);
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.fragrance-badge-sale {
+  background-color: #be123c;
+  color: #ffffff;
+}
+
+.fragrance-badge-new {
+  background-color: var(--frg-primary);
+  color: #ffffff;
+}
+
+.fragrance-card-actions {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 10;
+  opacity: 0.95;
+  transition: var(--frg-transition);
+}
+
+.fragrance-action-circle-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid var(--frg-border);
+  color: var(--frg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: var(--frg-transition);
+}
+
+.fragrance-action-circle-btn:hover,
+.fragrance-action-circle-btn.active {
+  background-color: var(--frg-accent);
+  color: #ffffff;
+  border-color: var(--frg-accent);
+}
+
+.fragrance-card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.fragrance-card-family {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--frg-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+
+.fragrance-concentration-pill {
+  font-size: 10px;
+  background-color: var(--frg-cream-bg);
+  border: 1px solid var(--frg-border);
+  padding: 1px 6px;
+  border-radius: var(--frg-radius-pill);
+  color: var(--frg-muted);
+}
+
+.fragrance-card-title {
+  font-family: var(--frg-font-serif);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--frg-primary);
+  margin: 0 0 10px 0;
+  line-height: 1.3;
+  cursor: pointer;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: var(--frg-transition);
+}
+
+.fragrance-card-title:hover {
+  color: var(--frg-accent);
+}
+
+/* Scent Notes Preview Tags */
+.fragrance-card-notes {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.fragrance-note-tag {
+  font-size: 10.5px;
+  background-color: #f7f6f2;
+  color: #4b5563;
+  padding: 2px 7px;
+  border-radius: var(--frg-radius-sm);
+  border: 1px solid #ebe7df;
+}
+
+/* Volume Pills (50ml, 100ml, 150ml) */
+.fragrance-card-volumes {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.fragrance-volume-chip {
+  min-width: 38px;
+  height: 24px;
+  padding: 0 8px;
+  border: 1px solid var(--frg-border);
+  border-radius: var(--frg-radius-sm);
+  background: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--frg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--frg-transition);
+}
+
+.fragrance-volume-chip:hover {
+  border-color: var(--frg-accent);
+}
+
+.fragrance-volume-chip.selected {
+  background-color: var(--frg-primary);
+  color: #ffffff;
+  border-color: var(--frg-primary);
+}
+
+.fragrance-card-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--frg-border);
+}
+
+.fragrance-card-prices {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.fragrance-card-price {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--frg-primary);
+}
+
+.fragrance-card-compare {
+  font-size: 13px;
+  color: var(--frg-muted);
+  text-decoration: line-through;
+}
+
+.fragrance-card-add-btn {
+  background-color: var(--frg-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--frg-radius-pill);
+  padding: 7px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--frg-transition);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.fragrance-card-add-btn:hover {
+  background-color: var(--frg-accent);
+}
+
+.fragrance-card-compare-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 11px;
+  color: var(--frg-muted);
+}
+
+.fragrance-compare-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+/* =========================================================================
+   PERFUME PERSPECTIVES: SCENT PYRAMID SECTION
+   ========================================================================= */
+.fragrance-perspectives-section {
+  padding: 70px 0;
+  background-color: var(--frg-cream-bg);
+  border-top: 1px solid var(--frg-border);
+  border-bottom: 1px solid var(--frg-border);
+}
+
+.fragrance-pyramid-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 36px;
+}
+
+.fragrance-pyramid-card {
+  background-color: #ffffff;
+  border: 1px solid var(--frg-border);
+  border-radius: var(--frg-radius-md);
+  padding: 28px 24px;
+  box-shadow: var(--frg-shadow);
+  transition: var(--frg-transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.fragrance-pyramid-card:hover {
+  border-color: var(--frg-accent);
+  transform: translateY(-4px);
+}
+
+.fragrance-pyramid-tier {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--frg-accent);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.fragrance-pyramid-title {
+  font-family: var(--frg-font-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--frg-primary);
+  margin: 0 0 10px 0;
+}
+
+.fragrance-pyramid-desc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #4b5563;
+  margin-bottom: 16px;
+}
+
+.fragrance-pyramid-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.fragrance-pyramid-tag {
+  background-color: var(--frg-cream-bg);
+  border: 1px solid var(--frg-border);
+  padding: 4px 10px;
+  border-radius: var(--frg-radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--frg-primary);
+}
+
+/* =========================================================================
+   DUAL PROMO BANNERS: "Body Perfume Ro ty"
+   ========================================================================= */
+.fragrance-dual-banners {
+  padding: 70px 0;
+  background-color: #ffffff;
+}
+
+.fragrance-banners-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.fragrance-banner-card {
+  position: relative;
+  border-radius: var(--frg-radius-lg);
+  overflow: hidden;
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 40px;
+  box-shadow: var(--frg-shadow);
+  cursor: pointer;
+}
+
+.fragrance-banner-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  z-index: 1;
+}
+
+.fragrance-banner-card:hover .fragrance-banner-bg {
+  transform: scale(1.05);
+}
+
+.fragrance-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(1, 61, 41, 0.85) 0%, rgba(0, 0, 0, 0.15) 75%);
+  z-index: 2;
+}
+
+.fragrance-banner-content {
+  position: relative;
+  z-index: 3;
+  color: #ffffff;
+}
+
+.fragrance-banner-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background-color: var(--frg-accent);
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: var(--frg-radius-sm);
+  margin-bottom: 12px;
+}
+
+.fragrance-banner-title {
+  font-family: var(--frg-font-serif);
+  font-size: 30px;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  line-height: 1.2;
+}
+
+.fragrance-banner-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--frg-accent-gold);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* =========================================================================
+   BESTSELLERS / TABBED SECTION
+   ========================================================================= */
+.fragrance-bestsellers-section {
+  padding: 70px 0;
+  background-color: #ffffff;
+}
+
+.fragrance-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+
+.fragrance-tab-btn {
+  background: transparent;
+  border: 1px solid var(--frg-border);
+  border-radius: var(--frg-radius-pill);
+  padding: 8px 22px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--frg-muted);
+  cursor: pointer;
+  transition: var(--frg-transition);
+}
+
+.fragrance-tab-btn:hover {
+  border-color: var(--frg-primary);
+  color: var(--frg-primary);
+}
+
+.fragrance-tab-btn.active {
+  background-color: var(--frg-primary);
+  border-color: var(--frg-primary);
+  color: #ffffff;
+}
+
+/* =========================================================================
+   TESTIMONIALS SECTION
+   ========================================================================= */
+.fragrance-testimonials {
+  padding: 70px 0;
+  background: linear-gradient(180deg, var(--frg-cream-bg) 0%, #ffffff 100%);
+  border-top: 1px solid var(--frg-border);
+}
+
+.fragrance-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.fragrance-review-card {
+  background-color: #ffffff;
+  border: 1px solid var(--frg-border);
+  border-radius: var(--frg-radius-md);
+  padding: 26px;
+  box-shadow: var(--frg-shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+.fragrance-stars-row {
+  color: var(--frg-accent-gold);
+  font-size: 15px;
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+}
+
+.fragrance-review-headline {
+  font-family: var(--frg-font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--frg-primary);
+  margin: 0 0 10px 0;
+}
+
+.fragrance-review-comment {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: #4b5563;
+  margin-bottom: 18px;
+  flex: 1;
+}
+
+.fragrance-review-scent {
+  font-size: 11.5px;
+  color: var(--frg-accent);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.fragrance-review-author-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--frg-border);
+  padding-top: 12px;
+  font-size: 12px;
+}
+
+.fragrance-review-author {
+  font-weight: 700;
+  color: var(--frg-primary);
+}
+
+.fragrance-review-verified {
+  color: #10b981;
+  font-weight: 600;
+}
+
+/* =========================================================================
+   BLOGS SECTION ("From Our Blog")
+   ========================================================================= */
+.fragrance-blog-section {
+  padding: 70px 0;
+  background-color: #ffffff;
+}
+
+.fragrance-blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.fragrance-blog-card {
+  border: 1px solid var(--frg-border);
+  border-radius: var(--frg-radius-md);
+  overflow: hidden;
+  background: #ffffff;
+  transition: var(--frg-transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.fragrance-blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--frg-shadow-lg);
+  border-color: var(--frg-accent);
+}
+
+.fragrance-blog-img-wrap {
+  aspect-ratio: 16/10;
+  overflow: hidden;
+}
+
+.fragrance-blog-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.fragrance-blog-card:hover .fragrance-blog-img {
+  transform: scale(1.05);
+}
+
+.fragrance-blog-content {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.fragrance-blog-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11.5px;
+  color: var(--frg-muted);
+  margin-bottom: 10px;
+}
+
+.fragrance-blog-tag {
+  background-color: var(--frg-cream-bg);
+  color: var(--frg-accent);
+  padding: 2px 8px;
+  border-radius: var(--frg-radius-pill);
+  font-weight: 700;
+}
+
+.fragrance-blog-title {
+  font-family: var(--frg-font-serif);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--frg-primary);
+  margin: 0 0 10px 0;
+  line-height: 1.3;
+}
+
+.fragrance-blog-excerpt {
+  font-size: 13.5px;
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.fragrance-blog-link {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--frg-primary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* =========================================================================
+   BRAND PARTNERS
+   ========================================================================= */
+.fragrance-partners-section {
+  padding: 40px 0;
+  background-color: var(--frg-cream-bg);
+  border-top: 1px solid var(--frg-border);
+  border-bottom: 1px solid var(--frg-border);
+}
+
+.fragrance-partners-flex {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.fragrance-partner-pill {
+  font-family: var(--frg-font-serif);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--frg-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* =========================================================================
+   DISCOUNT BANNER: "Get 20% off for first order"
+   ========================================================================= */
+.fragrance-discount-banner {
+  background: linear-gradient(135deg, var(--frg-primary-dark) 0%, var(--frg-primary) 100%);
+  color: #ffffff;
+  padding: 60px 0;
+  text-align: center;
+}
+
+.fragrance-discount-box {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.fragrance-discount-title {
+  font-family: var(--frg-font-serif);
+  font-size: 34px;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+}
+
+.fragrance-discount-desc {
+  font-size: 15px;
+  color: #e2e8f0;
+  margin-bottom: 24px;
+}
+
+.fragrance-newsletter-form {
+  display: flex;
+  gap: 10px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.fragrance-newsletter-input {
+  flex: 1;
+  padding: 12px 18px;
+  border-radius: var(--frg-radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 13.5px;
+  outline: none;
+}
+
+.fragrance-newsletter-input:focus {
+  border-color: var(--frg-accent-gold);
+}
+
+.fragrance-newsletter-btn {
+  background-color: var(--frg-accent);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--frg-radius-pill);
+  padding: 12px 24px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--frg-transition);
+}
+
+.fragrance-newsletter-btn:hover {
+  background-color: var(--frg-accent-gold);
+}
+
+/* =========================================================================
+   FOOTER (Faithful to Fragrance WorkDo)
+   ========================================================================= */
+.fragrance-footer {
+  background-color: #001f16;
+  color: #94a3b8;
+  padding: 60px 0 30px 0;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.fragrance-footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.fragrance-footer-logo-col p {
+  font-size: 13.5px;
+  line-height: 1.65;
+  margin: 16px 0;
+  color: #94a3b8;
+}
+
+.fragrance-footer-socials {
+  display: flex;
+  gap: 12px;
+}
+
+.fragrance-footer-social-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  color: var(--frg-accent-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--frg-transition);
+}
+
+.fragrance-footer-social-btn:hover {
+  background: var(--frg-accent);
+  color: #ffffff;
+}
+
+.fragrance-footer-title {
+  color: #ffffff;
+  font-family: var(--frg-font-serif);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin: 0 0 18px 0;
+}
+
+.fragrance-footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fragrance-footer-link {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 13.5px;
+  cursor: pointer;
+  transition: var(--frg-transition);
+}
+
+.fragrance-footer-link:hover {
+  color: var(--frg-accent-gold);
+  padding-left: 4px;
+}
+
+.fragrance-footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* =========================================================================
+   PDP (PRODUCT DETAIL PAGE) WITH SCENT PYRAMID & METERS
+   ========================================================================= */
+.fragrance-pdp-section {
+  padding: 40px 0 80px 0;
+  background-color: #ffffff;
+}
+
+.fragrance-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--frg-muted);
+  margin-bottom: 24px;
+}
+
+.fragrance-breadcrumbs button {
+  background: none;
+  border: none;
+  color: var(--frg-muted);
+  cursor: pointer;
+  padding: 0;
+  font-size: 13px;
+}
+
+.fragrance-breadcrumbs button:hover {
+  color: var(--frg-primary);
+}
+
+.fragrance-pdp-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  margin-bottom: 60px;
+}
+
+.fragrance-pdp-gallery {
+  display: flex;
+  gap: 16px;
+}
+
+.fragrance-pdp-thumbnails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 76px;
+}
+
+.fragrance-thumb-btn {
+  width: 76px;
+  height: 90px;
+  border-radius: var(--frg-radius-md);
+  border: 1.5px solid var(--frg-border);
+  overflow: hidden;
+  padding: 0;
+  cursor: pointer;
+  background: #ffffff;
+}
+
+.fragrance-thumb-btn.active {
+  border-color: var(--frg-accent);
+}
+
+.fragrance-thumb-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fragrance-pdp-main-media {
+  flex: 1;
+  aspect-ratio: 1;
+  border-radius: var(--frg-radius-lg);
+  overflow: hidden;
+  background-color: #f7f6f2;
+  border: 1px solid var(--frg-border);
+}
+
+.fragrance-pdp-main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fragrance-pdp-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.fragrance-pdp-family {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--frg-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+
+.fragrance-pdp-title {
+  font-family: var(--frg-font-serif);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--frg-primary);
+  margin: 0 0 12px 0;
+  line-height: 1.25;
+}
+
+.fragrance-pdp-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: var(--frg-muted);
+}
+
+.fragrance-pdp-price-box {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--frg-border);
+}
+
+.fragrance-pdp-price {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--frg-primary);
+}
+
+.fragrance-pdp-compare {
+  font-size: 18px;
+  color: var(--frg-muted);
+  text-decoration: line-through;
+}
+
+.fragrance-pdp-desc {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: #4b5563;
+  margin-bottom: 24px;
+}
+
+/* Sillage & Longevity Meters */
+.fragrance-pdp-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  background: var(--frg-cream-bg);
+  border: 1px solid var(--frg-border);
+  border-radius: var(--frg-radius-md);
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.fragrance-metric-label {
+  font-size: 11.5px;
+  color: var(--frg-muted);
+  font-weight: 600;
+}
+
+.fragrance-metric-val {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--frg-primary);
+  margin-top: 2px;
+}
+
+.fragrance-pdp-volumes {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.fragrance-pdp-vol-btn {
+  min-width: 60px;
+  height: 38px;
+  padding: 0 16px;
+  border: 1.5px solid var(--frg-border);
+  border-radius: var(--frg-radius-sm);
+  background: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--frg-transition);
+}
+
+.fragrance-pdp-vol-btn.active {
+  background-color: var(--frg-primary);
+  color: #ffffff;
+  border-color: var(--frg-primary);
+}
+
+.fragrance-pdp-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+
+.fragrance-btn-add-pdp {
+  flex: 1;
+  background-color: var(--frg-primary);
+  color: #ffffff;
+  border: none;
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: var(--frg-radius-pill);
+  cursor: pointer;
+  transition: var(--frg-transition);
+}
+
+.fragrance-btn-add-pdp:hover {
+  background-color: var(--frg-primary-dark);
+}
+
+.fragrance-btn-buy-pdp {
+  flex: 1;
+  background-color: var(--frg-accent);
+  color: #ffffff;
+  border: none;
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: var(--frg-radius-pill);
+  cursor: pointer;
+  transition: var(--frg-transition);
+}
+
+.fragrance-btn-buy-pdp:hover {
+  background-color: var(--frg-accent-gold);
+}
+
+/* Accordions */
+.fragrance-accordions {
+  border-top: 1px solid var(--frg-border);
+  margin-top: 10px;
+}
+
+.fragrance-accordion-item {
+  border-bottom: 1px solid var(--frg-border);
+}
+
+.fragrance-accordion-header {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 14px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--frg-primary);
+  cursor: pointer;
+}
+
+.fragrance-accordion-body {
+  padding-bottom: 14px;
+  font-size: 13.5px;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+/* =========================================================================
+   COLLECTION / SHOP VIEW
+   ========================================================================= */
+.fragrance-shop-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 40px;
+  padding: 40px 0 80px 0;
+}
+
+.fragrance-sidebar-filters {
+  background: #ffffff;
+  border: 1px solid var(--frg-border);
+  border-radius: var(--frg-radius-md);
+  padding: 24px;
+  height: fit-content;
+}
+
+.fragrance-filter-title {
+  font-family: var(--frg-font-serif);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin: 0 0 14px 0;
+  color: var(--frg-primary);
+}
+
+.fragrance-filter-group {
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--frg-border);
+}
+
+.fragrance-filter-group:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.fragrance-filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fragrance-filter-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  color: var(--frg-text);
+  cursor: pointer;
+}
+
+.fragrance-shop-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--frg-border);
+}
+
+.fragrance-sort-select {
+  padding: 8px 14px;
+  border: 1px solid var(--frg-border);
+  border-radius: var(--frg-radius-pill);
+  font-size: 13px;
+  outline: none;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+/* =========================================================================
+   COMPARE TRAY & MODAL
+   ========================================================================= */
+.fragrance-compare-tray {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--frg-primary-dark);
+  color: #ffffff;
+  padding: 14px 24px;
+  z-index: 100;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  animation: slideUp 0.3s ease;
+  border-top: 1px solid var(--frg-border-gold);
+}
+
+.fragrance-compare-items {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.fragrance-compare-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--frg-radius-sm);
+  object-fit: cover;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+.fragrance-compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+.fragrance-compare-table th,
+.fragrance-compare-table td {
+  padding: 12px 16px;
+  border: 1px solid var(--frg-border);
+  font-size: 13.5px;
+  text-align: left;
+}
+
+.fragrance-compare-table th {
+  background-color: var(--frg-cream-bg);
+  font-weight: 700;
+}
+
+/* =========================================================================
+   CART DRAWER & QUICK VIEW MODALS
+   ========================================================================= */
+.fragrance-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(2px);
+  z-index: 110;
+  animation: fadeIn 0.2s ease;
+}
+
+.fragrance-cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 420px;
+  max-width: 90vw;
+  background: #ffffff;
+  z-index: 111;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+  animation: slideLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fragrance-drawer-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--frg-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fragrance-drawer-title {
+  font-family: var(--frg-font-serif);
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--frg-primary);
+}
+
+.fragrance-free-shipping-goal {
+  padding: 14px 24px;
+  background-color: var(--frg-cream-bg);
+  border-bottom: 1px solid var(--frg-border);
+  font-size: 12.5px;
+}
+
+.fragrance-progress-bar {
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: var(--frg-radius-pill);
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.fragrance-progress-fill {
+  height: 100%;
+  background: var(--frg-accent);
+  transition: width 0.3s ease;
+}
+
+.fragrance-cart-items-wrap {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.fragrance-cart-item {
+  display: flex;
+  gap: 14px;
+  border-bottom: 1px solid var(--frg-border);
+  padding-bottom: 16px;
+}
+
+.fragrance-cart-item-img {
+  width: 70px;
+  height: 80px;
+  border-radius: var(--frg-radius-sm);
+  object-fit: cover;
+}
+
+.fragrance-cart-item-info {
+  flex: 1;
+}
+
+.fragrance-cart-item-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  color: var(--frg-primary);
+}
+
+.fragrance-cart-item-meta {
+  font-size: 12px;
+  color: var(--frg-muted);
+  margin-bottom: 8px;
+}
+
+.fragrance-qty-controls {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--frg-border);
+  border-radius: var(--frg-radius-pill);
+  width: fit-content;
+}
+
+.fragrance-qty-btn {
+  background: none;
+  border: none;
+  padding: 2px 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.fragrance-qty-val {
+  padding: 0 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.fragrance-drawer-footer {
+  padding: 20px 24px;
+  border-top: 1px solid var(--frg-border);
+  background: #ffffff;
+}
+
+.fragrance-subtotal-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.fragrance-checkout-btn {
+  width: 100%;
+  background: var(--frg-primary);
+  color: #ffffff;
+  border: none;
+  padding: 14px;
+  border-radius: var(--frg-radius-pill);
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--frg-transition);
+}
+
+.fragrance-checkout-btn:hover {
+  background: var(--frg-primary-dark);
+}
+
+/* QUICK VIEW MODAL */
+.fragrance-modal-box {
+  background: #ffffff;
+  border-radius: var(--frg-radius-lg);
+  max-width: 720px;
+  width: 90vw;
+  padding: 28px;
+  position: relative;
+  box-shadow: var(--frg-shadow-lg);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* TOAST */
+.fragrance-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--frg-primary-dark);
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: var(--frg-radius-pill);
+  z-index: 120;
+  font-size: 13.5px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--frg-shadow-lg);
+  border-left: 4px solid var(--frg-accent-gold);
+  animation: slideUp 0.3s ease;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideLeft {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+/* =========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================= */
+@media (max-width: 1024px) {
+  .fragrance-product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .fragrance-promises-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .fragrance-pyramid-grid,
+  .fragrance-reviews-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .fragrance-hero-grid {
+    grid-template-columns: 1fr;
+  }
+  .fragrance-hero-img {
+    height: 380px;
+  }
+  .fragrance-footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .fragrance-topbar {
+    display: none;
+  }
+  .fragrance-nav {
+    display: none;
+  }
+  .fragrance-mobile-menu-btn {
+    display: block;
+  }
+  .fragrance-search-box {
+    display: none;
+  }
+  .fragrance-hero-title {
+    font-size: 34px;
+  }
+  .fragrance-product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .fragrance-banners-grid {
+    grid-template-columns: 1fr;
+  }
+  .fragrance-shop-layout {
+    grid-template-columns: 1fr;
+  }
+  .fragrance-sidebar-filters {
+    display: none;
+  }
+  .fragrance-pdp-layout {
+    grid-template-columns: 1fr;
+  }
+  .fragrance-pdp-gallery {
+    flex-direction: column-reverse;
+  }
+  .fragrance-pdp-thumbnails {
+    flex-direction: row;
+    width: 100%;
+  }
+  .fragrance-pyramid-grid,
+  .fragrance-blog-grid,
+  .fragrance-reviews-grid {
+    grid-template-columns: 1fr;
+  }
+  .fragrance-footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
