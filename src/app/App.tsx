@@ -151,11 +151,22 @@ function App() {
             rawHash === 'trendy' ||
             rawHash === 'fashion-trendy' ||
             rawHash === 'trendy-fashion' ||
-            rawHash === 'trendy-templates' ||
             rawHash === 'fragrance' ||
             rawHash === 'fashion-fragrance' ||
             rawHash === 'fragrance-fashion' ||
-            rawHash === 'fragrance-templates'
+            rawHash === 'fragrance-templates' ||
+            rawHash === 'jenie' ||
+            rawHash === 'fashion-jenie' ||
+            rawHash === 'jenie-fashion' ||
+            rawHash === 'jenie-denim' ||
+            rawHash === 'jenie-templates' ||
+            rawHash === 'chutti' ||
+            rawHash === 'fashion-chutti' ||
+            rawHash === 'chutti-kids' ||
+            rawHash === 'chutti-fashion' ||
+            rawHash === 'chutti-templates' ||
+            rawHash === 'kids-fashion' ||
+            rawHash === 'kids-store'
           )) ||
           (key === 'restaurant' && (rawHash === 'restro' || rawHash === 'restro-templates')) ||
           (key === 'health-beauty' && (

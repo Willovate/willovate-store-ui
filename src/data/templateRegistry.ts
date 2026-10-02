@@ -7,6 +7,7 @@ import { NaturyaFashionStorefront } from '../templates/fashion/Naturya'
 import { TrendyFashionStorefront } from '../templates/fashion/Trendy'
 import { FragranceFashionStorefront } from '../templates/fashion/Fragrance'
 import { JenieFashionStorefront } from '../templates/fashion/Jenie'
+import { ChuttiFashionStorefront } from '../templates/fashion/Chutti'
 import { VelocityStorefront } from '../templates/sports/Velocity'
 import { ArenaStorefront } from '../templates/sports/Arena'
 import { SprintStorefront } from '../templates/sports/Sprint'
@@ -207,6 +208,15 @@ export function getTemplateComponent(template?: MarketplaceTemplate | Template |
       template.name?.toLowerCase().includes('jenie'))
   ) {
     return JenieFashionStorefront
+  }
+  if (
+    template &&
+    (template.slug === 'fashion-chutti' ||
+      template.id === 'fashion-chutti' ||
+      template.slug === 'chutti-kids' ||
+      template.name?.toLowerCase().includes('chutti'))
+  ) {
+    return ChuttiFashionStorefront
   }
   if (
     template &&

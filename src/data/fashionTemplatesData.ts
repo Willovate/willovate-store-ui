@@ -271,6 +271,47 @@ export const JENIE_FASHION_TEMPLATE: MarketplaceTemplate = {
   ],
 }
 
+export const CHUTTI_FASHION_TEMPLATE: MarketplaceTemplate = {
+  id: 'fashion-chutti',
+  slug: 'chutti-kids',
+  name: 'Chutti Kids & Baby Boutique',
+  businessType: 'clothing-store',
+  industryCategory: 'Fashion Store',
+  tags: ['Kids', 'Baby', 'Organic Cotton', 'Boutique', 'Pastel', 'Toddler'],
+  style: 'modern',
+  catalogSize: 'medium',
+  shortDescription:
+    'Playful and cheerful kids & baby boutique store inspired by the authentic Chutti Shopify 2.0 theme. Features joyful hero slider, age-based sizing chips, soft organic cotton collections, customer parent reviews, and interactive drawers.',
+  thumbnailUrl: 'https://chutti-theme.myshopify.com/cdn/shop/files/slider-3.jpg?v=1613778204&width=800',
+  fullPreviewUrl: 'https://chutti-theme.myshopify.com/cdn/shop/files/slider-3.jpg?v=1613778204&width=1600',
+  popularityScore: 99,
+  isActive: true,
+  brandName: 'Chutti',
+  headline: 'Summer Collections\nFor Little Champs',
+  subtitle: 'Flat 10% off on orders above $59.49 with ultra-soft certified organic cotton outfits.',
+  buttonText: 'Shop Now',
+  buttonColor: '#FC6171',
+  isDark: false,
+  modelImage: 'https://chutti-theme.myshopify.com/cdn/shop/files/slider-3.jpg?v=1613778204&width=800',
+  badge: 'trending',
+  rating: 4.98,
+  reviewCount: 412,
+  layoutType: 'card-grid',
+  accentColor: '#11D6E1',
+  features: [
+    'Animated marquee announcement "Free deliveries worldwide! For more info Click Here"',
+    'Hero slideshow banner with 3 playful toddler slides and smooth controls',
+    'Shop by category grid: Accessories, Baby Clothes, Synthetic dress, Sleeveless Dress, Girls Party Dress',
+    'New arrivals 4-column product grid with age size chips and quick add',
+    'Stylist Collection multi-product showcase with hover image flips',
+    'The Biggest Kids Fashion Store promotional banner with up to 70% off callouts',
+    'Parent customer reviews ("What Customers Say") with verified buyer ratings',
+    'Our Fun & Exciting Updates playful blog grid',
+    'Pill-shaped 50px rounded buttons and gentle pastel palette',
+    'Slide-over shopping cart drawer, quick view modal, and technical baby PDP',
+  ],
+}
+
 export const ALL_FASHION_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   BELLE_FASHION_TEMPLATE,
   VOGAL_FASHION_TEMPLATE,
@@ -279,4 +320,6 @@ export const ALL_FASHION_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   TRENDY_FASHION_TEMPLATE,
   FRAGRANCE_FASHION_TEMPLATE,
   JENIE_FASHION_TEMPLATE,
+  CHUTTI_FASHION_TEMPLATE,
 ]
+

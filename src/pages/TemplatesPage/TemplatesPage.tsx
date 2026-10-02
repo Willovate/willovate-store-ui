@@ -17,6 +17,7 @@ import { NaturyaFashionStorefront } from '../../templates/fashion/Naturya'
 import { TrendyFashionStorefront } from '../../templates/fashion/Trendy'
 import { FragranceFashionStorefront } from '../../templates/fashion/Fragrance'
 import { JenieFashionStorefront } from '../../templates/fashion/Jenie'
+import { ChuttiFashionStorefront } from '../../templates/fashion/Chutti'
 import {
   BELLE_FASHION_TEMPLATE,
   VOGAL_FASHION_TEMPLATE,
@@ -26,7 +27,7 @@ import {
   FRAGRANCE_FASHION_TEMPLATE,
   ALL_FASHION_MARKETPLACE_TEMPLATES,
 } from '../../data/fashionTemplatesData'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront }
 
 // Re-export domain types
 export type {
@@ -632,6 +633,21 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
         customAccentColor={customAccentColor}
         onColorChange={_onColorChange}
         onUseTemplate={onUseTemplate}
+        onClose={onClose}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'fashion-chutti' ||
+      template.id === 'fashion-chutti' ||
+      template.slug === 'chutti-kids' ||
+      template.name?.toLowerCase().includes('chutti'))
+  ) {
+    return (
+      <ChuttiFashionStorefront
+        templateData={template}
         onClose={onClose}
       />
     )
