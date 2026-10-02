@@ -587,6 +587,16 @@
   border-radius: 50%;
   border: 1px solid rgba(0, 0, 0, 0.15);
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.jenie-wash-dot:hover {
+  transform: scale(1.15);
+}
+
+.jenie-wash-dot.active {
+  outline: 2px solid var(--jenie-indigo-deep);
+  outline-offset: 2px;
 }
 
 /* Size chips */

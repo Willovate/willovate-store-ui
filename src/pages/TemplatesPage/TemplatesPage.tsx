@@ -24,7 +24,6 @@ import {
   NATURYA_FASHION_TEMPLATE,
   TRENDY_FASHION_TEMPLATE,
   FRAGRANCE_FASHION_TEMPLATE,
-  JENIE_FASHION_TEMPLATE,
   ALL_FASHION_MARKETPLACE_TEMPLATES,
 } from '../../data/fashionTemplatesData'
 export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront }

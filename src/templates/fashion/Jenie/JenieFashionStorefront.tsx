@@ -479,6 +479,17 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
                         {'★'.repeat(Math.round(p.rating))}
                         <span style={{ color: '#6B7280', marginLeft: 4 }}>({p.reviewCount})</span>
                       </div>
+                      <div className="jenie-wash-swatches">
+                        {p.washes.map((w) => (
+                          <span
+                            key={w.name}
+                            className={`jenie-wash-dot ${curWash === w.name ? 'active' : ''}`}
+                            style={{ backgroundColor: w.hex }}
+                            title={w.name}
+                            onClick={() => setSelectedCardWashes((prev) => ({ ...prev, [p.id]: w.name }))}
+                          />
+                        ))}
+                      </div>
                       <div className="jenie-size-row">
                         {p.sizes.slice(0, 4).map((s) => (
                           <button
@@ -861,6 +872,17 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
                           {'★'.repeat(Math.round(p.rating))}
                           <span style={{ color: '#6B7280', marginLeft: 4 }}>({p.reviewCount})</span>
                         </div>
+                        <div className="jenie-wash-swatches">
+                          {p.washes.map((w) => (
+                            <span
+                              key={w.name}
+                              className={`jenie-wash-dot ${curWash === w.name ? 'active' : ''}`}
+                              style={{ backgroundColor: w.hex }}
+                              title={w.name}
+                              onClick={() => setSelectedCardWashes((prev) => ({ ...prev, [p.id]: w.name }))}
+                            />
+                          ))}
+                        </div>
                         <div className="jenie-size-row">
                           {p.sizes.slice(0, 4).map((s) => (
                             <button
@@ -966,6 +988,17 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
                         <div className="jenie-product-rating">
                           {'★'.repeat(Math.round(p.rating))}
                           <span style={{ color: '#6B7280', marginLeft: 4 }}>({p.reviewCount})</span>
+                        </div>
+                        <div className="jenie-wash-swatches">
+                          {p.washes.map((w) => (
+                            <span
+                              key={w.name}
+                              className={`jenie-wash-dot ${curWash === w.name ? 'active' : ''}`}
+                              style={{ backgroundColor: w.hex }}
+                              title={w.name}
+                              onClick={() => setSelectedCardWashes((prev) => ({ ...prev, [p.id]: w.name }))}
+                            />
+                          ))}
                         </div>
                         <div className="jenie-size-row">
                           {p.sizes.slice(0, 4).map((s) => (
