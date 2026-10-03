@@ -103,4 +103,6 @@ export interface ChuttiStorefrontProps {
   initialView?: 'home' | 'collection' | 'pdp'
   onClose?: () => void
   templateData?: MarketplaceTemplate
+  device?: 'desktop' | 'tablet' | 'mobile' | 'fullscreen'
+  deviceView?: string
 }

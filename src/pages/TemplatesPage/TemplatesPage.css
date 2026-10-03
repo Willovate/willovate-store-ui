@@ -2693,6 +2693,16 @@
 .simulated-frame.frame-mobile .progear-storefront,
 .simulated-frame.frame-mobile .arena-storefront,
 .simulated-frame.frame-mobile .mino-storefront,
+.simulated-frame.frame-mobile .optimal-root,
+.simulated-frame.frame-mobile .belle-theme-root,
+.simulated-frame.frame-mobile .vogal-theme-root,
+.simulated-frame.frame-mobile .naturya-root,
+.simulated-frame.frame-mobile .trendy-storefront,
+.simulated-frame.frame-mobile .fragrance-theme-root,
+.simulated-frame.frame-mobile .jenie-theme-root,
+.simulated-frame.frame-mobile .chutti-root,
+.simulated-frame.frame-mobile .baggo-root,
+.simulated-frame.frame-mobile .mr-tevor-storefront,
 .simulated-frame.frame-mobile > div:not(.mobile-chrome-notch) {
   flex: 1 1 auto !important;
   width: 100% !important;
@@ -9360,3 +9370,753 @@
   text-transform: none;
   margin-left: 0.4rem;
 }
+
+/* =========================================================================
+   FASHION TEMPLATES - UNIVERSAL MOBILE RESPONSIVE ENGINE (ALL 10 TEMPLATES)
+   Applies inside simulated mobile frame (.frame-mobile), on device-mobile, 
+   is-mobile, and native mobile screens <= 768px.
+   ========================================================================= */
+
+/* -------------------------------------------------------------
+   1. OPTIMAL FASHION STOREFRONT MOBILE
+   ------------------------------------------------------------- */
+.simulated-frame.frame-mobile .optimal-root,
+.optimal-root.device-mobile,
+.optimal-root.is-mobile {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+.simulated-frame.frame-mobile .optimal-topbar,
+.optimal-root.device-mobile .optimal-topbar,
+.optimal-root.is-mobile .optimal-topbar {
+  display: block !important;
+  padding: 6px 10px !important;
+}
+
+.simulated-frame.frame-mobile .optimal-topbar-left,
+.simulated-frame.frame-mobile .optimal-topbar-right,
+.optimal-root.device-mobile .optimal-topbar-left,
+.optimal-root.device-mobile .optimal-topbar-right,
+.optimal-root.is-mobile .optimal-topbar-left,
+.optimal-root.is-mobile .optimal-topbar-right {
+  display: none !important;
+}
+
+.simulated-frame.frame-mobile .optimal-topbar-inner,
+.optimal-root.device-mobile .optimal-topbar-inner,
+.optimal-root.is-mobile .optimal-topbar-inner {
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 0 !important;
+}
+
+.simulated-frame.frame-mobile .optimal-topbar-center,
+.optimal-root.device-mobile .optimal-topbar-center,
+.optimal-root.is-mobile .optimal-topbar-center {
+  width: 100% !important;
+  font-size: 11px !important;
+  letter-spacing: 0.01em !important;
+  line-height: 1.3 !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  display: block !important;
+}
+
+.simulated-frame.frame-mobile .optimal-header-main,
+.optimal-root.device-mobile .optimal-header-main,
+.optimal-root.is-mobile .optimal-header-main {
+  padding: 10px 12px !important;
+}
+
+.simulated-frame.frame-mobile .optimal-header-row,
+.optimal-root.device-mobile .optimal-header-row,
+.optimal-root.is-mobile .optimal-header-row {
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+}
+
+.simulated-frame.frame-mobile .optimal-logo,
+.optimal-root.device-mobile .optimal-logo,
+.optimal-root.is-mobile .optimal-logo {
+  font-size: 20px !important;
+}
+
+.simulated-frame.frame-mobile .optimal-logo-mark,
+.optimal-root.device-mobile .optimal-logo-mark,
+.optimal-root.is-mobile .optimal-logo-mark {
+  width: 28px !important;
+  height: 28px !important;
+}
+
+.simulated-frame.frame-mobile .optimal-search-wrapper,
+.optimal-root.device-mobile .optimal-search-wrapper,
+.optimal-root.is-mobile .optimal-search-wrapper {
+  order: 3 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin-top: 2px !important;
+}
+
+.simulated-frame.frame-mobile .optimal-search-category-select,
+.optimal-root.device-mobile .optimal-search-category-select,
+.optimal-root.is-mobile .optimal-search-category-select,
+.simulated-frame.frame-mobile .optimal-header-action-label,
+.optimal-root.device-mobile .optimal-header-action-label,
+.optimal-root.is-mobile .optimal-header-action-label {
+  display: none !important;
+}
+
+.simulated-frame.frame-mobile .optimal-products-grid,
+.simulated-frame.frame-mobile .optimal-deals-grid,
+.optimal-root.device-mobile .optimal-products-grid,
+.optimal-root.device-mobile .optimal-deals-grid,
+.optimal-root.is-mobile .optimal-products-grid,
+.optimal-root.is-mobile .optimal-deals-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.simulated-frame.frame-mobile .optimal-product-card,
+.optimal-root.device-mobile .optimal-product-card,
+.optimal-root.is-mobile .optimal-product-card {
+  min-width: 0 !important;
+  width: 100% !important;
+  overflow: hidden !important;
+}
+
+.simulated-frame.frame-mobile .optimal-product-card-title,
+.optimal-root.device-mobile .optimal-product-card-title,
+.optimal-root.is-mobile .optimal-product-card-title {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  white-space: normal !important;
+  font-size: 13px !important;
+  line-height: 1.35 !important;
+  min-height: 35px !important;
+}
+
+.simulated-frame.frame-mobile .optimal-hero-grid,
+.optimal-root.device-mobile .optimal-hero-grid,
+.optimal-root.is-mobile .optimal-hero-grid {
+  grid-template-columns: 1fr !important;
+  gap: 12px !important;
+}
+
+.simulated-frame.frame-mobile .optimal-hero-main,
+.optimal-root.device-mobile .optimal-hero-main,
+.optimal-root.is-mobile .optimal-hero-main {
+  min-height: 280px !important;
+}
+
+.simulated-frame.frame-mobile .optimal-hero-side,
+.optimal-root.device-mobile .optimal-hero-side,
+.optimal-root.is-mobile .optimal-hero-side {
+  flex-direction: row !important;
+  gap: 10px !important;
+}
+
+.simulated-frame.frame-mobile .optimal-trust-grid,
+.optimal-root.device-mobile .optimal-trust-grid,
+.optimal-root.is-mobile .optimal-trust-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.simulated-frame.frame-mobile .optimal-blog-grid,
+.simulated-frame.frame-mobile .optimal-testimonials-grid,
+.optimal-root.device-mobile .optimal-blog-grid,
+.optimal-root.device-mobile .optimal-testimonials-grid,
+.optimal-root.is-mobile .optimal-blog-grid,
+.optimal-root.is-mobile .optimal-testimonials-grid {
+  grid-template-columns: 1fr !important;
+  gap: 14px !important;
+}
+
+/* -------------------------------------------------------------
+   2. BELLE FASHION STOREFRONT MOBILE
+   ------------------------------------------------------------- */
+.simulated-frame.frame-mobile .belle-theme-root,
+.belle-theme-root.device-mobile,
+.belle-theme-root.is-mobile {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+.simulated-frame.frame-mobile .belle-top-bar,
+.belle-theme-root.device-mobile .belle-top-bar,
+.belle-theme-root.is-mobile .belle-top-bar {
+  padding: 6px 12px !important;
+}
+
+.simulated-frame.frame-mobile .belle-top-bar-right,
+.belle-theme-root.device-mobile .belle-top-bar-right,
+.belle-theme-root.is-mobile .belle-top-bar-right {
+  display: none !important;
+}
+
+.simulated-frame.frame-mobile .belle-top-bar-left,
+.belle-theme-root.device-mobile .belle-top-bar-left,
+.belle-theme-root.is-mobile .belle-top-bar-left {
+  width: 100% !important;
+  justify-content: center !important;
+  text-align: center !important;
+  font-size: 11px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.simulated-frame.frame-mobile .belle-header-inner,
+.belle-theme-root.device-mobile .belle-header-inner,
+.belle-theme-root.is-mobile .belle-header-inner {
+  padding: 10px 14px !important;
+}
+
+.simulated-frame.frame-mobile .belle-logo-text,
+.belle-theme-root.device-mobile .belle-logo-text,
+.belle-theme-root.is-mobile .belle-logo-text {
+  font-size: 20px !important;
+}
+
+.simulated-frame.frame-mobile .belle-desktop-nav,
+.belle-theme-root.device-mobile .belle-desktop-nav,
+.belle-theme-root.is-mobile .belle-desktop-nav {
+  display: none !important;
+}
+
+.simulated-frame.frame-mobile .belle-mobile-menu-btn,
+.belle-theme-root.device-mobile .belle-mobile-menu-btn,
+.belle-theme-root.is-mobile .belle-mobile-menu-btn {
+  display: flex !important;
+}
+
+.simulated-frame.frame-mobile .belle-hero,
+.belle-theme-root.device-mobile .belle-hero,
+.belle-theme-root.is-mobile .belle-hero {
+  min-height: 340px !important;
+  padding: 36px 16px !important;
+}
+
+.simulated-frame.frame-mobile .belle-hero-title,
+.belle-theme-root.device-mobile .belle-hero-title,
+.belle-theme-root.is-mobile .belle-hero-title {
+  font-size: 24px !important;
+  line-height: 1.2 !important;
+}
+
+.simulated-frame.frame-mobile .belle-products-grid,
+.simulated-frame.frame-mobile .belle-collection-grid,
+.belle-theme-root.device-mobile .belle-products-grid,
+.belle-theme-root.device-mobile .belle-collection-grid,
+.belle-theme-root.is-mobile .belle-products-grid,
+.belle-theme-root.is-mobile .belle-collection-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.simulated-frame.frame-mobile .belle-product-card,
+.belle-theme-root.device-mobile .belle-product-card,
+.belle-theme-root.is-mobile .belle-product-card {
+  min-width: 0 !important;
+  width: 100% !important;
+}
+
+.simulated-frame.frame-mobile .belle-card-title,
+.belle-theme-root.device-mobile .belle-card-title,
+.belle-theme-root.is-mobile .belle-card-title {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  white-space: normal !important;
+  font-size: 13px !important;
+  line-height: 1.35 !important;
+  min-height: 35px !important;
+}
+
+.simulated-frame.frame-mobile .belle-editorial-block,
+.simulated-frame.frame-mobile .belle-editorial-block.reversed,
+.simulated-frame.frame-mobile .belle-look-grid,
+.belle-theme-root.device-mobile .belle-editorial-block,
+.belle-theme-root.device-mobile .belle-look-grid,
+.belle-theme-root.is-mobile .belle-editorial-block,
+.belle-theme-root.is-mobile .belle-look-grid {
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+}
+
+.simulated-frame.frame-mobile .belle-trust-grid,
+.belle-theme-root.device-mobile .belle-trust-grid,
+.belle-theme-root.is-mobile .belle-trust-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.simulated-frame.frame-mobile .belle-insta-grid,
+.belle-theme-root.device-mobile .belle-insta-grid,
+.belle-theme-root.is-mobile .belle-insta-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+}
+
+/* -------------------------------------------------------------
+   3. VOGAL FASHION STOREFRONT MOBILE
+   ------------------------------------------------------------- */
+.simulated-frame.frame-mobile .vogal-theme-root,
+.vogal-theme-root.device-mobile,
+.vogal-theme-root.is-mobile {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+.simulated-frame.frame-mobile .vogal-top-bar,
+.vogal-theme-root.device-mobile .vogal-top-bar,
+.vogal-theme-root.is-mobile .vogal-top-bar {
+  padding: 6px 12px !important;
+}
+
+.simulated-frame.frame-mobile .vogal-top-bar-right,
+.vogal-theme-root.device-mobile .vogal-top-bar-right,
+.vogal-theme-root.is-mobile .vogal-top-bar-right {
+  display: none !important;
+}
+
+.simulated-frame.frame-mobile .vogal-top-bar-left,
+.vogal-theme-root.device-mobile .vogal-top-bar-left,
+.vogal-theme-root.is-mobile .vogal-top-bar-left {
+  width: 100% !important;
+  text-align: center !important;
+  justify-content: center !important;
+  font-size: 11px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.simulated-frame.frame-mobile .vogal-header-inner,
+.vogal-theme-root.device-mobile .vogal-header-inner,
+.vogal-theme-root.is-mobile .vogal-header-inner {
+  padding: 10px 14px !important;
+}
+
+.simulated-frame.frame-mobile .vogal-desktop-nav,
+.vogal-theme-root.device-mobile .vogal-desktop-nav,
+.vogal-theme-root.is-mobile .vogal-desktop-nav {
+  display: none !important;
+}
+
+.simulated-frame.frame-mobile .vogal-mobile-hamburger,
+.vogal-theme-root.device-mobile .vogal-mobile-hamburger,
+.vogal-theme-root.is-mobile .vogal-mobile-hamburger {
+  display: flex !important;
+}
+
+.simulated-frame.frame-mobile .vogal-product-grid,
+.simulated-frame.frame-mobile .vogal-products-grid,
+.vogal-theme-root.device-mobile .vogal-product-grid,
+.vogal-theme-root.device-mobile .vogal-products-grid,
+.vogal-theme-root.is-mobile .vogal-product-grid,
+.vogal-theme-root.is-mobile .vogal-products-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.simulated-frame.frame-mobile .vogal-categories-grid,
+.vogal-theme-root.device-mobile .vogal-categories-grid,
+.vogal-theme-root.is-mobile .vogal-categories-grid {
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 10px !important;
+}
+
+.simulated-frame.frame-mobile .vogal-cat-avatar-wrap,
+.vogal-theme-root.device-mobile .vogal-cat-avatar-wrap,
+.vogal-theme-root.is-mobile .vogal-cat-avatar-wrap {
+  width: 60px !important;
+  height: 60px !important;
+}
+
+.simulated-frame.frame-mobile .vogal-split-grid,
+.simulated-frame.frame-mobile .vogal-stl-container,
+.simulated-frame.frame-mobile .vogal-countdown-inner,
+.simulated-frame.frame-mobile .vogal-collection-layout,
+.vogal-theme-root.device-mobile .vogal-split-grid,
+.vogal-theme-root.device-mobile .vogal-collection-layout,
+.vogal-theme-root.is-mobile .vogal-split-grid,
+.vogal-theme-root.is-mobile .vogal-collection-layout {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+.simulated-frame.frame-mobile .vogal-trust-grid,
+.vogal-theme-root.device-mobile .vogal-trust-grid,
+.vogal-theme-root.is-mobile .vogal-trust-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+/* -------------------------------------------------------------
+   4. NATURYA FASHION STOREFRONT MOBILE
+   ------------------------------------------------------------- */
+.simulated-frame.frame-mobile .naturya-root,
+.naturya-root.device-mobile,
+.naturya-root.is-mobile {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+.simulated-frame.frame-mobile .nat-announcement,
+.naturya-root.device-mobile .nat-announcement,
+.naturya-root.is-mobile .nat-announcement {
+  font-size: 11px !important;
+  padding: 6px 10px !important;
+  text-align: center !important;
+}
+
+.simulated-frame.frame-mobile .nat-announcement-tools,
+.naturya-root.device-mobile .nat-announcement-tools,
+.naturya-root.is-mobile .nat-announcement-tools {
+  display: none !important;
+}
+
+.simulated-frame.frame-mobile .naturya-nav-menu,
+.simulated-frame.frame-mobile .nat-nav,
+.naturya-root.device-mobile .naturya-nav-menu,
+.naturya-root.device-mobile .nat-nav,
+.naturya-root.is-mobile .naturya-nav-menu,
+.naturya-root.is-mobile .nat-nav {
+  display: none !important;
+}
+
+.simulated-frame.frame-mobile .naturya-products-grid,
+.simulated-frame.frame-mobile .nat-products-grid,
+.naturya-root.device-mobile .naturya-products-grid,
+.naturya-root.device-mobile .nat-products-grid,
+.naturya-root.is-mobile .naturya-products-grid,
+.naturya-root.is-mobile .nat-products-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.simulated-frame.frame-mobile .naturya-oasis-grid,
+.simulated-frame.frame-mobile .naturya-trio-grid,
+.simulated-frame.frame-mobile .naturya-collection-layout,
+.naturya-root.device-mobile .naturya-oasis-grid,
+.naturya-root.device-mobile .naturya-collection-layout,
+.naturya-root.is-mobile .naturya-oasis-grid,
+.naturya-root.is-mobile .naturya-collection-layout {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+.simulated-frame.frame-mobile .naturya-promises-grid,
+.naturya-root.device-mobile .naturya-promises-grid,
+.naturya-root.is-mobile .naturya-promises-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+/* -------------------------------------------------------------
+   5. TRENDY FASHION STOREFRONT MOBILE
+   ------------------------------------------------------------- */
+.simulated-frame.frame-mobile .trendy-storefront,
+.trendy-storefront.device-mobile,
+.trendy-storefront.is-mobile {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+.simulated-frame.frame-mobile .trendy-topbar-tools,
+.simulated-frame.frame-mobile .trendy-announcement-tools,
+.trendy-storefront.device-mobile .trendy-topbar-tools,
+.trendy-storefront.device-mobile .trendy-announcement-tools,
+.trendy-storefront.is-mobile .trendy-topbar-tools,
+.trendy-storefront.is-mobile .trendy-announcement-tools {
+  display: none !important;
+}
+
+.simulated-frame.frame-mobile .trendy-nav,
+.trendy-storefront.device-mobile .trendy-nav,
+.trendy-storefront.is-mobile .trendy-nav {
+  display: none !important;
+}
+
+.simulated-frame.frame-mobile .trendy-product-grid,
+.simulated-frame.frame-mobile .trendy-deals-grid,
+.trendy-storefront.device-mobile .trendy-product-grid,
+.trendy-storefront.device-mobile .trendy-deals-grid,
+.trendy-storefront.is-mobile .trendy-product-grid,
+.trendy-storefront.is-mobile .trendy-deals-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.simulated-frame.frame-mobile .trendy-banners-grid,
+.simulated-frame.frame-mobile .trendy-shop-layout,
+.simulated-frame.frame-mobile .trendy-blog-grid,
+.trendy-storefront.device-mobile .trendy-banners-grid,
+.trendy-storefront.device-mobile .trendy-shop-layout,
+.trendy-storefront.is-mobile .trendy-banners-grid,
+.trendy-storefront.is-mobile .trendy-shop-layout {
+  grid-template-columns: 1fr !important;
+  gap: 14px !important;
+}
+
+/* -------------------------------------------------------------
+   6. FRAGRANCE FASHION STOREFRONT MOBILE
+   ------------------------------------------------------------- */
+.simulated-frame.frame-mobile .fragrance-theme-root,
+.fragrance-theme-root.device-mobile,
+.fragrance-theme-root.is-mobile {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-announce-left,
+.fragrance-theme-root.device-mobile .fragrance-announce-left,
+.fragrance-theme-root.is-mobile .fragrance-announce-left {
+  display: none !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-main-nav,
+.fragrance-theme-root.device-mobile .fragrance-main-nav,
+.fragrance-theme-root.is-mobile .fragrance-main-nav {
+  display: none !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-product-grid,
+.simulated-frame.frame-mobile .fragrance-bestseller-grid,
+.fragrance-theme-root.device-mobile .fragrance-product-grid,
+.fragrance-theme-root.device-mobile .fragrance-bestseller-grid,
+.fragrance-theme-root.is-mobile .fragrance-product-grid,
+.fragrance-theme-root.is-mobile .fragrance-bestseller-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-hero-row,
+.simulated-frame.frame-mobile .fragrance-notes-grid,
+.simulated-frame.frame-mobile .fragrance-pyramid-grid,
+.fragrance-theme-root.device-mobile .fragrance-hero-row,
+.fragrance-theme-root.is-mobile .fragrance-hero-row {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+/* -------------------------------------------------------------
+   7. JENIE FASHION STOREFRONT MOBILE
+   ------------------------------------------------------------- */
+.simulated-frame.frame-mobile .jenie-theme-root,
+.jenie-theme-root.device-mobile,
+.jenie-theme-root.is-mobile {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+.simulated-frame.frame-mobile .jenie-nav-list,
+.simulated-frame.frame-mobile .jenie-nav,
+.jenie-theme-root.device-mobile .jenie-nav-list,
+.jenie-theme-root.device-mobile .jenie-nav,
+.jenie-theme-root.is-mobile .jenie-nav-list,
+.jenie-theme-root.is-mobile .jenie-nav {
+  display: none !important;
+}
+
+.simulated-frame.frame-mobile .jenie-products-grid,
+.simulated-frame.frame-mobile .jenie-bestsellers-grid,
+.simulated-frame.frame-mobile .jenie-product-grid,
+.jenie-theme-root.device-mobile .jenie-products-grid,
+.jenie-theme-root.device-mobile .jenie-bestsellers-grid,
+.jenie-theme-root.is-mobile .jenie-products-grid,
+.jenie-theme-root.is-mobile .jenie-bestsellers-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.simulated-frame.frame-mobile .jenie-collection-grid,
+.simulated-frame.frame-mobile .jenie-editorial-grid,
+.jenie-theme-root.device-mobile .jenie-collection-grid,
+.jenie-theme-root.is-mobile .jenie-collection-grid {
+  grid-template-columns: 1fr !important;
+  gap: 14px !important;
+}
+
+/* -------------------------------------------------------------
+   8. CHUTTI FASHION STOREFRONT MOBILE
+   ------------------------------------------------------------- */
+.simulated-frame.frame-mobile .chutti-root,
+.chutti-root.device-mobile,
+.chutti-root.is-mobile {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+.simulated-frame.frame-mobile .chutti-top-tools,
+.chutti-root.device-mobile .chutti-top-tools,
+.chutti-root.is-mobile .chutti-top-tools {
+  display: none !important;
+}
+
+.simulated-frame.frame-mobile .chutti-nav,
+.chutti-root.device-mobile .chutti-nav,
+.chutti-root.is-mobile .chutti-nav {
+  display: none !important;
+}
+
+.simulated-frame.frame-mobile .chutti-products-grid,
+.simulated-frame.frame-mobile .chutti-product-grid,
+.chutti-root.device-mobile .chutti-products-grid,
+.chutti-root.device-mobile .chutti-product-grid,
+.chutti-root.is-mobile .chutti-products-grid,
+.chutti-root.is-mobile .chutti-product-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.simulated-frame.frame-mobile .chutti-cat-grid,
+.simulated-frame.frame-mobile .chutti-perks-grid,
+.chutti-root.device-mobile .chutti-cat-grid,
+.chutti-root.device-mobile .chutti-perks-grid,
+.chutti-root.is-mobile .chutti-cat-grid,
+.chutti-root.is-mobile .chutti-perks-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.simulated-frame.frame-mobile .chutti-blog-grid,
+.chutti-root.device-mobile .chutti-blog-grid,
+.chutti-root.is-mobile .chutti-blog-grid {
+  grid-template-columns: 1fr !important;
+  gap: 14px !important;
+}
+
+/* -------------------------------------------------------------
+   9. BAGGO FASHION STOREFRONT MOBILE
+   ------------------------------------------------------------- */
+.simulated-frame.frame-mobile .baggo-root,
+.baggo-root.device-mobile,
+.baggo-root.is-mobile {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+.simulated-frame.frame-mobile .baggo-announcement-tools,
+.baggo-root.device-mobile .baggo-announcement-tools,
+.baggo-root.is-mobile .baggo-announcement-tools {
+  display: none !important;
+}
+
+.simulated-frame.frame-mobile .baggo-nav,
+.baggo-root.device-mobile .baggo-nav,
+.baggo-root.is-mobile .baggo-nav {
+  display: none !important;
+}
+
+.simulated-frame.frame-mobile .baggo-products-grid,
+.simulated-frame.frame-mobile .baggo-curated-grid,
+.baggo-root.device-mobile .baggo-products-grid,
+.baggo-root.device-mobile .baggo-curated-grid,
+.baggo-root.is-mobile .baggo-products-grid,
+.baggo-root.is-mobile .baggo-curated-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-cat-grid,
+.simulated-frame.frame-mobile .baggo-pillars-grid,
+.baggo-root.device-mobile .baggo-cat-grid,
+.baggo-root.device-mobile .baggo-pillars-grid,
+.baggo-root.is-mobile .baggo-cat-grid,
+.baggo-root.is-mobile .baggo-pillars-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+/* -------------------------------------------------------------
+   10. MR-TEVOR FASHION STOREFRONT MOBILE
+   ------------------------------------------------------------- */
+.simulated-frame.frame-mobile .mr-tevor-storefront,
+.mr-tevor-storefront.device-mobile,
+.mr-tevor-storefront.is-mobile {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+.simulated-frame.frame-mobile .mt-announcement-tools,
+.mr-tevor-storefront.device-mobile .mt-announcement-tools,
+.mr-tevor-storefront.is-mobile .mt-announcement-tools {
+  display: none !important;
+}
+
+.simulated-frame.frame-mobile .mt-desktop-nav,
+.mr-tevor-storefront.device-mobile .mt-desktop-nav,
+.mr-tevor-storefront.is-mobile .mt-desktop-nav {
+  display: none !important;
+}
+
+.simulated-frame.frame-mobile .mt-products-grid,
+.mr-tevor-storefront.device-mobile .mt-products-grid,
+.mr-tevor-storefront.is-mobile .mt-products-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.simulated-frame.frame-mobile .mt-suit-card,
+.mr-tevor-storefront.device-mobile .mt-suit-card,
+.mr-tevor-storefront.is-mobile .mt-suit-card {
+  min-width: 0 !important;
+  width: 100% !important;
+}
+
+.simulated-frame.frame-mobile .mt-suit-title,
+.mr-tevor-storefront.device-mobile .mt-suit-title,
+.mr-tevor-storefront.is-mobile .mt-suit-title {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  font-size: 13px !important;
+  min-height: 35px !important;
+}
+
+.simulated-frame.frame-mobile .mt-bespoke-customizer-box,
+.simulated-frame.frame-mobile .mt-lapel-guide-grid,
+.mr-tevor-storefront.device-mobile .mt-bespoke-customizer-box,
+.mr-tevor-storefront.device-mobile .mt-lapel-guide-grid,
+.mr-tevor-storefront.is-mobile .mt-bespoke-customizer-box,
+.mr-tevor-storefront.is-mobile .mt-lapel-guide-grid {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+.simulated-frame.frame-mobile .mt-value-pillars-grid,
+.mr-tevor-storefront.device-mobile .mt-value-pillars-grid,
+.mr-tevor-storefront.is-mobile .mt-value-pillars-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+

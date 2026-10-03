@@ -650,6 +650,7 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
     return (
       <ChuttiFashionStorefront
         templateData={template}
+        device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
         onClose={onClose}
       />
     )
@@ -665,6 +666,7 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
     return (
       <BaggoFashionStorefront
         templateData={template}
+        device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
         onClose={onClose}
       />
     )
@@ -681,6 +683,7 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   ) {
     return (
       <MrTevorFashionStorefront
+        device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
         onBackToDirectory={onClose}
       />
     )

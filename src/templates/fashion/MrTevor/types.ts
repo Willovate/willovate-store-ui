@@ -85,4 +85,6 @@ export interface BespokeFittingForm {
 export interface MrTevorStorefrontProps {
   onBackToDirectory?: () => void
   onSelectProduct?: (product: MrTevorProduct) => void
+  device?: 'desktop' | 'tablet' | 'mobile' | 'fullscreen'
+  deviceView?: string
 }
