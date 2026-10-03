@@ -312,6 +312,47 @@ export const CHUTTI_FASHION_TEMPLATE: MarketplaceTemplate = {
   ],
 }
 
+export const BAGGO_FASHION_TEMPLATE: MarketplaceTemplate = {
+  id: 'fashion-baggo',
+  slug: 'baggo-leather',
+  name: 'Baggo Handcrafted Bags & Leather Atelier',
+  businessType: 'clothing-store',
+  industryCategory: 'Fashion Store',
+  tags: ['Leather', 'Bags', 'Handcrafted', 'Backpacks', 'Tote', 'Briefcases'],
+  style: 'modern',
+  catalogSize: 'medium',
+  shortDescription:
+    'Luxury handcrafted leather bags, travel backpacks, and accessories store inspired by the authentic Baggo Shopify theme. Features deep Oxford Navy & saddle cognac palette, bespoke gold foil monogramming, full-grain leather specifications, and value pillars.',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&auto=format&fit=crop&q=80',
+  fullPreviewUrl: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1600&auto=format&fit=crop&q=85',
+  popularityScore: 99,
+  isActive: true,
+  brandName: 'Baggo',
+  headline: 'Wally Slim Leather Bags\nMade by Professionals',
+  subtitle: 'Artisan crafted European full-grain leather bags engineered for seamless city commutes and weekend journeys.',
+  buttonText: 'Shop Collection',
+  buttonColor: '#CC824C',
+  isDark: false,
+  modelImage: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&auto=format&fit=crop&q=80',
+  badge: 'new',
+  rating: 4.97,
+  reviewCount: 395,
+  layoutType: 'card-grid',
+  accentColor: '#CC824C',
+  features: [
+    'Top notification bar with free worldwide shipping and lifetime warranty notice',
+    'Hero slideshow banner featuring Wally Slim Leather Bags and executive weekender duffels',
+    'Three large atelier category cards: Leather, Synthetic, Polyurethane Collections',
+    'Exclusive Collections product carousel with artisan vendor tags (Elena, Veelo, Ephiany)',
+    'Quality Baggo Providers 4-pillar value badges (Full-Grain, Hand-Stitching, Weatherproof, Lifetime Warranty)',
+    'Craftsmanship split storytelling banner "Style in handcrafts, made by professionals for you"',
+    'Interactive 24K gold foil live monogram customizer preview',
+    'Verified client testimonials with location & model attribution',
+    'Newsletter banner with instant 10% discount invitation',
+    'Slide-over leather cart drawer, quick view modal, and technical leather PDP',
+  ],
+}
+
 export const ALL_FASHION_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   BELLE_FASHION_TEMPLATE,
   VOGAL_FASHION_TEMPLATE,
@@ -321,5 +362,7 @@ export const ALL_FASHION_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   FRAGRANCE_FASHION_TEMPLATE,
   JENIE_FASHION_TEMPLATE,
   CHUTTI_FASHION_TEMPLATE,
+  BAGGO_FASHION_TEMPLATE,
 ]
+
 

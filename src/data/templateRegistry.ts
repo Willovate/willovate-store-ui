@@ -8,6 +8,7 @@ import { TrendyFashionStorefront } from '../templates/fashion/Trendy'
 import { FragranceFashionStorefront } from '../templates/fashion/Fragrance'
 import { JenieFashionStorefront } from '../templates/fashion/Jenie'
 import { ChuttiFashionStorefront } from '../templates/fashion/Chutti'
+import { BaggoFashionStorefront } from '../templates/fashion/Baggo'
 import { VelocityStorefront } from '../templates/sports/Velocity'
 import { ArenaStorefront } from '../templates/sports/Arena'
 import { SprintStorefront } from '../templates/sports/Sprint'
@@ -217,6 +218,15 @@ export function getTemplateComponent(template?: MarketplaceTemplate | Template |
       template.name?.toLowerCase().includes('chutti'))
   ) {
     return ChuttiFashionStorefront
+  }
+  if (
+    template &&
+    (template.slug === 'fashion-baggo' ||
+      template.id === 'fashion-baggo' ||
+      template.slug === 'baggo-leather' ||
+      template.name?.toLowerCase().includes('baggo'))
+  ) {
+    return BaggoFashionStorefront
   }
   if (
     template &&

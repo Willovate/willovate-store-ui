@@ -1,0 +1,930 @@
+/* ==========================================================================
+   BAGGO HANDCRAFTED BAGS & LEATHER LIFESTYLE THEME STYLING
+   Authentic to: https://baggo-theme.myshopify.com/
+   Identity: Deep Oxford Navy (#27314C), Saddle Cognac (#CC824C), Warm Parchment (#FAF3EE)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;800&family=Cambay:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  --baggo-navy: #27314C;
+  --baggo-navy-dark: #1A2236;
+  --baggo-cognac: #CC824C;
+  --baggo-cognac-hover: #B8723E;
+  --baggo-amber: #BD7A4A;
+  --baggo-parchment: #FAF3EE;
+  --baggo-parchment-soft: #F6ECE4;
+  --baggo-text-dark: #27314C;
+  --baggo-text-muted: #535353;
+  --baggo-border: #E8DED6;
+  --baggo-font-serif: 'Frank Ruhl Libre', Georgia, serif;
+  --baggo-font-sans: 'Cambay', -apple-system, BlinkMacSystemFont, sans-serif;
+  --baggo-shadow-card: 0 10px 30px rgba(39, 49, 76, 0.06);
+  --baggo-shadow-hover: 0 16px 40px rgba(204, 130, 76, 0.16);
+}
+
+.baggo-root {
+  font-family: var(--baggo-font-sans);
+  color: var(--baggo-text-dark);
+  background-color: #FFFFFF;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  box-sizing: border-box;
+}
+
+.baggo-root * {
+  box-sizing: border-box;
+}
+
+.baggo-container {
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* TOP NOTIFICATION BAR */
+.baggo-top-bar {
+  background: var(--baggo-navy-dark);
+  color: #FFFFFF;
+  padding: 8px 0;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.baggo-top-bar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.baggo-top-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.02em;
+}
+
+.baggo-top-highlight {
+  color: var(--baggo-cognac);
+  font-weight: 700;
+}
+
+/* HEADER */
+.baggo-header {
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--baggo-border);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.baggo-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+.baggo-logo {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.baggo-logo-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--baggo-navy);
+  color: var(--baggo-cognac);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  border: 1px solid var(--baggo-cognac);
+}
+
+.baggo-logo-title {
+  font-family: var(--baggo-font-serif);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--baggo-navy);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.baggo-logo-sub {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--baggo-cognac);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.baggo-nav-list {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.baggo-nav-link {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--baggo-navy);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 6px 0;
+  position: relative;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.baggo-nav-link:hover,
+.baggo-nav-link.active {
+  color: var(--baggo-cognac);
+}
+
+.baggo-nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--baggo-cognac);
+}
+
+.baggo-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.baggo-action-btn {
+  background: none;
+  border: 1px solid var(--baggo-border);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--baggo-navy);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.baggo-action-btn:hover {
+  background: var(--baggo-parchment);
+  border-color: var(--baggo-cognac);
+  color: var(--baggo-cognac);
+  transform: translateY(-2px);
+}
+
+.baggo-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--baggo-cognac);
+  color: #FFFFFF;
+  font-size: 10px;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* BUTTONS */
+.baggo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--baggo-font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  border: none;
+  outline: none;
+}
+
+.baggo-btn-primary {
+  background: var(--baggo-navy);
+  color: #FFFFFF;
+  border: 1px solid var(--baggo-navy);
+}
+
+.baggo-btn-primary:hover {
+  background: var(--baggo-cognac);
+  border-color: var(--baggo-cognac);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(204, 130, 76, 0.3);
+}
+
+.baggo-btn-cognac {
+  background: var(--baggo-cognac);
+  color: #FFFFFF;
+  border: 1px solid var(--baggo-cognac);
+}
+
+.baggo-btn-cognac:hover {
+  background: var(--baggo-cognac-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(204, 130, 76, 0.35);
+}
+
+.baggo-btn-outline {
+  background: transparent;
+  color: var(--baggo-navy);
+  border: 1px solid var(--baggo-navy);
+}
+
+.baggo-btn-outline:hover {
+  background: var(--baggo-navy);
+  color: #FFFFFF;
+}
+
+/* SECTION 1: HERO SLIDER */
+.baggo-hero {
+  position: relative;
+  background-color: var(--baggo-parchment);
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--baggo-border);
+}
+
+.baggo-hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
+  padding: 60px 0;
+}
+
+.baggo-hero-subtitle {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--baggo-cognac);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.baggo-hero-title {
+  font-family: var(--baggo-font-serif);
+  font-size: 54px;
+  font-weight: 700;
+  color: var(--baggo-navy);
+  line-height: 1.15;
+  margin: 0 0 18px;
+}
+
+.baggo-hero-desc {
+  font-size: 16px;
+  color: var(--baggo-text-muted);
+  line-height: 1.7;
+  margin-bottom: 32px;
+  max-width: 480px;
+}
+
+.baggo-hero-image-wrap {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(39, 49, 76, 0.15);
+  height: 440px;
+}
+
+.baggo-hero-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.baggo-hero-image-wrap:hover img {
+  transform: scale(1.03);
+}
+
+/* SECTION 2: 3 CATEGORY CARDS ("Choose your style") */
+.baggo-section {
+  padding: 80px 0;
+}
+
+.baggo-section-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.baggo-section-subtitle {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--baggo-cognac);
+  margin-bottom: 8px;
+}
+
+.baggo-section-title {
+  font-family: var(--baggo-font-serif);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--baggo-navy);
+  margin: 0 0 12px;
+}
+
+.baggo-section-line {
+  width: 60px;
+  height: 2px;
+  background: var(--baggo-cognac);
+  margin: 14px auto 0;
+}
+
+.baggo-cat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.baggo-cat-card {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  height: 380px;
+  box-shadow: var(--baggo-shadow-card);
+  cursor: pointer;
+  border: 1px solid var(--baggo-border);
+}
+
+.baggo-cat-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.baggo-cat-card:hover img {
+  transform: scale(1.08);
+}
+
+.baggo-cat-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(39, 49, 76, 0.1) 0%, rgba(39, 49, 76, 0.85) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 30px;
+  color: #FFFFFF;
+}
+
+.baggo-cat-card-title {
+  font-family: var(--baggo-font-serif);
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.baggo-cat-card-desc {
+  font-size: 13px;
+  opacity: 0.85;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+/* SECTION 3: PRODUCT GRID / CAROUSEL */
+.baggo-products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+.baggo-product-card {
+  background: #FFFFFF;
+  border: 1px solid var(--baggo-border);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.baggo-product-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--baggo-cognac);
+  box-shadow: var(--baggo-shadow-hover);
+}
+
+.baggo-product-media {
+  position: relative;
+  height: 290px;
+  background: #F8F9FA;
+  overflow: hidden;
+}
+
+.baggo-product-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.baggo-product-card:hover .baggo-product-media img {
+  transform: scale(1.05);
+}
+
+.baggo-product-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--baggo-cognac);
+  color: #FFFFFF;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 4px 8px;
+  border-radius: 2px;
+}
+
+.baggo-card-actions {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  transform: translateX(8px);
+  transition: all 0.3s ease;
+  z-index: 5;
+}
+
+.baggo-product-card:hover .baggo-card-actions {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.baggo-card-action-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1px solid var(--baggo-border);
+  color: var(--baggo-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.baggo-card-action-btn:hover,
+.baggo-card-action-btn.active {
+  background: var(--baggo-navy);
+  color: #FFFFFF;
+}
+
+.baggo-product-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.baggo-product-vendor {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--baggo-cognac);
+  margin-bottom: 4px;
+}
+
+.baggo-product-title {
+  font-family: var(--baggo-font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--baggo-navy);
+  margin: 0 0 8px;
+  cursor: pointer;
+  line-height: 1.35;
+  transition: color 0.2s ease;
+}
+
+.baggo-product-title:hover {
+  color: var(--baggo-cognac);
+}
+
+.baggo-product-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #D97706;
+  margin-bottom: 12px;
+}
+
+.baggo-leather-pill {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--baggo-text-muted);
+  background: var(--baggo-parchment);
+  padding: 3px 8px;
+  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.baggo-color-swatches {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.baggo-color-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.baggo-color-dot.active {
+  outline: 2px solid var(--baggo-navy);
+  outline-offset: 1px;
+}
+
+.baggo-product-footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid #F1ECE7;
+}
+
+.baggo-price {
+  font-family: var(--baggo-font-serif);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--baggo-navy);
+}
+
+.baggo-compare-price {
+  font-size: 13px;
+  color: #9CA3AF;
+  text-decoration: line-through;
+  margin-left: 6px;
+}
+
+.baggo-add-btn {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 8px 14px;
+  border-radius: 3px;
+  background: var(--baggo-parchment);
+  color: var(--baggo-navy);
+  border: 1px solid var(--baggo-border);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.baggo-add-btn:hover {
+  background: var(--baggo-navy);
+  color: #FFFFFF;
+  border-color: var(--baggo-navy);
+}
+
+/* SECTION 4: VALUE PILLARS */
+.baggo-pillars-section {
+  background: var(--baggo-parchment);
+  border-top: 1px solid var(--baggo-border);
+  border-bottom: 1px solid var(--baggo-border);
+  padding: 60px 0;
+}
+
+.baggo-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+.baggo-pillar-card {
+  text-align: center;
+  padding: 20px;
+}
+
+.baggo-pillar-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+.baggo-pillar-title {
+  font-family: var(--baggo-font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--baggo-navy);
+  margin: 0 0 8px;
+}
+
+.baggo-pillar-desc {
+  font-size: 13px;
+  color: var(--baggo-text-muted);
+  line-height: 1.6;
+}
+
+/* SECTION 5: CRAFTSMANSHIP SPLIT BANNER */
+.baggo-split-banner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
+  padding: 60px 0;
+}
+
+.baggo-split-img {
+  border-radius: 8px;
+  overflow: hidden;
+  height: 460px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+}
+
+.baggo-split-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.baggo-split-content {
+  max-width: 480px;
+}
+
+/* SECTION 6: CLIENT TESTIMONIALS */
+.baggo-testimonial-card {
+  background: #FFFFFF;
+  border: 1px solid var(--baggo-border);
+  border-radius: 6px;
+  padding: 40px;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  box-shadow: var(--baggo-shadow-card);
+}
+
+.baggo-testimonial-quote {
+  font-family: var(--baggo-font-serif);
+  font-size: 22px;
+  font-style: italic;
+  color: var(--baggo-navy);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.baggo-testimonial-author {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--baggo-navy);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.baggo-testimonial-sub {
+  font-size: 12px;
+  color: var(--baggo-cognac);
+}
+
+/* SECTION 7: NEWSLETTER BANNER */
+.baggo-newsletter-banner {
+  background: var(--baggo-navy);
+  color: #FFFFFF;
+  border-radius: 8px;
+  padding: 60px 40px;
+  text-align: center;
+}
+
+.baggo-newsletter-title {
+  font-family: var(--baggo-font-serif);
+  font-size: 38px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  color: #FFFFFF;
+}
+
+.baggo-newsletter-desc {
+  font-size: 15px;
+  color: #CBD5E1;
+  max-width: 520px;
+  margin: 0 auto 28px;
+}
+
+.baggo-newsletter-form {
+  display: flex;
+  max-width: 480px;
+  margin: 0 auto;
+  background: #FFFFFF;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.baggo-newsletter-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 12px 18px;
+  font-size: 14px;
+  color: var(--baggo-navy);
+}
+
+/* FOOTER */
+.baggo-footer {
+  background: var(--baggo-navy-dark);
+  color: #E2E8F0;
+  padding: 70px 0 30px;
+  border-top: 3px solid var(--baggo-cognac);
+}
+
+.baggo-footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.baggo-footer-col h4 {
+  font-family: var(--baggo-font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.05em;
+  margin: 0 0 18px;
+}
+
+.baggo-footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.baggo-footer-col li {
+  margin-bottom: 10px;
+}
+
+.baggo-footer-col a {
+  color: #94A3B8;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.baggo-footer-col a:hover {
+  color: var(--baggo-cognac);
+}
+
+.baggo-footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #94A3B8;
+}
+
+/* CART DRAWER */
+.baggo-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.baggo-cart-drawer {
+  width: 440px;
+  max-width: 90vw;
+  background: #FFFFFF;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.25);
+  animation: baggoSlide 0.3s ease;
+}
+
+@keyframes baggoSlide {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.baggo-drawer-header {
+  padding: 24px;
+  border-bottom: 1px solid var(--baggo-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.baggo-drawer-header h3 {
+  font-family: var(--baggo-font-serif);
+  font-size: 22px;
+  margin: 0;
+  color: var(--baggo-navy);
+}
+
+.baggo-drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+.baggo-drawer-item {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--baggo-border);
+}
+
+.baggo-drawer-item img {
+  width: 75px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.baggo-drawer-footer {
+  padding: 24px;
+  border-top: 1px solid var(--baggo-border);
+  background: var(--baggo-parchment);
+}
+
+.baggo-drawer-subtotal {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--baggo-font-serif);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .baggo-cat-grid {
+    grid-template-columns: 1fr;
+  }
+  .baggo-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .baggo-hero-inner {
+    grid-template-columns: 1fr;
+  }
+  .baggo-split-banner {
+    grid-template-columns: 1fr;
+  }
+  .baggo-pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .baggo-footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .baggo-products-grid {
+    grid-template-columns: 1fr;
+  }
+  .baggo-hero-title {
+    font-size: 38px;
+  }
+  .baggo-pillars-grid {
+    grid-template-columns: 1fr;
+  }
+  .baggo-footer-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -18,6 +18,7 @@ import { TrendyFashionStorefront } from '../../templates/fashion/Trendy'
 import { FragranceFashionStorefront } from '../../templates/fashion/Fragrance'
 import { JenieFashionStorefront } from '../../templates/fashion/Jenie'
 import { ChuttiFashionStorefront } from '../../templates/fashion/Chutti'
+import { BaggoFashionStorefront } from '../../templates/fashion/Baggo'
 import {
   BELLE_FASHION_TEMPLATE,
   VOGAL_FASHION_TEMPLATE,
@@ -27,7 +28,7 @@ import {
   FRAGRANCE_FASHION_TEMPLATE,
   ALL_FASHION_MARKETPLACE_TEMPLATES,
 } from '../../data/fashionTemplatesData'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront }
 
 // Re-export domain types
 export type {
@@ -647,6 +648,21 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   ) {
     return (
       <ChuttiFashionStorefront
+        templateData={template}
+        onClose={onClose}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'fashion-baggo' ||
+      template.id === 'fashion-baggo' ||
+      template.slug === 'baggo-leather' ||
+      template.name?.toLowerCase().includes('baggo'))
+  ) {
+    return (
+      <BaggoFashionStorefront
         templateData={template}
         onClose={onClose}
       />
