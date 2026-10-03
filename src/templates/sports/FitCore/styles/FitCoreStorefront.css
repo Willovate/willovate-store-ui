@@ -1,0 +1,2867 @@
+/* ==========================================================================
+   FITCORE THEME - LUXURY FITNESS & ACTIVEWEAR STOREFRONT
+   Tagline: BUILD YOUR STRONGEST SELF
+   ========================================================================== */
+
+:root {
+  --fc-font-display: 'Barlow Condensed', 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --fc-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Color Palette */
+  --fc-bg-main: #0c0f14;
+  --fc-bg-surface: #141922;
+  --fc-bg-elevated: #1a222e;
+  --fc-bg-light: #f8fafc;
+  --fc-bg-light-alt: #f1f5f9;
+  --fc-bg-light-card: #ffffff;
+
+  --fc-text-primary: #ffffff;
+  --fc-text-secondary: #94a3b8;
+  --fc-text-muted: #64748b;
+  --fc-text-dark: #0f172a;
+  --fc-text-dark-muted: #475569;
+
+  --fc-accent-crimson: #ff3b30;
+  --fc-accent-coral: #ff5247;
+  --fc-accent-glow: rgba(255, 59, 48, 0.25);
+  --fc-border-dark: rgba(255, 255, 255, 0.08);
+  --fc-border-dark-hover: rgba(255, 255, 255, 0.2);
+  --fc-border-light: rgba(15, 23, 42, 0.08);
+  --fc-border-light-hover: rgba(15, 23, 42, 0.16);
+
+  --fc-radius-sm: 4px;
+  --fc-radius-md: 8px;
+  --fc-radius-lg: 14px;
+  --fc-radius-full: 9999px;
+
+  --fc-transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  --fc-shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  --fc-shadow-hover: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+}
+
+.fitcore-storefront {
+  font-family: var(--fc-font-sans);
+  background-color: var(--fc-bg-main);
+  color: var(--fc-text-primary);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.fitcore-storefront * {
+  box-sizing: border-box;
+}
+
+/* Container */
+.fitcore-container {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 768px) {
+  .fitcore-container {
+    padding: 0 16px;
+  }
+}
+
+/* Section Header Utility */
+.fitcore-section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 36px;
+}
+
+.fitcore-section-tagline {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--fc-accent-crimson);
+  margin-bottom: 8px;
+}
+
+.fitcore-section-title {
+  font-family: var(--fc-font-display);
+  font-size: 2.25rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.fitcore-section-subtitle {
+  color: var(--fc-text-secondary);
+  font-size: 0.95rem;
+  margin-top: 6px;
+  max-width: 600px;
+}
+
+.fitcore-section-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--fc-text-primary);
+  border: 1px solid var(--fc-border-dark-hover);
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--fc-radius-sm);
+  cursor: pointer;
+  transition: var(--fc-transition);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.fitcore-section-cta-btn:hover {
+  background: #ffffff;
+  color: #0c0f14;
+  border-color: #ffffff;
+}
+
+/* ==========================================================================
+   HEADER & NAVIGATION
+   ========================================================================== */
+.fitcore-top-bar {
+  background: #000000;
+  border-bottom: 1px solid var(--fc-border-dark);
+  padding: 8px 16px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-align: center;
+  color: #cbd5e1;
+}
+
+.fitcore-top-bar strong {
+  color: #ffffff;
+  margin-right: 6px;
+}
+
+.fitcore-top-bar .highlight {
+  color: var(--fc-accent-coral);
+  margin-left: 8px;
+  font-weight: 700;
+}
+
+.fitcore-header {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  background: rgba(12, 15, 20, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--fc-border-dark);
+  transition: var(--fc-transition);
+}
+
+.fitcore-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  gap: 16px;
+}
+
+.fitcore-brand-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.fitcore-logo-mark {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--fc-accent-crimson), #b91c1c);
+  clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 16px var(--fc-accent-glow);
+}
+
+.fitcore-logo-text {
+  font-family: var(--fc-font-display);
+  font-size: 1.65rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+}
+
+.fitcore-logo-text span {
+  color: var(--fc-accent-crimson);
+}
+
+/* Nav links */
+.fitcore-nav {
+  display: flex;
+  align-items: center;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.fitcore-nav-list {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: nowrap;
+}
+
+.fitcore-nav-item {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.fitcore-nav-btn {
+  background: transparent;
+  border: none;
+  color: #e2e8f0;
+  padding: 6px 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--fc-transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: var(--fc-radius-sm);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.fitcore-nav-btn:hover,
+.fitcore-nav-btn.active {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.fitcore-nav-btn.sale-btn {
+  color: var(--fc-accent-coral);
+}
+
+/* Action Icons */
+.fitcore-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.fitcore-action-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #cbd5e1;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--fc-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--fc-transition);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.fitcore-action-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--fc-border-dark);
+}
+
+.fitcore-badge-count {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  background: var(--fc-accent-crimson);
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  min-width: 17px;
+  height: 17px;
+  border-radius: var(--fc-radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+/* Mega Menu */
+.fitcore-mega-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #11151c;
+  border-bottom: 2px solid var(--fc-accent-crimson);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+  padding: 32px 0;
+  animation: fcFadeSlide 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 95;
+}
+
+@keyframes fcFadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fitcore-mega-inner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) 300px;
+  gap: 32px;
+}
+
+.fitcore-mega-col-title {
+  font-family: var(--fc-font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--fc-border-dark);
+}
+
+.fitcore-mega-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fitcore-mega-link {
+  background: none;
+  border: none;
+  padding: 4px 0;
+  color: var(--fc-text-secondary);
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-align: left;
+  transition: var(--fc-transition);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fitcore-mega-link:hover {
+  color: #ffffff;
+  padding-left: 4px;
+}
+
+.fitcore-mega-tag {
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: var(--fc-radius-sm);
+  background: rgba(255, 59, 48, 0.15);
+  color: var(--fc-accent-coral);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.fitcore-mega-card {
+  position: relative;
+  border-radius: var(--fc-radius-sm);
+  overflow: hidden;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  text-decoration: none;
+  background-size: cover;
+  background-position: center;
+}
+
+.fitcore-mega-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.2) 60%, transparent 100%);
+}
+
+.fitcore-mega-card-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+.fitcore-hero {
+  position: relative;
+  min-height: 84vh;
+  display: flex;
+  align-items: center;
+  background-color: #0c0f14;
+  overflow: hidden;
+}
+
+.fitcore-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=1800&auto=format&fit=crop&q=85');
+  background-size: cover;
+  background-position: center 25%;
+  opacity: 0.45;
+  filter: contrast(110%) brightness(85%);
+  transform: scale(1.02);
+  transition: transform 10s ease-out;
+}
+
+.fitcore-hero:hover .fitcore-hero-bg {
+  transform: scale(1.06);
+}
+
+.fitcore-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 75% 40%, rgba(255, 59, 48, 0.08) 0%, transparent 60%),
+    linear-gradient(90deg, #0c0f14 0%, rgba(12, 15, 20, 0.85) 50%, rgba(12, 15, 20, 0.4) 100%),
+    linear-gradient(0deg, #0c0f14 0%, transparent 30%);
+}
+
+.fitcore-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+  padding: 60px 0;
+}
+
+.fitcore-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 59, 48, 0.15);
+  border: 1px solid rgba(255, 59, 48, 0.35);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: var(--fc-radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.fitcore-hero-badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--fc-accent-crimson);
+  box-shadow: 0 0 10px var(--fc-accent-crimson);
+}
+
+.fitcore-hero-title {
+  font-family: var(--fc-font-display);
+  font-size: clamp(3rem, 6vw, 4.8rem);
+  font-weight: 900;
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  margin: 0 0 20px 0;
+}
+
+.fitcore-hero-title span {
+  display: block;
+  background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.fitcore-hero-desc {
+  font-size: 1.1rem;
+  color: #cbd5e1;
+  max-width: 540px;
+  line-height: 1.6;
+  margin-bottom: 36px;
+}
+
+.fitcore-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.fitcore-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--fc-accent-crimson);
+  color: #ffffff;
+  font-family: var(--fc-font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border: none;
+  border-radius: var(--fc-radius-sm);
+  cursor: pointer;
+  transition: var(--fc-transition);
+  box-shadow: 0 6px 20px var(--fc-accent-glow);
+}
+
+.fitcore-btn-primary:hover {
+  background: #e02419;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(255, 59, 48, 0.4);
+}
+
+.fitcore-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-family: var(--fc-font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--fc-radius-sm);
+  cursor: pointer;
+  transition: var(--fc-transition);
+  backdrop-filter: blur(8px);
+}
+
+.fitcore-btn-secondary:hover {
+  background: #ffffff;
+  color: #0c0f14;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.fitcore-hero-stats {
+  display: flex;
+  gap: 36px;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.fitcore-hero-stat-value {
+  font-family: var(--fc-font-display);
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.fitcore-hero-stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fc-text-secondary);
+}
+
+/* ==========================================================================
+   PRODUCT CARD COMPONENT
+   ========================================================================== */
+.fitcore-card {
+  position: relative;
+  background: var(--fc-bg-surface);
+  border: 1px solid var(--fc-border-dark);
+  border-radius: var(--fc-radius-sm);
+  overflow: hidden;
+  transition: var(--fc-transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.fitcore-card:hover {
+  border-color: var(--fc-border-dark-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--fc-shadow-hover);
+}
+
+.fitcore-card-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: #19202c;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.fitcore-card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+}
+
+.fitcore-card-img-primary {
+  opacity: 1;
+}
+
+.fitcore-card-img-hover {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.fitcore-card:hover .fitcore-card-img-primary {
+  opacity: 0;
+}
+
+.fitcore-card:hover .fitcore-card-img-hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Badge */
+.fitcore-card-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 3;
+  background: rgba(12, 15, 20, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  padding: 4px 8px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: var(--fc-radius-sm);
+  backdrop-filter: blur(8px);
+}
+
+.fitcore-card-badge.bestseller {
+  background: var(--fc-accent-crimson);
+  border-color: transparent;
+  color: #ffffff;
+}
+
+/* Wishlist Button */
+.fitcore-card-wish-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 3;
+  width: 34px;
+  height: 34px;
+  background: rgba(12, 15, 20, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: var(--fc-transition);
+  backdrop-filter: blur(8px);
+}
+
+.fitcore-card-wish-btn:hover {
+  color: #ffffff;
+  background: var(--fc-accent-crimson);
+  border-color: var(--fc-accent-crimson);
+  transform: scale(1.1);
+}
+
+.fitcore-card-wish-btn.active {
+  color: #ffffff;
+  background: var(--fc-accent-crimson);
+  border-color: var(--fc-accent-crimson);
+}
+
+/* Quick Add Overlay Bar */
+.fitcore-card-quick-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 8px 12px;
+  background: rgba(12, 15, 20, 0.92);
+  backdrop-filter: blur(12px);
+  transform: translateY(100%);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  z-index: 4;
+}
+
+.fitcore-card:hover .fitcore-card-quick-bar {
+  transform: translateY(0);
+}
+
+.fitcore-size-btn {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 6px 0;
+  border-radius: var(--fc-radius-sm);
+  cursor: pointer;
+  transition: var(--fc-transition);
+  text-align: center;
+}
+
+.fitcore-size-btn:hover {
+  background: var(--fc-accent-crimson);
+  color: #ffffff;
+  border-color: var(--fc-accent-crimson);
+}
+
+/* Card Body */
+.fitcore-card-body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.fitcore-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 0.72rem;
+  color: var(--fc-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.fitcore-card-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #fbbf24;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.fitcore-card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 8px;
+  line-height: 1.35;
+  cursor: pointer;
+  transition: color 0.15s ease;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 2.7em;
+}
+
+.fitcore-card-title:hover {
+  color: var(--fc-accent-coral);
+}
+
+/* Swatches */
+.fitcore-swatches {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.fitcore-swatch-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.fitcore-swatch-dot:hover,
+.fitcore-swatch-dot.active {
+  transform: scale(1.25);
+  border-color: #ffffff;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+}
+
+/* Price & Button */
+.fitcore-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.fitcore-price-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.fitcore-price-current {
+  font-family: var(--fc-font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.fitcore-price-compare {
+  font-size: 0.8rem;
+  color: var(--fc-text-muted);
+  text-decoration: line-through;
+}
+
+.fitcore-card-add-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--fc-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--fc-transition);
+}
+
+.fitcore-card-add-btn:hover {
+  background: var(--fc-accent-crimson);
+  border-color: var(--fc-accent-crimson);
+}
+
+/* ==========================================================================
+   SECTION 2: SHOP BY WORKOUT
+   ========================================================================== */
+.fitcore-workout-section {
+  padding: 80px 0;
+  background-color: #0c0f14;
+}
+
+.fitcore-workout-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+}
+
+.fitcore-workout-card {
+  position: relative;
+  height: 360px;
+  border-radius: var(--fc-radius-sm);
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid var(--fc-border-dark);
+  transition: var(--fc-transition);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px 20px;
+}
+
+.fitcore-workout-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--fc-accent-crimson);
+  box-shadow: 0 16px 30px rgba(255, 59, 48, 0.2);
+}
+
+.fitcore-workout-card-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: brightness(80%) contrast(110%);
+}
+
+.fitcore-workout-card:hover .fitcore-workout-card-img {
+  transform: scale(1.08);
+  filter: brightness(95%);
+}
+
+.fitcore-workout-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, #0c0f14 0%, rgba(12, 15, 20, 0.5) 60%, transparent 100%);
+  transition: background 0.3s ease;
+}
+
+.fitcore-workout-card:hover .fitcore-workout-card-overlay {
+  background: linear-gradient(0deg, #0c0f14 0%, rgba(255, 59, 48, 0.25) 100%);
+}
+
+.fitcore-workout-card-content {
+  position: relative;
+  z-index: 2;
+}
+
+.fitcore-workout-count {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fc-accent-coral);
+  margin-bottom: 4px;
+}
+
+.fitcore-workout-name {
+  font-family: var(--fc-font-display);
+  font-size: 1.55rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0 0 6px;
+  line-height: 1;
+}
+
+.fitcore-workout-tagline {
+  font-size: 0.78rem;
+  color: #cbd5e1;
+  line-height: 1.35;
+  margin: 0 0 14px;
+  opacity: 0.85;
+}
+
+.fitcore-workout-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.fitcore-workout-card:hover .fitcore-workout-link {
+  color: var(--fc-accent-coral);
+}
+
+/* ==========================================================================
+   SECTION 3: TRAINING ESSENTIALS (LIGHT/STONE BACKGROUND)
+   ========================================================================== */
+.fitcore-light-section {
+  padding: 80px 0;
+  background-color: var(--fc-bg-light);
+  color: var(--fc-text-dark);
+}
+
+.fitcore-light-section .fitcore-section-title {
+  color: var(--fc-text-dark);
+}
+
+.fitcore-light-section .fitcore-section-subtitle {
+  color: var(--fc-text-dark-muted);
+}
+
+.fitcore-light-section .fitcore-section-cta-btn {
+  border-color: var(--fc-border-light-hover);
+  color: var(--fc-text-dark);
+}
+
+.fitcore-light-section .fitcore-section-cta-btn:hover {
+  background: var(--fc-text-dark);
+  color: #ffffff;
+}
+
+.fitcore-light-section .fitcore-card {
+  background: var(--fc-bg-light-card);
+  border: 1px solid var(--fc-border-light);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.fitcore-light-section .fitcore-card:hover {
+  border-color: var(--fc-border-light-hover);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08);
+}
+
+.fitcore-light-section .fitcore-card-title {
+  color: var(--fc-text-dark);
+}
+
+.fitcore-light-section .fitcore-card-title:hover {
+  color: var(--fc-accent-crimson);
+}
+
+.fitcore-light-section .fitcore-price-current {
+  color: var(--fc-text-dark);
+}
+
+.fitcore-light-section .fitcore-card-add-btn {
+  background: var(--fc-bg-light-alt);
+  color: var(--fc-text-dark);
+  border-color: var(--fc-border-light-hover);
+}
+
+.fitcore-light-section .fitcore-card-add-btn:hover {
+  background: var(--fc-accent-crimson);
+  color: #ffffff;
+  border-color: var(--fc-accent-crimson);
+}
+
+.fitcore-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* ==========================================================================
+   SECTION 4: GYM WEAR (DARK GYM FLOOR)
+   ========================================================================== */
+.fitcore-gymwear-section {
+  padding: 80px 0;
+  background-color: var(--fc-bg-surface);
+}
+
+.fitcore-filter-pill-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 24px;
+}
+
+.fitcore-filter-pill {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--fc-border-dark);
+  color: #cbd5e1;
+  padding: 6px 16px;
+  border-radius: var(--fc-radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--fc-transition);
+  white-space: nowrap;
+}
+
+.fitcore-filter-pill:hover,
+.fitcore-filter-pill.active {
+  background: #ffffff;
+  color: #0c0f14;
+  border-color: #ffffff;
+}
+
+/* ==========================================================================
+   SECTION 5: PERFORMANCE TECHNOLOGY
+   ========================================================================== */
+.fitcore-tech-section {
+  padding: 90px 0;
+  background: linear-gradient(180deg, #0c0f14 0%, #161b22 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.fitcore-tech-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255, 59, 48, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.fitcore-tech-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.fitcore-tech-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--fc-border-dark);
+  border-radius: var(--fc-radius-sm);
+  padding: 28px 24px;
+  transition: var(--fc-transition);
+  position: relative;
+}
+
+.fitcore-tech-card:hover {
+  border-color: var(--fc-accent-crimson);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-4px);
+}
+
+.fitcore-tech-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--fc-radius-sm);
+  background: rgba(255, 59, 48, 0.12);
+  color: var(--fc-accent-crimson);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.fitcore-tech-card h3 {
+  font-family: var(--fc-font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  margin: 0 0 10px;
+}
+
+.fitcore-tech-card p {
+  font-size: 0.88rem;
+  color: var(--fc-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.fitcore-tech-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1px solid var(--fc-border-dark);
+}
+
+.fitcore-tech-stat-val {
+  font-family: var(--fc-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--fc-accent-coral);
+}
+
+.fitcore-tech-stat-lbl {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--fc-text-muted);
+}
+
+/* ==========================================================================
+   SECTION 6: WORKOUT EQUIPMENT
+   ========================================================================== */
+.fitcore-equipment-section {
+  padding: 80px 0;
+  background-color: #0c0f14;
+}
+
+/* ==========================================================================
+   SECTION 7: COMPLETE THE WORKOUT (OUTFIT / BUNDLE BUILDER)
+   ========================================================================== */
+.fitcore-bundle-section {
+  padding: 90px 0;
+  background-color: var(--fc-bg-surface);
+  position: relative;
+}
+
+.fitcore-bundle-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+.fitcore-bundle-tab {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--fc-border-dark);
+  color: #cbd5e1;
+  padding: 10px 24px;
+  font-family: var(--fc-font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: var(--fc-radius-sm);
+  cursor: pointer;
+  transition: var(--fc-transition);
+}
+
+.fitcore-bundle-tab.active,
+.fitcore-bundle-tab:hover {
+  background: var(--fc-accent-crimson);
+  color: #ffffff;
+  border-color: var(--fc-accent-crimson);
+  box-shadow: 0 4px 16px var(--fc-accent-glow);
+}
+
+.fitcore-bundle-container {
+  display: grid;
+  grid-template-columns: 440px 1fr;
+  gap: 36px;
+  background: #0c0f14;
+  border: 1px solid var(--fc-border-dark);
+  border-radius: var(--fc-radius-sm);
+  overflow: hidden;
+  padding: 24px;
+}
+
+.fitcore-bundle-hero {
+  position: relative;
+  border-radius: var(--fc-radius-sm);
+  overflow: hidden;
+  min-height: 480px;
+}
+
+.fitcore-bundle-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fitcore-bundle-hero-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: var(--fc-accent-crimson);
+  color: #ffffff;
+  font-family: var(--fc-font-display);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 6px 14px;
+  border-radius: var(--fc-radius-sm);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.fitcore-bundle-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.fitcore-bundle-meta h3 {
+  font-family: var(--fc-font-display);
+  font-size: 1.85rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 6px;
+  color: #ffffff;
+}
+
+.fitcore-bundle-meta p {
+  color: var(--fc-text-secondary);
+  font-size: 0.92rem;
+  margin: 0 0 20px;
+}
+
+.fitcore-bundle-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.fitcore-bundle-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--fc-border-dark);
+  border-radius: var(--fc-radius-sm);
+  padding: 10px 14px;
+  gap: 14px;
+}
+
+.fitcore-bundle-item-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fitcore-bundle-item-thumb {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--fc-radius-sm);
+  object-fit: cover;
+  background: #19202c;
+}
+
+.fitcore-bundle-item-info h4 {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 2px;
+}
+
+.fitcore-bundle-item-role {
+  font-size: 0.72rem;
+  color: var(--fc-accent-coral);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.fitcore-bundle-item-price {
+  font-family: var(--fc-font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.fitcore-bundle-summary {
+  margin-top: auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: var(--fc-radius-sm);
+  border: 1px solid var(--fc-border-dark);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.fitcore-bundle-pricing {
+  display: flex;
+  flex-direction: column;
+}
+
+.fitcore-bundle-saving {
+  font-size: 0.78rem;
+  color: #10b981;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.fitcore-bundle-total-price {
+  font-family: var(--fc-font-display);
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.fitcore-bundle-orig-price {
+  font-size: 0.95rem;
+  color: var(--fc-text-muted);
+  text-decoration: line-through;
+  margin-left: 8px;
+}
+
+/* ==========================================================================
+   SECTION 8: BEST SELLERS (CLEAN SLATE LIGHT)
+   ========================================================================== */
+.fitcore-bestsellers-section {
+  padding: 80px 0;
+  background-color: var(--fc-bg-light);
+}
+
+/* ==========================================================================
+   SECTION 9: FITNESS STORIES
+   ========================================================================== */
+.fitcore-stories-section {
+  padding: 85px 0;
+  background-color: #0c0f14;
+}
+
+.fitcore-stories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.fitcore-story-card {
+  background: var(--fc-bg-surface);
+  border: 1px solid var(--fc-border-dark);
+  border-radius: var(--fc-radius-sm);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: var(--fc-transition);
+  cursor: pointer;
+}
+
+.fitcore-story-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--fc-border-dark-hover);
+  box-shadow: var(--fc-shadow-hover);
+}
+
+.fitcore-story-img-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.fitcore-story-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fitcore-story-card:hover .fitcore-story-img-wrap img {
+  transform: scale(1.06);
+}
+
+.fitcore-story-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.fitcore-story-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 0.75rem;
+  color: var(--fc-text-muted);
+}
+
+.fitcore-story-category {
+  color: var(--fc-accent-coral);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.fitcore-story-title {
+  font-family: var(--fc-font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 10px;
+  line-height: 1.25;
+}
+
+.fitcore-story-excerpt {
+  font-size: 0.88rem;
+  color: var(--fc-text-secondary);
+  line-height: 1.5;
+  margin: 0 0 16px;
+  flex: 1;
+}
+
+.fitcore-story-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--fc-border-dark);
+  font-size: 0.78rem;
+  color: #cbd5e1;
+}
+
+/* ==========================================================================
+   SECTION 10: REVIEWS
+   ========================================================================== */
+.fitcore-reviews-section {
+  padding: 85px 0;
+  background-color: var(--fc-bg-surface);
+}
+
+.fitcore-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.fitcore-review-card {
+  background: #0c0f14;
+  border: 1px solid var(--fc-border-dark);
+  border-radius: var(--fc-radius-sm);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--fc-transition);
+}
+
+.fitcore-review-card:hover {
+  border-color: var(--fc-accent-crimson);
+  transform: translateY(-4px);
+}
+
+.fitcore-review-stars {
+  display: flex;
+  gap: 3px;
+  color: #fbbf24;
+  margin-bottom: 14px;
+}
+
+.fitcore-review-quote {
+  font-size: 0.9rem;
+  color: #e2e8f0;
+  line-height: 1.55;
+  margin: 0 0 16px;
+  font-style: italic;
+}
+
+.fitcore-review-product {
+  font-size: 0.75rem;
+  color: var(--fc-accent-coral);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.fitcore-review-author-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--fc-border-dark);
+}
+
+.fitcore-review-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.fitcore-review-author-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.fitcore-review-author-role {
+  font-size: 0.72rem;
+  color: var(--fc-text-muted);
+}
+
+/* ==========================================================================
+   SECTION 11: NEWSLETTER
+   ========================================================================== */
+.fitcore-newsletter-section {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #161b22 0%, #0c0f14 100%);
+  border-top: 1px solid var(--fc-border-dark);
+  border-bottom: 1px solid var(--fc-border-dark);
+  text-align: center;
+}
+
+.fitcore-newsletter-box {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.fitcore-newsletter-title {
+  font-family: var(--fc-font-display);
+  font-size: 2.6rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0 0 12px;
+}
+
+.fitcore-newsletter-desc {
+  font-size: 0.95rem;
+  color: var(--fc-text-secondary);
+  margin-bottom: 28px;
+}
+
+.fitcore-newsletter-form {
+  display: flex;
+  gap: 10px;
+  max-width: 500px;
+  margin: 0 auto 16px;
+}
+
+.fitcore-newsletter-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--fc-border-dark);
+  color: #ffffff;
+  padding: 14px 18px;
+  font-size: 0.9rem;
+  border-radius: var(--fc-radius-sm);
+  outline: none;
+  transition: var(--fc-transition);
+}
+
+.fitcore-newsletter-input:focus {
+  border-color: var(--fc-accent-crimson);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.fitcore-newsletter-guarantee {
+  font-size: 0.75rem;
+  color: var(--fc-text-muted);
+}
+
+/* ==========================================================================
+   SECTION 12: FOOTER
+   ========================================================================== */
+.fitcore-footer {
+  background: #080a0e;
+  border-top: 1px solid var(--fc-border-dark);
+  padding: 70px 0 30px;
+  color: var(--fc-text-secondary);
+  font-size: 0.85rem;
+}
+
+.fitcore-footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.fitcore-footer-brand p {
+  color: var(--fc-text-muted);
+  max-width: 300px;
+  margin: 14px 0 20px;
+  line-height: 1.6;
+}
+
+.fitcore-footer-col h4 {
+  font-family: var(--fc-font-display);
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+  margin: 0 0 16px;
+}
+
+.fitcore-footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fitcore-footer-col a {
+  color: var(--fc-text-secondary);
+  text-decoration: none;
+  transition: var(--fc-transition);
+  cursor: pointer;
+}
+
+.fitcore-footer-col a:hover {
+  color: #ffffff;
+  padding-left: 3px;
+}
+
+.fitcore-footer-bottom {
+  padding-top: 24px;
+  border-top: 1px solid var(--fc-border-dark);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--fc-text-muted);
+}
+
+/* ==========================================================================
+   PRODUCT DETAIL PAGE
+   ========================================================================== */
+.fitcore-pdp {
+  padding: 40px 0 80px;
+  background-color: #0c0f14;
+}
+
+.fitcore-pdp-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--fc-text-muted);
+  margin-bottom: 28px;
+}
+
+.fitcore-pdp-breadcrumbs span {
+  cursor: pointer;
+}
+
+.fitcore-pdp-breadcrumbs span:hover {
+  color: #ffffff;
+}
+
+.fitcore-pdp-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 48px;
+}
+
+.fitcore-pdp-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fitcore-pdp-main-img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: var(--fc-bg-surface);
+  border-radius: var(--fc-radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--fc-border-dark);
+}
+
+.fitcore-pdp-main-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fitcore-pdp-thumbs {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+}
+
+.fitcore-pdp-thumb {
+  width: 76px;
+  height: 90px;
+  border-radius: var(--fc-radius-sm);
+  overflow: hidden;
+  border: 2px solid transparent;
+  cursor: pointer;
+  background: var(--fc-bg-surface);
+  flex-shrink: 0;
+  transition: var(--fc-transition);
+}
+
+.fitcore-pdp-thumb.active {
+  border-color: var(--fc-accent-crimson);
+}
+
+.fitcore-pdp-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fitcore-pdp-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.fitcore-pdp-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.fitcore-pdp-brand {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fc-accent-coral);
+}
+
+.fitcore-pdp-title {
+  font-family: var(--fc-font-display);
+  font-size: 2.2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0 0 14px;
+  line-height: 1.1;
+}
+
+.fitcore-pdp-pricing {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.fitcore-pdp-price {
+  font-family: var(--fc-font-display);
+  font-size: 2rem;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.fitcore-pdp-compare {
+  font-size: 1.1rem;
+  color: var(--fc-text-muted);
+  text-decoration: line-through;
+}
+
+.fitcore-pdp-badge-save {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 4px 8px;
+  border-radius: var(--fc-radius-sm);
+  text-transform: uppercase;
+}
+
+.fitcore-pdp-section {
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--fc-border-dark);
+}
+
+.fitcore-pdp-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.fitcore-pdp-color-grid {
+  display: flex;
+  gap: 10px;
+}
+
+.fitcore-pdp-color-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--fc-border-dark);
+  padding: 8px 14px;
+  border-radius: var(--fc-radius-sm);
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--fc-transition);
+}
+
+.fitcore-pdp-color-btn.active,
+.fitcore-pdp-color-btn:hover {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.fitcore-pdp-size-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.fitcore-pdp-size-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--fc-border-dark);
+  color: #cbd5e1;
+  padding: 12px 0;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-align: center;
+  border-radius: var(--fc-radius-sm);
+  cursor: pointer;
+  transition: var(--fc-transition);
+}
+
+.fitcore-pdp-size-btn.active,
+.fitcore-pdp-size-btn:hover {
+  background: var(--fc-accent-crimson);
+  color: #ffffff;
+  border-color: var(--fc-accent-crimson);
+}
+
+.fitcore-pdp-actions-row {
+  display: flex;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.fitcore-pdp-add-btn {
+  flex: 1;
+  padding: 16px;
+  font-family: var(--fc-font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.fitcore-pdp-wish-btn {
+  width: 54px;
+  height: 54px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--fc-border-dark);
+  border-radius: var(--fc-radius-sm);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--fc-transition);
+}
+
+.fitcore-pdp-wish-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.fitcore-pdp-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 18px;
+  border-radius: var(--fc-radius-sm);
+  border: 1px solid var(--fc-border-dark);
+}
+
+.fitcore-spec-item h5 {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fc-text-muted);
+  margin: 0 0 4px;
+}
+
+.fitcore-spec-item p {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  margin: 0;
+}
+
+/* ==========================================================================
+   COLLECTION / CATALOG PAGE
+   ========================================================================== */
+.fitcore-catalog-page {
+  padding: 40px 0 80px;
+  background-color: #0c0f14;
+}
+
+.fitcore-catalog-header {
+  margin-bottom: 32px;
+}
+
+.fitcore-catalog-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 32px;
+}
+
+.fitcore-filters-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.fitcore-filter-group {
+  border-bottom: 1px solid var(--fc-border-dark);
+  padding-bottom: 20px;
+}
+
+.fitcore-filter-group-title {
+  font-family: var(--fc-font-display);
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.fitcore-filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fitcore-filter-check-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.84rem;
+  color: #cbd5e1;
+  cursor: pointer;
+}
+
+.fitcore-filter-check-label input {
+  accent-color: var(--fc-accent-crimson);
+}
+
+.fitcore-catalog-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  background: var(--fc-bg-surface);
+  padding: 12px 18px;
+  border-radius: var(--fc-radius-sm);
+  border: 1px solid var(--fc-border-dark);
+}
+
+.fitcore-catalog-count {
+  font-size: 0.85rem;
+  color: var(--fc-text-secondary);
+}
+
+.fitcore-catalog-sort {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--fc-text-secondary);
+}
+
+.fitcore-catalog-sort select {
+  background: #0c0f14;
+  border: 1px solid var(--fc-border-dark);
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: var(--fc-radius-sm);
+  font-size: 0.82rem;
+  outline: none;
+}
+
+.fitcore-catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* ==========================================================================
+   CART DRAWER
+   ========================================================================== */
+.fitcore-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+  animation: fcBackdropFade 0.2s ease-out;
+}
+
+@keyframes fcBackdropFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fitcore-cart-drawer {
+  width: 100%;
+  max-width: 440px;
+  height: 100%;
+  background: #11151c;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.8);
+  animation: fcSlideRight 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fcSlideRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.fitcore-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--fc-border-dark);
+}
+
+.fitcore-drawer-header h3 {
+  font-family: var(--fc-font-display);
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0;
+  color: #ffffff;
+}
+
+.fitcore-drawer-close {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.15s ease;
+}
+
+.fitcore-drawer-close:hover {
+  color: #ffffff;
+}
+
+.fitcore-shipping-bar {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--fc-border-dark);
+}
+
+.fitcore-shipping-bar-text {
+  font-size: 0.78rem;
+  color: #cbd5e1;
+  margin-bottom: 8px;
+}
+
+.fitcore-shipping-bar-text strong {
+  color: var(--fc-accent-coral);
+}
+
+.fitcore-shipping-progress {
+  height: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--fc-radius-full);
+  overflow: hidden;
+}
+
+.fitcore-shipping-progress-fill {
+  height: 100%;
+  background: var(--fc-accent-crimson);
+  transition: width 0.3s ease;
+}
+
+.fitcore-drawer-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fitcore-cart-item {
+  display: flex;
+  gap: 14px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--fc-border-dark);
+}
+
+.fitcore-cart-item-img {
+  width: 72px;
+  height: 84px;
+  border-radius: var(--fc-radius-sm);
+  object-fit: cover;
+  background: var(--fc-bg-surface);
+}
+
+.fitcore-cart-item-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.fitcore-cart-item-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 4px;
+}
+
+.fitcore-cart-item-variant {
+  font-size: 0.75rem;
+  color: var(--fc-text-muted);
+  margin-bottom: 8px;
+}
+
+.fitcore-cart-item-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.fitcore-qty-picker {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--fc-border-dark);
+  border-radius: var(--fc-radius-sm);
+}
+
+.fitcore-qty-btn {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.fitcore-qty-val {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #ffffff;
+  padding: 0 6px;
+}
+
+.fitcore-cart-item-price {
+  font-family: var(--fc-font-display);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.fitcore-cart-item-remove {
+  background: transparent;
+  border: none;
+  color: var(--fc-text-muted);
+  font-size: 0.75rem;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  margin-top: 4px;
+  align-self: flex-start;
+}
+
+.fitcore-cart-item-remove:hover {
+  color: var(--fc-accent-coral);
+}
+
+.fitcore-drawer-footer {
+  padding: 20px 24px;
+  background: #0d1017;
+  border-top: 1px solid var(--fc-border-dark);
+}
+
+.fitcore-subtotal-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.fitcore-subtotal-label {
+  font-size: 0.9rem;
+  color: var(--fc-text-secondary);
+}
+
+.fitcore-subtotal-val {
+  font-family: var(--fc-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.fitcore-checkout-btn {
+  width: 100%;
+  padding: 16px;
+  font-family: var(--fc-font-display);
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   TOAST NOTIFICATION
+   ========================================================================== */
+.fitcore-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #11151c;
+  border: 1px solid var(--fc-accent-crimson);
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: var(--fc-radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 1100;
+  animation: fcToastIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fcToastIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .fitcore-nav-btn {
+    padding: 6px 7px;
+    font-size: 0.78rem;
+  }
+
+  .fitcore-header-inner {
+    gap: 10px;
+  }
+
+  .fitcore-workout-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .fitcore-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .fitcore-tech-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .fitcore-stories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .fitcore-reviews-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .fitcore-bundle-container {
+    grid-template-columns: 1fr;
+  }
+
+  .fitcore-bundle-hero {
+    min-height: 320px;
+  }
+
+  .fitcore-catalog-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .fitcore-filters-sidebar {
+    display: none;
+  }
+
+  .fitcore-catalog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .fitcore-pdp-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .fitcore-footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .fitcore-top-bar {
+    font-size: 0.65rem;
+    padding: 6px 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .fitcore-header-inner {
+    height: 56px;
+    gap: 8px;
+    justify-content: space-between;
+  }
+
+  .fitcore-nav-list {
+    display: none !important;
+  }
+
+  .fitcore-mobile-menu-toggle {
+    display: inline-flex !important;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    flex-shrink: 0;
+  }
+
+  .fitcore-brand-group {
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .fitcore-logo-mark {
+    width: 28px;
+    height: 28px;
+  }
+
+  .fitcore-logo-text {
+    font-size: 1.35rem;
+  }
+
+  .fitcore-actions {
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .fitcore-action-account {
+    display: none !important;
+  }
+
+  .fitcore-action-btn {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    padding: 0;
+  }
+
+  .fitcore-badge-count {
+    top: 2px;
+    right: 2px;
+    font-size: 0.6rem;
+    min-width: 15px;
+    height: 15px;
+  }
+
+  .fitcore-hero {
+    min-height: 75vh;
+  }
+
+  .fitcore-hero-title {
+    font-size: 2.6rem;
+  }
+
+  .fitcore-hero-stats {
+    gap: 20px;
+  }
+
+  .fitcore-workout-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .fitcore-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .fitcore-card-body {
+    padding: 10px 12px 12px;
+  }
+
+  .fitcore-card-title {
+    font-size: 0.85rem;
+    height: 2.5em;
+  }
+
+  .fitcore-price-current {
+    font-size: 1.1rem;
+  }
+
+  .fitcore-tech-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fitcore-stories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fitcore-reviews-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fitcore-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .fitcore-bundle-item-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .fitcore-bundle-item-price {
+    align-self: flex-end;
+  }
+
+  .fitcore-bundle-summary {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* Cart & Mobile Drawer in 768px */
+  .fitcore-drawer-backdrop {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 10000 !important;
+  }
+
+  .fitcore-cart-drawer {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+  }
+
+  .fitcore-drawer-header,
+  .fitcore-shipping-bar,
+  .fitcore-drawer-items,
+  .fitcore-drawer-footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fitcore-workout-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fitcore-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .fitcore-catalog-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .fitcore-card-quick-bar {
+    display: none;
+  }
+}
+
+/* Mobile Menu Toggle & Mobile Drawer */
+.fitcore-mobile-menu-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .fitcore-mobile-menu-toggle {
+    display: inline-flex !important;
+  }
+}
+
+.fitcore-mobile-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: flex-start;
+  animation: fcFadeIn 0.2s ease both;
+}
+
+.fitcore-mobile-drawer {
+  width: min(340px, 85vw);
+  height: 100%;
+  background: #0f141c;
+  border-right: 1px solid var(--fc-border-dark);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  box-shadow: 10px 0 40px rgba(0, 0, 0, 0.6);
+  animation: fcSlideRight 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.fitcore-mobile-drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--fc-border-dark);
+}
+
+.fitcore-mobile-drawer-close {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.fitcore-mobile-nav-list {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0;
+  gap: 4px;
+}
+
+.fitcore-mobile-nav-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 12px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: #f1f5f9;
+  font-family: var(--fc-font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: left;
+  cursor: pointer;
+  transition: var(--fc-transition);
+}
+
+.fitcore-mobile-nav-link:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--fc-accent-coral);
+  padding-left: 18px;
+}
+
+.fitcore-mobile-nav-link.sale {
+  color: var(--fc-accent-coral);
+}
+
+.fitcore-mobile-drawer-footer {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--fc-border-dark);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fitcore-mobile-quick-btn {
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--fc-border-dark);
+  border-radius: 6px;
+  color: #e2e8f0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+}
+
+.fitcore-mobile-quick-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes fcFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fcSlideRight {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+/* Simulated Mobile Preview Frame Target (.fitcore-storefront[data-device-view='mobile']) */
+.fitcore-storefront[data-device-view='mobile'] .fitcore-top-bar,
+.fitcore-storefront.device-mobile .fitcore-top-bar,
+.simulated-frame.frame-mobile .fitcore-top-bar {
+  font-size: 0.65rem !important;
+  padding: 6px 10px !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-header-inner,
+.fitcore-storefront.device-mobile .fitcore-header-inner,
+.simulated-frame.frame-mobile .fitcore-header-inner {
+  height: 56px !important;
+  gap: 8px !important;
+  justify-content: space-between !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-mobile-menu-toggle,
+.fitcore-storefront.device-mobile .fitcore-mobile-menu-toggle,
+.simulated-frame.frame-mobile .fitcore-mobile-menu-toggle {
+  display: inline-flex !important;
+  width: 34px !important;
+  height: 34px !important;
+  padding: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-brand-group,
+.fitcore-storefront.device-mobile .fitcore-brand-group,
+.simulated-frame.frame-mobile .fitcore-brand-group {
+  gap: 8px !important;
+  flex-shrink: 0 !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-logo-mark,
+.fitcore-storefront.device-mobile .fitcore-logo-mark,
+.simulated-frame.frame-mobile .fitcore-logo-mark {
+  width: 28px !important;
+  height: 28px !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-logo-text,
+.fitcore-storefront.device-mobile .fitcore-logo-text,
+.simulated-frame.frame-mobile .fitcore-logo-text {
+  font-size: 1.35rem !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-nav-list,
+.fitcore-storefront.device-mobile .fitcore-nav-list,
+.simulated-frame.frame-mobile .fitcore-nav-list {
+  display: none !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-actions,
+.fitcore-storefront.device-mobile .fitcore-actions,
+.simulated-frame.frame-mobile .fitcore-actions {
+  gap: 4px !important;
+  flex-shrink: 0 !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-action-account,
+.fitcore-storefront.device-mobile .fitcore-action-account,
+.simulated-frame.frame-mobile .fitcore-action-account {
+  display: none !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-action-btn,
+.fitcore-storefront.device-mobile .fitcore-action-btn,
+.simulated-frame.frame-mobile .fitcore-action-btn {
+  width: 34px !important;
+  height: 34px !important;
+  flex-shrink: 0 !important;
+  padding: 0 !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-badge-count,
+.fitcore-storefront.device-mobile .fitcore-badge-count,
+.simulated-frame.frame-mobile .fitcore-badge-count {
+  top: 2px !important;
+  right: 2px !important;
+  font-size: 0.6rem !important;
+  min-width: 15px !important;
+  height: 15px !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-hero,
+.fitcore-storefront.device-mobile .fitcore-hero,
+.simulated-frame.frame-mobile .fitcore-hero {
+  min-height: 70vh !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-hero-title,
+.fitcore-storefront.device-mobile .fitcore-hero-title,
+.simulated-frame.frame-mobile .fitcore-hero-title {
+  font-size: 2.4rem !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-hero-stats,
+.fitcore-storefront.device-mobile .fitcore-hero-stats,
+.simulated-frame.frame-mobile .fitcore-hero-stats {
+  gap: 16px !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-workout-grid,
+.fitcore-storefront.device-mobile .fitcore-workout-grid,
+.simulated-frame.frame-mobile .fitcore-workout-grid {
+  grid-template-columns: 1fr !important;
+  gap: 12px !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-grid-4,
+.fitcore-storefront[data-device-view='mobile'] .fitcore-catalog-grid,
+.fitcore-storefront.device-mobile .fitcore-grid-4,
+.fitcore-storefront.device-mobile .fitcore-catalog-grid,
+.simulated-frame.frame-mobile .fitcore-grid-4,
+.simulated-frame.frame-mobile .fitcore-catalog-grid {
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 10px !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-card-body,
+.fitcore-storefront.device-mobile .fitcore-card-body,
+.simulated-frame.frame-mobile .fitcore-card-body {
+  padding: 10px 12px 12px !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-card-title,
+.fitcore-storefront.device-mobile .fitcore-card-title,
+.simulated-frame.frame-mobile .fitcore-card-title {
+  font-size: 0.85rem !important;
+  height: auto !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-price-current,
+.fitcore-storefront.device-mobile .fitcore-price-current,
+.simulated-frame.frame-mobile .fitcore-price-current {
+  font-size: 1.1rem !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-tech-grid,
+.fitcore-storefront[data-device-view='mobile'] .fitcore-stories-grid,
+.fitcore-storefront[data-device-view='mobile'] .fitcore-reviews-grid,
+.fitcore-storefront[data-device-view='mobile'] .fitcore-footer-grid,
+.fitcore-storefront.device-mobile .fitcore-tech-grid,
+.fitcore-storefront.device-mobile .fitcore-stories-grid,
+.fitcore-storefront.device-mobile .fitcore-reviews-grid,
+.fitcore-storefront.device-mobile .fitcore-footer-grid,
+.simulated-frame.frame-mobile .fitcore-tech-grid,
+.simulated-frame.frame-mobile .fitcore-stories-grid,
+.simulated-frame.frame-mobile .fitcore-reviews-grid,
+.simulated-frame.frame-mobile .fitcore-footer-grid {
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-card-quick-bar,
+.fitcore-storefront.device-mobile .fitcore-card-quick-bar,
+.simulated-frame.frame-mobile .fitcore-card-quick-bar {
+  display: none !important;
+}
+
+/* Drawer in Simulated Mobile View */
+.fitcore-storefront[data-device-view='mobile'] .fitcore-drawer-backdrop,
+.fitcore-storefront.device-mobile .fitcore-drawer-backdrop,
+.simulated-frame.frame-mobile .fitcore-drawer-backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 10000 !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-cart-drawer,
+.fitcore-storefront.device-mobile .fitcore-cart-drawer,
+.simulated-frame.frame-mobile .fitcore-cart-drawer {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
+}
+
+.fitcore-storefront[data-device-view='mobile'] .fitcore-drawer-header,
+.fitcore-storefront[data-device-view='mobile'] .fitcore-shipping-bar,
+.fitcore-storefront[data-device-view='mobile'] .fitcore-drawer-items,
+.fitcore-storefront[data-device-view='mobile'] .fitcore-drawer-footer,
+.fitcore-storefront.device-mobile .fitcore-drawer-header,
+.fitcore-storefront.device-mobile .fitcore-shipping-bar,
+.fitcore-storefront.device-mobile .fitcore-drawer-items,
+.fitcore-storefront.device-mobile .fitcore-drawer-footer,
+.simulated-frame.frame-mobile .fitcore-drawer-header,
+.simulated-frame.frame-mobile .fitcore-shipping-bar,
+.simulated-frame.frame-mobile .fitcore-drawer-items,
+.simulated-frame.frame-mobile .fitcore-drawer-footer {
+  padding-left: 14px !important;
+  padding-right: 14px !important;
+}
+
