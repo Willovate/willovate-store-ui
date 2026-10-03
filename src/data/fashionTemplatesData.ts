@@ -236,7 +236,7 @@ export const JENIE_FASHION_TEMPLATE: MarketplaceTemplate = {
   slug: 'jenie-denim',
   name: 'Jenie Denim',
   businessType: 'clothing-store',
-  industryCategory: 'Fashion Store',
+  industryCategory: "Fashion",
   tags: ['Jeans', 'Denim', 'Vintage', 'Indigo', 'Streetwear', 'Sustainable'],
   style: 'modern',
   catalogSize: 'large',
