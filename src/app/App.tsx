@@ -172,7 +172,15 @@ function App() {
             rawHash === 'baggo-fashion' ||
             rawHash === 'baggo-leather' ||
             rawHash === 'baggo-templates' ||
-            rawHash === 'leather-bags'
+            rawHash === 'leather-bags' ||
+            rawHash === 'mr-tevor' ||
+            rawHash === 'fashion-mr-tevor' ||
+            rawHash === 'mr-tevor-fashion' ||
+            rawHash === 'mr-tevor-suiting' ||
+            rawHash === 'mr-tevor-templates' ||
+            rawHash === 'tevor' ||
+            rawHash === 'suiting-store' ||
+            rawHash === 'bespoke-suits'
           )) ||
           (key === 'restaurant' && (rawHash === 'restro' || rawHash === 'restro-templates')) ||
           (key === 'health-beauty' && (

@@ -9,6 +9,7 @@ import { FragranceFashionStorefront } from '../templates/fashion/Fragrance'
 import { JenieFashionStorefront } from '../templates/fashion/Jenie'
 import { ChuttiFashionStorefront } from '../templates/fashion/Chutti'
 import { BaggoFashionStorefront } from '../templates/fashion/Baggo'
+import { MrTevorFashionStorefront } from '../templates/fashion/MrTevor'
 import { VelocityStorefront } from '../templates/sports/Velocity'
 import { ArenaStorefront } from '../templates/sports/Arena'
 import { SprintStorefront } from '../templates/sports/Sprint'
@@ -227,6 +228,17 @@ export function getTemplateComponent(template?: MarketplaceTemplate | Template |
       template.name?.toLowerCase().includes('baggo'))
   ) {
     return BaggoFashionStorefront
+  }
+  if (
+    template &&
+    (template.slug === 'fashion-mr-tevor' ||
+      template.id === 'fashion-mr-tevor' ||
+      template.slug === 'mr-tevor' ||
+      template.slug === 'mr-tevor-suiting' ||
+      template.name?.toLowerCase().includes('mr-tevor') ||
+      template.name?.toLowerCase().includes('tevor'))
+  ) {
+    return MrTevorFashionStorefront
   }
   if (
     template &&

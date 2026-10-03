@@ -353,6 +353,47 @@ export const BAGGO_FASHION_TEMPLATE: MarketplaceTemplate = {
   ],
 }
 
+export const MR_TEVOR_FASHION_TEMPLATE: MarketplaceTemplate = {
+  id: 'fashion-mr-tevor',
+  slug: 'fashion-mr-tevor',
+  name: 'Mr-Tevor',
+  businessType: 'clothing-store',
+  industryCategory: 'Fashion Store',
+  tags: ['Suiting', 'Bespoke', 'Tailoring', 'Blazers', 'Tuxedos', 'Luxury Menswear'],
+  style: 'luxury',
+  catalogSize: 'medium',
+  shortDescription:
+    'Haute sartorial suiting and bespoke gentleman tailoring store inspired by the authentic Mr-Tevor Shopify theme. Features crimson needle-and-thread branding, floating canvas suiting, interactive lapel guides, made-to-measure measurement builder, and 10 authentic tailored blazers.',
+  thumbnailUrl: 'https://cdn.shopify.com/s/files/1/0612/7134/3347/products/shop-10.png?v=1641536777',
+  fullPreviewUrl: 'https://cdn.shopify.com/s/files/1/0612/7134/3347/products/shop-10.png?v=1641536777',
+  popularityScore: 99,
+  isActive: true,
+  brandName: 'Mr-Tevor',
+  headline: 'The Art of Haute Sartorial Suiting\nMade by Master Cutters',
+  subtitle: 'Handcrafted bespoke blazers, double-breasted tuxedos, and heritage tweed jackets cut with Savile Row precision.',
+  buttonText: 'Explore Suiting',
+  buttonColor: '#A01C2B',
+  isDark: false,
+  modelImage: 'https://cdn.shopify.com/s/files/1/0612/7134/3347/products/shop-1.png?v=1641536469',
+  badge: 'new',
+  rating: 4.98,
+  reviewCount: 420,
+  layoutType: 'card-grid',
+  accentColor: '#A01C2B',
+  features: [
+    'Top notification bar with complimentary insured worldwide courier and cedar hanger notice',
+    'Crimson needle-and-thread authentic brand emblem and luxury header',
+    'Hero slideshow banner featuring Savile Row bespoke suits, tweed blazers, and obsidian tuxedos',
+    'Craftsmanship 3-pillar value badges (Artisan Quality, Executive Wardrobe, White-Glove Courier)',
+    'Filterable Collection tabs (All Suits, Best Sellers, Lastest Arrivals, Hot Deals, Trending Products)',
+    'Interactive Lapel Architecture Guide comparing Peak Lapel, Notch Lapel, and Shawl Lapel',
+    'Made-to-Measure Bespoke Measurement Studio with chest, shoulder, sleeve, and monogram calculator',
+    'Authentic Spool-Thread dark moody customer testimonial banner',
+    'Technical suiting PDP with fabric provenance, lining, pocket style, and care guide',
+    'Slide-over tailored garment bag drawer and private master tailor appointment modal',
+  ],
+}
+
 export const ALL_FASHION_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   BELLE_FASHION_TEMPLATE,
   VOGAL_FASHION_TEMPLATE,
@@ -363,6 +404,8 @@ export const ALL_FASHION_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   JENIE_FASHION_TEMPLATE,
   CHUTTI_FASHION_TEMPLATE,
   BAGGO_FASHION_TEMPLATE,
+  MR_TEVOR_FASHION_TEMPLATE,
 ]
+
 
 

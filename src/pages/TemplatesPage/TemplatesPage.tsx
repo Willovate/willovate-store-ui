@@ -19,6 +19,7 @@ import { FragranceFashionStorefront } from '../../templates/fashion/Fragrance'
 import { JenieFashionStorefront } from '../../templates/fashion/Jenie'
 import { ChuttiFashionStorefront } from '../../templates/fashion/Chutti'
 import { BaggoFashionStorefront } from '../../templates/fashion/Baggo'
+import { MrTevorFashionStorefront } from '../../templates/fashion/MrTevor'
 import {
   BELLE_FASHION_TEMPLATE,
   VOGAL_FASHION_TEMPLATE,
@@ -28,7 +29,7 @@ import {
   FRAGRANCE_FASHION_TEMPLATE,
   ALL_FASHION_MARKETPLACE_TEMPLATES,
 } from '../../data/fashionTemplatesData'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront }
 
 // Re-export domain types
 export type {
@@ -665,6 +666,22 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
       <BaggoFashionStorefront
         templateData={template}
         onClose={onClose}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'fashion-mr-tevor' ||
+      template.id === 'fashion-mr-tevor' ||
+      template.slug === 'mr-tevor' ||
+      template.slug === 'mr-tevor-suiting' ||
+      template.name?.toLowerCase().includes('mr-tevor') ||
+      template.name?.toLowerCase().includes('tevor'))
+  ) {
+    return (
+      <MrTevorFashionStorefront
+        onBackToDirectory={onClose}
       />
     )
   }
