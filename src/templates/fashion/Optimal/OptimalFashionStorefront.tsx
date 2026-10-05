@@ -33,6 +33,19 @@ export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
   const [cartOpen, setCartOpen] = useState(false)
   const [browseDropdownOpen, setBrowseDropdownOpen] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false)
+  const [isSmallScreen, setIsSmallScreen] = useState(false)
+
+  useEffect(() => {
+    const checkScreen = () => {
+      setIsSmallScreen(window.innerWidth <= 768)
+    }
+    checkScreen()
+    window.addEventListener('resize', checkScreen)
+    return () => window.removeEventListener('resize', checkScreen)
+  }, [])
+
+  const isMobile = device === 'mobile' || isSmallScreen
   const [homeTab, setHomeTab] = useState<'featured' | 'bestsellers' | 'new' | 'sale'>('featured')
   const [toastMessage, setToastMessage] = useState<string | null>(null)
 
@@ -241,7 +254,7 @@ export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
 
   return (
     <div
-      className={`optimal-root optimal-${device}`}
+      className={`optimal-root ${isMobile ? 'optimal-mobile device-mobile is-mobile' : `optimal-${device}`}`}
       style={
         {
           ...(customAccentColor ? { '--opt-primary': customAccentColor } : {}),
@@ -252,34 +265,38 @@ export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
       <div className="optimal-topbar">
         <div className="optimal-container">
           <div className="optimal-topbar-inner">
-            <div className="optimal-topbar-left">
-              <span className="optimal-topbar-item">
-                <span>📞</span> 24/7 Concierge: +1 (800) 555-0199
-              </span>
-              <span className="optimal-topbar-item">
-                <span>📍</span> Store Locator
-              </span>
-              <span className="optimal-topbar-item">
-                <span>📦</span> Track Order
-              </span>
-            </div>
+            {!isMobile && (
+              <div className="optimal-topbar-left">
+                <span className="optimal-topbar-item">
+                  <span>📞</span> 24/7 Concierge: +1 (800) 555-0199
+                </span>
+                <span className="optimal-topbar-item">
+                  <span>📍</span> Store Locator
+                </span>
+                <span className="optimal-topbar-item">
+                  <span>📦</span> Track Order
+                </span>
+              </div>
+            )}
             <div className="optimal-topbar-center">
-              🔥 FLASH SALE: Extra <strong>20% OFF</strong> on all Autumn & Winter outer layers! Code:{' '}
+              🔥 FLASH SALE: Extra <strong>20% OFF</strong>! Code:{' '}
               <strong>OPTIMAL20</strong>
             </div>
-            <div className="optimal-topbar-right">
-              <select className="optimal-topbar-select" defaultValue="INR">
-                <option value="INR">INR (₹)</option>
-                <option value="USD">USD ($)</option>
-                <option value="EUR">EUR (€)</option>
-                <option value="GBP">GBP (£)</option>
-              </select>
-              <select className="optimal-topbar-select" defaultValue="EN">
-                <option value="EN">English</option>
-                <option value="FR">Français</option>
-                <option value="DE">Deutsch</option>
-              </select>
-            </div>
+            {!isMobile && (
+              <div className="optimal-topbar-right">
+                <select className="optimal-topbar-select" defaultValue="INR">
+                  <option value="INR">INR (₹)</option>
+                  <option value="USD">USD ($)</option>
+                  <option value="EUR">EUR (€)</option>
+                  <option value="GBP">GBP (£)</option>
+                </select>
+                <select className="optimal-topbar-select" defaultValue="EN">
+                  <option value="EN">English</option>
+                  <option value="FR">Français</option>
+                  <option value="DE">Deutsch</option>
+                </select>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -311,44 +328,60 @@ export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
               }}
             >
               <div className="optimal-logo-mark">O</div>
-              <div>
-                <span>OPTIMAL</span>
+              <div className="optimal-logo-text-block">
+                <span className="optimal-logo-text">OPTIMAL</span>
                 <span className="optimal-logo-accent">.</span>
                 <span className="optimal-logo-tagline">Department Store</span>
               </div>
             </a>
 
-            {/* Large Search Bar with Category Dropdown */}
-            <form className="optimal-search-wrapper" onSubmit={handleSearchSubmit}>
-              <select
-                className="optimal-search-category"
-                value={headerSearchCat}
-                onChange={(e) => setHeaderSearchCat(e.target.value as OptimalCategoryType)}
-              >
-                <option value="All">All Categories</option>
-                <option value="Women">Women</option>
-                <option value="Men">Men</option>
-                <option value="Outerwear">Outerwear</option>
-                <option value="Dresses">Dresses</option>
-                <option value="Footwear">Footwear</option>
-                <option value="Bags & Luggage">Bags & Luggage</option>
-                <option value="Watches & Jewelry">Watches</option>
-                <option value="Accessories">Accessories</option>
-              </select>
-              <input
-                type="text"
-                className="optimal-search-input"
-                placeholder="Search over 2,500+ curated fashion pieces, coats, shoes..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <button type="submit" className="optimal-search-btn">
-                <span>🔍</span> Search
-              </button>
-            </form>
+            {/* Large Search Bar with Category Dropdown (Desktop Only) */}
+            {!isMobile && (
+              <form className="optimal-search-wrapper" onSubmit={handleSearchSubmit}>
+                <select
+                  className="optimal-search-category"
+                  value={headerSearchCat}
+                  onChange={(e) => setHeaderSearchCat(e.target.value as OptimalCategoryType)}
+                >
+                  <option value="All">All Categories</option>
+                  <option value="Women">Women</option>
+                  <option value="Men">Men</option>
+                  <option value="Outerwear">Outerwear</option>
+                  <option value="Dresses">Dresses</option>
+                  <option value="Footwear">Footwear</option>
+                  <option value="Bags & Luggage">Bags & Luggage</option>
+                  <option value="Watches & Jewelry">Watches</option>
+                  <option value="Accessories">Accessories</option>
+                </select>
+                <input
+                  type="text"
+                  className="optimal-search-input"
+                  placeholder="Search over 2,500+ curated fashion pieces, coats, shoes..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <button type="submit" className="optimal-search-btn">
+                  <span>🔍</span> Search
+                </button>
+              </form>
+            )}
 
             {/* Quick Actions (Wishlist, Account, Cart) */}
             <div className="optimal-header-actions">
+              {isMobile && (
+                <button
+                  type="button"
+                  className="optimal-action-btn optimal-search-toggle-btn"
+                  onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
+                  title="Search"
+                  aria-label="Search"
+                >
+                  <div className="optimal-action-icon-wrap">
+                    <span>🔍</span>
+                  </div>
+                </button>
+              )}
+
               <button
                 type="button"
                 className="optimal-action-btn"
@@ -363,10 +396,12 @@ export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
                   <span>♡</span>
                   {wishlist.length > 0 && <span className="optimal-badge-counter">{wishlist.length}</span>}
                 </div>
-                <div className="optimal-action-text">
-                  <span className="optimal-action-label">Favorite</span>
-                  <span className="optimal-action-val">Wishlist</span>
-                </div>
+                {!isMobile && (
+                  <div className="optimal-action-text">
+                    <span className="optimal-action-label">Favorite</span>
+                    <span className="optimal-action-val">Wishlist</span>
+                  </div>
+                )}
               </button>
 
               <button
@@ -379,13 +414,32 @@ export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
                   <span>🛍️</span>
                   {cartItemCount > 0 && <span className="optimal-badge-counter">{cartItemCount}</span>}
                 </div>
-                <div className="optimal-action-text">
-                  <span className="optimal-action-label">Your Bag</span>
-                  <span className="optimal-action-val">{fmt(cartSubtotal)}</span>
-                </div>
+                {!isMobile && (
+                  <div className="optimal-action-text">
+                    <span className="optimal-action-label">Your Bag</span>
+                    <span className="optimal-action-val">{fmt(cartSubtotal)}</span>
+                  </div>
+                )}
               </button>
             </div>
           </div>
+
+          {/* Collapsible Mobile Search Bar */}
+          {isMobile && mobileSearchOpen && (
+            <form className="optimal-mobile-search-bar" onSubmit={handleSearchSubmit}>
+              <input
+                type="text"
+                className="optimal-mobile-search-input"
+                placeholder="Search coats, shoes, bags..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                autoFocus
+              />
+              <button type="submit" className="optimal-mobile-search-submit">
+                🔍
+              </button>
+            </form>
+          )}
         </div>
       </header>
 
@@ -449,121 +503,123 @@ export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
         </div>
       )}
 
-      {/* ================= NAVIGATION BAR WITH CATEGORY FLYOUT ================= */}
-      <nav className="optimal-navbar">
-        <div className="optimal-container">
-          <div className="optimal-nav-inner">
-            {/* Browse Categories Flyout Button */}
-            <div className="optimal-browse-categories-wrapper">
-              <button
-                type="button"
-                className="optimal-browse-btn"
-                onClick={() => setBrowseDropdownOpen(!browseDropdownOpen)}
-              >
-                <span className="optimal-browse-left">
-                  <span>☰</span> BROWSE CATEGORIES
-                </span>
-                <span>{browseDropdownOpen ? '▲' : '▼'}</span>
-              </button>
+      {/* ================= NAVIGATION BAR WITH CATEGORY FLYOUT (DESKTOP ONLY) ================= */}
+      {!isMobile && (
+        <nav className="optimal-navbar">
+          <div className="optimal-container">
+            <div className="optimal-nav-inner">
+              {/* Browse Categories Flyout Button */}
+              <div className="optimal-browse-categories-wrapper">
+                <button
+                  type="button"
+                  className="optimal-browse-btn"
+                  onClick={() => setBrowseDropdownOpen(!browseDropdownOpen)}
+                >
+                  <span className="optimal-browse-left">
+                    <span>☰</span> BROWSE CATEGORIES
+                  </span>
+                  <span>{browseDropdownOpen ? '▲' : '▼'}</span>
+                </button>
 
-              {browseDropdownOpen && (
-                <div className="optimal-categories-dropdown">
-                  {OPTIMAL_NAV_LINKS.filter((c) => c !== 'Home').map((cat) => (
-                    <button
-                      key={cat}
-                      type="button"
-                      className={`optimal-category-flyout-item ${
-                        activeCategory === cat ? 'active' : ''
-                      }`}
-                      onClick={() => handleNavCategory(cat as OptimalCategoryType)}
-                    >
-                      <span>{cat}</span>
-                      <span>›</span>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
+                {browseDropdownOpen && (
+                  <div className="optimal-categories-dropdown">
+                    {OPTIMAL_NAV_LINKS.filter((c) => c !== 'Home').map((cat) => (
+                      <button
+                        key={cat}
+                        type="button"
+                        className={`optimal-category-flyout-item ${
+                          activeCategory === cat ? 'active' : ''
+                        }`}
+                        onClick={() => handleNavCategory(cat as OptimalCategoryType)}
+                      >
+                        <span>{cat}</span>
+                        <span>›</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
 
-            {/* Horizontal Nav Links */}
-            <div className="optimal-nav-links">
-              <button
-                type="button"
-                className={`optimal-nav-link ${activeView === 'home' ? 'active' : ''}`}
-                onClick={() => {
-                  setActiveView('home')
-                  setActiveCategory('All')
-                  window.scrollTo({ top: 0, behavior: 'smooth' })
-                }}
-              >
-                Home
-              </button>
+              {/* Horizontal Nav Links */}
+              <div className="optimal-nav-links">
+                <button
+                  type="button"
+                  className={`optimal-nav-link ${activeView === 'home' ? 'active' : ''}`}
+                  onClick={() => {
+                    setActiveView('home')
+                    setActiveCategory('All')
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                  }}
+                >
+                  Home
+                </button>
 
-              <button
-                type="button"
-                className={`optimal-nav-link ${activeCategory === 'Women' && activeView === 'collection' ? 'active' : ''}`}
-                onClick={() => handleNavCategory('Women')}
-              >
-                Women <span className="optimal-nav-tag hot">HOT</span>
-              </button>
+                <button
+                  type="button"
+                  className={`optimal-nav-link ${activeCategory === 'Women' && activeView === 'collection' ? 'active' : ''}`}
+                  onClick={() => handleNavCategory('Women')}
+                >
+                  Women <span className="optimal-nav-tag hot">HOT</span>
+                </button>
 
-              <button
-                type="button"
-                className={`optimal-nav-link ${activeCategory === 'Men' && activeView === 'collection' ? 'active' : ''}`}
-                onClick={() => handleNavCategory('Men')}
-              >
-                Men
-              </button>
+                <button
+                  type="button"
+                  className={`optimal-nav-link ${activeCategory === 'Men' && activeView === 'collection' ? 'active' : ''}`}
+                  onClick={() => handleNavCategory('Men')}
+                >
+                  Men
+                </button>
 
-              <button
-                type="button"
-                className={`optimal-nav-link ${activeCategory === 'Outerwear' && activeView === 'collection' ? 'active' : ''}`}
-                onClick={() => handleNavCategory('Outerwear')}
-              >
-                Outerwear <span className="optimal-nav-tag new">NEW</span>
-              </button>
+                <button
+                  type="button"
+                  className={`optimal-nav-link ${activeCategory === 'Outerwear' && activeView === 'collection' ? 'active' : ''}`}
+                  onClick={() => handleNavCategory('Outerwear')}
+                >
+                  Outerwear <span className="optimal-nav-tag new">NEW</span>
+                </button>
 
-              <button
-                type="button"
-                className={`optimal-nav-link ${activeCategory === 'Dresses' && activeView === 'collection' ? 'active' : ''}`}
-                onClick={() => handleNavCategory('Dresses')}
-              >
-                Dresses
-              </button>
+                <button
+                  type="button"
+                  className={`optimal-nav-link ${activeCategory === 'Dresses' && activeView === 'collection' ? 'active' : ''}`}
+                  onClick={() => handleNavCategory('Dresses')}
+                >
+                  Dresses
+                </button>
 
-              <button
-                type="button"
-                className={`optimal-nav-link ${activeCategory === 'Footwear' && activeView === 'collection' ? 'active' : ''}`}
-                onClick={() => handleNavCategory('Footwear')}
-              >
-                Footwear
-              </button>
+                <button
+                  type="button"
+                  className={`optimal-nav-link ${activeCategory === 'Footwear' && activeView === 'collection' ? 'active' : ''}`}
+                  onClick={() => handleNavCategory('Footwear')}
+                >
+                  Footwear
+                </button>
 
-              <button
-                type="button"
-                className={`optimal-nav-link ${activeCategory === 'Bags & Luggage' && activeView === 'collection' ? 'active' : ''}`}
-                onClick={() => handleNavCategory('Bags & Luggage')}
-              >
-                Bags & Luggage
-              </button>
+                <button
+                  type="button"
+                  className={`optimal-nav-link ${activeCategory === 'Bags & Luggage' && activeView === 'collection' ? 'active' : ''}`}
+                  onClick={() => handleNavCategory('Bags & Luggage')}
+                >
+                  Bags & Luggage
+                </button>
 
-              <button
-                type="button"
-                className={`optimal-nav-link ${activeCategory === 'Deals & Sale' && activeView === 'collection' ? 'active' : ''}`}
-                onClick={() => handleNavCategory('Deals & Sale')}
-              >
-                Deals & Sale
-              </button>
-            </div>
+                <button
+                  type="button"
+                  className={`optimal-nav-link ${activeCategory === 'Deals & Sale' && activeView === 'collection' ? 'active' : ''}`}
+                  onClick={() => handleNavCategory('Deals & Sale')}
+                >
+                  Deals & Sale
+                </button>
+              </div>
 
-            {/* Helpline / Support */}
-            <div className="optimal-nav-help">
-              <span>⚡ Need help?</span>
-              <strong>+1 (800) 555-0199</strong>
+              {/* Helpline / Support */}
+              <div className="optimal-nav-help">
+                <span>⚡ Need help?</span>
+                <strong>+1 (800) 555-0199</strong>
+              </div>
             </div>
           </div>
-        </div>
-      </nav>
+        </nav>
+      )}
 
       {/* ================= VIEW: HOME ================= */}
       {activeView === 'home' && (

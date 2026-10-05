@@ -9459,12 +9459,14 @@
 }
 
 .simulated-frame.frame-mobile .optimal-navbar,
+.optimal-root.optimal-mobile .optimal-navbar,
 .optimal-root.device-mobile .optimal-navbar,
 .optimal-root.is-mobile .optimal-navbar {
   display: none !important;
 }
 
 .simulated-frame.frame-mobile .optimal-logo,
+.optimal-root.optimal-mobile .optimal-logo,
 .optimal-root.device-mobile .optimal-logo,
 .optimal-root.is-mobile .optimal-logo {
   font-size: 18px !important;
@@ -9472,6 +9474,7 @@
 }
 
 .simulated-frame.frame-mobile .optimal-logo-mark,
+.optimal-root.optimal-mobile .optimal-logo-mark,
 .optimal-root.device-mobile .optimal-logo-mark,
 .optimal-root.is-mobile .optimal-logo-mark {
   width: 26px !important;
@@ -9479,6 +9482,7 @@
 }
 
 .simulated-frame.frame-mobile .optimal-search-wrapper,
+.optimal-root.optimal-mobile .optimal-search-wrapper,
 .optimal-root.device-mobile .optimal-search-wrapper,
 .optimal-root.is-mobile .optimal-search-wrapper {
   order: 3 !important;
@@ -9490,11 +9494,14 @@
 
 .simulated-frame.frame-mobile .optimal-search-category,
 .simulated-frame.frame-mobile .optimal-search-category-select,
+.optimal-root.optimal-mobile .optimal-search-category,
+.optimal-root.optimal-mobile .optimal-search-category-select,
 .optimal-root.device-mobile .optimal-search-category,
 .optimal-root.device-mobile .optimal-search-category-select,
 .optimal-root.is-mobile .optimal-search-category,
 .optimal-root.is-mobile .optimal-search-category-select,
 .simulated-frame.frame-mobile .optimal-header-action-label,
+.optimal-root.optimal-mobile .optimal-header-action-label,
 .optimal-root.device-mobile .optimal-header-action-label,
 .optimal-root.is-mobile .optimal-header-action-label {
   display: none !important;

@@ -2755,6 +2755,118 @@
   align-items: center !important;
 }
 
+/* Mobile Search Bar */
+.optimal-mobile-search-bar {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  margin-top: 8px !important;
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05) !important;
+}
+
+.optimal-mobile-search-input {
+  flex: 1 !important;
+  border: none !important;
+  padding: 8px 12px !important;
+  font-size: 13px !important;
+  color: #0f172a !important;
+  outline: none !important;
+  background: transparent !important;
+}
+
+.optimal-mobile-search-submit {
+  border: none !important;
+  background: #2563eb !important;
+  color: #ffffff !important;
+  padding: 8px 14px !important;
+  font-size: 13px !important;
+  cursor: pointer !important;
+}
+
+/* Mobile Hero Banner Formatting */
+.optimal-root.optimal-mobile .optimal-hero-grid,
+.optimal-root.device-mobile .optimal-hero-grid,
+.optimal-root.is-mobile .optimal-hero-grid,
+.simulated-frame.frame-mobile .optimal-hero-grid {
+  grid-template-columns: 1fr !important;
+  gap: 12px !important;
+}
+
+.optimal-root.optimal-mobile .optimal-hero-main,
+.optimal-root.device-mobile .optimal-hero-main,
+.optimal-root.is-mobile .optimal-hero-main,
+.simulated-frame.frame-mobile .optimal-hero-main {
+  min-height: 280px !important;
+  max-height: 380px !important;
+  padding: 20px 16px !important;
+  border-radius: 12px !important;
+}
+
+.optimal-root.optimal-mobile .optimal-hero-title,
+.optimal-root.device-mobile .optimal-hero-title,
+.optimal-root.is-mobile .optimal-hero-title,
+.simulated-frame.frame-mobile .optimal-hero-title {
+  font-size: 20px !important;
+  line-height: 1.25 !important;
+  margin-bottom: 8px !important;
+}
+
+.optimal-root.optimal-mobile .optimal-hero-desc,
+.optimal-root.device-mobile .optimal-hero-desc,
+.optimal-root.is-mobile .optimal-hero-desc,
+.simulated-frame.frame-mobile .optimal-hero-desc {
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+  margin-bottom: 12px !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+.optimal-root.optimal-mobile .optimal-hero-pill,
+.optimal-root.device-mobile .optimal-hero-pill,
+.optimal-root.is-mobile .optimal-hero-pill,
+.simulated-frame.frame-mobile .optimal-hero-pill {
+  font-size: 10px !important;
+  padding: 3px 8px !important;
+  margin-bottom: 8px !important;
+}
+
+.optimal-root.optimal-mobile .optimal-hero-btn-group,
+.optimal-root.device-mobile .optimal-hero-btn-group,
+.optimal-root.is-mobile .optimal-hero-btn-group,
+.simulated-frame.frame-mobile .optimal-hero-btn-group {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 8px !important;
+  flex-wrap: wrap !important;
+}
+
+.optimal-root.optimal-mobile .optimal-btn-primary,
+.optimal-root.optimal-mobile .optimal-btn-outline,
+.optimal-root.device-mobile .optimal-btn-primary,
+.optimal-root.device-mobile .optimal-btn-outline,
+.optimal-root.is-mobile .optimal-btn-primary,
+.optimal-root.is-mobile .optimal-btn-outline,
+.simulated-frame.frame-mobile .optimal-btn-primary,
+.simulated-frame.frame-mobile .optimal-btn-outline {
+  padding: 8px 14px !important;
+  font-size: 11px !important;
+  border-radius: 6px !important;
+}
+
+.optimal-root.optimal-mobile .optimal-hero-side,
+.optimal-root.device-mobile .optimal-hero-side,
+.optimal-root.is-mobile .optimal-hero-side,
+.simulated-frame.frame-mobile .optimal-hero-side {
+  display: none !important;
+}
+
 @media (max-width: 480px) {
   .optimal-products-grid,
   .optimal-deals-grid {
