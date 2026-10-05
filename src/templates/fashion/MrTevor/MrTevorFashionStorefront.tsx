@@ -21,7 +21,7 @@ import type {
 import './styles/mrTevorFashion.css'
 
 export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
-  onBackToDirectory,
+  onBackToDirectory: _onBackToDirectory,
   onSelectProduct,
   device = 'desktop',
   deviceView,
