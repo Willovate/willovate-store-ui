@@ -1307,6 +1307,10 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
                 </button>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
       {/* Slide-over Saved Suits Wishlist Drawer */}
       {isWishlistOpen && (
         <div className="mt-cart-drawer-overlay" onClick={() => setIsWishlistOpen(false)}>
