@@ -10088,6 +10088,32 @@
   padding-top: 14px !important;
 }
 
+.simulated-frame .fragrance-btn-primary,
+.fragrance-theme-root .fragrance-btn-primary {
+  background: #F3734D !important;
+  color: #FFFFFF !important;
+  cursor: pointer !important;
+}
+
+.simulated-frame .fragrance-btn-primary:hover,
+.fragrance-theme-root .fragrance-btn-primary:hover {
+  background: #E05C33 !important;
+  color: #FFFFFF !important;
+}
+
+.simulated-frame .fragrance-card-add-btn,
+.fragrance-theme-root .fragrance-card-add-btn {
+  background: #013D29 !important;
+  color: #FFFFFF !important;
+  cursor: pointer !important;
+}
+
+.simulated-frame .fragrance-card-add-btn:hover,
+.fragrance-theme-root .fragrance-card-add-btn:hover {
+  background: #F3734D !important;
+  color: #FFFFFF !important;
+}
+
 .simulated-frame.frame-mobile .fragrance-btn-primary,
 .fragrance-theme-root.device-mobile .fragrance-btn-primary,
 .fragrance-theme-root.is-mobile .fragrance-btn-primary {

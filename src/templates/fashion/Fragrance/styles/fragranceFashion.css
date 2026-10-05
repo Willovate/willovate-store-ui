@@ -58,7 +58,6 @@
 .fragrance-theme-root button {
   font-family: inherit;
   border: none;
-  background: none;
   cursor: pointer;
   outline: none;
 }
@@ -731,23 +730,30 @@
   text-decoration: line-through;
 }
 
-.fragrance-btn-primary {
-  background: var(--frag-accent-coral);
-  color: #FFFFFF;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 12px 28px;
-  border-radius: 30px;
-  box-shadow: 0 6px 16px rgba(243, 115, 77, 0.3);
-  transition: all 0.3s ease;
+.fragrance-btn-primary,
+.fragrance-theme-root .fragrance-btn-primary {
+  background: #F3734D !important;
+  color: #FFFFFF !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  padding: 12px 28px !important;
+  border-radius: 30px !important;
+  box-shadow: 0 6px 16px rgba(243, 115, 77, 0.3) !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
-.fragrance-btn-primary:hover {
-  background: #E05C33;
+.fragrance-btn-primary:hover,
+.fragrance-theme-root .fragrance-btn-primary:hover {
+  background: #E05C33 !important;
+  color: #FFFFFF !important;
   transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(243, 115, 77, 0.4);
+  box-shadow: 0 10px 22px rgba(243, 115, 77, 0.4) !important;
 }
 
 /* -------------------------------------------------------------
@@ -1015,20 +1021,24 @@
   border-top: 1px solid var(--frag-border);
 }
 
-.fragrance-card-add-btn {
-  background: var(--frag-accent-emerald);
-  color: #FFFFFF;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  padding: 8px 16px;
-  border-radius: 20px;
-  text-transform: uppercase;
-  transition: all 0.2s ease;
+.fragrance-card-add-btn,
+.fragrance-theme-root .fragrance-card-add-btn {
+  background: var(--frag-accent-emerald, #013D29) !important;
+  color: #FFFFFF !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  padding: 8px 16px !important;
+  border-radius: 20px !important;
+  text-transform: uppercase !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
 }
 
-.fragrance-card-add-btn:hover {
-  background: var(--frag-accent-coral);
+.fragrance-card-add-btn:hover,
+.fragrance-theme-root .fragrance-card-add-btn:hover {
+  background: var(--frag-accent-coral, #F3734D) !important;
+  color: #FFFFFF !important;
 }
 
 /* -------------------------------------------------------------
