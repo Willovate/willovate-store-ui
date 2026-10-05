@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import {
   MR_TEVOR_LOGO_URL,
   MR_TEVOR_PRODUCTS,
