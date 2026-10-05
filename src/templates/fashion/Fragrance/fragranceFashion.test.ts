@@ -23,7 +23,7 @@ describe('Fragrance Fashion Template Suite', () => {
     const names = FRAGRANCE_PRODUCTS.map((p) => p.name)
     expect(names).toContain('Old Wood Perfume')
     expect(names).toContain('Majestic Perfumes')
-    expect(names).toContain('Body Perfume Ro ty')
+    expect(names).toContain('Body Perfume Royalty')
     expect(names).toContain('Skinn Celeste Perfume')
     expect(names).toContain('Snake Perfume for Men')
     expect(names).toContain('Good Vibes Only Perfume')
