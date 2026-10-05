@@ -2605,6 +2605,14 @@
   background: #080c14;
 }
 
+.preview-viewport-container:not(.device-mobile) {
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  max-height: 100% !important;
+}
+
 .preview-viewport-container::-webkit-scrollbar {
   width: 8px;
 }
@@ -2636,26 +2644,41 @@
   overflow: hidden;
   box-sizing: border-box;
   position: relative;
+  transform: translateZ(0);
 }
 
 .frame-desktop {
   width: 100% !important;
   max-width: 100% !important;
-  min-height: 100% !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  min-height: 0 !important;
+  flex: 1 1 auto !important;
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  transform: translateZ(0) !important;
   border-radius: 0 !important;
   border: none !important;
   box-shadow: none !important;
-  transform: none !important;
 }
 
 .frame-fullscreen {
   width: 100% !important;
   max-width: 100% !important;
-  min-height: 100% !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  min-height: 0 !important;
+  flex: 1 1 auto !important;
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  transform: translateZ(0) !important;
   border-radius: 0 !important;
   border: none !important;
   box-shadow: none !important;
-  transform: none !important;
 }
 
 .frame-tablet {
@@ -2710,6 +2733,68 @@
   width: 100% !important;
   height: calc(100% - 22px) !important;
   max-height: calc(100% - 22px) !important;
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  position: relative !important;
+  transform: none !important;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.simulated-frame.frame-desktop .velocity-storefront-wrapper,
+.simulated-frame.frame-desktop .sports-storefront-wrapper,
+.simulated-frame.frame-desktop .elite-sport,
+.simulated-frame.frame-desktop .motion-theme,
+.simulated-frame.frame-desktop .street-athlete-theme,
+.simulated-frame.frame-desktop .peak-theme,
+.simulated-frame.frame-desktop .peak-storefront-root,
+.simulated-frame.frame-desktop .sprint-storefront-root,
+.simulated-frame.frame-desktop .fitcore-storefront,
+.simulated-frame.frame-desktop .gameday-storefront,
+.simulated-frame.frame-desktop .progear-storefront,
+.simulated-frame.frame-desktop .arena-storefront,
+.simulated-frame.frame-desktop .mino-storefront,
+.simulated-frame.frame-desktop .optimal-root,
+.simulated-frame.frame-desktop .belle-theme-root,
+.simulated-frame.frame-desktop .vogal-theme-root,
+.simulated-frame.frame-desktop .naturya-root,
+.simulated-frame.frame-desktop .trendy-storefront,
+.simulated-frame.frame-desktop .fragrance-theme-root,
+.simulated-frame.frame-desktop .jenie-theme-root,
+.simulated-frame.frame-desktop .chutti-root,
+.simulated-frame.frame-desktop .baggo-root,
+.simulated-frame.frame-desktop .mr-tevor-storefront,
+.simulated-frame.frame-desktop > div,
+.simulated-frame.frame-fullscreen .velocity-storefront-wrapper,
+.simulated-frame.frame-fullscreen .sports-storefront-wrapper,
+.simulated-frame.frame-fullscreen .elite-sport,
+.simulated-frame.frame-fullscreen .motion-theme,
+.simulated-frame.frame-fullscreen .street-athlete-theme,
+.simulated-frame.frame-fullscreen .peak-theme,
+.simulated-frame.frame-fullscreen .peak-storefront-root,
+.simulated-frame.frame-fullscreen .sprint-storefront-root,
+.simulated-frame.frame-fullscreen .fitcore-storefront,
+.simulated-frame.frame-fullscreen .gameday-storefront,
+.simulated-frame.frame-fullscreen .progear-storefront,
+.simulated-frame.frame-fullscreen .arena-storefront,
+.simulated-frame.frame-fullscreen .mino-storefront,
+.simulated-frame.frame-fullscreen .optimal-root,
+.simulated-frame.frame-fullscreen .belle-theme-root,
+.simulated-frame.frame-fullscreen .vogal-theme-root,
+.simulated-frame.frame-fullscreen .naturya-root,
+.simulated-frame.frame-fullscreen .trendy-storefront,
+.simulated-frame.frame-fullscreen .fragrance-theme-root,
+.simulated-frame.frame-fullscreen .jenie-theme-root,
+.simulated-frame.frame-fullscreen .chutti-root,
+.simulated-frame.frame-fullscreen .baggo-root,
+.simulated-frame.frame-fullscreen .mr-tevor-storefront,
+.simulated-frame.frame-fullscreen > div {
+  flex: 1 1 auto !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 100% !important;
   min-height: 0 !important;
   overflow-y: auto !important;
   overflow-x: hidden !important;
@@ -11408,9 +11493,11 @@
   gap: 10px !important;
 }
 
-/* Modals & Drawers inside Simulated Mobile Frame */
-.simulated-frame.frame-mobile .mt-cart-drawer-overlay,
-.simulated-frame.frame-mobile .mt-modal-overlay {
+/* Modals & Drawers strictly inside Simulated Device Frames (Mobile, Tablet, Desktop, Fullscreen) */
+.simulated-frame .mt-cart-drawer-overlay,
+.simulated-frame .mt-modal-overlay,
+.simulated-frame .sports-cart-drawer-backdrop,
+.simulated-frame .sports-quickview-backdrop {
   position: fixed !important;
   inset: 0 !important;
   width: 100% !important;

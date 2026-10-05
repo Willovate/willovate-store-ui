@@ -755,6 +755,10 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
   useEffect(() => {
     if (viewportRef.current) {
       viewportRef.current.scrollTop = 0
+      const innerScroll = viewportRef.current.querySelector('.simulated-frame > div:not(.mobile-chrome-notch)') as HTMLElement | null
+      if (innerScroll) {
+        innerScroll.scrollTop = 0
+      }
     }
   }, [template?.id, device, isOpen])
 
