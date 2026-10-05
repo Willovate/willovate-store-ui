@@ -1801,6 +1801,54 @@
     justify-content: space-between !important;
     align-items: center !important;
   }
+  .fragrance-logo {
+    font-size: 15px !important;
+    letter-spacing: 0.06em !important;
+    white-space: nowrap !important;
+  }
+  .fragrance-logo span {
+    font-size: 8px !important;
+    letter-spacing: 0.1em !important;
+  }
+  .fragrance-profile-btn {
+    display: none !important;
+  }
+  .fragrance-cart-bubble {
+    display: inline-flex !important;
+    flex-shrink: 0 !important;
+    visibility: visible !important;
+  }
+  .fragrance-sub-box {
+    padding: 30px 16px !important;
+  }
+  .fragrance-sub-form {
+    flex-direction: column !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    gap: 12px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .fragrance-sub-form input {
+    width: 100% !important;
+    background: #FFFFFF !important;
+    border: 1px solid var(--frag-border) !important;
+    border-radius: 30px !important;
+    padding: 13px 20px !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+  }
+  .fragrance-sub-form button {
+    width: 100% !important;
+    border-radius: 30px !important;
+    padding: 13px 20px !important;
+    background: #F3734D !important;
+    color: #FFFFFF !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+  }
   .fragrance-menu-right {
     gap: 8px;
   }
@@ -1917,15 +1965,28 @@
 
 .fragrance-theme-root.is-mobile .fragrance-logo,
 .fragrance-theme-root.device-mobile .fragrance-logo {
-  font-size: 18px !important;
-  letter-spacing: 0.12em !important;
+  font-size: 15px !important;
+  letter-spacing: 0.06em !important;
   white-space: nowrap !important;
 }
 
 .fragrance-theme-root.is-mobile .fragrance-logo span,
 .fragrance-theme-root.device-mobile .fragrance-logo span {
-  font-size: 9px !important;
-  letter-spacing: 0.15em !important;
+  font-size: 8px !important;
+  letter-spacing: 0.1em !important;
+}
+
+.fragrance-theme-root.is-mobile .fragrance-profile-btn,
+.fragrance-theme-root.device-mobile .fragrance-profile-btn {
+  display: none !important;
+}
+
+.fragrance-theme-root.is-mobile .fragrance-cart-bubble,
+.fragrance-theme-root.device-mobile .fragrance-cart-bubble {
+  display: inline-flex !important;
+  flex-shrink: 0 !important;
+  visibility: visible !important;
+  order: 3 !important;
 }
 
 .fragrance-theme-root.is-mobile .fragrance-menu-right,
@@ -2125,6 +2186,7 @@
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
+  background-color: #a82e2e;
 }
 
 .fragrance-theme-root.is-mobile .fragrance-tab-nav,
@@ -2167,4 +2229,44 @@
   grid-template-columns: 1fr !important;
   gap: 20px !important;
 }
+
+.fragrance-theme-root.is-mobile .fragrance-sub-box,
+.fragrance-theme-root.device-mobile .fragrance-sub-box {
+  padding: 30px 16px !important;
+}
+
+.fragrance-theme-root.is-mobile .fragrance-sub-form,
+.fragrance-theme-root.device-mobile .fragrance-sub-form {
+  flex-direction: column !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  gap: 12px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.fragrance-theme-root.is-mobile .fragrance-sub-form input,
+.fragrance-theme-root.device-mobile .fragrance-sub-form input {
+  width: 100% !important;
+  background: #FFFFFF !important;
+  border: 1px solid var(--frag-border) !important;
+  border-radius: 30px !important;
+  padding: 13px 20px !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+
+.fragrance-theme-root.is-mobile .fragrance-sub-form button,
+.fragrance-theme-root.device-mobile .fragrance-sub-form button {
+  width: 100% !important;
+  border-radius: 30px !important;
+  padding: 13px 20px !important;
+  background: #F3734D !important;
+  color: #FFFFFF !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+
 

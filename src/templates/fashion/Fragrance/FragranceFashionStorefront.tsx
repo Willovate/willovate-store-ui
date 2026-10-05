@@ -410,7 +410,7 @@ export const FragranceFashionStorefront: React.FC<FragranceStorefrontProps> = ({
               </button>
 
               <button
-                className="fragrance-icon-btn"
+                className="fragrance-icon-btn fragrance-profile-btn"
                 onClick={() => showToast('Customer Concierge Profile')}
                 title="My profile"
                 aria-label="My profile"
