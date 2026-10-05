@@ -1934,7 +1934,20 @@
 .belle-theme-root button,
 .belle-theme-root input,
 .belle-theme-root select { font: inherit; }
-.belle-theme-root button { cursor: pointer; }
+.belle-theme-root button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  outline: none;
+  box-shadow: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
 .belle-theme-root img { display: block; max-width: 100%; }
 .belle-theme-root :focus-visible { outline: 2px solid var(--belle-accent-gold-dark); outline-offset: 3px; }
 
@@ -1951,16 +1964,16 @@
 .belle-brand-sub { display: block; margin-top: 5px; color: #85734f; font-size: 8px; letter-spacing: .28em; }
 .belle-nav-desktop { display: flex; justify-content: center; align-items: center; gap: clamp(12px, 1.6vw, 26px); }
 .belle-nav-item-wrapper { position: relative; }
-.belle-nav-link { min-height: 82px; display: inline-flex; align-items: center; gap: 6px; padding: 0 2px; color: #33312c; font-size: 10px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; white-space: nowrap; }
+.belle-nav-link { min-height: 82px; display: inline-flex; align-items: center; gap: 6px; padding: 0 4px; background: none; border: none; color: #33312c; font-size: 10px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; white-space: nowrap; cursor: pointer; }
 .belle-nav-link:hover, .belle-nav-link.is-active { color: #967742; }
 .belle-nav-link.is-active::after { position: absolute; right: 0; bottom: 22px; left: 0; height: 1px; background: #967742; content: ''; }
 .belle-badge-hot { padding: 2px 4px; background: #9d3f34; color: #fff; font-size: 8px; }
 .belle-header-actions { display: flex; align-items: center; gap: 6px; }
-.belle-action-btn { width: 40px; height: 40px; display: inline-grid; place-items: center; position: relative; color: #292824; }
+.belle-action-btn { width: 40px; height: 40px; display: inline-grid; place-items: center; position: relative; background: none; border: none; color: #292824; cursor: pointer; padding: 0; }
 .belle-action-btn:hover { color: #9a7845; }
 .belle-badge-count { position: absolute; top: 0; right: 0; min-width: 16px; height: 16px; padding: 0 4px; display: grid; place-items: center; border-radius: 50%; background: #9c7a46; color: #fff; font: 600 9px/1 var(--belle-font-sans); }
-.belle-mobile-menu-btn { display: none; width: 42px; height: 42px; padding: 10px; }
-.belle-mobile-menu-btn span { display: block; height: 1px; margin: 5px 0; background: #24231f; }
+.belle-mobile-menu-btn { display: none; width: 42px; height: 42px; padding: 0; background: none; border: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; cursor: pointer; }
+.belle-mobile-menu-btn span { display: block; width: 20px; height: 2px; margin: 0; background: #24231f; border-radius: 1px; }
 .belle-mega-dropdown { position: absolute; z-index: 120; top: 100%; left: 50%; width: min(1000px, calc(100vw - 48px)); padding: 30px; transform: translateX(-50%); background: #fff; border: 1px solid #efede8; box-shadow: 0 20px 48px #1614101c; animation: belle-rise .2s ease-out; }
 .belle-mega-inner { display: grid; grid-template-columns: repeat(3, minmax(120px,1fr)) minmax(180px,.9fr); gap: 24px; }
 .belle-mega-heading { margin: 0 0 12px; font: 600 19px var(--belle-font-serif); }
@@ -1979,15 +1992,18 @@
 .belle-mobile-drawer { width: min(390px, 90vw); height: 100%; padding: 22px; overflow-y: auto; background: #fff; box-shadow: var(--belle-shadow-drawer); animation: belle-from-left .24s ease-out; }
 .belle-mobile-drawer-header, .belle-mobile-nav-link-row { display: flex; align-items: center; justify-content: space-between; }
 .belle-mobile-drawer-header { padding-bottom: 18px; border-bottom: 1px solid #eeeae4; }
-.belle-mobile-title { font-size: 10px; font-weight: 700; letter-spacing: .15em; }
-.belle-mobile-nav-link-row { min-height: 54px; border-bottom: 1px solid #eeeae4; }
-.belle-mobile-nav-link { flex: 1; padding: 14px 0; text-align: left; font: 500 21px var(--belle-font-serif); }
-.belle-mobile-expand-btn, .belle-drawer-close { width: 40px; height: 40px; display: grid; place-items: center; }
+.belle-mobile-title { font-size: 11px; font-weight: 700; letter-spacing: .15em; color: #20201e; }
+.belle-mobile-nav-link-row { min-height: 52px; border-bottom: 1px solid #eeeae4; background: transparent; }
+.belle-mobile-nav-link { flex: 1; padding: 14px 0; text-align: left; background: none; border: none; font: 500 20px var(--belle-font-serif); color: #20201e; cursor: pointer; letter-spacing: .02em; }
+.belle-mobile-nav-link:hover { color: #967742; }
+.belle-mobile-expand-btn, .belle-drawer-close { width: 40px; height: 40px; display: grid; place-items: center; background: none; border: none; font-size: 18px; color: #686660; cursor: pointer; }
 .belle-mobile-subnav { padding: 12px 0 16px 12px; border-bottom: 1px solid #eeeae4; }
 .belle-mobile-subnav-group + .belle-mobile-subnav-group { margin-top: 14px; }
 .belle-mobile-subnav ul { padding: 0; list-style: none; }
 .belle-mobile-subnav li { padding: 4px 0; color: #686660; font-size: 13px; }
 .belle-mobile-drawer-footer { padding-top: 22px; }
+.belle-mobile-drawer-footer .belle-btn-outline { width: 100%; min-height: 46px; display: flex; align-items: center; justify-content: center; padding: 12px 20px; background: #20201e; color: #fff; border: 1px solid #20201e; border-radius: 2px; font-family: var(--belle-font-sans); font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; transition: all .2s ease; }
+.belle-mobile-drawer-footer .belle-btn-outline:hover { background: #3a3832; border-color: #3a3832; }
 .belle-search-overlay { z-index: 800; justify-content: center; align-items: flex-start; padding: 12vh 20px 20px; }
 .belle-search-modal { width: min(760px,100%); max-height: 76vh; padding: 24px; overflow: auto; background: #fff; box-shadow: var(--belle-shadow-drawer); }
 .belle-search-input-wrap { display: flex; gap: 12px; border-bottom: 1px solid #aaa69e; }

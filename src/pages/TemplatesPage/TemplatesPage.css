@@ -9701,7 +9701,8 @@
 .simulated-frame.frame-mobile .belle-top-bar,
 .belle-theme-root.device-mobile .belle-top-bar,
 .belle-theme-root.is-mobile .belle-top-bar {
-  padding: 6px 12px !important;
+  padding: 6px 10px !important;
+  min-height: 32px !important;
 }
 
 .simulated-frame.frame-mobile .belle-top-bar-right,
@@ -9714,24 +9715,67 @@
 .belle-theme-root.device-mobile .belle-top-bar-left,
 .belle-theme-root.is-mobile .belle-top-bar-left {
   width: 100% !important;
+  display: flex !important;
   justify-content: center !important;
+  align-items: center !important;
   text-align: center !important;
-  font-size: 11px !important;
+  font-size: 10px !important;
+  letter-spacing: 0.04em !important;
+  padding: 0 6px !important;
+  overflow: hidden !important;
+}
+
+.simulated-frame.frame-mobile .belle-top-bar-left .belle-top-bar-dot,
+.simulated-frame.frame-mobile .belle-top-bar-left span:last-child,
+.belle-theme-root.device-mobile .belle-top-bar-left .belle-top-bar-dot,
+.belle-theme-root.device-mobile .belle-top-bar-left span:last-child,
+.belle-theme-root.is-mobile .belle-top-bar-left .belle-top-bar-dot,
+.belle-theme-root.is-mobile .belle-top-bar-left span:last-child {
+  display: none !important;
+}
+
+.simulated-frame.frame-mobile .belle-top-bar-left span:first-child,
+.belle-theme-root.device-mobile .belle-top-bar-left span:first-child,
+.belle-theme-root.is-mobile .belle-top-bar-left span:first-child {
   white-space: nowrap !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
+  max-width: 100% !important;
+  display: inline-block !important;
 }
 
 .simulated-frame.frame-mobile .belle-header-inner,
 .belle-theme-root.device-mobile .belle-header-inner,
 .belle-theme-root.is-mobile .belle-header-inner {
   padding: 10px 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  min-height: 60px !important;
+  background: #ffffff !important;
 }
 
-.simulated-frame.frame-mobile .belle-logo-text,
-.belle-theme-root.device-mobile .belle-logo-text,
-.belle-theme-root.is-mobile .belle-logo-text {
-  font-size: 20px !important;
+.simulated-frame.frame-mobile .belle-brand-logo,
+.belle-theme-root.device-mobile .belle-brand-logo,
+.belle-theme-root.is-mobile .belle-brand-logo {
+  text-align: center !important;
+  flex: 1 1 auto !important;
+}
+
+.simulated-frame.frame-mobile .belle-brand-logo h1,
+.belle-theme-root.device-mobile .belle-brand-logo h1,
+.belle-theme-root.is-mobile .belle-brand-logo h1 {
+  font-size: 22px !important;
+  letter-spacing: 0.12em !important;
+  margin: 0 !important;
+}
+
+.simulated-frame.frame-mobile .belle-brand-sub,
+.belle-theme-root.device-mobile .belle-brand-sub,
+.belle-theme-root.is-mobile .belle-brand-sub {
+  font-size: 7px !important;
+  letter-spacing: 0.22em !important;
+  margin-top: 2px !important;
 }
 
 .simulated-frame.frame-mobile .belle-desktop-nav,
@@ -9744,6 +9788,190 @@
 .belle-theme-root.device-mobile .belle-mobile-menu-btn,
 .belle-theme-root.is-mobile .belle-mobile-menu-btn {
   display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 5px !important;
+  width: 38px !important;
+  height: 38px !important;
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+}
+
+.simulated-frame.frame-mobile .belle-mobile-menu-btn span,
+.belle-theme-root.device-mobile .belle-mobile-menu-btn span,
+.belle-theme-root.is-mobile .belle-mobile-menu-btn span {
+  display: block !important;
+  width: 20px !important;
+  height: 2px !important;
+  background: #20201e !important;
+  border-radius: 1px !important;
+  margin: 0 !important;
+}
+
+.simulated-frame.frame-mobile .belle-header-actions,
+.belle-theme-root.device-mobile .belle-header-actions,
+.belle-theme-root.is-mobile .belle-header-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  flex-shrink: 0 !important;
+}
+
+.simulated-frame.frame-mobile .belle-action-btn,
+.belle-theme-root.device-mobile .belle-action-btn,
+.belle-theme-root.is-mobile .belle-action-btn {
+  background: none !important;
+  border: none !important;
+  width: 36px !important;
+  height: 36px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  color: #20201e !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+}
+
+/* Belle Mobile Menu Drawer */
+.simulated-frame.frame-mobile .belle-mobile-drawer-overlay,
+.belle-theme-root.device-mobile .belle-mobile-drawer-overlay,
+.belle-theme-root.is-mobile .belle-mobile-drawer-overlay {
+  display: flex !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 1200 !important;
+  background: rgba(20, 19, 17, 0.5) !important;
+  backdrop-filter: blur(4px) !important;
+}
+
+.simulated-frame.frame-mobile .belle-mobile-drawer,
+.belle-theme-root.device-mobile .belle-mobile-drawer,
+.belle-theme-root.is-mobile .belle-mobile-drawer {
+  width: 82% !important;
+  max-width: 320px !important;
+  height: 100% !important;
+  padding: 22px 18px !important;
+  background: #ffffff !important;
+  overflow-y: auto !important;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15) !important;
+}
+
+.simulated-frame.frame-mobile .belle-mobile-drawer-header,
+.belle-theme-root.device-mobile .belle-mobile-drawer-header,
+.belle-theme-root.is-mobile .belle-mobile-drawer-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding-bottom: 16px !important;
+  border-bottom: 1px solid #eeeae4 !important;
+}
+
+.simulated-frame.frame-mobile .belle-mobile-title,
+.belle-theme-root.device-mobile .belle-mobile-title,
+.belle-theme-root.is-mobile .belle-mobile-title {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  color: #20201e !important;
+}
+
+.simulated-frame.frame-mobile .belle-drawer-close,
+.belle-theme-root.device-mobile .belle-drawer-close,
+.belle-theme-root.is-mobile .belle-drawer-close {
+  background: none !important;
+  border: none !important;
+  width: 34px !important;
+  height: 34px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 18px !important;
+  color: #20201e !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+}
+
+.simulated-frame.frame-mobile .belle-mobile-nav-link-row,
+.belle-theme-root.device-mobile .belle-mobile-nav-link-row,
+.belle-theme-root.is-mobile .belle-mobile-nav-link-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  min-height: 50px !important;
+  border-bottom: 1px solid #eeeae4 !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.simulated-frame.frame-mobile .belle-mobile-nav-link,
+.belle-theme-root.device-mobile .belle-mobile-nav-link,
+.belle-theme-root.is-mobile .belle-mobile-nav-link {
+  flex: 1 !important;
+  background: none !important;
+  border: none !important;
+  padding: 12px 0 !important;
+  text-align: left !important;
+  font-family: var(--belle-font-serif, 'Cinzel', serif) !important;
+  font-size: 1.15rem !important;
+  font-weight: 500 !important;
+  color: #20201e !important;
+  cursor: pointer !important;
+  letter-spacing: 0.02em !important;
+}
+
+.simulated-frame.frame-mobile .belle-mobile-expand-btn,
+.belle-theme-root.device-mobile .belle-mobile-expand-btn,
+.belle-theme-root.is-mobile .belle-mobile-expand-btn {
+  width: 36px !important;
+  height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: none !important;
+  border: none !important;
+  font-size: 18px !important;
+  font-weight: 300 !important;
+  color: #686660 !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+}
+
+.simulated-frame.frame-mobile .belle-mobile-drawer-footer,
+.belle-theme-root.device-mobile .belle-mobile-drawer-footer,
+.belle-theme-root.is-mobile .belle-mobile-drawer-footer {
+  padding-top: 22px !important;
+}
+
+.simulated-frame.frame-mobile .belle-mobile-drawer-footer .belle-btn-outline,
+.belle-theme-root.device-mobile .belle-mobile-drawer-footer .belle-btn-outline,
+.belle-theme-root.is-mobile .belle-mobile-drawer-footer .belle-btn-outline {
+  width: 100% !important;
+  padding: 13px 18px !important;
+  background: #20201e !important;
+  color: #ffffff !important;
+  border: 1px solid #20201e !important;
+  border-radius: 2px !important;
+  font-family: var(--belle-font-sans, sans-serif) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.simulated-frame.frame-mobile .belle-mobile-drawer-footer .belle-btn-outline:hover,
+.belle-theme-root.device-mobile .belle-mobile-drawer-footer .belle-btn-outline:hover,
+.belle-theme-root.is-mobile .belle-mobile-drawer-footer .belle-btn-outline:hover {
+  background: #3a3832 !important;
 }
 
 .simulated-frame.frame-mobile .belle-hero,
@@ -11496,6 +11724,11 @@
 /* Modals & Drawers strictly inside Simulated Device Frames (Mobile, Tablet, Desktop, Fullscreen) */
 .simulated-frame .mt-cart-drawer-overlay,
 .simulated-frame .mt-modal-overlay,
+.simulated-frame .belle-mobile-drawer-overlay,
+.simulated-frame .belle-cart-drawer-overlay,
+.simulated-frame .belle-wishlist-drawer-overlay,
+.simulated-frame .belle-search-overlay,
+.simulated-frame .belle-modal-overlay,
 .simulated-frame .sports-cart-drawer-backdrop,
 .simulated-frame .sports-quickview-backdrop {
   position: fixed !important;
