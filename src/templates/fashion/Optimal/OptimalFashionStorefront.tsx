@@ -46,6 +46,7 @@ export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
   }, [])
 
   const isMobile = device === 'mobile' || isSmallScreen
+  const [mobileFiltersExpanded, setMobileFiltersExpanded] = useState(false)
   const [homeTab, setHomeTab] = useState<'featured' | 'bestsellers' | 'new' | 'sale'>('featured')
   const [toastMessage, setToastMessage] = useState<string | null>(null)
 
@@ -1231,75 +1232,120 @@ export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
       {/* ================= VIEW: COLLECTION ================= */}
       {activeView === 'collection' && (
         <main className="optimal-container">
-          <div className="optimal-collection-layout">
-            {/* Filters Sidebar */}
-            <aside className="optimal-filters-sidebar">
-              <div className="optimal-filter-group">
-                <div className="optimal-filter-title">Categories</div>
-                <div className="optimal-filter-options">
-                  {(['All', 'Women', 'Men', 'Outerwear', 'Dresses', 'Footwear', 'Bags & Luggage', 'Accessories', 'Deals & Sale'] as OptimalCategoryType[]).map((cat) => (
-                    <label key={cat} className="optimal-filter-checkbox-label">
-                      <input
-                        type="radio"
-                        name="collection-cat"
-                        checked={activeCategory === cat}
-                        onChange={() => setActiveCategory(cat)}
-                      />
-                      <span>{cat}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
+          {/* Mobile Category Quick-Scroll Pills Bar */}
+          {isMobile && (
+            <div className="optimal-mobile-cat-pills-bar">
+              {(
+                [
+                  'All',
+                  'Women',
+                  'Men',
+                  'Outerwear',
+                  'Dresses',
+                  'Footwear',
+                  'Bags & Luggage',
+                  'Accessories',
+                  'Deals & Sale',
+                ] as OptimalCategoryType[]
+              ).map((cat) => (
+                <button
+                  key={cat}
+                  type="button"
+                  className={`optimal-mobile-cat-pill ${activeCategory === cat ? 'active' : ''}`}
+                  onClick={() => setActiveCategory(cat)}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          )}
 
-              <div className="optimal-filter-group">
-                <div className="optimal-filter-title">Gender</div>
-                <div className="optimal-filter-options">
-                  {(['All', 'Women', 'Men', 'Unisex'] as const).map((g) => (
-                    <label key={g} className="optimal-filter-checkbox-label">
-                      <input
-                        type="radio"
-                        name="collection-gender"
-                        checked={selectedGenderFilter === g}
-                        onChange={() => setSelectedGenderFilter(g)}
-                      />
-                      <span>{g}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              <div className="optimal-filter-group">
-                <div className="optimal-filter-title">
-                  Max Price: {fmt(maxPriceFilter)}
-                </div>
-                <input
-                  type="range"
-                  min={1000}
-                  max={25000}
-                  step={500}
-                  value={maxPriceFilter}
-                  onChange={(e) => setMaxPriceFilter(Number(e.target.value))}
-                  style={{ width: '100%', cursor: 'pointer' }}
-                />
-              </div>
-
+          {/* Mobile Filters Toggle Button */}
+          {isMobile && (
+            <div className="optimal-mobile-filters-bar">
               <button
                 type="button"
-                className="optimal-btn-primary"
-                style={{ width: '100%', justifyContent: 'center' }}
-                onClick={() => {
-                  setActiveCategory('All')
-                  setSelectedGenderFilter('All')
-                  setMaxPriceFilter(20000)
-                  setSearchQuery('')
-                }}
+                className="optimal-mobile-filters-toggle"
+                onClick={() => setMobileFiltersExpanded(!mobileFiltersExpanded)}
               >
-                Reset Filters
+                <span>⚙️ Filter: {activeCategory} {selectedGenderFilter !== 'All' ? `• ${selectedGenderFilter}` : ''}</span>
+                <span>{mobileFiltersExpanded ? '▲ Hide Filters' : '▼ More Filters'}</span>
               </button>
-            </aside>
+            </div>
+          )}
+
+          <div className="optimal-collection-layout">
+            {/* Filters Sidebar (Collapsible on Mobile, Persistent on Desktop) */}
+            {(!isMobile || mobileFiltersExpanded) && (
+              <aside className="optimal-filters-sidebar">
+                <div className="optimal-filter-group">
+                  <div className="optimal-filter-title">Categories</div>
+                  <div className="optimal-filter-options">
+                    {(['All', 'Women', 'Men', 'Outerwear', 'Dresses', 'Footwear', 'Bags & Luggage', 'Accessories', 'Deals & Sale'] as OptimalCategoryType[]).map((cat) => (
+                      <label key={cat} className="optimal-filter-checkbox-label">
+                        <input
+                          type="radio"
+                          name="collection-cat"
+                          checked={activeCategory === cat}
+                          onChange={() => setActiveCategory(cat)}
+                        />
+                        <span>{cat}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="optimal-filter-group">
+                  <div className="optimal-filter-title">Gender</div>
+                  <div className="optimal-filter-options">
+                    {(['All', 'Women', 'Men', 'Unisex'] as const).map((g) => (
+                      <label key={g} className="optimal-filter-checkbox-label">
+                        <input
+                          type="radio"
+                          name="collection-gender"
+                          checked={selectedGenderFilter === g}
+                          onChange={() => setSelectedGenderFilter(g)}
+                        />
+                        <span>{g}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="optimal-filter-group">
+                  <div className="optimal-filter-title">
+                    Max Price: {fmt(maxPriceFilter)}
+                  </div>
+                  <input
+                    type="range"
+                    min={1000}
+                    max={25000}
+                    step={500}
+                    value={maxPriceFilter}
+                    onChange={(e) => setMaxPriceFilter(Number(e.target.value))}
+                    style={{ width: '100%', cursor: 'pointer' }}
+                  />
+                </div>
+
+                <button
+                  type="button"
+                  className="optimal-btn-primary"
+                  style={{ width: '100%', justifyContent: 'center' }}
+                  onClick={() => {
+                    setActiveCategory('All')
+                    setSelectedGenderFilter('All')
+                    setMaxPriceFilter(20000)
+                    setSearchQuery('')
+                    if (isMobile) setMobileFiltersExpanded(false)
+                  }}
+                >
+                  Reset Filters
+                </button>
+              </aside>
+            )}
 
             {/* Collection Grid Area */}
-            <div>
+            <div className="optimal-collection-products-wrap">
               <div className="optimal-collection-toolbar">
                 <div className="optimal-results-count">
                   Showing <strong>{collectionProducts.length}</strong> items for category{' '}

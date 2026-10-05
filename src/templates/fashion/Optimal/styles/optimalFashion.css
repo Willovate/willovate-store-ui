@@ -2554,22 +2554,48 @@
   padding: 10px 12px !important;
 }
 
+/* Mobile Hamburger Button & Bars */
+.optimal-mobile-hamburger-btn {
+  display: none;
+}
+
+.optimal-hamburger-bar {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background-color: #0f172a;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+}
+
 .optimal-root.optimal-mobile .optimal-mobile-hamburger-btn,
 .optimal-root.device-mobile .optimal-mobile-hamburger-btn,
 .optimal-root.is-mobile .optimal-mobile-hamburger-btn,
 .simulated-frame.frame-mobile .optimal-root .optimal-mobile-hamburger-btn {
   display: flex !important;
+  flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
+  gap: 4px !important;
   width: 36px !important;
   height: 36px !important;
   background: #f8fafc !important;
   border: 1px solid #e2e8f0 !important;
   border-radius: 8px !important;
-  font-size: 18px !important;
-  color: #0f172a !important;
   cursor: pointer !important;
   flex-shrink: 0 !important;
+  padding: 0 !important;
+}
+
+.optimal-root.optimal-mobile .optimal-hamburger-bar,
+.optimal-root.device-mobile .optimal-hamburger-bar,
+.optimal-root.is-mobile .optimal-hamburger-bar,
+.simulated-frame.frame-mobile .optimal-root .optimal-hamburger-bar {
+  display: block !important;
+  width: 18px !important;
+  height: 2px !important;
+  background-color: #0f172a !important;
+  border-radius: 2px !important;
 }
 
 .optimal-root.optimal-mobile .optimal-navbar,
@@ -2579,22 +2605,29 @@
   display: none !important;
 }
 
+/* Mobile Header Single-Row Layout */
 .optimal-root.optimal-mobile .optimal-header-row,
 .optimal-root.device-mobile .optimal-header-row,
 .optimal-root.is-mobile .optimal-header-row,
 .simulated-frame.frame-mobile .optimal-root .optimal-header-row {
-  flex-wrap: wrap !important;
+  display: flex !important;
+  flex-wrap: nowrap !important;
   gap: 8px !important;
   align-items: center !important;
   justify-content: space-between !important;
+  width: 100% !important;
 }
 
 .optimal-root.optimal-mobile .optimal-logo,
 .optimal-root.device-mobile .optimal-logo,
 .optimal-root.is-mobile .optimal-logo,
 .simulated-frame.frame-mobile .optimal-root .optimal-logo {
-  font-size: 18px !important;
+  display: flex !important;
+  align-items: center !important;
   gap: 6px !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  margin-left: 2px !important;
 }
 
 .optimal-root.optimal-mobile .optimal-logo-mark,
@@ -2603,40 +2636,48 @@
 .simulated-frame.frame-mobile .optimal-root .optimal-logo-mark {
   width: 26px !important;
   height: 26px !important;
+  font-size: 13px !important;
+  flex-shrink: 0 !important;
 }
 
-.optimal-root.optimal-mobile .optimal-search-wrapper,
-.optimal-root.device-mobile .optimal-search-wrapper,
-.optimal-root.is-mobile .optimal-search-wrapper,
-.simulated-frame.frame-mobile .optimal-root .optimal-search-wrapper {
-  order: 3 !important;
-  max-width: 100% !important;
-  width: 100% !important;
-  margin-top: 4px !important;
+.optimal-root.optimal-mobile .optimal-logo-text-block,
+.optimal-root.device-mobile .optimal-logo-text-block,
+.optimal-root.is-mobile .optimal-logo-text-block,
+.simulated-frame.frame-mobile .optimal-root .optimal-logo-text-block {
   display: flex !important;
+  flex-direction: column !important;
+  line-height: 1.1 !important;
+  min-width: 0 !important;
 }
 
-.optimal-root.optimal-mobile .optimal-search-category,
-.optimal-root.device-mobile .optimal-search-category,
-.optimal-root.is-mobile .optimal-search-category,
-.simulated-frame.frame-mobile .optimal-root .optimal-search-category {
-  display: none !important;
+.optimal-root.optimal-mobile .optimal-logo-text,
+.optimal-root.device-mobile .optimal-logo-text,
+.optimal-root.is-mobile .optimal-logo-text,
+.simulated-frame.frame-mobile .optimal-root .optimal-logo-text {
+  font-size: 14.5px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  white-space: nowrap !important;
 }
 
-.optimal-root.optimal-mobile .optimal-search-input,
-.optimal-root.device-mobile .optimal-search-input,
-.optimal-root.is-mobile .optimal-search-input,
-.simulated-frame.frame-mobile .optimal-root .optimal-search-input {
-  border-radius: 6px 0 0 6px !important;
-  font-size: 12px !important;
-  padding: 8px 10px !important;
+.optimal-root.optimal-mobile .optimal-logo-tagline,
+.optimal-root.device-mobile .optimal-logo-tagline,
+.optimal-root.is-mobile .optimal-logo-tagline,
+.simulated-frame.frame-mobile .optimal-root .optimal-logo-tagline {
+  font-size: 8px !important;
+  letter-spacing: 0.05em !important;
+  color: #64748b !important;
+  white-space: nowrap !important;
 }
 
 .optimal-root.optimal-mobile .optimal-header-actions,
 .optimal-root.device-mobile .optimal-header-actions,
 .optimal-root.is-mobile .optimal-header-actions,
 .simulated-frame.frame-mobile .optimal-root .optimal-header-actions {
-  gap: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex-shrink: 0 !important;
 }
 
 .optimal-root.optimal-mobile .optimal-action-label,
@@ -2650,8 +2691,24 @@
 .optimal-root.device-mobile .optimal-action-btn,
 .optimal-root.is-mobile .optimal-action-btn,
 .simulated-frame.frame-mobile .optimal-root .optimal-action-btn {
-  padding: 6px 8px !important;
-  gap: 4px !important;
+  padding: 0 !important;
+  width: 34px !important;
+  height: 34px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 8px !important;
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  flex-shrink: 0 !important;
+}
+
+.optimal-root.optimal-mobile .optimal-action-icon-wrap,
+.optimal-root.device-mobile .optimal-action-icon-wrap,
+.optimal-root.is-mobile .optimal-action-icon-wrap,
+.simulated-frame.frame-mobile .optimal-root .optimal-action-icon-wrap {
+  position: relative !important;
+  font-size: 15px !important;
 }
 
 /* Mobile Drawer Elements */
@@ -2865,6 +2922,344 @@
 .optimal-root.is-mobile .optimal-hero-side,
 .simulated-frame.frame-mobile .optimal-hero-side {
   display: none !important;
+}
+
+/* Mobile Collection View (Pills, Collapsible Filters & Grid) */
+.optimal-mobile-cat-pills-bar {
+  display: flex !important;
+  gap: 8px !important;
+  overflow-x: auto !important;
+  padding: 10px 0 6px 0 !important;
+  scrollbar-width: none !important;
+  -webkit-overflow-scrolling: touch !important;
+  width: 100% !important;
+}
+.optimal-mobile-cat-pills-bar::-webkit-scrollbar {
+  display: none !important;
+}
+.optimal-mobile-cat-pill {
+  flex: 0 0 auto !important;
+  padding: 6px 14px !important;
+  border-radius: 20px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  background: #f1f5f9 !important;
+  color: #334155 !important;
+  border: 1px solid #e2e8f0 !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+}
+.optimal-mobile-cat-pill.active {
+  background: #2563eb !important;
+  color: #ffffff !important;
+  border-color: #2563eb !important;
+}
+
+.optimal-mobile-filters-bar {
+  width: 100% !important;
+  margin-bottom: 10px !important;
+}
+.optimal-mobile-filters-toggle {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 9px 12px !important;
+  border-radius: 8px !important;
+  border: 1px solid #cbd5e1 !important;
+  background: #ffffff !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: #0f172a !important;
+  cursor: pointer !important;
+}
+
+.optimal-root.optimal-mobile .optimal-collection-layout,
+.optimal-root.device-mobile .optimal-collection-layout,
+.optimal-root.is-mobile .optimal-collection-layout,
+.simulated-frame.frame-mobile .optimal-collection-layout {
+  display: flex !important;
+  flex-direction: column !important;
+  grid-template-columns: 1fr !important;
+  gap: 14px !important;
+  padding: 8px 0 30px 0 !important;
+  width: 100% !important;
+}
+
+.optimal-root.optimal-mobile .optimal-filters-sidebar,
+.optimal-root.device-mobile .optimal-filters-sidebar,
+.optimal-root.is-mobile .optimal-filters-sidebar,
+.simulated-frame.frame-mobile .optimal-filters-sidebar {
+  width: 100% !important;
+  padding: 14px !important;
+  border-radius: 12px !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-sizing: border-box !important;
+}
+
+.optimal-root.optimal-mobile .optimal-collection-products-wrap,
+.optimal-root.device-mobile .optimal-collection-products-wrap,
+.optimal-root.is-mobile .optimal-collection-products-wrap,
+.simulated-frame.frame-mobile .optimal-collection-products-wrap {
+  width: 100% !important;
+}
+
+.optimal-root.optimal-mobile .optimal-collection-toolbar,
+.optimal-root.device-mobile .optimal-collection-toolbar,
+.optimal-root.is-mobile .optimal-collection-toolbar,
+.simulated-frame.frame-mobile .optimal-collection-toolbar {
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 8px !important;
+  margin-bottom: 12px !important;
+}
+
+.optimal-root.optimal-mobile .optimal-sort-select,
+.optimal-root.device-mobile .optimal-sort-select,
+.optimal-root.is-mobile .optimal-sort-select,
+.simulated-frame.frame-mobile .optimal-sort-select {
+  width: 100% !important;
+}
+
+/* Department Section / Explore by Department */
+.optimal-root.optimal-mobile .optimal-section-heading,
+.optimal-root.device-mobile .optimal-section-heading,
+.optimal-root.is-mobile .optimal-section-heading,
+.simulated-frame.frame-mobile .optimal-section-heading {
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 6px !important;
+  margin-bottom: 12px !important;
+}
+
+.optimal-root.optimal-mobile .optimal-section-title,
+.optimal-root.device-mobile .optimal-section-title,
+.optimal-root.is-mobile .optimal-section-title,
+.simulated-frame.frame-mobile .optimal-section-title {
+  font-size: 18px !important;
+}
+
+.optimal-root.optimal-mobile .optimal-section-subtitle,
+.optimal-root.device-mobile .optimal-section-subtitle,
+.optimal-root.is-mobile .optimal-section-subtitle,
+.simulated-frame.frame-mobile .optimal-section-subtitle {
+  font-size: 12px !important;
+}
+
+.optimal-root.optimal-mobile .optimal-view-all-link,
+.optimal-root.device-mobile .optimal-view-all-link,
+.optimal-root.is-mobile .optimal-view-all-link,
+.simulated-frame.frame-mobile .optimal-view-all-link {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+}
+
+.optimal-root.optimal-mobile .optimal-category-grid,
+.optimal-root.device-mobile .optimal-category-grid,
+.optimal-root.is-mobile .optimal-category-grid,
+.simulated-frame.frame-mobile .optimal-category-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+.optimal-root.optimal-mobile .optimal-cat-card,
+.optimal-root.device-mobile .optimal-cat-card,
+.optimal-root.is-mobile .optimal-cat-card,
+.simulated-frame.frame-mobile .optimal-cat-card {
+  padding: 12px 8px !important;
+  text-align: center !important;
+  border-radius: 10px !important;
+}
+
+.optimal-root.optimal-mobile .optimal-cat-img-wrap,
+.optimal-root.device-mobile .optimal-cat-img-wrap,
+.optimal-root.is-mobile .optimal-cat-img-wrap,
+.simulated-frame.frame-mobile .optimal-cat-img-wrap {
+  width: 68px !important;
+  height: 68px !important;
+  margin: 0 auto 8px auto !important;
+}
+
+.optimal-root.optimal-mobile .optimal-cat-title,
+.optimal-root.device-mobile .optimal-cat-title,
+.optimal-root.is-mobile .optimal-cat-title,
+.simulated-frame.frame-mobile .optimal-cat-title {
+  font-size: 12.5px !important;
+  margin-bottom: 2px !important;
+}
+
+.optimal-root.optimal-mobile .optimal-cat-count,
+.optimal-root.device-mobile .optimal-cat-count,
+.optimal-root.is-mobile .optimal-cat-count,
+.simulated-frame.frame-mobile .optimal-cat-count {
+  font-size: 11px !important;
+}
+
+/* Newsletter Strip (Screenshot 3 Fix) */
+.optimal-root.optimal-mobile .optimal-newsletter-strip,
+.optimal-root.device-mobile .optimal-newsletter-strip,
+.optimal-root.is-mobile .optimal-newsletter-strip,
+.simulated-frame.frame-mobile .optimal-newsletter-strip {
+  padding: 20px 14px !important;
+  border-radius: 12px !important;
+  margin-bottom: 20px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.optimal-root.optimal-mobile .optimal-newsletter-text h3,
+.optimal-root.device-mobile .optimal-newsletter-text h3,
+.optimal-root.is-mobile .optimal-newsletter-text h3,
+.simulated-frame.frame-mobile .optimal-newsletter-text h3 {
+  font-size: 18px !important;
+}
+
+.optimal-root.optimal-mobile .optimal-newsletter-text p,
+.optimal-root.device-mobile .optimal-newsletter-text p,
+.optimal-root.is-mobile .optimal-newsletter-text p,
+.simulated-frame.frame-mobile .optimal-newsletter-text p {
+  font-size: 12px !important;
+  margin-bottom: 12px !important;
+}
+
+.optimal-root.optimal-mobile .optimal-newsletter-form,
+.optimal-root.device-mobile .optimal-newsletter-form,
+.optimal-root.is-mobile .optimal-newsletter-form,
+.simulated-frame.frame-mobile .optimal-newsletter-form {
+  flex-direction: column !important;
+  gap: 8px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.optimal-root.optimal-mobile .optimal-newsletter-input,
+.optimal-root.device-mobile .optimal-newsletter-input,
+.optimal-root.is-mobile .optimal-newsletter-input,
+.simulated-frame.frame-mobile .optimal-newsletter-input {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 10px 12px !important;
+  font-size: 13px !important;
+}
+
+.optimal-root.optimal-mobile .optimal-newsletter-form .optimal-btn-primary,
+.optimal-root.device-mobile .optimal-newsletter-form .optimal-btn-primary,
+.optimal-root.is-mobile .optimal-newsletter-form .optimal-btn-primary,
+.simulated-frame.frame-mobile .optimal-newsletter-form .optimal-btn-primary {
+  width: 100% !important;
+  justify-content: center !important;
+  padding: 10px 14px !important;
+  box-sizing: border-box !important;
+}
+
+/* Footer (Screenshot 2 Fix) */
+.optimal-root.optimal-mobile .optimal-footer,
+.optimal-root.device-mobile .optimal-footer,
+.optimal-root.is-mobile .optimal-footer,
+.simulated-frame.frame-mobile .optimal-footer {
+  padding: 28px 0 20px 0 !important;
+  width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+.optimal-root.optimal-mobile .optimal-footer-grid,
+.optimal-root.device-mobile .optimal-footer-grid,
+.optimal-root.is-mobile .optimal-footer-grid,
+.simulated-frame.frame-mobile .optimal-footer-grid {
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+  margin-bottom: 20px !important;
+  width: 100% !important;
+}
+
+.optimal-root.optimal-mobile .optimal-footer-col,
+.optimal-root.device-mobile .optimal-footer-col,
+.optimal-root.is-mobile .optimal-footer-col,
+.simulated-frame.frame-mobile .optimal-footer-col {
+  width: 100% !important;
+}
+
+.optimal-root.optimal-mobile .optimal-footer-col h4,
+.optimal-root.device-mobile .optimal-footer-col h4,
+.optimal-root.is-mobile .optimal-footer-col h4,
+.simulated-frame.frame-mobile .optimal-footer-col h4 {
+  margin: 0 0 10px 0 !important;
+  font-size: 14px !important;
+}
+
+.optimal-root.optimal-mobile .optimal-footer-about,
+.optimal-root.device-mobile .optimal-footer-about,
+.optimal-root.is-mobile .optimal-footer-about,
+.simulated-frame.frame-mobile .optimal-footer-about {
+  font-size: 12.5px !important;
+  margin-bottom: 12px !important;
+}
+
+.optimal-root.optimal-mobile .optimal-footer-bottom,
+.optimal-root.device-mobile .optimal-footer-bottom,
+.optimal-root.is-mobile .optimal-footer-bottom,
+.simulated-frame.frame-mobile .optimal-footer-bottom {
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  gap: 10px !important;
+  padding-top: 14px !important;
+}
+
+/* Products & Deals Responsive Grid */
+.optimal-root.optimal-mobile .optimal-products-grid,
+.optimal-root.optimal-mobile .optimal-deals-grid,
+.optimal-root.device-mobile .optimal-products-grid,
+.optimal-root.device-mobile .optimal-deals-grid,
+.optimal-root.is-mobile .optimal-products-grid,
+.optimal-root.is-mobile .optimal-deals-grid,
+.simulated-frame.frame-mobile .optimal-products-grid,
+.simulated-frame.frame-mobile .optimal-deals-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+.optimal-root.optimal-mobile .optimal-product-card,
+.optimal-root.device-mobile .optimal-product-card,
+.optimal-root.is-mobile .optimal-product-card,
+.simulated-frame.frame-mobile .optimal-product-card {
+  min-width: 0 !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  padding: 8px !important;
+  border-radius: 10px !important;
+}
+
+.optimal-root.optimal-mobile .optimal-product-card-title,
+.optimal-root.device-mobile .optimal-product-card-title,
+.optimal-root.is-mobile .optimal-product-card-title,
+.simulated-frame.frame-mobile .optimal-product-card-title {
+  font-size: 12px !important;
+  line-height: 1.3 !important;
+  margin-bottom: 4px !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+.optimal-root.optimal-mobile .optimal-product-card-price,
+.optimal-root.device-mobile .optimal-product-card-price,
+.optimal-root.is-mobile .optimal-product-card-price,
+.simulated-frame.frame-mobile .optimal-product-card-price {
+  font-size: 13px !important;
+}
+
+.optimal-root.optimal-mobile .optimal-add-bag-btn,
+.optimal-root.device-mobile .optimal-add-bag-btn,
+.optimal-root.is-mobile .optimal-add-bag-btn,
+.simulated-frame.frame-mobile .optimal-add-bag-btn {
+  padding: 6px 8px !important;
+  font-size: 11px !important;
 }
 
 @media (max-width: 480px) {
