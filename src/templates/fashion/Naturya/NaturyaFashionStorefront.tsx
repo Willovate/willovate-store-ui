@@ -179,7 +179,7 @@ export const NaturyaFashionStorefront: React.FC<NaturyaStorefrontProps> = ({
 
   return (
     <div
-      className={`naturya-root naturya-${device}`}
+      className={`naturya-root naturya-${device} ${device === 'mobile' ? 'naturya-mobile device-mobile is-mobile' : ''}`}
       style={
         {
           ...(customAccentColor ? { '--nat-highlight': customAccentColor } : {}),

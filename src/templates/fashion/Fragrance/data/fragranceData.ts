@@ -125,7 +125,7 @@ export const FRAGRANCE_PRODUCTS: FragranceProduct[] = [
   },
   {
     id: 'frag-body-roty',
-    name: 'Body Perfume Ro ty',
+    name: 'Body Perfume Royalty',
     subtitle: 'scent',
     family: 'Fresh & Citrus',
     category: 'Unisex',

@@ -208,7 +208,7 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
 
   return (
     <div
-      className={`trendy-storefront device-${device}`}
+      className={`trendy-storefront device-${device} ${device === 'mobile' ? 'trendy-mobile device-mobile is-mobile' : ''}`}
       style={inlineAccentStyle}
     >
       {/* 1. TOP ANNOUNCEMENT / UTILITY BAR */}

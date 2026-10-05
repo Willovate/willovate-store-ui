@@ -281,13 +281,13 @@
   }
 
   .fragrance-theme-root .fragrance-nav-row {
-    flex-wrap: wrap;
-    row-gap: 8px;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    align-items: center !important;
   }
 
   .fragrance-theme-root .fragrance-main-nav {
-    flex: 1 0 100%;
-    order: 3;
+    display: none !important;
   }
 
   .mr-tevor-storefront .mt-nav {

@@ -265,7 +265,7 @@ export const VogalFashionStorefront: React.FC<VogalStorefrontProps> = ({
 
   return (
     <div
-      className={`vogal-theme-root device-${effectiveDevice}`}
+      className={`vogal-theme-root device-${effectiveDevice} ${isMobile ? 'vogal-mobile device-mobile is-mobile' : ''}`}
       style={{
         ...(customAccentColor ? ({ '--vogal-accent': customAccentColor } as React.CSSProperties) : {}),
       }}

@@ -19,7 +19,12 @@ import './styles/baggoFashion.css'
 export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
   initialView = 'home',
   templateData: _templateData,
+  device = 'desktop',
+  deviceView,
+  onClose: _onClose,
 }) => {
+  const effectiveDevice = deviceView || device || 'desktop'
+  const isMobile = effectiveDevice === 'mobile'
   const [viewMode, setViewMode] = useState<'home' | 'collection' | 'pdp'>(initialView)
   const [selectedProduct, setSelectedProduct] = useState<BaggoProduct>(BAGGO_PRODUCTS[0])
   const [activeHeroSlideIdx, setActiveHeroSlideIdx] = useState<number>(0)
@@ -173,7 +178,7 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
   const currentTestimonial = BAGGO_TESTIMONIALS[activeTestiIdx]
 
   return (
-    <div className="baggo-root">
+    <div className={`baggo-root ${isMobile ? 'baggo-mobile device-mobile is-mobile' : `baggo-${effectiveDevice}`}`}>
       {/* TOAST POPUP */}
       {toastMsg && (
         <div

@@ -23,7 +23,11 @@ import './styles/mrTevorFashion.css'
 export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
   onBackToDirectory,
   onSelectProduct,
+  device = 'desktop',
+  deviceView,
 }) => {
+  const effectiveDevice = deviceView || device || 'desktop'
+  const isMobile = effectiveDevice === 'mobile'
   // Navigation & View State
   const [activeTab, setActiveTab] = useState<'storefront' | 'pdp' | 'tailor-guide'>('storefront')
   const [selectedProduct, setSelectedProduct] = useState<MrTevorProduct | null>(null)
@@ -223,7 +227,7 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
   const currentHeroSlide = MR_TEVOR_HERO_SLIDES[currentSlideIndex]
 
   return (
-    <div className="mr-tevor-storefront">
+    <div className={`mr-tevor-storefront ${isMobile ? 'mr-tevor-mobile device-mobile is-mobile' : `device-${effectiveDevice}`}`}>
       {/* Top Announcement Bar */}
       <div className="mt-announcement-bar">
         <div className="mt-announcement-content">

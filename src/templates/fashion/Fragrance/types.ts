@@ -95,6 +95,7 @@ export interface FragranceFilterState {
 export interface FragranceStorefrontProps {
   template?: MarketplaceTemplate
   device?: 'desktop' | 'tablet' | 'mobile' | 'fullscreen'
+  deviceView?: string
   customAccentColor?: string | null
   onColorChange?: (color: string) => void
   onUseTemplate?: (templateId: string) => void

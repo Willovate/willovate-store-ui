@@ -17,11 +17,16 @@ import './styles/fragranceFashion.css'
 
 export const FragranceFashionStorefront: React.FC<FragranceStorefrontProps> = ({
   template: _template,
-  device: _device = 'desktop',
+  device = 'desktop',
+  deviceView,
   customAccentColor: _customAccentColor,
   onColorChange: _onColorChange,
   onUseTemplate: _onUseTemplate,
 }) => {
+  const effectiveDevice = deviceView || device || 'desktop'
+  const isMobile = effectiveDevice === 'mobile'
+  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false)
+
   // Navigation & View Mode
   const [viewMode, setViewMode] = useState<'home' | 'collection' | 'pdp'>('home')
   const [selectedProduct, setSelectedProduct] = useState<FragranceProduct>(FRAGRANCE_HERO_PRODUCT)
@@ -173,7 +178,7 @@ export const FragranceFashionStorefront: React.FC<FragranceStorefrontProps> = ({
   }, [filters, searchQuery])
 
   return (
-    <div className="fragrance-theme-root">
+    <div className={`fragrance-theme-root ${isMobile ? 'fragrance-mobile device-mobile is-mobile' : `fragrance-${effectiveDevice}`}`}>
       {/* Toast Notification */}
       {toastMsg && (
         <div
@@ -234,6 +239,18 @@ export const FragranceFashionStorefront: React.FC<FragranceStorefrontProps> = ({
       <header className="fragrance-site-header">
         <div className="fragrance-container">
           <div className="fragrance-nav-row">
+            {isMobile && (
+              <button
+                className="fragrance-mobile-menu-toggle"
+                onClick={() => setMobileMenuOpen(true)}
+                aria-label="Toggle navigation menu"
+              >
+                <span className="fragrance-hamburger-bar" />
+                <span className="fragrance-hamburger-bar" />
+                <span className="fragrance-hamburger-bar" />
+              </button>
+            )}
+
             {/* Brand Logo */}
             <a
               href="#home"
@@ -383,21 +400,25 @@ export const FragranceFashionStorefront: React.FC<FragranceStorefrontProps> = ({
               <button
                 className="fragrance-icon-btn"
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
+                title="Search"
+                aria-label="Search"
               >
                 <svg viewBox="0 0 19 19">
                   <path d="M7 0C3.13 0 0 3.13 0 7s3.13 7 7 7c1.61 0 3.1-.55 4.28-1.47l5.6 5.6c.36.36.95.36 1.32 0s.36-.95 0-1.32l-5.6-5.6C13.45 10.1 14 8.61 14 7c0-3.87-3.13-7-7-7zm0 1.87c2.83 0 5.13 2.3 5.13 5.13s-2.3 5.13-5.13 5.13S1.87 9.83 1.87 7 4.17 1.87 7 1.87z" />
                 </svg>
-                <span>Search</span>
+                <span className="fragrance-btn-label">Search</span>
               </button>
 
               <button
                 className="fragrance-icon-btn"
                 onClick={() => showToast('Customer Concierge Profile')}
+                title="My profile"
+                aria-label="My profile"
               >
                 <svg viewBox="0 0 16 22">
                   <path d="M13.37 21.04H4.6c-.48 0-.88-.39-.88-.88s.4-.88.88-.88h8.77c.48 0 .88-.4.88-.88v-3.64c-.04-.5-.34-.93-.78-1.15-3.44-1.39-7.28-1.39-10.72 0-.44.22-.73.66-.78 1.15v5.39c0 .49-.4.88-.88.88s-.88-.39-.88-.88v-5.39c.04-1.21.77-2.29 1.88-2.78 3.86-1.56 8.17-1.56 12.03 0 1.11.49 1.84 1.57 1.88 2.78v3.64c0 1.45-1.18 2.63-2.63 2.63zM12.49 4.38C12.49 1.96 10.53 0 8.11 0S3.72 1.96 3.72 4.38s1.96 4.38 4.39 4.38 4.38-1.96 4.38-4.38z" />
                 </svg>
-                <span>My profile</span>
+                <span className="fragrance-btn-label">My profile</span>
               </button>
 
               {compareIds.length > 0 && (
@@ -405,14 +426,18 @@ export const FragranceFashionStorefront: React.FC<FragranceStorefrontProps> = ({
                   className="fragrance-icon-btn"
                   onClick={() => setIsCompareOpen(true)}
                   style={{ color: '#D4AF37' }}
+                  title="Compare"
+                  aria-label="Compare"
                 >
-                  <span>Compare ({compareIds.length})</span>
+                  <span className="fragrance-btn-label">Compare ({compareIds.length})</span>
                 </button>
               )}
 
               <button
                 className="fragrance-icon-btn fragrance-cart-bubble"
                 onClick={() => setIsCartOpen(true)}
+                title="Cart"
+                aria-label="Shopping Cart"
               >
                 <svg viewBox="0 0 19 17">
                   <path d="M15.57 10.63H6.97c-1.16 0-2.16-.83-2.37-1.97L3.48 2.6c-.07-.39-.41-.67-.8-.67H.8C.36 1.93 0 1.57 0 1.13S.36.32.8.32h1.89c1.16 0 2.16.83 2.37 1.97l1.12 6.07c.07.39.41.67.8.66h8.59c.39 0 .73-.28.8-.66l1.02-5.48c.04-.24-.02-.48-.18-.66-.16-.18-.39-.29-.63-.29H7.25c-.44 0-.8-.36-.8-.8s.36-.8.8-.8h9.35c.78 0 1.48.37 1.93.99.45.62.58 1.4.37 2.15l-1.01 5.48c-.28 1.52-1.6 2.63-3.12 2.63z" />
@@ -453,6 +478,155 @@ export const FragranceFashionStorefront: React.FC<FragranceStorefrontProps> = ({
           )}
         </div>
       </header>
+
+      {/* Slide-over Mobile Navigation Drawer */}
+      <div
+        className={`fragrance-mobile-drawer-backdrop ${mobileMenuOpen ? 'open' : ''}`}
+        onClick={() => setMobileMenuOpen(false)}
+      />
+      <aside className={`fragrance-mobile-drawer ${mobileMenuOpen ? 'open' : ''}`}>
+        <div className="fragrance-mobile-drawer-header">
+          <a
+            href="#home"
+            className="fragrance-logo"
+            onClick={(e) => {
+              e.preventDefault()
+              setViewMode('home')
+              setMobileMenuOpen(false)
+            }}
+          >
+            FRAGRANCE <span>WORKDO</span>
+          </a>
+          <button
+            className="fragrance-mobile-drawer-close"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-label="Close menu"
+          >
+            ✕
+          </button>
+        </div>
+        <div className="fragrance-mobile-drawer-content">
+          <nav className="fragrance-mobile-drawer-nav">
+            <a
+              href="#home"
+              className={`fragrance-mobile-link ${viewMode === 'home' ? 'active' : ''}`}
+              onClick={(e) => {
+                e.preventDefault()
+                setViewMode('home')
+                setMobileMenuOpen(false)
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+              }}
+            >
+              Home
+            </a>
+            <a
+              href="#scent"
+              className={`fragrance-mobile-link ${viewMode === 'collection' ? 'active' : ''}`}
+              onClick={(e) => {
+                e.preventDefault()
+                setViewMode('collection')
+                setFilters((f) => ({ ...f, family: 'All', category: 'All' }))
+                setMobileMenuOpen(false)
+              }}
+            >
+              All Fragrances
+            </a>
+
+            <div className="fragrance-mobile-group">
+              <span className="fragrance-mobile-group-title">Olfactory Families</span>
+              <a
+                href="#woody"
+                className="fragrance-mobile-sublink"
+                onClick={(e) => {
+                  e.preventDefault()
+                  setFilters((f) => ({ ...f, family: 'Woody' }))
+                  setViewMode('collection')
+                  setMobileMenuOpen(false)
+                }}
+              >
+                Woody & Agarwood
+              </a>
+              <a
+                href="#oriental"
+                className="fragrance-mobile-sublink"
+                onClick={(e) => {
+                  e.preventDefault()
+                  setFilters((f) => ({ ...f, family: 'Oriental' }))
+                  setViewMode('collection')
+                  setMobileMenuOpen(false)
+                }}
+              >
+                Oriental & Spices
+              </a>
+              <a
+                href="#fresh"
+                className="fragrance-mobile-sublink"
+                onClick={(e) => {
+                  e.preventDefault()
+                  setFilters((f) => ({ ...f, family: 'Fresh & Citrus' }))
+                  setViewMode('collection')
+                  setMobileMenuOpen(false)
+                }}
+              >
+                Fresh & Aquatic
+              </a>
+              <a
+                href="#floral"
+                className="fragrance-mobile-sublink"
+                onClick={(e) => {
+                  e.preventDefault()
+                  setFilters((f) => ({ ...f, family: 'Floral' }))
+                  setViewMode('collection')
+                  setMobileMenuOpen(false)
+                }}
+              >
+                Floral & Damascus
+              </a>
+            </div>
+
+            <a
+              href="#men"
+              className="fragrance-mobile-link"
+              onClick={(e) => {
+                e.preventDefault()
+                setFilters((f) => ({ ...f, category: 'Men' }))
+                setViewMode('collection')
+                setMobileMenuOpen(false)
+              }}
+            >
+              Men's Fragrances
+            </a>
+
+            <a
+              href="#bestseller"
+              className="fragrance-mobile-link"
+              onClick={(e) => {
+                e.preventDefault()
+                setBestsellerTab('Bestseller')
+                if (viewMode !== 'home') setViewMode('home')
+                setMobileMenuOpen(false)
+                const el = document.getElementById('bestseller-sec')
+                el?.scrollIntoView({ behavior: 'smooth' })
+              }}
+            >
+              Bestsellers
+            </a>
+
+            <a
+              href="#about"
+              className="fragrance-mobile-link"
+              onClick={(e) => {
+                e.preventDefault()
+                setMobileMenuOpen(false)
+                const el = document.getElementById('testimonials-sec')
+                el?.scrollIntoView({ behavior: 'smooth' })
+              }}
+            >
+              About Haute Parfumerie
+            </a>
+          </nav>
+        </div>
+      </aside>
 
       {/* =========================================================
           VIEW MODE: COLLECTION VIEW
@@ -593,7 +767,7 @@ export const FragranceFashionStorefront: React.FC<FragranceStorefrontProps> = ({
             >
               ← Back to Storefront
             </button>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 60, alignItems: 'start' }}>
+            <div className="fragrance-pdp-layout">
               {/* Left Gallery */}
               <div>
                 <div
@@ -1221,21 +1395,21 @@ export const FragranceFashionStorefront: React.FC<FragranceStorefrontProps> = ({
             </div>
           </section>
 
-          {/* 5. SECTION 5: BODY PERFUME RO TY (.shoe-two-column-layput.twocol-dark) */}
+          {/* 5. SECTION 5: BODY PERFUME ROYALTY (.shoe-two-column-layput.twocol-dark) */}
           <section className="fragrance-two-column-section fragrance-two-col-dark">
             <div className="fragrance-container">
               <div className="fragrance-two-col-grid">
                 <div className="fragrance-two-col-media">
                   <img
                     src="https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=1000&auto=format&fit=crop&q=80"
-                    alt="Body Perfume Ro ty"
+                    alt="Body Perfume Royalty"
                   />
                 </div>
 
                 <div className="fragrance-two-col-content">
                   <span className="fragrance-badge-tag">Khalab</span>
                   <div className="section-title" style={{ marginBottom: 16 }}>
-                    <h3 style={{ color: '#FFFFFF' }}>Body Perfume Ro ty</h3>
+                    <h3 style={{ color: '#FFFFFF' }}>Body Perfume Royalty</h3>
                     <div className="subtitle" style={{ color: '#D4AF37' }}>scent</div>
                   </div>
                   <p style={{ marginBottom: 20 }}>

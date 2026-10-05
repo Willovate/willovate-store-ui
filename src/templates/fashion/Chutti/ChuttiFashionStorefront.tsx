@@ -19,7 +19,12 @@ import './styles/chuttiFashion.css'
 export const ChuttiFashionStorefront: React.FC<ChuttiStorefrontProps> = ({
   initialView = 'home',
   templateData: _templateData,
+  device = 'desktop',
+  deviceView,
+  onClose: _onClose,
 }) => {
+  const effectiveDevice = deviceView || device || 'desktop'
+  const isMobile = effectiveDevice === 'mobile'
   const [viewMode, setViewMode] = useState<'home' | 'collection' | 'pdp'>(initialView)
   const [selectedProduct, setSelectedProduct] = useState<ChuttiProduct>(CHUTTI_PRODUCTS[0])
   const [activeHeroSlideIdx, setActiveHeroSlideIdx] = useState<number>(0)
@@ -175,7 +180,7 @@ export const ChuttiFashionStorefront: React.FC<ChuttiStorefrontProps> = ({
   const currentTestimonial = CHUTTI_TESTIMONIALS[activeTestiIdx]
 
   return (
-    <div className="chutti-root">
+    <div className={`chutti-root ${isMobile ? 'chutti-mobile device-mobile is-mobile' : `chutti-${effectiveDevice}`}`}>
       {/* TOAST POPUP */}
       {toastMsg && (
         <div

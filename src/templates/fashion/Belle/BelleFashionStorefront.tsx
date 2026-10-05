@@ -294,7 +294,7 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
 
   return (
     <div
-      className={`belle-theme-root device-${effectiveDevice}`}
+      className={`belle-theme-root device-${effectiveDevice} ${isMobile ? 'belle-mobile device-mobile is-mobile' : ''}`}
       style={{
         ...(customAccentColor ? ({ '--belle-accent-noir': customAccentColor } as React.CSSProperties) : {}),
       }}

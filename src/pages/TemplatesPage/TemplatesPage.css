@@ -9960,6 +9960,168 @@
   display: none !important;
 }
 
+.simulated-frame.frame-mobile .fragrance-mobile-menu-toggle,
+.fragrance-theme-root.device-mobile .fragrance-mobile-menu-toggle,
+.fragrance-theme-root.is-mobile .fragrance-mobile-menu-toggle {
+  display: flex !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-btn-label,
+.fragrance-theme-root.device-mobile .fragrance-btn-label,
+.fragrance-theme-root.is-mobile .fragrance-btn-label {
+  display: none !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-nav-row,
+.fragrance-theme-root.device-mobile .fragrance-nav-row,
+.fragrance-theme-root.is-mobile .fragrance-nav-row {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
+  padding: 10px 0 !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-logo,
+.fragrance-theme-root.device-mobile .fragrance-logo,
+.fragrance-theme-root.is-mobile .fragrance-logo {
+  font-size: 17px !important;
+  letter-spacing: 0.1em !important;
+  white-space: nowrap !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-logo span,
+.fragrance-theme-root.device-mobile .fragrance-logo span,
+.fragrance-theme-root.is-mobile .fragrance-logo span {
+  font-size: 9px !important;
+  letter-spacing: 0.12em !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-menu-right,
+.fragrance-theme-root.device-mobile .fragrance-menu-right,
+.fragrance-theme-root.is-mobile .fragrance-menu-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex-shrink: 0 !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-icon-btn,
+.fragrance-theme-root.device-mobile .fragrance-icon-btn,
+.fragrance-theme-root.is-mobile .fragrance-icon-btn {
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+  flex-shrink: 0 !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-icon-btn svg,
+.fragrance-theme-root.device-mobile .fragrance-icon-btn svg,
+.fragrance-theme-root.is-mobile .fragrance-icon-btn svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-hero-center-title,
+.fragrance-theme-root.device-mobile .fragrance-hero-center-title,
+.fragrance-theme-root.is-mobile .fragrance-hero-center-title {
+  margin-bottom: 24px !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-hero-center-title h2,
+.fragrance-theme-root.device-mobile .fragrance-hero-center-title h2,
+.fragrance-theme-root.is-mobile .fragrance-hero-center-title h2 {
+  font-size: 28px !important;
+  line-height: 1.2 !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-hero-row,
+.simulated-frame.frame-mobile .fragrance-notes-grid,
+.simulated-frame.frame-mobile .fragrance-pyramid-grid,
+.fragrance-theme-root.device-mobile .fragrance-hero-row,
+.fragrance-theme-root.is-mobile .fragrance-hero-row {
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-hero-left,
+.fragrance-theme-root.device-mobile .fragrance-hero-left,
+.fragrance-theme-root.is-mobile .fragrance-hero-left {
+  min-height: 280px !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-hero-card,
+.fragrance-theme-root.device-mobile .fragrance-hero-card,
+.fragrance-theme-root.is-mobile .fragrance-hero-card {
+  padding: 20px 16px !important;
+  border-radius: 12px !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-card-footer,
+.fragrance-theme-root.device-mobile .fragrance-card-footer,
+.fragrance-theme-root.is-mobile .fragrance-card-footer {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  padding-top: 14px !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-btn-primary,
+.fragrance-theme-root.device-mobile .fragrance-btn-primary,
+.fragrance-theme-root.is-mobile .fragrance-btn-primary {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #F3734D !important;
+  color: #FFFFFF !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  padding: 10px 18px !important;
+  border-radius: 30px !important;
+  box-shadow: 0 4px 14px rgba(243, 115, 77, 0.4) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-two-col-grid,
+.simulated-frame.frame-mobile .fragrance-two-col-dark .fragrance-two-col-grid,
+.fragrance-theme-root.device-mobile .fragrance-two-col-grid,
+.fragrance-theme-root.device-mobile .fragrance-two-col-dark .fragrance-two-col-grid,
+.fragrance-theme-root.is-mobile .fragrance-two-col-grid,
+.fragrance-theme-root.is-mobile .fragrance-two-col-dark .fragrance-two-col-grid {
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-two-col-media,
+.fragrance-theme-root.device-mobile .fragrance-two-col-media,
+.fragrance-theme-root.is-mobile .fragrance-two-col-media {
+  height: 240px !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-two-col-content,
+.fragrance-theme-root.device-mobile .fragrance-two-col-content,
+.fragrance-theme-root.is-mobile .fragrance-two-col-content {
+  padding: 22px 16px !important;
+  width: 100% !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-two-col-content h3,
+.fragrance-theme-root.device-mobile .fragrance-two-col-content h3,
+.fragrance-theme-root.is-mobile .fragrance-two-col-content h3 {
+  font-size: 24px !important;
+  line-height: 1.25 !important;
+}
+
 .simulated-frame.frame-mobile .fragrance-product-grid,
 .simulated-frame.frame-mobile .fragrance-bestseller-grid,
 .fragrance-theme-root.device-mobile .fragrance-product-grid,
@@ -9971,13 +10133,141 @@
   gap: 10px !important;
 }
 
-.simulated-frame.frame-mobile .fragrance-hero-row,
-.simulated-frame.frame-mobile .fragrance-notes-grid,
-.simulated-frame.frame-mobile .fragrance-pyramid-grid,
-.fragrance-theme-root.device-mobile .fragrance-hero-row,
-.fragrance-theme-root.is-mobile .fragrance-hero-row {
+.simulated-frame.frame-mobile .fragrance-product-card,
+.simulated-frame.frame-mobile .fragrance-bestseller-card,
+.fragrance-theme-root.device-mobile .fragrance-product-card,
+.fragrance-theme-root.device-mobile .fragrance-bestseller-card,
+.fragrance-theme-root.is-mobile .fragrance-product-card,
+.fragrance-theme-root.is-mobile .fragrance-bestseller-card {
+  padding: 12px 10px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-card-title,
+.fragrance-theme-root.device-mobile .fragrance-card-title,
+.fragrance-theme-root.is-mobile .fragrance-card-title {
+  font-size: 13px !important;
+  line-height: 1.35 !important;
+  white-space: normal !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  min-height: 35px !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-card-sizes,
+.fragrance-theme-root.device-mobile .fragrance-card-sizes,
+.fragrance-theme-root.is-mobile .fragrance-card-sizes {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 4px !important;
+  margin-bottom: 8px !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-card-size-opt,
+.fragrance-theme-root.device-mobile .fragrance-card-size-opt,
+.fragrance-theme-root.is-mobile .fragrance-card-size-opt {
+  font-size: 10px !important;
+  padding: 3px 6px !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-card-bottom,
+.fragrance-theme-root.device-mobile .fragrance-card-bottom,
+.fragrance-theme-root.is-mobile .fragrance-card-bottom {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 8px !important;
+  padding-top: 8px !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-price-block,
+.fragrance-theme-root.device-mobile .fragrance-price-block,
+.fragrance-theme-root.is-mobile .fragrance-price-block {
+  display: flex !important;
+  align-items: baseline !important;
+  justify-content: flex-start !important;
+  gap: 6px !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-current-price,
+.fragrance-theme-root.device-mobile .fragrance-current-price,
+.fragrance-theme-root.is-mobile .fragrance-current-price {
+  font-size: 16px !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-compare-price,
+.fragrance-theme-root.device-mobile .fragrance-compare-price,
+.fragrance-theme-root.is-mobile .fragrance-compare-price {
+  font-size: 12px !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-card-add-btn,
+.fragrance-theme-root.device-mobile .fragrance-card-add-btn,
+.fragrance-theme-root.is-mobile .fragrance-card-add-btn {
+  width: 100% !important;
+  text-align: center !important;
+  padding: 8px 10px !important;
+  font-size: 10px !important;
+  letter-spacing: 0.08em !important;
+  white-space: nowrap !important;
+  border-radius: 20px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-tab-nav,
+.fragrance-theme-root.device-mobile .fragrance-tab-nav,
+.fragrance-theme-root.is-mobile .fragrance-tab-nav {
+  display: flex !important;
+  overflow-x: auto !important;
+  white-space: nowrap !important;
+  gap: 8px !important;
+  padding-bottom: 8px !important;
+  scrollbar-width: none !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-tab-nav::-webkit-scrollbar,
+.fragrance-theme-root.device-mobile .fragrance-tab-nav::-webkit-scrollbar,
+.fragrance-theme-root.is-mobile .fragrance-tab-nav::-webkit-scrollbar {
+  display: none !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-tab-btn,
+.fragrance-theme-root.device-mobile .fragrance-tab-btn,
+.fragrance-theme-root.is-mobile .fragrance-tab-btn {
+  flex-shrink: 0 !important;
+  padding: 6px 14px !important;
+  font-size: 12px !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-pdp-layout,
+.fragrance-theme-root.device-mobile .fragrance-pdp-layout,
+.fragrance-theme-root.is-mobile .fragrance-pdp-layout {
   grid-template-columns: 1fr !important;
-  gap: 16px !important;
+  gap: 24px !important;
+}
+
+.simulated-frame.frame-mobile .fragrance-perspectives-grid,
+.simulated-frame.frame-mobile .fragrance-testimonial-grid,
+.simulated-frame.frame-mobile .fragrance-blog-grid,
+.simulated-frame.frame-mobile .fragrance-footer-grid,
+.fragrance-theme-root.device-mobile .fragrance-perspectives-grid,
+.fragrance-theme-root.device-mobile .fragrance-testimonial-grid,
+.fragrance-theme-root.device-mobile .fragrance-blog-grid,
+.fragrance-theme-root.device-mobile .fragrance-footer-grid,
+.fragrance-theme-root.is-mobile .fragrance-perspectives-grid,
+.fragrance-theme-root.is-mobile .fragrance-testimonial-grid,
+.fragrance-theme-root.is-mobile .fragrance-blog-grid,
+.fragrance-theme-root.is-mobile .fragrance-footer-grid {
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
 }
 
 /* -------------------------------------------------------------
