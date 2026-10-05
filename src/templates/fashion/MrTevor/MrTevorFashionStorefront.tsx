@@ -34,6 +34,7 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
   const [quickViewProduct, setQuickViewProduct] = useState<MrTevorProduct | null>(null)
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isBookingOpen, setIsBookingOpen] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
 
   // Cart & Wishlist State
@@ -368,11 +369,145 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
               <svg width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
-              Book Tailor
+              <span>Book Tailor</span>
+            </button>
+
+            <button
+              className="mt-mobile-menu-toggle"
+              aria-label="Open Navigation Menu"
+              onClick={() => setIsMobileMenuOpen(true)}
+            >
+              <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
             </button>
           </div>
         </div>
       </header>
+
+      {/* Mobile Luxury Navigation Drawer */}
+      {isMobileMenuOpen && (
+        <div className="mt-mobile-drawer-overlay" onClick={() => setIsMobileMenuOpen(false)}>
+          <div className="mt-mobile-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className="mt-mobile-drawer-header">
+              <div
+                className="mt-brand"
+                onClick={() => {
+                  setActiveTab('storefront')
+                  setIsMobileMenuOpen(false)
+                }}
+              >
+                <img src={MR_TEVOR_LOGO_URL} alt="Mr-Tevor Logo" className="mt-brand-logo-img" style={{ height: '32px' }} />
+                <div className="mt-brand-text">
+                  <span className="mt-brand-name" style={{ fontSize: '1.2rem' }}>MR-TEVOR</span>
+                  <span className="mt-brand-tagline">Haute Sartorial Suiting</span>
+                </div>
+              </div>
+              <button
+                className="mt-mobile-drawer-close"
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-label="Close Navigation"
+              >
+                ✕
+              </button>
+            </div>
+
+            <nav className="mt-mobile-nav">
+              <button
+                className={`mt-mobile-nav-link ${activeTab === 'storefront' && filterState.collection === 'All' ? 'active' : ''}`}
+                onClick={() => {
+                  setActiveTab('storefront')
+                  setFilterState((prev) => ({ ...prev, collection: 'All' }))
+                  setIsMobileMenuOpen(false)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                <span>Atelier Home</span>
+                <span>→</span>
+              </button>
+              <button
+                className={`mt-mobile-nav-link ${filterState.collection === 'Best Sellers' ? 'active' : ''}`}
+                onClick={() => {
+                  setActiveTab('storefront')
+                  setFilterState((prev) => ({ ...prev, collection: 'Best Sellers' }))
+                  setIsMobileMenuOpen(false)
+                  const el = document.getElementById('mt-catalog-view')
+                  if (el) el.scrollIntoView({ behavior: 'smooth' })
+                }}
+              >
+                <span>Best Sellers <span className="mt-nav-badge">Iconic</span></span>
+                <span>→</span>
+              </button>
+              <button
+                className={`mt-mobile-nav-link ${filterState.collection === 'Lastest Arrivals' ? 'active' : ''}`}
+                onClick={() => {
+                  setActiveTab('storefront')
+                  setFilterState((prev) => ({ ...prev, collection: 'Lastest Arrivals' }))
+                  setIsMobileMenuOpen(false)
+                  const el = document.getElementById('mt-catalog-view')
+                  if (el) el.scrollIntoView({ behavior: 'smooth' })
+                }}
+              >
+                <span>Lastest Arrivals</span>
+                <span>→</span>
+              </button>
+              <button
+                className="mt-mobile-nav-link"
+                onClick={() => {
+                  setActiveTab('storefront')
+                  setIsMobileMenuOpen(false)
+                  const el = document.getElementById('mt-lapel-guide')
+                  if (el) el.scrollIntoView({ behavior: 'smooth' })
+                }}
+              >
+                <span>Lapel Geometry Guide</span>
+                <span>→</span>
+              </button>
+              <button
+                className="mt-mobile-nav-link"
+                onClick={() => {
+                  setActiveTab('storefront')
+                  setIsMobileMenuOpen(false)
+                  const el = document.getElementById('mt-customizer-section')
+                  if (el) el.scrollIntoView({ behavior: 'smooth' })
+                }}
+              >
+                <span>Bespoke Fitting Studio</span>
+                <span>→</span>
+              </button>
+              <button
+                className={`mt-mobile-nav-link ${filterState.collection === 'Hot Deals' ? 'active' : ''}`}
+                onClick={() => {
+                  setActiveTab('storefront')
+                  setFilterState((prev) => ({ ...prev, collection: 'Hot Deals' }))
+                  setIsMobileMenuOpen(false)
+                  const el = document.getElementById('mt-catalog-view')
+                  if (el) el.scrollIntoView({ behavior: 'smooth' })
+                }}
+              >
+                <span>Hot Deals</span>
+                <span>→</span>
+              </button>
+            </nav>
+
+            <div className="mt-mobile-drawer-footer">
+              <button
+                className="mt-btn-primary"
+                style={{ width: '100%', justifyContent: 'center', marginBottom: '12px' }}
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  setIsBookingOpen(true)
+                }}
+              >
+                Book Tailor Consultation
+              </button>
+              <div style={{ fontSize: '0.75rem', color: '#9CA3AF', textAlign: 'center' }}>
+                Savile Row Valet: +44 (0)20 7946 0912
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Main Content Router */}
       {activeTab === 'storefront' ? (
