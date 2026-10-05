@@ -30,6 +30,7 @@ export const NaturyaFashionStorefront: React.FC<NaturyaStorefrontProps> = ({
   const [selectedProduct, setSelectedProduct] = useState<NaturyaProduct>(NATURYA_PRODUCTS[0])
   const [quickViewProduct, setQuickViewProduct] = useState<NaturyaProduct | null>(null)
   const [cartOpen, setCartOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeGenderTab, setActiveGenderTab] = useState<'Women' | 'Men'>('Women')
   const [currentHeroSlide, setCurrentHeroSlide] = useState(0)
   const [toastMessage, setToastMessage] = useState<string | null>(null)
@@ -165,16 +166,34 @@ export const NaturyaFashionStorefront: React.FC<NaturyaStorefrontProps> = ({
   // Format currency
   const fmt = (num: number) => `$${num.toFixed(2)}`
 
+  const scrollContainersToTop = () => {
+    try {
+      window.scrollTo({ top: 0, behavior: 'instant' })
+      const scrollParents = document.querySelectorAll(
+        '.simulated-frame, .preview-viewport-container, .naturya-root, .preview-modal-body, body, html'
+      )
+      scrollParents.forEach((el) => {
+        el.scrollTo({ top: 0, behavior: 'instant' })
+      })
+    } catch {
+      // Fallback
+    }
+  }
+
+  useEffect(() => {
+    scrollContainersToTop()
+  }, [activeView])
+
   const handleOpenPdp = (prod: NaturyaProduct) => {
     setSelectedProduct(prod)
     setActiveView('pdp')
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    scrollContainersToTop()
   }
 
   const handleNavCategory = (cat: NaturyaCategoryType) => {
     setActiveCategory(cat)
     setActiveView('collection')
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    scrollContainersToTop()
   }
 
   return (
@@ -208,7 +227,19 @@ export const NaturyaFashionStorefront: React.FC<NaturyaStorefrontProps> = ({
       <header className="naturya-header">
         <div className="naturya-container">
           <div className="naturya-header-inner">
-            {/* Left Nav Menu */}
+            {/* Mobile Hamburger */}
+            <button
+              type="button"
+              className="naturya-mobile-hamburger"
+              onClick={() => setMobileMenuOpen(true)}
+              aria-label="Open navigation menu"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+
+            {/* Left Nav Menu (Desktop) */}
             <nav className="naturya-nav-menu">
               <button
                 type="button"
@@ -216,7 +247,7 @@ export const NaturyaFashionStorefront: React.FC<NaturyaStorefrontProps> = ({
                 onClick={() => {
                   setActiveView('home')
                   setActiveCategory('All')
-                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                  scrollContainersToTop()
                 }}
               >
                 Home
@@ -257,7 +288,7 @@ export const NaturyaFashionStorefront: React.FC<NaturyaStorefrontProps> = ({
               onClick={() => {
                 setActiveView('home')
                 setActiveCategory('All')
-                window.scrollTo({ top: 0, behavior: 'smooth' })
+                scrollContainersToTop()
               }}
             >
               Naturya
@@ -299,6 +330,100 @@ export const NaturyaFashionStorefront: React.FC<NaturyaStorefrontProps> = ({
           </div>
         </div>
       </header>
+
+      {/* MOBILE NAVIGATION DRAWER */}
+      {mobileMenuOpen && (
+        <div className="naturya-cart-overlay" onClick={() => setMobileMenuOpen(false)}>
+          <div className="naturya-cart-drawer naturya-mobile-menu-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className="naturya-cart-header">
+              <h3>Naturya Atelier</h3>
+              <button
+                type="button"
+                className="naturya-cart-close"
+                onClick={() => setMobileMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="naturya-cart-body" style={{ padding: '16px 20px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <button
+                  type="button"
+                  style={{
+                    padding: '12px 0',
+                    borderBottom: '1px solid #f0eee9',
+                    background: 'none',
+                    borderLeft: 'none',
+                    borderRight: 'none',
+                    borderTop: 'none',
+                    textAlign: 'left',
+                    fontFamily: 'var(--nat-font-heading)',
+                    fontSize: '16px',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                  }}
+                  onClick={() => {
+                    setActiveView('home')
+                    setActiveCategory('All')
+                    setMobileMenuOpen(false)
+                    scrollContainersToTop()
+                  }}
+                >
+                  <span>Home</span>
+                  <span>→</span>
+                </button>
+                {(['All', 'Coats', 'Jackets', 'Sweaters', 'T-shirts', 'Sweatshirts', 'Accessories', 'Sale'] as NaturyaCategoryType[]).map((cat) => (
+                  <button
+                    key={cat}
+                    type="button"
+                    style={{
+                      padding: '12px 0',
+                      borderBottom: '1px solid #f0eee9',
+                      background: 'none',
+                      borderLeft: 'none',
+                      borderRight: 'none',
+                      borderTop: 'none',
+                      textAlign: 'left',
+                      fontFamily: 'var(--nat-font-heading)',
+                      fontSize: '15px',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      color: cat === 'Sale' ? 'var(--nat-highlight)' : 'inherit',
+                    }}
+                    onClick={() => {
+                      handleNavCategory(cat)
+                      setMobileMenuOpen(false)
+                    }}
+                  >
+                    <span>{cat === 'All' ? 'Shop All Collection' : cat}</span>
+                    <span>→</span>
+                  </button>
+                ))}
+              </div>
+
+              <div style={{ marginTop: '24px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <button
+                  type="button"
+                  className="naturya-checkout-btn"
+                  style={{ width: '100%', padding: '12px', fontSize: '13px' }}
+                  onClick={() => {
+                    setMobileMenuOpen(false)
+                    setCartOpen(true)
+                  }}
+                >
+                  View Shopping Bag ({cartCount})
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ================= VIEW: HOME ================= */}
       {activeView === 'home' && (
@@ -1231,7 +1356,7 @@ export const NaturyaFashionStorefront: React.FC<NaturyaStorefrontProps> = ({
               </button>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+            <div className="naturya-quickview-grid">
               <img
                 src={quickViewProduct.image}
                 alt={quickViewProduct.name}

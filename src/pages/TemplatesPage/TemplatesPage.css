@@ -10362,6 +10362,53 @@
   display: none !important;
 }
 
+.simulated-frame.frame-mobile .naturya-mobile-hamburger,
+.naturya-root.device-mobile .naturya-mobile-hamburger,
+.naturya-root.is-mobile .naturya-mobile-hamburger {
+  display: flex !important;
+}
+
+.simulated-frame.frame-mobile .naturya-header-inner,
+.naturya-root.device-mobile .naturya-header-inner,
+.naturya-root.is-mobile .naturya-header-inner {
+  height: 60px !important;
+}
+
+.simulated-frame.frame-mobile .naturya-hero-title,
+.naturya-root.device-mobile .naturya-hero-title,
+.naturya-root.is-mobile .naturya-hero-title {
+  font-size: 28px !important;
+  line-height: 1.15 !important;
+}
+
+.simulated-frame.frame-mobile .naturya-hero-desc,
+.naturya-root.device-mobile .naturya-hero-desc,
+.naturya-root.is-mobile .naturya-hero-desc {
+  font-size: 13.5px !important;
+  line-height: 1.5 !important;
+}
+
+.simulated-frame.frame-mobile .naturya-trio-grid,
+.naturya-root.device-mobile .naturya-trio-grid,
+.naturya-root.is-mobile .naturya-trio-grid {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+.simulated-frame.frame-mobile .naturya-trio-card,
+.naturya-root.device-mobile .naturya-trio-card,
+.naturya-root.is-mobile .naturya-trio-card {
+  aspect-ratio: 16/10 !important;
+  padding: 20px 18px !important;
+}
+
+.simulated-frame.frame-mobile .naturya-trio-title,
+.naturya-root.device-mobile .naturya-trio-title,
+.naturya-root.is-mobile .naturya-trio-title {
+  font-size: 19px !important;
+  margin-bottom: 8px !important;
+}
+
 .simulated-frame.frame-mobile .naturya-products-grid,
 .simulated-frame.frame-mobile .nat-products-grid,
 .naturya-root.device-mobile .naturya-products-grid,
@@ -10370,11 +10417,53 @@
 .naturya-root.is-mobile .nat-products-grid {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 10px !important;
+  gap: 12px 10px !important;
+}
+
+.simulated-frame.frame-mobile .naturya-card-actions,
+.naturya-root.device-mobile .naturya-card-actions,
+.naturya-root.is-mobile .naturya-card-actions {
+  display: none !important;
+}
+
+.simulated-frame.frame-mobile .naturya-cat-pills-grid,
+.naturya-root.device-mobile .naturya-cat-pills-grid,
+.naturya-root.is-mobile .naturya-cat-pills-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 14px 10px !important;
+}
+
+.simulated-frame.frame-mobile .naturya-cat-pill-title,
+.naturya-root.device-mobile .naturya-cat-pill-title,
+.naturya-root.is-mobile .naturya-cat-pill-title {
+  font-size: 12.5px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.simulated-frame.frame-mobile .naturya-reviews-grid,
+.naturya-root.device-mobile .naturya-reviews-grid,
+.naturya-root.is-mobile .naturya-reviews-grid {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+.simulated-frame.frame-mobile .naturya-review-card,
+.naturya-root.device-mobile .naturya-review-card,
+.naturya-root.is-mobile .naturya-review-card {
+  padding: 20px 16px !important;
+}
+
+.simulated-frame.frame-mobile .naturya-ig-grid,
+.naturya-root.device-mobile .naturya-ig-grid,
+.naturya-root.is-mobile .naturya-ig-grid {
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 8px !important;
 }
 
 .simulated-frame.frame-mobile .naturya-oasis-grid,
-.simulated-frame.frame-mobile .naturya-trio-grid,
 .simulated-frame.frame-mobile .naturya-collection-layout,
 .naturya-root.device-mobile .naturya-oasis-grid,
 .naturya-root.device-mobile .naturya-collection-layout,
@@ -10387,8 +10476,79 @@
 .simulated-frame.frame-mobile .naturya-promises-grid,
 .naturya-root.device-mobile .naturya-promises-grid,
 .naturya-root.is-mobile .naturya-promises-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 10px !important;
+  grid-template-columns: 1fr !important;
+  gap: 14px !important;
+}
+
+.simulated-frame.frame-mobile .naturya-quickview-grid,
+.naturya-root.device-mobile .naturya-quickview-grid,
+.naturya-root.is-mobile .naturya-quickview-grid {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+.simulated-frame.frame-mobile .naturya-footer,
+.naturya-root.device-mobile .naturya-footer,
+.naturya-root.is-mobile .naturya-footer {
+  padding: 44px 0 24px 0 !important;
+}
+
+.simulated-frame.frame-mobile .naturya-footer-grid,
+.naturya-root.device-mobile .naturya-footer-grid,
+.naturya-root.is-mobile .naturya-footer-grid {
+  grid-template-columns: 1fr !important;
+  gap: 32px !important;
+  margin-bottom: 32px !important;
+}
+
+.simulated-frame.frame-mobile .naturya-newsletter-form,
+.naturya-root.device-mobile .naturya-newsletter-form,
+.naturya-root.is-mobile .naturya-newsletter-form {
+  display: flex !important;
+  gap: 8px !important;
+  width: 100% !important;
+}
+
+.simulated-frame.frame-mobile .naturya-newsletter-input,
+.naturya-root.device-mobile .naturya-newsletter-input,
+.naturya-root.is-mobile .naturya-newsletter-input {
+  flex: 1 !important;
+  min-width: 0 !important;
+  padding: 12px 14px !important;
+  font-size: 14px !important;
+}
+
+.simulated-frame.frame-mobile .naturya-newsletter-submit,
+.naturya-root.device-mobile .naturya-newsletter-submit,
+.naturya-root.is-mobile .naturya-newsletter-submit {
+  padding: 0 18px !important;
+  font-size: 14px !important;
+}
+
+.simulated-frame.frame-mobile .naturya-footer-bottom,
+.naturya-root.device-mobile .naturya-footer-bottom,
+.naturya-root.is-mobile .naturya-footer-bottom {
+  flex-direction: column !important;
+  text-align: center !important;
+  gap: 12px !important;
+  padding-top: 20px !important;
+}
+
+.simulated-frame.frame-mobile .naturya-cart-drawer,
+.naturya-root.device-mobile .naturya-cart-drawer,
+.naturya-root.is-mobile .naturya-cart-drawer {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.simulated-frame.frame-mobile .naturya-modal-box,
+.naturya-root.device-mobile .naturya-modal-box,
+.naturya-root.is-mobile .naturya-modal-box {
+  width: 95% !important;
+  max-width: 95% !important;
+  max-height: 85vh !important;
+  padding: 20px 16px !important;
+  overflow-y: auto !important;
 }
 
 /* -------------------------------------------------------------
@@ -12030,7 +12190,9 @@
 .simulated-frame .sports-cart-drawer-backdrop,
 .simulated-frame .sports-quickview-backdrop,
 .simulated-frame .vogal-cart-overlay,
-.simulated-frame .vogal-modal-overlay {
+.simulated-frame .vogal-modal-overlay,
+.simulated-frame .naturya-cart-overlay,
+.simulated-frame .naturya-modal-overlay {
   position: fixed !important;
   inset: 0 !important;
   width: 100% !important;

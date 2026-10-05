@@ -1605,12 +1605,48 @@
   }
 }
 
+.naturya-mobile-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  padding: 6px 4px;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  width: 28px;
+}
+
+.naturya-mobile-hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--nat-dark);
+  border-radius: 2px;
+}
+
+.naturya-quickview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
 @media (max-width: 768px) {
   .naturya-nav-menu {
     display: none;
   }
+  .naturya-mobile-hamburger {
+    display: flex;
+  }
+  .naturya-header-inner {
+    height: 62px;
+  }
   .naturya-hero-title {
-    font-size: 34px;
+    font-size: 28px;
+    line-height: 1.15;
+  }
+  .naturya-hero-desc {
+    font-size: 13.5px;
+    line-height: 1.5;
   }
   .naturya-oasis-grid,
   .naturya-pdp-layout {
@@ -1618,19 +1654,48 @@
   }
   .naturya-trio-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .naturya-trio-card {
+    aspect-ratio: 16/10;
+    padding: 20px 18px;
+  }
+  .naturya-trio-title {
+    font-size: 19px;
+    margin-bottom: 8px;
   }
   .naturya-products-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 10px;
+  }
+  .naturya-card-actions {
+    display: none !important;
+  }
+  .naturya-cat-pills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px 10px;
+  }
+  .naturya-cat-pill-title {
+    font-size: 12.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .naturya-reviews-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
-  .naturya-cat-pills-grid,
+  .naturya-review-card {
+    padding: 20px 16px;
+  }
   .naturya-ig-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
   }
   .naturya-promises-grid {
     grid-template-columns: 1fr;
+    gap: 14px;
   }
   .naturya-collection-layout {
     grid-template-columns: 1fr;
@@ -1638,4 +1703,130 @@
   .naturya-filter-sidebar {
     display: none;
   }
+  .naturya-quickview-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .naturya-footer {
+    padding: 44px 0 24px 0;
+  }
+  .naturya-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+  .naturya-newsletter-form {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+  }
+  .naturya-newsletter-input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+  .naturya-newsletter-submit {
+    padding: 0 18px;
+    font-size: 14px;
+  }
+  .naturya-footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+    padding-top: 20px;
+  }
+  .naturya-cart-drawer {
+    width: 100%;
+    max-width: 100%;
+  }
+  .naturya-modal-box {
+    width: 95%;
+    max-width: 95%;
+    max-height: 85vh;
+    padding: 20px 16px;
+    overflow-y: auto;
+  }
+}
+
+/* Explicit device-mobile & is-mobile support */
+.naturya-root.device-mobile,
+.naturya-root.is-mobile {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.naturya-root.device-mobile .naturya-nav-menu,
+.naturya-root.is-mobile .naturya-nav-menu {
+  display: none !important;
+}
+
+.naturya-root.device-mobile .naturya-mobile-hamburger,
+.naturya-root.is-mobile .naturya-mobile-hamburger {
+  display: flex !important;
+}
+
+.naturya-root.device-mobile .naturya-trio-grid,
+.naturya-root.is-mobile .naturya-trio-grid {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+.naturya-root.device-mobile .naturya-trio-card,
+.naturya-root.is-mobile .naturya-trio-card {
+  aspect-ratio: 16/10 !important;
+  padding: 20px 18px !important;
+}
+
+.naturya-root.device-mobile .naturya-products-grid,
+.naturya-root.is-mobile .naturya-products-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 12px 10px !important;
+}
+
+.naturya-root.device-mobile .naturya-card-actions,
+.naturya-root.is-mobile .naturya-card-actions {
+  display: none !important;
+}
+
+.naturya-root.device-mobile .naturya-cat-pills-grid,
+.naturya-root.is-mobile .naturya-cat-pills-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 14px 10px !important;
+}
+
+.naturya-root.device-mobile .naturya-cat-pill-title,
+.naturya-root.is-mobile .naturya-cat-pill-title {
+  font-size: 12.5px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.naturya-root.device-mobile .naturya-reviews-grid,
+.naturya-root.is-mobile .naturya-reviews-grid {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+.naturya-root.device-mobile .naturya-footer-grid,
+.naturya-root.is-mobile .naturya-footer-grid {
+  grid-template-columns: 1fr !important;
+  gap: 32px !important;
+  margin-bottom: 32px !important;
+}
+
+.naturya-root.device-mobile .naturya-newsletter-form,
+.naturya-root.is-mobile .naturya-newsletter-form {
+  display: flex !important;
+  gap: 8px !important;
+  width: 100% !important;
+}
+
+.naturya-root.device-mobile .naturya-cart-drawer,
+.naturya-root.is-mobile .naturya-cart-drawer {
+  width: 100% !important;
+  max-width: 100% !important;
 }
