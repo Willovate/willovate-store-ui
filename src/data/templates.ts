@@ -11,7 +11,7 @@ import {
 } from '../templates/HomeFurniture'
 import {
   GeneralStore01, GeneralStore02, GeneralStore03, GeneralStore04, GeneralStore05,
-  GeneralStore06, GeneralStore07, GeneralStore08, GeneralStore09
+  GeneralStore06, GeneralStore07, GeneralStore08, GeneralStore09, GeneralStore10
 } from '../templates/GeneralStore'
 import {
   FoodGrocery01, FoodGrocery02, FoodGrocery03, FoodGrocery04, FoodGrocery05,
@@ -325,6 +325,7 @@ export const templates: TemplateConfig[] = [
   GeneralStore07,
   GeneralStore08,
   GeneralStore09,
+  GeneralStore10,
   FoodGrocery01,
   FoodGrocery02,
   FoodGrocery03,

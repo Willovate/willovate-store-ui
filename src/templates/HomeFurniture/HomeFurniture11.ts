@@ -1,7 +1,7 @@
 import type { TemplateConfig } from '../../types/template'
 
 export const HomeFurniture11: TemplateConfig = {
-  id: 'atelier',
+  id: 'atelier-home',
   name: 'Atelier Home',
   description: 'Premium contemporary furniture studio. Editorial, architectural, and sophisticated.',
   categories: [{ id: 'home', name: 'Home & Furniture' }],

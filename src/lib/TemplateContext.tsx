@@ -11,7 +11,11 @@ const TemplateContext = createContext<TemplateContextType | undefined>(undefined
 
 export function TemplateProvider({ children }: { children: React.ReactNode }) {
   const [selectedId, setSelectedId] = useState<string | null>(() => {
-    return localStorage.getItem('willovate_selected_template') || 'template-01'
+    const saved = localStorage.getItem('willovate_selected_template')
+    if (saved && templates.some(t => t.id === saved)) {
+      return saved
+    }
+    return 'template-01'
   })
 
   useEffect(() => {

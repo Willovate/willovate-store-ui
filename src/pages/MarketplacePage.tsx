@@ -7,11 +7,17 @@ export default function MarketplacePage() {
   const [filter, setFilter] = useState('All')
   const [search, setSearch] = useState('')
 
-  const categories = ['All', 'Fashion', 'Beauty', 'Home & Furniture', 'Electronics', 'Food & Grocery', 'Jewelry', 'Services', 'General Store']
+  const validMarketplaceCategories = ['Electronics', 'Home & Furniture', 'General Store', 'Food & Grocery']
+  const categories = ['All', ...validMarketplaceCategories]
+  const legacyIds = ['template-01', 'atelier', 'aura', 'casa', 'mono', 'noir', 'solis', 'market', 'studio']
 
   const filteredTemplates = templates.filter(t => {
+    // Only show templates that belong to the core marketplace categories and are not legacy inline templates
+    const isCategoryTemplate = t.categories && t.categories.some(c => validMarketplaceCategories.includes(c.name))
+    if (!isCategoryTemplate || legacyIds.includes(t.id)) return false
+
     const matchesSearch = t.name.toLowerCase().includes(search.toLowerCase()) || t.description.toLowerCase().includes(search.toLowerCase())
-    const matchesFilter = filter === 'All' || t.categories.some(c => c.name === filter)
+    const matchesFilter = filter === 'All' || (t.categories && t.categories.some(c => c.name === filter))
     return matchesSearch && matchesFilter
   })
 

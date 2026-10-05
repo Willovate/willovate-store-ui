@@ -23,7 +23,7 @@ export default function TemplateDetailsPage() {
         <Link to="/" aria-label="Willovate one">
           <img src="/assets/willovate-one-logo.png" alt="Willovate one" style={{ width: 'clamp(140px, 16vw, 200px)', height: 'auto', maxHeight: '60px', objectFit: 'contain', display: 'block' }} />
         </Link>
-        <Link to="/" style={{ color: 'var(--paper)' }}>← Back to Marketplace</Link>
+        <Link to="/" style={{ color: 'var(--paper)', textDecoration: 'none', fontWeight: 'bold' }}>← Back to Marketplace</Link>
       </header>
 
       <main style={{ padding: '60px 40px', maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 400px', gap: '60px' }}>
