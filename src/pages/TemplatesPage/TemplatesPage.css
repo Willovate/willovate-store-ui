@@ -2739,8 +2739,14 @@
   position: relative !important;
   transform: none !important;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.simulated-frame.frame-mobile > div:not(.mobile-chrome-notch)::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 .simulated-frame.frame-desktop .velocity-storefront-wrapper,
@@ -10339,6 +10345,29 @@
   overflow-x: hidden !important;
 }
 
+.simulated-frame.frame-mobile .naturya-container,
+.naturya-root.device-mobile .naturya-container,
+.naturya-root.is-mobile .naturya-container {
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
+.simulated-frame.frame-desktop .naturya-container,
+.naturya-root:not(.device-mobile):not(.is-mobile) .naturya-container {
+  padding-left: 32px !important;
+  padding-right: 32px !important;
+  width: 100% !important;
+  max-width: 1440px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
 .simulated-frame.frame-mobile .nat-announcement,
 .naturya-root.device-mobile .nat-announcement,
 .naturya-root.is-mobile .nat-announcement {
@@ -10418,6 +10447,18 @@
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 12px 10px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+}
+
+.simulated-frame.frame-mobile .naturya-product-card,
+.naturya-root.device-mobile .naturya-product-card,
+.naturya-root.is-mobile .naturya-product-card {
+  width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
 }
 
 .simulated-frame.frame-mobile .naturya-card-actions,

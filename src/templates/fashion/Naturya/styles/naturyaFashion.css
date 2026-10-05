@@ -43,8 +43,11 @@
 .naturya-container {
   width: 100%;
   max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 32px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 32px;
+  padding-right: 32px;
+  box-sizing: border-box;
 }
 
 /* =========================================================================
@@ -321,7 +324,8 @@
    VALUE PROMISES STRIP
    ========================================================================= */
 .naturya-promises-section {
-  padding: 50px 0;
+  padding-top: 50px;
+  padding-bottom: 50px;
   border-bottom: 1px solid var(--nat-border);
   background: #ffffff;
 }
@@ -362,7 +366,8 @@
    TRIPLE EDITORIAL BANNER TRIO
    ========================================================================= */
 .naturya-trio-section {
-  padding: 60px 0 40px 0;
+  padding-top: 60px;
+  padding-bottom: 40px;
 }
 
 .naturya-trio-grid {
@@ -438,7 +443,8 @@
    "YOU ARE INTERESTED IN" COLLECTION TABS
    ========================================================================= */
 .naturya-collection-section {
-  padding: 50px 0;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 .naturya-section-header {
@@ -493,6 +499,9 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .naturya-product-card {
@@ -503,6 +512,9 @@
   flex-direction: column;
   transition: var(--nat-transition);
   position: relative;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .naturya-product-card:hover {
@@ -646,7 +658,8 @@
    "SHOP BY CATEGORY" PILLS
    ========================================================================= */
 .naturya-categories-section {
-  padding: 40px 0 60px 0;
+  padding-top: 40px;
+  padding-bottom: 60px;
 }
 
 .naturya-cat-pills-grid {
@@ -697,7 +710,8 @@
    "URBAN OASIS" EDITORIAL SPLIT
    ========================================================================= */
 .naturya-oasis-section {
-  padding: 60px 0;
+  padding-top: 60px;
+  padding-bottom: 60px;
   background: #ffffff;
 }
 
@@ -752,7 +766,8 @@
    "HAPPY CLIENTS" (JUDGE.ME DESIGN)
    ========================================================================= */
 .naturya-reviews-section {
-  padding: 60px 0;
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 
 .naturya-reviews-grid {
@@ -825,7 +840,8 @@
    "INSTAGRAM SHOP" UGC CAROUSEL
    ========================================================================= */
 .naturya-instagram-section {
-  padding: 50px 0 70px 0;
+  padding-top: 50px;
+  padding-bottom: 70px;
 }
 
 .naturya-ig-grid {
@@ -1219,7 +1235,8 @@
    PDP (PRODUCT DETAIL PAGE)
    ========================================================================= */
 .naturya-pdp-section {
-  padding: 40px 0 80px 0;
+  padding-top: 40px;
+  padding-bottom: 80px;
 }
 
 .naturya-breadcrumb {
@@ -1631,6 +1648,15 @@
 }
 
 @media (max-width: 768px) {
+  .naturya-container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box !important;
+  }
   .naturya-nav-menu {
     display: none;
   }
@@ -1665,8 +1691,17 @@
     margin-bottom: 8px;
   }
   .naturya-products-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px 10px;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px 10px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+  }
+  .naturya-product-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
   }
   .naturya-card-actions {
     display: none !important;
@@ -1708,7 +1743,8 @@
     gap: 16px;
   }
   .naturya-footer {
-    padding: 44px 0 24px 0;
+    padding-top: 44px;
+    padding-bottom: 24px;
   }
   .naturya-footer-grid {
     grid-template-columns: 1fr;
@@ -1757,6 +1793,17 @@
   overflow-x: hidden;
 }
 
+.naturya-root.device-mobile .naturya-container,
+.naturya-root.is-mobile .naturya-container {
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
 .naturya-root.device-mobile .naturya-nav-menu,
 .naturya-root.is-mobile .naturya-nav-menu {
   display: none !important;
@@ -1783,6 +1830,17 @@
 .naturya-root.is-mobile .naturya-products-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 12px 10px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+}
+
+.naturya-root.device-mobile .naturya-product-card,
+.naturya-root.is-mobile .naturya-product-card {
+  width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
 }
 
 .naturya-root.device-mobile .naturya-card-actions,
