@@ -10444,18 +10444,154 @@
   overflow-x: hidden !important;
 }
 
-.simulated-frame.frame-mobile .chutti-top-tools,
-.chutti-root.device-mobile .chutti-top-tools,
-.chutti-root.is-mobile .chutti-top-tools {
+.simulated-frame.frame-mobile .chutti-main-nav,
+.simulated-frame.frame-mobile .chutti-nav-menu,
+.simulated-frame.frame-mobile .chutti-wishlist-btn,
+.simulated-frame.frame-mobile .chutti-compare-btn,
+.chutti-root.device-mobile .chutti-main-nav,
+.chutti-root.device-mobile .chutti-nav-menu,
+.chutti-root.device-mobile .chutti-wishlist-btn,
+.chutti-root.device-mobile .chutti-compare-btn,
+.chutti-root.is-mobile .chutti-main-nav,
+.chutti-root.is-mobile .chutti-nav-menu,
+.chutti-root.is-mobile .chutti-wishlist-btn,
+.chutti-root.is-mobile .chutti-compare-btn {
   display: none !important;
 }
 
-.simulated-frame.frame-mobile .chutti-nav,
-.chutti-root.device-mobile .chutti-nav,
-.chutti-root.is-mobile .chutti-nav {
-  display: none !important;
+.simulated-frame.frame-mobile .chutti-mobile-menu-toggle,
+.chutti-root.device-mobile .chutti-mobile-menu-toggle,
+.chutti-root.is-mobile .chutti-mobile-menu-toggle {
+  display: flex !important;
 }
 
+.simulated-frame.frame-mobile .chutti-header-inner,
+.chutti-root.device-mobile .chutti-header-inner,
+.chutti-root.is-mobile .chutti-header-inner {
+  padding: 10px 0 !important;
+  gap: 8px !important;
+}
+
+.simulated-frame.frame-mobile .chutti-logo-icon,
+.chutti-root.device-mobile .chutti-logo-icon,
+.chutti-root.is-mobile .chutti-logo-icon {
+  width: 34px !important;
+  height: 34px !important;
+  font-size: 16px !important;
+}
+
+.simulated-frame.frame-mobile .chutti-logo-text,
+.chutti-root.device-mobile .chutti-logo-text,
+.chutti-root.is-mobile .chutti-logo-text {
+  font-size: 20px !important;
+}
+
+.simulated-frame.frame-mobile .chutti-logo-tagline,
+.chutti-root.device-mobile .chutti-logo-tagline,
+.chutti-root.is-mobile .chutti-logo-tagline {
+  font-size: 8px !important;
+}
+
+.simulated-frame.frame-mobile .chutti-header-actions,
+.chutti-root.device-mobile .chutti-header-actions,
+.chutti-root.is-mobile .chutti-header-actions {
+  gap: 6px !important;
+}
+
+.simulated-frame.frame-mobile .chutti-action-icon-btn,
+.chutti-root.device-mobile .chutti-action-icon-btn,
+.chutti-root.is-mobile .chutti-action-icon-btn {
+  width: 34px !important;
+  height: 34px !important;
+  font-size: 14px !important;
+}
+
+.simulated-frame.frame-mobile .chutti-badge-pill,
+.chutti-root.device-mobile .chutti-badge-pill,
+.chutti-root.is-mobile .chutti-badge-pill {
+  width: 17px !important;
+  height: 17px !important;
+  font-size: 9px !important;
+  top: -3px !important;
+  right: -3px !important;
+}
+
+/* Hero Section */
+.simulated-frame.frame-mobile .chutti-hero,
+.chutti-root.device-mobile .chutti-hero,
+.chutti-root.is-mobile .chutti-hero {
+  flex-direction: column !important;
+  min-height: auto !important;
+  padding: 24px 0 20px !important;
+  text-align: center !important;
+  overflow: hidden !important;
+}
+
+.simulated-frame.frame-mobile .chutti-hero-content,
+.chutti-root.device-mobile .chutti-hero-content,
+.chutti-root.is-mobile .chutti-hero-content {
+  max-width: 100% !important;
+  padding: 0 10px !important;
+  text-align: center !important;
+}
+
+.simulated-frame.frame-mobile .chutti-hero-script,
+.chutti-root.device-mobile .chutti-hero-script,
+.chutti-root.is-mobile .chutti-hero-script {
+  font-size: 20px !important;
+  margin-bottom: 4px !important;
+}
+
+.simulated-frame.frame-mobile .chutti-hero-title,
+.chutti-root.device-mobile .chutti-hero-title,
+.chutti-root.is-mobile .chutti-hero-title {
+  font-size: 28px !important;
+  line-height: 1.2 !important;
+  margin: 0 0 10px !important;
+}
+
+.simulated-frame.frame-mobile .chutti-hero-tagline,
+.chutti-root.device-mobile .chutti-hero-tagline,
+.chutti-root.is-mobile .chutti-hero-tagline {
+  font-size: 12px !important;
+  padding: 4px 12px !important;
+  margin-bottom: 16px !important;
+}
+
+.simulated-frame.frame-mobile .chutti-hero-content .chutti-btn,
+.chutti-root.device-mobile .chutti-hero-content .chutti-btn,
+.chutti-root.is-mobile .chutti-hero-content .chutti-btn {
+  padding: 10px 22px !important;
+  font-size: 12px !important;
+}
+
+.simulated-frame.frame-mobile .chutti-hero-visual,
+.chutti-root.device-mobile .chutti-hero-visual,
+.chutti-root.is-mobile .chutti-hero-visual {
+  position: relative !important;
+  right: auto !important;
+  top: auto !important;
+  transform: none !important;
+  width: 100% !important;
+  max-width: 290px !important;
+  height: 210px !important;
+  margin: 16px auto 0 !important;
+  border-radius: 18px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+}
+
+.simulated-frame.frame-mobile .chutti-hero-dots,
+.chutti-root.device-mobile .chutti-hero-dots,
+.chutti-root.is-mobile .chutti-hero-dots {
+  position: relative !important;
+  bottom: auto !important;
+  left: auto !important;
+  transform: none !important;
+  margin-top: 14px !important;
+  justify-content: center !important;
+}
+
+/* Products Grids & Cards */
 .simulated-frame.frame-mobile .chutti-products-grid,
 .simulated-frame.frame-mobile .chutti-product-grid,
 .chutti-root.device-mobile .chutti-products-grid,
@@ -10465,6 +10601,224 @@
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 10px !important;
+}
+
+.simulated-frame.frame-mobile .chutti-card,
+.chutti-root.device-mobile .chutti-card,
+.chutti-root.is-mobile .chutti-card {
+  padding: 10px !important;
+  border-radius: 16px !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.simulated-frame.frame-mobile .chutti-card-media,
+.chutti-root.device-mobile .chutti-card-media,
+.chutti-root.is-mobile .chutti-card-media {
+  height: 170px !important;
+  border-radius: 12px !important;
+}
+
+.simulated-frame.frame-mobile .chutti-card-title,
+.chutti-root.device-mobile .chutti-card-title,
+.chutti-root.is-mobile .chutti-card-title {
+  font-size: 12px !important;
+  line-height: 1.3 !important;
+  min-height: 32px !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  margin: 4px 0 6px !important;
+}
+
+.simulated-frame.frame-mobile .chutti-card-sizes,
+.chutti-root.device-mobile .chutti-card-sizes,
+.chutti-root.is-mobile .chutti-card-sizes {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 3px !important;
+  margin-bottom: 6px !important;
+}
+
+.simulated-frame.frame-mobile .chutti-size-chip,
+.chutti-root.device-mobile .chutti-size-chip,
+.chutti-root.is-mobile .chutti-size-chip {
+  font-size: 9px !important;
+  padding: 2px 6px !important;
+  border-radius: 10px !important;
+}
+
+.simulated-frame.frame-mobile .chutti-card-footer,
+.chutti-root.device-mobile .chutti-card-footer,
+.chutti-root.is-mobile .chutti-card-footer {
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 8px !important;
+  padding-top: 8px !important;
+  margin-top: auto !important;
+}
+
+.simulated-frame.frame-mobile .chutti-card-footer > div:first-child,
+.chutti-root.device-mobile .chutti-card-footer > div:first-child,
+.chutti-root.is-mobile .chutti-card-footer > div:first-child {
+  display: flex !important;
+  align-items: baseline !important;
+  gap: 6px !important;
+  justify-content: flex-start !important;
+}
+
+.simulated-frame.frame-mobile .chutti-card-price,
+.chutti-root.device-mobile .chutti-card-price,
+.chutti-root.is-mobile .chutti-card-price {
+  font-size: 15px !important;
+}
+
+.simulated-frame.frame-mobile .chutti-card-compare,
+.chutti-root.device-mobile .chutti-card-compare,
+.chutti-root.is-mobile .chutti-card-compare {
+  font-size: 11px !important;
+}
+
+.simulated-frame.frame-mobile .chutti-quick-add,
+.chutti-root.device-mobile .chutti-quick-add,
+.chutti-root.is-mobile .chutti-quick-add {
+  width: 100% !important;
+  text-align: center !important;
+  padding: 7px 8px !important;
+  font-size: 11px !important;
+  border-radius: 20px !important;
+  white-space: nowrap !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+}
+
+/* Big Promo Banner */
+.simulated-frame.frame-mobile .chutti-big-promo,
+.chutti-root.device-mobile .chutti-big-promo,
+.chutti-root.is-mobile .chutti-big-promo {
+  flex-direction: column !important;
+  text-align: center !important;
+  padding: 32px 16px !important;
+  gap: 24px !important;
+  margin: 24px 0 !important;
+  border-radius: 20px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.simulated-frame.frame-mobile .chutti-promo-text,
+.chutti-root.device-mobile .chutti-promo-text,
+.chutti-root.is-mobile .chutti-promo-text {
+  max-width: 100% !important;
+  width: 100% !important;
+  text-align: center !important;
+}
+
+.simulated-frame.frame-mobile .chutti-promo-tag,
+.chutti-root.device-mobile .chutti-promo-tag,
+.chutti-root.is-mobile .chutti-promo-tag {
+  font-size: 11px !important;
+  padding: 4px 12px !important;
+}
+
+.simulated-frame.frame-mobile .chutti-promo-title,
+.chutti-root.device-mobile .chutti-promo-title,
+.chutti-root.is-mobile .chutti-promo-title {
+  font-size: 24px !important;
+  margin-bottom: 10px !important;
+  line-height: 1.2 !important;
+}
+
+.simulated-frame.frame-mobile .chutti-promo-desc,
+.chutti-root.device-mobile .chutti-promo-desc,
+.chutti-root.is-mobile .chutti-promo-desc {
+  font-size: 13px !important;
+  margin-bottom: 18px !important;
+}
+
+.simulated-frame.frame-mobile .chutti-big-promo .chutti-btn,
+.chutti-root.device-mobile .chutti-big-promo .chutti-btn,
+.chutti-root.is-mobile .chutti-big-promo .chutti-btn {
+  display: inline-flex !important;
+  margin: 0 auto !important;
+  padding: 10px 24px !important;
+  font-size: 13px !important;
+}
+
+/* Newsletter */
+.simulated-frame.frame-mobile .chutti-newsletter,
+.chutti-root.device-mobile .chutti-newsletter,
+.chutti-root.is-mobile .chutti-newsletter {
+  padding: 36px 16px !important;
+  border-radius: 20px !important;
+}
+
+.simulated-frame.frame-mobile .chutti-newsletter h2,
+.chutti-root.device-mobile .chutti-newsletter h2,
+.chutti-root.is-mobile .chutti-newsletter h2 {
+  font-size: 26px !important;
+  margin-bottom: 10px !important;
+}
+
+.simulated-frame.frame-mobile .chutti-newsletter p,
+.chutti-root.device-mobile .chutti-newsletter p,
+.chutti-root.is-mobile .chutti-newsletter p {
+  font-size: 13px !important;
+  margin-bottom: 20px !important;
+}
+
+.simulated-frame.frame-mobile .chutti-newsletter-form,
+.chutti-root.device-mobile .chutti-newsletter-form,
+.chutti-root.is-mobile .chutti-newsletter-form {
+  flex-direction: column !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  gap: 10px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.simulated-frame.frame-mobile .chutti-newsletter-input,
+.chutti-root.device-mobile .chutti-newsletter-input,
+.chutti-root.is-mobile .chutti-newsletter-input {
+  width: 100% !important;
+  background: #FFFFFF !important;
+  border-radius: 30px !important;
+  padding: 12px 18px !important;
+  text-align: center !important;
+  font-size: 14px !important;
+  box-sizing: border-box !important;
+}
+
+.simulated-frame.frame-mobile .chutti-newsletter-form button,
+.chutti-root.device-mobile .chutti-newsletter-form button,
+.chutti-root.is-mobile .chutti-newsletter-form button {
+  width: 100% !important;
+  border-radius: 30px !important;
+  padding: 12px 20px !important;
+  text-align: center !important;
+  font-size: 14px !important;
+  box-sizing: border-box !important;
+}
+
+.simulated-frame.frame-mobile .chutti-partners-row,
+.chutti-root.device-mobile .chutti-partners-row,
+.chutti-root.is-mobile .chutti-partners-row {
+  padding: 24px 10px !important;
+  gap: 16px !important;
+  justify-content: center !important;
+}
+
+.simulated-frame.frame-mobile .chutti-partner-img,
+.chutti-root.device-mobile .chutti-partner-img,
+.chutti-root.is-mobile .chutti-partner-img {
+  max-height: 32px !important;
+  max-width: 80px !important;
+  object-fit: contain !important;
 }
 
 .simulated-frame.frame-mobile .chutti-cat-grid,
@@ -10478,10 +10832,13 @@
 }
 
 .simulated-frame.frame-mobile .chutti-blog-grid,
+.simulated-frame.frame-mobile .chutti-footer-grid,
 .chutti-root.device-mobile .chutti-blog-grid,
-.chutti-root.is-mobile .chutti-blog-grid {
+.chutti-root.device-mobile .chutti-footer-grid,
+.chutti-root.is-mobile .chutti-blog-grid,
+.chutti-root.is-mobile .chutti-footer-grid {
   grid-template-columns: 1fr !important;
-  gap: 14px !important;
+  gap: 20px !important;
 }
 
 /* -------------------------------------------------------------

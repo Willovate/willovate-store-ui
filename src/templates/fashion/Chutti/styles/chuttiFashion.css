@@ -1028,20 +1028,761 @@
   }
 }
 
-@media (max-width: 640px) {
-  .chutti-cat-grid {
-    grid-template-columns: repeat(2, 1fr);
+/* =============================================================
+   MOBILE NAVIGATION DRAWER & TOGGLE
+   ============================================================= */
+.chutti-mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--chutti-border);
+  background: #FFFFFF;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.chutti-hamburger-bar {
+  display: block;
+  width: 16px;
+  height: 2px;
+  background: var(--chutti-text-dark);
+  border-radius: 2px;
+  transition: all 0.25s ease;
+}
+
+.chutti-mobile-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 99999;
+  display: flex;
+  justify-content: flex-start;
+  animation: chuttiFadeIn 0.25s ease;
+}
+
+.chutti-mobile-drawer {
+  width: 300px;
+  max-width: 85%;
+  height: 100%;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 4px 0 25px rgba(0, 0, 0, 0.15);
+  animation: chuttiSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes chuttiSlideIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes chuttiFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.chutti-mobile-drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 18px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.chutti-drawer-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-family: var(--chutti-font-heading);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--chutti-text-dark);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chutti-drawer-link:hover,
+.chutti-drawer-link.active {
+  background: var(--chutti-bg-soft);
+  color: var(--chutti-coral);
+}
+
+.chutti-mobile-drawer-footer {
+  padding-top: 16px;
+  border-top: 1px dashed var(--chutti-border);
+}
+
+/* =============================================================
+   MOBILE MEDIA QUERY (@media (max-width: 768px))
+   ============================================================= */
+@media (max-width: 768px) {
+  .chutti-main-nav,
+  .chutti-nav-menu,
+  .chutti-wishlist-btn,
+  .chutti-compare-btn {
+    display: none !important;
   }
-  .chutti-products-grid {
-    grid-template-columns: 1fr;
+
+  .chutti-mobile-menu-toggle {
+    display: flex !important;
   }
-  .chutti-blog-grid {
-    grid-template-columns: 1fr;
+
+  .chutti-header-inner {
+    padding: 10px 0 !important;
+    gap: 8px !important;
   }
+
+  .chutti-logo-icon {
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 16px !important;
+  }
+
+  .chutti-logo-text {
+    font-size: 20px !important;
+  }
+
+  .chutti-logo-tagline {
+    font-size: 8px !important;
+  }
+
+  .chutti-header-actions {
+    gap: 6px !important;
+  }
+
+  .chutti-action-icon-btn {
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 14px !important;
+  }
+
+  .chutti-badge-pill {
+    width: 17px !important;
+    height: 17px !important;
+    font-size: 9px !important;
+    top: -3px !important;
+    right: -3px !important;
+  }
+
+  /* Hero Section */
+  .chutti-hero {
+    flex-direction: column !important;
+    min-height: auto !important;
+    padding: 24px 0 20px !important;
+    text-align: center !important;
+    overflow: hidden !important;
+  }
+
+  .chutti-hero-content {
+    max-width: 100% !important;
+    padding: 0 10px !important;
+    text-align: center !important;
+  }
+
+  .chutti-hero-script {
+    font-size: 20px !important;
+    margin-bottom: 4px !important;
+  }
+
   .chutti-hero-title {
-    font-size: 38px;
+    font-size: 28px !important;
+    line-height: 1.2 !important;
+    margin: 0 0 10px !important;
   }
+
+  .chutti-hero-tagline {
+    font-size: 12px !important;
+    padding: 4px 12px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .chutti-hero-content .chutti-btn {
+    padding: 10px 22px !important;
+    font-size: 12px !important;
+  }
+
+  .chutti-hero-visual {
+    position: relative !important;
+    right: auto !important;
+    top: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 290px !important;
+    height: 210px !important;
+    margin: 16px auto 0 !important;
+    border-radius: 18px !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .chutti-hero-dots {
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
+    margin-top: 14px !important;
+    justify-content: center !important;
+  }
+
+  /* Product Grid & Cards */
+  .chutti-products-grid,
+  .chutti-product-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .chutti-card {
+    padding: 10px !important;
+    border-radius: 16px !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .chutti-card-media {
+    height: 170px !important;
+    border-radius: 12px !important;
+  }
+
+  .chutti-card-title {
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+    min-height: 32px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    margin: 4px 0 6px !important;
+  }
+
+  .chutti-card-sizes {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 3px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .chutti-size-chip {
+    font-size: 9px !important;
+    padding: 2px 6px !important;
+    border-radius: 10px !important;
+  }
+
+  .chutti-card-footer {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    padding-top: 8px !important;
+    margin-top: auto !important;
+  }
+
+  .chutti-card-footer > div:first-child {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 6px !important;
+    justify-content: flex-start !important;
+  }
+
+  .chutti-card-price {
+    font-size: 15px !important;
+  }
+
+  .chutti-card-compare {
+    font-size: 11px !important;
+  }
+
+  .chutti-quick-add {
+    width: 100% !important;
+    text-align: center !important;
+    padding: 7px 8px !important;
+    font-size: 11px !important;
+    border-radius: 20px !important;
+    white-space: nowrap !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Big Promo Banner */
+  .chutti-big-promo {
+    flex-direction: column !important;
+    text-align: center !important;
+    padding: 32px 16px !important;
+    gap: 24px !important;
+    margin: 24px 0 !important;
+    border-radius: 20px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .chutti-promo-text {
+    max-width: 100% !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  .chutti-promo-tag {
+    font-size: 11px !important;
+    padding: 4px 12px !important;
+  }
+
+  .chutti-promo-title {
+    font-size: 24px !important;
+    margin-bottom: 10px !important;
+    line-height: 1.2 !important;
+  }
+
+  .chutti-promo-desc {
+    font-size: 13px !important;
+    margin-bottom: 18px !important;
+  }
+
+  .chutti-big-promo .chutti-btn {
+    display: inline-flex !important;
+    margin: 0 auto !important;
+    padding: 10px 24px !important;
+    font-size: 13px !important;
+  }
+
+  /* Newsletter */
+  .chutti-newsletter {
+    padding: 36px 16px !important;
+    border-radius: 20px !important;
+  }
+
+  .chutti-newsletter h2 {
+    font-size: 26px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .chutti-newsletter p {
+    font-size: 13px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .chutti-newsletter-form {
+    flex-direction: column !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    gap: 10px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .chutti-newsletter-input {
+    width: 100% !important;
+    background: #FFFFFF !important;
+    border-radius: 30px !important;
+    padding: 12px 18px !important;
+    text-align: center !important;
+    font-size: 14px !important;
+    box-sizing: border-box !important;
+  }
+
+  .chutti-newsletter-form button {
+    width: 100% !important;
+    border-radius: 30px !important;
+    padding: 12px 20px !important;
+    text-align: center !important;
+    font-size: 14px !important;
+    box-sizing: border-box !important;
+  }
+
+  .chutti-partners-row {
+    padding: 24px 10px !important;
+    gap: 16px !important;
+    justify-content: center !important;
+  }
+
+  .chutti-partner-img {
+    max-height: 32px !important;
+    max-width: 80px !important;
+    object-fit: contain !important;
+  }
+
+  .chutti-cat-grid,
+  .chutti-perks-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .chutti-blog-grid,
   .chutti-footer-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
   }
 }
+
+/* =============================================================
+   SIMULATED FRAME & EXPLICIT MOBILE CLASS OVERRIDES
+   ============================================================= */
+.chutti-root.is-mobile,
+.chutti-root.device-mobile,
+.chutti-root.chutti-mobile {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+.chutti-root.is-mobile .chutti-main-nav,
+.chutti-root.is-mobile .chutti-nav-menu,
+.chutti-root.is-mobile .chutti-wishlist-btn,
+.chutti-root.is-mobile .chutti-compare-btn,
+.chutti-root.device-mobile .chutti-main-nav,
+.chutti-root.device-mobile .chutti-nav-menu,
+.chutti-root.device-mobile .chutti-wishlist-btn,
+.chutti-root.device-mobile .chutti-compare-btn {
+  display: none !important;
+}
+
+.chutti-root.is-mobile .chutti-mobile-menu-toggle,
+.chutti-root.device-mobile .chutti-mobile-menu-toggle {
+  display: flex !important;
+}
+
+.chutti-root.is-mobile .chutti-header-inner,
+.chutti-root.device-mobile .chutti-header-inner {
+  padding: 10px 0 !important;
+  gap: 8px !important;
+}
+
+.chutti-root.is-mobile .chutti-logo-icon,
+.chutti-root.device-mobile .chutti-logo-icon {
+  width: 34px !important;
+  height: 34px !important;
+  font-size: 16px !important;
+}
+
+.chutti-root.is-mobile .chutti-logo-text,
+.chutti-root.device-mobile .chutti-logo-text {
+  font-size: 20px !important;
+}
+
+.chutti-root.is-mobile .chutti-logo-tagline,
+.chutti-root.device-mobile .chutti-logo-tagline {
+  font-size: 8px !important;
+}
+
+.chutti-root.is-mobile .chutti-header-actions,
+.chutti-root.device-mobile .chutti-header-actions {
+  gap: 6px !important;
+}
+
+.chutti-root.is-mobile .chutti-action-icon-btn,
+.chutti-root.device-mobile .chutti-action-icon-btn {
+  width: 34px !important;
+  height: 34px !important;
+  font-size: 14px !important;
+}
+
+.chutti-root.is-mobile .chutti-badge-pill,
+.chutti-root.device-mobile .chutti-badge-pill {
+  width: 17px !important;
+  height: 17px !important;
+  font-size: 9px !important;
+  top: -3px !important;
+  right: -3px !important;
+}
+
+/* Hero Section in simulated mobile */
+.chutti-root.is-mobile .chutti-hero,
+.chutti-root.device-mobile .chutti-hero {
+  flex-direction: column !important;
+  min-height: auto !important;
+  padding: 24px 0 20px !important;
+  text-align: center !important;
+  overflow: hidden !important;
+}
+
+.chutti-root.is-mobile .chutti-hero-content,
+.chutti-root.device-mobile .chutti-hero-content {
+  max-width: 100% !important;
+  padding: 0 10px !important;
+  text-align: center !important;
+}
+
+.chutti-root.is-mobile .chutti-hero-script,
+.chutti-root.device-mobile .chutti-hero-script {
+  font-size: 20px !important;
+  margin-bottom: 4px !important;
+}
+
+.chutti-root.is-mobile .chutti-hero-title,
+.chutti-root.device-mobile .chutti-hero-title {
+  font-size: 28px !important;
+  line-height: 1.2 !important;
+  margin: 0 0 10px !important;
+}
+
+.chutti-root.is-mobile .chutti-hero-tagline,
+.chutti-root.device-mobile .chutti-hero-tagline {
+  font-size: 12px !important;
+  padding: 4px 12px !important;
+  margin-bottom: 16px !important;
+}
+
+.chutti-root.is-mobile .chutti-hero-content .chutti-btn,
+.chutti-root.device-mobile .chutti-hero-content .chutti-btn {
+  padding: 10px 22px !important;
+  font-size: 12px !important;
+}
+
+.chutti-root.is-mobile .chutti-hero-visual,
+.chutti-root.device-mobile .chutti-hero-visual {
+  position: relative !important;
+  right: auto !important;
+  top: auto !important;
+  transform: none !important;
+  width: 100% !important;
+  max-width: 290px !important;
+  height: 210px !important;
+  margin: 16px auto 0 !important;
+  border-radius: 18px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+}
+
+.chutti-root.is-mobile .chutti-hero-dots,
+.chutti-root.device-mobile .chutti-hero-dots {
+  position: relative !important;
+  bottom: auto !important;
+  left: auto !important;
+  transform: none !important;
+  margin-top: 14px !important;
+  justify-content: center !important;
+}
+
+/* Product Cards in simulated mobile */
+.chutti-root.is-mobile .chutti-products-grid,
+.chutti-root.is-mobile .chutti-product-grid,
+.chutti-root.device-mobile .chutti-products-grid,
+.chutti-root.device-mobile .chutti-product-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.chutti-root.is-mobile .chutti-card,
+.chutti-root.device-mobile .chutti-card {
+  padding: 10px !important;
+  border-radius: 16px !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.chutti-root.is-mobile .chutti-card-media,
+.chutti-root.device-mobile .chutti-card-media {
+  height: 170px !important;
+  border-radius: 12px !important;
+}
+
+.chutti-root.is-mobile .chutti-card-title,
+.chutti-root.device-mobile .chutti-card-title {
+  font-size: 12px !important;
+  line-height: 1.3 !important;
+  min-height: 32px !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  margin: 4px 0 6px !important;
+}
+
+.chutti-root.is-mobile .chutti-card-sizes,
+.chutti-root.device-mobile .chutti-card-sizes {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 3px !important;
+  margin-bottom: 6px !important;
+}
+
+.chutti-root.is-mobile .chutti-size-chip,
+.chutti-root.device-mobile .chutti-size-chip {
+  font-size: 9px !important;
+  padding: 2px 6px !important;
+  border-radius: 10px !important;
+}
+
+.chutti-root.is-mobile .chutti-card-footer,
+.chutti-root.device-mobile .chutti-card-footer {
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 8px !important;
+  padding-top: 8px !important;
+  margin-top: auto !important;
+}
+
+.chutti-root.is-mobile .chutti-card-footer > div:first-child,
+.chutti-root.device-mobile .chutti-card-footer > div:first-child {
+  display: flex !important;
+  align-items: baseline !important;
+  gap: 6px !important;
+  justify-content: flex-start !important;
+}
+
+.chutti-root.is-mobile .chutti-card-price,
+.chutti-root.device-mobile .chutti-card-price {
+  font-size: 15px !important;
+}
+
+.chutti-root.is-mobile .chutti-card-compare,
+.chutti-root.device-mobile .chutti-card-compare {
+  font-size: 11px !important;
+}
+
+.chutti-root.is-mobile .chutti-quick-add,
+.chutti-root.device-mobile .chutti-quick-add {
+  width: 100% !important;
+  text-align: center !important;
+  padding: 7px 8px !important;
+  font-size: 11px !important;
+  border-radius: 20px !important;
+  white-space: nowrap !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+}
+
+/* Big Promo Banner in simulated mobile */
+.chutti-root.is-mobile .chutti-big-promo,
+.chutti-root.device-mobile .chutti-big-promo {
+  flex-direction: column !important;
+  text-align: center !important;
+  padding: 32px 16px !important;
+  gap: 24px !important;
+  margin: 24px 0 !important;
+  border-radius: 20px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.chutti-root.is-mobile .chutti-promo-text,
+.chutti-root.device-mobile .chutti-promo-text {
+  max-width: 100% !important;
+  width: 100% !important;
+  text-align: center !important;
+}
+
+.chutti-root.is-mobile .chutti-promo-tag,
+.chutti-root.device-mobile .chutti-promo-tag {
+  font-size: 11px !important;
+  padding: 4px 12px !important;
+}
+
+.chutti-root.is-mobile .chutti-promo-title,
+.chutti-root.device-mobile .chutti-promo-title {
+  font-size: 24px !important;
+  margin-bottom: 10px !important;
+  line-height: 1.2 !important;
+}
+
+.chutti-root.is-mobile .chutti-promo-desc,
+.chutti-root.device-mobile .chutti-promo-desc {
+  font-size: 13px !important;
+  margin-bottom: 18px !important;
+}
+
+.chutti-root.is-mobile .chutti-big-promo .chutti-btn,
+.chutti-root.device-mobile .chutti-big-promo .chutti-btn {
+  display: inline-flex !important;
+  margin: 0 auto !important;
+  padding: 10px 24px !important;
+  font-size: 13px !important;
+}
+
+/* Newsletter in simulated mobile */
+.chutti-root.is-mobile .chutti-newsletter,
+.chutti-root.device-mobile .chutti-newsletter {
+  padding: 36px 16px !important;
+  border-radius: 20px !important;
+}
+
+.chutti-root.is-mobile .chutti-newsletter h2,
+.chutti-root.device-mobile .chutti-newsletter h2 {
+  font-size: 26px !important;
+  margin-bottom: 10px !important;
+}
+
+.chutti-root.is-mobile .chutti-newsletter p,
+.chutti-root.device-mobile .chutti-newsletter p {
+  font-size: 13px !important;
+  margin-bottom: 20px !important;
+}
+
+.chutti-root.is-mobile .chutti-newsletter-form,
+.chutti-root.device-mobile .chutti-newsletter-form {
+  flex-direction: column !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  gap: 10px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.chutti-root.is-mobile .chutti-newsletter-input,
+.chutti-root.device-mobile .chutti-newsletter-input {
+  width: 100% !important;
+  background: #FFFFFF !important;
+  border-radius: 30px !important;
+  padding: 12px 18px !important;
+  text-align: center !important;
+  font-size: 14px !important;
+  box-sizing: border-box !important;
+}
+
+.chutti-root.is-mobile .chutti-newsletter-form button,
+.chutti-root.device-mobile .chutti-newsletter-form button {
+  width: 100% !important;
+  border-radius: 30px !important;
+  padding: 12px 20px !important;
+  text-align: center !important;
+  font-size: 14px !important;
+  box-sizing: border-box !important;
+}
+
+.chutti-root.is-mobile .chutti-partners-row,
+.chutti-root.device-mobile .chutti-partners-row {
+  padding: 24px 10px !important;
+  gap: 16px !important;
+  justify-content: center !important;
+}
+
+.chutti-root.is-mobile .chutti-partner-img,
+.chutti-root.device-mobile .chutti-partner-img {
+  max-height: 32px !important;
+  max-width: 80px !important;
+  object-fit: contain !important;
+}
+
+.chutti-root.is-mobile .chutti-cat-grid,
+.chutti-root.is-mobile .chutti-perks-grid,
+.chutti-root.device-mobile .chutti-cat-grid,
+.chutti-root.device-mobile .chutti-perks-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.chutti-root.is-mobile .chutti-blog-grid,
+.chutti-root.is-mobile .chutti-footer-grid,
+.chutti-root.device-mobile .chutti-blog-grid,
+.chutti-root.device-mobile .chutti-footer-grid {
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+}
+

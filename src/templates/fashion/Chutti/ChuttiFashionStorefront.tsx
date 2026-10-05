@@ -36,6 +36,7 @@ export const ChuttiFashionStorefront: React.FC<ChuttiStorefrontProps> = ({
   const [quickViewProduct, setQuickViewProduct] = useState<ChuttiProduct>(CHUTTI_PRODUCTS[0])
   const [isCompareOpen, setIsCompareOpen] = useState<boolean>(false)
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false)
   const [searchQuery, setSearchQuery] = useState<string>('')
 
   // Cart & Interactions
@@ -244,7 +245,7 @@ export const ChuttiFashionStorefront: React.FC<ChuttiStorefrontProps> = ({
             </div>
 
             {/* Nav Menu */}
-            <nav>
+            <nav className="chutti-main-nav">
               <ul className="chutti-nav-menu">
                 <li>
                   <a
@@ -315,7 +316,7 @@ export const ChuttiFashionStorefront: React.FC<ChuttiStorefrontProps> = ({
             {/* Header Actions */}
             <div className="chutti-header-actions">
               <button
-                className="chutti-action-icon-btn"
+                className="chutti-action-icon-btn chutti-search-btn"
                 title="Search"
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
               >
@@ -323,7 +324,7 @@ export const ChuttiFashionStorefront: React.FC<ChuttiStorefrontProps> = ({
               </button>
 
               <button
-                className="chutti-action-icon-btn"
+                className="chutti-action-icon-btn chutti-wishlist-btn"
                 title="Wishlist"
                 onClick={() => showToast(`Wishlist contains ${wishlistIds.length} items`)}
               >
@@ -334,7 +335,7 @@ export const ChuttiFashionStorefront: React.FC<ChuttiStorefrontProps> = ({
               </button>
 
               <button
-                className="chutti-action-icon-btn"
+                className="chutti-action-icon-btn chutti-compare-btn"
                 title="Compare"
                 onClick={() => {
                   if (compareIds.length === 0) {
@@ -353,7 +354,7 @@ export const ChuttiFashionStorefront: React.FC<ChuttiStorefrontProps> = ({
               </button>
 
               <button
-                className="chutti-action-icon-btn"
+                className="chutti-action-icon-btn chutti-cart-btn"
                 title="Cart Bag"
                 onClick={() => setIsCartOpen(true)}
               >
@@ -363,6 +364,16 @@ export const ChuttiFashionStorefront: React.FC<ChuttiStorefrontProps> = ({
                 </span>
               </button>
 
+              <button
+                className="chutti-mobile-menu-toggle"
+                onClick={() => setIsMobileMenuOpen(true)}
+                title="Menu"
+                aria-label="Toggle navigation"
+              >
+                <span className="chutti-hamburger-bar" />
+                <span className="chutti-hamburger-bar" />
+                <span className="chutti-hamburger-bar" />
+              </button>
             </div>
           </div>
         </div>
@@ -1253,6 +1264,96 @@ export const ChuttiFashionStorefront: React.FC<ChuttiStorefrontProps> = ({
           </div>
         </div>
       </footer>
+
+      {/* =========================================================
+          SLIDE-OVER MOBILE NAVIGATION DRAWER
+          ========================================================= */}
+      {isMobileMenuOpen && (
+        <div className="chutti-mobile-drawer-backdrop" onClick={() => setIsMobileMenuOpen(false)}>
+          <div className="chutti-mobile-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className="chutti-drawer-header">
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span style={{ fontSize: 24 }}>🧸</span>
+                <span style={{ fontFamily: 'Baloo Paaji 2, cursive', fontSize: 20, fontWeight: 800, color: '#FC6171' }}>
+                  Chutti Kids
+                </span>
+              </div>
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer', color: '#6B7280' }}
+              >
+                ✕
+              </button>
+            </div>
+            <div className="chutti-mobile-drawer-links">
+              <button
+                className={`chutti-drawer-link ${viewMode === 'home' ? 'active' : ''}`}
+                onClick={() => {
+                  setViewMode('home')
+                  setIsMobileMenuOpen(false)
+                }}
+              >
+                🏠 Home
+              </button>
+              <button
+                className={`chutti-drawer-link ${viewMode === 'collection' && filters.category === 'All' ? 'active' : ''}`}
+                onClick={() => {
+                  setFilters((f) => ({ ...f, category: 'All' }))
+                  setViewMode('collection')
+                  setIsMobileMenuOpen(false)
+                }}
+              >
+                🛍 All Collections
+              </button>
+              <button
+                className="chutti-drawer-link"
+                onClick={() => {
+                  setFilters((f) => ({ ...f, ageGroup: '0-6M' }))
+                  setViewMode('collection')
+                  setIsMobileMenuOpen(false)
+                }}
+              >
+                👶 New Born (0-6M)
+              </button>
+              <button
+                className="chutti-drawer-link"
+                onClick={() => {
+                  setFilters((f) => ({ ...f, ageGroup: '2-3Y' }))
+                  setViewMode('collection')
+                  setIsMobileMenuOpen(false)
+                }}
+              >
+                🧒 Toddlers & Kids (2-3Y)
+              </button>
+              <button
+                className="chutti-drawer-link"
+                onClick={() => {
+                  setFilters((f) => ({ ...f, category: 'Accessories' }))
+                  setViewMode('collection')
+                  setIsMobileMenuOpen(false)
+                }}
+              >
+                🎀 Cute Accessories
+              </button>
+            </div>
+            <div className="chutti-mobile-drawer-footer">
+              <div style={{ fontSize: 13, color: '#6B7280', marginBottom: 12 }}>
+                ★ 100% Certified Organic Cotton
+              </div>
+              <button
+                className="chutti-btn chutti-btn-coral"
+                style={{ width: '100%', padding: '10px 0' }}
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  setIsCartOpen(true)
+                }}
+              >
+                View Cart ({cartItems.reduce((acc, i) => acc + i.quantity, 0)})
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* =========================================================
           SLIDE-OVER CART DRAWER
