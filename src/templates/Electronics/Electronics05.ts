@@ -8,7 +8,7 @@ export const Electronics05: TemplateConfig = {
   tags: [{ id: 'lifestyle', name: 'Lifestyle' }, { id: 'wellness', name: 'Wellness' }, { id: 'personal', name: 'Personal' }],
   thumbnailUrl: 'https://images.unsplash.com/photo-1518331647614-7a1f04cd34ce?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1518331647614-7a1f04cd34ce?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {
@@ -21,7 +21,7 @@ export const Electronics05: TemplateConfig = {
     { id: 's3', type: 'split-hero', props: { 
       title: 'Made for the rhythm of your day.', 
       subtitle: 'Beautifully minimal personal technology designed to fit quietly and seamlessly into your everyday life.', 
-      image: 'https://images.unsplash.com/photo-1518331647614-7a1f04cd34ce?auto=format&fit=crop&q=80&w=1600', 
+      image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=1600', 
       ctaLabel: 'Shop the Collection' 
     } },
     { id: 's4', type: 'category-grid', props: { 

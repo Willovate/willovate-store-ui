@@ -8,7 +8,7 @@ export const Electronics07: TemplateConfig = {
   tags: [{ id: 'smart-home', name: 'Smart Home' }, { id: 'interior', name: 'Interior' }, { id: 'ambient', name: 'Ambient' }],
   thumbnailUrl: 'https://images.unsplash.com/photo-1558036117-15d82a90b9b1?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1558036117-15d82a90b9b1?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {
@@ -21,7 +21,7 @@ export const Electronics07: TemplateConfig = {
     { id: 's3', type: 'split-hero', props: { 
       title: 'Technology, quietly at home.', 
       subtitle: 'Discover ambient sensors, intelligent lighting, and automated climate systems that blend seamlessly into your interior design.', 
-      image: 'https://images.unsplash.com/photo-1558036117-15d82a90b9b1?auto=format&fit=crop&q=80&w=1600', 
+      image: 'https://images.unsplash.com/photo-1575414003593-0a373d5a5700?auto=format&fit=crop&q=80&w=1600', 
       ctaLabel: 'Shop Ecosystem' 
     } },
     { id: 's4', type: 'category-grid', props: { 

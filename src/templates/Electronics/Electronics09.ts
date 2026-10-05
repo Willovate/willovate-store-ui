@@ -8,7 +8,7 @@ export const Electronics09: TemplateConfig = {
   tags: [{ id: 'mobility', name: 'Mobility' }, { id: 'travel', name: 'Travel' }, { id: 'portable', name: 'Portable' }],
   thumbnailUrl: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {
@@ -82,7 +82,7 @@ export const Electronics09: TemplateConfig = {
     { id: 's10', type: 'editorial-grid', props: { 
       title: 'Travel Tech Kit', 
       images: [
-        'https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&q=80&w=800', 
+        'https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&q=80&w=800', 
         'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=800',
         'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800'
       ] 

@@ -8,7 +8,7 @@ export const Electronics10: TemplateConfig = {
   tags: [{ id: 'cinema', name: 'Cinema' }, { id: 'entertainment', name: 'Entertainment' }, { id: 'premium', name: 'Premium' }],
   thumbnailUrl: 'https://images.unsplash.com/photo-1600566753086-00f18efc2291?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1600566753086-00f18efc2291?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {
@@ -21,7 +21,7 @@ export const Electronics10: TemplateConfig = {
     { id: 's3', type: 'full-hero', props: { 
       title: 'Cinema, without leaving home.', 
       subtitle: 'Premium projectors, large-format displays, and immersive audio systems engineered for the modern media room.', 
-      image: 'https://images.unsplash.com/photo-1600566753086-00f18efc2291?auto=format&fit=crop&q=80&w=1600', 
+      image: 'https://images.unsplash.com/photo-1532372576444-ea6ba6a78241?auto=format&fit=crop&q=80&w=1600', 
       ctaLabel: 'Design Your Theater' 
     } },
     { id: 's4', type: 'category-grid', props: { 

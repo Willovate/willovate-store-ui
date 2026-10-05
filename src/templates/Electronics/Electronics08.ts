@@ -8,7 +8,7 @@ export const Electronics08: TemplateConfig = {
   tags: [{ id: 'workspace', name: 'Workspace' }, { id: 'professional', name: 'Professional' }, { id: 'creator', name: 'Creator' }],
   thumbnailUrl: 'https://images.unsplash.com/photo-1600861194942-f883de0dfe96?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1600861194942-f883de0dfe96?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1531685250784-7569952593d2?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {
@@ -21,7 +21,7 @@ export const Electronics08: TemplateConfig = {
     { id: 's3', type: 'split-hero', props: { 
       title: 'Build the space where your best work happens.', 
       subtitle: 'Premium workstation technology designed for professional creators, developers, and designers.', 
-      image: 'https://images.unsplash.com/photo-1600861194942-f883de0dfe96?auto=format&fit=crop&q=80&w=1600', 
+      image: 'https://images.unsplash.com/photo-1593696140826-c58b021acf8b?auto=format&fit=crop&q=80&w=1600', 
       ctaLabel: 'Shop Workstations' 
     } },
     { id: 's4', type: 'category-grid', props: { 
@@ -98,7 +98,7 @@ export const Electronics08: TemplateConfig = {
       ] 
     } },
     { id: 's12', type: 'product-spotlight', props: { 
-      image: 'https://images.unsplash.com/photo-1616423640778-28d1b53229bd?auto=format&fit=crop&q=80&w=800', 
+      image: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&q=80&w=800', 
       name: 'Techflow Thunderbolt Dock', 
       category: 'Workspace Hub', 
       description: 'One cable to connect your entire professional studio. Delivers up to 140W of power while supporting dual 4K displays at 60Hz and ultra-fast NVMe storage.', 

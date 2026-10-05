@@ -8,7 +8,7 @@ export const Electronics02: TemplateConfig = {
   tags: [{ id: 'premium', name: 'Premium' }, { id: 'modern', name: 'Modern' }],
   thumbnailUrl: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: true,
   theme: {
@@ -21,7 +21,7 @@ export const Electronics02: TemplateConfig = {
     { id: 's3', type: 'full-hero', props: { 
       title: 'Technology, Refined.', 
       subtitle: 'Experience the next generation of premium consumer electronics designed for your everyday life.', 
-      image: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=80&w=1600', 
+      image: 'https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&q=80&w=1600', 
       ctaLabel: 'Shop New Arrivals' 
     } },
     { id: 's4', type: 'category-grid', props: { 
@@ -30,16 +30,16 @@ export const Electronics02: TemplateConfig = {
         { name: 'Smartphones', image: 'https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?auto=format&fit=crop&q=80&w=600' }, 
         { name: 'Laptops', image: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&q=80&w=600' }, 
         { name: 'Audio', image: 'https://images.unsplash.com/photo-1612444530582-fc66183b16f7?auto=format&fit=crop&q=80&w=600' }, 
-        { name: 'Wearables', image: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&q=80&w=600' },
+        { name: 'Wearables', image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&q=80&w=600' },
         { name: 'Accessories', image: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&q=80&w=600' }
       ] 
     } },
     { id: 's5', type: 'catalog', props: {
         products: [
           { id: 'vp1', name: 'Volt X', description: 'Flagship Smartphone', price: 999, imageUrl: 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&q=80&w=600' },
-          { id: 'vp2', name: 'VoltBook Pro', description: '14" Ultrabook', price: 1499, imageUrl: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&q=80&w=600' },
+          { id: 'vp2', name: 'VoltBook Pro', description: '14" Ultrabook', price: 1499, imageUrl: 'https://images.unsplash.com/photo-1572981779307-38b8cabb2407?auto=format&fit=crop&q=80&w=600' },
           { id: 'vp3', name: 'Volt Buds', description: 'True Wireless Noise Cancelling', price: 199, imageUrl: 'https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&q=80&w=600' },
-          { id: 'vp4', name: 'Volt Watch', description: 'Advanced Health Tracking', price: 349, imageUrl: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&q=80&w=600' }
+          { id: 'vp4', name: 'Volt Watch', description: 'Advanced Health Tracking', price: 349, imageUrl: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&q=80&w=600' }
         ]
     }},
     { id: 's6', type: 'product-spotlight', props: { 
@@ -66,7 +66,7 @@ export const Electronics02: TemplateConfig = {
           { id: 'va1', name: 'Volt Studio Over-Ear', description: 'High-Fidelity Audio', price: 349, imageUrl: 'https://images.unsplash.com/photo-1599669500515-9b40924d5189?auto=format&fit=crop&q=80&w=600' },
           { id: 'va2', name: 'Volt Soundbar', description: 'Cinematic Sound', price: 499, imageUrl: 'https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&q=80&w=600' },
           { id: 'va3', name: 'Volt Portable Mini', description: 'Waterproof Bluetooth Speaker', price: 129, imageUrl: 'https://images.unsplash.com/photo-1589256469067-ea9912224858?auto=format&fit=crop&q=80&w=600' },
-          { id: 'va4', name: 'Volt Buds Pro', description: 'Adaptive Noise Control', price: 249, imageUrl: 'https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&q=80&w=600' }
+          { id: 'va4', name: 'Volt Buds Pro', description: 'Adaptive Noise Control', price: 249, imageUrl: 'https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?auto=format&fit=crop&q=80&w=600' }
         ]
     }},
     { id: 's9', type: 'editorial-grid', props: { 
@@ -98,10 +98,10 @@ export const Electronics02: TemplateConfig = {
     } },
     { id: 's12', type: 'catalog', props: {
         products: [
-          { id: 'vacc1', name: 'Volt Fast Charger 65W', description: 'Dual USB-C', price: 49, imageUrl: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&q=80&w=600' },
+          { id: 'vacc1', name: 'Volt Fast Charger 65W', description: 'Dual USB-C', price: 49, imageUrl: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=600' },
           { id: 'vacc2', name: 'Volt Magnetic Power Bank', description: '10,000mAh', price: 79, imageUrl: 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&q=80&w=600' },
           { id: 'vacc3', name: 'Volt Leather Case', description: 'Premium Protection', price: 59, imageUrl: 'https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&q=80&w=600' },
-          { id: 'vacc4', name: 'Volt Pro Hub', description: '7-in-1 Connectivity', price: 89, imageUrl: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=80&w=600' }
+          { id: 'vacc4', name: 'Volt Pro Hub', description: '7-in-1 Connectivity', price: 89, imageUrl: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=600' }
         ]
     }},
     { id: 's13', type: 'testimonials', props: { 

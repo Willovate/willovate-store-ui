@@ -8,7 +8,7 @@ export const Electronics06: TemplateConfig = {
   tags: [{ id: 'creative', name: 'Creative' }, { id: 'digital', name: 'Digital' }, { id: 'lifestyle', name: 'Lifestyle' }],
   thumbnailUrl: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1615529162924-f8605388461d?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: true,
   theme: {
@@ -21,7 +21,7 @@ export const Electronics06: TemplateConfig = {
     { id: 's3', type: 'split-hero', props: { 
       title: 'MAKE EVERY PIXEL COUNT.', 
       subtitle: 'Premium creative technology built for artists, designers, photographers, and modern digital storytellers.', 
-      image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=1600', 
+      image: 'https://images.unsplash.com/photo-1540569014015-19a7be504e3a?auto=format&fit=crop&q=80&w=1600', 
       ctaLabel: 'Explore Creative Tech' 
     } },
     { id: 's4', type: 'category-grid', props: { 
@@ -37,10 +37,10 @@ export const Electronics06: TemplateConfig = {
     } },
     { id: 's5', type: 'catalog', props: {
       products: [
-        { id: 'px1', name: 'Studio Display Pro', description: '5K Retina Color Accurate', price: 1599, imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=600' },
-        { id: 'px2', name: 'Creator Pad 12"', description: 'Digital Canvas + Stylus', price: 799, imageUrl: 'https://images.unsplash.com/photo-1585790050230-5dd28404ccb9?auto=format&fit=crop&q=80&w=600' },
-        { id: 'px3', name: 'CineCam Mirrorless', description: '4K/120fps Full Frame', price: 2199, imageUrl: 'https://images.unsplash.com/photo-1516961642265-531546e84af2?auto=format&fit=crop&q=80&w=600' },
-        { id: 'px4', name: 'Artisan Tablet', description: 'Graphic Drawing Surface', price: 349, imageUrl: 'https://images.unsplash.com/photo-1620052329302-36cce5634da2?auto=format&fit=crop&q=80&w=600' }
+        { id: 'px1', name: 'Studio Display Pro', description: '5K Retina Color Accurate', price: 1599, imageUrl: 'https://images.unsplash.com/photo-1517420879524-86d64ac2f339?auto=format&fit=crop&q=80&w=600' },
+        { id: 'px2', name: 'Creator Pad 12"', description: 'Digital Canvas + Stylus', price: 799, imageUrl: 'https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?auto=format&fit=crop&q=80&w=600' },
+        { id: 'px3', name: 'CineCam Mirrorless', description: '4K/120fps Full Frame', price: 2199, imageUrl: 'https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&q=80&w=600' },
+        { id: 'px4', name: 'Artisan Tablet', description: 'Graphic Drawing Surface', price: 349, imageUrl: 'https://images.unsplash.com/photo-1555529771-835f59fc5efe?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
     { id: 's6', type: 'editorial-grid', props: { 
@@ -65,7 +65,7 @@ export const Electronics06: TemplateConfig = {
       title: 'Creative Workspace',
       items: [
         { title: 'The Ultimate Setup', description: 'Where ideas happen.', size: 'large', image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=800' },
-        { title: 'Mechanical Flow', description: 'Tactile typing.', size: 'small', image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&q=80&w=400' },
+        { title: 'Mechanical Flow', description: 'Tactile typing.', size: 'small', image: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&q=80&w=400' },
         { title: 'Studio Audio', description: 'Hear every detail.', size: 'small', image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&q=80&w=400' },
         { title: 'Lighting', description: 'Perfect ambience.', size: 'small', image: 'https://images.unsplash.com/photo-1505685296765-3a2736de412f?auto=format&fit=crop&q=80&w=400' }
       ]
@@ -79,7 +79,7 @@ export const Electronics06: TemplateConfig = {
     { id: 's10', type: 'catalog', props: {
       products: [
         { id: 'pt1', name: 'Nomad Tablet', description: 'Liquid AMOLED display', price: 699, imageUrl: 'https://images.unsplash.com/photo-1561154464-82e9adf32764?auto=format&fit=crop&q=80&w=600' },
-        { id: 'pt2', name: 'Precision Stylus', description: '4096 Pressure Levels', price: 99, imageUrl: 'https://images.unsplash.com/photo-1585790050230-5dd28404ccb9?auto=format&fit=crop&q=80&w=600' },
+        { id: 'pt2', name: 'Precision Stylus', description: '4096 Pressure Levels', price: 99, imageUrl: 'https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?auto=format&fit=crop&q=80&w=600' },
         { id: 'pt3', name: 'Portable Monitor', description: '15.6" USB-C Display', price: 249, imageUrl: 'https://images.unsplash.com/photo-1593640495253-23d96b424c22?auto=format&fit=crop&q=80&w=600' },
         { id: 'pt4', name: 'Travel Keyboard', description: 'Ultra-slim Bluetooth', price: 79, imageUrl: 'https://images.unsplash.com/photo-1595009622879-1bf452077b94?auto=format&fit=crop&q=80&w=600' }
       ]
@@ -102,7 +102,7 @@ export const Electronics06: TemplateConfig = {
       products: [
         { id: 'pa1', name: 'V-90 SD Card 128GB', description: '300MB/s Transfer', price: 129, imageUrl: 'https://images.unsplash.com/photo-1531299243346-608f6580f5d0?auto=format&fit=crop&q=80&w=600' },
         { id: 'pa2', name: 'Aluminum Tablet Stand', description: 'Adjustable Angle', price: 49, imageUrl: 'https://images.unsplash.com/photo-1592890278964-b676f9d2737c?auto=format&fit=crop&q=80&w=600' },
-        { id: 'pa3', name: 'Creator Hub', description: 'USB-C and Card Reader', price: 89, imageUrl: 'https://images.unsplash.com/photo-1512295767273-ac10bd3667af?auto=format&fit=crop&q=80&w=600' },
+        { id: 'pa3', name: 'Creator Hub', description: 'USB-C and Card Reader', price: 89, imageUrl: 'https://images.unsplash.com/photo-1574634534894-89d7576c8259?auto=format&fit=crop&q=80&w=600' },
         { id: 'pa4', name: 'SSD Armor 2TB', description: 'Rugged USB 3.2', price: 199, imageUrl: 'https://images.unsplash.com/photo-1621288424161-00030560a289?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
