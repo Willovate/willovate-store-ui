@@ -66,13 +66,16 @@
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  width: 100%;
 }
 
 .optimal-topbar-left {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 .optimal-topbar-item {
@@ -82,6 +85,7 @@
   color: #cbd5e1;
   text-decoration: none;
   transition: var(--opt-transition);
+  white-space: nowrap;
 }
 
 .optimal-topbar-item:hover {
@@ -89,9 +93,15 @@
 }
 
 .optimal-topbar-center {
+  flex: 1 1 auto;
+  text-align: center;
   font-weight: 500;
   color: #f1f5f9;
   letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 12px;
 }
 
 .optimal-topbar-center strong {
@@ -101,7 +111,9 @@
 .optimal-topbar-right {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 10px;
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 .optimal-topbar-select {
@@ -2462,66 +2474,285 @@
   }
 }
 
-@media (max-width: 768px) {
-  .optimal-topbar {
-    display: none;
-  }
-  .optimal-header-row {
-    flex-wrap: wrap;
-  }
-  .optimal-search-wrapper {
-    order: 3;
-    max-width: 100%;
-    width: 100%;
-  }
-  .optimal-nav-inner {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .optimal-browse-categories-wrapper {
-    width: 100%;
-  }
-  .optimal-pdp-grid {
-    grid-template-columns: 1fr;
-    padding: 20px;
-  }
-  .optimal-pdp-gallery {
-    flex-direction: column-reverse;
-  }
-  .optimal-pdp-thumbs {
-    flex-direction: row;
-    width: 100%;
-  }
-  .optimal-products-grid,
-  .optimal-deals-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-  }
-  .optimal-blog-grid,
-  .optimal-testimonials-grid {
-    grid-template-columns: 1fr;
-  }
-  .optimal-trust-grid {
-    grid-template-columns: 1fr;
-  }
-  .optimal-collection-layout {
-    grid-template-columns: 1fr;
-  }
-  .optimal-filters-sidebar {
-    display: none;
-  }
-  .optimal-hero-side {
-    flex-direction: column;
-  }
-  .optimal-hero-main {
-    min-height: 360px;
-  }
-  .optimal-hero-overlay {
-    padding: 24px;
-  }
-  .optimal-hero-title {
-    font-size: 28px;
-  }
+/* Mobile Hamburger and Drawer Navigation (Velocity Style) */
+.optimal-mobile-hamburger-btn {
+  display: none;
+}
+
+.optimal-mobile-drawer-backdrop {
+  display: none;
+}
+
+@keyframes optimalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes optimalSlideRight {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+/* =========================================================================
+   MOBILE RESPONSIVE STYLES (DEVICE-MOBILE & SIMULATED FRAME)
+   ========================================================================= */
+.optimal-root.optimal-mobile,
+.optimal-root.device-mobile,
+.optimal-root.is-mobile,
+.simulated-frame.frame-mobile .optimal-root {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+.optimal-root.optimal-mobile .optimal-topbar-left,
+.optimal-root.optimal-mobile .optimal-topbar-right,
+.optimal-root.device-mobile .optimal-topbar-left,
+.optimal-root.device-mobile .optimal-topbar-right,
+.optimal-root.is-mobile .optimal-topbar-left,
+.optimal-root.is-mobile .optimal-topbar-right,
+.simulated-frame.frame-mobile .optimal-root .optimal-topbar-left,
+.simulated-frame.frame-mobile .optimal-root .optimal-topbar-right {
+  display: none !important;
+}
+
+.optimal-root.optimal-mobile .optimal-topbar,
+.optimal-root.device-mobile .optimal-topbar,
+.optimal-root.is-mobile .optimal-topbar,
+.simulated-frame.frame-mobile .optimal-root .optimal-topbar {
+  display: block !important;
+  padding: 6px 10px !important;
+}
+
+.optimal-root.optimal-mobile .optimal-topbar-inner,
+.optimal-root.device-mobile .optimal-topbar-inner,
+.optimal-root.is-mobile .optimal-topbar-inner,
+.simulated-frame.frame-mobile .optimal-root .optimal-topbar-inner {
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 0 !important;
+}
+
+.optimal-root.optimal-mobile .optimal-topbar-center,
+.optimal-root.device-mobile .optimal-topbar-center,
+.optimal-root.is-mobile .optimal-topbar-center,
+.simulated-frame.frame-mobile .optimal-root .optimal-topbar-center {
+  font-size: 11px !important;
+  letter-spacing: 0.01em !important;
+  line-height: 1.3 !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 100% !important;
+  display: block !important;
+}
+
+.optimal-root.optimal-mobile .optimal-header-main,
+.optimal-root.device-mobile .optimal-header-main,
+.optimal-root.is-mobile .optimal-header-main,
+.simulated-frame.frame-mobile .optimal-root .optimal-header-main {
+  padding: 10px 12px !important;
+}
+
+.optimal-root.optimal-mobile .optimal-mobile-hamburger-btn,
+.optimal-root.device-mobile .optimal-mobile-hamburger-btn,
+.optimal-root.is-mobile .optimal-mobile-hamburger-btn,
+.simulated-frame.frame-mobile .optimal-root .optimal-mobile-hamburger-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 36px !important;
+  height: 36px !important;
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  font-size: 18px !important;
+  color: #0f172a !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+}
+
+.optimal-root.optimal-mobile .optimal-navbar,
+.optimal-root.device-mobile .optimal-navbar,
+.optimal-root.is-mobile .optimal-navbar,
+.simulated-frame.frame-mobile .optimal-root .optimal-navbar {
+  display: none !important;
+}
+
+.optimal-root.optimal-mobile .optimal-header-row,
+.optimal-root.device-mobile .optimal-header-row,
+.optimal-root.is-mobile .optimal-header-row,
+.simulated-frame.frame-mobile .optimal-root .optimal-header-row {
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+.optimal-root.optimal-mobile .optimal-logo,
+.optimal-root.device-mobile .optimal-logo,
+.optimal-root.is-mobile .optimal-logo,
+.simulated-frame.frame-mobile .optimal-root .optimal-logo {
+  font-size: 18px !important;
+  gap: 6px !important;
+}
+
+.optimal-root.optimal-mobile .optimal-logo-mark,
+.optimal-root.device-mobile .optimal-logo-mark,
+.optimal-root.is-mobile .optimal-logo-mark,
+.simulated-frame.frame-mobile .optimal-root .optimal-logo-mark {
+  width: 26px !important;
+  height: 26px !important;
+}
+
+.optimal-root.optimal-mobile .optimal-search-wrapper,
+.optimal-root.device-mobile .optimal-search-wrapper,
+.optimal-root.is-mobile .optimal-search-wrapper,
+.simulated-frame.frame-mobile .optimal-root .optimal-search-wrapper {
+  order: 3 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin-top: 4px !important;
+  display: flex !important;
+}
+
+.optimal-root.optimal-mobile .optimal-search-category,
+.optimal-root.device-mobile .optimal-search-category,
+.optimal-root.is-mobile .optimal-search-category,
+.simulated-frame.frame-mobile .optimal-root .optimal-search-category {
+  display: none !important;
+}
+
+.optimal-root.optimal-mobile .optimal-search-input,
+.optimal-root.device-mobile .optimal-search-input,
+.optimal-root.is-mobile .optimal-search-input,
+.simulated-frame.frame-mobile .optimal-root .optimal-search-input {
+  border-radius: 6px 0 0 6px !important;
+  font-size: 12px !important;
+  padding: 8px 10px !important;
+}
+
+.optimal-root.optimal-mobile .optimal-header-actions,
+.optimal-root.device-mobile .optimal-header-actions,
+.optimal-root.is-mobile .optimal-header-actions,
+.simulated-frame.frame-mobile .optimal-root .optimal-header-actions {
+  gap: 8px !important;
+}
+
+.optimal-root.optimal-mobile .optimal-action-label,
+.optimal-root.device-mobile .optimal-action-label,
+.optimal-root.is-mobile .optimal-action-label,
+.simulated-frame.frame-mobile .optimal-root .optimal-action-label {
+  display: none !important;
+}
+
+.optimal-root.optimal-mobile .optimal-action-btn,
+.optimal-root.device-mobile .optimal-action-btn,
+.optimal-root.is-mobile .optimal-action-btn,
+.simulated-frame.frame-mobile .optimal-root .optimal-action-btn {
+  padding: 6px 8px !important;
+  gap: 4px !important;
+}
+
+/* Mobile Drawer Elements */
+.optimal-mobile-drawer-backdrop {
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: rgba(15, 23, 42, 0.65) !important;
+  z-index: 9999 !important;
+  backdrop-filter: blur(2px) !important;
+}
+
+.optimal-mobile-drawer {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  width: 290px !important;
+  max-width: 82% !important;
+  background: #ffffff !important;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.25) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  z-index: 10000 !important;
+}
+
+.optimal-mobile-drawer-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 14px 16px !important;
+  background: #0f172a !important;
+  color: #ffffff !important;
+}
+
+.optimal-mobile-drawer-title {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+}
+
+.optimal-mobile-drawer-close {
+  background: transparent !important;
+  border: none !important;
+  color: #ffffff !important;
+  font-size: 18px !important;
+  cursor: pointer !important;
+  padding: 2px 6px !important;
+}
+
+.optimal-mobile-drawer-body {
+  flex: 1 !important;
+  overflow-y: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+.optimal-mobile-drawer-nav {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.optimal-mobile-drawer-link {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 12px 16px !important;
+  border: none !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+  background: #ffffff !important;
+  color: #1e293b !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  text-align: left !important;
+  cursor: pointer !important;
+  transition: background 0.15s !important;
+}
+
+.optimal-mobile-drawer-link:hover,
+.optimal-mobile-drawer-link.active {
+  background: #eff6ff !important;
+  color: #2563eb !important;
+}
+
+.optimal-mobile-drawer-footer {
+  padding: 14px 16px !important;
+  background: #f8fafc !important;
+  border-top: 1px solid #e2e8f0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  font-size: 11.5px !important;
+  color: #64748b !important;
+}
+
+.optimal-mobile-drawer-info {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
 }
 
 @media (max-width: 480px) {

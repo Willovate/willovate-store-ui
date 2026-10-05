@@ -9436,20 +9436,46 @@
 .optimal-root.device-mobile .optimal-header-row,
 .optimal-root.is-mobile .optimal-header-row {
   flex-wrap: wrap !important;
-  gap: 10px !important;
+  gap: 8px !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+.simulated-frame.frame-mobile .optimal-mobile-hamburger-btn,
+.optimal-root.device-mobile .optimal-mobile-hamburger-btn,
+.optimal-root.is-mobile .optimal-mobile-hamburger-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 36px !important;
+  height: 36px !important;
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  font-size: 18px !important;
+  color: #0f172a !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+}
+
+.simulated-frame.frame-mobile .optimal-navbar,
+.optimal-root.device-mobile .optimal-navbar,
+.optimal-root.is-mobile .optimal-navbar {
+  display: none !important;
 }
 
 .simulated-frame.frame-mobile .optimal-logo,
 .optimal-root.device-mobile .optimal-logo,
 .optimal-root.is-mobile .optimal-logo {
-  font-size: 20px !important;
+  font-size: 18px !important;
+  gap: 6px !important;
 }
 
 .simulated-frame.frame-mobile .optimal-logo-mark,
 .optimal-root.device-mobile .optimal-logo-mark,
 .optimal-root.is-mobile .optimal-logo-mark {
-  width: 28px !important;
-  height: 28px !important;
+  width: 26px !important;
+  height: 26px !important;
 }
 
 .simulated-frame.frame-mobile .optimal-search-wrapper,
@@ -9458,16 +9484,28 @@
   order: 3 !important;
   max-width: 100% !important;
   width: 100% !important;
-  margin-top: 2px !important;
+  margin-top: 4px !important;
+  display: flex !important;
 }
 
+.simulated-frame.frame-mobile .optimal-search-category,
 .simulated-frame.frame-mobile .optimal-search-category-select,
+.optimal-root.device-mobile .optimal-search-category,
 .optimal-root.device-mobile .optimal-search-category-select,
+.optimal-root.is-mobile .optimal-search-category,
 .optimal-root.is-mobile .optimal-search-category-select,
 .simulated-frame.frame-mobile .optimal-header-action-label,
 .optimal-root.device-mobile .optimal-header-action-label,
 .optimal-root.is-mobile .optimal-header-action-label {
   display: none !important;
+}
+
+.simulated-frame.frame-mobile .optimal-search-input,
+.optimal-root.device-mobile .optimal-search-input,
+.optimal-root.is-mobile .optimal-search-input {
+  border-radius: 6px 0 0 6px !important;
+  font-size: 12px !important;
+  padding: 8px 10px !important;
 }
 
 .simulated-frame.frame-mobile .optimal-products-grid,
@@ -9939,6 +9977,26 @@
   display: none !important;
 }
 
+.simulated-frame.frame-mobile .jenie-nav-list.is-open,
+.jenie-theme-root.device-mobile .jenie-nav-list.is-open,
+.jenie-theme-root.is-mobile .jenie-nav-list.is-open {
+  display: flex !important;
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  right: 0 !important;
+  flex-direction: column !important;
+  background: #ffffff !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+  z-index: 9999 !important;
+}
+
+.simulated-frame.frame-mobile .jenie-mobile-menu-toggle,
+.jenie-theme-root.device-mobile .jenie-mobile-menu-toggle,
+.jenie-theme-root.is-mobile .jenie-mobile-menu-toggle {
+  display: inline-flex !important;
+}
+
 .simulated-frame.frame-mobile .jenie-products-grid,
 .simulated-frame.frame-mobile .jenie-bestsellers-grid,
 .simulated-frame.frame-mobile .jenie-product-grid,
@@ -9957,6 +10015,24 @@
 .jenie-theme-root.is-mobile .jenie-collection-grid {
   grid-template-columns: 1fr !important;
   gap: 14px !important;
+}
+
+.simulated-frame.frame-mobile .jenie-collection-card,
+.jenie-theme-root.device-mobile .jenie-collection-card,
+.jenie-theme-root.is-mobile .jenie-collection-card {
+  height: 200px !important;
+  aspect-ratio: auto !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+
+.simulated-frame.frame-mobile .jenie-promo-content .jenie-btn-light,
+.jenie-theme-root.device-mobile .jenie-promo-content .jenie-btn-light,
+.jenie-theme-root.is-mobile .jenie-promo-content .jenie-btn-light {
+  background: #ffffff !important;
+  color: #1E2C3D !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
 }
 
 /* -------------------------------------------------------------

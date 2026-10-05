@@ -20,7 +20,6 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
   customAccentColor,
   onColorChange: _onColorChange,
   onUseTemplate: _onUseTemplate,
-  onClose,
 }) => {
   // Navigation & View State
   const [viewMode, setViewMode] = useState<'home' | 'collection' | 'pdp'>('home')
@@ -420,17 +419,6 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
               ☰
             </button>
 
-            {/* Template Close Button if launched from Willovate preview */}
-            {onClose && (
-              <button
-                type="button"
-                onClick={onClose}
-                className="trendy-btn-secondary"
-                style={{ padding: '8px 16px', fontSize: '12px' }}
-              >
-                ✕ Close Preview
-              </button>
-            )}
           </div>
         </div>
       </header>

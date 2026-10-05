@@ -32,6 +32,7 @@ export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
   const [sizeChartOpen, setSizeChartOpen] = useState(false)
   const [cartOpen, setCartOpen] = useState(false)
   const [browseDropdownOpen, setBrowseDropdownOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [homeTab, setHomeTab] = useState<'featured' | 'bestsellers' | 'new' | 'sale'>('featured')
   const [toastMessage, setToastMessage] = useState<string | null>(null)
 
@@ -287,6 +288,18 @@ export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
       <header className="optimal-header-main">
         <div className="optimal-container">
           <div className="optimal-header-row">
+            {/* Mobile Hamburger Toggle (Velocity Style) */}
+            <button
+              type="button"
+              className="optimal-mobile-hamburger-btn"
+              onClick={() => setMobileMenuOpen(true)}
+              aria-label="Open mobile navigation menu"
+            >
+              <span className="optimal-hamburger-bar" />
+              <span className="optimal-hamburger-bar" />
+              <span className="optimal-hamburger-bar" />
+            </button>
+
             {/* Logo */}
             <a
               href="#home"
@@ -375,6 +388,66 @@ export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
           </div>
         </div>
       </header>
+
+      {/* Mobile Drawer Navigation (Velocity Style) */}
+      {mobileMenuOpen && (
+        <div className="optimal-mobile-drawer-backdrop" onClick={() => setMobileMenuOpen(false)}>
+          <div className="optimal-mobile-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className="optimal-mobile-drawer-header">
+              <span className="optimal-mobile-drawer-title">Department Categories</span>
+              <button
+                type="button"
+                className="optimal-mobile-drawer-close"
+                onClick={() => setMobileMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="optimal-mobile-drawer-body">
+              <div className="optimal-mobile-drawer-nav">
+                <button
+                  type="button"
+                  className={`optimal-mobile-drawer-link ${activeView === 'home' ? 'active' : ''}`}
+                  onClick={() => {
+                    setActiveView('home')
+                    setActiveCategory('All')
+                    setMobileMenuOpen(false)
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                  }}
+                >
+                  <span>🏠 Home</span>
+                  <span>›</span>
+                </button>
+                {OPTIMAL_NAV_LINKS.filter((c) => c !== 'Home').map((cat) => (
+                  <button
+                    key={cat}
+                    type="button"
+                    className={`optimal-mobile-drawer-link ${activeCategory === cat && activeView === 'collection' ? 'active' : ''}`}
+                    onClick={() => {
+                      handleNavCategory(cat as OptimalCategoryType)
+                      setMobileMenuOpen(false)
+                    }}
+                  >
+                    <span>{cat}</span>
+                    <span>›</span>
+                  </button>
+                ))}
+              </div>
+              <div className="optimal-mobile-drawer-footer">
+                <div className="optimal-mobile-drawer-info">
+                  <span>📞 24/7 Concierge</span>
+                  <strong>+1 (800) 555-0199</strong>
+                </div>
+                <div className="optimal-mobile-drawer-info">
+                  <span>📦 Track Order</span>
+                  <span>📍 Store Locator</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ================= NAVIGATION BAR WITH CATEGORY FLYOUT ================= */}
       <nav className="optimal-navbar">

@@ -20,6 +20,7 @@ import { JenieFashionStorefront } from '../../templates/fashion/Jenie'
 import { ChuttiFashionStorefront } from '../../templates/fashion/Chutti'
 import { BaggoFashionStorefront } from '../../templates/fashion/Baggo'
 import { MrTevorFashionStorefront } from '../../templates/fashion/MrTevor'
+import '../../templates/fashion/fashionMobile.css'
 import {
   BELLE_FASHION_TEMPLATE,
   VOGAL_FASHION_TEMPLATE,

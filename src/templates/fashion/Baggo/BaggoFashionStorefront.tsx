@@ -18,7 +18,6 @@ import './styles/baggoFashion.css'
 
 export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
   initialView = 'home',
-  onClose,
   templateData: _templateData,
 }) => {
   const [viewMode, setViewMode] = useState<'home' | 'collection' | 'pdp'>(initialView)
@@ -344,15 +343,6 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
                 </span>
               </button>
 
-              {onClose && (
-                <button
-                  className="baggo-btn baggo-btn-cognac"
-                  style={{ padding: '8px 18px', fontSize: 12, marginLeft: 8 }}
-                  onClick={onClose}
-                >
-                  Exit Demo
-                </button>
-              )}
             </div>
           </div>
         </div>

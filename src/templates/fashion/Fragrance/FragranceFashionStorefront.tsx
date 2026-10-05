@@ -21,7 +21,6 @@ export const FragranceFashionStorefront: React.FC<FragranceStorefrontProps> = ({
   customAccentColor: _customAccentColor,
   onColorChange: _onColorChange,
   onUseTemplate: _onUseTemplate,
-  onClose,
 }) => {
   // Navigation & View Mode
   const [viewMode, setViewMode] = useState<'home' | 'collection' | 'pdp'>('home')
@@ -226,19 +225,6 @@ export const FragranceFashionStorefront: React.FC<FragranceStorefrontProps> = ({
                 <option>EUR (€)</option>
                 <option>GBP (£)</option>
               </select>
-              {onClose && (
-                <button
-                  onClick={onClose}
-                  style={{
-                    fontSize: 12,
-                    fontWeight: 700,
-                    color: '#F3734D',
-                    marginLeft: 12,
-                  }}
-                >
-                  ✕ Exit
-                </button>
-              )}
             </div>
           </div>
         </div>

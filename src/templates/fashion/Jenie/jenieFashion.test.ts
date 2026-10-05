@@ -12,6 +12,7 @@ describe('Jenie Denim Fashion Template Suite', () => {
     expect(JENIE_HERO_SLIDES[0].subtitle).toBe('Jenie Shop')
     expect(JENIE_HERO_SLIDES[0].title).toContain('Confidence – Jeans')
     expect(JENIE_HERO_SLIDES[0].buttonText).toBe('Explore More')
+    expect(JENIE_HERO_SLIDES.every((slide) => slide.image && slide.mobileImage)).toBe(true)
   })
 
   it('contains the 3 curated collection categories (Denim, Vintage, Slimfit)', () => {
@@ -31,6 +32,9 @@ describe('Jenie Denim Fashion Template Suite', () => {
       expect(product.fit).toBeTruthy()
       expect(product.fabricComposition).toBeTruthy()
       expect(product.stretchLevel).toBeTruthy()
+      expect([product.image, product.alternateImage, ...product.gallery]
+        .filter((image): image is string => Boolean(image))
+        .every((image) => image.startsWith('https://images.unsplash.com/'))).toBe(true)
     })
   })
 

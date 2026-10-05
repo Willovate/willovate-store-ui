@@ -18,7 +18,6 @@ import './styles/chuttiFashion.css'
 
 export const ChuttiFashionStorefront: React.FC<ChuttiStorefrontProps> = ({
   initialView = 'home',
-  onClose,
   templateData: _templateData,
 }) => {
   const [viewMode, setViewMode] = useState<'home' | 'collection' | 'pdp'>(initialView)
@@ -359,15 +358,6 @@ export const ChuttiFashionStorefront: React.FC<ChuttiStorefrontProps> = ({
                 </span>
               </button>
 
-              {onClose && (
-                <button
-                  className="chutti-btn chutti-btn-coral"
-                  style={{ padding: '8px 18px', fontSize: 13, marginLeft: 8 }}
-                  onClick={onClose}
-                >
-                  Exit Demo
-                </button>
-              )}
             </div>
           </div>
         </div>

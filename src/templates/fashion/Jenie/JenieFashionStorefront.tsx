@@ -16,12 +16,12 @@ import './styles/jenieFashion.css'
 
 export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
   template: _template,
-  device: _device = 'desktop',
+  device = 'desktop',
   customAccentColor: _customAccentColor,
   onColorChange: _onColorChange,
   onUseTemplate: _onUseTemplate,
-  onClose,
 }) => {
+  const isMobilePreview = device === 'mobile'
   // Navigation & View Mode
   const [viewMode, setViewMode] = useState<'home' | 'collection' | 'pdp'>('home')
   const [selectedProduct, setSelectedProduct] = useState<JenieProduct>(JENIE_PRODUCTS[0])
@@ -36,6 +36,7 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
   const [quickViewProduct, setQuickViewProduct] = useState<JenieProduct>(JENIE_PRODUCTS[0])
   const [isCompareOpen, setIsCompareOpen] = useState<boolean>(false)
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false)
   const [searchQuery, setSearchQuery] = useState<string>('')
 
   // State: Cart, Wishlist, Compare
@@ -179,10 +180,11 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
   const currentHeroSlide = JENIE_HERO_SLIDES[activeHeroSlideIdx] || JENIE_HERO_SLIDES[0]
 
   return (
-    <div className="jenie-theme-root">
+    <div className={`jenie-theme-root device-${device} ${device === 'mobile' ? 'is-mobile device-mobile is-mobile-preview' : ''}`}>
       {/* Toast Notification */}
       {toastMsg && (
         <div
+          className="jenie-quick-view-modal"
           style={{
             position: 'fixed',
             bottom: 24,
@@ -206,8 +208,19 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
         <div className="jenie-container">
           <div className="jenie-header-inner">
             {/* Left Column: Navigation */}
-            <nav>
-              <ul className="jenie-nav-list">
+            <nav className="jenie-primary-nav">
+              <button
+                className="jenie-mobile-menu-toggle"
+                type="button"
+                aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+                aria-expanded={isMobileMenuOpen}
+                onClick={() => setIsMobileMenuOpen((open) => !open)}
+              >
+                <span />
+                <span />
+                <span />
+              </button>
+              <ul className={`jenie-nav-list${isMobileMenuOpen ? ' is-open' : ''}`}>
                 <li>
                   <a
                     href="#home"
@@ -215,6 +228,7 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
                     onClick={(e) => {
                       e.preventDefault()
                       setViewMode('home')
+                      setIsMobileMenuOpen(false)
                     }}
                   >
                     Home
@@ -227,6 +241,7 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
                     onClick={(e) => {
                       e.preventDefault()
                       setViewMode('collection')
+                      setIsMobileMenuOpen(false)
                     }}
                   >
                     Shops
@@ -239,6 +254,7 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
                     onClick={(e) => {
                       e.preventDefault()
                       if (viewMode !== 'home') setViewMode('home')
+                      setIsMobileMenuOpen(false)
                       const el = document.getElementById('jenie-products-grid')
                       el?.scrollIntoView({ behavior: 'smooth' })
                     }}
@@ -252,6 +268,7 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
                     className="jenie-nav-link"
                     onClick={(e) => {
                       e.preventDefault()
+                      setIsMobileMenuOpen(false)
                       const el = document.getElementById('jenie-promo')
                       el?.scrollIntoView({ behavior: 'smooth' })
                     }}
@@ -265,6 +282,7 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
                     className="jenie-nav-link"
                     onClick={(e) => {
                       e.preventDefault()
+                      setIsMobileMenuOpen(false)
                       const el = document.getElementById('jenie-instagram')
                       el?.scrollIntoView({ behavior: 'smooth' })
                     }}
@@ -276,7 +294,7 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
             </nav>
 
             {/* Center Column: Logo */}
-            <div style={{ textAlign: 'center' }}>
+            <div className="jenie-header-brand">
               <a
                 href="#home"
                 onClick={(e) => {
@@ -358,19 +376,6 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
                 </div>
               </button>
 
-              {onClose && (
-                <button
-                  onClick={onClose}
-                  style={{
-                    fontSize: 12,
-                    fontWeight: 700,
-                    color: '#D97706',
-                    marginLeft: 8,
-                  }}
-                >
-                  ✕ Exit
-                </button>
-              )}
             </div>
           </div>
 
@@ -406,11 +411,11 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
           VIEW MODE: COLLECTION VIEW
           ========================================================= */}
       {viewMode === 'collection' && (
-        <section style={{ padding: '60px 0', minHeight: '60vh' }}>
+        <section className="jenie-collection-page" style={{ padding: '60px 0', minHeight: '60vh' }}>
           <div className="jenie-container">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 36 }}>
+            <div className="jenie-collection-heading">
               <div>
-                <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 36, margin: '0 0 8px' }}>
+                <h1 className="jenie-page-title" style={{ fontFamily: 'Playfair Display, serif', fontSize: 36, margin: '0 0 8px' }}>
                   All Denim Collections
                 </h1>
                 <p style={{ color: '#6B7280', margin: 0 }}>Showing {collectionProducts.length} premium denim styles</p>
@@ -421,7 +426,7 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
             </div>
 
             {/* Filter Chips */}
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 40 }}>
+            <div className="jenie-collection-filters">
               {(['All', 'Denim', 'Vintage', 'Slimfit', 'Jackets'] as const).map((cat) => (
                 <button
                   key={cat}
@@ -441,7 +446,16 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
                 return (
                   <div key={p.id} className="jenie-product-card">
                     <div className="jenie-product-media">
-                      <img src={p.image} alt={p.name} />
+                      <img src={p.image} alt={p.name} loading="lazy" decoding="async" />
+                      {p.alternateImage && (
+                        <img
+                          className="jenie-product-alt-image"
+                          src={p.alternateImage}
+                          alt={`${p.name} alternate view`}
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      )}
                       {p.badge && <span className="jenie-product-badge">{p.badge}</span>}
                       <div className="jenie-card-action-bar">
                         <button
@@ -528,7 +542,7 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
           VIEW MODE: PDP (PRODUCT DETAILS PAGE)
           ========================================================= */}
       {viewMode === 'pdp' && (
-        <section style={{ padding: '60px 0', background: '#FFFFFF' }}>
+        <section className="jenie-pdp-section" style={{ padding: '60px 0', background: '#FFFFFF' }}>
           <div className="jenie-container">
             <button
               className="jenie-btn jenie-btn-light"
@@ -538,18 +552,21 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
               ← Back to Storefront
             </button>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 60, alignItems: 'start' }}>
+            <div className="jenie-pdp-layout">
               {/* Gallery */}
-              <div>
-                <div style={{ borderRadius: 12, overflow: 'hidden', height: 560, marginBottom: 16 }}>
+              <div className="jenie-pdp-gallery">
+                <div className="jenie-pdp-main-image">
                   <img
                     src={pdpSelectedImage}
                     alt={selectedProduct.name}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
                 </div>
-                <div style={{ display: 'flex', gap: 12 }}>
-                  {selectedProduct.gallery.map((img, i) => (
+                <div className="jenie-pdp-thumbnails">
+                  {[...new Set([
+                    ...selectedProduct.gallery,
+                    ...(selectedProduct.alternateImage ? [selectedProduct.alternateImage] : []),
+                  ])].map((img, i) => (
                     <button
                       key={i}
                       onClick={() => setPdpSelectedImage(img)}
@@ -561,14 +578,14 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
                         overflow: 'hidden',
                       }}
                     >
-                      <img src={img} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <img src={img} alt={`${selectedProduct.name} view ${i + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </button>
                   ))}
                 </div>
               </div>
 
               {/* Product Info */}
-              <div>
+              <div className="jenie-pdp-details">
                 <span className="jenie-product-cat">{selectedProduct.category} • {selectedProduct.fit}</span>
                 <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 38, margin: '8px 0 12px' }}>
                   {selectedProduct.name}
@@ -738,10 +755,15 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
       {viewMode === 'home' && (
         <>
           {/* SECTION 1: HERO SLIDESHOW (.slideshow-v2) */}
-          <section
-            className="jenie-hero-section"
-            style={{ backgroundImage: `url(${currentHeroSlide.image})` }}
-          >
+          <section className="jenie-hero-section">
+            <picture className="jenie-hero-media">
+              <source media="(max-width: 768px)" srcSet={currentHeroSlide.mobileImage} />
+              <img
+                src={isMobilePreview ? currentHeroSlide.mobileImage : currentHeroSlide.image}
+                alt=""
+                aria-hidden="true"
+              />
+            </picture>
             <div className="jenie-hero-overlay" />
             <div className="jenie-container">
               <div className="jenie-hero-content">
@@ -805,7 +827,7 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
                       setViewMode('collection')
                     }}
                   >
-                    <img src={col.image} alt={col.title} />
+                    <img src={col.image} alt={`${col.title} denim collection`} loading="lazy" decoding="async" />
                     <div className="jenie-collection-overlay">
                       <span className="jenie-collection-tag">{col.tag}</span>
                       <h3 className="jenie-collection-title">
@@ -834,7 +856,16 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
                   return (
                     <div key={p.id} className="jenie-product-card">
                       <div className="jenie-product-media">
-                        <img src={p.image} alt={p.name} />
+                        <img src={p.image} alt={p.name} loading="lazy" decoding="async" />
+                        {p.alternateImage && (
+                          <img
+                            className="jenie-product-alt-image"
+                            src={p.alternateImage}
+                            alt={`${p.name} alternate view`}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        )}
                         {p.badge && <span className="jenie-product-badge">{p.badge}</span>}
                         <div className="jenie-card-action-bar">
                           <button
@@ -958,7 +989,16 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
                   return (
                     <div key={p.id} className="jenie-product-card">
                       <div className="jenie-product-media">
-                        <img src={p.image} alt={p.name} />
+                        <img src={p.image} alt={p.name} loading="lazy" decoding="async" />
+                        {p.alternateImage && (
+                          <img
+                            className="jenie-product-alt-image"
+                            src={p.alternateImage}
+                            alt={`${p.name} alternate view`}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        )}
                         {p.badge && <span className="jenie-product-badge">{p.badge}</span>}
                         <div className="jenie-card-action-bar">
                           <button
@@ -1052,7 +1092,7 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
             <div className="jenie-instagram-grid">
               {JENIE_INSTAGRAM_POSTS.map((post) => (
                 <div key={post.id} className="jenie-instagram-tile">
-                  <img src={post.image} alt={post.handle} />
+                  <img src={post.image} alt={`Denim outfit from ${post.handle}`} loading="lazy" decoding="async" />
                   <div className="jenie-instagram-tile-overlay">
                     <span>{post.handle} • {post.likes}</span>
                   </div>
@@ -1233,7 +1273,7 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
                 ✕
               </button>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32 }}>
+            <div className="jenie-quick-view-layout">
               <img
                 src={quickViewProduct.image}
                 alt={quickViewProduct.name}
@@ -1269,6 +1309,7 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
       {isCompareOpen && (
         <div className="jenie-drawer-backdrop open" onClick={() => setIsCompareOpen(false)}>
           <div
+            className="jenie-compare-modal"
             style={{
               position: 'fixed',
               top: '50%',
@@ -1291,7 +1332,7 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
                 ✕
               </button>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: `repeat(${compareIds.length}, 1fr)`, gap: 20 }}>
+            <div className="jenie-compare-grid" style={{ gridTemplateColumns: `repeat(${compareIds.length}, 1fr)` }}>
               {compareIds.map((id) => {
                 const prod = JENIE_PRODUCTS.find((p) => p.id === id)
                 if (!prod) return null
