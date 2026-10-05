@@ -10134,11 +10134,114 @@
   gap: 16px !important;
 }
 
+.simulated-frame.frame-mobile .vogal-testimonials-grid {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+.simulated-frame.frame-mobile .vogal-insta-grid {
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 8px !important;
+}
+
+.simulated-frame.frame-mobile .vogal-countdown-banner {
+  padding: 32px 14px !important;
+  margin: 20px 0 !important;
+  overflow: hidden !important;
+}
+
+.simulated-frame.frame-mobile .vogal-countdown-copy h2 {
+  font-size: 1.5rem !important;
+  line-height: 1.2 !important;
+  margin-bottom: 12px !important;
+}
+
+.simulated-frame.frame-mobile .vogal-countdown-copy p {
+  font-size: 0.88rem !important;
+  margin-bottom: 20px !important;
+}
+
+.simulated-frame.frame-mobile .vogal-timer-grid {
+  display: flex !important;
+  gap: 6px !important;
+  margin-bottom: 22px !important;
+  width: 100% !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.simulated-frame.frame-mobile .vogal-timer-box {
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  padding: 10px 4px !important;
+  text-align: center !important;
+}
+
+.simulated-frame.frame-mobile .vogal-timer-num {
+  font-size: 1.35rem !important;
+  line-height: 1 !important;
+}
+
+.simulated-frame.frame-mobile .vogal-timer-label {
+  font-size: 0.62rem !important;
+  margin-top: 4px !important;
+  letter-spacing: 0.05em !important;
+}
+
+.simulated-frame.frame-mobile .vogal-timer-sep {
+  font-size: 1.1rem !important;
+  padding: 0 !important;
+}
+
+.simulated-frame.frame-mobile .vogal-countdown-media {
+  aspect-ratio: 16/10 !important;
+  max-height: 220px !important;
+  width: 100% !important;
+}
+
+.simulated-frame.frame-mobile .vogal-footer-grid {
+  grid-template-columns: 1fr !important;
+  gap: 28px !important;
+  padding: 0 16px 36px !important;
+}
+
+.simulated-frame.frame-mobile .vogal-footer {
+  padding: 40px 0 20px !important;
+}
+
+.simulated-frame.frame-mobile .vogal-footer-bottom {
+  flex-direction: column !important;
+  text-align: center !important;
+  gap: 14px !important;
+  padding: 24px 16px !important;
+}
+
+.simulated-frame.frame-mobile .vogal-payment-icons {
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+}
+
 .simulated-frame.frame-mobile .vogal-trust-grid,
 .vogal-theme-root.device-mobile .vogal-trust-grid,
 .vogal-theme-root.is-mobile .vogal-trust-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+.simulated-frame.frame-mobile .vogal-search-results-grid {
+  grid-template-columns: 1fr !important;
   gap: 10px !important;
+}
+
+.simulated-frame.frame-mobile .vogal-cart-drawer {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.simulated-frame.frame-mobile .vogal-modal-card {
+  max-width: 95% !important;
+  width: 95% !important;
+  padding: 20px 14px !important;
 }
 
 /* -------------------------------------------------------------
@@ -11841,7 +11944,9 @@
 .simulated-frame .belle-search-overlay,
 .simulated-frame .belle-modal-overlay,
 .simulated-frame .sports-cart-drawer-backdrop,
-.simulated-frame .sports-quickview-backdrop {
+.simulated-frame .sports-quickview-backdrop,
+.simulated-frame .vogal-cart-overlay,
+.simulated-frame .vogal-modal-overlay {
   position: fixed !important;
   inset: 0 !important;
   width: 100% !important;

@@ -2313,19 +2313,202 @@
     grid-template-columns: 1fr;
   }
 
+  .vogal-search-results-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  /* Countdown & Deal of Week Mobile */
+  .vogal-countdown-banner {
+    padding: 36px 16px;
+    margin: 24px 0;
+  }
+
+  .vogal-countdown-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .vogal-countdown-copy h2 {
+    font-size: 1.55rem;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .vogal-countdown-copy p {
+    font-size: 0.88rem;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .vogal-timer-grid {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 24px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .vogal-timer-box {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 10px 4px;
+    text-align: center;
+  }
+
+  .vogal-timer-num {
+    font-size: 1.35rem;
+    line-height: 1;
+  }
+
+  .vogal-timer-label {
+    font-size: 0.62rem;
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  .vogal-timer-sep {
+    font-size: 1.1rem;
+    padding: 0;
+  }
+
+  .vogal-countdown-media {
+    aspect-ratio: 16/10;
+    max-height: 220px;
+    width: 100%;
+  }
+
+  /* Footer Mobile */
   .vogal-footer-grid {
     grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 0 16px 36px;
+  }
+
+  .vogal-footer {
+    padding: 40px 0 20px;
+  }
+
+  .vogal-footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 14px;
+    padding: 24px 16px;
+  }
+
+  .vogal-payment-icons {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Drawers and Modals Mobile */
+  .vogal-cart-drawer {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .vogal-modal-card {
+    max-width: 95%;
+    width: 95%;
+    padding: 20px 14px;
   }
 
   .vogal-header-inner {
-    padding: 0 20px;
+    padding: 0 16px;
   }
 
   .vogal-hero-content {
-    padding: 60px 20px;
+    padding: 48px 16px;
   }
 
   .vogal-section {
-    padding: 48px 20px;
+    padding: 40px 16px;
   }
+}
+
+/* Explicit device/is-mobile classes support */
+.vogal-theme-root.device-mobile,
+.vogal-theme-root.is-mobile {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.vogal-theme-root.device-mobile .vogal-desktop-nav,
+.vogal-theme-root.is-mobile .vogal-desktop-nav {
+  display: none !important;
+}
+
+.vogal-theme-root.device-mobile .vogal-mobile-hamburger,
+.vogal-theme-root.is-mobile .vogal-mobile-hamburger {
+  display: flex !important;
+}
+
+.vogal-theme-root.device-mobile .vogal-product-grid,
+.vogal-theme-root.is-mobile .vogal-product-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+}
+
+.vogal-theme-root.device-mobile .vogal-testimonials-grid,
+.vogal-theme-root.is-mobile .vogal-testimonials-grid {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+.vogal-theme-root.device-mobile .vogal-insta-grid,
+.vogal-theme-root.is-mobile .vogal-insta-grid {
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 8px !important;
+}
+
+.vogal-theme-root.device-mobile .vogal-countdown-banner,
+.vogal-theme-root.is-mobile .vogal-countdown-banner {
+  padding: 36px 16px !important;
+  margin: 24px 0 !important;
+}
+
+.vogal-theme-root.device-mobile .vogal-countdown-inner,
+.vogal-theme-root.is-mobile .vogal-countdown-inner {
+  grid-template-columns: 1fr !important;
+  gap: 24px !important;
+}
+
+.vogal-theme-root.device-mobile .vogal-timer-grid,
+.vogal-theme-root.is-mobile .vogal-timer-grid {
+  display: flex !important;
+  gap: 6px !important;
+  width: 100% !important;
+  justify-content: space-between !important;
+}
+
+.vogal-theme-root.device-mobile .vogal-timer-box,
+.vogal-theme-root.is-mobile .vogal-timer-box {
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  padding: 10px 4px !important;
+  text-align: center !important;
+}
+
+.vogal-theme-root.device-mobile .vogal-timer-num,
+.vogal-theme-root.is-mobile .vogal-timer-num {
+  font-size: 1.35rem !important;
+}
+
+.vogal-theme-root.device-mobile .vogal-timer-label,
+.vogal-theme-root.is-mobile .vogal-timer-label {
+  font-size: 0.62rem !important;
+}
+
+.vogal-theme-root.device-mobile .vogal-footer-grid,
+.vogal-theme-root.is-mobile .vogal-footer-grid {
+  grid-template-columns: 1fr !important;
+  gap: 28px !important;
+}
+
+.vogal-theme-root.device-mobile .vogal-cart-drawer,
+.vogal-theme-root.is-mobile .vogal-cart-drawer {
+  width: 100% !important;
+  max-width: 100% !important;
 }
