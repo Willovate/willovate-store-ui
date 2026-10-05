@@ -722,6 +722,40 @@
   background-color: #B45309;
 }
 
+.mt-card-heart-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 6;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(4px);
+  border: 1px solid var(--mt-border);
+  color: var(--mt-slate);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.mt-card-heart-btn:hover {
+  background-color: #FFFFFF;
+  color: var(--mt-crimson);
+  border-color: var(--mt-crimson);
+  transform: scale(1.08);
+}
+
+.mt-card-heart-btn.active {
+  background-color: #FFF0F2;
+  border-color: var(--mt-crimson);
+  color: var(--mt-crimson);
+}
+
 .mt-card-quick-actions {
   position: absolute;
   bottom: 12px;
@@ -1637,18 +1671,24 @@
 
   /* 3. Hero Section & Fix Overlapping Floating Spec */
   .mt-hero-carousel {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
     min-height: auto !important;
-    padding: 0 !important;
+    padding: 0 0 16px 0 !important;
+    width: 100% !important;
   }
 
   .mt-hero-slide {
     display: flex !important;
     flex-direction: column !important;
     grid-template-columns: 1fr !important;
-    padding: 24px 16px 36px !important;
+    padding: 24px 16px 20px !important;
     gap: 18px !important;
     text-align: center !important;
     align-items: center !important;
+    width: 100% !important;
+    order: 1 !important;
   }
 
   .mt-hero-text {
@@ -1749,12 +1789,20 @@
   }
 
   .mt-hero-nav-dots {
+    order: 2 !important;
     position: static !important;
-    margin-top: 16px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 10px !important;
+    width: 100% !important;
+    margin: 12px auto 16px auto !important;
+    padding: 0 !important;
     transform: none !important;
     left: auto !important;
     bottom: auto !important;
-    justify-content: center !important;
+    z-index: 10 !important;
   }
 
   /* 4. Value Pillars Section */
@@ -2382,8 +2430,12 @@
 .mr-tevor-storefront.is-mobile .mt-hero-carousel,
 .mr-tevor-storefront.device-mobile .mt-hero-carousel,
 .mr-tevor-storefront.mr-tevor-mobile .mt-hero-carousel {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
   min-height: auto !important;
-  padding: 0 !important;
+  padding: 0 0 16px 0 !important;
+  width: 100% !important;
 }
 
 .mr-tevor-storefront.is-mobile .mt-hero-slide,
@@ -2392,10 +2444,12 @@
   display: flex !important;
   flex-direction: column !important;
   grid-template-columns: 1fr !important;
-  padding: 24px 16px 36px !important;
+  padding: 24px 16px 20px !important;
   gap: 18px !important;
   text-align: center !important;
   align-items: center !important;
+  width: 100% !important;
+  order: 1 !important;
 }
 
 .mr-tevor-storefront.is-mobile .mt-hero-text,
@@ -2526,12 +2580,20 @@
 .mr-tevor-storefront.is-mobile .mt-hero-nav-dots,
 .mr-tevor-storefront.device-mobile .mt-hero-nav-dots,
 .mr-tevor-storefront.mr-tevor-mobile .mt-hero-nav-dots {
+  order: 2 !important;
   position: static !important;
-  margin-top: 16px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 10px !important;
+  width: 100% !important;
+  margin: 12px auto 16px auto !important;
+  padding: 0 !important;
   transform: none !important;
   left: auto !important;
   bottom: auto !important;
-  justify-content: center !important;
+  z-index: 10 !important;
 }
 
 .mr-tevor-storefront.is-mobile .mt-pillars-section,

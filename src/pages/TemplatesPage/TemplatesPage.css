@@ -11018,8 +11018,12 @@
 .simulated-frame.frame-mobile .mt-hero-carousel,
 .mr-tevor-storefront.device-mobile .mt-hero-carousel,
 .mr-tevor-storefront.is-mobile .mt-hero-carousel {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
   min-height: auto !important;
-  padding: 0 !important;
+  padding: 0 0 16px 0 !important;
+  width: 100% !important;
 }
 
 .simulated-frame.frame-mobile .mt-hero-slide,
@@ -11028,10 +11032,12 @@
   display: flex !important;
   flex-direction: column !important;
   grid-template-columns: 1fr !important;
-  padding: 24px 16px 36px !important;
+  padding: 24px 16px 20px !important;
   gap: 18px !important;
   text-align: center !important;
   align-items: center !important;
+  width: 100% !important;
+  order: 1 !important;
 }
 
 .simulated-frame.frame-mobile .mt-hero-text,
@@ -11134,12 +11140,20 @@
 .simulated-frame.frame-mobile .mt-hero-nav-dots,
 .mr-tevor-storefront.device-mobile .mt-hero-nav-dots,
 .mr-tevor-storefront.is-mobile .mt-hero-nav-dots {
+  order: 2 !important;
   position: static !important;
-  margin-top: 16px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 10px !important;
+  width: 100% !important;
+  margin: 12px auto 16px auto !important;
+  padding: 0 !important;
   transform: none !important;
   left: auto !important;
   bottom: auto !important;
-  justify-content: center !important;
+  z-index: 10 !important;
 }
 
 /* Value Pillars */
@@ -11189,6 +11203,24 @@
 .mr-tevor-storefront.device-mobile .mt-card-image-box,
 .mr-tevor-storefront.is-mobile .mt-card-image-box {
   height: 175px !important;
+  position: relative !important;
+}
+
+.simulated-frame.frame-mobile .mt-card-heart-btn,
+.mr-tevor-storefront.device-mobile .mt-card-heart-btn,
+.mr-tevor-storefront.is-mobile .mt-card-heart-btn {
+  display: inline-flex !important;
+  position: absolute !important;
+  top: 8px !important;
+  right: 8px !important;
+  z-index: 6 !important;
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 50% !important;
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid var(--mt-border) !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .simulated-frame.frame-mobile .mt-card-image,

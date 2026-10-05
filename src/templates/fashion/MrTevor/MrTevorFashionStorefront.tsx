@@ -33,6 +33,7 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
   const [selectedProduct, setSelectedProduct] = useState<MrTevorProduct | null>(null)
   const [quickViewProduct, setQuickViewProduct] = useState<MrTevorProduct | null>(null)
   const [isCartOpen, setIsCartOpen] = useState(false)
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false)
   const [isBookingOpen, setIsBookingOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
@@ -325,25 +326,10 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
           </nav>
 
           <div className="mt-header-actions">
-            {onBackToDirectory && (
-              <button
-                className="mt-icon-btn"
-                title="Return to Templates Directory"
-                onClick={onBackToDirectory}
-              >
-                <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-              </button>
-            )}
-
             <button
               className="mt-icon-btn"
               title="Saved Suits Wishlist"
-              onClick={() => {
-                setFilterState((prev) => ({ ...prev, collection: 'All' }))
-                setActiveTab('storefront')
-              }}
+              onClick={() => setIsWishlistOpen(true)}
             >
               <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -487,6 +473,16 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
               >
                 <span>Hot Deals</span>
                 <span>→</span>
+              </button>
+              <button
+                className="mt-mobile-nav-link"
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  setIsWishlistOpen(true)
+                }}
+              >
+                <span>Saved Suits Wishlist ({wishlist.length})</span>
+                <span style={{ color: 'var(--mt-crimson)' }}>♥</span>
               </button>
             </nav>
 
@@ -730,6 +726,20 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
                       )}
 
                       <img src={product.image} alt={product.title} className="mt-card-image" />
+
+                      <button
+                        className={`mt-card-heart-btn ${isWishlisted ? 'active' : ''}`}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          handleToggleWishlist(product.id)
+                        }}
+                        title={isWishlisted ? 'Remove from Saved Suits' : 'Save to Wishlist'}
+                        aria-label="Save to Wishlist"
+                      >
+                        <svg width="17" height="17" fill={isWishlisted ? '#C22A3B' : 'none'} stroke={isWishlisted ? '#C22A3B' : '#3B414E'} strokeWidth="2" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                      </button>
 
                       <div
                         className="mt-card-quick-actions"
@@ -1297,6 +1307,132 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
                 </button>
               </div>
             </div>
+      {/* Slide-over Saved Suits Wishlist Drawer */}
+      {isWishlistOpen && (
+        <div className="mt-cart-drawer-overlay" onClick={() => setIsWishlistOpen(false)}>
+          <div className="mt-cart-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className="mt-cart-header">
+              <h3>Saved Suits Wishlist ({wishlist.length})</h3>
+              <button
+                style={{ background: 'none', border: 'none', color: '#FFFFFF', fontSize: '1.2rem', cursor: 'pointer' }}
+                onClick={() => setIsWishlistOpen(false)}
+                aria-label="Close Wishlist"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div style={{ backgroundColor: 'var(--mt-linen)', padding: '12px 24px', borderBottom: '1px solid var(--mt-border)', fontSize: '0.78rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span>Hand-tailored Bespoke Wardrobe</span>
+                <strong style={{ color: 'var(--mt-crimson)' }}>{wishlist.length} Items Saved</strong>
+              </div>
+            </div>
+
+            <div className="mt-cart-items-list">
+              {wishlist.map((id) => {
+                const prod = MR_TEVOR_PRODUCTS.find((p) => p.id === id)
+                if (!prod) return null
+                return (
+                  <div className="mt-cart-item-card" key={prod.id}>
+                    <img
+                      src={prod.image}
+                      alt={prod.title}
+                      className="mt-cart-item-img"
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => {
+                        handleOpenPDP(prod)
+                        setIsWishlistOpen(false)
+                      }}
+                    />
+                    <div style={{ flexGrow: 1 }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <h4
+                          style={{ fontFamily: 'var(--mt-font-serif)', fontSize: '0.95rem', margin: '0 0 4px 0', cursor: 'pointer' }}
+                          onClick={() => {
+                            handleOpenPDP(prod)
+                            setIsWishlistOpen(false)
+                          }}
+                        >
+                          {prod.title}
+                        </h4>
+                        <button
+                          style={{ background: 'none', border: 'none', color: '#9CA3AF', cursor: 'pointer', fontSize: '0.85rem' }}
+                          onClick={() => handleToggleWishlist(prod.id)}
+                          title="Remove from Wishlist"
+                        >
+                          ✕
+                        </button>
+                      </div>
+
+                      <div style={{ fontSize: '0.75rem', color: '#6B7280', marginBottom: '8px' }}>
+                        {prod.lapel} • {prod.fit} • {prod.material}
+                      </div>
+
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px' }}>
+                        <span style={{ fontFamily: 'var(--mt-font-serif)', fontWeight: 800, color: 'var(--mt-crimson)' }}>
+                          ${prod.price}
+                        </span>
+
+                        <button
+                          className="mt-btn-primary"
+                          style={{ padding: '6px 12px', fontSize: '0.72rem', letterSpacing: '0.04em' }}
+                          onClick={() => {
+                            handleAddToCart(prod)
+                            setIsWishlistOpen(false)
+                          }}
+                        >
+                          Add to Garment Bag
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+
+              {wishlist.length === 0 && (
+                <div style={{ textAlign: 'center', padding: '60px 20px', color: '#6B7280' }}>
+                  <div style={{ fontSize: '2.5rem', marginBottom: '12px', color: 'var(--mt-crimson)' }}>♡</div>
+                  <p style={{ fontFamily: 'var(--mt-font-serif)', fontSize: '1.1rem', marginBottom: '8px' }}>
+                    Your Saved Suits Wishlist is Empty
+                  </p>
+                  <p style={{ fontSize: '0.82rem', marginBottom: '20px' }}>
+                    Explore our Savile Row collection and tap the heart icon on any suit to save your favorites.
+                  </p>
+                  <button
+                    className="mt-btn-primary"
+                    style={{ padding: '10px 20px', fontSize: '0.78rem' }}
+                    onClick={() => {
+                      setIsWishlistOpen(false)
+                      setActiveTab('storefront')
+                      const el = document.getElementById('mt-catalog-view')
+                      if (el) el.scrollIntoView({ behavior: 'smooth' })
+                    }}
+                  >
+                    Explore Suiting Collection
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {wishlist.length > 0 && (
+              <div className="mt-cart-footer">
+                <button
+                  className="mt-btn-primary"
+                  style={{ width: '100%', justifyContent: 'center' }}
+                  onClick={() => {
+                    wishlist.forEach((id) => {
+                      const prod = MR_TEVOR_PRODUCTS.find((p) => p.id === id)
+                      if (prod) handleAddToCart(prod)
+                    })
+                    setIsWishlistOpen(false)
+                    setIsCartOpen(true)
+                  }}
+                >
+                  Move All to Garment Bag
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
