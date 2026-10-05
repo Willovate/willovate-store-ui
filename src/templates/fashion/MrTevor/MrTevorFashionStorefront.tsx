@@ -204,8 +204,30 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
     setPdpQuantity(1)
     setActiveTab('pdp')
     if (onSelectProduct) onSelectProduct(product)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    try {
+      window.scrollTo({ top: 0, behavior: 'instant' })
+      const scrollParents = document.querySelectorAll(
+        '.simulated-frame, .preview-viewport-container, .mr-tevor-storefront, .preview-modal-body, body, html'
+      )
+      scrollParents.forEach((el) => {
+        ;(el as HTMLElement).scrollTop = 0
+      })
+    } catch (_) {}
   }
+
+  useEffect(() => {
+    if (activeTab === 'pdp') {
+      try {
+        window.scrollTo({ top: 0, behavior: 'instant' })
+        const scrollParents = document.querySelectorAll(
+          '.simulated-frame, .preview-viewport-container, .mr-tevor-storefront, .preview-modal-body, body, html'
+        )
+        scrollParents.forEach((el) => {
+          ;(el as HTMLElement).scrollTop = 0
+        })
+      } catch (_) {}
+    }
+  }, [activeTab])
 
   const handleAddBespokeCustomSuit = () => {
     const model = MR_TEVOR_PRODUCTS.find((p) => p.id === bespokeModelId) || MR_TEVOR_PRODUCTS[0]
@@ -706,10 +728,18 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
               {filteredProducts.map((product) => {
                 const isWishlisted = wishlist.includes(product.id)
                 return (
-                  <div className="mt-product-card" key={product.id}>
+                  <div
+                    className="mt-product-card"
+                    key={product.id}
+                    onClick={() => handleOpenPDP(product)}
+                    style={{ cursor: 'pointer' }}
+                  >
                     <div
                       className="mt-card-image-box"
-                      onClick={() => handleOpenPDP(product)}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleOpenPDP(product)
+                      }}
                     >
                       {product.badge && (
                         <span
@@ -747,13 +777,19 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
                       >
                         <button
                           className="mt-action-pill-btn"
-                          onClick={() => setQuickViewProduct(product)}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setQuickViewProduct(product)
+                          }}
                         >
                           Quick View
                         </button>
                         <button
                           className="mt-action-pill-btn"
-                          onClick={() => handleToggleWishlist(product.id)}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            handleToggleWishlist(product.id)
+                          }}
                         >
                           {isWishlisted ? '♥ Saved' : '♡ Wishlist'}
                         </button>
@@ -763,12 +799,15 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
                     <div className="mt-card-body">
                       <div className="mt-card-meta">
                         <span className="mt-card-lapel">{product.lapel}</span>
-                        <span>{product.fit}</span>
+                        <span className="mt-card-fit">{product.fit}</span>
                       </div>
 
                       <h3
                         className="mt-card-title"
-                        onClick={() => handleOpenPDP(product)}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          handleOpenPDP(product)
+                        }}
                       >
                         {product.title}
                       </h3>
@@ -783,20 +822,24 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
                         {product.compareAtPrice && (
                           <span className="mt-compare-price">${product.compareAtPrice}</span>
                         )}
-                        <span style={{ marginLeft: 'auto', fontSize: '0.75rem', color: '#6B7280' }}>
-                          ★ {product.rating} ({product.reviewsCount})
+                        <span className="mt-card-rating">
+                          ★ {product.rating} <span className="mt-reviews-count">({product.reviewsCount})</span>
                         </span>
                       </div>
 
                       <div className="mt-card-footer">
                         <button
                           className="mt-btn-add-cart"
-                          onClick={() => handleAddToCart(product)}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            handleAddToCart(product)
+                          }}
                         >
                           <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                           </svg>
-                          Add to Garment Bag
+                          <span className="mt-btn-cart-desktop">Add to Garment Bag</span>
+                          <span className="mt-btn-cart-mobile">Add to Bag</span>
                         </button>
                       </div>
                     </div>
@@ -1017,7 +1060,18 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
             <div className="mt-pdp-breadcrumbs">
               <span
                 style={{ cursor: 'pointer', textDecoration: 'underline' }}
-                onClick={() => setActiveTab('storefront')}
+                onClick={() => {
+                  setActiveTab('storefront')
+                  try {
+                    window.scrollTo({ top: 0, behavior: 'instant' })
+                    const scrollParents = document.querySelectorAll(
+                      '.simulated-frame, .preview-viewport-container, .mr-tevor-storefront, .preview-modal-body, body, html'
+                    )
+                    scrollParents.forEach((el) => {
+                      ;(el as HTMLElement).scrollTop = 0
+                    })
+                  } catch (_) {}
+                }}
               >
                 Atelier Home
               </span>
@@ -1026,6 +1080,23 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
               <span>/</span>
               <span style={{ color: 'var(--mt-crimson)', fontWeight: 600 }}>{selectedProduct.title}</span>
             </div>
+            <button
+              className="mt-pdp-back-btn"
+              onClick={() => {
+                setActiveTab('storefront')
+                try {
+                  window.scrollTo({ top: 0, behavior: 'instant' })
+                  const scrollParents = document.querySelectorAll(
+                    '.simulated-frame, .preview-viewport-container, .mr-tevor-storefront, .preview-modal-body, body, html'
+                  )
+                  scrollParents.forEach((el) => {
+                    ;(el as HTMLElement).scrollTop = 0
+                  })
+                } catch (_) {}
+              }}
+            >
+              ← Back to Collection
+            </button>
           </div>
 
           <div className="mt-pdp-container">
@@ -1123,6 +1194,7 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
                   {selectedProduct.sizes.map((sz) => (
                     <button
                       key={sz}
+                      className={`mt-pdp-size-btn ${pdpSelectedSize === sz ? 'active' : ''}`}
                       style={{
                         padding: '10px 16px',
                         border: pdpSelectedSize === sz ? '2px solid var(--mt-crimson)' : '1px solid var(--mt-border)',
@@ -1168,8 +1240,8 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
               </div>
 
               {/* Actions */}
-              <div style={{ display: 'flex', gap: '16px', marginBottom: '32px' }}>
-                <div style={{ display: 'flex', border: '1px solid var(--mt-border)', borderRadius: '2px' }}>
+              <div className="mt-pdp-actions-row" style={{ display: 'flex', gap: '16px', marginBottom: '32px' }}>
+                <div className="mt-pdp-qty-picker" style={{ display: 'flex', border: '1px solid var(--mt-border)', borderRadius: '2px' }}>
                   <button
                     style={{ padding: '0 14px', background: '#FFFFFF', border: 'none', cursor: 'pointer', fontSize: '1rem' }}
                     onClick={() => setPdpQuantity((q) => Math.max(1, q - 1))}
@@ -1188,7 +1260,7 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
                 </div>
 
                 <button
-                  className="mt-btn-primary"
+                  className="mt-btn-primary mt-pdp-add-carrier-btn"
                   style={{ flexGrow: 1, justifyContent: 'center' }}
                   onClick={() => {
                     handleAddToCart(
