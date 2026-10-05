@@ -3,43 +3,126 @@ import type { TemplateConfig } from '../../types/template'
 export const Electronics02: TemplateConfig = {
   id: 'electronics-02',
   name: 'Volt',
-  description: 'High-performance gaming hardware ecommerce with a dark, premium interface.',
+  description: 'Premium consumer electronics flagship store. Sleek, modern, and confident.',
   categories: [{ id: 'electronics', name: 'Electronics' }],
-  tags: [{ id: 'gaming', name: 'Gaming' }, { id: 'dark', name: 'Dark' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&q=80&w=800',
+  tags: [{ id: 'premium', name: 'Premium' }, { id: 'modern', name: 'Modern' }],
+  thumbnailUrl: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=80&w=1600'
   ],
-  isFeatured: false,
+  isFeatured: true,
   theme: {
-    fonts: { heading: 'Inter, sans-serif', body: 'Inter, sans-serif' },
-    colors: { primary: '#ffffff', background: '#09090b', accent: '#3b82f6' }
+    fonts: { heading: 'Space Grotesk, sans-serif', body: 'Inter, sans-serif' },
+    colors: { primary: '#111827', background: '#f8fafc', accent: '#0ea5e9' }
   },
   sections: [
-    { id: 's1', type: 'navbar', props: { brand: 'VOLT', style: 'utility' } },
-    { id: 's2', type: 'split-hero', props: { title: 'Dominate the Game.', subtitle: 'Next-generation hardware for serious competitors.', image: 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&q=80&w=800', ctaLabel: 'Shop Hardware' } },
-    { id: 's3', type: 'category-grid', props: { title: 'Hardware Categories', categories: [{ name: 'Laptops', image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=600' }, { name: 'Keyboards', image: 'https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&q=80&w=600' }, { name: 'Mice', image: 'https://images.unsplash.com/photo-1605773527852-c546a8584ea3?auto=format&fit=crop&q=80&w=600' }, { name: 'Headsets', image: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&q=80&w=600' }] } },
-    { id: 's4', type: 'product-spotlight', props: { image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=800', name: 'Apex Pro Gaming Laptop', category: 'Laptops', description: 'Armed with the latest RTX 4090 and a 240Hz OLED display, the Apex Pro is ready for any challenge.', price: 2499, originalPrice: 2799, features: ['NVIDIA RTX 4090', 'Intel Core i9', '32GB DDR5 RAM'], badge: 'Save $300' } },
-    { id: 's5', type: 'specification-grid', props: { title: 'Apex Pro Specs', specs: [{ label: 'GPU', value: 'RTX 4090' }, { label: 'CPU', value: 'Core i9 13900HX' }, { label: 'Display', value: '16" 240Hz OLED' }, { label: 'Memory', value: '32GB DDR5-5600' }] } },
-    { id: 's6', type: 'feature-comparison', props: { title: 'Find Your Setup', products: [{ name: 'Apex Elite', price: 1499 }, { name: 'Apex Pro', price: 2499, isHighlighted: true }, { name: 'Apex Ultra', price: 3499 }], rows: [{ label: 'GPU', values: ['RTX 4070', 'RTX 4090', 'RTX 4090 Ti'] }, { label: 'Display', values: ['144Hz IPS', '240Hz OLED', '240Hz Mini-LED'] }] } },
-    { id: 's7', type: 'catalog', props: {
+    { id: 's1', type: 'promo', props: { text: 'Free express delivery on orders over ₹5,000' } },
+    { id: 's2', type: 'navbar', props: { brand: 'VOLT', style: 'utility' } },
+    { id: 's3', type: 'full-hero', props: { 
+      title: 'Technology, Refined.', 
+      subtitle: 'Experience the next generation of premium consumer electronics designed for your everyday life.', 
+      image: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=80&w=1600', 
+      ctaLabel: 'Shop New Arrivals' 
+    } },
+    { id: 's4', type: 'category-grid', props: { 
+      title: 'Explore Categories', 
+      categories: [
+        { name: 'Smartphones', image: 'https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?auto=format&fit=crop&q=80&w=600' }, 
+        { name: 'Laptops', image: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&q=80&w=600' }, 
+        { name: 'Audio', image: 'https://images.unsplash.com/photo-1612444530582-fc66183b16f7?auto=format&fit=crop&q=80&w=600' }, 
+        { name: 'Wearables', image: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&q=80&w=600' },
+        { name: 'Accessories', image: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&q=80&w=600' }
+      ] 
+    } },
+    { id: 's5', type: 'catalog', props: {
         products: [
-          { id: 'v1', name: 'Apex Pro', description: 'Gaming Laptop', price: 2499, imageUrl: 'https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&q=80&w=600' },
-          { id: 'v2', name: 'Vector Wireless Mouse', description: 'Ultra-lightweight', price: 99, imageUrl: 'https://images.unsplash.com/photo-1605773527852-c546a8584ea3?auto=format&fit=crop&q=80&w=600' },
-        { id: 'v3', name: 'Volt Core Headset', description: '7.1 Surround Sound', price: 129, imageUrl: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&q=80&w=600' }
-      ]
+          { id: 'vp1', name: 'Volt X', description: 'Flagship Smartphone', price: 999, imageUrl: 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&q=80&w=600' },
+          { id: 'vp2', name: 'VoltBook Pro', description: '14" Ultrabook', price: 1499, imageUrl: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&q=80&w=600' },
+          { id: 'vp3', name: 'Volt Buds', description: 'True Wireless Noise Cancelling', price: 199, imageUrl: 'https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&q=80&w=600' },
+          { id: 'vp4', name: 'Volt Watch', description: 'Advanced Health Tracking', price: 349, imageUrl: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&q=80&w=600' }
+        ]
     }},
-    { id: 's8', type: 'testimonials', props: { title: 'Pro Endorsements', testimonials: [{ quote: 'The Apex Pro delivers desktop performance in a portable chassis.', author: 'Esports Monthly' }] } },
-    { id: 's9', type: 'footer', props: {} }
+    { id: 's6', type: 'product-spotlight', props: { 
+      image: 'https://images.unsplash.com/photo-1533228100845-08145b01de14?auto=format&fit=crop&q=80&w=800', 
+      name: 'Volt X Pro', 
+      category: 'Flagship', 
+      description: 'Capture every detail with the new 200MP camera system. Powered by the fastest chip ever in a smartphone, delivering unprecedented performance and battery life.', 
+      price: 1199, 
+      features: ['200MP Quad Camera', 'All-Day Battery', 'Dynamic 120Hz Display'], 
+      badge: 'New Arrival',
+      imageRight: false
+    } },
+    { id: 's7', type: 'bento-grid', props: { 
+      title: 'The Volt Ecosystem',
+      items: [
+        { title: 'Seamless Integration', description: 'Your devices, perfectly synced.', size: 'large', image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&q=80&w=800' },
+        { title: 'Volt X', description: 'The hub of your life.', size: 'small', image: 'https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?auto=format&fit=crop&q=80&w=400' },
+        { title: 'Volt Buds', description: 'Immersive sound.', size: 'small', image: 'https://images.unsplash.com/photo-1572569438068-409b60e40854?auto=format&fit=crop&q=80&w=400' },
+        { title: 'Volt Watch', description: 'Always connected.', size: 'small', image: 'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&q=80&w=400' }
+      ]
+    } },
+    { id: 's8', type: 'catalog', props: {
+        products: [
+          { id: 'va1', name: 'Volt Studio Over-Ear', description: 'High-Fidelity Audio', price: 349, imageUrl: 'https://images.unsplash.com/photo-1599669500515-9b40924d5189?auto=format&fit=crop&q=80&w=600' },
+          { id: 'va2', name: 'Volt Soundbar', description: 'Cinematic Sound', price: 499, imageUrl: 'https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&q=80&w=600' },
+          { id: 'va3', name: 'Volt Portable Mini', description: 'Waterproof Bluetooth Speaker', price: 129, imageUrl: 'https://images.unsplash.com/photo-1589256469067-ea9912224858?auto=format&fit=crop&q=80&w=600' },
+          { id: 'va4', name: 'Volt Buds Pro', description: 'Adaptive Noise Control', price: 249, imageUrl: 'https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&q=80&w=600' }
+        ]
+    }},
+    { id: 's9', type: 'editorial-grid', props: { 
+      title: 'Smart Devices', 
+      images: [
+        'https://images.unsplash.com/photo-1584006682522-dc17d6c0d06e?auto=format&fit=crop&q=80&w=600', 
+        'https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&q=80&w=600',
+        'https://images.unsplash.com/photo-1550989460-0adf9ea622e2?auto=format&fit=crop&q=80&w=600'
+      ] 
+    } },
+    { id: 's10', type: 'feature-comparison', props: { 
+      title: 'Compare Flagships', 
+      products: [
+        { name: 'Volt X', price: 999 }, 
+        { name: 'Volt X Pro', price: 1199, isHighlighted: true }
+      ], 
+      rows: [
+        { label: 'Display', values: ['6.1" OLED', '6.7" OLED 120Hz'] }, 
+        { label: 'Camera', values: ['Dual 50MP', 'Quad 200MP'] },
+        { label: 'Battery', values: ['Up to 20 hrs', 'Up to 28 hrs'] },
+        { label: 'Storage', values: ['128GB / 256GB', '256GB / 512GB / 1TB'] }
+      ] 
+    } },
+    { id: 's11', type: 'split-hero', props: { 
+      title: 'Designed for the way you live.', 
+      subtitle: 'Every Volt product is crafted with precision, blending premium materials with cutting-edge engineering to enhance your daily routines without getting in the way.', 
+      image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&q=80&w=800', 
+      ctaLabel: 'Read Our Story' 
+    } },
+    { id: 's12', type: 'catalog', props: {
+        products: [
+          { id: 'vacc1', name: 'Volt Fast Charger 65W', description: 'Dual USB-C', price: 49, imageUrl: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&q=80&w=600' },
+          { id: 'vacc2', name: 'Volt Magnetic Power Bank', description: '10,000mAh', price: 79, imageUrl: 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&q=80&w=600' },
+          { id: 'vacc3', name: 'Volt Leather Case', description: 'Premium Protection', price: 59, imageUrl: 'https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&q=80&w=600' },
+          { id: 'vacc4', name: 'Volt Pro Hub', description: '7-in-1 Connectivity', price: 89, imageUrl: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=80&w=600' }
+        ]
+    }},
+    { id: 's13', type: 'testimonials', props: { 
+      title: 'Customer Reviews', 
+      testimonials: [
+        { quote: 'The Volt X Pro is simply the best device I have ever owned. The camera is phenomenal.', author: 'Alex M.' },
+        { quote: 'Volt Buds provide incredible noise cancellation in a beautifully compact design.', author: 'Sarah T.' }
+      ] 
+    } },
+    { id: 's14', type: 'newsletter', props: {} },
+    { id: 's15', type: 'footer', props: {} }
   ],
   navigation: [
-    { label: 'Gaming PCs', href: '#pcs' },
-    { label: 'Components', href: '#components' },
+    { label: 'Smartphones', href: '#smartphones' },
+    { label: 'Laptops', href: '#laptops' },
+    { label: 'Audio', href: '#audio' },
+    { label: 'Accessories', href: '#accessories' },
   ],
   features: [
-    { id: 'gpus', label: 'GPUs', description: 'Next-gen graphics' },
-    { id: 'deals', label: 'Performance Deals' },
-    { id: 'compare', label: 'Compare' },
+    { id: 'compare', label: 'Compare Models' },
+    { id: 'support', label: 'Support' },
     { id: 'cart', label: 'Cart' },
   ]
 }
