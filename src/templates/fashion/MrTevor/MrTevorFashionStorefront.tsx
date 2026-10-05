@@ -1231,39 +1231,23 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
       {/* Quick View Modal */}
       {quickViewProduct && (
         <div
-          className="mt-cart-drawer-overlay"
-          style={{ justifyContent: 'center', alignItems: 'center' }}
+          className="mt-cart-drawer-overlay mt-modal-overlay"
           onClick={() => setQuickViewProduct(null)}
         >
           <div
-            style={{
-              backgroundColor: '#FFFFFF',
-              maxWidth: '680px',
-              width: '90%',
-              borderRadius: '4px',
-              padding: '32px',
-              position: 'relative',
-              boxShadow: 'var(--mt-shadow-lg)',
-            }}
+            className="mt-quick-view-modal"
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              style={{
-                position: 'absolute',
-                top: '16px',
-                right: '16px',
-                background: 'none',
-                border: 'none',
-                fontSize: '1.4rem',
-                cursor: 'pointer',
-              }}
+              className="mt-modal-close-btn"
               onClick={() => setQuickViewProduct(null)}
+              aria-label="Close Quick View"
             >
               ✕
             </button>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', alignItems: 'center' }}>
-              <div style={{ backgroundColor: '#F8F9FA', padding: '20px', borderRadius: '4px', textAlign: 'center' }}>
+            <div className="mt-quick-view-grid">
+              <div className="mt-quick-view-img-box">
                 <img
                   src={quickViewProduct.image}
                   alt={quickViewProduct.title}
@@ -1557,33 +1541,17 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
       {/* Book Master Tailor Consultation Modal */}
       {isBookingOpen && (
         <div
-          className="mt-cart-drawer-overlay"
-          style={{ justifyContent: 'center', alignItems: 'center' }}
+          className="mt-cart-drawer-overlay mt-modal-overlay"
           onClick={() => setIsBookingOpen(false)}
         >
           <div
-            style={{
-              backgroundColor: '#FFFFFF',
-              maxWidth: '540px',
-              width: '90%',
-              borderRadius: '4px',
-              padding: '36px',
-              position: 'relative',
-              boxShadow: 'var(--mt-shadow-lg)',
-            }}
+            className="mt-booking-modal"
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              style={{
-                position: 'absolute',
-                top: '16px',
-                right: '16px',
-                background: 'none',
-                border: 'none',
-                fontSize: '1.4rem',
-                cursor: 'pointer',
-              }}
+              className="mt-modal-close-btn"
               onClick={() => setIsBookingOpen(false)}
+              aria-label="Close Booking"
             >
               ✕
             </button>
@@ -1611,7 +1579,7 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
                   Enjoy a private one-on-one consultation in London, New York, or via live virtual video measurement.
                 </p>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '14px' }}>
+                <div className="mt-booking-grid">
                   <div>
                     <label style={{ display: 'block', fontSize: '0.72rem', textTransform: 'uppercase', fontWeight: 700, marginBottom: '4px' }}>
                       Full Name
@@ -1640,7 +1608,7 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
                   </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '14px' }}>
+                <div className="mt-booking-grid">
                   <div>
                     <label style={{ display: 'block', fontSize: '0.72rem', textTransform: 'uppercase', fontWeight: 700, marginBottom: '4px' }}>
                       Atelier Location
