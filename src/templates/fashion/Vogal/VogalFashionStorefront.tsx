@@ -43,6 +43,7 @@ export const VogalFashionStorefront: React.FC<VogalStorefrontProps> = ({
 
   // Modals & Drawers
   const [cartOpen, setCartOpen] = useState(false)
+  const [wishlistOpen, setWishlistOpen] = useState(false)
   const [quickViewProduct, setQuickViewProduct] = useState<VogalProduct | null>(null)
   const [sizeGuideOpen, setSizeGuideOpen] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -171,21 +172,41 @@ export const VogalFashionStorefront: React.FC<VogalStorefrontProps> = ({
     return cartItems.reduce((acc, i) => acc + (i.product.salePrice || i.product.price) * i.quantity, 0)
   }, [cartItems])
 
+  const wishlistedProducts = useMemo(() => {
+    return VOGAL_PRODUCTS.filter((p) => wishlist.includes(p.id))
+  }, [wishlist])
+
   const freeShippingGoal = 2999
   const freeShippingProgress = Math.min(100, Math.round((cartSubtotal / freeShippingGoal) * 100))
   const freeShippingRemaining = freeShippingGoal - cartSubtotal
 
+  const scrollContainersToTop = () => {
+    try {
+      window.scrollTo({ top: 0, behavior: 'instant' })
+      const scrollParents = document.querySelectorAll(
+        '.simulated-frame, .preview-viewport-container, .vogal-theme-root, .preview-modal-body, body, html'
+      )
+      scrollParents.forEach((el) => {
+        ;(el as HTMLElement).scrollTop = 0
+      })
+    } catch (_) {}
+  }
+
+  useEffect(() => {
+    scrollContainersToTop()
+  }, [viewMode])
+
   const openProduct = (productId: string) => {
     setSelectedProductId(productId)
     setViewMode('product')
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    scrollContainersToTop()
   }
 
   const openCollection = (cat: VogalCategoryType = 'All') => {
     setSelectedCategory(cat)
     setViewMode('collection')
     setMobileMenuOpen(false)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    scrollContainersToTop()
   }
 
   // Filtered homepage tab products
@@ -404,13 +425,10 @@ export const VogalFashionStorefront: React.FC<VogalStorefrontProps> = ({
             <button
               type="button"
               className="vogal-icon-btn"
-              onClick={() => {
-                openCollection('Outerwear')
-                triggerToast(`Wishlist contains ${wishlist.length} item(s)`)
-              }}
+              onClick={() => setWishlistOpen(true)}
               aria-label="Wishlist"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill={wishlist.length > 0 ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
               </svg>
               {wishlist.length > 0 && <span className="vogal-icon-badge">{wishlist.length}</span>}
@@ -449,26 +467,93 @@ export const VogalFashionStorefront: React.FC<VogalStorefrontProps> = ({
                 ✕
               </button>
             </div>
+
+            {/* Quick Actions in Mobile Drawer */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', padding: '16px 20px', borderBottom: '1px solid #f4f4f5' }}>
+              <button
+                type="button"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px',
+                  padding: '10px 12px',
+                  borderRadius: '6px',
+                  border: '1px solid #e4e4e7',
+                  background: '#f8fafc',
+                  fontSize: '0.82rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                }}
+                onClick={() => {
+                  setMobileMenuOpen(false)
+                  setSearchOpen(true)
+                }}
+              >
+                <span>🔍</span> Search
+              </button>
+              <button
+                type="button"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px',
+                  padding: '10px 12px',
+                  borderRadius: '6px',
+                  border: '1px solid #e4e4e7',
+                  background: '#f8fafc',
+                  fontSize: '0.82rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                }}
+                onClick={() => {
+                  setMobileMenuOpen(false)
+                  setWishlistOpen(true)
+                }}
+              >
+                <span>♡</span> Saved ({wishlist.length})
+              </button>
+            </div>
+
             <div className="vogal-cart-items-scroll">
+              <p style={{ fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.12em', color: '#a1a1aa', textTransform: 'uppercase', marginBottom: '8px' }}>
+                Curated Collections
+              </p>
               {VOGAL_NAV_ITEMS.map((cat) => (
                 <button
                   key={cat}
                   type="button"
                   style={{
-                    padding: '16px 0',
+                    padding: '14px 0',
                     borderBottom: '1px solid #f4f4f5',
-                    fontSize: '1.1rem',
+                    fontSize: '1.05rem',
                     fontWeight: 800,
                     textAlign: 'left',
                     display: 'flex',
                     justifyContent: 'space-between',
+                    alignItems: 'center',
                   }}
                   onClick={() => openCollection(cat as VogalCategoryType)}
                 >
                   <span>{cat}</span>
-                  <span>→</span>
+                  <span style={{ color: '#71717a', fontSize: '0.9rem' }}>→</span>
                 </button>
               ))}
+
+              <div style={{ marginTop: '24px', paddingTop: '16px', borderTop: '1px solid #f4f4f5' }}>
+                <button
+                  type="button"
+                  className="vogal-btn-primary"
+                  style={{ width: '100%', padding: '12px', fontSize: '0.82rem', textAlign: 'center' }}
+                  onClick={() => {
+                    setMobileMenuOpen(false)
+                    setCartOpen(true)
+                  }}
+                >
+                  VIEW SHOPPING BAG ({cartItems.reduce((acc, i) => acc + i.quantity, 0)})
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -477,15 +562,16 @@ export const VogalFashionStorefront: React.FC<VogalStorefrontProps> = ({
       {/* SEARCH MODAL */}
       {searchOpen && (
         <div className="vogal-modal-overlay" onClick={() => setSearchOpen(false)}>
-          <div className="vogal-modal-card" onClick={(e) => e.stopPropagation()} style={{ padding: '32px' }}>
+          <div className="vogal-modal-card" onClick={(e) => e.stopPropagation()} style={{ padding: '24px' }}>
             <button
               type="button"
               className="vogal-modal-close-btn"
               onClick={() => setSearchOpen(false)}
+              aria-label="Close search"
             >
               ✕
             </button>
-            <div style={{ display: 'flex', gap: '12px', marginBottom: '24px' }}>
+            <div style={{ display: 'flex', gap: '12px', marginBottom: '16px', marginTop: '8px' }}>
               <input
                 type="text"
                 placeholder="Search bombers, blazers, raw selvedge, hoodies..."
@@ -494,45 +580,94 @@ export const VogalFashionStorefront: React.FC<VogalStorefrontProps> = ({
                 autoFocus
                 style={{
                   width: '100%',
-                  padding: '14px 18px',
+                  padding: '12px 16px',
                   border: '1.5px solid #e4e4e7',
-                  borderRadius: '4px',
-                  fontSize: '1rem',
+                  borderRadius: '6px',
+                  fontSize: '0.95rem',
                   outline: 'none',
                 }}
               />
             </div>
+
+            {/* Popular search chips */}
+            {!searchQuery && (
+              <div style={{ marginTop: '8px', marginBottom: '8px' }}>
+                <p style={{ fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.1em', color: '#71717a', textTransform: 'uppercase', marginBottom: '10px' }}>
+                  Popular in Atelier
+                </p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                  {['Blazers', 'Bombers', 'Selvedge Denim', 'Tailoring', 'Hoodies', 'Outerwear'].map((chip) => (
+                    <button
+                      key={chip}
+                      type="button"
+                      style={{
+                        padding: '6px 14px',
+                        borderRadius: '999px',
+                        border: '1px solid #e4e4e7',
+                        background: '#f4f4f5',
+                        fontSize: '0.8rem',
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                        color: '#18181b',
+                      }}
+                      onClick={() => setSearchQuery(chip)}
+                    >
+                      {chip}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {searchQuery && (
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px' }}>
-                {searchResults.slice(0, 4).map((p) => (
-                  <div
-                    key={p.id}
-                    style={{
-                      display: 'flex',
-                      gap: '12px',
-                      cursor: 'pointer',
-                      padding: '8px',
-                      border: '1px solid #f4f4f5',
-                      borderRadius: '4px',
-                    }}
-                    onClick={() => {
-                      setSearchOpen(false)
-                      openProduct(p.id)
-                    }}
-                  >
-                    <img
-                      src={p.image}
-                      alt={p.name}
-                      style={{ width: '60px', height: '75px', objectFit: 'cover' }}
-                    />
-                    <div>
-                      <h4 style={{ fontSize: '0.88rem', fontWeight: 700 }}>{p.name}</h4>
-                      <span style={{ fontSize: '0.85rem', fontWeight: 800 }}>
-                        ₹{(p.salePrice || p.price).toLocaleString()}
-                      </span>
-                    </div>
+              <div>
+                <p style={{ fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.1em', color: '#71717a', textTransform: 'uppercase', marginBottom: '12px' }}>
+                  Matching Pieces ({searchResults.length})
+                </p>
+                {searchResults.length === 0 ? (
+                  <p style={{ textAlign: 'center', color: '#71717a', padding: '24px 0', fontSize: '0.88rem' }}>
+                    No pieces found matching &ldquo;{searchQuery}&rdquo;. Try another term.
+                  </p>
+                ) : (
+                  <div className="vogal-search-results-grid">
+                    {searchResults.slice(0, 6).map((p) => (
+                      <div
+                        key={p.id}
+                        style={{
+                          display: 'flex',
+                          gap: '12px',
+                          cursor: 'pointer',
+                          padding: '8px',
+                          border: '1px solid #f4f4f5',
+                          borderRadius: '6px',
+                          alignItems: 'center',
+                          backgroundColor: '#fafafa',
+                        }}
+                        onClick={() => {
+                          setSearchOpen(false)
+                          openProduct(p.id)
+                        }}
+                      >
+                        <img
+                          src={p.image}
+                          alt={p.name}
+                          style={{ width: '56px', height: '70px', objectFit: 'cover', borderRadius: '4px', flexShrink: 0 }}
+                        />
+                        <div style={{ minWidth: 0, flex: 1 }}>
+                          <h4 style={{ fontSize: '0.85rem', fontWeight: 700, margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                            {p.name}
+                          </h4>
+                          <span style={{ fontSize: '0.75rem', color: '#71717a', display: 'block', margin: '2px 0 4px' }}>
+                            {p.category}
+                          </span>
+                          <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--vogal-primary)' }}>
+                            ₹{(p.salePrice || p.price).toLocaleString()}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                )}
               </div>
             )}
           </div>
@@ -1615,6 +1750,127 @@ export const VogalFashionStorefront: React.FC<VogalStorefrontProps> = ({
                 </tbody>
               </table>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* WISHLIST DRAWER */}
+      {wishlistOpen && (
+        <div className="vogal-cart-overlay" onClick={() => setWishlistOpen(false)}>
+          <div className="vogal-cart-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className="vogal-cart-header">
+              <h3>SAVED PIECES ({wishlistedProducts.length})</h3>
+              <button
+                type="button"
+                className="vogal-icon-btn"
+                onClick={() => setWishlistOpen(false)}
+                aria-label="Close wishlist"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="vogal-cart-items-scroll">
+              {wishlistedProducts.length === 0 ? (
+                <div style={{ textAlign: 'center', padding: '48px 16px', color: '#71717a' }}>
+                  <p style={{ fontSize: '1.4rem', marginBottom: '8px' }}>♡</p>
+                  <p style={{ fontWeight: 700, fontSize: '1rem', marginBottom: '6px', color: '#18181b' }}>Your wishlist is currently empty.</p>
+                  <p style={{ fontSize: '0.85rem', lineHeight: 1.5 }}>
+                    Save your favorite tailoring and archival pieces to review them later.
+                  </p>
+                  <button
+                    type="button"
+                    className="vogal-btn-dark"
+                    style={{ marginTop: '20px', padding: '10px 20px', fontSize: '0.8rem' }}
+                    onClick={() => {
+                      setWishlistOpen(false)
+                      openCollection('All')
+                    }}
+                  >
+                    EXPLORE NEW ARRIVALS
+                  </button>
+                </div>
+              ) : (
+                wishlistedProducts.map((p) => (
+                  <div key={p.id} className="vogal-cart-item-row">
+                    <img
+                      src={p.image}
+                      alt={p.name}
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => {
+                        setWishlistOpen(false)
+                        openProduct(p.id)
+                      }}
+                    />
+                    <div className="vogal-cart-item-info">
+                      <div>
+                        <h4
+                          className="vogal-cart-item-title"
+                          style={{ cursor: 'pointer' }}
+                          onClick={() => {
+                            setWishlistOpen(false)
+                            openProduct(p.id)
+                          }}
+                        >
+                          {p.name}
+                        </h4>
+                        <span className="vogal-cart-item-meta">{p.category}</span>
+                      </div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '8px', flexWrap: 'wrap', gap: '8px' }}>
+                        <span style={{ fontWeight: 800, fontSize: '0.92rem' }}>
+                          ₹{(p.salePrice || p.price).toLocaleString()}
+                        </span>
+                        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                          <button
+                            type="button"
+                            className="vogal-btn-primary"
+                            style={{ padding: '6px 12px', fontSize: '0.74rem', letterSpacing: '0.04em' }}
+                            onClick={() => {
+                              addToCart(p, p.sizes[0] || 'M', p.colors[0]?.name || 'Standard', 1)
+                              toggleWishlist(p.id)
+                              setWishlistOpen(false)
+                              setCartOpen(true)
+                            }}
+                          >
+                            + MOVE TO BAG
+                          </button>
+                          <button
+                            type="button"
+                            className="vogal-icon-btn"
+                            style={{ width: '28px', height: '28px', fontSize: '0.85rem', color: '#71717a' }}
+                            onClick={() => toggleWishlist(p.id)}
+                            aria-label="Remove item"
+                          >
+                            ✕
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+
+            {wishlistedProducts.length > 0 && (
+              <div className="vogal-cart-footer">
+                <button
+                  type="button"
+                  className="vogal-btn-dark"
+                  style={{ width: '100%', padding: '14px', fontSize: '0.85rem' }}
+                  onClick={() => {
+                    wishlistedProducts.forEach((p) => {
+                      addToCart(p, p.sizes[0] || 'M', p.colors[0]?.name || 'Standard', 1)
+                    })
+                    setWishlist([])
+                    setWishlistOpen(false)
+                    setCartOpen(true)
+                    triggerToast('All saved pieces moved to bag')
+                  }}
+                >
+                  MOVE ALL TO SHOPPING BAG
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
