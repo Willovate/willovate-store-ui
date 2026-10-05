@@ -10058,25 +10058,17 @@
 .simulated-frame.frame-mobile .vogal-top-bar,
 .vogal-theme-root.device-mobile .vogal-top-bar,
 .vogal-theme-root.is-mobile .vogal-top-bar {
-  padding: 6px 12px !important;
-}
-
-.simulated-frame.frame-mobile .vogal-top-bar-right,
-.vogal-theme-root.device-mobile .vogal-top-bar-right,
-.vogal-theme-root.is-mobile .vogal-top-bar-right {
-  display: none !important;
-}
-
-.simulated-frame.frame-mobile .vogal-top-bar-left,
-.vogal-theme-root.device-mobile .vogal-top-bar-left,
-.vogal-theme-root.is-mobile .vogal-top-bar-left {
-  width: 100% !important;
-  text-align: center !important;
-  justify-content: center !important;
-  font-size: 11px !important;
-  white-space: nowrap !important;
+  padding: 0 !important;
+  height: 32px !important;
+  font-size: 0.72rem !important;
   overflow: hidden !important;
-  text-overflow: ellipsis !important;
+}
+
+.simulated-frame.frame-mobile .vogal-marquee-item,
+.vogal-theme-root.device-mobile .vogal-marquee-item,
+.vogal-theme-root.is-mobile .vogal-marquee-item {
+  padding: 0 16px !important;
+  font-size: 0.72rem !important;
 }
 
 .simulated-frame.frame-mobile .vogal-header-inner,
@@ -10095,6 +10087,98 @@
 .vogal-theme-root.device-mobile .vogal-mobile-hamburger,
 .vogal-theme-root.is-mobile .vogal-mobile-hamburger {
   display: flex !important;
+}
+
+/* Vogal Hero Section Mobile */
+.simulated-frame.frame-mobile .vogal-hero,
+.vogal-theme-root.device-mobile .vogal-hero,
+.vogal-theme-root.is-mobile .vogal-hero {
+  min-height: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.simulated-frame.frame-mobile .vogal-hero-gradient,
+.vogal-theme-root.device-mobile .vogal-hero-gradient,
+.vogal-theme-root.is-mobile .vogal-hero-gradient {
+  background: linear-gradient(
+    180deg,
+    rgba(9, 9, 11, 0.72) 0%,
+    rgba(9, 9, 11, 0.80) 45%,
+    rgba(9, 9, 11, 0.94) 100%
+  ) !important;
+}
+
+.simulated-frame.frame-mobile .vogal-hero-content,
+.vogal-theme-root.device-mobile .vogal-hero-content,
+.vogal-theme-root.is-mobile .vogal-hero-content {
+  padding: 32px 16px 38px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.simulated-frame.frame-mobile .vogal-hero-eyebrow,
+.vogal-theme-root.device-mobile .vogal-hero-eyebrow,
+.vogal-theme-root.is-mobile .vogal-hero-eyebrow {
+  font-size: 0.7rem !important;
+  letter-spacing: 0.16em !important;
+  margin-bottom: 10px !important;
+  display: inline-block !important;
+}
+
+.simulated-frame.frame-mobile .vogal-hero-title,
+.vogal-theme-root.device-mobile .vogal-hero-title,
+.vogal-theme-root.is-mobile .vogal-hero-title {
+  font-size: 1.85rem !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.02em !important;
+  margin-bottom: 12px !important;
+  max-width: 100% !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+}
+
+.simulated-frame.frame-mobile .vogal-hero-desc,
+.vogal-theme-root.device-mobile .vogal-hero-desc,
+.vogal-theme-root.is-mobile .vogal-hero-desc {
+  font-size: 0.84rem !important;
+  line-height: 1.48 !important;
+  color: #e4e4e7 !important;
+  max-width: 100% !important;
+  margin-bottom: 22px !important;
+}
+
+.simulated-frame.frame-mobile .vogal-hero-actions,
+.vogal-theme-root.device-mobile .vogal-hero-actions,
+.vogal-theme-root.is-mobile .vogal-hero-actions {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+.simulated-frame.frame-mobile .vogal-hero-actions .vogal-btn-primary,
+.simulated-frame.frame-mobile .vogal-hero-actions .vogal-btn-secondary,
+.vogal-theme-root.device-mobile .vogal-hero-actions .vogal-btn-primary,
+.vogal-theme-root.device-mobile .vogal-hero-actions .vogal-btn-secondary,
+.vogal-theme-root.is-mobile .vogal-hero-actions .vogal-btn-primary,
+.vogal-theme-root.is-mobile .vogal-hero-actions .vogal-btn-secondary {
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  padding: 12px 10px !important;
+  font-size: 0.76rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.06em !important;
+  text-align: center !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
+  box-sizing: border-box !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
 }
 
 .simulated-frame.frame-mobile .vogal-product-grid,

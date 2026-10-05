@@ -2418,8 +2418,73 @@
     padding: 0 16px;
   }
 
+  .vogal-hero {
+    min-height: auto;
+    height: auto;
+    padding: 0;
+  }
+
+  .vogal-hero-gradient {
+    background: linear-gradient(
+      180deg,
+      rgba(9, 9, 11, 0.72) 0%,
+      rgba(9, 9, 11, 0.80) 45%,
+      rgba(9, 9, 11, 0.94) 100%
+    );
+  }
+
   .vogal-hero-content {
-    padding: 48px 16px;
+    padding: 32px 16px 38px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .vogal-hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+
+  .vogal-hero-title {
+    font-size: 1.85rem;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+    max-width: 100%;
+    word-break: normal;
+    overflow-wrap: break-word;
+  }
+
+  .vogal-hero-desc {
+    font-size: 0.84rem;
+    line-height: 1.48;
+    color: #e4e4e7;
+    max-width: 100%;
+    margin-bottom: 22px;
+  }
+
+  .vogal-hero-actions {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .vogal-hero-actions .vogal-btn-primary,
+  .vogal-hero-actions .vogal-btn-secondary {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 12px 10px;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-align: center;
+    justify-content: center;
+    white-space: nowrap;
+    box-sizing: border-box;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   }
 
   .vogal-section {
@@ -2443,6 +2508,84 @@
 .vogal-theme-root.device-mobile .vogal-mobile-hamburger,
 .vogal-theme-root.is-mobile .vogal-mobile-hamburger {
   display: flex !important;
+}
+
+.vogal-theme-root.device-mobile .vogal-hero,
+.vogal-theme-root.is-mobile .vogal-hero {
+  min-height: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+}
+
+.vogal-theme-root.device-mobile .vogal-hero-gradient,
+.vogal-theme-root.is-mobile .vogal-hero-gradient {
+  background: linear-gradient(
+    180deg,
+    rgba(9, 9, 11, 0.72) 0%,
+    rgba(9, 9, 11, 0.80) 45%,
+    rgba(9, 9, 11, 0.94) 100%
+  ) !important;
+}
+
+.vogal-theme-root.device-mobile .vogal-hero-content,
+.vogal-theme-root.is-mobile .vogal-hero-content {
+  padding: 32px 16px 38px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.vogal-theme-root.device-mobile .vogal-hero-eyebrow,
+.vogal-theme-root.is-mobile .vogal-hero-eyebrow {
+  font-size: 0.7rem !important;
+  letter-spacing: 0.16em !important;
+  margin-bottom: 10px !important;
+  display: inline-block !important;
+}
+
+.vogal-theme-root.device-mobile .vogal-hero-title,
+.vogal-theme-root.is-mobile .vogal-hero-title {
+  font-size: 1.85rem !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.02em !important;
+  margin-bottom: 12px !important;
+  max-width: 100% !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+}
+
+.vogal-theme-root.device-mobile .vogal-hero-desc,
+.vogal-theme-root.is-mobile .vogal-hero-desc {
+  font-size: 0.84rem !important;
+  line-height: 1.48 !important;
+  color: #e4e4e7 !important;
+  max-width: 100% !important;
+  margin-bottom: 22px !important;
+}
+
+.vogal-theme-root.device-mobile .vogal-hero-actions,
+.vogal-theme-root.is-mobile .vogal-hero-actions {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+.vogal-theme-root.device-mobile .vogal-hero-actions .vogal-btn-primary,
+.vogal-theme-root.device-mobile .vogal-hero-actions .vogal-btn-secondary,
+.vogal-theme-root.is-mobile .vogal-hero-actions .vogal-btn-primary,
+.vogal-theme-root.is-mobile .vogal-hero-actions .vogal-btn-secondary {
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  padding: 12px 10px !important;
+  font-size: 0.76rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.06em !important;
+  text-align: center !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
+  box-sizing: border-box !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
 }
 
 .vogal-theme-root.device-mobile .vogal-product-grid,
