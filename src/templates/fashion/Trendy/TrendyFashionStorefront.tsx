@@ -36,6 +36,7 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
   const [quickViewProduct, setQuickViewProduct] = useState<TrendyProduct>(TRENDY_PRODUCTS[0])
   const [isCompareModalOpen, setIsCompareModalOpen] = useState<boolean>(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false)
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState<boolean>(false)
 
   // Cart & Wishlist & Compare States
   const [cartItems, setCartItems] = useState<TrendyCartItem[]>([
@@ -257,6 +258,16 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
       {/* 2. STICKY MAIN HEADER */}
       <header className="trendy-header">
         <div className="trendy-container trendy-header-inner">
+          {/* Mobile Menu Toggle (Left) */}
+          <button
+            type="button"
+            className="trendy-mobile-menu-btn"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle Navigation"
+          >
+            ☰
+          </button>
+
           {/* Logo */}
           <div
             className="trendy-brand-logo"
@@ -347,8 +358,8 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
 
           {/* Header Actions */}
           <div className="trendy-header-actions">
-            {/* Search Input */}
-            <div className="trendy-search-box">
+            {/* Desktop Search Input */}
+            <div className="trendy-search-box trendy-desktop-search">
               <span className="trendy-search-icon">🔍</span>
               <input
                 type="text"
@@ -362,10 +373,20 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
               />
             </div>
 
+            {/* Mobile Search Toggle */}
+            <button
+              type="button"
+              className="trendy-icon-btn trendy-mobile-search-toggle"
+              title="Search"
+              onClick={() => setIsMobileSearchOpen(!isMobileSearchOpen)}
+            >
+              🔍
+            </button>
+
             {/* Compare Badge / Button */}
             <button
               type="button"
-              className="trendy-icon-btn"
+              className="trendy-icon-btn trendy-compare-btn"
               title="Compare Items"
               onClick={() => {
                 if (compareIds.length === 0) {
@@ -408,19 +429,39 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
                 {cartItems.reduce((acc, it) => acc + it.quantity, 0)}
               </span>
             </button>
-
-            {/* Mobile Menu Toggle */}
-            <button
-              type="button"
-              className="trendy-mobile-menu-btn"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle Navigation"
-            >
-              ☰
-            </button>
-
           </div>
         </div>
+
+        {/* Mobile Search Dropdown */}
+        {isMobileSearchOpen && (
+          <div className="trendy-mobile-search-bar">
+            <div className="trendy-container">
+              <div className="trendy-mobile-search-inner">
+                <span className="trendy-search-icon">🔍</span>
+                <input
+                  type="text"
+                  placeholder="Search all products..."
+                  className="trendy-mobile-search-input"
+                  value={searchQuery}
+                  autoFocus
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value)
+                    if (viewMode !== 'collection') setViewMode('collection')
+                  }}
+                />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    className="trendy-mobile-search-clear"
+                    onClick={() => setSearchQuery('')}
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* MOBILE DRAWER */}
@@ -444,7 +485,7 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
                 ✕
               </button>
             </div>
-            <div className="trendy-cart-items-wrap">
+            <div className="trendy-cart-items-wrap" style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
               {[
                 'Home',
                 'Shop',
@@ -462,11 +503,14 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
                     background: 'none',
                     border: 'none',
                     textAlign: 'left',
-                    fontSize: '16px',
+                    fontSize: '15px',
                     fontWeight: 700,
                     padding: '12px 0',
                     borderBottom: '1px solid var(--tr-border)',
                     cursor: 'pointer',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
                   }}
                   onClick={() => {
                     if (category === 'Home') {
@@ -481,9 +525,62 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
                     setIsMobileMenuOpen(false)
                   }}
                 >
-                  {category}
+                  <span>{category}</span>
+                  <span style={{ color: 'var(--tr-muted)', fontSize: '13px' }}>→</span>
                 </button>
               ))}
+
+              {/* Utility Links in Drawer */}
+              <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: '1px solid var(--tr-border)' }}>
+                <div style={{ fontSize: '12px', fontWeight: 800, color: 'var(--tr-muted)', textTransform: 'uppercase', marginBottom: '8px' }}>
+                  Quick Actions
+                </div>
+                <button
+                  type="button"
+                  style={{ width: '100%', padding: '10px 0', background: 'none', border: 'none', textAlign: 'left', fontWeight: 600, fontSize: '14px', cursor: 'pointer', display: 'flex', justifyContent: 'space-between' }}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false)
+                    setIsCartOpen(true)
+                  }}
+                >
+                  <span>🛍️ Shopping Bag</span>
+                  <span>{cartItems.reduce((acc, it) => acc + it.quantity, 0)} items</span>
+                </button>
+                <button
+                  type="button"
+                  style={{ width: '100%', padding: '10px 0', background: 'none', border: 'none', textAlign: 'left', fontWeight: 600, fontSize: '14px', cursor: 'pointer', display: 'flex', justifyContent: 'space-between' }}
+                  onClick={() => {
+                    showToast(`You have ${wishlistIds.length} saved wishlist item(s).`)
+                    setIsMobileMenuOpen(false)
+                  }}
+                >
+                  <span>🤍 Wishlist</span>
+                  <span>{wishlistIds.length} items</span>
+                </button>
+                {compareIds.length > 0 && (
+                  <button
+                    type="button"
+                    style={{ width: '100%', padding: '10px 0', background: 'none', border: 'none', textAlign: 'left', fontWeight: 600, fontSize: '14px', cursor: 'pointer', display: 'flex', justifyContent: 'space-between' }}
+                    onClick={() => {
+                      setIsMobileMenuOpen(false)
+                      setIsCompareModalOpen(true)
+                    }}
+                  >
+                    <span>⚖️ Compare Tray</span>
+                    <span>{compareIds.length} items</span>
+                  </button>
+                )}
+
+                <div style={{ marginTop: '16px', display: 'flex', gap: '8px', fontSize: '12px', color: 'var(--tr-muted)', flexWrap: 'wrap' }}>
+                  <span style={{ cursor: 'pointer' }} onClick={() => showToast('Help Center is 24/7')}>Support</span>
+                  <span>•</span>
+                  <span style={{ cursor: 'pointer' }} onClick={() => showToast('Free Delivery over $100')}>FAQ</span>
+                  <span>•</span>
+                  <span style={{ cursor: 'pointer' }} onClick={() => showToast('Contemporary fashion since 2020')}>About Us</span>
+                  <span>•</span>
+                  <span style={{ cursor: 'pointer' }} onClick={() => showToast('hello@trendy-fashion.com')}>Contact</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
