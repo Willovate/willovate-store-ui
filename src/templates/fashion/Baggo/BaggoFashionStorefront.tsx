@@ -341,7 +341,7 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
 
               <button
                 type="button"
-                className="baggo-action-btn"
+                className="baggo-action-btn baggo-compare-btn"
                 title="Compare"
                 onClick={() => {
                   if (compareIds.length === 0) {

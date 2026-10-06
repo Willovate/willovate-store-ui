@@ -12394,6 +12394,8 @@
   color: var(--baggo-navy) !important;
   cursor: pointer !important;
   flex-shrink: 0 !important;
+  z-index: 2 !important;
+  position: relative !important;
 }
 
 .simulated-frame.frame-mobile .baggo-nav-desktop,
@@ -12405,41 +12407,48 @@
 .simulated-frame.frame-mobile .baggo-header-inner,
 .baggo-root.device-mobile .baggo-header-inner,
 .baggo-root.is-mobile .baggo-header-inner {
-  padding: 12px 16px !important;
+  position: relative !important;
+  min-height: 58px !important;
+  padding: 10px 14px !important;
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
-  gap: 8px !important;
 }
 
 .simulated-frame.frame-mobile .baggo-logo,
 .baggo-root.device-mobile .baggo-logo,
 .baggo-root.is-mobile .baggo-logo {
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
   display: flex !important;
   align-items: center !important;
   gap: 6px !important;
-  margin: 0 auto !important;
+  margin: 0 !important;
+  z-index: 1 !important;
+  white-space: nowrap !important;
 }
 
 .simulated-frame.frame-mobile .baggo-logo-icon,
 .baggo-root.device-mobile .baggo-logo-icon,
 .baggo-root.is-mobile .baggo-logo-icon {
-  width: 32px !important;
-  height: 32px !important;
-  font-size: 16px !important;
+  width: 30px !important;
+  height: 30px !important;
+  font-size: 15px !important;
 }
 
 .simulated-frame.frame-mobile .baggo-logo-title,
 .baggo-root.device-mobile .baggo-logo-title,
 .baggo-root.is-mobile .baggo-logo-title {
-  font-size: 20px !important;
+  font-size: 18px !important;
 }
 
 .simulated-frame.frame-mobile .baggo-logo-sub,
 .baggo-root.device-mobile .baggo-logo-sub,
 .baggo-root.is-mobile .baggo-logo-sub {
-  font-size: 8px !important;
-  letter-spacing: 0.15em !important;
+  font-size: 7.5px !important;
+  letter-spacing: 0.12em !important;
 }
 
 .simulated-frame.frame-mobile .baggo-actions,
@@ -12448,14 +12457,23 @@
   display: flex !important;
   align-items: center !important;
   gap: 6px !important;
+  margin-left: auto !important;
+  z-index: 2 !important;
+  position: relative !important;
   flex-shrink: 0 !important;
+}
+
+.simulated-frame.frame-mobile .baggo-actions .baggo-compare-btn,
+.baggo-root.device-mobile .baggo-actions .baggo-compare-btn,
+.baggo-root.is-mobile .baggo-actions .baggo-compare-btn {
+  display: none !important;
 }
 
 .simulated-frame.frame-mobile .baggo-action-btn,
 .baggo-root.device-mobile .baggo-action-btn,
 .baggo-root.is-mobile .baggo-action-btn {
-  width: 34px !important;
-  height: 34px !important;
+  width: 32px !important;
+  height: 32px !important;
   font-size: 13px !important;
 }
 
