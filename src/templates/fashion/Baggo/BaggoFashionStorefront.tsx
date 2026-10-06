@@ -380,7 +380,7 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
             <div className="baggo-container" style={{ display: 'flex', gap: 12 }}>
               <input
                 type="text"
-                placeholder="Search walnut leather bags, executive briefcases, weekend duffels..."
+                placeholder={isMobile ? "Search leather bags..." : "Search walnut leather bags, executive briefcases, weekend duffels..."}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 style={{

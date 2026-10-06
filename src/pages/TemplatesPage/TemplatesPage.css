@@ -12379,88 +12379,111 @@
   text-overflow: ellipsis !important;
 }
 
-.simulated-frame.frame-mobile .baggo-mobile-menu-btn,
-.baggo-root.device-mobile .baggo-mobile-menu-btn,
-.baggo-root.is-mobile .baggo-mobile-menu-btn {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 36px !important;
-  height: 36px !important;
-  background: none !important;
-  border: 1px solid var(--baggo-border) !important;
-  border-radius: 4px !important;
-  font-size: 20px !important;
-  color: var(--baggo-navy) !important;
-  cursor: pointer !important;
-  flex-shrink: 0 !important;
-  z-index: 2 !important;
-  position: relative !important;
-}
-
 .simulated-frame.frame-mobile .baggo-nav-desktop,
 .baggo-root.device-mobile .baggo-nav-desktop,
 .baggo-root.is-mobile .baggo-nav-desktop {
   display: none !important;
 }
 
+.simulated-frame.frame-mobile .baggo-header .baggo-container,
+.baggo-root.device-mobile .baggo-header .baggo-container,
+.baggo-root.is-mobile .baggo-header .baggo-container {
+  padding: 0 10px !important;
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
 .simulated-frame.frame-mobile .baggo-header-inner,
 .baggo-root.device-mobile .baggo-header-inner,
 .baggo-root.is-mobile .baggo-header-inner {
-  position: relative !important;
-  min-height: 58px !important;
-  padding: 10px 14px !important;
-  display: flex !important;
-  justify-content: space-between !important;
+  display: grid !important;
+  grid-template-columns: 1fr auto 1fr !important;
   align-items: center !important;
+  min-height: 56px !important;
+  height: 56px !important;
+  padding: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  position: static !important;
+  gap: 4px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-mobile-menu-btn,
+.baggo-root.device-mobile .baggo-mobile-menu-btn,
+.baggo-root.is-mobile .baggo-mobile-menu-btn {
+  justify-self: start !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 34px !important;
+  height: 34px !important;
+  background: none !important;
+  border: 1px solid var(--baggo-border) !important;
+  border-radius: 4px !important;
+  font-size: 19px !important;
+  color: var(--baggo-navy) !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  margin: 0 !important;
+  position: static !important;
+  z-index: auto !important;
 }
 
 .simulated-frame.frame-mobile .baggo-logo,
 .baggo-root.device-mobile .baggo-logo,
 .baggo-root.is-mobile .baggo-logo {
-  position: absolute !important;
-  left: 50% !important;
-  top: 50% !important;
-  transform: translate(-50%, -50%) !important;
+  justify-self: center !important;
   display: flex !important;
   align-items: center !important;
   gap: 6px !important;
   margin: 0 !important;
-  z-index: 1 !important;
+  position: static !important;
+  transform: none !important;
+  left: auto !important;
+  top: auto !important;
+  z-index: auto !important;
   white-space: nowrap !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
 }
 
 .simulated-frame.frame-mobile .baggo-logo-icon,
 .baggo-root.device-mobile .baggo-logo-icon,
 .baggo-root.is-mobile .baggo-logo-icon {
-  width: 30px !important;
-  height: 30px !important;
-  font-size: 15px !important;
+  width: 26px !important;
+  height: 26px !important;
+  font-size: 13px !important;
+  border-radius: 6px !important;
+  flex-shrink: 0 !important;
 }
 
 .simulated-frame.frame-mobile .baggo-logo-title,
 .baggo-root.device-mobile .baggo-logo-title,
 .baggo-root.is-mobile .baggo-logo-title {
-  font-size: 18px !important;
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  line-height: 1.05 !important;
 }
 
 .simulated-frame.frame-mobile .baggo-logo-sub,
 .baggo-root.device-mobile .baggo-logo-sub,
 .baggo-root.is-mobile .baggo-logo-sub {
-  font-size: 7.5px !important;
+  font-size: 6.5px !important;
   letter-spacing: 0.12em !important;
+  line-height: 1 !important;
 }
 
 .simulated-frame.frame-mobile .baggo-actions,
 .baggo-root.device-mobile .baggo-actions,
 .baggo-root.is-mobile .baggo-actions {
+  justify-self: end !important;
   display: flex !important;
   align-items: center !important;
-  gap: 6px !important;
-  margin-left: auto !important;
-  z-index: 2 !important;
-  position: relative !important;
+  gap: 5px !important;
+  margin: 0 !important;
   flex-shrink: 0 !important;
+  position: static !important;
+  z-index: auto !important;
 }
 
 .simulated-frame.frame-mobile .baggo-actions .baggo-compare-btn,
@@ -12475,6 +12498,18 @@
   width: 32px !important;
   height: 32px !important;
   font-size: 13px !important;
+  border-radius: 50% !important;
+  flex-shrink: 0 !important;
+}
+
+.simulated-frame.frame-mobile .baggo-action-btn .baggo-badge,
+.baggo-root.device-mobile .baggo-action-btn .baggo-badge,
+.baggo-root.is-mobile .baggo-action-btn .baggo-badge {
+  width: 15px !important;
+  height: 15px !important;
+  font-size: 9px !important;
+  top: -3px !important;
+  right: -3px !important;
 }
 
 .simulated-frame.frame-mobile .baggo-hero-inner,
