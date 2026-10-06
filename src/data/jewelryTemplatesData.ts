@@ -1,0 +1,55 @@
+import type { MarketplaceTemplate } from '../types'
+
+export const DIAMOND_JEWELRY_TEMPLATE: MarketplaceTemplate = {
+  id: 'jewelry-diamond',
+  slug: 'jewelry-diamond',
+  name: 'Diamond Luxury Jewelry & Accessories',
+  businessType: 'jewelry-accessories',
+  industryCategory: 'Jewelry & Accessories',
+  style: 'luxury',
+  catalogSize: 'large',
+  tags: [
+    'Jewelry',
+    'Diamonds',
+    'Luxury',
+    'Gold',
+    'Rings',
+    'Accessories',
+    'Watches',
+    'Solitaires',
+    'Bespoke',
+    'GIA Certified',
+  ],
+  shortDescription:
+    'Haute joaillerie and luxury diamond storefront inspired by the authentic Diamond Shopify theme by WorkDo. Features certified solitaires, 18K solid gold, interactive ring sizer, metal selectors, countdown spotlight, and bespoke engraving.',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&auto=format&fit=crop&q=80',
+  fullPreviewUrl: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1600&auto=format&fit=crop&q=85',
+  popularityScore: 100,
+  isActive: true,
+  brandName: 'DIAMOND',
+  headline: 'Elegance in Every Facet,\nCrafted for Eternity.',
+  subtitle: 'Hand-sculpted certified solitaires, ethical diamonds, and recycled 18K solid gold heirlooms.',
+  buttonText: 'Explore Diamonds',
+  buttonColor: '#111111',
+  isDark: false,
+  modelImage: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&auto=format&fit=crop&q=80',
+  badge: 'trending',
+  rating: 4.99,
+  reviewCount: 385,
+  layoutType: 'editorial',
+  accentColor: '#C5A880',
+  features: [
+    'Certified GIA & IGI laser-inscribed diamond solitaires',
+    'Interactive Ring Sizer guide & international size conversion table',
+    'High-jewelry category showcases (Rings, Necklaces, Earrings, Bracelets, Watches)',
+    'Interactive metal variant swatches (18K Yellow, White, Rose Gold & Platinum 950)',
+    'Slide-out Shopping Bag cart drawer with free shipping meter and VIP promo codes',
+    'Diamond of the Month limited countdown spotlight',
+    'Bespoke atelier laser engraving and gift wrap customizer',
+    'Verified 5-star international client testimonials',
+  ],
+}
+
+export const ALL_JEWELRY_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
+  DIAMOND_JEWELRY_TEMPLATE,
+]

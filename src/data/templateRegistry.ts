@@ -10,6 +10,7 @@ import { JenieFashionStorefront } from '../templates/fashion/Jenie'
 import { ChuttiFashionStorefront } from '../templates/fashion/Chutti'
 import { BaggoFashionStorefront } from '../templates/fashion/Baggo'
 import { MrTevorFashionStorefront } from '../templates/fashion/MrTevor'
+import { DiamondJewelryStorefront } from '../templates/jewelry/Diamond'
 import { VelocityStorefront } from '../templates/sports/Velocity'
 import { ArenaStorefront } from '../templates/sports/Arena'
 import { SprintStorefront } from '../templates/sports/Sprint'
@@ -22,8 +23,16 @@ import { EliteSportStorefront } from '../templates/sports/EliteSport'
 import { MotionStorefront } from '../templates/sports/Motion'
 import { ALL_SPORTS_MARKETPLACE_TEMPLATES } from './sportsTemplatesData'
 import { ALL_FASHION_MARKETPLACE_TEMPLATES } from './fashionTemplatesData'
+import { ALL_JEWELRY_MARKETPLACE_TEMPLATES } from './jewelryTemplatesData'
 
 export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
+  'jewelry-accessories': {
+    displayName: 'Jewelry & Accessories',
+    badgeIcon: '💎',
+    description: 'Fine handcrafted diamond jewelry, certified solitaires, gold rings, and luxury Swiss timepieces.',
+    filterTags: ['All', 'Diamonds', 'Rings', 'Necklaces', 'Earrings', 'Bracelets', 'Watches', 'Solitaires', 'Bespoke'],
+    templates: ALL_JEWELRY_MARKETPLACE_TEMPLATES,
+  },
   'sporting-goods': {
     displayName: 'Sports Store',
     badgeIcon: '⚽',
@@ -239,6 +248,17 @@ export function getTemplateComponent(template?: MarketplaceTemplate | Template |
       template.name?.toLowerCase().includes('tevor'))
   ) {
     return MrTevorFashionStorefront
+  }
+  if (
+    template &&
+    (template.slug === 'jewelry-diamond' ||
+      template.id === 'jewelry-diamond' ||
+      template.name?.toLowerCase().includes('diamond') ||
+      template.name?.toLowerCase().includes('aurelia') ||
+      template.businessType === 'jewelry-accessories' ||
+      template.industryCategory?.toLowerCase().includes('jewel'))
+  ) {
+    return DiamondJewelryStorefront
   }
   if (
     template &&

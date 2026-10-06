@@ -20,6 +20,7 @@ import { JenieFashionStorefront } from '../../templates/fashion/Jenie'
 import { ChuttiFashionStorefront } from '../../templates/fashion/Chutti'
 import { BaggoFashionStorefront } from '../../templates/fashion/Baggo'
 import { MrTevorFashionStorefront } from '../../templates/fashion/MrTevor'
+import { DiamondJewelryStorefront } from '../../templates/jewelry/Diamond'
 import '../../templates/fashion/fashionMobile.css'
 import {
   BELLE_FASHION_TEMPLATE,
@@ -30,7 +31,11 @@ import {
   FRAGRANCE_FASHION_TEMPLATE,
   ALL_FASHION_MARKETPLACE_TEMPLATES,
 } from '../../data/fashionTemplatesData'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront }
+import {
+  DIAMOND_JEWELRY_TEMPLATE,
+  ALL_JEWELRY_MARKETPLACE_TEMPLATES,
+} from '../../data/jewelryTemplatesData'
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront }
 
 // Re-export domain types
 export type {
@@ -78,6 +83,11 @@ export {
   NATURYA_FASHION_TEMPLATE,
   ALL_FASHION_MARKETPLACE_TEMPLATES,
 } from '../../data/fashionTemplatesData'
+
+export {
+  DIAMOND_JEWELRY_TEMPLATE,
+  ALL_JEWELRY_MARKETPLACE_TEMPLATES,
+} from '../../data/jewelryTemplatesData'
 
 export {
   TEMPLATE_REGISTRY,
@@ -686,6 +696,25 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
       <MrTevorFashionStorefront
         device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
         onBackToDirectory={onClose}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'jewelry-diamond' ||
+      template.id === 'jewelry-diamond' ||
+      template.slug === 'clothing-reference-jewelry-accessories' ||
+      template.name?.toLowerCase().includes('diamond') ||
+      template.name?.toLowerCase().includes('aurelia') ||
+      template.businessType === 'jewelry-accessories' ||
+      template.industryCategory?.toLowerCase().includes('jewel'))
+  ) {
+    return (
+      <DiamondJewelryStorefront
+        templateData={template}
+        device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
+        onClose={onClose}
       />
     )
   }
@@ -1379,13 +1408,19 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
 
   const displayTitle = businessTypeDisplay || resolvedCategory?.displayName || 'Online Store'
 
-  // Sports keeps its full catalog; clothing-store uses fashion templates.
+  // Sports keeps its full catalog; clothing-store uses fashion templates; jewelry uses jewelry templates.
   const categoryTemplates: MarketplaceTemplate[] = useMemo(() => {
     if (businessType === 'sporting-goods') {
       return ALL_SPORTS_MARKETPLACE_TEMPLATES
     }
     if (businessType === 'clothing-store') {
       return ALL_FASHION_MARKETPLACE_TEMPLATES
+    }
+    if (businessType === 'jewelry-accessories' || businessType === 'jewelry') {
+      return ALL_JEWELRY_MARKETPLACE_TEMPLATES
+    }
+    if (TEMPLATE_REGISTRY[businessType]?.templates?.length) {
+      return TEMPLATE_REGISTRY[businessType].templates
     }
 
     return [{
@@ -1458,6 +1493,16 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
     ) {
       return FRAGRANCE_FASHION_TEMPLATE
     }
+    if (
+      rawHash === 'diamond' ||
+      rawHash === 'jewelry' ||
+      rawHash === 'jewelry-diamond' ||
+      rawHash === 'jewelry-accessories' ||
+      rawHash === 'diamond-workdo' ||
+      rawHash === 'aurelia'
+    ) {
+      return DIAMOND_JEWELRY_TEMPLATE
+    }
     return null
   })
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
@@ -1471,7 +1516,7 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
     setPreviewTemplate(null)
   }, [businessType, categoryTemplates])
 
-  // Auto-launch preview if URL hash changes to sports or fashion presets
+  // Auto-launch preview if URL hash changes to sports, fashion, or jewelry presets
   useEffect(() => {
     const handleHash = () => {
       const rawHash = window.location.hash.toLowerCase().replace(/^#/, '')
@@ -1519,6 +1564,15 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
         rawHash === 'fragrance-templates'
       ) {
         setPreviewTemplate(FRAGRANCE_FASHION_TEMPLATE)
+      } else if (
+        rawHash === 'diamond' ||
+        rawHash === 'jewelry' ||
+        rawHash === 'jewelry-diamond' ||
+        rawHash === 'jewelry-accessories' ||
+        rawHash === 'diamond-workdo' ||
+        rawHash === 'aurelia'
+      ) {
+        setPreviewTemplate(DIAMOND_JEWELRY_TEMPLATE)
       }
     }
     window.addEventListener('hashchange', handleHash)
