@@ -8,7 +8,7 @@ export const GeneralStore04: TemplateConfig = {
   tags: [{ id: 'curated', name: 'Curated' }, { id: 'lifestyle', name: 'Lifestyle' }, { id: 'home', name: 'Home' }],
   thumbnailUrl: 'https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1518843875459-f738682238a6?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {
@@ -21,31 +21,31 @@ export const GeneralStore04: TemplateConfig = {
     { id: 's3', type: 'full-hero', props: {
       title: 'Small things.\nBetter everyday.',
       subtitle: 'Made for the spaces you live in. Everyday objects, thoughtfully chosen to bring calm and organization to your routine.',
-      image: 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80&w=1600',
+      image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=1600',
       ctaLabel: 'Shop The Collection'
     } },
     { id: 's4', type: 'bento-grid', props: {
       title: 'Explore Nook',
       items: [
-        { title: 'Kitchen', description: 'Tools for nourishing routines.', size: 'large', image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=80&w=800' },
-        { title: 'Workspace', description: 'Clear space, clear mind.', size: 'small', image: 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=400' },
-        { title: 'Personal Care', description: 'Quiet moments.', size: 'small', image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=400' },
-        { title: 'Home', description: 'Warm accents.', size: 'small', image: 'https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&q=80&w=400' }
+        { title: 'Kitchen', description: 'Tools for nourishing routines.', size: 'large', image: 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?auto=format&fit=crop&q=80&w=800' },
+        { title: 'Workspace', description: 'Clear space, clear mind.', size: 'small', image: 'https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?auto=format&fit=crop&q=80&w=400' },
+        { title: 'Personal Care', description: 'Quiet moments.', size: 'small', image: 'https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&q=80&w=400' },
+        { title: 'Home', description: 'Warm accents.', size: 'small', image: 'https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&q=80&w=400' }
       ]
     } },
     { id: 's5', type: 'catalog', props: {
       title: 'Curated Essentials',
       products: [
-        { id: 'nk1', name: 'Ceramic Pour-Over Set', description: 'Kitchen', price: 45, imageUrl: 'https://images.unsplash.com/photo-1517006886278-f71f6d0f01ba?auto=format&fit=crop&q=80&w=600' },
-        { id: 'nk2', name: 'Woven Cotton Throw', description: 'Home', price: 65, imageUrl: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=600' },
-        { id: 'nk3', name: 'Glass Storage Jar Set', description: 'Organization', price: 38, imageUrl: 'https://images.unsplash.com/photo-1509319117193-57bab727e09d?auto=format&fit=crop&q=80&w=600' },
-        { id: 'nk4', name: 'Minimalist Desk Tray', description: 'Workspace', price: 24, imageUrl: 'https://images.unsplash.com/photo-1596526131083-e8c638c478d5?auto=format&fit=crop&q=80&w=600' }
+        { id: 'nk1', name: 'Ceramic Pour-Over Set', description: 'Kitchen', price: 45, imageUrl: 'https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?auto=format&fit=crop&q=80&w=600' },
+        { id: 'nk2', name: 'Woven Cotton Throw', description: 'Home', price: 65, imageUrl: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&q=80&w=600' },
+        { id: 'nk3', name: 'Glass Storage Jar Set', description: 'Organization', price: 38, imageUrl: 'https://images.unsplash.com/photo-1564834724105-918b73d1b9e0?auto=format&fit=crop&q=80&w=600' },
+        { id: 'nk4', name: 'Minimalist Desk Tray', description: 'Workspace', price: 24, imageUrl: 'https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
     { id: 's6', type: 'split-hero', props: {
       title: 'A Place for Everything.',
       subtitle: 'We believe that organization isn\'t about hiding your life away—it\'s about giving the things you love a proper home.',
-      image: 'https://images.unsplash.com/photo-1595514535316-24eb22442ad4?auto=format&fit=crop&q=80&w=800',
+      image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=800',
       ctaLabel: 'Shop Storage',
       imageRight: false
     } },
@@ -63,10 +63,10 @@ export const GeneralStore04: TemplateConfig = {
       title: 'For the Home',
       subtitle: 'Objects that bring warmth and texture to your space.',
       products: [
-        { id: 'nk5', name: 'Beeswax Pillar Candle', description: 'Decor', price: 28, imageUrl: 'https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&q=80&w=600' },
-        { id: 'nk6', name: 'Hand-Carved Wooden Bowl', description: 'Kitchen', price: 42, imageUrl: 'https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?auto=format&fit=crop&q=80&w=600' },
-        { id: 'nk7', name: 'Linen Napkin Set', description: 'Dining', price: 32, imageUrl: 'https://images.unsplash.com/photo-1592663527359-cf6642f54cff?auto=format&fit=crop&q=80&w=600' },
-        { id: 'nk8', name: 'Seagrass Basket', description: 'Storage', price: 48, imageUrl: 'https://images.unsplash.com/photo-1528301721190-186c3bd85418?auto=format&fit=crop&q=80&w=600' }
+        { id: 'nk5', name: 'Beeswax Pillar Candle', description: 'Decor', price: 28, imageUrl: 'https://images.unsplash.com/photo-1515543904379-3d757afe72e4?auto=format&fit=crop&q=80&w=600' },
+        { id: 'nk6', name: 'Hand-Carved Wooden Bowl', description: 'Kitchen', price: 42, imageUrl: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600' },
+        { id: 'nk7', name: 'Linen Napkin Set', description: 'Dining', price: 32, imageUrl: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600' },
+        { id: 'nk8', name: 'Seagrass Basket', description: 'Storage', price: 48, imageUrl: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=80&w=600' }
       ]
     } },
     { id: 's9', type: 'editorial-grid', props: {
@@ -93,10 +93,10 @@ export const GeneralStore04: TemplateConfig = {
     { id: 's12', type: 'catalog', props: {
       title: 'Community Favorites',
       products: [
-        { id: 'nk9', name: 'Amber Glass Soap Dispenser', description: 'Bath', price: 18, imageUrl: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&q=80&w=600' },
-        { id: 'nk10', name: 'Canvas Tote Bag', description: 'Carry', price: 35, imageUrl: 'https://images.unsplash.com/photo-1597816041042-45e3ed609f98?auto=format&fit=crop&q=80&w=600' },
-        { id: 'nk11', name: 'Bamboo Cleaning Brush', description: 'Kitchen', price: 12, imageUrl: 'https://images.unsplash.com/photo-1584820927498-cafe6c1c1f9b?auto=format&fit=crop&q=80&w=600' },
-        { id: 'nk12', name: 'Leather Cord Organizer', description: 'Workspace', price: 15, imageUrl: 'https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?auto=format&fit=crop&q=80&w=600' }
+        { id: 'nk9', name: 'Amber Glass Soap Dispenser', description: 'Bath', price: 18, imageUrl: 'https://images.unsplash.com/photo-1517673132405-a56a62b18caf?auto=format&fit=crop&q=80&w=600' },
+        { id: 'nk10', name: 'Canvas Tote Bag', description: 'Carry', price: 35, imageUrl: 'https://images.unsplash.com/photo-1628088062854-d1870b4553da?auto=format&fit=crop&q=80&w=600' },
+        { id: 'nk11', name: 'Bamboo Cleaning Brush', description: 'Kitchen', price: 12, imageUrl: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600' },
+        { id: 'nk12', name: 'Leather Cord Organizer', description: 'Workspace', price: 15, imageUrl: 'https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&q=80&w=600' }
       ]
     } },
     { id: 's13', type: 'story', props: {

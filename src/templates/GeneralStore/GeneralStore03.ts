@@ -6,9 +6,9 @@ export const GeneralStore03: TemplateConfig = {
   description: 'A curated city marketplace for modern everyday life. Discover interesting products designed for motion, utility, and contemporary living.',
   categories: [{ id: 'general', name: 'General Store' }],
   tags: [{ id: 'urban', name: 'Urban' }, { id: 'lifestyle', name: 'Lifestyle' }, { id: 'curated', name: 'Curated' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&q=80&w=800',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {
@@ -29,22 +29,22 @@ export const GeneralStore03: TemplateConfig = {
       title: 'Explore Categories',
       categories: [
         { name: 'Commute', image: 'https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&q=80&w=600' },
-        { name: 'Workspace', image: 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=600' },
-        { name: 'Travel', image: 'https://images.unsplash.com/photo-1553531384-cc64ac80f931?auto=format&fit=crop&q=80&w=600' },
-        { name: 'Home', image: 'https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&q=80&w=600' }
+        { name: 'Workspace', image: 'https://images.unsplash.com/photo-1593696140826-c58b021acf8b?auto=format&fit=crop&q=80&w=600' },
+        { name: 'Travel', image: 'https://images.unsplash.com/photo-1531685250784-7569952593d2?auto=format&fit=crop&q=80&w=600' },
+        { name: 'Home', image: 'https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&q=80&w=600' }
       ]
     } },
     { id: 's5', type: 'catalog', props: {
       title: 'Trending in the City',
       products: [
-        { id: 'uc1', name: 'Commuter Flask', description: 'Drinkware', price: 35, badge: 'Hot', imageUrl: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&q=80&w=600' },
-        { id: 'uc2', name: 'Tech Pouch Pro', description: 'Organization', price: 45, imageUrl: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&q=80&w=600' },
-        { id: 'uc3', name: 'Heavyweight Canvas Tote', description: 'Carry', price: 55, imageUrl: 'https://images.unsplash.com/photo-1597816041042-45e3ed609f98?auto=format&fit=crop&q=80&w=600' },
-        { id: 'uc4', name: 'Matte Desk Tray', description: 'Workspace', price: 28, imageUrl: 'https://images.unsplash.com/photo-1611077544719-741ce2b9894e?auto=format&fit=crop&q=80&w=600' }
+        { id: 'uc1', name: 'Commuter Flask', description: 'Drinkware', price: 35, badge: 'Hot', imageUrl: 'https://images.unsplash.com/photo-1574634534894-89d7576c8259?auto=format&fit=crop&q=80&w=600' },
+        { id: 'uc2', name: 'Tech Pouch Pro', description: 'Organization', price: 45, imageUrl: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&q=80&w=600' },
+        { id: 'uc3', name: 'Heavyweight Canvas Tote', description: 'Carry', price: 55, imageUrl: 'https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?auto=format&fit=crop&q=80&w=600' },
+        { id: 'uc4', name: 'Matte Desk Tray', description: 'Workspace', price: 28, imageUrl: 'https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&q=80&w=600' }
       ]
     } },
     { id: 's6', type: 'product-spotlight', props: {
-      image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=800',
+      image: 'https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?auto=format&fit=crop&q=80&w=800',
       name: 'The Transit Backpack',
       category: 'Everyday Carry',
       description: 'Engineered for the daily commute. Weather-resistant materials, dedicated tech storage, and a sleek profile that navigates crowded trains with ease.',
@@ -57,7 +57,7 @@ export const GeneralStore03: TemplateConfig = {
       title: 'Life in Motion',
       images: [
         'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&q=80&w=800',
-        'https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&q=80&w=800',
+        'https://images.unsplash.com/photo-1540569014015-19a7be504e3a?auto=format&fit=crop&q=80&w=800',
         'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&q=80&w=800'
       ]
     } },
@@ -68,16 +68,16 @@ export const GeneralStore03: TemplateConfig = {
       title: 'City Essentials',
       subtitle: 'Highly functional basics for smaller spaces and busier days.',
       products: [
-        { id: 'uc5', name: 'Portable Espresso Maker', description: 'Coffee', price: 65, imageUrl: 'https://images.unsplash.com/photo-1580828369019-222049d5b035?auto=format&fit=crop&q=80&w=600' },
-        { id: 'uc6', name: 'Compact Umbrella', description: 'Weather', price: 32, imageUrl: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&q=80&w=600' },
-        { id: 'uc7', name: 'Aluminum Cardholder', description: 'Wallet', price: 24, imageUrl: 'https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&q=80&w=600' },
-        { id: 'uc8', name: 'Reusable Bento Box', description: 'Lunch', price: 40, imageUrl: 'https://images.unsplash.com/photo-1585238341267-16fc2d50b40e?auto=format&fit=crop&q=80&w=600' }
+        { id: 'uc5', name: 'Portable Espresso Maker', description: 'Coffee', price: 65, imageUrl: 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&q=80&w=600' },
+        { id: 'uc6', name: 'Compact Umbrella', description: 'Weather', price: 32, imageUrl: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=600' },
+        { id: 'uc7', name: 'Aluminum Cardholder', description: 'Wallet', price: 24, imageUrl: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&q=80&w=600' },
+        { id: 'uc8', name: 'Reusable Bento Box', description: 'Lunch', price: 40, imageUrl: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&q=80&w=600' }
       ]
     } },
     { id: 's10', type: 'bento-grid', props: {
       title: 'Urban Curations',
       items: [
-        { title: 'The Minimalist Desk', description: 'Declutter your thoughts.', size: 'large', image: 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=800' },
+        { title: 'The Minimalist Desk', description: 'Declutter your thoughts.', size: 'large', image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=800' },
         { title: 'Gym to Office', description: 'Seamless transitions.', size: 'small', image: 'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&q=80&w=400' },
         { title: 'Coffee Ritual', description: 'Start right.', size: 'small', image: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&q=80&w=400' },
         { title: 'Rain Ready', description: 'Stay dry.', size: 'small', image: 'https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?auto=format&fit=crop&q=80&w=400' }
@@ -86,7 +86,7 @@ export const GeneralStore03: TemplateConfig = {
     { id: 's11', type: 'shop-the-look', props: {
       title: 'Staff Picks: Sarah\'s Commute',
       subtitle: 'What our art director carries every day.',
-      image: 'https://images.unsplash.com/photo-1509319117193-57bab727e09d?auto=format&fit=crop&q=80&w=1600',
+      image: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&q=80&w=1600',
       hotspots: [
         { x: 50, y: 35, product: { name: 'Oversized Trench', price: 185 } },
         { x: 30, y: 70, product: { name: 'Leather Tote', price: 145 } },
@@ -96,10 +96,10 @@ export const GeneralStore03: TemplateConfig = {
     { id: 's12', type: 'catalog', props: {
       title: 'Limited Time Deals',
       products: [
-        { id: 'uc9', name: 'Pocket Notebook Set', description: 'Stationery', price: 15, originalPrice: 22, badge: 'Sale', imageUrl: 'https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&q=80&w=600' },
-        { id: 'uc10', name: 'Aromatherapy Roll-On', description: 'Self-Care', price: 18, originalPrice: 26, badge: 'Sale', imageUrl: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&q=80&w=600' },
+        { id: 'uc9', name: 'Pocket Notebook Set', description: 'Stationery', price: 15, originalPrice: 22, badge: 'Sale', imageUrl: 'https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&q=80&w=600' },
+        { id: 'uc10', name: 'Aromatherapy Roll-On', description: 'Self-Care', price: 18, originalPrice: 26, badge: 'Sale', imageUrl: 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&q=80&w=600' },
         { id: 'uc11', name: 'Stainless Steel Carabiner', description: 'Hardware', price: 12, originalPrice: 18, badge: 'Sale', imageUrl: 'https://images.unsplash.com/photo-1520699697851-3dc68aa3a474?auto=format&fit=crop&q=80&w=600' },
-        { id: 'uc12', name: 'Cable Organizer Roll', description: 'Tech Accessories', price: 20, originalPrice: 30, badge: 'Sale', imageUrl: 'https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?auto=format&fit=crop&q=80&w=600' }
+        { id: 'uc12', name: 'Cable Organizer Roll', description: 'Tech Accessories', price: 20, originalPrice: 30, badge: 'Sale', imageUrl: 'https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600' }
       ]
     } },
     { id: 's13', type: 'story', props: {

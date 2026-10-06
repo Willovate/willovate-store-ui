@@ -6,9 +6,9 @@ export const GeneralStore02: TemplateConfig = {
   description: 'Everything you need, beautifully organized. An approachable, modern general store.',
   categories: [{ id: 'general', name: 'General Store' }],
   tags: [{ id: 'friendly', name: 'Friendly' }, { id: 'essentials', name: 'Essentials' }, { id: 'lifestyle', name: 'Lifestyle' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=800',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {
@@ -36,7 +36,7 @@ export const GeneralStore02: TemplateConfig = {
       title: 'Everything you need, beautifully organized.',
       subtitle: 'Discover our curated collection of household essentials, personal care, and daily-use items designed to simplify your routine and elevate your space.',
       ctaLabel: 'Shop the Collection',
-      image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=1600'
+      image: 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80&w=1600'
     } },
 
     { id: 's4', type: 'bento-grid', props: {
@@ -51,7 +51,7 @@ export const GeneralStore02: TemplateConfig = {
         {
           title: 'Personal Care',
           description: 'Clean, simple self-care routines.',
-          image: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&q=80&w=800',
+          image: 'https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?auto=format&fit=crop&q=80&w=800',
           span: 1
         },
         {
@@ -73,14 +73,14 @@ export const GeneralStore02: TemplateConfig = {
       title: 'Shop by Category',
       categories: [
         { id: 'c1', name: 'Household', image: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=600', itemCount: 124 },
-        { id: 'c2', name: 'Kitchen', image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=80&w=600', itemCount: 86 },
+        { id: 'c2', name: 'Kitchen', image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=600', itemCount: 86 },
         { id: 'c3', name: 'Bath & Body', image: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&q=80&w=600', itemCount: 53 },
-        { id: 'c4', name: 'Travel', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=600', itemCount: 42 }
+        { id: 'c4', name: 'Travel', image: 'https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?auto=format&fit=crop&q=80&w=600', itemCount: 42 }
       ]
     } },
 
     { id: 's6', type: 'product-spotlight', props: {
-      image: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&q=80&w=800',
+      image: 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&q=80&w=800',
       name: 'The Thermal Essential Bottle',
       category: 'Drinkware',
       description: 'Our award-winning insulated bottle keeps your drinks cold for 24 hours or hot for 12. Features a durable powder-coated finish and a leak-proof seal for your daily commute.',
@@ -96,9 +96,9 @@ export const GeneralStore02: TemplateConfig = {
       subtitle: 'Highly-rated staples for a well-stocked home.',
       products: [
         { id: 'e1', name: 'Ceramic Storage Jar', description: 'Kitchen', price: 24, imageUrl: 'https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&q=80&w=600' },
-        { id: 'e2', name: 'Minimalist Notebook', description: 'Workspace', price: 18, imageUrl: 'https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&q=80&w=600' },
-        { id: 'e3', name: 'Bamboo Cleaning Brush', description: 'Household', price: 12, imageUrl: 'https://images.unsplash.com/photo-1584820927498-cafe6c1c1f9b?auto=format&fit=crop&q=80&w=600' },
-        { id: 'e4', name: 'Natural Hand Soap', description: 'Bath & Body', price: 16, imageUrl: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&q=80&w=600' }
+        { id: 'e2', name: 'Minimalist Notebook', description: 'Workspace', price: 18, imageUrl: 'https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&q=80&w=600' },
+        { id: 'e3', name: 'Bamboo Cleaning Brush', description: 'Household', price: 12, imageUrl: 'https://images.unsplash.com/photo-1533228100845-08145b01de14?auto=format&fit=crop&q=80&w=600' },
+        { id: 'e4', name: 'Natural Hand Soap', description: 'Bath & Body', price: 16, imageUrl: 'https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&q=80&w=600' }
       ]
     } },
 
@@ -110,16 +110,16 @@ export const GeneralStore02: TemplateConfig = {
       title: 'Trending This Week',
       subtitle: 'What our community is loving right now.',
       products: [
-        { id: 't1', name: 'Canvas Tote Bag', description: 'Accessories', price: 28, badge: 'Popular', imageUrl: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=600' },
-        { id: 't2', name: 'Glass Meal Prep Set', description: 'Kitchen', price: 45, badge: 'New', imageUrl: 'https://images.unsplash.com/photo-1592663527359-cf6642f54cff?auto=format&fit=crop&q=80&w=600' },
-        { id: 't3', name: 'Desktop Organizer', description: 'Workspace', price: 32, imageUrl: 'https://images.unsplash.com/photo-1596526131083-e8c638c478d5?auto=format&fit=crop&q=80&w=600' },
-        { id: 't4', name: 'Linen Dish Towels', description: 'Household', price: 22, imageUrl: 'https://images.unsplash.com/photo-1584285427181-42021fb20a9a?auto=format&fit=crop&q=80&w=600' }
+        { id: 't1', name: 'Canvas Tote Bag', description: 'Accessories', price: 28, badge: 'Popular', imageUrl: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&q=80&w=600' },
+        { id: 't2', name: 'Glass Meal Prep Set', description: 'Kitchen', price: 45, badge: 'New', imageUrl: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80&w=600' },
+        { id: 't3', name: 'Desktop Organizer', description: 'Workspace', price: 32, imageUrl: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&q=80&w=600' },
+        { id: 't4', name: 'Linen Dish Towels', description: 'Household', price: 22, imageUrl: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=600' }
       ]
     } },
 
     { id: 's10', type: 'shop-the-look', props: {
       title: 'The Morning Routine',
-      image: 'https://images.unsplash.com/photo-1512438248247-f0f2a5a8b7f0?auto=format&fit=crop&q=80&w=1600',
+      image: 'https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&q=80&w=1600',
       hotspots: [
         { x: 30, y: 40, product: { name: 'Pour Over Coffee Maker', price: 45 } },
         { x: 55, y: 60, product: { name: 'Ceramic Mug Set', price: 28 } },
@@ -130,10 +130,10 @@ export const GeneralStore02: TemplateConfig = {
     { id: 's11', type: 'catalog', props: {
       title: 'Special Offers',
       products: [
-        { id: 'so1', name: 'Silicone Storage Bags', description: 'Kitchen', price: 24, originalPrice: 32, badge: 'Sale', imageUrl: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=600' },
-        { id: 'so2', name: 'Cable Management Box', description: 'Workspace', price: 18, originalPrice: 25, badge: 'Sale', imageUrl: 'https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?auto=format&fit=crop&q=80&w=600' },
+        { id: 'so1', name: 'Silicone Storage Bags', description: 'Kitchen', price: 24, originalPrice: 32, badge: 'Sale', imageUrl: 'https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&q=80&w=600' },
+        { id: 'so2', name: 'Cable Management Box', description: 'Workspace', price: 18, originalPrice: 25, badge: 'Sale', imageUrl: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&q=80&w=600' },
         { id: 'so3', name: 'Aromatherapy Candle', description: 'Home Fragrance', price: 20, originalPrice: 28, badge: 'Sale', imageUrl: 'https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&q=80&w=600' },
-        { id: 'so4', name: 'Travel Packing Cubes', description: 'Accessories', price: 35, originalPrice: 48, badge: 'Sale', imageUrl: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=600' }
+        { id: 'so4', name: 'Travel Packing Cubes', description: 'Accessories', price: 35, originalPrice: 48, badge: 'Sale', imageUrl: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=600' }
       ]
     } },
 
@@ -141,13 +141,13 @@ export const GeneralStore02: TemplateConfig = {
       title: 'Designed for Real Life',
       subtitle: 'The Everyday Promise',
       content: 'We believe that the objects you interact with every day should bring a small sense of joy and profound utility. We rigorously test, source, and refine our collection to ensure that every item in our store is durable, sustainable, and beautifully practical. No clutter, no gimmicks—just good design for everyday living.',
-      image: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&q=80&w=1200'
+      image: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&q=80&w=1200'
     } },
 
     { id: 's13', type: 'editorial-grid', props: {
       title: 'Life in Motion',
       images: [
-        'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=800',
+        'https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&q=80&w=800',
         'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=800',
         'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800'
       ]

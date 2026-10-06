@@ -6,9 +6,9 @@ export const GeneralStore05: TemplateConfig = {
   description: 'A modern digital bazaar where every visit reveals something worth bringing home. Vibrant, discovery-driven, and thoughtfully curated.',
   categories: [{ id: 'general', name: 'General Store' }],
   tags: [{ id: 'vibrant', name: 'Vibrant' }, { id: 'discovery', name: 'Discovery' }, { id: 'colorful', name: 'Colorful' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&q=80&w=800',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {
@@ -21,31 +21,31 @@ export const GeneralStore05: TemplateConfig = {
     { id: 's3', type: 'split-hero', props: {
       title: 'Find Your Next Favorite Thing.',
       subtitle: 'A vibrant marketplace of everyday goods, unusual finds, and design-led essentials for a more colorful life.',
-      image: 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80&w=1600',
+      image: 'https://images.unsplash.com/photo-1603833665858-e61d17a86224?auto=format&fit=crop&q=80&w=1600',
       ctaLabel: 'Start Exploring',
       imageRight: true
     } },
     { id: 's4', type: 'bento-grid', props: {
       title: 'The Market Aisles',
       items: [
-        { title: 'For the Home', description: 'Brighten your space.', size: 'large', image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=80&w=800' },
-        { title: 'Desk & Study', description: 'Work beautifully.', size: 'small', image: 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=400' },
-        { title: 'Self Care', description: 'Treat yourself.', size: 'small', image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=400' },
-        { title: 'On the Go', description: 'Travel essentials.', size: 'small', image: 'https://images.unsplash.com/photo-1553531384-cc64ac80f931?auto=format&fit=crop&q=80&w=400' }
+        { title: 'For the Home', description: 'Brighten your space.', size: 'large', image: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&q=80&w=800' },
+        { title: 'Desk & Study', description: 'Work beautifully.', size: 'small', image: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&q=80&w=400' },
+        { title: 'Self Care', description: 'Treat yourself.', size: 'small', image: 'https://images.unsplash.com/photo-1584556812952-905ffd0c611a?auto=format&fit=crop&q=80&w=400' },
+        { title: 'On the Go', description: 'Travel essentials.', size: 'small', image: 'https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&q=80&w=400' }
       ]
     }},
     { id: 's5', type: 'catalog', props: {
       title: 'Fresh Arrivals',
       subtitle: 'Just landed in the bazaar.',
       products: [
-        { id: 'bz1', name: 'Terracotta Planter', description: 'Home', price: 34, imageUrl: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&q=80&w=600' },
-        { id: 'bz2', name: 'Colorblock Notebook', description: 'Workspace', price: 18, imageUrl: 'https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&q=80&w=600' },
-        { id: 'bz3', name: 'Artisan Glass Tumbler', description: 'Kitchen', price: 22, badge: 'New', imageUrl: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&q=80&w=600' },
-        { id: 'bz4', name: 'Woven Cotton Throw', description: 'Textiles', price: 55, imageUrl: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=600' }
+        { id: 'bz1', name: 'Terracotta Planter', description: 'Home', price: 34, imageUrl: 'https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?auto=format&fit=crop&q=80&w=600' },
+        { id: 'bz2', name: 'Colorblock Notebook', description: 'Workspace', price: 18, imageUrl: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&q=80&w=600' },
+        { id: 'bz3', name: 'Artisan Glass Tumbler', description: 'Kitchen', price: 22, badge: 'New', imageUrl: 'https://images.unsplash.com/photo-1506084868230-bb9d95c24759?auto=format&fit=crop&q=80&w=600' },
+        { id: 'bz4', name: 'Woven Cotton Throw', description: 'Textiles', price: 55, imageUrl: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
     { id: 's6', type: 'product-spotlight', props: {
-      image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=800',
+      image: 'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&q=80&w=800',
       name: 'The Market Tote',
       category: 'Carry',
       description: 'The ultimate everyday carry. Made from heavy-duty organic canvas with reinforced handles and interior pockets for all your daily finds.',
@@ -60,16 +60,16 @@ export const GeneralStore05: TemplateConfig = {
     { id: 's8', type: 'catalog', props: {
       title: 'Top Rated Finds',
       products: [
-        { id: 'bz5', name: 'Speckled Ceramic Mug', description: 'Kitchen', price: 24, imageUrl: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&q=80&w=600' },
-        { id: 'bz6', name: 'Brass Desk Tray', description: 'Workspace', price: 38, imageUrl: 'https://images.unsplash.com/photo-1611077544719-741ce2b9894e?auto=format&fit=crop&q=80&w=600' },
-        { id: 'bz7', name: 'Scented Soy Candle', description: 'Home Fragrance', price: 28, imageUrl: 'https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&q=80&w=600' },
-        { id: 'bz8', name: 'Leather Passport Holder', description: 'Travel', price: 42, imageUrl: 'https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&q=80&w=600' }
+        { id: 'bz5', name: 'Speckled Ceramic Mug', description: 'Kitchen', price: 24, imageUrl: 'https://images.unsplash.com/photo-1466637574441-749b8f19452f?auto=format&fit=crop&q=80&w=600' },
+        { id: 'bz6', name: 'Brass Desk Tray', description: 'Workspace', price: 38, imageUrl: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=600' },
+        { id: 'bz7', name: 'Scented Soy Candle', description: 'Home Fragrance', price: 28, imageUrl: 'https://images.unsplash.com/photo-1505253758473-96b7015fcd40?auto=format&fit=crop&q=80&w=600' },
+        { id: 'bz8', name: 'Leather Passport Holder', description: 'Travel', price: 42, imageUrl: 'https://images.unsplash.com/photo-1604514628550-37477afdf4e3?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
     { id: 's9', type: 'shop-the-look', props: {
       title: 'Desk Refresh',
       subtitle: 'Everything you need for a more inspiring workspace.',
-      image: 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=1600',
+      image: 'https://images.unsplash.com/photo-1494390248081-4e521a5940db?auto=format&fit=crop&q=80&w=1600',
       hotspots: [
         { x: 30, y: 50, product: { name: 'Dot Grid Notebook', price: 18 } },
         { x: 55, y: 40, product: { name: 'Brass Pen Set', price: 35 } },
@@ -79,19 +79,19 @@ export const GeneralStore05: TemplateConfig = {
     { id: 's10', type: 'editorial-grid', props: {
       title: 'Vibrant Living',
       images: [
-        'https://images.unsplash.com/photo-1528317424683-11bb58763dc0?auto=format&fit=crop&q=80&w=800',
+        'https://images.unsplash.com/photo-1559598467-f8b76c8155d0?auto=format&fit=crop&q=80&w=800',
         'https://images.unsplash.com/photo-1550989460-0adf9ea622e2?auto=format&fit=crop&q=80&w=800',
-        'https://images.unsplash.com/photo-1595123049187-573e3a4e9b92?auto=format&fit=crop&q=80&w=800'
+        'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&q=80&w=800'
       ]
     }},
     { id: 's11', type: 'catalog', props: {
       title: 'Under $50',
       subtitle: 'Great design doesn\'t have to break the bank.',
       products: [
-        { id: 'bz9', name: 'Bamboo Cutlery Set', description: 'Kitchen', price: 16, imageUrl: 'https://images.unsplash.com/photo-1584820927498-cafe6c1c1f9b?auto=format&fit=crop&q=80&w=600' },
-        { id: 'bz10', name: 'Glass Match Cloche', description: 'Home', price: 22, imageUrl: 'https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?auto=format&fit=crop&q=80&w=600' },
-        { id: 'bz11', name: 'Mesh Produce Bags', description: 'Sustainable', price: 14, imageUrl: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=600' },
-        { id: 'bz12', name: 'Travel Pill Organizer', description: 'Accessories', price: 12, imageUrl: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&q=80&w=600' }
+        { id: 'bz9', name: 'Bamboo Cutlery Set', description: 'Kitchen', price: 16, imageUrl: 'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&q=80&w=600' },
+        { id: 'bz10', name: 'Glass Match Cloche', description: 'Home', price: 22, imageUrl: 'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?auto=format&fit=crop&q=80&w=600' },
+        { id: 'bz11', name: 'Mesh Produce Bags', description: 'Sustainable', price: 14, imageUrl: 'https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&q=80&w=600' },
+        { id: 'bz12', name: 'Travel Pill Organizer', description: 'Accessories', price: 12, imageUrl: 'https://images.unsplash.com/photo-1558401391-7899b4bd5bbf?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
     { id: 's12', type: 'promo', props: {
@@ -100,10 +100,10 @@ export const GeneralStore05: TemplateConfig = {
     { id: 's13', type: 'catalog', props: {
       title: 'Gifts & Sets',
       products: [
-        { id: 'bz13', name: 'The Coffee Enthusiast', description: 'Gift Box', price: 85, imageUrl: 'https://images.unsplash.com/photo-1517006886278-f71f6d0f01ba?auto=format&fit=crop&q=80&w=600' },
-        { id: 'bz14', name: 'Self-Care Sunday', description: 'Gift Box', price: 65, imageUrl: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&q=80&w=600' },
-        { id: 'bz15', name: 'Desk Upgrade', description: 'Gift Box', price: 55, imageUrl: 'https://images.unsplash.com/photo-1596526131083-e8c638c478d5?auto=format&fit=crop&q=80&w=600' },
-        { id: 'bz16', name: 'The Frequent Flyer', description: 'Gift Box', price: 95, imageUrl: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=600' }
+        { id: 'bz13', name: 'The Coffee Enthusiast', description: 'Gift Box', price: 85, imageUrl: 'https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&q=80&w=600' },
+        { id: 'bz14', name: 'Self-Care Sunday', description: 'Gift Box', price: 65, imageUrl: 'https://images.unsplash.com/photo-1519999482648-25049ddd37b1?auto=format&fit=crop&q=80&w=600' },
+        { id: 'bz15', name: 'Desk Upgrade', description: 'Gift Box', price: 55, imageUrl: 'https://images.unsplash.com/photo-1495214783159-3503fd1b572d?auto=format&fit=crop&q=80&w=600' },
+        { id: 'bz16', name: 'The Frequent Flyer', description: 'Gift Box', price: 95, imageUrl: 'https://images.unsplash.com/photo-1606914501449-5a96b6ce24ca?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
     { id: 's14', type: 'testimonials', props: {
@@ -118,7 +118,7 @@ export const GeneralStore05: TemplateConfig = {
       title: 'A World of Design.',
       subtitle: 'The Bazaar Ethos',
       content: 'We scour the globe for products that spark joy, offer brilliant utility, or just look fantastic on your shelf. Bazaar is about celebrating diversity in design—bringing together an eclectic mix of objects that make daily life a little more vibrant.',
-      image: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&q=80&w=1200'
+      image: 'https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&q=80&w=1200'
     }},
     { id: 's16', type: 'bento-grid', props: {
       title: 'Why Shop Bazaar',

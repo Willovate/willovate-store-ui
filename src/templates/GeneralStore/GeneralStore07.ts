@@ -6,9 +6,9 @@ export const GeneralStore07: TemplateConfig = {
   description: 'A modern neighborhood marketplace built around products people actually use, keep around, recommend, and return to.',
   categories: [{ id: 'general', name: 'General Store' }],
   tags: [{ id: 'community', name: 'Community' }, { id: 'everyday', name: 'Everyday' }, { id: 'practical', name: 'Practical' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&q=80&w=800',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {
@@ -21,21 +21,21 @@ export const GeneralStore07: TemplateConfig = {
     { id: 's3', type: 'split-hero', props: {
       title: 'Good things for everyday life.',
       subtitle: 'A considered mix of useful, enjoyable, and easy-to-love products — chosen with real people in mind.',
-      image: 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=1600',
+      image: 'https://images.unsplash.com/photo-1572981779307-38b8cabb2407?auto=format&fit=crop&q=80&w=1600',
       ctaLabel: 'Shop the collection',
       imageRight: false
     } },
     { id: 's4', type: 'bento-grid', props: {
       title: 'Shop what you need',
       items: [
-        { title: 'Home', description: 'Everyday living.', size: 'large', image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=80&w=800' },
-        { title: 'Travel', description: 'On the move.', size: 'small', image: 'https://images.unsplash.com/photo-1553531384-cc64ac80f931?auto=format&fit=crop&q=80&w=400' },
-        { title: 'Tech', description: 'Workspace essentials.', size: 'small', image: 'https://images.unsplash.com/photo-1528301721190-186c3bd85418?auto=format&fit=crop&q=80&w=400' },
+        { title: 'Home', description: 'Everyday living.', size: 'large', image: 'https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&q=80&w=800' },
+        { title: 'Travel', description: 'On the move.', size: 'small', image: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&q=80&w=400' },
+        { title: 'Tech', description: 'Workspace essentials.', size: 'small', image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&q=80&w=400' },
         { title: 'Gifts', description: 'For them.', size: 'small', image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=400' }
       ]
     }},
     { id: 's5', type: 'product-spotlight', props: {
-      image: 'https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&q=80&w=800',
+      image: 'https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?auto=format&fit=crop&q=80&w=800',
       name: 'Fold Travel Pouch',
       category: 'Community Pick',
       description: 'Our most recommended travel companion. Holds cables, toiletries, and essentials perfectly. "I bought three just in case they stop making them" - Mark T.',
@@ -47,9 +47,9 @@ export const GeneralStore07: TemplateConfig = {
     { id: 's6', type: 'catalog', props: {
       title: 'Most Loved',
       products: [
-        { id: 'cm1', name: 'Field Tote', description: 'Everyday Carry', price: 45, imageUrl: 'https://images.unsplash.com/photo-1597816041042-45e3ed609f98?auto=format&fit=crop&q=80&w=600' },
-        { id: 'cm2', name: 'Daily Carry Bottle', description: 'Hydration', price: 28, imageUrl: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&q=80&w=600' },
-        { id: 'cm3', name: 'Arc Desk Tray', description: 'Workspace', price: 32, imageUrl: 'https://images.unsplash.com/photo-1611077544719-741ce2b9894e?auto=format&fit=crop&q=80&w=600' },
+        { id: 'cm1', name: 'Field Tote', description: 'Everyday Carry', price: 45, imageUrl: 'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&q=80&w=600' },
+        { id: 'cm2', name: 'Daily Carry Bottle', description: 'Hydration', price: 28, imageUrl: 'https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&q=80&w=600' },
+        { id: 'cm3', name: 'Arc Desk Tray', description: 'Workspace', price: 32, imageUrl: 'https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?auto=format&fit=crop&q=80&w=600' },
         { id: 'cm4', name: 'Pocket Speaker', description: 'Audio', price: 65, imageUrl: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
@@ -59,7 +59,7 @@ export const GeneralStore07: TemplateConfig = {
     { id: 's8', type: 'bento-grid', props: {
       title: 'Under one roof',
       items: [
-        { title: 'Home', description: 'The foundation.', span: 2, image: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&q=80&w=800' },
+        { title: 'Home', description: 'The foundation.', span: 2, image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&q=80&w=800' },
         { title: 'Work', description: 'Focus better.', span: 1 },
         { title: 'Travel', description: 'Pack lighter.', span: 1 }
       ]
@@ -67,44 +67,44 @@ export const GeneralStore07: TemplateConfig = {
     { id: 's9', type: 'catalog', props: {
       title: 'New In',
       products: [
-        { id: 'cm5', name: 'Softline Mug', description: 'Kitchen', price: 24, badge: 'New', imageUrl: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&q=80&w=600' },
-        { id: 'cm6', name: 'Everyday Notebook', description: 'Stationery', price: 18, badge: 'New', imageUrl: 'https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&q=80&w=600' },
-        { id: 'cm7', name: 'Common Charge Hub', description: 'Tech', price: 48, badge: 'New', imageUrl: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&q=80&w=600' },
-        { id: 'cm8', name: 'Weekender Organizer', description: 'Travel', price: 55, badge: 'New', imageUrl: 'https://images.unsplash.com/photo-1559404289-4b68ff05f57a?auto=format&fit=crop&q=80&w=600' }
+        { id: 'cm5', name: 'Softline Mug', description: 'Kitchen', price: 24, badge: 'New', imageUrl: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&q=80&w=600' },
+        { id: 'cm6', name: 'Everyday Notebook', description: 'Stationery', price: 18, badge: 'New', imageUrl: 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&q=80&w=600' },
+        { id: 'cm7', name: 'Common Charge Hub', description: 'Tech', price: 48, badge: 'New', imageUrl: 'https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&q=80&w=600' },
+        { id: 'cm8', name: 'Weekender Organizer', description: 'Travel', price: 55, badge: 'New', imageUrl: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
     { id: 's10', type: 'catalog', props: {
       title: 'People Also Picked',
       subtitle: 'Cross-category discovery',
       products: [
-        { id: 'cm9', name: 'Desk Lamp', description: 'Lighting', price: 85, imageUrl: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=600' },
-        { id: 'cm10', name: 'Phone Stand', description: 'Accessories', price: 22, imageUrl: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&q=80&w=600' },
-        { id: 'cm11', name: 'Storage Basket', description: 'Organization', price: 38, imageUrl: 'https://images.unsplash.com/photo-1528301721190-186c3bd85418?auto=format&fit=crop&q=80&w=600' },
-        { id: 'cm12', name: 'Ceramic Pour Over', description: 'Kitchen', price: 42, imageUrl: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=600' }
+        { id: 'cm9', name: 'Desk Lamp', description: 'Lighting', price: 85, imageUrl: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=600' },
+        { id: 'cm10', name: 'Phone Stand', description: 'Accessories', price: 22, imageUrl: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&q=80&w=600' },
+        { id: 'cm11', name: 'Storage Basket', description: 'Organization', price: 38, imageUrl: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&q=80&w=600' },
+        { id: 'cm12', name: 'Ceramic Pour Over', description: 'Kitchen', price: 42, imageUrl: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
     { id: 's11', type: 'story', props: {
       title: 'Made for the way people actually live.',
       subtitle: 'Editorial Feature',
       content: 'We believe the objects you use every day should work perfectly and look great. No fuss, no excessive features. Just honest, well-made products that fit seamlessly into your routine.',
-      image: 'https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&q=80&w=1200'
+      image: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&q=80&w=1200'
     }},
     { id: 's12', type: 'catalog', props: {
       title: 'Build your everyday kit',
       subtitle: 'Curated bundles to save you time.',
       products: [
-        { id: 'cm13', name: 'The Desk Kit', description: 'Tray, Notebook, Stand', price: 68, badge: 'Bundle', imageUrl: 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=600' },
-        { id: 'cm14', name: 'The Travel Kit', description: 'Pouch, Bottle, Organizer', price: 95, badge: 'Bundle', imageUrl: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=600' },
-        { id: 'cm15', name: 'The Home Reset', description: 'Storage, Lamp, Blanket', price: 145, badge: 'Bundle', imageUrl: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=80&w=600' }
+        { id: 'cm13', name: 'The Desk Kit', description: 'Tray, Notebook, Stand', price: 68, badge: 'Bundle', imageUrl: 'https://images.unsplash.com/photo-1502899576159-f224dc2349fa?auto=format&fit=crop&q=80&w=600' },
+        { id: 'cm14', name: 'The Travel Kit', description: 'Pouch, Bottle, Organizer', price: 95, badge: 'Bundle', imageUrl: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&q=80&w=600' },
+        { id: 'cm15', name: 'The Home Reset', description: 'Storage, Lamp, Blanket', price: 145, badge: 'Bundle', imageUrl: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
     { id: 's13', type: 'catalog', props: {
       title: 'Back in rotation',
       products: [
-        { id: 'cm16', name: 'Stack Storage Set', description: 'Organization', price: 54, imageUrl: 'https://images.unsplash.com/photo-1595514535316-24eb22442ad4?auto=format&fit=crop&q=80&w=600' },
-        { id: 'cm17', name: 'Linen Throw', description: 'Home', price: 85, imageUrl: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=600' },
-        { id: 'cm18', name: 'Bamboo Cutlery', description: 'Kitchen', price: 24, imageUrl: 'https://images.unsplash.com/photo-1584820927498-cafe6c1c1f9b?auto=format&fit=crop&q=80&w=600' },
-        { id: 'cm19', name: 'Glass Match Cloche', description: 'Accessories', price: 28, imageUrl: 'https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?auto=format&fit=crop&q=80&w=600' }
+        { id: 'cm16', name: 'Stack Storage Set', description: 'Organization', price: 54, imageUrl: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&q=80&w=600' },
+        { id: 'cm17', name: 'Linen Throw', description: 'Home', price: 85, imageUrl: 'https://images.unsplash.com/photo-1527443195645-1133f7f28990?auto=format&fit=crop&q=80&w=600' },
+        { id: 'cm18', name: 'Bamboo Cutlery', description: 'Kitchen', price: 24, imageUrl: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&q=80&w=600' },
+        { id: 'cm19', name: 'Glass Match Cloche', description: 'Accessories', price: 28, imageUrl: 'https://images.unsplash.com/photo-1558227691-41ea78d1f631?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
     { id: 's14', type: 'testimonials', props: {
@@ -128,7 +128,7 @@ export const GeneralStore07: TemplateConfig = {
       title: 'A collection of things worth making room for.',
       subtitle: 'The Common Identity',
       content: 'We created Common to bring together products that balance beauty and utility. Our community helps us shape the collection, recommending items that have stood the test of time.',
-      image: 'https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&q=80&w=1200'
+      image: 'https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&q=80&w=1200'
     }},
     { id: 's17', type: 'newsletter', props: {
       title: 'Get the good stuff first.',
