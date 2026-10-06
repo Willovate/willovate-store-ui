@@ -1420,7 +1420,7 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
       return ALL_JEWELRY_MARKETPLACE_TEMPLATES
     }
     if (TEMPLATE_REGISTRY[businessType]?.templates?.length) {
-      return TEMPLATE_REGISTRY[businessType].templates
+      return TEMPLATE_REGISTRY[businessType].templates as unknown as MarketplaceTemplate[]
     }
 
     return [{
