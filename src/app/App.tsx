@@ -11,6 +11,8 @@ import { productService } from '../services/productService'
 import { formatCurrency } from '../lib/currency'
 import { useCart } from '../hooks/useCart'
 import type { Product } from '../types'
+import { AdminApp } from '../admin/AdminApp'
+import { useHashRoute } from '../admin/hooks/useHashRoute'
 
 const STORE_PROMISES = [
   ['Free delivery', 'On orders over ₹2,500'],
@@ -612,4 +614,12 @@ function App() {
   )
 }
 
-export default App
+// ── AppRouter — thin wrapper that handles admin vs main flow ──────────────────
+
+function AppRouter() {
+  const hash = useHashRoute()
+  if (hash.startsWith('#/admin')) return <AdminApp hash={hash} />
+  return <App />
+}
+
+export default AppRouter
