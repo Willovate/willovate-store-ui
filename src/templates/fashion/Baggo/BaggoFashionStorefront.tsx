@@ -32,6 +32,8 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
 
   // Drawers and Modals
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false)
+  const [isWishlistOpen, setIsWishlistOpen] = useState<boolean>(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false)
   const [isQuickViewOpen, setIsQuickViewOpen] = useState<boolean>(false)
   const [quickViewProduct, setQuickViewProduct] = useState<BaggoProduct>(BAGGO_PRODUCTS[0])
   const [isCompareOpen, setIsCompareOpen] = useState<boolean>(false)
@@ -112,11 +114,13 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
   const toggleWishlist = (id: string) => {
     setWishlistIds((prev) => {
       const exists = prev.includes(id)
+      const prod = BAGGO_PRODUCTS.find((p) => p.id === id)
+      const name = prod ? prod.name : 'Leather bag'
       if (exists) {
-        showToast('Removed from wishlist')
+        showToast(`Removed "${name}" from wishlist`)
         return prev.filter((x) => x !== id)
       }
-      showToast('Saved to handcrafted wishlist ♥')
+      showToast(`Saved "${name}" to wishlist ♥`)
       return [...prev, id]
     })
   }
@@ -177,6 +181,10 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
   const currentHeroSlide = BAGGO_HERO_SLIDES[activeHeroSlideIdx]
   const currentTestimonial = BAGGO_TESTIMONIALS[activeTestiIdx]
 
+  const wishlistProducts = useMemo(() => {
+    return BAGGO_PRODUCTS.filter((p) => wishlistIds.includes(p.id))
+  }, [wishlistIds])
+
   return (
     <div className={`baggo-root ${isMobile ? 'baggo-mobile device-mobile is-mobile' : `baggo-${effectiveDevice}`}`}>
       {/* TOAST POPUP */}
@@ -209,7 +217,7 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
             <div className="baggo-top-notice">
               <span>EST. 1984</span> • <span>GENUINE HANDCRAFTED LEATHER</span> • <span className="baggo-top-highlight">FREE WORLDWIDE COURIER DELIVERY</span>
             </div>
-            <div style={{ display: 'flex', gap: 20 }}>
+            <div className="baggo-top-extra" style={{ display: 'flex', gap: 20 }}>
               <span>Lifetime Warranty</span>
               <span>Complimentary Monogramming</span>
             </div>
@@ -221,6 +229,16 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
       <header className="baggo-header">
         <div className="baggo-container">
           <div className="baggo-header-inner">
+            {/* Mobile Menu Toggle (Left) */}
+            <button
+              type="button"
+              className="baggo-mobile-menu-btn"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle Navigation"
+            >
+              ☰
+            </button>
+
             {/* Logo */}
             <div className="baggo-logo" onClick={() => setViewMode('home')}>
               <div className="baggo-logo-icon">💼</div>
@@ -230,8 +248,8 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
               </div>
             </div>
 
-            {/* Navigation */}
-            <nav>
+            {/* Navigation (Desktop) */}
+            <nav className="baggo-nav-desktop">
               <ul className="baggo-nav-list">
                 <li>
                   <a
@@ -248,9 +266,10 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
                 <li>
                   <a
                     href="#catalog"
-                    className={`baggo-nav-link ${viewMode === 'collection' ? 'active' : ''}`}
+                    className={`baggo-nav-link ${viewMode === 'collection' && filters.category === 'All' ? 'active' : ''}`}
                     onClick={(e) => {
                       e.preventDefault()
+                      setFilters((f) => ({ ...f, category: 'All' }))
                       setViewMode('collection')
                     }}
                   >
@@ -260,7 +279,7 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
                 <li>
                   <a
                     href="#casual-bags"
-                    className="baggo-nav-link"
+                    className={`baggo-nav-link ${viewMode === 'collection' && filters.category === 'Casual Bags' ? 'active' : ''}`}
                     onClick={(e) => {
                       e.preventDefault()
                       setFilters((f) => ({ ...f, category: 'Casual Bags' }))
@@ -273,7 +292,7 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
                 <li>
                   <a
                     href="#formal-bags"
-                    className="baggo-nav-link"
+                    className={`baggo-nav-link ${viewMode === 'collection' && filters.category === 'Formal Bags' ? 'active' : ''}`}
                     onClick={(e) => {
                       e.preventDefault()
                       setFilters((f) => ({ ...f, category: 'Formal Bags' }))
@@ -286,7 +305,7 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
                 <li>
                   <a
                     href="#party-bags"
-                    className="baggo-nav-link"
+                    className={`baggo-nav-link ${viewMode === 'collection' && filters.category === 'Party Bags' ? 'active' : ''}`}
                     onClick={(e) => {
                       e.preventDefault()
                       setFilters((f) => ({ ...f, category: 'Party Bags' }))
@@ -302,6 +321,7 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
             {/* Actions */}
             <div className="baggo-actions">
               <button
+                type="button"
                 className="baggo-action-btn"
                 title="Search"
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
@@ -310,15 +330,17 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
               </button>
 
               <button
+                type="button"
                 className="baggo-action-btn"
                 title="Wishlist"
-                onClick={() => showToast(`Wishlist has ${wishlistIds.length} items`)}
+                onClick={() => setIsWishlistOpen(true)}
               >
                 ♥
                 {wishlistIds.length > 0 && <span className="baggo-badge">{wishlistIds.length}</span>}
               </button>
 
               <button
+                type="button"
                 className="baggo-action-btn"
                 title="Compare"
                 onClick={() => {
@@ -338,6 +360,7 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
               </button>
 
               <button
+                type="button"
                 className="baggo-action-btn"
                 title="Bag Cart"
                 onClick={() => setIsCartOpen(true)}
@@ -347,7 +370,6 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
                   {cartItems.reduce((acc, i) => acc + i.quantity, 0)}
                 </span>
               </button>
-
             </div>
           </div>
         </div>
@@ -372,6 +394,7 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
                 }}
               />
               <button
+                type="button"
                 className="baggo-btn baggo-btn-primary"
                 onClick={() => {
                   if (searchQuery.trim()) {
@@ -386,6 +409,130 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
           </div>
         )}
       </header>
+
+      {/* MOBILE NAVIGATION DRAWER */}
+      {isMobileMenuOpen && (
+        <div
+          className="baggo-drawer-backdrop"
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
+          <div
+            className="baggo-cart-drawer baggo-mobile-nav-drawer"
+            style={{ left: 0, right: 'auto' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="baggo-drawer-header">
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <span style={{ fontSize: 24 }}>💼</span>
+                <div>
+                  <div style={{ fontFamily: 'Frank Ruhl Libre, serif', fontSize: 18, fontWeight: 700, color: '#27314C' }}>
+                    Baggo
+                  </div>
+                  <div style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.15em', color: '#CC824C' }}>
+                    Leather Atelier
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsMobileMenuOpen(false)}
+                style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer', color: '#27314C' }}
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="baggo-drawer-body" style={{ padding: '16px 20px' }}>
+              <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em', color: '#CC824C', marginBottom: 12 }}>
+                Navigation
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                {[
+                  { name: 'Home', cat: null },
+                  { name: 'Catalog (All Bags)', cat: 'All' },
+                  { name: 'Casual Bags', cat: 'Casual Bags' },
+                  { name: 'Formal Bags', cat: 'Formal Bags' },
+                  { name: 'Party Bags', cat: 'Party Bags' },
+                ].map((item) => (
+                  <button
+                    key={item.name}
+                    type="button"
+                    style={{
+                      width: '100%',
+                      padding: '12px 0',
+                      background: 'none',
+                      border: 'none',
+                      textAlign: 'left',
+                      fontWeight: 600,
+                      fontSize: 15,
+                      cursor: 'pointer',
+                      color: '#27314C',
+                      borderBottom: '1px solid #F1ECE7',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                    onClick={() => {
+                      if (item.cat === null) {
+                        setViewMode('home')
+                      } else {
+                        setFilters((f) => ({ ...f, category: item.cat as any }))
+                        setViewMode('collection')
+                      }
+                      setIsMobileMenuOpen(false)
+                    }}
+                  >
+                    <span>{item.name}</span>
+                    <span style={{ color: '#CC824C', fontSize: 13 }}>→</span>
+                  </button>
+                ))}
+              </div>
+
+              {/* Quick Actions in Drawer */}
+              <div style={{ marginTop: 24, paddingTop: 16, borderTop: '1px solid #E8DED6' }}>
+                <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em', color: '#CC824C', marginBottom: 12 }}>
+                  Quick Actions
+                </div>
+                <button
+                  type="button"
+                  style={{ width: '100%', padding: '10px 0', background: 'none', border: 'none', textAlign: 'left', fontWeight: 600, fontSize: 14, cursor: 'pointer', display: 'flex', justifyContent: 'space-between', color: '#27314C' }}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false)
+                    setIsCartOpen(true)
+                  }}
+                >
+                  <span>🛍 Shopping Bag</span>
+                  <span style={{ fontWeight: 700, color: '#CC824C' }}>{cartItems.reduce((acc, i) => acc + i.quantity, 0)} items</span>
+                </button>
+                <button
+                  type="button"
+                  style={{ width: '100%', padding: '10px 0', background: 'none', border: 'none', textAlign: 'left', fontWeight: 600, fontSize: 14, cursor: 'pointer', display: 'flex', justifyContent: 'space-between', color: '#27314C' }}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false)
+                    setIsWishlistOpen(true)
+                  }}
+                >
+                  <span>♥ Saved Wishlist</span>
+                  <span style={{ fontWeight: 700, color: '#CC824C' }}>{wishlistIds.length} items</span>
+                </button>
+                {compareIds.length > 0 && (
+                  <button
+                    type="button"
+                    style={{ width: '100%', padding: '10px 0', background: 'none', border: 'none', textAlign: 'left', fontWeight: 600, fontSize: 14, cursor: 'pointer', display: 'flex', justifyContent: 'space-between', color: '#27314C' }}
+                    onClick={() => {
+                      setIsMobileMenuOpen(false)
+                      setIsCompareOpen(true)
+                    }}
+                  >
+                    <span>⇄ Compare Tray</span>
+                    <span style={{ fontWeight: 700, color: '#CC824C' }}>{compareIds.length} bags</span>
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* =========================================================
           VIEW MODE: COLLECTION VIEW
@@ -442,11 +589,12 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
                           👁
                         </button>
                         <button
+                          type="button"
                           className={`baggo-card-action-btn ${wishlistIds.includes(p.id) ? 'active' : ''}`}
-                          title="Wishlist"
+                          title={wishlistIds.includes(p.id) ? 'Remove from Wishlist' : 'Save to Wishlist'}
                           onClick={() => toggleWishlist(p.id)}
                         >
-                          ♥
+                          {wishlistIds.includes(p.id) ? '♥' : '♡'}
                         </button>
                         <button
                           className={`baggo-card-action-btn ${compareIds.includes(p.id) ? 'active' : ''}`}
@@ -520,10 +668,11 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
               ← Back to Catalog
             </button>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 50 }}>
+            <div className="baggo-pdp-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 50 }}>
               {/* Left: Gallery */}
               <div>
                 <div
+                  className="baggo-pdp-main-img-wrap"
                   style={{
                     borderRadius: 6,
                     overflow: 'hidden',
@@ -899,11 +1048,12 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
                             👁
                           </button>
                           <button
+                            type="button"
                             className={`baggo-card-action-btn ${wishlistIds.includes(p.id) ? 'active' : ''}`}
-                            title="Wishlist"
+                            title={wishlistIds.includes(p.id) ? 'Remove from Wishlist' : 'Save to Wishlist'}
                             onClick={() => toggleWishlist(p.id)}
                           >
-                            ♥
+                            {wishlistIds.includes(p.id) ? '♥' : '♡'}
                           </button>
                           <button
                             className={`baggo-card-action-btn ${compareIds.includes(p.id) ? 'active' : ''}`}
@@ -1044,6 +1194,7 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
           {/* SECTION 7: BESPOKE MONOGRAM CALLOUT BANNER */}
           <section className="baggo-container" style={{ margin: '40px auto 60px' }}>
             <div
+              className="baggo-monogram-banner"
               style={{
                 background: '#FFFFFF',
                 border: '2px solid #E8DED6',
@@ -1212,6 +1363,7 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
               <h4>Contact us</h4>
               <ul>
                 <li><a href="#faq" onClick={(e) => { e.preventDefault(); showToast('FAQ & Support'); }}>Help & FAQs</a></li>
+                <li><a href="#wishlist" onClick={(e) => { e.preventDefault(); setIsWishlistOpen(true); }}>Saved Wishlist ({wishlistIds.length})</a></li>
                 <li><a href="#shipping" onClick={(e) => { e.preventDefault(); showToast('Shipping Policies'); }}>Global Delivery</a></li>
                 <li><a href="#warranty" onClick={(e) => { e.preventDefault(); showToast('Warranty Info'); }}>Lifetime Warranty</a></li>
                 <li><a href="#care" onClick={(e) => { e.preventDefault(); showToast('Leather Care Guide'); }}>Leather Care Guide</a></li>
@@ -1341,10 +1493,146 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
         </div>
       )}
 
+      {/* SLIDE-OVER WISHLIST DRAWER */}
+      {isWishlistOpen && (
+        <div className="baggo-drawer-backdrop" onClick={() => setIsWishlistOpen(false)}>
+          <div className="baggo-cart-drawer baggo-wishlist-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className="baggo-drawer-header">
+              <h3>Saved Wishlist ({wishlistIds.length})</h3>
+              <button
+                type="button"
+                onClick={() => setIsWishlistOpen(false)}
+                style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer', color: '#27314C' }}
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="baggo-drawer-body">
+              {wishlistProducts.length === 0 ? (
+                <div style={{ textAlign: 'center', padding: '60px 0', color: '#535353' }}>
+                  <div style={{ fontSize: 44, marginBottom: 12, color: '#CC824C' }}>♥</div>
+                  <div style={{ fontWeight: 700, fontSize: 16, color: '#27314C' }}>Your Wishlist is Empty</div>
+                  <p style={{ fontSize: 13, color: '#6B7280', margin: '8px 0 16px' }}>
+                    Tap the heart icon on any handcrafted bag to save your favorites.
+                  </p>
+                  <button
+                    type="button"
+                    className="baggo-btn baggo-btn-primary"
+                    onClick={() => {
+                      setIsWishlistOpen(false)
+                      setViewMode('collection')
+                    }}
+                  >
+                    Explore Leather Catalog
+                  </button>
+                </div>
+              ) : (
+                wishlistProducts.map((p) => (
+                  <div key={p.id} className="baggo-drawer-item">
+                    <img
+                      src={p.image}
+                      alt={p.name}
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => {
+                        openPdp(p)
+                        setIsWishlistOpen(false)
+                      }}
+                    />
+                    <div style={{ flex: 1 }}>
+                      <div
+                        style={{
+                          fontFamily: 'Frank Ruhl Libre, serif',
+                          fontSize: 16,
+                          fontWeight: 700,
+                          color: '#27314C',
+                          cursor: 'pointer',
+                        }}
+                        onClick={() => {
+                          openPdp(p)
+                          setIsWishlistOpen(false)
+                        }}
+                      >
+                        {p.name}
+                      </div>
+                      <div style={{ fontSize: 12, color: '#535353', margin: '2px 0 4px' }}>
+                        {p.leatherType} • {p.capacityLiters}
+                      </div>
+                      <div style={{ color: '#CC824C', fontWeight: 700, fontSize: 16, marginBottom: 8 }}>
+                        ${p.price.toFixed(2)}
+                      </div>
+                      <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                        <button
+                          type="button"
+                          className="baggo-btn baggo-btn-cognac"
+                          style={{ padding: '6px 14px', fontSize: 11 }}
+                          onClick={() => {
+                            addToCart(p, p.colors[0]?.name || 'Default', undefined, 1)
+                            setIsWishlistOpen(false)
+                          }}
+                        >
+                          + Add to Bag
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => toggleWishlist(p.id)}
+                          style={{ background: 'none', border: 'none', fontSize: 12, color: '#EF4444', cursor: 'pointer' }}
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+
+            {wishlistProducts.length > 0 && (
+              <div className="baggo-drawer-footer">
+                <button
+                  type="button"
+                  className="baggo-btn baggo-btn-cognac"
+                  style={{ width: '100%', marginBottom: 10 }}
+                  onClick={() => {
+                    wishlistProducts.forEach((p) => {
+                      addToCart(p, p.colors[0]?.name || 'Default', undefined, 1)
+                    })
+                    setIsWishlistOpen(false)
+                    setIsCartOpen(true)
+                  }}
+                >
+                  Move All to Bag →
+                </button>
+                <button
+                  type="button"
+                  style={{
+                    width: '100%',
+                    padding: '8px',
+                    background: 'none',
+                    border: '1px solid #E8DED6',
+                    borderRadius: 3,
+                    color: '#6B7280',
+                    fontSize: 13,
+                    cursor: 'pointer',
+                  }}
+                  onClick={() => {
+                    setWishlistIds([])
+                    showToast('Wishlist cleared')
+                  }}
+                >
+                  Clear Wishlist
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* QUICK VIEW MODAL */}
       {isQuickViewOpen && (
         <div className="baggo-drawer-backdrop" onClick={() => setIsQuickViewOpen(false)}>
           <div
+            className="baggo-quickview-modal"
             style={{
               position: 'fixed',
               top: '50%',
@@ -1355,6 +1643,8 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
               borderRadius: 6,
               maxWidth: 720,
               width: '90%',
+              maxHeight: '90vh',
+              overflowY: 'auto',
               zIndex: 10002,
               boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
             }}
@@ -1362,13 +1652,14 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
           >
             <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 8 }}>
               <button
+                type="button"
                 onClick={() => setIsQuickViewOpen(false)}
                 style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer' }}
               >
                 ✕
               </button>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 28 }}>
+            <div className="baggo-quickview-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 28 }}>
               <img
                 src={quickViewProduct.image}
                 alt={quickViewProduct.name}
@@ -1387,16 +1678,28 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
                 <p style={{ fontSize: 13, color: '#535353', lineHeight: 1.7, marginBottom: 20 }}>
                   {quickViewProduct.description}
                 </p>
-                <button
-                  className="baggo-btn baggo-btn-cognac"
-                  style={{ width: '100%' }}
-                  onClick={() => {
-                    addToCart(quickViewProduct, quickViewProduct.colors[0]?.name || 'Default', undefined, 1)
-                    setIsQuickViewOpen(false)
-                  }}
-                >
-                  Add to Bag
-                </button>
+                <div style={{ display: 'flex', gap: 10 }}>
+                  <button
+                    type="button"
+                    className="baggo-btn baggo-btn-cognac"
+                    style={{ flex: 1 }}
+                    onClick={() => {
+                      addToCart(quickViewProduct, quickViewProduct.colors[0]?.name || 'Default', undefined, 1)
+                      setIsQuickViewOpen(false)
+                    }}
+                  >
+                    Add to Bag
+                  </button>
+                  <button
+                    type="button"
+                    className={`baggo-action-btn ${wishlistIds.includes(quickViewProduct.id) ? 'active' : ''}`}
+                    onClick={() => toggleWishlist(quickViewProduct.id)}
+                    style={{ width: 44, height: 44, borderRadius: 4 }}
+                    title={wishlistIds.includes(quickViewProduct.id) ? 'Remove from Wishlist' : 'Save to Wishlist'}
+                  >
+                    {wishlistIds.includes(quickViewProduct.id) ? '♥' : '♡'}
+                  </button>
+                </div>
               </div>
             </div>
           </div>

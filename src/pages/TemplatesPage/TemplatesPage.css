@@ -12356,37 +12356,457 @@
   overflow-x: hidden !important;
 }
 
-.simulated-frame.frame-mobile .baggo-announcement-tools,
-.baggo-root.device-mobile .baggo-announcement-tools,
-.baggo-root.is-mobile .baggo-announcement-tools {
+.simulated-frame.frame-mobile .baggo-top-extra,
+.baggo-root.device-mobile .baggo-top-extra,
+.baggo-root.is-mobile .baggo-top-extra {
   display: none !important;
 }
 
-.simulated-frame.frame-mobile .baggo-nav,
-.baggo-root.device-mobile .baggo-nav,
-.baggo-root.is-mobile .baggo-nav {
+.simulated-frame.frame-mobile .baggo-top-bar-inner,
+.baggo-root.device-mobile .baggo-top-bar-inner,
+.baggo-root.is-mobile .baggo-top-bar-inner {
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 6px 12px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-top-notice,
+.baggo-root.device-mobile .baggo-top-notice,
+.baggo-root.is-mobile .baggo-top-notice {
+  font-size: 11px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.simulated-frame.frame-mobile .baggo-mobile-menu-btn,
+.baggo-root.device-mobile .baggo-mobile-menu-btn,
+.baggo-root.is-mobile .baggo-mobile-menu-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 36px !important;
+  height: 36px !important;
+  background: none !important;
+  border: 1px solid var(--baggo-border) !important;
+  border-radius: 4px !important;
+  font-size: 20px !important;
+  color: var(--baggo-navy) !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+}
+
+.simulated-frame.frame-mobile .baggo-nav-desktop,
+.baggo-root.device-mobile .baggo-nav-desktop,
+.baggo-root.is-mobile .baggo-nav-desktop {
   display: none !important;
+}
+
+.simulated-frame.frame-mobile .baggo-header-inner,
+.baggo-root.device-mobile .baggo-header-inner,
+.baggo-root.is-mobile .baggo-header-inner {
+  padding: 12px 16px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-logo,
+.baggo-root.device-mobile .baggo-logo,
+.baggo-root.is-mobile .baggo-logo {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin: 0 auto !important;
+}
+
+.simulated-frame.frame-mobile .baggo-logo-icon,
+.baggo-root.device-mobile .baggo-logo-icon,
+.baggo-root.is-mobile .baggo-logo-icon {
+  width: 32px !important;
+  height: 32px !important;
+  font-size: 16px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-logo-title,
+.baggo-root.device-mobile .baggo-logo-title,
+.baggo-root.is-mobile .baggo-logo-title {
+  font-size: 20px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-logo-sub,
+.baggo-root.device-mobile .baggo-logo-sub,
+.baggo-root.is-mobile .baggo-logo-sub {
+  font-size: 8px !important;
+  letter-spacing: 0.15em !important;
+}
+
+.simulated-frame.frame-mobile .baggo-actions,
+.baggo-root.device-mobile .baggo-actions,
+.baggo-root.is-mobile .baggo-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex-shrink: 0 !important;
+}
+
+.simulated-frame.frame-mobile .baggo-action-btn,
+.baggo-root.device-mobile .baggo-action-btn,
+.baggo-root.is-mobile .baggo-action-btn {
+  width: 34px !important;
+  height: 34px !important;
+  font-size: 13px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-hero-inner,
+.baggo-root.device-mobile .baggo-hero-inner,
+.baggo-root.is-mobile .baggo-hero-inner {
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+  padding: 24px 0 !important;
+  text-align: center !important;
+}
+
+.simulated-frame.frame-mobile .baggo-hero-title,
+.baggo-root.device-mobile .baggo-hero-title,
+.baggo-root.is-mobile .baggo-hero-title {
+  font-size: 32px !important;
+  line-height: 1.2 !important;
+  margin-bottom: 12px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-hero-desc,
+.baggo-root.device-mobile .baggo-hero-desc,
+.baggo-root.is-mobile .baggo-hero-desc {
+  font-size: 14px !important;
+  margin: 0 auto 20px !important;
+  max-width: 100% !important;
+}
+
+.simulated-frame.frame-mobile .baggo-hero-actions,
+.baggo-root.device-mobile .baggo-hero-actions,
+.baggo-root.is-mobile .baggo-hero-actions {
+  display: flex !important;
+  gap: 10px !important;
+  justify-content: center !important;
+  width: 100% !important;
+}
+
+.simulated-frame.frame-mobile .baggo-hero-actions .baggo-btn,
+.baggo-root.device-mobile .baggo-hero-actions .baggo-btn,
+.baggo-root.is-mobile .baggo-hero-actions .baggo-btn {
+  flex: 1 !important;
+  padding: 12px 8px !important;
+  font-size: 11px !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+}
+
+.simulated-frame.frame-mobile .baggo-hero-img-wrap,
+.baggo-root.device-mobile .baggo-hero-img-wrap,
+.baggo-root.is-mobile .baggo-hero-img-wrap {
+  height: 250px !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+
+.simulated-frame.frame-mobile .baggo-cat-grid,
+.baggo-root.device-mobile .baggo-cat-grid,
+.baggo-root.is-mobile .baggo-cat-grid {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-cat-card,
+.baggo-root.device-mobile .baggo-cat-card,
+.baggo-root.is-mobile .baggo-cat-card {
+  height: 220px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-cat-card-title,
+.baggo-root.device-mobile .baggo-cat-card-title,
+.baggo-root.is-mobile .baggo-cat-card-title {
+  font-size: 20px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-cat-card-desc,
+.baggo-root.device-mobile .baggo-cat-card-desc,
+.baggo-root.is-mobile .baggo-cat-card-desc {
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+.simulated-frame.frame-mobile .baggo-cat-overlay,
+.baggo-root.device-mobile .baggo-cat-overlay,
+.baggo-root.is-mobile .baggo-cat-overlay {
+  padding: 16px 20px !important;
 }
 
 .simulated-frame.frame-mobile .baggo-products-grid,
-.simulated-frame.frame-mobile .baggo-curated-grid,
 .baggo-root.device-mobile .baggo-products-grid,
-.baggo-root.device-mobile .baggo-curated-grid,
-.baggo-root.is-mobile .baggo-products-grid,
-.baggo-root.is-mobile .baggo-curated-grid {
+.baggo-root.is-mobile .baggo-products-grid {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 10px !important;
 }
 
-.simulated-frame.frame-mobile .baggo-cat-grid,
+.simulated-frame.frame-mobile .baggo-product-card,
+.baggo-root.device-mobile .baggo-product-card,
+.baggo-root.is-mobile .baggo-product-card {
+  border-radius: 4px !important;
+  overflow: hidden !important;
+}
+
+.simulated-frame.frame-mobile .baggo-product-media,
+.baggo-root.device-mobile .baggo-product-media,
+.baggo-root.is-mobile .baggo-product-media {
+  height: 170px !important;
+  position: relative !important;
+}
+
+.simulated-frame.frame-mobile .baggo-product-body,
+.baggo-root.device-mobile .baggo-product-body,
+.baggo-root.is-mobile .baggo-product-body {
+  padding: 10px 8px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-product-title,
+.baggo-root.device-mobile .baggo-product-title,
+.baggo-root.is-mobile .baggo-product-title {
+  font-size: 13.5px !important;
+  line-height: 1.3 !important;
+  min-height: 36px !important;
+  margin-bottom: 6px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-product-vendor,
+.baggo-root.device-mobile .baggo-product-vendor,
+.baggo-root.is-mobile .baggo-product-vendor {
+  font-size: 9.5px !important;
+  letter-spacing: 0.05em !important;
+  margin-bottom: 2px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-product-rating,
+.baggo-root.device-mobile .baggo-product-rating,
+.baggo-root.is-mobile .baggo-product-rating {
+  font-size: 11px !important;
+  margin-bottom: 6px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-leather-pill,
+.baggo-root.device-mobile .baggo-leather-pill,
+.baggo-root.is-mobile .baggo-leather-pill {
+  font-size: 10px !important;
+  padding: 2px 6px !important;
+  margin-bottom: 8px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-color-swatches,
+.baggo-root.device-mobile .baggo-color-swatches,
+.baggo-root.is-mobile .baggo-color-swatches {
+  gap: 4px !important;
+  margin-bottom: 8px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-color-dot,
+.baggo-root.device-mobile .baggo-color-dot,
+.baggo-root.is-mobile .baggo-color-dot {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-price,
+.baggo-root.device-mobile .baggo-price,
+.baggo-root.is-mobile .baggo-price {
+  font-size: 15px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-compare-price,
+.baggo-root.device-mobile .baggo-compare-price,
+.baggo-root.is-mobile .baggo-compare-price {
+  font-size: 11px !important;
+  margin-left: 4px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-product-footer,
+.baggo-root.device-mobile .baggo-product-footer,
+.baggo-root.is-mobile .baggo-product-footer {
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 6px !important;
+  padding-top: 8px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-add-btn,
+.baggo-root.device-mobile .baggo-add-btn,
+.baggo-root.is-mobile .baggo-add-btn {
+  width: 100% !important;
+  text-align: center !important;
+  padding: 6px 4px !important;
+  font-size: 11px !important;
+  white-space: nowrap !important;
+  letter-spacing: 0.02em !important;
+}
+
+.simulated-frame.frame-mobile .baggo-card-actions,
+.baggo-root.device-mobile .baggo-card-actions,
+.baggo-root.is-mobile .baggo-card-actions {
+  opacity: 1 !important;
+  transform: none !important;
+  top: 6px !important;
+  right: 6px !important;
+  gap: 6px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-card-action-btn,
+.baggo-root.device-mobile .baggo-card-action-btn,
+.baggo-root.is-mobile .baggo-card-action-btn {
+  width: 30px !important;
+  height: 30px !important;
+  font-size: 13px !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+}
+
+.simulated-frame.frame-mobile .baggo-split-banner,
+.baggo-root.device-mobile .baggo-split-banner,
+.baggo-root.is-mobile .baggo-split-banner {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+  padding: 24px 0 !important;
+}
+
+.simulated-frame.frame-mobile .baggo-split-img,
+.baggo-root.device-mobile .baggo-split-img,
+.baggo-root.is-mobile .baggo-split-img {
+  width: 100% !important;
+  height: 220px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+}
+
+.simulated-frame.frame-mobile .baggo-split-content,
+.baggo-root.device-mobile .baggo-split-content,
+.baggo-root.is-mobile .baggo-split-content {
+  max-width: 100% !important;
+  text-align: center !important;
+}
+
+.simulated-frame.frame-mobile .baggo-split-content h2,
+.baggo-root.device-mobile .baggo-split-content h2,
+.baggo-root.is-mobile .baggo-split-content h2 {
+  font-size: 24px !important;
+  line-height: 1.25 !important;
+}
+
+.simulated-frame.frame-mobile .baggo-split-content p,
+.baggo-root.device-mobile .baggo-split-content p,
+.baggo-root.is-mobile .baggo-split-content p {
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+  margin-bottom: 16px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-split-content .baggo-btn,
+.baggo-root.device-mobile .baggo-split-content .baggo-btn,
+.baggo-root.is-mobile .baggo-split-content .baggo-btn {
+  width: 100% !important;
+}
+
+.simulated-frame.frame-mobile .baggo-monogram-banner,
+.baggo-root.device-mobile .baggo-monogram-banner,
+.baggo-root.is-mobile .baggo-monogram-banner {
+  grid-template-columns: 1fr !important;
+  padding: 24px 16px !important;
+  gap: 24px !important;
+  text-align: center !important;
+}
+
 .simulated-frame.frame-mobile .baggo-pillars-grid,
-.baggo-root.device-mobile .baggo-cat-grid,
 .baggo-root.device-mobile .baggo-pillars-grid,
-.baggo-root.is-mobile .baggo-cat-grid,
 .baggo-root.is-mobile .baggo-pillars-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 10px !important;
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-testimonial-card,
+.baggo-root.device-mobile .baggo-testimonial-card,
+.baggo-root.is-mobile .baggo-testimonial-card {
+  padding: 24px 16px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-testimonial-quote,
+.baggo-root.device-mobile .baggo-testimonial-quote,
+.baggo-root.is-mobile .baggo-testimonial-quote {
+  font-size: 16px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-footer,
+.baggo-root.device-mobile .baggo-footer,
+.baggo-root.is-mobile .baggo-footer {
+  padding: 40px 0 24px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-footer-grid,
+.baggo-root.device-mobile .baggo-footer-grid,
+.baggo-root.is-mobile .baggo-footer-grid {
+  grid-template-columns: 1fr !important;
+  gap: 28px !important;
+  text-align: left !important;
+}
+
+.simulated-frame.frame-mobile .baggo-footer-bottom,
+.baggo-root.device-mobile .baggo-footer-bottom,
+.baggo-root.is-mobile .baggo-footer-bottom {
+  flex-direction: column !important;
+  gap: 12px !important;
+  text-align: center !important;
+  align-items: center !important;
+}
+
+.simulated-frame.frame-mobile .baggo-cart-drawer,
+.baggo-root.device-mobile .baggo-cart-drawer,
+.baggo-root.is-mobile .baggo-cart-drawer,
+.simulated-frame.frame-mobile .baggo-wishlist-drawer,
+.baggo-root.device-mobile .baggo-wishlist-drawer,
+.baggo-root.is-mobile .baggo-wishlist-drawer,
+.simulated-frame.frame-mobile .baggo-mobile-nav-drawer,
+.baggo-root.device-mobile .baggo-mobile-nav-drawer,
+.baggo-root.is-mobile .baggo-mobile-nav-drawer {
+  width: 100% !important;
+  max-width: 100vw !important;
+}
+
+.simulated-frame.frame-mobile .baggo-quickview-modal,
+.baggo-root.device-mobile .baggo-quickview-modal,
+.baggo-root.is-mobile .baggo-quickview-modal {
+  width: 95% !important;
+  padding: 20px 16px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-quickview-layout,
+.baggo-root.device-mobile .baggo-quickview-layout,
+.baggo-root.is-mobile .baggo-quickview-layout {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-pdp-layout,
+.baggo-root.device-mobile .baggo-pdp-layout,
+.baggo-root.is-mobile .baggo-pdp-layout {
+  grid-template-columns: 1fr !important;
+  gap: 24px !important;
+}
+
+.simulated-frame.frame-mobile .baggo-pdp-main-img-wrap,
+.baggo-root.device-mobile .baggo-pdp-main-img-wrap,
+.baggo-root.is-mobile .baggo-pdp-main-img-wrap {
+  height: 300px !important;
 }
 
 /* -------------------------------------------------------------
