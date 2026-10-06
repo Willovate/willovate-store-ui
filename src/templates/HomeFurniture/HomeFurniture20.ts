@@ -8,7 +8,7 @@ export const HomeFurniture20: TemplateConfig = {
   tags: [{ id: 'luxury', name: 'Luxury' }, { id: 'premium', name: 'Premium' }],
   thumbnailUrl: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: true,
   theme: {
@@ -20,31 +20,31 @@ export const HomeFurniture20: TemplateConfig = {
     { id: 's2', type: 'split-hero', props: { 
       title: 'The Luxury of Home', 
       subtitle: 'Exclusive furniture pieces for the discerning collector.', 
-      image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=800', 
+      image: 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&q=80&w=800', 
       ctaLabel: 'Discover Maison' 
     } },
     { id: 's3', type: 'bento-grid', props: { 
       title: 'The Editorial Edit',
       items: [
-        { title: 'The Velvet Collection', description: 'Rich textures.', size: 'large', image: 'https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&q=80&w=800' },
-        { title: 'Crystal Lighting', description: 'Illumination.', size: 'small', image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=400' },
-        { title: 'Fine Art', description: 'Masterpieces.', size: 'small', image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=400' }
+        { title: 'The Velvet Collection', description: 'Rich textures.', size: 'large', image: 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&q=80&w=800' },
+        { title: 'Crystal Lighting', description: 'Illumination.', size: 'small', image: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&q=80&w=400' },
+        { title: 'Fine Art', description: 'Masterpieces.', size: 'small', image: 'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&q=80&w=400' }
       ]
     } },
     { id: 's4', type: 'catalog', props: {
       products: [
-        { id: 'h20_1', name: 'Velvet Sofa', description: 'Premium Seating', price: 4500, imageUrl: 'https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&q=80&w=600' },
-        { id: 'h20_2', name: 'Crystal Chandelier', description: 'Lighting', price: 2800, imageUrl: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=600' },
-        { id: 'h20_3', name: 'Marble Coffee Table', description: 'Tables', price: 1900, imageUrl: 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&q=80&w=600' },
-        { id: 'h20_4', name: 'Cashmere Throw', description: 'Textiles', price: 650, imageUrl: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&q=80&w=600' }
+        { id: 'h20_1', name: 'Velvet Sofa', description: 'Premium Seating', price: 4500, imageUrl: 'https://images.unsplash.com/photo-1572981779307-38b8cabb2407?auto=format&fit=crop&q=80&w=600' },
+        { id: 'h20_2', name: 'Crystal Chandelier', description: 'Lighting', price: 2800, imageUrl: 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&q=80&w=600' },
+        { id: 'h20_3', name: 'Marble Coffee Table', description: 'Tables', price: 1900, imageUrl: 'https://images.unsplash.com/photo-1590779033100-9f60a05a013d?auto=format&fit=crop&q=80&w=600' },
+        { id: 'h20_4', name: 'Cashmere Throw', description: 'Textiles', price: 650, imageUrl: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
     { id: 's5', type: 'shop-the-look', props: {
       title: 'Curated Elegance',
       subtitle: 'Complete the look.',
-      image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=1600',
+      image: 'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&q=80&w=1600',
       hotspots: [
-        { x: 45, y: 65, product: { name: 'Marble Dining Table', price: 3200, imageUrl: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=600' } }
+        { x: 45, y: 65, product: { name: 'Marble Dining Table', price: 3200, imageUrl: 'https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600' } }
       ]
     } },
     { id: 's6', type: 'testimonials', props: { title: 'Client Reviews', testimonials: [{ quote: 'Unparalleled quality and service.', author: 'Victoria H.' }] } },

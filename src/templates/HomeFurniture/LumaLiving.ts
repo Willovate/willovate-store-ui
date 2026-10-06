@@ -17,7 +17,7 @@ export const LumaLiving: TemplateConfig = {
   },
   sections: [
     { id: 's1', type: 'navbar', props: { brand: 'LUMA LIVING', style: 'center' } },
-    { id: 's2', type: 'split-hero', props: { title: 'The Spring Issue', subtitle: 'Refresh your space with light fabrics and natural woods.', image: 'https://images.unsplash.com/photo-1598928506311-c55dd71358a9?auto=format&fit=crop&q=80&w=800', ctaLabel: 'Read the Journal' } },
+    { id: 's2', type: 'split-hero', props: { title: 'The Spring Issue', subtitle: 'Refresh your space with light fabrics and natural woods.', image: 'https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&q=80&w=800', ctaLabel: 'Read the Journal' } },
     { id: 's3', type: 'category-grid', props: { title: '', categories: [{ name: 'Lighting', image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=600' }, { name: 'Textiles', image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=600' }, { name: 'Objects', image: 'https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?auto=format&fit=crop&q=80&w=600' }] } },
     { id: 's4', type: 'shop-the-look', props: { title: 'Shop the Look', subtitle: 'The serene living room.', image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1600', hotspots: [
       { x: 30, y: 70, product: { name: 'Boucle Sofa', price: 2100, imageUrl: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80&w=600' } },
@@ -28,7 +28,7 @@ export const LumaLiving: TemplateConfig = {
       products: [
         { id: 'l1', name: 'Linen Throw', description: 'Sand', price: 120, imageUrl: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=600' },
         { id: 'l2', name: 'Ceramic Table Lamp', description: 'Handcrafted', price: 280, imageUrl: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=600' },
-        { id: 'l3', name: 'Woven Rug', description: '8x10', price: 850, imageUrl: 'https://images.unsplash.com/photo-1575414003593-0a373d5a5700?auto=format&fit=crop&q=80&w=600' },
+        { id: 'l3', name: 'Woven Rug', description: '8x10', price: 850, imageUrl: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&q=80&w=600' },
         { id: 'l4', name: 'Accent Pillow', description: 'Ochre', price: 65, imageUrl: 'https://images.unsplash.com/photo-1574634534894-89d7576c8259?auto=format&fit=crop&q=80&w=600' }
       ]
     }},

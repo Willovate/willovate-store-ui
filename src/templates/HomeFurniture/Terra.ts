@@ -25,7 +25,7 @@ export const Terra: TemplateConfig = {
         { id: 'tr1', name: 'Bamboo Bed Frame', description: 'Sustainable', price: 1100, imageUrl: 'https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&q=80&w=600' },
         { id: 'tr2', name: 'Organic Cotton Sheets', description: 'Queen Size', price: 180, imageUrl: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&q=80&w=600' },
         { id: 'tr3', name: 'Reclaimed Dining Table', description: 'Unique Grain', price: 2200, imageUrl: 'https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&q=80&w=600' },
-        { id: 'tr4', name: 'Jute Rug', description: 'Hand-woven', price: 350, imageUrl: 'https://images.unsplash.com/photo-1575414003593-0a373d5a5700?auto=format&fit=crop&q=80&w=600' }
+        { id: 'tr4', name: 'Jute Rug', description: 'Hand-woven', price: 350, imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
     { id: 's6', type: 'testimonials', props: { title: 'Impact', testimonials: [{ quote: 'Terra makes it easy to furnish a home beautifully without compromising on ethics.', author: 'EcoLiving Magazine' }] } },

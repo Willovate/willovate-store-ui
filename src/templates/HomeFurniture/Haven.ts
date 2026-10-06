@@ -29,7 +29,7 @@ export const Haven: TemplateConfig = {
         { id: 'hf4', name: 'Ceramic Vase', description: 'Handcrafted', price: 95, imageUrl: 'https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
-    { id: 's7', type: 'editorial-grid', props: { title: 'Room Inspiration', images: ['https://images.unsplash.com/photo-1598928506311-c55dd71358a9?auto=format&fit=crop&q=80&w=600', 'https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&q=80&w=600', 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&q=80&w=600'] } },
+    { id: 's7', type: 'editorial-grid', props: { title: 'Room Inspiration', images: ['https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=600', 'https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&q=80&w=600', 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&q=80&w=600'] } },
     { id: 's8', type: 'newsletter', props: {} },
     { id: 's9', type: 'footer', props: {} }
   ],

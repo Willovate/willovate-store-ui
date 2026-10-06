@@ -26,7 +26,7 @@ export const Linea: TemplateConfig = {
         { id: 'ln1', name: 'Minimal Dining Table', description: 'Birch Plywood', price: 1100, imageUrl: 'https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&q=80&w=600' },
         { id: 'ln2', name: 'Woven Chair', description: 'Ash & Paper Cord', price: 450, imageUrl: 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&q=80&w=600' },
         { id: 'ln3', name: 'Pendant Lamp', description: 'Matte White', price: 180, imageUrl: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=600' },
-        { id: 'ln4', name: 'Wool Rug', description: 'Light Grey', price: 420, imageUrl: 'https://images.unsplash.com/photo-1575414003593-0a373d5a5700?auto=format&fit=crop&q=80&w=600' }
+        { id: 'ln4', name: 'Wool Rug', description: 'Light Grey', price: 420, imageUrl: 'https://images.unsplash.com/photo-1582966772680-860e372bb558?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
     { id: 's7', type: 'editorial-grid', props: { title: 'Designer Collection', images: ['https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=600', 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=600'] } },
