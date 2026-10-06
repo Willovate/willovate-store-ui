@@ -3,47 +3,147 @@ import type { TemplateConfig } from '../../types/template'
 export const GeneralStore06: TemplateConfig = {
   id: 'supply',
   name: 'Supply',
-  description: 'Utility and essentials focused store. Structured, practical and information-rich ecommerce layout.',
+  description: 'Everyday supplies, made simple. A highly practical, value-driven general store focused on everyday essentials and utility.',
   categories: [{ id: 'general', name: 'General Store' }],
-  tags: [{ id: 'utility', name: 'Utility' }, { id: 'industrial', name: 'Industrial' }],
+  tags: [{ id: 'practical', name: 'Practical' }, { id: 'essentials', name: 'Essentials' }, { id: 'value', name: 'Value' }],
   thumbnailUrl: 'https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?auto=format&fit=crop&q=80&w=800',
   previewImages: [
     'https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {
-    fonts: { heading: 'Inter, sans-serif', body: 'Inter, sans-serif' },
-    colors: { primary: '#333333', background: '#f5f5f5', accent: '#0055ff' }
+    fonts: { heading: '"Archivo", sans-serif', body: '"Inter", sans-serif' },
+    colors: { primary: '#17202a', background: '#f3f4f1', accent: '#2563eb' }
   },
   sections: [
-    { id: 's1', type: 'navbar', props: { brand: 'SUPPLY', style: 'utility' } },
-    { id: 's2', type: 'hero', props: { 
-      title: 'Built for Function.', 
-      subtitle: 'Durable supplies and industrial-grade tools for everyday use.', 
-      ctaLabel: 'Browse Supplies' 
+    { id: 's1', type: 'promo', props: { text: 'FREE NEXT-DAY DELIVERY ON ORDERS OVER ₹999. SHOP ESSENTIALS.' } },
+    { id: 's2', type: 'navbar', props: { brand: 'SUPPLY', style: 'utility' } },
+    { id: 's3', type: 'split-hero', props: {
+      title: 'Everyday supplies,\nmade simple.',
+      subtitle: 'Dependable products for your home, workspace, and daily routine. Everything useful, in one dependable place.',
+      image: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&q=80&w=1600',
+      ctaLabel: 'Shop Essentials',
+      imageRight: true
     } },
-    { id: 's3', type: 'feature-comparison', props: {
-      title: 'Choose Your Tier',
-      products: [
-        { name: 'Basic Kit', price: 49, isHighlighted: false },
-        { name: 'Pro Kit', price: 99, isHighlighted: true },
-        { name: 'Master Kit', price: 149, isHighlighted: false }
-      ],
-      rows: [
-        { label: 'Durability', values: ['Standard', 'High', 'Industrial'] },
-        { label: 'Components', values: ['5 items', '12 items', '24 items'] },
-        { label: 'Warranty', values: ['1 Year', '3 Years', 'Lifetime'] }
-      ]
-    } },
-    { id: 's4', type: 'catalog', props: {
-      products: [
-        { id: 'sup1', name: 'Heavy Duty Gloves', description: 'Workwear', price: 25, imageUrl: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&q=80&w=600' },
-        { id: 'sup2', name: 'Steel Tool Box', description: 'Storage', price: 65, imageUrl: 'https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?auto=format&fit=crop&q=80&w=600' },
-        { id: 'sup3', name: 'Utility Knife', description: 'Tools', price: 15, imageUrl: 'https://images.unsplash.com/photo-1572981779307-38b8cabb2407?auto=format&fit=crop&q=80&w=600' },
-        { id: 'sup4', name: 'Work Boots', description: 'Footwear', price: 120, imageUrl: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&q=80&w=600' }
+    { id: 's4', type: 'bento-grid', props: {
+      title: 'Quick Categories',
+      items: [
+        { title: 'Household', description: 'Cleaning & Storage', size: 'large', image: 'https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&q=80&w=800' },
+        { title: 'Workspace', description: 'Desk Supplies', size: 'small', image: 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=400' },
+        { title: 'Kitchen', description: 'Daily Tools', size: 'small', image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=80&w=400' },
+        { title: 'Travel', description: 'Packing Essentials', size: 'small', image: 'https://images.unsplash.com/photo-1553531384-cc64ac80f931?auto=format&fit=crop&q=80&w=400' }
       ]
     }},
-    { id: 's5', type: 'story', props: {} },
-    { id: 's6', type: 'footer', props: {} }
+    { id: 's5', type: 'catalog', props: {
+      title: 'Core Essentials',
+      products: [
+        { id: 'sp1', name: 'Stackable Storage Bins (Set of 3)', description: 'Organization', price: 899, imageUrl: 'https://images.unsplash.com/photo-1595514535316-24eb22442ad4?auto=format&fit=crop&q=80&w=600' },
+        { id: 'sp2', name: 'Heavy-Duty Kitchen Shears', description: 'Kitchen', price: 450, imageUrl: 'https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?auto=format&fit=crop&q=80&w=600' },
+        { id: 'sp3', name: 'Microfiber Cleaning Cloths (10 Pack)', description: 'Cleaning', price: 399, badge: 'Value Pack', imageUrl: 'https://images.unsplash.com/photo-1584820927498-cafe6c1c1f9b?auto=format&fit=crop&q=80&w=600' },
+        { id: 'sp4', name: 'Insulated Steel Tumbler', description: 'Hydration', price: 799, imageUrl: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&q=80&w=600' }
+      ]
+    }},
+    { id: 's6', type: 'catalog', props: {
+      title: 'Bundle & Save',
+      subtitle: 'Curated packs for maximum value.',
+      products: [
+        { id: 'sp5', name: 'The Desk Reset Kit', description: 'Notebook, Pens, Desk Tray', price: 1299, badge: 'Save 20%', imageUrl: 'https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&q=80&w=600' },
+        { id: 'sp6', name: 'Kitchen Starter Kit', description: 'Utensils & Storage', price: 2499, badge: 'Save 15%', imageUrl: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=80&w=600' },
+        { id: 'sp7', name: 'Travel Organizer Pack', description: '3 Packing Cubes & Pouch', price: 1899, badge: 'Save 25%', imageUrl: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=600' },
+        { id: 'sp8', name: 'Daily Care Bundle', description: 'Soap, Lotion, Towel', price: 999, badge: 'Save 10%', imageUrl: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&q=80&w=600' }
+      ]
+    }},
+    { id: 's7', type: 'catalog', props: {
+      title: 'Most Reliable',
+      subtitle: 'Highest rated everyday products.',
+      products: [
+        { id: 'sp9', name: 'Cable Management Box', description: 'Workspace', price: 699, imageUrl: 'https://images.unsplash.com/photo-1611077544719-741ce2b9894e?auto=format&fit=crop&q=80&w=600' },
+        { id: 'sp10', name: 'Glass Food Storage (Set of 5)', description: 'Kitchen', price: 1499, imageUrl: 'https://images.unsplash.com/photo-1509319117193-57bab727e09d?auto=format&fit=crop&q=80&w=600' },
+        { id: 'sp11', name: 'Toiletry Travel Pouch', description: 'Personal Care', price: 550, imageUrl: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&q=80&w=600' },
+        { id: 'sp12', name: 'Compact Umbrella', description: 'Everyday Carry', price: 850, imageUrl: 'https://images.unsplash.com/photo-1559404289-4b68ff05f57a?auto=format&fit=crop&q=80&w=600' }
+      ]
+    }},
+    { id: 's8', type: 'editorial-grid', props: {
+      title: 'Practical Spaces',
+      images: [
+        'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=800',
+        'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=800',
+        'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=80&w=800'
+      ]
+    }},
+    { id: 's9', type: 'catalog', props: {
+      title: 'Workspace Essentials',
+      products: [
+        { id: 'sp17', name: 'Aluminum Ruler', description: 'Stationery', price: 199, imageUrl: 'https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?auto=format&fit=crop&q=80&w=600' },
+        { id: 'sp18', name: 'Wire Mesh Basket', description: 'Storage', price: 399, imageUrl: 'https://images.unsplash.com/photo-1528301721190-186c3bd85418?auto=format&fit=crop&q=80&w=600' },
+        { id: 'sp19', name: 'Leather Desk Pad', description: 'Workspace', price: 1299, imageUrl: 'https://images.unsplash.com/photo-1611077544719-741ce2b9894e?auto=format&fit=crop&q=80&w=600' },
+        { id: 'sp20', name: 'Adjustable Tablet Stand', description: 'Accessories', price: 899, imageUrl: 'https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&q=80&w=600' }
+      ]
+    }},
+    { id: 's10', type: 'bento-grid', props: {
+      title: 'Hydration Tiers',
+      items: [
+        { title: 'Good', description: 'BPA-Free Plastic Bottle — ₹399', span: 1 },
+        { title: 'Better', description: 'Vacuum Insulated Steel — ₹799', span: 1 },
+        { title: 'Best', description: 'Titanium Travel Flask — ₹1499', span: 1 },
+        { title: 'Accessories', description: 'Cleaning brush & carry strap.', span: 1 }
+      ]
+    }},
+    { id: 's11', type: 'catalog', props: {
+      title: 'Clearance & Deals',
+      subtitle: 'Great value on overstock essentials.',
+      products: [
+        { id: 'sp13', name: 'Bamboo Drawer Organizer', description: 'Kitchen', price: 499, badge: 'Clearance', imageUrl: 'https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?auto=format&fit=crop&q=80&w=600' },
+        { id: 'sp14', name: 'Utility Tote Bag', description: 'Carry', price: 299, badge: 'Sale', imageUrl: 'https://images.unsplash.com/photo-1597816041042-45e3ed609f98?auto=format&fit=crop&q=80&w=600' },
+        { id: 'sp15', name: 'Ceramic Soap Dispenser', description: 'Bath', price: 349, badge: 'Sale', imageUrl: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&q=80&w=600' },
+        { id: 'sp16', name: 'Silicone Food Covers', description: 'Kitchen', price: 199, badge: 'Clearance', imageUrl: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=600' }
+      ]
+    }},
+    { id: 's12', type: 'catalog', props: {
+      title: 'Household Needs',
+      products: [
+        { id: 'sp21', name: 'Cotton Bath Towel', description: 'Bath', price: 599, imageUrl: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=600' },
+        { id: 'sp22', name: 'Laundry Hamper', description: 'Organization', price: 899, imageUrl: 'https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&q=80&w=600' },
+        { id: 'sp23', name: 'Aromatherapy Diffuser', description: 'Wellness', price: 1199, imageUrl: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&q=80&w=600' },
+        { id: 'sp24', name: 'Fleece Throw Blanket', description: 'Living', price: 799, imageUrl: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=600' }
+      ]
+    }},
+    { id: 's13', type: 'bento-grid', props: {
+      title: 'Why Shop Supply',
+      items: [
+        { title: 'Honest Pricing', description: 'No artificial markups. Just solid value.', span: 1 },
+        { title: 'Quality Tested', description: 'We use everything we sell.', span: 1 },
+        { title: 'Bulk Discounts', description: 'Save more when you stock up.', span: 1 },
+        { title: 'Fast Delivery', description: 'Next-day delivery on essentials.', span: 1 }
+      ]
+    }},
+    { id: 's14', type: 'testimonials', props: {
+      title: 'Customer Reviews',
+      testimonials: [
+        { quote: 'No clutter, no confusion. Just the things I actually need for my house, delivered fast.', author: 'David M.' },
+        { quote: 'The bundles are brilliant. I moved into a new apartment and the Kitchen Starter Kit was a lifesaver.', author: 'Sarah K.' },
+        { quote: 'Reliable quality across the board. I don\'t shop anywhere else for my home office supplies.', author: 'James R.' }
+      ]
+    }},
+    { id: 's15', type: 'story', props: {
+      title: 'Utility Above All.',
+      subtitle: 'Our Philosophy',
+      content: 'We created Supply because shopping for everyday goods shouldn\'t be complicated. We curate highly functional, durable, and practical products that make your life easier. No unnecessary features, just dependable utility.',
+      image: 'https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?auto=format&fit=crop&q=80&w=1200'
+    }},
+    { id: 's16', type: 'newsletter', props: {
+      title: 'Get Supply Updates',
+      subtitle: 'Sign up for alerts on new essentials, restocks, and exclusive bundle deals.',
+      buttonText: 'Subscribe'
+    }},
+    { id: 's17', type: 'footer', props: {
+      brand: 'SUPPLY',
+      text: 'Everyday supplies, made simple.',
+      social: [
+        { label: 'LinkedIn', href: '#' },
+        { label: 'Twitter', href: '#' },
+        { label: 'Facebook', href: '#' }
+      ]
+    }}
   ]
 }
