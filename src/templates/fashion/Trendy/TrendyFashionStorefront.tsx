@@ -32,6 +32,7 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
 
   // Modals & Drawers
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false)
+  const [isWishlistOpen, setIsWishlistOpen] = useState<boolean>(false)
   const [isQuickViewOpen, setIsQuickViewOpen] = useState<boolean>(false)
   const [quickViewProduct, setQuickViewProduct] = useState<TrendyProduct>(TRENDY_PRODUCTS[0])
   const [isCompareModalOpen, setIsCompareModalOpen] = useState<boolean>(false)
@@ -118,7 +119,9 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
     setWishlistIds((prev) => {
       const exists = prev.includes(id)
       const next = exists ? prev.filter((item) => item !== id) : [...prev, id]
-      showToast(exists ? 'Removed from wishlist' : 'Saved to wishlist!')
+      const prod = TRENDY_PRODUCTS.find((p) => p.id === id)
+      const name = prod ? prod.name : 'Item'
+      showToast(exists ? `Removed "${name}" from wishlist` : `Saved "${name}" to wishlist!`)
       return next
     })
   }
@@ -201,6 +204,11 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
   const comparedProducts = useMemo(() => {
     return TRENDY_PRODUCTS.filter((p) => compareIds.includes(p.id))
   }, [compareIds])
+
+  // Wishlist Products
+  const wishlistProducts = useMemo(() => {
+    return TRENDY_PRODUCTS.filter((p) => wishlistIds.includes(p.id))
+  }, [wishlistIds])
 
   // Custom accent style override
   const inlineAccentStyle = customAccentColor
@@ -407,9 +415,7 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
               type="button"
               className="trendy-icon-btn"
               title="Wishlist"
-              onClick={() => {
-                showToast(`You have ${wishlistIds.length} saved wishlist item(s).`)
-              }}
+              onClick={() => setIsWishlistOpen(true)}
             >
               🤍
               {wishlistIds.length > 0 && (
@@ -550,8 +556,8 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
                   type="button"
                   style={{ width: '100%', padding: '10px 0', background: 'none', border: 'none', textAlign: 'left', fontWeight: 600, fontSize: '14px', cursor: 'pointer', display: 'flex', justifyContent: 'space-between' }}
                   onClick={() => {
-                    showToast(`You have ${wishlistIds.length} saved wishlist item(s).`)
                     setIsMobileMenuOpen(false)
+                    setIsWishlistOpen(true)
                   }}
                 >
                   <span>🤍 Wishlist</span>
@@ -727,10 +733,10 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
                           <button
                             type="button"
                             className={`trendy-action-circle-btn ${wishlistIds.includes(product.id) ? 'active' : ''}`}
-                            title="Save to Wishlist"
+                            title={wishlistIds.includes(product.id) ? 'Remove from Wishlist' : 'Save to Wishlist'}
                             onClick={() => toggleWishlist(product.id)}
                           >
-                            🤍
+                            {wishlistIds.includes(product.id) ? '❤️' : '🤍'}
                           </button>
                           <button
                             type="button"
@@ -1006,9 +1012,10 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
                           <button
                             type="button"
                             className={`trendy-action-circle-btn ${wishlistIds.includes(product.id) ? 'active' : ''}`}
+                            title={wishlistIds.includes(product.id) ? 'Remove from Wishlist' : 'Save to Wishlist'}
                             onClick={() => toggleWishlist(product.id)}
                           >
-                            🤍
+                            {wishlistIds.includes(product.id) ? '❤️' : '🤍'}
                           </button>
                           <button
                             type="button"
@@ -1365,9 +1372,10 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
                             <button
                               type="button"
                               className={`trendy-action-circle-btn ${wishlistIds.includes(product.id) ? 'active' : ''}`}
+                              title={wishlistIds.includes(product.id) ? 'Remove from Wishlist' : 'Save to Wishlist'}
                               onClick={() => toggleWishlist(product.id)}
                             >
-                              🤍
+                              {wishlistIds.includes(product.id) ? '❤️' : '🤍'}
                             </button>
                             <button
                               type="button"
@@ -1992,21 +2000,41 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
                   </div>
                 </div>
 
-                <button
-                  type="button"
-                  className="trendy-btn-primary"
-                  style={{ width: '100%' }}
-                  onClick={() => {
-                    addToCart(
-                      quickViewProduct,
-                      quickViewProduct.sizes[0] || 'M',
-                      quickViewProduct.colors[0]?.name || 'Standard'
-                    )
-                    setIsQuickViewOpen(false)
-                  }}
-                >
-                  Add to Cart
-                </button>
+                <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
+                  <button
+                    type="button"
+                    className="trendy-btn-primary"
+                    style={{ flex: 1 }}
+                    onClick={() => {
+                      addToCart(
+                        quickViewProduct,
+                        quickViewProduct.sizes[0] || 'M',
+                        quickViewProduct.colors[0]?.name || 'Standard'
+                      )
+                      setIsQuickViewOpen(false)
+                    }}
+                  >
+                    Add to Cart
+                  </button>
+                  <button
+                    type="button"
+                    className="trendy-icon-btn"
+                    style={{
+                      border: '1px solid var(--tr-border)',
+                      width: '44px',
+                      height: '44px',
+                      borderRadius: 'var(--tr-radius)',
+                      fontSize: '18px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                    title={wishlistIds.includes(quickViewProduct.id) ? 'Remove from Wishlist' : 'Save to Wishlist'}
+                    onClick={() => toggleWishlist(quickViewProduct.id)}
+                  >
+                    {wishlistIds.includes(quickViewProduct.id) ? '❤️' : '🤍'}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -2143,6 +2171,220 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
         </div>
       )}
 
+      {/* SLIDE-OVER WISHLIST DRAWER */}
+      {isWishlistOpen && (
+        <div
+          className="trendy-drawer-overlay"
+          onClick={() => setIsWishlistOpen(false)}
+        >
+          <div
+            className="trendy-cart-drawer trendy-wishlist-drawer"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="trendy-drawer-header">
+              <h3 className="trendy-drawer-title">
+                Saved Wishlist ({wishlistIds.length})
+              </h3>
+              <button
+                type="button"
+                className="trendy-icon-btn"
+                onClick={() => setIsWishlistOpen(false)}
+                aria-label="Close Wishlist"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div
+              style={{
+                backgroundColor: 'var(--tr-light-bg)',
+                padding: '12px 24px',
+                borderBottom: '1px solid var(--tr-border)',
+                fontSize: '13px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <span>Saved Favorites</span>
+              <strong style={{ color: 'var(--tr-accent)' }}>
+                {wishlistIds.length} {wishlistIds.length === 1 ? 'item' : 'items'}
+              </strong>
+            </div>
+
+            {/* Items List */}
+            <div className="trendy-cart-items-wrap">
+              {wishlistProducts.length === 0 ? (
+                <div style={{ textAlign: 'center', padding: '60px 20px', color: 'var(--tr-muted)' }}>
+                  <div style={{ fontSize: '2.5rem', marginBottom: '12px' }}>🤍</div>
+                  <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--tr-dark)', marginBottom: '8px' }}>
+                    Your Wishlist is Empty
+                  </h4>
+                  <p style={{ fontSize: '13px', lineHeight: 1.5, marginBottom: '20px' }}>
+                    Tap the heart icon on any product to save your favorite styles here.
+                  </p>
+                  <button
+                    type="button"
+                    className="trendy-btn-primary"
+                    onClick={() => {
+                      setIsWishlistOpen(false)
+                      setViewMode('collection')
+                    }}
+                  >
+                    Explore Products →
+                  </button>
+                </div>
+              ) : (
+                wishlistProducts.map((product) => (
+                  <div key={product.id} className="trendy-cart-item">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="trendy-cart-item-img"
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => {
+                        navigateToPDP(product)
+                        setIsWishlistOpen(false)
+                      }}
+                    />
+                    <div className="trendy-cart-item-info">
+                      <div
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'flex-start',
+                          gap: '8px',
+                        }}
+                      >
+                        <h4
+                          className="trendy-cart-item-title"
+                          style={{ cursor: 'pointer', margin: 0 }}
+                          onClick={() => {
+                            navigateToPDP(product)
+                            setIsWishlistOpen(false)
+                          }}
+                        >
+                          {product.name}
+                        </h4>
+                        <button
+                          type="button"
+                          title="Remove from Wishlist"
+                          onClick={() => toggleWishlist(product.id)}
+                          style={{
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            color: 'var(--tr-muted)',
+                            fontSize: '14px',
+                            padding: '2px 4px',
+                            lineHeight: 1,
+                          }}
+                        >
+                          ✕
+                        </button>
+                      </div>
+
+                      <div className="trendy-cart-item-meta" style={{ marginTop: '4px' }}>
+                        {product.category} • {product.inStock ? 'In Stock' : 'Out of Stock'}
+                      </div>
+
+                      <div
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          marginTop: '10px',
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontWeight: 800,
+                            color: 'var(--tr-accent)',
+                            fontSize: '15px',
+                          }}
+                        >
+                          ${product.price.toFixed(2)}
+                        </span>
+
+                        <button
+                          type="button"
+                          className="trendy-btn-primary"
+                          style={{
+                            padding: '6px 14px',
+                            fontSize: '12px',
+                            fontWeight: 700,
+                            borderRadius: 'var(--tr-radius)',
+                          }}
+                          onClick={() => {
+                            addToCart(
+                              product,
+                              product.sizes[0] || 'M',
+                              product.colors[0]?.name || 'Standard',
+                              1
+                            )
+                            setIsWishlistOpen(false)
+                          }}
+                        >
+                          + Add to Cart
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+
+            {/* Wishlist Drawer Footer */}
+            {wishlistProducts.length > 0 && (
+              <div
+                className="trendy-drawer-footer"
+                style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}
+              >
+                <button
+                  type="button"
+                  className="trendy-checkout-btn"
+                  style={{ width: '100%' }}
+                  onClick={() => {
+                    wishlistProducts.forEach((p) => {
+                      addToCart(
+                        p,
+                        p.sizes[0] || 'M',
+                        p.colors[0]?.name || 'Standard',
+                        1
+                      )
+                    })
+                    setIsWishlistOpen(false)
+                    setIsCartOpen(true)
+                  }}
+                >
+                  Move All to Cart →
+                </button>
+                <button
+                  type="button"
+                  style={{
+                    width: '100%',
+                    padding: '8px',
+                    background: 'none',
+                    border: '1px solid var(--tr-border)',
+                    borderRadius: 'var(--tr-radius)',
+                    color: 'var(--tr-muted)',
+                    fontSize: '13px',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                  }}
+                  onClick={() => {
+                    setWishlistIds([])
+                    showToast('Wishlist cleared')
+                  }}
+                >
+                  Clear Wishlist
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* TOAST NOTIFICATION */}
       {toastMessage && <div className="trendy-toast">{toastMessage}</div>}
 
@@ -2192,6 +2434,11 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
                 <li>
                   <span className="trendy-footer-link" onClick={() => setIsCartOpen(true)}>
                     My Cart
+                  </span>
+                </li>
+                <li>
+                  <span className="trendy-footer-link" onClick={() => setIsWishlistOpen(true)}>
+                    My Wishlist ({wishlistIds.length})
                   </span>
                 </li>
               </ul>

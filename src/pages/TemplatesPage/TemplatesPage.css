@@ -11405,7 +11405,11 @@
 .simulated-frame.frame-mobile .trendy-cart-drawer,
 .trendy-storefront.device-mobile .trendy-cart-drawer,
 .trendy-storefront.is-mobile .trendy-cart-drawer,
-.trendy-storefront.trendy-mobile .trendy-cart-drawer {
+.trendy-storefront.trendy-mobile .trendy-cart-drawer,
+.simulated-frame.frame-mobile .trendy-wishlist-drawer,
+.trendy-storefront.device-mobile .trendy-wishlist-drawer,
+.trendy-storefront.is-mobile .trendy-wishlist-drawer,
+.trendy-storefront.trendy-mobile .trendy-wishlist-drawer {
   width: 100% !important;
   max-width: 100% !important;
 }
