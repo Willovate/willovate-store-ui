@@ -8,6 +8,7 @@ import BakeryTheme from './BakeryTheme'
 import FastFoodTheme from './FastFoodTheme'
 import CloudKitchenTheme from './CloudKitchenTheme'
 import PizzaTheme from './PizzaTheme'
+import IndianTheme from './IndianTheme'
 import FoodTheme from './FoodTheme'
 import { buildFoodConfig } from './buildFoodConfig'
 import { RestaurantProvider, useRestaurant } from '../store/RestaurantContext'
@@ -625,7 +626,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
 
   // ── INDIAN RESTAURANT ─────────────────────────────────────────────────────
   'saffron-house': {
-    id: 'saffron-house', kind: 'cafe', name: 'Saffron House',
+    id: 'saffron-house', kind: 'indian', name: 'Saffron House',
     eyebrow: 'Contemporary Indian dining',
     heroTitle: 'Where spice meets sophistication.',
     heroCopy: 'Luxury contemporary Indian dining in saffron and brass — a modern interpretation of timeless cuisine.',
@@ -640,7 +641,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Lamb rogan josh', 'Dal makhani', 'Saffron kulfi'],
   },
   'spice-route': {
-    id: 'spice-route', kind: 'cafe', name: 'Spice Route',
+    id: 'spice-route', kind: 'indian', name: 'Spice Route',
     eyebrow: 'A journey through Indian flavour',
     heroTitle: 'Follow the spice.',
     heroCopy: 'An editorial journey through regional Indian cooking — from Kerala coast to Kashmiri highlands.',
@@ -655,7 +656,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Goan fish curry', 'Kerala prawn moilee', 'Mysore pak'],
   },
   'masala-modern': {
-    id: 'masala-modern', kind: 'cafe', name: 'Masala Modern',
+    id: 'masala-modern', kind: 'indian', name: 'Masala Modern',
     eyebrow: 'Modern Indian. No compromise.',
     heroTitle: 'Tradition, brilliantly reimagined.',
     heroCopy: 'Modern Indian cuisine in a clean, expressive visual system — classic spices, contemporary plating.',
@@ -670,7 +671,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Paneer makhani', 'Chicken tikka masala', 'Gulab jamun'],
   },
   'tandoor-tales': {
-    id: 'tandoor-tales', kind: 'cafe', name: 'Tandoor Tales',
+    id: 'tandoor-tales', kind: 'indian', name: 'Tandoor Tales',
     eyebrow: 'Live fire. Authentic flavour.',
     heroTitle: 'The tandoor never sleeps.',
     heroCopy: 'Fire-led tandoor cooking with smoky, dramatic presentation — naan, kebabs, and slow-cooked perfection.',
@@ -685,7 +686,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Seekh kebab', 'Butter naan', 'Murgh malai tikka'],
   },
   'royal-thali': {
-    id: 'royal-thali', kind: 'cafe', name: 'Royal Thali',
+    id: 'royal-thali', kind: 'indian', name: 'Royal Thali',
     eyebrow: 'The complete Indian feast',
     heroTitle: 'A royal spread, served with pride.',
     heroCopy: 'A curated royal thali — all the classics, the chutneys, the bread, the sweets, on one glorious plate.',
@@ -948,8 +949,10 @@ function InnerRestaurantTheme({ theme, compact = false, elements = [] }: { theme
   const cloudThemes = ['kitchen-x', 'ghost-kitchen', 'urban-batch', 'fresh-dispatch', 'kitchen-express']
   const fineThemes = ['noir-table', 'velvet-reserve', 'the-tasting-room', 'ember-and-oak', 'maison-gourmet']
   const pizzaThemes = ['napoli-flame', 'pizza-district', 'crust-and-co', 'woodfire-90', 'slice-society']
+  const indianThemes = ['saffron-house', 'spice-route', 'masala-modern', 'tandoor-tales', 'royal-thali']
 
   const renderTheme = () => {
+    if (indianThemes.includes(theme.id)) return <IndianTheme theme={theme} />
     if (pizzaThemes.includes(theme.id)) return <PizzaTheme theme={theme} />
     if (cloudThemes.includes(theme.id)) return <CloudKitchenTheme theme={theme} />
     if (bakeryThemes.includes(theme.id)) return <BakeryTheme theme={theme} />
