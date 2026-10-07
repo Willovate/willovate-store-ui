@@ -9,16 +9,16 @@ const theme: RestaurantThemeConfig = {
   palette: { primary: '#b45309', secondary: '#fef3c7', background: '#ffffff', surface: '#fafaf9', text: '#1c1917', textLight: '#78716c', heroOverlay: 'linear-gradient(to right, rgba(28,25,23,0.7), rgba(255,255,255,0.2))' },
   typography: { heading: '"Cinzel", serif', body: '"Cormorant Garamond", serif' },
   images: {
-    hero: img('photo-1514362545857-3bc16c4c7d1b'), heroAlt: 'Luxurious dining room with white tablecloths and crystal glasses',
-    story: img('photo-1482049016688-2d3e1b311543'), storyAlt: 'Chef carefully arranging herbs on a fine dining plate',
-    promo: img('photo-1547592180-85f173990554'), promoAlt: 'Sommelier pouring red wine into a crystal glass',
+    hero: img('photo-1504674900247-0877df9cc836'), heroAlt: 'Luxurious dining room with white tablecloths and crystal glasses',
+    story: img('photo-1504674900247-0877df9cc836'), storyAlt: 'Chef carefully arranging herbs on a fine dining plate',
+    promo: img('photo-1504674900247-0877df9cc836'), promoAlt: 'Sommelier pouring red wine into a crystal glass',
     gallery: [
-      { src: img('photo-1514362545857-3bc16c4c7d1b'), alt: 'Elegant dining area' },
-      { src: img('photo-1482049016688-2d3e1b311543'), alt: 'Intricate plating' },
-      { src: img('photo-1547592180-85f173990554'), alt: 'Wine service' },
-      { src: img('photo-1519708227418-c8fd9a32b7a2'), alt: 'Gourmet appetizer' },
-      { src: img('photo-1559339352-11d035aa65de'), alt: 'Chef presentation' },
-      { src: img('photo-1600565193348-f74bd3c7ccdf'), alt: 'Culinary art' },
+      { src: img('photo-1504674900247-0877df9cc836'), alt: 'Elegant dining area' },
+      { src: img('photo-1504674900247-0877df9cc836'), alt: 'Intricate plating' },
+      { src: img('photo-1504674900247-0877df9cc836'), alt: 'Wine service' },
+      { src: img('photo-1504674900247-0877df9cc836'), alt: 'Gourmet appetizer' },
+      { src: img('photo-1504674900247-0877df9cc836'), alt: 'Chef presentation' },
+      { src: img('photo-1504674900247-0877df9cc836'), alt: 'Culinary art' },
     ],
   },
   content: {
@@ -38,9 +38,9 @@ const theme: RestaurantThemeConfig = {
   },
   menu: [
     { tab: 'Tasting Menu', items: [
-      { name: 'Amuse-Bouche', price: '', desc: 'Caviar tartlet, crème fraîche, gold leaf.', image: img('photo-1519708227418-c8fd9a32b7a2') },
-      { name: 'First Course', price: '', desc: 'White asparagus, quail egg, black truffle vinaigrette.', image: img('photo-1482049016688-2d3e1b311543') },
-      { name: 'Main Course', price: '', desc: 'A5 Wagyu beef, charred leeks, potato mille-feuille, red wine reduction.', tags: ['Signature'], image: img('photo-1550966871-3ed3cdb5ed0c') },
+      { name: 'Amuse-Bouche', price: '', desc: 'Caviar tartlet, crème fraîche, gold leaf.', image: img('photo-1504674900247-0877df9cc836') },
+      { name: 'First Course', price: '', desc: 'White asparagus, quail egg, black truffle vinaigrette.', image: img('photo-1504674900247-0877df9cc836') },
+      { name: 'Main Course', price: '', desc: 'A5 Wagyu beef, charred leeks, potato mille-feuille, red wine reduction.', tags: ['Signature'], image: img('photo-1504674900247-0877df9cc836') },
     ]},
   ],
   testimonials: [

@@ -10,9 +10,9 @@ const IMAGES = {
   coffee: image('photo-1506224477000-07c7e0e260e9'),
   toast: image('photo-1486427944299-d1955d23e34d'),
   matcha: image('photo-1601050690597-df0568f70950'),
-  gallery1: image('photo-1484101403633-562f891dc89a'),
-  gallery2: image('photo-1519710164239-da123dc03ef4'),
-  gallery3: image('photo-1505693416388-ac5ce068fe85'),
+  gallery1: image('photo-1516559228935-0a3e83cdaa03'),
+  gallery2: image('photo-1461023058943-07fcbe16d735'),
+  gallery3: image('photo-1447933601403-0c6688de566e'),
 };
 
 export default function CornerCafe() {
@@ -32,7 +32,7 @@ export default function CornerCafe() {
       
       {/* Navigation */}
       <header style={{ 
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, 
+        position: 'sticky', top: 0, left: 0, right: 0, zIndex: 50, 
         backgroundColor: isScrolled ? 'rgba(251, 255, 250, 0.9)' : 'transparent',
         backdropFilter: isScrolled ? 'blur(10px)' : 'none',
         borderBottom: isScrolled ? '1px solid #d7e5d6' : '1px solid transparent',
@@ -82,7 +82,18 @@ export default function CornerCafe() {
           <img src={IMAGES.interior} alt="Cafe interior" style={{ width: '100%', aspectRatio: '4/5', objectFit: 'cover', position: 'relative', zIndex: 1 }} />
         </div>
         <div ref={storyReveal as any} style={{ flex: 1 }}>
-          <h2 style={{ fontFamily: '"Lora", serif', fontSize: '3.5rem', color: '#345044', marginBottom: '2rem', lineHeight: 1.1 }}>A natural extension of your living room.</h2>
+          <h2 style={{ 
+            fontFamily: '"Lora", serif', 
+            fontSize: '4.5rem', 
+            marginBottom: '2rem', 
+            lineHeight: 1.1,
+            color: 'transparent',
+            backgroundImage: `url(${IMAGES.interior})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text'
+          }}>A natural extension of your living room.</h2>
           <p style={{ fontSize: '1.1rem', lineHeight: 1.8, color: '#668074', marginBottom: '2rem' }}>
             We built Corner Caf&eacute; because we wanted a place to read a book without feeling rushed. We filled it with plants, brewed the coffee we wanted to drink, and baked the kind of bread that makes a house feel like a home.
           </p>
@@ -96,7 +107,17 @@ export default function CornerCafe() {
       <section id="menu" style={{ backgroundColor: '#f0f5ef', padding: '10rem 3rem' }}>
         <div ref={menuReveal as any} style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '6rem' }}>
-            <h2 style={{ fontFamily: '"Lora", serif', fontSize: '4rem', color: '#345044', margin: '0 0 1rem 0' }}>The Menu</h2>
+            <h2 style={{ 
+              fontFamily: '"Lora", serif', 
+              fontSize: '5rem', 
+              margin: '0 0 1rem 0',
+              color: 'transparent',
+              backgroundImage: `url(${IMAGES.toast})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text'
+            }}>The Menu</h2>
             <p style={{ fontSize: '1.1rem', color: '#668074' }}>Simple, seasonal, and made from scratch.</p>
           </div>
 
@@ -127,15 +148,17 @@ export default function CornerCafe() {
             .menu-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(52, 80, 68, 0.1); }
             .menu-card:hover .menu-img { transform: scale(1.05); transition: transform 0.8s ease; }
             .menu-img { transition: transform 0.8s ease; }
+            .gallery-img { transition: transform 0.5s ease; cursor: pointer; }
+            .gallery-img:hover { transform: scale(1.05); }
           `}</style>
         </div>
       </section>
 
       {/* Gallery */}
-      <section style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 0 }}>
-        <img src={IMAGES.gallery1} style={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover' }} alt="Gallery 1" />
-        <img src={IMAGES.gallery2} style={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover' }} alt="Gallery 2" />
-        <img src={IMAGES.gallery3} style={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover' }} alt="Gallery 3" />
+      <section style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 0, overflow: 'hidden' }}>
+        <div style={{ overflow: 'hidden' }}><img src={IMAGES.gallery1} className="gallery-img" style={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover' }} alt="Gallery 1" /></div>
+        <div style={{ overflow: 'hidden' }}><img src={IMAGES.gallery2} className="gallery-img" style={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover' }} alt="Gallery 2" /></div>
+        <div style={{ overflow: 'hidden' }}><img src={IMAGES.gallery3} className="gallery-img" style={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover' }} alt="Gallery 3" /></div>
       </section>
 
       {/* Footer */}
@@ -158,3 +181,4 @@ export default function CornerCafe() {
     </div>
   );
 }
+

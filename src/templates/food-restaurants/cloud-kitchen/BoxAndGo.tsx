@@ -12,8 +12,8 @@ const BoxAndGo = () => {
 
   const menu = [
     { tab: 'Bento Boxes', items: [
-      { name: 'Miso Salmon Bento', price: '$18', desc: 'Glazed Atlantic salmon, sushi rice, wakame salad, edamame, pickled ginger.', tags: ['Bestseller'], image: 'photo-1467003909585-2f8a72700288' },
-      { name: 'Katsu Chicken Bento', price: '$16', desc: 'Crispy chicken breast, tonkatsu sauce, shredded cabbage, steamed rice.', image: 'photo-1544025162-d76538a679db' },
+      { name: 'Miso Salmon Bento', price: '$18', desc: 'Glazed Atlantic salmon, sushi rice, wakame salad, edamame, pickled ginger.', tags: ['Bestseller'], image: 'photo-1504674900247-0877df9cc836' },
+      { name: 'Katsu Chicken Bento', price: '$16', desc: 'Crispy chicken breast, tonkatsu sauce, shredded cabbage, steamed rice.', image: 'photo-1504674900247-0877df9cc836' },
       { name: 'Teriyaki Tofu Bento', price: '$14', desc: 'Charred tofu, broccolini, brown rice, house teriyaki sauce.', tags: ['Vegan'], image: 'photo-1512621776951-a57141f2eefd' },
     ]},
     { tab: 'Grain Bowls', items: [
@@ -21,8 +21,8 @@ const BoxAndGo = () => {
       { name: 'The Harvest Bowl', price: '$15', desc: 'Quinoa, roasted sweet potato, kale, goat cheese, balsamic vinaigrette.', tags: ['Healthy'], image: 'photo-1512621776951-a57141f2eefd' },
     ]},
     { tab: 'Extras', items: [
-      { name: 'Pork Gyoza (5 pcs)', price: '$7', desc: 'Pan-fried with chili soy dipping sauce.', image: 'photo-1544025162-d76538a679db' },
-      { name: 'Matcha Brownie', price: '$4', desc: 'Fudgy dark chocolate and matcha swirl.', image: 'photo-1606313564200-e75d5e30476c' },
+      { name: 'Pork Gyoza (5 pcs)', price: '$7', desc: 'Pan-fried with chili soy dipping sauce.', image: 'photo-1504674900247-0877df9cc836' },
+      { name: 'Matcha Brownie', price: '$4', desc: 'Fudgy dark chocolate and matcha swirl.', image: 'photo-1504674900247-0877df9cc836' },
     ]},
   ];
 
@@ -31,9 +31,7 @@ const BoxAndGo = () => {
       {/* Navigation */}
       <nav className="ck-nav" style={{ backgroundColor: palette.surface, boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <a href="/browse-templates/food-and-restaurant/cloud-kitchen" style={{ color: palette.textLight, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 500 }}>
-            <ArrowLeft size={18} /> Back
-          </a>
+          
           <div style={{ fontFamily: font.heading, fontSize: '1.8rem', fontWeight: 800, color: palette.primary, letterSpacing: '-0.5px' }}>BOX & GO</div>
         </div>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
@@ -44,7 +42,7 @@ const BoxAndGo = () => {
       </nav>
 
       {/* Hero */}
-      <header className="ck-hero" style={{ backgroundImage: `url(${img('photo-1548943487-a2e4d43b4850')})`, backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '80vh' }}>
+      <header className="ck-hero" style={{ backgroundImage: `url(${img('photo-1504674900247-0877df9cc836')})`, backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '80vh' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(24,24,27,0.95) 30%, rgba(249,115,22,0.2) 100%)' }}></div>
         <div className="ck-hero-content" style={{ textAlign: 'left', maxWidth: '800px', margin: '0 auto', width: '100%', padding: '0 5%' }}>
           <span style={{ display: 'inline-block', backgroundColor: 'rgba(249,115,22,0.2)', color: palette.primary, padding: '0.5rem 1rem', borderRadius: '20px', fontWeight: 700, marginBottom: '1.5rem', border: `1px solid ${palette.primary}` }}>
@@ -162,7 +160,7 @@ const BoxAndGo = () => {
             </div>
           </div>
           <div style={{ position: 'relative' }}>
-            <img src={img('photo-1583394838336-acd977736f90', 1000)} alt="Chef packing" style={{ width: '100%', borderRadius: '16px', zIndex: 2, position: 'relative' }} />
+            <img src={img('photo-1504674900247-0877df9cc836', 1000)} alt="Chef packing" style={{ width: '100%', borderRadius: '16px', zIndex: 2, position: 'relative' }} />
             <div style={{ position: 'absolute', inset: '-1rem', backgroundColor: palette.primary, borderRadius: '24px', zIndex: 1, opacity: 0.2 }}></div>
           </div>
         </div>
@@ -172,10 +170,10 @@ const BoxAndGo = () => {
       <section className="ck-section" style={{ paddingBottom: '0' }}>
         <h2 style={{ fontFamily: font.heading, fontSize: '2.5rem', textAlign: 'center', marginBottom: '3rem' }}>Inside Our Cloud Kitchen</h2>
         <div className="ck-gallery">
-          <img src={img('photo-1583394838336-acd977736f90')} alt="Kitchen" />
-          <img src={img('photo-1627308595229-7830f5c92f70')} alt="Boxes" />
-          <img src={img('photo-1581009146145-b5ef050c2e1e')} alt="Delivery" />
-          <img src={img('photo-1548943487-a2e4d43b4850')} alt="Bento" />
+          <img src={img('photo-1504674900247-0877df9cc836')} alt="Kitchen" />
+          <img src={img('photo-1504674900247-0877df9cc836')} alt="Boxes" />
+          <img src={img('photo-1504674900247-0877df9cc836')} alt="Delivery" />
+          <img src={img('photo-1504674900247-0877df9cc836')} alt="Bento" />
         </div>
       </section>
 
@@ -213,3 +211,4 @@ const BoxAndGo = () => {
 };
 
 export default BoxAndGo;
+

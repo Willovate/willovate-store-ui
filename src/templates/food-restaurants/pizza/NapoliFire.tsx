@@ -5,15 +5,15 @@ import { useReveal } from '../components/RestaurantCore';
 const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
 
 const IMAGES = {
-  hero: img('photo-1565299624946-b28f40a0ae38'), // classic neapolitan
-  story: img('photo-1513104890138-7c749659a591'), // pizza chef
-  promo: img('photo-1593560708920-61dd98c46a4e'), // wood-fired oven flames
-  pizza1: img('photo-1574071318508-1cdbab80d002'),
-  pizza2: img('photo-1604382354936-07c5d9983bd3'),
+  hero: img('photo-1504674900247-0877df9cc836'), // classic neapolitan
+  story: img('photo-1504674900247-0877df9cc836'), // pizza chef
+  promo: img('photo-1504674900247-0877df9cc836'), // wood-fired oven flames
+  pizza1: img('photo-1504674900247-0877df9cc836'),
+  pizza2: img('photo-1504674900247-0877df9cc836'),
   pizza3: img('photo-1555939594-58d7cb561ad1'),
-  pizza4: img('photo-1516714435131-44d6b64dc6a2'),
-  pizza5: img('photo-1628840042765-356cda07504e'),
-  pizza6: img('photo-1596797038530-2c107229654b'),
+  pizza4: img('photo-1504674900247-0877df9cc836'),
+  pizza5: img('photo-1504674900247-0877df9cc836'),
+  pizza6: img('photo-1488477181946-6428a0291777'),
 };
 
 export default function NapoliFire() {
@@ -53,11 +53,9 @@ export default function NapoliFire() {
 
   return (
     <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif' }}>
-      <nav style={{ position: 'fixed', top: 0, width: '100%', padding: '1rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.3s', backgroundColor: scrolled ? 'rgba(255,251,247,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid #eaeaea' : 'none', backdropFilter: scrolled ? 'blur(10px)' : 'none' }}>
+      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.3s', backgroundColor: scrolled ? 'rgba(255,251,247,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid #eaeaea' : 'none', backdropFilter: scrolled ? 'blur(10px)' : 'none' }}>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <a href="/browse-templates/food-and-restaurant/pizza" style={{ color: scrolled ? theme.palette.text : '#fff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
-            <ArrowLeft size={16} /> Back
-          </a>
+          
           <div style={{ fontSize: '1.8rem', fontWeight: 700, fontFamily: '"Playfair Display", serif', color: scrolled ? theme.palette.primary : '#fff', letterSpacing: '0.5px' }}>
             {theme.name}
           </div>
@@ -199,3 +197,5 @@ export default function NapoliFire() {
     </div>
   );
 }
+
+

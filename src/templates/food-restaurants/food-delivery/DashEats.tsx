@@ -5,13 +5,13 @@ import { useReveal } from '../components/RestaurantCore';
 const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
 
 const IMAGES = {
-  hero: img('photo-1526367790999-0150786686a2'),
-  story: img('photo-1584308972271-2b8146747b2c'),
-  promo: img('photo-1628840042765-356cda07504e'),
-  menu1: img('photo-1626082896492-766af4eb65ed'),
+  hero: img('photo-1504674900247-0877df9cc836'),
+  story: img('photo-1504674900247-0877df9cc836'),
+  promo: img('photo-1504674900247-0877df9cc836'),
+  menu1: img('photo-1504674900247-0877df9cc836'),
   menu2: img('photo-1568901346375-23c9450c58cd'),
-  menu3: img('photo-1559314809-0d155014e29e'),
-  menu4: img('photo-1513104890138-7c749659a591'),
+  menu3: img('photo-1504674900247-0877df9cc836'),
+  menu4: img('photo-1504674900247-0877df9cc836'),
   menu5: img('photo-1512621776951-a57141f2eefd'),
 };
 
@@ -48,11 +48,9 @@ export default function DashEats() {
 
   return (
     <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif' }}>
-      <nav style={{ position: 'fixed', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(255,255,255,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(244,63,94,0.1)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none' }}>
+      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(255,255,255,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(244,63,94,0.1)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none' }}>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <a href="/browse-templates/food-and-restaurant/food-delivery" style={{ color: scrolled ? theme.palette.text : '#fff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
-            <ArrowLeft size={18} /> Back
-          </a>
+          
           <div style={{ fontSize: '1.75rem', fontWeight: 800, fontFamily: '"Montserrat", sans-serif', color: scrolled ? theme.palette.primary : '#fff', letterSpacing: '-0.5px' }}>
             {theme.name}
           </div>
@@ -238,3 +236,5 @@ export default function DashEats() {
     </div>
   );
 }
+
+

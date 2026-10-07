@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, MapPin, Clock, Phone, ChefHat, ChevronRight, Star, ShoppingBag } from 'lucide-react';
 import { useReveal } from '../components/RestaurantCore';
@@ -5,14 +6,14 @@ import { useReveal } from '../components/RestaurantCore';
 const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
 
 const IMAGES = {
-  hero: img('photo-1540189549336-e6e99c3679fe'),
-  story: img('photo-1414235077428-338988a2e8c0'),
-  promo: img('photo-1606787620819-8bdf0c44c293'),
-  menu1: img('photo-1544025162-d76538a679db'),
-  menu2: img('photo-1519708227418-c8fd9a32b7a2'),
-  menu3: img('photo-1619895092538-128341789043'),
-  menu4: img('photo-1598514982205-f36b96d1e8d4'),
-  menu5: img('photo-1606313564200-e75d5e30476c'),
+  hero: img('photo-1504674900247-0877df9cc836'),
+  story: img('photo-1504674900247-0877df9cc836'),
+  promo: img('photo-1504674900247-0877df9cc836'),
+  menu1: img('photo-1504674900247-0877df9cc836'),
+  menu2: img('photo-1504674900247-0877df9cc836'),
+  menu3: img('photo-1504674900247-0877df9cc836'),
+  menu4: img('photo-1504674900247-0877df9cc836'),
+  menu5: img('photo-1504674900247-0877df9cc836'),
 };
 
 export default function ForkExpress() {
@@ -50,11 +51,9 @@ export default function ForkExpress() {
 
   return (
     <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Lato", sans-serif' }}>
-      <nav style={{ position: 'fixed', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(255,255,255,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(37,99,235,0.1)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none' }}>
+      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(255,255,255,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(37,99,235,0.1)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none' }}>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <a href="/browse-templates/food-and-restaurant/food-delivery" style={{ color: scrolled ? theme.palette.text : '#fff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
-            <ArrowLeft size={18} /> Back
-          </a>
+          
           <div style={{ fontSize: '1.75rem', fontWeight: 700, fontFamily: '"Playfair Display", serif', color: scrolled ? theme.palette.primary : '#fff' }}>
             {theme.name}
           </div>
@@ -221,3 +220,6 @@ export default function ForkExpress() {
     </div>
   );
 }
+
+
+

@@ -5,15 +5,15 @@ import { useReveal } from '../components/RestaurantCore';
 const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
 
 const PIZZA_IMAGES = {
-  hero: img('photo-1588315029754-2dd089d39a1a'), // Detroit style
-  story: img('photo-1534308983496-4fabb1a015ee'), // baker preparing dough
-  promo: img('photo-1528137871618-79d2761e3fd5'), // deep dish cheese pull
-  detroit: img('photo-1588315029754-2dd089d39a1a'), // original detroit
-  chicago: img('photo-1544025162-d76538a679db'), // original chicago
-  gallery1: img('photo-1576458088443-04a19bb13da6'),
-  gallery2: img('photo-1571407970349-bc81e7e96d47'),
-  gallery3: img('photo-1440516851687-7a8a3a48e2d4'),
-  gallery4: img('photo-1593560708920-61dd98c46a4e'),
+  hero: img('photo-1504674900247-0877df9cc836'), // Detroit style
+  story: img('photo-1504674900247-0877df9cc836'), // baker preparing dough
+  promo: img('photo-1504674900247-0877df9cc836'), // deep dish cheese pull
+  detroit: img('photo-1504674900247-0877df9cc836'), // original detroit
+  chicago: img('photo-1504674900247-0877df9cc836'), // original chicago
+  gallery1: img('photo-1504674900247-0877df9cc836'),
+  gallery2: img('photo-1504674900247-0877df9cc836'),
+  gallery3: img('photo-1504674900247-0877df9cc836'),
+  gallery4: img('photo-1504674900247-0877df9cc836'),
 };
 
 export default function CrustTheory() {
@@ -48,11 +48,9 @@ export default function CrustTheory() {
 
   return (
     <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif' }}>
-      <nav style={{ position: 'fixed', top: 0, width: '100%', padding: '1rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.3s', backgroundColor: scrolled ? 'rgba(255,255,255,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid #eaeaea' : 'none', backdropFilter: scrolled ? 'blur(10px)' : 'none' }}>
+      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.3s', backgroundColor: scrolled ? 'rgba(255,255,255,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid #eaeaea' : 'none', backdropFilter: scrolled ? 'blur(10px)' : 'none' }}>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <a href="/browse-templates/food-and-restaurant/pizza" style={{ color: scrolled ? theme.palette.text : '#fff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
-            <ArrowLeft size={16} /> Back
-          </a>
+          
           <div style={{ fontSize: '1.5rem', fontWeight: 900, fontFamily: '"Bebas Neue", sans-serif', color: scrolled ? theme.palette.primary : '#fff', letterSpacing: '1px' }}>
             {theme.name}
           </div>
@@ -186,3 +184,5 @@ export default function CrustTheory() {
     </div>
   );
 }
+
+

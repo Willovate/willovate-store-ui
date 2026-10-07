@@ -44,8 +44,8 @@ export default function BrowseTemplateSubsection() {
   return (
     <TemplatesLayout>
       <div className="template-subsection-page">
-        <Link to={category ? `/browse-templates/${category.slug}${targetWebsiteId ? `?websiteId=${targetWebsiteId}` : ''}` : targetWebsiteId ? `/browse-templates?websiteId=${targetWebsiteId}` : '/browse-templates'} className="browse-template-back">
-          <ArrowLeft size={17} /> Back to {category?.name ?? 'Browse Templates'}
+        <Link to={targetWebsiteId ? `/browse-templates?websiteId=${targetWebsiteId}` : '/browse-templates'} className="browse-template-back">
+          <ArrowLeft size={17} /> Back to Browse Templates
         </Link>
         {subsection ? (
           <>

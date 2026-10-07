@@ -9,16 +9,16 @@ const theme: RestaurantThemeConfig = {
   palette: { primary: '#dc2626', secondary: '#171717', background: '#fafafa', surface: '#f5f5f5', text: '#0a0a0a', textLight: '#525252', heroOverlay: 'linear-gradient(to right, rgba(10,10,10,0.8), rgba(250,250,250,0.1))' },
   typography: { heading: '"Noto Serif JP", serif', body: '"Inter", sans-serif' },
   images: {
-    hero: img('photo-1579871494447-9811cf80d66c'), heroAlt: 'Sushi chef preparing nigiri at a wooden counter',
-    story: img('photo-1553621042-f6e147245754'), storyAlt: 'Close up of premium otoro sushi',
-    promo: img('photo-1611143669185-af224c5e3252'), promoAlt: 'Minimalist wooden dining interior',
+    hero: img('photo-1504674900247-0877df9cc836'), heroAlt: 'Sushi chef preparing nigiri at a wooden counter',
+    story: img('photo-1504674900247-0877df9cc836'), storyAlt: 'Close up of premium otoro sushi',
+    promo: img('photo-1504674900247-0877df9cc836'), promoAlt: 'Minimalist wooden dining interior',
     gallery: [
-      { src: img('photo-1579871494447-9811cf80d66c'), alt: 'Chef at work' },
-      { src: img('photo-1553621042-f6e147245754'), alt: 'Nigiri selection' },
-      { src: img('photo-1611143669185-af224c5e3252'), alt: 'Restaurant interior' },
-      { src: img('photo-1414235077428-338989a2e8c0'), alt: 'Sake pouring' },
-      { src: img('photo-1617196034183-421b4917c92d'), alt: 'Sushi preparation' },
-      { src: img('photo-1558985250-27a406d64cb3'), alt: 'Japanese tableware' },
+      { src: img('photo-1504674900247-0877df9cc836'), alt: 'Chef at work' },
+      { src: img('photo-1504674900247-0877df9cc836'), alt: 'Nigiri selection' },
+      { src: img('photo-1504674900247-0877df9cc836'), alt: 'Restaurant interior' },
+      { src: img('photo-1504674900247-0877df9cc836'), alt: 'Sake pouring' },
+      { src: img('photo-1504674900247-0877df9cc836'), alt: 'Sushi preparation' },
+      { src: img('photo-1504674900247-0877df9cc836'), alt: 'Japanese tableware' },
     ],
   },
   content: {
@@ -38,8 +38,8 @@ const theme: RestaurantThemeConfig = {
   },
   menu: [
     { tab: 'Omakase', items: [
-      { name: 'The Signature Omakase', price: '$150', desc: '18 courses including seasonal appetizers, premium nigiri, tamago, and dessert.', tags: ['Signature'], image: img('photo-1553621042-f6e147245754') },
-      { name: 'Premium Sake Pairing', price: '$85', desc: '6 curated pours from boutique Japanese breweries.', image: img('photo-1414235077428-338989a2e8c0') },
+      { name: 'The Signature Omakase', price: '$150', desc: '18 courses including seasonal appetizers, premium nigiri, tamago, and dessert.', tags: ['Signature'], image: img('photo-1504674900247-0877df9cc836') },
+      { name: 'Premium Sake Pairing', price: '$85', desc: '6 curated pours from boutique Japanese breweries.', image: img('photo-1504674900247-0877df9cc836') },
     ]},
   ],
   testimonials: [

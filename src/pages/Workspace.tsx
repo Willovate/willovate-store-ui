@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import type { Website, Theme, Page, PageElement } from '../types'
 import { getWebsite, updateWebsite, updateElement, createElement, createTheme, deleteElement, publishTheme } from '../lib/workspace-api'
-import PageEditor from '../components/PageEditor'; import { getSyntheticElement } from '../utils/editorUtils';
+import PageEditor, { isRestaurantTemplate } from '../components/PageEditor'; import { getSyntheticElement } from '../utils/editorUtils';
 import SaveIndicator from '../components/SaveIndicator'
 import ElementEditor from '../components/ElementEditor'
 import AIAssistant from '../components/AIAssistant'
@@ -78,6 +78,8 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
   const [showThemeLibrary, setShowThemeLibrary] = useState(false)
   const [previewMode, setPreviewMode] = useState<'desktop' | 'tablet' | 'mobile'>('desktop')
   const [isAddingElement, setIsAddingElement] = useState(false)
+  const [activeNav, setActiveNav] = useState<string>('online-store')
+  const [comingSoonToast, setComingSoonToast] = useState<string | null>(null)
   const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const frameRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLDivElement>(null)
@@ -148,12 +150,28 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
       setSelectedElement(prevEl => {
         if (!prevEl || !themeToUse) return prevEl
         const pages = themeToUse.pages
+
+        // Synthetic element IDs are keyword strings, not UUIDs.
+        // After a save + reload, we need to rebuild them from the new page data.
+        const SYNTHETIC_IDS = ['hero', 'announcement', 'nav', 'featured-title', 'prod-grid',
+          'coll-list', 'img-text', 'newsletter', 'policies', 'email-signup', 'footer', 'heading-dummy']
+        const isSyntheticId = SYNTHETIC_IDS.includes(prevEl.id) || prevEl.id.startsWith('product-')
+
         for (const p of pages) {
-          if (prevEl.id === 'hero' && p.elements.some(e => e.elementType === 'hero')) {
-            return { ...prevEl, properties: { ...prevEl.properties, _headingId: p.elements.find(e => e.elementType === 'hero')!.id } }
+          if (isSyntheticId) {
+            // Rebuild the synthetic element from fresh page data so its properties
+            // reflect what the server just returned (and no stale data remains).
+            const rebuilt = getSyntheticElement(prevEl.id, p)
+            if (rebuilt) return rebuilt
+          } else {
+            // Real UUID element — check if it exists by matching elementType on any page
+            // (covers the case where id was just created from a synthetic element)
+            const byId = p.elements.find(e => e.id === prevEl.id)
+            if (byId) return byId
+            // Also check by elementType as a fallback for just-saved synthetic elements
+            const byType = p.elements.find(e => e.elementType === prevEl.elementType)
+            if (byType) return getSyntheticElement(prevEl.elementType, p) ?? byType
           }
-          const el = p.elements.find(e => e.id === prevEl.id)
-          if (el) return el
         }
         return prevEl
       })
@@ -317,6 +335,15 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
     if (!confirm('Are you sure you want to publish these changes to your live storefront?')) return
     try {
       setSaveStatus('saving')
+      // Auto-save unsaved changes before publishing
+      if (hasUnsavedChanges && website) {
+        await updateWebsite(website.id, {
+          name: website.name,
+          description: website.description,
+          themeColor: website.themeColor ?? undefined,
+        })
+        setHasUnsavedChanges(false)
+      }
       await updateWebsite(websiteId, { isPublished: true })
       setSaveStatus('saved')
       setShowPublishSuccess(true)
@@ -324,6 +351,11 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
       setSaveStatus('error')
       alert('Failed to publish website. Please try again.')
     }
+  }
+
+  const showComingSoon = (module: string) => {
+    setComingSoonToast(`${module} — coming soon!`)
+    setTimeout(() => setComingSoonToast(null), 2500)
   }
 
   if (isLoading) {
@@ -387,6 +419,12 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
 
       {viewMode === 'dashboard' ? (
         <div className="ws-dashboard-shell" style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100vh', background: '#f8fafc' }}>
+          {/* Coming Soon Toast */}
+          {comingSoonToast && (
+            <div role="status" style={{ position: 'fixed', bottom: '2rem', left: '50%', transform: 'translateX(-50%)', background: '#1e1b4b', color: '#fff', padding: '0.6rem 1.25rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, zIndex: 9999, boxShadow: '0 4px 12px rgba(0,0,0,0.2)' }}>
+              {comingSoonToast}
+            </div>
+          )}
           {/* ── GLOBAL DASHBOARD HEADER ── */}
           <header className="ws-topbar ws-dashboard-topbar" style={{ display: 'flex', justifyContent: 'space-between', padding: '0 1.25rem', height: '60px', background: '#fff', borderBottom: '1px solid #eef0f5', flexShrink: 0, zIndex: 90 }}>
             <div className="ws-topbar-left" style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
@@ -426,13 +464,13 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
               <nav className="ws-sidebar-nav" style={{ padding: '1rem', flex: 1, display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
                 <p className="ws-sidebar-section-label" style={{ color: '#1e1b4b', fontSize: '0.7rem', fontWeight: 800, letterSpacing: '1px', marginBottom: '0.4rem', padding: '0 0.5rem' }}>MAIN MENU</p>
                 <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem', padding: 0, margin: 0, listStyle: 'none' }}>
-                  <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}><Home size={18} /> Workspace</li>
-                  <li className="ws-nav-item ws-nav-active" style={{ background: '#EEF2FF', color: '#4F46E5', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}><AppWindow size={18} /> Online Store</li>
-                  <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}><ShoppingBag size={18} /> Products</li>
-                  <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}><Folder size={18} /> Orders</li>
-                  <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}><Users size={18} /> Customers</li>
-                  <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}><TrendingUp size={18} /> Sales</li>
-                  <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}><Megaphone size={18} /> Marketing &amp; Growth</li>
+                  <li className={`ws-nav-item ${activeNav === 'workspace' ? 'ws-nav-active' : ''}`} style={{ background: activeNav === 'workspace' ? '#EEF2FF' : 'transparent', color: activeNav === 'workspace' ? '#4F46E5' : '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }} onClick={() => setActiveNav('workspace')}><Home size={18} /> Workspace</li>
+                  <li className={`ws-nav-item ${activeNav === 'online-store' ? 'ws-nav-active' : ''}`} style={{ background: activeNav === 'online-store' ? '#EEF2FF' : 'transparent', color: activeNav === 'online-store' ? '#4F46E5' : '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }} onClick={() => setActiveNav('online-store')}><AppWindow size={18} /> Online Store</li>
+                  <li className={`ws-nav-item ${activeNav === 'products' ? 'ws-nav-active' : ''}`} style={{ background: activeNav === 'products' ? '#EEF2FF' : 'transparent', color: activeNav === 'products' ? '#4F46E5' : '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }} onClick={() => { setActiveNav('products'); showComingSoon('Products'); }}><ShoppingBag size={18} /> Products</li>
+                  <li className={`ws-nav-item ${activeNav === 'orders' ? 'ws-nav-active' : ''}`} style={{ background: activeNav === 'orders' ? '#EEF2FF' : 'transparent', color: activeNav === 'orders' ? '#4F46E5' : '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }} onClick={() => { setActiveNav('orders'); showComingSoon('Orders'); }}><Folder size={18} /> Orders</li>
+                  <li className={`ws-nav-item ${activeNav === 'customers' ? 'ws-nav-active' : ''}`} style={{ background: activeNav === 'customers' ? '#EEF2FF' : 'transparent', color: activeNav === 'customers' ? '#4F46E5' : '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }} onClick={() => { setActiveNav('customers'); showComingSoon('Customers'); }}><Users size={18} /> Customers</li>
+                  <li className={`ws-nav-item ${activeNav === 'sales' ? 'ws-nav-active' : ''}`} style={{ background: activeNav === 'sales' ? '#EEF2FF' : 'transparent', color: activeNav === 'sales' ? '#4F46E5' : '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }} onClick={() => { setActiveNav('sales'); showComingSoon('Sales'); }}><TrendingUp size={18} /> Sales</li>
+                  <li className={`ws-nav-item ${activeNav === 'marketing' ? 'ws-nav-active' : ''}`} style={{ background: activeNav === 'marketing' ? '#EEF2FF' : 'transparent', color: activeNav === 'marketing' ? '#4F46E5' : '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }} onClick={() => { setActiveNav('marketing'); showComingSoon('Marketing & Growth'); }}><Megaphone size={18} /> Marketing &amp; Growth</li>
                 </ul>
 
                 <div style={{ height: '1px', background: '#f1f5f9', margin: '0.5rem' }}></div>
@@ -450,7 +488,7 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
 
                 <p className="ws-sidebar-section-label" style={{ color: '#1e1b4b', fontSize: '0.7rem', fontWeight: 800, letterSpacing: '1px', marginBottom: '0.4rem', padding: '0 0.5rem' }}>SETTINGS</p>
                 <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem', padding: 0, margin: 0, listStyle: 'none' }}>
-                  <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}><Settings size={18} /> Settings</li>
+                  <li className={`ws-nav-item ${activeNav === 'settings' ? 'ws-nav-active' : ''}`} style={{ background: activeNav === 'settings' ? '#EEF2FF' : 'transparent', color: activeNav === 'settings' ? '#4F46E5' : '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }} onClick={() => { setActiveNav('settings'); showComingSoon('Settings'); }}><Settings size={18} /> Settings</li>
                 </ul>
               </nav>
 
@@ -491,41 +529,27 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
 
               <div className="ws-store-summary-card" style={{ background: '#fff', border: '1px solid #eef0f5', borderRadius: '20px', display: 'flex', alignItems: 'stretch', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
                 <div className="ws-store-preview-pane" style={{ flex: 1.8, background: '#f9f9fa', padding: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: '20px', borderBottomLeftRadius: '20px' }}>
-                   {/* Preview placeholder image matching Mino store */}
-                   <div className="ws-store-preview-card" style={{ width: '100%', background: '#fff', borderRadius: '8px', display: 'flex', flexDirection: 'column', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', position: 'relative', overflow: 'hidden' }}>
-                      <div className="ws-store-preview-header" style={{ background: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.75rem 1.25rem', borderBottom: '1px solid #f1f1f1' }}>
-                        <div className="ws-store-preview-logo" style={{ fontWeight: 800, fontSize: '1.1rem', letterSpacing: '-0.5px' }}>MINO</div>
-                        <div className="ws-store-preview-nav" style={{ display: 'flex', gap: '1.25rem', fontSize: '0.7rem', fontWeight: 600, color: '#111' }}>
-                          <span>Home</span><span>Shop</span><span>Collection</span><span>About</span><span>Contact</span>
-                        </div>
-                        <div className="ws-store-preview-icons" style={{ display: 'flex', gap: '0.75rem', color: '#111' }}>
-                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-                        </div>
-                      </div>
-                      <div className="ws-store-hero" style={{ height: '240px' }}>
-                        <img src="/hero_handbag_raw.png" alt="Summer collection handbag and vase" />
-                        <div className="ws-store-hero-copy">
-                          <p>NEW COLLECTION</p>
-                          <h2>Summer<br />Collection</h2>
-                          <span>Light, modern and made for your<br />beautiful days.</span>
-                          <button type="button" onClick={() => navigate('/')}>Shop Now <span aria-hidden="true">→</span></button>
-                        </div>
+                   <div className="ws-store-preview-card" style={{ width: '100%', height: '400px', background: '#fff', borderRadius: '8px', display: 'flex', flexDirection: 'column', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', position: 'relative', overflow: 'hidden' }}>
+                      <div style={{ transform: 'scale(0.4)', transformOrigin: 'top left', width: '250%', height: '250%' }}>
+                        {selectedPage ? (
+                          <PageEditor website={website} page={selectedPage} />
+                        ) : (
+                          <div style={{ padding: '2rem' }}>Loading...</div>
+                        )}
                       </div>
                    </div>
                 </div>
                 <div className="ws-store-details-pane" style={{ flex: 1, padding: '1.5rem', borderLeft: '1px solid #eef0f5', display: 'flex', flexDirection: 'column' }}>
-                  <h3 className="ws-store-details-title" style={{ fontSize: '1.2rem', fontWeight: 700, margin: '0 0 0.25rem 0', color: '#1e1b4b' }}>Mino Fashion Store</h3>
-                  <p className="ws-store-details-description" style={{ color: '#64748b', fontSize: '0.8rem', marginBottom: '1.5rem' }}>Minimal fashion store for everyday style.</p>
+                  <h3 className="ws-store-details-title" style={{ fontSize: '1.2rem', fontWeight: 700, margin: '0 0 0.25rem 0', color: '#1e1b4b' }}>{website.name || 'Mino Fashion Store'}</h3>
+                  <p className="ws-store-details-description" style={{ color: '#64748b', fontSize: '0.8rem', marginBottom: '1.5rem' }}>{website.description || 'Minimal fashion store for everyday style.'}</p>
 
                   <div className="ws-store-meta-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #eef0f5', paddingBottom: '1rem', marginBottom: '1rem' }}>
                     <div className="ws-store-meta-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#475569', fontSize: '0.85rem', fontWeight: 500 }}><Calendar size={16} strokeWidth={1.5}/> Template</div>
-                    <span className="ws-store-meta-value" style={{ fontWeight: 600, fontSize: '0.85rem', color: '#0f172a' }}>Mino</span>
+                    <span className="ws-store-meta-value" style={{ fontWeight: 600, fontSize: '0.85rem', color: '#0f172a', textTransform: 'capitalize' }}>{website.templateId?.replace(/-/g, ' ') || 'Default'}</span>
                   </div>
                   <div className="ws-store-meta-row ws-store-meta-row-last" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '1rem', marginBottom: 'auto' }}>
                     <div className="ws-store-meta-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#475569', fontSize: '0.85rem', fontWeight: 500 }}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> Last updated</div>
-                    <span className="ws-store-meta-value" style={{ fontWeight: 600, fontSize: '0.85rem', color: '#0f172a' }}>11 May 2025, 10:30 AM</span>
+                    <span className="ws-store-meta-value" style={{ fontWeight: 600, fontSize: '0.85rem', color: '#0f172a' }}>{new Date(website.updatedAt).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit' })}</span>
                   </div>
 
                   <button className="ws-btn ws-btn-outline" style={{ width: '100%', justifyContent: 'center', color: '#5c3ce6', borderColor: '#ddd6fe', background: '#fff', fontWeight: 600, padding: '0.6rem', borderRadius: '8px', fontSize: '0.85rem' }} onClick={() => setViewMode('editor')}>
@@ -669,6 +693,7 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
                     }}
                     onAddElement={handleAddElement}
                     onRefresh={() => loadWebsite()}
+                    isRestaurantTheme={website ? isRestaurantTemplate(website.templateId) : false}
                   />
                 )}
               </div>
@@ -680,7 +705,9 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
                   <div className={`ws-canvas ws-canvas-${previewMode}`} ref={canvasRef}>
                     {selectedPage ? (
                       <PageEditor
+                        website={website}
                         page={selectedPage}
+                        selectedElement={selectedElement}
                         selectedElementId={selectedElement?.id}
                         onSelectElement={(el) => {
                           setSelectedElement(el)
@@ -781,16 +808,27 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
 
                     // Push to history
                     if (selectedPage) {
+                        const isSyntheticId = !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(selectedElement.id)
                         const newPages = pagesState.map(p => {
                             if (p.id === selectedPage.id) {
-                                return {
-                                    ...p,
-                                    elements: p.elements.map(e =>
-                                      (e.id === selectedElement.id || (['announcement', 'nav', 'hero', 'featured-title', 'prod-grid', 'coll-list', 'img-text', 'newsletter', 'policies', 'email-signup', 'footer', 'heading-dummy'].includes(selectedElement.id) && e.elementType === selectedElement.elementType))
-                                        ? { ...e, properties: { ...e.properties, ...newProps } }
-                                        : e
-                                    )
+                                let found = false;
+                                const newElements = p.elements.map(e => {
+                                    // Match by exact UUID id, OR by elementType if this is a synthetic (keyword) element
+                                    const matches = e.id === selectedElement.id ||
+                                      (isSyntheticId && e.elementType === selectedElement.elementType)
+                                    if (matches) {
+                                        found = true;
+                                        return { ...e, properties: newProps };
+                                    }
+                                    return e;
+                                });
+                                if (!found) {
+                                    newElements.push({
+                                        ...selectedElement,
+                                        properties: newProps
+                                    });
                                 }
+                                return { ...p, elements: newElements }
                             }
                             return p;
                         });
@@ -810,8 +848,12 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
                   <div className="ws-props-header" style={{ borderBottom: '1px solid #E5E7EB' }}>
                     <h3 style={{ fontSize: '14px', fontWeight: 600 }}>Settings</h3>
                   </div>
-                  <div className="ws-props-empty-body">
-                    <p style={{ fontSize: '13px', color: '#6B7280', textAlign: 'center', marginTop: '20px' }}>Select an element on the canvas to view settings.</p>
+                  <div className="ws-props-empty-body" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.5rem', gap: '0.75rem' }}>
+                    <div style={{ width: 48, height: 48, borderRadius: '50%', background: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.25rem' }}>
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6366F1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M3 9h6"/></svg>
+                    </div>
+                    <p style={{ fontSize: '13px', fontWeight: 600, color: '#1F2937', margin: 0 }}>No section selected</p>
+                    <p style={{ fontSize: '12px', color: '#6B7280', textAlign: 'center', margin: 0, lineHeight: 1.5 }}>Click any section on the canvas or select one from the left sidebar to edit its content and styling.</p>
                   </div>
                 </div>
               )}

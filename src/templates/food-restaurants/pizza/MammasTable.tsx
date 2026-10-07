@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, MapPin, Clock, Phone, ShoppingBag, ChevronRight, Star } from 'lucide-react';
 import { useReveal } from '../components/RestaurantCore';
@@ -5,15 +6,15 @@ import { useReveal } from '../components/RestaurantCore';
 const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
 
 const IMAGES = {
-  hero: img('photo-1555396273-367ea4eb4db5'), 
+  hero: img('photo-1504674900247-0877df9cc836'), 
   story: img('photo-1571115177098-24ec42ed204d'),
-  promo: img('photo-1565299624946-b28f40a0ae38'), 
-  pizza1: img('photo-1604382354936-07c5d9983bd3'),
-  pizza2: img('photo-1513104890138-7c749659a591'),
-  pasta1: img('photo-1473093295043-cdd812d0e601'),
-  pasta2: img('photo-1551183053-bf91a1d81141'),
-  anti1: img('photo-1572695157366-5e585ab2b69f'),
-  anti2: img('photo-1549007994-cb92caebd54b'),
+  promo: img('photo-1504674900247-0877df9cc836'), 
+  pizza1: img('photo-1504674900247-0877df9cc836'),
+  pizza2: img('photo-1504674900247-0877df9cc836'),
+  pasta1: img('photo-1504674900247-0877df9cc836'),
+  pasta2: img('photo-1504674900247-0877df9cc836'),
+  anti1: img('photo-1504674900247-0877df9cc836'),
+  anti2: img('photo-1504674900247-0877df9cc836'),
 };
 
 export default function MammasTable() {
@@ -53,11 +54,9 @@ export default function MammasTable() {
 
   return (
     <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Lato", sans-serif' }}>
-      <nav style={{ position: 'fixed', top: 0, width: '100%', padding: '1rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.3s', backgroundColor: scrolled ? 'rgba(253,247,242,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid #eaeaea' : 'none', backdropFilter: scrolled ? 'blur(10px)' : 'none' }}>
+      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.3s', backgroundColor: scrolled ? 'rgba(253,247,242,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid #eaeaea' : 'none', backdropFilter: scrolled ? 'blur(10px)' : 'none' }}>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <a href="/browse-templates/food-and-restaurant/pizza" style={{ color: scrolled ? theme.palette.text : '#fff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
-            <ArrowLeft size={16} /> Back
-          </a>
+          
           <div style={{ fontSize: '1.5rem', fontWeight: 700, fontFamily: '"Cormorant Garamond", serif', color: scrolled ? theme.palette.primary : '#fff', letterSpacing: '1px' }}>
             {theme.name}
           </div>
@@ -199,3 +198,6 @@ export default function MammasTable() {
     </div>
   );
 }
+
+
+

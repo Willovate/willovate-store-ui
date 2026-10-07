@@ -7,6 +7,7 @@
  */
 
 import React, { useState, useEffect, useRef } from 'react';
+import { EditableSection, useEditableOverrides } from '../../../context/WebsiteContext';
 import { ArrowRight, MapPin, Clock, Phone, Star, ChevronLeft, ChevronRight, ShoppingBag } from 'lucide-react';
 
 // ─── SCROLL REVEAL HOOK ─────────────────────────────────────────────────────
@@ -86,10 +87,13 @@ export interface RestaurantThemeConfig {
 // ─── ANNOUNCEMENT BAR ────────────────────────────────────────────────────────
 
 export function AnnouncementBar({ text, palette }: { text: string; palette: RestaurantThemeConfig['palette'] }) {
+  const overrides = useEditableOverrides('announcement', { text });
   return (
-    <div style={{ backgroundColor: palette.primary, color: '#fff', textAlign: 'center', padding: '0.6rem 1rem', fontSize: '0.85rem', fontWeight: 600, letterSpacing: '0.05em' }}>
-      {text}
-    </div>
+    <EditableSection id="announcement" elementType="announcement" name="Announcement Bar" defaultProps={{ text }}>
+      <div style={{ backgroundColor: palette.primary, color: '#fff', textAlign: 'center', padding: '0.6rem 1rem', fontSize: '0.85rem', fontWeight: 600, letterSpacing: '0.05em' }}>
+        {overrides.text}
+      </div>
+    </EditableSection>
   );
 }
 
@@ -111,29 +115,31 @@ export function RestaurantNavbar({ theme }: { theme: RestaurantThemeConfig }) {
   const border = scrolled ? `1px solid ${theme.palette.text}15` : 'none';
 
   return (
-    <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, backgroundColor: bg, borderBottom: border, backdropFilter: scrolled ? 'blur(12px)' : 'none', transition: 'all 0.35s ease', padding: '0 5%', height: '70px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-      <div style={{ fontFamily: theme.typography.heading, fontSize: '1.6rem', fontWeight: 900, color: scrolled ? theme.palette.primary : '#fff', letterSpacing: '-0.03em', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-        <a href={`/browse-templates/food-and-restaurant/${theme.category}`} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: scrolled ? theme.palette.textLight : 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 600, fontFamily: theme.typography.body }}>
-          <ChevronLeft size={18} /> Back
-        </a>
-        {theme.name}
-      </div>
-
-      <div style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }}>
-        {navLinks.map(link => (
-          <a key={link} href={`#${link.toLowerCase()}`} style={{ fontFamily: theme.typography.body, fontSize: '0.9rem', fontWeight: 600, color: textColor, textDecoration: 'none', textTransform: 'uppercase', letterSpacing: '0.08em', transition: 'opacity 0.2s' }}
-            onMouseOver={e => (e.currentTarget.style.opacity = '0.6')}
-            onMouseOut={e => (e.currentTarget.style.opacity = '1')}>
-            {link}
+    <EditableSection id="nav" elementType="nav" name="Navigation" defaultProps={{ logoText: theme.name }}>
+      <nav style={{ position: 'sticky', top: 0, left: 0, right: 0, zIndex: 100, backgroundColor: bg, borderBottom: border, backdropFilter: scrolled ? 'blur(12px)' : 'none', transition: 'all 0.35s ease', padding: '0 5%', height: '70px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ fontFamily: theme.typography.heading, fontSize: '1.6rem', fontWeight: 900, color: scrolled ? theme.palette.primary : '#fff', letterSpacing: '-0.03em', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <a href={`/browse-templates/food-and-restaurant/${theme.category}`} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: scrolled ? theme.palette.textLight : 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 600, fontFamily: theme.typography.body }}>
+            <ChevronLeft size={18} /> Back
           </a>
-        ))}
-        <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', borderRadius: '8px', padding: '0.6rem 1.4rem', fontFamily: theme.typography.body, fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem', transition: 'transform 0.2s, box-shadow 0.2s', boxShadow: `0 4px 14px ${theme.palette.primary}55` }}
-          onMouseOver={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 8px 20px ${theme.palette.primary}66`; }}
-          onMouseOut={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = `0 4px 14px ${theme.palette.primary}55`; }}>
-          <ShoppingBag size={15} /> {theme.content.ctaPrimary}
-        </button>
-      </div>
-    </nav>
+          {useEditableOverrides('nav', {logoText: theme.name}).logoText}
+        </div>
+
+        <div style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }}>
+          {navLinks.map(link => (
+            <a key={link} href={`#${link.toLowerCase()}`} style={{ fontFamily: theme.typography.body, fontSize: '0.9rem', fontWeight: 600, color: textColor, textDecoration: 'none', textTransform: 'uppercase', letterSpacing: '0.08em', transition: 'opacity 0.2s' }}
+              onMouseOver={e => (e.currentTarget.style.opacity = '0.6')}
+              onMouseOut={e => (e.currentTarget.style.opacity = '1')}>
+              {link}
+            </a>
+          ))}
+          <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', borderRadius: '8px', padding: '0.6rem 1.4rem', fontFamily: theme.typography.body, fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem', transition: 'transform 0.2s, box-shadow 0.2s', boxShadow: `0 4px 14px ${theme.palette.primary}55` }}
+            onMouseOver={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 8px 20px ${theme.palette.primary}66`; }}
+            onMouseOut={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = `0 4px 14px ${theme.palette.primary}55`; }}>
+            <ShoppingBag size={15} /> {theme.content.ctaPrimary}
+          </button>
+        </div>
+      </nav>
+    </EditableSection>
   );
 }
 
@@ -141,23 +147,30 @@ export function RestaurantNavbar({ theme }: { theme: RestaurantThemeConfig }) {
 
 export function RestaurantHero({ theme }: { theme: RestaurantThemeConfig }) {
   const [imgLoaded, setImgLoaded] = useState(false);
+  const overrides = useEditableOverrides('hero', {
+    title: theme.content.heroHeadline,
+    subtitle: theme.content.heroSub,
+    buttonText: theme.content.ctaPrimary,
+    style_backgroundImage: theme.images.hero
+  });
 
   return (
-    <section style={{ position: 'relative', height: '100vh', minHeight: '600px', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
-      {/* Background image with Ken Burns */}
-      <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
-        {theme.videoSrc ? (
-          <video autoPlay loop muted playsInline style={{ width: '100%', height: '100%', objectFit: 'cover' }}>
-            <source src={theme.videoSrc} type="video/mp4" />
-          </video>
-        ) : (
-          <img
-            src={theme.images.hero}
-            alt={theme.images.heroAlt}
-            onLoad={() => setImgLoaded(true)}
-            style={{ width: '100%', height: '110%', objectFit: 'cover', objectPosition: 'center', transform: imgLoaded ? 'scale(1.05)' : 'scale(1)', transition: 'transform 8s ease-out' }}
-          />
-        )}
+    <EditableSection id="hero" elementType="hero" name="Hero" defaultProps={overrides}>
+      <section style={{ position: 'relative', height: '100vh', minHeight: '600px', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
+        {/* Background image with Ken Burns */}
+        <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
+          {theme.videoSrc ? (
+            <video autoPlay loop muted playsInline style={{ width: '100%', height: '100%', objectFit: 'cover' }}>
+              <source src={theme.videoSrc} type="video/mp4" />
+            </video>
+          ) : (
+            <img
+              src={overrides.style_backgroundImage}
+              alt={theme.images.heroAlt}
+              onLoad={() => setImgLoaded(true)}
+              style={{ width: '100%', height: '110%', objectFit: 'cover', objectPosition: 'center', transform: imgLoaded ? 'scale(1.05)' : 'scale(1)', transition: 'transform 8s ease-out' }}
+            />
+          )}
         <div style={{ position: 'absolute', inset: 0, background: theme.palette.heroOverlay }} />
       </div>
 
@@ -167,16 +180,16 @@ export function RestaurantHero({ theme }: { theme: RestaurantThemeConfig }) {
           {theme.category.replace('-', ' ')} · {theme.tagline}
         </div>
         <h1 style={{ fontFamily: theme.typography.heading, fontSize: 'clamp(3.5rem, 8vw, 7rem)', fontWeight: 900, color: '#fff', lineHeight: 0.95, marginBottom: '2rem', textShadow: '0 2px 40px rgba(0,0,0,0.3)' }}>
-          {theme.content.heroHeadline}
+          {overrides.title}
         </h1>
         <p style={{ fontFamily: theme.typography.body, fontSize: 'clamp(1.1rem, 2vw, 1.35rem)', color: 'rgba(255,255,255,0.88)', marginBottom: '3rem', maxWidth: '550px', lineHeight: 1.6 }}>
-          {theme.content.heroSub}
+          {overrides.subtitle}
         </p>
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
           <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', borderRadius: '10px', padding: '1.1rem 2.5rem', fontFamily: theme.typography.heading, fontWeight: 800, fontSize: '1.1rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', transition: 'transform 0.2s', boxShadow: `0 8px 24px ${theme.palette.primary}66` }}
             onMouseOver={e => e.currentTarget.style.transform = 'translateY(-3px)'}
             onMouseOut={e => e.currentTarget.style.transform = 'none'}>
-            {theme.content.ctaPrimary} <ArrowRight size={18} />
+            {overrides.buttonText} <ArrowRight size={18} />
           </button>
           <button style={{ backgroundColor: 'transparent', color: '#fff', border: '2px solid rgba(255,255,255,0.6)', borderRadius: '10px', padding: '1.1rem 2.5rem', fontFamily: theme.typography.heading, fontWeight: 700, fontSize: '1.1rem', cursor: 'pointer', transition: 'background 0.2s, border-color 0.2s' }}
             onMouseOver={e => { e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.15)'; e.currentTarget.style.borderColor = '#fff'; }}
@@ -191,6 +204,7 @@ export function RestaurantHero({ theme }: { theme: RestaurantThemeConfig }) {
         <div style={{ width: '1px', height: '60px', background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.6))', animation: 'none' }} />
       </div>
     </section>
+    </EditableSection>
   );
 }
 
@@ -216,14 +230,16 @@ export function RestaurantMenu({ theme }: { theme: RestaurantThemeConfig }) {
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
   const ref = useReveal();
 
+  const overrides = useEditableOverrides('prod-grid', {title: 'What We Serve'});
   return (
+    <EditableSection id="prod-grid" elementType="prod-grid" name="Menu Section" defaultProps={overrides}>
     <section id="menu" style={{ backgroundColor: theme.palette.background, padding: '7rem 5%', color: theme.palette.text }}>
       <div ref={ref as any} style={{ maxWidth: '1200px', margin: '0 auto' }}>
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <div style={{ fontFamily: theme.typography.body, fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.2em', color: theme.palette.primary, marginBottom: '1rem' }}>Our Menu</div>
           <h2 style={{ fontFamily: theme.typography.heading, fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 900, lineHeight: 1, color: theme.palette.text, margin: 0 }}>
-            What We Serve
+            {overrides.title}
           </h2>
         </div>
 
@@ -282,6 +298,7 @@ export function RestaurantMenu({ theme }: { theme: RestaurantThemeConfig }) {
         </div>
       </div>
     </section>
+    </EditableSection>
   );
 }
 
@@ -525,3 +542,4 @@ export function RestaurantPage({ theme, children }: { theme: RestaurantThemeConf
     </div>
   );
 }
+

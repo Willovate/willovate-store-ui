@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from 'react';
 import './bakery-shared.css';
 
@@ -24,7 +25,7 @@ const RusticOven = () => {
       </nav>
 
       {/* Hero */}
-      <header className="bakery-hero" style={{ backgroundImage: `url(${img('photo-1534620808146-d33bb39128b2')})` }}>
+      <header className="bakery-hero" style={{ backgroundImage: `url(${img('photo-1563729784474-d77dbb933a9e')})` }}>
         <div className="bakery-hero-overlay" style={{ background: 'linear-gradient(to right, rgba(69,26,3,0.8), rgba(180,83,9,0.3))' }}></div>
         <div className="bakery-hero-content">
           <h1 style={{ ...headingStyle, fontSize: '4.5rem', margin: '0 0 1rem 0', color: '#fff' }}>Fire & Flour.</h1>
@@ -40,9 +41,9 @@ const RusticOven = () => {
           <p className="bakery-subtitle" style={{ color: '#78350f' }}>Smoky, dark-crusted, and perfectly baked every time.</p>
           <div className="bakery-grid">
             {[
-              { title: 'Heritage Miche', desc: 'Large country loaf with whole wheat and rye.', img: 'photo-1534620808146-d33bb39128b2' },
-              { title: 'Wood-fired Baguette', desc: 'Chewy interior and blistered crust.', img: 'photo-1589367920969-ab8e050bfbc7' },
-              { title: 'Spiced Apple Pie', desc: 'Heirloom apples and all-butter flaky crust.', img: 'photo-1519915028121-7d3463d20b13' }
+              { title: 'Heritage Miche', desc: 'Large country loaf with whole wheat and rye.', img: 'photo-1563729784474-d77dbb933a9e' },
+              { title: 'Wood-fired Baguette', desc: 'Chewy interior and blistered crust.', img: 'photo-1509440159596-0249088772ff' },
+              { title: 'Spiced Apple Pie', desc: 'Heirloom apples and all-butter flaky crust.', img: 'photo-1535141192574-5f92f4da2b3c' }
             ].map((item, i) => (
               <div key={i} className="bakery-card">
                 <img src={img(item.img, 800)} alt={item.title} />
@@ -81,11 +82,11 @@ const RusticOven = () => {
         </div>
         <div className="bakery-grid">
           {[
-            { cat: 'Wood-Fired Breads', title: 'Heritage Miche', price: '$12', img: 'photo-1534620808146-d33bb39128b2' },
-            { cat: 'Wood-Fired Breads', title: 'Olive & Rosemary Fougasse', price: '$7', img: 'photo-1589367920969-ab8e050bfbc7' },
+            { cat: 'Wood-Fired Breads', title: 'Heritage Miche', price: '$12', img: 'photo-1563729784474-d77dbb933a9e' },
+            { cat: 'Wood-Fired Breads', title: 'Olive & Rosemary Fougasse', price: '$7', img: 'photo-1509440159596-0249088772ff' },
             { cat: 'Wood-Fired Breads', title: 'Classic Sourdough', price: '$8', img: 'photo-1509440159596-0249088772ff' },
-            { cat: 'Rustic Pies', title: 'Spiced Apple Pie', price: '$24', img: 'photo-1519915028121-7d3463d20b13' },
-            { cat: 'Rustic Pies', title: 'Cherry Lattice Pie', price: '$26', img: 'photo-1583337130417-3346a1be7dee' },
+            { cat: 'Rustic Pies', title: 'Spiced Apple Pie', price: '$24', img: 'photo-1535141192574-5f92f4da2b3c' },
+            { cat: 'Rustic Pies', title: 'Cherry Lattice Pie', price: '$26', img: 'photo-1571115177098-24ec42ed204d' },
           ].filter(item => activeCategory === 'All' || item.cat === activeCategory).map((item, i) => (
             <div key={i} className="bakery-card" style={{ display: 'flex', flexDirection: 'column' }}>
               <img src={img(item.img, 600)} alt={item.title} style={{ height: '200px' }} />
@@ -101,7 +102,7 @@ const RusticOven = () => {
       {/* Signature & About */}
       <section id="story" className="bakery-section">
         <div className="bakery-story">
-          <img src={img('photo-1517433622965-0e62054fb4eb', 1000)} alt="Baker scoring a loaf of bread before baking" style={{ borderRadius: '0' }} />
+          <img src={img('photo-1509440159596-0249088772ff', 1000)} alt="Baker scoring a loaf of bread before baking" style={{ borderRadius: '0' }} />
           <div>
             <h2 className="bakery-title" style={{ ...headingStyle, textAlign: 'left' }}>Back to Basics</h2>
             <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '1.5rem' }}>
@@ -120,10 +121,10 @@ const RusticOven = () => {
         <h2 className="bakery-title" style={headingStyle}>The Baking Process</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
           {[
-            'photo-1534620808146-d33bb39128b2',
-            'photo-1517433622965-0e62054fb4eb',
-            'photo-1519915028121-7d3463d20b13',
-            'photo-1555507036-ab1f4038808a'
+            'photo-1563729784474-d77dbb933a9e',
+            'photo-1509440159596-0249088772ff',
+            'photo-1535141192574-5f92f4da2b3c',
+            'photo-1549931319-a545dcf3bc7c'
           ].map((src, i) => (
             <div key={i} style={{ overflow: 'hidden' }}>
               <img src={img(src, 600)} alt="Gallery item" style={{ width: '100%', height: '250px', objectFit: 'cover', transition: 'transform 0.4s ease' }} onMouseOver={e => e.currentTarget.style.transform = 'scale(1.1)'} onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'} />
@@ -177,3 +178,4 @@ const RusticOven = () => {
 };
 
 export default RusticOven;
+

@@ -5,16 +5,16 @@ import { useReveal } from '../components/RestaurantCore';
 const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
 
 const IMAGES = {
-  hero: img('photo-1567620905732-2d1ec7ab7445'),
-  story: img('photo-1551024601-bec78aea704b'),
-  promo: img('photo-1497034825429-c343d7c6a68f'),
-  shake1: img('photo-1592415486689-125cbbfcbee2'),
-  shake2: img('photo-1631515243349-e0cb75fb8d3a'),
-  shake3: img('photo-1544025162-d76538a679db'),
-  candy1: img('photo-1565299624946-b28f40a0ae38'),
-  candy2: img('photo-1440516851687-7a8a3a48e2d4'),
-  candy3: img('photo-1555396273-367ea4eb4db5'),
-  ic1: img('photo-1534308983496-4fabb1a015ee'),
+  hero: img('photo-1504674900247-0877df9cc836'),
+  story: img('photo-1504674900247-0877df9cc836'),
+  promo: img('photo-1504674900247-0877df9cc836'),
+  shake1: img('photo-1504674900247-0877df9cc836'),
+  shake2: img('photo-1504674900247-0877df9cc836'),
+  shake3: img('photo-1504674900247-0877df9cc836'),
+  candy1: img('photo-1504674900247-0877df9cc836'),
+  candy2: img('photo-1504674900247-0877df9cc836'),
+  candy3: img('photo-1504674900247-0877df9cc836'),
+  ic1: img('photo-1504674900247-0877df9cc836'),
   ic2: img('photo-1567188040759-fb8a883dc6d8'),
 };
 
@@ -56,11 +56,9 @@ export default function SweetTooth() {
 
   return (
     <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif' }}>
-      <nav style={{ position: 'fixed', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(255,240,245,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(244,63,94,0.2)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none' }}>
+      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(255,240,245,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(244,63,94,0.2)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none' }}>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <a href="/browse-templates/food-and-restaurant/dessert-shop" style={{ color: scrolled ? theme.palette.text : '#fff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
-            <ArrowLeft size={18} /> Back
-          </a>
+          
           <div style={{ fontSize: '2rem', fontWeight: 700, fontFamily: '"Righteous", cursive', color: scrolled ? theme.palette.primary : '#fff', letterSpacing: '1px' }}>
             {theme.name}
           </div>
@@ -207,3 +205,5 @@ export default function SweetTooth() {
     </div>
   );
 }
+
+

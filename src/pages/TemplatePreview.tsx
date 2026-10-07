@@ -35,16 +35,29 @@ export default function TemplatePreview() {
   const handleUseTemplate = async () => {
     setIsCreating(true);
     try {
+      const sectionConfig = JSON.stringify([
+        { type: "announcement", text: "Free shipping on orders above ₹499", visibility: false },
+        { type: "nav", logoText: template.name },
+        { type: "hero", title: template.name, subtitle: '', buttonText: "Explore", buttonLink: "/", style_backgroundColor: "#f6ebd9", style_textColor: "#111111", style_buttonColor: "#1A1C20", style_buttonTextColor: "#ffffff", style_backgroundImage: "/mino_bag_preview.jpg" },
+        { type: "featured-title", title: "Featured Collection" },
+        { type: "prod-grid", title: "New Arrivals", productsToShow: 4, columns: 4 },
+        { type: "img-text", title: "Designed for your lifestyle", content: "Simple, elegant and crafted with care to bring comfort into your everyday.", buttonText: "Explore Collection", buttonLink: "/about", image: "/assets/lifestyle.jpg" },
+        { type: "email-signup", heading: "Join our newsletter", subtext: "Get updates on new arrivals and exclusive offers.", buttonText: "Subscribe", placeholder: "Enter your email" },
+        { type: "footer", brand: template.name, tagline: '', showSocial: true }
+      ]);
+
       const website = await createWebsite(
         `${template.name} Store`,
         `Created from ${template.name} template`,
         template.slug,
+        undefined,
+        sectionConfig
       );
-      navigate(`/workspace/${website.id}`);
+      navigate(`/workspace/${website.id}`, { state: { viewMode: 'editor' } });
     } catch (e) {
       console.error('Failed to create workspace from template:', e);
       // Fallback to demo workspace if API fails
-      navigate('/workspace/demo');
+      navigate('/workspace/demo', { state: { viewMode: 'editor' } });
     } finally {
       setIsCreating(false);
     }

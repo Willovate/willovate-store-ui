@@ -58,7 +58,7 @@ const QuickBowl = () => {
           {[
             { name: 'Harvest Chicken', price: '$11.99', desc: 'Roasted chicken, sweet potatoes, wild rice, kale, balsamic vinaigrette.', img: 'photo-1546069901-ba9599a7e63c' },
             { name: 'Spicy Tofu Crunch', price: '$10.99', desc: 'Crispy tofu, quinoa, edamame, carrots, spicy peanut dressing.', img: 'photo-1512621776951-a57141f2eefd' },
-            { name: 'Mediterranean Grain', price: '$11.49', desc: 'Falafel, brown rice, hummus, cucumber, feta, lemon tahini.', img: 'photo-1540420773420-3366772f4999' }
+            { name: 'Mediterranean Grain', price: '$11.49', desc: 'Falafel, brown rice, hummus, cucumber, feta, lemon tahini.', img: 'photo-1504674900247-0877df9cc836' }
           ].map((item, i) => (
             <div key={i} className="ff-card" style={{ backgroundColor: '#f4f9f6', borderRadius: '16px', border: 'none' }}>
               <img src={img(item.img, 800)} alt={item.name} style={{ height: '260px' }} />
@@ -105,11 +105,11 @@ const QuickBowl = () => {
           {[
             { cat: 'Signature Bowls', name: 'Harvest Chicken Bowl', price: '$11.99', desc: 'Roasted chicken, sweet potatoes, wild rice, kale, balsamic vinaigrette.', img: 'photo-1546069901-ba9599a7e63c' },
             { cat: 'Signature Bowls', name: 'Spicy Tofu Crunch', price: '$10.99', desc: 'Crispy tofu, quinoa, edamame, carrots, spicy peanut dressing.', img: 'photo-1512621776951-a57141f2eefd' },
-            { cat: 'Signature Bowls', name: 'Mediterranean Grain', price: '$11.49', desc: 'Falafel, brown rice, hummus, cucumber, feta, lemon tahini.', img: 'photo-1540420773420-3366772f4999' },
+            { cat: 'Signature Bowls', name: 'Mediterranean Grain', price: '$11.49', desc: 'Falafel, brown rice, hummus, cucumber, feta, lemon tahini.', img: 'photo-1504674900247-0877df9cc836' },
             { cat: 'Build Your Own', name: 'Base & Greens', price: 'from $8.99', desc: 'Choose 2 bases (Quinoa, Rice, Kale, Spinach).', img: 'photo-1490645935967-10de6ba17061' },
             { cat: 'Build Your Own', name: 'Add Protein', price: '+$3.00', desc: 'Chicken, Tofu, Steak, or Salmon.', img: 'photo-1555939594-58d7cb561ad1' },
-            { cat: 'Drinks & Sides', name: 'Green Glow Smoothie', price: '$6.99', desc: 'Spinach, apple, ginger, lemon, cucumber.', img: 'photo-1440516851687-7a8a3a48e2d4' },
-            { cat: 'Drinks & Sides', name: 'Berry Antioxidant', price: '$6.99', desc: 'Mixed berries, banana, almond milk, chia.', img: 'photo-1516714435131-44d6b64dc6a2' },
+            { cat: 'Drinks & Sides', name: 'Green Glow Smoothie', price: '$6.99', desc: 'Spinach, apple, ginger, lemon, cucumber.', img: 'photo-1504674900247-0877df9cc836' },
+            { cat: 'Drinks & Sides', name: 'Berry Antioxidant', price: '$6.99', desc: 'Mixed berries, banana, almond milk, chia.', img: 'photo-1504674900247-0877df9cc836' },
           ].filter(item => item.cat === activeCategory).map((item, i) => (
             <div key={i} style={{ display: 'flex', backgroundColor: '#fff', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' }}>
               <img src={img(item.img, 400)} alt={item.name} style={{ width: '140px', objectFit: 'cover' }} />

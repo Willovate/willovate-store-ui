@@ -52,8 +52,8 @@ const StreetBites = () => {
         <div className="ff-grid">
           {[
             { name: 'Taco Trio', price: '$10.00', desc: 'Any 3 tacos + drink.', img: 'photo-1552332386-f8dd00dc2f85' },
-            { name: 'The Loaded Box', price: '$12.00', desc: 'Street fries + 2 tacos.', img: 'photo-1564759077036-3def242e69c5' },
-            { name: 'Late Night Fix', price: '$15.00', desc: '4 tacos, fries, and 2 drinks.', img: 'photo-1596623661575-f09c258d4a99' }
+            { name: 'The Loaded Box', price: '$12.00', desc: 'Street fries + 2 tacos.', img: 'photo-1614707253590-50d4fc833076' },
+            { name: 'Late Night Fix', price: '$15.00', desc: '4 tacos, fries, and 2 drinks.', img: 'photo-1546069901-ba9599a7e63c' }
           ].map((item, i) => (
             <div key={i} className="ff-card" style={{ backgroundColor: '#1a1a1a', borderRadius: '0', border: '1px solid #333' }}>
               <img src={img(item.img, 800)} alt={item.name} style={{ height: '240px', filter: 'contrast(1.2) saturate(1.2)' }} />
@@ -99,13 +99,13 @@ const StreetBites = () => {
         
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '1.5rem', maxWidth: '1200px', margin: '0 auto' }}>
           {[
-            { cat: 'Tacos', name: 'Al Pastor', price: '$3.50', desc: 'Marinated pork, pineapple, cilantro, onions.', img: 'photo-1588315029754-2dd089d39a1a' },
-            { cat: 'Tacos', name: 'Carne Asada', price: '$4.00', desc: 'Grilled steak, salsa verde, onions.', img: 'photo-1585937421612-70a008356fbe' },
-            { cat: 'Tacos', name: 'Mushroom Tempura', price: '$3.50', desc: 'Crispy mushrooms, chipotle mayo, cabbage slaw.', img: 'photo-1604382354936-07c5d9983bd3' },
+            { cat: 'Tacos', name: 'Al Pastor', price: '$3.50', desc: 'Marinated pork, pineapple, cilantro, onions.', img: 'photo-1504674900247-0877df9cc836' },
+            { cat: 'Tacos', name: 'Carne Asada', price: '$4.00', desc: 'Grilled steak, salsa verde, onions.', img: 'photo-1504674900247-0877df9cc836' },
+            { cat: 'Tacos', name: 'Mushroom Tempura', price: '$3.50', desc: 'Crispy mushrooms, chipotle mayo, cabbage slaw.', img: 'photo-1504674900247-0877df9cc836' },
             { cat: 'Loaded Fries', name: 'Street Fries', price: '$8.00', desc: 'Fries topped with asada, queso, pico, and crema.', img: 'photo-1567188040759-fb8a883dc6d8' },
-            { cat: 'Loaded Fries', name: 'Elote Fries', price: '$7.50', desc: 'Roasted corn, cotija cheese, mayo, chili powder.', img: 'photo-1529193591184-b1d58069ecdd' },
-            { cat: 'Drinks', name: 'Horchata', price: '$3.00', desc: 'Sweet rice milk with cinnamon.', img: 'photo-1613589410313-984e1b8b2111' },
-            { cat: 'Drinks', name: 'Agua Fresca', price: '$3.00', desc: 'Watermelon or Pineapple, made daily.', img: 'photo-1596796901844-325255479672' },
+            { cat: 'Loaded Fries', name: 'Elote Fries', price: '$7.50', desc: 'Roasted corn, cotija cheese, mayo, chili powder.', img: 'photo-1504674900247-0877df9cc836' },
+            { cat: 'Drinks', name: 'Horchata', price: '$3.00', desc: 'Sweet rice milk with cinnamon.', img: 'photo-1490645935967-10de6ba17061' },
+            { cat: 'Drinks', name: 'Agua Fresca', price: '$3.00', desc: 'Watermelon or Pineapple, made daily.', img: 'photo-1512621776951-a57141f2eefd' },
           ].filter(item => item.cat === activeCategory).map((item, i) => (
             <div key={i} style={{ display: 'flex', backgroundColor: '#1a1a1a', borderRadius: '0', overflow: 'hidden', border: '1px solid #222' }}>
               <img src={img(item.img, 400)} alt={item.name} style={{ width: '120px', objectFit: 'cover' }} />
@@ -124,7 +124,7 @@ const StreetBites = () => {
       {/* Story */}
       <section id="story" className="ff-section" style={{ backgroundColor: '#ff0055', color: '#ffffff' }}>
         <div className="ff-story">
-          <img src={img('photo-1565299624946-b28f40a0ae38', 1000)} alt="Food truck" style={{ borderRadius: '0', width: '100%', boxShadow: '-15px 15px 0px #00e5ff' }} />
+          <img src={img('photo-1504674900247-0877df9cc836', 1000)} alt="Food truck" style={{ borderRadius: '0', width: '100%', boxShadow: '-15px 15px 0px #00e5ff' }} />
           <div>
             <h2 className="ff-title" style={{ ...headingStyle, fontSize: '4.5rem', color: '#111' }}>Born In The Truck.</h2>
             <p style={{ fontSize: '1.1rem', lineHeight: 1.7, marginBottom: '1.5rem', color: '#ffe' }}>

@@ -19,8 +19,8 @@ const FreshBatch = () => {
   const menuSample = [
     { name: 'Lemon Herb Salmon Bowl', cal: 450, protein: '32g', img: 'photo-1490645935967-10de6ba17061' },
     { name: 'Quinoa & Roasted Veg', cal: 380, protein: '14g', img: 'photo-1512621776951-a57141f2eefd' },
-    { name: 'Grilled Chicken Asparagus', cal: 410, protein: '38g', img: 'photo-1543339308-43e59d6b73a6' },
-    { name: 'Mediterranean Grain Bowl', cal: 420, protein: '18g', img: 'photo-1498837167922-ddd27525d352' },
+    { name: 'Grilled Chicken Asparagus', cal: 410, protein: '38g', img: 'photo-1504674900247-0877df9cc836' },
+    { name: 'Mediterranean Grain Bowl', cal: 420, protein: '18g', img: 'photo-1517701604599-bb29b565090c' },
   ];
 
   return (
@@ -28,9 +28,7 @@ const FreshBatch = () => {
       {/* Navigation */}
       <nav className="ck-nav" style={{ backgroundColor: palette.surface, borderBottom: `1px solid #ccfbf1` }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <a href="/browse-templates/food-and-restaurant/cloud-kitchen" style={{ color: palette.textLight, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 500 }}>
-            <ArrowLeft size={18} /> Back
-          </a>
+          
           <div style={{ fontFamily: font.heading, fontSize: '1.8rem', fontWeight: 900, color: palette.primaryDark, display: 'flex', alignItems: 'center', gap: '0.5rem', letterSpacing: '-0.5px' }}>
             <Leaf size={24} fill={palette.primary} color={palette.primary} /> Fresh Batch.
           </div>
@@ -44,7 +42,7 @@ const FreshBatch = () => {
       </nav>
 
       {/* Hero */}
-      <header className="ck-hero" style={{ padding: '8rem 5% 6rem', textAlign: 'center', backgroundColor: '#e0f2fe', backgroundImage: `url(${img('photo-1556740758-90de374c12ad', 2000)})`, backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative' }}>
+      <header className="ck-hero" style={{ padding: '8rem 5% 6rem', textAlign: 'center', backgroundColor: '#e0f2fe', backgroundImage: `url(${img('photo-1504674900247-0877df9cc836', 2000)})`, backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(240, 253, 250, 0.92)' }}></div>
         <div style={{ position: 'relative', zIndex: 1, maxWidth: '900px', margin: '0 auto' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', backgroundColor: '#ccfbf1', color: palette.primaryDark, padding: '0.5rem 1.25rem', borderRadius: '30px', fontWeight: 700, marginBottom: '2rem' }}>
@@ -133,7 +131,7 @@ const FreshBatch = () => {
           </div>
           <div style={{ flex: '1 1 400px', position: 'relative' }}>
             <img src={img('photo-1555939594-58d7cb561ad1', 800)} alt="Chef Prep" style={{ width: '100%', borderRadius: '24px', boxShadow: '0 20px 50px rgba(0,0,0,0.5)' }} />
-            <img src={img('photo-1556742049-0cfed4f6a45d', 500)} alt="Packaging" style={{ position: 'absolute', bottom: '-2rem', left: '-2rem', width: '250px', borderRadius: '16px', border: '8px solid #042f2e', boxShadow: '0 20px 50px rgba(0,0,0,0.5)' }} />
+            <img src={img('photo-1504674900247-0877df9cc836', 500)} alt="Packaging" style={{ position: 'absolute', bottom: '-2rem', left: '-2rem', width: '250px', borderRadius: '16px', border: '8px solid #042f2e', boxShadow: '0 20px 50px rgba(0,0,0,0.5)' }} />
           </div>
         </div>
       </section>
@@ -229,3 +227,4 @@ const FreshBatch = () => {
 };
 
 export default FreshBatch;
+

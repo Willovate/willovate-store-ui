@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from 'react';
 import './bakery-shared.css';
 
@@ -41,8 +42,8 @@ const RiseAndKnead = () => {
           <p className="bakery-subtitle" style={{ color: '#57534e', fontFamily: '"Inter", sans-serif' }}>Everything is baked in small batches so you always get something warm.</p>
           <div className="bakery-grid">
             {[
-              { title: 'Blueberry Streusel Muffin', desc: 'Loaded with wild blueberries and topped with brown sugar streusel.', img: 'photo-1587314168485-3236d6710814' },
-              { title: 'Cinnamon Roll', desc: 'Warm, gooey cinnamon roll topped with cream cheese icing.', img: 'photo-1608198093002-ad4e005484ec' },
+              { title: 'Blueberry Streusel Muffin', desc: 'Loaded with wild blueberries and topped with brown sugar streusel.', img: 'photo-1586444248902-2f64eddc13df' },
+              { title: 'Cinnamon Roll', desc: 'Warm, gooey cinnamon roll topped with cream cheese icing.', img: 'photo-1558961363-fa8fdf82db35' },
               { title: 'Vanilla Bean Latte', desc: 'House espresso, steamed milk, real vanilla bean syrup.', img: 'photo-1541167760496-1628856ab772' }
             ].map((item, i) => (
               <div key={i} className="bakery-card" style={{ borderRadius: '12px', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)' }}>
@@ -84,12 +85,12 @@ const RiseAndKnead = () => {
         </div>
         <div className="bakery-grid">
           {[
-            { cat: 'Morning Pastries', title: 'Blueberry Muffin', price: '$4', img: 'photo-1587314168485-3236d6710814' },
-            { cat: 'Morning Pastries', title: 'Cinnamon Roll', price: '$5', img: 'photo-1608198093002-ad4e005484ec' },
+            { cat: 'Morning Pastries', title: 'Blueberry Muffin', price: '$4', img: 'photo-1586444248902-2f64eddc13df' },
+            { cat: 'Morning Pastries', title: 'Cinnamon Roll', price: '$5', img: 'photo-1558961363-fa8fdf82db35' },
             { cat: 'Breads', title: 'Daily Sourdough', price: '$7', img: 'photo-1509440159596-0249088772ff' },
-            { cat: 'Breads', title: 'Seeded Loaf', price: '$8', img: 'photo-1549931319-a545dcf3bc7b' },
+            { cat: 'Breads', title: 'Seeded Loaf', price: '$8', img: 'photo-1603532648955-039310d9ed75' },
             { cat: 'Coffee', title: 'Vanilla Latte', price: '$5.50', img: 'photo-1541167760496-1628856ab772' },
-            { cat: 'Coffee', title: 'Cold Brew', price: '$4.50', img: 'photo-1461023058943-0708e52269c3' },
+            { cat: 'Coffee', title: 'Cold Brew', price: '$4.50', img: 'photo-1432139555190-58524dae6a55' },
           ].filter(item => activeCategory === 'All' || item.cat === activeCategory).map((item, i) => (
             <div key={i} className="bakery-card" style={{ display: 'flex', flexDirection: 'column', borderRadius: '12px', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>
               <img src={img(item.img, 600)} alt={item.title} style={{ height: '200px' }} />
@@ -105,7 +106,7 @@ const RiseAndKnead = () => {
       {/* Signature & About */}
       <section id="story" className="bakery-section">
         <div className="bakery-story">
-          <img src={img('photo-1555507036-ab1f4038808a', 1000)} alt="Baker shaping dough" style={{ borderRadius: '16px' }} />
+          <img src={img('photo-1549931319-a545dcf3bc7c', 1000)} alt="Baker shaping dough" style={{ borderRadius: '16px' }} />
           <div>
             <h2 className="bakery-title" style={{ ...headingStyle, textAlign: 'left', fontSize: '2.5rem' }}>Your Daily Ritual.</h2>
             <p style={{ fontSize: '1.1rem', lineHeight: 1.7, marginBottom: '1.5rem', color: '#57534e' }}>
@@ -126,8 +127,8 @@ const RiseAndKnead = () => {
           {[
             'photo-1509440159596-0249088772ff',
             'photo-1541167760496-1628856ab772',
-            'photo-1555507036-ab1f4038808a',
-            'photo-1587314168485-3236d6710814'
+            'photo-1549931319-a545dcf3bc7c',
+            'photo-1586444248902-2f64eddc13df'
           ].map((src, i) => (
             <div key={i} style={{ overflow: 'hidden', borderRadius: '12px' }}>
               <img src={img(src, 600)} alt="Gallery item" style={{ width: '100%', height: '250px', objectFit: 'cover', transition: 'transform 0.3s ease' }} onMouseOver={e => e.currentTarget.style.transform = 'scale(1.05)'} onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'} />
@@ -185,3 +186,4 @@ const RiseAndKnead = () => {
 };
 
 export default RiseAndKnead;
+

@@ -7,6 +7,7 @@ export async function getWebsite(websiteId: string, signal?: AbortSignal): Promi
   const response = await fetch(`${API_URL}/api/websites/${websiteId}`, {
     headers: { Accept: 'application/json' },
     signal,
+    cache: 'no-store',
   })
 
   if (!response.ok) {
@@ -34,12 +35,13 @@ export async function createWebsite(
   description: string,
   templateId: string,
   themeColor?: string,
+  sectionConfiguration?: string,
   signal?: AbortSignal,
 ): Promise<Website> {
   const response = await fetch(`${API_URL}/api/websites`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-    body: JSON.stringify({ name, description, templateId, themeColor: themeColor || null }),
+    body: JSON.stringify({ name, description, templateId, themeColor: themeColor || null, sectionConfiguration }),
     signal,
   })
 
@@ -52,7 +54,7 @@ export async function createWebsite(
 
 export async function updateWebsite(
   websiteId: string,
-  updates: { name?: string; description?: string; themeColor?: string; isPublished?: boolean; templateId?: string },
+  updates: { name?: string; description?: string; themeColor?: string; isPublished?: boolean; templateId?: string; sectionConfiguration?: string },
   signal?: AbortSignal,
 ): Promise<Website> {
   const response = await fetch(`${API_URL}/api/websites/${websiteId}`, {

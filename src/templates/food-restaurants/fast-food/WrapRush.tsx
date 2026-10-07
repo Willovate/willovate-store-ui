@@ -105,12 +105,12 @@ const WrapRush = () => {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '1.5rem', maxWidth: '1200px', margin: '0 auto' }}>
           {[
             { cat: 'Signature Wraps', name: 'The Californian', price: '$9.99', desc: 'Grilled chicken, avocado, bacon, lettuce, ranch, tomato basil wrap.', img: 'photo-1567188040759-fb8a883dc6d8' },
-            { cat: 'Signature Wraps', name: 'Spicy Buffalo', price: '$8.99', desc: 'Crispy chicken, buffalo sauce, blue cheese, celery slaw.', img: 'photo-1558030137-a56c1b002c99' },
-            { cat: 'Signature Wraps', name: 'Falafel Hummus', price: '$8.49', desc: 'Crispy falafel, garlic hummus, cucumber, spinach, whole wheat wrap.', img: 'photo-1529193591184-b1d58069ecdd' },
-            { cat: 'Breakfast Wraps', name: 'Morning Rush', price: '$6.99', desc: 'Scrambled eggs, sausage, hashbrowns, cheddar, salsa.', img: 'photo-1528137871618-79d2761e3fd5' },
-            { cat: 'Breakfast Wraps', name: 'Veggie Sunrise', price: '$6.49', desc: 'Egg whites, spinach, feta, roasted peppers.', img: 'photo-1440516851687-7a8a3a48e2d4' },
-            { cat: 'Snacks', name: 'Pita Chips & Hummus', price: '$4.49', desc: 'House-made chips and garlic hummus.', img: 'photo-1549007994-cb92caebd54b' },
-            { cat: 'Snacks', name: 'Sweet Potato Tots', price: '$3.99', desc: 'Crispy baked tots with a side of aioli.', img: 'photo-1516714435131-44d6b64dc6a2' },
+            { cat: 'Signature Wraps', name: 'Spicy Buffalo', price: '$8.99', desc: 'Crispy chicken, buffalo sauce, blue cheese, celery slaw.', img: 'photo-1504674900247-0877df9cc836' },
+            { cat: 'Signature Wraps', name: 'Falafel Hummus', price: '$8.49', desc: 'Crispy falafel, garlic hummus, cucumber, spinach, whole wheat wrap.', img: 'photo-1504674900247-0877df9cc836' },
+            { cat: 'Breakfast Wraps', name: 'Morning Rush', price: '$6.99', desc: 'Scrambled eggs, sausage, hashbrowns, cheddar, salsa.', img: 'photo-1504674900247-0877df9cc836' },
+            { cat: 'Breakfast Wraps', name: 'Veggie Sunrise', price: '$6.49', desc: 'Egg whites, spinach, feta, roasted peppers.', img: 'photo-1504674900247-0877df9cc836' },
+            { cat: 'Snacks', name: 'Pita Chips & Hummus', price: '$4.49', desc: 'House-made chips and garlic hummus.', img: 'photo-1504674900247-0877df9cc836' },
+            { cat: 'Snacks', name: 'Sweet Potato Tots', price: '$3.99', desc: 'Crispy baked tots with a side of aioli.', img: 'photo-1504674900247-0877df9cc836' },
           ].filter(item => item.cat === activeCategory).map((item, i) => (
             <div key={i} style={{ display: 'flex', backgroundColor: '#fff', borderRadius: '12px', overflow: 'hidden', border: '1px solid #fae8ff', boxShadow: '0 2px 8px rgba(107,33,168,0.05)' }}>
               <img src={img(item.img, 400)} alt={item.name} style={{ width: '120px', objectFit: 'cover' }} />

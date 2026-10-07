@@ -5,10 +5,10 @@ import { useReveal } from '../components/RestaurantCore';
 const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
 
 const IMAGES = {
-  hero: img('photo-1529193591184-b1d58069ecdd'),
-  story: img('photo-1544025162-d76538a679db'),
-  menu1: img('photo-1558030137-a56c1b002c99'),
-  menu2: img('photo-1592415486689-125cbbfcbee2'),
+  hero: img('photo-1504674900247-0877df9cc836'),
+  story: img('photo-1504674900247-0877df9cc836'),
+  menu1: img('photo-1504674900247-0877df9cc836'),
+  menu2: img('photo-1504674900247-0877df9cc836'),
   menu3: img('photo-1555939594-58d7cb561ad1')
 };
 
@@ -46,11 +46,9 @@ export default function BackyardBBQ() {
 
   return (
     <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif', minHeight: '100vh' }}>
-      <nav style={{ position: 'fixed', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(250,250,249,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(249,115,22,0.15)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none', color: scrolled ? theme.palette.secondary : '#fff' }}>
+      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(250,250,249,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(249,115,22,0.15)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none', color: scrolled ? theme.palette.secondary : '#fff' }}>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <a href="/browse-templates/food-and-restaurant/bbq" style={{ color: 'inherit', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
-            <ArrowLeft size={18} /> Back
-          </a>
+          
           <div style={{ fontSize: '1.5rem', fontWeight: 800, color: scrolled ? theme.palette.secondary : '#fff' }}>
             {theme.name}
           </div>
@@ -110,3 +108,5 @@ export default function BackyardBBQ() {
     </div>
   );
 }
+
+

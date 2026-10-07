@@ -52,8 +52,8 @@ const CrunchBox = () => {
         <div className="ff-grid">
           {[
             { name: 'The Tender Box', price: '$11.99', desc: '4 Hand-breaded tenders, fries, Texas toast, and drink.', img: 'photo-1614707253590-50d4fc833076' },
-            { name: 'The Sandwich Meal', price: '$10.99', desc: 'Original crispy chicken sandwich, fries, and drink.', img: 'photo-1569058242253-92a9c755a0ec' },
-            { name: 'Wings Combo', price: '$12.99', desc: '6 Crispy bone-in wings, fries, and drink.', img: 'photo-1606313564200-e75d5e30476c' }
+            { name: 'The Sandwich Meal', price: '$10.99', desc: 'Original crispy chicken sandwich, fries, and drink.', img: 'photo-1626082927389-6cd097cdc6ec' },
+            { name: 'Wings Combo', price: '$12.99', desc: '6 Crispy bone-in wings, fries, and drink.', img: 'photo-1504674900247-0877df9cc836' }
           ].map((item, i) => (
             <div key={i} className="ff-card" style={{ backgroundColor: '#fcf8f2', borderRadius: '12px', border: '1px solid #ffe6cc' }}>
               <img src={img(item.img, 800)} alt={item.name} style={{ height: '240px' }} />
@@ -99,13 +99,13 @@ const CrunchBox = () => {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '1.5rem', maxWidth: '1200px', margin: '0 auto' }}>
           {[
             { cat: 'Tenders & Wings', name: '4-Piece Box', price: '$8.99', desc: '4 hand-breaded tenders, fries, Texas toast, and Crunch sauce.', img: 'photo-1614707253590-50d4fc833076' },
-            { cat: 'Tenders & Wings', name: '6-Piece Wings', price: '$9.49', desc: 'Crispy bone-in wings tossed in your choice of sauce.', img: 'photo-1606313564200-e75d5e30476c' },
-            { cat: 'Tenders & Wings', name: 'Family Bucket', price: '$24.99', desc: '12 tenders, 2 large sides, 4 toasts, and plenty of sauce.', img: 'photo-1529193591184-b1d58069ecdd' },
-            { cat: 'Sandwiches', name: 'The Original Crunch', price: '$7.49', desc: 'Crispy breast, pickles, mayo, toasted brioche.', img: 'photo-1628840042765-356cda07504e' },
-            { cat: 'Sandwiches', name: 'Spicy Firebird', price: '$7.99', desc: 'Dipped in Nashville hot oil, slaw, pickles.', img: 'photo-1544025162-d76538a679db' },
-            { cat: 'Sides', name: 'Seasoned Fries', price: '$3.49', desc: 'Tossed in our secret spice blend.', img: 'photo-1574071318508-1cdbab80d002' },
+            { cat: 'Tenders & Wings', name: '6-Piece Wings', price: '$9.49', desc: 'Crispy bone-in wings tossed in your choice of sauce.', img: 'photo-1504674900247-0877df9cc836' },
+            { cat: 'Tenders & Wings', name: 'Family Bucket', price: '$24.99', desc: '12 tenders, 2 large sides, 4 toasts, and plenty of sauce.', img: 'photo-1504674900247-0877df9cc836' },
+            { cat: 'Sandwiches', name: 'The Original Crunch', price: '$7.49', desc: 'Crispy breast, pickles, mayo, toasted brioche.', img: 'photo-1504674900247-0877df9cc836' },
+            { cat: 'Sandwiches', name: 'Spicy Firebird', price: '$7.99', desc: 'Dipped in Nashville hot oil, slaw, pickles.', img: 'photo-1504674900247-0877df9cc836' },
+            { cat: 'Sides', name: 'Seasoned Fries', price: '$3.49', desc: 'Tossed in our secret spice blend.', img: 'photo-1504674900247-0877df9cc836' },
             { cat: 'Sides', name: 'Mac & Cheese', price: '$3.99', desc: 'Creamy, cheesy, and baked golden.', img: 'photo-1567188040759-fb8a883dc6d8' },
-            { cat: 'Sides', name: 'Coleslaw', price: '$2.99', desc: 'Fresh and tangy.', img: 'photo-1574071318508-1cdbab80d002' },
+            { cat: 'Sides', name: 'Coleslaw', price: '$2.99', desc: 'Fresh and tangy.', img: 'photo-1504674900247-0877df9cc836' },
           ].filter(item => item.cat === activeCategory).map((item, i) => (
             <div key={i} style={{ display: 'flex', backgroundColor: '#fff', borderRadius: '4px', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.05)', border: '1px solid #ffe6cc' }}>
               <img src={img(item.img, 400)} alt={item.name} style={{ width: '120px', objectFit: 'cover' }} />
@@ -144,9 +144,9 @@ const CrunchBox = () => {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
           {[
             'photo-1614707253590-50d4fc833076',
-            'photo-1626082895617-2c6ab34758cb',
-            'photo-1569058242253-92a9c755a0ec',
-            'photo-1628840042765-356cda07504e'
+            'photo-1626645738196-c2a7c87a8f58',
+            'photo-1626082927389-6cd097cdc6ec',
+            'photo-1504674900247-0877df9cc836'
           ].map((src, i) => (
             <div key={i} className="ff-gallery-item" style={{ borderRadius: '8px' }}>
               <img src={img(src, 600)} alt="Gallery" />

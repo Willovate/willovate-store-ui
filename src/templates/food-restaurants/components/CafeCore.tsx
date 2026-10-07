@@ -26,6 +26,7 @@ export interface CafeThemeConfig {
     visit: string;
     menu: string[];
     gallery: string[];
+    headingBackground?: string;
   };
   layout?: 'airy' | 'bold' | 'minimal' | 'rustic' | 'editorial';
 }
@@ -42,7 +43,7 @@ export function CafeNavbar({ theme }: { theme: CafeThemeConfig }) {
 
   return (
     <nav style={{
-      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
+      position: 'sticky', top: 0, left: 0, right: 0, zIndex: 50,
       backgroundColor: isScrolled ? theme.palette.background : 'transparent',
       boxShadow: isScrolled ? '0 4px 6px -1px rgba(0, 0, 0, 0.1)' : 'none',
       transition: 'all 0.3s ease', padding: '1rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
@@ -115,7 +116,17 @@ export function StorySection({ theme, text }: { theme: CafeThemeConfig, text: st
     <section id="story" style={{ padding: '8rem 2rem', backgroundColor: theme.palette.background, color: theme.palette.text }}>
       <div ref={ref as any} style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }} className="grid-responsive">
         <div>
-          <h2 style={{ fontFamily: theme.typography.heading, fontSize: '3rem', marginBottom: '2rem', color: theme.palette.primary }}>Our Story</h2>
+          <h2 style={{ 
+            fontFamily: theme.typography.heading, 
+            fontSize: '3.5rem', 
+            marginBottom: '2rem', 
+            color: theme.images.headingBackground ? 'transparent' : theme.palette.primary,
+            backgroundImage: theme.images.headingBackground ? `url(${theme.images.headingBackground})` : 'none',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundClip: theme.images.headingBackground ? 'text' : 'border-box',
+            WebkitBackgroundClip: theme.images.headingBackground ? 'text' : 'border-box'
+          }}>Our Story</h2>
           <p style={{ fontFamily: theme.typography.body, fontSize: '1.125rem', lineHeight: 1.8, color: theme.palette.textLight }}>
             {text}
           </p>
@@ -135,7 +146,18 @@ export function InteractiveMenu({ theme, categories }: { theme: CafeThemeConfig,
   return (
     <section id="menu" style={{ padding: '8rem 2rem', backgroundColor: theme.palette.surface, color: theme.palette.text }}>
       <div ref={ref as any} style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <h2 style={{ fontFamily: theme.typography.heading, fontSize: '3rem', textAlign: 'center', marginBottom: '4rem' }}>Curated Menu</h2>
+        <h2 style={{ 
+            fontFamily: theme.typography.heading, 
+            fontSize: '3.5rem', 
+            textAlign: 'center', 
+            marginBottom: '4rem',
+            color: theme.images.headingBackground ? 'transparent' : theme.palette.text,
+            backgroundImage: theme.images.headingBackground ? `url(${theme.images.headingBackground})` : 'none',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundClip: theme.images.headingBackground ? 'text' : 'border-box',
+            WebkitBackgroundClip: theme.images.headingBackground ? 'text' : 'border-box'
+        }}>Curated Menu</h2>
         
         <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', marginBottom: '4rem', flexWrap: 'wrap' }}>
           {categories.map((cat, i) => (
@@ -177,8 +199,8 @@ export function CafeGallery({ theme }: { theme: CafeThemeConfig }) {
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
           {theme.images.gallery.map((img, i) => (
-            <div key={i} style={{ aspectRatio: '1/1', overflow: 'hidden', borderRadius: '0.5rem' }}>
-              <img src={img} alt="Gallery image" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <div key={i} style={{ aspectRatio: '1/1', overflow: 'hidden', borderRadius: '0.5rem', cursor: 'pointer' }}>
+              <img src={img} alt="Gallery image" style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} onMouseOver={e => e.currentTarget.style.transform = 'scale(1.1)'} onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'} />
             </div>
           ))}
         </div>
@@ -191,7 +213,17 @@ export function VisitSection({ theme }: { theme: CafeThemeConfig }) {
   return (
     <section id="visit" style={{ padding: '8rem 2rem', backgroundColor: theme.palette.surface, color: theme.palette.text }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
-        <h2 style={{ fontFamily: theme.typography.heading, fontSize: '3rem', marginBottom: '2rem' }}>Visit Us</h2>
+        <h2 style={{ 
+            fontFamily: theme.typography.heading, 
+            fontSize: '3.5rem', 
+            marginBottom: '2rem',
+            color: theme.images.headingBackground ? 'transparent' : theme.palette.text,
+            backgroundImage: theme.images.headingBackground ? `url(${theme.images.headingBackground})` : 'none',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundClip: theme.images.headingBackground ? 'text' : 'border-box',
+            WebkitBackgroundClip: theme.images.headingBackground ? 'text' : 'border-box'
+        }}>Visit Us</h2>
         <p style={{ fontFamily: theme.typography.body, fontSize: '1.25rem', color: theme.palette.textLight, marginBottom: '3rem' }}>
           Open daily from 7am to 7pm.<br/>Come as you are.
         </p>
@@ -218,3 +250,4 @@ export function CafeFooter({ theme }: { theme: CafeThemeConfig }) {
     </footer>
   );
 }
+

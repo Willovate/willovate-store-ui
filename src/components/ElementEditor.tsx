@@ -84,7 +84,7 @@ export default function ElementEditor({ element, onClose, onUpdate, onOptimistic
     if (saveState === 'saving') return
     setSaveState('saving')
     try {
-      const isSynthetic = ['announcement', 'nav', 'hero', 'featured-title', 'prod-grid', 'coll-list', 'img-text', 'newsletter', 'policies', 'email-signup', 'footer', 'heading-dummy'].includes(element.id)
+      const isSynthetic = !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(element.id)
       if (isSynthetic) {
         await createElement(element.pageId, element.elementType, element.name, props, element.displayOrder)
       } else {

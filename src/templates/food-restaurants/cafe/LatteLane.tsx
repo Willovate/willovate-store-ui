@@ -21,16 +21,17 @@ const config: CafeThemeConfig = {
     body: 'Inter, sans-serif',
   },
   images: {
-    hero: image('photo-1511081692775-05d0f180a065'),
-    about: image('photo-1514066558159-fc8c737ef259'),
-    process: image('photo-1494526585095-c41746248156'),
-    visit: image('photo-1504754524776-8f4f37790ca0'),
+    hero: image('photo-1506224477000-07c7e0e260e9'),
+    about: image('photo-1486427944299-d1955d23e34d'),
+    process: image('photo-1601050690597-df0568f70950'),
+    visit: image('photo-1554118811-1e0d58224f24'),
     menu: [],
     gallery: [
-      image('photo-1504754524776-8f4f37790ca0'),
+      image('photo-1554118811-1e0d58224f24'),
       image('photo-1541167760496-1628856ab772'),
-      image('photo-1516738901171-8eb4fc13bd20'),
-    ]
+      image('photo-1520209759809-a9bcb6cb3241'),
+    ],
+    headingBackground: image('photo-1497935586351-b67a49e012bf')
   },
   layout: 'airy',
 };
@@ -40,13 +41,13 @@ const menuCategories = [
     name: 'Signatures',
     items: [
       { name: 'Terracotta Latte', desc: 'Espresso with house-made spiced caramel.', price: '$6.00', image: image('photo-1461023058943-07fcbe16d735') },
-      { name: 'Blood Orange Soda', desc: 'Sparkling citrus with a splash of cream.', price: '$5.50', image: image('photo-1453614512568-c4024d13c247') },
+      { name: 'Blood Orange Soda', desc: 'Sparkling citrus with a splash of cream.', price: '$5.50', image: image('photo-1541167760496-1628856ab772') },
     ]
   },
   {
     name: 'Sweets',
     items: [
-      { name: 'Cardamom Bun', desc: 'Soft, twisted, and dusted with sugar.', price: '$4.50', image: image('photo-1485808191679-5f86510681a2') },
+      { name: 'Cardamom Bun', desc: 'Soft, twisted, and dusted with sugar.', price: '$4.50', image: image('photo-1525193612562-0ec53b0e5d7c') },
       { name: 'Pistachio Cookie', desc: 'Brown butter and toasted pistachios.', price: '$3.50', image: image('photo-1445116572660-236099ec97a0') },
     ]
   }

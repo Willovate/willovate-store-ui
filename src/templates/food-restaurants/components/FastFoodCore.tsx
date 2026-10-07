@@ -39,7 +39,7 @@ export function FastFoodNavbar({ theme }: { theme: FastFoodThemeConfig }) {
 
   return (
     <nav style={{
-      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
+      position: 'sticky', top: 0, left: 0, right: 0, zIndex: 50,
       backgroundColor: isScrolled ? theme.palette.surface : 'transparent',
       boxShadow: isScrolled ? '0 10px 30px -10px rgba(0,0,0,0.1)' : 'none',
       transition: 'all 0.3s ease',
@@ -342,3 +342,4 @@ export function FastFoodMenu({ theme, categories }: { theme: FastFoodThemeConfig
     </section>
   );
 }
+

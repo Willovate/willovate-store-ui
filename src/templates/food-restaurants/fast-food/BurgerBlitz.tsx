@@ -53,7 +53,7 @@ const BurgerBlitz = () => {
           {[
             { name: 'The Blitz Meal', price: '$12.99', desc: 'Classic Blitz burger, medium fries, and a drink.', img: 'photo-1551782450-a2132b4ba21d' },
             { name: 'Spicy Combo', price: '$13.49', desc: 'Spicy Inferno burger, loaded fries, and a drink.', img: 'photo-1594212204628-941d4c2fdce1' },
-            { name: 'Double Trouble', price: '$15.99', desc: 'Two classic burgers, large fries, and two drinks.', img: 'photo-1572802419224-296b0aeee0d9' }
+            { name: 'Double Trouble', price: '$15.99', desc: 'Two classic burgers, large fries, and two drinks.', img: 'photo-1504674900247-0877df9cc836' }
           ].map((item, i) => (
             <div key={i} className="ff-card" style={{ backgroundColor: '#fafafa', borderRadius: '12px', border: '1px solid #eee' }}>
               <img src={img(item.img, 800)} alt={item.name} style={{ height: '240px' }} />
@@ -98,13 +98,13 @@ const BurgerBlitz = () => {
         
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '1.5rem', maxWidth: '1200px', margin: '0 auto' }}>
           {[
-            { cat: 'Burgers', name: 'The Blitz Classic', price: '$8.99', desc: 'Double smash patty, American cheese, Blitz sauce, pickles.', img: 'photo-1558030137-a56c1b002c99' },
+            { cat: 'Burgers', name: 'The Blitz Classic', price: '$8.99', desc: 'Double smash patty, American cheese, Blitz sauce, pickles.', img: 'photo-1504674900247-0877df9cc836' },
             { cat: 'Burgers', name: 'Spicy Inferno', price: '$9.49', desc: 'Pepper jack, jalapeños, crispy onions, habanero aioli.', img: 'photo-1568901346375-23c9450c58cd' },
-            { cat: 'Burgers', name: 'Shroom & Swiss', price: '$9.99', desc: 'Sautéed mushrooms, Swiss cheese, truffle mayo.', img: 'photo-1572802419224-296b0aeee0d9' },
-            { cat: 'Sides', name: 'Crinkle Cut Fries', price: '$3.49', desc: 'Golden, crispy, and salted perfectly.', img: 'photo-1576107223062-8e360b979db7' },
-            { cat: 'Sides', name: 'Loaded Cheese Fries', price: '$5.99', desc: 'Topped with melted cheddar, bacon bits, and scallions.', img: 'photo-1541592106381-b31e9677c0e5' },
-            { cat: 'Shakes', name: 'Classic Vanilla', price: '$4.99', desc: 'Thick spun vanilla bean shake.', img: 'photo-1572490122747-3968b75bf699' },
-            { cat: 'Shakes', name: 'Double Chocolate', price: '$4.99', desc: 'Fudge swirl, whipped cream, cherry.', img: 'photo-1572490122747-3968b75bf699' },
+            { cat: 'Burgers', name: 'Shroom & Swiss', price: '$9.99', desc: 'Sautéed mushrooms, Swiss cheese, truffle mayo.', img: 'photo-1504674900247-0877df9cc836' },
+            { cat: 'Sides', name: 'Crinkle Cut Fries', price: '$3.49', desc: 'Golden, crispy, and salted perfectly.', img: 'photo-1568901346375-23c9450c58cd' },
+            { cat: 'Sides', name: 'Loaded Cheese Fries', price: '$5.99', desc: 'Topped with melted cheddar, bacon bits, and scallions.', img: 'photo-1504674900247-0877df9cc836' },
+            { cat: 'Shakes', name: 'Classic Vanilla', price: '$4.99', desc: 'Thick spun vanilla bean shake.', img: 'photo-1550547660-d9450f859349' },
+            { cat: 'Shakes', name: 'Double Chocolate', price: '$4.99', desc: 'Fudge swirl, whipped cream, cherry.', img: 'photo-1550547660-d9450f859349' },
           ].filter(item => item.cat === activeCategory).map((item, i) => (
             <div key={i} style={{ display: 'flex', backgroundColor: '#fff', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.05)', border: '1px solid #eee' }}>
               <img src={img(item.img, 400)} alt={item.name} style={{ width: '120px', objectFit: 'cover' }} />
@@ -142,8 +142,8 @@ const BurgerBlitz = () => {
         <h2 className="ff-title" style={{ ...headingStyle, fontSize: '3rem', textAlign: 'center', marginBottom: '3rem' }}>Burger Gram</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
           {[
-            'photo-1593504049359-74330189a345',
-            'photo-1625869016599-2a912bbbc5bf',
+            'photo-1551782450-a2132b4ba21d',
+            'photo-1594212204628-941d4c2fdce1',
             'photo-1550547660-d9450f859349',
             'photo-1568901346375-23c9450c58cd'
           ].map((src, i) => (

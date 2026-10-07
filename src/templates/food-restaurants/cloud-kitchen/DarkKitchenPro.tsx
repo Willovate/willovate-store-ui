@@ -16,17 +16,17 @@ const DarkKitchenPro = () => {
       img: 'photo-1568901346375-23c9450c58cd',
       items: [
         { name: 'Classic Smash', price: '$12.00', desc: 'Double patty, house sauce, brioche bun.', img: 'photo-1568901346375-23c9450c58cd' },
-        { name: 'Truffle Fries', price: '$6.50', desc: 'Crispy fries tossed in truffle oil and parmesan.', img: 'photo-1573080496219-bb080dd4f877' },
+        { name: 'Truffle Fries', price: '$6.50', desc: 'Crispy fries tossed in truffle oil and parmesan.', img: 'photo-1504674900247-0877df9cc836' },
         { name: 'Spicy Chicken Sandwich', price: '$13.50', desc: 'Fried chicken breast, spicy slaw, pickles.', img: 'photo-1626082927389-6cd097cdc6ec' },
       ]
     },
     'TacoNinja': {
       desc: 'Authentic street tacos, engineered to stay hot.',
-      img: 'photo-1551504734-5ee1c4a1479b',
+      img: 'photo-1504674900247-0877df9cc836',
       items: [
-        { name: 'Al Pastor Tacos (3)', price: '$11.00', desc: 'Marinated pork, pineapple, cilantro, onion.', img: 'photo-1551504734-5ee1c4a1479b' },
-        { name: 'Carne Asada Tacos (3)', price: '$12.00', desc: 'Grilled steak, salsa verde, cotija cheese.', img: 'photo-1585937421612-70a008356fbe' },
-        { name: 'Queso & Chips', price: '$5.50', desc: 'Warm house-made queso dip and tortilla chips.', img: 'photo-1512805147242-c3e794c1a774' },
+        { name: 'Al Pastor Tacos (3)', price: '$11.00', desc: 'Marinated pork, pineapple, cilantro, onion.', img: 'photo-1504674900247-0877df9cc836' },
+        { name: 'Carne Asada Tacos (3)', price: '$12.00', desc: 'Grilled steak, salsa verde, cotija cheese.', img: 'photo-1504674900247-0877df9cc836' },
+        { name: 'Queso & Chips', price: '$5.50', desc: 'Warm house-made queso dip and tortilla chips.', img: 'photo-1504674900247-0877df9cc836' },
       ]
     },
     'SaladWorks': {
@@ -44,9 +44,7 @@ const DarkKitchenPro = () => {
       {/* Navigation */}
       <nav className="ck-nav" style={{ backgroundColor: 'rgba(10,10,10,0.9)', backdropFilter: 'blur(10px)', borderBottom: '1px solid #222' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <a href="/browse-templates/food-and-restaurant/cloud-kitchen" style={{ color: palette.textLight, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 500 }}>
-            <ArrowLeft size={18} /> Back
-          </a>
+          
           <div style={{ fontFamily: font.heading, fontSize: '1.5rem', fontWeight: 800, color: '#fff', letterSpacing: '1px' }}>
             DARK<span style={{ color: palette.primary }}>KITCHEN</span>PRO
           </div>
@@ -156,7 +154,7 @@ const DarkKitchenPro = () => {
       {/* Operations / Concept */}
       <section id="concept" className="ck-section" style={{ backgroundColor: palette.surface, display: 'flex', gap: '4rem', alignItems: 'center', borderTop: '1px solid #222' }}>
         <div style={{ flex: 1 }}>
-          <img src={img('photo-1583394838336-acd977736f90', 1000)} alt="Commercial Kitchen" style={{ width: '100%', borderRadius: '4px', border: `1px solid ${palette.primary}` }} />
+          <img src={img('photo-1504674900247-0877df9cc836', 1000)} alt="Commercial Kitchen" style={{ width: '100%', borderRadius: '4px', border: `1px solid ${palette.primary}` }} />
         </div>
         <div style={{ flex: 1 }}>
           <h2 style={{ fontFamily: font.heading, fontSize: '3rem', margin: '0 0 1.5rem', textTransform: 'uppercase' }}>Optimized Operations.</h2>
@@ -201,3 +199,4 @@ const DarkKitchenPro = () => {
 };
 
 export default DarkKitchenPro;
+

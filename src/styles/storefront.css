@@ -24,17 +24,17 @@
 }
 
 .pe-header {
-  height: 58px;
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 40px;
+  padding: 0 80px;
   background: var(--lux-bg);
 }
 
 .pe-header-logo {
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 2.5rem !important;
   letter-spacing: 2px;
   font-family: Georgia, serif;
   flex: 1;
@@ -43,35 +43,36 @@
 .pe-nav {
   display: flex;
   gap: 2rem;
-  font-size: 13px;
   font-family: Inter, sans-serif;
 }
 
 .pe-nav-link {
   color: var(--lux-ink);
   text-decoration: none;
+  font-size: 18px !important;
+  font-weight: 500;
 }
 .pe-nav-link:hover { text-decoration: underline; }
 
 .pe-header-icons {
   display: flex;
-  gap: 16px;
+  gap: 32px;
   flex: 1;
   justify-content: flex-end;
 }
 .pe-header-icons svg {
-  width: 18px;
-  height: 18px;
+  width: 42px;
+  height: 42px;
 }
 
-.hero { margin: 24px 40px; border-radius: 12px; background: #f3eee6; display: flex; align-items: center; overflow: hidden; min-height: 420px; position: relative; }
-.hero__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: right center; z-index: 0; }
-.hero__content { position: relative; padding: 40px 60px; display: flex; flex-direction: column; justify-content: center; z-index: 1; max-width: 500px; }
-.hero__eyebrow { font: 700 11px Inter, sans-serif; letter-spacing: 1.5px; color: var(--lux-ink); margin: 0 0 10px 0; text-transform: uppercase; }
-.hero__title { font: 400 42px/1.1 Georgia, serif; margin: 0 0 16px; color: var(--lux-ink); white-space: pre-line; }
-.hero__text { font: 15px/1.55 Inter, sans-serif; margin: 0 0 24px; color: var(--lux-ink); white-space: pre-line; }
-.hero__buttons { display: flex; gap: 12px; }
-.hero__cta { border-radius: 4px; padding: 12px 24px; font: 500 14px Inter; display: inline-block; text-decoration: none; cursor: pointer; }
+.hero { margin: 0; border-radius: 0; background: #f3eee6; display: flex; align-items: center; overflow: hidden; min-height: 900px; position: relative; }
+.hero__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 0; }
+.hero__content { position: relative; padding: 40px 120px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; z-index: 1; max-width: 700px; }
+.hero__eyebrow { font: 700 24px Inter, sans-serif; letter-spacing: 2.5px; color: var(--lux-ink); margin: 0 0 16px 0; text-transform: uppercase; }
+.hero__title { font: 700 130px/1.1 Inter, sans-serif; letter-spacing: -0.04em; margin: 0 0 24px; color: var(--lux-ink); white-space: pre-line; }
+.hero__text { font: 30px/1.55 Inter, sans-serif; margin: 0 0 40px; color: var(--lux-ink); white-space: pre-line; max-width: 500px; }
+.hero__buttons { display: flex; gap: 24px; }
+.hero__cta { border-radius: 6px; padding: 26px 56px; font: 600 28px Inter; display: inline-block; text-decoration: none; cursor: pointer; }
 .hero__cta--black { background: #1a1816; color: #fff; border: 1px solid #1a1816; }
 .hero__cta--white { background: #fff; color: #1a1816; border: 1px solid #1a1816; }
 
@@ -206,7 +207,7 @@
 @media (max-width: 900px) {
   .pe-header { padding: 0 24px; }
   .pe-nav { gap: 1rem; }
-  .hero { margin: 20px 24px; min-height: 360px; }
+  .hero { margin: 0; min-height: 942px; }
   .hero__content { padding: 36px 42px; max-width: 430px; }
   .hero__title { font-size: 36px; }
   .products { gap: 16px; padding: 0 24px; }
@@ -224,7 +225,7 @@
   .pe-header-icons { gap: 8px; }
   .pe-icon-btn { padding: 4px; }
 
-  .hero { margin: 14px 16px; min-height: 390px; align-items: flex-end; border-radius: 8px; }
+  .hero { margin: 0; min-height: 942px; align-items: flex-end; border-radius: 0; }
   .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(251,248,243,.97) 0%, rgba(251,248,243,.78) 60%, rgba(251,248,243,.15) 100%); z-index: 0; }
   .hero__content { padding: 30px 24px; max-width: min(100%, 330px); }
   .hero__title { font-size: 31px; }
@@ -277,7 +278,7 @@
 .ws-canvas-mobile .pe-header-icons { gap: 8px; }
 .ws-canvas-mobile .pe-icon-btn { padding: 4px; }
 
-.ws-canvas-mobile .hero { margin: 14px 16px; min-height: 390px; align-items: flex-end; border-radius: 8px; }
+.ws-canvas-mobile .hero { margin: 0; min-height: 942px; align-items: flex-end; border-radius: 0; }
 .ws-canvas-mobile .hero__content { padding: 30px 24px; max-width: min(100%, 330px); }
 .ws-canvas-mobile .hero__title { font-size: 31px; }
 .ws-canvas-mobile .hero__text { font-size: 14px; margin-bottom: 20px; }

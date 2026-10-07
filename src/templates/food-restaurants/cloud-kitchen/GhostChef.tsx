@@ -16,7 +16,7 @@ const GhostChef = () => {
     { name: 'WAGYU SMASH BURGER', price: '$16', cal: '850 Kcal', desc: 'Double wagyu patty, american cheese, house sauce, potato bun.', img: 'photo-1568901346375-23c9450c58cd' },
     { name: 'TRUFFLE MAC & CHEESE', price: '$14', cal: '920 Kcal', desc: 'Four cheese blend, white truffle oil, toasted panko crust.', img: 'photo-1512621776951-a57141f2eefd' },
     { name: 'VEGAN PAD THAI', price: '$13', cal: '580 Kcal', desc: 'Rice noodles, tofu, bean sprouts, peanuts, tamarind sauce.', img: 'photo-1565299507177-b0ac66763828' },
-    { name: 'STEAK FRITES', price: '$22', cal: '1100 Kcal', desc: '8oz flank steak, garlic butter, shoestring fries.', img: 'photo-1529193591184-b1d58069ecdd' },
+    { name: 'STEAK FRITES', price: '$22', cal: '1100 Kcal', desc: '8oz flank steak, garlic butter, shoestring fries.', img: 'photo-1504674900247-0877df9cc836' },
   ];
 
   return (
@@ -25,9 +25,7 @@ const GhostChef = () => {
       {/* Navigation */}
       <nav style={{ padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: `2px solid ${palette.primary}`, backgroundColor: palette.secondary }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-          <a href="/browse-templates/food-and-restaurant/cloud-kitchen" style={{ color: palette.text, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700 }}>
-            <ArrowLeft size={18} /> BACK
-          </a>
+          
           <div style={{ fontSize: '1.8rem', fontWeight: 900, letterSpacing: '-1px' }}>GHOST CHEF.</div>
         </div>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
@@ -172,3 +170,4 @@ const GhostChef = () => {
 };
 
 export default GhostChef;
+

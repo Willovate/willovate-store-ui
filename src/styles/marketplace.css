@@ -82,6 +82,12 @@
   display: flex;
   gap: 0.75rem;
   flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scrollbar-width: none;
+}
+.mp-tabs-left::-webkit-scrollbar {
+  display: none;
 }
 
 .mp-main-tab {
@@ -98,6 +104,7 @@
   gap: 0.5rem;
   transition: all 0.2s;
   box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+  white-space: nowrap;
 }
 
 .mp-main-tab:hover {
@@ -147,14 +154,72 @@
   background: #f8fafc;
 }
 
-.mp-filters-hidden-select {
+.mp-filters-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+}
+
+.mp-filters-menu {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  width: 200px;
+  max-height: 320px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.mp-filters-menu::-webkit-scrollbar {
+  width: 6px;
+}
+.mp-filters-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+.mp-filters-menu::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+.mp-filters-menu::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.mp-filter-option {
   width: 100%;
-  height: 100%;
-  opacity: 0;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #475569;
   cursor: pointer;
+  transition: all 0.15s;
+}
+
+.mp-filter-option:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.mp-filter-option.selected {
+  background: #eef2ff;
+  color: #4f46e5;
+  font-weight: 600;
+}
+
+.mp-btn-filters.active {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+  color: #4f46e5;
 }
 
 .mp-sub-tabs {
@@ -189,6 +254,9 @@
   font-size: 0.9rem;
   color: #64748b;
   margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .mp-grid-modern {
@@ -305,6 +373,11 @@
 .mp-badge-new {
   color: #16a34a;
   background: #dcfce7;
+}
+
+.mp-badge-featured {
+  color: #7c3aed;
+  background: #ede9fe;
 }
 
 .mp-card-actions {

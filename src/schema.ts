@@ -29,8 +29,8 @@ export const SECTION_SCHEMAS: SectionSchema[] = [
     name: 'Hero',
     settings: [
       { name: 'eyebrow', label: 'Eyebrow', type: 'text', placeholder: 'e.g. NEW COLLECTION', tab: 'content' },
-      { name: 'heading', label: 'Heading', type: 'textarea', placeholder: 'Timeless pieces made for you', tab: 'content' },
-      { name: 'description', label: 'Description', type: 'textarea', placeholder: 'Discover our new collection...', tab: 'content' },
+      { name: 'title', label: 'Heading', type: 'textarea', placeholder: 'Timeless pieces made for you', tab: 'content' },
+      { name: 'subtitle', label: 'Description', type: 'textarea', placeholder: 'Discover our new collection...', tab: 'content' },
       { name: 'buttonText', label: 'Button text', type: 'text', placeholder: 'Shop Now', tab: 'content' },
       { name: 'buttonLink', label: 'Button link', type: 'link', placeholder: '/collections/all', tab: 'content' },
       { name: 'style_backgroundImage', label: 'Image', type: 'image', tab: 'style' },
@@ -270,6 +270,36 @@ export const SECTION_SCHEMAS: SectionSchema[] = [
       { name: 'url', label: 'Video URL (YouTube/Vimeo)', type: 'link', tab: 'content' },
       { name: 'autoplay', label: 'Autoplay', type: 'toggle', tab: 'style' }
     ]
+  },
+  {
+    type: 'categories',
+    name: 'Menu',
+    settings: []
+  },
+  {
+    type: 'process',
+    name: 'How it works',
+    settings: []
+  },
+  {
+    type: 'promo',
+    name: 'Special Offer',
+    settings: []
+  },
+  {
+    type: 'gallery',
+    name: 'Gallery',
+    settings: []
+  },
+  {
+    type: 'location',
+    name: 'Visit Us',
+    settings: []
+  },
+  {
+    type: 'testimonials',
+    name: 'Testimonials',
+    settings: []
   }
 ];
 

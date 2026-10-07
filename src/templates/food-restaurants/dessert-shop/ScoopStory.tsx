@@ -5,16 +5,16 @@ import { useReveal } from '../components/RestaurantCore';
 const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
 
 const IMAGES = {
-  hero: img('photo-1497034825429-c343d7c6a68f'),
-  story: img('photo-1563805042-7684c019e1cb'),
-  promo: img('photo-1551024601-bec78aea704b'),
-  scoop1: img('photo-1631515243349-e0cb75fb8d3a'),
-  scoop2: img('photo-1578985545062-69928b1d9587'),
-  scoop3: img('photo-1574071318508-1cdbab80d002'),
-  scoop4: img('photo-1588315029754-2dd089d39a1a'),
-  sundae1: img('photo-1596797038530-2c107229654b'),
-  sundae2: img('photo-1606313564200-e75d5e30476c'),
-  float1: img('photo-1592415486689-125cbbfcbee2'),
+  hero: img('photo-1504674900247-0877df9cc836'),
+  story: img('photo-1477090792565-af1b2f0fd1e4'),
+  promo: img('photo-1504674900247-0877df9cc836'),
+  scoop1: img('photo-1504674900247-0877df9cc836'),
+  scoop2: img('photo-1534432182912-63863115e106'),
+  scoop3: img('photo-1504674900247-0877df9cc836'),
+  scoop4: img('photo-1504674900247-0877df9cc836'),
+  sundae1: img('photo-1488477181946-6428a0291777'),
+  sundae2: img('photo-1504674900247-0877df9cc836'),
+  float1: img('photo-1504674900247-0877df9cc836'),
 };
 
 export default function ScoopStory() {
@@ -55,11 +55,9 @@ export default function ScoopStory() {
 
   return (
     <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif' }}>
-      <nav style={{ position: 'fixed', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(253,242,248,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(236,72,153,0.2)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none' }}>
+      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(253,242,248,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(236,72,153,0.2)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none' }}>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <a href="/browse-templates/food-and-restaurant/dessert-shop" style={{ color: scrolled ? theme.palette.text : '#fff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
-            <ArrowLeft size={18} /> Back
-          </a>
+          
           <div style={{ fontSize: '2rem', fontWeight: 700, fontFamily: '"Boogaloo", cursive', color: scrolled ? theme.palette.primary : '#fff', letterSpacing: '2px' }}>
             {theme.name}
           </div>
@@ -207,3 +205,5 @@ export default function ScoopStory() {
     </div>
   );
 }
+
+

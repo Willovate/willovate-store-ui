@@ -11,9 +11,9 @@ const FlameHub = () => {
   const font = { heading: '"Ubuntu", sans-serif', body: '"Inter", sans-serif' };
 
   const menu = [
-    { cat: 'Hot & Spicy', name: 'Inferno Wings', price: '$14', desc: '10 perfectly crisp wings tossed in our signature ghost pepper sauce.', img: 'photo-1569691899455-88464f6d3ab1' },
+    { cat: 'Hot & Spicy', name: 'Inferno Wings', price: '$14', desc: '10 perfectly crisp wings tossed in our signature ghost pepper sauce.', img: 'photo-1504674900247-0877df9cc836' },
     { cat: 'Hot & Spicy', name: 'Volcano Burger', price: '$16', desc: 'Double patty, pepper jack, jalapeños, spicy mayo, brioche bun.', img: 'photo-1568901346375-23c9450c58cd' },
-    { cat: 'Smoked & Grilled', name: 'BBQ Ribs Box', price: '$22', desc: 'Half rack of slow-smoked ribs with mac & cheese and slaw.', img: 'photo-1529193591184-b1d58069ecdd' },
+    { cat: 'Smoked & Grilled', name: 'BBQ Ribs Box', price: '$22', desc: 'Half rack of slow-smoked ribs with mac & cheese and slaw.', img: 'photo-1504674900247-0877df9cc836' },
     { cat: 'Smoked & Grilled', name: 'Brisket Sandwich', price: '$15', desc: '12-hour smoked brisket, tangy BBQ sauce, pickles.', img: 'photo-1509722747041-616f39b57569' },
     { cat: 'Sides & Extras', name: 'Loaded Fire Fries', price: '$8', desc: 'Crispy fries topped with cheese, bacon, and spicy ranch.', img: 'photo-1567188040759-fb8a883dc6d8' },
     { cat: 'Sides & Extras', name: 'Spicy Slaw', price: '$4', desc: 'Cabbage, carrots, and our signature spicy dressing.', img: 'photo-1546069901-ba9599a7e63c' },
@@ -24,9 +24,7 @@ const FlameHub = () => {
       {/* Navigation */}
       <nav className="ck-nav" style={{ backgroundColor: '#fff', borderBottom: '2px solid #ffe4e1' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <a href="/browse-templates/food-and-restaurant/cloud-kitchen" style={{ color: palette.textLight, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 500 }}>
-            <ArrowLeft size={18} /> Back
-          </a>
+          
           <div style={{ fontFamily: font.heading, fontSize: '1.8rem', fontWeight: 800, color: palette.primary, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <Flame size={24} fill={palette.primary} /> FLAME HUB
           </div>
@@ -169,7 +167,7 @@ const FlameHub = () => {
             </div>
           </div>
           <div style={{ flex: '1 1 400px', position: 'relative' }}>
-            <img src={img('photo-1556740758-90de374c12ad', 800)} alt="Commercial Kitchen Prep" style={{ width: '100%', borderRadius: '16px', border: '1px solid #333' }} />
+            <img src={img('photo-1504674900247-0877df9cc836', 800)} alt="Commercial Kitchen Prep" style={{ width: '100%', borderRadius: '16px', border: '1px solid #333' }} />
             <div style={{ position: 'absolute', bottom: '-2rem', left: '-2rem', backgroundColor: '#fff', color: '#000', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
               <div style={{ fontSize: '2rem', fontWeight: 900, fontFamily: font.heading, color: palette.primary }}>14</div>
               <div style={{ fontWeight: 600 }}>Active Kitchens</div>
@@ -182,10 +180,10 @@ const FlameHub = () => {
       <section className="ck-section" style={{ backgroundColor: palette.background, paddingBottom: '2rem' }}>
         <h2 style={{ fontFamily: font.heading, fontSize: '2.5rem', textAlign: 'center', marginBottom: '3rem' }}>Delivery Perfected</h2>
         <div className="ck-gallery">
-          <img src={img('photo-1627308595229-7830f5c92f70')} alt="Packaging" />
+          <img src={img('photo-1504674900247-0877df9cc836')} alt="Packaging" />
           <img src={img('photo-1555939594-58d7cb561ad1')} alt="Chefs" />
-          <img src={img('photo-1583394838336-acd977736f90')} alt="Cloud Kitchen" />
-          <img src={img('photo-1556742049-0cfed4f6a45d')} alt="Delivery" />
+          <img src={img('photo-1504674900247-0877df9cc836')} alt="Cloud Kitchen" />
+          <img src={img('photo-1504674900247-0877df9cc836')} alt="Delivery" />
         </div>
       </section>
 
@@ -224,3 +222,4 @@ const FlameHub = () => {
 };
 
 export default FlameHub;
+

@@ -12,12 +12,12 @@ const GhostBurger = () => {
 
   const menu = [
     { tab: 'Burgers', name: 'The OG Ghost', price: '$12', desc: 'Double smash patty, American cheese, grilled onions, pickles, ghost sauce, potato bun.', tags: ['Signature'], img: 'photo-1568901346375-23c9450c58cd' },
-    { tab: 'Burgers', name: 'Spicy Poltergeist', price: '$14', desc: 'Crispy fried chicken breast, ghost pepper jack, jalapeño slaw, spicy mayo.', tags: ['Spicy'], img: 'photo-1586190848861-99aa4a171e90' },
+    { tab: 'Burgers', name: 'Spicy Poltergeist', price: '$14', desc: 'Crispy fried chicken breast, ghost pepper jack, jalapeño slaw, spicy mayo.', tags: ['Spicy'], img: 'photo-1504674900247-0877df9cc836' },
     { tab: 'Burgers', name: 'Truffle Phantom', price: '$15', desc: 'Double smash patty, swiss, roasted mushrooms, truffle aioli, crispy onions.', tags: [], img: 'photo-1568901346375-23c9450c58cd' },
-    { tab: 'Sides', name: 'Ectoplasm Fries', price: '$8', desc: 'Crinkle cut fries loaded with green chili cheese sauce and bacon.', tags: ['Messy'], img: 'photo-1572802419224-296b0aeee0d9' },
-    { tab: 'Sides', name: 'Classic Crinkle Fries', price: '$5', desc: 'Served with a side of ghost sauce.', tags: [], img: 'photo-1572802419224-296b0aeee0d9' },
-    { tab: 'Shakes', name: 'Midnight Chocolate', price: '$7', desc: 'Dark chocolate shake, brownie chunks.', tags: [], img: 'photo-1551024601-bec78aea704b' },
-    { tab: 'Shakes', name: 'Vanilla Bean Spook', price: '$7', desc: 'Classic vanilla bean with caramel drizzle.', tags: [], img: 'photo-1551024601-bec78aea704b' },
+    { tab: 'Sides', name: 'Ectoplasm Fries', price: '$8', desc: 'Crinkle cut fries loaded with green chili cheese sauce and bacon.', tags: ['Messy'], img: 'photo-1504674900247-0877df9cc836' },
+    { tab: 'Sides', name: 'Classic Crinkle Fries', price: '$5', desc: 'Served with a side of ghost sauce.', tags: [], img: 'photo-1504674900247-0877df9cc836' },
+    { tab: 'Shakes', name: 'Midnight Chocolate', price: '$7', desc: 'Dark chocolate shake, brownie chunks.', tags: [], img: 'photo-1504674900247-0877df9cc836' },
+    { tab: 'Shakes', name: 'Vanilla Bean Spook', price: '$7', desc: 'Classic vanilla bean with caramel drizzle.', tags: [], img: 'photo-1504674900247-0877df9cc836' },
   ];
 
   return (
@@ -25,9 +25,7 @@ const GhostBurger = () => {
       {/* Navigation */}
       <nav className="ck-nav" style={{ backgroundColor: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(10px)', borderBottom: '1px solid #222' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <a href="/browse-templates/food-and-restaurant/cloud-kitchen" style={{ color: palette.textLight, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 500 }}>
-            <ArrowLeft size={18} /> Back
-          </a>
+          
           <div style={{ fontFamily: font.heading, fontSize: '1.8rem', color: '#fff', display: 'flex', alignItems: 'center', gap: '0.5rem', textTransform: 'uppercase', letterSpacing: '-1px' }}>
             <Ghost size={24} color={palette.primary} /> Ghost Burger
           </div>
@@ -85,7 +83,7 @@ const GhostBurger = () => {
           </div>
           <div style={{ flex: '1 1 400px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
             <img src={img('photo-1550547660-d9450f859349', 800)} alt="Chef smashing burgers" style={{ width: '100%', height: '300px', objectFit: 'cover', borderRadius: '8px' }} />
-            <img src={img('photo-1594212691516-436fecf5ef74', 800)} alt="Delivery bag" style={{ width: '100%', height: '300px', objectFit: 'cover', borderRadius: '8px', transform: 'translateY(2rem)' }} />
+            <img src={img('photo-1504674900247-0877df9cc836', 800)} alt="Delivery bag" style={{ width: '100%', height: '300px', objectFit: 'cover', borderRadius: '8px', transform: 'translateY(2rem)' }} />
           </div>
         </div>
       </section>
@@ -193,3 +191,4 @@ const GhostBurger = () => {
 };
 
 export default GhostBurger;
+

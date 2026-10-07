@@ -22,15 +22,16 @@ const config: CafeThemeConfig = {
   },
   images: {
     hero: image('photo-1509042239860-f550ce710b93'), // Latte on table
-    about: image('photo-1498837167922-ddd27525d352'), // Coffee beans
+    about: image('photo-1517701604599-bb29b565090c'), // Coffee beans
     process: image('photo-1442512595331-e89e73853f31'), // Pour over
-    visit: image('photo-1501339847302-ac426a4a7cbb'), // Cafe interior
+    visit: image('photo-1495474472287-4d71bcdd2085'), // Cafe interior
     menu: [],
     gallery: [
-      image('photo-1522992319-0365e5f11656'),
+      image('photo-1445116572660-236099ec97a0'),
       image('photo-1495474472287-4d71bcdd2085'),
       image('photo-1497935586351-b67a49e012bf'),
-    ]
+    ],
+    headingBackground: image('photo-1517701604599-bb29b565090c')
   },
   layout: 'airy',
 };
@@ -46,15 +47,15 @@ const menuCategories = [
   {
     name: 'Pastries',
     items: [
-      { name: 'Morning Croissant', desc: 'Golden, flaky, and still warm from the oven.', price: '$4.50', image: image('photo-1555507036-ab1f4038808a') },
+      { name: 'Morning Croissant', desc: 'Golden, flaky, and still warm from the oven.', price: '$4.50', image: image('photo-1549931319-a545dcf3bc7c') },
       { name: 'Jammy Berry Scone', desc: 'Buttermilk scone with blackberry jam.', price: '$5.00', image: image('photo-1486427944299-d1955d23e34d') },
     ]
   },
   {
     name: 'Plates',
     items: [
-      { name: 'Honey Cinnamon Toast', desc: 'Sourdough, whipped ricotta and local honey.', price: '$8.00', image: image('photo-1525351484163-7529414344d8') },
-      { name: 'Garden Breakfast Bowl', desc: 'Soft egg, herbs, avocado and toasted seeds.', price: '$11.00', image: image('photo-1498837167922-ddd27525d352') },
+      { name: 'Honey Cinnamon Toast', desc: 'Sourdough, whipped ricotta and local honey.', price: '$8.00', image: image('photo-1514432324607-a09d9b4aefdd') },
+      { name: 'Garden Breakfast Bowl', desc: 'Soft egg, herbs, avocado and toasted seeds.', price: '$11.00', image: image('photo-1517701604599-bb29b565090c') },
     ]
   }
 ];

@@ -9,16 +9,16 @@ const theme: RestaurantThemeConfig = {
   palette: { primary: '#be123c', secondary: '#052e16', background: '#022c22', surface: '#064e3b', text: '#ecfdf5', textLight: '#a7f3d0', heroOverlay: 'linear-gradient(to right, rgba(2,44,34,0.9), rgba(5,46,22,0.4))' },
   typography: { heading: '"Lora", serif', body: '"Open Sans", sans-serif' },
   images: {
-    hero: img('photo-1550966871-3ed3cdb5ed0c'), heroAlt: 'Luxurious dining room with velvet green chairs and botanical elements',
-    story: img('photo-1560624052-449f5ddf0c31'), storyAlt: 'Colorful, beautifully plated avant-garde dish',
-    promo: img('photo-1528605248644-14dd04022da1'), promoAlt: 'Lush greenery inside a restaurant',
+    hero: img('photo-1504674900247-0877df9cc836'), heroAlt: 'Luxurious dining room with velvet green chairs and botanical elements',
+    story: img('photo-1504674900247-0877df9cc836'), storyAlt: 'Colorful, beautifully plated avant-garde dish',
+    promo: img('photo-1504674900247-0877df9cc836'), promoAlt: 'Lush greenery inside a restaurant',
     gallery: [
-      { src: img('photo-1550966871-3ed3cdb5ed0c'), alt: 'Dining room' },
-      { src: img('photo-1560624052-449f5ddf0c31'), alt: 'Beetroot carpaccio' },
-      { src: img('photo-1528605248644-14dd04022da1'), alt: 'Botanical interior' },
-      { src: img('photo-1519708227418-c8fd9a32b7a2'), alt: 'Scallop dish' },
-      { src: img('photo-1544148103-0773bf10d330'), alt: 'Gourmet prep' },
-      { src: img('photo-1547592180-85f173990554'), alt: 'Wine pour' },
+      { src: img('photo-1504674900247-0877df9cc836'), alt: 'Dining room' },
+      { src: img('photo-1504674900247-0877df9cc836'), alt: 'Beetroot carpaccio' },
+      { src: img('photo-1504674900247-0877df9cc836'), alt: 'Botanical interior' },
+      { src: img('photo-1504674900247-0877df9cc836'), alt: 'Scallop dish' },
+      { src: img('photo-1504674900247-0877df9cc836'), alt: 'Gourmet prep' },
+      { src: img('photo-1504674900247-0877df9cc836'), alt: 'Wine pour' },
     ],
   },
   content: {
@@ -38,12 +38,12 @@ const theme: RestaurantThemeConfig = {
   },
   menu: [
     { tab: 'First Course', items: [
-      { name: 'Beetroot Carpaccio', price: '$22', desc: 'Thinly sliced heirloom beets, goat cheese mousse, candied walnuts, micro-arugula.', tags: ['Vegan Option'], image: img('photo-1560624052-449f5ddf0c31') },
-      { name: 'Lobster Bisque', price: '$26', desc: 'Butter-poached lobster, cognac cream, chive oil.', image: img('photo-1544148103-0773bf10d330') },
+      { name: 'Beetroot Carpaccio', price: '$22', desc: 'Thinly sliced heirloom beets, goat cheese mousse, candied walnuts, micro-arugula.', tags: ['Vegan Option'], image: img('photo-1504674900247-0877df9cc836') },
+      { name: 'Lobster Bisque', price: '$26', desc: 'Butter-poached lobster, cognac cream, chive oil.', image: img('photo-1504674900247-0877df9cc836') },
     ]},
     { tab: 'Main Course', items: [
       { name: 'Herb-Crusted Rack of Lamb', price: '$58', desc: 'Mint infused pea purée, roasted root vegetables, rosemary jus.', tags: ['Signature'], image: img('photo-1497935586351-b67a49e012bf') },
-      { name: 'Pan-Roasted Duck Breast', price: '$52', desc: 'Cherry gastrique, sweet potato fondant, charred endive.', image: img('photo-1519708227418-c8fd9a32b7a2') },
+      { name: 'Pan-Roasted Duck Breast', price: '$52', desc: 'Cherry gastrique, sweet potato fondant, charred endive.', image: img('photo-1504674900247-0877df9cc836') },
     ]},
   ],
   testimonials: [

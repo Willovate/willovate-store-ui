@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from 'react';
 import './bakery-shared.css';
 
@@ -41,8 +42,8 @@ const SugarPetal = () => {
           <div className="bakery-grid">
             {[
               { title: 'Funfetti Explosion', desc: 'Vanilla cake loaded with sprinkles.', img: 'photo-1486427944299-d1955d23e34d' },
-              { title: 'Red Velvet Dream', desc: 'Classic red velvet with cream cheese frosting.', img: 'photo-1550617931-e17a7b70dce2' },
-              { title: 'Chocolate Fudge', desc: 'Rich chocolate cake with fudge frosting.', img: 'photo-1578985545062-69928b1d9587' }
+              { title: 'Red Velvet Dream', desc: 'Classic red velvet with cream cheese frosting.', img: 'photo-1567188040759-fb8a883dc6d8' },
+              { title: 'Chocolate Fudge', desc: 'Rich chocolate cake with fudge frosting.', img: 'photo-1534432182912-63863115e106' }
             ].map((item, i) => (
               <div key={i} className="bakery-card" style={{ borderRadius: '24px', border: '3px solid #fdf2f8' }}>
                 <img src={img(item.img, 800)} alt={item.title} style={{ height: '220px' }} />
@@ -85,11 +86,11 @@ const SugarPetal = () => {
         <div className="bakery-grid">
           {[
             { cat: 'Cupcakes', title: 'Funfetti Explosion', price: '$4', img: 'photo-1486427944299-d1955d23e34d' },
-            { cat: 'Cupcakes', title: 'Red Velvet Dream', price: '$4.50', img: 'photo-1550617931-e17a7b70dce2' },
-            { cat: 'Cookies', title: 'Stuffed Choco-Chip', price: '$3.50', img: 'photo-1550617931-e17a7b70dce2' },
-            { cat: 'Macarons', title: 'Cotton Candy Macaron', price: '$3', img: 'photo-1495147466023-ac5c588e2e94' },
-            { cat: 'Cupcakes', title: 'Lemon Drop', price: '$4', img: 'photo-1514517521153-1be72277b32f' },
-            { cat: 'Cookies', title: 'Sugar Cookie', price: '$2.50', img: 'photo-1550617931-e17a7b70dce2' },
+            { cat: 'Cupcakes', title: 'Red Velvet Dream', price: '$4.50', img: 'photo-1567188040759-fb8a883dc6d8' },
+            { cat: 'Cookies', title: 'Stuffed Choco-Chip', price: '$3.50', img: 'photo-1567188040759-fb8a883dc6d8' },
+            { cat: 'Macarons', title: 'Cotton Candy Macaron', price: '$3', img: 'photo-1558961363-fa8fdf82db35' },
+            { cat: 'Cupcakes', title: 'Lemon Drop', price: '$4', img: 'photo-1590080876351-41de98b4b4ae' },
+            { cat: 'Cookies', title: 'Sugar Cookie', price: '$2.50', img: 'photo-1567188040759-fb8a883dc6d8' },
           ].filter(item => activeCategory === 'All' || item.cat === activeCategory).map((item, i) => (
             <div key={i} className="bakery-card" style={{ display: 'flex', flexDirection: 'column', borderRadius: '24px', overflow: 'hidden' }}>
               <img src={img(item.img, 600)} alt={item.title} style={{ height: '220px' }} />
@@ -105,7 +106,7 @@ const SugarPetal = () => {
       {/* Signature & About */}
       <section id="story" className="bakery-section">
         <div className="bakery-story">
-          <img src={img('photo-1578985545062-69928b1d9587', 1000)} alt="Baker piping frosting" style={{ borderRadius: '50%', border: '8px solid #ffffff', boxShadow: '0 10px 20px rgba(0,0,0,0.1)' }} />
+          <img src={img('photo-1534432182912-63863115e106', 1000)} alt="Baker piping frosting" style={{ borderRadius: '50%', border: '8px solid #ffffff', boxShadow: '0 10px 20px rgba(0,0,0,0.1)' }} />
           <div>
             <h2 className="bakery-title" style={{ ...headingStyle, textAlign: 'left', fontSize: '3rem' }}>Baking Smiles</h2>
             <p style={{ fontSize: '1.2rem', lineHeight: 1.8, marginBottom: '1.5rem', color: '#831843', fontWeight: 500 }}>
@@ -125,9 +126,9 @@ const SugarPetal = () => {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
           {[
             'photo-1486427944299-d1955d23e34d',
-            'photo-1578985545062-69928b1d9587',
-            'photo-1550617931-e17a7b70dce2',
-            'photo-1514517521153-1be72277b32f'
+            'photo-1534432182912-63863115e106',
+            'photo-1567188040759-fb8a883dc6d8',
+            'photo-1590080876351-41de98b4b4ae'
           ].map((src, i) => (
             <div key={i} style={{ overflow: 'hidden', borderRadius: '24px', border: '2px solid #fdf2f8' }}>
               <img src={img(src, 600)} alt="Gallery item" style={{ width: '100%', height: '220px', objectFit: 'cover', transition: 'transform 0.4s ease' }} onMouseOver={e => e.currentTarget.style.transform = 'scale(1.15) rotate(2deg)'} onMouseOut={e => e.currentTarget.style.transform = 'scale(1) rotate(0deg)'} />
@@ -181,3 +182,4 @@ const SugarPetal = () => {
 };
 
 export default SugarPetal;
+

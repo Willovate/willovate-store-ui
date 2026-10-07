@@ -21,16 +21,17 @@ const config: CafeThemeConfig = {
     body: 'Space Mono, monospace',
   },
   images: {
-    hero: image('photo-1512568400610-62da28bc8a13'),
-    about: image('photo-1501339847302-ac426a4a7cbb'),
+    hero: image('photo-1509042239860-f550ce710b93'),
+    about: image('photo-1495474472287-4d71bcdd2085'),
     process: image('photo-1442512595331-e89e73853f31'),
-    visit: image('photo-1497636577773-f1231844b336'),
+    visit: image('photo-1442512595331-e89e73853f31'),
     menu: [],
     gallery: [
       image('photo-1514432324607-a09d9b4aefdd'),
-      image('photo-1495774856032-8b90bbb32b32'),
-      image('photo-1497636577773-f1231844b336'),
-    ]
+      image('photo-1511920170033-f8396924c348'),
+      image('photo-1442512595331-e89e73853f31'),
+    ],
+    headingBackground: image('photo-1447933601403-0c6688de566e')
   },
   layout: 'bold',
 };
@@ -47,7 +48,7 @@ const menuCategories = [
     name: 'Filter',
     items: [
       { name: 'Batch Brew', desc: 'Rotating single origin, brewed fresh.', price: '$3.50', image: image('photo-1442512595331-e89e73853f31') },
-      { name: 'Cold Brew Tonic', desc: 'Slow-steeped cold brew with artisanal tonic.', price: '$6.00', image: image('photo-1517686469429-8bdb88b9f907') },
+      { name: 'Cold Brew Tonic', desc: 'Slow-steeped cold brew with artisanal tonic.', price: '$6.00', image: image('photo-1461023058943-07fcbe16d735') },
     ]
   }
 ];

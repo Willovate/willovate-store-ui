@@ -5,15 +5,15 @@ import { useReveal } from '../components/RestaurantCore';
 const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
 
 const IMAGES = {
-  hero: img('photo-1529193591184-b1d58069ecdd'),
+  hero: img('photo-1504674900247-0877df9cc836'),
   story: img('photo-1555939594-58d7cb561ad1'),
-  promo: img('photo-1558030137-a56c1b002c99'),
-  brisket: img('photo-1558030137-a56c1b002c99'),
-  ribs: img('photo-1440516851687-7a8a3a48e2d4'),
-  pork: img('photo-1544025162-d76538a679db'),
-  sausage: img('photo-1595854341625-f33ee10dbf98'),
-  plate: img('photo-1588315029754-2dd089d39a1a'),
-  sides: img('photo-1516714435131-44d6b64dc6a2')
+  promo: img('photo-1504674900247-0877df9cc836'),
+  brisket: img('photo-1504674900247-0877df9cc836'),
+  ribs: img('photo-1504674900247-0877df9cc836'),
+  pork: img('photo-1504674900247-0877df9cc836'),
+  sausage: img('photo-1504674900247-0877df9cc836'),
+  plate: img('photo-1504674900247-0877df9cc836'),
+  sides: img('photo-1504674900247-0877df9cc836')
 };
 
 export default function Smokehouse77() {
@@ -55,11 +55,9 @@ export default function Smokehouse77() {
 
   return (
     <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif', minHeight: '100vh' }}>
-      <nav style={{ position: 'fixed', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(28,13,0,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(180,83,9,0.2)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none' }}>
+      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(28,13,0,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(180,83,9,0.2)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none' }}>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <a href="/browse-templates/food-and-restaurant/bbq-grill" style={{ color: '#fff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
-            <ArrowLeft size={18} /> Back
-          </a>
+          
           <div style={{ fontSize: '1.75rem', fontWeight: 800, fontFamily: '"Oswald", sans-serif', color: '#fff', textTransform: 'uppercase', letterSpacing: '1px' }}>
             {theme.name}
           </div>
@@ -220,3 +218,5 @@ export default function Smokehouse77() {
     </div>
   );
 }
+
+

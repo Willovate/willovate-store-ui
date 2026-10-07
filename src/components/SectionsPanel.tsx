@@ -13,6 +13,7 @@ interface SectionsPanelProps {
   onSelectElement: (elementId: string) => void
   onAddElement: (type: string) => void
   onRefresh: () => void
+  isRestaurantTheme?: boolean
 }
 
 const HEADER_ITEMS = [
@@ -31,13 +32,14 @@ const FIXED_TEMPLATE_ITEMS = [
   { id: 'prod-grid',      name: 'Product grid' },
   { id: 'coll-list',      name: 'Collection list' },
   { id: 'img-text',       name: 'Image with text' },
+  { id: 'testimonials',   name: 'Testimonials' },
   { id: 'newsletter',     name: 'Newsletter' },
 ]
 
 // IDs that are synthetic (not DB-backed user elements)
 const SYNTHETIC_IDS = new Set([
   'announcement', 'nav', 'hero', 'badges', 'featured-title',
-  'heading-dummy', 'prod-grid', 'coll-list', 'img-text', 'newsletter',
+  'heading-dummy', 'prod-grid', 'coll-list', 'img-text', 'testimonials', 'newsletter',
   'footer', 'email-signup', 'policies',
 ])
 // ElementTypes that are handled as fixed synthetic sections — DB elements with
@@ -45,7 +47,7 @@ const SYNTHETIC_IDS = new Set([
 // are already represented by the fixed synthetic rows above.
 const SYNTHETIC_ELEMENT_TYPES = new Set([
   'announcement', 'nav', 'hero', 'featured-title', 'heading', 'prod-grid',
-  'coll-list', 'img-text', 'newsletter', 'email-signup',
+  'coll-list', 'img-text', 'testimonials', 'newsletter', 'email-signup',
   'footer', 'policies', 'section-title',
 ])
 const isSynthetic = (id: string) =>
@@ -111,7 +113,7 @@ function DotsMenu({
   )
 }
 
-function AddSectionDropdown({ onAdd, disabled, direction = 'down' }: { onAdd: (type: string) => void; disabled: boolean; direction?: 'down' | 'up' }) {
+function AddSectionDropdown({ onAdd, disabled, direction = 'down', isRestaurantTheme }: { onAdd: (type: string) => void; disabled: boolean; direction?: 'down' | 'up', isRestaurantTheme?: boolean }) {
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
@@ -123,6 +125,32 @@ function AddSectionDropdown({ onAdd, disabled, direction = 'down' }: { onAdd: (t
     return () => document.removeEventListener('mousedown', handler)
   }, [])
 
+  const restaurantOptions = [
+    { type: 'hero', label: 'Hero', icon: <Image size={14} /> },
+    { type: 'featured-title', label: 'House Favourites', icon: <Grid size={14} /> },
+    { type: 'img-text', label: 'Our Story', icon: <AlignLeft size={14} /> },
+    { type: 'categories', label: 'Menu', icon: <Grid size={14} /> },
+    { type: 'process', label: 'How it works', icon: <Images size={14} /> },
+    { type: 'promo', label: 'Special Offer', icon: <Square size={14} /> },
+    { type: 'gallery', label: 'Gallery', icon: <Images size={14} /> },
+    { type: 'testimonials', label: 'Testimonials', icon: <Type size={14} /> },
+    { type: 'location', label: 'Visit Us', icon: <AlignLeft size={14} /> },
+    { type: 'newsletter', label: 'Newsletter', icon: <Type size={14} /> },
+  ]
+
+  const retailOptions = [
+    { type: 'heading', label: 'Heading', icon: <Type size={14} /> },
+    { type: 'text', label: 'Text Block', icon: <Type size={14} /> },
+    { type: 'button', label: 'Button', icon: <Square size={14} /> },
+    { type: 'image', label: 'Image', icon: <Image size={14} /> },
+    { type: 'divider', label: 'Divider', icon: <Minus size={14} /> },
+    { type: 'banner_slider', label: 'Banner Slider', icon: <Images size={14} /> },
+    { type: 'services_grid', label: 'Services', icon: <Grid size={14} /> },
+    { type: 'image_text', label: 'Image & Text', icon: <AlignLeft size={14} /> },
+  ]
+
+  const options = isRestaurantTheme ? restaurantOptions : retailOptions;
+
   return (
     <div ref={ref} style={{ position: 'relative', display: 'flex', width: '100%' }}>
       <button className="ws-add-section-btn" onClick={() => setOpen(!open)} disabled={disabled} style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#2f6fed', border: 'none', background: 'transparent', fontWeight: 500, fontSize: '13px', cursor: 'pointer', height: '34px', padding: 0, width: '100%' }}>
@@ -131,16 +159,7 @@ function AddSectionDropdown({ onAdd, disabled, direction = 'down' }: { onAdd: (t
       </button>
       {open && (
         <div style={{ position: 'absolute', ...(direction === 'up' ? { bottom: '100%', marginBottom: '8px' } : { top: '100%' }), left: '2rem', background: '#fff', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.15)', border: '1px solid #eef0f5', padding: '0.5rem 0', minWidth: '180px', zIndex: 100 }}>
-          {[
-            { type: 'heading', label: 'Heading', icon: <Type size={14} /> },
-            { type: 'text', label: 'Text Block', icon: <Type size={14} /> },
-            { type: 'button', label: 'Button', icon: <Square size={14} /> },
-            { type: 'image', label: 'Image', icon: <Image size={14} /> },
-            { type: 'divider', label: 'Divider', icon: <Minus size={14} /> },
-            { type: 'banner_slider', label: 'Banner Slider', icon: <Images size={14} /> },
-            { type: 'services_grid', label: 'Services', icon: <Grid size={14} /> },
-            { type: 'image_text', label: 'Image & Text', icon: <AlignLeft size={14} /> },
-          ].map(item => (
+          {options.map(item => (
             <button
               key={item.type}
               onClick={() => { onAdd(item.type); setOpen(false) }}
@@ -163,6 +182,7 @@ export default function SectionsPanel({
   onSelectElement,
   onAddElement,
   onRefresh,
+  isRestaurantTheme = false,
 }: SectionsPanelProps) {
   const [busy, setBusy] = useState(false)
   const [draggedId, setDraggedId] = useState<string | null>(null)
@@ -171,8 +191,11 @@ export default function SectionsPanel({
   // Filter out: (a) elements whose ID is a known synthetic key, (b) product-* entries,
   // and (c) elements whose elementType is already represented by a fixed synthetic row.
   // This is the root-cause fix for duplicate "Main Hero Section" / "Hero Heading" etc.
+  // EXCEPT for restaurant themes, where we want to manage sections fully dynamically!
   const userElements = elements.filter(
-    el => !isSynthetic(el.id) && !SYNTHETIC_ELEMENT_TYPES.has(el.elementType)
+    el => isRestaurantTheme 
+      ? !['nav', 'footer', 'announcement-bar'].includes(el.elementType) 
+      : (!isSynthetic(el.id) && !SYNTHETIC_ELEMENT_TYPES.has(el.elementType))
   )
 
   const toggleVisibility = async (element: PageElement) => {
@@ -316,7 +339,7 @@ export default function SectionsPanel({
 
   const renderAddBtn = (direction: 'down' | 'up' = 'down', isFooter = false) => (
     <div className={`ws-add-section-row ${isFooter ? 'ws-footer-add-section' : ''}`} style={{ padding: '0 16px', height: '32px', display: 'flex', alignItems: 'center', marginBottom: '2px' }}>
-      <AddSectionDropdown onAdd={onAddElement} disabled={busy} direction={direction} />
+      <AddSectionDropdown onAdd={onAddElement} disabled={busy} direction={direction} isRestaurantTheme={isRestaurantTheme} />
     </div>
   )
 
@@ -342,8 +365,8 @@ export default function SectionsPanel({
       {/* ── TEMPLATE ── */}
       {renderGroupHeader({ label: "Template" })}
       <div className="ws-sections-list" style={{ display: 'flex', flexDirection: 'column' }}>
-        {FIXED_TEMPLATE_ITEMS.map((item, idx) => <div key={item.id}>{renderRow(item.id, item.name, false, idx, true, undefined, false)}</div>)}
-        {userElements.map((el, idx) => <div key={el.id}>{renderRow(el.id, el.name, el.properties?.isHidden === true, FIXED_TEMPLATE_ITEMS.length + idx, false, el, false, true)}</div>)}
+        {!isRestaurantTheme && FIXED_TEMPLATE_ITEMS.map((item, idx) => <div key={item.id}>{renderRow(item.id, item.name, false, idx, true, undefined, false)}</div>)}
+        {userElements.map((el, idx) => <div key={el.id}>{renderRow(el.id, el.name, el.properties?.isHidden === true, (isRestaurantTheme ? 0 : FIXED_TEMPLATE_ITEMS.length) + idx, false, el, false, true)}</div>)}
         {renderAddBtn()}
       </div>
 
@@ -352,7 +375,7 @@ export default function SectionsPanel({
       {/* ── FOOTER ── */}
       {renderGroupHeader({ label: "Footer" })}
       <div className="ws-sections-list ws-footer-sections-list" style={{ display: 'flex', flexDirection: 'column' }}>
-        {FOOTER_ITEMS.map((item, idx) => <div key={item.id}>{renderRow(item.id, item.name, false, idx, true, undefined, false)}</div>)}
+        {FOOTER_ITEMS.filter(item => isRestaurantTheme ? item.id === 'footer' : true).map((item, idx) => <div key={item.id}>{renderRow(item.id, item.name, false, idx, true, undefined, false)}</div>)}
         {renderAddBtn('up', true)}
       </div>
 

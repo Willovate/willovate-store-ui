@@ -5,14 +5,14 @@ import { useReveal } from '../components/RestaurantCore';
 const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
 
 const IMAGES = {
-  hero: img('photo-1516714435131-44d6b64dc6a2'),
-  story: img('photo-1544025162-d76538a679db'),
-  promo: img('photo-1604382354936-07c5d9983bd3'),
-  kebab1: img('photo-1534308983496-4fabb1a015ee'),
-  kebab2: img('photo-1585937421612-70a008356fbe'),
+  hero: img('photo-1504674900247-0877df9cc836'),
+  story: img('photo-1504674900247-0877df9cc836'),
+  promo: img('photo-1504674900247-0877df9cc836'),
+  kebab1: img('photo-1504674900247-0877df9cc836'),
+  kebab2: img('photo-1504674900247-0877df9cc836'),
   paneer: img('photo-1567188040759-fb8a883dc6d8'),
-  curry: img('photo-1626777552726-4a6b54c97e46'),
-  cocktail: img('photo-1558030137-a56c1b002c99'),
+  curry: img('photo-1504674900247-0877df9cc836'),
+  cocktail: img('photo-1504674900247-0877df9cc836'),
 };
 
 export default function TandoorNights() {
@@ -52,11 +52,9 @@ export default function TandoorNights() {
 
   return (
     <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif' }}>
-      <nav style={{ position: 'fixed', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(13,7,0,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(245,158,11,0.2)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none' }}>
+      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(13,7,0,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(245,158,11,0.2)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none' }}>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <a href="/browse-templates/food-and-restaurant/indian" style={{ color: '#fff8e7', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
-            <ArrowLeft size={18} /> Back
-          </a>
+          
           <div style={{ fontSize: '1.75rem', fontWeight: 700, fontFamily: '"Cinzel", serif', color: theme.palette.primary, letterSpacing: '1px' }}>
             {theme.name}
           </div>
@@ -199,3 +197,5 @@ export default function TandoorNights() {
     </div>
   );
 }
+
+

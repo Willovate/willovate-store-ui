@@ -6,12 +6,12 @@ const image = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit
 
 const IMAGES = {
   hero: image('photo-1517701604599-bb29b565090c'), // Gritty, dark coffee making
-  origin: image('photo-1524350876685-274059332603'), // Pouring coffee
-  beans: image('photo-1559525839-b184a4d698c7'), // Roasted beans
+  origin: image('photo-1504630083234-14187a9df0f5'), // Pouring coffee
+  beans: image('photo-1498804103079-a6351b050096'), // Roasted beans
   roaster: image('photo-1498804103079-a6351b050096'), // Roasting process
-  gallery1: image('photo-1507133750070-4f51950e30d1'),
+  gallery1: image('photo-1497935586351-b67a49e012bf'),
   gallery2: image('photo-1495474472287-4d71bcdd2085'),
-  gallery3: image('photo-1481833761820-0509d32170b4'),
+  gallery3: image('photo-1449247709967-d4461a6a6103'),
 };
 
 export default function DailyGrind() {
@@ -31,7 +31,7 @@ export default function DailyGrind() {
       
       {/* Navigation */}
       <header style={{ 
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, 
+        position: 'sticky', top: 0, left: 0, right: 0, zIndex: 50, 
         backgroundColor: isScrolled ? 'rgba(17, 17, 17, 0.95)' : 'transparent',
         backdropFilter: isScrolled ? 'blur(10px)' : 'none',
         borderBottom: isScrolled ? '1px solid #333' : '1px solid transparent',
@@ -80,7 +80,20 @@ export default function DailyGrind() {
       <section id="manifesto" style={{ padding: '12rem 4rem', borderBottom: '1px solid #222' }}>
         <div ref={manifestoReveal as any} style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', gap: '8rem', alignItems: 'center' }}>
           <div style={{ flex: 1 }}>
-            <h2 style={{ fontSize: '4.5rem', fontWeight: 900, lineHeight: 1, marginBottom: '3rem', color: '#fff', textTransform: 'uppercase', letterSpacing: '-0.03em' }}>
+            <h2 style={{ 
+              fontSize: '4.5rem', 
+              fontWeight: 900, 
+              lineHeight: 1, 
+              marginBottom: '3rem', 
+              color: 'transparent',
+              textTransform: 'uppercase', 
+              letterSpacing: '-0.03em',
+              backgroundImage: `url(${IMAGES.beans})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text'
+            }}>
               We roast it <br/>dark. We brew <br/>it strong.
             </h2>
             <p style={{ fontSize: '1.2rem', color: '#a0a0a0', lineHeight: 1.8, marginBottom: '2rem' }}>
@@ -101,7 +114,19 @@ export default function DailyGrind() {
       <section id="beans" style={{ padding: '12rem 4rem', backgroundColor: '#0a0a0a' }}>
         <div ref={beansReveal as any} style={{ maxWidth: '1400px', margin: '0 auto' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '6rem' }}>
-            <h2 style={{ fontSize: '5rem', fontWeight: 900, margin: 0, color: '#fff', textTransform: 'uppercase', letterSpacing: '-0.05em' }}>Fresh Roasts</h2>
+            <h2 style={{ 
+              fontSize: '5rem', 
+              fontWeight: 900, 
+              margin: 0, 
+              color: 'transparent', 
+              textTransform: 'uppercase', 
+              letterSpacing: '-0.05em',
+              backgroundImage: `url(${IMAGES.origin})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text'
+            }}>Fresh Roasts</h2>
             <a href="#" style={{ color: '#e25822', textDecoration: 'none', fontSize: '1.1rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '0.5rem' }} className="link-hover">
               View All Origins <ArrowRight size={20} />
             </a>
@@ -177,3 +202,4 @@ export default function DailyGrind() {
     </div>
   );
 }
+

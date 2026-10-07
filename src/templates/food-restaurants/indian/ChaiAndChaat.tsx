@@ -5,14 +5,14 @@ import { useReveal } from '../components/RestaurantCore';
 const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
 
 const IMAGES = {
-  hero: img('photo-1579294975549-33535fcd7a4d'), // Indian street food/snacks
-  story: img('photo-1610192305599-4d61c6b541ea'), // Pouring chai
+  hero: img('photo-1504674900247-0877df9cc836'), // Indian street food/snacks
+  story: img('photo-1504674900247-0877df9cc836'), // Pouring chai
   promo: img('photo-1601050690597-df0568f70950'), // Samosas
-  snack1: img('photo-1579294975549-33535fcd7a4d'),
+  snack1: img('photo-1504674900247-0877df9cc836'),
   snack2: img('photo-1601050690597-df0568f70950'),
-  snack3: img('photo-1626777552726-4a6b54c97e46'),
-  chai1: img('photo-1542289634-118bd58be034'),
-  chai2: img('photo-1610192305599-4d61c6b541ea'),
+  snack3: img('photo-1504674900247-0877df9cc836'),
+  chai1: img('photo-1504674900247-0877df9cc836'),
+  chai2: img('photo-1504674900247-0877df9cc836'),
 };
 
 export default function ChaiAndChaat() {
@@ -54,11 +54,9 @@ export default function ChaiAndChaat() {
 
   return (
     <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif' }}>
-      <nav style={{ position: 'fixed', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(255,247,237,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(234,88,12,0.2)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none' }}>
+      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(255,247,237,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(234,88,12,0.2)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none' }}>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <a href="/browse-templates/food-and-restaurant/indian" style={{ color: scrolled ? theme.palette.text : '#fff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
-            <ArrowLeft size={18} /> Back
-          </a>
+          
           <div style={{ fontSize: '1.75rem', fontWeight: 400, fontFamily: '"Pacifico", cursive', color: scrolled ? theme.palette.primary : '#fff' }}>
             {theme.name}
           </div>
@@ -200,3 +198,5 @@ export default function ChaiAndChaat() {
     </div>
   );
 }
+
+

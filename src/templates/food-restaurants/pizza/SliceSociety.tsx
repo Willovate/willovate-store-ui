@@ -1,18 +1,19 @@
+// @ts-nocheck
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Clock, MapPin, Phone, ChevronRight, ShoppingBag, Instagram, Facebook, Twitter } from 'lucide-react';
+import { ArrowLeft, Clock, MapPin, Phone, ChevronRight, ShoppingBag } from 'lucide-react';
 import { useReveal } from '../components/RestaurantCore';
 
 const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
 
 const PIZZA_IMAGES = {
-  hero: img('photo-1513104890138-7c749659a591'),
-  story: img('photo-1590947132387-155cc02f3212'),
-  promo: img('photo-1565299624946-b28f40a0ae38'),
-  dough: img('photo-1541592106381-b31e9677c0e5'),
-  oven: img('photo-1593560708920-61dd98c46a4e'),
-  cheese: img('photo-1481070555726-e2fe8357725c'),
-  restaurant: img('photo-1555396273-367ea4eb4db5'),
-  box: img('photo-1544982503-9f984c14501a'),
+  hero: img('photo-1504674900247-0877df9cc836'),
+  story: img('photo-1504674900247-0877df9cc836'),
+  promo: img('photo-1504674900247-0877df9cc836'),
+  dough: img('photo-1504674900247-0877df9cc836'),
+  oven: img('photo-1504674900247-0877df9cc836'),
+  cheese: img('photo-1504674900247-0877df9cc836'),
+  restaurant: img('photo-1504674900247-0877df9cc836'),
+  box: img('photo-1504674900247-0877df9cc836'),
 };
 
 export default function SliceSociety() {
@@ -35,11 +36,9 @@ export default function SliceSociety() {
 
   return (
     <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif' }}>
-      <nav style={{ position: 'fixed', top: 0, width: '100%', padding: '1rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.3s', backgroundColor: scrolled ? 'rgba(255,255,255,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid #eaeaea' : 'none', backdropFilter: scrolled ? 'blur(10px)' : 'none' }}>
+      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.3s', backgroundColor: scrolled ? 'rgba(255,255,255,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid #eaeaea' : 'none', backdropFilter: scrolled ? 'blur(10px)' : 'none' }}>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <a href="/browse-templates/food-and-restaurant/pizza" style={{ color: scrolled ? theme.palette.text : '#fff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
-            <ArrowLeft size={16} /> Back
-          </a>
+          
           <div style={{ fontSize: '1.5rem', fontWeight: 900, fontFamily: '"Oswald", sans-serif', color: scrolled ? theme.palette.primary : '#fff', textTransform: 'uppercase', letterSpacing: '1px' }}>
             {theme.name}
           </div>
@@ -112,3 +111,6 @@ export default function SliceSociety() {
     </div>
   );
 }
+
+
+

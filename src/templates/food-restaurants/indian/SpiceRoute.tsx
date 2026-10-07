@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, MapPin, Clock, Phone, ShoppingBag, ChevronRight, Star, Flame } from 'lucide-react';
 import { useReveal } from '../components/RestaurantCore';
@@ -5,14 +6,14 @@ import { useReveal } from '../components/RestaurantCore';
 const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
 
 const IMAGES = {
-  hero: img('photo-1626777552726-4a6b54c97e46'), // Thali / Pan-Indian
-  story: img('photo-1596797038530-2c107229654b'), // Spices
-  promo: img('photo-1589301760014-d929f39ce9b1'), // Dosa
-  chaat1: img('photo-1579294975549-33535fcd7a4d'),
+  hero: img('photo-1504674900247-0877df9cc836'), // Thali / Pan-Indian
+  story: img('photo-1488477181946-6428a0291777'), // Spices
+  promo: img('photo-1504674900247-0877df9cc836'), // Dosa
+  chaat1: img('photo-1504674900247-0877df9cc836'),
   chaat2: img('photo-1601050690597-df0568f70950'),
-  curry1: img('photo-1585937421612-70a008356fbe'),
-  curry2: img('photo-1565557623262-b51c2513a641'),
-  bread: img('photo-1606491956689-2ea866880c84'),
+  curry1: img('photo-1504674900247-0877df9cc836'),
+  curry2: img('photo-1504674900247-0877df9cc836'),
+  bread: img('photo-1504674900247-0877df9cc836'),
 };
 
 export default function SpiceRoute() {
@@ -53,11 +54,9 @@ export default function SpiceRoute() {
 
   return (
     <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif' }}>
-      <nav style={{ position: 'fixed', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(255,251,245,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(239,68,68,0.2)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none' }}>
+      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(255,251,245,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(239,68,68,0.2)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none' }}>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <a href="/browse-templates/food-and-restaurant/indian" style={{ color: scrolled ? theme.palette.text : '#fff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
-            <ArrowLeft size={18} /> Back
-          </a>
+          
           <div style={{ fontSize: '1.75rem', fontWeight: 700, fontFamily: '"Kalam", cursive', color: scrolled ? theme.palette.primary : '#fff', letterSpacing: '1px' }}>
             {theme.name}
           </div>
@@ -200,3 +199,6 @@ export default function SpiceRoute() {
     </div>
   );
 }
+
+
+

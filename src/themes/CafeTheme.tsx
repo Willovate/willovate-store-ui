@@ -14,3 +14,4 @@ export default function CafeTheme({ theme }: { theme: RestaurantThemePreset }) {
     default: throw new Error(`No dedicated café experience for ${theme.id}`)
   }
 }
+

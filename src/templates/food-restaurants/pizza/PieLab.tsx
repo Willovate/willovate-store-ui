@@ -5,15 +5,15 @@ import { useReveal } from '../components/RestaurantCore';
 const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
 
 const IMAGES = {
-  hero: img('photo-1476224203421-9ac39bcb3327'), // creative gourmet pizza
+  hero: img('photo-1504674900247-0877df9cc836'), // creative gourmet pizza
   story: img('photo-1534432182912-63863115e106'), // chef crafting pizza
   promo: img('photo-1568901346375-23c9450c58cd'), // artisan pizza
-  pizza1: img('photo-1578985545062-69928b1d9587'),
-  pizza2: img('photo-1594007654729-407eedc4be65'),
-  pizza3: img('photo-1513104890138-7c749659a591'),
-  pizza4: img('photo-1588315029754-2dd089d39a1a'),
-  pizza5: img('photo-1604382354936-07c5d9983bd3'),
-  pizza6: img('photo-1571407970349-bc81e7e96d47'),
+  pizza1: img('photo-1534432182912-63863115e106'),
+  pizza2: img('photo-1504674900247-0877df9cc836'),
+  pizza3: img('photo-1504674900247-0877df9cc836'),
+  pizza4: img('photo-1504674900247-0877df9cc836'),
+  pizza5: img('photo-1504674900247-0877df9cc836'),
+  pizza6: img('photo-1504674900247-0877df9cc836'),
 };
 
 export default function PieLab() {
@@ -53,11 +53,9 @@ export default function PieLab() {
 
   return (
     <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif' }}>
-      <nav style={{ position: 'fixed', top: 0, width: '100%', padding: '1.5rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.3s', backgroundColor: scrolled ? 'rgba(248,247,255,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid #eaeaea' : 'none', backdropFilter: scrolled ? 'blur(10px)' : 'none' }}>
+      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1.5rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.3s', backgroundColor: scrolled ? 'rgba(248,247,255,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid #eaeaea' : 'none', backdropFilter: scrolled ? 'blur(10px)' : 'none' }}>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <a href="/browse-templates/food-and-restaurant/pizza" style={{ color: scrolled ? theme.palette.text : '#fff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
-            <ArrowLeft size={16} /> Back
-          </a>
+          
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.5rem', fontWeight: 800, fontFamily: '"Space Grotesk", sans-serif', color: scrolled ? theme.palette.primary : '#fff', letterSpacing: '-0.5px' }}>
             <FlaskConical size={24} /> {theme.name}
           </div>
@@ -200,3 +198,5 @@ export default function PieLab() {
     </div>
   );
 }
+
+

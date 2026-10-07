@@ -5,14 +5,14 @@ import { useReveal } from '../components/RestaurantCore';
 const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
 
 const IMAGES = {
-  hero: img('photo-1549007994-cb92caebd54b'),
-  story: img('photo-1606313564200-e75d5e30476c'),
-  promo: img('photo-1578985545062-69928b1d9587'),
-  bonbon1: img('photo-1440516851687-7a8a3a48e2d4'),
-  bonbon2: img('photo-1574071318508-1cdbab80d002'),
-  cake1: img('photo-1574071318508-1cdbab80d002'),
-  cake2: img('photo-1588315029754-2dd089d39a1a'),
-  drink: img('photo-1587314168485-3236d6710814'),
+  hero: img('photo-1504674900247-0877df9cc836'),
+  story: img('photo-1504674900247-0877df9cc836'),
+  promo: img('photo-1534432182912-63863115e106'),
+  bonbon1: img('photo-1504674900247-0877df9cc836'),
+  bonbon2: img('photo-1504674900247-0877df9cc836'),
+  cake1: img('photo-1504674900247-0877df9cc836'),
+  cake2: img('photo-1504674900247-0877df9cc836'),
+  drink: img('photo-1586444248902-2f64eddc13df'),
 };
 
 export default function ChocoVault() {
@@ -53,11 +53,9 @@ export default function ChocoVault() {
 
   return (
     <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Lato", sans-serif' }}>
-      <nav style={{ position: 'fixed', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(253,243,227,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(146,64,14,0.2)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none' }}>
+      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(253,243,227,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(146,64,14,0.2)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none' }}>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <a href="/browse-templates/food-and-restaurant/dessert-shop" style={{ color: scrolled ? theme.palette.text : '#fff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
-            <ArrowLeft size={18} /> Back
-          </a>
+          
           <div style={{ fontSize: '1.75rem', fontWeight: 700, fontFamily: '"Playfair Display", serif', color: scrolled ? theme.palette.primary : '#fff', letterSpacing: '1px' }}>
             {theme.name}
           </div>
@@ -200,3 +198,5 @@ export default function ChocoVault() {
     </div>
   );
 }
+
+

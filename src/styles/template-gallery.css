@@ -271,8 +271,22 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: #4f46e5;
-  font-weight: 600;
+  padding: 0.5rem 1rem;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  color: #64748b;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
+  width: fit-content;
+  transition: all 0.2s;
+}
+
+.browse-template-back:hover {
+  background: #f8fafc;
+  color: #334155;
 }
 
 .template-subsection-page {

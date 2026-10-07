@@ -12,12 +12,12 @@ const MidnightMunchies = () => {
 
   const menu = [
     { tab: 'The Crazy Stuff', name: 'Mac & Cheese Grilled Cheese', price: '$12', desc: 'Creamy mac and cheese stuffed between two slices of buttered Texas toast, with extra cheddar.', tags: ['Carb Loaded'], img: 'photo-1568901346375-23c9450c58cd' },
-    { tab: 'The Crazy Stuff', name: 'Trash Can Nachos', price: '$15', desc: 'Tortilla chips, pulled pork, queso, jalapeños, baked beans, sour cream, BBQ sauce.', tags: ['Shareable'], img: 'photo-1604908176997-125f25cc6f3d' },
-    { tab: 'The Crazy Stuff', name: 'Pizza Fries', price: '$10', desc: 'Crinkle fries, marinara, melted mozzarella, pepperoni crisp.', tags: [], img: 'photo-1572802419224-296b0aeee0d9' },
-    { tab: 'Deep Fried', name: 'Fried Mac Bites (6)', price: '$8', desc: 'Breaded and fried mac and cheese, served with ranch.', tags: [], img: 'photo-1541592106381-b31e9677c0e5' },
-    { tab: 'Deep Fried', name: 'Mozzarella Sticks (8)', price: '$9', desc: 'Thick cut, house-breaded, marinara dip.', tags: [], img: 'photo-1541592106381-b31e9677c0e5' },
-    { tab: 'Sugar Coma', name: 'The Cake Shake', price: '$11', desc: 'Vanilla shake blended with an entire slice of funfetti cake.', tags: ['Signature'], img: 'photo-1551024601-bec78aea704b' },
-    { tab: 'Sugar Coma', name: 'Deep Fried Oreos', price: '$7', desc: '5 battered and fried Oreos, powdered sugar, chocolate dip.', tags: [], img: 'photo-1551024601-bec78aea704b' },
+    { tab: 'The Crazy Stuff', name: 'Trash Can Nachos', price: '$15', desc: 'Tortilla chips, pulled pork, queso, jalapeños, baked beans, sour cream, BBQ sauce.', tags: ['Shareable'], img: 'photo-1504674900247-0877df9cc836' },
+    { tab: 'The Crazy Stuff', name: 'Pizza Fries', price: '$10', desc: 'Crinkle fries, marinara, melted mozzarella, pepperoni crisp.', tags: [], img: 'photo-1504674900247-0877df9cc836' },
+    { tab: 'Deep Fried', name: 'Fried Mac Bites (6)', price: '$8', desc: 'Breaded and fried mac and cheese, served with ranch.', tags: [], img: 'photo-1504674900247-0877df9cc836' },
+    { tab: 'Deep Fried', name: 'Mozzarella Sticks (8)', price: '$9', desc: 'Thick cut, house-breaded, marinara dip.', tags: [], img: 'photo-1504674900247-0877df9cc836' },
+    { tab: 'Sugar Coma', name: 'The Cake Shake', price: '$11', desc: 'Vanilla shake blended with an entire slice of funfetti cake.', tags: ['Signature'], img: 'photo-1504674900247-0877df9cc836' },
+    { tab: 'Sugar Coma', name: 'Deep Fried Oreos', price: '$7', desc: '5 battered and fried Oreos, powdered sugar, chocolate dip.', tags: [], img: 'photo-1504674900247-0877df9cc836' },
   ];
 
   return (
@@ -26,9 +26,7 @@ const MidnightMunchies = () => {
       {/* Navigation */}
       <nav className="ck-nav" style={{ backgroundColor: 'rgba(9,9,11,0.9)', backdropFilter: 'blur(10px)', borderBottom: `1px solid ${palette.surface}` }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <a href="/browse-templates/food-and-restaurant/cloud-kitchen" style={{ color: palette.textLight, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 500 }}>
-            <ArrowLeft size={18} /> Back
-          </a>
+          
           <div style={{ fontFamily: font.heading, fontSize: '2rem', color: palette.primary, display: 'flex', alignItems: 'center', gap: '0.5rem', letterSpacing: '2px' }}>
             <Moon size={24} fill={palette.primary} /> MIDNIGHT MUNCHIES
           </div>
@@ -41,7 +39,7 @@ const MidnightMunchies = () => {
       </nav>
 
       {/* Hero */}
-      <header className="ck-hero" style={{ height: '80vh', display: 'flex', alignItems: 'center', backgroundImage: `url(${img('photo-1604908176997-125f25cc6f3d', 2000)})`, backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative' }}>
+      <header className="ck-hero" style={{ height: '80vh', display: 'flex', alignItems: 'center', backgroundImage: `url(${img('photo-1504674900247-0877df9cc836', 2000)})`, backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(9,9,11,1) 0%, rgba(9,9,11,0.8) 50%, rgba(139,92,246,0.3) 100%)' }}></div>
         <div style={{ position: 'relative', zIndex: 1, maxWidth: '1200px', margin: '0 auto', width: '100%', padding: '0 5%' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', backgroundColor: palette.primary, color: '#fff', padding: '0.5rem 1rem', borderRadius: '4px', fontWeight: 900, marginBottom: '2rem', textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '2px' }}>
@@ -82,8 +80,8 @@ const MidnightMunchies = () => {
             </div>
           </div>
           <div style={{ flex: '1 1 400px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', position: 'relative' }}>
-            <img src={img('photo-1541592106381-b31e9677c0e5', 800)} alt="Frying" style={{ width: '100%', height: '350px', objectFit: 'cover', borderRadius: '16px', boxShadow: `0 0 40px rgba(139,92,246,0.2)` }} />
-            <img src={img('photo-1627308595229-7830f5c92f70', 800)} alt="Delivery bags" style={{ width: '100%', height: '350px', objectFit: 'cover', borderRadius: '16px', transform: 'translateY(3rem)', boxShadow: `0 0 40px rgba(139,92,246,0.2)` }} />
+            <img src={img('photo-1504674900247-0877df9cc836', 800)} alt="Frying" style={{ width: '100%', height: '350px', objectFit: 'cover', borderRadius: '16px', boxShadow: `0 0 40px rgba(139,92,246,0.2)` }} />
+            <img src={img('photo-1504674900247-0877df9cc836', 800)} alt="Delivery bags" style={{ width: '100%', height: '350px', objectFit: 'cover', borderRadius: '16px', transform: 'translateY(3rem)', boxShadow: `0 0 40px rgba(139,92,246,0.2)` }} />
           </div>
         </div>
       </section>
@@ -196,3 +194,4 @@ const MidnightMunchies = () => {
 };
 
 export default MidnightMunchies;
+

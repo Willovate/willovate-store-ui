@@ -5,14 +5,14 @@ import { useReveal } from '../components/RestaurantCore';
 const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
 
 const IMAGES = {
-  hero: img('photo-1592415486689-125cbbfcbee2'),
-  story: img('photo-1544025162-d76538a679db'),
-  steak1: img('photo-1558030137-a56c1b002c99'),
-  steak2: img('photo-1592415486689-125cbbfcbee2'),
-  tomahawk: img('photo-1529193591184-b1d58069ecdd'),
-  seafood: img('photo-1517838277536-f5f99be501cd'), // safe food
-  starter1: img('photo-1544025162-d76538a679db'),
-  starter2: img('photo-1558030137-a56c1b002c99')
+  hero: img('photo-1504674900247-0877df9cc836'),
+  story: img('photo-1504674900247-0877df9cc836'),
+  steak1: img('photo-1504674900247-0877df9cc836'),
+  steak2: img('photo-1504674900247-0877df9cc836'),
+  tomahawk: img('photo-1504674900247-0877df9cc836'),
+  seafood: img('photo-1504674900247-0877df9cc836'), // safe food
+  starter1: img('photo-1504674900247-0877df9cc836'),
+  starter2: img('photo-1504674900247-0877df9cc836')
 };
 
 export default function GrillRepublic() {
@@ -53,11 +53,9 @@ export default function GrillRepublic() {
 
   return (
     <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif', minHeight: '100vh' }}>
-      <nav style={{ position: 'fixed', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(248,250,252,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(14,165,233,0.15)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none', color: scrolled ? theme.palette.secondary : '#fff' }}>
+      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(248,250,252,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(14,165,233,0.15)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none', color: scrolled ? theme.palette.secondary : '#fff' }}>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <a href="/browse-templates/food-and-restaurant/bbq-grill" style={{ color: 'inherit', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
-            <ArrowLeft size={18} /> Back
-          </a>
+          
           <div style={{ fontSize: '1.75rem', fontWeight: 700, fontFamily: '"Rajdhani", sans-serif', color: scrolled ? theme.palette.secondary : '#fff', letterSpacing: '2px', textTransform: 'uppercase' }}>
             {theme.name}
           </div>
@@ -200,3 +198,5 @@ export default function GrillRepublic() {
     </div>
   );
 }
+
+

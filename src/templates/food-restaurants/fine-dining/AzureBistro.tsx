@@ -9,16 +9,16 @@ const theme: RestaurantThemeConfig = {
   palette: { primary: '#0ea5e9', secondary: '#f8fafc', background: '#ffffff', surface: '#f1f5f9', text: '#0f172a', textLight: '#64748b', heroOverlay: 'linear-gradient(to top, rgba(15,23,42,0.8), rgba(255,255,255,0.1))' },
   typography: { heading: '"Playfair Display", serif', body: '"Lato", sans-serif' },
   images: {
-    hero: img('photo-1550966871-3ed3cdb5ed0c'), heroAlt: 'Elegant coastal dining room overlooking the ocean',
-    story: img('photo-1559339352-11d035aa65de'), storyAlt: 'Chef plating a delicate seafood dish',
-    promo: img('photo-1544148103-0773bf10d330'), promoAlt: 'Beautifully arranged oysters and champagne',
+    hero: img('photo-1504674900247-0877df9cc836'), heroAlt: 'Elegant coastal dining room overlooking the ocean',
+    story: img('photo-1504674900247-0877df9cc836'), storyAlt: 'Chef plating a delicate seafood dish',
+    promo: img('photo-1504674900247-0877df9cc836'), promoAlt: 'Beautifully arranged oysters and champagne',
     gallery: [
-      { src: img('photo-1550966871-3ed3cdb5ed0c'), alt: 'Dining room' },
-      { src: img('photo-1559339352-11d035aa65de'), alt: 'Seafood plating' },
-      { src: img('photo-1544148103-0773bf10d330'), alt: 'Oysters' },
-      { src: img('photo-1519708227418-c8fd9a32b7a2'), alt: 'Scallops' },
-      { src: img('photo-1515003197210-e0cd71810b5f'), alt: 'Steak dish' },
-      { src: img('photo-1559339352-11d035aa65de'), alt: 'Wine pairing' },
+      { src: img('photo-1504674900247-0877df9cc836'), alt: 'Dining room' },
+      { src: img('photo-1504674900247-0877df9cc836'), alt: 'Seafood plating' },
+      { src: img('photo-1504674900247-0877df9cc836'), alt: 'Oysters' },
+      { src: img('photo-1504674900247-0877df9cc836'), alt: 'Scallops' },
+      { src: img('photo-1504674900247-0877df9cc836'), alt: 'Steak dish' },
+      { src: img('photo-1504674900247-0877df9cc836'), alt: 'Wine pairing' },
     ],
   },
   content: {
@@ -38,12 +38,12 @@ const theme: RestaurantThemeConfig = {
   },
   menu: [
     { tab: 'Tasting Menu', items: [
-      { name: 'Oysters Mignonette', price: '$24', desc: 'Half dozen local oysters, classic shallot mignonette.', image: img('photo-1544148103-0773bf10d330') },
-      { name: 'Seared Scallops', price: '$38', desc: 'Diver scallops, cauliflower purée, brown butter, capers.', tags: ['Signature'], image: img('photo-1519708227418-c8fd9a32b7a2') },
-      { name: 'Bouillabaisse', price: '$45', desc: 'Traditional Provençal fish stew, saffron, rouille, crusty bread.', image: img('photo-1559339352-11d035aa65de') },
+      { name: 'Oysters Mignonette', price: '$24', desc: 'Half dozen local oysters, classic shallot mignonette.', image: img('photo-1504674900247-0877df9cc836') },
+      { name: 'Seared Scallops', price: '$38', desc: 'Diver scallops, cauliflower purée, brown butter, capers.', tags: ['Signature'], image: img('photo-1504674900247-0877df9cc836') },
+      { name: 'Bouillabaisse', price: '$45', desc: 'Traditional Provençal fish stew, saffron, rouille, crusty bread.', image: img('photo-1504674900247-0877df9cc836') },
     ]},
     { tab: 'Mains', items: [
-      { name: 'Filet Mignon', price: '$55', desc: 'Center cut beef filet, pommes purée, haricots verts, bordelaise.', image: img('photo-1515003197210-e0cd71810b5f') },
+      { name: 'Filet Mignon', price: '$55', desc: 'Center cut beef filet, pommes purée, haricots verts, bordelaise.', image: img('photo-1504674900247-0877df9cc836') },
     ]},
   ],
   testimonials: [

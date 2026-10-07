@@ -38,9 +38,9 @@ const GoldenCrumb = () => {
           <p className="bakery-subtitle">Discover what our master bakers have prepared for you this beautiful morning.</p>
           <div className="bakery-grid">
             {[
-              { title: 'Artisan Sourdough', desc: '48-hour fermented signature loaf', img: 'photo-1589367920969-ab8e050bfbc7' },
-              { title: 'Almond Croissant', desc: 'Twice-baked with rich frangipane', img: 'photo-1608198093002-ad4e005484ec' },
-              { title: 'Rustic Baguette', desc: 'Crisp crust and airy crumb', img: 'photo-1596797038530-2c107229654b' }
+              { title: 'Artisan Sourdough', desc: '48-hour fermented signature loaf', img: 'photo-1509440159596-0249088772ff' },
+              { title: 'Almond Croissant', desc: 'Twice-baked with rich frangipane', img: 'photo-1558961363-fa8fdf82db35' },
+              { title: 'Rustic Baguette', desc: 'Crisp crust and airy crumb', img: 'photo-1488477181946-6428a0291777' }
             ].map((item, i) => (
               <div key={i} className="bakery-card">
                 <img src={img(item.img, 800)} alt={item.title} />
@@ -80,11 +80,11 @@ const GoldenCrumb = () => {
         <div className="bakery-grid">
           {[
             { cat: 'Breads', title: 'Country Sourdough', price: '$8', img: 'photo-1509440159596-0249088772ff' },
-            { cat: 'Breads', title: 'Olive Fougasse', price: '$7', img: 'photo-1549931319-a545dcf3bc7b' },
-            { cat: 'Pastries', title: 'Butter Croissant', price: '$4', img: 'photo-1608198093002-ad4e005484ec' },
-            { cat: 'Pastries', title: 'Pain au Chocolat', price: '$5', img: 'photo-1621303837174-89787a7d4729' },
-            { cat: 'Cakes', title: 'Chocolate Ganache', price: '$45', img: 'photo-1578985545062-69928b1d9587' },
-            { cat: 'Cakes', title: 'Seasonal Fruit Tart', price: '$35', img: 'photo-1550617931-e17a7b70dce2' },
+            { cat: 'Breads', title: 'Olive Fougasse', price: '$7', img: 'photo-1603532648955-039310d9ed75' },
+            { cat: 'Pastries', title: 'Butter Croissant', price: '$4', img: 'photo-1558961363-fa8fdf82db35' },
+            { cat: 'Pastries', title: 'Pain au Chocolat', price: '$5', img: 'photo-1509365390695-33aee754301f' },
+            { cat: 'Cakes', title: 'Chocolate Ganache', price: '$45', img: 'photo-1534432182912-63863115e106' },
+            { cat: 'Cakes', title: 'Seasonal Fruit Tart', price: '$35', img: 'photo-1567188040759-fb8a883dc6d8' },
           ].filter(item => activeCategory === 'All' || item.cat === activeCategory).map((item, i) => (
             <div key={i} className="bakery-card" style={{ display: 'flex', flexDirection: 'column' }}>
               <img src={img(item.img, 600)} alt={item.title} style={{ height: '200px' }} />
@@ -100,7 +100,7 @@ const GoldenCrumb = () => {
       {/* Signature & About */}
       <section id="story" className="bakery-section bg-light">
         <div className="bakery-story">
-          <img src={img('photo-1555507036-ab1f4038808a', 1000)} alt="Baker shaping dough" />
+          <img src={img('photo-1549931319-a545dcf3bc7c', 1000)} alt="Baker shaping dough" />
           <div>
             <h2 className="bakery-title" style={{ textAlign: 'left' }}>The Art of Sourdough</h2>
             <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '1.5rem' }}>
@@ -120,9 +120,9 @@ const GoldenCrumb = () => {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
           {[
             'photo-1509440159596-0249088772ff',
-            'photo-1608198093002-ad4e005484ec',
-            'photo-1555507036-ab1f4038808a',
-            'photo-1589367920969-ab8e050bfbc7'
+            'photo-1558961363-fa8fdf82db35',
+            'photo-1549931319-a545dcf3bc7c',
+            'photo-1509440159596-0249088772ff'
           ].map((src, i) => (
             <div key={i} style={{ overflow: 'hidden', borderRadius: '8px' }}>
               <img src={img(src, 600)} alt="Gallery item" style={{ width: '100%', height: '250px', objectFit: 'cover', transition: 'transform 0.4s ease' }} onMouseOver={e => e.currentTarget.style.transform = 'scale(1.1)'} onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'} />

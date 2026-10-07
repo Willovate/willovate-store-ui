@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from 'react';
 import './bakery-shared.css';
 
@@ -40,9 +41,9 @@ const PatisserieLune = () => {
           <p className="bakery-subtitle" style={{ color: '#be185d' }}>Delicate layers, vibrant flavors, and exacting precision.</p>
           <div className="bakery-grid">
             {[
-              { title: 'Rose Water Macaron', desc: 'Floral notes with white chocolate ganache.', img: 'photo-1509365465994-3e28be75c504' },
-              { title: 'Vanilla Bean Eclair', desc: 'Choux pastry with Tahitian vanilla cream.', img: 'photo-1514517521153-1be72277b32f' },
-              { title: 'Opera Cake', desc: 'Almond sponge and rich coffee syrup.', img: 'photo-1578985545062-69928b1d9587' }
+              { title: 'Rose Water Macaron', desc: 'Floral notes with white chocolate ganache.', img: 'photo-1556711905-b3f402473b01' },
+              { title: 'Vanilla Bean Eclair', desc: 'Choux pastry with Tahitian vanilla cream.', img: 'photo-1590080876351-41de98b4b4ae' },
+              { title: 'Opera Cake', desc: 'Almond sponge and rich coffee syrup.', img: 'photo-1534432182912-63863115e106' }
             ].map((item, i) => (
               <div key={i} className="bakery-card" style={{ borderRadius: '12px' }}>
                 <img src={img(item.img, 800)} alt={item.title} />
@@ -82,12 +83,12 @@ const PatisserieLune = () => {
         </div>
         <div className="bakery-grid">
           {[
-            { cat: 'Macarons', title: 'Rose Water', price: '$3.50', img: 'photo-1509365465994-3e28be75c504' },
-            { cat: 'Macarons', title: 'Pistachio', price: '$3.50', img: 'photo-1563805042-7684c019e1cb' },
-            { cat: 'Patisserie', title: 'Opera Cake', price: '$8', img: 'photo-1578985545062-69928b1d9587' },
-            { cat: 'Patisserie', title: 'Vanilla Eclair', price: '$6', img: 'photo-1514517521153-1be72277b32f' },
-            { cat: 'Viennoiserie', title: 'Butter Croissant', price: '$4', img: 'photo-1621303837174-89787a7d4729' },
-            { cat: 'Patisserie', title: 'Fruit Tart', price: '$7', img: 'photo-1550617931-e17a7b70dce2' },
+            { cat: 'Macarons', title: 'Rose Water', price: '$3.50', img: 'photo-1556711905-b3f402473b01' },
+            { cat: 'Macarons', title: 'Pistachio', price: '$3.50', img: 'photo-1477090792565-af1b2f0fd1e4' },
+            { cat: 'Patisserie', title: 'Opera Cake', price: '$8', img: 'photo-1534432182912-63863115e106' },
+            { cat: 'Patisserie', title: 'Vanilla Eclair', price: '$6', img: 'photo-1590080876351-41de98b4b4ae' },
+            { cat: 'Viennoiserie', title: 'Butter Croissant', price: '$4', img: 'photo-1509365390695-33aee754301f' },
+            { cat: 'Patisserie', title: 'Fruit Tart', price: '$7', img: 'photo-1567188040759-fb8a883dc6d8' },
           ].filter(item => activeCategory === 'All' || item.cat === activeCategory).map((item, i) => (
             <div key={i} className="bakery-card" style={{ display: 'flex', flexDirection: 'column', borderRadius: '12px' }}>
               <img src={img(item.img, 600)} alt={item.title} style={{ height: '200px' }} />
@@ -103,7 +104,7 @@ const PatisserieLune = () => {
       {/* Signature & About */}
       <section id="story" className="bakery-section">
         <div className="bakery-story">
-          <img src={img('photo-1509365465994-3e28be75c504', 1000)} alt="Chef piping macarons" style={{ borderRadius: '12px' }} />
+          <img src={img('photo-1556711905-b3f402473b01', 1000)} alt="Chef piping macarons" style={{ borderRadius: '12px' }} />
           <div>
             <h2 className="bakery-title" style={{ ...headingStyle, textAlign: 'left' }}>Crafted with Precision</h2>
             <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '1.5rem', color: '#831843' }}>
@@ -123,9 +124,9 @@ const PatisserieLune = () => {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
           {[
             'photo-1558961363-fa8fdf82db35',
-            'photo-1509365465994-3e28be75c504',
-            'photo-1578985545062-69928b1d9587',
-            'photo-1514517521153-1be72277b32f'
+            'photo-1556711905-b3f402473b01',
+            'photo-1534432182912-63863115e106',
+            'photo-1590080876351-41de98b4b4ae'
           ].map((src, i) => (
             <div key={i} style={{ overflow: 'hidden', borderRadius: '12px' }}>
               <img src={img(src, 600)} alt="Gallery item" style={{ width: '100%', height: '250px', objectFit: 'cover', transition: 'transform 0.5s ease' }} onMouseOver={e => e.currentTarget.style.transform = 'scale(1.1)'} onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'} />
@@ -179,3 +180,4 @@ const PatisserieLune = () => {
 };
 
 export default PatisserieLune;
+

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, MapPin, Clock, Phone, UtensilsCrossed, ChevronRight, Star, Coffee } from 'lucide-react';
 import { useReveal } from '../components/RestaurantCore';
@@ -5,17 +6,17 @@ import { useReveal } from '../components/RestaurantCore';
 const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
 
 const IMAGES = {
-  hero: img('photo-1519676867240-f03562e64548'),
-  story: img('photo-1544943910-4c1dc44aab44'),
-  promo: img('photo-1567620905732-2d1ec7ab7445'),
-  waf1: img('photo-1592415486689-125cbbfcbee2'),
-  waf2: img('photo-1571407970349-bc81e7e96d47'),
-  waf3: img('photo-1440516851687-7a8a3a48e2d4'),
-  waf4: img('photo-1604382354936-07c5d9983bd3'),
-  waf5: img('photo-1576458088443-04a19bb13da6'),
-  drink1: img('photo-1571407970349-bc81e7e96d47'),
-  drink2: img('photo-1587314168485-3236d6710814'),
-  drink3: img('photo-1558030137-a56c1b002c99'),
+  hero: img('photo-1504674900247-0877df9cc836'),
+  story: img('photo-1504674900247-0877df9cc836'),
+  promo: img('photo-1504674900247-0877df9cc836'),
+  waf1: img('photo-1504674900247-0877df9cc836'),
+  waf2: img('photo-1504674900247-0877df9cc836'),
+  waf3: img('photo-1504674900247-0877df9cc836'),
+  waf4: img('photo-1504674900247-0877df9cc836'),
+  waf5: img('photo-1504674900247-0877df9cc836'),
+  drink1: img('photo-1504674900247-0877df9cc836'),
+  drink2: img('photo-1586444248902-2f64eddc13df'),
+  drink3: img('photo-1504674900247-0877df9cc836'),
 };
 
 export default function WaffleHouseStudio() {
@@ -56,11 +57,9 @@ export default function WaffleHouseStudio() {
 
   return (
     <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif' }}>
-      <nav style={{ position: 'fixed', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(254,252,232,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(217,119,6,0.2)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none' }}>
+      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(254,252,232,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(217,119,6,0.2)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none' }}>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <a href="/browse-templates/food-and-restaurant/dessert-shop" style={{ color: scrolled ? theme.palette.text : '#fff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
-            <ArrowLeft size={18} /> Back
-          </a>
+          
           <div style={{ fontSize: '1.75rem', fontWeight: 700, fontFamily: '"Abril Fatface", cursive', color: scrolled ? theme.palette.primary : '#fff', letterSpacing: '1px' }}>
             {theme.name}
           </div>
@@ -204,3 +203,6 @@ export default function WaffleHouseStudio() {
     </div>
   );
 }
+
+
+

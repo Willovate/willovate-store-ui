@@ -5,12 +5,12 @@ import { useReveal } from '../components/RestaurantCore';
 const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
 
 const IMAGES = {
-  hero: img('photo-1581009146145-b5ef050c2e1e'), // delivery person paper bag
-  story: img('photo-1627308595229-7830f5c92f70'), // eco friendly packaging
-  promo: img('photo-1540420773420-3366772f4999'), // fresh produce
-  menu1: img('photo-1498837167922-41cfa6f318ba'), // healthy meal bowl
+  hero: img('photo-1504674900247-0877df9cc836'), // delivery person paper bag
+  story: img('photo-1504674900247-0877df9cc836'), // eco friendly packaging
+  promo: img('photo-1504674900247-0877df9cc836'), // fresh produce
+  menu1: img('photo-1504674900247-0877df9cc836'), // healthy meal bowl
   menu2: img('photo-1512621776951-a57141f2eefd'), // vegan bowl
-  menu3: img('photo-1467003909585-2f8a72700288'), // salmon
+  menu3: img('photo-1504674900247-0877df9cc836'), // salmon
 };
 
 export default function LocalPlate() {
@@ -44,11 +44,9 @@ export default function LocalPlate() {
 
   return (
     <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif' }}>
-      <nav style={{ position: 'fixed', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(255,255,255,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(22,163,74,0.1)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none' }}>
+      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(255,255,255,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(22,163,74,0.1)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none' }}>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <a href="/browse-templates/food-and-restaurant/food-delivery" style={{ color: scrolled ? theme.palette.text : '#fff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
-            <ArrowLeft size={18} /> Back
-          </a>
+          
           <div style={{ fontSize: '1.75rem', fontWeight: 800, fontFamily: '"Source Serif Pro", serif', color: scrolled ? theme.palette.primary : '#fff' }}>
             {theme.name}
           </div>
@@ -214,3 +212,5 @@ export default function LocalPlate() {
     </div>
   );
 }
+
+

@@ -6,13 +6,13 @@ const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=c
 
 const IMAGES = {
   hero: img('photo-1555939594-58d7cb561ad1'),
-  story: img('photo-1544025162-d76538a679db'),
-  lamb: img('photo-1558030137-a56c1b002c99'),
-  adana: img('photo-1592415486689-125cbbfcbee2'),
-  chicken: img('photo-1529193591184-b1d58069ecdd'),
+  story: img('photo-1504674900247-0877df9cc836'),
+  lamb: img('photo-1504674900247-0877df9cc836'),
+  adana: img('photo-1504674900247-0877df9cc836'),
+  chicken: img('photo-1504674900247-0877df9cc836'),
   mezze1: img('photo-1555939594-58d7cb561ad1'), 
-  mezze2: img('photo-1517838277536-f5f99be501cd'),
-  wrap: img('photo-1544025162-d76538a679db')
+  mezze2: img('photo-1504674900247-0877df9cc836'),
+  wrap: img('photo-1504674900247-0877df9cc836')
 };
 
 export default function KebabKingdom() {
@@ -53,11 +53,9 @@ export default function KebabKingdom() {
 
   return (
     <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif', minHeight: '100vh' }}>
-      <nav style={{ position: 'fixed', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(254,253,248,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(217,119,6,0.15)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none', color: scrolled ? theme.palette.secondary : '#fff' }}>
+      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(254,253,248,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(217,119,6,0.15)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none', color: scrolled ? theme.palette.secondary : '#fff' }}>
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <a href="/browse-templates/food-and-restaurant/bbq-grill" style={{ color: 'inherit', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
-            <ArrowLeft size={18} /> Back
-          </a>
+          
           <div style={{ fontSize: '1.5rem', fontWeight: 700, fontFamily: '"Cairo", sans-serif', color: scrolled ? theme.palette.secondary : '#fff', letterSpacing: '1px' }}>
             {theme.name}
           </div>
@@ -211,3 +209,5 @@ export default function KebabKingdom() {
     </div>
   );
 }
+
+
