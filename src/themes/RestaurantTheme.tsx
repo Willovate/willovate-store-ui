@@ -4,6 +4,7 @@ import './restaurant-theme.css'
 import MorningRitualTheme from './MorningRitualTheme'
 import FineDiningTheme from './FineDiningTheme'
 import CafeTheme from './CafeTheme'
+import BakeryTheme from './BakeryTheme'
 import FoodTheme from './FoodTheme'
 import { buildFoodConfig } from './buildFoodConfig'
 import { RestaurantProvider, useRestaurant } from '../store/RestaurantContext'
@@ -313,7 +314,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
 
   // ── BAKERY ────────────────────────────────────────────────────────────────
   'butter-and-bloom': {
-    id: 'butter-and-bloom', kind: 'cafe', name: 'Butter & Bloom',
+    id: 'butter-and-bloom', kind: 'bakery', name: 'Butter & Bloom',
     eyebrow: 'Baked before sunrise',
     heroTitle: 'Fresh from our oven to your table.',
     heroCopy: 'A floral, handcrafted bakehouse where every pastry is made with flour, butter, and a little love.',
@@ -328,7 +329,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Lavender croissant', 'Earl Grey financier', 'Rose choux'],
   },
   'oven-and-crumb': {
-    id: 'oven-and-crumb', kind: 'cafe', name: 'Oven & Crumb',
+    id: 'oven-and-crumb', kind: 'bakery', name: 'Oven & Crumb',
     eyebrow: 'Grain-led artisan baking',
     heroTitle: 'Honest bread, made daily.',
     heroCopy: 'Rustic sourdoughs and grain loaves shaped by hand every morning. Nothing fancy, everything real.',
@@ -343,7 +344,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Country sourdough', 'Seeded rye', 'Walnut & fig loaf'],
   },
   'parisian-crust': {
-    id: 'parisian-crust', kind: 'cafe', name: 'Parisian Crust',
+    id: 'parisian-crust', kind: 'bakery', name: 'Parisian Crust',
     eyebrow: 'Une boulangerie de quartier',
     heroTitle: 'Butter, flour, and a little Paris.',
     heroCopy: 'A refined French bakery with buttery croissants, eclairs, and baguettes baked to a golden finish.',
@@ -358,7 +359,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Butter croissant', 'Almond éclair', 'Baguette tradition'],
   },
   'golden-loaf': {
-    id: 'golden-loaf', kind: 'cafe', name: 'Golden Loaf',
+    id: 'golden-loaf', kind: 'bakery', name: 'Golden Loaf',
     eyebrow: 'Artisan baking at its finest',
     heroTitle: 'Golden crust. Perfect crumb.',
     heroCopy: 'Luxury artisan bread crafted from heritage grains and slow fermentation. Worth every wait.',
@@ -373,7 +374,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Heritage sourdough', 'Honey & oat tin loaf', 'Dark rye'],
   },
   'daily-bread-co': {
-    id: 'daily-bread-co', kind: 'cafe', name: 'Daily Bread Co.',
+    id: 'daily-bread-co', kind: 'bakery', name: 'Daily Bread Co.',
     eyebrow: 'Your neighbourhood bakery',
     heroTitle: 'Baked daily, just for you.',
     heroCopy: 'Bright, friendly and full of freshly baked treats. The bakery your morning was missing.',
@@ -939,9 +940,11 @@ export function RestaurantTheme(props: { theme: RestaurantThemePreset; compact?:
 function InnerRestaurantTheme({ theme, compact = false, elements = [] }: { theme: RestaurantThemePreset; compact?: boolean, elements?: any[] }) {
   const { state, dispatch } = useRestaurant()
   const cafeThemes = ['morning-ritual', 'brew-house', 'corner-cafe', 'latte-lane', 'the-daily-grind']
+  const bakeryThemes = ['butter-and-bloom', 'oven-and-crumb', 'parisian-crust', 'golden-loaf', 'daily-bread-co']
   const fineThemes = ['noir-table', 'velvet-reserve', 'the-tasting-room', 'ember-and-oak', 'maison-gourmet']
 
   const renderTheme = () => {
+    if (bakeryThemes.includes(theme.id)) return <BakeryTheme theme={theme} />
     if (cafeThemes.includes(theme.id)) return <CafeTheme theme={theme} />
     if (fineThemes.includes(theme.id)) return <FineDiningTheme theme={theme} />
     
