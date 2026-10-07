@@ -1019,9 +1019,11 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
    ========================================================================= */
 export interface TemplateDirectoryPageProps {
   initialBusinessType?: string
+  initialCustomPrompt?: string
   onBack?: () => void
   onSelectBusinessType: (businessType: string, displayName: string, customPrompt?: string) => void
 }
+
 
 export const BUSINESS_TYPES: BusinessTypeItem[] = [
   {
@@ -1164,8 +1166,16 @@ export const ALL_OTHER_SUGGESTIONS: OtherSuggestionItem[] = [
   { id: 'portfolio', label: 'Portfolio', icon: '👤', prompt: 'Creative personal portfolio and resume showcase' },
 ]
 
-export function TemplateDirectoryPage({ initialBusinessType, onBack, onSelectBusinessType }: TemplateDirectoryPageProps) {
+export function TemplateDirectoryPage({
+  initialBusinessType,
+  initialCustomPrompt,
+  onBack,
+  onSelectBusinessType,
+}: TemplateDirectoryPageProps) {
   const [selectedType, setSelectedType] = useState<string>(() => {
+    if (initialCustomPrompt && (!initialBusinessType || initialBusinessType === 'other')) {
+      return 'other'
+    }
     if (initialBusinessType && BUSINESS_TYPES.some((b) => b.id === initialBusinessType && b.id !== 'other')) {
       return initialBusinessType
     }
@@ -1179,7 +1189,8 @@ export function TemplateDirectoryPage({ initialBusinessType, onBack, onSelectBus
     return null
   })
 
-  const [customPrompt, setCustomPrompt] = useState<string>('')
+  const [customPrompt, setCustomPrompt] = useState<string>(() => initialCustomPrompt || '')
+
   const [promptError, setPromptError] = useState<string | null>(null)
 
   const handleCardClick = (id: string) => {
@@ -1250,20 +1261,32 @@ export function TemplateDirectoryPage({ initialBusinessType, onBack, onSelectBus
       </header>
 
       <main className="directory-main">
-        {/* Stepper Header */}
-        <div className="stepper-container" aria-label="Step 1: What do you want to build?">
+        {/* Stepper Header: 3-step Unified Flow */}
+        <div className="stepper-container" aria-label="Step 2: Build your idea">
           <div className="stepper-item">
-            <span className="stepper-circle active">1</span>
-            <span className="stepper-label active">What do you want to build?</span>
+            <span className="stepper-circle completed">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </span>
+            <span className="stepper-label completed">1. Registration</span>
+          </div>
+
+          <div className="stepper-track completed" />
+
+          <div className="stepper-item">
+            <span className="stepper-circle active">2</span>
+            <span className="stepper-label active">2. Build your idea</span>
           </div>
 
           <div className="stepper-track step-1" />
 
           <div className="stepper-item">
-            <span className="stepper-circle inactive">2</span>
-            <span className="stepper-label inactive">Choose a template</span>
+            <span className="stepper-circle inactive">3</span>
+            <span className="stepper-label inactive">3. Choose template</span>
           </div>
         </div>
+
 
         {/* Directory Hero Title */}
         <section className="directory-intro directory-hero">
@@ -1672,24 +1695,36 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
       {/* Stepper & Category Title Section */}
       <section className="marketplace-hero-section">
         <div className="marketplace-stepper-wrap">
-          <div className="stepper-container" aria-label="Step 2: Choose a template">
+          <div className="stepper-container" aria-label="Step 3: Choose a template">
             <div className="stepper-item">
               <span className="stepper-circle completed">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </span>
-              <span className="stepper-label completed">What do you want to build?</span>
+              <span className="stepper-label completed">1. Registration</span>
             </div>
 
-            <div className="stepper-track step-2" />
+            <div className="stepper-track completed" />
 
             <div className="stepper-item">
-              <span className="stepper-circle active">2</span>
-              <span className="stepper-label active">Choose a template</span>
+              <span className="stepper-circle completed">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </span>
+              <span className="stepper-label completed">2. Build your idea</span>
+            </div>
+
+            <div className="stepper-track completed" />
+
+            <div className="stepper-item">
+              <span className="stepper-circle active">3</span>
+              <span className="stepper-label active">3. Choose template</span>
             </div>
           </div>
         </div>
+
 
         {/* Title and Context Badge for the Chosen Category */}
         <div className="marketplace-title-group">

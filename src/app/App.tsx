@@ -14,9 +14,9 @@ import type { Product } from '../types'
 import { AdminApp } from '../admin/AdminApp'
 import { useHashRoute } from '../admin/hooks/useHashRoute'
 import { useAuth, AuthProvider } from '../auth/AuthContext'
-import { ProgressSteps } from '../auth/ProgressSteps'
 import LoginPage from '../pages/LoginPage'
 import SignupPage from '../pages/SignupPage'
+
 
 const STORE_PROMISES = [
   ['Free delivery', 'On orders over ₹2,500'],
@@ -73,7 +73,7 @@ function ProductCard({
 function App() {
   const [showStore, setShowStore] = useState(false)
   const [currentPage, setCurrentPage] = useState<
-    'landing' | 'directory' | 'templates' | 'workspace' | 'login' | 'signup' | 'tell-us-your-idea'
+    'landing' | 'directory' | 'templates' | 'workspace' | 'login' | 'signup'
   >('landing')
   const [selectedBusinessType, setSelectedBusinessType] = useState('online-store')
   const [selectedBusinessTypeDisplay, setSelectedBusinessTypeDisplay] = useState('Online Store')
@@ -117,17 +117,12 @@ function App() {
         return
       }
 
-      if (rawHash === 'tell-us-your-idea') {
-        setCurrentPage('tell-us-your-idea')
-        document.title = 'Tell Us Your Idea | Willovate One'
+      if (rawHash === 'tell-us-your-idea' || rawHash === 'build-idea' || rawHash === 'directory' || rawHash === 'all-templates' || rawHash === 'explore-templates') {
+        setCurrentPage('directory')
+        document.title = 'Build Your Idea | Willovate One'
         return
       }
 
-      if (rawHash === 'directory' || rawHash === 'all-templates' || rawHash === 'explore-templates') {
-        setCurrentPage('directory')
-        document.title = 'What do you want to build? | Willovate One'
-        return
-      }
 
 
       if (rawHash === 'templates') {
@@ -311,11 +306,12 @@ function App() {
     setCartOpen(true)
   }
 
-  // 1. All Templates / Category Selection (Step 1: What do you want to build?)
+  // 1. All Templates / Category Selection (Step 2: Build your idea)
   if (currentPage === 'directory') {
     return (
       <TemplateDirectoryPage
         initialBusinessType={selectedBusinessType}
+        initialCustomPrompt={customPrompt}
         onBack={() => {
           setCurrentPage('landing')
           window.location.hash = ''
@@ -331,7 +327,7 @@ function App() {
     )
   }
 
-  // 2. Templates Page (Step 2: Choose a template for ANY of the 8 categories)
+  // 2. Templates Page (Step 3: Choose a template)
   if (currentPage === 'templates') {
     return (
       <CategoryTemplatesPage
@@ -369,18 +365,21 @@ function App() {
     )
   }
 
-  // 4. Auth Pages
+  // 4. Auth Pages (Step 1: Registration / Login)
   if (currentPage === 'signup') {
     return (
       <SignupPage
         onNavigateToLogin={() => {
+          setCurrentPage('login')
           window.location.hash = 'login'
         }}
         onNavigateHome={() => {
+          setCurrentPage('landing')
           window.location.hash = ''
         }}
         onAuthSuccess={() => {
-          window.location.hash = 'tell-us-your-idea'
+          setCurrentPage('directory')
+          window.location.hash = 'directory'
         }}
       />
     )
@@ -390,44 +389,22 @@ function App() {
     return (
       <LoginPage
         onNavigateToSignup={() => {
+          setCurrentPage('signup')
           window.location.hash = 'signup'
         }}
         onNavigateHome={() => {
+          setCurrentPage('landing')
           window.location.hash = ''
         }}
         onAuthSuccess={() => {
-          window.location.hash = 'tell-us-your-idea'
+          setCurrentPage('directory')
+          window.location.hash = 'directory'
         }}
       />
     )
   }
 
-  if (currentPage === 'tell-us-your-idea') {
-    return (
-      <div style={{ padding: '3rem', textAlign: 'center', fontFamily: 'sans-serif', maxWidth: '600px', margin: '0 auto' }}>
-        <div style={{ background: '#080d2a', padding: '1.5rem', borderRadius: '12px', marginBottom: '2rem' }}>
-          <ProgressSteps currentStep={2} />
-        </div>
-        <p className="kicker" style={{ color: 'var(--color-primary, #4f46e5)', fontWeight: 600 }}>Willovate One Onboarding · Step 02/03</p>
-        <h2>Tell Us Your Idea</h2>
-        <p style={{ maxWidth: '400px', margin: '1rem auto', color: '#666' }}>
-          Welcome, <strong>{customer?.firstName || 'Creator'}</strong>! This step is currently under development by the onboarding team.
-        </p>
-        <button
-          type="button"
-          onClick={() => {
-            window.location.hash = ''
-          }}
-          className="primary-link"
-          style={{ cursor: 'pointer', margin: '0 auto' }}
-        >
-          Return to Home
-        </button>
-      </div>
-    )
-  }
-
-  // 5. Landing Page
+  // 5. Willovate One Landing Page
   if (!showStore) {
     return (
       <LandingPage
@@ -435,20 +412,50 @@ function App() {
           setShowStore(true)
           window.location.hash = 'store'
         }}
+        onStartFree={() => {
+          if (isAuthenticated) {
+            setCurrentPage('directory')
+            window.location.hash = 'directory'
+          } else {
+            setCurrentPage('signup')
+            window.location.hash = 'signup'
+          }
+        }}
+        onSubmitPrompt={(prompt) => {
+          setCustomPrompt(prompt)
+          if (isAuthenticated) {
+            setCurrentPage('directory')
+            window.location.hash = 'directory'
+          } else {
+            setCurrentPage('signup')
+            window.location.hash = 'signup'
+          }
+        }}
         onExploreTemplates={() => {
-          setCurrentPage('directory')
-          window.location.hash = 'directory'
+          if (isAuthenticated) {
+            setCurrentPage('directory')
+            window.location.hash = 'directory'
+          } else {
+            setCurrentPage('signup')
+            window.location.hash = 'signup'
+          }
         }}
         onSelectCategory={(businessType) => {
           const cat = TEMPLATE_REGISTRY[businessType]
           setSelectedBusinessType(businessType)
           setSelectedBusinessTypeDisplay(cat ? cat.displayName : businessType)
-          setCurrentPage('templates')
-          window.location.hash = `${businessType}-templates`
+          if (isAuthenticated) {
+            setCurrentPage('templates')
+            window.location.hash = `${businessType}-templates`
+          } else {
+            setCurrentPage('signup')
+            window.location.hash = 'signup'
+          }
         }}
       />
     )
   }
+
 
   // 5. Storefront Page
   return (

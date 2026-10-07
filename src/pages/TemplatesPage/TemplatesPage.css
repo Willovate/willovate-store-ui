@@ -146,9 +146,11 @@
   background: linear-gradient(90deg, #2563eb 0 50%, #e2e8f0 50% 100%);
 }
 
-.stepper-track.step-2 {
-  background: linear-gradient(90deg, #e2e8f0 0 50%, #2563eb 50% 100%);
+.stepper-track.step-2,
+.stepper-track.completed {
+  background: #2563eb;
 }
+
 
 .directory-main {
   max-width: 90%;

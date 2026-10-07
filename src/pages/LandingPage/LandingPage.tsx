@@ -2405,10 +2405,21 @@ interface LandingPageProps {
   onGoToStore?: () => void
   onExploreTemplates?: () => void
   onSelectCategory?: (category: string) => void
+  onSubmitPrompt?: (prompt: string) => void
 }
 
-export function LandingPage({ onGoToStore, onExploreTemplates, onSelectCategory }: LandingPageProps = {}) {
+export function LandingPage({
+  onStartFree,
+  onGoToStore,
+  onExploreTemplates,
+  onSelectCategory,
+  onSubmitPrompt,
+}: LandingPageProps = {}) {
   const handleStartFree = () => {
+    if (onStartFree) {
+      onStartFree()
+      return
+    }
     const target =
       document.getElementById('categories') ||
       document.getElementById('product') ||
@@ -2422,12 +2433,21 @@ export function LandingPage({ onGoToStore, onExploreTemplates, onSelectCategory 
   }
 
   const handleAICommand = (command: string) => {
-    console.log('AI Command submitted:', command)
+    if (onSubmitPrompt) {
+      onSubmitPrompt(command)
+    } else {
+      console.log('AI Command submitted:', command)
+    }
   }
 
   const handleSelectPlan = (plan: string) => {
-    console.log('Selected plan:', plan)
+    if (plan === 'starter') {
+      handleStartFree()
+    } else {
+      console.log('Selected plan:', plan)
+    }
   }
+
 
   return (
     <div className="landing-page-wrapper">

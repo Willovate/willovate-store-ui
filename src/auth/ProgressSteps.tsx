@@ -14,10 +14,11 @@ export interface ProgressStepsProps {
 }
 
 export const ONBOARDING_STEPS = [
-  { number: '01 / 03', label: 'Create account' },
-  { number: '02 / 03', label: 'Tell us your idea' },
-  { number: '03 / 03', label: 'Review your starting point' },
+  { number: '01 / 03', label: 'Registration' },
+  { number: '02 / 03', label: 'Build your idea' },
+  { number: '03 / 03', label: 'Choose template' },
 ] as const
+
 
 export function ProgressSteps({
   currentStep,
