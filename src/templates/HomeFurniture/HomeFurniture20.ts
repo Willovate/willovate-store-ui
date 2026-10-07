@@ -88,10 +88,7 @@ export const HomeFurniture20: TemplateConfig = {
         { id: 'mat6', name: 'Marble', description: 'Italian Carrara.', image: 'https://images.unsplash.com/photo-1510505193026-668d2a677610?auto=format&fit=crop&q=80&w=600' }
       ]
     } },
-    { id: 's10', type: 'story', props: {
-      title: 'An Art of Living',
-      description: 'Maison Living presents a collection of timeless interiors defined by French-inspired proportion, uncompromising craftsmanship, and the finest natural materials. Furniture intended to live with you over time.'
-    } },
+    { id: 's10', type: 'story', props: {} },
     { id: 's11', type: 'testimonials', props: { 
       title: 'Client Reviews', 
       testimonials: [
@@ -100,7 +97,7 @@ export const HomeFurniture20: TemplateConfig = {
         { quote: 'A flawless integration of classic French design into a contemporary home. Truly timeless.', author: 'Margaux C.' }
       ] 
     } },
-    { id: 's12', type: 'newsletter', props: { title: 'From the Maison', subtitle: 'New collections, interiors, material stories and notes from the studio.' } },
+    { id: 's12', type: 'newsletter', props: {} },
     { id: 's13', type: 'footer', props: {} }
   ]
 }
