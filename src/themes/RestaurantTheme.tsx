@@ -7,6 +7,7 @@ import CafeTheme from './CafeTheme'
 import BakeryTheme from './BakeryTheme'
 import FastFoodTheme from './FastFoodTheme'
 import CloudKitchenTheme from './CloudKitchenTheme'
+import PizzaTheme from './PizzaTheme'
 import FoodTheme from './FoodTheme'
 import { buildFoodConfig } from './buildFoodConfig'
 import { RestaurantProvider, useRestaurant } from '../store/RestaurantContext'
@@ -547,7 +548,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
 
   // ── PIZZA ─────────────────────────────────────────────────────────────────
   'napoli-flame': {
-    id: 'napoli-flame', kind: 'cafe', name: 'Napoli Flame',
+    id: 'napoli-flame', kind: 'pizza', name: 'Napoli Flame',
     eyebrow: 'True Neapolitan pizza',
     heroTitle: 'From Naples, with love.',
     heroCopy: 'Hand-stretched dough, San Marzano tomatoes, and 90 seconds in a 485°C wood-fired oven.',
@@ -562,7 +563,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Margherita DOC', 'Diavola spicy salami', 'Prosciutto e rucola'],
   },
   'pizza-district': {
-    id: 'pizza-district', kind: 'cafe', name: 'Pizza District',
+    id: 'pizza-district', kind: 'pizza', name: 'Pizza District',
     eyebrow: 'Urban. Bold. Pizza.',
     heroTitle: 'Every slice tells a story.',
     heroCopy: 'An urban pizza brand with high-contrast graphics, rotating specials, and a neighbourhood edge.',
@@ -577,7 +578,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Classic pepperoni', 'BBQ pulled pork', 'Truffle & mushroom'],
   },
   'crust-and-co': {
-    id: 'crust-and-co', kind: 'cafe', name: 'Crust & Co.',
+    id: 'crust-and-co', kind: 'pizza', name: 'Crust & Co.',
     eyebrow: 'Refined pizza craft',
     heroTitle: 'The art of the crust.',
     heroCopy: 'Premium contemporary pizza with a refined ingredient story. Long ferment. Perfect crust.',
@@ -592,7 +593,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['White truffle bianca', 'Burrata & basil', 'Caramelised onion'],
   },
   'woodfire-90': {
-    id: 'woodfire-90', kind: 'cafe', name: 'Woodfire 90',
+    id: 'woodfire-90', kind: 'pizza', name: 'Woodfire 90',
     eyebrow: 'Artisan wood-fired pizza',
     heroTitle: 'Ninety seconds of fire.',
     heroCopy: 'Traditional wood-fired Neapolitan pizza at amber, craft-led intensity.',
@@ -607,7 +608,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Marinara classica', 'Nduja & honey', 'Seasonal special'],
   },
   'slice-society': {
-    id: 'slice-society', kind: 'cafe', name: 'Slice Society',
+    id: 'slice-society', kind: 'pizza', name: 'Slice Society',
     eyebrow: 'Pizza by the slice',
     heroTitle: 'Every slice, a different story.',
     heroCopy: "A youthful pizza concept with fast category navigation, rotating slices, and a vibe you won't forget.",
@@ -946,8 +947,10 @@ function InnerRestaurantTheme({ theme, compact = false, elements = [] }: { theme
   const fastFoodThemes = ['street-stack', 'crunch-club', 'burger-district', 'drive-and-dine', 'quick-bite']
   const cloudThemes = ['kitchen-x', 'ghost-kitchen', 'urban-batch', 'fresh-dispatch', 'kitchen-express']
   const fineThemes = ['noir-table', 'velvet-reserve', 'the-tasting-room', 'ember-and-oak', 'maison-gourmet']
+  const pizzaThemes = ['napoli-flame', 'pizza-district', 'crust-and-co', 'woodfire-90', 'slice-society']
 
   const renderTheme = () => {
+    if (pizzaThemes.includes(theme.id)) return <PizzaTheme theme={theme} />
     if (cloudThemes.includes(theme.id)) return <CloudKitchenTheme theme={theme} />
     if (bakeryThemes.includes(theme.id)) return <BakeryTheme theme={theme} />
     if (fastFoodThemes.includes(theme.id)) return <FastFoodTheme theme={theme} />
