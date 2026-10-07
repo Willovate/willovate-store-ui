@@ -9,6 +9,7 @@ import FastFoodTheme from './FastFoodTheme'
 import CloudKitchenTheme from './CloudKitchenTheme'
 import PizzaTheme from './PizzaTheme'
 import IndianTheme from './IndianTheme'
+import DessertTheme from './DessertTheme'
 import FoodTheme from './FoodTheme'
 import { buildFoodConfig } from './buildFoodConfig'
 import { RestaurantProvider, useRestaurant } from '../store/RestaurantContext'
@@ -703,7 +704,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
 
   // ── DESSERT SHOP ──────────────────────────────────────────────────────────
   'sugar-bloom': {
-    id: 'sugar-bloom', kind: 'cafe', name: 'Sugar Bloom',
+    id: 'sugar-bloom', kind: 'dessert', name: 'Sugar Bloom',
     eyebrow: 'Life is sweeter in colour',
     heroTitle: 'Made with love and a lot of sugar.',
     heroCopy: 'Soft pastels and fruit-forward desserts. Each creation is as beautiful as it is delicious.',
@@ -718,7 +719,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Raspberry pavlova', 'Mango tart', 'Pastel macaron box'],
   },
   'sweet-atelier': {
-    id: 'sweet-atelier', kind: 'cafe', name: 'Sweet Atelier',
+    id: 'sweet-atelier', kind: 'dessert', name: 'Sweet Atelier',
     eyebrow: 'Patisserie elevated',
     heroTitle: 'Dessert as fine art.',
     heroCopy: 'A luxurious patisserie with exacting editorial composition — handcrafted for those who take dessert seriously.',
@@ -733,7 +734,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Opera cake slice', 'Pistachio religieuse', 'Saint-Honoré'],
   },
   'cocoa-room': {
-    id: 'cocoa-room', kind: 'cafe', name: 'Cocoa Room',
+    id: 'cocoa-room', kind: 'dessert', name: 'Cocoa Room',
     eyebrow: 'For serious chocolate lovers',
     heroTitle: 'Every bar tells a story.',
     heroCopy: 'Deep chocolate tones and a rich, premium product focus. Bean-to-bar, bar-to-table.',
@@ -748,7 +749,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['70% dark truffle', 'Salted caramel bark', 'Hot chocolate pot'],
   },
   'sprinkle-studio': {
-    id: 'sprinkle-studio', kind: 'cafe', name: 'Sprinkle Studio',
+    id: 'sprinkle-studio', kind: 'dessert', name: 'Sprinkle Studio',
     eyebrow: 'Colourful. Playful. Delicious.',
     heroTitle: 'More sprinkles, please.',
     heroCopy: 'A playful modern dessert studio for colourful sweet discoveries — donuts, cakes, and pure joy.',
@@ -763,7 +764,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Rainbow sprinkle donut', 'Confetti cake pop', 'Birthday sundae'],
   },
   'velvet-cake': {
-    id: 'velvet-cake', kind: 'cafe', name: 'Velvet Cake',
+    id: 'velvet-cake', kind: 'dessert', name: 'Velvet Cake',
     eyebrow: 'Luxury cake boutique',
     heroTitle: 'Cakes worth celebrating.',
     heroCopy: 'An elegant cake boutique with velvet-toned detail. Custom cakes and celebration orders made with care.',
@@ -950,8 +951,10 @@ function InnerRestaurantTheme({ theme, compact = false, elements = [] }: { theme
   const fineThemes = ['noir-table', 'velvet-reserve', 'the-tasting-room', 'ember-and-oak', 'maison-gourmet']
   const pizzaThemes = ['napoli-flame', 'pizza-district', 'crust-and-co', 'woodfire-90', 'slice-society']
   const indianThemes = ['saffron-house', 'spice-route', 'masala-modern', 'tandoor-tales', 'royal-thali']
+  const dessertThemes = ['sugar-bloom', 'sweet-atelier', 'cocoa-room', 'sprinkle-studio', 'velvet-cake']
 
   const renderTheme = () => {
+    if (dessertThemes.includes(theme.id)) return <DessertTheme theme={theme} />
     if (indianThemes.includes(theme.id)) return <IndianTheme theme={theme} />
     if (pizzaThemes.includes(theme.id)) return <PizzaTheme theme={theme} />
     if (cloudThemes.includes(theme.id)) return <CloudKitchenTheme theme={theme} />
