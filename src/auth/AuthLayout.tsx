@@ -30,7 +30,6 @@ export function AuthLayout({
           aria-label="Willovate One home"
         >
           <WillovateLogo className="auth-brand-mark" />
-          <span>Willovate One</span>
         </a>
 
         <p className="auth-topbar-switch">

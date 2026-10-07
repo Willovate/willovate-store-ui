@@ -123,7 +123,7 @@ export const WillovateLogo: React.FC<{ onClick?: () => void }> = ({ onClick }) =
     aria-label="Willovate One Home"
   >
     <img
-      src="/willovate-logo.png"
+      src="/willovate-one-logo.png"
       alt="Willovate One"
       className="template-logo-img"
     />

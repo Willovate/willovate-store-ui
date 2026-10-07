@@ -32,7 +32,23 @@ export function WorkspacePage({
           boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
         }}
       >
-        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🎉</div>
+        <div style={{ marginBottom: '1.5rem', textAlign: 'center' }}>
+          <img
+            src="/willovate-one-logo.png"
+            alt="Willovate One"
+            style={{
+              height: '38px',
+              width: 'auto',
+              maxWidth: '180px',
+              objectFit: 'contain',
+              background: '#0b0d17',
+              padding: '6px 16px',
+              borderRadius: '8px',
+              display: 'inline-block',
+            }}
+          />
+        </div>
+        <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>🎉</div>
         <h1
           style={{
             fontSize: '1.75rem',

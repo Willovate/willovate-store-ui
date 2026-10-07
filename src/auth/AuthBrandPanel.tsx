@@ -165,7 +165,7 @@ export function AuthBrandPanel({ currentStep = 1, stepProgress }: AuthBrandPanel
         <div className="auth-orbit auth-orbit-three" />
         {ecosystemCards.map((card) => <EcosystemCard card={card} key={card.kind} />)}
         <div className="auth-network-core">
-          <WillovateLogo className="auth-network-logo" />
+          <WillovateLogo className="auth-network-logo" iconOnly={true} />
         </div>
       </div>
 

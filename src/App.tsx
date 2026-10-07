@@ -167,9 +167,8 @@ function MainApp() {
       </div>
 
       <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="Willovate Store home">
-          <img src="/willovate_icon.svg" alt="Willovate logo" className="site-header__logo-mark" />
-          willovate<span>.</span>
+        <a className="wordmark" href="#top" aria-label="Willovate One home" style={{ display: 'inline-flex', alignItems: 'center' }}>
+          <img src="/willovate-one-logo.png" alt="Willovate One" style={{ height: '28px', width: 'auto', objectFit: 'contain' }} />
         </a>
         <nav aria-label="Main navigation">
           <a href="#catalog">Shop</a>
@@ -359,9 +358,8 @@ function MainApp() {
       </main>
 
       <footer>
-        <a className="wordmark" href="#top">
-          <img src="/willovate_icon.svg" alt="Willovate logo" className="site-header__logo-mark" />
-          willovate<span>.</span>
+        <a className="wordmark" href="#top" style={{ display: 'inline-flex', alignItems: 'center' }}>
+          <img src="/willovate-one-logo.png" alt="Willovate One" style={{ height: '26px', width: 'auto', objectFit: 'contain' }} />
         </a>
         <p>Thoughtful goods for modern life.</p>
         <p>

@@ -116,11 +116,14 @@ html, body, #root {
   text-decoration: none;
   letter-spacing: -.01em;
 }
-.willovate-logo-img {
-  width: 25px;
-  height: 25px;
+.willovate-logo-img,
+.auth-brand-mark {
+  height: 32px;
+  width: auto;
+  max-width: 180px;
   object-fit: contain;
   flex-shrink: 0;
+  display: block;
 }
 .auth-topbar-switch,
 .auth-bottom-switch {

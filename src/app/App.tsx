@@ -494,9 +494,14 @@ function App() {
             setShowStore(false)
             window.location.hash = ''
           }}
-          aria-label="Willovate Store home"
+          aria-label="Willovate One home"
+          style={{ display: 'inline-flex', alignItems: 'center' }}
         >
-          willovate<span>.</span>
+          <img
+            src="/willovate-one-logo.png"
+            alt="Willovate One"
+            style={{ height: '30px', width: 'auto', objectFit: 'contain' }}
+          />
         </a>
         <nav aria-label="Main navigation">
           <a href="#catalog">Shop</a>
@@ -693,8 +698,13 @@ function App() {
             setShowStore(false)
             window.location.hash = ''
           }}
+          style={{ display: 'inline-flex', alignItems: 'center' }}
         >
-          willovate<span>.</span>
+          <img
+            src="/willovate-one-logo.png"
+            alt="Willovate One"
+            style={{ height: '26px', width: 'auto', objectFit: 'contain' }}
+          />
         </a>
         <p>Thoughtful goods for modern life.</p>
         <p>© {new Date().getFullYear()} Willovate Store</p>
