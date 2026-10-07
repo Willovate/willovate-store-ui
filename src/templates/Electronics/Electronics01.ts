@@ -30,8 +30,19 @@ export const Electronics01: TemplateConfig = {
     }},
     { id: 's6', type: 'bento-grid', props: { title: 'Innovating the Everyday', items: [{ title: 'All-day battery', description: 'Up to 24 hours of use.', image: 'https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&q=80&w=600', size: 'large' }, { title: 'Titanium frame', description: 'Lighter and stronger.' }, { title: 'A17 Chip', description: 'Next-generation performance.' }] } },
     { id: 's7', type: 'product-spotlight', props: { image: 'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&q=80&w=800', name: 'AeroBuds Pro', category: 'Audio', description: 'Experience sound like never before with industry-leading Active Noise Cancellation and spatial audio.', price: 249, features: ['Active Noise Cancellation', 'Spatial Audio', '30h battery life with case'], imageRight: true, badge: 'New' } },
-    { id: 's8', type: 'newsletter', props: {} },
-    { id: 's9', type: 'footer', props: {} }
+    { id: 's8', type: 'testimonials', props: { title: '', testimonials: [{ quote: 'The Nova X Pro is a masterclass in industrial design and raw performance.', author: 'Tech Today', role: 'Editor\'s Choice' }, { quote: 'Unparalleled battery life and the best display on the market right now.', author: 'Marcus C.', role: 'Tech Reviewer' }, { quote: 'The AeroBuds Pro deliver the cleanest sound profile I\'ve experienced in wireless audio.', author: 'Elena S.', role: 'Audio Engineer' }] } },
+    { id: 's9', type: 'feature-comparison', props: { title: 'Compare Models', products: [{ name: 'Nova X', price: 799 }, { name: 'Nova X Pro', price: 999, isHighlighted: true }], rows: [{ label: 'Display', values: ['6.1" OLED, 60Hz', '6.7" OLED, 120Hz ProMotion'] }, { label: 'Processor', values: ['A16 Chip', 'A17 Pro Chip'] }, { label: 'Camera', values: ['Dual 12MP System', 'Pro 48MP System'] }, { label: 'Battery', values: ['Up to 20 hours', 'Up to 24 hours'] }, { label: 'Material', values: ['Aerospace Aluminum', 'Grade 5 Titanium'] }] } },
+    { id: 's10', type: 'catalog', props: {
+      title: 'Complete the Setup',
+      products: [
+        { id: 'na1', name: 'Nova MagCharge', description: 'Wireless charging accessory', price: 49, imageUrl: 'https://images.unsplash.com/photo-1628126235206-5260b9ea6441?auto=format&fit=crop&q=80&w=600' },
+        { id: 'na2', name: 'Nova Shield Case', description: 'Premium protective case', price: 59, imageUrl: 'https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&q=80&w=600' },
+        { id: 'na3', name: 'Nova Power 65', description: 'USB-C fast charger', price: 39, imageUrl: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&q=80&w=600' },
+        { id: 'na4', name: 'Nova Link Cable', description: 'Braided USB-C charging cable', price: 29, imageUrl: 'https://images.unsplash.com/photo-1542393545-10f5cde2c810?auto=format&fit=crop&q=80&w=600' }
+      ]
+    }},
+    { id: 's11', type: 'newsletter', props: {} },
+    { id: 's12', type: 'footer', props: {} }
   ],
   navigation: [
     { label: 'Shop', href: '#shop' },
