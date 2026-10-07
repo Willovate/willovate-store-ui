@@ -11,6 +11,7 @@ import PizzaTheme from './PizzaTheme'
 import IndianTheme from './IndianTheme'
 import DessertTheme from './DessertTheme'
 import DeliveryTheme from './DeliveryTheme'
+import BbqTheme from './BbqTheme'
 import FoodTheme from './FoodTheme'
 import { buildFoodConfig } from './buildFoodConfig'
 import { RestaurantProvider, useRestaurant } from '../store/RestaurantContext'
@@ -859,7 +860,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
 
   // ── BBQ / GRILL ───────────────────────────────────────────────────────────
   'smokehouse-77': {
-    id: 'smokehouse-77', kind: 'cafe', name: 'Smokehouse 77',
+    id: 'smokehouse-77', kind: 'bbq', name: 'Smokehouse 77',
     eyebrow: "Low & slow since '77",
     heroTitle: 'This is what smoke tastes like.',
     heroCopy: 'Charcoal pits, ember orange, and premium smokehouse cuts slow-cooked to perfection.',
@@ -874,7 +875,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Texas brisket plate', 'St Louis ribs rack', 'Pulled pork slider'],
   },
   'grill-republic': {
-    id: 'grill-republic', kind: 'cafe', name: 'Grill Republic',
+    id: 'grill-republic', kind: 'bbq', name: 'Grill Republic',
     eyebrow: 'The republic of great grilling',
     heroTitle: 'Where fire makes the rules.',
     heroCopy: 'Industrial steel, black and red, with a strong menu grid and a grill that never goes cold.',
@@ -889,7 +890,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Prime ribeye', 'Grill republic platter', 'Charred veggie skewers'],
   },
   'fire-and-rib': {
-    id: 'fire-and-rib', kind: 'cafe', name: 'Fire & Rib',
+    id: 'fire-and-rib', kind: 'bbq', name: 'Fire & Rib',
     eyebrow: 'Rustic fire & smoke',
     heroTitle: 'The rib is everything.',
     heroCopy: 'Hand-crafted barbecue ribs slow-cooked over real wood fire. No shortcuts. No compromise.',
@@ -904,7 +905,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Baby back ribs', 'Fire-smoked wings', 'Jalapeño corn bread'],
   },
   'backyard-barbeque': {
-    id: 'backyard-barbeque', kind: 'cafe', name: 'Backyard Barbeque',
+    id: 'backyard-barbeque', kind: 'bbq', name: 'Backyard Barbeque',
     eyebrow: 'Family grilling, elevated',
     heroTitle: 'Gather around the grill.',
     heroCopy: 'Warm outdoor barbecue for the whole family. Easy combos, big flavours, better memories.',
@@ -919,7 +920,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Family BBQ combo', 'Grilled chicken feast', 'Loaded potato side'],
   },
   'kebab-kingdom': {
-    id: 'kebab-kingdom', kind: 'cafe', name: 'Kebab Kingdom',
+    id: 'kebab-kingdom', kind: 'bbq', name: 'Kebab Kingdom',
     eyebrow: 'Middle Eastern skewer craft',
     heroTitle: 'Rule the skewer.',
     heroCopy: 'Warm Middle Eastern-inspired skewer dining with fragrant spices, charred meats, and elegant flavour.',
@@ -954,8 +955,10 @@ function InnerRestaurantTheme({ theme, compact = false, elements = [] }: { theme
   const indianThemes = ['saffron-house', 'spice-route', 'masala-modern', 'tandoor-tales', 'royal-thali']
   const dessertThemes = ['sugar-bloom', 'sweet-atelier', 'cocoa-room', 'sprinkle-studio', 'velvet-cake']
   const deliveryThemes = ['foodflow', 'dashdish', 'mealdrop', 'cravego', 'bitenow']
+  const bbqThemes = ['smokehouse-77', 'grill-republic', 'fire-and-rib', 'backyard-barbeque', 'kebab-kingdom']
 
   const renderTheme = () => {
+    if (bbqThemes.includes(theme.id)) return <BbqTheme theme={theme} />
     if (deliveryThemes.includes(theme.id)) return <DeliveryTheme theme={theme} />
     if (dessertThemes.includes(theme.id)) return <DessertTheme theme={theme} />
     if (indianThemes.includes(theme.id)) return <IndianTheme theme={theme} />
