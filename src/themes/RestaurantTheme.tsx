@@ -6,6 +6,7 @@ import FineDiningTheme from './FineDiningTheme'
 import CafeTheme from './CafeTheme'
 import BakeryTheme from './BakeryTheme'
 import FastFoodTheme from './FastFoodTheme'
+import CloudKitchenTheme from './CloudKitchenTheme'
 import FoodTheme from './FoodTheme'
 import { buildFoodConfig } from './buildFoodConfig'
 import { RestaurantProvider, useRestaurant } from '../store/RestaurantContext'
@@ -469,7 +470,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
 
   // ── CLOUD KITCHEN ─────────────────────────────────────────────────────────
   'kitchen-x': {
-    id: 'kitchen-x', kind: 'cafe', name: 'Kitchen X',
+    id: 'kitchen-x', kind: 'cloud-kitchen', name: 'Kitchen X',
     eyebrow: 'Delivery-first. Always.',
     heroTitle: 'The kitchen you never see. The food you never forget.',
     heroCopy: 'A futuristic dark kitchen powering multiple virtual brands. Order from one, taste from many.',
@@ -484,7 +485,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Signature delivery bowl', "Chef's loaded box", 'Express combo meal'],
   },
   'ghost-kitchen': {
-    id: 'ghost-kitchen', kind: 'cafe', name: 'Ghost Kitchen',
+    id: 'ghost-kitchen', kind: 'cloud-kitchen', name: 'Ghost Kitchen',
     eyebrow: 'Virtually delicious',
     heroTitle: 'Multiple menus. One kitchen.',
     heroCopy: 'Editorial delivery design for the new era of virtual restaurants. Ghost-brand food, real-world flavour.',
@@ -499,7 +500,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Ghost burger', 'Delivery pasta box', 'Loaded noodle bowl'],
   },
   'urban-batch': {
-    id: 'urban-batch', kind: 'cafe', name: 'Urban Batch',
+    id: 'urban-batch', kind: 'cloud-kitchen', name: 'Urban Batch',
     eyebrow: 'Batch-cooked. Fast-delivered.',
     heroTitle: 'Everyday meals, elevated.',
     heroCopy: 'Thoughtfully batch-cooked meals for busy people. Nutritious, balanced, and delivered fresh to you.',
@@ -514,7 +515,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Grain & roast bowl', 'Seasonal stew batch', 'Protein power box'],
   },
   'fresh-dispatch': {
-    id: 'fresh-dispatch', kind: 'cafe', name: 'Fresh Dispatch',
+    id: 'fresh-dispatch', kind: 'cloud-kitchen', name: 'Fresh Dispatch',
     eyebrow: 'Farm fresh. Door delivered.',
     heroTitle: 'Fresh ingredients, faster than you think.',
     heroCopy: 'Bright, light delivery-first cooking with transparent sourcing and farm-to-table honesty.',
@@ -529,7 +530,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Harvest veggie box', 'Fresh salmon poke', 'Summer grain salad'],
   },
   'kitchen-express': {
-    id: 'kitchen-express', kind: 'cafe', name: 'Kitchen Express',
+    id: 'kitchen-express', kind: 'cloud-kitchen', name: 'Kitchen Express',
     eyebrow: 'Speed meets quality',
     heroTitle: 'Your order, on its way.',
     heroCopy: 'A fast, mobile-first ordering platform connecting kitchens to customers in record time.',
@@ -943,9 +944,11 @@ function InnerRestaurantTheme({ theme, compact = false, elements = [] }: { theme
   const cafeThemes = ['morning-ritual', 'brew-house', 'corner-cafe', 'latte-lane', 'the-daily-grind']
   const bakeryThemes = ['butter-and-bloom', 'oven-and-crumb', 'parisian-crust', 'golden-loaf', 'daily-bread-co']
   const fastFoodThemes = ['street-stack', 'crunch-club', 'burger-district', 'drive-and-dine', 'quick-bite']
+  const cloudThemes = ['kitchen-x', 'ghost-kitchen', 'urban-batch', 'fresh-dispatch', 'kitchen-express']
   const fineThemes = ['noir-table', 'velvet-reserve', 'the-tasting-room', 'ember-and-oak', 'maison-gourmet']
 
   const renderTheme = () => {
+    if (cloudThemes.includes(theme.id)) return <CloudKitchenTheme theme={theme} />
     if (bakeryThemes.includes(theme.id)) return <BakeryTheme theme={theme} />
     if (fastFoodThemes.includes(theme.id)) return <FastFoodTheme theme={theme} />
     if (cafeThemes.includes(theme.id)) return <CafeTheme theme={theme} />
