@@ -54,7 +54,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
 
   // ── FINE DINING ───────────────────────────────────────────────────────────
   'noir-table': {
-    id: 'noir-table', kind: 'fine', name: 'Noir Table',
+    id: 'noir-table', kind: 'fine', name: 'Noir & Savor',
     eyebrow: 'A destination for fire & flavour',
     heroTitle: 'Dining after dark.',
     heroCopy: 'A cinematic tasting menu shaped by flame, season and quiet indulgence.',
@@ -90,7 +90,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Ember roasted scallop', 'Aged duck with cherries', 'Dark chocolate & smoke'],
   },
   'velvet-reserve': {
-    id: 'velvet-reserve', kind: 'fine', name: 'Velvet Reserve',
+    id: 'velvet-reserve', kind: 'fine', name: 'Velvet Fork',
     eyebrow: 'Evenings by candlelight',
     heroTitle: 'Save a table for romance.',
     heroCopy: 'An intimate dining room, a considered glass of wine, and a menu written for lingering.',
@@ -126,7 +126,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Truffle agnolotti', 'Rosemary lamb', 'Vanilla mille-feuille'],
   },
   'the-tasting-room': {
-    id: 'the-tasting-room', kind: 'fine', name: 'The Tasting Room',
+    id: 'the-tasting-room', kind: 'fine', name: 'Maison Étoile',
     eyebrow: 'A seasonal tasting menu',
     heroTitle: 'The table tells the story.',
     heroCopy: 'Twelve thoughtful courses, served at an unhurried pace in the heart of the city.',
@@ -162,7 +162,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Garden pea & caviar', 'Line-caught turbot', 'Honeyed pear'],
   },
   'ember-and-oak': {
-    id: 'ember-and-oak', kind: 'fine', name: 'Ember & Oak',
+    id: 'ember-and-oak', kind: 'fine', name: 'Lumière',
     eyebrow: 'Wood. Fire. Craft.',
     heroTitle: 'Made over an open flame.',
     heroCopy: 'Ingredient-led cooking from our hearth to your table, with smoke in the air and warmth in every course.',
@@ -198,7 +198,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Charred leeks & hazelnut', 'Oak-grilled ribeye', 'Burnt honey tart'],
   },
   'maison-gourmet': {
-    id: 'maison-gourmet', kind: 'fine', name: 'Maison Gourmet',
+    id: 'maison-gourmet', kind: 'fine', name: 'The Ivory Table',
     eyebrow: 'Cuisine française · depuis 1998',
     heroTitle: 'Simple things, beautifully done.',
     heroCopy: 'A light-filled bistro where classic French technique meets the rhythm of a modern neighbourhood.',
@@ -942,8 +942,7 @@ function InnerRestaurantTheme({ theme, compact = false, elements = [] }: { theme
   const fineThemes = ['noir-table', 'velvet-reserve', 'the-tasting-room', 'ember-and-oak', 'maison-gourmet']
 
   const renderTheme = () => {
-    if (theme.id === 'morning-ritual') return <MorningRitualTheme />
-    if (cafeThemes.includes(theme.id) && theme.id !== 'morning-ritual') return <CafeTheme theme={theme} />
+    if (cafeThemes.includes(theme.id)) return <CafeTheme theme={theme} />
     if (fineThemes.includes(theme.id)) return <FineDiningTheme theme={theme} />
     
     // Use the new FoodTheme architecture for the remaining 40 themes
