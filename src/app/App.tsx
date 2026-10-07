@@ -13,6 +13,10 @@ import { useCart } from '../hooks/useCart'
 import type { Product } from '../types'
 import { AdminApp } from '../admin/AdminApp'
 import { useHashRoute } from '../admin/hooks/useHashRoute'
+import { useAuth, AuthProvider } from '../auth/AuthContext'
+import { ProgressSteps } from '../auth/ProgressSteps'
+import LoginPage from '../pages/LoginPage'
+import SignupPage from '../pages/SignupPage'
 
 const STORE_PROMISES = [
   ['Free delivery', 'On orders over ₹2,500'],
@@ -68,7 +72,9 @@ function ProductCard({
 
 function App() {
   const [showStore, setShowStore] = useState(false)
-  const [currentPage, setCurrentPage] = useState<'landing' | 'directory' | 'templates' | 'workspace'>('landing')
+  const [currentPage, setCurrentPage] = useState<
+    'landing' | 'directory' | 'templates' | 'workspace' | 'login' | 'signup' | 'tell-us-your-idea'
+  >('landing')
   const [selectedBusinessType, setSelectedBusinessType] = useState('online-store')
   const [selectedBusinessTypeDisplay, setSelectedBusinessTypeDisplay] = useState('Online Store')
   const [customPrompt, setCustomPrompt] = useState('')
@@ -83,8 +89,9 @@ function App() {
   const [newsletterSent, setNewsletterSent] = useState(false)
   const deferredSearch = useDeferredValue(search)
   const cart = useCart()
+  const { isAuthenticated, customer, logout } = useAuth()
 
-  // URL Hash Synchronizer Supporting All 8 Categories
+  // URL Hash Synchronizer Supporting All 8 Categories & Auth
   useEffect(() => {
     const handleHash = () => {
       const rawHash = window.location.hash.toLowerCase().replace(/^#/, '')
@@ -98,11 +105,30 @@ function App() {
 
       setShowStore(false)
 
+      if (rawHash === 'login') {
+        setCurrentPage('login')
+        document.title = 'Log in | Willovate One'
+        return
+      }
+
+      if (rawHash === 'signup' || rawHash === 'register') {
+        setCurrentPage('signup')
+        document.title = 'Create your account | Willovate One'
+        return
+      }
+
+      if (rawHash === 'tell-us-your-idea') {
+        setCurrentPage('tell-us-your-idea')
+        document.title = 'Tell Us Your Idea | Willovate One'
+        return
+      }
+
       if (rawHash === 'directory' || rawHash === 'all-templates' || rawHash === 'explore-templates') {
         setCurrentPage('directory')
         document.title = 'What do you want to build? | Willovate One'
         return
       }
+
 
       if (rawHash === 'templates') {
         setCurrentPage('landing')
@@ -343,7 +369,65 @@ function App() {
     )
   }
 
-  // 4. Landing Page
+  // 4. Auth Pages
+  if (currentPage === 'signup') {
+    return (
+      <SignupPage
+        onNavigateToLogin={() => {
+          window.location.hash = 'login'
+        }}
+        onNavigateHome={() => {
+          window.location.hash = ''
+        }}
+        onAuthSuccess={() => {
+          window.location.hash = 'tell-us-your-idea'
+        }}
+      />
+    )
+  }
+
+  if (currentPage === 'login') {
+    return (
+      <LoginPage
+        onNavigateToSignup={() => {
+          window.location.hash = 'signup'
+        }}
+        onNavigateHome={() => {
+          window.location.hash = ''
+        }}
+        onAuthSuccess={() => {
+          window.location.hash = 'tell-us-your-idea'
+        }}
+      />
+    )
+  }
+
+  if (currentPage === 'tell-us-your-idea') {
+    return (
+      <div style={{ padding: '3rem', textAlign: 'center', fontFamily: 'sans-serif', maxWidth: '600px', margin: '0 auto' }}>
+        <div style={{ background: '#080d2a', padding: '1.5rem', borderRadius: '12px', marginBottom: '2rem' }}>
+          <ProgressSteps currentStep={2} />
+        </div>
+        <p className="kicker" style={{ color: 'var(--color-primary, #4f46e5)', fontWeight: 600 }}>Willovate One Onboarding · Step 02/03</p>
+        <h2>Tell Us Your Idea</h2>
+        <p style={{ maxWidth: '400px', margin: '1rem auto', color: '#666' }}>
+          Welcome, <strong>{customer?.firstName || 'Creator'}</strong>! This step is currently under development by the onboarding team.
+        </p>
+        <button
+          type="button"
+          onClick={() => {
+            window.location.hash = ''
+          }}
+          className="primary-link"
+          style={{ cursor: 'pointer', margin: '0 auto' }}
+        >
+          Return to Home
+        </button>
+      </div>
+    )
+  }
+
+  // 5. Landing Page
   if (!showStore) {
     return (
       <LandingPage
@@ -411,11 +495,49 @@ function App() {
           <a href="#catalog">Shop</a>
           <a href="#story">Our story</a>
           <a href="#newsletter">Journal</a>
-
         </nav>
-        <button className="cart-trigger" type="button" onClick={() => setCartOpen(true)}>
-          Bag <span>{cart.count}</span>
-        </button>
+        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+          {isAuthenticated ? (
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', fontSize: '0.875rem' }}>
+              <span>Hi, {customer?.firstName || 'Account'}</span>
+              <button
+                type="button"
+                onClick={logout}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline', color: '#666' }}
+              >
+                Log out
+              </button>
+            </div>
+          ) : (
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+              <button
+                type="button"
+                onClick={() => { window.location.hash = 'login' }}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '0.875rem' }}
+              >
+                Log in
+              </button>
+              <button
+                type="button"
+                onClick={() => { window.location.hash = 'signup' }}
+                style={{
+                  padding: '0.4rem 0.8rem',
+                  borderRadius: '9999px',
+                  border: '1px solid #111',
+                  background: '#111',
+                  color: '#fff',
+                  cursor: 'pointer',
+                  fontSize: '0.875rem',
+                }}
+              >
+                Sign up
+              </button>
+            </div>
+          )}
+          <button className="cart-trigger" type="button" onClick={() => setCartOpen(true)}>
+            Bag <span>{cart.count}</span>
+          </button>
+        </div>
       </header>
 
       <main id="top">
@@ -614,7 +736,7 @@ function App() {
   )
 }
 
-// ── AppRouter — thin wrapper that handles admin vs main flow ──────────────────
+// ── AppRouter — thin wrapper that handles admin vs main flow with AuthProvider ──
 
 function AppRouter() {
   const hash = useHashRoute()
@@ -622,4 +744,10 @@ function AppRouter() {
   return <App />
 }
 
-export default AppRouter
+export default function RootApp() {
+  return (
+    <AuthProvider>
+      <AppRouter />
+    </AuthProvider>
+  )
+}

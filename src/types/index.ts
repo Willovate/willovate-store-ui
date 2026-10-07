@@ -207,3 +207,30 @@ export interface BusinessTypeItem {
   tone: string
   iconSvg: React.ReactNode
 }
+
+export interface RegisterRequest {
+  email: string
+  password: string
+  firstName: string
+  lastName: string
+}
+
+export interface LoginRequest {
+  email: string
+  password: string
+}
+
+export interface Customer {
+  id: string
+  email: string
+  firstName: string
+  lastName: string
+  createdAt: string
+}
+
+export interface AuthResponse {
+  accessToken: string
+  expiresInSeconds: number
+  customer: Customer
+}
+

@@ -3,9 +3,14 @@ import './App.css'
 import { getProducts } from './lib/api'
 import { formatCurrency } from './lib/currency'
 import { useCart } from './hooks/useCart'
+import { useAuth } from './auth/AuthContext'
+import { ProgressSteps } from './auth/ProgressSteps'
+import SignupPage from './pages/SignupPage'
+import LoginPage from './pages/LoginPage'
 import type { Product } from './types'
 import { AdminApp } from './admin/AdminApp'
 import { useHashRoute } from './admin/hooks/useHashRoute'
+
 
 const STORE_PROMISES = [
   ['Free delivery', 'On orders over ₹2,500'],
@@ -64,9 +69,7 @@ function ProductCard({
   )
 }
 
-// ── Storefront (all existing App content, renamed) ─────────────────────────
-
-function StoreApp() {
+function MainApp() {
   const [products, setProducts] = useState<Product[]>([])
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('All')
@@ -75,8 +78,10 @@ function StoreApp() {
   const [reloadKey, setReloadKey] = useState(0)
   const [cartOpen, setCartOpen] = useState(false)
   const [newsletterSent, setNewsletterSent] = useState(false)
+  const [currentView, setCurrentView] = useState<'store' | 'signup' | 'login' | 'tell-us-your-idea'>('store')
   const deferredSearch = useDeferredValue(search)
   const cart = useCart()
+  const { isAuthenticated, customer, logout } = useAuth()
 
   useEffect(() => {
     const controller = new AbortController()
@@ -110,6 +115,50 @@ function StoreApp() {
     setCartOpen(true)
   }
 
+  if (currentView === 'signup') {
+    return (
+      <SignupPage
+        onNavigateToLogin={() => setCurrentView('login')}
+        onNavigateHome={() => setCurrentView('store')}
+        onAuthSuccess={() => setCurrentView('tell-us-your-idea')}
+      />
+    )
+  }
+
+  if (currentView === 'login') {
+    return (
+      <LoginPage
+        onNavigateToSignup={() => setCurrentView('signup')}
+        onNavigateHome={() => setCurrentView('store')}
+        onAuthSuccess={() => setCurrentView('tell-us-your-idea')}
+      />
+    )
+  }
+
+  if (currentView === 'tell-us-your-idea') {
+    return (
+      <div style={{ padding: '3rem', textAlign: 'center', fontFamily: 'sans-serif', maxWidth: '600px', margin: '0 auto' }}>
+        <div style={{ background: '#080d2a', padding: '1.5rem', borderRadius: '12px', marginBottom: '2rem' }}>
+          <ProgressSteps currentStep={2} />
+        </div>
+        <p className="kicker" style={{ color: 'var(--color-primary, #4f46e5)', fontWeight: 600 }}>Willovate One Onboarding · Step 02/03</p>
+        <h2>Tell Us Your Idea</h2>
+        <p style={{ maxWidth: '400px', margin: '1rem auto', color: '#666' }}>
+          Welcome, <strong>{customer?.firstName || 'Creator'}</strong>! This step is currently under development by the onboarding team.
+        </p>
+        <button
+          type="button"
+          onClick={() => setCurrentView('store')}
+          className="primary-link"
+          style={{ cursor: 'pointer', margin: '0 auto' }}
+        >
+          Return to Store
+        </button>
+      </div>
+    )
+  }
+
+
   return (
     <div className="site-shell">
       <div className="announcement">
@@ -127,10 +176,50 @@ function StoreApp() {
           <a href="#story">Our story</a>
           <a href="#newsletter">Journal</a>
         </nav>
-        <button className="cart-trigger" type="button" onClick={() => setCartOpen(true)}>
-          Bag <span>{cart.count}</span>
-        </button>
+        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+          {isAuthenticated ? (
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', fontSize: '0.875rem' }}>
+              <span>Hi, {customer?.firstName || 'Account'}</span>
+              <button
+                type="button"
+                onClick={logout}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline', color: '#666' }}
+              >
+                Log out
+              </button>
+            </div>
+          ) : (
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+              <button
+                type="button"
+                onClick={() => setCurrentView('login')}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '0.875rem' }}
+              >
+                Log in
+              </button>
+              <button
+                type="button"
+                onClick={() => setCurrentView('signup')}
+                style={{
+                  padding: '0.4rem 0.8rem',
+                  borderRadius: '9999px',
+                  border: '1px solid #111',
+                  background: '#111',
+                  color: '#fff',
+                  cursor: 'pointer',
+                  fontSize: '0.875rem',
+                }}
+              >
+                Sign up
+              </button>
+            </div>
+          )}
+          <button className="cart-trigger" type="button" onClick={() => setCartOpen(true)}>
+            Bag <span>{cart.count}</span>
+          </button>
+        </div>
       </header>
+
 
       <main id="top">
         <section className="hero-section">
@@ -325,12 +414,21 @@ function StoreApp() {
   )
 }
 
-// ── App — thin hash router ─────────────────────────────────────────────────
+// ── App — thin hash router with AuthProvider ───────────────────────────────
 
-function App() {
+import { AuthProvider } from './auth/AuthContext'
+
+function AppRouter() {
   const hash = useHashRoute()
   if (hash.startsWith('#/admin')) return <AdminApp hash={hash} />
-  return <StoreApp />
+  return <MainApp />
 }
 
-export default App
+export default function App() {
+  return (
+    <AuthProvider>
+      <AppRouter />
+    </AuthProvider>
+  )
+}
+
