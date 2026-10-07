@@ -10,6 +10,7 @@ import CloudKitchenTheme from './CloudKitchenTheme'
 import PizzaTheme from './PizzaTheme'
 import IndianTheme from './IndianTheme'
 import DessertTheme from './DessertTheme'
+import DeliveryTheme from './DeliveryTheme'
 import FoodTheme from './FoodTheme'
 import { buildFoodConfig } from './buildFoodConfig'
 import { RestaurantProvider, useRestaurant } from '../store/RestaurantContext'
@@ -781,7 +782,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
 
   // ── FOOD DELIVERY ─────────────────────────────────────────────────────────
   'foodflow': {
-    id: 'foodflow', kind: 'cafe', name: 'FoodFlow',
+    id: 'foodflow', kind: 'delivery', name: 'FoodFlow',
     eyebrow: 'Your city. Your food.',
     heroTitle: 'Discover. Order. Enjoy.',
     heroCopy: 'A modern food marketplace connecting you with the best restaurants in your city. Fast, fresh, effortless.',
@@ -796,7 +797,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Top pick today', 'Restaurant of the week', 'Lightning fast meal'],
   },
   'dashdish': {
-    id: 'dashdish', kind: 'cafe', name: 'DashDish',
+    id: 'dashdish', kind: 'delivery', name: 'DashDish',
     eyebrow: 'Speed & flavour, guaranteed',
     heroTitle: 'Your cravings, delivered.',
     heroCopy: 'Fast delivery identity with prominent live tracking, curated offers, and food that arrives hot.',
@@ -811,7 +812,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Dash burger combo', 'Express noodle box', 'Rush hour special'],
   },
   'mealdrop': {
-    id: 'mealdrop', kind: 'cafe', name: 'MealDrop',
+    id: 'mealdrop', kind: 'delivery', name: 'MealDrop',
     eyebrow: 'Local food, local love',
     heroTitle: 'The best local meals, dropped at your door.',
     heroCopy: 'A curated delivery platform centred on supporting neighbourhood restaurants with real food.',
@@ -826,7 +827,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Local kitchen pick', 'Neighbourhood pasta', 'Community lunch box'],
   },
   'bitenow': {
-    id: 'bitenow', kind: 'cafe', name: 'BiteNow',
+    id: 'bitenow', kind: 'delivery', name: 'BiteNow',
     eyebrow: "Hungry? We're ready.",
     heroTitle: 'Order now. Eat fast.',
     heroCopy: 'A bold mobile-first ordering experience for immediate cravings. Tap, order, bite.',
@@ -841,7 +842,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Instant burger', 'Quick-bite bowl', 'Power protein box'],
   },
   'cravego': {
-    id: 'cravego', kind: 'cafe', name: 'CraveGo',
+    id: 'cravego', kind: 'delivery', name: 'CraveGo',
     eyebrow: 'Premium food delivery',
     heroTitle: 'Satisfy every craving.',
     heroCopy: 'A polished premium marketplace for food and daily convenience. Curated restaurants, guaranteed quality.',
@@ -952,8 +953,10 @@ function InnerRestaurantTheme({ theme, compact = false, elements = [] }: { theme
   const pizzaThemes = ['napoli-flame', 'pizza-district', 'crust-and-co', 'woodfire-90', 'slice-society']
   const indianThemes = ['saffron-house', 'spice-route', 'masala-modern', 'tandoor-tales', 'royal-thali']
   const dessertThemes = ['sugar-bloom', 'sweet-atelier', 'cocoa-room', 'sprinkle-studio', 'velvet-cake']
+  const deliveryThemes = ['foodflow', 'dashdish', 'mealdrop', 'cravego', 'bitenow']
 
   const renderTheme = () => {
+    if (deliveryThemes.includes(theme.id)) return <DeliveryTheme theme={theme} />
     if (dessertThemes.includes(theme.id)) return <DessertTheme theme={theme} />
     if (indianThemes.includes(theme.id)) return <IndianTheme theme={theme} />
     if (pizzaThemes.includes(theme.id)) return <PizzaTheme theme={theme} />
