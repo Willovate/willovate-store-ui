@@ -5,6 +5,7 @@ import MorningRitualTheme from './MorningRitualTheme'
 import FineDiningTheme from './FineDiningTheme'
 import CafeTheme from './CafeTheme'
 import BakeryTheme from './BakeryTheme'
+import FastFoodTheme from './FastFoodTheme'
 import FoodTheme from './FoodTheme'
 import { buildFoodConfig } from './buildFoodConfig'
 import { RestaurantProvider, useRestaurant } from '../store/RestaurantContext'
@@ -391,7 +392,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
 
   // ── FAST FOOD ─────────────────────────────────────────────────────────────
   'street-stack': {
-    id: 'street-stack', kind: 'cafe', name: 'Street Stack',
+    id: 'street-stack', kind: 'fast-food', name: 'Street Stack',
     eyebrow: 'Street food done loud',
     heroTitle: 'Stack it. Sauce it. Devour it.',
     heroCopy: 'An urban street-food system with assertive flavours, stacked combos, and zero waiting.',
@@ -406,7 +407,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Double smash burger', 'Nashville hot fries', 'BBQ brisket wrap'],
   },
   'crunch-club': {
-    id: 'crunch-club', kind: 'cafe', name: 'Crunch Club',
+    id: 'crunch-club', kind: 'fast-food', name: 'Crunch Club',
     eyebrow: 'Crispy. Punchy. Legendary.',
     heroTitle: 'Join the crunch side.',
     heroCopy: 'Crispy fried chicken, loaded fries, and a menu built around satisfying every craving.',
@@ -421,7 +422,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Crispy chicken sandwich', 'Loaded cheese fries', 'Spicy slaw combo'],
   },
   'burger-district': {
-    id: 'burger-district', kind: 'cafe', name: 'Burger District',
+    id: 'burger-district', kind: 'fast-food', name: 'Burger District',
     eyebrow: "The city's best burger",
     heroTitle: 'Burgers that mean business.',
     heroCopy: 'A modern burger destination where quality beef, fresh toppings and bold sauces take centre stage.',
@@ -436,7 +437,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Classic smash burger', 'Truffle mushroom burger', 'Double crispy chicken'],
   },
   'drive-and-dine': {
-    id: 'drive-and-dine', kind: 'cafe', name: 'Drive & Dine',
+    id: 'drive-and-dine', kind: 'fast-food', name: 'Drive & Dine',
     eyebrow: 'Retro fast food vibes',
     heroTitle: 'Pull up. Order up.',
     heroCopy: 'Retro drive-through energy with neon signs, bold menus, and food that hits every time.',
@@ -451,7 +452,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     menu: ['Retro cheeseburger', 'Crinkle-cut fries', 'Thick vanilla shake'],
   },
   'quick-bite': {
-    id: 'quick-bite', kind: 'cafe', name: 'Quick Bite',
+    id: 'quick-bite', kind: 'fast-food', name: 'Quick Bite',
     eyebrow: 'Fast, fresh, and flavourful',
     heroTitle: "Good food shouldn't keep you waiting.",
     heroCopy: 'A clean modern fast-food experience. Order in seconds, eat in minutes, leave happy.',
@@ -941,10 +942,12 @@ function InnerRestaurantTheme({ theme, compact = false, elements = [] }: { theme
   const { state, dispatch } = useRestaurant()
   const cafeThemes = ['morning-ritual', 'brew-house', 'corner-cafe', 'latte-lane', 'the-daily-grind']
   const bakeryThemes = ['butter-and-bloom', 'oven-and-crumb', 'parisian-crust', 'golden-loaf', 'daily-bread-co']
+  const fastFoodThemes = ['street-stack', 'crunch-club', 'burger-district', 'drive-and-dine', 'quick-bite']
   const fineThemes = ['noir-table', 'velvet-reserve', 'the-tasting-room', 'ember-and-oak', 'maison-gourmet']
 
   const renderTheme = () => {
     if (bakeryThemes.includes(theme.id)) return <BakeryTheme theme={theme} />
+    if (fastFoodThemes.includes(theme.id)) return <FastFoodTheme theme={theme} />
     if (cafeThemes.includes(theme.id)) return <CafeTheme theme={theme} />
     if (fineThemes.includes(theme.id)) return <FineDiningTheme theme={theme} />
     
