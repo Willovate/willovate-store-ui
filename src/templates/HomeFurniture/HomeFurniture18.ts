@@ -62,11 +62,11 @@ export const HomeFurniture18: TemplateConfig = {
     { id: 's8', type: 'shop-the-look', props: {
       title: 'Soft Morning',
       image: 'https://images.unsplash.com/photo-1583847268964-b28ce8da5236?auto=format&fit=crop&q=80&w=1200',
-      products: [
-        { id: 'stl1', name: 'Linen Duvet', price: 280, x: 50, y: 70 },
-        { id: 'stl2', name: 'Textured Cushion', price: 65, x: 40, y: 55 },
-        { id: 'stl3', name: 'Natural Wool Throw', price: 150, x: 60, y: 80 },
-        { id: 'stl4', name: 'Linen Curtain', price: 120, x: 20, y: 40 }
+      hotspots: [
+        { x: 50, y: 70, product: { name: 'Linen Duvet', price: 280, imageUrl: 'https://images.unsplash.com/photo-1595123049187-573e3a4e9b92?auto=format&fit=crop&q=80&w=600' } },
+        { x: 40, y: 55, product: { name: 'Textured Cushion', price: 65, imageUrl: 'https://images.unsplash.com/photo-1528317424683-11bb58763dc0?auto=format&fit=crop&q=80&w=600' } },
+        { x: 60, y: 80, product: { name: 'Natural Wool Throw', price: 150, imageUrl: 'https://images.unsplash.com/photo-1593642702821-c823b13eb2a2?auto=format&fit=crop&q=80&w=600' } },
+        { x: 20, y: 40, product: { name: 'Linen Curtain', price: 120, imageUrl: 'https://images.unsplash.com/photo-1615663245857-ac93bb5c9023?auto=format&fit=crop&q=80&w=600' } }
       ]
     } },
     { id: 's9', type: 'catalog', props: {

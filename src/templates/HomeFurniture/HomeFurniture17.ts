@@ -55,11 +55,11 @@ export const HomeFurniture17: TemplateConfig = {
     { id: 's7', type: 'shop-the-look', props: {
       title: 'Sunday Kitchen',
       image: 'https://images.unsplash.com/photo-1556910103190-2d922a967441?auto=format&fit=crop&q=80&w=1200',
-      products: [
-        { id: 'stl1', name: 'Farmhouse Dining Table', price: 1800, x: 50, y: 70 },
-        { id: 'stl2', name: 'Upholstered Chair', price: 350, x: 30, y: 60 },
-        { id: 'stl3', name: 'Ceramic Serving Bowl', price: 65, x: 50, y: 55 },
-        { id: 'stl4', name: 'Linen Runner', price: 45, x: 60, y: 50 }
+      hotspots: [
+        { x: 50, y: 70, product: { name: 'Farmhouse Dining Table', price: 1800, imageUrl: 'https://images.unsplash.com/photo-1572569438068-409b60e40854?auto=format&fit=crop&q=80&w=600' } },
+        { x: 30, y: 60, product: { name: 'Upholstered Chair', price: 350, imageUrl: 'https://images.unsplash.com/photo-1599669500515-9b40924d5189?auto=format&fit=crop&q=80&w=600' } },
+        { x: 50, y: 55, product: { name: 'Ceramic Serving Bowl', price: 65, imageUrl: 'https://images.unsplash.com/photo-1589256469067-ea9912224858?auto=format&fit=crop&q=80&w=600' } },
+        { x: 60, y: 50, product: { name: 'Linen Runner', price: 45, imageUrl: 'https://images.unsplash.com/photo-1584006682522-dc17d6c0d06e?auto=format&fit=crop&q=80&w=600' } }
       ]
     } },
     { id: 's8', type: 'catalog', props: {

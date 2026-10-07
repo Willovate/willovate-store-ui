@@ -60,11 +60,11 @@ export const HomeFurniture16: TemplateConfig = {
     { id: 's8', type: 'shop-the-look', props: {
       title: 'Quiet Morning',
       image: 'https://images.unsplash.com/photo-1585412727339-54e4bae3bbf9?auto=format&fit=crop&q=80&w=1200',
-      products: [
-        { id: 'stl1', name: 'Oak Dining Table', price: 1200, x: 50, y: 70 },
-        { id: 'stl2', name: 'Linen Chair', price: 350, x: 30, y: 60 },
-        { id: 'stl3', name: 'Pendant Light', price: 220, x: 50, y: 20 },
-        { id: 'stl4', name: 'Ceramic Vase', price: 85, x: 60, y: 50 }
+      hotspots: [
+        { x: 50, y: 70, product: { name: 'Oak Dining Table', price: 1200, imageUrl: 'https://images.unsplash.com/photo-1580828369631-01be14a9a468?auto=format&fit=crop&q=80&w=600' } },
+        { x: 30, y: 60, product: { name: 'Linen Chair', price: 350, imageUrl: 'https://images.unsplash.com/photo-1628126235206-5260b9ea6441?auto=format&fit=crop&q=80&w=600' } },
+        { x: 50, y: 20, product: { name: 'Pendant Light', price: 220, imageUrl: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&q=80&w=600' } },
+        { x: 60, y: 50, product: { name: 'Ceramic Vase', price: 85, imageUrl: 'https://images.unsplash.com/photo-1533228100845-08145b01de14?auto=format&fit=crop&q=80&w=600' } }
       ]
     } },
     { id: 's9', type: 'editorial-grid', props: { title: 'Nordic Light', images: ['https://images.unsplash.com/photo-1550989460-0adf9ea622e2?auto=format&fit=crop&q=80&w=600', 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&q=80&w=600'] } },
