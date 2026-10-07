@@ -135,24 +135,7 @@ export default function SignupPage({
     setIsSubmitting(false)
   }
 
-  const handleMicrosoftSuccess = () => {
-    setStatus({ tone: 'success', message: 'Microsoft authentication successful!' })
-    if (onAuthSuccess) onAuthSuccess()
-  }
-
-  const handleMicrosoftError = (message: string) => {
-    setStatus({ tone: 'error', message })
-  }
-
-  const handleMicrosoftStart = () => {
-    if (isSubmitting) return
-    setIsSubmitting(true)
-    setStatus(null)
-  }
-
-  const handleMicrosoftEnd = () => {
-    setIsSubmitting(false)
-  }
+  const hasGoogle = Boolean(import.meta.env.VITE_GOOGLE_CLIENT_ID)
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -254,21 +237,21 @@ export default function SignupPage({
       />
 
 
-      <SocialAuthButtons
-        disabled={isSubmitting}
-        onGoogleSuccess={handleGoogleSuccess}
-        onGoogleError={handleGoogleError}
-        onGoogleStart={handleGoogleStart}
-        onGoogleEnd={handleGoogleEnd}
-        onMicrosoftSuccess={handleMicrosoftSuccess}
-        onMicrosoftError={handleMicrosoftError}
-        onMicrosoftStart={handleMicrosoftStart}
-        onMicrosoftEnd={handleMicrosoftEnd}
-      />
+      {hasGoogle && (
+        <>
+          <SocialAuthButtons
+            disabled={isSubmitting}
+            onGoogleSuccess={handleGoogleSuccess}
+            onGoogleError={handleGoogleError}
+            onGoogleStart={handleGoogleStart}
+            onGoogleEnd={handleGoogleEnd}
+          />
 
-      <div className="auth-divider" aria-hidden="true">
-        <span>or continue with email</span>
-      </div>
+          <div className="auth-divider" aria-hidden="true">
+            <span>or continue with email</span>
+          </div>
+        </>
+      )}
 
       {status && <AuthStatus tone={status.tone}>{status.message}</AuthStatus>}
 

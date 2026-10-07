@@ -87,7 +87,9 @@ export default function LoginPage({
     }))
   }
 
-  const handleProviderSelect = (provider: 'Google' | 'Microsoft') => {
+  const hasGoogle = Boolean(import.meta.env.VITE_GOOGLE_CLIENT_ID)
+
+  const handleProviderSelect = (provider: 'Google') => {
     setStatus({
       tone: 'info',
       message: `${provider} sign-in is not connected yet.`,
@@ -176,14 +178,18 @@ export default function LoginPage({
         description="Log in to access your Willovate workspace."
       />
 
-      <SocialAuthButtons
-        disabled={isSubmitting}
-        onProviderSelect={handleProviderSelect}
-      />
+      {hasGoogle && (
+        <>
+          <SocialAuthButtons
+            disabled={isSubmitting}
+            onProviderSelect={handleProviderSelect}
+          />
 
-      <div className="auth-divider" aria-hidden="true">
-        <span>or continue with email</span>
-      </div>
+          <div className="auth-divider" aria-hidden="true">
+            <span>or continue with email</span>
+          </div>
+        </>
+      )}
 
       {status && <AuthStatus tone={status.tone}>{status.message}</AuthStatus>}
 
