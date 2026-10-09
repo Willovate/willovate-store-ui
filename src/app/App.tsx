@@ -413,44 +413,24 @@ function App() {
           window.location.hash = 'store'
         }}
         onStartFree={() => {
-          if (isAuthenticated) {
-            setCurrentPage('directory')
-            window.location.hash = 'directory'
-          } else {
-            setCurrentPage('signup')
-            window.location.hash = 'signup'
-          }
+          setCurrentPage('directory')
+          window.location.hash = 'directory'
         }}
         onSubmitPrompt={(prompt) => {
           setCustomPrompt(prompt)
-          if (isAuthenticated) {
-            setCurrentPage('directory')
-            window.location.hash = 'directory'
-          } else {
-            setCurrentPage('signup')
-            window.location.hash = 'signup'
-          }
+          setCurrentPage('directory')
+          window.location.hash = 'directory'
         }}
         onExploreTemplates={() => {
-          if (isAuthenticated) {
-            setCurrentPage('directory')
-            window.location.hash = 'directory'
-          } else {
-            setCurrentPage('signup')
-            window.location.hash = 'signup'
-          }
+          setCurrentPage('directory')
+          window.location.hash = 'directory'
         }}
         onSelectCategory={(businessType) => {
           const cat = TEMPLATE_REGISTRY[businessType]
           setSelectedBusinessType(businessType)
           setSelectedBusinessTypeDisplay(cat ? cat.displayName : businessType)
-          if (isAuthenticated) {
-            setCurrentPage('templates')
-            window.location.hash = `${businessType}-templates`
-          } else {
-            setCurrentPage('signup')
-            window.location.hash = 'signup'
-          }
+          setCurrentPage('templates')
+          window.location.hash = `${businessType}-templates`
         }}
       />
     )
