@@ -6,7 +6,7 @@ export const Electronics05: TemplateConfig = {
   description: 'A premium personal-technology marketplace built around calm daily life, wellness, and morning-to-night routines.',
   categories: [{ id: 'electronics', name: 'Electronics' }],
   tags: [{ id: 'lifestyle', name: 'Lifestyle' }, { id: 'wellness', name: 'Wellness' }, { id: 'personal', name: 'Personal' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1518331647614-7a1f04cd34ce?auto=format&fit=crop&q=80&w=800',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&q=80&w=800',
   previewImages: [
     'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&q=80&w=1600'
   ],

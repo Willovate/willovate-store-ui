@@ -6,7 +6,7 @@ export const Electronics10: TemplateConfig = {
   description: 'A premium cinematic media and home entertainment marketplace featuring atmospheric layouts and sophisticated minimal design.',
   categories: [{ id: 'electronics', name: 'Electronics' }],
   tags: [{ id: 'cinema', name: 'Cinema' }, { id: 'entertainment', name: 'Entertainment' }, { id: 'premium', name: 'Premium' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1600566753086-00f18efc2291?auto=format&fit=crop&q=80&w=800',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&q=80&w=800',
   previewImages: [
     'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&q=80&w=1600'
   ],
