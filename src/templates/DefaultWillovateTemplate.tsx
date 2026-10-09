@@ -80,8 +80,13 @@ export default function DefaultWillovateTemplate() {
           <a href="#newsletter">Journal</a>
         </nav>
         <div style={{ display: 'flex', alignItems: 'center', gap: '20px', justifySelf: 'end' }}>
-          <button className="cart-trigger" type="button" onClick={() => setCartOpen(true)}>
-            Bag <span>{cart.count}</span>
+          <button className="cart-trigger" type="button" onClick={() => setCartOpen(true)} aria-label={`Shopping cart, ${cart.count} items`} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span>{cart.count}</span>
           </button>
           <button 
             className="nav-hamburger"

@@ -2,9 +2,11 @@ import { useState } from 'react'
 import { StoreMenu } from './StoreMenu'
 import { SectionContainer } from './SectionContainer'
 import type { TemplateConfig } from '../../types/template'
+import { useCart } from '../../hooks/useCart'
 
 export function NavBarSection({ brand = 'Store', style = 'minimal', template }: { brand?: string, style?: 'minimal' | 'center' | 'utility', template?: TemplateConfig }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const cart = useCart()
   const isCenter = style === 'center'
   const isUtility = style === 'utility'
   
@@ -53,7 +55,14 @@ export function NavBarSection({ brand = 'Store', style = 'minimal', template }: 
         {/* Right Side */}
         <div className="nav-right" style={{ minWidth: 0 }}>
           {isUtility && !isCenter && <button aria-label="Navigate" className="nav-desktop-only" style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 'inherit', color: 'inherit', fontFamily: 'inherit', whiteSpace: 'nowrap' }}>Search</button>}
-          <button aria-label="Navigate" style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 'inherit', color: 'inherit', fontFamily: 'inherit', whiteSpace: 'nowrap', flexShrink: 0 }}>Cart (0)</button>
+          <button aria-label={`Shopping cart, ${cart.count} items`} style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 'inherit', color: 'inherit', fontFamily: 'inherit', whiteSpace: 'nowrap', flexShrink: 0, display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span>{cart.count}</span>
+          </button>
           <button 
             className="nav-hamburger"
             aria-label="Open store menu" 
