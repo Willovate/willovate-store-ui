@@ -142,17 +142,6 @@ a {
   .nav-brand-text {
     font-size: 1.25rem !important;
   }
-  .nav-layout.nav-center .nav-left {
-    display: none !important;
-  }
-  .nav-layout.nav-center .nav-center {
-    flex: 1 1 auto !important;
-    justify-content: flex-start !important;
-  }
-  .nav-layout.nav-center .nav-right {
-    flex: 0 0 auto !important;
-    margin-left: auto !important;
-  }
   .nav-hamburger {
     display: flex !important;
   }

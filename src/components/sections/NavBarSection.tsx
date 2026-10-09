@@ -30,19 +30,35 @@ export function NavBarSection({ brand = 'Store', style = 'minimal', template }: 
           justify-content: space-between;
           width: 100%;
           gap: 16px;
-          position: relative;
         }
         @container (max-width: 576px) {
           .nav-mobile-grid {
-            display: flex !important;
+            display: grid !important;
+            grid-template-columns: auto 1fr auto;
+            gap: 0;
+            align-items: center;
+          }
+          .nav-mobile-grid > .nav-left {
+            grid-column: 1;
+            grid-row: 1;
+            justify-self: start;
+            min-width: 0;
           }
           .nav-mobile-grid > .nav-center-brand {
-            position: absolute !important;
-            left: 50% !important;
-            transform: translateX(-50%) !important;
-            max-width: calc(100% - 160px);
+            grid-column: 2;
+            grid-row: 1;
             display: flex !important;
             justify-content: center !important;
+            align-items: center;
+            min-width: 0;
+            overflow: hidden;
+            padding-inline: 8px;
+          }
+          .nav-mobile-grid > .nav-right {
+            grid-column: 3;
+            grid-row: 1;
+            justify-self: end;
+            min-width: 0;
           }
           .desktop-brand {
             display: none !important;
@@ -57,7 +73,7 @@ export function NavBarSection({ brand = 'Store', style = 'minimal', template }: 
         <div className="nav-mobile-grid">
           
           {/* Left Side */}
-          <div className="nav-left" style={{ display: 'flex', alignItems: 'center', minWidth: 0 }}>
+          <div className="nav-left" style={{ display: 'flex', alignItems: 'center', minWidth: 0, flexShrink: 0 }}>
             <button 
               className="nav-hamburger"
               aria-label="Open store menu" 
@@ -90,24 +106,24 @@ export function NavBarSection({ brand = 'Store', style = 'minimal', template }: 
           </div>
 
           {/* Center Brand */}
-          <div className="nav-center-brand" style={{ display: isCenter ? 'flex' : 'none', justifyContent: 'center', minWidth: 0 }}>
-            <div className="nav-brand-text" style={{ fontSize: '1.5rem', fontWeight: 'bold', fontFamily: 'var(--template-heading-font)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', flexShrink: 1, minWidth: 0 }}>
+          <div className="nav-center-brand" style={{ display: isCenter ? 'flex' : 'none', justifyContent: 'center', alignItems: 'center', minWidth: 0 }}>
+            <div className="nav-brand-text" style={{ fontSize: '1.5rem', fontWeight: 'bold', fontFamily: 'var(--template-heading-font)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>
               {brand}
             </div>
           </div>
 
           {/* Right Side */}
-          <div className="nav-right" style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '4px', minWidth: 0 }}>
+          <div className="nav-right" style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '4px', minWidth: 0, flexShrink: 0 }}>
             {isUtility && !isCenter && <button aria-label="Navigate" className="nav-desktop-only" style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 'inherit', color: 'inherit', fontFamily: 'inherit', whiteSpace: 'nowrap', padding: '8px' }}>Search</button>}
             
-            <button aria-label="Search products" onClick={() => setIsSearchOpen(true)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px' }}>
+            <button aria-label="Search products" onClick={() => setIsSearchOpen(true)} style={{ flexShrink: 0, background: 'transparent', border: 'none', cursor: 'pointer', color: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px' }}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
             </button>
 
-            <button aria-label={`Shopping cart, ${cart.count} items`} style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 'inherit', color: 'inherit', fontFamily: 'inherit', whiteSpace: 'nowrap', flexShrink: 0, display: 'flex', alignItems: 'center', gap: '6px', padding: '8px' }}>
+            <button aria-label={`Shopping cart, ${cart.count} items`} style={{ flexShrink: 0, background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 'inherit', color: 'inherit', fontFamily: 'inherit', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: '6px', padding: '8px' }}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="9" cy="21" r="1"></circle>
                 <circle cx="20" cy="21" r="1"></circle>
@@ -131,5 +147,7 @@ export function NavBarSection({ brand = 'Store', style = 'minimal', template }: 
     </nav>
   )
 }
+
+
 
 
