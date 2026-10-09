@@ -71,16 +71,90 @@ export default function DefaultWillovateTemplate() {
       </div>
 
       <header className="site-header">
+        <style>{`
+          .header-mobile-left {
+            display: none;
+          }
+          @media (max-width: 576px) {
+            .site-header {
+              display: grid !important;
+              grid-template-columns: 1fr auto 1fr !important;
+              align-items: center;
+            }
+            .site-header > .wordmark {
+              grid-column: 2;
+              grid-row: 1;
+              justify-self: center;
+            }
+            .site-header > nav {
+              display: none;
+            }
+            .header-mobile-left {
+              display: flex !important;
+              grid-column: 1;
+              grid-row: 1;
+              justify-self: start;
+            }
+            .header-right {
+              grid-column: 3;
+              grid-row: 1;
+              justify-self: end;
+              gap: 4px !important;
+            }
+            .header-right .nav-hamburger {
+              display: none !important;
+            }
+          }
+        `}</style>
+
+        <div className="header-mobile-left">
+          <button 
+            className="nav-hamburger"
+            aria-label="Open store menu" 
+            aria-expanded={isMenuOpen}
+            onClick={() => setIsMenuOpen(true)}
+            style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'inherit', marginLeft: '-8px' }}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
         <a className="wordmark" href="#top" aria-label="Willovate one home">
           Willovate<span> one</span>
         </a>
+        
         <nav aria-label="Main navigation">
           <a href="#catalog">Shop</a>
           <a href="#story">Our story</a>
           <a href="#newsletter">Journal</a>
         </nav>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px', justifySelf: 'end' }}>
-          <button className="cart-trigger" type="button" onClick={() => setCartOpen(true)} aria-label={`Shopping cart, ${cart.count} items`} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+        
+        <div className="header-right" style={{ display: 'flex', alignItems: 'center', gap: '20px', justifySelf: 'end' }}>
+          <button 
+            aria-label="Search products" 
+            onClick={() => {
+              const catalog = document.getElementById('catalog')
+              if (catalog) {
+                catalog.scrollIntoView({ behavior: 'smooth' })
+                setTimeout(() => {
+                  const input = catalog.querySelector('input[type="search"]') as HTMLInputElement
+                  if (input) input.focus()
+                }, 500)
+              }
+            }} 
+            style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px' }}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+
+          <button className="cart-trigger" type="button" onClick={() => setCartOpen(true)} aria-label={`Shopping cart, ${cart.count} items`} style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '8px', background: 'transparent', border: 'none', cursor: 'pointer', color: 'inherit', font: 'inherit' }}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
               <circle cx="9" cy="21" r="1"></circle>
               <circle cx="20" cy="21" r="1"></circle>
@@ -88,12 +162,13 @@ export default function DefaultWillovateTemplate() {
             </svg>
             <span>{cart.count}</span>
           </button>
+
           <button 
             className="nav-hamburger"
             aria-label="Open store menu" 
             aria-expanded={isMenuOpen}
             onClick={() => setIsMenuOpen(true)}
-            style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: '8px', alignItems: 'center', justifyContent: 'center', color: 'inherit' }}
+            style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'inherit' }}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="3" y1="12" x2="21" y2="12"></line>
