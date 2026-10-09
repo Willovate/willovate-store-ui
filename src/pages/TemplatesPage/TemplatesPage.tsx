@@ -1255,9 +1255,6 @@ export function TemplateDirectoryPage({
     <div className="directory-page">
       <header className="directory-header">
         <WillovateLogo onClick={onBack} />
-        <span className="directory-account">
-          Already have an account? <a href="#login">Log in</a>
-        </span>
       </header>
 
       <main className="directory-main">
@@ -1680,16 +1677,12 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
 
   return (
     <div className="marketplace-page-container">
-      {/* Top Application Header: Logo on left, Login on right */}
+      {/* Top Application Header: Logo on left, balanced layout */}
       <header className="marketplace-top-header">
         <div className="header-left">
           <WillovateLogo onClick={onBack} />
         </div>
-        <div className="header-right">
-          <span className="account-text">
-            Already have an account? <a href="#login">Log in</a>
-          </span>
-        </div>
+        <div className="header-right" />
       </header>
 
       {/* Stepper & Category Title Section */}

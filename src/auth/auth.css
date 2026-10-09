@@ -290,10 +290,11 @@ html, body, #root {
   transform: translate(-50%, -50%);
 }
 .auth-network-logo {
-  width: 40px;
-  height: 32px;
+  width: 48px;
+  height: 34px;
   object-fit: contain;
-  filter: drop-shadow(0 0 9px rgba(145, 160, 255, 1)) drop-shadow(0 0 3px rgba(210, 220, 255, .85));
+  display: block;
+  filter: drop-shadow(0 0 10px rgba(80, 130, 255, 0.95)) drop-shadow(0 0 3px rgba(200, 220, 255, .85));
 }
 
 /* Orbit rings */

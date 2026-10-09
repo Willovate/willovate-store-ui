@@ -12,7 +12,6 @@ interface AuthLayoutProps {
 export function AuthLayout({
   children,
   brandPanel,
-  onNavigateToLogin,
   onNavigateHome,
 }: AuthLayoutProps) {
   return (
@@ -31,25 +30,9 @@ export function AuthLayout({
         >
           <WillovateLogo className="auth-brand-mark" />
         </a>
-
-        <p className="auth-topbar-switch">
-          Already have an account?{' '}
-          <button type="button" onClick={onNavigateToLogin}>
-            Log in
-          </button>
-        </p>
       </header>
 
       <main className="auth-main">
-        <button
-          type="button"
-          className="auth-back-link"
-          onClick={onNavigateHome}
-        >
-          <span aria-hidden="true">←</span>
-          Back to home
-        </button>
-
         <section className="auth-card" aria-label="Create your Willovate account">
           {brandPanel}
           <div className="auth-form-panel">{children}</div>
