@@ -38,7 +38,8 @@ export function TemplateRenderer({ template }: { template: TemplateConfig }) {
     minHeight: '100vh',
     display: 'flex',
     flexDirection: 'column' as const,
-    containerType: 'inline-size' as any
+    containerType: 'inline-size' as any,
+    width: '100%'
   }
 
   // Simple section mapping

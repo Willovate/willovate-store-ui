@@ -77,29 +77,28 @@ export default function DefaultWillovateTemplate() {
           }
           @media (max-width: 576px) {
             .site-header {
-              display: grid !important;
-              grid-template-columns: 1fr auto 1fr !important;
+              display: flex !important;
               align-items: center;
+              justify-content: space-between;
+              padding-inline: 20px;
+              position: relative;
             }
             .site-header > .wordmark {
-              grid-column: 2;
-              grid-row: 1;
-              justify-self: center;
+              position: absolute;
+              left: 50%;
+              transform: translateX(-50%);
+              max-width: calc(100% - 160px);
             }
             .site-header > nav {
               display: none;
             }
             .header-mobile-left {
               display: flex !important;
-              grid-column: 1;
-              grid-row: 1;
-              justify-self: start;
             }
             .header-right {
-              grid-column: 3;
-              grid-row: 1;
-              justify-self: end;
-              gap: 4px !important;
+              display: flex;
+              align-items: center;
+              gap: 8px !important;
             }
             .header-right .nav-hamburger {
               display: none !important;

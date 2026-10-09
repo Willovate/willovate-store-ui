@@ -21,7 +21,7 @@ export function CatalogSection({ title = 'Curated Collection', products: customP
     <section style={{ paddingBlock: '60px', width: '100%' }}>
       <SectionContainer>
         <h2 style={{ fontFamily: 'var(--template-heading-font)', fontSize: '2rem', marginBottom: '40px' }}>{title}</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '30px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(250px, 100%), 1fr))', gap: '30px' }}>
           {products.map(p => (
             <ProductCard key={p.id} product={p} onAdd={(product) => cart.add(product)} />
           ))}

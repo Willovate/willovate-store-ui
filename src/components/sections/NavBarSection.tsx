@@ -30,25 +30,19 @@ export function NavBarSection({ brand = 'Store', style = 'minimal', template }: 
           justify-content: space-between;
           width: 100%;
           gap: 16px;
+          position: relative;
         }
         @container (max-width: 576px) {
           .nav-mobile-grid {
-            display: grid !important;
-            grid-template-columns: 1fr auto 1fr;
-            gap: 10px;
-          }
-          .nav-mobile-grid > .nav-left {
-            justify-content: flex-start !important;
-            order: 1;
+            display: flex !important;
           }
           .nav-mobile-grid > .nav-center-brand {
+            position: absolute !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            max-width: calc(100% - 160px);
             display: flex !important;
             justify-content: center !important;
-            order: 2;
-          }
-          .nav-mobile-grid > .nav-right {
-            justify-content: flex-end !important;
-            order: 3;
           }
           .desktop-brand {
             display: none !important;

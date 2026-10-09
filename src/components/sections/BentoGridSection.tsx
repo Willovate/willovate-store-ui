@@ -19,9 +19,9 @@ export function BentoGridSection({ title, items }: BentoGridProps) {
         {title && <h2 style={{ fontSize: '2.5rem', marginBottom: '40px', textAlign: 'center' }}>{title}</h2>}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
           gap: '24px',
-          gridAutoRows: 'minmax(300px, auto)'
+          gridAutoRows: 'minmax(min(300px, 100%), auto)'
         }}>
           {items.map((item, idx) => (
             <div key={idx} style={{
