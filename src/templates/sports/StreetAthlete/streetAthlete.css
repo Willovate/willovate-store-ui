@@ -783,3 +783,150 @@
 @media (prefers-reduced-motion: reduce) {
   .street-athlete *, .street-athlete *::before, .street-athlete *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
+/* ==========================================================================
+   STREET ATHLETE STOREFRONT - TABLET RESPONSIVE SYSTEM
+   Covers both:
+   1) Actual Tablet Viewports: @media (min-width: 768px) and (max-width: 1024px)
+   2) Simulated Tablet Frame: :is(.simulated-frame.frame-tablet, [data-device-view='tablet'])
+   ========================================================================== */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .street-athlete,
+  .street-athlete-theme {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .sa-ticker {
+    padding: 0 24px !important;
+    height: 30px !important;
+  }
+
+  /* Top Bar / Header */
+  .sa-header {
+    padding: 0 24px !important;
+    min-height: 70px !important;
+    gap: 16px !important;
+  }
+
+  .sa-wordmark {
+    font-size: 22px !important;
+  }
+
+  .sa-nav {
+    gap: 12px !important;
+  }
+
+  .sa-nav button {
+    font-size: 9.5px !important;
+  }
+
+  .sa-header-actions {
+    gap: 10px !important;
+  }
+
+  .sa-section-pad {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  .sa-hero h1 {
+    font-size: clamp(60px, 10vw, 100px) !important;
+  }
+
+  /* 3-Column Product Grid on Tablet */
+  .sa-product-grid,
+  .sa-product-grid-3 {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+
+  /* 2-Column Story, Drop & Look */
+  .sa-story-grid,
+  .sa-drop,
+  .sa-look,
+  .sa-essentials {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 18px !important;
+  }
+
+  /* 2-Column Footer on Tablet */
+  .sa-footer-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 28px !important;
+  }
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .street-athlete,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .street-athlete-theme {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sa-ticker {
+  padding: 0 24px !important;
+  height: 30px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sa-header {
+  padding: 0 24px !important;
+  min-height: 70px !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sa-wordmark {
+  font-size: 22px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sa-nav {
+  gap: 12px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sa-nav button {
+  font-size: 9.5px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sa-header-actions {
+  gap: 10px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sa-section-pad {
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sa-hero h1 {
+  font-size: clamp(60px, 10vw, 100px) !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sa-product-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sa-product-grid-3 {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sa-story-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sa-drop,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sa-look,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sa-essentials {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sa-footer-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 28px !important;
+}

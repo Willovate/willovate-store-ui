@@ -86,7 +86,7 @@ export interface OptimalTestimonial {
 
 export interface OptimalStorefrontProps {
   template?: any
-  device?: 'desktop' | 'mobile' | 'fullscreen'
+  device?: 'desktop' | 'tablet' | 'mobile' | 'fullscreen'
   deviceView?: 'desktop' | 'tablet' | 'mobile' | 'fullscreen'
   customAccentColor?: string | null
   onColorChange?: (color: string) => void

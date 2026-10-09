@@ -551,7 +551,8 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
     return (
       <VogalFashionStorefront
         template={template}
-        device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
+        device={device}
+        deviceView={device}
         customAccentColor={customAccentColor}
         onColorChange={_onColorChange}
         onUseTemplate={onUseTemplate}
@@ -569,7 +570,8 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
     return (
       <OptimalFashionStorefront
         template={template}
-        device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
+        device={device}
+        deviceView={device}
         customAccentColor={customAccentColor}
         onColorChange={_onColorChange}
         onUseTemplate={onUseTemplate}
@@ -587,7 +589,8 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
     return (
       <NaturyaFashionStorefront
         template={template}
-        device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
+        device={device}
+        deviceView={device}
         customAccentColor={customAccentColor}
         onColorChange={_onColorChange}
         onUseTemplate={onUseTemplate}
@@ -605,7 +608,8 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
     return (
       <TrendyFashionStorefront
         template={template}
-        device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
+        device={device}
+        deviceView={device}
         customAccentColor={customAccentColor}
         onColorChange={_onColorChange}
         onUseTemplate={onUseTemplate}
@@ -623,7 +627,8 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
     return (
       <FragranceFashionStorefront
         template={template}
-        device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
+        device={device}
+        deviceView={device}
         customAccentColor={customAccentColor}
         onColorChange={_onColorChange}
         onUseTemplate={onUseTemplate}
@@ -642,7 +647,8 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
     return (
       <JenieFashionStorefront
         template={template}
-        device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
+        device={device}
+        deviceView={device}
         customAccentColor={customAccentColor}
         onColorChange={_onColorChange}
         onUseTemplate={onUseTemplate}
@@ -661,7 +667,8 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
     return (
       <ChuttiFashionStorefront
         templateData={template}
-        device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
+        device={device}
+        deviceView={device}
         onClose={onClose}
       />
     )
@@ -677,7 +684,8 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
     return (
       <BaggoFashionStorefront
         templateData={template}
-        device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
+        device={device}
+        deviceView={device}
         onClose={onClose}
       />
     )
@@ -694,7 +702,8 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   ) {
     return (
       <MrTevorFashionStorefront
-        device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
+        device={device}
+        deviceView={device}
         onBackToDirectory={onClose}
       />
     )
@@ -713,7 +722,8 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
     return (
       <DiamondJewelryStorefront
         templateData={template}
-        device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
+        device={device}
+        deviceView={device}
         onClose={onClose}
       />
     )
@@ -729,7 +739,8 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
     return (
       <BelleFashionStorefront
         template={template}
-        device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
+        device={device}
+        deviceView={device}
         customAccentColor={customAccentColor}
         onColorChange={_onColorChange}
         onUseTemplate={onUseTemplate}
@@ -742,7 +753,8 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
     return (
       <BelleFashionStorefront
         template={template}
-        device={device === 'mobile' ? 'mobile' : device === 'fullscreen' ? 'fullscreen' : 'desktop'}
+        device={device}
+        deviceView={device}
         customAccentColor={customAccentColor}
         onColorChange={_onColorChange}
         onUseTemplate={onUseTemplate}
@@ -777,7 +789,7 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
   onClose,
   onUseTemplate,
 }) => {
-  const [device, setDevice] = useState<'desktop' | 'mobile' | 'fullscreen'>('desktop')
+  const [device, setDevice] = useState<'desktop' | 'tablet' | 'mobile' | 'fullscreen'>('desktop')
   const [selectedColorOverride, setSelectedColorOverride] = useState<{ templateId: string; color: string } | null>(null)
   const viewportRef = useRef<HTMLDivElement | null>(null)
 
@@ -854,6 +866,14 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
               title="Desktop View (100%)"
             >
               🖥️ Desktop
+            </button>
+            <button
+              type="button"
+              className={`device-btn ${device === 'tablet' ? 'active' : ''}`}
+              onClick={() => setDevice('tablet')}
+              title="Tablet View (768px)"
+            >
+              📱 Tablet
             </button>
             <button
               type="button"

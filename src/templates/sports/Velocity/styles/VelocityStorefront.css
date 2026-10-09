@@ -6586,3 +6586,218 @@ footer.velocity-footer {
   }
 }
 
+/* ==========================================================================
+   VELOCITY STOREFRONT - TABLET RESPONSIVE SYSTEM
+   Covers both:
+   1) Actual Tablet Viewports: @media (min-width: 768px) and (max-width: 1024px)
+   2) Simulated Tablet Frame: :is(.simulated-frame.frame-tablet, [data-device-view='tablet'])
+   ========================================================================== */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .velocity-storefront-wrapper,
+  .sports-storefront-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .velocity-container,
+  .sports-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Top Bar / Header */
+  .sports-header-inner,
+  .velocity-navbar-container {
+    padding: 0 20px !important;
+    gap: 16px !important;
+    height: 70px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  .sports-desktop-nav {
+    gap: 12px !important;
+  }
+
+  .sports-desktop-nav a {
+    font-size: 0.82rem !important;
+  }
+
+  .sports-header-actions {
+    gap: 10px !important;
+  }
+
+  .sports-top-announcement {
+    padding: 0.4rem 1.25rem !important;
+    font-size: 0.78rem !important;
+  }
+
+  /* Hero Section */
+  .sports-hero-grid,
+  .sports-story-layout {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+
+  .hero-display-headline {
+    font-size: 2.75rem !important;
+    line-height: 1.1 !important;
+  }
+
+  .hero-telemetry-strip {
+    flex-wrap: wrap !important;
+    gap: 14px !important;
+    padding: 10px 16px !important;
+  }
+
+  /* 3-Column Product Grid on Tablet */
+  .sports-product-grid.four-col-grid,
+  .products-grid-4,
+  .products-grid-8,
+  .sports-product-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+
+  /* 3-Column Categories Grid */
+  .sports-categories-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+
+  /* 2-Column Promo & Trust Splits */
+  .sports-trust-grid,
+  .sports-reviews-grid,
+  .promo-content-grid,
+  .split-grid-wrapper,
+  .sports-story-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 18px !important;
+  }
+
+  /* 2-Column Footer on Tablet */
+  .sports-footer-top-row,
+  .sports-footer-grid,
+  .footer-columns-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 28px !important;
+  }
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .velocity-storefront-wrapper,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-storefront-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .velocity-container,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+  box-sizing: border-box !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .velocity-announcement-bar,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-top-announcement {
+  padding: 0.45rem 1.25rem !important;
+  font-size: 0.78rem !important;
+  text-align: center !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .announcement-content {
+  justify-content: center !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-header-inner,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .velocity-navbar-container {
+  padding: 0 20px !important;
+  gap: 16px !important;
+  height: 70px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-desktop-nav {
+  gap: 12px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-desktop-nav a {
+  font-size: 0.82rem !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-header-actions {
+  gap: 10px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-hero-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-story-layout {
+  grid-template-columns: 1fr !important;
+  gap: 28px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .hero-display-headline {
+  font-size: 2.75rem !important;
+  line-height: 1.1 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .hero-telemetry-strip {
+  flex-wrap: wrap !important;
+  gap: 14px !important;
+  padding: 10px 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-product-grid.four-col-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .products-grid-4,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .products-grid-8,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-product-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-categories-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-trust-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-reviews-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .promo-content-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .split-grid-wrapper,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-story-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-footer-top-row,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-footer-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .footer-columns-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 28px !important;
+}
+

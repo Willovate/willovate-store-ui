@@ -2760,4 +2760,159 @@
   gap: 1.5rem !important;
 }
 
+/* ==========================================================================
+   SPRINT STOREFRONT - TABLET RESPONSIVE SYSTEM
+   Covers both:
+   1) Actual Tablet Viewports: @media (min-width: 768px) and (max-width: 1024px)
+   2) Simulated Tablet Frame: :is(.simulated-frame.frame-tablet, [data-device-view='tablet'])
+   ========================================================================== */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .sprint-root,
+  .sprint-storefront-root {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .sprint-container,
+  .sprint-hero-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Top Bar / Header */
+  .sprint-announcement-strip {
+    padding: 0.45rem 1.25rem !important;
+    font-size: 0.75rem !important;
+  }
+
+  .sprint-header-inner {
+    padding: 0 1.25rem !important;
+    height: 70px !important;
+    gap: 1.25rem !important;
+  }
+
+  .sprint-nav-link {
+    font-size: 0.82rem !important;
+    padding: 0.35rem 0.6rem !important;
+  }
+
+  .sprint-header-actions {
+    gap: 0.65rem !important;
+  }
+
+  /* 3-Column Product Grid */
+  .sprint-product-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+
+  /* 3-Column Categories Grid */
+  .sprint-categories-grid,
+  .sprint-mega-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+
+  /* 2-Column Essentials & Reviews */
+  .sprint-essentials-grid,
+  .sprint-reviews-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 18px !important;
+  }
+
+  /* 2-Column Footer on Tablet */
+  .sprint-footer-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 28px !important;
+  }
+
+  /* 2-Column PDP on Tablet */
+  .sprint-pdp-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 24px !important;
+  }
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sprint-root,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sprint-storefront-root {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sprint-container,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sprint-hero-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+  box-sizing: border-box !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sprint-announcement-strip {
+  padding: 0.45rem 1.25rem !important;
+  font-size: 0.75rem !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sprint-header-inner {
+  padding: 0 1.25rem !important;
+  height: 70px !important;
+  gap: 1.25rem !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sprint-nav-link {
+  font-size: 0.82rem !important;
+  padding: 0.35rem 0.6rem !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sprint-header-actions {
+  gap: 0.65rem !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sprint-product-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sprint-categories-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sprint-mega-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sprint-essentials-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sprint-reviews-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sprint-footer-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 28px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sprint-pdp-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 24px !important;
+}
+
 

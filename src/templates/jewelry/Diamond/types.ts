@@ -67,8 +67,8 @@ export interface DiamondTestimonial {
 
 export interface DiamondStorefrontProps {
   templateData?: any
-  device?: 'desktop' | 'mobile' | 'fullscreen'
-  deviceView?: 'desktop' | 'mobile' | 'fullscreen'
+  device?: 'desktop' | 'tablet' | 'mobile' | 'fullscreen'
+  deviceView?: 'desktop' | 'tablet' | 'mobile' | 'fullscreen'
   onClose?: () => void
   initialView?: 'home' | 'catalog' | 'pdp'
 }

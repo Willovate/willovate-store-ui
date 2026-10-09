@@ -1611,3 +1611,179 @@
   .jenie-theme-root.is-mobile-preview .jenie-cart-drawer.open {
     right: 0;
   }
+
+/* =========================================================================
+   DEDICATED TABLET VIEW (768px - 1024px & SIMULATED TABLET)
+   ========================================================================= */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .jenie-theme-root {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .jenie-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    box-sizing: border-box !important;
+  }
+
+  .jenie-header-inner {
+    height: 72px !important;
+    display: grid !important;
+    grid-template-columns: 1fr auto 1fr !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  .jenie-nav-list {
+    display: flex !important;
+    gap: 16px !important;
+  }
+
+  .jenie-nav-link {
+    font-size: 13px !important;
+  }
+
+  .jenie-logo {
+    font-size: 26px !important;
+  }
+
+  .jenie-header-utilities {
+    gap: 12px !important;
+  }
+
+  .jenie-mobile-menu-toggle {
+    display: none !important;
+  }
+
+  .jenie-hero-title {
+    font-size: 38px !important;
+  }
+
+  .jenie-products-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+
+  .jenie-collection-grid,
+  .jenie-compare-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+
+  .jenie-instagram-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .jenie-footer-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 24px !important;
+  }
+
+  .jenie-pdp-layout {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 24px !important;
+  }
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .jenie-theme-root.device-tablet) .jenie-theme-root,
+.jenie-theme-root.device-tablet {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .jenie-theme-root.device-tablet) .jenie-container,
+.jenie-theme-root.device-tablet .jenie-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  box-sizing: border-box !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .jenie-theme-root.device-tablet) .jenie-header-inner,
+.jenie-theme-root.device-tablet .jenie-header-inner {
+  height: 72px !important;
+  display: grid !important;
+  grid-template-columns: 1fr auto 1fr !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .jenie-theme-root.device-tablet) .jenie-nav-list,
+.jenie-theme-root.device-tablet .jenie-nav-list {
+  display: flex !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .jenie-theme-root.device-tablet) .jenie-nav-link,
+.jenie-theme-root.device-tablet .jenie-nav-link {
+  font-size: 13px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .jenie-theme-root.device-tablet) .jenie-logo,
+.jenie-theme-root.device-tablet .jenie-logo {
+  font-size: 26px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .jenie-theme-root.device-tablet) .jenie-header-utilities,
+.jenie-theme-root.device-tablet .jenie-header-utilities {
+  gap: 12px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .jenie-theme-root.device-tablet) .jenie-mobile-menu-toggle,
+.jenie-theme-root.device-tablet .jenie-mobile-menu-toggle {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .jenie-theme-root.device-tablet) .jenie-hero-title,
+.jenie-theme-root.device-tablet .jenie-hero-title {
+  font-size: 38px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .jenie-theme-root.device-tablet) .jenie-products-grid,
+.jenie-theme-root.device-tablet .jenie-products-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .jenie-theme-root.device-tablet) .jenie-collection-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .jenie-theme-root.device-tablet) .jenie-compare-grid,
+.jenie-theme-root.device-tablet .jenie-collection-grid,
+.jenie-theme-root.device-tablet .jenie-compare-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .jenie-theme-root.device-tablet) .jenie-instagram-grid,
+.jenie-theme-root.device-tablet .jenie-instagram-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .jenie-theme-root.device-tablet) .jenie-footer-grid,
+.jenie-theme-root.device-tablet .jenie-footer-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 24px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .jenie-theme-root.device-tablet) .jenie-pdp-layout,
+.jenie-theme-root.device-tablet .jenie-pdp-layout {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 24px !important;
+}

@@ -2280,3 +2280,197 @@
 }
 
 
+
+/* =========================================================================
+   DEDICATED TABLET VIEW (768px - 1024px & SIMULATED TABLET)
+   ========================================================================= */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .fragrance-theme-root {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .fragrance-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    box-sizing: border-box !important;
+  }
+
+  .fragrance-announcebar {
+    padding: 6px 0 !important;
+    font-size: 11px !important;
+  }
+
+  .fragrance-announce-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
+  }
+
+  .fragrance-nav-row {
+    height: 70px !important;
+  }
+
+  .fragrance-logo {
+    font-size: 22px !important;
+  }
+
+  .fragrance-main-nav {
+    display: flex !important;
+    gap: 16px !important;
+  }
+
+  .fragrance-nav-link {
+    font-size: 12px !important;
+    padding: 6px 0 !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  .fragrance-menu-right {
+    gap: 14px !important;
+  }
+
+  .fragrance-mobile-hamburger,
+  .fragrance-menu-toggle {
+    display: none !important;
+  }
+
+  .fragrance-product-grid,
+  .fragrance-grid-4,
+  .fragrance-bestseller-grid,
+  .fragrance-related-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+
+  .fragrance-perspectives-grid,
+  .fragrance-two-col-grid,
+  .fragrance-testimonial-grid,
+  .fragrance-blog-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 18px !important;
+  }
+
+  .fragrance-pdp-layout {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 24px !important;
+  }
+
+  .fragrance-footer-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 24px !important;
+  }
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-theme-root,
+.fragrance-theme-root.fragrance-tablet {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-container,
+.fragrance-theme-root.fragrance-tablet .fragrance-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  box-sizing: border-box !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-announcebar,
+.fragrance-theme-root.fragrance-tablet .fragrance-announcebar {
+  padding: 6px 0 !important;
+  font-size: 11px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-announce-row,
+.fragrance-theme-root.fragrance-tablet .fragrance-announce-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-nav-row,
+.fragrance-theme-root.fragrance-tablet .fragrance-nav-row {
+  height: 70px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-logo,
+.fragrance-theme-root.fragrance-tablet .fragrance-logo {
+  font-size: 22px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-main-nav,
+.fragrance-theme-root.fragrance-tablet .fragrance-main-nav {
+  display: flex !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-nav-link,
+.fragrance-theme-root.fragrance-tablet .fragrance-nav-link {
+  font-size: 12px !important;
+  padding: 6px 0 !important;
+  letter-spacing: 0.08em !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-menu-right,
+.fragrance-theme-root.fragrance-tablet .fragrance-menu-right {
+  gap: 14px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-mobile-hamburger,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-menu-toggle,
+.fragrance-theme-root.fragrance-tablet .fragrance-mobile-hamburger,
+.fragrance-theme-root.fragrance-tablet .fragrance-menu-toggle {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-product-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-grid-4,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-bestseller-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-related-grid,
+.fragrance-theme-root.fragrance-tablet .fragrance-product-grid,
+.fragrance-theme-root.fragrance-tablet .fragrance-grid-4,
+.fragrance-theme-root.fragrance-tablet .fragrance-bestseller-grid,
+.fragrance-theme-root.fragrance-tablet .fragrance-related-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-perspectives-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-two-col-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-testimonial-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-blog-grid,
+.fragrance-theme-root.fragrance-tablet .fragrance-perspectives-grid,
+.fragrance-theme-root.fragrance-tablet .fragrance-two-col-grid,
+.fragrance-theme-root.fragrance-tablet .fragrance-testimonial-grid,
+.fragrance-theme-root.fragrance-tablet .fragrance-blog-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-pdp-layout,
+.fragrance-theme-root.fragrance-tablet .fragrance-pdp-layout {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 24px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-footer-grid,
+.fragrance-theme-root.fragrance-tablet .fragrance-footer-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 24px !important;
+}

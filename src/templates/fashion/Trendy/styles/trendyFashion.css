@@ -3173,3 +3173,192 @@
   width: 100% !important;
   max-width: 100% !important;
 }
+
+/* =========================================================================
+   DEDICATED TABLET VIEW (768px - 1024px & SIMULATED TABLET)
+   ========================================================================= */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .trendy-storefront {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .trendy-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    box-sizing: border-box !important;
+  }
+
+  .trendy-topbar {
+    padding: 6px 0 !important;
+    font-size: 11px !important;
+  }
+
+  .trendy-topbar-inner {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  .trendy-header-inner {
+    height: 68px !important;
+    gap: 16px !important;
+  }
+
+  .trendy-brand-title {
+    font-size: 20px !important;
+  }
+
+  .trendy-nav {
+    display: flex !important;
+    gap: 14px !important;
+  }
+
+  .trendy-nav-item {
+    font-size: 13px !important;
+    padding: 6px 0 !important;
+  }
+
+  .trendy-mobile-hamburger {
+    display: none !important;
+  }
+
+  .trendy-search-input {
+    width: 130px !important;
+    padding: 6px 10px 6px 30px !important;
+    font-size: 12px !important;
+  }
+
+  .trendy-header-actions {
+    gap: 12px !important;
+  }
+
+  .trendy-product-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+
+  .trendy-banners-grid,
+  .trendy-promises-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+
+  .trendy-footer-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 24px !important;
+  }
+
+  .trendy-pdp-layout {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 24px !important;
+  }
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .trendy-storefront.device-tablet) .trendy-storefront,
+.trendy-storefront.device-tablet {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .trendy-storefront.device-tablet) .trendy-container,
+.trendy-storefront.device-tablet .trendy-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  box-sizing: border-box !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .trendy-storefront.device-tablet) .trendy-topbar,
+.trendy-storefront.device-tablet .trendy-topbar {
+  padding: 6px 0 !important;
+  font-size: 11px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .trendy-storefront.device-tablet) .trendy-topbar-inner,
+.trendy-storefront.device-tablet .trendy-topbar-inner {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .trendy-storefront.device-tablet) .trendy-header-inner,
+.trendy-storefront.device-tablet .trendy-header-inner {
+  height: 68px !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .trendy-storefront.device-tablet) .trendy-brand-title,
+.trendy-storefront.device-tablet .trendy-brand-title {
+  font-size: 20px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .trendy-storefront.device-tablet) .trendy-nav,
+.trendy-storefront.device-tablet .trendy-nav {
+  display: flex !important;
+  gap: 14px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .trendy-storefront.device-tablet) .trendy-nav-item,
+.trendy-storefront.device-tablet .trendy-nav-item {
+  font-size: 13px !important;
+  padding: 6px 0 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .trendy-storefront.device-tablet) .trendy-mobile-hamburger,
+.trendy-storefront.device-tablet .trendy-mobile-hamburger {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .trendy-storefront.device-tablet) .trendy-search-input,
+.trendy-storefront.device-tablet .trendy-search-input {
+  width: 130px !important;
+  padding: 6px 10px 6px 30px !important;
+  font-size: 12px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .trendy-storefront.device-tablet) .trendy-header-actions,
+.trendy-storefront.device-tablet .trendy-header-actions {
+  gap: 12px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .trendy-storefront.device-tablet) .trendy-product-grid,
+.trendy-storefront.device-tablet .trendy-product-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .trendy-storefront.device-tablet) .trendy-banners-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .trendy-storefront.device-tablet) .trendy-promises-grid,
+.trendy-storefront.device-tablet .trendy-banners-grid,
+.trendy-storefront.device-tablet .trendy-promises-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .trendy-storefront.device-tablet) .trendy-footer-grid,
+.trendy-storefront.device-tablet .trendy-footer-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 24px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .trendy-storefront.device-tablet) .trendy-pdp-layout,
+.trendy-storefront.device-tablet .trendy-pdp-layout {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 24px !important;
+}

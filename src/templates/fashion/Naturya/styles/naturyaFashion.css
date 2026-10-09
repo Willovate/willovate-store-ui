@@ -1888,3 +1888,224 @@
   width: 100% !important;
   max-width: 100% !important;
 }
+
+/* =========================================================================
+   DEDICATED TABLET VIEW (768px - 1024px & SIMULATED TABLET)
+   ========================================================================= */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .naturya-root {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .naturya-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    box-sizing: border-box !important;
+  }
+
+  .naturya-announcement-bar {
+    padding: 8px 16px !important;
+    font-size: 12px !important;
+    text-align: center !important;
+  }
+
+  .naturya-announcement-content {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .naturya-header-inner {
+    height: 70px !important;
+    padding: 0 4px !important;
+  }
+
+  .naturya-nav-menu {
+    display: flex !important;
+    gap: 16px !important;
+  }
+
+  .naturya-nav-link {
+    font-size: 13px !important;
+    padding: 6px 0 !important;
+  }
+
+  .naturya-mobile-hamburger {
+    display: none !important;
+  }
+
+  .naturya-logo {
+    font-size: 24px !important;
+  }
+
+  .naturya-header-actions {
+    gap: 14px !important;
+  }
+
+  .naturya-trio-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+
+  .naturya-products-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+
+  .naturya-cat-pills-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+
+  .naturya-reviews-grid,
+  .naturya-promises-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 18px !important;
+  }
+
+  .naturya-pdp-layout {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 24px !important;
+  }
+
+  .naturya-footer-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 28px !important;
+  }
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-root,
+.naturya-root.naturya-tablet,
+.naturya-root.device-tablet {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-container,
+.naturya-root.naturya-tablet .naturya-container,
+.naturya-root.device-tablet .naturya-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+  box-sizing: border-box !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-announcement-bar,
+.naturya-root.naturya-tablet .naturya-announcement-bar,
+.naturya-root.device-tablet .naturya-announcement-bar {
+  padding: 8px 16px !important;
+  font-size: 12px !important;
+  text-align: center !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-announcement-content,
+.naturya-root.naturya-tablet .naturya-announcement-content,
+.naturya-root.device-tablet .naturya-announcement-content {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-header-inner,
+.naturya-root.naturya-tablet .naturya-header-inner,
+.naturya-root.device-tablet .naturya-header-inner {
+  height: 70px !important;
+  padding: 0 4px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-nav-menu,
+.naturya-root.naturya-tablet .naturya-nav-menu,
+.naturya-root.device-tablet .naturya-nav-menu {
+  display: flex !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-nav-link,
+.naturya-root.naturya-tablet .naturya-nav-link,
+.naturya-root.device-tablet .naturya-nav-link {
+  font-size: 13px !important;
+  padding: 6px 0 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-mobile-hamburger,
+.naturya-root.naturya-tablet .naturya-mobile-hamburger,
+.naturya-root.device-tablet .naturya-mobile-hamburger {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-logo,
+.naturya-root.naturya-tablet .naturya-logo,
+.naturya-root.device-tablet .naturya-logo {
+  font-size: 24px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-header-actions,
+.naturya-root.naturya-tablet .naturya-header-actions,
+.naturya-root.device-tablet .naturya-header-actions {
+  gap: 14px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-trio-grid,
+.naturya-root.naturya-tablet .naturya-trio-grid,
+.naturya-root.device-tablet .naturya-trio-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-products-grid,
+.naturya-root.naturya-tablet .naturya-products-grid,
+.naturya-root.device-tablet .naturya-products-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-cat-pills-grid,
+.naturya-root.naturya-tablet .naturya-cat-pills-grid,
+.naturya-root.device-tablet .naturya-cat-pills-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-reviews-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-promises-grid,
+.naturya-root.naturya-tablet .naturya-reviews-grid,
+.naturya-root.naturya-tablet .naturya-promises-grid,
+.naturya-root.device-tablet .naturya-reviews-grid,
+.naturya-root.device-tablet .naturya-promises-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-pdp-layout,
+.naturya-root.naturya-tablet .naturya-pdp-layout,
+.naturya-root.device-tablet .naturya-pdp-layout {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 24px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-footer-grid,
+.naturya-root.naturya-tablet .naturya-footer-grid,
+.naturya-root.device-tablet .naturya-footer-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 28px !important;
+}

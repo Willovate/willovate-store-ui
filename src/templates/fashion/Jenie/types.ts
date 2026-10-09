@@ -63,6 +63,7 @@ export interface JenieFilterState {
 export interface JenieStorefrontProps {
   template?: MarketplaceTemplate
   device?: 'desktop' | 'tablet' | 'mobile' | 'fullscreen'
+  deviceView?: 'desktop' | 'tablet' | 'mobile' | 'fullscreen'
   customAccentColor?: string | null
   onColorChange?: (color: string) => void
   onUseTemplate?: (templateId: string) => void

@@ -2655,3 +2655,214 @@
   width: 100% !important;
   max-width: 100% !important;
 }
+
+/* ─────────────────────────────────────────────────────────────
+   20. DEDICATED TABLET VIEW (768px - 1024px & SIMULATED TABLET)
+───────────────────────────────────────────────────────────── */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .vogal-theme-root {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .vogal-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    box-sizing: border-box !important;
+  }
+
+  .vogal-top-bar {
+    padding: 7px 16px !important;
+    font-size: 0.72rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  .vogal-header-inner {
+    padding: 0 20px !important;
+    height: 70px !important;
+    gap: 16px !important;
+  }
+
+  .vogal-logo h1 {
+    font-size: 1.6rem !important;
+  }
+
+  .vogal-desktop-nav {
+    display: flex !important;
+    gap: 16px !important;
+  }
+
+  .vogal-nav-link {
+    font-size: 0.8rem !important;
+    padding: 20px 0 !important;
+  }
+
+  .vogal-mobile-hamburger {
+    display: none !important;
+  }
+
+  .vogal-header-actions {
+    gap: 10px !important;
+  }
+
+  .vogal-hero-title {
+    font-size: 2.5rem !important;
+  }
+
+  .vogal-product-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+
+  .vogal-categories-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+
+  .vogal-split-grid,
+  .vogal-testimonials-grid,
+  .vogal-trust-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 18px !important;
+  }
+
+  .vogal-countdown-inner {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px !important;
+    align-items: center !important;
+  }
+
+  .vogal-footer-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 28px !important;
+  }
+
+  .vogal-pdp-layout {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 24px !important;
+  }
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-theme-root,
+.vogal-theme-root.device-tablet {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-container,
+.vogal-theme-root.device-tablet .vogal-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+  box-sizing: border-box !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-top-bar,
+.vogal-theme-root.device-tablet .vogal-top-bar {
+  padding: 7px 16px !important;
+  font-size: 0.72rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-header-inner,
+.vogal-theme-root.device-tablet .vogal-header-inner {
+  padding: 0 20px !important;
+  height: 70px !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-logo h1,
+.vogal-theme-root.device-tablet .vogal-logo h1 {
+  font-size: 1.6rem !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-desktop-nav,
+.vogal-theme-root.device-tablet .vogal-desktop-nav {
+  display: flex !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-nav-link,
+.vogal-theme-root.device-tablet .vogal-nav-link {
+  font-size: 0.8rem !important;
+  padding: 20px 0 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-mobile-hamburger,
+.vogal-theme-root.device-tablet .vogal-mobile-hamburger {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-header-actions,
+.vogal-theme-root.device-tablet .vogal-header-actions {
+  gap: 10px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-hero-title,
+.vogal-theme-root.device-tablet .vogal-hero-title {
+  font-size: 2.5rem !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-product-grid,
+.vogal-theme-root.device-tablet .vogal-product-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-categories-grid,
+.vogal-theme-root.device-tablet .vogal-categories-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-split-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-testimonials-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-trust-grid,
+.vogal-theme-root.device-tablet .vogal-split-grid,
+.vogal-theme-root.device-tablet .vogal-testimonials-grid,
+.vogal-theme-root.device-tablet .vogal-trust-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-countdown-inner,
+.vogal-theme-root.device-tablet .vogal-countdown-inner {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 20px !important;
+  align-items: center !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-footer-grid,
+.vogal-theme-root.device-tablet .vogal-footer-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 28px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-pdp-layout,
+.vogal-theme-root.device-tablet .vogal-pdp-layout {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 24px !important;
+}

@@ -2607,7 +2607,7 @@
   background: #080c14;
 }
 
-.preview-viewport-container:not(.device-mobile) {
+.preview-viewport-container:not(.device-mobile):not(.device-tablet) {
   overflow: hidden !important;
   display: flex !important;
   flex-direction: column !important;
@@ -2638,6 +2638,19 @@
   justify-content: center;
   align-items: flex-start;
   background: #090d16;
+}
+
+.preview-viewport-container.device-tablet {
+  padding: 2.5rem 1.5rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  background: #090d16 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
 }
 
 /* Device Frame Simulation */
@@ -2684,12 +2697,66 @@
 }
 
 .frame-tablet {
-  width: 768px;
-  max-width: 100%;
-  border: 12px solid #1e293b;
-  border-radius: 28px;
-  box-shadow: 0 25px 60px rgba(0,0,0,0.6);
-  transform: translateZ(0);
+  width: 768px !important;
+  max-width: calc(100% - 32px) !important;
+  height: 980px !important;
+  max-height: calc(100vh - 120px) !important;
+  margin: 0 auto !important;
+  align-self: center !important;
+  flex-shrink: 0 !important;
+  border: 14px solid #1e293b !important;
+  border-radius: 28px !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6) !important;
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  transform: translateZ(0) !important;
+}
+
+.simulated-frame.frame-tablet .velocity-storefront-wrapper,
+.simulated-frame.frame-tablet .sports-storefront-wrapper,
+.simulated-frame.frame-tablet .arena-root,
+.simulated-frame.frame-tablet .arena-storefront,
+.simulated-frame.frame-tablet .sprint-root,
+.simulated-frame.frame-tablet .sprint-storefront-root,
+.simulated-frame.frame-tablet .progear-root,
+.simulated-frame.frame-tablet .progear-storefront,
+.simulated-frame.frame-tablet .fitcore-root,
+.simulated-frame.frame-tablet .fitcore-storefront,
+.simulated-frame.frame-tablet .gd-root,
+.simulated-frame.frame-tablet .gameday-storefront,
+.simulated-frame.frame-tablet .peak-theme,
+.simulated-frame.frame-tablet .peak-storefront-root,
+.simulated-frame.frame-tablet .street-athlete,
+.simulated-frame.frame-tablet .street-athlete-theme,
+.simulated-frame.frame-tablet .elite-sport,
+.simulated-frame.frame-tablet .motion-theme,
+.simulated-frame.frame-tablet .motion-root,
+.simulated-frame.frame-tablet .belle-theme-root,
+.simulated-frame.frame-tablet .vogal-theme-root,
+.simulated-frame.frame-tablet .optimal-root,
+.simulated-frame.frame-tablet .naturya-root,
+.simulated-frame.frame-tablet .trendy-storefront,
+.simulated-frame.frame-tablet .fragrance-theme-root,
+.simulated-frame.frame-tablet .jenie-theme-root,
+.simulated-frame.frame-tablet .chutti-root,
+.simulated-frame.frame-tablet .baggo-root,
+.simulated-frame.frame-tablet .mr-tevor-storefront,
+.simulated-frame.frame-tablet .diamond-root,
+.simulated-frame.frame-tablet > div {
+  flex: 1 1 auto !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  position: relative !important;
+  transform: none !important;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
 .frame-mobile {
