@@ -153,25 +153,7 @@ export default function LoginPage({
   }
 
   return (
-    <AuthLayout brandPanel={<AuthBrandPanel />}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-        {onNavigateHome && (
-          <button
-            type="button"
-            onClick={onNavigateHome}
-            style={{
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              color: 'var(--color-text-secondary, #666)',
-              fontSize: '0.875rem',
-              padding: 0,
-            }}
-          >
-            ← Back to Store
-          </button>
-        )}
-      </div>
+    <AuthLayout brandPanel={<AuthBrandPanel />} onNavigateHome={onNavigateHome}>
 
       <AuthFormHeader
         title="Welcome back"

@@ -125,7 +125,41 @@ html, body, #root {
   flex-shrink: 0;
   display: block;
 }
-.auth-topbar-switch,
+.auth-topbar-home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.auth-topbar-home-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.28);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+.auth-topbar-home-btn:active {
+  transform: translateY(0);
+}
+.auth-topbar-home-btn svg {
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+.auth-topbar-home-btn:hover svg {
+  transform: translateX(-3px);
+}
+
 .auth-bottom-switch {
   margin: 0;
   color: rgba(220, 226, 255, .7);

@@ -94,7 +94,7 @@ function App() {
   // URL Hash Synchronizer Supporting All 8 Categories & Auth
   useEffect(() => {
     const handleHash = () => {
-      const rawHash = window.location.hash.toLowerCase().replace(/^#/, '')
+      const rawHash = window.location.hash.toLowerCase().replace(/^#\/?/, '')
 
       if (rawHash === 'store' || rawHash === 'shop' || rawHash === 'catalog') {
         setShowStore(true)
@@ -371,7 +371,7 @@ function App() {
       <SignupPage
         onNavigateToLogin={() => {
           setCurrentPage('login')
-          window.location.hash = 'login'
+          window.location.hash = '/login'
         }}
         onNavigateHome={() => {
           setCurrentPage('landing')
@@ -379,7 +379,7 @@ function App() {
         }}
         onAuthSuccess={() => {
           setCurrentPage('directory')
-          window.location.hash = 'directory'
+          window.location.hash = '/directory'
         }}
       />
     )
@@ -390,7 +390,7 @@ function App() {
       <LoginPage
         onNavigateToSignup={() => {
           setCurrentPage('signup')
-          window.location.hash = 'signup'
+          window.location.hash = '/signup'
         }}
         onNavigateHome={() => {
           setCurrentPage('landing')
@@ -398,7 +398,7 @@ function App() {
         }}
         onAuthSuccess={() => {
           setCurrentPage('directory')
-          window.location.hash = 'directory'
+          window.location.hash = '/directory'
         }}
       />
     )
@@ -413,24 +413,32 @@ function App() {
           window.location.hash = 'store'
         }}
         onStartFree={() => {
-          setCurrentPage('directory')
-          window.location.hash = 'directory'
+          setSelectedBusinessType('online-store')
+          setSelectedBusinessTypeDisplay('Online Store')
+          setCustomPrompt('')
+          setCurrentPage('signup')
+          window.location.hash = '/signup'
         }}
         onSubmitPrompt={(prompt) => {
           setCustomPrompt(prompt)
-          setCurrentPage('directory')
-          window.location.hash = 'directory'
+          setSelectedBusinessType('other')
+          setSelectedBusinessTypeDisplay('Other')
+          setCurrentPage('signup')
+          window.location.hash = '/signup'
         }}
         onExploreTemplates={() => {
-          setCurrentPage('directory')
-          window.location.hash = 'directory'
+          setSelectedBusinessType('online-store')
+          setSelectedBusinessTypeDisplay('Online Store')
+          setCustomPrompt('')
+          setCurrentPage('signup')
+          window.location.hash = '/signup'
         }}
         onSelectCategory={(businessType) => {
           const cat = TEMPLATE_REGISTRY[businessType]
           setSelectedBusinessType(businessType)
           setSelectedBusinessTypeDisplay(cat ? cat.displayName : businessType)
-          setCurrentPage('templates')
-          window.location.hash = `${businessType}-templates`
+          setCurrentPage('signup')
+          window.location.hash = '/signup'
         }}
       />
     )

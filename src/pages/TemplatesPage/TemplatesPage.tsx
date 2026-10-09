@@ -1179,6 +1179,9 @@ export function TemplateDirectoryPage({
     if (initialBusinessType && BUSINESS_TYPES.some((b) => b.id === initialBusinessType && b.id !== 'other')) {
       return initialBusinessType
     }
+    if (initialBusinessType && ALL_OTHER_SUGGESTIONS.some((suggestion) => suggestion.id === initialBusinessType)) {
+      return 'other'
+    }
     return 'online-store'
   })
 
