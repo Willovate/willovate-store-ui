@@ -625,8 +625,18 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
   padding-top: 12px;
   border-top: 1px solid #F3F4F6;
+}
+
+.chutti-card-footer > div:first-child {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: nowrap;
+  min-width: 0;
+  flex-shrink: 0;
 }
 
 .chutti-card-price {
@@ -634,13 +644,15 @@
   font-size: 18px;
   font-weight: 800;
   color: var(--chutti-coral);
+  white-space: nowrap;
 }
 
 .chutti-card-compare {
   font-size: 13px;
   color: #9CA3AF;
   text-decoration: line-through;
-  margin-left: 6px;
+  margin-left: 2px;
+  white-space: nowrap;
 }
 
 .chutti-quick-add {
@@ -654,6 +666,11 @@
   border: 1px solid rgba(252, 97, 113, 0.2);
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .chutti-quick-add:hover {
@@ -1848,8 +1865,8 @@
   .chutti-container {
     width: 100% !important;
     max-width: 100% !important;
-    padding-left: 20px !important;
-    padding-right: 20px !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
     box-sizing: border-box !important;
   }
 
@@ -1864,19 +1881,22 @@
 
   .chutti-header-inner {
     padding: 12px 0 !important;
+    gap: 12px !important;
+    justify-content: space-between !important;
   }
 
   .chutti-logo-text {
-    font-size: 26px !important;
+    font-size: 24px !important;
   }
 
   .chutti-nav-menu {
     display: flex !important;
-    gap: 16px !important;
+    gap: 14px !important;
   }
 
   .chutti-nav-link {
-    font-size: 14px !important;
+    font-size: 13.5px !important;
+    white-space: nowrap !important;
   }
 
   .chutti-mobile-menu-toggle {
@@ -1884,20 +1904,154 @@
   }
 
   .chutti-header-actions {
-    gap: 10px !important;
+    gap: 8px !important;
+    flex-shrink: 0 !important;
   }
 
+  /* Hero Section in Tablet View - Side-by-Side without Overlap */
+  .chutti-hero {
+    flex-direction: row !important;
+    min-height: 400px !important;
+    padding: 36px 0 48px !important;
+    align-items: center !important;
+    overflow: hidden !important;
+  }
+
+  .chutti-hero > .chutti-container {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 24px !important;
+    position: relative !important;
+  }
+
+  .chutti-hero-content {
+    flex: 1 1 50% !important;
+    max-width: 50% !important;
+    min-width: 0 !important;
+    padding: 16px 0 !important;
+    text-align: left !important;
+    z-index: 5 !important;
+  }
+
+  .chutti-hero-script {
+    font-size: 24px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .chutti-hero-title {
+    font-size: 36px !important;
+    line-height: 1.15 !important;
+    margin: 0 0 14px !important;
+    word-break: break-word !important;
+  }
+
+  .chutti-hero-tagline {
+    font-size: 13px !important;
+    padding: 6px 14px !important;
+    margin-bottom: 22px !important;
+    display: inline-block !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .chutti-hero-visual {
+    position: relative !important;
+    right: auto !important;
+    top: auto !important;
+    transform: none !important;
+    flex: 0 0 46% !important;
+    width: 46% !important;
+    max-width: 360px !important;
+    height: 320px !important;
+    margin: 0 !important;
+    border-radius: 24px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .chutti-hero-dots {
+    position: absolute !important;
+    bottom: -24px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+
+  /* Product Grid & Cards in Tablet View */
   .chutti-product-grid,
   .chutti-products-grid {
     display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 16px !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 20px !important;
+  }
+
+  .chutti-card-media {
+    height: 260px !important;
+  }
+
+  .chutti-card-body {
+    padding: 16px !important;
+  }
+
+  .chutti-card-footer {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+    flex-wrap: nowrap !important;
+    padding-top: 12px !important;
+  }
+
+  .chutti-card-footer > div:first-child {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 6px !important;
+    flex-wrap: nowrap !important;
+    min-width: 0 !important;
+    flex-shrink: 0 !important;
+  }
+
+  .chutti-card-price {
+    font-size: 18px !important;
+    white-space: nowrap !important;
+  }
+
+  .chutti-card-compare {
+    font-size: 13px !important;
+    margin-left: 2px !important;
+    white-space: nowrap !important;
+  }
+
+  .chutti-quick-add {
+    width: auto !important;
+    padding: 7px 16px !important;
+    font-size: 13px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50px !important;
   }
 
   .chutti-cat-grid {
     display: grid !important;
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
     gap: 14px !important;
+  }
+
+  .chutti-big-promo {
+    padding: 36px 28px !important;
+    gap: 24px !important;
+  }
+
+  .chutti-promo-text {
+    max-width: 55% !important;
+  }
+
+  .chutti-promo-title {
+    font-size: 30px !important;
   }
 
   .chutti-blog-grid {
@@ -1913,23 +2067,25 @@
   }
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet) .chutti-root,
-.chutti-root.chutti-tablet {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-root,
+.chutti-root.chutti-tablet,
+.chutti-root.device-tablet,
+.chutti-root.is-tablet {
   width: 100% !important;
   max-width: 100% !important;
   overflow-x: hidden !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet) .chutti-container,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-container,
 .chutti-root.chutti-tablet .chutti-container {
   width: 100% !important;
   max-width: 100% !important;
-  padding-left: 20px !important;
-  padding-right: 20px !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
   box-sizing: border-box !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet) .chutti-marquee-bar,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-marquee-bar,
 .chutti-root.chutti-tablet .chutti-marquee-bar {
   padding: 6px 0 !important;
   font-size: 11px !important;
@@ -1939,61 +2095,216 @@
   text-align: center !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet) .chutti-header-inner,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-header-inner,
 .chutti-root.chutti-tablet .chutti-header-inner {
   padding: 12px 0 !important;
+  gap: 12px !important;
+  justify-content: space-between !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet) .chutti-logo-text,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-logo-text,
 .chutti-root.chutti-tablet .chutti-logo-text {
-  font-size: 26px !important;
+  font-size: 24px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet) .chutti-nav-menu,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-nav-menu,
 .chutti-root.chutti-tablet .chutti-nav-menu {
   display: flex !important;
-  gap: 16px !important;
+  gap: 14px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet) .chutti-nav-link,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-nav-link,
 .chutti-root.chutti-tablet .chutti-nav-link {
-  font-size: 14px !important;
+  font-size: 13.5px !important;
+  white-space: nowrap !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet) .chutti-mobile-menu-toggle,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-mobile-menu-toggle,
 .chutti-root.chutti-tablet .chutti-mobile-menu-toggle {
   display: none !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet) .chutti-header-actions,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-header-actions,
 .chutti-root.chutti-tablet .chutti-header-actions {
-  gap: 10px !important;
+  gap: 8px !important;
+  flex-shrink: 0 !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet) .chutti-product-grid,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet) .chutti-products-grid,
+/* Hero Section in Simulated Tablet View */
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-hero,
+.chutti-root.chutti-tablet .chutti-hero {
+  flex-direction: row !important;
+  min-height: 400px !important;
+  padding: 36px 0 48px !important;
+  align-items: center !important;
+  overflow: hidden !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-hero > .chutti-container,
+.chutti-root.chutti-tablet .chutti-hero > .chutti-container {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 24px !important;
+  position: relative !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-hero-content,
+.chutti-root.chutti-tablet .chutti-hero-content {
+  flex: 1 1 50% !important;
+  max-width: 50% !important;
+  min-width: 0 !important;
+  padding: 16px 0 !important;
+  text-align: left !important;
+  z-index: 5 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-hero-script,
+.chutti-root.chutti-tablet .chutti-hero-script {
+  font-size: 24px !important;
+  margin-bottom: 6px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-hero-title,
+.chutti-root.chutti-tablet .chutti-hero-title {
+  font-size: 36px !important;
+  line-height: 1.15 !important;
+  margin: 0 0 14px !important;
+  word-break: break-word !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-hero-tagline,
+.chutti-root.chutti-tablet .chutti-hero-tagline {
+  font-size: 13px !important;
+  padding: 6px 14px !important;
+  margin-bottom: 22px !important;
+  display: inline-block !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-hero-visual,
+.chutti-root.chutti-tablet .chutti-hero-visual {
+  position: relative !important;
+  right: auto !important;
+  top: auto !important;
+  transform: none !important;
+  flex: 0 0 46% !important;
+  width: 46% !important;
+  max-width: 360px !important;
+  height: 320px !important;
+  margin: 0 !important;
+  border-radius: 24px !important;
+  flex-shrink: 0 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-hero-dots,
+.chutti-root.chutti-tablet .chutti-hero-dots {
+  position: absolute !important;
+  bottom: -24px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+/* Product Grid & Cards in Simulated Tablet View */
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-product-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-products-grid,
 .chutti-root.chutti-tablet .chutti-product-grid,
 .chutti-root.chutti-tablet .chutti-products-grid {
   display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 16px !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 20px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet) .chutti-cat-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-card-media,
+.chutti-root.chutti-tablet .chutti-card-media {
+  height: 260px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-card-body,
+.chutti-root.chutti-tablet .chutti-card-body {
+  padding: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-card-footer,
+.chutti-root.chutti-tablet .chutti-card-footer {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+  flex-wrap: nowrap !important;
+  padding-top: 12px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-card-footer > div:first-child,
+.chutti-root.chutti-tablet .chutti-card-footer > div:first-child {
+  display: flex !important;
+  align-items: baseline !important;
+  gap: 6px !important;
+  flex-wrap: nowrap !important;
+  min-width: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-card-price,
+.chutti-root.chutti-tablet .chutti-card-price {
+  font-size: 18px !important;
+  white-space: nowrap !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-card-compare,
+.chutti-root.chutti-tablet .chutti-card-compare {
+  font-size: 13px !important;
+  margin-left: 2px !important;
+  white-space: nowrap !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-quick-add,
+.chutti-root.chutti-tablet .chutti-quick-add {
+  width: auto !important;
+  padding: 7px 16px !important;
+  font-size: 13px !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-cat-grid,
 .chutti-root.chutti-tablet .chutti-cat-grid {
   display: grid !important;
   grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   gap: 14px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet) .chutti-blog-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-big-promo,
+.chutti-root.chutti-tablet .chutti-big-promo {
+  padding: 36px 28px !important;
+  gap: 24px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-promo-text,
+.chutti-root.chutti-tablet .chutti-promo-text {
+  max-width: 55% !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-promo-title,
+.chutti-root.chutti-tablet .chutti-promo-title {
+  font-size: 30px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-blog-grid,
 .chutti-root.chutti-tablet .chutti-blog-grid {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 20px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet) .chutti-footer-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .chutti-root.chutti-tablet, .chutti-root.device-tablet, .chutti-root.is-tablet) .chutti-footer-grid,
 .chutti-root.chutti-tablet .chutti-footer-grid {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;

@@ -36,21 +36,34 @@
 .mt-announcement-bar {
   background-color: var(--mt-obsidian);
   color: #D1D5DB;
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  padding: 8px 24px;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  padding: 7px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .mt-announcement-content {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin: 0 auto;
-  text-align: center;
+  gap: 10px;
+  margin: 0;
+  text-align: left;
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.mt-announcement-content > span:last-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .mt-announcement-pill {
@@ -59,16 +72,20 @@
   padding: 2px 8px;
   border-radius: 2px;
   font-weight: 700;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .mt-announcement-tools {
   display: flex;
   align-items: center;
-  gap: 16px;
-  font-size: 0.75rem;
+  gap: 14px;
+  font-size: 0.68rem;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* Master Header */
@@ -84,26 +101,32 @@
 
 .mt-header-inner {
   max-width: 1380px;
+  width: 100%;
   margin: 0 auto;
-  padding: 14px 24px;
+  padding: 12px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 16px;
+  box-sizing: border-box;
+  flex-wrap: nowrap;
 }
 
 .mt-brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   text-decoration: none;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .mt-brand-logo-img {
-  height: 48px;
-  width: auto;
+  height: 36px;
+  width: 48px;
+  max-width: 48px;
   object-fit: contain;
+  flex-shrink: 0;
 }
 
 .mt-brand-text {
@@ -113,34 +136,39 @@
 
 .mt-brand-name {
   font-family: var(--mt-font-serif);
-  font-size: 1.55rem;
+  font-size: 1.25rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   color: var(--mt-obsidian);
   line-height: 1.1;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .mt-brand-tagline {
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
+  font-size: 0.52rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--mt-crimson);
   font-weight: 600;
+  white-space: nowrap;
 }
 
 /* Navigation Links */
 .mt-nav {
   display: flex;
   align-items: center;
-  gap: 28px;
+  justify-content: center;
+  gap: clamp(12px, 1.4vw, 22px);
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .mt-nav-link {
   font-family: var(--mt-font-serif);
-  font-size: 0.85rem;
+  font-size: clamp(0.68rem, 0.78vw, 0.78rem);
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--mt-charcoal);
   text-decoration: none;
@@ -148,6 +176,8 @@
   padding: 8px 0;
   position: relative;
   transition: color 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .mt-nav-link:hover,
@@ -168,12 +198,12 @@
 .mt-nav-badge {
   background-color: var(--mt-crimson);
   color: #FFFFFF;
-  font-size: 0.6rem;
-  padding: 1px 5px;
+  font-size: 0.52rem;
+  padding: 1px 4px;
   border-radius: 2px;
   position: relative;
-  top: -8px;
-  margin-left: 2px;
+  top: -6px;
+  margin-left: 3px;
   font-family: var(--mt-font-sans);
 }
 
@@ -181,38 +211,50 @@
 .mt-header-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 .mt-icon-btn {
   background: transparent;
-  border: 1px solid transparent;
+  border: 1px solid var(--mt-border);
   color: var(--mt-charcoal);
   cursor: pointer;
   position: relative;
-  padding: 8px;
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  padding: 6px;
   border-radius: 4px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
-.mt-icon-btn:hover {
-  background-color: var(--mt-linen);
+.mt-icon-btn svg {
+  width: 17px;
+  height: 17px;
+}
+
+.mt-icon-btn:hover,
+.mt-icon-btn.active {
+  background-color: var(--mt-crimson-tint);
+  border-color: var(--mt-crimson);
   color: var(--mt-crimson);
 }
 
 .mt-badge-counter {
   position: absolute;
-  top: 2px;
-  right: 2px;
+  top: -4px;
+  right: -4px;
   background-color: var(--mt-crimson);
   color: #FFFFFF;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 700;
-  width: 17px;
-  height: 17px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -223,23 +265,152 @@
   background-color: var(--mt-obsidian);
   color: #FFFFFF;
   font-family: var(--mt-font-serif);
-  font-size: 0.78rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
-  padding: 10px 18px;
+  padding: 9px 14px;
   border: 1px solid var(--mt-gold);
   border-radius: 2px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
   transition: all 0.25s ease;
 }
 
 .mt-bespoke-cta-btn:hover {
   background-color: var(--mt-crimson);
   border-color: var(--mt-crimson);
+}
+
+/* Expandable Header Search Bar */
+.mt-header-search-bar {
+  background-color: var(--mt-cream);
+  border-top: 1px solid var(--mt-border);
+  border-bottom: 1px solid var(--mt-border);
+  width: 100%;
+  box-sizing: border-box;
+  animation: mtFadeIn 0.2s ease;
+}
+
+.mt-header-search-inner {
+  max-width: 1380px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.mt-header-search-input-wrap {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #FFFFFF;
+  border: 1px solid var(--mt-border);
+  border-radius: 4px;
+  padding: 8px 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mt-header-search-input-wrap:focus-within {
+  border-color: var(--mt-crimson);
+  box-shadow: 0 0 0 2px rgba(160, 28, 43, 0.12);
+}
+
+.mt-header-search-input-wrap svg {
+  color: var(--mt-slate);
+  flex-shrink: 0;
+}
+
+.mt-header-search-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--mt-font-sans);
+  font-size: 0.86rem;
+  color: var(--mt-obsidian);
+}
+
+.mt-header-search-input::placeholder {
+  color: #9CA3AF;
+}
+
+.mt-header-search-clear {
+  background: transparent;
+  border: none;
+  color: #9CA3AF;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 2px 6px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.mt-header-search-clear:hover {
+  color: var(--mt-crimson);
+}
+
+.mt-header-search-submit {
+  background-color: var(--mt-crimson);
+  color: #FFFFFF;
+  border: 1px solid var(--mt-crimson);
+  border-radius: 4px;
+  padding: 9px 18px;
+  font-family: var(--mt-font-serif);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.mt-header-search-submit:hover {
+  background-color: var(--mt-crimson-dark);
+  border-color: var(--mt-crimson-dark);
+}
+
+.mt-header-search-close {
+  background-color: #FFFFFF;
+  border: 1px solid var(--mt-border);
+  color: var(--mt-charcoal);
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.mt-header-search-close:hover {
+  background-color: var(--mt-crimson-tint);
+  border-color: var(--mt-crimson);
+  color: var(--mt-crimson);
+}
+
+.mt-mobile-drawer-search {
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--mt-border);
+  background-color: var(--mt-cream);
 }
 
 /* Hero Carousel */
@@ -1675,21 +1846,39 @@
 
   /* 1. Announcement Bar */
   .mt-announcement-bar {
-    padding: 6px 12px !important;
-    font-size: 0.72rem !important;
+    padding: 6px 10px !important;
+    font-size: 0.62rem !important;
+    letter-spacing: 0.02em !important;
   }
 
   .mt-announcement-content {
-    flex-direction: column !important;
-    gap: 4px !important;
-    font-size: 0.72rem !important;
-    line-height: 1.35 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    flex-wrap: nowrap !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    font-size: 0.62rem !important;
+    line-height: 1.25 !important;
   }
 
   .mt-announcement-pill {
-    font-size: 0.65rem !important;
+    font-size: 0.54rem !important;
     padding: 2px 6px !important;
     display: inline-block !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+  }
+
+  .mt-announcement-content > span:last-child {
+    font-size: 0.6rem !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
   }
 
   .mt-announcement-tools {
@@ -1698,29 +1887,40 @@
 
   /* 2. Header & Navigation */
   .mt-header-inner {
-    padding: 10px 14px !important;
+    padding: 10px 12px !important;
     gap: 8px !important;
     justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    flex-wrap: nowrap !important;
   }
 
   .mt-brand {
-    gap: 8px !important;
+    gap: 6px !important;
     min-width: 0 !important;
-    flex-shrink: 1 !important;
+    flex: 0 1 auto !important;
   }
 
   .mt-brand-logo-img {
-    height: 34px !important;
+    height: 28px !important;
+    width: 36px !important;
+    max-width: 36px !important;
+    object-fit: contain !important;
+    flex-shrink: 0 !important;
   }
 
   .mt-brand-name {
-    font-size: 1.15rem !important;
-    letter-spacing: 0.08em !important;
+    font-size: 1rem !important;
+    letter-spacing: 0.05em !important;
+    white-space: nowrap !important;
   }
 
   .mt-brand-tagline {
-    font-size: 0.55rem !important;
-    letter-spacing: 0.12em !important;
+    font-size: 0.45rem !important;
+    letter-spacing: 0.06em !important;
+    white-space: nowrap !important;
   }
 
   .mt-nav {
@@ -1735,20 +1935,21 @@
   }
 
   .mt-icon-btn {
-    padding: 6px !important;
-    width: 34px !important;
-    height: 34px !important;
-    min-width: 34px !important;
+    padding: 5px !important;
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
     border-radius: 4px !important;
     border: 1px solid var(--mt-border) !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
+    flex-shrink: 0 !important;
   }
 
   .mt-icon-btn svg {
-    width: 17px !important;
-    height: 17px !important;
+    width: 16px !important;
+    height: 16px !important;
   }
 
   .mt-badge-counter {
@@ -1765,6 +1966,34 @@
 
   .mt-mobile-menu-toggle {
     display: inline-flex !important;
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+  }
+
+  .mt-header-search-inner {
+    padding: 8px 12px !important;
+    gap: 6px !important;
+  }
+
+  .mt-header-search-input-wrap {
+    padding: 6px 10px !important;
+    gap: 6px !important;
+  }
+
+  .mt-header-search-input {
+    font-size: 0.78rem !important;
+  }
+
+  .mt-header-search-submit {
+    padding: 7px 12px !important;
+    font-size: 0.68rem !important;
+  }
+
+  .mt-header-search-close {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
   }
 
   /* 3. Hero Section & Fix Overlapping Floating Spec */
@@ -2505,17 +2734,45 @@
 .mr-tevor-storefront.is-mobile .mt-announcement-bar,
 .mr-tevor-storefront.device-mobile .mt-announcement-bar,
 .mr-tevor-storefront.mr-tevor-mobile .mt-announcement-bar {
-  padding: 6px 12px !important;
-  font-size: 0.72rem !important;
+  padding: 6px 10px !important;
+  font-size: 0.62rem !important;
+  letter-spacing: 0.02em !important;
 }
 
 .mr-tevor-storefront.is-mobile .mt-announcement-content,
 .mr-tevor-storefront.device-mobile .mt-announcement-content,
 .mr-tevor-storefront.mr-tevor-mobile .mt-announcement-content {
-  flex-direction: column !important;
-  gap: 4px !important;
-  font-size: 0.72rem !important;
-  line-height: 1.35 !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  flex-wrap: nowrap !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  font-size: 0.62rem !important;
+  line-height: 1.25 !important;
+}
+
+.mr-tevor-storefront.is-mobile .mt-announcement-pill,
+.mr-tevor-storefront.device-mobile .mt-announcement-pill,
+.mr-tevor-storefront.mr-tevor-mobile .mt-announcement-pill {
+  font-size: 0.54rem !important;
+  padding: 2px 6px !important;
+  display: inline-block !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
+
+.mr-tevor-storefront.is-mobile .mt-announcement-content > span:last-child,
+.mr-tevor-storefront.device-mobile .mt-announcement-content > span:last-child,
+.mr-tevor-storefront.mr-tevor-mobile .mt-announcement-content > span:last-child {
+  font-size: 0.6rem !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 .mr-tevor-storefront.is-mobile .mt-announcement-tools,
@@ -2527,37 +2784,48 @@
 .mr-tevor-storefront.is-mobile .mt-header-inner,
 .mr-tevor-storefront.device-mobile .mt-header-inner,
 .mr-tevor-storefront.mr-tevor-mobile .mt-header-inner {
-  padding: 10px 14px !important;
+  padding: 10px 12px !important;
   gap: 8px !important;
   justify-content: space-between !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  flex-wrap: nowrap !important;
 }
 
 .mr-tevor-storefront.is-mobile .mt-brand,
 .mr-tevor-storefront.device-mobile .mt-brand,
 .mr-tevor-storefront.mr-tevor-mobile .mt-brand {
-  gap: 8px !important;
+  gap: 6px !important;
   min-width: 0 !important;
-  flex-shrink: 1 !important;
+  flex: 0 1 auto !important;
 }
 
 .mr-tevor-storefront.is-mobile .mt-brand-logo-img,
 .mr-tevor-storefront.device-mobile .mt-brand-logo-img,
 .mr-tevor-storefront.mr-tevor-mobile .mt-brand-logo-img {
-  height: 34px !important;
+  height: 28px !important;
+  width: 36px !important;
+  max-width: 36px !important;
+  object-fit: contain !important;
+  flex-shrink: 0 !important;
 }
 
 .mr-tevor-storefront.is-mobile .mt-brand-name,
 .mr-tevor-storefront.device-mobile .mt-brand-name,
 .mr-tevor-storefront.mr-tevor-mobile .mt-brand-name {
-  font-size: 1.15rem !important;
-  letter-spacing: 0.08em !important;
+  font-size: 1rem !important;
+  letter-spacing: 0.05em !important;
+  white-space: nowrap !important;
 }
 
 .mr-tevor-storefront.is-mobile .mt-brand-tagline,
 .mr-tevor-storefront.device-mobile .mt-brand-tagline,
 .mr-tevor-storefront.mr-tevor-mobile .mt-brand-tagline {
-  font-size: 0.55rem !important;
-  letter-spacing: 0.12em !important;
+  font-size: 0.45rem !important;
+  letter-spacing: 0.06em !important;
+  white-space: nowrap !important;
 }
 
 .mr-tevor-storefront.is-mobile .mt-nav,
@@ -2578,22 +2846,23 @@
 .mr-tevor-storefront.is-mobile .mt-icon-btn,
 .mr-tevor-storefront.device-mobile .mt-icon-btn,
 .mr-tevor-storefront.mr-tevor-mobile .mt-icon-btn {
-  padding: 6px !important;
-  width: 34px !important;
-  height: 34px !important;
-  min-width: 34px !important;
+  padding: 5px !important;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
   border-radius: 4px !important;
   border: 1px solid var(--mt-border) !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
+  flex-shrink: 0 !important;
 }
 
 .mr-tevor-storefront.is-mobile .mt-icon-btn svg,
 .mr-tevor-storefront.device-mobile .mt-icon-btn svg,
 .mr-tevor-storefront.mr-tevor-mobile .mt-icon-btn svg {
-  width: 17px !important;
-  height: 17px !important;
+  width: 16px !important;
+  height: 16px !important;
 }
 
 .mr-tevor-storefront.is-mobile .mt-badge-counter,
@@ -2616,6 +2885,44 @@
 .mr-tevor-storefront.device-mobile .mt-mobile-menu-toggle,
 .mr-tevor-storefront.mr-tevor-mobile .mt-mobile-menu-toggle {
   display: inline-flex !important;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+}
+
+.mr-tevor-storefront.is-mobile .mt-header-search-inner,
+.mr-tevor-storefront.device-mobile .mt-header-search-inner,
+.mr-tevor-storefront.mr-tevor-mobile .mt-header-search-inner {
+  padding: 8px 12px !important;
+  gap: 6px !important;
+}
+
+.mr-tevor-storefront.is-mobile .mt-header-search-input-wrap,
+.mr-tevor-storefront.device-mobile .mt-header-search-input-wrap,
+.mr-tevor-storefront.mr-tevor-mobile .mt-header-search-input-wrap {
+  padding: 6px 10px !important;
+  gap: 6px !important;
+}
+
+.mr-tevor-storefront.is-mobile .mt-header-search-input,
+.mr-tevor-storefront.device-mobile .mt-header-search-input,
+.mr-tevor-storefront.mr-tevor-mobile .mt-header-search-input {
+  font-size: 0.78rem !important;
+}
+
+.mr-tevor-storefront.is-mobile .mt-header-search-submit,
+.mr-tevor-storefront.device-mobile .mt-header-search-submit,
+.mr-tevor-storefront.mr-tevor-mobile .mt-header-search-submit {
+  padding: 7px 12px !important;
+  font-size: 0.68rem !important;
+}
+
+.mr-tevor-storefront.is-mobile .mt-header-search-close,
+.mr-tevor-storefront.device-mobile .mt-header-search-close,
+.mr-tevor-storefront.mr-tevor-mobile .mt-header-search-close {
+  width: 30px !important;
+  height: 30px !important;
+  min-width: 30px !important;
 }
 
 .mr-tevor-storefront.is-mobile .mt-hero-carousel,
@@ -3601,14 +3908,16 @@
   .mt-header-inner {
     width: 100% !important;
     max-width: 100% !important;
-    padding-left: 20px !important;
-    padding-right: 20px !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
     box-sizing: border-box !important;
   }
 
+  /* 1. Announcement Bar - Single Crisp Line */
   .mt-announcement-bar {
-    padding: 6px 16px !important;
-    font-size: 0.72rem !important;
+    padding: 6px 14px !important;
+    font-size: 0.6rem !important;
+    letter-spacing: 0.02em !important;
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
@@ -3617,52 +3926,182 @@
 
   .mt-announcement-content {
     display: flex !important;
+    flex-direction: row !important;
     justify-content: center !important;
     align-items: center !important;
     text-align: center !important;
+    gap: 8px !important;
     margin: 0 auto !important;
+    flex-wrap: nowrap !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .mt-announcement-pill {
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    font-size: 0.55rem !important;
+    padding: 2px 6px !important;
+    line-height: 1.2 !important;
+  }
+
+  .mt-announcement-content > span:last-child {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    font-size: 0.6rem !important;
   }
 
   .mt-announcement-tools {
     display: none !important;
   }
 
+  /* 2. Header - Same Clean Layout as Mobile Top Bar */
   .mt-header-inner {
-    padding: 10px 20px !important;
-    gap: 16px !important;
+    padding: 10px 16px !important;
+    gap: 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .mt-brand {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
   }
 
   .mt-brand-logo-img {
-    height: 40px !important;
+    height: 28px !important;
+    width: 36px !important;
+    max-width: 36px !important;
+    object-fit: contain !important;
+    flex-shrink: 0 !important;
   }
 
   .mt-brand-name {
-    font-size: 1.35rem !important;
+    font-size: 1.05rem !important;
+    letter-spacing: 0.05em !important;
+    white-space: nowrap !important;
+    line-height: 1.1 !important;
+  }
+
+  .mt-brand-tagline {
+    font-size: 0.46rem !important;
+    letter-spacing: 0.06em !important;
+    white-space: nowrap !important;
   }
 
   .mt-nav {
-    display: flex !important;
-    gap: 16px !important;
-  }
-
-  .mt-nav-link {
-    font-size: 0.78rem !important;
-    padding: 6px 0 !important;
-  }
-
-  .mt-mobile-hamburger,
-  .mt-mobile-toggle {
     display: none !important;
   }
 
   .mt-header-actions {
-    gap: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    flex: 0 0 auto !important;
+    flex-shrink: 0 !important;
   }
 
+  .mt-icon-btn {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    padding: 6px !important;
+    border: 1px solid var(--mt-border) !important;
+    border-radius: 4px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+  }
+
+  .mt-icon-btn svg {
+    width: 17px !important;
+    height: 17px !important;
+  }
+
+  .mt-badge-counter {
+    top: -4px !important;
+    right: -4px !important;
+    width: 16px !important;
+    height: 16px !important;
+    font-size: 0.6rem !important;
+  }
+
+  .mt-mobile-menu-toggle {
+    display: inline-flex !important;
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+  }
+
+  .mt-header-search-inner {
+    padding: 10px 16px !important;
+    gap: 8px !important;
+  }
+
+  /* 3. Hero Section in Tablet View */
+  .mt-hero-carousel {
+    min-height: 440px !important;
+  }
+
+  .mt-hero-slide {
+    display: grid !important;
+    grid-template-columns: 1.15fr 0.85fr !important;
+    gap: 24px !important;
+    padding: 40px 24px 52px !important;
+    text-align: left !important;
+    align-items: center !important;
+  }
+
+  .mt-hero-title {
+    font-size: 2.1rem !important;
+    line-height: 1.18 !important;
+    margin-bottom: 14px !important;
+  }
+
+  .mt-hero-subtitle {
+    font-size: 0.9rem !important;
+    line-height: 1.55 !important;
+    margin-bottom: 22px !important;
+  }
+
+  .mt-hero-actions {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    justify-content: flex-start !important;
+  }
+
+  .mt-btn-primary,
+  .mt-btn-secondary {
+    padding: 11px 18px !important;
+    font-size: 0.74rem !important;
+    white-space: nowrap !important;
+  }
+
+  .mt-hero-img-wrapper {
+    max-width: 280px !important;
+  }
+
+  .mt-hero-floating-spec {
+    right: 0 !important;
+    bottom: 10px !important;
+    padding: 8px 12px !important;
+  }
+
+  /* 4. Product Grid & Sections in Tablet View */
   .mt-products-grid {
     display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 16px !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 20px !important;
   }
 
   .mt-pillars-grid,
@@ -3670,6 +4109,16 @@
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 16px !important;
+  }
+
+  .mt-customizer-box {
+    grid-template-columns: 1fr 1fr !important;
+    padding: 32px 24px !important;
+    gap: 24px !important;
+  }
+
+  .mt-customizer-title {
+    font-size: 1.65rem !important;
   }
 
   .mt-footer-grid {
@@ -3685,97 +4134,243 @@
   }
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet) .mr-tevor-storefront,
-.mr-tevor-storefront.device-tablet {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mr-tevor-storefront,
+.mr-tevor-storefront.device-tablet,
+.mr-tevor-storefront.mr-tevor-tablet,
+.mr-tevor-storefront.is-tablet {
   width: 100% !important;
   max-width: 100% !important;
   overflow-x: hidden !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet) .mt-container,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet) .mt-header-inner,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-container,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-header-inner,
 .mr-tevor-storefront.device-tablet .mt-container,
 .mr-tevor-storefront.device-tablet .mt-header-inner {
   width: 100% !important;
   max-width: 100% !important;
-  padding-left: 20px !important;
-  padding-right: 20px !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
   box-sizing: border-box !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet) .mt-announcement-bar,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-announcement-bar,
 .mr-tevor-storefront.device-tablet .mt-announcement-bar {
-  padding: 6px 16px !important;
-  font-size: 0.72rem !important;
+  padding: 6px 14px !important;
+  font-size: 0.6rem !important;
+  letter-spacing: 0.02em !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
   text-align: center !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet) .mt-announcement-content,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-announcement-content,
 .mr-tevor-storefront.device-tablet .mt-announcement-content {
   display: flex !important;
+  flex-direction: row !important;
   justify-content: center !important;
   align-items: center !important;
   text-align: center !important;
+  gap: 8px !important;
   margin: 0 auto !important;
+  flex-wrap: nowrap !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet) .mt-announcement-tools,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-announcement-pill,
+.mr-tevor-storefront.device-tablet .mt-announcement-pill {
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  font-size: 0.55rem !important;
+  padding: 2px 6px !important;
+  line-height: 1.2 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-announcement-content > span:last-child,
+.mr-tevor-storefront.device-tablet .mt-announcement-content > span:last-child {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  font-size: 0.6rem !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-announcement-tools,
 .mr-tevor-storefront.device-tablet .mt-announcement-tools {
   display: none !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet) .mt-header-inner,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-header-inner,
 .mr-tevor-storefront.device-tablet .mt-header-inner {
-  padding: 10px 20px !important;
-  gap: 16px !important;
-}
-
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet) .mt-brand-logo-img,
-.mr-tevor-storefront.device-tablet .mt-brand-logo-img {
-  height: 40px !important;
-}
-
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet) .mt-brand-name,
-.mr-tevor-storefront.device-tablet .mt-brand-name {
-  font-size: 1.35rem !important;
-}
-
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet) .mt-nav,
-.mr-tevor-storefront.device-tablet .mt-nav {
+  padding: 10px 16px !important;
+  gap: 10px !important;
   display: flex !important;
-  gap: 16px !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: nowrap !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet) .mt-nav-link,
-.mr-tevor-storefront.device-tablet .mt-nav-link {
-  font-size: 0.78rem !important;
-  padding: 6px 0 !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-brand,
+.mr-tevor-storefront.device-tablet .mt-brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex: 0 1 auto !important;
+  min-width: 0 !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet) .mt-mobile-hamburger,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet) .mt-mobile-toggle,
-.mr-tevor-storefront.device-tablet .mt-mobile-hamburger,
-.mr-tevor-storefront.device-tablet .mt-mobile-toggle {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-brand-logo-img,
+.mr-tevor-storefront.device-tablet .mt-brand-logo-img {
+  height: 28px !important;
+  width: 36px !important;
+  max-width: 36px !important;
+  object-fit: contain !important;
+  flex-shrink: 0 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-brand-name,
+.mr-tevor-storefront.device-tablet .mt-brand-name {
+  font-size: 1.05rem !important;
+  letter-spacing: 0.05em !important;
+  white-space: nowrap !important;
+  line-height: 1.1 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-brand-tagline,
+.mr-tevor-storefront.device-tablet .mt-brand-tagline {
+  font-size: 0.46rem !important;
+  letter-spacing: 0.06em !important;
+  white-space: nowrap !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-nav,
+.mr-tevor-storefront.device-tablet .mt-nav {
   display: none !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet) .mt-header-actions,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-header-actions,
 .mr-tevor-storefront.device-tablet .mt-header-actions {
-  gap: 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex: 0 0 auto !important;
+  flex-shrink: 0 !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet) .mt-products-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-icon-btn,
+.mr-tevor-storefront.device-tablet .mt-icon-btn {
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  padding: 6px !important;
+  border: 1px solid var(--mt-border) !important;
+  border-radius: 4px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-icon-btn svg,
+.mr-tevor-storefront.device-tablet .mt-icon-btn svg {
+  width: 17px !important;
+  height: 17px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-badge-counter,
+.mr-tevor-storefront.device-tablet .mt-badge-counter {
+  top: -4px !important;
+  right: -4px !important;
+  width: 16px !important;
+  height: 16px !important;
+  font-size: 0.6rem !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-mobile-menu-toggle,
+.mr-tevor-storefront.device-tablet .mt-mobile-menu-toggle {
+  display: inline-flex !important;
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-header-search-inner,
+.mr-tevor-storefront.device-tablet .mt-header-search-inner {
+  padding: 10px 16px !important;
+  gap: 8px !important;
+}
+
+/* Hero Section in Simulated Tablet View */
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-hero-carousel,
+.mr-tevor-storefront.device-tablet .mt-hero-carousel {
+  min-height: 440px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-hero-slide,
+.mr-tevor-storefront.device-tablet .mt-hero-slide {
+  display: grid !important;
+  grid-template-columns: 1.15fr 0.85fr !important;
+  gap: 24px !important;
+  padding: 40px 24px 52px !important;
+  text-align: left !important;
+  align-items: center !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-hero-title,
+.mr-tevor-storefront.device-tablet .mt-hero-title {
+  font-size: 2.1rem !important;
+  line-height: 1.18 !important;
+  margin-bottom: 14px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-hero-subtitle,
+.mr-tevor-storefront.device-tablet .mt-hero-subtitle {
+  font-size: 0.9rem !important;
+  line-height: 1.55 !important;
+  margin-bottom: 22px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-hero-actions,
+.mr-tevor-storefront.device-tablet .mt-hero-actions {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  justify-content: flex-start !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-btn-primary,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-btn-secondary,
+.mr-tevor-storefront.device-tablet .mt-btn-primary,
+.mr-tevor-storefront.device-tablet .mt-btn-secondary {
+  padding: 11px 18px !important;
+  font-size: 0.74rem !important;
+  white-space: nowrap !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-hero-img-wrapper,
+.mr-tevor-storefront.device-tablet .mt-hero-img-wrapper {
+  max-width: 280px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-hero-floating-spec,
+.mr-tevor-storefront.device-tablet .mt-hero-floating-spec {
+  right: 0 !important;
+  bottom: 10px !important;
+  padding: 8px 12px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-products-grid,
 .mr-tevor-storefront.device-tablet .mt-products-grid {
   display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 16px !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 20px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet) .mt-pillars-grid,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet) .mt-lapel-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-pillars-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-lapel-grid,
 .mr-tevor-storefront.device-tablet .mt-pillars-grid,
 .mr-tevor-storefront.device-tablet .mt-lapel-grid {
   display: grid !important;
@@ -3783,14 +4378,26 @@
   gap: 16px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet) .mt-footer-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-customizer-box,
+.mr-tevor-storefront.device-tablet .mt-customizer-box {
+  grid-template-columns: 1fr 1fr !important;
+  padding: 32px 24px !important;
+  gap: 24px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-customizer-title,
+.mr-tevor-storefront.device-tablet .mt-customizer-title {
+  font-size: 1.65rem !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-footer-grid,
 .mr-tevor-storefront.device-tablet .mt-footer-grid {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 24px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet) .mt-pdp-container,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .mr-tevor-storefront.device-tablet, .mr-tevor-storefront.mr-tevor-tablet, .mr-tevor-storefront.is-tablet) .mt-pdp-container,
 .mr-tevor-storefront.device-tablet .mt-pdp-container {
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;

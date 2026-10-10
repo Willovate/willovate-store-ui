@@ -28,6 +28,7 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
 }) => {
   const effectiveDevice = deviceView || device || 'desktop'
   const isMobile = effectiveDevice === 'mobile'
+  const isTablet = effectiveDevice === 'tablet'
   // Navigation & View State
   const [activeTab, setActiveTab] = useState<'storefront' | 'pdp' | 'tailor-guide'>('storefront')
   const [selectedProduct, setSelectedProduct] = useState<MrTevorProduct | null>(null)
@@ -36,6 +37,7 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
   const [isWishlistOpen, setIsWishlistOpen] = useState(false)
   const [isBookingOpen, setIsBookingOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
 
   // Cart & Wishlist State
@@ -251,7 +253,16 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
   const currentHeroSlide = MR_TEVOR_HERO_SLIDES[currentSlideIndex]
 
   return (
-    <div className={`mr-tevor-storefront ${isMobile ? 'mr-tevor-mobile device-mobile is-mobile' : `device-${effectiveDevice}`}`}>
+    <div
+      className={`mr-tevor-storefront ${
+        isMobile
+          ? 'mr-tevor-mobile device-mobile is-mobile'
+          : isTablet
+          ? 'mr-tevor-tablet device-tablet is-tablet'
+          : `device-${effectiveDevice}`
+      }`}
+      data-device-view={effectiveDevice}
+    >
       {/* Top Announcement Bar */}
       <div className="mt-announcement-bar">
         <div className="mt-announcement-content">
@@ -349,6 +360,17 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
 
           <div className="mt-header-actions">
             <button
+              className={`mt-icon-btn mt-search-toggle-btn ${isSearchOpen ? 'active' : ''}`}
+              title="Search Suiting Collection"
+              aria-label="Search Suiting Collection"
+              onClick={() => setIsSearchOpen((prev) => !prev)}
+            >
+              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </button>
+
+            <button
               className="mt-icon-btn"
               title="Saved Suits Wishlist"
               onClick={() => setIsWishlistOpen(true)}
@@ -371,16 +393,6 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
             </button>
 
             <button
-              className="mt-bespoke-cta-btn"
-              onClick={() => setIsBookingOpen(true)}
-            >
-              <svg width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <span>Book Tailor</span>
-            </button>
-
-            <button
               className="mt-mobile-menu-toggle"
               aria-label="Open Navigation Menu"
               onClick={() => setIsMobileMenuOpen(true)}
@@ -391,6 +403,65 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
             </button>
           </div>
         </div>
+
+        {isSearchOpen && (
+          <div className="mt-header-search-bar">
+            <div className="mt-header-search-inner">
+              <div className="mt-header-search-input-wrap">
+                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <input
+                  type="text"
+                  className="mt-header-search-input"
+                  placeholder="Search bespoke suits, Merino wool, Peak lapel, Tuxedos..."
+                  value={filterState.searchQuery}
+                  autoFocus
+                  onChange={(e) => {
+                    setFilterState((prev) => ({ ...prev, searchQuery: e.target.value }))
+                    if (activeTab !== 'storefront') setActiveTab('storefront')
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      setActiveTab('storefront')
+                      const el = document.getElementById('mt-catalog-view')
+                      if (el) el.scrollIntoView({ behavior: 'smooth' })
+                    }
+                  }}
+                />
+                {filterState.searchQuery && (
+                  <button
+                    type="button"
+                    className="mt-header-search-clear"
+                    onClick={() => setFilterState((prev) => ({ ...prev, searchQuery: '' }))}
+                    aria-label="Clear search"
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
+              <button
+                type="button"
+                className="mt-header-search-submit"
+                onClick={() => {
+                  setActiveTab('storefront')
+                  const el = document.getElementById('mt-catalog-view')
+                  if (el) el.scrollIntoView({ behavior: 'smooth' })
+                }}
+              >
+                Search
+              </button>
+              <button
+                type="button"
+                className="mt-header-search-close"
+                onClick={() => setIsSearchOpen(false)}
+                aria-label="Close search"
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Mobile Luxury Navigation Drawer */}
@@ -418,6 +489,32 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
               >
                 ✕
               </button>
+            </div>
+
+            <div className="mt-mobile-drawer-search">
+              <div className="mt-header-search-input-wrap">
+                <svg width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <input
+                  type="text"
+                  className="mt-header-search-input"
+                  placeholder="Search suiting, fabric, lapel..."
+                  value={filterState.searchQuery}
+                  onChange={(e) => {
+                    setFilterState((prev) => ({ ...prev, searchQuery: e.target.value }))
+                    if (activeTab !== 'storefront') setActiveTab('storefront')
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      setActiveTab('storefront')
+                      setIsMobileMenuOpen(false)
+                      const el = document.getElementById('mt-catalog-view')
+                      if (el) el.scrollIntoView({ behavior: 'smooth' })
+                    }
+                  }}
+                />
+              </div>
             </div>
 
             <nav className="mt-mobile-nav">
