@@ -27,7 +27,7 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
   const isTablet = effectiveDevice === 'tablet'
   const isMobilePreview = isMobile
   // Navigation & View Mode
-  const [viewMode, setViewMode] = useState<'home' | 'collection' | 'pdp'>('home')
+  const [viewMode, setViewMode] = useState<'home' | 'collection' | 'pdp' | 'wishlist'>('home')
   const [selectedProduct, setSelectedProduct] = useState<JenieProduct>(JENIE_PRODUCTS[0])
   const [activeTabProductV1, setActiveTabProductV1] = useState<'Lastest Products' | 'Best Sellers' | 'Featured Products'>('Lastest Products')
 
@@ -180,6 +180,10 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
       return true
     })
   }, [filters, searchQuery])
+
+  const wishlistProducts = useMemo(() => {
+    return JENIE_PRODUCTS.filter((p) => wishlistIds.includes(p.id))
+  }, [wishlistIds])
 
   const currentHeroSlide = JENIE_HERO_SLIDES[activeHeroSlideIdx] || JENIE_HERO_SLIDES[0]
 
@@ -359,11 +363,22 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
               </button>
 
               <button
-                className="jenie-util-icon-btn"
+                className={`jenie-util-icon-btn ${viewMode === 'wishlist' ? 'active' : ''}`}
                 title="Wishlist"
-                onClick={() => showToast(`Wishlist contains ${wishlistIds.length} items`)}
+                aria-label="Wishlist"
+                onClick={() => {
+                  setViewMode((prev) => (prev === 'wishlist' ? 'home' : 'wishlist'))
+                  setIsMobileMenuOpen(false)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
               >
-                <svg viewBox="0 0 24 24">
+                <svg
+                  viewBox="0 0 24 24"
+                  style={{
+                    fill: wishlistIds.length > 0 || viewMode === 'wishlist' ? '#D97706' : 'none',
+                    stroke: wishlistIds.length > 0 || viewMode === 'wishlist' ? '#D97706' : 'currentColor',
+                  }}
+                >
                   <path
                     d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
                     strokeWidth="2"
@@ -419,6 +434,177 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
           )}
         </div>
       </header>
+
+      {/* =========================================================
+          VIEW MODE: WISHLIST / LIKED PRODUCTS VIEW
+          ========================================================= */}
+      {viewMode === 'wishlist' && (
+        <section className="jenie-collection-page jenie-wishlist-page" style={{ padding: '60px 0', minHeight: '60vh' }}>
+          <div className="jenie-container">
+            <div className="jenie-collection-heading">
+              <div>
+                <h1 className="jenie-page-title" style={{ fontFamily: 'Playfair Display, serif', fontSize: 36, margin: '0 0 8px' }}>
+                  Liked Denim Wishlist
+                </h1>
+                <p style={{ color: '#6B7280', margin: 0 }}>
+                  Showing {wishlistProducts.length} {wishlistProducts.length === 1 ? 'liked denim style' : 'liked denim styles'}
+                </p>
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+                {wishlistProducts.length > 0 && (
+                  <>
+                    <button
+                      className="jenie-btn jenie-btn-primary"
+                      onClick={() => {
+                        wishlistProducts.forEach((p) => {
+                          const curSize = selectedCardSizes[p.id] || p.sizes[0] || '28'
+                          const curWash = selectedCardWashes[p.id] || p.wash
+                          addToCart(p, curSize, curWash, 1)
+                        })
+                        showToast('Added all liked products to bag!')
+                      }}
+                    >
+                      Move All to Bag
+                    </button>
+                    <button
+                      className="jenie-btn jenie-btn-light"
+                      style={{ border: '1px solid #E5E7EB' }}
+                      onClick={() => {
+                        setWishlistIds([])
+                        showToast('Cleared liked products')
+                      }}
+                    >
+                      Clear All
+                    </button>
+                  </>
+                )}
+                <button className="jenie-btn jenie-btn-primary" onClick={() => setViewMode('home')}>
+                  ← Back to Home
+                </button>
+              </div>
+            </div>
+
+            {wishlistProducts.length === 0 ? (
+              <div
+                style={{
+                  textAlign: 'center',
+                  padding: '64px 24px',
+                  background: '#F8FAFC',
+                  borderRadius: 16,
+                  border: '1px solid #E5E7EB',
+                }}
+              >
+                <div style={{ fontSize: 42, color: '#D97706', marginBottom: 12 }}>♥</div>
+                <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 26, margin: '0 0 8px', color: '#1E2C3D' }}>
+                  Your Liked List is Empty
+                </h2>
+                <p style={{ color: '#6B7280', maxWidth: 440, margin: '0 auto 24px', fontSize: 14 }}>
+                  Tap the heart icon on any denim style to save your liked products here for quick access.
+                </p>
+                <button className="jenie-btn jenie-btn-primary" onClick={() => setViewMode('collection')}>
+                  Browse Denim Collection
+                </button>
+              </div>
+            ) : (
+              <div className="jenie-products-grid">
+                {wishlistProducts.map((p) => {
+                  const curSize = selectedCardSizes[p.id] || p.sizes[0] || '28'
+                  const curWash = selectedCardWashes[p.id] || p.wash
+                  return (
+                    <div key={p.id} className="jenie-product-card">
+                      <div className="jenie-product-media">
+                        <img src={p.image} alt={p.name} loading="lazy" decoding="async" />
+                        {p.alternateImage && (
+                          <img
+                            className="jenie-product-alt-image"
+                            src={p.alternateImage}
+                            alt={`${p.name} alternate view`}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        )}
+                        {p.badge && <span className="jenie-product-badge">{p.badge}</span>}
+                        <div className="jenie-card-action-bar">
+                          <button
+                            className="jenie-card-icon-btn"
+                            title="Quick View"
+                            onClick={() => {
+                              setQuickViewProduct(p)
+                              setIsQuickViewOpen(true)
+                            }}
+                          >
+                            👁
+                          </button>
+                          <button
+                            className={`jenie-card-icon-btn ${wishlistIds.includes(p.id) ? 'active' : ''}`}
+                            title="Remove from Liked"
+                            onClick={() => toggleWishlist(p.id)}
+                          >
+                            ♥
+                          </button>
+                          <button
+                            className="jenie-card-icon-btn"
+                            title="Compare"
+                            onClick={() => toggleCompare(p.id)}
+                          >
+                            ⇄
+                          </button>
+                        </div>
+                      </div>
+                      <div className="jenie-product-body">
+                        <span className="jenie-product-cat">{p.category} • {p.fit}</span>
+                        <h3 className="jenie-product-title" onClick={() => openPdp(p)}>
+                          {p.name}
+                        </h3>
+                        <div className="jenie-product-rating">
+                          {'★'.repeat(Math.round(p.rating))}
+                          <span style={{ color: '#6B7280', marginLeft: 4 }}>({p.reviewCount})</span>
+                        </div>
+                        <div className="jenie-wash-swatches">
+                          {p.washes.map((w) => (
+                            <span
+                              key={w.name}
+                              className={`jenie-wash-dot ${curWash === w.name ? 'active' : ''}`}
+                              style={{ backgroundColor: w.hex }}
+                              title={w.name}
+                              onClick={() => setSelectedCardWashes((prev) => ({ ...prev, [p.id]: w.name }))}
+                            />
+                          ))}
+                        </div>
+                        <div className="jenie-size-row">
+                          {p.sizes.slice(0, 4).map((s) => (
+                            <button
+                              key={s}
+                              className={`jenie-size-btn ${curSize === s ? 'active' : ''}`}
+                              onClick={() => setSelectedCardSizes((prev) => ({ ...prev, [p.id]: s }))}
+                            >
+                              {s}
+                            </button>
+                          ))}
+                        </div>
+                        <div className="jenie-product-footer">
+                          <div className="jenie-price-wrap">
+                            <span className="jenie-price">${p.price}.00</span>
+                            {p.compareAtPrice && (
+                              <span className="jenie-compare-price">${p.compareAtPrice}.00</span>
+                            )}
+                          </div>
+                          <button
+                            className="jenie-quick-add-btn"
+                            onClick={() => addToCart(p, curSize, curWash, 1)}
+                          >
+                            Add to Bag
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* =========================================================
           VIEW MODE: COLLECTION VIEW
@@ -690,9 +876,10 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
                     Add to Bag
                   </button>
                   <button
-                    className="jenie-card-icon-btn"
+                    className={`jenie-card-icon-btn ${wishlistIds.includes(selectedProduct.id) ? 'active' : ''}`}
                     style={{ border: '1px solid #E5E7EB', width: 48, height: 48 }}
                     onClick={() => toggleWishlist(selectedProduct.id)}
+                    title="Wishlist"
                   >
                     ♥
                   </button>

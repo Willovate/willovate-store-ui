@@ -47,7 +47,7 @@
   transition: all 0.25s ease;
 }
 
-.jenie-theme-root button {
+:where(.jenie-theme-root) button {
   font-family: inherit;
   border: none;
   background: none;
@@ -56,6 +56,7 @@
 }
 
 /* Primary Button (rounded 0.8rem matching live theme) */
+.jenie-theme-root .jenie-btn,
 .jenie-btn {
   display: inline-flex;
   align-items: center;
@@ -71,12 +72,14 @@
   overflow: hidden;
 }
 
+.jenie-theme-root .jenie-btn-primary,
 .jenie-btn-primary {
   background: var(--jenie-indigo-deep);
   color: #FFFFFF;
   border: 1px solid var(--jenie-indigo-deep);
 }
 
+.jenie-theme-root .jenie-btn-primary:hover,
 .jenie-btn-primary:hover {
   background: var(--jenie-indigo-washed);
   border-color: var(--jenie-indigo-washed);
@@ -84,12 +87,14 @@
   box-shadow: 0 8px 20px rgba(30, 44, 61, 0.2);
 }
 
+.jenie-theme-root .jenie-btn-light,
 .jenie-btn-light {
   background: #FFFFFF;
   color: var(--jenie-indigo-deep);
   border: 1px solid #FFFFFF;
 }
 
+.jenie-theme-root .jenie-btn-light:hover,
 .jenie-btn-light:hover {
   background: var(--jenie-indigo-deep);
   color: #FFFFFF;
@@ -563,6 +568,7 @@
   transform: translateX(0);
 }
 
+.jenie-theme-root .jenie-card-icon-btn,
 .jenie-card-icon-btn {
   width: 36px;
   height: 36px;
@@ -576,6 +582,8 @@
   transition: all 0.2s ease;
 }
 
+.jenie-theme-root .jenie-card-icon-btn:hover,
+.jenie-theme-root .jenie-card-icon-btn.active,
 .jenie-card-icon-btn:hover,
 .jenie-card-icon-btn.active {
   background: var(--jenie-indigo-deep);
@@ -653,16 +661,19 @@
   margin-bottom: 16px;
 }
 
+.jenie-theme-root .jenie-size-btn,
 .jenie-size-btn {
   font-size: 11px;
   font-weight: 600;
   padding: 3px 8px;
   border: 1px solid var(--jenie-border);
   border-radius: 4px;
+  background: #FFFFFF;
   color: var(--jenie-text-muted);
   cursor: pointer;
 }
 
+.jenie-theme-root .jenie-size-btn.active,
 .jenie-size-btn.active {
   background: var(--jenie-indigo-deep);
   color: #FFFFFF;
@@ -696,6 +707,7 @@
   text-decoration: line-through;
 }
 
+.jenie-theme-root .jenie-quick-add-btn,
 .jenie-quick-add-btn {
   background: var(--jenie-indigo-deep);
   color: #FFFFFF;
@@ -706,8 +718,10 @@
   transition: all 0.2s ease;
 }
 
+.jenie-theme-root .jenie-quick-add-btn:hover,
 .jenie-quick-add-btn:hover {
   background: var(--jenie-indigo-washed);
+  color: #FFFFFF;
 }
 
 /* -------------------------------------------------------------
