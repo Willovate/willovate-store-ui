@@ -1,0 +1,1110 @@
+import type { MarketplaceTemplate } from '../types'
+
+export interface SportsProduct {
+  id: string
+  name: string
+  category: string
+  price: string
+  compareAtPrice?: string
+  image: string
+  badge?: string
+  rating: number
+  reviewCount: number
+  colors?: string[]
+  sizes?: string[]
+  techSpecs?: string[]
+}
+
+export interface SportsTemplateConfig {
+  template: MarketplaceTemplate
+  announcement?: string
+  navItems: string[]
+  heroStats?: { label: string; value: string }[]
+  categories: { id: string; name: string; image: string; badge?: string; count?: string }[]
+  featuredProducts: SportsProduct[]
+  newArrivals?: SportsProduct[]
+  bestSellers?: SportsProduct[]
+  promoBanner?: {
+    tag: string
+    title: string
+    subtitle: string
+    code?: string
+    discount?: string
+    buttonText: string
+    image?: string
+    endDate?: string
+  }
+  techFeatures?: { icon: string; title: string; desc: string }[]
+  story?: {
+    eyebrow: string
+    title: string
+    quote: string
+    author: string
+    role: string
+    image: string
+    stats?: { num: string; label: string }[]
+  }
+  guides?: { title: string; tag: string; time: string; image: string; desc: string }[]
+  reviews?: { name: string; role: string; quote: string; rating: number; verified?: boolean }[]
+  faqs?: { q: string; a: string }[]
+  collections?: { title: string; tag: string; image: string; count?: string }[]
+  socialGallery?: { image: string; handle: string; likes: string }[]
+}
+
+export const SPORTS_TEMPLATES_CONFIG: Record<string, SportsTemplateConfig> = {
+  'sports-fitcore': {
+    template: {
+      id: 'sports-fitcore',
+      slug: 'sports-fitcore',
+      name: 'FitCore',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'bold',
+      catalogSize: 'large',
+      tags: ['Gym', 'Training', 'Athletic', 'Performance', 'Activewear'],
+      shortDescription:
+        'Premium fitness and activewear storefront for strength training, running, HIIT, yoga, recovery, and gym equipment.',
+      thumbnailUrl:
+        'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl:
+        'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 96,
+      isActive: true,
+      brandName: 'FITCORE',
+      headline: 'BUILD YOUR\nSTRONGEST SELF.',
+      subtitle:
+        'Performance apparel, lifting footwear, training essentials, and recovery gear built for every session.',
+      buttonText: 'Shop Training',
+      buttonColor: '#ff3b30',
+      accentColor: '#ff3b30',
+      isDark: true,
+      modelImage:
+        'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&auto=format&fit=crop&q=80',
+      badge: 'new',
+      rating: 4.96,
+      reviewCount: 284,
+      layoutType: 'bold-minimal',
+      features: [
+        'Workout-Based Product Discovery for Strength, Running, HIIT, Yoga, and Recovery',
+        'Premium Product Pages with Fit, Material, Technology, and Care Details',
+        'Athlete Wishlist, Cart Drawer, Bundles, and Quick Add-to-Cart Actions',
+        'Gym Wear, Footwear, Equipment, Accessories, and Training Essentials Catalog',
+      ],
+    },
+    announcement: 'FREE SHIPPING ON ALL ORDERS ABOVE ₹999 • USE CODE: STRONG15 FOR 15% OFF',
+    navItems: ['Men', 'Women', 'Training', 'Gym Wear', 'Equipment', 'Accessories'],
+    heroStats: [
+      { label: 'Performance Products', value: '120+' },
+      { label: 'Training Categories', value: '6' },
+      { label: 'Free Shipping', value: '₹999' },
+    ],
+    categories: [
+      {
+        id: 'training',
+        name: 'Training Essentials',
+        image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&auto=format&fit=crop&q=80',
+        badge: 'BUILT TO TRAIN',
+        count: '40+ Items',
+      },
+      {
+        id: 'gym-wear',
+        name: 'Gym Wear',
+        image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80',
+        badge: 'SQUAT PROOF',
+        count: '35+ Items',
+      },
+      {
+        id: 'equipment',
+        name: 'Equipment & Hardware',
+        image: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=600&auto=format&fit=crop&q=80',
+        badge: 'PRO SPEC',
+        count: '25+ Items',
+      },
+    ],
+    featuredProducts: [
+      {
+        id: 'fc-featured-01',
+        name: 'Apex Raw Heavyweight Oversized Tee',
+        category: 'Gym Wear',
+        price: '₹1,899',
+        compareAtPrice: '₹2,499',
+        image: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&auto=format&fit=crop&q=80',
+        badge: 'BEST SELLER',
+        rating: 4.95,
+        reviewCount: 312,
+      },
+      {
+        id: 'fc-featured-02',
+        name: 'IronGround Zero-Drop Lifting Shoes',
+        category: 'Footwear',
+        price: '₹5,499',
+        compareAtPrice: '₹6,999',
+        image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800&auto=format&fit=crop&q=80',
+        badge: 'PRO SPEC',
+        rating: 4.96,
+        reviewCount: 144,
+      },
+      {
+        id: 'fc-featured-03',
+        name: 'SculptFlex High-Rise Seamless Leggings',
+        category: 'Gym Wear',
+        price: '₹2,299',
+        compareAtPrice: '₹2,999',
+        image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&auto=format&fit=crop&q=80',
+        badge: 'SQUAT PROOF',
+        rating: 4.97,
+        reviewCount: 428,
+      },
+    ],
+  },
+  'sports-velocity': {
+    template: {
+      id: 'sports-velocity',
+      slug: 'sports-velocity',
+      name: 'Velocity',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'bold',
+      catalogSize: 'large',
+      tags: ['Performance Sports', 'Athletic', 'High Energy', 'Training', 'Footwear'],
+      shortDescription: 'High-energy, motion-inspired layout with aggressive volt typography, kinetic product grids, and athlete telemetry data.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 99,
+      isActive: true,
+      brandName: 'VELOCITY // LAB',
+      headline: 'BREAK THE SPEED OF SOUND.\nZERO DRAG. MAX FORCE.',
+      subtitle: 'Engineered with kinetic carbon-weave lattice and aerodynamic compression zones for elite competitive athletes.',
+      buttonText: 'Shop Speed Drop',
+      buttonColor: '#ccff00',
+      accentColor: '#ccff00',
+      isDark: true,
+      modelImage: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&auto=format&fit=crop&q=80',
+      badge: 'recommended',
+      rating: 4.96,
+      reviewCount: 142,
+      features: [
+        'High-Velocity Hero Showcase with Real-Time Stride & Kinetic Telemetry',
+        'Kinetic Zoom Viewer & Dynamic Size Finder for Performance Runners',
+        'Speedwear Product Pages with Carbon Plate Specs and Rapid Quick-Buy',
+      ],
+      layoutType: 'bold-minimal',
+    },
+    announcement: '⚡ FLASH VELOCITY DROP: Free Global Express on orders over $120 • Use Code: HYPERSONIC',
+    navItems: ['Men', 'Women', 'Footwear', 'Performance Lab', 'Speedwear', 'Athletes'],
+    heroStats: [
+      { label: 'Energy Return', value: '88.4%' },
+      { label: 'Weight', value: '168g' },
+      { label: 'Tested By', value: '45+ Olympians' },
+    ],
+    categories: [
+      { id: 'men', name: "Men's Performance", image: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&auto=format&fit=crop&q=80', count: '64 Items' },
+      { id: 'women', name: "Women's Speed", image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop&q=80', count: '58 Items' },
+      { id: 'footwear', name: 'Kinetic Spikes & Flats', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80', count: '32 Items' },
+      { id: 'apparel', name: 'Aero Compression Gear', image: 'https://images.unsplash.com/photo-1506152983158-b4a74a01c721?w=600&auto=format&fit=crop&q=80', count: '41 Items' },
+    ],
+    featuredProducts: [
+      {
+        id: 'vel-01',
+        name: 'HyperSonic Carbon Pro 3',
+        category: 'Footwear',
+        price: '$230.00',
+        compareAtPrice: '$260.00',
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80',
+        badge: 'NEW RECORD',
+        rating: 4.9,
+        reviewCount: 88,
+        colors: ['#ccff00', '#0f172a', '#e11d48'],
+        sizes: ['US 8', 'US 9', 'US 10', 'US 11'],
+        techSpecs: ['Carbon-Weave Plate', 'Nitro-Infused Foam', '168g Featherweight'],
+      },
+      {
+        id: 'vel-02',
+        name: 'AeroShift Seamless Speed Top',
+        category: 'Apparel',
+        price: '$85.00',
+        image: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&auto=format&fit=crop&q=80',
+        badge: 'ZERO DRAG',
+        rating: 4.8,
+        reviewCount: 54,
+        colors: ['#0f172a', '#ccff00', '#64748b'],
+        sizes: ['S', 'M', 'L', 'XL'],
+        techSpecs: ['Hydrophobic Micro-Knit', 'Laser-Cut Venting'],
+      },
+      {
+        id: 'vel-03',
+        name: 'Kinetic 2-in-1 Sprint Short',
+        category: 'Apparel',
+        price: '$72.00',
+        image: 'https://images.unsplash.com/photo-1506152983158-b4a74a01c721?w=600&auto=format&fit=crop&q=80',
+        badge: 'BESTSELLER',
+        rating: 4.9,
+        reviewCount: 96,
+        colors: ['#0f172a', '#334155'],
+        sizes: ['S', 'M', 'L'],
+        techSpecs: ['4-Way Stretch Compression', 'Anti-Chafe Welded Seams'],
+      },
+      {
+        id: 'vel-04',
+        name: 'Vortex Hydration Speed Vest',
+        category: 'Accessories',
+        price: '$110.00',
+        image: 'https://images.unsplash.com/photo-1576243345690-4e4b79b63288?w=600&auto=format&fit=crop&q=80',
+        badge: 'ULTRA LIGHT',
+        rating: 4.7,
+        reviewCount: 42,
+        colors: ['#ccff00', '#0f172a'],
+        sizes: ['S/M', 'L/XL'],
+        techSpecs: ['Dual 500ml Flasks', 'Zero-Bounce Harness'],
+      },
+    ],
+    newArrivals: [
+      {
+        id: 'vel-05',
+        name: 'Quantum Aero Flight Jacket',
+        category: 'Outerwear',
+        price: '$195.00',
+        image: 'https://images.unsplash.com/photo-1556906781-9a412961c28c?w=600&auto=format&fit=crop&q=80',
+        badge: 'JUST DROPPED',
+        rating: 4.9,
+        reviewCount: 19,
+        colors: ['#0f172a', '#ccff00'],
+      },
+      {
+        id: 'vel-06',
+        name: 'Vector Carbon Fiber Bottle Cage',
+        category: 'Gear',
+        price: '$45.00',
+        image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80',
+        badge: '18 GRAMS',
+        rating: 4.8,
+        reviewCount: 31,
+      },
+    ],
+    promoBanner: {
+      tag: 'SEASON 04 CAMPAIGN',
+      title: 'PRECISION OVER POWER',
+      subtitle: 'Unlock 25% off all wind-tunnel certified performance apparel with instant membership sign-up.',
+      code: 'SPEED25',
+      discount: '25% OFF',
+      buttonText: 'Claim Your Advantage',
+      image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=1200&auto=format&fit=crop&q=80',
+    },
+    techFeatures: [
+      { icon: '⚡', title: 'Carbon Lattice Matrix', desc: 'Proprietary 3D-woven carbon plate returns 88.4% of kinetic energy with zero flex fatigue.' },
+      { icon: '💨', title: 'AeroFlow Dynamic Vents', desc: 'Wind-tunnel tested seam channels redirect turbulent airflow over shoulders and lats.' },
+      { icon: '🛡️', title: 'ShieldSeam Bonding', desc: 'Ultrasonic welded seams eliminate 100% of thread friction during continuous motion.' },
+    ],
+    story: {
+      eyebrow: 'ATHLETE DISPATCH // NO. 09',
+      title: '“IT’S NOT ABOUT RUNNING FASTER. IT’S ABOUT REDEFINING WHAT FAST FEELS LIKE.”',
+      quote: 'When every millisecond counts towards podium standing, you don’t compromise on kit. Velocity gives me the explosive snap I need out of every curve.',
+      author: 'Marcus Vance',
+      role: 'World Champion 200m Sprinter',
+      image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&auto=format&fit=crop&q=80',
+    },
+  },
+  'sports-arena': {
+    template: {
+      id: 'sports-arena',
+      slug: 'sports-arena',
+      name: 'Arena',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'bold',
+      catalogSize: 'large',
+      tags: ['Performance Sports', 'Athletic', 'Football', 'Cricket', 'Basketball', 'Tennis', 'Match Kits'],
+      shortDescription:
+        'Championship stadium-grade sports marketplace featuring pro athlete editorial layouts, 3 mega menus, dynamic filter drawers, and player edition kits.',
+      thumbnailUrl:
+        'https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl:
+        'https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 98,
+      isActive: true,
+      brandName: 'ARENA',
+      headline: 'PLAY LIKE A PRO.\nCHAMPIONSHIP GEAR.',
+      subtitle:
+        'Official matchday jerseys, carbon sprint cleat chassis, Grade-1 English willow bats, and telemetry gear engineered for international competition.',
+      buttonText: 'Shop The Collection',
+      buttonColor: '#ff5500',
+      accentColor: '#ff5500',
+      isDark: true,
+      modelImage:
+        'https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=800&auto=format&fit=crop&q=80',
+      badge: 'trending',
+      rating: 4.98,
+      reviewCount: 284,
+      layoutType: 'editorial',
+      features: [
+        'Multi-Sport Marketplace (Football, Cricket, Basketball, Tennis, Training)',
+        '3 Multi-Column Mega Menus with Featured Gear Showcases',
+        'Animated Right-Side Cart Drawer with Free Shipping Meter',
+        'Locker Wishlist & Instant Query Search Overlay',
+        'Official Player Edition Kit Showcase & Size Chart Modal',
+      ],
+    },
+    announcement: 'MATCHDAY: Free Stadium Express Shipping on orders over $100 • Use Code: ARENAPRO',
+    navItems: ['Football', 'Cricket', 'Basketball', 'Tennis', 'Jerseys', 'Equipment', 'New Drops', 'Sale'],
+    heroStats: [
+      { label: 'Pro Athletes Equipped', value: '450+' },
+      { label: 'Matchday Win Rate', value: '94.2%' },
+      { label: 'Championship Leagues', value: '18 Global' },
+    ],
+    categories: [
+      {
+        id: 'football',
+        name: 'Football Championship',
+        image: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=600&auto=format&fit=crop&q=80',
+        badge: 'FIFA APPROVED',
+        count: '48 Items',
+      },
+      {
+        id: 'cricket',
+        name: 'Cricket Armour & Bats',
+        image: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=600&auto=format&fit=crop&q=80',
+        badge: 'GRADE 1 WILLOW',
+        count: '36 Items',
+      },
+      {
+        id: 'basketball',
+        name: 'Hardwood Basketball',
+        image: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600&auto=format&fit=crop&q=80',
+        badge: 'COURT TRACTION',
+        count: '42 Items',
+      },
+      {
+        id: 'tennis',
+        name: 'Grand Slam Tennis',
+        image: 'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?w=600&auto=format&fit=crop&q=80',
+        badge: 'CARBON MATRIX',
+        count: '24 Items',
+      },
+    ],
+    featuredProducts: [
+      {
+        id: 'arn-fb-01',
+        name: 'Vanguard Elite Matchday Jersey',
+        category: 'Jerseys',
+        price: '$130.00',
+        compareAtPrice: '$155.00',
+        image: 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=800&auto=format&fit=crop&q=80',
+        badge: 'OFFICIAL KIT',
+        rating: 4.95,
+        reviewCount: 168,
+        colors: ['#0f172a', '#f59e0b', '#ffffff'],
+        sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+      },
+      {
+        id: 'arn-fb-02',
+        name: 'Phantom Strike Carbon FG Cleats',
+        category: 'Footwear',
+        price: '$260.00',
+        compareAtPrice: '$295.00',
+        image: 'https://images.unsplash.com/photo-1511886929837-354d827aae26?w=800&auto=format&fit=crop&q=80',
+        badge: 'NEW DROP',
+        rating: 4.9,
+        reviewCount: 94,
+        colors: ['#000000', '#ff5500'],
+        sizes: ['8', '8.5', '9', '9.5', '10', '10.5', '11'],
+      },
+      {
+        id: 'arn-cr-01',
+        name: 'Gladiator Limited English Willow Bat',
+        category: 'Equipment',
+        price: '$480.00',
+        compareAtPrice: '$550.00',
+        image: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=800&auto=format&fit=crop&q=80',
+        badge: 'HAND CRAFTED',
+        rating: 4.98,
+        reviewCount: 62,
+        sizes: ['SH', 'LH', 'Harrow'],
+      },
+      {
+        id: 'arn-bk-01',
+        name: 'Overdrive High-Altitude Basketball Shoes',
+        category: 'Footwear',
+        price: '$190.00',
+        compareAtPrice: '$220.00',
+        image: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=800&auto=format&fit=crop&q=80',
+        badge: 'PRO SPEC',
+        rating: 4.88,
+        reviewCount: 88,
+        colors: ['#1e1b4b', '#ff5500'],
+        sizes: ['8', '9', '10', '11', '12'],
+      },
+    ],
+    promoBanner: {
+      tag: 'ARENA DROP CAMPAIGN',
+      title: 'EQUIP YOUR MATCHDAY WITH 20% ADVANTAGE',
+      subtitle: 'Use code STADIUM20 for 20% off all matchday jerseys, carbon sprint footwear, and titanium armor.',
+      code: 'STADIUM20',
+      discount: '20% OFF',
+      buttonText: 'Claim Your Pro Pass',
+      image: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=1200&auto=format&fit=crop&q=80',
+    },
+    techFeatures: [
+      {
+        icon: '🛡️',
+        title: 'Carbon-Lattice Sprint Chassis',
+        desc: 'Returns maximum kinetic energy into forward propulsion across 90 minutes of unrelenting sprint output.',
+      },
+      {
+        icon: '💨',
+        title: 'AeroWeave Micro-Vent Channeling',
+        desc: 'Strategically engineered mesh zones accelerate evaporative cooling directly across primary athlete perspiration points.',
+      },
+      {
+        icon: '⚡',
+        title: 'ImpactArmor Titanium Matrix',
+        desc: 'Ultra-lightweight titanium grilles and EVA shock pods dissipate up to 155 km/h projectile kinetic force.',
+      },
+    ],
+  },
+  'sports-sprint': {
+    template: {
+      id: 'sports-sprint',
+      slug: 'sports-sprint',
+      name: 'Sprint',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'minimal',
+      catalogSize: 'medium',
+      tags: ['Running', 'Footwear', 'Performance', 'Athletic', 'Footwear'],
+      shortDescription:
+        'Minimalist, light-themed running and performance footwear store with clean typography, multi-angle shoe galleries, and technical stride specs.',
+      thumbnailUrl:
+        'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl:
+        'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 97,
+      isActive: true,
+      brandName: 'SPRINT',
+      headline: 'RUN YOUR WAY.\nWEIGHTLESS STRIDE.',
+      subtitle:
+        'Supercritical nitrogen foams, full-length carbon plates, and breathable engineered mono-meshes designed for road, trail, and race day.',
+      buttonText: 'Shop Running Shoes',
+      buttonColor: '#0f172a',
+      accentColor: '#0f172a',
+      isDark: false,
+      modelImage:
+        'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=800&auto=format&fit=crop&q=80',
+      badge: 'new',
+      rating: 4.96,
+      reviewCount: 310,
+      layoutType: 'centered',
+      features: [
+        'Multi-Angle Running Shoe Gallery with Drop & Weight Specs',
+        'Find Your Running Shoe Interactive Stride Matcher',
+        'Shoe Sizing Guide Modal (US, UK, EU, CM Foot Length)',
+        '30-Day Road Trial Guarantee & Minimal Bag Drawer',
+        'Running Apparel & Zero-Bounce Hydration Essentials',
+      ],
+    },
+    announcement: '30-DAY RUN TRIAL: Complimentary Express Shipping over $120 • Love Every Mile or Return Free',
+    navItems: ['Men', 'Women', 'Running Shoes', 'Running Apparel', 'Accessories', 'New', 'Sale'],
+    heroStats: [
+      { label: 'Sub-7oz Spec', value: '198g' },
+      { label: 'Energy Rebound', value: '87.4%' },
+      { label: 'Trial Period', value: '30 Days' },
+    ],
+    categories: [
+      {
+        id: 'daily',
+        name: 'Daily Training',
+        image: 'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=600&auto=format&fit=crop&q=80',
+        badge: 'MILEAGE',
+        count: '24 Shoes',
+      },
+      {
+        id: 'race',
+        name: 'Racing & Carbon',
+        image: 'https://images.unsplash.com/photo-1530549387789-4c1017266635?w=600&auto=format&fit=crop&q=80',
+        badge: 'SUB-7OZ',
+        count: '16 Shoes',
+      },
+      {
+        id: 'trail',
+        name: 'Trail & Mountain',
+        image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=600&auto=format&fit=crop&q=80',
+        badge: 'VIBRAM',
+        count: '18 Shoes',
+      },
+    ],
+    featuredProducts: [
+      {
+        id: 'sprint-shoe-01',
+        name: 'Strata Pro Carbon Racer',
+        category: 'Shoes',
+        price: '$260.00',
+        compareAtPrice: '$290.00',
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&auto=format&fit=crop&q=80',
+        badge: 'MARATHON RACER',
+        rating: 4.96,
+        reviewCount: 142,
+        colors: ['#f8fafc', '#93c5fd', '#0f172a'],
+        sizes: ['7', '8', '8.5', '9', '9.5', '10', '10.5', '11', '12'],
+        techSpecs: ['Weight: 198g', 'Drop: 8mm', 'Carbon: PropelPlate 3D', 'Foam: NitroPebax'],
+      },
+      {
+        id: 'sprint-shoe-02',
+        name: 'AeroGlide Daily Trainer',
+        category: 'Shoes',
+        price: '$155.00',
+        compareAtPrice: '$175.00',
+        image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800&auto=format&fit=crop&q=80',
+        badge: 'DAILY ESSENTIAL',
+        rating: 4.88,
+        reviewCount: 310,
+        colors: ['#f1f5f9', '#e2e8f0', '#1e293b'],
+        sizes: ['8', '8.5', '9', '9.5', '10', '10.5', '11'],
+        techSpecs: ['Weight: 238g', 'Drop: 9mm', 'Foam: StrataFoam Matrix'],
+      },
+    ],
+    techFeatures: [
+      {
+        icon: '⚡',
+        title: 'PropelPlate 3D Carbon Matrix',
+        desc: 'Curved carbon fiber plate loads kinetic energy during midfoot strike and snaps forward at toe-off.',
+      },
+      {
+        icon: '☁️',
+        title: 'NitroPebax Supercritical Foam',
+        desc: 'Expanded with nitrogen for ultra-responsive bounce without bottoming out over 20+ mile distances.',
+      },
+      {
+        icon: '🎯',
+        title: 'Zero-Slip Anatomical Heel Lock',
+        desc: 'Memory foam Achilles wrap locks the calcaneus securely in place, eliminating heel lift on steep ascents.',
+      },
+    ],
+  },
+  'sports-progear': {
+    template: {
+      id: 'sports-progear',
+      slug: 'sports-progear',
+      name: 'ProGear',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'bold',
+      catalogSize: 'large',
+      tags: ['Equipment', 'Marketplace', 'Cricket', 'Football', 'Gym', 'Badminton'],
+      shortDescription:
+        'Large-scale sports equipment marketplace with 8 sports departments, bundled kit packs, PIN code delivery validation, and competition specs.',
+      thumbnailUrl:
+        'https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl:
+        'https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 98,
+      isActive: true,
+      brandName: 'PROGEAR',
+      headline: 'GEAR UP. PLAY HARD.',
+      subtitle:
+        'Tournament-grade sports equipment marketplace. 8 sports departments, bundled equipment kits, PIN code express dispatch, and ₹999 free shipping.',
+      buttonText: 'Shop Equipment',
+      buttonColor: '#1d4ed8',
+      accentColor: '#1d4ed8',
+      isDark: false,
+      modelImage:
+        'https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=800&auto=format&fit=crop&q=80',
+      badge: 'new',
+      rating: 4.98,
+      reviewCount: 420,
+      layoutType: 'card-grid',
+      features: [
+        '8 Dedicated Sports Departments & Universal Mega Menus',
+        'Bundled Starter & Training Kits (Cricket, Football, Gym, Badminton)',
+        'Detailed Specifications Table & Official Federation Certifications',
+        'PIN Code Delivery Checker with Express Dispatch Status',
+        'Free Shipping Progress Meter on Orders Above ₹999',
+      ],
+    },
+    announcement: 'FREE SHIPPING ON ORDERS ABOVE ₹999 • SAME-DAY MATCHDAY DISPATCH',
+    navItems: [
+      'Football',
+      'Cricket',
+      'Basketball',
+      'Tennis',
+      'Badminton',
+      'Cycling',
+      'Gym',
+      'Outdoor',
+    ],
+    heroStats: [
+      { label: 'Products', value: '1,500+' },
+      { label: 'Departments', value: '8 Sports' },
+      { label: 'Free Shipping', value: '₹999' },
+    ],
+    categories: [
+      {
+        id: 'football',
+        name: 'Football Department',
+        image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=600&auto=format&fit=crop&q=80',
+        badge: 'FIFA QUALITY PRO',
+        count: '140+ Items',
+      },
+      {
+        id: 'cricket',
+        name: 'Cricket Department',
+        image: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=600&auto=format&fit=crop&q=80',
+        badge: 'GRADE 1 WILLOW',
+        count: '185+ Items',
+      },
+      {
+        id: 'gym',
+        name: 'Gym & Strength',
+        image: 'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=600&auto=format&fit=crop&q=80',
+        badge: 'SOLID CAST IRON',
+        count: '210+ Items',
+      },
+    ],
+    featuredProducts: [
+      {
+        id: 'pg-fb-01',
+        name: 'Striker Match Elite FIFA Pro Ball',
+        category: 'Equipment',
+        price: '₹2,499',
+        compareAtPrice: '₹3,299',
+        image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&auto=format&fit=crop&q=80',
+        badge: 'FIFA QUALITY PRO',
+        rating: 4.9,
+        reviewCount: 320,
+      },
+      {
+        id: 'pg-ck-01',
+        name: 'Master Stroke Grade 1 Willow Bat',
+        category: 'Equipment',
+        price: '₹14,999',
+        compareAtPrice: '₹18,499',
+        image: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=800&auto=format&fit=crop&q=80',
+        badge: 'GRADE 1 WILLOW',
+        rating: 4.98,
+        reviewCount: 175,
+      },
+    ],
+    techFeatures: [
+      {
+        icon: '🛡️',
+        title: '100% Authentic Equipment',
+        desc: 'Sourced directly from authorized sports manufacturers with verifiable hologram serials.',
+      },
+      {
+        icon: '⚡',
+        title: 'Express Matchday Dispatch',
+        desc: 'Orders placed before 2 PM dispatched same-day with real-time GPS tracking across all PIN codes.',
+      },
+      {
+        icon: '🔄',
+        title: '7-Day Hassle-Free Returns',
+        desc: 'Easy exchanges if equipment size, weight, or balance doesn’t fit your gameplay style.',
+      },
+    ],
+  },
+
+  'sports-gameday': {
+    template: {
+      id: 'sports-gameday',
+      slug: 'sports-gameday',
+      name: 'GameDay',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'bold',
+      catalogSize: 'large',
+      tags: ['Football', 'Cricket', 'Basketball', 'Jerseys', 'Fan Gear', 'Match Day'],
+      shortDescription: 'Stadium fan store for jerseys and match-day gear across football, cricket, basketball, tennis, and running.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 94,
+      isActive: true,
+      brandName: 'GAMEDAY',
+      headline: 'BRING THE ENERGY.',
+      subtitle: 'Jerseys, scarves, caps and match-day fan gear for every sport and every team.',
+      buttonText: 'Shop Fan Gear',
+      buttonColor: '#f59e0b',
+      accentColor: '#f59e0b',
+      isDark: true,
+      modelImage: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&auto=format&fit=crop&q=80',
+      badge: 'trending',
+      rating: 4.92,
+      reviewCount: 198,
+      layoutType: 'editorial',
+      features: [
+        'Stadium Fan Store with Football, Cricket, Basketball, Tennis and Running',
+        'Jersey Customisation with Player Name and Number Heat-Press',
+        'Limited Edition Collector Jerseys with Holographic Authentication',
+        'Match-Day Stories, Fan Reviews and Stadium Pass VIP Newsletter',
+      ],
+    },
+    announcement: 'FREE EXPRESS SHIPPING ON ALL JERSEYS ABOVE 1999 - CUSTOM NAME AND NUMBER AVAILABLE',
+    navItems: ['Football', 'Cricket', 'Basketball', 'Tennis', 'Jerseys', 'Fan Gear', 'New Drops', 'Sale'],
+    heroStats: [
+      { label: 'Jerseys', value: '500+' },
+      { label: 'Sports', value: '5' },
+      { label: 'Free Shipping', value: 'Rs1999' },
+    ],
+    categories: [
+      {
+        id: 'football',
+        name: 'Football',
+        image: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=600&auto=format&fit=crop&q=80',
+        badge: 'MATCH DAY',
+        count: '200+ Items',
+      },
+      {
+        id: 'cricket',
+        name: 'Cricket',
+        image: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=600&auto=format&fit=crop&q=80',
+        badge: 'POPULAR',
+        count: '180+ Items',
+      },
+    ],
+    featuredProducts: [
+      {
+        id: 'gd-fb-01',
+        name: 'FC Barcelona 2024/25 Home Jersey',
+        category: 'Jerseys',
+        price: 'Rs4499',
+        compareAtPrice: 'Rs5499',
+        image: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&auto=format&fit=crop&q=80',
+        badge: 'MATCH DAY',
+        rating: 4.9,
+        reviewCount: 312,
+      },
+    ],
+    techFeatures: [
+      {
+        icon: '🔥',
+        title: 'Custom Heat-Press Printing',
+        desc: 'Add your player name and number with stadium-quality heat-press. Ships in 2-3 days.',
+      },
+    ],
+  },
+  'sports-elitesport': {
+    template: {
+      id: 'sports-elitesport',
+      slug: 'sports-elitesport',
+      name: 'EliteSport',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'editorial',
+      catalogSize: 'large',
+      tags: ['Luxury Performance', 'Running', 'Training', 'Footwear', 'Technical', 'Premium'],
+      shortDescription: 'Refined performance sportswear and technical footwear presented through cinematic editorial photography, considered material stories, and a calm luxury storefront.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 99,
+      isActive: true,
+      brandName: 'ELITESPORT',
+      headline: 'ENGINEERED FOR EXCELLENCE',
+      subtitle: 'Luxury performance equipment for movement without compromise.',
+      buttonText: 'Discover Collection',
+      buttonColor: '#697563',
+      accentColor: '#697563',
+      isDark: false,
+      modelImage: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&auto=format&fit=crop&q=80',
+      badge: 'new',
+      rating: 4.98,
+      reviewCount: 182,
+      layoutType: 'editorial',
+      features: [
+        'Cinematic Editorial Storefront with New, Performance, and Exclusive Collections',
+        'Minimal Product Presentation with Alternate Photography and Refined Details',
+        'Technology-Led Product Pages with Color, Size, Cart, and Buy-Now Actions',
+        'Mobile-First Navigation and a Persistent Mobile Add-to-Cart Experience',
+      ],
+    },
+    announcement: 'ENGINEERED FOR EXCELLENCE · COMPLIMENTARY DELIVERY ON ALL ORDERS',
+    navItems: ['Collections', 'Men', 'Women', 'Performance', 'Footwear', 'Accessories', 'New Collection'],
+    categories: [
+      { id: 'footwear', name: 'Performance Footwear', image: 'https://images.unsplash.com/photo-1539185441755-769473a23570?w=600&auto=format&fit=crop&q=80', badge: 'PRECISION IN MOTION' },
+      { id: 'performance', name: 'Performance', image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&auto=format&fit=crop&q=80', badge: 'DESIGNED TO MOVE' },
+      { id: 'accessories', name: 'Accessories', image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=600&auto=format&fit=crop&q=80', badge: 'CONSIDERED DETAIL' },
+    ],
+    featuredProducts: [
+      { id: 'es-aerion-carbon-01', name: 'Aerion Carbon 01', category: 'Footwear', price: '₹18,900', image: 'https://images.unsplash.com/photo-1539185441755-769473a23570?w=800&auto=format&fit=crop&q=80', badge: 'NEW COLLECTION', rating: 4.98, reviewCount: 182 },
+      { id: 'es-altitude-shell', name: 'Altitude 3L Shell', category: 'Performance', price: '₹24,600', image: 'https://images.unsplash.com/photo-1544923246-77307dd654cb?w=800&auto=format&fit=crop&q=80', badge: 'LIMITED EDITION', rating: 4.96, reviewCount: 74 },
+      { id: 'es-form-knit-1', name: 'Form Knit Long Sleeve', category: 'Performance', price: '₹8,900', image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop&q=80', rating: 4.92, reviewCount: 93 },
+    ],
+  },
+  'sports-streetathlete': {
+    template: {
+      id: 'sports-streetathlete',
+      slug: 'sports-streetathlete',
+      name: 'StreetAthlete',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'editorial',
+      catalogSize: 'large',
+      tags: ['Sneakers', 'Streetwear', 'Urban', 'Footwear', 'Hoodies', 'Fashion'],
+      shortDescription: 'Fashion-led sneaker and streetwear storefront with oversized editorial campaigns, complete outfit styling, and an urban everyday rotation.',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 98,
+      isActive: true,
+      brandName: 'STREETATHLETE',
+      headline: 'BUILT FOR THE STREETS',
+      subtitle: 'Sneakers, streetwear, and everyday pieces made for your own route.',
+      buttonText: 'Shop New Drops',
+      buttonColor: '#d6ff32',
+      accentColor: '#f15a32',
+      isDark: true,
+      modelImage: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=800&auto=format&fit=crop&q=80',
+      badge: 'new',
+      rating: 4.9,
+      reviewCount: 128,
+      layoutType: 'editorial',
+      features: [
+        'Fashion Editorial Homepage with Oversized Sneaker Campaign Photography',
+        'Shop-the-Look Outfit Compositions with Complete Product Bundles',
+        'Sneaker Product Pages with Gallery, Size Selection, Wishlist, and Quick Add',
+        'Streetwear Stories, New Drops, and Responsive Mobile Shopping',
+      ],
+    },
+    announcement: 'BUILT FOR THE STREETS • FREE SHIPPING OVER ₹4,999 • NEW DROP JUST LANDED',
+    navItems: ['Sneakers', 'Men', 'Women', 'Hoodies', 'T-Shirts', 'Joggers', 'Accessories', 'New Drops', 'Sale'],
+    categories: [
+      { id: 'sneakers', name: 'Sneakers', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80', badge: 'FRESH PAIRS' },
+      { id: 'streetwear', name: 'Streetwear', image: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=600&auto=format&fit=crop&q=80', badge: 'EVERYDAY UNIFORM' },
+      { id: 'accessories', name: 'Accessories', image: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=600&auto=format&fit=crop&q=80', badge: 'THE FINISHING TOUCH' },
+    ],
+    featuredProducts: [
+      { id: 'sa-after-hours-01', name: 'After Hours 01', category: 'Sneakers', price: '₹8,490', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&auto=format&fit=crop&q=80', badge: 'JUST LANDED', rating: 4.9, reviewCount: 128 },
+      { id: 'sa-concrete-runner', name: 'Concrete Runner', category: 'Sneakers', price: '₹11,200', image: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=800&auto=format&fit=crop&q=80', badge: 'STAFF PICK', rating: 4.9, reviewCount: 96 },
+      { id: 'sa-off-grid-hoodie', name: 'Off Grid Heavyweight Hoodie', category: 'Streetwear', price: '₹6,290', image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800&auto=format&fit=crop&q=80', rating: 4.8, reviewCount: 72 },
+    ],
+  },
+  'sports-peak': {
+    template: {
+      id: 'sports-peak',
+      slug: 'sports-peak',
+      name: 'Peak',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'bold',
+      catalogSize: 'large',
+      tags: ['Hiking', 'Trekking', 'Camping', 'Cycling', 'Trail Running', 'Outdoor'],
+      shortDescription:
+        'Technical outdoor adventure storefront for hiking, high-altitude trekking, wild camping, gravel cycling, and mountain trail running.',
+      thumbnailUrl:
+        'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl:
+        'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 97,
+      isActive: true,
+      brandName: 'PEAK',
+      headline: 'FIND YOUR NEXT ADVENTURE.',
+      subtitle:
+        'Expedition-grade apparel, technical packs, and alpine equipment built for unyielding weather and remote terrain.',
+      buttonText: 'Explore Outdoor',
+      buttonColor: '#4d7c0f',
+      accentColor: '#4d7c0f',
+      isDark: false,
+      modelImage:
+        'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&auto=format&fit=crop&q=80',
+      badge: 'new',
+      rating: 4.95,
+      reviewCount: 310,
+      layoutType: 'editorial',
+      features: [
+        'Explore by 5 Outdoor Disciplines: Hiking, Trekking, Camping, Cycling, Trail Running',
+        'Field-Engineered Waterproofing, Wind Protection, and Breathability Tech Specs',
+        'Technical Product Pages with Material, Weight, Temperature Rating, and Terrain Specs',
+        'Field Notes & Himalayan Adventure Stories Editorial',
+      ],
+    },
+    announcement: 'FREE SHIPPING ON ORDERS ABOVE ₹1,999 • 30-NIGHT FIELD TEST TRAIL GUARANTEE',
+    navItems: [
+      'Hiking',
+      'Trekking',
+      'Camping',
+      'Cycling',
+      'Trail Running',
+      'Outdoor Clothing',
+      'Footwear',
+      'Accessories',
+    ],
+    heroStats: [
+      { label: 'Waterproof', value: '28,000mm' },
+      { label: 'Thermal Limit', value: '-20°C' },
+      { label: 'Free Freight', value: '₹1,999' },
+    ],
+    categories: [
+      {
+        id: 'hiking',
+        name: 'Hiking',
+        image: 'https://images.unsplash.com/photo-1501555088652-021faa106b9b?w=600&auto=format&fit=crop&q=80',
+        badge: 'ALL TERRAIN',
+        count: '180+ Items',
+      },
+      {
+        id: 'trekking',
+        name: 'Trekking',
+        image: 'https://images.unsplash.com/photo-1464207687429-7505649dae38?w=600&auto=format&fit=crop&q=80',
+        badge: 'ALPINE',
+        count: '140+ Items',
+      },
+      {
+        id: 'camping',
+        name: 'Camping',
+        image: 'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=600&auto=format&fit=crop&q=80',
+        badge: 'WILD',
+        count: '120+ Items',
+      },
+    ],
+    featuredProducts: [
+      {
+        id: 'pk-hk-01',
+        name: 'Summit Ridge 40L Trekking Pack',
+        category: 'Packs',
+        price: '₹8,499',
+        compareAtPrice: '₹10,999',
+        image: 'https://images.unsplash.com/photo-1501555088652-021faa106b9b?w=800&auto=format&fit=crop&q=80',
+        badge: 'BESTSELLER',
+        rating: 4.9,
+        reviewCount: 412,
+      },
+    ],
+    techFeatures: [
+      {
+        icon: '🏔️',
+        title: 'High-Altitude Field Tested',
+        desc: 'Tested above 4,000m on Himalayan routes before entering production.',
+      },
+      {
+        icon: '🌧️',
+        title: 'Gore-Tex & DWR Protection',
+        desc: 'Advanced barrier membranes seal out deluge rainfall and alpine sleet.',
+      },
+      {
+        icon: '🌿',
+        title: '30-Night Trail Guarantee',
+        desc: 'Test your gear on the trail. If it falls short of expectations, exchange with ease.',
+      },
+    ],
+  },
+  'sports-motion': {
+    template: {
+      id: 'sports-motion',
+      slug: 'sports-motion',
+      name: 'Motion',
+      businessType: 'sporting-goods',
+      industryCategory: 'Sports Store',
+      style: 'bold',
+      catalogSize: 'large',
+      tags: ['Futuristic', 'Sports Tech', 'Running', 'Smart Gear', 'Carbon', 'Biometrics'],
+      shortDescription:
+        'Next-generation futuristic sports technology storefront featuring biometric-responsive sportswear, carbon-fusion footwear, and real-time kinetic telemetry.',
+      thumbnailUrl:
+        'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&auto=format&fit=crop&q=80',
+      fullPreviewUrl:
+        'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1600&auto=format&fit=crop&q=85',
+      popularityScore: 99,
+      isActive: true,
+      brandName: 'MOTION',
+      headline: 'THE FUTURE OF PERFORMANCE',
+      subtitle:
+        'Biometric-responsive sportswear, carbon-fusion footwear, and real-time kinetic gear engineered to break the human boundary.',
+      buttonText: 'Explore Technology',
+      buttonColor: '#00f5d4',
+      accentColor: '#00f5d4',
+      isDark: true,
+      modelImage:
+        'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&auto=format&fit=crop&q=80',
+      badge: 'new',
+      rating: 4.98,
+      reviewCount: 382,
+      layoutType: 'editorial',
+      features: [
+        'Interactive Performance Technology Cards: Speed, Recovery, Precision',
+        'Smart Gear Ecosystem: Haptic Hydration, Biometric Telemetry, EMG Sensing',
+        'Engineered For Motion: 94.2% Kinetic Return & Micro-Graphene Heat Diffusion',
+        'Technical PDP with Laboratory Specifications, Materials, and Instant Checkout',
+      ],
+    },
+    announcement: 'KINETIC INTELLIGENCE · QUANTUM RECOVERY ARCHITECTURE · FREE TELEMETRY SHIPPING OVER ₹2,499',
+    navItems: [
+      'Performance',
+      'Running',
+      'Training',
+      'Footwear',
+      'Smart Gear',
+      'Technology',
+      'Collections',
+      'New',
+    ],
+    heroStats: [
+      { label: 'Energy Return', value: '94.2%' },
+      { label: 'Carbon Chassis', value: '168g' },
+      { label: 'Telemetry Latency', value: '0.02s' },
+    ],
+    categories: [
+      {
+        id: 'footwear',
+        name: 'Carbon Footwear',
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80',
+        badge: 'PROPULSION',
+        count: '32 Items',
+      },
+      {
+        id: 'smart-gear',
+        name: 'Smart Telemetry',
+        image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=600&auto=format&fit=crop&q=80',
+        badge: 'CONNECTED',
+        count: '18 Items',
+      },
+      {
+        id: 'training',
+        name: 'Graphene Training',
+        image: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&auto=format&fit=crop&q=80',
+        badge: 'NEURAL FIT',
+        count: '46 Items',
+      },
+    ],
+    featuredProducts: [
+      {
+        id: 'mo-shoe-01',
+        name: 'AeroKinetics 01 Carbon Racer',
+        category: 'Footwear',
+        price: '₹18,999',
+        compareAtPrice: '₹22,499',
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&auto=format&fit=crop&q=80',
+        badge: 'KINETIC-CORE V4',
+        rating: 4.9,
+        reviewCount: 324,
+      },
+      {
+        id: 'mo-smart-01',
+        name: 'PulseWeave Smart Hydration Vest',
+        category: 'Smart Gear',
+        price: '₹9,999',
+        compareAtPrice: '₹12,499',
+        image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&auto=format&fit=crop&q=80',
+        badge: 'TELEMETRY V2',
+        rating: 4.9,
+        reviewCount: 146,
+      },
+    ],
+    techFeatures: [
+      {
+        icon: '⚡',
+        title: 'Supercritical PEBA Propulsion',
+        desc: 'Nitrogen-infused foam paired with dual-strut carbon rocker for continuous forward momentum.',
+      },
+      {
+        icon: '◈',
+        title: 'Micro-Graphene Thermal Dissipation',
+        desc: 'Directs metabolic thermal spikes away from the torso to preserve peak output.',
+      },
+      {
+        icon: '📡',
+        title: 'Real-Time Biometric Telemetry',
+        desc: 'Sub-millisecond electromyography sensor integration seamlessly reads muscle tension.',
+      },
+    ],
+  },
+}
+
+export const ALL_SPORTS_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = Object.values(SPORTS_TEMPLATES_CONFIG).map(
+  (c) => c.template
+)
+
