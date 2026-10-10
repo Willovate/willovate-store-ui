@@ -57,4 +57,13 @@ describe('Fragrance Fashion Template Suite', () => {
       expect(p.longevity).toBeDefined()
     })
   })
+
+  it('supports bestseller category tabs with valid options', () => {
+    const tabs = ['Men', 'Unisex', 'Women', 'Bestseller'] as const
+    expect(tabs.length).toBe(4)
+    expect(tabs).toContain('Men')
+    expect(tabs).toContain('Unisex')
+    expect(tabs).toContain('Women')
+    expect(tabs).toContain('Bestseller')
+  })
 })

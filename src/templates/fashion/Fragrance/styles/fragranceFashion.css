@@ -990,10 +990,12 @@
 
 .fragrance-card-size-opt {
   font-size: 11px;
+  font-weight: 600;
   padding: 3px 8px;
   border: 1px solid var(--frag-border);
   border-radius: 4px;
-  color: var(--frag-text-muted);
+  color: #111827;
+  background: #FFFFFF;
   cursor: pointer;
 }
 
@@ -1062,19 +1064,28 @@
 
 .fragrance-tab-btn {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
-  padding: 8px 16px;
+  background: #FFFFFF !important;
+  color: #000000 !important;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 8px 18px;
   border-radius: 20px;
   transition: all 0.25s ease;
+  cursor: pointer;
 }
 
 .fragrance-tab-btn.active,
 .fragrance-tab-btn:hover {
-  background: var(--frag-accent-gold);
-  color: var(--frag-bg-dark-deep);
+  background: var(--frag-accent-gold) !important;
+  color: var(--frag-bg-dark-deep) !important;
+  border-color: var(--frag-accent-gold) !important;
+}
+
+.fragrance-tab-btn:hover:not(.active) {
+  background: #f3f4f6 !important;
+  color: #000000 !important;
 }
 
 .fragrance-bestseller-grid {
@@ -1109,14 +1120,17 @@
 }
 
 .fragrance-bestseller-card .fragrance-card-size-opt {
-  border-color: rgba(255, 255, 255, 0.2);
-  color: rgba(255, 255, 255, 0.7);
+  background: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #000000 !important;
+  font-weight: 600;
 }
 
 .fragrance-bestseller-card .fragrance-card-size-opt.active {
-  background: var(--frag-accent-gold);
-  color: var(--frag-bg-dark-deep);
-  border-color: var(--frag-accent-gold);
+  background: var(--frag-accent-gold) !important;
+  color: var(--frag-bg-dark-deep) !important;
+  border-color: var(--frag-accent-gold) !important;
+  font-weight: 700;
 }
 
 .fragrance-bestseller-card .fragrance-current-price {
@@ -2402,30 +2416,68 @@
 
 :is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-nav-row,
 .fragrance-theme-root.fragrance-tablet .fragrance-nav-row {
-  height: 70px !important;
+  height: 66px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  overflow: visible !important;
 }
 
 :is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-logo,
 .fragrance-theme-root.fragrance-tablet .fragrance-logo {
-  font-size: 22px !important;
+  font-size: 18px !important;
+  letter-spacing: 0.1em !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  margin-right: 12px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-logo span,
+.fragrance-theme-root.fragrance-tablet .fragrance-logo span {
+  font-size: 11px !important;
+  letter-spacing: 0.08em !important;
+  margin-left: 6px !important;
 }
 
 :is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-main-nav,
 .fragrance-theme-root.fragrance-tablet .fragrance-main-nav {
   display: flex !important;
-  gap: 16px !important;
+  gap: 10px !important;
+  flex-wrap: nowrap !important;
 }
 
 :is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-nav-link,
 .fragrance-theme-root.fragrance-tablet .fragrance-nav-link {
-  font-size: 12px !important;
-  padding: 6px 0 !important;
-  letter-spacing: 0.08em !important;
+  font-size: 11.5px !important;
+  padding: 4px 2px !important;
+  letter-spacing: 0.05em !important;
+  white-space: nowrap !important;
 }
 
 :is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-menu-right,
 .fragrance-theme-root.fragrance-tablet .fragrance-menu-right {
-  gap: 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex-shrink: 0 !important;
+  margin-left: auto !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-btn-label,
+.fragrance-theme-root.fragrance-tablet .fragrance-btn-label {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-icon-btn,
+.fragrance-theme-root.fragrance-tablet .fragrance-icon-btn {
+  padding: 6px 8px !important;
+  gap: 0 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-cart-bubble,
+.fragrance-theme-root.fragrance-tablet .fragrance-cart-bubble {
+  margin-right: 4px !important;
 }
 
 :is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-mobile-hamburger,
@@ -2433,6 +2485,36 @@
 .fragrance-theme-root.fragrance-tablet .fragrance-mobile-hamburger,
 .fragrance-theme-root.fragrance-tablet .fragrance-menu-toggle {
   display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-tab-nav,
+.fragrance-theme-root.fragrance-tablet .fragrance-tab-nav {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+  margin-bottom: 28px !important;
+  padding-bottom: 12px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-tab-btn,
+.fragrance-theme-root.fragrance-tablet .fragrance-tab-btn {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  background: #FFFFFF !important;
+  color: #000000 !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  padding: 8px 18px !important;
+  border-radius: 20px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-tab-btn.active,
+.fragrance-theme-root.fragrance-tablet .fragrance-tab-btn.active {
+  background: var(--frag-accent-gold) !important;
+  color: var(--frag-bg-dark-deep) !important;
+  border-color: var(--frag-accent-gold) !important;
 }
 
 :is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-product-grid,
@@ -2444,8 +2526,8 @@
 .fragrance-theme-root.fragrance-tablet .fragrance-bestseller-grid,
 .fragrance-theme-root.fragrance-tablet .fragrance-related-grid {
   display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 16px !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 20px !important;
 }
 
 :is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fragrance-theme-root.fragrance-tablet) .fragrance-perspectives-grid,

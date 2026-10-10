@@ -24,6 +24,7 @@ export const FragranceFashionStorefront: React.FC<FragranceStorefrontProps> = ({
   onUseTemplate: _onUseTemplate,
 }) => {
   const effectiveDevice = deviceView || device || 'desktop'
+  const isTablet = effectiveDevice === 'tablet'
   const isMobile = effectiveDevice === 'mobile'
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false)
 
@@ -177,8 +178,17 @@ export const FragranceFashionStorefront: React.FC<FragranceStorefrontProps> = ({
     })
   }, [filters, searchQuery])
 
+  const rootDeviceClass = isMobile
+    ? 'fragrance-mobile device-mobile is-mobile'
+    : isTablet
+    ? 'fragrance-tablet device-tablet is-tablet'
+    : `fragrance-${effectiveDevice}`
+
   return (
-    <div className={`fragrance-theme-root ${isMobile ? 'fragrance-mobile device-mobile is-mobile' : `fragrance-${effectiveDevice}`}`}>
+    <div
+      className={`fragrance-theme-root ${rootDeviceClass}`}
+      data-device-view={effectiveDevice}
+    >
       {/* Toast Notification */}
       {toastMsg && (
         <div
