@@ -19,33 +19,45 @@ import './styles/optimalFashion.css'
 export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
   template: _template,
   device = 'desktop',
+  deviceView,
   customAccentColor,
   onUseTemplate: _onUseTemplate,
   onClose: _onClose,
   onBack: _onBack,
 }) => {
   // Navigation & View State
-  const [activeView, setActiveView] = useState<'home' | 'collection' | 'pdp'>('home')
+  const [activeView, setActiveView] = useState<'home' | 'collection' | 'pdp' | 'wishlist'>('home')
   const [activeCategory, setActiveCategory] = useState<OptimalCategoryType>('All')
   const [selectedProduct, setSelectedProduct] = useState<OptimalProduct>(OPTIMAL_PRODUCTS[0])
   const [quickViewProduct, setQuickViewProduct] = useState<OptimalProduct | null>(null)
   const [sizeChartOpen, setSizeChartOpen] = useState(false)
   const [cartOpen, setCartOpen] = useState(false)
+  const [wishlistOpen, setWishlistOpen] = useState(false)
   const [browseDropdownOpen, setBrowseDropdownOpen] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false)
-  const [isSmallScreen, setIsSmallScreen] = useState(false)
+  const [windowWidth, setWindowWidth] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : 1200
+  )
 
   useEffect(() => {
     const checkScreen = () => {
-      setIsSmallScreen(window.innerWidth <= 768)
+      setWindowWidth(window.innerWidth)
     }
     checkScreen()
     window.addEventListener('resize', checkScreen)
     return () => window.removeEventListener('resize', checkScreen)
   }, [])
 
-  const isMobile = device === 'mobile' || isSmallScreen
+  const effectiveDevice = deviceView || device || 'desktop'
+  const isExplicitMobile = effectiveDevice === 'mobile'
+  const isExplicitTablet = effectiveDevice === 'tablet'
+
+  const isTablet =
+    isExplicitTablet ||
+    (!isExplicitMobile && effectiveDevice === 'desktop' && windowWidth >= 768 && windowWidth <= 1024)
+  const isMobile =
+    isExplicitMobile || (!isExplicitTablet && windowWidth < 768)
   const [mobileFiltersExpanded, setMobileFiltersExpanded] = useState(false)
   const [homeTab, setHomeTab] = useState<'featured' | 'bestsellers' | 'new' | 'sale'>('featured')
   const [toastMessage, setToastMessage] = useState<string | null>(null)
@@ -80,8 +92,19 @@ export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
     },
   ])
 
-  // Wishlist State
+  // Wishlist State (demo items: opt-01 Trench Coat, opt-07 Silk Slip Dress)
   const [wishlist, setWishlist] = useState<string[]>(['opt-01', 'opt-07'])
+
+  // Derived Liked Products (ONLY liked clothes!)
+  const likedProducts = useMemo(
+    () => OPTIMAL_PRODUCTS.filter((p) => wishlist.includes(p.id)),
+    [wishlist]
+  )
+
+  const likedProductsTotal = useMemo(
+    () => likedProducts.reduce((sum, item) => sum + item.price, 0),
+    [likedProducts]
+  )
 
   // Deal Countdown Timer (Ticking every second)
   const [timeLeft, setTimeLeft] = useState({
@@ -126,13 +149,46 @@ export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
     setWishlist((prev) => {
       const exists = prev.includes(id)
       if (exists) {
-        showToast(`Removed "${name}" from Wishlist`)
+        showToast(`Removed "${name}" from Liked Clothes`)
         return prev.filter((item) => item !== id)
       } else {
-        showToast(`Added "${name}" to Wishlist`)
+        showToast(`Added "${name}" to Liked Clothes ❤️`)
         return [...prev, id]
       }
     })
+  }
+
+  // Handle Add Liked Item to Bag
+  const handleAddLikedToBag = (prod: OptimalProduct) => {
+    addToCart(
+      prod,
+      prod.sizes[0] || 'M',
+      prod.colors[0]?.name || 'Standard',
+      1
+    )
+    showToast(`Added "${prod.name}" to Bag! 🛍️`)
+  }
+
+  // Handle Move All Liked Items to Bag
+  const handleMoveAllLikedToBag = () => {
+    if (likedProducts.length === 0) return
+    likedProducts.forEach((prod) => {
+      addToCart(
+        prod,
+        prod.sizes[0] || 'M',
+        prod.colors[0]?.name || 'Standard',
+        1
+      )
+    })
+    showToast(`Moved all ${likedProducts.length} liked clothes to your bag! 🛍️`)
+    setWishlistOpen(false)
+    setCartOpen(true)
+  }
+
+  // Clear all liked clothes
+  const handleClearLiked = () => {
+    setWishlist([])
+    showToast('Cleared all liked clothes')
   }
 
   // Cart operations
@@ -253,9 +309,16 @@ export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
   // Format currency helper
   const fmt = (num: number) => `₹${num.toLocaleString('en-IN')}`
 
+  const rootDeviceClass = isMobile
+    ? 'optimal-mobile device-mobile is-mobile'
+    : isTablet
+    ? 'optimal-tablet device-tablet is-tablet'
+    : `optimal-${effectiveDevice}`
+
   return (
     <div
-      className={`optimal-root ${isMobile ? 'optimal-mobile device-mobile is-mobile' : `optimal-${device}`}`}
+      className={`optimal-root ${rootDeviceClass}`}
+      data-device-view={isMobile ? 'mobile' : isTablet ? 'tablet' : effectiveDevice}
       style={
         {
           ...(customAccentColor ? { '--opt-primary': customAccentColor } : {}),
@@ -386,21 +449,20 @@ export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
               <button
                 type="button"
                 className="optimal-action-btn"
-                onClick={() => {
-                  setActiveCategory('All')
-                  setActiveView('collection')
-                  showToast(`Showing ${wishlist.length} item(s) in your saved list`)
-                }}
-                title="Wishlist"
+                onClick={() => setWishlistOpen(true)}
+                title="Liked Clothes"
+                aria-label={`Liked clothes: ${likedProducts.length} items`}
               >
                 <div className="optimal-action-icon-wrap">
-                  <span>♡</span>
+                  <span style={{ color: wishlist.length > 0 ? '#ef4444' : 'inherit' }}>
+                    {wishlist.length > 0 ? '❤️' : '♡'}
+                  </span>
                   {wishlist.length > 0 && <span className="optimal-badge-counter">{wishlist.length}</span>}
                 </div>
                 {!isMobile && (
                   <div className="optimal-action-text">
                     <span className="optimal-action-label">Favorite</span>
-                    <span className="optimal-action-val">Wishlist</span>
+                    <span className="optimal-action-val">Liked ({wishlist.length})</span>
                   </div>
                 )}
               </button>
@@ -472,6 +534,17 @@ export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
                   }}
                 >
                   <span>🏠 Home</span>
+                  <span>›</span>
+                </button>
+                <button
+                  type="button"
+                  className={`optimal-mobile-drawer-link ${activeView === 'wishlist' ? 'active' : ''}`}
+                  onClick={() => {
+                    setMobileMenuOpen(false)
+                    setWishlistOpen(true)
+                  }}
+                >
+                  <span>❤️ Liked Clothes ({wishlist.length})</span>
                   <span>›</span>
                 </button>
                 {OPTIMAL_NAV_LINKS.filter((c) => c !== 'Home').map((cat) => (
@@ -1488,6 +1561,154 @@ export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
         </main>
       )}
 
+      {/* ================= VIEW: DEDICATED LIKED CLOTHES FULL VIEW ================= */}
+      {activeView === 'wishlist' && (
+        <main className="optimal-container optimal-wishlist-page">
+          {/* Breadcrumb Navigation */}
+          <div className="optimal-breadcrumb">
+            <button
+              type="button"
+              className="optimal-breadcrumb-link"
+              onClick={() => {
+                setActiveView('home')
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+              }}
+            >
+              Home
+            </button>
+            <span>/</span>
+            <span className="optimal-breadcrumb-current">Liked Clothes ({likedProducts.length})</span>
+          </div>
+
+          {/* Banner / Header */}
+          <div className="optimal-wishlist-page-header">
+            <div className="optimal-wishlist-page-title-row">
+              <div>
+                <h1 className="optimal-wishlist-page-title">
+                  <span>❤️</span> My Liked Clothes
+                </h1>
+                <p className="optimal-wishlist-page-desc">
+                  Curated wardrobe favorites. Showing ONLY the fashion pieces and apparel you have favorited.
+                </p>
+              </div>
+
+              {likedProducts.length > 0 && (
+                <div className="optimal-wishlist-page-actions">
+                  <button
+                    type="button"
+                    className="optimal-btn-primary optimal-wishlist-bulk-add-btn"
+                    onClick={handleMoveAllLikedToBag}
+                  >
+                    🛍️ Move All to Bag ({fmt(likedProductsTotal)})
+                  </button>
+                  <button
+                    type="button"
+                    className="optimal-btn-outline optimal-wishlist-clear-page-btn"
+                    onClick={handleClearLiked}
+                  >
+                    Clear All
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Liked Clothes Grid Content */}
+          {likedProducts.length === 0 ? (
+            <div className="optimal-wishlist-empty-container">
+              <div className="optimal-wishlist-empty-icon">🤍</div>
+              <h2 className="optimal-wishlist-empty-heading">No Liked Clothes in Your Wardrobe</h2>
+              <p className="optimal-wishlist-empty-text">
+                You haven't liked any clothes yet. Tap the heart icon on any dress, jacket, shoes, or bag while browsing to save it right here!
+              </p>
+              <button
+                type="button"
+                className="optimal-btn-primary"
+                onClick={() => {
+                  setActiveCategory('All')
+                  setActiveView('collection')
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                Browse Fashion Collections
+              </button>
+            </div>
+          ) : (
+            <div className="optimal-wishlist-grid-wrap">
+              <div className="optimal-products-grid optimal-wishlist-grid">
+                {likedProducts.map((prod) => (
+                  <div key={prod.id} className="optimal-product-card optimal-wishlist-card">
+                    <div className="optimal-card-image-wrap">
+                      <img
+                        src={prod.image}
+                        alt={prod.name}
+                        className="optimal-card-img"
+                        onClick={() => handleOpenPdp(prod)}
+                      />
+                      <span className="optimal-card-badge optimal-badge-liked">
+                        ❤️ Liked
+                      </span>
+
+                      <div
+                        className="optimal-card-actions"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <button
+                          type="button"
+                          className="optimal-icon-action-btn active"
+                          onClick={() => toggleWishlist(prod.id, prod.name)}
+                          title="Remove from Liked Clothes"
+                        >
+                          ♥
+                        </button>
+                        <button
+                          type="button"
+                          className="optimal-icon-action-btn"
+                          onClick={() => setQuickViewProduct(prod)}
+                          title="Quick View"
+                        >
+                          👁
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="optimal-card-body">
+                      <div className="optimal-card-brand">{prod.brand}</div>
+                      <h4
+                        className="optimal-card-title"
+                        onClick={() => handleOpenPdp(prod)}
+                      >
+                        {prod.name}
+                      </h4>
+
+                      <div className="optimal-card-rating">
+                        {'★'.repeat(Math.floor(prod.rating))}
+                        <span className="optimal-card-review-count">({prod.reviewCount})</span>
+                      </div>
+
+                      <div className="optimal-card-price-row">
+                        <span className="optimal-card-price">{fmt(prod.price)}</span>
+                        {prod.compareAtPrice && (
+                          <span className="optimal-card-old-price">{fmt(prod.compareAtPrice)}</span>
+                        )}
+                      </div>
+
+                      <button
+                        type="button"
+                        className="optimal-card-add-btn"
+                        onClick={() => handleAddLikedToBag(prod)}
+                      >
+                        🛍️ Add to Bag
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </main>
+      )}
+
       {/* ================= VIEW: PDP (PRODUCT DETAIL PAGE) ================= */}
       {activeView === 'pdp' && selectedProduct && (
         <main className="optimal-container optimal-pdp-section">
@@ -1919,6 +2140,179 @@ export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
           </div>
         </div>
       </footer>
+
+      {/* ================= DEDICATED LIKED CLOTHES SLIDE-OVER DRAWER INTERFACE ================= */}
+      {wishlistOpen && (
+        <div className="optimal-wishlist-overlay" onClick={() => setWishlistOpen(false)}>
+          <div className="optimal-wishlist-drawer" onClick={(e) => e.stopPropagation()}>
+            {/* Header */}
+            <div className="optimal-wishlist-header">
+              <div className="optimal-wishlist-header-left">
+                <span className="optimal-wishlist-icon">❤️</span>
+                <div>
+                  <h3 className="optimal-wishlist-title">Liked Clothes</h3>
+                  <span className="optimal-wishlist-subtitle">
+                    {likedProducts.length} {likedProducts.length === 1 ? 'piece' : 'pieces'} saved in your wardrobe
+                  </span>
+                </div>
+              </div>
+              <button
+                type="button"
+                className="optimal-wishlist-close-btn"
+                onClick={() => setWishlistOpen(false)}
+                title="Close"
+                aria-label="Close liked clothes"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Quick Informational Pill / Badge */}
+            <div className="optimal-wishlist-alert-bar">
+              <span>✨ Only showing your favorited clothes. Ready to try or buy anytime!</span>
+            </div>
+
+            {/* Clothes List */}
+            <div className="optimal-wishlist-items-list">
+              {likedProducts.length === 0 ? (
+                <div className="optimal-wishlist-empty-state">
+                  <div className="optimal-wishlist-empty-icon">🤍</div>
+                  <h4 className="optimal-wishlist-empty-title">No Liked Clothes Yet</h4>
+                  <p className="optimal-wishlist-empty-desc">
+                    Tap the heart icon on any outfit, jacket, dress, or footwear while browsing to save it to your personal liked collection.
+                  </p>
+                  <button
+                    type="button"
+                    className="optimal-btn-primary optimal-wishlist-empty-cta"
+                    onClick={() => {
+                      setWishlistOpen(false)
+                      setActiveCategory('All')
+                      setActiveView('collection')
+                      window.scrollTo({ top: 0, behavior: 'smooth' })
+                    }}
+                  >
+                    Browse Fashion Catalog
+                  </button>
+                </div>
+              ) : (
+                likedProducts.map((prod) => (
+                  <div key={prod.id} className="optimal-wishlist-item-card">
+                    <div
+                      className="optimal-wishlist-thumb-wrap"
+                      onClick={() => {
+                        handleOpenPdp(prod)
+                        setWishlistOpen(false)
+                      }}
+                      title={`View details of ${prod.name}`}
+                    >
+                      <img
+                        src={prod.image}
+                        alt={prod.name}
+                        className="optimal-wishlist-item-thumb"
+                      />
+                      <span className="optimal-wishlist-liked-tag">❤️ Saved</span>
+                    </div>
+
+                    <div className="optimal-wishlist-item-details">
+                      <div className="optimal-wishlist-item-meta">
+                        <span className="optimal-wishlist-item-brand">{prod.brand}</span>
+                        <span className="optimal-wishlist-item-cat">{prod.category}</span>
+                      </div>
+                      <h4
+                        className="optimal-wishlist-item-name"
+                        onClick={() => {
+                          handleOpenPdp(prod)
+                          setWishlistOpen(false)
+                        }}
+                      >
+                        {prod.name}
+                      </h4>
+
+                      <div className="optimal-wishlist-item-pricing">
+                        <span className="optimal-wishlist-current-price">{fmt(prod.price)}</span>
+                        {prod.compareAtPrice && (
+                          <span className="optimal-wishlist-old-price">{fmt(prod.compareAtPrice)}</span>
+                        )}
+                        <span className="optimal-wishlist-stock-tag">
+                          {prod.inStock ? '✓ In Stock' : 'Low Stock'}
+                        </span>
+                      </div>
+
+                      <div className="optimal-wishlist-item-actions">
+                        <button
+                          type="button"
+                          className="optimal-wishlist-add-bag-btn"
+                          onClick={() => handleAddLikedToBag(prod)}
+                          title="Add to shopping bag"
+                        >
+                          🛍️ Add to Bag
+                        </button>
+                        <button
+                          type="button"
+                          className="optimal-wishlist-quickview-btn"
+                          onClick={() => {
+                            setQuickViewProduct(prod)
+                            setWishlistOpen(false)
+                          }}
+                          title="Quick View"
+                        >
+                          👁️ Quick View
+                        </button>
+                        <button
+                          type="button"
+                          className="optimal-wishlist-remove-btn"
+                          onClick={() => toggleWishlist(prod.id, prod.name)}
+                          title="Remove from liked clothes"
+                          aria-label={`Remove ${prod.name} from liked clothes`}
+                        >
+                          🗑️
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+
+            {/* Footer Summary & CTAs */}
+            {likedProducts.length > 0 && (
+              <div className="optimal-wishlist-footer">
+                <div className="optimal-wishlist-summary-row">
+                  <span>Total Value ({likedProducts.length} items):</span>
+                  <strong>{fmt(likedProductsTotal)}</strong>
+                </div>
+                <div className="optimal-wishlist-footer-buttons">
+                  <button
+                    type="button"
+                    className="optimal-wishlist-move-all-btn"
+                    onClick={handleMoveAllLikedToBag}
+                  >
+                    🛍️ MOVE ALL TO BAG ({fmt(likedProductsTotal)})
+                  </button>
+                  <button
+                    type="button"
+                    className="optimal-wishlist-view-grid-btn"
+                    onClick={() => {
+                      setWishlistOpen(false)
+                      setActiveView('wishlist')
+                      window.scrollTo({ top: 0, behavior: 'smooth' })
+                    }}
+                  >
+                    🔍 View in Full Page Grid
+                  </button>
+                  <button
+                    type="button"
+                    className="optimal-wishlist-clear-btn"
+                    onClick={handleClearLiked}
+                  >
+                    Clear Liked Clothes
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* ================= CART SLIDE-OVER DRAWER ================= */}
       {cartOpen && (

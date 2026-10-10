@@ -76,4 +76,13 @@ describe('Optimal Fashion Storefront Template', () => {
     expect(OPTIMAL_TESTIMONIALS.length).toBeGreaterThanOrEqual(3)
     expect(OPTIMAL_TRUST_PROMISES.length).toBe(4)
   })
+
+  it('supports liked clothes filtering with valid products in catalog', () => {
+    const demoWishlist = ['opt-01', 'opt-07']
+    const liked = OPTIMAL_PRODUCTS.filter((p) => demoWishlist.includes(p.id))
+    expect(liked.length).toBe(2)
+    expect(liked[0].id).toBe('opt-01')
+    expect(liked[1].id).toBe('opt-07')
+    expect(liked.every((item) => item.price > 0)).toBe(true)
+  })
 })
