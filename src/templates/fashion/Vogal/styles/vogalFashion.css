@@ -149,6 +149,7 @@
   display: flex;
   flex-direction: column;
   user-select: none;
+  flex-shrink: 0;
 }
 
 .vogal-logo h1 {
@@ -158,6 +159,7 @@
   letter-spacing: -0.04em;
   line-height: 1;
   color: var(--vogal-primary);
+  white-space: nowrap;
 }
 
 .vogal-logo-tagline {
@@ -167,13 +169,14 @@
   color: var(--vogal-accent);
   margin-top: 2px;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 /* Desktop Nav Menu */
 .vogal-desktop-nav {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: clamp(16px, 1.8vw, 32px);
 }
 
 .vogal-nav-wrapper {
@@ -191,6 +194,7 @@
   gap: 6px;
   transition: color 0.18s ease;
   position: relative;
+  white-space: nowrap;
 }
 
 .vogal-nav-link:hover,
@@ -2686,29 +2690,40 @@
   .vogal-header-inner {
     padding: 0 20px !important;
     height: 70px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
     gap: 16px !important;
+  }
+
+  .vogal-logo {
+    flex-shrink: 0 !important;
   }
 
   .vogal-logo h1 {
-    font-size: 1.6rem !important;
+    font-size: 1.65rem !important;
+    white-space: nowrap !important;
+  }
+
+  .vogal-logo-tagline {
+    font-size: 0.56rem !important;
+    letter-spacing: 0.24em !important;
+    white-space: nowrap !important;
   }
 
   .vogal-desktop-nav {
-    display: flex !important;
-    gap: 16px !important;
-  }
-
-  .vogal-nav-link {
-    font-size: 0.8rem !important;
-    padding: 20px 0 !important;
-  }
-
-  .vogal-mobile-hamburger {
     display: none !important;
   }
 
+  .vogal-mobile-hamburger {
+    display: flex !important;
+  }
+
   .vogal-header-actions {
+    display: flex !important;
+    align-items: center !important;
     gap: 10px !important;
+    flex-shrink: 0 !important;
   }
 
   .vogal-hero-title {
@@ -2755,14 +2770,16 @@
   }
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-theme-root,
-.vogal-theme-root.device-tablet {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet, .vogal-theme-root.vogal-tablet, .vogal-theme-root.is-tablet) .vogal-theme-root,
+.vogal-theme-root.device-tablet,
+.vogal-theme-root.vogal-tablet,
+.vogal-theme-root.is-tablet {
   width: 100% !important;
   max-width: 100% !important;
   overflow-x: hidden !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-container,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet, .vogal-theme-root.vogal-tablet, .vogal-theme-root.is-tablet) .vogal-container,
 .vogal-theme-root.device-tablet .vogal-container {
   width: 100% !important;
   max-width: 100% !important;
@@ -2771,7 +2788,7 @@
   box-sizing: border-box !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-top-bar,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet, .vogal-theme-root.vogal-tablet, .vogal-theme-root.is-tablet) .vogal-top-bar,
 .vogal-theme-root.device-tablet .vogal-top-bar {
   padding: 7px 16px !important;
   font-size: 0.72rem !important;
@@ -2781,38 +2798,50 @@
   text-align: center !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-header-inner,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet, .vogal-theme-root.vogal-tablet, .vogal-theme-root.is-tablet) .vogal-header-inner,
 .vogal-theme-root.device-tablet .vogal-header-inner {
   padding: 0 20px !important;
   height: 70px !important;
-  gap: 16px !important;
-}
-
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-logo h1,
-.vogal-theme-root.device-tablet .vogal-logo h1 {
-  font-size: 1.6rem !important;
-}
-
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-desktop-nav,
-.vogal-theme-root.device-tablet .vogal-desktop-nav {
   display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
   gap: 16px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-nav-link,
-.vogal-theme-root.device-tablet .vogal-nav-link {
-  font-size: 0.8rem !important;
-  padding: 20px 0 !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet, .vogal-theme-root.vogal-tablet, .vogal-theme-root.is-tablet) .vogal-logo,
+.vogal-theme-root.device-tablet .vogal-logo {
+  flex-shrink: 0 !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-mobile-hamburger,
-.vogal-theme-root.device-tablet .vogal-mobile-hamburger {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet, .vogal-theme-root.vogal-tablet, .vogal-theme-root.is-tablet) .vogal-logo h1,
+.vogal-theme-root.device-tablet .vogal-logo h1 {
+  font-size: 1.65rem !important;
+  white-space: nowrap !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet, .vogal-theme-root.vogal-tablet, .vogal-theme-root.is-tablet) .vogal-logo-tagline,
+.vogal-theme-root.device-tablet .vogal-logo-tagline {
+  font-size: 0.56rem !important;
+  letter-spacing: 0.24em !important;
+  white-space: nowrap !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet, .vogal-theme-root.vogal-tablet, .vogal-theme-root.is-tablet) .vogal-desktop-nav,
+.vogal-theme-root.device-tablet .vogal-desktop-nav {
   display: none !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-header-actions,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet, .vogal-theme-root.vogal-tablet, .vogal-theme-root.is-tablet) .vogal-mobile-hamburger,
+.vogal-theme-root.device-tablet .vogal-mobile-hamburger {
+  display: flex !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet, .vogal-theme-root.vogal-tablet, .vogal-theme-root.is-tablet) .vogal-header-actions,
 .vogal-theme-root.device-tablet .vogal-header-actions {
+  display: flex !important;
+  align-items: center !important;
   gap: 10px !important;
+  flex-shrink: 0 !important;
 }
 
 :is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .vogal-theme-root.device-tablet) .vogal-hero-title,

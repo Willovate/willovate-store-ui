@@ -32,6 +32,7 @@ export const VogalFashionStorefront: React.FC<VogalStorefrontProps> = ({
 }) => {
   const effectiveDevice = deviceView || device || 'desktop'
   const isMobile = effectiveDevice === 'mobile'
+  const isTablet = effectiveDevice === 'tablet'
 
   // View mode
   const [viewMode, setViewMode] = useState<'home' | 'collection' | 'product'>('home')
@@ -286,7 +287,14 @@ export const VogalFashionStorefront: React.FC<VogalStorefrontProps> = ({
 
   return (
     <div
-      className={`vogal-theme-root device-${effectiveDevice} ${isMobile ? 'vogal-mobile device-mobile is-mobile' : ''}`}
+      className={`vogal-theme-root device-${effectiveDevice} ${
+        isMobile
+          ? 'vogal-mobile device-mobile is-mobile'
+          : isTablet
+          ? 'vogal-tablet device-tablet is-tablet'
+          : ''
+      }`}
+      data-device-view={effectiveDevice}
       style={{
         ...(customAccentColor ? ({ '--vogal-accent': customAccentColor } as React.CSSProperties) : {}),
       }}

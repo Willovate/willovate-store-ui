@@ -17,11 +17,15 @@ import './styles/jenieFashion.css'
 export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
   template: _template,
   device = 'desktop',
+  deviceView,
   customAccentColor: _customAccentColor,
   onColorChange: _onColorChange,
   onUseTemplate: _onUseTemplate,
 }) => {
-  const isMobilePreview = device === 'mobile'
+  const effectiveDevice = deviceView || device || 'desktop'
+  const isMobile = effectiveDevice === 'mobile'
+  const isTablet = effectiveDevice === 'tablet'
+  const isMobilePreview = isMobile
   // Navigation & View Mode
   const [viewMode, setViewMode] = useState<'home' | 'collection' | 'pdp'>('home')
   const [selectedProduct, setSelectedProduct] = useState<JenieProduct>(JENIE_PRODUCTS[0])
@@ -180,7 +184,16 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
   const currentHeroSlide = JENIE_HERO_SLIDES[activeHeroSlideIdx] || JENIE_HERO_SLIDES[0]
 
   return (
-    <div className={`jenie-theme-root device-${device} ${device === 'mobile' ? 'is-mobile device-mobile is-mobile-preview' : ''}`}>
+    <div
+      className={`jenie-theme-root device-${effectiveDevice} ${
+        isMobile
+          ? 'is-mobile device-mobile is-mobile-preview jenie-mobile'
+          : isTablet
+          ? 'is-tablet device-tablet is-tablet-preview jenie-tablet'
+          : ''
+      }`}
+      data-device-view={effectiveDevice}
+    >
       {/* Toast Notification */}
       {toastMsg && (
         <div

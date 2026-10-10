@@ -17,10 +17,15 @@ import './styles/trendyFashion.css'
 export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
   template: _template,
   device = 'desktop',
+  deviceView,
   customAccentColor,
   onColorChange: _onColorChange,
   onUseTemplate: _onUseTemplate,
 }) => {
+  const effectiveDevice = deviceView || device || 'desktop'
+  const isMobile = effectiveDevice === 'mobile'
+  const isTablet = effectiveDevice === 'tablet'
+
   // Navigation & View State
   const [viewMode, setViewMode] = useState<'home' | 'collection' | 'pdp'>('home')
   const [selectedProduct, setSelectedProduct] = useState<TrendyProduct>(TRENDY_PRODUCTS[0])
@@ -217,7 +222,14 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
 
   return (
     <div
-      className={`trendy-storefront device-${device} ${device === 'mobile' ? 'trendy-mobile device-mobile is-mobile' : ''}`}
+      className={`trendy-storefront device-${effectiveDevice} ${
+        isMobile
+          ? 'trendy-mobile device-mobile is-mobile'
+          : isTablet
+          ? 'trendy-tablet device-tablet is-tablet'
+          : ''
+      }`}
+      data-device-view={effectiveDevice}
       style={inlineAccentStyle}
     >
       {/* 1. TOP ANNOUNCEMENT / UTILITY BAR */}
