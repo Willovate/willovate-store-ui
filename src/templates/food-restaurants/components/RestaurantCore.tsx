@@ -1,40 +1,170 @@
 /**
  * RestaurantCore — Universal scalable component system for all Food & Restaurant themes.
- * Powers Pizza, BBQ, Indian, Dessert, Cloud Kitchen, Food Delivery, Fine Dining sections.
+ * Powers Fine Dining, Pizza, BBQ, Indian, Dessert, Cloud Kitchen, and Food Delivery sections.
  *
  * Architecture:
- *   ThemeData config → RestaurantCore components → Complete interactive website
+ *   ThemeData config → RestaurantCore components → Fully interactive, cinematic storefront
  */
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, createContext, useContext } from 'react';
 import { EditableSection, useEditableOverrides } from '../../../context/WebsiteContext';
-import { ArrowRight, MapPin, Clock, Phone, Star, ChevronLeft, ChevronRight, ShoppingBag } from 'lucide-react';
+import {
+  ArrowRight, MapPin, Clock, Phone, Star, ChevronLeft, ChevronRight,
+  ShoppingBag, X, Calendar, Users, CheckCircle, Wine, Sparkles,
+  Plus, Minus, Info, Menu as MenuIcon, Utensils, Award, Compass, Heart,
+  Trash2, Copy, Check
+} from 'lucide-react';
 
-// ─── SCROLL REVEAL HOOK ─────────────────────────────────────────────────────
+// ─── SAFE SCROLL REVEAL HOOK ────────────────────────────────────────────────
+// Safely enhances elements without ever trapping them at opacity 0 if IntersectionObserver fails
 
 export function useReveal(delay = 0) {
   const ref = useRef<HTMLElement>(null);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(48px)';
-    el.style.transition = `opacity 0.8s ease ${delay}ms, transform 0.8s ease ${delay}ms`;
-    const obs = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) { el.style.opacity = '1'; el.style.transform = 'none'; obs.disconnect(); }
-    }, { threshold: 0.08 });
-    obs.observe(el);
-    return () => obs.disconnect();
+    // Set initial visible state first for safety, then apply gentle transition
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+    if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
+      el.style.opacity = '0.01';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = `opacity 0.7s ease ${delay}ms, transform 0.7s ease ${delay}ms`;
+      const obs = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+          obs.disconnect();
+        }
+      }, { threshold: 0.05 });
+      obs.observe(el);
+      // Fallback: force visibility after 1.2s to prevent blank screens
+      const timer = setTimeout(() => {
+        if (el) {
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        }
+      }, 1200 + delay);
+      return () => {
+        obs.disconnect();
+        clearTimeout(timer);
+      };
+    }
   }, [delay]);
   return ref;
 }
 
+// ─── SHARED RESTAURANT STORE CONTEXT ────────────────────────────────────────
+
+export interface CartItem {
+  item: MenuItem;
+  quantity: number;
+}
+
+export interface ReservationDetails {
+  date: string;
+  time: string;
+  guests: number;
+  seatingArea: string;
+  occasion: string;
+  specialRequests: string;
+  guestName: string;
+  guestEmail: string;
+  guestPhone: string;
+  referenceCode: string;
+}
+
+interface RestaurantContextType {
+  isReservationOpen: boolean;
+  openReservation: () => void;
+  closeReservation: () => void;
+  selectedDish: MenuItem | null;
+  openDishModal: (dish: MenuItem) => void;
+  closeDishModal: () => void;
+  cart: CartItem[];
+  isCartOpen: boolean;
+  openCart: () => void;
+  closeCart: () => void;
+  addToCart: (dish: MenuItem) => void;
+  removeFromCart: (dishName: string) => void;
+  updateCartQuantity: (dishName: string, delta: number) => void;
+  clearCart: () => void;
+  activeLightboxIndex: number | null;
+  openLightbox: (index: number) => void;
+  closeLightbox: () => void;
+  bookingConfirmed: ReservationDetails | null;
+  setBookingConfirmed: (details: ReservationDetails | null) => void;
+}
+
+const RestaurantContext = createContext<RestaurantContextType>({
+  isReservationOpen: false,
+  openReservation: () => {},
+  closeReservation: () => {},
+  selectedDish: null,
+  openDishModal: () => {},
+  closeDishModal: () => {},
+  cart: [],
+  isCartOpen: false,
+  openCart: () => {},
+  closeCart: () => {},
+  addToCart: () => {},
+  removeFromCart: () => {},
+  updateCartQuantity: () => {},
+  clearCart: () => {},
+  activeLightboxIndex: null,
+  openLightbox: () => {},
+  closeLightbox: () => {},
+  bookingConfirmed: null,
+  setBookingConfirmed: () => {},
+});
+
+export function useRestaurantStore() {
+  return useContext(RestaurantContext);
+}
+
 // ─── THEME TYPES ─────────────────────────────────────────────────────────────
 
-export interface MenuItem { name: string; price: string; desc: string; tags?: string[]; image?: string; imageAlt?: string; }
-export interface MenuCategory { tab: string; items: MenuItem[]; }
-export interface GalleryImage { src: string; alt: string; }
-export interface TestimonialItem { name: string; quote: string; rating: number; }
+export interface MenuItem {
+  name: string;
+  price: string;
+  desc: string;
+  tags?: string[];
+  image?: string;
+  imageAlt?: string;
+  winePairing?: string;
+  calories?: string;
+  dietary?: string[];
+  chefNote?: string;
+}
+
+export interface MenuCategory {
+  tab: string;
+  items: MenuItem[];
+}
+
+export interface GalleryImage {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+export interface TestimonialItem {
+  name: string;
+  quote: string;
+  rating: number;
+  role?: string;
+  publication?: string;
+}
+
+export interface TastingCourse {
+  courseNumber: string;
+  title: string;
+  dishName: string;
+  description: string;
+  winePairing: string;
+  wineOrigin: string;
+  image?: string;
+}
 
 export interface RestaurantThemeConfig {
   id: string;
@@ -42,13 +172,14 @@ export interface RestaurantThemeConfig {
   tagline: string;
   category: string;
   palette: {
-    primary: string;     // dominant accent
+    primary: string;     // dominant accent (gold, firebrick, ruby, amber)
     secondary: string;   // secondary accent / dark bg
     background: string;  // page background
     surface: string;     // card / section background
     text: string;        // body text
     textLight: string;   // muted text
-    heroOverlay: string; // rgba for hero overlay
+    heroOverlay: string; // rgba or linear-gradient for hero overlay
+    border?: string;     // subtle border color
   };
   typography: {
     heading: string;
@@ -64,6 +195,8 @@ export interface RestaurantThemeConfig {
     promoAlt: string;
     gallery: GalleryImage[];
     combos?: string[];
+    chef?: string;
+    tastingHero?: string;
   };
   content: {
     heroHeadline: string;
@@ -77,11 +210,16 @@ export interface RestaurantThemeConfig {
     address: string;
     hours: string;
     phone: string;
+    chefName?: string;
+    chefTitle?: string;
+    chefQuote?: string;
   };
   menu: MenuCategory[];
   testimonials: TestimonialItem[];
+  tastingCourses?: TastingCourse[];
   features?: string[];
   videoSrc?: string;
+  accolades?: Array<{ year: string; title: string; organization: string }>;
 }
 
 // ─── ANNOUNCEMENT BAR ────────────────────────────────────────────────────────
@@ -90,8 +228,24 @@ export function AnnouncementBar({ text, palette }: { text: string; palette: Rest
   const overrides = useEditableOverrides('announcement', { text });
   return (
     <EditableSection id="announcement" elementType="announcement" name="Announcement Bar" defaultProps={{ text }}>
-      <div style={{ backgroundColor: palette.primary, color: '#fff', textAlign: 'center', padding: '0.6rem 1rem', fontSize: '0.85rem', fontWeight: 600, letterSpacing: '0.05em' }}>
-        {overrides.text}
+      <div style={{
+        backgroundColor: palette.primary,
+        color: '#ffffff',
+        textAlign: 'center',
+        padding: '0.65rem 1.25rem',
+        fontSize: '0.84rem',
+        fontWeight: 600,
+        letterSpacing: '0.06em',
+        textTransform: 'uppercase',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '0.6rem',
+        position: 'relative',
+        zIndex: 50,
+      }}>
+        <Sparkles size={14} style={{ opacity: 0.9 }} />
+        <span>{overrides.text}</span>
       </div>
     </EditableSection>
   );
@@ -101,44 +255,416 @@ export function AnnouncementBar({ text, palette }: { text: string; palette: Rest
 
 export function RestaurantNavbar({ theme }: { theme: RestaurantThemeConfig }) {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>('menu');
+  const store = useRestaurantStore();
 
   useEffect(() => {
-    const h = () => setScrolled(window.scrollY > 60);
-    window.addEventListener('scroll', h);
-    return () => window.removeEventListener('scroll', h);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 30);
+
+      const sectionIds = ['menu', 'story', 'tasting', 'gallery', 'visit'];
+      const scrollPos = window.scrollY + 160;
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPos >= top && scrollPos < top + height) {
+            setActiveSection(id);
+            break;
+          }
+        }
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = ['Menu', 'Story', 'Gallery', 'Visit'];
+  const totalCartCount = store.cart.reduce((sum, item) => sum + item.quantity, 0);
+  const navLinks = [
+    { label: 'Menu', href: '#menu', id: 'menu' },
+    { label: 'Our Story', href: '#story', id: 'story' },
+    { label: 'Experience', href: '#tasting', id: 'tasting' },
+    { label: 'Gallery', href: '#gallery', id: 'gallery' },
+    { label: 'Visit & Hours', href: '#visit', id: 'visit' },
+  ];
+
+  const scrollToSection = (e: React.MouseEvent, href: string) => {
+    e.preventDefault();
+    const id = href.replace('#', '');
+    const el = document.getElementById(id);
+    if (el) {
+      const navHeight = 80;
+      const elementPosition = el.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+      setActiveSection(id);
+    }
+    setMobileMenuOpen(false);
+  };
+
   const bg = scrolled ? theme.palette.surface : 'transparent';
-  const textColor = scrolled ? theme.palette.text : '#fff';
-  const border = scrolled ? `1px solid ${theme.palette.text}15` : 'none';
+  const textColor = scrolled ? theme.palette.text : '#ffffff';
+  const borderColor = scrolled ? (theme.palette.border || `${theme.palette.text}15`) : 'transparent';
 
   return (
     <EditableSection id="nav" elementType="nav" name="Navigation" defaultProps={{ logoText: theme.name }}>
-      <nav style={{ position: 'sticky', top: 0, left: 0, right: 0, zIndex: 100, backgroundColor: bg, borderBottom: border, backdropFilter: scrolled ? 'blur(12px)' : 'none', transition: 'all 0.35s ease', padding: '0 5%', height: '70px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <div style={{ fontFamily: theme.typography.heading, fontSize: '1.6rem', fontWeight: 900, color: scrolled ? theme.palette.primary : '#fff', letterSpacing: '-0.03em', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <a href={`/browse-templates/food-and-restaurant/${theme.category}`} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: scrolled ? theme.palette.textLight : 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 600, fontFamily: theme.typography.body }}>
-            <ChevronLeft size={18} /> Back
+      <nav style={{
+        position: 'sticky',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 100,
+        backgroundColor: bg,
+        borderBottom: `1px solid ${borderColor}`,
+        backdropFilter: scrolled ? 'blur(16px)' : 'none',
+        WebkitBackdropFilter: scrolled ? 'blur(16px)' : 'none',
+        transition: 'all 0.35s ease',
+        padding: '0 5%',
+        height: '76px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        boxShadow: scrolled ? '0 10px 30px rgba(0,0,0,0.1)' : 'none',
+      }}>
+        {/* Brand & Back Button */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+          <a
+            href={`/browse-templates/food-and-restaurant/${theme.category}`}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.4rem',
+              color: scrolled ? theme.palette.textLight : 'rgba(255,255,255,0.78)',
+              textDecoration: 'none',
+              fontSize: '0.82rem',
+              fontWeight: 600,
+              fontFamily: theme.typography.body,
+              letterSpacing: '0.04em',
+              transition: 'color 0.2s',
+            }}
+            onMouseOver={e => e.currentTarget.style.color = theme.palette.primary}
+            onMouseOut={e => e.currentTarget.style.color = scrolled ? theme.palette.textLight : 'rgba(255,255,255,0.78)'}
+          >
+            <ChevronLeft size={16} /> Catalog
           </a>
-          {useEditableOverrides('nav', {logoText: theme.name}).logoText}
+          <a
+            href="#top"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            style={{
+              fontFamily: theme.typography.heading,
+              fontSize: '1.65rem',
+              fontWeight: 800,
+              color: scrolled ? theme.palette.primary : '#ffffff',
+              letterSpacing: '-0.02em',
+              textDecoration: 'none',
+              transition: 'color 0.2s',
+            }}
+          >
+            {useEditableOverrides('nav', { logoText: theme.name }).logoText}
+          </a>
         </div>
 
-        <div style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }}>
-          {navLinks.map(link => (
-            <a key={link} href={`#${link.toLowerCase()}`} style={{ fontFamily: theme.typography.body, fontSize: '0.9rem', fontWeight: 600, color: textColor, textDecoration: 'none', textTransform: 'uppercase', letterSpacing: '0.08em', transition: 'opacity 0.2s' }}
-              onMouseOver={e => (e.currentTarget.style.opacity = '0.6')}
-              onMouseOut={e => (e.currentTarget.style.opacity = '1')}>
-              {link}
-            </a>
-          ))}
-          <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', borderRadius: '8px', padding: '0.6rem 1.4rem', fontFamily: theme.typography.body, fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem', transition: 'transform 0.2s, box-shadow 0.2s', boxShadow: `0 4px 14px ${theme.palette.primary}55` }}
-            onMouseOver={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 8px 20px ${theme.palette.primary}66`; }}
-            onMouseOut={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = `0 4px 14px ${theme.palette.primary}55`; }}>
-            <ShoppingBag size={15} /> {theme.content.ctaPrimary}
+        {/* Desktop Navigation Links */}
+        <div style={{ display: 'none', gap: '2rem', alignItems: 'center' }} className="rt-desktop-nav">
+          <style>{`
+            @media (min-width: 900px) {
+              .rt-desktop-nav { display: flex !important; }
+              .rt-mobile-toggle { display: none !important; }
+            }
+          `}</style>
+          {navLinks.map(link => {
+            const isActive = activeSection === link.id;
+            return (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={(e) => scrollToSection(e, link.href)}
+                style={{
+                  fontFamily: theme.typography.body,
+                  fontSize: '0.88rem',
+                  fontWeight: isActive ? 700 : 600,
+                  color: isActive ? theme.palette.primary : textColor,
+                  textDecoration: 'none',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.08em',
+                  transition: 'opacity 0.2s, color 0.2s',
+                  opacity: isActive ? 1 : 0.85,
+                  position: 'relative',
+                  padding: '0.4rem 0',
+                }}
+                onMouseOver={e => {
+                  e.currentTarget.style.opacity = '1';
+                  e.currentTarget.style.color = theme.palette.primary;
+                }}
+                onMouseOut={e => {
+                  e.currentTarget.style.opacity = isActive ? '1' : '0.85';
+                  e.currentTarget.style.color = isActive ? theme.palette.primary : textColor;
+                }}
+              >
+                {link.label}
+                {isActive && (
+                  <span style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    width: '18px',
+                    height: '2px',
+                    borderRadius: '2px',
+                    backgroundColor: theme.palette.primary,
+                  }} />
+                )}
+              </a>
+            );
+          })}
+
+          {/* Cart / Tasting Selection Button */}
+          <button
+            onClick={() => store.openCart()}
+            aria-label="View Order and Tasting Selection"
+            style={{
+              backgroundColor: totalCartCount > 0 ? `${theme.palette.primary}18` : 'transparent',
+              border: `1.5px solid ${totalCartCount > 0 ? theme.palette.primary : (scrolled ? `${theme.palette.text}25` : 'rgba(255,255,255,0.3)')}`,
+              color: textColor,
+              padding: '0.55rem 1rem',
+              borderRadius: '99px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.55rem',
+              fontSize: '0.85rem',
+              fontFamily: theme.typography.body,
+              fontWeight: 600,
+              position: 'relative',
+              transition: 'all 0.2s ease',
+            }}
+            onMouseOver={e => {
+              e.currentTarget.style.borderColor = theme.palette.primary;
+              e.currentTarget.style.transform = 'translateY(-1px)';
+            }}
+            onMouseOut={e => {
+              e.currentTarget.style.borderColor = totalCartCount > 0 ? theme.palette.primary : (scrolled ? `${theme.palette.text}25` : 'rgba(255,255,255,0.3)');
+              e.currentTarget.style.transform = 'none';
+            }}
+          >
+            <ShoppingBag size={16} color={totalCartCount > 0 ? theme.palette.primary : undefined} />
+            <span>Selection</span>
+            {totalCartCount > 0 && (
+              <span style={{
+                backgroundColor: theme.palette.primary,
+                color: '#fff',
+                fontSize: '0.72rem',
+                fontWeight: 800,
+                borderRadius: '99px',
+                padding: '0.12rem 0.5rem',
+                marginLeft: '0.15rem',
+                boxShadow: `0 2px 8px ${theme.palette.primary}66`,
+              }}>
+                {totalCartCount}
+              </span>
+            )}
+          </button>
+
+          {/* Primary Action Button — Opens Reservation Modal */}
+          <button
+            onClick={() => store.openReservation()}
+            style={{
+              backgroundColor: store.bookingConfirmed ? '#15803d' : theme.palette.primary,
+              color: '#ffffff',
+              border: 'none',
+              borderRadius: '8px',
+              padding: '0.7rem 1.6rem',
+              fontFamily: theme.typography.body,
+              fontWeight: 700,
+              fontSize: '0.88rem',
+              letterSpacing: '0.04em',
+              textTransform: 'uppercase',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.55rem',
+              transition: 'transform 0.2s, box-shadow 0.2s',
+              boxShadow: store.bookingConfirmed
+                ? '0 4px 16px rgba(21,128,61,0.5)'
+                : `0 4px 16px ${theme.palette.primary}55`,
+            }}
+            onMouseOver={e => {
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = store.bookingConfirmed
+                ? '0 8px 24px rgba(21,128,61,0.65)'
+                : `0 8px 24px ${theme.palette.primary}77`;
+            }}
+            onMouseOut={e => {
+              e.currentTarget.style.transform = 'none';
+              e.currentTarget.style.boxShadow = store.bookingConfirmed
+                ? '0 4px 16px rgba(21,128,61,0.5)'
+                : `0 4px 16px ${theme.palette.primary}55`;
+            }}
+          >
+            {store.bookingConfirmed ? (
+              <>
+                <CheckCircle size={15} /> Booked ({store.bookingConfirmed.time})
+              </>
+            ) : (
+              <>
+                <Calendar size={15} /> {theme.content.ctaPrimary || 'Book a Table'}
+              </>
+            )}
+          </button>
+        </div>
+
+        {/* Mobile Hamburger Button */}
+        <div className="rt-mobile-toggle" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <button
+            onClick={() => store.openCart()}
+            aria-label="View Selection"
+            style={{
+              background: 'transparent',
+              border: 'none',
+              color: textColor,
+              cursor: 'pointer',
+              position: 'relative',
+              padding: '0.5rem',
+            }}
+          >
+            <ShoppingBag size={22} color={totalCartCount > 0 ? theme.palette.primary : undefined} />
+            {totalCartCount > 0 && (
+              <span style={{
+                position: 'absolute',
+                top: 0,
+                right: 0,
+                backgroundColor: theme.palette.primary,
+                color: '#fff',
+                fontSize: '0.7rem',
+                fontWeight: 800,
+                borderRadius: '99px',
+                width: '18px',
+                height: '18px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+                {totalCartCount}
+              </span>
+            )}
+          </button>
+          <button
+            onClick={() => setMobileMenuOpen(prev => !prev)}
+            aria-label="Toggle navigation drawer"
+            style={{
+              background: 'transparent',
+              border: 'none',
+              color: textColor,
+              cursor: 'pointer',
+              padding: '0.5rem',
+            }}
+          >
+            {mobileMenuOpen ? <X size={26} /> : <MenuIcon size={26} />}
           </button>
         </div>
       </nav>
+
+      {/* Mobile Slide-Out Drawer */}
+      {mobileMenuOpen && (
+        <div style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 99,
+          backgroundColor: 'rgba(0,0,0,0.7)',
+          backdropFilter: 'blur(8px)',
+        }} onClick={() => setMobileMenuOpen(false)}>
+          <div
+            onClick={e => e.stopPropagation()}
+            style={{
+              position: 'absolute',
+              top: '76px',
+              right: 0,
+              width: '85%',
+              maxWidth: '360px',
+              backgroundColor: theme.palette.surface,
+              height: 'calc(100vh - 76px)',
+              padding: '2.5rem 2rem',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1.25rem',
+              boxShadow: '-10px 0 30px rgba(0,0,0,0.3)',
+              borderLeft: `1px solid ${theme.palette.border || `${theme.palette.text}15`}`,
+            }}
+          >
+            <div style={{
+              fontFamily: theme.typography.heading,
+              fontSize: '1.4rem',
+              fontWeight: 800,
+              color: theme.palette.primary,
+              marginBottom: '0.5rem',
+            }}>
+              {theme.name}
+            </div>
+            {navLinks.map(link => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={(e) => scrollToSection(e, link.href)}
+                style={{
+                  fontFamily: theme.typography.body,
+                  fontSize: '1.1rem',
+                  fontWeight: 600,
+                  color: activeSection === link.id ? theme.palette.primary : theme.palette.text,
+                  textDecoration: 'none',
+                  padding: '0.65rem 0',
+                  borderBottom: `1px solid ${theme.palette.text}10`,
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}
+              >
+                <span>{link.label}</span>
+                {activeSection === link.id && <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: theme.palette.primary }} />}
+              </a>
+            ))}
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                store.openReservation();
+              }}
+              style={{
+                marginTop: '1.5rem',
+                backgroundColor: store.bookingConfirmed ? '#15803d' : theme.palette.primary,
+                color: '#fff',
+                border: 'none',
+                borderRadius: '8px',
+                padding: '1rem',
+                fontFamily: theme.typography.heading,
+                fontWeight: 700,
+                fontSize: '1rem',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem',
+              }}
+            >
+              {store.bookingConfirmed ? (
+                <>
+                  <CheckCircle size={18} /> View Confirmed Table
+                </>
+              ) : (
+                <>
+                  <Calendar size={18} /> {theme.content.ctaPrimary || 'Reserve a Table'}
+                </>
+              )}
+            </button>
+          </div>
+        </div>
+      )}
     </EditableSection>
   );
 }
@@ -147,20 +673,34 @@ export function RestaurantNavbar({ theme }: { theme: RestaurantThemeConfig }) {
 
 export function RestaurantHero({ theme }: { theme: RestaurantThemeConfig }) {
   const [imgLoaded, setImgLoaded] = useState(false);
+  const store = useRestaurantStore();
   const overrides = useEditableOverrides('hero', {
     title: theme.content.heroHeadline,
     subtitle: theme.content.heroSub,
     buttonText: theme.content.ctaPrimary,
-    style_backgroundImage: theme.images.hero
+    style_backgroundImage: theme.images.hero,
   });
 
   return (
     <EditableSection id="hero" elementType="hero" name="Hero" defaultProps={overrides}>
-      <section style={{ position: 'relative', height: '100vh', minHeight: '600px', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
-        {/* Background image with Ken Burns */}
+      <header id="top" style={{
+        position: 'relative',
+        minHeight: '92vh',
+        display: 'flex',
+        alignItems: 'center',
+        overflow: 'hidden',
+        backgroundColor: theme.palette.secondary,
+      }}>
+        {/* Background Image / Video with Ken Burns subtle breathing */}
         <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
           {theme.videoSrc ? (
-            <video autoPlay loop muted playsInline style={{ width: '100%', height: '100%', objectFit: 'cover' }}>
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            >
               <source src={theme.videoSrc} type="video/mp4" />
             </video>
           ) : (
@@ -168,169 +708,800 @@ export function RestaurantHero({ theme }: { theme: RestaurantThemeConfig }) {
               src={overrides.style_backgroundImage}
               alt={theme.images.heroAlt}
               onLoad={() => setImgLoaded(true)}
-              style={{ width: '100%', height: '110%', objectFit: 'cover', objectPosition: 'center', transform: imgLoaded ? 'scale(1.05)' : 'scale(1)', transition: 'transform 8s ease-out' }}
+              style={{
+                width: '100%',
+                height: '110%',
+                objectFit: 'cover',
+                objectPosition: 'center',
+                transform: imgLoaded ? 'scale(1.04)' : 'scale(1)',
+                transition: 'transform 7s cubic-bezier(0.25, 1, 0.5, 1)',
+              }}
             />
           )}
-        <div style={{ position: 'absolute', inset: 0, background: theme.palette.heroOverlay }} />
-      </div>
-
-      {/* Content */}
-      <div style={{ position: 'relative', zIndex: 10, padding: '0 5%', maxWidth: '900px' }}>
-        <div style={{ fontFamily: theme.typography.body, fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.2em', color: theme.palette.primary, marginBottom: '1.5rem', opacity: 0.9 }}>
-          {theme.category.replace('-', ' ')} · {theme.tagline}
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            background: theme.palette.heroOverlay,
+          }} />
         </div>
-        <h1 style={{ fontFamily: theme.typography.heading, fontSize: 'clamp(3.5rem, 8vw, 7rem)', fontWeight: 900, color: '#fff', lineHeight: 0.95, marginBottom: '2rem', textShadow: '0 2px 40px rgba(0,0,0,0.3)' }}>
-          {overrides.title}
-        </h1>
-        <p style={{ fontFamily: theme.typography.body, fontSize: 'clamp(1.1rem, 2vw, 1.35rem)', color: 'rgba(255,255,255,0.88)', marginBottom: '3rem', maxWidth: '550px', lineHeight: 1.6 }}>
-          {overrides.subtitle}
-        </p>
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-          <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', borderRadius: '10px', padding: '1.1rem 2.5rem', fontFamily: theme.typography.heading, fontWeight: 800, fontSize: '1.1rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', transition: 'transform 0.2s', boxShadow: `0 8px 24px ${theme.palette.primary}66` }}
-            onMouseOver={e => e.currentTarget.style.transform = 'translateY(-3px)'}
-            onMouseOut={e => e.currentTarget.style.transform = 'none'}>
-            {overrides.buttonText} <ArrowRight size={18} />
-          </button>
-          <button style={{ backgroundColor: 'transparent', color: '#fff', border: '2px solid rgba(255,255,255,0.6)', borderRadius: '10px', padding: '1.1rem 2.5rem', fontFamily: theme.typography.heading, fontWeight: 700, fontSize: '1.1rem', cursor: 'pointer', transition: 'background 0.2s, border-color 0.2s' }}
-            onMouseOver={e => { e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.15)'; e.currentTarget.style.borderColor = '#fff'; }}
-            onMouseOut={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.6)'; }}>
-            {theme.content.ctaSecondary}
-          </button>
-        </div>
-      </div>
 
-      {/* Scroll indicator */}
-      <div style={{ position: 'absolute', bottom: '2rem', left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
-        <div style={{ width: '1px', height: '60px', background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.6))', animation: 'none' }} />
-      </div>
-    </section>
+        {/* Hero Narrative Content */}
+        <div style={{
+          position: 'relative',
+          zIndex: 10,
+          padding: '4rem 6%',
+          maxWidth: '960px',
+        }}>
+          {/* Tagline / Eyebrow */}
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.6rem',
+            fontFamily: theme.typography.body,
+            fontSize: '0.85rem',
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '0.22em',
+            color: theme.palette.primary,
+            marginBottom: '1.75rem',
+            backgroundColor: 'rgba(0,0,0,0.4)',
+            padding: '0.45rem 1.1rem',
+            borderRadius: '99px',
+            backdropFilter: 'blur(8px)',
+          }}>
+            <Sparkles size={14} />
+            <span>{theme.category.replace('-', ' ')} · {theme.tagline}</span>
+          </div>
+
+          {/* Large Headline */}
+          <h1 style={{
+            fontFamily: theme.typography.heading,
+            fontSize: 'clamp(3.2rem, 7.5vw, 6.5rem)',
+            fontWeight: 900,
+            color: '#ffffff',
+            lineHeight: 1.02,
+            marginBottom: '1.75rem',
+            textShadow: '0 4px 30px rgba(0,0,0,0.5)',
+            letterSpacing: '-0.02em',
+          }}>
+            {overrides.title}
+          </h1>
+
+          {/* Subtitle */}
+          <p style={{
+            fontFamily: theme.typography.body,
+            fontSize: 'clamp(1.1rem, 2vw, 1.35rem)',
+            color: 'rgba(255,255,255,0.92)',
+            marginBottom: '2.75rem',
+            maxWidth: '640px',
+            lineHeight: 1.65,
+            textShadow: '0 2px 16px rgba(0,0,0,0.4)',
+          }}>
+            {overrides.subtitle}
+          </p>
+
+          {/* Interactive CTAs */}
+          <div style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap', alignItems: 'center' }}>
+            <button
+              onClick={() => store.openReservation()}
+              style={{
+                backgroundColor: theme.palette.primary,
+                color: '#ffffff',
+                border: 'none',
+                borderRadius: '10px',
+                padding: '1.2rem 2.6rem',
+                fontFamily: theme.typography.heading,
+                fontWeight: 800,
+                fontSize: '1.05rem',
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.6rem',
+                transition: 'transform 0.2s, box-shadow 0.2s',
+                boxShadow: `0 8px 30px ${theme.palette.primary}77`,
+              }}
+              onMouseOver={e => {
+                e.currentTarget.style.transform = 'translateY(-3px)';
+                e.currentTarget.style.boxShadow = `0 12px 36px ${theme.palette.primary}88`;
+              }}
+              onMouseOut={e => {
+                e.currentTarget.style.transform = 'none';
+                e.currentTarget.style.boxShadow = `0 8px 30px ${theme.palette.primary}77`;
+              }}
+            >
+              <Calendar size={18} />
+              <span>{overrides.buttonText || 'Book a Table'}</span>
+              <ArrowRight size={18} />
+            </button>
+
+            <a
+              href="#menu"
+              style={{
+                backgroundColor: 'rgba(255,255,255,0.08)',
+                color: '#ffffff',
+                border: '1.5px solid rgba(255,255,255,0.55)',
+                borderRadius: '10px',
+                padding: '1.2rem 2.6rem',
+                fontFamily: theme.typography.heading,
+                fontWeight: 700,
+                fontSize: '1.05rem',
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                backdropFilter: 'blur(8px)',
+                transition: 'background 0.2s, border-color 0.2s, transform 0.2s',
+              }}
+              onMouseOver={e => {
+                e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.2)';
+                e.currentTarget.style.borderColor = '#ffffff';
+                e.currentTarget.style.transform = 'translateY(-2px)';
+              }}
+              onMouseOut={e => {
+                e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.08)';
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.55)';
+                e.currentTarget.style.transform = 'none';
+              }}
+            >
+              <Utensils size={18} /> {theme.content.ctaSecondary || 'Explore Menu'}
+            </a>
+          </div>
+        </div>
+
+        {/* Scroll indicator prompt */}
+        <div style={{
+          position: 'absolute',
+          bottom: '2.5rem',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '0.5rem',
+          opacity: 0.7,
+        }}>
+          <span style={{
+            fontSize: '0.72rem',
+            textTransform: 'uppercase',
+            letterSpacing: '0.2em',
+            color: '#ffffff',
+            fontWeight: 700,
+          }}>
+            Scroll to Discover
+          </span>
+          <div style={{
+            width: '1px',
+            height: '40px',
+            background: 'linear-gradient(to bottom, rgba(255,255,255,0.8), transparent)',
+          }} />
+        </div>
+      </header>
     </EditableSection>
   );
 }
 
-// ─── FEATURES STRIP ──────────────────────────────────────────────────────────
+// ─── FEATURES & PHILOSOPHY STRIP ─────────────────────────────────────────────
 
 export function FeaturesStrip({ theme }: { theme: RestaurantThemeConfig }) {
-  if (!theme.features?.length) return null;
+  const defaultFeatures = [
+    'Seasonal Tasting Menus',
+    'Curated Cellar of 800+ Labels',
+    'Open Hearth Fire Cooking',
+    'Chef Counter & Private Salon',
+  ];
+  const list = theme.features?.length ? theme.features : defaultFeatures;
+
   return (
-    <div style={{ backgroundColor: theme.palette.primary, padding: '1.5rem 5%', display: 'flex', justifyContent: 'center', gap: '3rem', flexWrap: 'wrap' }}>
-      {theme.features.map((f, i) => (
-        <div key={i} style={{ color: '#fff', fontFamily: theme.typography.body, fontWeight: 700, fontSize: '0.95rem', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-          ✦ {f}
+    <div style={{
+      backgroundColor: theme.palette.surface,
+      borderTop: `1px solid ${theme.palette.border || `${theme.palette.text}12`}`,
+      borderBottom: `1px solid ${theme.palette.border || `${theme.palette.text}12`}`,
+      padding: '1.4rem 5%',
+      display: 'flex',
+      justifyContent: 'center',
+      gap: '3.5rem',
+      flexWrap: 'wrap',
+    }}>
+      {list.map((f, i) => (
+        <div key={i} style={{
+          color: theme.palette.text,
+          fontFamily: theme.typography.body,
+          fontWeight: 700,
+          fontSize: '0.88rem',
+          textTransform: 'uppercase',
+          letterSpacing: '0.08em',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.6rem',
+        }}>
+          <Sparkles size={14} color={theme.palette.primary} />
+          <span>{f}</span>
         </div>
       ))}
     </div>
   );
 }
 
-// ─── INTERACTIVE MENU ────────────────────────────────────────────────────────
+// ─── INTERACTIVE MENU WITH QUICK-VIEW & SELECTION ───────────────────────────
 
 export function RestaurantMenu({ theme }: { theme: RestaurantThemeConfig }) {
   const [activeTab, setActiveTab] = useState(0);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
+  const [addedItem, setAddedItem] = useState<string | null>(null);
+  const store = useRestaurantStore();
   const ref = useReveal();
 
-  const overrides = useEditableOverrides('prod-grid', {title: 'What We Serve'});
+  const overrides = useEditableOverrides('prod-grid', { title: 'Curated Menus & Offerings' });
+
+  const handleAddItem = (item: MenuItem, e: React.MouseEvent) => {
+    e.stopPropagation();
+    store.addToCart(item);
+    setAddedItem(item.name);
+    setTimeout(() => setAddedItem(null), 1800);
+  };
+
   return (
     <EditableSection id="prod-grid" elementType="prod-grid" name="Menu Section" defaultProps={overrides}>
-    <section id="menu" style={{ backgroundColor: theme.palette.background, padding: '7rem 5%', color: theme.palette.text }}>
-      <div ref={ref as any} style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <div style={{ fontFamily: theme.typography.body, fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.2em', color: theme.palette.primary, marginBottom: '1rem' }}>Our Menu</div>
-          <h2 style={{ fontFamily: theme.typography.heading, fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 900, lineHeight: 1, color: theme.palette.text, margin: 0 }}>
-            {overrides.title}
-          </h2>
-        </div>
-
-        {/* Tabs */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.75rem', marginBottom: '4rem', flexWrap: 'wrap' }}>
-          {theme.menu.map((cat, i) => (
-            <button key={i} onClick={() => setActiveTab(i)} style={{
-              padding: '0.75rem 2rem', borderRadius: '99px', border: activeTab === i ? 'none' : `2px solid ${theme.palette.text}22`,
-              backgroundColor: activeTab === i ? theme.palette.primary : 'transparent',
-              color: activeTab === i ? '#fff' : theme.palette.textLight,
-              fontFamily: theme.typography.body, fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer', transition: 'all 0.25s'
+      <section id="menu" style={{
+        backgroundColor: theme.palette.background,
+        padding: '7rem 5%',
+        color: theme.palette.text,
+        scrollMarginTop: '80px',
+      }}>
+        <div ref={ref as any} style={{ maxWidth: '1240px', margin: '0 auto' }}>
+          {/* Header */}
+          <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+            <div style={{
+              fontFamily: theme.typography.body,
+              fontSize: '0.82rem',
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: '0.22em',
+              color: theme.palette.primary,
+              marginBottom: '0.9rem',
             }}>
-              {cat.tab}
-            </button>
-          ))}
-        </div>
-
-        {/* Items Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.5rem' }}>
-          {theme.menu[activeTab].items.map((item, i) => (
-            <div key={i}
-              onMouseEnter={() => setHoveredItem(i)}
-              onMouseLeave={() => setHoveredItem(null)}
-              style={{
-                backgroundColor: theme.palette.surface, borderRadius: '16px', padding: '2rem',
-                border: hoveredItem === i ? `2px solid ${theme.palette.primary}` : `2px solid transparent`,
-                transition: 'transform 0.3s, border-color 0.3s, box-shadow 0.3s',
-                transform: hoveredItem === i ? 'translateY(-6px)' : 'none',
-                boxShadow: hoveredItem === i ? `0 20px 40px ${theme.palette.primary}22` : '0 2px 12px rgba(0,0,0,0.06)',
-                cursor: 'pointer'
-              }}>
-              {item.image && (
-                <div style={{ height: '200px', marginBottom: '1.5rem', borderRadius: '10px', overflow: 'hidden' }}>
-                  <img src={item.image} alt={item.imageAlt || item.name} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.4s', transform: hoveredItem === i ? 'scale(1.05)' : 'scale(1)' }} />
-                </div>
-              )}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
-                <h3 style={{ fontFamily: theme.typography.heading, fontSize: '1.2rem', fontWeight: 800, color: theme.palette.text, margin: 0, flex: 1, paddingRight: '1rem' }}>{item.name}</h3>
-                <span style={{ fontFamily: theme.typography.heading, fontSize: '1.3rem', fontWeight: 900, color: theme.palette.primary, whiteSpace: 'nowrap' }}>{item.price}</span>
-              </div>
-              <p style={{ fontFamily: theme.typography.body, fontSize: '0.95rem', color: theme.palette.textLight, margin: 0, lineHeight: 1.5 }}>{item.desc}</p>
-              {item.tags && (
-                <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem', flexWrap: 'wrap' }}>
-                  {item.tags.map((tag, ti) => (
-                    <span key={ti} style={{ padding: '0.25rem 0.75rem', borderRadius: '99px', backgroundColor: `${theme.palette.primary}18`, color: theme.palette.primary, fontFamily: theme.typography.body, fontSize: '0.75rem', fontWeight: 700 }}>{tag}</span>
-                  ))}
-                </div>
-              )}
-              {hoveredItem === i && (
-                <button style={{ marginTop: '1.25rem', width: '100%', backgroundColor: theme.palette.primary, color: '#fff', border: 'none', borderRadius: '8px', padding: '0.75rem', fontFamily: theme.typography.body, fontWeight: 700, cursor: 'pointer', animation: 'fadeIn 0.2s ease' }}>
-                  Add to Order →
-                </button>
-              )}
+              Culinary Repertoire
             </div>
-          ))}
+            <h2 style={{
+              fontFamily: theme.typography.heading,
+              fontSize: 'clamp(2.5rem, 5vw, 4.2rem)',
+              fontWeight: 900,
+              lineHeight: 1.05,
+              color: theme.palette.text,
+              margin: '0 0 1rem 0',
+            }}>
+              {overrides.title}
+            </h2>
+            <p style={{
+              fontFamily: theme.typography.body,
+              fontSize: '1.05rem',
+              color: theme.palette.textLight,
+              maxWidth: '600px',
+              margin: '0 auto',
+              lineHeight: 1.6,
+            }}>
+              Sourced daily from artisanal fisheries, heritage farms, and our private kitchen garden.
+            </p>
+          </div>
+
+          {/* Category Tabs */}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '0.75rem',
+            marginBottom: '3.5rem',
+            flexWrap: 'wrap',
+          }}>
+            {theme.menu.map((cat, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveTab(i)}
+                style={{
+                  padding: '0.75rem 2rem',
+                  borderRadius: '99px',
+                  border: activeTab === i ? 'none' : `1.5px solid ${theme.palette.text}22`,
+                  backgroundColor: activeTab === i ? theme.palette.primary : 'transparent',
+                  color: activeTab === i ? '#ffffff' : theme.palette.textLight,
+                  fontFamily: theme.typography.body,
+                  fontWeight: 700,
+                  fontSize: '0.92rem',
+                  cursor: 'pointer',
+                  transition: 'all 0.25s',
+                  boxShadow: activeTab === i ? `0 4px 18px ${theme.palette.primary}44` : 'none',
+                }}
+              >
+                {cat.tab}
+              </button>
+            ))}
+          </div>
+
+          {/* Dish Cards Grid */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(330px, 1fr))',
+            gap: '2rem',
+          }}>
+            {theme.menu[activeTab]?.items.map((item, i) => (
+              <article
+                key={i}
+                onClick={() => store.openDishModal(item)}
+                onMouseEnter={() => setHoveredItem(i)}
+                onMouseLeave={() => setHoveredItem(null)}
+                style={{
+                  backgroundColor: theme.palette.surface,
+                  borderRadius: '18px',
+                  padding: '2rem',
+                  border: hoveredItem === i
+                    ? `1.5px solid ${theme.palette.primary}`
+                    : `1.5px solid ${theme.palette.border || `${theme.palette.text}12`}`,
+                  transition: 'transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s, border-color 0.3s',
+                  transform: hoveredItem === i ? 'translateY(-6px)' : 'none',
+                  boxShadow: hoveredItem === i
+                    ? `0 20px 40px ${theme.palette.primary}20`
+                    : '0 4px 16px rgba(0,0,0,0.04)',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  position: 'relative',
+                }}
+              >
+                <div>
+                  {item.image && (
+                    <div style={{
+                      height: '210px',
+                      marginBottom: '1.5rem',
+                      borderRadius: '12px',
+                      overflow: 'hidden',
+                      position: 'relative',
+                    }}>
+                      <img
+                        src={item.image}
+                        alt={item.imageAlt || item.name}
+                        loading="lazy"
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          transition: 'transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)',
+                          transform: hoveredItem === i ? 'scale(1.06)' : 'scale(1)',
+                        }}
+                      />
+                      <div style={{
+                        position: 'absolute',
+                        top: '10px',
+                        right: '10px',
+                        backgroundColor: 'rgba(0,0,0,0.65)',
+                        color: '#fff',
+                        backdropFilter: 'blur(6px)',
+                        padding: '0.3rem 0.7rem',
+                        borderRadius: '99px',
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.3rem',
+                      }}>
+                        <Info size={13} /> Details
+                      </div>
+                    </div>
+                  )}
+
+                  <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'baseline',
+                    marginBottom: '0.75rem',
+                  }}>
+                    <h3 style={{
+                      fontFamily: theme.typography.heading,
+                      fontSize: '1.28rem',
+                      fontWeight: 800,
+                      color: theme.palette.text,
+                      margin: 0,
+                      flex: 1,
+                      paddingRight: '1rem',
+                      lineHeight: 1.25,
+                    }}>
+                      {item.name}
+                    </h3>
+                    <span style={{
+                      fontFamily: theme.typography.heading,
+                      fontSize: '1.35rem',
+                      fontWeight: 900,
+                      color: theme.palette.primary,
+                      whiteSpace: 'nowrap',
+                    }}>
+                      {item.price}
+                    </span>
+                  </div>
+
+                  <p style={{
+                    fontFamily: theme.typography.body,
+                    fontSize: '0.94rem',
+                    color: theme.palette.textLight,
+                    margin: '0 0 1rem 0',
+                    lineHeight: 1.55,
+                  }}>
+                    {item.desc}
+                  </p>
+
+                  {item.winePairing && (
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      fontSize: '0.82rem',
+                      color: theme.palette.primary,
+                      fontWeight: 600,
+                      marginBottom: '1rem',
+                      fontStyle: 'italic',
+                    }}>
+                      <Wine size={14} /> Pairing: {item.winePairing}
+                    </div>
+                  )}
+
+                  {item.tags && (
+                    <div style={{ display: 'flex', gap: '0.45rem', flexWrap: 'wrap' }}>
+                      {item.tags.map((tag, ti) => (
+                        <span
+                          key={ti}
+                          style={{
+                            padding: '0.2rem 0.65rem',
+                            borderRadius: '99px',
+                            backgroundColor: `${theme.palette.primary}15`,
+                            color: theme.palette.primary,
+                            fontFamily: theme.typography.body,
+                            fontSize: '0.74rem',
+                            fontWeight: 700,
+                          }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Actions */}
+                <div style={{ marginTop: '1.5rem', display: 'flex', gap: '0.75rem' }}>
+                  <button
+                    onClick={(e) => handleAddItem(item, e)}
+                    style={{
+                      flex: 1,
+                      backgroundColor: addedItem === item.name ? '#16a34a' : theme.palette.primary,
+                      color: '#ffffff',
+                      border: 'none',
+                      borderRadius: '8px',
+                      padding: '0.7rem 1rem',
+                      fontFamily: theme.typography.body,
+                      fontWeight: 700,
+                      fontSize: '0.86rem',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '0.4rem',
+                      transition: 'background-color 0.25s, transform 0.2s',
+                    }}
+                  >
+                    {addedItem === item.name ? (
+                      <>
+                        <CheckCircle size={15} /> Added to Selection
+                      </>
+                    ) : (
+                      <>
+                        <Plus size={15} /> Add to Tasting
+                      </>
+                    )}
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      store.openDishModal(item);
+                    }}
+                    style={{
+                      backgroundColor: 'transparent',
+                      border: `1px solid ${theme.palette.text}25`,
+                      color: theme.palette.text,
+                      borderRadius: '8px',
+                      padding: '0.7rem',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                    title="View dish tasting notes"
+                  >
+                    <Info size={16} />
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
     </EditableSection>
   );
 }
 
-// ─── STORY SECTION ───────────────────────────────────────────────────────────
+// ─── TASTING MENU EXPERIENCE (COURSE PROGRESSION) ───────────────────────────
 
-export function RestaurantStory({ theme }: { theme: RestaurantThemeConfig }) {
+export function TastingMenuExperience({ theme }: { theme: RestaurantThemeConfig }) {
+  const store = useRestaurantStore();
   const ref = useReveal();
-  const imgRef = useReveal(150);
+  const [addedCourse, setAddedCourse] = useState<number | null>(null);
+
+  const defaultCourses: TastingCourse[] = [
+    {
+      courseNumber: '01',
+      title: 'The Prelude',
+      dishName: 'Ossetra Caviar & Smoked Dashi Tartlet',
+      description: 'Hand-pressed buckwheat tart, crème fraîche infused with Meyer lemon, oscietra sturgeon caviar, sea grapes.',
+      winePairing: 'Champagne Jacques Selosse ‘Initial’ Brut NV',
+      wineOrigin: 'Avize, Côte des Blancs, France',
+    },
+    {
+      courseNumber: '02',
+      title: 'From the Depths',
+      dishName: 'Live Bluefin Otoro & Charred Kelp Oil',
+      description: 'Gently cured line-caught otoro, winter white truffle emulsion, pickled sea buckthorn, sea fennel.',
+      winePairing: 'Domaine Leflaive Puligny-Montrachet 2021',
+      wineOrigin: 'Burgundy, France',
+    },
+    {
+      courseNumber: '03',
+      title: 'Earth & Fire',
+      dishName: '45-Day Dry-Aged Wagyu BMS 11 over Binchotan',
+      description: 'Seared on open binchotan coals, roasted celeriac purée, black garlic gastrique, smoked bone marrow glaze.',
+      winePairing: 'Château Margaux Premier Grand Cru Classé 2015',
+      wineOrigin: 'Margaux, Bordeaux, France',
+    },
+    {
+      courseNumber: '04',
+      title: 'The Climax',
+      dishName: 'Smoked Single-Origin Cocoa & Truffle Ganache',
+      description: 'Valrhona Grand Cru 72%, toasted malt gelato, aged balsamic caramel, gold leaf flakes.',
+      winePairing: 'Taylor Fladgate 40-Year-Old Tawny Port',
+      wineOrigin: 'Douro Valley, Portugal',
+    },
+  ];
+
+  const courses = theme.tastingCourses?.length ? theme.tastingCourses : defaultCourses;
+
+  const handleAddCourse = (course: TastingCourse, idx: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    store.addToCart({
+      name: `Course ${course.courseNumber}: ${course.dishName}`,
+      price: '$45',
+      desc: `${course.description} | Wine: ${course.winePairing}`,
+      chefNote: course.title,
+    });
+    setAddedCourse(idx);
+    setTimeout(() => setAddedCourse(null), 1800);
+  };
 
   return (
-    <section id="story" style={{ backgroundColor: theme.palette.secondary, color: '#fff', padding: '7rem 5%' }}>
-      <div style={{ maxWidth: '1300px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '5rem', alignItems: 'center' }}>
-        {/* Image */}
-        <div ref={imgRef as any} style={{ position: 'relative' }}>
-          <img src={theme.images.story} alt={theme.images.storyAlt} style={{ width: '100%', borderRadius: '20px', display: 'block', aspectRatio: '4/5', objectFit: 'cover' }} />
-          {/* Decorative border */}
-          <div style={{ position: 'absolute', inset: '-16px', border: `3px solid ${theme.palette.primary}`, borderRadius: '28px', pointerEvents: 'none' }} />
+    <section id="tasting" style={{
+      backgroundColor: theme.palette.secondary,
+      color: '#ffffff',
+      padding: '7rem 5%',
+      position: 'relative',
+      overflow: 'hidden',
+      scrollMarginTop: '80px',
+    }}>
+      <div ref={ref as any} style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        <div style={{ textAlign: 'center', marginBottom: '4.5rem' }}>
+          <div style={{
+            fontFamily: theme.typography.body,
+            fontSize: '0.82rem',
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '0.22em',
+            color: theme.palette.primary,
+            marginBottom: '0.9rem',
+          }}>
+            Chef's Grand Degustation
+          </div>
+          <h2 style={{
+            fontFamily: theme.typography.heading,
+            fontSize: 'clamp(2.5rem, 5vw, 4.2rem)',
+            fontWeight: 900,
+            lineHeight: 1.05,
+            color: '#ffffff',
+            margin: '0 0 1.25rem 0',
+          }}>
+            The Evening Tasting Journey
+          </h2>
+          <p style={{
+            fontFamily: theme.typography.body,
+            fontSize: '1.1rem',
+            color: 'rgba(255,255,255,0.82)',
+            maxWidth: '650px',
+            margin: '0 auto',
+            lineHeight: 1.65,
+          }}>
+            An intentional progression of flavor, texture, temperature, and emotion. Accompanied by our Head Sommelier's cellar pairings.
+          </p>
         </div>
 
-        {/* Text */}
-        <div ref={ref as any}>
-          <div style={{ fontFamily: theme.typography.body, fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.2em', color: theme.palette.primary, marginBottom: '1rem' }}>Our Story</div>
-          <h2 style={{ fontFamily: theme.typography.heading, fontSize: 'clamp(2.5rem, 4vw, 3.5rem)', fontWeight: 900, lineHeight: 1.1, marginBottom: '2rem', color: '#fff' }}>
-            {theme.content.storyTitle}
-          </h2>
-          {theme.content.storyBody.map((para, i) => (
-            <p key={i} style={{ fontFamily: theme.typography.body, fontSize: '1.05rem', lineHeight: 1.8, color: 'rgba(255,255,255,0.8)', marginBottom: '1.25rem' }}>{para}</p>
+        {/* Course Cards */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '2rem',
+        }}>
+          {courses.map((c, i) => (
+            <div
+              key={i}
+              style={{
+                backgroundColor: 'rgba(255,255,255,0.04)',
+                border: `1px solid ${theme.palette.primary}44`,
+                borderRadius: '16px',
+                padding: '2.5rem 2rem',
+                backdropFilter: 'blur(10px)',
+                position: 'relative',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                transition: 'transform 0.3s, border-color 0.3s',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.transform = 'translateY(-6px)';
+                e.currentTarget.style.borderColor = theme.palette.primary;
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.transform = 'none';
+                e.currentTarget.style.borderColor = `${theme.palette.primary}44`;
+              }}
+            >
+              <div>
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'baseline',
+                  marginBottom: '1.25rem',
+                }}>
+                  <span style={{
+                    fontFamily: theme.typography.heading,
+                    fontSize: '2rem',
+                    fontWeight: 900,
+                    color: theme.palette.primary,
+                  }}>
+                    {c.courseNumber}
+                  </span>
+                  <span style={{
+                    fontFamily: theme.typography.body,
+                    fontSize: '0.8rem',
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.12em',
+                    color: 'rgba(255,255,255,0.6)',
+                  }}>
+                    {c.title}
+                  </span>
+                </div>
+
+                <h3 style={{
+                  fontFamily: theme.typography.heading,
+                  fontSize: '1.35rem',
+                  fontWeight: 800,
+                  color: '#ffffff',
+                  marginBottom: '0.85rem',
+                  lineHeight: 1.3,
+                }}>
+                  {c.dishName}
+                </h3>
+
+                <p style={{
+                  fontFamily: theme.typography.body,
+                  fontSize: '0.94rem',
+                  color: 'rgba(255,255,255,0.78)',
+                  lineHeight: 1.6,
+                  marginBottom: '1.75rem',
+                }}>
+                  {c.description}
+                </p>
+              </div>
+
+              <div>
+                <div style={{
+                  borderTop: '1px solid rgba(255,255,255,0.12)',
+                  paddingTop: '1.25rem',
+                }}>
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    color: theme.palette.primary,
+                    fontSize: '0.84rem',
+                    fontWeight: 700,
+                    marginBottom: '0.35rem',
+                  }}>
+                    <Wine size={15} />
+                    <span>Sommelier Pairing</span>
+                  </div>
+                  <div style={{ fontSize: '0.92rem', color: '#ffffff', fontWeight: 600 }}>
+                    {c.winePairing}
+                  </div>
+                  <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>
+                    {c.wineOrigin}
+                  </div>
+                </div>
+
+                {/* Interactive Add Course Button */}
+                <div style={{ marginTop: '1.25rem' }}>
+                  <button
+                    onClick={(e) => handleAddCourse(c, i, e)}
+                    style={{
+                      width: '100%',
+                      backgroundColor: addedCourse === i ? '#16a34a' : `${theme.palette.primary}20`,
+                      border: `1.5px solid ${addedCourse === i ? '#16a34a' : theme.palette.primary}`,
+                      color: addedCourse === i ? '#ffffff' : theme.palette.primary,
+                      borderRadius: '8px',
+                      padding: '0.65rem 1rem',
+                      fontFamily: theme.typography.body,
+                      fontWeight: 700,
+                      fontSize: '0.84rem',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '0.45rem',
+                      transition: 'all 0.2s',
+                    }}
+                    onMouseOver={e => {
+                      if (addedCourse !== i) {
+                        e.currentTarget.style.backgroundColor = theme.palette.primary;
+                        e.currentTarget.style.color = '#ffffff';
+                      }
+                    }}
+                    onMouseOut={e => {
+                      if (addedCourse !== i) {
+                        e.currentTarget.style.backgroundColor = `${theme.palette.primary}20`;
+                        e.currentTarget.style.color = theme.palette.primary;
+                      }
+                    }}
+                  >
+                    {addedCourse === i ? (
+                      <>
+                        <CheckCircle size={15} /> Added to Selection
+                      </>
+                    ) : (
+                      <>
+                        <Plus size={15} /> Add Course to Selection
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+            </div>
           ))}
-          <button style={{ marginTop: '1rem', backgroundColor: 'transparent', color: '#fff', border: `2px solid ${theme.palette.primary}`, borderRadius: '10px', padding: '1rem 2.5rem', fontFamily: theme.typography.body, fontWeight: 700, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', transition: 'background 0.2s' }}
-            onMouseOver={e => e.currentTarget.style.backgroundColor = theme.palette.primary}
-            onMouseOut={e => e.currentTarget.style.backgroundColor = 'transparent'}>
-            Learn More <ArrowRight size={16} />
+        </div>
+
+        <div style={{ textAlign: 'center', marginTop: '4rem' }}>
+          <button
+            onClick={() => store.openReservation()}
+            style={{
+              backgroundColor: theme.palette.primary,
+              color: '#ffffff',
+              border: 'none',
+              borderRadius: '10px',
+              padding: '1.2rem 3rem',
+              fontFamily: theme.typography.heading,
+              fontWeight: 800,
+              fontSize: '1.05rem',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.6rem',
+              boxShadow: `0 8px 30px ${theme.palette.primary}66`,
+              transition: 'transform 0.2s',
+            }}
+            onMouseOver={e => e.currentTarget.style.transform = 'translateY(-3px)'}
+            onMouseOut={e => e.currentTarget.style.transform = 'none'}
+          >
+            <Calendar size={18} /> Reserve This Tasting Menu Experience
           </button>
         </div>
       </div>
@@ -338,55 +1509,395 @@ export function RestaurantStory({ theme }: { theme: RestaurantThemeConfig }) {
   );
 }
 
-// ─── VIDEO-LIKE PROMO SECTION ─────────────────────────────────────────────────
+// ─── CHEF STORY & CULINARY PHILOSOPHY ───────────────────────────────────────
+
+export function RestaurantStory({ theme }: { theme: RestaurantThemeConfig }) {
+  const store = useRestaurantStore();
+  const ref = useReveal();
+  const imgRef = useReveal(120);
+
+  return (
+    <section id="story" style={{
+      backgroundColor: theme.palette.surface,
+      color: theme.palette.text,
+      padding: '7rem 5%',
+      borderTop: `1px solid ${theme.palette.border || `${theme.palette.text}10`}`,
+      scrollMarginTop: '80px',
+    }}>
+      <div style={{
+        maxWidth: '1280px',
+        margin: '0 auto',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
+        gap: '5rem',
+        alignItems: 'center',
+      }}>
+        {/* Visual Frame */}
+        <div ref={imgRef as any} style={{ position: 'relative' }}>
+          <div style={{
+            borderRadius: '20px',
+            overflow: 'hidden',
+            boxShadow: '0 24px 60px rgba(0,0,0,0.18)',
+            aspectRatio: '4/5',
+          }}>
+            <img
+              src={theme.images.story}
+              alt={theme.images.storyAlt}
+              loading="lazy"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          </div>
+          {/* Subtle Decorative Golden Border Frame */}
+          <div style={{
+            position: 'absolute',
+            inset: '-16px',
+            border: `2px solid ${theme.palette.primary}`,
+            borderRadius: '26px',
+            pointerEvents: 'none',
+            opacity: 0.75,
+          }} />
+
+          {/* Floating Accolade Badge */}
+          <div style={{
+            position: 'absolute',
+            bottom: '24px',
+            right: '-12px',
+            backgroundColor: theme.palette.primary,
+            color: '#fff',
+            borderRadius: '12px',
+            padding: '1rem 1.4rem',
+            boxShadow: '0 12px 30px rgba(0,0,0,0.25)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.75rem',
+          }}>
+            <Award size={26} />
+            <div>
+              <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700 }}>Recognised By</div>
+              <div style={{ fontFamily: theme.typography.heading, fontSize: '1rem', fontWeight: 800 }}>Michelin & World's 50 Best</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Narrative */}
+        <div ref={ref as any}>
+          <div style={{
+            fontFamily: theme.typography.body,
+            fontSize: '0.82rem',
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '0.22em',
+            color: theme.palette.primary,
+            marginBottom: '0.9rem',
+          }}>
+            Philosophy & Lineage
+          </div>
+          <h2 style={{
+            fontFamily: theme.typography.heading,
+            fontSize: 'clamp(2.4rem, 4.5vw, 3.8rem)',
+            fontWeight: 900,
+            lineHeight: 1.1,
+            marginBottom: '1.75rem',
+            color: theme.palette.text,
+          }}>
+            {theme.content.storyTitle}
+          </h2>
+
+          {theme.content.storyBody.map((para, i) => (
+            <p
+              key={i}
+              style={{
+                fontFamily: theme.typography.body,
+                fontSize: '1.08rem',
+                lineHeight: 1.8,
+                color: theme.palette.textLight,
+                marginBottom: '1.4rem',
+              }}
+            >
+              {para}
+            </p>
+          ))}
+
+          {theme.content.chefQuote && (
+            <blockquote style={{
+              margin: '2rem 0',
+              paddingLeft: '1.5rem',
+              borderLeft: `3px solid ${theme.palette.primary}`,
+              fontFamily: theme.typography.heading,
+              fontSize: '1.15rem',
+              fontStyle: 'italic',
+              color: theme.palette.text,
+              lineHeight: 1.6,
+            }}>
+              "{theme.content.chefQuote}"
+              <footer style={{
+                marginTop: '0.6rem',
+                fontSize: '0.88rem',
+                fontStyle: 'normal',
+                fontWeight: 700,
+                color: theme.palette.primary,
+              }}>
+                — {theme.content.chefName || 'Executive Chef'}, {theme.content.chefTitle || 'Maître Culinaire'}
+              </footer>
+            </blockquote>
+          )}
+
+          <div style={{ marginTop: '2.5rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+            <button
+              onClick={() => store.openReservation()}
+              style={{
+                backgroundColor: theme.palette.primary,
+                color: '#ffffff',
+                border: 'none',
+                borderRadius: '10px',
+                padding: '1.1rem 2.4rem',
+                fontFamily: theme.typography.heading,
+                fontWeight: 800,
+                fontSize: '1rem',
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                transition: 'transform 0.2s, box-shadow 0.2s',
+                boxShadow: `0 6px 20px ${theme.palette.primary}55`,
+              }}
+              onMouseOver={e => e.currentTarget.style.transform = 'translateY(-2px)'}
+              onMouseOut={e => e.currentTarget.style.transform = 'none'}
+            >
+              Reserve a Table <ArrowRight size={17} />
+            </button>
+            <a
+              href="#visit"
+              style={{
+                backgroundColor: 'transparent',
+                color: theme.palette.text,
+                border: `1.5px solid ${theme.palette.text}33`,
+                borderRadius: '10px',
+                padding: '1.1rem 2.4rem',
+                fontFamily: theme.typography.heading,
+                fontWeight: 700,
+                fontSize: '1rem',
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                transition: 'border-color 0.2s',
+              }}
+              onMouseOver={e => e.currentTarget.style.borderColor = theme.palette.primary}
+              onMouseOut={e => e.currentTarget.style.borderColor = `${theme.palette.text}33`}
+            >
+              Location & Hours
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── CINEMATIC PROMO SECTION ────────────────────────────────────────────────
 
 export function PromoSection({ theme }: { theme: RestaurantThemeConfig }) {
+  const store = useRestaurantStore();
   const ref = useReveal();
+
   return (
-    <section style={{ position: 'relative', padding: '10rem 5%', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
-      {/* Parallax bg image */}
-      <div style={{ position: 'absolute', inset: '-10%', backgroundImage: `url(${theme.images.promo})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed', filter: 'brightness(0.35)' }} />
-      <div ref={ref as any} style={{ position: 'relative', zIndex: 10, maxWidth: '800px' }}>
-        <h2 style={{ fontFamily: theme.typography.heading, fontSize: 'clamp(3rem, 6vw, 5.5rem)', fontWeight: 900, color: '#fff', lineHeight: 1, marginBottom: '2rem' }}>
+    <section style={{
+      position: 'relative',
+      padding: '10rem 5%',
+      overflow: 'hidden',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      textAlign: 'center',
+    }}>
+      {/* Background with dark overlay */}
+      <div style={{ position: 'absolute', inset: 0 }}>
+        <img
+          src={theme.images.promo}
+          alt={theme.images.promoAlt}
+          loading="lazy"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center',
+            filter: 'brightness(0.34)',
+          }}
+        />
+      </div>
+
+      <div ref={ref as any} style={{ position: 'relative', zIndex: 10, maxWidth: '840px' }}>
+        <div style={{
+          fontFamily: theme.typography.body,
+          fontSize: '0.84rem',
+          fontWeight: 700,
+          textTransform: 'uppercase',
+          letterSpacing: '0.22em',
+          color: theme.palette.primary,
+          marginBottom: '1rem',
+        }}>
+          Unforgettable Hospitality
+        </div>
+        <h2 style={{
+          fontFamily: theme.typography.heading,
+          fontSize: 'clamp(2.8rem, 6vw, 5.2rem)',
+          fontWeight: 900,
+          color: '#ffffff',
+          lineHeight: 1.05,
+          marginBottom: '2.25rem',
+          textShadow: '0 4px 30px rgba(0,0,0,0.6)',
+        }}>
           {theme.content.promoTitle}
         </h2>
-        <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', borderRadius: '10px', padding: '1.2rem 3rem', fontFamily: theme.typography.heading, fontWeight: 800, fontSize: '1.2rem', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', transition: 'transform 0.2s, box-shadow 0.2s', boxShadow: `0 8px 30px ${theme.palette.primary}88` }}
-          onMouseOver={e => { e.currentTarget.style.transform = 'scale(1.04)'; }}
-          onMouseOut={e => { e.currentTarget.style.transform = 'none'; }}>
-          {theme.content.promoCTA} <ArrowRight size={20} />
+        <button
+          onClick={() => store.openReservation()}
+          style={{
+            backgroundColor: theme.palette.primary,
+            color: '#ffffff',
+            border: 'none',
+            borderRadius: '10px',
+            padding: '1.25rem 3.2rem',
+            fontFamily: theme.typography.heading,
+            fontWeight: 800,
+            fontSize: '1.15rem',
+            cursor: 'pointer',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.6rem',
+            transition: 'transform 0.2s, box-shadow 0.2s',
+            boxShadow: `0 8px 30px ${theme.palette.primary}88`,
+          }}
+          onMouseOver={e => {
+            e.currentTarget.style.transform = 'scale(1.04)';
+            e.currentTarget.style.boxShadow = `0 12px 40px ${theme.palette.primary}aa`;
+          }}
+          onMouseOut={e => {
+            e.currentTarget.style.transform = 'none';
+            e.currentTarget.style.boxShadow = `0 8px 30px ${theme.palette.primary}88`;
+          }}
+        >
+          <Calendar size={20} />
+          <span>{theme.content.promoCTA || 'Reserve Your Table'}</span>
+          <ArrowRight size={20} />
         </button>
       </div>
     </section>
   );
 }
 
-// ─── GALLERY ──────────────────────────────────────────────────────────────────
+// ─── EDITORIAL GALLERY WITH LIGHTBOX ────────────────────────────────────────
 
 export function RestaurantGallery({ theme }: { theme: RestaurantThemeConfig }) {
+  const store = useRestaurantStore();
   const ref = useReveal();
-  const [active, setActive] = useState<number | null>(null);
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   const imgs = theme.images.gallery;
+
   return (
-    <section id="gallery" style={{ backgroundColor: theme.palette.surface, padding: '7rem 5%' }}>
+    <section id="gallery" style={{
+      backgroundColor: theme.palette.background,
+      padding: '7rem 5%',
+      scrollMarginTop: '80px',
+    }}>
       <div ref={ref as any}>
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <div style={{ fontFamily: theme.typography.body, fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.2em', color: theme.palette.primary, marginBottom: '1rem' }}>Gallery</div>
-          <h2 style={{ fontFamily: theme.typography.heading, fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 900, color: theme.palette.text, margin: 0 }}>A Taste Through the Lens</h2>
+          <div style={{
+            fontFamily: theme.typography.body,
+            fontSize: '0.82rem',
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '0.22em',
+            color: theme.palette.primary,
+            marginBottom: '0.9rem',
+          }}>
+            Atmosphere & Details
+          </div>
+          <h2 style={{
+            fontFamily: theme.typography.heading,
+            fontSize: 'clamp(2.4rem, 5vw, 4rem)',
+            fontWeight: 900,
+            color: theme.palette.text,
+            margin: '0 0 1rem 0',
+          }}>
+            Through the Lens
+          </h2>
+          <p style={{
+            fontFamily: theme.typography.body,
+            fontSize: '1rem',
+            color: theme.palette.textLight,
+            margin: 0,
+          }}>
+            Click any image to view in high resolution.
+          </p>
         </div>
 
-        {/* Masonry-style grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gridAutoRows: '260px', gap: '1rem', maxWidth: '1400px', margin: '0 auto' }}>
+        {/* Masonry Grid */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+          gridAutoRows: '280px',
+          gap: '1.25rem',
+          maxWidth: '1360px',
+          margin: '0 auto',
+        }}>
           {imgs.map((img, i) => (
-            <div key={i}
-              onMouseEnter={() => setActive(i)}
-              onMouseLeave={() => setActive(null)}
-              style={{ position: 'relative', overflow: 'hidden', borderRadius: '16px', gridRow: i === 0 || i === 3 ? 'span 2' : 'span 1', cursor: 'pointer', boxShadow: '0 8px 30px rgba(0,0,0,0.12)' }}>
-              <img src={img.src} alt={img.alt} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s ease', transform: active === i ? 'scale(1.08)' : 'scale(1)' }} />
-              {/* Overlay on hover */}
-              <div style={{ position: 'absolute', inset: 0, backgroundColor: active === i ? 'rgba(0,0,0,0.4)' : 'transparent', transition: 'background 0.4s', display: 'flex', alignItems: 'flex-end', padding: '1.5rem' }}>
-                {active === i && (
-                  <p style={{ color: '#fff', fontFamily: theme.typography.body, fontWeight: 600, fontSize: '0.95rem', margin: 0 }}>{img.alt}</p>
+            <div
+              key={i}
+              onClick={() => store.openLightbox(i)}
+              onMouseEnter={() => setHoveredIdx(i)}
+              onMouseLeave={() => setHoveredIdx(null)}
+              style={{
+                position: 'relative',
+                overflow: 'hidden',
+                borderRadius: '16px',
+                gridRow: i === 0 || i === 3 ? 'span 2' : 'span 1',
+                cursor: 'pointer',
+                boxShadow: '0 8px 30px rgba(0,0,0,0.1)',
+                backgroundColor: theme.palette.surface,
+              }}
+            >
+              <img
+                src={img.src}
+                alt={img.alt}
+                loading="lazy"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  transition: 'transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)',
+                  transform: hoveredIdx === i ? 'scale(1.08)' : 'scale(1)',
+                }}
+              />
+              <div style={{
+                position: 'absolute',
+                inset: 0,
+                backgroundColor: hoveredIdx === i ? 'rgba(0,0,0,0.45)' : 'transparent',
+                transition: 'background 0.35s ease',
+                display: 'flex',
+                alignItems: 'flex-end',
+                padding: '1.75rem',
+              }}>
+                {hoveredIdx === i && (
+                  <div style={{
+                    color: '#ffffff',
+                    fontFamily: theme.typography.body,
+                    fontWeight: 600,
+                    fontSize: '0.96rem',
+                    textShadow: '0 2px 10px rgba(0,0,0,0.6)',
+                  }}>
+                    <span>{img.alt}</span>
+                    <div style={{
+                      fontSize: '0.75rem',
+                      color: theme.palette.primary,
+                      marginTop: '0.25rem',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.1em',
+                    }}>
+                      Tap to enlarge ↗
+                    </div>
+                  </div>
                 )}
               </div>
             </div>
@@ -397,44 +1908,158 @@ export function RestaurantGallery({ theme }: { theme: RestaurantThemeConfig }) {
   );
 }
 
-// ─── TESTIMONIALS ────────────────────────────────────────────────────────────
+// ─── TESTIMONIALS & CRITICAL ACCLAIM ────────────────────────────────────────
 
 export function Testimonials({ theme }: { theme: RestaurantThemeConfig }) {
   const [current, setCurrent] = useState(0);
   const total = theme.testimonials.length;
   const ref = useReveal();
 
-  return (
-    <section style={{ backgroundColor: theme.palette.background, padding: '7rem 5%', color: theme.palette.text }}>
-      <div ref={ref as any} style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-        <div style={{ fontFamily: theme.typography.body, fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.2em', color: theme.palette.primary, marginBottom: '1rem' }}>Reviews</div>
-        <h2 style={{ fontFamily: theme.typography.heading, fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 900, marginBottom: '4rem' }}>What Guests Say</h2>
+  if (total === 0) return null;
 
-        {/* Active testimonial */}
-        <div style={{ backgroundColor: theme.palette.surface, borderRadius: '24px', padding: '3.5rem', boxShadow: '0 20px 60px rgba(0,0,0,0.08)', minHeight: '200px', transition: 'opacity 0.4s' }}>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '4px', marginBottom: '1.5rem' }}>
-            {Array.from({ length: theme.testimonials[current].rating }).map((_, i) => (
-              <Star key={i} size={20} fill={theme.palette.primary} color={theme.palette.primary} />
+  return (
+    <section style={{
+      backgroundColor: theme.palette.surface,
+      padding: '7rem 5%',
+      color: theme.palette.text,
+      borderTop: `1px solid ${theme.palette.border || `${theme.palette.text}10`}`,
+    }}>
+      <div ref={ref as any} style={{ maxWidth: '960px', margin: '0 auto', textAlign: 'center' }}>
+        <div style={{
+          fontFamily: theme.typography.body,
+          fontSize: '0.82rem',
+          fontWeight: 700,
+          textTransform: 'uppercase',
+          letterSpacing: '0.22em',
+          color: theme.palette.primary,
+          marginBottom: '0.9rem',
+        }}>
+          Acclaim & Recognition
+        </div>
+        <h2 style={{
+          fontFamily: theme.typography.heading,
+          fontSize: 'clamp(2.4rem, 5vw, 3.8rem)',
+          fontWeight: 900,
+          marginBottom: '3.5rem',
+        }}>
+          What Guests & Critics Say
+        </h2>
+
+        {/* Active Testimonial Card */}
+        <div style={{
+          backgroundColor: theme.palette.background,
+          borderRadius: '24px',
+          padding: '3.5rem 3rem',
+          boxShadow: '0 20px 60px rgba(0,0,0,0.06)',
+          minHeight: '220px',
+          position: 'relative',
+          border: `1px solid ${theme.palette.border || `${theme.palette.text}10`}`,
+        }}>
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '4px',
+            marginBottom: '1.5rem',
+          }}>
+            {Array.from({ length: theme.testimonials[current].rating || 5 }).map((_, i) => (
+              <Star key={i} size={22} fill={theme.palette.primary} color={theme.palette.primary} />
             ))}
           </div>
-          <blockquote style={{ fontFamily: theme.typography.body, fontSize: '1.15rem', lineHeight: 1.7, color: theme.palette.text, margin: '0 0 1.5rem 0', fontStyle: 'italic' }}>
+
+          <blockquote style={{
+            fontFamily: theme.typography.heading,
+            fontSize: '1.35rem',
+            lineHeight: 1.7,
+            color: theme.palette.text,
+            margin: '0 0 1.75rem 0',
+            fontStyle: 'italic',
+          }}>
             &ldquo;{theme.testimonials[current].quote}&rdquo;
           </blockquote>
-          <p style={{ fontFamily: theme.typography.heading, fontWeight: 800, fontSize: '1rem', color: theme.palette.primary, margin: 0 }}>— {theme.testimonials[current].name}</p>
+
+          <div style={{
+            fontFamily: theme.typography.body,
+            fontWeight: 800,
+            fontSize: '1.05rem',
+            color: theme.palette.primary,
+          }}>
+            — {theme.testimonials[current].name}
+            {theme.testimonials[current].publication && (
+              <span style={{ color: theme.palette.textLight, fontWeight: 500, fontSize: '0.9rem', marginLeft: '0.5rem' }}>
+                · {theme.testimonials[current].publication}
+              </span>
+            )}
+          </div>
         </div>
 
-        {/* Navigation */}
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1.5rem', marginTop: '2rem' }}>
-          <button onClick={() => setCurrent((current - 1 + total) % total)} style={{ width: '44px', height: '44px', borderRadius: '50%', backgroundColor: theme.palette.surface, border: `2px solid ${theme.palette.text}18`, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <ChevronLeft size={18} color={theme.palette.text} />
+        {/* Carousel Controls */}
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '1.5rem',
+          marginTop: '2.5rem',
+        }}>
+          <button
+            onClick={() => setCurrent((current - 1 + total) % total)}
+            aria-label="Previous testimonial"
+            style={{
+              width: '46px',
+              height: '46px',
+              borderRadius: '50%',
+              backgroundColor: theme.palette.background,
+              border: `1.5px solid ${theme.palette.text}20`,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'border-color 0.2s',
+            }}
+            onMouseOver={e => e.currentTarget.style.borderColor = theme.palette.primary}
+            onMouseOut={e => e.currentTarget.style.borderColor = `${theme.palette.text}20`}
+          >
+            <ChevronLeft size={20} color={theme.palette.text} />
           </button>
+
           <div style={{ display: 'flex', gap: '8px' }}>
             {theme.testimonials.map((_, i) => (
-              <button key={i} onClick={() => setCurrent(i)} style={{ width: i === current ? '24px' : '8px', height: '8px', borderRadius: '99px', border: 'none', backgroundColor: i === current ? theme.palette.primary : `${theme.palette.text}30`, cursor: 'pointer', transition: 'width 0.3s, background 0.3s', padding: 0 }} />
+              <button
+                key={i}
+                onClick={() => setCurrent(i)}
+                aria-label={`Jump to review ${i + 1}`}
+                style={{
+                  width: i === current ? '28px' : '9px',
+                  height: '9px',
+                  borderRadius: '99px',
+                  border: 'none',
+                  backgroundColor: i === current ? theme.palette.primary : `${theme.palette.text}30`,
+                  cursor: 'pointer',
+                  transition: 'width 0.3s, background 0.3s',
+                  padding: 0,
+                }}
+              />
             ))}
           </div>
-          <button onClick={() => setCurrent((current + 1) % total)} style={{ width: '44px', height: '44px', borderRadius: '50%', backgroundColor: theme.palette.surface, border: `2px solid ${theme.palette.text}18`, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <ChevronRight size={18} color={theme.palette.text} />
+
+          <button
+            onClick={() => setCurrent((current + 1) % total)}
+            aria-label="Next testimonial"
+            style={{
+              width: '46px',
+              height: '46px',
+              borderRadius: '50%',
+              backgroundColor: theme.palette.background,
+              border: `1.5px solid ${theme.palette.text}20`,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'border-color 0.2s',
+            }}
+            onMouseOver={e => e.currentTarget.style.borderColor = theme.palette.primary}
+            onMouseOut={e => e.currentTarget.style.borderColor = `${theme.palette.text}20`}
+          >
+            <ChevronRight size={20} color={theme.palette.text} />
           </button>
         </div>
       </div>
@@ -442,43 +2067,393 @@ export function Testimonials({ theme }: { theme: RestaurantThemeConfig }) {
   );
 }
 
-// ─── LOCATION / CTA ──────────────────────────────────────────────────────────
+// ─── LOCATION, CONTACT & IN-PAGE RESERVATION WIDGET ─────────────────────────
 
 export function LocationCTA({ theme }: { theme: RestaurantThemeConfig }) {
+  const store = useRestaurantStore();
   const ref = useReveal();
+
+  // Local quick reservation state
+  const [quickDate, setQuickDate] = useState('2026-10-18');
+  const [quickTime, setQuickTime] = useState('19:30');
+  const [quickGuests, setQuickGuests] = useState(2);
+  const [quickSubmitted, setQuickSubmitted] = useState(false);
+
+  const handleQuickSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    store.setBookingConfirmed({
+      date: quickDate,
+      time: quickTime,
+      guests: quickGuests,
+      seatingArea: 'Main Dining Room',
+      occasion: 'Dinner Reservation',
+      specialRequests: 'None',
+      guestName: 'Guest',
+      guestEmail: 'guest@example.com',
+      guestPhone: '(555) 012-3456',
+      referenceCode: `RES-${Math.floor(100000 + Math.random() * 900000)}`,
+    });
+    setQuickSubmitted(true);
+    store.openReservation();
+  };
+
   return (
-    <section id="visit" style={{ backgroundColor: theme.palette.secondary, color: '#fff', padding: '7rem 5%' }}>
-      <div ref={ref as any} style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
+    <section id="visit" style={{
+      backgroundColor: theme.palette.secondary,
+      color: '#ffffff',
+      padding: '7rem 5%',
+      scrollMarginTop: '80px',
+    }}>
+      <div ref={ref as any} style={{
+        maxWidth: '1240px',
+        margin: '0 auto',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+        gap: '4.5rem',
+        alignItems: 'center',
+      }}>
+        {/* Contact Info */}
         <div>
-          <div style={{ fontFamily: theme.typography.body, fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.2em', color: theme.palette.primary, marginBottom: '1rem' }}>Find Us</div>
-          <h2 style={{ fontFamily: theme.typography.heading, fontSize: 'clamp(2.5rem, 4vw, 3.5rem)', fontWeight: 900, marginBottom: '3rem', lineHeight: 1.1, color: '#fff' }}>
-            Come In & Taste It For Yourself
+          <div style={{
+            fontFamily: theme.typography.body,
+            fontSize: '0.82rem',
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '0.22em',
+            color: theme.palette.primary,
+            marginBottom: '0.9rem',
+          }}>
+            Visit Us
+          </div>
+          <h2 style={{
+            fontFamily: theme.typography.heading,
+            fontSize: 'clamp(2.4rem, 4.5vw, 3.8rem)',
+            fontWeight: 900,
+            marginBottom: '2.5rem',
+            lineHeight: 1.1,
+            color: '#ffffff',
+          }}>
+            Join Us for Dinner
           </h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            {[
-              { icon: <MapPin size={20} color={theme.palette.primary} />, text: theme.content.address },
-              { icon: <Clock size={20} color={theme.palette.primary} />, text: theme.content.hours },
-              { icon: <Phone size={20} color={theme.palette.primary} />, text: theme.content.phone },
-            ].map((row, i) => (
-              <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', fontFamily: theme.typography.body, fontSize: '1rem', color: 'rgba(255,255,255,0.85)' }}>
-                {row.icon}
-                <span>{row.text}</span>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1.2rem' }}>
+              <div style={{
+                backgroundColor: 'rgba(255,255,255,0.08)',
+                padding: '0.75rem',
+                borderRadius: '12px',
+                color: theme.palette.primary,
+              }}>
+                <MapPin size={22} />
               </div>
-            ))}
+              <div>
+                <div style={{ fontWeight: 700, fontSize: '1rem', color: '#fff', marginBottom: '0.2rem' }}>Address</div>
+                <div style={{ color: 'rgba(255,255,255,0.85)', lineHeight: 1.5 }}>{theme.content.address}</div>
+                <a
+                  href={`https://maps.google.com/?q=${encodeURIComponent(theme.content.address)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    color: theme.palette.primary,
+                    fontSize: '0.84rem',
+                    fontWeight: 700,
+                    textDecoration: 'none',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.3rem',
+                    marginTop: '0.4rem',
+                  }}
+                >
+                  <Compass size={14} /> Get Driving Directions →
+                </a>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1.2rem' }}>
+              <div style={{
+                backgroundColor: 'rgba(255,255,255,0.08)',
+                padding: '0.75rem',
+                borderRadius: '12px',
+                color: theme.palette.primary,
+              }}>
+                <Clock size={22} />
+              </div>
+              <div>
+                <div style={{ fontWeight: 700, fontSize: '1rem', color: '#fff', marginBottom: '0.2rem' }}>Service Hours</div>
+                <div style={{ color: 'rgba(255,255,255,0.85)', lineHeight: 1.5 }}>{theme.content.hours}</div>
+                <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.82rem', marginTop: '0.2rem' }}>
+                  Kitchen closes 45 minutes prior to closing.
+                </div>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1.2rem' }}>
+              <div style={{
+                backgroundColor: 'rgba(255,255,255,0.08)',
+                padding: '0.75rem',
+                borderRadius: '12px',
+                color: theme.palette.primary,
+              }}>
+                <Phone size={22} />
+              </div>
+              <div>
+                <div style={{ fontWeight: 700, fontSize: '1rem', color: '#fff', marginBottom: '0.2rem' }}>Direct Line & Enquiries</div>
+                <div style={{ color: 'rgba(255,255,255,0.85)', lineHeight: 1.5 }}>{theme.content.phone}</div>
+                <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.82rem', marginTop: '0.2rem' }}>
+                  Concierge responds from 11:00 AM daily.
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div style={{ textAlign: 'center' }}>
-          <h3 style={{ fontFamily: theme.typography.heading, fontSize: '2rem', fontWeight: 900, marginBottom: '1.5rem', color: '#fff' }}>Ready to Order?</h3>
-          <p style={{ fontFamily: theme.typography.body, color: 'rgba(255,255,255,0.75)', marginBottom: '2rem', lineHeight: 1.6 }}>
-            Online ordering, reservations, and delivery all in one place.
+        {/* In-Page Quick Reservation Card */}
+        <div style={{
+          backgroundColor: 'rgba(255,255,255,0.05)',
+          border: `1.5px solid ${theme.palette.primary}55`,
+          borderRadius: '24px',
+          padding: '3rem 2.5rem',
+          backdropFilter: 'blur(12px)',
+          boxShadow: '0 24px 60px rgba(0,0,0,0.3)',
+        }}>
+          <h3 style={{
+            fontFamily: theme.typography.heading,
+            fontSize: '1.85rem',
+            fontWeight: 900,
+            color: '#ffffff',
+            margin: '0 0 0.75rem 0',
+          }}>
+            Reserve Your Evening
+          </h3>
+          <p style={{
+            fontFamily: theme.typography.body,
+            color: 'rgba(255,255,255,0.8)',
+            margin: '0 0 2rem 0',
+            fontSize: '0.96rem',
+            lineHeight: 1.55,
+          }}>
+            Select your preferred evening and party size. Immediate table confirmation.
           </p>
-          <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', borderRadius: '12px', padding: '1.2rem 3rem', fontFamily: theme.typography.heading, fontWeight: 800, fontSize: '1.1rem', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', transition: 'transform 0.2s', boxShadow: `0 8px 24px ${theme.palette.primary}66` }}
-            onMouseOver={e => e.currentTarget.style.transform = 'scale(1.04)'}
-            onMouseOut={e => e.currentTarget.style.transform = 'none'}>
-            {theme.content.ctaPrimary} <ArrowRight size={18} />
-          </button>
+
+          <form onSubmit={handleQuickSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div>
+                <label style={{ fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'rgba(255,255,255,0.7)', display: 'block', marginBottom: '0.4rem', fontWeight: 600 }}>
+                  Date
+                </label>
+                <input
+                  type="date"
+                  value={quickDate}
+                  onChange={e => setQuickDate(e.target.value)}
+                  style={{
+                    width: '100%',
+                    backgroundColor: 'rgba(255,255,255,0.08)',
+                    border: '1px solid rgba(255,255,255,0.2)',
+                    borderRadius: '8px',
+                    padding: '0.75rem 1rem',
+                    color: '#ffffff',
+                    fontSize: '0.94rem',
+                    fontFamily: theme.typography.body,
+                    outline: 'none',
+                    boxSizing: 'border-box',
+                  }}
+                />
+              </div>
+
+              <div>
+                <label style={{ fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'rgba(255,255,255,0.7)', display: 'block', marginBottom: '0.4rem', fontWeight: 600 }}>
+                  Time
+                </label>
+                <select
+                  value={quickTime}
+                  onChange={e => setQuickTime(e.target.value)}
+                  style={{
+                    width: '100%',
+                    backgroundColor: 'rgba(255,255,255,0.08)',
+                    border: '1px solid rgba(255,255,255,0.2)',
+                    borderRadius: '8px',
+                    padding: '0.75rem 1rem',
+                    color: '#ffffff',
+                    fontSize: '0.94rem',
+                    fontFamily: theme.typography.body,
+                    outline: 'none',
+                    boxSizing: 'border-box',
+                  }}
+                >
+                  {['17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00'].map(t => (
+                    <option key={t} value={t} style={{ background: '#1c1917', color: '#fff' }}>
+                      {t}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label style={{ fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'rgba(255,255,255,0.7)', display: 'block', marginBottom: '0.4rem', fontWeight: 600 }}>
+                Guests
+              </label>
+              <select
+                value={quickGuests}
+                onChange={e => setQuickGuests(Number(e.target.value))}
+                style={{
+                  width: '100%',
+                  backgroundColor: 'rgba(255,255,255,0.08)',
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  borderRadius: '8px',
+                  padding: '0.75rem 1rem',
+                  color: '#ffffff',
+                  fontSize: '0.94rem',
+                  fontFamily: theme.typography.body,
+                  outline: 'none',
+                  boxSizing: 'border-box',
+                }}
+              >
+                {[1, 2, 3, 4, 5, 6, 8].map(n => (
+                  <option key={n} value={n} style={{ background: '#1c1917', color: '#fff' }}>
+                    {n} {n === 1 ? 'Guest (Counter Seating)' : 'Guests'}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <button
+              type="submit"
+              style={{
+                marginTop: '0.75rem',
+                backgroundColor: theme.palette.primary,
+                color: '#ffffff',
+                border: 'none',
+                borderRadius: '10px',
+                padding: '1.1rem 2rem',
+                fontFamily: theme.typography.heading,
+                fontWeight: 800,
+                fontSize: '1.05rem',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem',
+                transition: 'transform 0.2s, box-shadow 0.2s',
+                boxShadow: `0 8px 24px ${theme.palette.primary}66`,
+              }}
+              onMouseOver={e => e.currentTarget.style.transform = 'translateY(-2px)'}
+              onMouseOut={e => e.currentTarget.style.transform = 'none'}
+            >
+              <Calendar size={18} /> Complete Reservation <ArrowRight size={18} />
+            </button>
+          </form>
         </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── NEWSLETTER SIGNUP ──────────────────────────────────────────────────────
+
+export function NewsletterSection({ theme }: { theme: RestaurantThemeConfig }) {
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email.trim()) {
+      setSubmitted(true);
+    }
+  };
+
+  return (
+    <section style={{
+      backgroundColor: theme.palette.background,
+      padding: '5.5rem 5%',
+      borderTop: `1px solid ${theme.palette.border || `${theme.palette.text}10`}`,
+      textAlign: 'center',
+    }}>
+      <div style={{ maxWidth: '640px', margin: '0 auto' }}>
+        <Sparkles size={24} color={theme.palette.primary} style={{ marginBottom: '1rem' }} />
+        <h3 style={{
+          fontFamily: theme.typography.heading,
+          fontSize: 'clamp(2rem, 4vw, 2.8rem)',
+          fontWeight: 900,
+          color: theme.palette.text,
+          margin: '0 0 0.8rem 0',
+        }}>
+          Join Our Gastronomy Journal
+        </h3>
+        <p style={{
+          fontFamily: theme.typography.body,
+          fontSize: '1rem',
+          color: theme.palette.textLight,
+          lineHeight: 1.6,
+          marginBottom: '2rem',
+        }}>
+          Receive private releases of seasonal menus, rare cellar vintage allocations, and invitation-only guest chef collaborations.
+        </p>
+
+        {submitted ? (
+          <div style={{
+            backgroundColor: `${theme.palette.primary}20`,
+            border: `1.5px solid ${theme.palette.primary}`,
+            color: theme.palette.text,
+            padding: '1.25rem 2rem',
+            borderRadius: '12px',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.6rem',
+            fontWeight: 700,
+            fontSize: '1rem',
+          }}>
+            <CheckCircle size={20} color={theme.palette.primary} />
+            <span>Welcome to our inner table. An invitation has been sent to your inbox.</span>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} style={{
+            display: 'flex',
+            gap: '0.6rem',
+            maxWidth: '500px',
+            margin: '0 auto',
+            flexWrap: 'wrap',
+          }}>
+            <input
+              type="email"
+              required
+              placeholder="Enter your personal email address"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              style={{
+                flex: 1,
+                minWidth: '240px',
+                backgroundColor: theme.palette.surface,
+                border: `1.5px solid ${theme.palette.text}25`,
+                borderRadius: '8px',
+                padding: '0.9rem 1.25rem',
+                fontSize: '0.95rem',
+                color: theme.palette.text,
+                fontFamily: theme.typography.body,
+                outline: 'none',
+              }}
+            />
+            <button
+              type="submit"
+              style={{
+                backgroundColor: theme.palette.primary,
+                color: '#ffffff',
+                border: 'none',
+                borderRadius: '8px',
+                padding: '0.9rem 1.75rem',
+                fontFamily: theme.typography.heading,
+                fontWeight: 700,
+                fontSize: '0.95rem',
+                cursor: 'pointer',
+                transition: 'opacity 0.2s',
+              }}
+              onMouseOver={e => e.currentTarget.style.opacity = '0.9'}
+              onMouseOut={e => e.currentTarget.style.opacity = '1'}
+            >
+              Subscribe
+            </button>
+          </form>
+        )}
       </div>
     </section>
   );
@@ -487,59 +2462,1765 @@ export function LocationCTA({ theme }: { theme: RestaurantThemeConfig }) {
 // ─── FOOTER ──────────────────────────────────────────────────────────────────
 
 export function RestaurantFooter({ theme }: { theme: RestaurantThemeConfig }) {
+  const store = useRestaurantStore();
+
   return (
-    <footer style={{ backgroundColor: '#0a0a0a', color: '#888', padding: '4rem 5% 2rem' }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '3rem', marginBottom: '4rem' }}>
+    <footer style={{
+      backgroundColor: '#0a0a0c',
+      color: '#94a3b8',
+      padding: '5rem 5% 2.5rem',
+      borderTop: '1px solid #1e293b',
+    }}>
+      <div style={{ maxWidth: '1240px', margin: '0 auto' }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+          gap: '3.5rem',
+          marginBottom: '4.5rem',
+        }}>
+          {/* Brand Info */}
           <div>
-            <div style={{ fontFamily: theme.typography.heading, fontSize: '2rem', fontWeight: 900, color: theme.palette.primary, marginBottom: '0.75rem' }}>{theme.name}</div>
-            <p style={{ fontFamily: theme.typography.body, fontSize: '0.95rem', maxWidth: '280px', lineHeight: 1.6 }}>{theme.tagline}</p>
+            <div style={{
+              fontFamily: theme.typography.heading,
+              fontSize: '2rem',
+              fontWeight: 900,
+              color: theme.palette.primary,
+              marginBottom: '0.85rem',
+            }}>
+              {theme.name}
+            </div>
+            <p style={{
+              fontFamily: theme.typography.body,
+              fontSize: '0.95rem',
+              lineHeight: 1.65,
+              color: '#94a3b8',
+              marginBottom: '1.5rem',
+            }}>
+              {theme.tagline}
+            </p>
+            <div style={{ display: 'flex', gap: '0.75rem' }}>
+              <button
+                onClick={() => store.openReservation()}
+                style={{
+                  backgroundColor: theme.palette.primary,
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '6px',
+                  padding: '0.65rem 1.4rem',
+                  fontFamily: theme.typography.body,
+                  fontWeight: 700,
+                  fontSize: '0.85rem',
+                  cursor: 'pointer',
+                }}
+              >
+                Book a Table
+              </button>
+            </div>
           </div>
-          <div style={{ display: 'flex', gap: '5rem', flexWrap: 'wrap' }}>
-            {[
-              { title: 'Quick Links', links: ['Menu', 'Our Story', 'Gallery', 'Reservations'] },
-              { title: 'Contact', links: [theme.content.phone, theme.content.address.split(',')[0]] },
-            ].map((col, ci) => (
-              <div key={ci}>
-                <h4 style={{ fontFamily: theme.typography.body, fontWeight: 700, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#fff', marginBottom: '1.25rem' }}>{col.title}</h4>
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  {col.links.map((link, li) => (
-                    <li key={li}><a href="#" style={{ color: '#888', fontFamily: theme.typography.body, fontSize: '0.95rem', textDecoration: 'none', transition: 'color 0.2s' }}
-                      onMouseOver={e => (e.currentTarget.style.color = theme.palette.primary)}
-                      onMouseOut={e => (e.currentTarget.style.color = '#888')}>{link}</a></li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+
+          {/* Navigation Links */}
+          <div>
+            <h4 style={{
+              color: '#ffffff',
+              fontSize: '0.82rem',
+              textTransform: 'uppercase',
+              letterSpacing: '0.12em',
+              fontWeight: 800,
+              marginBottom: '1.25rem',
+            }}>
+              Storefront Sections
+            </h4>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              {[
+                { label: 'Dinner & Tasting Menu', href: '#menu' },
+                { label: 'Culinary Philosophy', href: '#story' },
+                { label: 'The Degustation Journey', href: '#tasting' },
+                { label: 'Visual Gallery', href: '#gallery' },
+                { label: 'Location & Private Dining', href: '#visit' },
+              ].map((l, i) => (
+                <li key={i}>
+                  <a
+                    href={l.href}
+                    style={{
+                      color: '#94a3b8',
+                      textDecoration: 'none',
+                      fontSize: '0.92rem',
+                      fontFamily: theme.typography.body,
+                      transition: 'color 0.2s',
+                    }}
+                    onMouseOver={e => e.currentTarget.style.color = theme.palette.primary}
+                    onMouseOut={e => e.currentTarget.style.color = '#94a3b8'}
+                  >
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Location & Contacts */}
+          <div>
+            <h4 style={{
+              color: '#ffffff',
+              fontSize: '0.82rem',
+              textTransform: 'uppercase',
+              letterSpacing: '0.12em',
+              fontWeight: 800,
+              marginBottom: '1.25rem',
+            }}>
+              Service & Reservations
+            </h4>
+            <p style={{ fontSize: '0.92rem', color: '#94a3b8', lineHeight: 1.6, margin: '0 0 0.8rem 0' }}>
+              {theme.content.address}
+            </p>
+            <p style={{ fontSize: '0.92rem', color: '#94a3b8', lineHeight: 1.6, margin: '0 0 0.8rem 0' }}>
+              {theme.content.hours}
+            </p>
+            <p style={{ fontSize: '0.92rem', color: theme.palette.primary, fontWeight: 700, margin: 0 }}>
+              {theme.content.phone}
+            </p>
+          </div>
+
+          {/* Accreditations */}
+          <div>
+            <h4 style={{
+              color: '#ffffff',
+              fontSize: '0.82rem',
+              textTransform: 'uppercase',
+              letterSpacing: '0.12em',
+              fontWeight: 800,
+              marginBottom: '1.25rem',
+            }}>
+              Culinary Standards
+            </h4>
+            <p style={{ fontSize: '0.88rem', color: '#64748b', lineHeight: 1.6 }}>
+              All seafood sustainably wild-harvested. Produce organically grown within a 60-mile radius. Zero single-use plastics.
+            </p>
           </div>
         </div>
-        <div style={{ borderTop: '1px solid #222', paddingTop: '2rem', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
-          <span style={{ fontFamily: theme.typography.body, fontSize: '0.85rem' }}>&copy; {new Date().getFullYear()} {theme.name}. All rights reserved.</span>
-          <span style={{ fontFamily: theme.typography.body, fontSize: '0.85rem' }}>Built with Willovate Store</span>
+
+        {/* Bottom Bar */}
+        <div style={{
+          borderTop: '1px solid #1e293b',
+          paddingTop: '2rem',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '1rem',
+          fontSize: '0.84rem',
+        }}>
+          <div>&copy; {new Date().getFullYear()} {theme.name}. All rights reserved.</div>
+          <div style={{ display: 'flex', gap: '1.5rem', color: '#64748b' }}>
+            <span>Fine Dining & Hospitality Template</span>
+            <span>·</span>
+            <span>Willovate Storefront Engine</span>
+          </div>
         </div>
       </div>
     </footer>
   );
 }
 
-// ─── FULL PAGE WRAPPER ────────────────────────────────────────────────────────
+// ─── INTERACTIVE MODALS & DRAWERS ───────────────────────────────────────────
 
-export function RestaurantPage({ theme, children }: { theme: RestaurantThemeConfig; children?: React.ReactNode }) {
+// 1. RESERVATION MODAL
+export function ReservationModal({ theme }: { theme: RestaurantThemeConfig }) {
+  const store = useRestaurantStore();
+  
+  // Tomorrow's date formatted as YYYY-MM-DD
+  const tomorrowStr = () => {
+    const d = new Date();
+    d.setDate(d.getDate() + 1);
+    return d.toISOString().split('T')[0];
+  };
+  const todayStr = new Date().toISOString().split('T')[0];
+
+  const [date, setDate] = useState(tomorrowStr());
+  const [time, setTime] = useState('19:30');
+  const [guests, setGuests] = useState(2);
+  const [seating, setSeating] = useState('Main Dining Room');
+  const [occasion, setOccasion] = useState('Date Night / Dinner');
+  const [specialRequests, setSpecialRequests] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [copied, setCopied] = useState(false);
+  const [calendarDownloaded, setCalendarDownloaded] = useState(false);
+  const [viewingForm, setViewingForm] = useState(false);
+
+  if (!store.isReservationOpen) return null;
+
+  const currentBooking = store.bookingConfirmed;
+  const hasExistingBooking = Boolean(currentBooking && !viewingForm);
+
+  const cartItemsCount = store.cart.reduce((sum, item) => sum + item.quantity, 0);
+  const cartSubtotal = store.cart.reduce((sum, entry) => {
+    const raw = entry.item.price.replace(/[^0-9.]/g, '');
+    const priceNum = parseFloat(raw) || 32;
+    return sum + priceNum * entry.quantity;
+  }, 0);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const refCode = `RES-${Math.floor(100000 + Math.random() * 900000)}`;
+    
+    // Auto-append tasting selection to special requests if present
+    let finalRequests = specialRequests;
+    if (cartItemsCount > 0) {
+      const dishes = store.cart.map(c => `${c.quantity}x ${c.item.name}`).join(', ');
+      finalRequests = finalRequests
+        ? `${finalRequests} | Tasting Selection: ${dishes}`
+        : `Pre-Selected Tasting Courses: ${dishes}`;
+    }
+
+    store.setBookingConfirmed({
+      date,
+      time,
+      guests,
+      seatingArea: seating,
+      occasion,
+      specialRequests: finalRequests,
+      guestName: name || 'Valued Guest',
+      guestEmail: email || 'guest@example.com',
+      guestPhone: phone || '(555) 012-3456',
+      referenceCode: refCode,
+    });
+    setViewingForm(false);
+  };
+
+  const handleClose = () => {
+    store.closeReservation();
+  };
+
+  const handleCopyCode = (codeToCopy: string) => {
+    navigator.clipboard?.writeText(codeToCopy);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleDownloadCalendar = () => {
+    const booking = currentBooking;
+    if (!booking) return;
+
+    // Create a real .ics calendar event
+    const startHour = parseInt(booking.time.split(':')[0]) || 19;
+    const startMin = parseInt(booking.time.split(':')[1]) || 30;
+    const endHour = startHour + 2;
+    
+    const dateFormatted = booking.date.replace(/-/g, '');
+    const pad = (n: number) => n.toString().padStart(2, '0');
+    
+    const icsContent = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Willovate Store//Restaurant Reservations//EN',
+      'BEGIN:VEVENT',
+      `SUMMARY:Dinner at ${theme.name} (${booking.referenceCode})`,
+      `DESCRIPTION:Table reserved for ${booking.guests} guests at ${theme.name}. Seating: ${booking.seatingArea}. Ref: ${booking.referenceCode}.`,
+      `LOCATION:${theme.content.address}`,
+      `DTSTART:${dateFormatted}T${pad(startHour)}${pad(startMin)}00`,
+      `DTEND:${dateFormatted}T${pad(endHour)}${pad(startMin)}00`,
+      'STATUS:CONFIRMED',
+      'END:VEVENT',
+      'END:VCALENDAR',
+    ].join('\r\n');
+
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `Reservation_${booking.referenceCode}.ics`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    setCalendarDownloaded(true);
+    setTimeout(() => setCalendarDownloaded(false), 3000);
+  };
+
   return (
-    <div style={{ backgroundColor: theme.palette.background, fontFamily: theme.typography.body, overflowX: 'hidden', minHeight: '100vh' }}>
-      <AnnouncementBar text={`🍽️  ${theme.tagline} · Now Open Daily`} palette={theme.palette} />
-      <RestaurantNavbar theme={theme} />
-      <RestaurantHero theme={theme} />
-      <FeaturesStrip theme={theme} />
-      <RestaurantMenu theme={theme} />
-      <RestaurantStory theme={theme} />
-      <PromoSection theme={theme} />
-      <RestaurantGallery theme={theme} />
-      <Testimonials theme={theme} />
-      <LocationCTA theme={theme} />
-      {children}
-      <RestaurantFooter theme={theme} />
+    <div style={{
+      position: 'fixed',
+      inset: 0,
+      zIndex: 9999,
+      backgroundColor: 'rgba(0,0,0,0.82)',
+      backdropFilter: 'blur(10px)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '1.5rem',
+    }} onClick={handleClose}>
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{
+          backgroundColor: theme.palette.surface,
+          color: theme.palette.text,
+          borderRadius: '24px',
+          width: '100%',
+          maxWidth: '620px',
+          maxHeight: '92vh',
+          overflowY: 'auto',
+          padding: '2.5rem',
+          boxShadow: '0 25px 80px rgba(0,0,0,0.6)',
+          border: `1.5px solid ${theme.palette.border || `${theme.palette.text}20`}`,
+          position: 'relative',
+        }}
+      >
+        <button
+          onClick={handleClose}
+          aria-label="Close modal"
+          style={{
+            position: 'absolute',
+            top: '1.5rem',
+            right: '1.5rem',
+            background: 'transparent',
+            border: 'none',
+            color: theme.palette.text,
+            cursor: 'pointer',
+            padding: '0.4rem',
+            opacity: 0.7,
+            transition: 'opacity 0.2s',
+          }}
+          onMouseOver={e => e.currentTarget.style.opacity = '1'}
+          onMouseOut={e => e.currentTarget.style.opacity = '0.7'}
+        >
+          <X size={24} />
+        </button>
+
+        {hasExistingBooking && currentBooking ? (
+          /* ACTIVE RESERVATION PASS VIEW */
+          <div style={{ textAlign: 'center' }}>
+            <div style={{
+              width: '76px',
+              height: '76px',
+              borderRadius: '50%',
+              backgroundColor: `${theme.palette.primary}22`,
+              color: theme.palette.primary,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto 1.25rem',
+              border: `2px solid ${theme.palette.primary}55`,
+            }}>
+              <CheckCircle size={42} />
+            </div>
+
+            <div style={{
+              fontSize: '0.8rem',
+              fontWeight: 800,
+              textTransform: 'uppercase',
+              letterSpacing: '0.2em',
+              color: theme.palette.primary,
+              marginBottom: '0.35rem',
+            }}>
+              Confirmed Table Pass
+            </div>
+
+            <h3 style={{
+              fontFamily: theme.typography.heading,
+              fontSize: '2.2rem',
+              fontWeight: 900,
+              color: theme.palette.text,
+              margin: '0 0 0.5rem 0',
+            }}>
+              Table Reserved at {theme.name}
+            </h3>
+
+            <p style={{
+              fontFamily: theme.typography.body,
+              fontSize: '0.96rem',
+              color: theme.palette.textLight,
+              marginBottom: '1.75rem',
+            }}>
+              We are preparing your table. Present your digital pass or reference code upon arrival.
+            </p>
+
+            {/* Luxury Ticket Card */}
+            <div style={{
+              backgroundColor: theme.palette.background,
+              borderRadius: '16px',
+              padding: '1.75rem',
+              textAlign: 'left',
+              marginBottom: '1.75rem',
+              border: `1.5px solid ${theme.palette.primary}33`,
+              position: 'relative',
+              overflow: 'hidden',
+            }}>
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                right: 0,
+                backgroundColor: `${theme.palette.primary}18`,
+                color: theme.palette.primary,
+                fontSize: '0.72rem',
+                fontWeight: 800,
+                padding: '0.35rem 0.9rem',
+                borderBottomLeftRadius: '12px',
+                textTransform: 'uppercase',
+                letterSpacing: '0.08em',
+              }}>
+                VIP Reservation
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', paddingBottom: '1rem', borderBottom: `1px solid ${theme.palette.text}12` }}>
+                <div>
+                  <span style={{ fontSize: '0.75rem', color: theme.palette.textLight, textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block' }}>Reference Code</span>
+                  <strong style={{ fontSize: '1.35rem', fontFamily: theme.typography.heading, color: theme.palette.primary, letterSpacing: '0.05em' }}>
+                    {currentBooking.referenceCode}
+                  </strong>
+                </div>
+                <button
+                  onClick={() => handleCopyCode(currentBooking.referenceCode)}
+                  style={{
+                    backgroundColor: copied ? '#15803d' : 'transparent',
+                    border: `1px solid ${copied ? '#15803d' : `${theme.palette.text}30`}`,
+                    color: copied ? '#fff' : theme.palette.text,
+                    borderRadius: '8px',
+                    padding: '0.45rem 0.85rem',
+                    fontSize: '0.8rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.4rem',
+                    transition: 'all 0.2s',
+                  }}
+                >
+                  {copied ? <><Check size={14} /> Copied</> : <><Copy size={14} /> Copy Code</>}
+                </button>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem', fontSize: '0.92rem' }}>
+                <div>
+                  <span style={{ color: theme.palette.textLight, fontSize: '0.8rem', display: 'block' }}>Date & Time</span>
+                  <strong>{currentBooking.date} · {currentBooking.time}</strong>
+                </div>
+                <div>
+                  <span style={{ color: theme.palette.textLight, fontSize: '0.8rem', display: 'block' }}>Party & Area</span>
+                  <strong>{currentBooking.guests} Guests ({currentBooking.seatingArea})</strong>
+                </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '0.5rem', fontSize: '0.92rem' }}>
+                <div>
+                  <span style={{ color: theme.palette.textLight, fontSize: '0.8rem', display: 'block' }}>Reserved For</span>
+                  <strong>{currentBooking.guestName}</strong>
+                </div>
+                <div>
+                  <span style={{ color: theme.palette.textLight, fontSize: '0.8rem', display: 'block' }}>Contact</span>
+                  <strong>{currentBooking.guestPhone}</strong>
+                </div>
+              </div>
+
+              {currentBooking.specialRequests && (
+                <div style={{ marginTop: '0.85rem', paddingTop: '0.85rem', borderTop: `1px dashed ${theme.palette.text}15`, fontSize: '0.86rem' }}>
+                  <span style={{ color: theme.palette.textLight, fontSize: '0.78rem', display: 'block' }}>Special Notes & Selections:</span>
+                  <span style={{ color: theme.palette.text }}>{currentBooking.specialRequests}</span>
+                </div>
+              )}
+            </div>
+
+            {/* Actions for Confirmed Booking */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <div style={{ display: 'flex', gap: '0.75rem' }}>
+                <button
+                  onClick={handleDownloadCalendar}
+                  style={{
+                    flex: 1,
+                    backgroundColor: theme.palette.primary,
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: '10px',
+                    padding: '0.95rem',
+                    fontFamily: theme.typography.body,
+                    fontWeight: 700,
+                    fontSize: '0.92rem',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.5rem',
+                    boxShadow: `0 4px 16px ${theme.palette.primary}55`,
+                  }}
+                >
+                  <Calendar size={16} /> {calendarDownloaded ? 'Downloaded to Calendar!' : 'Add to Calendar (.ics)'}
+                </button>
+
+                <button
+                  onClick={() => {
+                    store.setBookingConfirmed(null);
+                    setViewingForm(true);
+                  }}
+                  style={{
+                    backgroundColor: 'transparent',
+                    border: `1.5px solid ${theme.palette.text}25`,
+                    color: theme.palette.text,
+                    borderRadius: '10px',
+                    padding: '0.95rem 1.4rem',
+                    fontFamily: theme.typography.body,
+                    fontWeight: 700,
+                    fontSize: '0.92rem',
+                    cursor: 'pointer',
+                  }}
+                >
+                  Cancel / Re-book
+                </button>
+              </div>
+
+              <button
+                onClick={handleClose}
+                style={{
+                  width: '100%',
+                  backgroundColor: 'transparent',
+                  border: 'none',
+                  color: theme.palette.textLight,
+                  padding: '0.65rem',
+                  fontSize: '0.88rem',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                }}
+              >
+                Close & Return to Storefront
+              </button>
+            </div>
+          </div>
+        ) : (
+          /* RESERVATION BOOKING FORM */
+          <>
+            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+              <div style={{
+                fontFamily: theme.typography.body,
+                fontSize: '0.8rem',
+                fontWeight: 700,
+                textTransform: 'uppercase',
+                letterSpacing: '0.2em',
+                color: theme.palette.primary,
+                marginBottom: '0.4rem',
+              }}>
+                Instant Table Reservation
+              </div>
+              <h2 style={{
+                fontFamily: theme.typography.heading,
+                fontSize: '2.1rem',
+                fontWeight: 900,
+                color: theme.palette.text,
+                margin: '0 0 0.5rem 0',
+              }}>
+                Book a Table at {theme.name}
+              </h2>
+              <p style={{
+                fontFamily: theme.typography.body,
+                fontSize: '0.92rem',
+                color: theme.palette.textLight,
+                margin: 0,
+              }}>
+                {theme.content.hours || 'Evening service from 5:00 PM · Immediate confirmation'}
+              </p>
+            </div>
+
+            {/* Tasting Selection Banner (If Items in Cart) */}
+            {cartItemsCount > 0 && (
+              <div style={{
+                backgroundColor: `${theme.palette.primary}18`,
+                border: `1.5px solid ${theme.palette.primary}55`,
+                borderRadius: '12px',
+                padding: '0.9rem 1.25rem',
+                marginBottom: '1.5rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                  <Sparkles size={18} color={theme.palette.primary} />
+                  <div>
+                    <strong style={{ fontSize: '0.9rem', color: theme.palette.text, display: 'block' }}>
+                      Attaching Curated Selection ({cartItemsCount} dishes)
+                    </strong>
+                    <span style={{ fontSize: '0.78rem', color: theme.palette.textLight }}>
+                      Dishes will be prepared and served tableside upon arrival
+                    </span>
+                  </div>
+                </div>
+                <strong style={{ color: theme.palette.primary, fontSize: '0.95rem' }}>
+                  ${cartSubtotal.toFixed(2)}
+                </strong>
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+              {/* Date & Time */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div>
+                  <label style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: '0.4rem' }}>
+                    Reservation Date
+                  </label>
+                  <input
+                    type="date"
+                    required
+                    min={todayStr}
+                    value={date}
+                    onChange={e => setDate(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem 1rem',
+                      borderRadius: '8px',
+                      border: `1.5px solid ${theme.palette.text}25`,
+                      backgroundColor: theme.palette.background,
+                      color: theme.palette.text,
+                      boxSizing: 'border-box',
+                      fontSize: '0.92rem',
+                    }}
+                  />
+                </div>
+                <div>
+                  <label style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: '0.4rem' }}>
+                    Time Slot
+                  </label>
+                  <select
+                    value={time}
+                    onChange={e => setTime(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem 1rem',
+                      borderRadius: '8px',
+                      border: `1.5px solid ${theme.palette.text}25`,
+                      backgroundColor: theme.palette.background,
+                      color: theme.palette.text,
+                      boxSizing: 'border-box',
+                      fontSize: '0.92rem',
+                    }}
+                  >
+                    {['17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30'].map(t => (
+                      <option key={t} value={t} style={{ backgroundColor: theme.palette.surface, color: theme.palette.text }}>
+                        {t} {t === '19:30' || t === '20:00' ? '✦ Prime Seating' : ''}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              {/* Guests & Seating Preference */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div>
+                  <label style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: '0.4rem' }}>
+                    Number of Guests
+                  </label>
+                  <select
+                    value={guests}
+                    onChange={e => setGuests(Number(e.target.value))}
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem 1rem',
+                      borderRadius: '8px',
+                      border: `1.5px solid ${theme.palette.text}25`,
+                      backgroundColor: theme.palette.background,
+                      color: theme.palette.text,
+                      boxSizing: 'border-box',
+                      fontSize: '0.92rem',
+                    }}
+                  >
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 10].map(n => (
+                      <option key={n} value={n} style={{ backgroundColor: theme.palette.surface, color: theme.palette.text }}>
+                        {n} {n === 1 ? 'Guest (Counter)' : 'Guests'}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: '0.4rem' }}>
+                    Seating Area
+                  </label>
+                  <select
+                    value={seating}
+                    onChange={e => setSeating(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem 1rem',
+                      borderRadius: '8px',
+                      border: `1.5px solid ${theme.palette.text}25`,
+                      backgroundColor: theme.palette.background,
+                      color: theme.palette.text,
+                      boxSizing: 'border-box',
+                      fontSize: '0.92rem',
+                    }}
+                  >
+                    {['Main Dining Room', 'Chef Counter', 'Private Salon', 'Garden Terrace'].map(s => (
+                      <option key={s} value={s} style={{ backgroundColor: theme.palette.surface, color: theme.palette.text }}>
+                        {s}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              {/* Guest Details */}
+              <div>
+                <label style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: '0.4rem' }}>
+                  Guest Name
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Adrian Vance"
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                  style={{
+                    width: '100%',
+                    padding: '0.75rem 1rem',
+                    borderRadius: '8px',
+                    border: `1.5px solid ${theme.palette.text}25`,
+                    backgroundColor: theme.palette.background,
+                    color: theme.palette.text,
+                    boxSizing: 'border-box',
+                    fontSize: '0.92rem',
+                  }}
+                />
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div>
+                  <label style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: '0.4rem' }}>
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    placeholder="adrian@example.com"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem 1rem',
+                      borderRadius: '8px',
+                      border: `1.5px solid ${theme.palette.text}25`,
+                      backgroundColor: theme.palette.background,
+                      color: theme.palette.text,
+                      boxSizing: 'border-box',
+                      fontSize: '0.92rem',
+                    }}
+                  />
+                </div>
+                <div>
+                  <label style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: '0.4rem' }}>
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    placeholder="(212) 555-0199"
+                    value={phone}
+                    onChange={e => setPhone(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem 1rem',
+                      borderRadius: '8px',
+                      border: `1.5px solid ${theme.palette.text}25`,
+                      backgroundColor: theme.palette.background,
+                      color: theme.palette.text,
+                      boxSizing: 'border-box',
+                      fontSize: '0.92rem',
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: '0.4rem' }}>
+                  Dietary Notes & Occasion
+                </label>
+                <textarea
+                  rows={2}
+                  placeholder="e.g. Anniversary dinner, gluten-free, reserve sommelier wine pairing..."
+                  value={specialRequests}
+                  onChange={e => setSpecialRequests(e.target.value)}
+                  style={{
+                    width: '100%',
+                    padding: '0.75rem 1rem',
+                    borderRadius: '8px',
+                    border: `1.5px solid ${theme.palette.text}25`,
+                    backgroundColor: theme.palette.background,
+                    color: theme.palette.text,
+                    boxSizing: 'border-box',
+                    fontSize: '0.92rem',
+                    fontFamily: theme.typography.body,
+                  }}
+                />
+              </div>
+
+              <button
+                type="submit"
+                style={{
+                  marginTop: '0.5rem',
+                  backgroundColor: theme.palette.primary,
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '10px',
+                  padding: '1.15rem',
+                  fontFamily: theme.typography.heading,
+                  fontWeight: 800,
+                  fontSize: '1.05rem',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.6rem',
+                  boxShadow: `0 8px 24px ${theme.palette.primary}66`,
+                  transition: 'transform 0.2s',
+                }}
+                onMouseOver={e => e.currentTarget.style.transform = 'translateY(-2px)'}
+                onMouseOut={e => e.currentTarget.style.transform = 'none'}
+              >
+                <CheckCircle size={18} /> Confirm Table Reservation
+              </button>
+            </form>
+          </>
+        )}
+      </div>
     </div>
   );
 }
 
+// 2. DISH QUICK-VIEW MODAL
+export function DishQuickViewModal({ theme }: { theme: RestaurantThemeConfig }) {
+  const store = useRestaurantStore();
+  const dish = store.selectedDish;
+  const [added, setAdded] = useState(false);
+
+  if (!dish) return null;
+
+  const handleAdd = () => {
+    store.addToCart(dish);
+    setAdded(true);
+    setTimeout(() => {
+      setAdded(false);
+      store.closeDishModal();
+    }, 1200);
+  };
+
+  return (
+    <div style={{
+      position: 'fixed',
+      inset: 0,
+      zIndex: 9999,
+      backgroundColor: 'rgba(0,0,0,0.82)',
+      backdropFilter: 'blur(8px)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '1.5rem',
+    }} onClick={() => store.closeDishModal()}>
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{
+          backgroundColor: theme.palette.surface,
+          color: theme.palette.text,
+          borderRadius: '20px',
+          width: '100%',
+          maxWidth: '720px',
+          maxHeight: '90vh',
+          overflowY: 'auto',
+          boxShadow: '0 25px 70px rgba(0,0,0,0.5)',
+          border: `1px solid ${theme.palette.border || `${theme.palette.text}20`}`,
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        <button
+          onClick={() => store.closeDishModal()}
+          aria-label="Close dish preview"
+          style={{
+            position: 'absolute',
+            top: '1rem',
+            right: '1rem',
+            zIndex: 10,
+            backgroundColor: 'rgba(0,0,0,0.6)',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '50%',
+            width: '36px',
+            height: '36px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <X size={20} />
+        </button>
+
+        {dish.image && (
+          <div style={{ height: '300px', width: '100%', overflow: 'hidden' }}>
+            <img
+              src={dish.image}
+              alt={dish.name}
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          </div>
+        )}
+
+        <div style={{ padding: '2.5rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
+            <div>
+              <div style={{
+                fontSize: '0.78rem',
+                textTransform: 'uppercase',
+                letterSpacing: '0.15em',
+                color: theme.palette.primary,
+                fontWeight: 700,
+                marginBottom: '0.35rem',
+              }}>
+                Artisanal Preparation
+              </div>
+              <h2 style={{
+                fontFamily: theme.typography.heading,
+                fontSize: '2rem',
+                fontWeight: 900,
+                color: theme.palette.text,
+                margin: 0,
+              }}>
+                {dish.name}
+              </h2>
+            </div>
+            <span style={{
+              fontFamily: theme.typography.heading,
+              fontSize: '2rem',
+              fontWeight: 900,
+              color: theme.palette.primary,
+            }}>
+              {dish.price}
+            </span>
+          </div>
+
+          <p style={{
+            fontFamily: theme.typography.body,
+            fontSize: '1.05rem',
+            color: theme.palette.textLight,
+            lineHeight: 1.7,
+            marginBottom: '1.5rem',
+          }}>
+            {dish.desc}
+          </p>
+
+          {/* Sommelier & Dietary Callouts */}
+          <div style={{
+            backgroundColor: theme.palette.background,
+            borderRadius: '12px',
+            padding: '1.25rem 1.5rem',
+            marginBottom: '2rem',
+            border: `1px solid ${theme.palette.text}10`,
+          }}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.6rem',
+              color: theme.palette.primary,
+              fontWeight: 700,
+              fontSize: '0.92rem',
+              marginBottom: '0.4rem',
+            }}>
+              <Wine size={16} /> Sommelier Recommendation
+            </div>
+            <p style={{ margin: 0, fontSize: '0.92rem', color: theme.palette.text }}>
+              {dish.winePairing || 'Paired harmoniously with Grand Cru cellar selections or artisan smoked botanical infusions.'}
+            </p>
+          </div>
+
+          <div style={{ display: 'flex', gap: '1rem' }}>
+            <button
+              onClick={handleAdd}
+              style={{
+                flex: 1,
+                backgroundColor: added ? '#16a34a' : theme.palette.primary,
+                color: '#ffffff',
+                border: 'none',
+                borderRadius: '10px',
+                padding: '1.1rem',
+                fontFamily: theme.typography.heading,
+                fontWeight: 800,
+                fontSize: '1rem',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem',
+                transition: 'background 0.25s',
+              }}
+            >
+              {added ? (
+                <>
+                  <CheckCircle size={18} /> Added to Selection
+                </>
+              ) : (
+                <>
+                  <Plus size={18} /> Add to Tasting Selection
+                </>
+              )}
+            </button>
+            <button
+              onClick={() => {
+                store.closeDishModal();
+                store.openReservation();
+              }}
+              style={{
+                backgroundColor: 'transparent',
+                border: `1.5px solid ${theme.palette.primary}`,
+                color: theme.palette.primary,
+                borderRadius: '10px',
+                padding: '1.1rem 1.75rem',
+                fontFamily: theme.typography.heading,
+                fontWeight: 700,
+                fontSize: '1rem',
+                cursor: 'pointer',
+              }}
+            >
+              Book Table
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 3. ORDER / TASTING SELECTION DRAWER
+export function OrderDrawer({ theme }: { theme: RestaurantThemeConfig }) {
+  const store = useRestaurantStore();
+  const [orderCode, setOrderCode] = useState<string | null>(null);
+
+  if (!store.isCartOpen) return null;
+
+  const subtotal = store.cart.reduce((sum, entry) => {
+    const raw = entry.item.price.replace(/[^0-9.]/g, '');
+    const priceNum = parseFloat(raw) || 32;
+    return sum + priceNum * entry.quantity;
+  }, 0);
+
+  const sampleItems: MenuItem[] = (theme.menu?.[0]?.items?.slice(0, 3)) || [
+    { name: '45-Day Dry-Aged Wagyu BMS 11', price: '$95', desc: 'Seared over white oak coals, bone marrow glaze', chefNote: 'Signature' },
+    { name: 'Ossetra Caviar Tartlet', price: '$48', desc: 'Buckwheat tart, meyer lemon crème fraîche', chefNote: 'Starter' },
+    { name: 'Smoked Dark Chocolate Ganache', price: '$24', desc: 'Single-origin 74% cacao with gold leaf', chefNote: 'Dessert' },
+  ];
+
+  const handleCheckoutToReservation = () => {
+    store.closeCart();
+    store.openReservation();
+  };
+
+  const handleConfirmPreOrder = () => {
+    const code = `ORD-${Math.floor(100000 + Math.random() * 900000)}`;
+    setOrderCode(code);
+  };
+
+  const handleExploreMenu = () => {
+    store.closeCart();
+    const el = document.getElementById('menu');
+    if (el) {
+      const navOffset = 80;
+      const elementPosition = el.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <div style={{
+      position: 'fixed',
+      inset: 0,
+      zIndex: 9999,
+      backgroundColor: 'rgba(0,0,0,0.72)',
+      backdropFilter: 'blur(8px)',
+    }} onClick={() => store.closeCart()}>
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          bottom: 0,
+          width: '100%',
+          maxWidth: '460px',
+          backgroundColor: theme.palette.surface,
+          color: theme.palette.text,
+          boxShadow: '-15px 0 50px rgba(0,0,0,0.5)',
+          display: 'flex',
+          flexDirection: 'column',
+          borderLeft: `1px solid ${theme.palette.border || `${theme.palette.text}20`}`,
+        }}
+      >
+        {/* Header */}
+        <div style={{
+          padding: '1.75rem 2rem',
+          borderBottom: `1px solid ${theme.palette.text}15`,
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+          <div>
+            <h3 style={{
+              fontFamily: theme.typography.heading,
+              fontSize: '1.45rem',
+              fontWeight: 800,
+              margin: 0,
+              color: theme.palette.text,
+            }}>
+              Tasting Selection
+            </h3>
+            <span style={{ fontSize: '0.82rem', color: theme.palette.textLight }}>
+              {store.cart.length} {store.cart.length === 1 ? 'item' : 'items'} in your evening degustation
+            </span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            {store.cart.length > 0 && !orderCode && (
+              <button
+                onClick={() => store.clearCart()}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  color: theme.palette.textLight,
+                  fontSize: '0.78rem',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  padding: '0.3rem 0.5rem',
+                  borderRadius: '4px',
+                }}
+              >
+                Clear All
+              </button>
+            )}
+            <button
+              onClick={() => store.closeCart()}
+              aria-label="Close cart drawer"
+              style={{
+                background: 'transparent',
+                border: 'none',
+                color: theme.palette.text,
+                cursor: 'pointer',
+                padding: '0.4rem',
+              }}
+            >
+              <X size={22} />
+            </button>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div style={{ flex: 1, overflowY: 'auto', padding: '1.5rem 2rem' }}>
+          {orderCode ? (
+            /* ORDER CONFIRMATION VIEW */
+            <div style={{ textAlign: 'center', padding: '2.5rem 1rem' }}>
+              <div style={{
+                width: '68px',
+                height: '68px',
+                borderRadius: '50%',
+                backgroundColor: `${theme.palette.primary}22`,
+                color: theme.palette.primary,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 1.5rem',
+                border: `2px solid ${theme.palette.primary}55`,
+              }}>
+                <CheckCircle size={38} />
+              </div>
+              <h4 style={{
+                fontFamily: theme.typography.heading,
+                fontSize: '1.8rem',
+                fontWeight: 900,
+                color: theme.palette.text,
+                margin: '0 0 0.5rem 0',
+              }}>
+                Tasting Order Received
+              </h4>
+              <p style={{ color: theme.palette.textLight, fontSize: '0.92rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>
+                Your custom tasting selection has been prepared for our culinary brigade.
+              </p>
+
+              <div style={{
+                backgroundColor: theme.palette.background,
+                borderRadius: '12px',
+                padding: '1.25rem',
+                border: `1px solid ${theme.palette.text}15`,
+                marginBottom: '2rem',
+                textAlign: 'left',
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', fontSize: '0.88rem' }}>
+                  <span style={{ color: theme.palette.textLight }}>Order Reference:</span>
+                  <strong style={{ color: theme.palette.primary }}>{orderCode}</strong>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.88rem' }}>
+                  <span style={{ color: theme.palette.textLight }}>Total Amount:</span>
+                  <strong>${subtotal.toFixed(2)}</strong>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                <button
+                  onClick={handleCheckoutToReservation}
+                  style={{
+                    backgroundColor: theme.palette.primary,
+                    color: '#fff',
+                    border: 'none',
+                    borderRadius: '10px',
+                    padding: '1rem',
+                    fontFamily: theme.typography.heading,
+                    fontWeight: 700,
+                    fontSize: '1rem',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.5rem',
+                    boxShadow: `0 4px 16px ${theme.palette.primary}66`,
+                  }}
+                >
+                  <Calendar size={18} /> Book Table with This Order
+                </button>
+                <button
+                  onClick={() => {
+                    store.clearCart();
+                    setOrderCode(null);
+                    store.closeCart();
+                  }}
+                  style={{
+                    backgroundColor: 'transparent',
+                    border: `1px solid ${theme.palette.text}25`,
+                    color: theme.palette.text,
+                    borderRadius: '10px',
+                    padding: '0.85rem',
+                    fontWeight: 600,
+                    fontSize: '0.92rem',
+                    cursor: 'pointer',
+                  }}
+                >
+                  Done & Close Drawer
+                </button>
+              </div>
+            </div>
+          ) : store.cart.length === 0 ? (
+            /* EMPTY STATE WITH QUICK SUGGESTIONS */
+            <div style={{ padding: '2rem 0' }}>
+              <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+                <ShoppingBag size={48} color={theme.palette.textLight} style={{ opacity: 0.35, marginBottom: '1rem' }} />
+                <h4 style={{ fontFamily: theme.typography.heading, fontSize: '1.4rem', fontWeight: 800, margin: '0 0 0.5rem 0' }}>
+                  Your tasting selection is empty
+                </h4>
+                <p style={{ color: theme.palette.textLight, fontSize: '0.92rem', lineHeight: 1.5, margin: '0 0 1.5rem 0' }}>
+                  Add signature courses from our seasonal menu to design your personalized culinary journey.
+                </p>
+                <button
+                  onClick={handleExploreMenu}
+                  style={{
+                    backgroundColor: theme.palette.primary,
+                    color: '#fff',
+                    border: 'none',
+                    borderRadius: '8px',
+                    padding: '0.75rem 1.75rem',
+                    fontFamily: theme.typography.body,
+                    fontWeight: 700,
+                    fontSize: '0.9rem',
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.4rem',
+                    boxShadow: `0 4px 14px ${theme.palette.primary}55`,
+                  }}
+                >
+                  Explore Full Menu <ArrowRight size={15} />
+                </button>
+              </div>
+
+              {/* Quick Add Recommendations */}
+              <div>
+                <div style={{
+                  fontSize: '0.78rem',
+                  fontWeight: 800,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.12em',
+                  color: theme.palette.primary,
+                  marginBottom: '1rem',
+                }}>
+                  Chef's Recommended Signatures
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                  {sampleItems.map((item, idx) => (
+                    <div
+                      key={idx}
+                      style={{
+                        backgroundColor: theme.palette.background,
+                        borderRadius: '12px',
+                        padding: '1rem',
+                        border: `1px solid ${theme.palette.text}10`,
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <div style={{ flex: 1, paddingRight: '0.75rem' }}>
+                        <div style={{ fontWeight: 700, fontSize: '0.92rem', color: theme.palette.text }}>
+                          {item.name}
+                        </div>
+                        <div style={{ color: theme.palette.primary, fontWeight: 800, fontSize: '0.88rem', marginTop: '0.15rem' }}>
+                          {item.price}
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => store.addToCart(item)}
+                        style={{
+                          backgroundColor: `${theme.palette.primary}18`,
+                          border: `1.5px solid ${theme.palette.primary}`,
+                          color: theme.palette.primary,
+                          borderRadius: '8px',
+                          padding: '0.45rem 0.85rem',
+                          fontSize: '0.82rem',
+                          fontWeight: 700,
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.35rem',
+                          transition: 'all 0.2s',
+                        }}
+                        onMouseOver={e => {
+                          e.currentTarget.style.backgroundColor = theme.palette.primary;
+                          e.currentTarget.style.color = '#fff';
+                        }}
+                        onMouseOut={e => {
+                          e.currentTarget.style.backgroundColor = `${theme.palette.primary}18`;
+                          e.currentTarget.style.color = theme.palette.primary;
+                        }}
+                      >
+                        <Plus size={14} /> Add
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            /* ACTIVE CART ITEMS */
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {store.cart.map((entry, i) => (
+                <div
+                  key={i}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    backgroundColor: theme.palette.background,
+                    borderRadius: '14px',
+                    padding: '1rem 1.25rem',
+                    border: `1px solid ${theme.palette.text}12`,
+                  }}
+                >
+                  <div style={{ flex: 1, paddingRight: '1rem' }}>
+                    <div style={{ fontWeight: 700, fontSize: '0.96rem', color: theme.palette.text }}>
+                      {entry.item.name}
+                    </div>
+                    <div style={{ color: theme.palette.primary, fontWeight: 800, fontSize: '0.92rem', marginTop: '0.2rem' }}>
+                      {entry.item.price}
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', backgroundColor: theme.palette.surface, borderRadius: '8px', border: `1px solid ${theme.palette.text}20` }}>
+                      <button
+                        onClick={() => store.updateCartQuantity(entry.item.name, -1)}
+                        aria-label="Decrease quantity"
+                        style={{
+                          width: '28px',
+                          height: '28px',
+                          border: 'none',
+                          backgroundColor: 'transparent',
+                          color: theme.palette.text,
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <Minus size={13} />
+                      </button>
+                      <span style={{ fontWeight: 800, fontSize: '0.88rem', minWidth: '22px', textAlign: 'center' }}>
+                        {entry.quantity}
+                      </span>
+                      <button
+                        onClick={() => store.updateCartQuantity(entry.item.name, 1)}
+                        aria-label="Increase quantity"
+                        style={{
+                          width: '28px',
+                          height: '28px',
+                          border: 'none',
+                          backgroundColor: 'transparent',
+                          color: theme.palette.text,
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <Plus size={13} />
+                      </button>
+                    </div>
+
+                    <button
+                      onClick={() => store.removeFromCart(entry.item.name)}
+                      aria-label="Remove item"
+                      style={{
+                        background: 'transparent',
+                        border: 'none',
+                        color: '#ef4444',
+                        cursor: 'pointer',
+                        padding: '0.4rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        opacity: 0.7,
+                      }}
+                      onMouseOver={e => e.currentTarget.style.opacity = '1'}
+                      onMouseOut={e => e.currentTarget.style.opacity = '0.7'}
+                      title="Remove from selection"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Footer / Checkout */}
+        {!orderCode && store.cart.length > 0 && (
+          <div style={{
+            padding: '1.75rem 2rem',
+            borderTop: `1px solid ${theme.palette.text}15`,
+            backgroundColor: theme.palette.background,
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem', fontSize: '0.92rem' }}>
+              <span style={{ color: theme.palette.textLight }}>Tasting Subtotal:</span>
+              <strong style={{ color: theme.palette.text }}>${subtotal.toFixed(2)}</strong>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.25rem', fontSize: '0.82rem' }}>
+              <span style={{ color: theme.palette.textLight }}>Sommelier Pairing & Gratuity:</span>
+              <span style={{ color: '#16a34a', fontWeight: 600 }}>Included tableside</span>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+              <button
+                onClick={handleCheckoutToReservation}
+                style={{
+                  width: '100%',
+                  backgroundColor: theme.palette.primary,
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '10px',
+                  padding: '1rem',
+                  fontFamily: theme.typography.heading,
+                  fontWeight: 800,
+                  fontSize: '1rem',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.5rem',
+                  boxShadow: `0 6px 20px ${theme.palette.primary}66`,
+                  transition: 'transform 0.2s',
+                }}
+                onMouseOver={e => e.currentTarget.style.transform = 'translateY(-1px)'}
+                onMouseOut={e => e.currentTarget.style.transform = 'none'}
+              >
+                <Calendar size={17} /> Reserve Table with This Selection <ArrowRight size={17} />
+              </button>
+
+              <button
+                onClick={handleConfirmPreOrder}
+                style={{
+                  width: '100%',
+                  backgroundColor: 'transparent',
+                  border: `1.5px solid ${theme.palette.primary}66`,
+                  color: theme.palette.text,
+                  borderRadius: '10px',
+                  padding: '0.8rem',
+                  fontFamily: theme.typography.body,
+                  fontWeight: 700,
+                  fontSize: '0.88rem',
+                  cursor: 'pointer',
+                }}
+              >
+                Pre-Order Courses Only
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// 4. FULLSCREEN GALLERY LIGHTBOX
+export function GalleryLightbox({ theme }: { theme: RestaurantThemeConfig }) {
+  const store = useRestaurantStore();
+  const idx = store.activeLightboxIndex;
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (idx === null) return;
+      if (e.key === 'Escape') store.closeLightbox();
+      if (e.key === 'ArrowLeft') {
+        const next = (idx - 1 + theme.images.gallery.length) % theme.images.gallery.length;
+        store.openLightbox(next);
+      }
+      if (e.key === 'ArrowRight') {
+        const next = (idx + 1) % theme.images.gallery.length;
+        store.openLightbox(next);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [idx, theme.images.gallery.length]);
+
+  if (idx === null) return null;
+
+  const currentImage = theme.images.gallery[idx];
+
+  return (
+    <div
+      style={{
+        position: 'fixed',
+        inset: 0,
+        zIndex: 99999,
+        backgroundColor: 'rgba(0,0,0,0.94)',
+        backdropFilter: 'blur(10px)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '2rem',
+      }}
+      onClick={() => store.closeLightbox()}
+    >
+      <button
+        onClick={() => store.closeLightbox()}
+        aria-label="Close lightbox"
+        style={{
+          position: 'absolute',
+          top: '2rem',
+          right: '2.5rem',
+          background: 'transparent',
+          border: 'none',
+          color: '#ffffff',
+          cursor: 'pointer',
+          padding: '0.5rem',
+        }}
+      >
+        <X size={32} />
+      </button>
+
+      {/* Nav Left */}
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          const next = (idx - 1 + theme.images.gallery.length) % theme.images.gallery.length;
+          store.openLightbox(next);
+        }}
+        aria-label="Previous image"
+        style={{
+          position: 'absolute',
+          left: '2rem',
+          backgroundColor: 'rgba(255,255,255,0.1)',
+          border: 'none',
+          borderRadius: '50%',
+          width: '54px',
+          height: '54px',
+          color: '#ffffff',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <ChevronLeft size={28} />
+      </button>
+
+      {/* Main Image */}
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{
+          maxWidth: '90vw',
+          maxHeight: '80vh',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <img
+          src={currentImage.src}
+          alt={currentImage.alt}
+          style={{
+            maxWidth: '100%',
+            maxHeight: '74vh',
+            objectFit: 'contain',
+            borderRadius: '12px',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.8)',
+          }}
+        />
+        <div style={{
+          marginTop: '1.25rem',
+          textAlign: 'center',
+          color: '#ffffff',
+          fontFamily: theme.typography.body,
+        }}>
+          <p style={{ fontSize: '1.1rem', fontWeight: 600, margin: '0 0 0.35rem 0' }}>
+            {currentImage.alt}
+          </p>
+          <span style={{ fontSize: '0.85rem', color: theme.palette.primary }}>
+            {idx + 1} of {theme.images.gallery.length}
+          </span>
+        </div>
+      </div>
+
+      {/* Nav Right */}
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          const next = (idx + 1) % theme.images.gallery.length;
+          store.openLightbox(next);
+        }}
+        aria-label="Next image"
+        style={{
+          position: 'absolute',
+          right: '2rem',
+          backgroundColor: 'rgba(255,255,255,0.1)',
+          border: 'none',
+          borderRadius: '50%',
+          width: '54px',
+          height: '54px',
+          color: '#ffffff',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <ChevronRight size={28} />
+      </button>
+    </div>
+  );
+}
+
+// ─── MASTER PAGE CONTAINER ──────────────────────────────────────────────────
+
+export function RestaurantPage({
+  theme,
+  children,
+}: {
+  theme: RestaurantThemeConfig;
+  children?: React.ReactNode;
+}) {
+  const [isReservationOpen, setIsReservationOpen] = useState(false);
+  const [selectedDish, setSelectedDish] = useState<MenuItem | null>(null);
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [activeLightboxIndex, setActiveLightboxIndex] = useState<number | null>(null);
+  const [bookingConfirmed, setBookingConfirmed] = useState<ReservationDetails | null>(null);
+
+  const openReservation = () => setIsReservationOpen(true);
+  const closeReservation = () => setIsReservationOpen(false);
+
+  const openDishModal = (dish: MenuItem) => setSelectedDish(dish);
+  const closeDishModal = () => setSelectedDish(null);
+
+  const openCart = () => setIsCartOpen(true);
+  const closeCart = () => setIsCartOpen(false);
+
+  const addToCart = (dish: MenuItem) => {
+    setCart(prev => {
+      const idx = prev.findIndex(entry => entry.item.name === dish.name);
+      if (idx >= 0) {
+        const next = [...prev];
+        next[idx].quantity += 1;
+        return next;
+      }
+      return [...prev, { item: dish, quantity: 1 }];
+    });
+  };
+
+  const removeFromCart = (dishName: string) => {
+    setCart(prev => prev.filter(entry => entry.item.name !== dishName));
+  };
+
+  const updateCartQuantity = (dishName: string, delta: number) => {
+    setCart(prev => {
+      return prev
+        .map(entry => {
+          if (entry.item.name === dishName) {
+            const newQty = entry.quantity + delta;
+            return newQty > 0 ? { ...entry, quantity: newQty } : null;
+          }
+          return entry;
+        })
+        .filter(Boolean) as CartItem[];
+    });
+  };
+
+  const clearCart = () => setCart([]);
+
+  const openLightbox = (index: number) => setActiveLightboxIndex(index);
+  const closeLightbox = () => setActiveLightboxIndex(null);
+
+  const storeValue: RestaurantContextType = {
+    isReservationOpen,
+    openReservation,
+    closeReservation,
+    selectedDish,
+    openDishModal,
+    closeDishModal,
+    cart,
+    isCartOpen,
+    openCart,
+    closeCart,
+    addToCart,
+    removeFromCart,
+    updateCartQuantity,
+    clearCart,
+    activeLightboxIndex,
+    openLightbox,
+    closeLightbox,
+    bookingConfirmed,
+    setBookingConfirmed,
+  };
+
+  return (
+    <RestaurantContext.Provider value={storeValue}>
+      <div style={{
+        backgroundColor: theme.palette.background,
+        color: theme.palette.text,
+        fontFamily: theme.typography.body,
+        overflowX: 'hidden',
+        minHeight: '100vh',
+      }}>
+        <AnnouncementBar text={`🍽️  ${theme.tagline} · Evening Bookings Now Open`} palette={theme.palette} />
+        <RestaurantNavbar theme={theme} />
+        <RestaurantHero theme={theme} />
+        <FeaturesStrip theme={theme} />
+        <RestaurantMenu theme={theme} />
+        <TastingMenuExperience theme={theme} />
+        <RestaurantStory theme={theme} />
+        <PromoSection theme={theme} />
+        <RestaurantGallery theme={theme} />
+        <Testimonials theme={theme} />
+        <LocationCTA theme={theme} />
+        <NewsletterSection theme={theme} />
+        {children}
+        <RestaurantFooter theme={theme} />
+
+        {/* Global Modals & Drawers */}
+        <ReservationModal theme={theme} />
+        <DishQuickViewModal theme={theme} />
+        <OrderDrawer theme={theme} />
+        <GalleryLightbox theme={theme} />
+      </div>
+    </RestaurantContext.Provider>
+  );
+}

@@ -1,185 +1,201 @@
-// @ts-nocheck
 import React, { useState } from 'react';
-import './bakery-shared.css';
+import './bakery-production.css';
 
-const img = (id: string, w = 1600) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
+const img = (id: string, w = 1200) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
 
-const SugarPetal = () => {
-  const [activeCategory, setActiveCategory] = useState('All');
+export default function SugarPetal() {
+  const [cartCount, setCartCount] = useState(0);
+  const [cartNotice, setCartNotice] = useState<string | null>(null);
+  const [cupcakeBox, setCupcakeBox] = useState('Box of 6 ($24)');
 
-  const headingStyle = { fontFamily: '"Pacifico", cursive', color: '#f472b6' };
-  const navStyle = { color: '#831843', textDecoration: 'none', marginLeft: '2rem', fontWeight: 700 };
+  const addToCart = (item: string) => {
+    setCartCount(c => c + 1);
+    setCartNotice(`Added "${item}" to party box.`);
+    setTimeout(() => setCartNotice(null), 3000);
+  };
 
   return (
-    <div className="bakery-theme" style={{ fontFamily: '"Quicksand", sans-serif', color: '#831843', backgroundColor: '#fdf2f8' }}>
+    <div className="bk-root" style={{
+      '--bk-cream-50': '#fff1f8',
+      '--bk-cream-100': '#fce7f3',
+      '--bk-hearth-900': '#500724',
+      '--bk-amber-600': '#db2777',
+      '--bk-golden-500': '#ec4899'
+    } as React.CSSProperties}>
+      {cartNotice && (
+        <div style={{
+          position: 'fixed',
+          bottom: '24px',
+          right: '24px',
+          background: 'var(--bk-hearth-900)',
+          color: '#fff',
+          padding: '12px 24px',
+          borderRadius: '8px',
+          zIndex: 9999,
+          fontSize: '0.9rem'
+        }}>
+          🧁 {cartNotice}
+        </div>
+      )}
+
+      {/* 1. Utility Strip */}
+      <div className="bk-utility-strip">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+          <span className="bk-utility-badge" style={{ background: 'rgba(236, 72, 153, 0.25)', color: '#fbcfe8' }}>
+            CELEBRATION BOUTIQUE
+          </span>
+          <span>Freshly Frosted Cupcakes & Party Bakes · Order by 12 PM for Same-Day Party Drops</span>
+        </div>
+        <div style={{ fontSize: '0.82rem', color: '#fbcfe8' }}>
+          Custom Birthday Plaque Included with Every Cake Order
+        </div>
+      </div>
+
       {/* Navigation */}
-      <nav className="bakery-nav" style={{ backgroundColor: '#ffffff', borderBottom: '3px dashed #fbcfe8' }}>
-        <div style={{ ...headingStyle, fontSize: '2.2rem', margin: 0, textShadow: '1px 1px 0px #fbcfe8' }}>Sugar Petal</div>
+      <nav style={{
+        background: '#ffffff',
+        padding: '1.25rem 6vw',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        borderBottom: '1px solid var(--bk-border-soft)',
+        position: 'sticky',
+        top: 0,
+        zIndex: 100
+      }}>
         <div>
-          <a href="/templates/category/bakery" style={{ marginRight: '2rem', textDecoration: 'none', fontWeight: 'bold', color: '#831843' }}>← Back to Bakery</a>
-          <a href="#cupcakes" style={navStyle}>Cupcakes</a>
-          <a href="#custom" style={navStyle}>Custom Cakes</a>
-          <a href="#story" style={navStyle}>Our Story</a>
-          <button className="bakery-btn" style={{ marginLeft: '2rem', backgroundColor: '#f472b6', borderRadius: '50px', fontWeight: 700 }}>Order Treats</button>
+          <a href="/" style={{
+            fontFamily: '"Quicksand", sans-serif',
+            fontSize: '2rem',
+            fontWeight: 800,
+            color: 'var(--bk-amber-600)',
+            textDecoration: 'none'
+          }}>
+            Sugar Petal<span style={{ color: 'var(--bk-golden-500)' }}>✿</span>
+          </a>
+          <span style={{ display: 'block', fontSize: '0.75rem', letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--bk-toast-700)' }}>
+            Celebration Cakes & Floral Confectionery
+          </span>
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+          <a href="/templates/category/bakery" style={{ fontSize: '0.88rem', fontWeight: 600, color: 'var(--bk-toast-700)', textDecoration: 'none' }}>← Category Index</a>
+          <button
+            onClick={() => document.getElementById('cupcakes')?.scrollIntoView({ behavior: 'smooth' })}
+            style={{
+              background: 'var(--bk-amber-600)',
+              color: '#fff',
+              border: 'none',
+              padding: '0.55rem 1.25rem',
+              borderRadius: 'var(--bk-radius-pill)',
+              fontWeight: 700,
+              fontSize: '0.88rem',
+              cursor: 'pointer'
+            }}
+          >
+            Party Box ({cartCount})
+          </button>
         </div>
       </nav>
 
-      {/* Hero */}
-      <header className="bakery-hero" style={{ backgroundImage: `url(${img('photo-1486427944299-d1955d23e34d')})`, minHeight: '85vh' }}>
-        <div className="bakery-hero-overlay" style={{ background: 'linear-gradient(to right, rgba(131,24,67,0.7), rgba(244,114,182,0.4))' }}></div>
-        <div className="bakery-hero-content">
-          <h1 style={{ ...headingStyle, fontSize: '5rem', margin: '0 0 1rem 0', color: '#ffffff', textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>Life is Sweet.</h1>
-          <p style={{ fontSize: '1.5rem', marginBottom: '2.5rem', lineHeight: 1.6, color: '#fdf2f8', fontWeight: 600 }}>Brighten your day with our colorful, whimsical cupcakes, cookies, and custom treats.</p>
-          <button className="bakery-btn" style={{ backgroundColor: '#f472b6', borderRadius: '50px', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(244,114,182,0.5)' }}>See Our Flavors</button>
+      {/* 2. Hero */}
+      <header className="bk-hero" style={{ backgroundImage: `url(${img('photo-1486427944299-d1955d23e34d', 1600)})` }}>
+        <div className="bk-hero-scrim" style={{ background: 'linear-gradient(90deg, rgba(80,7,36,0.92) 0%, rgba(80,7,36,0.68) 60%, rgba(80,7,36,0.25) 100%)' }} />
+        <div className="bk-hero-card">
+          <span className="bk-hero-tagline" style={{ color: '#fbcfe8' }}>HAND-PIPED BUTTERCREAM & SPRINKLES</span>
+          <h1 className="bk-hero-title">Life is Worth Celebrating Every Single Day.</h1>
+          <p className="bk-hero-desc">
+            Vibrant gourmet cupcakes, custom birthday cakes, and dessert platters crafted with pure Madagascar vanilla, fresh berries, and whimsical floral touches.
+          </p>
+          <div className="bk-hero-actions">
+            <a href="#cupcakes" className="bk-btn-primary" style={{ background: 'var(--bk-amber-600)' }}>Shop Cupcake Flavors →</a>
+            <a href="#custom" className="bk-btn-secondary">Custom Cake Inquiry 🎂</a>
+          </div>
         </div>
       </header>
 
-      {/* Bakery Headline & Fresh Today */}
-      <section className="bakery-section">
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <h2 className="bakery-title" style={{ ...headingStyle, fontSize: '3rem' }}>Freshly Frosted</h2>
-          <p className="bakery-subtitle" style={{ color: '#be185d', fontSize: '1.2rem' }}>Made from scratch every morning with a whole lot of love and sprinkles.</p>
-          <div className="bakery-grid">
-            {[
-              { title: 'Funfetti Explosion', desc: 'Vanilla cake loaded with sprinkles.', img: 'photo-1486427944299-d1955d23e34d' },
-              { title: 'Red Velvet Dream', desc: 'Classic red velvet with cream cheese frosting.', img: 'photo-1567188040759-fb8a883dc6d8' },
-              { title: 'Chocolate Fudge', desc: 'Rich chocolate cake with fudge frosting.', img: 'photo-1534432182912-63863115e106' }
-            ].map((item, i) => (
-              <div key={i} className="bakery-card" style={{ borderRadius: '24px', border: '3px solid #fdf2f8' }}>
-                <img src={img(item.img, 800)} alt={item.title} style={{ height: '220px' }} />
-                <div className="bakery-card-content" style={{ backgroundColor: '#ffffff', textAlign: 'center' }}>
-                  <h3 style={{ ...headingStyle, fontSize: '1.8rem', color: '#f472b6' }}>{item.title}</h3>
-                  <p style={{ color: '#831843', fontWeight: 500 }}>{item.desc}</p>
+      {/* 3. Proof Bar */}
+      <section className="bk-proof-strip">
+        <div className="bk-proof-grid">
+          <div className="bk-proof-item">
+            <span className="bk-proof-stat">50,000+</span>
+            <span className="bk-proof-label">Cupcakes Hand-Piped</span>
+          </div>
+          <div className="bk-proof-item">
+            <span className="bk-proof-stat">100% Real</span>
+            <span className="bk-proof-label">Farm Butter & Madagascar Vanilla</span>
+          </div>
+          <div className="bk-proof-item">
+            <span className="bk-proof-stat">Eggless Pure</span>
+            <span className="bk-proof-label">Dedicated Vegetarian Flavor Line</span>
+          </div>
+          <div className="bk-proof-item">
+            <span className="bk-proof-stat">4.97★</span>
+            <span className="bk-proof-label">From 2,100+ Party Planners</span>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Cupcakes Grid */}
+      <section id="cupcakes" className="bk-section">
+        <div className="bk-section-header">
+          <span className="bk-section-eyebrow">Freshly Frosted Today</span>
+          <h2 className="bk-section-title">Signature Cupcake Flavors</h2>
+          <p className="bk-section-subtitle">Baked fresh from scratch each morning using heirloom recipe bases.</p>
+        </div>
+
+        <div className="bk-occasion-grid">
+          {[
+            { title: 'Funfetti Birthday Explosion', price: '$4.25', desc: 'Vanilla bean sponge with rainbow sprinkles & fluffy vanilla frosting.', img: 'photo-1486427944299-d1955d23e34d' },
+            { title: 'Red Velvet Dream Cloud', price: '$4.50', desc: 'Silky cocoa-buttermilk sponge topped with tangy whipped cream cheese.', img: 'photo-1567188040759-fb8a883dc6d8' },
+            { title: 'Salted Caramel Chocolate Fudge', price: '$4.50', desc: 'Dark Valrhona chocolate cake filled with gooey salted caramel center.', img: 'photo-1534432182912-63863115e106' },
+            { title: 'Wild Strawberry Lemon Blossom', price: '$4.25', desc: 'Zesty lemon sponge with house wild strawberry buttercream frosting.', img: 'photo-1558961363-fa8fdf82db35' }
+          ].map((item, idx) => (
+            <div key={idx} className="bk-occasion-card">
+              <div className="bk-occasion-media">
+                <img src={img(item.img, 700)} alt={item.title} loading="lazy" />
+              </div>
+              <div className="bk-occasion-content">
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
+                  <h3 style={{ margin: 0 }}>{item.title}</h3>
+                  <strong style={{ color: 'var(--bk-amber-600)' }}>{item.price}</strong>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Bread & Pastry Collection (Menu) */}
-      <section id="cupcakes" className="bakery-section" style={{ backgroundColor: '#ffffff', borderRadius: '40px', margin: '0 2rem', padding: '6rem 3rem', border: '2px dashed #fbcfe8' }}>
-        <h2 className="bakery-title" style={{ ...headingStyle, fontSize: '3rem' }}>Sweet Menu</h2>
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          {['All', 'Cupcakes', 'Cookies', 'Macarons'].map(cat => (
-            <button 
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              style={{
-                background: activeCategory === cat ? '#f472b6' : '#fdf2f8',
-                color: activeCategory === cat ? '#ffffff' : '#f472b6',
-                border: 'none',
-                padding: '0.6rem 2rem',
-                margin: '0 0.5rem',
-                borderRadius: '50px',
-                cursor: 'pointer',
-                fontFamily: '"Quicksand", sans-serif',
-                fontWeight: 700,
-                fontSize: '1.1rem',
-                transition: 'all 0.3s'
-              }}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-        <div className="bakery-grid">
-          {[
-            { cat: 'Cupcakes', title: 'Funfetti Explosion', price: '$4', img: 'photo-1486427944299-d1955d23e34d' },
-            { cat: 'Cupcakes', title: 'Red Velvet Dream', price: '$4.50', img: 'photo-1567188040759-fb8a883dc6d8' },
-            { cat: 'Cookies', title: 'Stuffed Choco-Chip', price: '$3.50', img: 'photo-1567188040759-fb8a883dc6d8' },
-            { cat: 'Macarons', title: 'Cotton Candy Macaron', price: '$3', img: 'photo-1558961363-fa8fdf82db35' },
-            { cat: 'Cupcakes', title: 'Lemon Drop', price: '$4', img: 'photo-1590080876351-41de98b4b4ae' },
-            { cat: 'Cookies', title: 'Sugar Cookie', price: '$2.50', img: 'photo-1567188040759-fb8a883dc6d8' },
-          ].filter(item => activeCategory === 'All' || item.cat === activeCategory).map((item, i) => (
-            <div key={i} className="bakery-card" style={{ display: 'flex', flexDirection: 'column', borderRadius: '24px', overflow: 'hidden' }}>
-              <img src={img(item.img, 600)} alt={item.title} style={{ height: '220px' }} />
-              <div className="bakery-card-content" style={{ flex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#fdf2f8' }}>
-                <h3 style={{ ...headingStyle, margin: 0, fontSize: '1.5rem', color: '#f472b6' }}>{item.title}</h3>
-                <span style={{ fontWeight: 800, color: '#831843', fontSize: '1.3rem', background: '#fbcfe8', padding: '0.2rem 0.8rem', borderRadius: '15px' }}>{item.price}</span>
+                <p>{item.desc}</p>
+                <button
+                  onClick={() => addToCart(item.title)}
+                  className="bk-btn-primary"
+                  style={{ width: '100%', justifyContent: 'center', padding: '0.65rem', background: 'var(--bk-amber-600)' }}
+                >
+                  Add to Box +
+                </button>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Signature & About */}
-      <section id="story" className="bakery-section">
-        <div className="bakery-story">
-          <img src={img('photo-1534432182912-63863115e106', 1000)} alt="Baker piping frosting" style={{ borderRadius: '50%', border: '8px solid #ffffff', boxShadow: '0 10px 20px rgba(0,0,0,0.1)' }} />
-          <div>
-            <h2 className="bakery-title" style={{ ...headingStyle, textAlign: 'left', fontSize: '3rem' }}>Baking Smiles</h2>
-            <p style={{ fontSize: '1.2rem', lineHeight: 1.8, marginBottom: '1.5rem', color: '#831843', fontWeight: 500 }}>
-              Sugar Petal was created to bring a little joy into the world. We specialize in fun, vibrant flavors and over-the-top decorations that make every dessert feel like a celebration.
-            </p>
-            <p style={{ fontSize: '1.2rem', lineHeight: 1.8, marginBottom: '2rem', color: '#831843', fontWeight: 500 }}>
-              Whether you need a dozen cupcakes for a birthday or just a single cookie to treat yourself, we are here to make your day sweeter.
-            </p>
-            <button className="bakery-btn" style={{ backgroundColor: '#f472b6', borderRadius: '50px' }}>Meet Our Team</button>
+      {/* 5. Footer */}
+      <footer className="bk-footer">
+        <div className="bk-footer-grid">
+          <div className="bk-footer-col">
+            <h4 style={{ color: '#fbcfe8', fontSize: '1.4rem' }}>Sugar Petal Boutique</h4>
+            <p>Bringing cheer, vibrant colors, and unforgettable sweet memories to every birthday and family gathering.</p>
+            <div className="bk-fssai-stamp">FSSAI / FDA COMPLIANT · HYGIENE EXCELLENCE CERTIFIED</div>
+          </div>
+          <div className="bk-footer-col">
+            <h4>Boutique Hours</h4>
+            <p>Tuesday – Saturday: <strong>9:00 AM – 6:00 PM</strong><br />Sunday: <strong>10:00 AM – 4:00 PM</strong><br />Monday: <em>Closed</em></p>
+          </div>
+          <div className="bk-footer-col">
+            <h4>Location & Pickups</h4>
+            <p>12 Petal Court, Blossom Valley<br />Party Concierge: +1 (555) 612-4091<br />celebrate@sugarpetal.com</p>
+          </div>
+          <div className="bk-footer-col">
+            <h4>Dietary Customization</h4>
+            <p style={{ fontSize: '0.82rem', opacity: 0.85 }}>All our cupcakes can be ordered in 100% eggless (vegetarian) or gluten-friendly formulations. Inquire 24 hours prior to your event.</p>
           </div>
         </div>
-      </section>
-
-      {/* Gallery */}
-      <section className="bakery-section" style={{ backgroundColor: '#ffffff', borderRadius: '40px', margin: '0 2rem', padding: '5rem 3rem' }}>
-        <h2 className="bakery-title" style={{ ...headingStyle, fontSize: '3rem' }}>A Pop of Color</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
-          {[
-            'photo-1486427944299-d1955d23e34d',
-            'photo-1534432182912-63863115e106',
-            'photo-1567188040759-fb8a883dc6d8',
-            'photo-1590080876351-41de98b4b4ae'
-          ].map((src, i) => (
-            <div key={i} style={{ overflow: 'hidden', borderRadius: '24px', border: '2px solid #fdf2f8' }}>
-              <img src={img(src, 600)} alt="Gallery item" style={{ width: '100%', height: '220px', objectFit: 'cover', transition: 'transform 0.4s ease' }} onMouseOver={e => e.currentTarget.style.transform = 'scale(1.15) rotate(2deg)'} onMouseOut={e => e.currentTarget.style.transform = 'scale(1) rotate(0deg)'} />
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Custom Orders & CTA */}
-      <section id="custom" className="bakery-section" style={{ textAlign: 'center' }}>
-        <h2 className="bakery-title" style={{ ...headingStyle, fontSize: '3.5rem' }}>Custom Party Orders</h2>
-        <p className="bakery-subtitle" style={{ color: '#be185d', fontSize: '1.3rem' }}>Throwing a party? Let us match your theme with custom cupcakes and celebration cakes!</p>
-        <button className="bakery-btn" style={{ backgroundColor: '#f472b6', padding: '1.2rem 3.5rem', fontSize: '1.3rem', borderRadius: '50px', boxShadow: '0 4px 15px rgba(244,114,182,0.4)' }}>Get a Quote</button>
-      </section>
-
-      {/* Testimonials */}
-      <section className="bakery-section" style={{ backgroundColor: '#ffffff', borderRadius: '40px', margin: '0 2rem 4rem 2rem' }}>
-        <h2 className="bakery-title" style={{ ...headingStyle, fontSize: '3rem' }}>Happy Customers</h2>
-        <div className="bakery-grid">
-          {[
-            { quote: "The cutest and most delicious cupcakes ever. They were a huge hit at my daughter's party.", author: "Jessica T." },
-            { quote: "I love coming here. It smells amazing and the staff is so friendly.", author: "Amy C." }
-          ].map((test, i) => (
-            <div key={i} style={{ backgroundColor: '#fdf2f8', padding: '3rem', borderRadius: '24px', textAlign: 'center', border: '2px dashed #fbcfe8' }}>
-              <p style={{ fontStyle: 'italic', fontSize: '1.3rem', marginBottom: '1.5rem', color: '#831843' }}>"{test.quote}"</p>
-              <h4 style={{ color: '#f472b6', ...headingStyle, fontSize: '1.5rem' }}>- {test.author}</h4>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Footer / Contact */}
-      <footer id="contact" className="bakery-footer" style={{ backgroundColor: '#f472b6', color: '#ffffff' }}>
-        <h2 style={{ ...headingStyle, fontSize: '3rem', marginBottom: '2rem', color: '#ffffff', textShadow: '1px 1px 2px rgba(0,0,0,0.1)' }}>Sugar Petal</h2>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '5rem', flexWrap: 'wrap', marginBottom: '3rem', fontWeight: 600, fontSize: '1.1rem' }}>
-          <div>
-            <h4 style={{ color: '#831843', marginBottom: '1rem', fontSize: '1.3rem' }}>Visit Us</h4>
-            <p style={{ margin: '0.5rem 0' }}>99 Sweet Street, Downtown</p>
-            <p style={{ margin: '0.5rem 0' }}>(555) 666-7777</p>
-          </div>
-          <div>
-            <h4 style={{ color: '#831843', marginBottom: '1rem', fontSize: '1.3rem' }}>Hours</h4>
-            <p style={{ margin: '0.5rem 0' }}>Mon - Sat: 10:00 AM - 6:00 PM</p>
-            <p style={{ margin: '0.5rem 0' }}>Sunday: Closed</p>
-          </div>
-        </div>
-        <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '1rem' }}>&copy; {new Date().getFullYear()} Sugar Petal Bakery. All rights reserved.</p>
       </footer>
     </div>
   );
-};
-
-export default SugarPetal;
-
+}

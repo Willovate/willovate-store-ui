@@ -1,183 +1,350 @@
-// @ts-nocheck
 import React, { useState } from 'react';
-import './bakery-shared.css';
+import './bakery-production.css';
 
-const img = (id: string, w = 1600) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
+const img = (id: string, w = 1200) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
 
-const PatisserieLune = () => {
-  const [activeCategory, setActiveCategory] = useState('All');
+export default function PatisserieLune() {
+  const [pincode, setPincode] = useState('');
+  const [pincodeStatus, setPincodeStatus] = useState<string | null>(null);
+  const [cartCount, setCartCount] = useState(0);
+  const [cartNotice, setCartNotice] = useState<string | null>(null);
 
-  const headingStyle = { fontFamily: '"Cormorant Garamond", serif', color: '#ec4899' };
-  const navStyle = { color: '#831843', textDecoration: 'none', marginLeft: '2rem', fontWeight: 'bold' };
+  // Stepper for custom luxury entremet
+  const [step, setStep] = useState(1);
+  const [size, setSize] = useState('6" Entremet (Serves 6-8)');
+  const [flavor, setFlavor] = useState('Raspberry Rose & Lychee Ispahan');
+  const [finish, setFinish] = useState('High Gloss Ruby Mirror Glaze');
+  const [inscribed, setInscribed] = useState(false);
+
+  const addToCart = (itemName: string) => {
+    setCartCount(prev => prev + 1);
+    setCartNotice(`Added "${itemName}" to your luxury box.`);
+    setTimeout(() => setCartNotice(null), 3000);
+  };
 
   return (
-    <div className="bakery-theme" style={{ fontFamily: '"Montserrat", sans-serif', color: '#831843', backgroundColor: '#fff1f2' }}>
+    <div className="bk-root" style={{
+      '--bk-cream-50': '#fff5f7',
+      '--bk-cream-100': '#fdf2f4',
+      '--bk-amber-600': '#be185d',
+      '--bk-golden-500': '#db2777',
+      '--bk-hearth-900': '#3b0721'
+    } as React.CSSProperties}>
+      {cartNotice && (
+        <div style={{
+          position: 'fixed',
+          bottom: '24px',
+          right: '24px',
+          background: 'var(--bk-hearth-900)',
+          color: '#fff',
+          padding: '12px 24px',
+          borderRadius: '8px',
+          zIndex: 9999,
+          boxShadow: '0 8px 24px rgba(0,0,0,0.2)',
+          fontSize: '0.9rem'
+        }}>
+          ✨ {cartNotice}
+        </div>
+      )}
+
+      {/* 1. Slim Utility Strip */}
+      <div className="bk-utility-strip">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+          <span className="bk-utility-badge" style={{ background: 'rgba(219, 39, 119, 0.2)', color: '#fbcfe8' }}>
+            PARISIAN ATELIER
+          </span>
+          <span>Macarons & Entremets freshly assembled each morning · Temperature-chilled delivery</span>
+        </div>
+        <form onSubmit={e => {
+          e.preventDefault();
+          setPincodeStatus(pincode.length >= 4 ? '✓ Chilled white-glove courier available for today.' : 'Please enter valid zip.');
+        }} className="bk-pincode-check">
+          <label htmlFor="lune-pincode" style={{ fontSize: '0.8rem', opacity: 0.9 }}>Chilled Delivery:</label>
+          <input
+            id="lune-pincode"
+            type="text"
+            className="bk-pincode-input"
+            placeholder="Pincode"
+            value={pincode}
+            onChange={e => setPincode(e.target.value)}
+          />
+          <button type="submit" className="bk-pincode-btn">Check</button>
+          {pincodeStatus && <span style={{ fontSize: '0.78rem', color: '#fbcfe8', marginLeft: '0.5rem' }}>{pincodeStatus}</span>}
+        </form>
+      </div>
+
       {/* Navigation */}
-      <nav className="bakery-nav" style={{ backgroundColor: '#ffffff', borderBottom: '1px solid #fbcfe8' }}>
-        <div style={{ ...headingStyle, fontSize: '2rem', margin: 0, fontWeight: 'bold' }}>Patisserie Lune</div>
+      <nav style={{
+        background: '#ffffff',
+        padding: '1.25rem 6vw',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        borderBottom: '1px solid var(--bk-border-soft)',
+        position: 'sticky',
+        top: 0,
+        zIndex: 100
+      }}>
         <div>
-          <a href="/templates/category/bakery" style={{ marginRight: '2rem', textDecoration: 'none', fontWeight: 'bold', color: '#831843' }}>← Back to Bakery</a>
-          <a href="#patisserie" style={navStyle}>Patisserie</a>
-          <a href="#macarons" style={navStyle}>Macarons</a>
-          <a href="#story" style={navStyle}>Our Craft</a>
-          <button className="bakery-btn" style={{ marginLeft: '2rem', backgroundColor: '#ec4899' }}>Order Online</button>
+          <a href="/" style={{
+            fontFamily: '"Cormorant Garamond", serif',
+            fontSize: '2.1rem',
+            fontWeight: 700,
+            color: 'var(--bk-amber-600)',
+            textDecoration: 'none'
+          }}>
+            Pâtisserie Lune
+          </a>
+          <span style={{ display: 'block', fontSize: '0.75rem', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--bk-toast-700)' }}>
+            Haute Pâtisserie & Macarons Paris
+          </span>
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+          <a href="/templates/category/bakery" style={{ fontSize: '0.88rem', fontWeight: 600, color: 'var(--bk-toast-700)', textDecoration: 'none' }}>← Category Index</a>
+          <button
+            onClick={() => document.getElementById('vitrine')?.scrollIntoView({ behavior: 'smooth' })}
+            style={{
+              background: 'transparent',
+              border: '1px solid var(--bk-border-soft)',
+              padding: '0.5rem 1rem',
+              borderRadius: 'var(--bk-radius-pill)',
+              fontWeight: 700,
+              fontSize: '0.9rem',
+              cursor: 'pointer'
+            }}
+          >
+            Gift Box ({cartCount})
+          </button>
         </div>
       </nav>
 
-      {/* Hero */}
-      <header className="bakery-hero" style={{ backgroundImage: `url(${img('photo-1558961363-fa8fdf82db35')})` }}>
-        <div className="bakery-hero-overlay" style={{ background: 'linear-gradient(to right, rgba(131,24,67,0.8), rgba(236,72,153,0.4))' }}></div>
-        <div className="bakery-hero-content">
-          <h1 style={{ ...headingStyle, fontSize: '4.5rem', margin: '0 0 1rem 0', color: '#fff' }}>Sweet Perfection.</h1>
-          <p style={{ fontSize: '1.4rem', marginBottom: '2.5rem', lineHeight: 1.6, color: '#fff1f2', fontFamily: '"Cormorant Garamond", serif' }}>Experience the magic of Parisian pastry arts right in your neighborhood. Every dessert is a masterpiece.</p>
-          <button className="bakery-btn" style={{ backgroundColor: '#ec4899' }}>Explore The Vitrine</button>
+      {/* 2. Story Hero */}
+      <header className="bk-hero" style={{ backgroundImage: `url(${img('photo-1558961363-fa8fdf82db35', 1600)})` }}>
+        <div className="bk-hero-scrim" style={{ background: 'linear-gradient(90deg, rgba(59,7,33,0.92) 0%, rgba(59,7,33,0.7) 60%, rgba(59,7,33,0.3) 100%)' }} />
+        <div className="bk-hero-card">
+          <span className="bk-hero-tagline" style={{ color: '#fbcfe8' }}>PARISIAN ARCHITECTURE IN SUGAR & BUTTER</span>
+          <h1 className="bk-hero-title">Haute Pâtisserie, Entremets & Silken Macarons.</h1>
+          <p className="bk-hero-desc">
+            Crafted with Valrhona Grand Cru chocolate, Tahitian vanilla beans, and precision French pastry techniques. Every dessert is an architectural statement.
+          </p>
+          <div className="bk-hero-actions">
+            <a href="#vitrine" className="bk-btn-primary" style={{ background: 'var(--bk-amber-600)' }}>
+              Explore The Vitrine <b>→</b>
+            </a>
+            <a href="#custom-entremet" className="bk-btn-secondary">
+              Custom Entremet Studio <b>✨</b>
+            </a>
+          </div>
         </div>
       </header>
 
-      {/* Bakery Headline & Fresh Today */}
-      <section className="bakery-section">
+      {/* 3. Proof Bar */}
+      <section className="bk-proof-strip">
+        <div className="bk-proof-grid">
+          <div className="bk-proof-item">
+            <span className="bk-proof-stat">120,000+</span>
+            <span className="bk-proof-label">Macarons Hand-Piped</span>
+          </div>
+          <div className="bk-proof-item">
+            <span className="bk-proof-stat">Valrhona</span>
+            <span className="bk-proof-label">Certified Grand Cru Chocolate</span>
+          </div>
+          <div className="bk-proof-item">
+            <span className="bk-proof-stat">100% Chilled</span>
+            <span className="bk-proof-label">Climate-Controlled White Glove Fleet</span>
+          </div>
+          <div className="bk-proof-item">
+            <span className="bk-proof-stat">4.96★</span>
+            <span className="bk-proof-label">From 940+ Wedding Couples</span>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Occasion Grid */}
+      <section id="vitrine" className="bk-section">
+        <div className="bk-section-header">
+          <span className="bk-section-eyebrow">The Collection</span>
+          <h2 className="bk-section-title">Curated by French Pastry Artisans</h2>
+          <p className="bk-section-subtitle">Individual jewel entremets, grand tiered party cakes, and presentation gift boxes.</p>
+        </div>
+
+        <div className="bk-occasion-grid">
+          {[
+            { title: 'Jewel Entremets', badge: 'Fresh Daily', desc: 'Mirror-glazed individual geometric cakes layered with mousse and sponge.', img: 'photo-1534432182912-63863115e106' },
+            { title: 'Macaron Coffrets', badge: 'Box of 12 or 24', desc: 'Pistachio, rose water, salted caramel, passion fruit & dark chocolate.', img: 'photo-1556711905-b3f402473b01' },
+            { title: 'Mille-Feuille & Eclairs', badge: 'Crisped Daily', desc: 'Caramelized inverted puff pastry with Tahitian vanilla diplomat cream.', img: 'photo-1590080876351-41de98b4b4ae' },
+            { title: 'Eggless Haute Patisserie', badge: 'Zero Egg Formulation', desc: 'Rich chocolate velvet domes and mango-coconut layers with clean texture.', img: 'photo-1567188040759-fb8a883dc6d8' }
+          ].map((item, idx) => (
+            <div key={idx} className="bk-occasion-card">
+              <div className="bk-occasion-media">
+                <img src={img(item.img, 700)} alt={item.title} loading="lazy" />
+                <span className="bk-occasion-badge">{item.badge}</span>
+              </div>
+              <div className="bk-occasion-content">
+                <h3>{item.title}</h3>
+                <p>{item.desc}</p>
+                <button
+                  onClick={() => addToCart(item.title)}
+                  className="bk-occasion-link"
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                >
+                  View & Order →
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 5. Custom Entremet Configurator */}
+      <section id="custom-entremet" className="bk-section" style={{ background: 'var(--bk-cream-100)', maxWidth: '100%' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <h2 className="bakery-title" style={headingStyle}>Fresh From The Atelier</h2>
-          <p className="bakery-subtitle" style={{ color: '#be185d' }}>Delicate layers, vibrant flavors, and exacting precision.</p>
-          <div className="bakery-grid">
-            {[
-              { title: 'Rose Water Macaron', desc: 'Floral notes with white chocolate ganache.', img: 'photo-1556711905-b3f402473b01' },
-              { title: 'Vanilla Bean Eclair', desc: 'Choux pastry with Tahitian vanilla cream.', img: 'photo-1590080876351-41de98b4b4ae' },
-              { title: 'Opera Cake', desc: 'Almond sponge and rich coffee syrup.', img: 'photo-1534432182912-63863115e106' }
-            ].map((item, i) => (
-              <div key={i} className="bakery-card" style={{ borderRadius: '12px' }}>
-                <img src={img(item.img, 800)} alt={item.title} />
-                <div className="bakery-card-content" style={{ backgroundColor: '#ffffff' }}>
-                  <h3 style={{ ...headingStyle, fontSize: '1.6rem', color: '#831843' }}>{item.title}</h3>
-                  <p style={{ color: '#be185d' }}>{item.desc}</p>
+          <div className="bk-section-header">
+            <span className="bk-section-eyebrow">Haute Couture</span>
+            <h2 className="bk-section-title">Design Your Bespoke Entremet</h2>
+            <p className="bk-section-subtitle">Tailored flavor profiles, mirror glaze colorways, and chocolate plaque inscriptions.</p>
+          </div>
+
+          <div className="bk-builder-card">
+            <div className="bk-stepper">
+              {['1. Format & Size', '2. Taste Profile', '3. Glaze & Edible Gold'].map((lbl, idx) => (
+                <button
+                  key={idx}
+                  className={`bk-step-btn ${step === idx + 1 ? 'active' : ''}`}
+                  onClick={() => setStep(idx + 1)}
+                >
+                  {lbl}
+                </button>
+              ))}
+            </div>
+
+            {step === 1 && (
+              <div>
+                <h4 style={{ marginBottom: '1rem' }}>Select Portions</h4>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}>
+                  {[
+                    { label: '6" Entremet (Serves 6-8)', price: '$65' },
+                    { label: '8" Entremet (Serves 12-14)', price: '$98' },
+                    { label: '10" Grand Entremet (Serves 20-24)', price: '$145' }
+                  ].map(s => (
+                    <div
+                      key={s.label}
+                      onClick={() => setSize(s.label)}
+                      style={{
+                        padding: '1.25rem',
+                        border: size === s.label ? '2px solid var(--bk-amber-600)' : '1px solid var(--bk-border-soft)',
+                        borderRadius: '8px',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      <strong>{s.label}</strong>
+                      <span style={{ display: 'block', color: 'var(--bk-amber-600)', marginTop: '0.25rem', fontWeight: 700 }}>{s.price}</span>
+                    </div>
+                  ))}
+                </div>
+                <button onClick={() => setStep(2)} className="bk-btn-primary" style={{ marginTop: '2rem' }}>Next: Flavor Palette →</button>
+              </div>
+            )}
+
+            {step === 2 && (
+              <div>
+                <h4 style={{ marginBottom: '1rem' }}>Choose Flavor Architecture</h4>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}>
+                  {[
+                    'Raspberry Rose & Lychee Ispahan',
+                    '70% Guanaja Chocolate & Praliné Feuilletine',
+                    'Tahitian Vanilla Mousseline & Passion Gelée',
+                    'Matcha Ceremonial & Yuzu Blossom'
+                  ].map(f => (
+                    <div
+                      key={f}
+                      onClick={() => setFlavor(f)}
+                      style={{
+                        padding: '1.25rem',
+                        border: flavor === f ? '2px solid var(--bk-amber-600)' : '1px solid var(--bk-border-soft)',
+                        borderRadius: '8px',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      <strong>{f}</strong>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem' }}>
+                  <button onClick={() => setStep(1)} className="bk-btn-secondary" style={{ color: '#000', borderColor: 'var(--bk-border-soft)' }}>← Back</button>
+                  <button onClick={() => setStep(3)} className="bk-btn-primary">Next: Glaze Finish →</button>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            )}
 
-      {/* Bread & Pastry Collection (Menu) */}
-      <section id="patisserie" className="bakery-section" style={{ backgroundColor: '#ffffff' }}>
-        <h2 className="bakery-title" style={headingStyle}>The Collection</h2>
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          {['All', 'Macarons', 'Patisserie', 'Viennoiserie'].map(cat => (
-            <button 
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              style={{
-                background: activeCategory === cat ? '#ec4899' : 'transparent',
-                color: activeCategory === cat ? '#ffffff' : '#ec4899',
-                border: '1px solid #ec4899',
-                padding: '0.5rem 1.5rem',
-                margin: '0 0.5rem',
-                borderRadius: '30px',
-                cursor: 'pointer',
-                fontFamily: '"Montserrat", sans-serif',
-                fontWeight: 'bold'
-              }}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-        <div className="bakery-grid">
-          {[
-            { cat: 'Macarons', title: 'Rose Water', price: '$3.50', img: 'photo-1556711905-b3f402473b01' },
-            { cat: 'Macarons', title: 'Pistachio', price: '$3.50', img: 'photo-1477090792565-af1b2f0fd1e4' },
-            { cat: 'Patisserie', title: 'Opera Cake', price: '$8', img: 'photo-1534432182912-63863115e106' },
-            { cat: 'Patisserie', title: 'Vanilla Eclair', price: '$6', img: 'photo-1590080876351-41de98b4b4ae' },
-            { cat: 'Viennoiserie', title: 'Butter Croissant', price: '$4', img: 'photo-1509365390695-33aee754301f' },
-            { cat: 'Patisserie', title: 'Fruit Tart', price: '$7', img: 'photo-1567188040759-fb8a883dc6d8' },
-          ].filter(item => activeCategory === 'All' || item.cat === activeCategory).map((item, i) => (
-            <div key={i} className="bakery-card" style={{ display: 'flex', flexDirection: 'column', borderRadius: '12px' }}>
-              <img src={img(item.img, 600)} alt={item.title} style={{ height: '200px' }} />
-              <div className="bakery-card-content" style={{ flex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#fff1f2' }}>
-                <h3 style={{ ...headingStyle, margin: 0, fontSize: '1.4rem', color: '#831843' }}>{item.title}</h3>
-                <span style={{ fontWeight: 'bold', color: '#ec4899', fontSize: '1.2rem' }}>{item.price}</span>
+            {step === 3 && (
+              <div>
+                <h4 style={{ marginBottom: '1rem' }}>Select Finish & Confirmation</h4>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
+                  {[
+                    'High Gloss Ruby Mirror Glaze',
+                    'Matte Velvet Cocoa Texture (Noir)',
+                    'Pastel Rose Marbled Sheen',
+                    'Pure Ivory with 24K Edible Gold Leaf'
+                  ].map(g => (
+                    <div
+                      key={g}
+                      onClick={() => setFinish(g)}
+                      style={{
+                        padding: '1.25rem',
+                        border: finish === g ? '2px solid var(--bk-amber-600)' : '1px solid var(--bk-border-soft)',
+                        borderRadius: '8px',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      <strong>{g}</strong>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ background: '#fff', padding: '1.25rem', borderRadius: '8px', border: '1px solid var(--bk-border-soft)', marginBottom: '1.5rem' }}>
+                  <strong>Selected:</strong> {size} · {flavor} · {finish}
+                </div>
+                <button
+                  onClick={() => {
+                    setInscribed(true);
+                    addToCart(`Bespoke Entremet (${size})`);
+                  }}
+                  className="bk-btn-primary"
+                >
+                  {inscribed ? '✓ Added to Luxury Bag' : 'Add Bespoke Entremet to Order →'}
+                </button>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Signature & About */}
-      <section id="story" className="bakery-section">
-        <div className="bakery-story">
-          <img src={img('photo-1556711905-b3f402473b01', 1000)} alt="Chef piping macarons" style={{ borderRadius: '12px' }} />
-          <div>
-            <h2 className="bakery-title" style={{ ...headingStyle, textAlign: 'left' }}>Crafted with Precision</h2>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '1.5rem', color: '#831843' }}>
-              At Patisserie Lune, baking is an exacting science and a passionate art form. Our executive pastry chef trained in Paris and brings authentic techniques to every creation.
-            </p>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '2rem', color: '#831843' }}>
-              From the precise temperature of our chocolate tempering to the exact lamination of our croissant dough, we pursue perfection in every bite.
-            </p>
-            <button className="bakery-btn" style={{ backgroundColor: '#ec4899', borderRadius: '30px' }}>Meet Our Chef</button>
+            )}
           </div>
         </div>
       </section>
 
-      {/* Gallery */}
-      <section className="bakery-section" style={{ backgroundColor: '#ffffff' }}>
-        <h2 className="bakery-title" style={headingStyle}>The Art of Pastry</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
-          {[
-            'photo-1558961363-fa8fdf82db35',
-            'photo-1556711905-b3f402473b01',
-            'photo-1534432182912-63863115e106',
-            'photo-1590080876351-41de98b4b4ae'
-          ].map((src, i) => (
-            <div key={i} style={{ overflow: 'hidden', borderRadius: '12px' }}>
-              <img src={img(src, 600)} alt="Gallery item" style={{ width: '100%', height: '250px', objectFit: 'cover', transition: 'transform 0.5s ease' }} onMouseOver={e => e.currentTarget.style.transform = 'scale(1.1)'} onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'} />
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Custom Orders & CTA */}
-      <section className="bakery-section" style={{ textAlign: 'center', backgroundColor: '#fff1f2' }}>
-        <h2 className="bakery-title" style={headingStyle}>Custom Celebration Cakes</h2>
-        <p className="bakery-subtitle" style={{ color: '#be185d' }}>Elevate your special moments with a bespoke cake designed just for you.</p>
-        <button className="bakery-btn" style={{ backgroundColor: '#ec4899', padding: '1.2rem 3rem', fontSize: '1.2rem', borderRadius: '30px' }}>Inquire Now</button>
-      </section>
-
-      {/* Testimonials */}
-      <section className="bakery-section" style={{ backgroundColor: '#ffffff' }}>
-        <h2 className="bakery-title" style={headingStyle}>Words of Delight</h2>
-        <div className="bakery-grid">
-          {[
-            { quote: "The macarons taste exactly like the ones I had in Paris. Absolutely divine.", author: "Isabella C." },
-            { quote: "We ordered our wedding cake from Patisserie Lune and it was breathtakingly beautiful and delicious.", author: "Michael L." }
-          ].map((test, i) => (
-            <div key={i} style={{ backgroundColor: '#fff1f2', padding: '3rem', borderRadius: '12px', textAlign: 'center' }}>
-              <p style={{ fontStyle: 'italic', fontSize: '1.2rem', marginBottom: '1.5rem', fontFamily: '"Cormorant Garamond", serif', color: '#831843' }}>"{test.quote}"</p>
-              <h4 style={{ color: '#ec4899', ...headingStyle, fontSize: '1.2rem' }}>- {test.author}</h4>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Footer / Contact */}
-      <footer id="contact" className="bakery-footer" style={{ backgroundColor: '#831843', color: '#fff1f2' }}>
-        <h2 style={{ ...headingStyle, fontSize: '2.5rem', marginBottom: '2rem', color: '#fbcfe8' }}>Patisserie Lune</h2>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '4rem', flexWrap: 'wrap', marginBottom: '3rem' }}>
-          <div>
-            <h4 style={{ color: '#fbcfe8', marginBottom: '1rem', fontSize: '1.2rem' }}>Atelier Location</h4>
-            <p>100 Rose Avenue, Chic District</p>
-            <p>(555) 777-8888</p>
+      {/* 6. Production Footer */}
+      <footer className="bk-footer">
+        <div className="bk-footer-grid">
+          <div className="bk-footer-col">
+            <h4 style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: '1.75rem', color: '#fbcfe8' }}>Pâtisserie Lune</h4>
+            <p>Atelier de Haute Pâtisserie Parisienne. Every batch tempers pure Valrhona cacao and churns fresh Charentes-Poitou PDO butter.</p>
+            <div className="bk-fssai-stamp">FSSAI / FDA COMPLIANT · HYGIENE GRADE 5/5</div>
           </div>
-          <div>
-            <h4 style={{ color: '#fbcfe8', marginBottom: '1rem', fontSize: '1.2rem' }}>Boutique Hours</h4>
-            <p>Wed - Sun: 8:00 AM - 5:00 PM</p>
-            <p>Mon - Tue: Closed</p>
+          <div className="bk-footer-col">
+            <h4>Boutique Hours</h4>
+            <p>Wed – Sun: <strong>8:00 AM – 6:00 PM</strong><br />Mon & Tue: <em>Masterclass & Private Commissions</em></p>
+          </div>
+          <div className="bk-footer-col">
+            <h4>Atelier Address</h4>
+            <p>18 Rue des Délices, Galleria Level<br />Concierge: +1 (555) 728-1934<br />concierge@patisserielune.com</p>
+          </div>
+          <div className="bk-footer-col">
+            <h4>Temperature Advisory</h4>
+            <p style={{ fontSize: '0.82rem', opacity: 0.85 }}>All entremets must remain refrigerated at 4°C until 20 minutes prior to service to ensure structural integrity and silken mouthfeel.</p>
           </div>
         </div>
-        <p style={{ color: 'rgba(255,241,242,0.5)', fontSize: '0.9rem' }}>&copy; {new Date().getFullYear()} Patisserie Lune. All rights reserved.</p>
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '2rem', textAlign: 'center', fontSize: '0.82rem', opacity: 0.7 }}>
+          &copy; {new Date().getFullYear()} Pâtisserie Lune. All rights reserved.
+        </div>
       </footer>
     </div>
   );
-};
-
-export default PatisserieLune;
-
+}

@@ -1,181 +1,200 @@
-// @ts-nocheck
 import React, { useState } from 'react';
-import './bakery-shared.css';
+import './bakery-production.css';
 
-const img = (id: string, w = 1600) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
+const img = (id: string, w = 1200) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
 
-const RusticOven = () => {
-  const [activeCategory, setActiveCategory] = useState('All');
+export default function RusticOven() {
+  const [cartCount, setCartCount] = useState(0);
+  const [cartNotice, setCartNotice] = useState<string | null>(null);
 
-  const headingStyle = { fontFamily: '"Rye", cursive', color: '#b45309' };
-  const navStyle = { color: '#b45309', textDecoration: 'none', marginLeft: '2rem', fontWeight: 'bold' };
+  const addToCart = (item: string) => {
+    setCartCount(c => c + 1);
+    setCartNotice(`Added "${item}" to order.`);
+    setTimeout(() => setCartNotice(null), 3000);
+  };
 
   return (
-    <div className="bakery-theme" style={{ fontFamily: '"Lora", serif', color: '#451a03', backgroundColor: '#fefce8' }}>
+    <div className="bk-root" style={{
+      '--bk-cream-50': '#fffbf0',
+      '--bk-cream-100': '#fef3c7',
+      '--bk-hearth-900': '#361b0c',
+      '--bk-amber-600': '#b45309',
+      '--bk-golden-500': '#d97706'
+    } as React.CSSProperties}>
+      {cartNotice && (
+        <div style={{
+          position: 'fixed',
+          bottom: '24px',
+          right: '24px',
+          background: 'var(--bk-hearth-900)',
+          color: '#fff',
+          padding: '12px 24px',
+          borderRadius: '8px',
+          zIndex: 9999,
+          fontSize: '0.9rem'
+        }}>
+          🔥 {cartNotice}
+        </div>
+      )}
+
+      {/* 1. Utility Strip */}
+      <div className="bk-utility-strip">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+          <span className="bk-utility-badge" style={{ background: 'rgba(180, 83, 9, 0.3)', color: '#fed7aa' }}>
+            WOOD-FIRED HEARTH
+          </span>
+          <span>Applewood & Oak Embers · Hearth Temperature: 485°F</span>
+        </div>
+        <div style={{ fontSize: '0.82rem', color: '#fed7aa' }}>
+          Hot Bread Window: 8:00 AM & 1:00 PM Daily
+        </div>
+      </div>
+
       {/* Navigation */}
-      <nav className="bakery-nav" style={{ backgroundColor: '#fff', borderBottom: '2px solid #b45309' }}>
-        <div style={{ ...headingStyle, fontSize: '2rem', margin: 0 }}>Rustic Oven</div>
+      <nav style={{
+        background: '#ffffff',
+        padding: '1.25rem 6vw',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        borderBottom: '1px solid var(--bk-border-soft)',
+        position: 'sticky',
+        top: 0,
+        zIndex: 100
+      }}>
         <div>
-          <a href="/templates/category/bakery" style={{ marginRight: '2rem', textDecoration: 'none', fontWeight: 'bold', color: '#b45309' }}>← Back to Bakery</a>
-          <a href="#breads" style={navStyle}>Breads</a>
-          <a href="#pies" style={navStyle}>Pies</a>
-          <a href="#story" style={navStyle}>Story</a>
-          <button className="bakery-btn" style={{ marginLeft: '2rem', backgroundColor: '#b45309' }}>Order Now</button>
+          <a href="/" style={{
+            fontFamily: '"Lora", serif',
+            fontSize: '2rem',
+            fontWeight: 800,
+            color: 'var(--bk-hearth-900)',
+            textDecoration: 'none'
+          }}>
+            Rustic Oven<span style={{ color: 'var(--bk-amber-600)' }}>.</span>
+          </a>
+          <span style={{ display: 'block', fontSize: '0.75rem', letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--bk-toast-700)' }}>
+            Wood-Fired Hearth & Country Pies
+          </span>
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+          <a href="/templates/category/bakery" style={{ fontSize: '0.88rem', fontWeight: 600, color: 'var(--bk-toast-700)', textDecoration: 'none' }}>← Category Index</a>
+          <button
+            onClick={() => document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth' })}
+            style={{
+              background: 'var(--bk-amber-600)',
+              color: '#fff',
+              border: 'none',
+              padding: '0.55rem 1.25rem',
+              borderRadius: 'var(--bk-radius-pill)',
+              fontWeight: 700,
+              fontSize: '0.88rem',
+              cursor: 'pointer'
+            }}
+          >
+            Hearth Basket ({cartCount})
+          </button>
         </div>
       </nav>
 
-      {/* Hero */}
-      <header className="bakery-hero" style={{ backgroundImage: `url(${img('photo-1563729784474-d77dbb933a9e')})` }}>
-        <div className="bakery-hero-overlay" style={{ background: 'linear-gradient(to right, rgba(69,26,3,0.8), rgba(180,83,9,0.3))' }}></div>
-        <div className="bakery-hero-content">
-          <h1 style={{ ...headingStyle, fontSize: '4.5rem', margin: '0 0 1rem 0', color: '#fff' }}>Fire & Flour.</h1>
-          <p style={{ fontSize: '1.4rem', marginBottom: '2.5rem', lineHeight: 1.6, color: '#fefce8' }}>Traditional wood-fired baking using heritage grains and slow fermentation.</p>
-          <button className="bakery-btn" style={{ backgroundColor: '#b45309' }}>Explore The Oven</button>
+      {/* 2. Hero */}
+      <header className="bk-hero" style={{ backgroundImage: `url(${img('photo-1563729784474-d77dbb933a9e', 1600)})` }}>
+        <div className="bk-hero-scrim" style={{ background: 'linear-gradient(90deg, rgba(54,27,12,0.92) 0%, rgba(54,27,12,0.7) 60%, rgba(54,27,12,0.3) 100%)' }} />
+        <div className="bk-hero-card">
+          <span className="bk-hero-tagline" style={{ color: '#fed7aa' }}>FIRED WITH SOLID OAK & CHERRY WOOD</span>
+          <h1 className="bk-hero-title">Dark-Crusted Loaves & Deep-Dish Country Pies.</h1>
+          <p className="bk-hero-desc">
+            No electric ovens. Every single loaf and heirloom butter pie is baked over hardwood embers, yielding a blistered smoky crust and tender interior crumb.
+          </p>
+          <div className="bk-hero-actions">
+            <a href="#menu" className="bk-btn-primary" style={{ background: 'var(--bk-amber-600)' }}>Order Today's Bake →</a>
+            <a href="#pies" className="bk-btn-secondary">Seasonal Pie Shop 🥧</a>
+          </div>
         </div>
       </header>
 
-      {/* Bakery Headline & Fresh Today */}
-      <section className="bakery-section">
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <h2 className="bakery-title" style={headingStyle}>Fresh Out of the Wood Fire</h2>
-          <p className="bakery-subtitle" style={{ color: '#78350f' }}>Smoky, dark-crusted, and perfectly baked every time.</p>
-          <div className="bakery-grid">
-            {[
-              { title: 'Heritage Miche', desc: 'Large country loaf with whole wheat and rye.', img: 'photo-1563729784474-d77dbb933a9e' },
-              { title: 'Wood-fired Baguette', desc: 'Chewy interior and blistered crust.', img: 'photo-1509440159596-0249088772ff' },
-              { title: 'Spiced Apple Pie', desc: 'Heirloom apples and all-butter flaky crust.', img: 'photo-1535141192574-5f92f4da2b3c' }
-            ].map((item, i) => (
-              <div key={i} className="bakery-card">
-                <img src={img(item.img, 800)} alt={item.title} />
-                <div className="bakery-card-content" style={{ backgroundColor: '#fff' }}>
-                  <h3 style={{ ...headingStyle, fontSize: '1.6rem' }}>{item.title}</h3>
-                  <p>{item.desc}</p>
+      {/* 3. Proof Bar */}
+      <section className="bk-proof-strip">
+        <div className="bk-proof-grid">
+          <div className="bk-proof-item">
+            <span className="bk-proof-stat">480°F</span>
+            <span className="bk-proof-label">Hardwood Hearth Temperature</span>
+          </div>
+          <div className="bk-proof-item">
+            <span className="bk-proof-stat">100%</span>
+            <span className="bk-proof-label">All-Butter Laminated Pie Crusts</span>
+          </div>
+          <div className="bk-proof-item">
+            <span className="bk-proof-stat">Local Orchard</span>
+            <span className="bk-proof-label">Heirloom Honeycrisp & Macintosh Apples</span>
+          </div>
+          <div className="bk-proof-item">
+            <span className="bk-proof-stat">4.95★</span>
+            <span className="bk-proof-label">1,400+ Verified Oven Ratings</span>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Menu Section */}
+      <section id="menu" className="bk-section">
+        <div className="bk-section-header">
+          <span className="bk-section-eyebrow">From The Hardwood Embers</span>
+          <h2 className="bk-section-title">Wood-Fired Breads & Rustic Pies</h2>
+          <p className="bk-section-subtitle">Baked fresh each morning until the cooling racks stand empty.</p>
+        </div>
+
+        <div className="bk-occasion-grid">
+          {[
+            { title: 'Oak-Fired Heritage Miche', price: '$9.00', desc: 'Whole wheat and dark rye loaf baked directly on stone embers.', img: 'photo-1563729784474-d77dbb933a9e' },
+            { title: 'Honeycrisp Orchard Apple Pie', price: '$28.00', desc: 'Piled high with spiced apples, cinnamon brown sugar, and lattice butter crust.', img: 'photo-1535141192574-5f92f4da2b3c' },
+            { title: 'Wood-Fired Sesame Baguette', price: '$4.50', desc: 'Blistered crust rolled in toasted sesame seeds with open airy crumb.', img: 'photo-1509440159596-0249088772ff' },
+            { title: 'Roasted Garlic & Sea Salt Focaccia', price: '$8.50', desc: 'Dimpled olive oil dough studded with whole roasted garlic cloves and rosemary.', img: 'photo-1603532648955-039310d9ed75' }
+          ].map((item, idx) => (
+            <div key={idx} className="bk-occasion-card">
+              <div className="bk-occasion-media">
+                <img src={img(item.img, 700)} alt={item.title} loading="lazy" />
+              </div>
+              <div className="bk-occasion-content">
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
+                  <h3 style={{ margin: 0 }}>{item.title}</h3>
+                  <strong style={{ color: 'var(--bk-amber-600)' }}>{item.price}</strong>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Bread & Pastry Collection (Menu) */}
-      <section id="breads" className="bakery-section" style={{ backgroundColor: '#fff' }}>
-        <h2 className="bakery-title" style={headingStyle}>Our Collections</h2>
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          {['All', 'Wood-Fired Breads', 'Rustic Pies'].map(cat => (
-            <button 
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              style={{
-                background: activeCategory === cat ? '#b45309' : 'transparent',
-                color: activeCategory === cat ? '#fff' : '#b45309',
-                border: '1px solid #b45309',
-                padding: '0.5rem 1.5rem',
-                margin: '0 0.5rem',
-                borderRadius: '4px',
-                cursor: 'pointer',
-                fontFamily: '"Lora", serif'
-              }}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-        <div className="bakery-grid">
-          {[
-            { cat: 'Wood-Fired Breads', title: 'Heritage Miche', price: '$12', img: 'photo-1563729784474-d77dbb933a9e' },
-            { cat: 'Wood-Fired Breads', title: 'Olive & Rosemary Fougasse', price: '$7', img: 'photo-1509440159596-0249088772ff' },
-            { cat: 'Wood-Fired Breads', title: 'Classic Sourdough', price: '$8', img: 'photo-1509440159596-0249088772ff' },
-            { cat: 'Rustic Pies', title: 'Spiced Apple Pie', price: '$24', img: 'photo-1535141192574-5f92f4da2b3c' },
-            { cat: 'Rustic Pies', title: 'Cherry Lattice Pie', price: '$26', img: 'photo-1571115177098-24ec42ed204d' },
-          ].filter(item => activeCategory === 'All' || item.cat === activeCategory).map((item, i) => (
-            <div key={i} className="bakery-card" style={{ display: 'flex', flexDirection: 'column' }}>
-              <img src={img(item.img, 600)} alt={item.title} style={{ height: '200px' }} />
-              <div className="bakery-card-content" style={{ flex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <h3 style={{ ...headingStyle, margin: 0, fontSize: '1.4rem' }}>{item.title}</h3>
-                <span style={{ fontWeight: 'bold', color: '#b45309', fontSize: '1.2rem' }}>{item.price}</span>
+                <p>{item.desc}</p>
+                <button
+                  onClick={() => addToCart(item.title)}
+                  className="bk-btn-primary"
+                  style={{ width: '100%', justifyContent: 'center', padding: '0.65rem', background: 'var(--bk-amber-600)' }}
+                >
+                  Order From Hearth +
+                </button>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Signature & About */}
-      <section id="story" className="bakery-section">
-        <div className="bakery-story">
-          <img src={img('photo-1509440159596-0249088772ff', 1000)} alt="Baker scoring a loaf of bread before baking" style={{ borderRadius: '0' }} />
-          <div>
-            <h2 className="bakery-title" style={{ ...headingStyle, textAlign: 'left' }}>Back to Basics</h2>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '1.5rem' }}>
-              At Rustic Oven, we bake the way they did a hundred years ago. Our custom-built wood-fired oven gives our breads a dark, caramelized crust and a smoky depth of flavor that modern ovens simply cannot replicate.
-            </p>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '2rem' }}>
-              We work directly with local farmers to mill our own heritage grains, ensuring every loaf is packed with nutrition and character. We believe in the slow process of fermentation and the magic of a roaring fire.
-            </p>
-            <button className="bakery-btn" style={{ backgroundColor: '#b45309', borderRadius: 0 }}>Read Our Story</button>
+      {/* 5. Footer */}
+      <footer className="bk-footer">
+        <div className="bk-footer-grid">
+          <div className="bk-footer-col">
+            <h4 style={{ color: '#fed7aa', fontSize: '1.4rem' }}>Rustic Oven Bakehouse</h4>
+            <p>Traditional hardwood wood-fired baking using heritage grains, real orchard fruit, and living sourdough cultures.</p>
+            <div className="bk-fssai-stamp">FSSAI / FDA COMPLIANT · WOOD-FIRE HEARTH LICENSE</div>
+          </div>
+          <div className="bk-footer-col">
+            <h4>Oven Schedule</h4>
+            <p>Wednesday – Sunday: <strong>7:30 AM – 3:00 PM</strong><br />Mon & Tue: <em>Wood prep & dough proofing</em></p>
+          </div>
+          <div className="bk-footer-col">
+            <h4>Bakehouse Address</h4>
+            <p>77 Hearthstone Lane, Old Mill Crossing<br />Direct: +1 (555) 491-0392<br />orders@rusticoven.com</p>
+          </div>
+          <div className="bk-footer-col">
+            <h4>Holiday Pie Pre-Orders</h4>
+            <p style={{ fontSize: '0.82rem', opacity: 0.85 }}>Thanksgiving and festive season pies require 72 hours advance notice. Early reservation cutoff is December 18.</p>
           </div>
         </div>
-      </section>
-
-      {/* Gallery */}
-      <section className="bakery-section" style={{ backgroundColor: '#fff' }}>
-        <h2 className="bakery-title" style={headingStyle}>The Baking Process</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
-          {[
-            'photo-1563729784474-d77dbb933a9e',
-            'photo-1509440159596-0249088772ff',
-            'photo-1535141192574-5f92f4da2b3c',
-            'photo-1549931319-a545dcf3bc7c'
-          ].map((src, i) => (
-            <div key={i} style={{ overflow: 'hidden' }}>
-              <img src={img(src, 600)} alt="Gallery item" style={{ width: '100%', height: '250px', objectFit: 'cover', transition: 'transform 0.4s ease' }} onMouseOver={e => e.currentTarget.style.transform = 'scale(1.1)'} onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'} />
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Custom Orders & CTA */}
-      <section className="bakery-section" style={{ textAlign: 'center', backgroundColor: '#fefce8' }}>
-        <h2 className="bakery-title" style={headingStyle}>Holiday Pies Available</h2>
-        <p className="bakery-subtitle">Our seasonal wood-fired pies sell out fast. Reserve yours for the upcoming holidays.</p>
-        <button className="bakery-btn" style={{ backgroundColor: '#b45309', padding: '1.2rem 3rem', fontSize: '1.2rem', borderRadius: 0 }}>Reserve Yours</button>
-      </section>
-
-      {/* Testimonials */}
-      <section className="bakery-section" style={{ backgroundColor: '#fff' }}>
-        <h2 className="bakery-title" style={headingStyle}>Community Feedback</h2>
-        <div className="bakery-grid">
-          {[
-            { quote: "The miche is incredible. It stays fresh for days and has so much complex flavor.", author: "Robert W." },
-            { quote: "The wood-fired crust makes such a huge difference. I can never eat supermarket bread again.", author: "Elaine C." }
-          ].map((test, i) => (
-            <div key={i} style={{ border: '1px solid #b45309', padding: '3rem', textAlign: 'center' }}>
-              <p style={{ fontStyle: 'italic', fontSize: '1.2rem', marginBottom: '1.5rem' }}>"{test.quote}"</p>
-              <h4 style={{ color: '#b45309', ...headingStyle, fontSize: '1.2rem' }}>- {test.author}</h4>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Footer / Contact */}
-      <footer id="contact" className="bakery-footer" style={{ backgroundColor: '#451a03', color: '#fefce8' }}>
-        <h2 style={{ ...headingStyle, fontSize: '2.5rem', marginBottom: '2rem', color: '#fefce8' }}>Rustic Oven</h2>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '4rem', flexWrap: 'wrap', marginBottom: '3rem' }}>
-          <div>
-            <h4 style={{ color: '#b45309', marginBottom: '1rem', fontSize: '1.2rem' }}>Location</h4>
-            <p>55 Heritage Road, Old Town</p>
-            <p>(555) 444-5555</p>
-          </div>
-          <div>
-            <h4 style={{ color: '#b45309', marginBottom: '1rem', fontSize: '1.2rem' }}>Hours</h4>
-            <p>Thu - Sun: 8:00 AM - 4:00 PM</p>
-            <p>Mon - Wed: Closed (Baking & Prep)</p>
-          </div>
-        </div>
-        <p style={{ color: 'rgba(254,252,232,0.5)', fontSize: '0.9rem' }}>&copy; {new Date().getFullYear()} Rustic Oven Bakery. All rights reserved.</p>
       </footer>
     </div>
   );
-};
-
-export default RusticOven;
-
+}

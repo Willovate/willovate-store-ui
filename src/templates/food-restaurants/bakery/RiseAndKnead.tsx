@@ -1,56 +1,218 @@
-// @ts-nocheck
 import React, { useState } from 'react';
-import './bakery-shared.css';
+import './bakery-production.css';
 
-const img = (id: string, w = 1600) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
+const img = (id: string, w = 1200) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
 
-const RiseAndKnead = () => {
-  const [activeCategory, setActiveCategory] = useState('All');
+export default function RiseAndKnead() {
+  const [cartCount, setCartCount] = useState(0);
+  const [cartNotice, setCartNotice] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState('All');
 
-  const headingStyle = { fontFamily: '"DM Sans", sans-serif', color: '#1c1917', fontWeight: 800 };
-  const navStyle = { color: '#292524', textDecoration: 'none', marginLeft: '2rem', fontWeight: 600, fontFamily: '"Inter", sans-serif' };
-  const accentColor = '#f59e0b';
+  const addToCart = (item: string) => {
+    setCartCount(c => c + 1);
+    setCartNotice(`Added "${item}" to bag.`);
+    setTimeout(() => setCartNotice(null), 3000);
+  };
 
   return (
-    <div className="bakery-theme" style={{ fontFamily: '"Inter", sans-serif', color: '#292524', backgroundColor: '#fafaf9' }}>
+    <div className="bk-root" style={{
+      '--bk-cream-50': '#fafaf9',
+      '--bk-cream-100': '#f5f5f4',
+      '--bk-hearth-900': '#1c1917',
+      '--bk-amber-600': '#d97706',
+      '--bk-golden-500': '#f59e0b'
+    } as React.CSSProperties}>
+      {cartNotice && (
+        <div style={{
+          position: 'fixed',
+          bottom: '24px',
+          right: '24px',
+          background: 'var(--bk-hearth-900)',
+          color: '#fff',
+          padding: '12px 24px',
+          borderRadius: '8px',
+          zIndex: 9999,
+          fontSize: '0.9rem'
+        }}>
+          🌾 {cartNotice}
+        </div>
+      )}
+
+      {/* 1. Utility Strip */}
+      <div className="bk-utility-strip">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+          <span className="bk-utility-badge">LOCAL GRAIN HARVEST</span>
+          <span>100% Regional Rye, Spelt & Hard Red Wheat · Stone-Ground On Site</span>
+        </div>
+        <div style={{ fontSize: '0.82rem', color: '#fbbf24' }}>
+          Next Day Loaf Subscriptions Open for Neighborhood Residents
+        </div>
+      </div>
+
       {/* Navigation */}
-      <nav className="bakery-nav" style={{ backgroundColor: '#ffffff', borderBottom: '1px solid #e7e5e4' }}>
-        <div style={{ ...headingStyle, fontSize: '1.8rem', margin: 0, letterSpacing: '-0.5px' }}>Rise & Knead</div>
+      <nav style={{
+        background: '#ffffff',
+        padding: '1.25rem 6vw',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        borderBottom: '1px solid var(--bk-border-soft)',
+        position: 'sticky',
+        top: 0,
+        zIndex: 100
+      }}>
         <div>
-          <a href="/templates/category/bakery" style={{ marginRight: '2rem', textDecoration: 'none', fontWeight: 'bold', color: '#292524' }}>← Back to Bakery</a>
-          <a href="#menu" style={navStyle}>Menu</a>
-          <a href="#story" style={navStyle}>Our Story</a>
-          <a href="#contact" style={navStyle}>Location</a>
-          <button className="bakery-btn" style={{ marginLeft: '2rem', backgroundColor: accentColor, borderRadius: '8px', color: '#fff', border: 'none' }}>Order Ahead</button>
+          <a href="/" style={{
+            fontFamily: '"DM Sans", sans-serif',
+            fontSize: '1.9rem',
+            fontWeight: 800,
+            color: 'var(--bk-hearth-900)',
+            textDecoration: 'none'
+          }}>
+            Rise & Knead<span style={{ color: 'var(--bk-amber-600)' }}>.</span>
+          </a>
+          <span style={{ display: 'block', fontSize: '0.75rem', letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--bk-toast-700)' }}>
+            Heritage Grain Hearth Bakery
+          </span>
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+          <a href="/templates/category/bakery" style={{ fontSize: '0.88rem', fontWeight: 600, color: 'var(--bk-toast-700)', textDecoration: 'none' }}>← Category Index</a>
+          <button
+            onClick={() => document.getElementById('loaves')?.scrollIntoView({ behavior: 'smooth' })}
+            style={{
+              background: 'var(--bk-hearth-900)',
+              color: '#fff',
+              border: 'none',
+              padding: '0.55rem 1.25rem',
+              borderRadius: 'var(--bk-radius-pill)',
+              fontWeight: 700,
+              fontSize: '0.88rem',
+              cursor: 'pointer'
+            }}
+          >
+            Daily Basket ({cartCount})
+          </button>
         </div>
       </nav>
 
-      {/* Hero */}
-      <header className="bakery-hero" style={{ backgroundImage: `url(${img('photo-1509440159596-0249088772ff')})`, minHeight: '80vh' }}>
-        <div className="bakery-hero-overlay" style={{ background: 'linear-gradient(to right, rgba(28,25,23,0.9), rgba(245,158,11,0.2))' }}></div>
-        <div className="bakery-hero-content" style={{ textAlign: 'left', maxWidth: '600px', margin: '0 auto 0 10%' }}>
-          <h1 style={{ ...headingStyle, fontSize: '4rem', margin: '0 0 1.5rem 0', color: '#ffffff', lineHeight: 1.1 }}>Good Morning.</h1>
-          <p style={{ fontSize: '1.25rem', marginBottom: '2.5rem', lineHeight: 1.6, color: '#f5f5f4', fontFamily: '"Inter", sans-serif', fontWeight: 400 }}>Start your day with warm muffins, fresh bread, and locally roasted coffee in a cozy neighborhood setting.</p>
-          <button className="bakery-btn" style={{ backgroundColor: accentColor, borderRadius: '8px', fontSize: '1.1rem' }}>See Today's Bakes</button>
+      {/* 2. Hero */}
+      <header className="bk-hero" style={{ backgroundImage: `url(${img('photo-1509440159596-0249088772ff', 1600)})` }}>
+        <div className="bk-hero-scrim" />
+        <div className="bk-hero-card">
+          <span className="bk-hero-tagline">ANCIENT FERMENTATION · REAL NOURISHMENT</span>
+          <h1 className="bk-hero-title">Flour, Water, Salt, Time. Nothing Else.</h1>
+          <p className="bk-hero-desc">
+            We partner with regional regenerative farmers to source untreated heirloom grains, stone-milled into living flour every 48 hours for maximum nutrient density and deep flavor.
+          </p>
+          <div className="bk-hero-actions">
+            <a href="#loaves" className="bk-btn-primary">Explore Daily Bakes →</a>
+            <a href="#grains" className="bk-btn-secondary">Meet Our Farmers 🌾</a>
+          </div>
         </div>
       </header>
 
-      {/* Bakery Headline & Fresh Today */}
-      <section className="bakery-section">
+      {/* 3. Proof Bar */}
+      <section className="bk-proof-strip">
+        <div className="bk-proof-grid">
+          <div className="bk-proof-item">
+            <span className="bk-proof-stat">36 Hours</span>
+            <span className="bk-proof-label">Slow Wild Ferment</span>
+          </div>
+          <div className="bk-proof-item">
+            <span className="bk-proof-stat">0 Additives</span>
+            <span className="bk-proof-label">No Commercial Dough Improvers</span>
+          </div>
+          <div className="bk-proof-item">
+            <span className="bk-proof-stat">5 Regional Farms</span>
+            <span className="bk-proof-label">100% Transparent Grain Sourcing</span>
+          </div>
+          <div className="bk-proof-item">
+            <span className="bk-proof-stat">4.92★</span>
+            <span className="bk-proof-label">Community Sourdough Rating</span>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Menu & Loaf Vitrine */}
+      <section id="loaves" className="bk-section">
+        <div className="bk-section-header">
+          <span className="bk-section-eyebrow">The Morning Bake</span>
+          <h2 className="bk-section-title">Fresh Hearth Loaves & Pastries</h2>
+          <p className="bk-section-subtitle">Pulled from our wood-fired deck oven twice every morning.</p>
+        </div>
+
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.75rem', marginBottom: '2.5rem', flexWrap: 'wrap' }}>
+          {['All', 'Heirloom Breads', 'Morning Bakes', 'Grain Bowls'].map(cat => (
+            <button
+              key={cat}
+              onClick={() => setActiveTab(cat)}
+              style={{
+                background: activeTab === cat ? 'var(--bk-hearth-900)' : '#fff',
+                color: activeTab === cat ? '#fff' : 'var(--bk-toast-700)',
+                border: '1px solid var(--bk-border-soft)',
+                padding: '0.5rem 1.25rem',
+                borderRadius: 'var(--bk-radius-pill)',
+                fontWeight: 600,
+                cursor: 'pointer'
+              }}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        <div className="bk-occasion-grid">
+          {[
+            { cat: 'Heirloom Breads', title: 'Red Fife Miche (1kg)', price: '$10.50', desc: 'Dense, nutty heirloom wheat with complex sour tang and blistered crust.', img: 'photo-1509440159596-0249088772ff' },
+            { cat: 'Heirloom Breads', title: 'Danish Dark Rye (Rugbrød)', price: '$9.00', desc: '100% cracked rye grains and malted barley, loaded with sunflower seeds.', img: 'photo-1549931319-a545dcf3bc7c' },
+            { cat: 'Morning Bakes', title: 'Spelt & Wild Blueberry Muffin', price: '$4.75', desc: 'Whole spelt flour, wild mountain berries, brown sugar oat streusel.', img: 'photo-1586444248902-2f64eddc13df' },
+            { cat: 'Morning Bakes', title: 'Brown Butter Cinnamon Knot', price: '$5.25', desc: 'Twisted brioche laminated with toasted Ceylon cinnamon and brown sugar.', img: 'photo-1558961363-fa8fdf82db35' }
+          ].filter(item => activeTab === 'All' || item.cat === activeTab).map((item, idx) => (
+            <div key={idx} className="bk-occasion-card">
+              <div className="bk-occasion-media">
+                <img src={img(item.img, 700)} alt={item.title} loading="lazy" />
+              </div>
+              <div className="bk-occasion-content">
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
+                  <h3 style={{ margin: 0 }}>{item.title}</h3>
+                  <strong style={{ color: 'var(--bk-amber-600)' }}>{item.price}</strong>
+                </div>
+                <p>{item.desc}</p>
+                <button
+                  onClick={() => addToCart(item.title)}
+                  className="bk-btn-primary"
+                  style={{ width: '100%', justifyContent: 'center', padding: '0.65rem' }}
+                >
+                  Add to Morning Basket +
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 5. Grain Provenance (Flourist pattern) */}
+      <section id="grains" className="bk-section" style={{ background: 'var(--bk-cream-100)', maxWidth: '100%' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <h2 className="bakery-title" style={{ ...headingStyle, fontSize: '2.5rem' }}>Fresh Out of the Oven Today</h2>
-          <p className="bakery-subtitle" style={{ color: '#57534e', fontFamily: '"Inter", sans-serif' }}>Everything is baked in small batches so you always get something warm.</p>
-          <div className="bakery-grid">
+          <div className="bk-section-header">
+            <span className="bk-section-eyebrow">Direct From The Soil</span>
+            <h2 className="bk-section-title">Know Your Grain, Know Your Baker</h2>
+            <p className="bk-section-subtitle">We list the farm, harvest year, and milling date for every sack of grain that enters our hearth.</p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
             {[
-              { title: 'Blueberry Streusel Muffin', desc: 'Loaded with wild blueberries and topped with brown sugar streusel.', img: 'photo-1586444248902-2f64eddc13df' },
-              { title: 'Cinnamon Roll', desc: 'Warm, gooey cinnamon roll topped with cream cheese icing.', img: 'photo-1558961363-fa8fdf82db35' },
-              { title: 'Vanilla Bean Latte', desc: 'House espresso, steamed milk, real vanilla bean syrup.', img: 'photo-1541167760496-1628856ab772' }
-            ].map((item, i) => (
-              <div key={i} className="bakery-card" style={{ borderRadius: '12px', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)' }}>
-                <img src={img(item.img, 800)} alt={item.title} />
-                <div className="bakery-card-content" style={{ backgroundColor: '#ffffff' }}>
-                  <h3 style={{ ...headingStyle, fontSize: '1.4rem' }}>{item.title}</h3>
-                  <p style={{ color: '#57534e', fontSize: '0.95rem', lineHeight: 1.5 }}>{item.desc}</p>
+              { farm: 'Cedar Valley Mill', grain: 'Organic Red Fife Wheat', loc: 'Peace River Region', role: 'Base for all Country Loaves' },
+              { farm: 'Heritage Acres', grain: 'Organic Spelt & Emmer', loc: 'Columbia River Basin', role: 'Ancient Grain Batards' },
+              { farm: 'Black Oak Farm', grain: 'Whole Rye & Hull-less Barley', loc: 'Saskatchewan Prairie', role: 'Danish Rye & Porridge Bakes' }
+            ].map((f, i) => (
+              <div key={i} style={{ background: '#fff', padding: '2rem', borderRadius: '12px', border: '1px solid var(--bk-border-soft)' }}>
+                <span style={{ color: 'var(--bk-amber-600)', fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase' }}>{f.loc}</span>
+                <h3 style={{ margin: '0.5rem 0 0.25rem 0' }}>{f.grain}</h3>
+                <p style={{ margin: '0 0 1rem 0', fontWeight: 600, color: 'var(--bk-toast-700)', fontSize: '0.9rem' }}>Grower: {f.farm}</p>
+                <div style={{ borderTop: '1px solid var(--bk-border-soft)', paddingTop: '0.75rem', fontSize: '0.82rem', color: 'var(--bk-toast-700)' }}>
+                  Used for: <strong>{f.role}</strong>
                 </div>
               </div>
             ))}
@@ -58,132 +220,28 @@ const RiseAndKnead = () => {
         </div>
       </section>
 
-      {/* Bread & Pastry Collection (Menu) */}
-      <section id="menu" className="bakery-section" style={{ backgroundColor: '#ffffff' }}>
-        <h2 className="bakery-title" style={{ ...headingStyle, fontSize: '2.5rem' }}>Our Menu</h2>
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          {['All', 'Morning Pastries', 'Breads', 'Coffee'].map(cat => (
-            <button 
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              style={{
-                background: activeCategory === cat ? '#1c1917' : '#f5f5f4',
-                color: activeCategory === cat ? '#ffffff' : '#1c1917',
-                border: 'none',
-                padding: '0.6rem 1.5rem',
-                margin: '0 0.5rem',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontFamily: '"Inter", sans-serif',
-                fontWeight: 600,
-                transition: 'all 0.2s'
-              }}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-        <div className="bakery-grid">
-          {[
-            { cat: 'Morning Pastries', title: 'Blueberry Muffin', price: '$4', img: 'photo-1586444248902-2f64eddc13df' },
-            { cat: 'Morning Pastries', title: 'Cinnamon Roll', price: '$5', img: 'photo-1558961363-fa8fdf82db35' },
-            { cat: 'Breads', title: 'Daily Sourdough', price: '$7', img: 'photo-1509440159596-0249088772ff' },
-            { cat: 'Breads', title: 'Seeded Loaf', price: '$8', img: 'photo-1603532648955-039310d9ed75' },
-            { cat: 'Coffee', title: 'Vanilla Latte', price: '$5.50', img: 'photo-1541167760496-1628856ab772' },
-            { cat: 'Coffee', title: 'Cold Brew', price: '$4.50', img: 'photo-1432139555190-58524dae6a55' },
-          ].filter(item => activeCategory === 'All' || item.cat === activeCategory).map((item, i) => (
-            <div key={i} className="bakery-card" style={{ display: 'flex', flexDirection: 'column', borderRadius: '12px', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>
-              <img src={img(item.img, 600)} alt={item.title} style={{ height: '200px' }} />
-              <div className="bakery-card-content" style={{ flex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#fafaf9' }}>
-                <h3 style={{ ...headingStyle, margin: 0, fontSize: '1.2rem' }}>{item.title}</h3>
-                <span style={{ fontWeight: 700, color: '#1c1917', fontSize: '1.1rem' }}>{item.price}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Signature & About */}
-      <section id="story" className="bakery-section">
-        <div className="bakery-story">
-          <img src={img('photo-1549931319-a545dcf3bc7c', 1000)} alt="Baker shaping dough" style={{ borderRadius: '16px' }} />
-          <div>
-            <h2 className="bakery-title" style={{ ...headingStyle, textAlign: 'left', fontSize: '2.5rem' }}>Your Daily Ritual.</h2>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.7, marginBottom: '1.5rem', color: '#57534e' }}>
-              Rise & Knead is more than a bakery; it's the living room of our neighborhood. We bake everything in small batches throughout the day so you always get something warm.
-            </p>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.7, marginBottom: '2rem', color: '#57534e' }}>
-              Pair our baked goods with our carefully sourced coffee, roasted just three blocks away. It's the perfect start to any day.
-            </p>
-            <button className="bakery-btn" style={{ backgroundColor: '#1c1917', color: '#fff', borderRadius: '8px' }}>Our Roasting Partners</button>
+      {/* 6. Footer */}
+      <footer className="bk-footer">
+        <div className="bk-footer-grid">
+          <div className="bk-footer-col">
+            <h4 style={{ color: '#fff', fontSize: '1.4rem' }}>Rise & Knead Bakehouse</h4>
+            <p>Committed to honest fermentation, living grain nutrients, and neighborhood community breakfast tables.</p>
+            <div className="bk-fssai-stamp">FSSAI / FDA COMPLIANT · STONE HEARTH CERTIFIED</div>
           </div>
-        </div>
-      </section>
-
-      {/* Gallery */}
-      <section className="bakery-section" style={{ backgroundColor: '#ffffff' }}>
-        <h2 className="bakery-title" style={{ ...headingStyle, fontSize: '2.5rem' }}>From the Counter</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem' }}>
-          {[
-            'photo-1509440159596-0249088772ff',
-            'photo-1541167760496-1628856ab772',
-            'photo-1549931319-a545dcf3bc7c',
-            'photo-1586444248902-2f64eddc13df'
-          ].map((src, i) => (
-            <div key={i} style={{ overflow: 'hidden', borderRadius: '12px' }}>
-              <img src={img(src, 600)} alt="Gallery item" style={{ width: '100%', height: '250px', objectFit: 'cover', transition: 'transform 0.3s ease' }} onMouseOver={e => e.currentTarget.style.transform = 'scale(1.05)'} onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'} />
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Custom Orders & CTA */}
-      <section className="bakery-section" style={{ textAlign: 'center', backgroundColor: '#fef3c7', borderRadius: '24px', margin: '4rem auto' }}>
-        <h2 className="bakery-title" style={{ ...headingStyle, fontSize: '2.5rem' }}>Morning Coffee Combo</h2>
-        <p className="bakery-subtitle" style={{ color: '#78350f', fontSize: '1.1rem' }}>Order ahead via our app and your coffee and pastry will be waiting for you.</p>
-        <button className="bakery-btn" style={{ backgroundColor: accentColor, padding: '1rem 2.5rem', fontSize: '1.1rem', borderRadius: '8px' }}>Order Ahead</button>
-      </section>
-
-      {/* Testimonials */}
-      <section className="bakery-section" style={{ backgroundColor: '#ffffff' }}>
-        <h2 className="bakery-title" style={{ ...headingStyle, fontSize: '2.5rem' }}>Community Love</h2>
-        <div className="bakery-grid">
-          {[
-            { quote: "The best muffins I have ever had. I stop by here every morning on my way to work.", author: "David H." },
-            { quote: "Great coffee, friendly staff, and the cinnamon rolls are dangerously good.", author: "Sarah B." }
-          ].map((test, i) => (
-            <div key={i} style={{ backgroundColor: '#fafaf9', padding: '3rem', borderRadius: '16px', border: '1px solid #e7e5e4' }}>
-              <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem', color: '#44403c', lineHeight: 1.6 }}>"{test.quote}"</p>
-              <h4 style={{ color: '#1c1917', ...headingStyle, fontSize: '1.1rem', margin: 0 }}>- {test.author}</h4>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Footer / Contact */}
-      <footer id="contact" className="bakery-footer" style={{ backgroundColor: '#1c1917', color: '#a8a29e', paddingTop: '5rem', paddingBottom: '3rem' }}>
-        <h2 style={{ ...headingStyle, fontSize: '2rem', marginBottom: '2.5rem', color: '#ffffff' }}>Rise & Knead</h2>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '5rem', flexWrap: 'wrap', marginBottom: '4rem', textAlign: 'left' }}>
-          <div>
-            <h4 style={{ color: '#ffffff', marginBottom: '1rem', fontSize: '1.1rem', fontWeight: 600 }}>Location</h4>
-            <p style={{ margin: '0.5rem 0' }}>10 Main Street</p>
-            <p style={{ margin: '0.5rem 0' }}>Suburbia, ST 12345</p>
-            <p style={{ margin: '0.5rem 0' }}>(555) 111-2222</p>
+          <div className="bk-footer-col">
+            <h4>Bake Hours</h4>
+            <p>Tuesday – Sunday: <strong>7:00 AM – 2:00 PM</strong> (or until sold out)<br />Monday: <em>Closed</em></p>
           </div>
-          <div>
-            <h4 style={{ color: '#ffffff', marginBottom: '1rem', fontSize: '1.1rem', fontWeight: 600 }}>Hours</h4>
-            <p style={{ margin: '0.5rem 0' }}>Mon - Sun</p>
-            <p style={{ margin: '0.5rem 0' }}>7:00 AM - 3:00 PM</p>
-            <p style={{ margin: '0.5rem 0', color: accentColor }}>Open everyday</p>
+          <div className="bk-footer-col">
+            <h4>Hearth Location</h4>
+            <p>108 Grainfield Road, Mill District<br />Phone: +1 (555) 839-2041<br />hello@riseandknead.com</p>
           </div>
-        </div>
-        <div style={{ borderTop: '1px solid #44403c', paddingTop: '2rem' }}>
-          <p style={{ fontSize: '0.9rem' }}>&copy; {new Date().getFullYear()} Rise & Knead Bakery. All rights reserved.</p>
+          <div className="bk-footer-col">
+            <h4>Zero Waste Mission</h4>
+            <p style={{ fontSize: '0.82rem', opacity: 0.85 }}>All day-old loaves are converted into sourdough breadcrumbs or donated to the Community Food Kitchen every evening at 4 PM.</p>
+          </div>
         </div>
       </footer>
     </div>
   );
-};
-
-export default RiseAndKnead;
-
+}

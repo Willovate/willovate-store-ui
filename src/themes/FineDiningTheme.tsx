@@ -38,6 +38,7 @@ const journey = [
 ]
 
 function QuickViewModal({ dish, image, onClose, themeName }: { dish: string[], image: string, onClose: () => void, themeName: string }) {
+  const [added, setAdded] = useState(false)
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
     window.addEventListener('keydown', handleEsc)
@@ -68,10 +69,16 @@ function QuickViewModal({ dish, image, onClose, themeName }: { dish: string[], i
               </ul>
             </div>
             
-            <button className="fd-btn-primary" onClick={() => {
-              alert('Added to your course selection.')
-              onClose()
-            }}>Select for Tasting</button>
+            {added ? (
+              <div style={{ padding: '0.8rem 1.2rem', background: 'rgba(34,197,94,0.15)', border: '1px solid #22c55e', color: '#22c55e', borderRadius: '4px', textAlign: 'center', fontWeight: 600 }}>
+                ✓ Selected for Tasting Sequence
+              </div>
+            ) : (
+              <button className="fd-btn-primary" onClick={() => {
+                setAdded(true)
+                setTimeout(() => onClose(), 1200)
+              }}>Select for Tasting</button>
+            )}
           </div>
         </div>
       </div>
@@ -83,6 +90,7 @@ export default function FineDiningTheme({ theme }: { theme: RestaurantThemePrese
   const [path, setPath] = useState('/')
   const [mobile, setMobile] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [subscribed, setSubscribed] = useState(false)
   
   const images = theme.images
   const hasDedicatedSectionImages = images.length >= 15
@@ -422,11 +430,15 @@ export default function FineDiningTheme({ theme }: { theme: RestaurantThemePrese
       <section className="fd-newsletter fd-reveal">
         <span>STAY AT THE TABLE</span>
         <h2>Seasonal news,<br /><em>from our kitchen.</em></h2>
-        <form onSubmit={e => { e.preventDefault(); alert("Subscribed!") }}>
-          <label className="sr-only" htmlFor="fine-email">Email address</label>
-          <input id="fine-email" required type="email" placeholder="Your email address" />
-          <button>Subscribe →</button>
-        </form>
+        {subscribed ? (
+          <p style={{ color: 'var(--fd-accent)', fontStyle: 'italic', margin: '1rem 0' }}>✓ Merci. You have been added to our private cellar bulletin.</p>
+        ) : (
+          <form onSubmit={e => { e.preventDefault(); setSubscribed(true) }}>
+            <label className="sr-only" htmlFor="fine-email">Email address</label>
+            <input id="fine-email" required type="email" placeholder="Your email address" />
+            <button>Subscribe →</button>
+          </form>
+        )}
       </section>
     </div>
   )

@@ -106,6 +106,7 @@ export default function BakeryTheme({ theme }: { theme: RestaurantThemePreset })
 
   const HomeView = () => (
     <>
+      {/* 1. Hero */}
       <section className="fd-hero">
         <img src={heroImage} alt={theme.name + ' bakery'} />
         <div className="fd-hero-shade" />
@@ -120,7 +121,30 @@ export default function BakeryTheme({ theme }: { theme: RestaurantThemePreset })
           </section>
         </div>
       </section>
+
+      {/* 2. Trust & Proof Bar */}
+      <section className="fd-reveal" style={{ background: 'var(--fd-paper)', borderTop: '1px solid var(--fd-line)', borderBottom: '1px solid var(--fd-line)', padding: '2.5rem 5%' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem', textAlign: 'center', maxWidth: '1200px', margin: '0 auto' }}>
+          <div>
+            <span style={{ fontSize: '2.2rem', fontWeight: 800, color: 'var(--bk-amber-600, #b45309)', display: 'block' }}>65,000+</span>
+            <span style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.8 }}>Loaves Hearth-Baked</span>
+          </div>
+          <div>
+            <span style={{ fontSize: '2.2rem', fontWeight: 800, color: 'var(--bk-amber-600, #b45309)', display: 'block' }}>48 Hours</span>
+            <span style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.8 }}>Wild Yeast Fermentation</span>
+          </div>
+          <div>
+            <span style={{ fontSize: '2.2rem', fontWeight: 800, color: 'var(--bk-amber-600, #b45309)', display: 'block' }}>100% Organic</span>
+            <span style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.8 }}>Stone-Ground Flour</span>
+          </div>
+          <div>
+            <span style={{ fontSize: '2.2rem', fontWeight: 800, color: 'var(--bk-amber-600, #b45309)', display: 'block' }}>4.9★</span>
+            <span style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.8 }}>1,600+ Verified Reviews</span>
+          </div>
+        </div>
+      </section>
       
+      {/* 3. Process & Story */}
       <section className="fd-intro fd-reveal" style={{ textAlign: 'center', padding: '6rem 5%', maxWidth: '800px', margin: '0 auto' }}>
         <span style={{ color: 'var(--fd-accent)', textTransform: 'uppercase', letterSpacing: '1px' }}>OUR PROCESS</span>
         <h2 style={{ fontSize: '2.5rem', margin: '1rem 0' }}>{theme.storyTitle || 'Time, flour, and wild yeast.'}</h2>
@@ -130,6 +154,7 @@ export default function BakeryTheme({ theme }: { theme: RestaurantThemePreset })
         </div>
       </section>
       
+      {/* 4. Signature Bakes Rail */}
       <section className="fd-gallery" style={{ background: 'rgba(0,0,0,0.03)', padding: '5rem 0' }}>
         <div className="fd-section-title fd-reveal" style={{ padding: '0 5%' }}>
           <span>FRESH TODAY</span>
@@ -144,6 +169,57 @@ export default function BakeryTheme({ theme }: { theme: RestaurantThemePreset })
         </div>
         <div style={{ textAlign: 'center', marginTop: '4rem' }} className="fd-reveal">
            <a href="/menu" onClick={(e) => navigate(e, '/menu')} className="fd-text-link">View the full menu <b>→</b></a>
+        </div>
+      </section>
+
+      {/* 5. Live Hearth Board (Flourist Benchmark) */}
+      <section className="fd-reveal" style={{ padding: '5rem 5%', maxWidth: '1100px', margin: '0 auto' }}>
+        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+          <span style={{ color: 'var(--fd-accent)', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '0.85rem' }}>HEARTH AVAILABILITY</span>
+          <h2 style={{ fontSize: '2.2rem', margin: '0.5rem 0' }}>Today's Daily Oven Schedule</h2>
+        </div>
+        <div style={{ border: '1px solid var(--fd-line)', borderRadius: '10px', overflow: 'hidden' }}>
+          <div style={{ background: 'var(--fd-ink)', color: 'var(--fd-paper)', padding: '1rem 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span>Oven Deck 1 & 2</span>
+            <span style={{ fontSize: '0.85rem' }}>PULLED AT 5:30 AM & 11:00 AM</span>
+          </div>
+          <div style={{ padding: '1rem 1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            {[
+              { name: 'Heritage Sourdough Batard', time: 'Pulled 06:00 AM', status: '✓ Available' },
+              { name: 'Pure Butter Pain au Chocolat', time: 'Pulled 07:15 AM', status: '✓ Fresh from Hearth' },
+              { name: 'Organic Seeded Miche', time: 'Pulled 11:00 AM', status: '✓ 8 Loaves Remaining' }
+            ].map(b => (
+              <div key={b.name} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--fd-line)', paddingBottom: '0.75rem' }}>
+                <div>
+                  <strong>{b.name}</strong>
+                  <span style={{ display: 'block', fontSize: '0.8rem', opacity: 0.7 }}>{b.time}</span>
+                </div>
+                <span style={{ color: 'var(--fd-accent)', fontWeight: 700, fontSize: '0.9rem' }}>{b.status}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Dual Fulfillment Path (Levain Benchmark) */}
+      <section className="fd-reveal" style={{ background: 'rgba(0,0,0,0.02)', padding: '5rem 5%' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2.5rem' }}>
+          <div style={{ background: 'var(--fd-paper)', padding: '2.5rem', borderRadius: '12px', border: '1px solid var(--fd-line)' }}>
+            <span style={{ fontSize: '1.75rem', display: 'block', marginBottom: '1rem' }}>🛵</span>
+            <h3 style={{ fontSize: '1.5rem', margin: '0 0 0.5rem 0' }}>Same-Day Local Delivery</h3>
+            <p style={{ opacity: 0.8, fontSize: '0.95rem', marginBottom: '1.5rem' }}>Direct from the oven to your kitchen table. Order before 2:00 PM for afternoon delivery or 30-minute counter pickup.</p>
+            <button onClick={(e) => navigate(e, '/menu')} style={{ padding: '0.75rem 1.5rem', background: 'var(--fd-ink)', color: 'var(--fd-paper)', border: 'none', cursor: 'pointer', borderRadius: '4px' }}>
+              Order Local Bakes →
+            </button>
+          </div>
+          <div style={{ background: 'var(--fd-paper)', padding: '2.5rem', borderRadius: '12px', border: '1px solid var(--fd-line)' }}>
+            <span style={{ fontSize: '1.75rem', display: 'block', marginBottom: '1rem' }}>📦</span>
+            <h3 style={{ fontSize: '1.5rem', margin: '0 0 0.5rem 0' }}>Nationwide Cookie Tins</h3>
+            <p style={{ opacity: 0.8, fontSize: '0.95rem', marginBottom: '1.5rem' }}>Our iconic dark chocolate chunk cookies, granola jars, and sourdough pancake kits shipped anywhere in inert vacuum-sealed gift tins.</p>
+            <button onClick={(e) => navigate(e, '/menu')} style={{ padding: '0.75rem 1.5rem', background: 'transparent', color: 'inherit', border: '1px solid var(--fd-line)', cursor: 'pointer', borderRadius: '4px' }}>
+              Ship Gift Boxes →
+            </button>
+          </div>
         </div>
       </section>
     </>

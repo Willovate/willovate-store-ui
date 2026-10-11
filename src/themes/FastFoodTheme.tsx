@@ -378,9 +378,9 @@ export default function FastFoodTheme({ theme }: { theme: RestaurantThemePreset 
         <div className="fd-brand" style={{ fontSize: '2rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-1px' }}>{theme.name}</div>
         <div>
           <strong>Menu</strong>
-          <a href="/menu" onClick={(e) => { setTab('burgers'); navigate(e, '/menu'); }}>Burgers</a>
-          <a href="/menu" onClick={(e) => { setTab('chicken'); navigate(e, '/menu'); }}>Chicken</a>
-          <a href="/menu" onClick={(e) => { setTab('sides'); navigate(e, '/menu'); }}>Sides</a>
+          <a href="/menu" onClick={(e) => navigate(e, '/menu')}>Burgers</a>
+          <a href="/menu" onClick={(e) => navigate(e, '/menu')}>Chicken</a>
+          <a href="/menu" onClick={(e) => navigate(e, '/menu')}>Sides</a>
         </div>
         <div>
           <strong>About</strong>

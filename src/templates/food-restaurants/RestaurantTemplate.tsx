@@ -9,11 +9,11 @@ export type RestaurantTemplateConfig = {
 }
 
 const imagePool = [
-  'photo-1504674900247-0877df9cc836', 'photo-1546069901-ba9599a7e63c', 'photo-1504674900247-0877df9cc836',
+  'photo-1555396273-367ea4eb4db5', 'photo-1546069901-ba9599a7e63c', 'photo-1517248135467-4c7edcad34c4',
   'photo-1550547660-d9450f859349', 'photo-1555939594-58d7cb561ad1', 'photo-1509440159596-0249088772ff',
-  'photo-1551024506-0bccd828d307', 'photo-1504674900247-0877df9cc836', 'photo-1504674900247-0877df9cc836',
-  'photo-1517701604599-bb29b565090c', 'photo-1504674900247-0877df9cc836', 'photo-1504674900247-0877df9cc836',
-  'photo-1504674900247-0877df9cc836', 'photo-1495474472287-4d71bcdd2085', 'photo-1517248135467-4c7edcad34c4',
+  'photo-1551024506-0bccd828d307', 'photo-1544025162-d76694265947', 'photo-1565299624946-b28f40a0ae38',
+  'photo-1517701604599-bb29b565090c', 'photo-1565895405138-6c3a1555da6a', 'photo-1540189549336-e6e99c3679fe',
+  'photo-1563245372-f21724e3856d', 'photo-1495474472287-4d71bcdd2085', 'photo-1552611052-33e04de081de',
 ]
 
 const copy: Record<string, { kicker: string; title: string; text: string; menu: string[]; story: string; experience: string }> = {
@@ -35,28 +35,41 @@ function Reveal({ children, className = '', id }: { children: React.ReactNode; c
   return <section ref={ref} id={id} className={`rt-reveal ${className}`}>{children}</section>
 }
 
-export default function RestaurantTemplate({ config }: { config: RestaurantTemplateConfig }) {
-  const [menu, setMenu] = useState(0); const [mobileOpen, setMobileOpen] = useState(false); const [lightbox, setLightbox] = useState<number | null>(null); const [sent, setSent] = useState(false)
-  const content = copy[config.category] ?? copy.cafe
-  const images = useMemo(() => { const n = [...config.slug].reduce((a, c) => a + c.charCodeAt(0), 0); return Array.from({ length: 10 }, (_, i) => `https://images.unsplash.com/${imagePool[(n + i * 3) % imagePool.length]}?auto=format&fit=crop&w=${i === 0 ? 1800 : 900}&q=85&sig=${n + i}`) }, [config.slug])
-  const layout = useMemo(() => [...config.slug].reduce((a, c) => a + c.charCodeAt(0), 0) % 3, [config.slug])
-  const categories = config.category === 'food-delivery' ? ['Popular', 'Near you', 'Under 30 min'] : ['Signatures', 'From the fire', 'Something sweet']
-  const isDelivery = config.category === 'food-delivery' || config.category === 'cloud-kitchen'
-  return <div className={`restaurant-template rt-${config.category} rt-layout-${layout}`} style={{ '--rt-primary': config.palette.primary, '--rt-secondary': config.palette.secondary, '--rt-bg': config.palette.background, '--rt-text': config.palette.text } as React.CSSProperties}>
+const defaultConfig: RestaurantTemplateConfig = {
+  name: 'The Dining Room',
+  slug: 'the-dining-room',
+  category: 'fine-dining',
+  palette: { primary: '#c5a059', secondary: '#1e293b', background: '#0b0f19', text: '#f8fafc' }
+}
+
+export default function RestaurantTemplate({ config = defaultConfig }: { config?: RestaurantTemplateConfig }) {
+  const safeConfig = config || defaultConfig
+  const [menu, setMenu] = useState(0); const [mobileOpen, setMobileOpen] = useState(false); const [lightbox, setLightbox] = useState<number | null>(null); const [sent, setSent] = useState(false); const [orderToast, setOrderToast] = useState<string | null>(null)
+  const content = copy[safeConfig.category] ?? copy.cafe
+  const images = useMemo(() => { const n = [...safeConfig.slug].reduce((a, c) => a + c.charCodeAt(0), 0); return Array.from({ length: 10 }, (_, i) => `https://images.unsplash.com/${imagePool[(n + i * 3) % imagePool.length]}?auto=format&fit=crop&w=${i === 0 ? 1800 : 900}&q=85&sig=${n + i}`) }, [safeConfig.slug])
+  const layout = useMemo(() => [...safeConfig.slug].reduce((a, c) => a + c.charCodeAt(0), 0) % 3, [safeConfig.slug])
+  const categories = safeConfig.category === 'food-delivery' ? ['Popular', 'Near you', 'Under 30 min'] : ['Signatures', 'From the fire', 'Something sweet']
+  const isDelivery = safeConfig.category === 'food-delivery' || safeConfig.category === 'cloud-kitchen'
+  return <div className={`restaurant-template rt-${safeConfig.category} rt-layout-${layout}`} style={{ '--rt-primary': safeConfig.palette.primary, '--rt-secondary': safeConfig.palette.secondary, '--rt-bg': safeConfig.palette.background, '--rt-text': safeConfig.palette.text } as React.CSSProperties}>
+    {orderToast && (
+      <div style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 9999, background: 'var(--rt-primary)', color: '#fff', padding: '1rem 1.6rem', borderRadius: '8px', boxShadow: '0 10px 25px rgba(0,0,0,0.25)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.6rem', animation: 'fadeIn 0.25s ease' }}>
+        <span>✓</span> {orderToast}
+      </div>
+    )}
     <div className="rt-announcement">{isDelivery ? 'Free delivery on your first order — use HELLO' : `${content.kicker} — reservations now open for the weekend`}</div>
-    <header className="rt-nav"><a href="#top" className="rt-brand">{config.name}</a><button className="rt-mobile" aria-label="Toggle navigation" onClick={() => setMobileOpen(!mobileOpen)}>☰</button><nav className={mobileOpen ? 'open' : ''}><a href="#menu">Menu</a><a href="#story">Our story</a><a href="#gallery">Gallery</a><a href="#visit">Visit</a><a className="rt-nav-cta" href="#reserve">{isDelivery ? 'Order now' : 'Reserve a table'}</a></nav></header>
+    <header className="rt-nav"><a href="#top" className="rt-brand">{safeConfig.name}</a><button className="rt-mobile" aria-label="Toggle navigation" onClick={() => setMobileOpen(!mobileOpen)}>☰</button><nav className={mobileOpen ? 'open' : ''}><a href="#menu">Menu</a><a href="#story">Our story</a><a href="#gallery">Gallery</a><a href="#visit">Visit</a><a className="rt-nav-cta" href="#reserve">{isDelivery ? 'Order now' : 'Reserve a table'}</a></nav></header>
     <main id="top">
-      <Reveal className="rt-hero"><img src={images[0]} alt={`${config.name} hero`} /><div className="rt-hero-shade"/><div className="rt-hero-copy"><p>{content.kicker}</p><h1>{content.title}</h1><span>{content.text}</span><div><a className="rt-button" href="#menu">{isDelivery ? 'Start an order' : 'Explore the menu'} <b>→</b></a><a className="rt-text-link" href="#story">Our story</a></div></div></Reveal>
-      <Reveal className="rt-intro"><p className="rt-eyebrow">{isDelivery ? 'A better way to eat' : 'A table with a point of view'}</p><h2>{config.name} is more than a meal. It’s a feeling worth coming back for.</h2><div className="rt-stat-row"><span><b>4.9</b> guest rating</span><span><b>Fresh</b> every day</span><span><b>01–11pm</b> daily</span></div></Reveal>
-      <Reveal className="rt-menu" ><div className="rt-section-head"><div><p className="rt-eyebrow">Taste the difference</p><h2>{isDelivery ? 'Find your next favorite' : 'Signature menu'}</h2></div><a href="#reserve">View full menu →</a></div><div className="rt-tabs">{categories.map((x,i)=><button className={menu===i?'active':''} onClick={()=>setMenu(i)} key={x}>{x}</button>)}</div><div className="rt-product-grid">{content.menu.map((name,i)=><article className="rt-product" key={`${menu}-${name}`}><img src={images[i+1]} alt={name}/><div><p>{i % 2 ? 'Chef’s choice' : 'House favorite'}</p><h3>{menu === 0 ? name : `${categories[menu]} ${name}`}</h3><span>{i % 2 ? 'Bright, generous and beautifully balanced.' : 'Made to order with serious care.'}</span><button onClick={() => alert(`${name} added to your order`)}>Add to order <b>+</b></button></div></article>)}</div></Reveal>
-      <Reveal className="rt-split" id="story"><img src={images[5]} alt={`${config.name} kitchen`}/><div><p className="rt-eyebrow">Our story</p><h2>Made with purpose, served with heart.</h2><p>{content.story}</p><a className="rt-text-link" href="#visit">Meet the team →</a></div></Reveal>
+      <Reveal className="rt-hero"><img src={images[0]} alt={`${safeConfig.name} hero`} /><div className="rt-hero-shade"/><div className="rt-hero-copy"><p>{content.kicker}</p><h1>{content.title}</h1><span>{content.text}</span><div><a className="rt-button" href="#menu">{isDelivery ? 'Start an order' : 'Explore the menu'} <b>→</b></a><a className="rt-text-link" href="#story">Our story</a></div></div></Reveal>
+      <Reveal className="rt-intro"><p className="rt-eyebrow">{isDelivery ? 'A better way to eat' : 'A table with a point of view'}</p><h2>{safeConfig.name} is more than a meal. It’s a feeling worth coming back for.</h2><div className="rt-stat-row"><span><b>4.9</b> guest rating</span><span><b>Fresh</b> every day</span><span><b>01–11pm</b> daily</span></div></Reveal>
+      <Reveal className="rt-menu" ><div className="rt-section-head"><div><p className="rt-eyebrow">Taste the difference</p><h2>{isDelivery ? 'Find your next favorite' : 'Signature menu'}</h2></div><a href="#reserve">View full menu →</a></div><div className="rt-tabs">{categories.map((x,i)=><button className={menu===i?'active':''} onClick={()=>setMenu(i)} key={x}>{x}</button>)}</div><div className="rt-product-grid">{content.menu.map((name,i)=><article className="rt-product" key={`${menu}-${name}`}><img src={images[i+1]} alt={name}/><div><p>{i % 2 ? 'Chef’s choice' : 'House favorite'}</p><h3>{menu === 0 ? name : `${categories[menu]} ${name}`}</h3><span>{i % 2 ? 'Bright, generous and beautifully balanced.' : 'Made to order with serious care.'}</span><button onClick={() => { setOrderToast(`${name} added to your order`); setTimeout(() => setOrderToast(null), 3000) }}>Add to order <b>+</b></button></div></article>)}</div></Reveal>
+      <Reveal className="rt-split" id="story"><img src={images[5]} alt={`${safeConfig.name} kitchen`}/><div><p className="rt-eyebrow">Our story</p><h2>Made with purpose, served with heart.</h2><p>{content.story}</p><a className="rt-text-link" href="#visit">Meet the team →</a></div></Reveal>
       <Reveal className="rt-promo"><img src={images[6]} alt="Restaurant experience"/><div><p className="rt-eyebrow">The experience</p><h2>{content.experience}</h2><a className="rt-button light" href="#reserve">{isDelivery ? 'Browse restaurants' : 'Book your experience'} <b>→</b></a></div></Reveal>
-      <Reveal className="rt-gallery" id="gallery"><div className="rt-section-head"><div><p className="rt-eyebrow">Through our lens</p><h2>Good moments, well fed.</h2></div><span>Tap an image to expand</span></div><div className="rt-gallery-grid">{images.slice(2,8).map((image,i)=><button key={image} onClick={()=>setLightbox(i+2)}><img src={image} alt={`${config.name} gallery ${i+1}`}/><span>View moment ↗</span></button>)}</div></Reveal>
+      <Reveal className="rt-gallery" id="gallery"><div className="rt-section-head"><div><p className="rt-eyebrow">Through our lens</p><h2>Good moments, well fed.</h2></div><span>Tap an image to expand</span></div><div className="rt-gallery-grid">{images.slice(2,8).map((image,i)=><button key={image} onClick={()=>setLightbox(i+2)}><img src={image} alt={`${safeConfig.name} gallery ${i+1}`}/><span>View moment ↗</span></button>)}</div></Reveal>
       <Reveal className="rt-testimonials"><p className="rt-eyebrow">The word on the table</p><h2>Guests leave happy. Then they bring friends.</h2><div>{['“The kind of place you immediately want to tell people about.”','“Every detail felt easy, warm and genuinely delicious.”','“A new ritual for our whole group.”'].map((quote,i)=><blockquote key={quote}><p>{quote}</p><footer>★★★★★ <span>{['Mira S.','Aarav K.','Leah R.'][i]}</span></footer></blockquote>)}</div></Reveal>
       <Reveal className="rt-reserve" id="reserve"><div><p className="rt-eyebrow">{isDelivery ? 'Dinner, solved' : 'Make it a date'}</p><h2>{isDelivery ? 'A great meal is only a few taps away.' : 'Save your seat at the table.'}</h2><p>Choose a time, invite your people, and we’ll take care of the rest.</p></div><form onSubmit={e=>{e.preventDefault(); setSent(true)}}>{sent ? <strong>Perfect — we’ll be in touch shortly.</strong> : <><input aria-label="Your email" type="email" required placeholder="Your email address"/><button className="rt-button">{isDelivery ? 'Get offers' : 'Request a table'} <b>→</b></button></>}</form></Reveal>
-      <Reveal className="rt-visit" id="visit"><img src={images[8]} alt={`${config.name} dining room`}/><div><p className="rt-eyebrow">Come say hello</p><h2>Find us where the good things happen.</h2><p>18 Market Lane, City Centre<br/>Monday–Sunday · 11am–11pm<br/>(555) 017-2026</p><a className="rt-text-link" href="https://maps.google.com" target="_blank" rel="noreferrer">Get directions →</a></div></Reveal>
+      <Reveal className="rt-visit" id="visit"><img src={images[8]} alt={`${safeConfig.name} dining room`}/><div><p className="rt-eyebrow">Come say hello</p><h2>Find us where the good things happen.</h2><p>18 Market Lane, City Centre<br/>Monday–Sunday · 11am–11pm<br/>(555) 017-2026</p><a className="rt-text-link" href="https://maps.google.com" target="_blank" rel="noreferrer">Get directions →</a></div></Reveal>
     </main>
-    <footer className="rt-footer"><div><strong>{config.name}</strong><p>{content.kicker}</p></div><div><a href="#menu">Menu</a><a href="#story">Story</a><a href="#gallery">Gallery</a><a href="#visit">Contact</a></div><p>© 2026 {config.name}. Made with good taste.</p></footer>
+    <footer className="rt-footer"><div><strong>{safeConfig.name}</strong><p>{content.kicker}</p></div><div><a href="#menu">Menu</a><a href="#story">Story</a><a href="#gallery">Gallery</a><a href="#visit">Contact</a></div><p>© 2026 {safeConfig.name}. Made with good taste.</p></footer>
     {lightbox !== null && <div className="rt-lightbox" role="dialog" aria-modal="true" aria-label="Expanded gallery image" onClick={()=>setLightbox(null)}><button aria-label="Close image">×</button><img src={images[lightbox]} alt="Expanded gallery view"/></div>}
   </div>
 }
