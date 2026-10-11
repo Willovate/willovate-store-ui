@@ -1374,6 +1374,25 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
       rawHash === 'jewelry-diamond' ||
       rawHash === 'jewelry-accessories' ||
       rawHash === 'diamond-workdo' ||
+      rawHash === 'diamond-jewelry' ||
+      rawHash === 'diamond-templates' ||
+      rawHash === 'diamond-template' ||
+      rawHash === 'diamond-luxury' ||
+      rawHash === 'jwell' ||
+      rawHash === 'jwell-templet' ||
+      rawHash === 'jwell-template' ||
+      rawHash === 'jwell-templates' ||
+      rawHash === 'jwellery' ||
+      rawHash === 'jwellery-templet' ||
+      rawHash === 'jwellery-template' ||
+      rawHash === 'jewel' ||
+      rawHash === 'jewel-template' ||
+      rawHash === 'jewel-templates' ||
+      rawHash === 'jewellery' ||
+      rawHash === 'jewellery-templates' ||
+      rawHash === 'jewellery-templet' ||
+      rawHash === 'jewelry-templates' ||
+      rawHash === 'jewelry-templet' ||
       rawHash === 'aurelia'
     ) {
       return DIAMOND_JEWELRY_TEMPLATE
@@ -1445,6 +1464,25 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
         rawHash === 'jewelry-diamond' ||
         rawHash === 'jewelry-accessories' ||
         rawHash === 'diamond-workdo' ||
+        rawHash === 'diamond-jewelry' ||
+        rawHash === 'diamond-templates' ||
+        rawHash === 'diamond-template' ||
+        rawHash === 'diamond-luxury' ||
+        rawHash === 'jwell' ||
+        rawHash === 'jwell-templet' ||
+        rawHash === 'jwell-template' ||
+        rawHash === 'jwell-templates' ||
+        rawHash === 'jwellery' ||
+        rawHash === 'jwellery-templet' ||
+        rawHash === 'jwellery-template' ||
+        rawHash === 'jewel' ||
+        rawHash === 'jewel-template' ||
+        rawHash === 'jewel-templates' ||
+        rawHash === 'jewellery' ||
+        rawHash === 'jewellery-templates' ||
+        rawHash === 'jewellery-templet' ||
+        rawHash === 'jewelry-templates' ||
+        rawHash === 'jewelry-templet' ||
         rawHash === 'aurelia'
       ) {
         setPreviewTemplate(DIAMOND_JEWELRY_TEMPLATE)

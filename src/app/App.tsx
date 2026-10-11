@@ -227,7 +227,33 @@ function App() {
             rawHash === 'jewellery-templates' ||
             rawHash === 'jewellery-store' ||
             rawHash === 'accessories' ||
-            rawHash === 'accessories-templates'
+            rawHash === 'accessories-templates' ||
+            rawHash === 'diamond' ||
+            rawHash === 'diamond-templates' ||
+            rawHash === 'diamond-template' ||
+            rawHash === 'diamond-store' ||
+            rawHash === 'diamond-workdo' ||
+            rawHash === 'diamond-jewelry' ||
+            rawHash === 'jewelry-diamond' ||
+            rawHash === 'diamond-luxury' ||
+            rawHash === 'jwell' ||
+            rawHash === 'jwell-templet' ||
+            rawHash === 'jwell-template' ||
+            rawHash === 'jwell-templates' ||
+            rawHash === 'jwellery' ||
+            rawHash === 'jwellery-templet' ||
+            rawHash === 'jwellery-template' ||
+            rawHash === 'jwellery-templates' ||
+            rawHash === 'jewel' ||
+            rawHash === 'jewel-template' ||
+            rawHash === 'jewel-templates' ||
+            rawHash === 'jewellery-templet' ||
+            rawHash === 'jewellery-template' ||
+            rawHash === 'jewelry-templet' ||
+            rawHash === 'jewelry-accessories' ||
+            rawHash === 'jewelry-accessories-templates' ||
+            rawHash === 'jewelry-accessories-template' ||
+            rawHash === 'aurelia'
           )) ||
           (key === 'sporting-goods' && (
             rawHash === 'sports' ||
