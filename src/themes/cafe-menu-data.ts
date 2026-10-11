@@ -3,6 +3,14 @@ import { cafeImages } from './cafe-images'
 export type CafeDrink = { name: string; detail: string; price: string; category: string; image: string }
 
 const base: Record<string, Omit<CafeDrink, 'image'>[]> = {
+  'morning-ritual': [
+    { name: 'Honey Oat Latte', detail: 'Espresso, wildflower honey & velvety steamed oat milk.', price: '$5.50', category: 'Coffee' },
+    { name: 'Apricot Danish', detail: 'Flaky twice-baked puff pastry with apricot preserve.', price: '$4.75', category: 'Bakery' },
+    { name: 'Soft Scrambled Brioche', detail: 'Free-range eggs, chives & whipped butter on toasted brioche.', price: '$11.00', category: 'Kitchen' },
+    { name: 'Morning Butter Croissant', detail: 'Baked before dawn with cultured Normandy butter.', price: '$4.50', category: 'Bakery' },
+    { name: 'Cardamom Morning Bun', detail: 'Rolled dough with warm spiced cardamom sugar.', price: '$5.00', category: 'Bakery' },
+    { name: 'Whipped Ricotta Toast', detail: 'Local sourdough, fresh ricotta, figs & raw honey.', price: '$9.50', category: 'Kitchen' },
+  ],
   'brew-house': [
     { name: 'Blackline Espresso', detail: 'Chocolate, cherry and a long finish.', price: '$4', category: 'Espresso' },
     { name: 'Kenya Nyeri', detail: 'Washed single origin, citrus and panela.', price: '$22', category: 'Beans' },

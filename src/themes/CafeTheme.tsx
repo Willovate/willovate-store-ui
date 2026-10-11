@@ -1,8 +1,14 @@
 import { useEffect, useState } from 'react'
 import type { CSSProperties, FormEvent } from 'react'
 import type { RestaurantThemePreset } from './RestaurantTheme'
+import MorningRitualTheme from './MorningRitualTheme'
+import BrewHouseTheme from './BrewHouseTheme'
+import CornerCafeTheme from './CornerCafeTheme'
+import LatteLaneTheme from './LatteLaneTheme'
+import DailyGrindTheme from './DailyGrindTheme'
 import './fine-dining-theme.css' // We can reuse base structural classes, but add specific cafe overrides
 import './fine-dining-responsive.css'
+
 
 // The data
 const coffeeMenu = [
@@ -92,9 +98,16 @@ function CafeQuickViewModal({ item, image, type, onClose }: { item: string[], im
 }
 
 export default function CafeTheme({ theme }: { theme: RestaurantThemePreset }) {
+  if (theme.id === 'morning-ritual') return <MorningRitualTheme theme={theme} />
+  if (theme.id === 'brew-house') return <BrewHouseTheme theme={theme} />
+  if (theme.id === 'corner-cafe') return <CornerCafeTheme theme={theme} />
+  if (theme.id === 'latte-lane') return <LatteLaneTheme theme={theme} />
+  if (theme.id === 'the-daily-grind') return <DailyGrindTheme theme={theme} />
+
   const [path, setPath] = useState('/')
   const [mobile, setMobile] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+
   
   const images = theme.images
   const heroImage = images[0]

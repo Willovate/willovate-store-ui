@@ -67,23 +67,24 @@ export default function BrowseThemePreview() {
   };
 
   return <TemplatesLayout>
-    <div className="browse-theme-preview" style={{ backgroundColor: '#fff', padding: '1rem 3rem', borderBottom: '1px solid #e2e8f0', position: 'sticky', top: 0, zIndex: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+    <div className="browse-theme-preview" style={{ backgroundColor: '#fff', padding: '0.875rem 2rem', borderBottom: '1px solid #e2e8f0', position: 'sticky', top: 0, zIndex: 1000, display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
         <Link 
           to={`/browse-templates/${categorySlug}/${subsectionSlug}${targetWebsiteId ? `?websiteId=${targetWebsiteId}` : ''}`} 
           className="browse-template-back"
+          style={{ textDecoration: 'none', color: '#475569', display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 600, fontSize: '0.9rem' }}
         >
-          <ArrowLeft size={17} /> Back to Browse Templates
+          <ArrowLeft size={17} /> Back to {subsection?.name ?? 'Templates'}
         </Link>
         {theme && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', borderLeft: '1px solid #e2e8f0', paddingLeft: '1.25rem' }}>
             <div>
               <h2 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700, color: '#0f172a' }}>{theme.name}</h2>
-              <div style={{ fontSize: '0.85rem', color: '#64748b', marginTop: '2px' }}>{subsection?.name ?? 'Theme'}</div>
+              <div style={{ fontSize: '0.8rem', color: '#64748b', marginTop: '1px' }}>{subsection?.name ?? 'Hospitality'} Theme</div>
             </div>
-            <div style={{ display: 'flex', gap: '0.5rem', marginLeft: '0.5rem' }}>
-              {theme.styleTags.map(tag => (
-                <span key={tag} style={{ background: '#f1f5f9', color: '#64748b', padding: '0.25rem 0.75rem', borderRadius: '100px', fontSize: '12px', fontWeight: 600, textTransform: 'capitalize' }}>{tag}</span>
+            <div style={{ display: 'flex', gap: '0.4rem', marginLeft: '0.25rem' }}>
+              {theme.styleTags.slice(0, 3).map(tag => (
+                <span key={tag} style={{ background: '#f1f5f9', color: '#475569', padding: '0.2rem 0.6rem', borderRadius: '100px', fontSize: '11px', fontWeight: 600, textTransform: 'capitalize' }}>{tag}</span>
               ))}
             </div>
           </div>
@@ -91,27 +92,57 @@ export default function BrowseThemePreview() {
       </div>
       
       <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-        <div style={{ display: 'flex', border: '1px solid #e2e8f0', borderRadius: '8px', padding: '0.25rem' }}>
-          <button onClick={() => setViewport('desktop')} style={{ background: viewport === 'desktop' ? '#f1f5f9' : 'transparent', border: 'none', padding: '0.4rem', borderRadius: '6px', color: viewport === 'desktop' ? '#334155' : '#94a3b8', cursor: 'pointer', display: 'flex', alignItems: 'center', transition: 'all 0.2s' }}><Monitor size={18} /></button>
-          <button onClick={() => setViewport('tablet')} style={{ background: viewport === 'tablet' ? '#f1f5f9' : 'transparent', border: 'none', padding: '0.4rem', borderRadius: '6px', color: viewport === 'tablet' ? '#334155' : '#94a3b8', cursor: 'pointer', display: 'flex', alignItems: 'center', transition: 'all 0.2s' }}><Tablet size={18} /></button>
-          <button onClick={() => setViewport('mobile')} style={{ background: viewport === 'mobile' ? '#f1f5f9' : 'transparent', border: 'none', padding: '0.4rem', borderRadius: '6px', color: viewport === 'mobile' ? '#334155' : '#94a3b8', cursor: 'pointer', display: 'flex', alignItems: 'center', transition: 'all 0.2s' }}><Smartphone size={18} /></button>
+        <div style={{ display: 'flex', border: '1px solid #cbd5e1', borderRadius: '8px', padding: '0.2rem', background: '#f8fafc' }}>
+          <button title="Desktop View" onClick={() => setViewport('desktop')} style={{ background: viewport === 'desktop' ? '#fff' : 'transparent', border: 'none', padding: '0.4rem 0.6rem', borderRadius: '6px', color: viewport === 'desktop' ? '#0f172a' : '#64748b', cursor: 'pointer', display: 'flex', alignItems: 'center', boxShadow: viewport === 'desktop' ? '0 1px 2px rgba(0,0,0,0.1)' : 'none', transition: 'all 0.2s' }}><Monitor size={17} /></button>
+          <button title="Tablet View (768px)" onClick={() => setViewport('tablet')} style={{ background: viewport === 'tablet' ? '#fff' : 'transparent', border: 'none', padding: '0.4rem 0.6rem', borderRadius: '6px', color: viewport === 'tablet' ? '#0f172a' : '#64748b', cursor: 'pointer', display: 'flex', alignItems: 'center', boxShadow: viewport === 'tablet' ? '0 1px 2px rgba(0,0,0,0.1)' : 'none', transition: 'all 0.2s' }}><Tablet size={17} /></button>
+          <button title="Mobile View (390px)" onClick={() => setViewport('mobile')} style={{ background: viewport === 'mobile' ? '#fff' : 'transparent', border: 'none', padding: '0.4rem 0.6rem', borderRadius: '6px', color: viewport === 'mobile' ? '#0f172a' : '#64748b', cursor: 'pointer', display: 'flex', alignItems: 'center', boxShadow: viewport === 'mobile' ? '0 1px 2px rgba(0,0,0,0.1)' : 'none', transition: 'all 0.2s' }}><Smartphone size={17} /></button>
         </div>
         {theme && (
           <button 
-            style={{ padding: '0.6rem 1.25rem', background: '#f97316', color: 'white', border: 'none', borderRadius: '8px', fontWeight: 600, cursor: 'pointer', fontSize: '14px' }}
+            style={{ padding: '0.55rem 1.25rem', background: '#0f172a', color: 'white', border: 'none', borderRadius: '8px', fontWeight: 600, cursor: 'pointer', fontSize: '13px', transition: 'background 0.2s' }}
             onClick={handleUseTemplate}
             disabled={creatingId === theme.id}
           >
-            {creatingId === theme.id ? 'Creating...' : 'Use This Template'}
+            {creatingId === theme.id ? 'Applying...' : 'Use This Template'}
           </button>
         )}
       </div>
     </div>
-    <div style={{ padding: '1.5rem 3rem 3rem', maxWidth: viewport === 'mobile' ? '414px' : viewport === 'tablet' ? '768px' : '1280px', margin: '0 auto', width: '100%', transition: 'max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1)' }}>
-      {preset ? <div style={{ marginTop: '1.5rem', boxShadow: '0 18px 50px rgba(15,23,42,.18)' }}><RestaurantTheme theme={preset} /></div>
-        : TemplateComponent ? <div style={{ marginTop: '1.5rem', overflow: 'hidden', borderRadius: '18px', boxShadow: '0 18px 50px rgba(15,23,42,.18)' }}>
-          <Suspense fallback={<div style={{ padding: '4rem', textAlign: 'center' }}>Loading template…</div>}><TemplateComponent /></Suspense>
-        </div> : <h1>Theme preview not found</h1>}
+
+    {/* Full-Window Viewport Stage */}
+    <div style={{
+      width: '100%',
+      minHeight: 'calc(100vh - 65px)',
+      background: viewport === 'desktop' ? 'transparent' : '#f1f5f9',
+      padding: viewport === 'desktop' ? 0 : '2rem 1rem',
+      display: 'flex',
+      justifyContent: 'center',
+      transition: 'background 0.3s ease',
+    }}>
+      <div style={{
+        width: '100%',
+        maxWidth: viewport === 'mobile' ? '390px' : viewport === 'tablet' ? '768px' : '100%',
+        margin: '0 auto',
+        borderRadius: viewport === 'desktop' ? 0 : '24px',
+        boxShadow: viewport === 'desktop' ? 'none' : '0 25px 60px -15px rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08)',
+        overflow: 'hidden',
+        background: '#fff',
+        transition: 'max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-radius 0.3s ease',
+        minHeight: '600px',
+      }}>
+        {TemplateComponent ? (
+          <Suspense fallback={<div style={{ padding: '6rem', textAlign: 'center', fontSize: '1.25rem', color: '#64748b' }}>Loading {theme?.name || 'template'}…</div>}>
+            <TemplateComponent />
+          </Suspense>
+        ) : preset ? (
+          <RestaurantTheme theme={preset} />
+        ) : (
+          <div style={{ padding: '4rem', textAlign: 'center', background: '#fff', margin: '2rem' }}>
+            <h2 style={{ fontSize: '1.5rem', color: '#0f172a', margin: '0 0 0.5rem 0' }}>Theme preview not found</h2>
+            <p style={{ color: '#64748b', margin: 0 }}>Unable to locate template component for "{themeSlug}".</p>
+          </div>
+        )}
+      </div>
     </div>
   </TemplatesLayout>
 }
