@@ -2884,38 +2884,97 @@
   .fitcore-bundle-container {
     width: 100% !important;
     max-width: 100% !important;
-    padding-left: 24px !important;
-    padding-right: 24px !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
     box-sizing: border-box !important;
   }
 
-  /* Top Bar / Header */
-  .fitcore-announcement {
-    padding: 0.45rem 1.25rem !important;
-    font-size: 0.74rem !important;
+  /* Top Bar / Header — Matches Mobile View Header */
+  .fitcore-top-bar {
+    font-size: 0.68rem !important;
+    padding: 5px 16px !important;
   }
 
   .fitcore-header-inner {
-    padding: 0 1.25rem !important;
-    height: 70px !important;
-    gap: 1.25rem !important;
+    height: 56px !important;
+    padding: 0 !important;
+    gap: 10px !important;
+    justify-content: space-between !important;
   }
 
-  .fitcore-nav-btn {
-    font-size: 0.8rem !important;
-    padding: 0.35rem 0.55rem !important;
+  .fitcore-mobile-menu-toggle {
+    display: inline-flex !important;
+    width: 34px !important;
+    height: 34px !important;
+    padding: 0 !important;
+    flex-shrink: 0 !important;
   }
 
-  .fitcore-header-actions {
-    gap: 0.65rem !important;
+  .fitcore-brand-group {
+    gap: 6px !important;
+    flex-shrink: 0 !important;
   }
 
-  /* 3-Column Product & Workout Grid */
+  .fitcore-logo-mark {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .fitcore-logo-text {
+    font-size: 1.35rem !important;
+  }
+
+  .fitcore-nav,
+  .fitcore-nav-list {
+    display: none !important;
+  }
+
+  .fitcore-actions {
+    gap: 5px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .fitcore-action-account {
+    display: none !important;
+  }
+
+  .fitcore-action-btn {
+    width: 34px !important;
+    height: 34px !important;
+    flex-shrink: 0 !important;
+    padding: 0 !important;
+  }
+
+  .fitcore-badge-count {
+    top: 2px !important;
+    right: 2px !important;
+    font-size: 0.56rem !important;
+    min-width: 14px !important;
+    height: 14px !important;
+  }
+
+  .fitcore-hero {
+    min-height: auto !important;
+    padding: 2.5rem 0 !important;
+  }
+
+  .fitcore-hero-title {
+    font-size: 2.3rem !important;
+  }
+
+  /* 2-Column Product & Catalog Grid (No orphan cards on 4/8-item sections) */
   .fitcore-grid-4,
+  .fitcore-catalog-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+
+  /* 3-Column Workout Grid (6 workouts -> 3x2) */
   .fitcore-workout-grid {
     display: grid !important;
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 16px !important;
+    gap: 12px !important;
   }
 
   /* 2-Column Tech, Stories & Reviews */
@@ -2924,88 +2983,159 @@
   .fitcore-reviews-grid {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 18px !important;
+    gap: 14px !important;
+  }
+
+  .fitcore-catalog-layout {
+    grid-template-columns: 1fr !important;
+  }
+
+  .fitcore-catalog-sidebar {
+    display: none !important;
   }
 
   /* 2-Column Footer on Tablet */
   .fitcore-footer-grid {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 28px !important;
+    gap: 24px !important;
   }
 
-  /* 2-Column PDP on Tablet */
+  /* PDP on Tablet */
   .fitcore-pdp-layout {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 24px !important;
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
   }
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .fitcore-root,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .fitcore-storefront {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-root,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-storefront,
+.fitcore-storefront[data-device-view='tablet'],
+.fitcore-storefront.device-tablet {
   width: 100% !important;
   max-width: 100% !important;
   overflow-x: hidden !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .fitcore-container,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .fitcore-bundle-container {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-container,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-bundle-container {
   width: 100% !important;
   max-width: 100% !important;
-  padding-left: 24px !important;
-  padding-right: 24px !important;
+  padding-left: 18px !important;
+  padding-right: 18px !important;
   box-sizing: border-box !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .fitcore-announcement {
-  padding: 0.45rem 1.25rem !important;
-  font-size: 0.74rem !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  text-align: center !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-top-bar {
+  font-size: 0.68rem !important;
+  padding: 5px 16px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .fitcore-header-inner {
-  padding: 0 1.25rem !important;
-  height: 70px !important;
-  gap: 1.25rem !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-header-inner {
+  height: 56px !important;
+  padding: 0 !important;
+  gap: 10px !important;
+  justify-content: space-between !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .fitcore-nav-btn {
-  font-size: 0.8rem !important;
-  padding: 0.35rem 0.55rem !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-mobile-menu-toggle {
+  display: inline-flex !important;
+  width: 34px !important;
+  height: 34px !important;
+  padding: 0 !important;
+  flex-shrink: 0 !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .fitcore-header-actions {
-  gap: 0.65rem !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-brand-group {
+  gap: 6px !important;
+  flex-shrink: 0 !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .fitcore-grid-4,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .fitcore-workout-grid {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-logo-mark {
+  width: 28px !important;
+  height: 28px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-logo-text {
+  font-size: 1.35rem !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-nav,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-nav-list {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-actions {
+  gap: 5px !important;
+  flex-shrink: 0 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-action-account {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-action-btn {
+  width: 34px !important;
+  height: 34px !important;
+  flex-shrink: 0 !important;
+  padding: 0 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-badge-count {
+  top: 2px !important;
+  right: 2px !important;
+  font-size: 0.56rem !important;
+  min-width: 14px !important;
+  height: 14px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-hero {
+  min-height: auto !important;
+  padding: 2.5rem 0 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-hero-title {
+  font-size: 2.3rem !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-grid-4,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-catalog-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-workout-grid {
   display: grid !important;
   grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 16px !important;
+  gap: 12px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .fitcore-tech-grid,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .fitcore-stories-grid,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .fitcore-reviews-grid {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-tech-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-stories-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-reviews-grid {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 18px !important;
+  gap: 14px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .fitcore-footer-grid {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-catalog-layout {
+  grid-template-columns: 1fr !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-catalog-sidebar {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-footer-grid {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 28px !important;
-}
-
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .fitcore-pdp-layout {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
   gap: 24px !important;
 }
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .fitcore-storefront.device-tablet) .fitcore-pdp-layout {
+  grid-template-columns: 1fr !important;
+  gap: 1.5rem !important;
+}
+
 

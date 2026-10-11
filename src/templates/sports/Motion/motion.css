@@ -2201,42 +2201,97 @@
   .mo-container {
     width: 100% !important;
     max-width: 100% !important;
-    padding-left: 24px !important;
-    padding-right: 24px !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
     box-sizing: border-box !important;
   }
 
-  /* Top Bar / Header */
+  /* Top Bar / Header — Matches Mobile View Header */
+  .mo-menu-toggle {
+    display: inline-flex !important;
+  }
+
+  .mo-nav {
+    display: none !important;
+  }
+
   .mo-header-inner {
-    padding: 0 1.25rem !important;
-    height: 68px !important;
-    gap: 14px !important;
+    height: 56px !important;
+    padding: 0 !important;
+    gap: 10px !important;
+    justify-content: space-between !important;
+  }
+
+  .mo-logo {
+    font-size: 1.3rem !important;
+    gap: 4px !important;
+  }
+
+  .mo-logo-tag {
+    font-size: 0.5rem !important;
+    padding: 1px 4px !important;
+  }
+
+  .mo-header-tools {
+    gap: 5px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .mo-header-tools .mo-account-btn {
+    display: none !important;
+  }
+
+  .mo-icon-btn {
+    width: 34px !important;
+    height: 34px !important;
+  }
+
+  .mo-icon-btn svg {
+    width: 17px !important;
+    height: 17px !important;
+  }
+
+  .mo-badge-count {
+    top: 2px !important;
+    right: 2px !important;
+    min-width: 14px !important;
+    height: 14px !important;
+    font-size: 0.54rem !important;
+    padding: 0 3px !important;
   }
 
   .mo-subnav-strip {
     display: flex !important;
-    gap: 14px !important;
+    padding: 8px 16px !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
   }
 
   .mo-subnav-btn {
-    font-size: 0.8rem !important;
+    font-size: 0.74rem !important;
   }
 
-  .mo-actions {
-    gap: 10px !important;
+  .mo-ticker {
+    font-size: 0.65rem !important;
+    padding: 5px 16px !important;
+  }
+
+  .mo-ticker span:nth-child(2),
+  .mo-ticker span:nth-child(3),
+  .mo-ticker span:nth-child(4) {
+    display: none !important;
   }
 
   .mo-hero-grid {
     grid-template-columns: 1fr !important;
-    gap: 32px !important;
+    gap: 24px !important;
   }
 
-  /* 3-Column Product & Cyber Grid */
-  .mo-products-grid,
-  .mo-cyber-grid {
+  /* 2-Column Product Grid (No orphan cards on 4/8-item sections) */
+  .mo-products-grid {
     display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 16px !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
   }
 
   /* 2-Column Tech, Smartgear & Engineered Grids */
@@ -2245,90 +2300,157 @@
   .mo-engineered-grid {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 18px !important;
+    gap: 14px !important;
+  }
+
+  .mo-collection-layout {
+    grid-template-columns: 1fr !important;
+  }
+
+  .mo-sidebar {
+    display: none !important;
   }
 
   /* 2-Column Footer on Tablet */
   .mo-footer-grid {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 28px !important;
+    gap: 24px !important;
   }
 
-  /* 2-Column PDP on Tablet */
+  /* PDP on Tablet */
   .mo-pdp-layout {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 24px !important;
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
   }
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .motion-theme,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .motion-root {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .motion-theme,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .motion-root,
+.motion-theme[data-device-view='tablet'],
+.motion-theme.device-tablet {
   width: 100% !important;
   max-width: 100% !important;
   overflow-x: hidden !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .mo-container {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-container {
   width: 100% !important;
   max-width: 100% !important;
-  padding-left: 24px !important;
-  padding-right: 24px !important;
+  padding-left: 18px !important;
+  padding-right: 18px !important;
   box-sizing: border-box !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .mo-header-inner {
-  padding: 0 1.25rem !important;
-  height: 68px !important;
-  gap: 14px !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-menu-toggle {
+  display: inline-flex !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .mo-subnav-strip {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  gap: 14px !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-nav {
+  display: none !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .mo-subnav-btn {
-  font-size: 0.8rem !important;
-}
-
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .mo-actions {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-header-inner {
+  height: 56px !important;
+  padding: 0 !important;
   gap: 10px !important;
+  justify-content: space-between !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .mo-hero-grid {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-logo {
+  font-size: 1.3rem !important;
+  gap: 4px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-logo-tag {
+  font-size: 0.5rem !important;
+  padding: 1px 4px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-header-tools {
+  gap: 5px !important;
+  flex-shrink: 0 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-header-tools .mo-account-btn {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-icon-btn {
+  width: 34px !important;
+  height: 34px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-icon-btn svg {
+  width: 17px !important;
+  height: 17px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-badge-count {
+  top: 2px !important;
+  right: 2px !important;
+  min-width: 14px !important;
+  height: 14px !important;
+  font-size: 0.54rem !important;
+  padding: 0 3px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-subnav-strip {
+  display: flex !important;
+  padding: 8px 16px !important;
+  gap: 8px !important;
+  overflow-x: auto !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-subnav-btn {
+  font-size: 0.74rem !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-ticker {
+  font-size: 0.65rem !important;
+  padding: 5px 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-ticker span:nth-child(2),
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-ticker span:nth-child(3),
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-ticker span:nth-child(4) {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-hero-grid {
   grid-template-columns: 1fr !important;
-  gap: 32px !important;
-}
-
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .mo-products-grid,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .mo-cyber-grid {
-  display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 16px !important;
-}
-
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .mo-tech-grid,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .mo-smartgear-grid,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .mo-engineered-grid {
-  display: grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 18px !important;
-}
-
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .mo-footer-grid {
-  display: grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 28px !important;
-}
-
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .mo-pdp-layout {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
   gap: 24px !important;
 }
 
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-products-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+}
 
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-tech-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-smartgear-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-engineered-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-collection-layout {
+  grid-template-columns: 1fr !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-sidebar {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-footer-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 24px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .motion-theme.device-tablet) .mo-pdp-layout {
+  grid-template-columns: 1fr !important;
+  gap: 1.5rem !important;
+}

@@ -3581,75 +3581,156 @@
   .arena-hero-container {
     width: 100% !important;
     max-width: 100% !important;
-    padding-left: 24px !important;
-    padding-right: 24px !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
     box-sizing: border-box !important;
   }
 
-  /* Top Bar / Header */
+  /* Top Bar / Header (Same as Mobile View Header) */
   .arena-announcement-strip {
-    padding: 0.45rem 1.25rem !important;
-    font-size: 0.74rem !important;
-    gap: 0.5rem !important;
+    padding: 0.35rem 1rem !important;
+    font-size: 0.68rem !important;
+    gap: 0.4rem !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
   }
 
   .arena-header {
-    padding: 0 1.25rem !important;
+    padding: 0 16px !important;
   }
 
   .arena-header-inner {
-    height: 68px !important;
-    gap: 1.25rem !important;
+    height: 56px !important;
+    gap: 10px !important;
+    justify-content: space-between !important;
   }
 
-  .arena-nav-link {
-    font-size: 0.82rem !important;
-    padding: 0.4rem 0.6rem !important;
+  .arena-brand-title {
+    font-size: 1.45rem !important;
+    gap: 0.2rem !important;
+  }
+
+  .arena-brand-tagline {
+    font-size: 0.48rem !important;
+    letter-spacing: 0.14em !important;
+  }
+
+  .arena-nav-menu {
+    display: none !important;
   }
 
   .arena-header-actions {
-    gap: 0.65rem !important;
+    gap: 5px !important;
   }
 
-  /* 3-Column Product Grid on Tablet */
+  .arena-action-btn {
+    width: 34px !important;
+    height: 34px !important;
+  }
+
+  .arena-account-btn {
+    display: none !important;
+  }
+
+  .arena-cart-badge {
+    top: -2px !important;
+    right: -2px !important;
+    font-size: 0.56rem !important;
+    min-width: 15px !important;
+    height: 15px !important;
+  }
+
+  .arena-mobile-toggle {
+    display: flex !important;
+  }
+
+  .arena-hero-section {
+    padding: 2.5rem 1.15rem !important;
+    min-height: auto !important;
+  }
+
+  .arena-hero-headline {
+    font-size: 2.35rem !important;
+    line-height: 0.98 !important;
+  }
+
+  .arena-hero-sub {
+    font-size: 0.88rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .arena-section {
+    padding: 2.5rem 1.15rem !important;
+  }
+
+  .arena-section-title {
+    font-size: 1.85rem !important;
+  }
+
+  /* 2-Column Sports & Product Grids on Tablet (No Orphan Cards) */
+  .arena-sports-grid,
   .arena-products-grid,
   .arena-collection-grid {
     display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 16px !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
   }
 
-  /* 3-Column Sports Categories */
-  .arena-sports-grid {
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 16px !important;
+  /* Collection Page Tablet Layout */
+  .arena-collection-layout {
+    grid-template-columns: 1fr !important;
   }
 
-  /* 2-Column Promo & Split Grids */
+  .arena-collection-sidebar {
+    display: none !important;
+  }
+
+  .arena-collection-sidebar.mobile-open {
+    display: flex !important;
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 1005 !important;
+    background: #0d1017 !important;
+    overflow-y: auto !important;
+    border-radius: 0 !important;
+    padding: 2rem 1.5rem !important;
+  }
+
+  .arena-mobile-filter-btn {
+    display: flex !important;
+  }
+
+  /* Promo & Split Grids */
   .arena-official-grid,
   .arena-pro-split-grid,
+  .arena-limited-section {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
   .arena-testimonials-grid {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 18px !important;
+    gap: 14px !important;
   }
 
   /* 2-Column Footer on Tablet */
   .arena-footer-grid {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 28px !important;
+    gap: 24px !important;
   }
 
-  /* 2-Column PDP on Tablet */
+  /* PDP on Tablet */
   .arena-product-page-grid {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 24px !important;
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
   }
 }
 
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet),
 :is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .arena-root,
 :is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .arena-storefront {
   width: 100% !important;
@@ -3657,74 +3738,152 @@
   overflow-x: hidden !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .arena-container,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .arena-hero-container {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-container,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-hero-container {
   width: 100% !important;
   max-width: 100% !important;
-  padding-left: 24px !important;
-  padding-right: 24px !important;
+  padding-left: 18px !important;
+  padding-right: 18px !important;
   box-sizing: border-box !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .arena-announcement-strip {
-  padding: 0.45rem 1.25rem !important;
-  font-size: 0.74rem !important;
-  gap: 0.5rem !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-announcement-strip {
+  padding: 0.35rem 1rem !important;
+  font-size: 0.68rem !important;
+  gap: 0.4rem !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
   text-align: center !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .arena-header {
-  padding: 0 1.25rem !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-header {
+  padding: 0 16px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .arena-header-inner {
-  height: 68px !important;
-  gap: 1.25rem !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-header-inner {
+  height: 56px !important;
+  gap: 10px !important;
+  justify-content: space-between !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .arena-nav-link {
-  font-size: 0.82rem !important;
-  padding: 0.4rem 0.6rem !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-brand-title {
+  font-size: 1.45rem !important;
+  gap: 0.2rem !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .arena-header-actions {
-  gap: 0.65rem !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-brand-tagline {
+  font-size: 0.48rem !important;
+  letter-spacing: 0.14em !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .arena-products-grid,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .arena-collection-grid {
-  display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 16px !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-nav-menu {
+  display: none !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .arena-sports-grid {
-  display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 16px !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-header-actions {
+  gap: 5px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .arena-official-grid,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .arena-pro-split-grid,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .arena-testimonials-grid {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-action-btn {
+  width: 34px !important;
+  height: 34px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-account-btn {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-cart-badge {
+  top: -2px !important;
+  right: -2px !important;
+  font-size: 0.56rem !important;
+  min-width: 15px !important;
+  height: 15px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-mobile-toggle {
+  display: flex !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-hero-section {
+  padding: 2.5rem 1.15rem !important;
+  min-height: auto !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-hero-headline {
+  font-size: 2.35rem !important;
+  line-height: 0.98 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-hero-sub {
+  font-size: 0.88rem !important;
+  line-height: 1.5 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-section {
+  padding: 2.5rem 1.15rem !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-section-title {
+  font-size: 1.85rem !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-sports-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-products-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-collection-grid {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 18px !important;
+  gap: 14px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .arena-footer-grid {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-collection-layout {
+  grid-template-columns: 1fr !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-collection-sidebar {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-collection-sidebar.mobile-open {
+  display: flex !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 1005 !important;
+  background: #0d1017 !important;
+  overflow-y: auto !important;
+  border-radius: 0 !important;
+  padding: 2rem 1.5rem !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-mobile-filter-btn {
+  display: flex !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-official-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-pro-split-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-limited-section {
+  grid-template-columns: 1fr !important;
+  gap: 1.5rem !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-testimonials-grid {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 28px !important;
+  gap: 14px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .arena-product-page-grid {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-footer-grid {
   display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 24px !important;
 }
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .arena-root.device-tablet) .arena-product-page-grid {
+  grid-template-columns: 1fr !important;
+  gap: 1.5rem !important;
+}
+
+
 
 

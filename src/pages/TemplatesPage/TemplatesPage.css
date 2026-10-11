@@ -2641,14 +2641,13 @@
 }
 
 .preview-viewport-container.device-tablet {
-  padding: 2.5rem 1.5rem !important;
+  padding: 1.5rem 2rem !important;
   display: flex !important;
   flex-direction: column !important;
-  justify-content: flex-start !important;
+  justify-content: center !important;
   align-items: center !important;
   background: #090d16 !important;
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
+  overflow: hidden !important;
   height: 100% !important;
   box-sizing: border-box !important;
 }
@@ -2697,14 +2696,15 @@
 }
 
 .frame-tablet {
-  width: 768px !important;
-  max-width: calc(100% - 32px) !important;
-  height: 980px !important;
-  max-height: calc(100vh - 120px) !important;
-  margin: 0 auto !important;
+  width: 580px !important;
+  max-width: min(580px, calc(100% - 80px)) !important;
+  height: 100% !important;
+  max-height: min(760px, calc(100vh - 150px)) !important;
+  min-height: 0 !important;
+  margin: auto !important;
   align-self: center !important;
-  flex-shrink: 0 !important;
-  border: 14px solid #1e293b !important;
+  flex: 1 1 auto !important;
+  border: 12px solid #1e293b !important;
   border-radius: 28px !important;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6) !important;
   position: relative !important;
@@ -2726,6 +2726,7 @@
 .simulated-frame.frame-tablet .fitcore-storefront,
 .simulated-frame.frame-tablet .gd-root,
 .simulated-frame.frame-tablet .gameday-storefront,
+.simulated-frame.frame-tablet .peak-storefront,
 .simulated-frame.frame-tablet .peak-theme,
 .simulated-frame.frame-tablet .peak-storefront-root,
 .simulated-frame.frame-tablet .street-athlete,

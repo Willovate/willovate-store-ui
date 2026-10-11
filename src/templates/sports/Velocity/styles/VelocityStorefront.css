@@ -6605,83 +6605,226 @@ footer.velocity-footer {
   .sports-container {
     width: 100% !important;
     max-width: 100% !important;
-    padding-left: 24px !important;
-    padding-right: 24px !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
     box-sizing: border-box !important;
   }
 
-  /* Top Bar / Header */
-  .sports-header-inner,
-  .velocity-navbar-container {
-    padding: 0 20px !important;
-    gap: 16px !important;
-    height: 70px !important;
+  /* Top Bar / Header (Same as Mobile View Header) */
+  .d-none-mobile,
+  .account-trigger {
+    display: none !important;
+  }
+
+  .velocity-desktop-nav,
+  .sports-desktop-nav {
+    display: none !important;
+  }
+
+  .mobile-hamburger-btn {
+    display: flex !important;
+  }
+
+  .velocity-announcement-bar,
+  .sports-top-announcement {
+    padding: 0.35rem 2rem 0.35rem 0.85rem !important;
+    font-size: 0.68rem !important;
+    text-align: center !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .announcement-text {
+    font-size: 0.68rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .announcement-content {
+    justify-content: center !important;
+    margin: 0 auto !important;
     display: flex !important;
     align-items: center !important;
-    justify-content: space-between !important;
+    text-align: center !important;
+    width: 100% !important;
   }
 
-  .sports-desktop-nav {
-    gap: 12px !important;
+  .velocity-navbar-container {
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important;
   }
 
-  .sports-desktop-nav a {
-    font-size: 0.82rem !important;
-  }
-
-  .sports-header-actions {
+  .sports-header-inner,
+  .velocity-navbar {
+    padding: 0 16px !important;
     gap: 10px !important;
+    height: 56px !important;
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    box-sizing: border-box !important;
   }
 
-  .sports-top-announcement {
-    padding: 0.4rem 1.25rem !important;
-    font-size: 0.78rem !important;
+  .velocity-logo-link {
+    gap: 0.45rem !important;
+    min-width: 0 !important;
+    flex-shrink: 1 !important;
+  }
+
+  .velocity-logo-symbol {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .velocity-logo-symbol svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .velocity-brand-name {
+    font-size: 1.08rem !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  .velocity-brand-tagline {
+    display: none !important;
+  }
+
+  .velocity-header-actions,
+  .sports-header-actions {
+    gap: 0.4rem !important;
+    flex-shrink: 0 !important;
+    margin-left: auto !important;
+  }
+
+  .action-icon-btn:not(.d-none-mobile):not(.account-trigger) {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    padding: 0 !important;
+    border-radius: 8px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    flex-shrink: 0 !important;
+  }
+
+  .action-icon-btn svg {
+    width: 17px !important;
+    height: 17px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .action-icon-btn .action-badge {
+    top: -4px !important;
+    right: -4px !important;
+    min-width: 15px !important;
+    height: 15px !important;
+    font-size: 0.58rem !important;
+    padding: 0 2px !important;
   }
 
   /* Hero Section */
+  .velocity-hero-section {
+    min-height: 420px !important;
+    padding: 2.5rem 0 2rem 0 !important;
+  }
+
+  .velocity-hero-headline,
+  .hero-display-headline {
+    font-size: 2.25rem !important;
+    line-height: 1.06 !important;
+  }
+
+  .hero-supporting-text {
+    font-size: 0.86rem !important;
+    max-width: 100% !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .hero-actions-cluster {
+    flex-wrap: wrap !important;
+    gap: 0.65rem !important;
+  }
+
+  .hero-primary-btn,
+  .hero-secondary-btn {
+    padding: 0.6rem 1.1rem !important;
+    font-size: 0.8rem !important;
+    min-height: 42px !important;
+  }
+
+  .hero-telemetry-card,
+  .hero-telemetry-strip {
+    flex-wrap: wrap !important;
+    gap: 12px 16px !important;
+    padding: 12px 14px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .telemetry-divider {
+    display: none !important;
+  }
+
   .sports-hero-grid,
   .sports-story-layout {
     grid-template-columns: 1fr !important;
-    gap: 28px !important;
+    gap: 24px !important;
   }
 
-  .hero-display-headline {
-    font-size: 2.75rem !important;
-    line-height: 1.1 !important;
-  }
-
-  .hero-telemetry-strip {
-    flex-wrap: wrap !important;
+  /* 2-Column Shop by Sport & Product Grids on Tablet (No Orphan Cards) */
+  .sports-grid-container {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 14px !important;
-    padding: 10px 16px !important;
   }
 
-  /* 3-Column Product Grid on Tablet */
   .sports-product-grid.four-col-grid,
   .products-grid-4,
   .products-grid-8,
-  .sports-product-grid {
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 16px !important;
-  }
-
-  /* 3-Column Categories Grid */
-  .sports-categories-grid {
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 16px !important;
-  }
-
-  /* 2-Column Promo & Trust Splits */
-  .sports-trust-grid,
-  .sports-reviews-grid,
-  .promo-content-grid,
-  .split-grid-wrapper,
-  .sports-story-grid {
+  .sports-product-grid,
+  .collection-products-grid {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 18px !important;
+    gap: 14px !important;
+  }
+
+  /* Collection Layout on Tablet */
+  .collection-main-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+
+  .desktop-filters-sidebar {
+    display: none !important;
+  }
+
+  /* Promo, Split & Categories on Tablet */
+  .split-grid-wrapper,
+  .promo-content-grid,
+  .pdp-main-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  .sports-trust-grid,
+  .sports-reviews-grid,
+  .sports-story-grid,
+  .asymmetric-categories-grid,
+  .testimonials-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+
+  .is-large-tile,
+  .is-medium-tile {
+    grid-column: span 1 !important;
+    height: 230px !important;
   }
 
   /* 2-Column Footer on Tablet */
@@ -6690,10 +6833,11 @@ footer.velocity-footer {
   .footer-columns-grid {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 28px !important;
+    gap: 24px !important;
   }
 }
 
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet),
 :is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .velocity-storefront-wrapper,
 :is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-storefront-wrapper {
   width: 100% !important;
@@ -6701,26 +6845,40 @@ footer.velocity-footer {
   overflow-x: hidden !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .velocity-container,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-container {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .velocity-container,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .sports-container {
   width: 100% !important;
   max-width: 100% !important;
-  padding-left: 24px !important;
-  padding-right: 24px !important;
+  padding-left: 18px !important;
+  padding-right: 18px !important;
   box-sizing: border-box !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .velocity-announcement-bar,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-top-announcement {
-  padding: 0.45rem 1.25rem !important;
-  font-size: 0.78rem !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .velocity-desktop-nav,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .sports-desktop-nav {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .mobile-hamburger-btn {
+  display: flex !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .velocity-announcement-bar,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .sports-top-announcement {
+  padding: 0.35rem 2rem 0.35rem 0.85rem !important;
+  font-size: 0.68rem !important;
   text-align: center !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .announcement-content {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .announcement-text {
+  font-size: 0.68rem !important;
+  line-height: 1.3 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .announcement-content {
   justify-content: center !important;
   margin: 0 auto !important;
   display: flex !important;
@@ -6729,75 +6887,205 @@ footer.velocity-footer {
   width: 100% !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-header-inner,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .velocity-navbar-container {
-  padding: 0 20px !important;
-  gap: 16px !important;
-  height: 70px !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .velocity-navbar-container {
+  padding: 0 !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .sports-header-inner,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .velocity-navbar {
+  padding: 0 16px !important;
+  gap: 10px !important;
+  height: 56px !important;
+  width: 100% !important;
   display: flex !important;
   align-items: center !important;
-  justify-content: space-between !important;
+  justify-content: flex-start !important;
+  box-sizing: border-box !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-desktop-nav {
-  gap: 12px !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .velocity-logo-link {
+  gap: 0.45rem !important;
+  min-width: 0 !important;
+  flex-shrink: 1 !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-desktop-nav a {
-  font-size: 0.82rem !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .velocity-logo-symbol {
+  width: 24px !important;
+  height: 24px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-header-actions {
-  gap: 10px !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .velocity-logo-symbol svg {
+  width: 24px !important;
+  height: 24px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-hero-grid,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-story-layout {
-  grid-template-columns: 1fr !important;
-  gap: 28px !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .velocity-brand-name {
+  font-size: 1.08rem !important;
+  letter-spacing: 0.05em !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .hero-display-headline {
-  font-size: 2.75rem !important;
-  line-height: 1.1 !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .velocity-brand-tagline {
+  display: none !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .hero-telemetry-strip {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .velocity-header-actions,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .sports-header-actions {
+  gap: 0.4rem !important;
+  flex-shrink: 0 !important;
+  margin-left: auto !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .action-icon-btn:not(.d-none-mobile):not(.account-trigger) {
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  padding: 0 !important;
+  border-radius: 8px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  flex-shrink: 0 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .d-none-mobile,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .account-trigger,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .action-label {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .action-icon-btn svg {
+  width: 17px !important;
+  height: 17px !important;
+  flex-shrink: 0 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .action-icon-btn .action-badge {
+  top: -4px !important;
+  right: -4px !important;
+  min-width: 15px !important;
+  height: 15px !important;
+  font-size: 0.58rem !important;
+  padding: 0 2px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .velocity-hero-section {
+  min-height: 420px !important;
+  padding: 2.5rem 0 2rem 0 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .velocity-hero-headline,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .hero-display-headline {
+  font-size: 2.25rem !important;
+  line-height: 1.06 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .hero-supporting-text {
+  font-size: 0.86rem !important;
+  max-width: 100% !important;
+  margin-bottom: 1.25rem !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .hero-actions-cluster {
   flex-wrap: wrap !important;
+  gap: 0.65rem !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .hero-primary-btn,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .hero-secondary-btn {
+  padding: 0.6rem 1.1rem !important;
+  font-size: 0.8rem !important;
+  min-height: 42px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .hero-telemetry-card,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .hero-telemetry-strip {
+  flex-wrap: wrap !important;
+  gap: 12px 16px !important;
+  padding: 12px 14px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .telemetry-divider {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .sports-hero-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .sports-story-layout {
+  grid-template-columns: 1fr !important;
+  gap: 24px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .section-title {
+  font-size: 1.75rem !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .sports-grid-container {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 14px !important;
-  padding: 10px 16px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-product-grid.four-col-grid,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .products-grid-4,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .products-grid-8,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-product-grid {
-  display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 16px !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .sport-card {
+  height: 260px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-categories-grid {
-  display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 16px !important;
-}
-
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-trust-grid,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-reviews-grid,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .promo-content-grid,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .split-grid-wrapper,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-story-grid {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .sports-product-grid.four-col-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .products-grid-4,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .products-grid-8,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .sports-product-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .collection-products-grid {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 18px !important;
+  gap: 14px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-footer-top-row,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .sports-footer-grid,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .footer-columns-grid {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .card-media-wrapper {
+  height: 195px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .collection-main-grid {
+  grid-template-columns: 1fr !important;
+  gap: 1.25rem !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .desktop-filters-sidebar {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .split-grid-wrapper,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .promo-content-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .pdp-main-grid {
+  grid-template-columns: 1fr !important;
+  gap: 1.5rem !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .sports-trust-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .sports-reviews-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .sports-story-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .asymmetric-categories-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .testimonials-grid {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 28px !important;
+  gap: 14px !important;
 }
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .is-large-tile,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .is-medium-tile {
+  grid-column: span 1 !important;
+  height: 230px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .sports-footer-top-row,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .sports-footer-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .velocity-storefront-wrapper.device-tablet) .footer-columns-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 24px !important;
+}
+
+
 

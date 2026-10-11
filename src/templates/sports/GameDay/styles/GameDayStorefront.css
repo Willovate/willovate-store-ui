@@ -3222,45 +3222,123 @@
   .gd-container {
     width: 100% !important;
     max-width: 100% !important;
-    padding-left: 24px !important;
-    padding-right: 24px !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
     box-sizing: border-box !important;
   }
 
-  /* Top Bar / Header */
+  /* Top Bar / Header — Matches Mobile View Header */
+  .gd-announcement,
   .gd-announcement-strip {
-    padding: 0.45rem 1.25rem !important;
-    font-size: 0.74rem !important;
+    padding: 5px 16px !important;
+    font-size: 0.68rem !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .gd-hamburger-btn {
+    display: inline-flex !important;
+  }
+
+  .gd-nav {
+    display: none !important;
   }
 
   .gd-header-inner {
-    padding: 0 1.25rem !important;
-    height: 70px !important;
-    gap: 1.25rem !important;
+    height: 56px !important;
+    padding: 0 !important;
+    gap: 10px !important;
+    justify-content: space-between !important;
+    width: 100% !important;
   }
 
-  .gd-nav-link {
-    font-size: 0.82rem !important;
-    padding: 0.35rem 0.6rem !important;
+  .gd-logo-name {
+    font-size: 1.35rem !important;
+  }
+
+  .gd-logo-tagline {
+    font-size: 0.48rem !important;
   }
 
   .gd-header-actions {
-    gap: 0.65rem !important;
+    gap: 4px !important;
   }
 
-  /* 3-Column Product Grid */
-  .gd-products-grid {
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 16px !important;
+  .gd-icon-btn {
+    padding: 5px !important;
   }
 
-  /* 3-Column Sports & Essentials Grid */
-  .gd-sports-grid,
+  .gd-action-account {
+    display: none !important;
+  }
+
+  .gd-mobile-pills {
+    display: flex !important;
+    gap: 6px !important;
+    overflow-x: auto !important;
+    padding: 7px 16px !important;
+    background: var(--gd-bg-surface) !important;
+    border-bottom: 1px solid var(--gd-border-dark) !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+  }
+
+  .gd-mobile-pills::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .gd-sport-pill {
+    padding: 4px 12px !important;
+    font-size: 0.68rem !important;
+    font-weight: 700 !important;
+    white-space: nowrap !important;
+    border-radius: var(--gd-radius-full) !important;
+    border: 1px solid var(--gd-border-dark) !important;
+    background: var(--gd-bg-elevated) !important;
+    color: var(--gd-text-white) !important;
+  }
+
+  .gd-hero {
+    min-height: auto !important;
+    padding: 2.5rem 0 2rem !important;
+  }
+
+  .gd-hero-title {
+    font-size: 2.3rem !important;
+  }
+
+  .gd-drawer-backdrop,
+  .gd-mobile-menu-backdrop {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 10000 !important;
+  }
+
+  .gd-mobile-menu-drawer {
+    width: min(340px, 85vw) !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    max-height: 100% !important;
+  }
+
+  /* 2-Column Product & Essentials Grid (No orphan cards on 4/8-item sections) */
+  .gd-products-grid,
   .gd-essentials-grid {
     display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+
+  /* 3-Column Sports Grid (6 sports -> 3x2) */
+  .gd-sports-grid {
+    display: grid !important;
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 16px !important;
+    gap: 12px !important;
   }
 
   /* 2-Column Jersey & Stories */
@@ -3269,95 +3347,167 @@
   .gd-reviews-grid {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 18px !important;
+    gap: 14px !important;
   }
 
   /* 2-Column Footer on Tablet */
   .gd-footer-grid {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 28px !important;
+    gap: 24px !important;
   }
 
-  /* 2-Column PDP on Tablet */
+  /* PDP on Tablet */
   .gd-product-layout {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 24px !important;
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
   }
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .gd-root,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .gameday-storefront {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-root,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gameday-storefront,
+.gameday-storefront[data-device-view='tablet'],
+.gameday-storefront.device-tablet {
   width: 100% !important;
   max-width: 100% !important;
   overflow-x: hidden !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .gd-container {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-container {
   width: 100% !important;
   max-width: 100% !important;
-  padding-left: 24px !important;
-  padding-right: 24px !important;
+  padding-left: 18px !important;
+  padding-right: 18px !important;
   box-sizing: border-box !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .gd-announcement,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .gd-announcement-strip {
-  padding: 0.45rem 1.25rem !important;
-  font-size: 0.74rem !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-announcement,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-announcement-strip {
+  padding: 5px 16px !important;
+  font-size: 0.68rem !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
   text-align: center !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .gd-header-inner {
-  padding: 0 1.25rem !important;
-  height: 70px !important;
-  gap: 1.25rem !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-hamburger-btn {
+  display: inline-flex !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .gd-nav-link {
-  font-size: 0.82rem !important;
-  padding: 0.35rem 0.6rem !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-nav {
+  display: none !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .gd-header-actions {
-  gap: 0.65rem !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-header-inner {
+  height: 56px !important;
+  padding: 0 !important;
+  gap: 10px !important;
+  justify-content: space-between !important;
+  width: 100% !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .gd-products-grid {
-  display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 16px !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-logo-name {
+  font-size: 1.35rem !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .gd-sports-grid,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .gd-essentials-grid {
-  display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 16px !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-logo-tagline {
+  font-size: 0.48rem !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .gd-jersey-grid,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .gd-stories-grid,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .gd-reviews-grid {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-header-actions {
+  gap: 4px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-icon-btn {
+  padding: 5px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-action-account {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-mobile-pills {
+  display: flex !important;
+  gap: 6px !important;
+  overflow-x: auto !important;
+  padding: 7px 16px !important;
+  background: var(--gd-bg-surface) !important;
+  border-bottom: 1px solid var(--gd-border-dark) !important;
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-mobile-pills::-webkit-scrollbar {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-sport-pill {
+  padding: 4px 12px !important;
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important;
+  border-radius: var(--gd-radius-full) !important;
+  border: 1px solid var(--gd-border-dark) !important;
+  background: var(--gd-bg-elevated) !important;
+  color: var(--gd-text-white) !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-hero {
+  min-height: auto !important;
+  padding: 2.5rem 0 2rem !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-hero-title {
+  font-size: 2.3rem !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-drawer-backdrop,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-mobile-menu-backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 10000 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-mobile-menu-drawer {
+  width: min(340px, 85vw) !important;
+  max-width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  max-height: 100% !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-products-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-essentials-grid {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 18px !important;
+  gap: 14px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .gd-footer-grid {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-sports-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-jersey-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-stories-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-reviews-grid {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 28px !important;
+  gap: 14px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .gd-product-layout {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-footer-grid {
   display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 24px !important;
 }
 
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .gameday-storefront.device-tablet) .gd-product-layout {
+  grid-template-columns: 1fr !important;
+  gap: 1.5rem !important;
+}
 

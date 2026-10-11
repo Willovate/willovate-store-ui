@@ -207,6 +207,7 @@ export const VelocityStorefront: React.FC<VelocityStorefrontProps> = ({
   return (
     <div
       className={`velocity-storefront-wrapper device-${device}`}
+      data-device-view={device}
       style={
         customAccentColor
           ? ({

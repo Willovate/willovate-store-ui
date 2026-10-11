@@ -3135,6 +3135,7 @@
    ========================================================================== */
 
 @media (min-width: 768px) and (max-width: 1024px) {
+  .peak-storefront,
   .peak-theme,
   .peak-storefront-root {
     width: 100% !important;
@@ -3146,44 +3147,132 @@
   .peak-container {
     width: 100% !important;
     max-width: 100% !important;
-    padding-left: 24px !important;
-    padding-right: 24px !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
     box-sizing: border-box !important;
   }
 
-  /* Top Bar / Header */
-  .pk-announcement-strip {
-    padding: 0.45rem 1.25rem !important;
-    font-size: 0.74rem !important;
+  /* Top Bar / Header — Matches Mobile View Header */
+  .pk-topbar {
+    font-size: 0.68rem !important;
+    padding: 5px 16px !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    display: block !important;
+    text-align: center !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .pk-topbar span:nth-child(n+2),
+  .pk-topbar .pk-topbar-divider {
+    display: none !important;
   }
 
   .pk-header-inner {
-    padding: 0 1.25rem !important;
-    height: 70px !important;
-    gap: 1.25rem !important;
+    height: 56px !important;
+    padding: 0 !important;
+    gap: 10px !important;
+    justify-content: space-between !important;
+    width: 100% !important;
   }
 
-  .pk-nav-link {
-    font-size: 0.82rem !important;
-    padding: 0.35rem 0.6rem !important;
+  .pk-hamburger-btn {
+    display: inline-flex !important;
+    width: 34px !important;
+    height: 34px !important;
+    padding: 0 !important;
+    flex-shrink: 0 !important;
+  }
+
+  .pk-logo {
+    flex-shrink: 1 !important;
+    min-width: 0 !important;
+  }
+
+  .pk-logo-name {
+    font-size: 1.3rem !important;
+  }
+
+  .pk-logo-tagline {
+    display: none !important;
+  }
+
+  .pk-nav {
+    display: none !important;
   }
 
   .pk-header-actions {
-    gap: 0.65rem !important;
+    gap: 5px !important;
+    flex-shrink: 0 !important;
   }
 
-  /* 3-Column Product Grid */
+  .pk-action-account {
+    display: none !important;
+  }
+
+  .pk-icon-btn {
+    width: 34px !important;
+    height: 34px !important;
+    padding: 0 !important;
+    flex-shrink: 0 !important;
+  }
+
+  .pk-icon-badge {
+    top: 2px !important;
+    right: 2px !important;
+    font-size: 0.54rem !important;
+    min-width: 14px !important;
+    height: 14px !important;
+  }
+
+  .pk-mobile-pills {
+    display: flex !important;
+    gap: 6px !important;
+    overflow-x: auto !important;
+    padding: 7px 16px !important;
+    background: var(--pk-cream-alt) !important;
+    border-bottom: 1px solid var(--pk-border-light) !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .pk-activity-pill {
+    flex-shrink: 0 !important;
+  }
+
+  .pk-hero {
+    min-height: auto !important;
+    padding: 2.5rem 0 !important;
+  }
+
+  .pk-hero-title {
+    font-size: 2.3rem !important;
+  }
+
+  .pk-mobile-menu-backdrop {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 10000 !important;
+  }
+
+  /* 2-Column Product Grid (No orphan cards on 4/8-item sections) */
   .pk-products-grid {
     display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 16px !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
   }
 
-  /* 3-Column Activities Grid */
+  /* 3-Column Activities Grid (6 activities -> 3x2) */
   .pk-activities-grid {
     display: grid !important;
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 16px !important;
+    gap: 12px !important;
   }
 
   /* 2-Column Elements, Stories & Reviews */
@@ -3192,93 +3281,178 @@
   .pk-reviews-grid {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 18px !important;
+    gap: 14px !important;
   }
 
   /* 2-Column Footer on Tablet */
   .pk-footer-grid {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 28px !important;
+    gap: 24px !important;
   }
 
-  /* 2-Column PDP on Tablet */
+  /* PDP on Tablet */
   .pk-pdp-layout {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 24px !important;
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
   }
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .peak-theme,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .peak-storefront-root {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .peak-storefront,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .peak-theme,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .peak-storefront-root,
+.peak-storefront[data-device-view='tablet'],
+.peak-storefront.device-tablet {
   width: 100% !important;
   max-width: 100% !important;
   overflow-x: hidden !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .pk-container,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .peak-container {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-container,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .peak-container {
   width: 100% !important;
   max-width: 100% !important;
-  padding-left: 24px !important;
-  padding-right: 24px !important;
+  padding-left: 18px !important;
+  padding-right: 18px !important;
   box-sizing: border-box !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .pk-announcement-strip {
-  padding: 0.45rem 1.25rem !important;
-  font-size: 0.74rem !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-topbar {
+  font-size: 0.68rem !important;
+  padding: 5px 16px !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  display: block !important;
   text-align: center !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .pk-header-inner {
-  padding: 0 1.25rem !important;
-  height: 70px !important;
-  gap: 1.25rem !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-topbar span:nth-child(n+2),
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-topbar .pk-topbar-divider {
+  display: none !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .pk-nav-link {
-  font-size: 0.82rem !important;
-  padding: 0.35rem 0.6rem !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-header-inner {
+  height: 56px !important;
+  padding: 0 !important;
+  gap: 10px !important;
+  justify-content: space-between !important;
+  width: 100% !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .pk-header-actions {
-  gap: 0.65rem !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-hamburger-btn {
+  display: inline-flex !important;
+  width: 34px !important;
+  height: 34px !important;
+  padding: 0 !important;
+  flex-shrink: 0 !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .pk-products-grid {
-  display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 16px !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-logo {
+  flex-shrink: 1 !important;
+  min-width: 0 !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .pk-activities-grid {
-  display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 16px !important;
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-logo-name {
+  font-size: 1.3rem !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .pk-elements-grid,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .pk-stories-grid,
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .pk-reviews-grid {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-logo-tagline {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-nav {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-header-actions {
+  gap: 5px !important;
+  flex-shrink: 0 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-action-account {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-icon-btn {
+  width: 34px !important;
+  height: 34px !important;
+  padding: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-icon-badge {
+  top: 2px !important;
+  right: 2px !important;
+  font-size: 0.54rem !important;
+  min-width: 14px !important;
+  height: 14px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-mobile-pills {
+  display: flex !important;
+  gap: 6px !important;
+  overflow-x: auto !important;
+  padding: 7px 16px !important;
+  background: var(--pk-cream-alt) !important;
+  border-bottom: 1px solid var(--pk-border-light) !important;
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: none !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-activity-pill {
+  flex-shrink: 0 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-hero {
+  min-height: auto !important;
+  padding: 2.5rem 0 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-hero-title {
+  font-size: 2.3rem !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-mobile-menu-backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 10000 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-products-grid {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 18px !important;
+  gap: 14px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .pk-footer-grid {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-activities-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-elements-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-stories-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-reviews-grid {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 28px !important;
+  gap: 14px !important;
 }
 
-:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet']) .pk-pdp-layout {
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-footer-grid {
   display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 24px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .peak-storefront.device-tablet) .pk-pdp-layout {
+  grid-template-columns: 1fr !important;
+  gap: 1.5rem !important;
 }
 
