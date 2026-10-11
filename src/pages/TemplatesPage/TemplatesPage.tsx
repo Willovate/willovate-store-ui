@@ -146,35 +146,11 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
   onSelect,
   onPreview,
 }) => {
-  const isDark = Boolean(template.isDark)
-
-  const badgeConfig = useMemo(() => {
-    if (!template.badge) return null
-    switch (template.badge) {
-      case 'recommended':
-        return { label: 'Recommended', icon: '✨', bg: '#ecfdf5', color: '#059669', border: '#a7f3d0' }
-      case 'new':
-        return { label: 'New Drop', icon: '⚡', bg: '#f5f3ff', color: '#7c3aed', border: '#ddd6fe' }
-      case 'popular':
-        return { label: 'Popular', icon: '🔥', bg: '#fffbeb', color: '#d97706', border: '#fde68a' }
-      case 'trending':
-        return { label: 'Trending', icon: '📈', bg: '#fff1f2', color: '#e11d48', border: '#fecdd3' }
-      case "editor's pick":
-        return { label: "Editor's Pick", icon: '⭐', bg: '#eef2ff', color: '#4f46e5', border: '#c7d2fe' }
-      default:
-        return null
-    }
-  }, [template.badge])
+  const isFeatured =
+    template.badge === 'recommended' || template.badge === "editor's pick"
 
   const fallbackHero = 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&auto=format&fit=crop&q=80'
   const heroImage = template.thumbnailUrl || template.modelImage || template.fullPreviewUrl || fallbackHero
-
-  const storeDomain = useMemo(() => {
-    const clean = (template.brandName || template.name)
-      .toLowerCase()
-      .replace(/[^a-z0-9]/g, '')
-    return `${clean}.willovate.store`
-  }, [template.brandName, template.name])
 
   return (
     <div
@@ -190,50 +166,14 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
       }}
       aria-label={`${template.name} - ${template.industryCategory} template`}
     >
-      {/* Top Visual Browser Canvas Stage - Shopify Theme Store Clean Showcase */}
+      {/* Clean Template Image */}
       <div className="marketplace-preview-stage">
-        {/* Simulated Browser Chrome / Top Bar */}
-        <div className="stage-browser-bar">
-          <div className="browser-traffic-dots" aria-hidden="true">
-            <span className="dot dot-red" />
-            <span className="dot dot-yellow" />
-            <span className="dot dot-green" />
-          </div>
-          <div className="browser-url-pill">
-            <svg
-              className="url-lock-icon"
-              viewBox="0 0 24 24"
-              width="10"
-              height="10"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M12 2a4 4 0 0 0-4 4v2H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2h-1V6a4 4 0 0 0-4-4zm-2 6V6a2 2 0 1 1 4 0v2h-4z" />
-            </svg>
-            <span className="browser-domain">{storeDomain}</span>
-          </div>
-          <div className="browser-status-chip">
-            <span className="live-pulse-dot" />
-            <span className="live-status-text">LIVE DEMO</span>
-          </div>
-        </div>
-
-        {/* Floating Category/Status Badge */}
-        {badgeConfig && (
-          <div
-            className="card-floating-badge"
-            style={{
-              backgroundColor: badgeConfig.bg,
-              color: badgeConfig.color,
-              borderColor: badgeConfig.border,
-            }}
-          >
-            <span>{badgeConfig.icon}</span>
-            <span>{badgeConfig.label}</span>
+        {isFeatured && (
+          <div className="card-floating-badge">
+            <span>FEATURED</span>
           </div>
         )}
 
-        {/* Main Hero Media Stage - Clean, Sharp, Authentic Theme Visual */}
         <div className="stage-hero-showcase">
           <img
             src={heroImage}
@@ -246,147 +186,39 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
               t.src = fallbackHero
             }}
           />
-          <div className="stage-hero-gradient" />
-
-          {/* Sleek Theme Brand Tag Overlay at Bottom of Visual */}
-          <div className="stage-brand-banner">
-            <div className="stage-brand-banner-info">
-              <span
-                className="brand-color-dot"
-                style={{ backgroundColor: template.accentColor || '#2563eb' }}
-              />
-              <span className="stage-brand-title">
-                {template.brandName || template.name}
-              </span>
-              <span className="stage-brand-sub">
-                {template.headline?.split('\n')[0] || template.subtitle || template.style}
-              </span>
-            </div>
-            <span className="stage-style-pill">{template.style}</span>
-          </div>
-        </div>
-
-        {/* Hover Action Overlay (Clean & Sharp — NO BLUR!) */}
-        <div className="marketplace-hover-overlay">
-          <div className="hover-action-buttons">
-            <button
-              type="button"
-              className="overlay-preview-btn"
-              onClick={(e) => {
-                e.stopPropagation()
-                onPreview(template)
-              }}
-            >
-              👁️ Live Preview
-            </button>
-            <button
-              type="button"
-              className={`overlay-select-btn ${isSelected ? 'active' : ''}`}
-              onClick={(e) => {
-                e.stopPropagation()
-                onSelect(template.id)
-              }}
-            >
-              {isSelected ? 'Selected ✓' : 'Select Template →'}
-            </button>
-          </div>
         </div>
       </div>
 
-      {/* Card Information Footer (Shopify Theme Store style) */}
+      {/* Simple & Professional Card Body */}
       <div className="marketplace-card-info">
         <div className="card-title-row">
-          <div className="title-and-industry">
-            <div className="card-theme-name-group">
-              <h3 className="card-theme-name">{template.name}</h3>
-              <span className="theme-verified-badge" title="Willovate Verified Theme">
-                ✓ Official
-              </span>
-            </div>
-            <span className="card-industry-label">{template.industryCategory}</span>
-          </div>
-          <div className="card-rating">
-            <span className="rating-star">★</span>
-            <span className="rating-val">{template.rating?.toFixed(1) || '4.9'}</span>
-            <span className="rating-reviews">({template.reviewCount || '284'})</span>
-          </div>
-        </div>
-
-        {/* Style & Catalog Size Tags */}
-        <div className="card-tags-row">
-          <span className="tag-chip style-chip">{template.style}</span>
-          <span className="tag-chip size-chip">
-            {template.catalogSize === 'small'
-              ? '1–15 items'
-              : template.catalogSize === 'medium'
-              ? '15–50 items'
-              : '50+ items'}
-          </span>
-          <span className="tag-chip opt-chip">Conversion Ready</span>
+          <h3 className="card-theme-name">{template.name}</h3>
+          <span className="card-industry-label">{template.industryCategory}</span>
         </div>
 
         <p className="card-short-desc">{template.shortDescription}</p>
 
-        {/* Feature Highlights */}
-        <div className="card-features-row">
-          {(template.features || []).slice(0, 3).map((feat) => (
-            <span key={feat} className="feat-bullet">
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              <span>{feat}</span>
-            </span>
-          ))}
-        </div>
-
-        {/* Bottom CTA Row: Color Palette Swatches & Action Button */}
         <div className="card-bottom-action">
-          <div className="palette-and-plan">
-            <div className="card-palette-preview" title="Storefront Color Palette">
-              <span
-                className="palette-swatch primary-swatch"
-                style={{ backgroundColor: template.accentColor || '#2563eb' }}
-              />
-              <span
-                className="palette-swatch secondary-swatch"
-                style={{ backgroundColor: isDark ? '#0f172a' : '#f1f5f9' }}
-              />
-            </div>
-            <span className="theme-plan-badge">Included in Plan</span>
-          </div>
-
-          <div className="card-action-group">
-            <button
-              type="button"
-              className="card-quick-preview-link"
-              onClick={(e) => {
-                e.stopPropagation()
-                onPreview(template)
-              }}
-            >
-              Preview
-            </button>
-            <button
-              type="button"
-              className={`card-select-btn ${isSelected ? 'active' : ''}`}
-              onClick={(e) => {
-                e.stopPropagation()
-                onSelect(template.id)
-              }}
-            >
-              {isSelected ? 'Selected ✓' : 'Select'}
-            </button>
-          </div>
+          <button
+            type="button"
+            className="card-quick-preview-link"
+            onClick={(e) => {
+              e.stopPropagation()
+              onPreview(template)
+            }}
+          >
+            Preview
+          </button>
+          <button
+            type="button"
+            className={`card-select-btn ${isSelected ? 'active' : ''}`}
+            onClick={(e) => {
+              e.stopPropagation()
+              onSelect(template.id)
+            }}
+          >
+            Use Template
+          </button>
         </div>
       </div>
     </div>
