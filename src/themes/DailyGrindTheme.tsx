@@ -129,8 +129,43 @@ export default function DailyGrindTheme({ theme }: { theme: RestaurantThemePrese
           </div>
         </section>
 
+        {/* Section 2: High-Octane Coffee Highlights Bar */}
+        <section className="dg-highlights" style={{ background: '#141414', borderTop: '2px solid #222', borderBottom: '2px solid #222', padding: '2.5rem 4rem' }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '2.5rem', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontSize: '1.8rem', color: '#f59e0b', background: '#000', width: '56px', height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #333' }}>⚡︎</span>
+              <div>
+                <h4 style={{ margin: '0 0 0.2rem 0', color: '#fff', fontSize: '1.05rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 900 }}>Nitro On Tap</h4>
+                <p style={{ margin: 0, color: '#888', fontSize: '0.85rem', fontFamily: '"Helvetica Neue", sans-serif' }}>Ice-cold micro-bubble velvet pour</p>
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontSize: '1.8rem', color: '#f59e0b', background: '#000', width: '56px', height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #333' }}>⏱</span>
+              <div>
+                <h4 style={{ margin: '0 0 0.2rem 0', color: '#fff', fontSize: '1.05rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 900 }}>5:00 AM Open</h4>
+                <p style={{ margin: 0, color: '#888', fontSize: '0.85rem', fontFamily: '"Helvetica Neue", sans-serif' }}>First shot pulled before sunrise</p>
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontSize: '1.8rem', color: '#f59e0b', background: '#000', width: '56px', height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #333' }}>📦</span>
+              <div>
+                <h4 style={{ margin: '0 0 0.2rem 0', color: '#fff', fontSize: '1.05rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 900 }}>Fresh Restock Drops</h4>
+                <p style={{ margin: 0, color: '#888', fontSize: '0.85rem', fontFamily: '"Helvetica Neue", sans-serif' }}>Roast Club whole beans shipped weekly</p>
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontSize: '1.8rem', color: '#f59e0b', background: '#000', width: '56px', height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid #333' }}>🚀</span>
+              <div>
+                <h4 style={{ margin: '0 0 0.2rem 0', color: '#fff', fontSize: '1.05rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 900 }}>Express Counter Locker</h4>
+                <p style={{ margin: 0, color: '#888', fontSize: '0.85rem', fontFamily: '"Helvetica Neue", sans-serif' }}>Skip lines with contactless order bag</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Ethos / Manifest Section */}
         <section id="about" className="cafe-reveal" style={{ padding: '8rem 4rem', background: '#080808', borderBottom: '1px solid #1a1a1a', textAlign: 'center' }}>
+
           <div style={{ maxWidth: '850px', margin: '0 auto' }}>
             <span style={{ color: '#f59e0b', letterSpacing: '0.25em', textTransform: 'uppercase', fontSize: '0.85rem', fontWeight: 800 }}>
               01 / THE MANIFESTO

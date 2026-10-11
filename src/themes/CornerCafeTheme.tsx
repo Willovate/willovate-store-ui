@@ -128,7 +128,42 @@ export default function CornerCafeTheme({ theme }: { theme: RestaurantThemePrese
           </div>
         </section>
 
+        {/* Section 2: Botanical Highlights Bar */}
+        <section className="cc-highlights" style={{ background: '#2d3b36', color: '#e8efe9', padding: '2.5rem 4rem' }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '2.5rem', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontSize: '2rem', background: '#3c4e48', width: '56px', height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%' }}>🌿</span>
+              <div>
+                <h4 style={{ margin: '0 0 0.2rem 0', color: '#fff', fontSize: '1rem', fontWeight: 600 }}>Shade-Grown Arabica</h4>
+                <p style={{ margin: 0, color: '#aab8af', fontSize: '0.85rem', fontFamily: 'system-ui, sans-serif' }}>High-altitude biodiversity farming</p>
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontSize: '2rem', background: '#3c4e48', width: '56px', height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%' }}>🌾</span>
+              <div>
+                <h4 style={{ margin: '0 0 0.2rem 0', color: '#fff', fontSize: '1rem', fontWeight: 600 }}>Wild Levain Sourdough</h4>
+                <p style={{ margin: 0, color: '#aab8af', fontSize: '0.85rem', fontFamily: 'system-ui, sans-serif' }}>48-hour cold fermentation bread daily</p>
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontSize: '2rem', background: '#3c4e48', width: '56px', height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%' }}>🪴</span>
+              <div>
+                <h4 style={{ margin: '0 0 0.2rem 0', color: '#fff', fontSize: '1rem', fontWeight: 600 }}>Living Green Space</h4>
+                <p style={{ margin: 0, color: '#aab8af', fontSize: '0.85rem', fontFamily: 'system-ui, sans-serif' }}>Sunken plant conservatory tables</p>
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontSize: '2rem', background: '#3c4e48', width: '56px', height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%' }}>🍵</span>
+              <div>
+                <h4 style={{ margin: '0 0 0.2rem 0', color: '#fff', fontSize: '1rem', fontWeight: 600 }}>Uji Ceremonial Tea</h4>
+                <p style={{ margin: 0, color: '#aab8af', fontSize: '0.85rem', fontFamily: 'system-ui, sans-serif' }}>Stone-ground first flush matcha</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Philosophy */}
+
         <section id="philosophy" className="cc-philosophy cafe-reveal" style={{ padding: '8rem 4rem', textAlign: 'center', background: '#fff' }}>
           <p style={{ fontFamily: 'system-ui, sans-serif', fontSize: '0.8rem', letterSpacing: '0.22em', color: '#6e8076', marginBottom: '3rem', textTransform: 'uppercase', fontWeight: 600 }}>
             WE BELIEVE A CAFÉ CAN BE A PAUSE, NOT A PERFORMANCE.

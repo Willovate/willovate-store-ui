@@ -150,8 +150,43 @@ export default function LatteLaneTheme({ theme }: { theme: RestaurantThemePreset
           </div>
         </section>
 
+        {/* Section 2: Social Café Highlights Bar */}
+        <section className="ll-highlights" style={{ background: '#fff', padding: '2.5rem 4rem', borderBottom: '2px solid #ffe8de' }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '2.5rem', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontSize: '2rem', background: '#fff2eb', width: '56px', height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', color: '#d96f4d' }}>🍯</span>
+              <div>
+                <h4 style={{ margin: '0 0 0.2rem 0', color: '#432818', fontSize: '1rem', fontWeight: 800 }}>Botanical Syrups</h4>
+                <p style={{ margin: 0, color: '#8a402e', fontSize: '0.85rem' }}>House-simmered cardamom, lavender & rose</p>
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontSize: '2rem', background: '#fff2eb', width: '56px', height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', color: '#d96f4d' }}>☀️</span>
+              <div>
+                <h4 style={{ margin: '0 0 0.2rem 0', color: '#432818', fontSize: '1rem', fontWeight: 800 }}>Sunny Open Patio</h4>
+                <p style={{ margin: 0, color: '#8a402e', fontSize: '0.85rem' }}>Dog-friendly outdoor tables & umbrellas</p>
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontSize: '2rem', background: '#fff2eb', width: '56px', height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', color: '#d96f4d' }}>🧁</span>
+              <div>
+                <h4 style={{ margin: '0 0 0.2rem 0', color: '#432818', fontSize: '1rem', fontWeight: 800 }}>Sweet Treats Case</h4>
+                <p style={{ margin: 0, color: '#8a402e', fontSize: '0.85rem' }}>Brown butter cookies & cinnamon twists</p>
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontSize: '2rem', background: '#fff2eb', width: '56px', height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', color: '#d96f4d' }}>🎉</span>
+              <div>
+                <h4 style={{ margin: '0 0 0.2rem 0', color: '#432818', fontSize: '1rem', fontWeight: 800 }}>Club Perks & BOGO</h4>
+                <p style={{ margin: 0, color: '#8a402e', fontSize: '0.85rem' }}>Happy hour specials 2-4 PM everyday</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Story Section */}
         <section id="about" className="ll-about cafe-reveal" style={{ padding: '7rem 4rem', background: '#fff', textAlign: 'center' }}>
+
           <div style={{ maxWidth: '780px', margin: '0 auto' }}>
             <span style={{ color: '#d96f4d', fontWeight: 800, letterSpacing: '0.12em', fontSize: '0.85rem', textTransform: 'uppercase', display: 'block', marginBottom: '1rem' }}>
               FROM POP-UP CART TO SUNNY RETREAT

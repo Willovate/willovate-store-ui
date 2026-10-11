@@ -118,6 +118,44 @@ export default function MorningRitualTheme({ theme }: { theme: RestaurantThemePr
           </div>
         </section>
 
+        {/* Section 2: Trust and Café Highlights Bar */}
+        <section className="mr-highlights" style={{ background: '#fff', borderTop: '1px solid #f4efe6', borderBottom: '1px solid #f4efe6', padding: '2.5rem 4rem' }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '2.5rem', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontSize: '2.2rem', background: '#fdfbf7', width: '60px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', border: '1px solid #ead4bf' }}>☕</span>
+              <div>
+                <h4 style={{ margin: '0 0 0.25rem 0', color: '#54463a', fontSize: '1.05rem', fontWeight: 700 }}>Specialty Micro-Lots</h4>
+                <p style={{ margin: 0, color: '#7a6c60', fontSize: '0.88rem', fontFamily: 'sans-serif' }}>Direct-trade Arabica roasted in small batches</p>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontSize: '2.2rem', background: '#fdfbf7', width: '60px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', border: '1px solid #ead4bf' }}>🥐</span>
+              <div>
+                <h4 style={{ margin: '0 0 0.25rem 0', color: '#54463a', fontSize: '1.05rem', fontWeight: 700 }}>Hearth-Baked Daily</h4>
+                <p style={{ margin: 0, color: '#7a6c60', fontSize: '0.88rem', fontFamily: 'sans-serif' }}>French cultured butter & natural levain at 5am</p>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontSize: '2.2rem', background: '#fdfbf7', width: '60px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', border: '1px solid #ead4bf' }}>🌱</span>
+              <div>
+                <h4 style={{ margin: '0 0 0.25rem 0', color: '#54463a', fontSize: '1.05rem', fontWeight: 700 }}>Organic Local Milks</h4>
+                <p style={{ margin: 0, color: '#7a6c60', fontSize: '0.88rem', fontFamily: 'sans-serif' }}>Minor Figures oat & pasture whole dairy</p>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontSize: '2.2rem', background: '#fdfbf7', width: '60px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', border: '1px solid #ead4bf' }}>🌿</span>
+              <div>
+                <h4 style={{ margin: '0 0 0.25rem 0', color: '#54463a', fontSize: '1.05rem', fontWeight: 700 }}>Sunlit Seating</h4>
+                <p style={{ margin: 0, color: '#7a6c60', fontSize: '0.88rem', fontFamily: 'sans-serif' }}>Quiet tables, books, and garden patio</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
         {/* Menu Section with Interactive Tabs */}
         <section className="mr-menu cafe-reveal" id="menu" style={{ padding: '6rem 4rem', textAlign: 'center' }}>
           <div className="mr-section-heading" style={{ marginBottom: '3rem' }}>

@@ -89,7 +89,42 @@ export default function BrewHouseTheme({ theme }: { theme: RestaurantThemePreset
           </div>
         </section>
 
+        {/* Section 2: Specialty Roastery Highlights Bar */}
+        <section className="bh-highlights" style={{ background: '#201b18', color: '#fff', padding: '2.5rem 3rem', borderBottom: '1px solid #332a25' }}>
+          <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '2rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontSize: '1.8rem', color: '#d9822b', background: '#2d2520', padding: '0.8rem', borderRadius: '4px' }}>⚙︎</span>
+              <div>
+                <h4 style={{ margin: '0 0 0.25rem 0', fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 800 }}>Loring S35 Kestrel</h4>
+                <p style={{ margin: 0, color: '#aaa', fontSize: '0.85rem' }}>Smokeless convection roasting for supreme bean purity</p>
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontSize: '1.8rem', color: '#d9822b', background: '#2d2520', padding: '0.8rem', borderRadius: '4px' }}>⚖︎</span>
+              <div>
+                <h4 style={{ margin: '0 0 0.25rem 0', fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 800 }}>Direct Farm Trade</h4>
+                <p style={{ margin: 0, color: '#aaa', fontSize: '0.85rem' }}>Purchased at 3.2x Fairtrade minimum directly from growers</p>
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontSize: '1.8rem', color: '#d9822b', background: '#2d2520', padding: '0.8rem', borderRadius: '4px' }}>⏱</span>
+              <div>
+                <h4 style={{ margin: '0 0 0.25rem 0', fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 800 }}>Weekly Batch Drops</h4>
+                <p style={{ margin: 0, color: '#aaa', fontSize: '0.85rem' }}>Restocked on Tuesdays & Fridays for optimal degassing</p>
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontSize: '1.8rem', color: '#d9822b', background: '#2d2520', padding: '0.8rem', borderRadius: '4px' }}>⚡︎</span>
+              <div>
+                <h4 style={{ margin: '0 0 0.25rem 0', fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 800 }}>Precision Dial-In</h4>
+                <p style={{ margin: 0, color: '#aaa', fontSize: '0.85rem' }}>Refractometer TDS testing on every daily morning shot</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section id="about" className="cafe-reveal" style={{ padding: '6rem 3rem', background: '#fff', display: 'flex', flexWrap: 'wrap', gap: '4rem', alignItems: 'center', maxWidth: '1280px', margin: '0 auto' }}>
+
           <div style={{ flex: '1 1 450px' }}>
             <span style={{ fontWeight: 600, letterSpacing: '2px', color: '#9e6d44', textTransform: 'uppercase', fontSize: '0.85rem' }}>01 / THE ROASTERY</span>
             <h2 style={{ fontSize: 'clamp(2.5rem, 4vw, 3.5rem)', margin: '1rem 0', fontWeight: 800, lineHeight: 1.1 }}>Roast for the routine.</h2>
