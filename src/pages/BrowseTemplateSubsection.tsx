@@ -17,12 +17,31 @@ export default function BrowseTemplateSubsection() {
   const [liveThemeId, setLiveThemeId] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedTag, setSelectedTag] = useState<string>('all')
+  const [sortBy, setSortBy] = useState<'featured' | 'name-asc' | 'name-desc'>('featured')
+  const [favorites, setFavorites] = useState<string[]>(() => {
+    try {
+      return JSON.parse(localStorage.getItem('willovate_favorite_templates') || '[]')
+    } catch {
+      return []
+    }
+  })
+
+  const toggleFavorite = (themeId: string) => {
+    setFavorites(prev => {
+      const next = prev.includes(themeId) ? prev.filter(id => id !== themeId) : [...prev, themeId]
+      try {
+        localStorage.setItem('willovate_favorite_templates', JSON.stringify(next))
+      } catch {}
+      return next
+    })
+  }
 
   useEffect(() => {
     setThemes(subsection?.themes ?? [])
     setLiveThemeId(null)
     setSearchQuery('')
     setSelectedTag('all')
+    setSortBy('featured')
   }, [subsectionSlug])
 
   const publishTheme = (themeId: string) => setLiveThemeId(themeId)
@@ -47,18 +66,28 @@ export default function BrowseTemplateSubsection() {
     return ['all', ...Array.from(tags)]
   }, [themes])
 
-  // Filtered themes by search query and tag
+  // Filtered and sorted themes
   const filteredThemes = useMemo(() => {
-    return themes.filter(theme => {
+    const list = themes.filter(theme => {
       const matchesSearch = !searchQuery.trim() || 
         theme.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         theme.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         theme.styleTags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
       
-      const matchesTag = selectedTag === 'all' || theme.styleTags.includes(selectedTag)
+      const matchesTag = selectedTag === 'all' || 
+        (selectedTag === 'favorites' ? favorites.includes(theme.id) : theme.styleTags.includes(selectedTag))
       return matchesSearch && matchesTag
     })
-  }, [themes, searchQuery, selectedTag])
+
+    if (sortBy === 'name-asc') {
+      return [...list].sort((a, b) => a.name.localeCompare(b.name))
+    }
+    if (sortBy === 'name-desc') {
+      return [...list].sort((a, b) => b.name.localeCompare(a.name))
+    }
+    return list
+  }, [themes, searchQuery, selectedTag, sortBy, favorites])
+
 
   const sectionSubtitle = subsection?.slug === 'fine-dining'
     ? 'Elegant restaurant templates designed for refined dining experiences.'
@@ -159,9 +188,51 @@ export default function BrowseTemplateSubsection() {
                       {tag}
                     </button>
                   ))}
+                  <button
+                    onClick={() => setSelectedTag(selectedTag === 'favorites' ? 'all' : 'favorites')}
+                    style={{
+                      padding: '0.45rem 0.85rem',
+                      borderRadius: '20px',
+                      border: selectedTag === 'favorites' ? '1px solid #e11d48' : '1px solid #e2e8f0',
+                      background: selectedTag === 'favorites' ? '#fff1f2' : '#fff',
+                      color: selectedTag === 'favorites' ? '#e11d48' : '#64748b',
+                      fontSize: '0.8rem',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.35rem',
+                    }}
+                  >
+                    <span>♥</span> Favorites ({favorites.length})
+                  </button>
+                </div>
+
+                {/* Sort Dropdown */}
+                <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 500 }}>Sort:</span>
+                  <select
+                    value={sortBy}
+                    onChange={e => setSortBy(e.target.value as any)}
+                    style={{
+                      padding: '0.45rem 0.85rem',
+                      borderRadius: '8px',
+                      border: '1px solid #cbd5e1',
+                      background: '#fff',
+                      color: '#0f172a',
+                      fontSize: '0.85rem',
+                      outline: 'none',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <option value="featured">Featured Order</option>
+                    <option value="name-asc">Alphabetical (A - Z)</option>
+                    <option value="name-desc">Alphabetical (Z - A)</option>
+                  </select>
                 </div>
               </div>
             </header>
+
 
             {filteredThemes.length > 0 ? (
               <div className="template-theme-grid template-theme-grid--premium" aria-label={`${subsection.name} themes`}>
