@@ -23,6 +23,7 @@ import { MrTevorFashionStorefront } from '../../templates/fashion/MrTevor'
 import { DiamondJewelryStorefront } from '../../templates/jewelry/Diamond'
 import { JoharyJewelryStorefront } from '../../templates/jewelry/Johary'
 import { LopezJewelryStorefront } from '../../templates/jewelry/Lopez'
+import { PSJewelshopStorefront } from '../../templates/jewelry/PSJewelshop'
 import '../../templates/fashion/fashionMobile.css'
 import {
   BELLE_FASHION_TEMPLATE,
@@ -37,9 +38,10 @@ import {
   DIAMOND_JEWELRY_TEMPLATE,
   JOHARY_JEWELRY_TEMPLATE,
   LOPEZ_JEWELRY_TEMPLATE,
+  PS_JEWELSHOP_TEMPLATE,
   ALL_JEWELRY_MARKETPLACE_TEMPLATES,
 } from '../../data/jewelryTemplatesData'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront }
 
 // Re-export domain types
 export type {
@@ -92,6 +94,7 @@ export {
   DIAMOND_JEWELRY_TEMPLATE,
   JOHARY_JEWELRY_TEMPLATE,
   LOPEZ_JEWELRY_TEMPLATE,
+  PS_JEWELSHOP_TEMPLATE,
   ALL_JEWELRY_MARKETPLACE_TEMPLATES,
 } from '../../data/jewelryTemplatesData'
 
@@ -575,6 +578,26 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   ) {
     return (
       <LopezJewelryStorefront
+        templateData={template}
+        device={device}
+        deviceView={device}
+        onClose={onClose}
+        onUseTemplate={onUseTemplate}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'jewelry-ps-jewelshop' ||
+      template.id === 'jewelry-ps-jewelshop' ||
+      template.slug === 'ps-jewelshop' ||
+      template.name?.toLowerCase().includes('jewelshop') ||
+      template.name?.toLowerCase().includes('ps-jewelshop') ||
+      template.name?.toLowerCase().includes('ps jewelshop'))
+  ) {
+    return (
+      <PSJewelshopStorefront
         templateData={template}
         device={device}
         deviceView={device}
@@ -1430,6 +1453,18 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
       return LOPEZ_JEWELRY_TEMPLATE
     }
     if (
+      rawHash === 'ps-jewelshop' ||
+      rawHash === 'ps-jewelshop-jewelry' ||
+      rawHash === 'jewelry-ps-jewelshop' ||
+      rawHash === 'ps-jewelshop-templates' ||
+      rawHash === 'ps-jewelshop-template' ||
+      rawHash === 'jewelshop' ||
+      rawHash === 'jewelshop-templates' ||
+      rawHash === 'jewelshop-template'
+    ) {
+      return PS_JEWELSHOP_TEMPLATE
+    }
+    if (
       rawHash === 'diamond' ||
       rawHash === 'jewelry' ||
       rawHash === 'jewelry-diamond' ||
@@ -1535,6 +1570,17 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
         rawHash === 'lopez-template'
       ) {
         setPreviewTemplate(LOPEZ_JEWELRY_TEMPLATE)
+      } else if (
+        rawHash === 'ps-jewelshop' ||
+        rawHash === 'ps-jewelshop-jewelry' ||
+        rawHash === 'jewelry-ps-jewelshop' ||
+        rawHash === 'ps-jewelshop-templates' ||
+        rawHash === 'ps-jewelshop-template' ||
+        rawHash === 'jewelshop' ||
+        rawHash === 'jewelshop-templates' ||
+        rawHash === 'jewelshop-template'
+      ) {
+        setPreviewTemplate(PS_JEWELSHOP_TEMPLATE)
       } else if (
         rawHash === 'diamond' ||
         rawHash === 'jewelry' ||

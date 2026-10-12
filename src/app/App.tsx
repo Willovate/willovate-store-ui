@@ -117,7 +117,7 @@ function App() {
         return
       }
 
-      if (rawHash === 'tell-us-your-idea' || rawHash === 'build-idea' || rawHash === 'directory' || rawHash === 'all-templates' || rawHash === 'explore-templates') {
+      if (rawHash === 'tell-us-your-idea' || rawHash === 'build-idea' || rawHash === 'directory' || rawHash === 'all-templates' || rawHash === 'explore-templates' || rawHash === 'marketplace') {
         setCurrentPage('directory')
         document.title = 'Build Your Idea | Willovate One'
         return
@@ -263,6 +263,14 @@ function App() {
             rawHash === 'jewelry-lopez' ||
             rawHash === 'lopez-templates' ||
             rawHash === 'lopez-template' ||
+            rawHash === 'ps-jewelshop' ||
+            rawHash === 'ps-jewelshop-jewelry' ||
+            rawHash === 'jewelry-ps-jewelshop' ||
+            rawHash === 'ps-jewelshop-templates' ||
+            rawHash === 'ps-jewelshop-template' ||
+            rawHash === 'jewelshop' ||
+            rawHash === 'jewelshop-templates' ||
+            rawHash === 'jewelshop-template' ||
             rawHash === 'aurelia'
           )) ||
           (key === 'sporting-goods' && (
@@ -463,18 +471,15 @@ function App() {
           window.location.hash = '/signup'
         }}
         onExploreTemplates={() => {
-          setSelectedBusinessType('online-store')
-          setSelectedBusinessTypeDisplay('Online Store')
-          setCustomPrompt('')
-          setCurrentPage('signup')
-          window.location.hash = '/signup'
+          setCurrentPage('directory')
+          window.location.hash = 'directory'
         }}
         onSelectCategory={(businessType) => {
           const cat = TEMPLATE_REGISTRY[businessType]
           setSelectedBusinessType(businessType)
           setSelectedBusinessTypeDisplay(cat ? cat.displayName : businessType)
-          setCurrentPage('signup')
-          window.location.hash = '/signup'
+          setCurrentPage('templates')
+          window.location.hash = `${businessType}-templates`
         }}
       />
     )

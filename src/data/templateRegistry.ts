@@ -13,6 +13,7 @@ import { MrTevorFashionStorefront } from '../templates/fashion/MrTevor'
 import { DiamondJewelryStorefront } from '../templates/jewelry/Diamond'
 import { JoharyJewelryStorefront } from '../templates/jewelry/Johary'
 import { LopezJewelryStorefront } from '../templates/jewelry/Lopez'
+import { PSJewelshopStorefront } from '../templates/jewelry/PSJewelshop'
 import { VelocityStorefront } from '../templates/sports/Velocity'
 import { ArenaStorefront } from '../templates/sports/Arena'
 import { SprintStorefront } from '../templates/sports/Sprint'
@@ -269,6 +270,17 @@ export function getTemplateComponent(template?: MarketplaceTemplate | Template |
       template.name?.toLowerCase().includes('lopez'))
   ) {
     return LopezJewelryStorefront
+  }
+  if (
+    template &&
+    (template.slug === 'jewelry-ps-jewelshop' ||
+      template.id === 'jewelry-ps-jewelshop' ||
+      template.slug === 'ps-jewelshop' ||
+      template.name?.toLowerCase().includes('jewelshop') ||
+      template.name?.toLowerCase().includes('ps-jewelshop') ||
+      template.name?.toLowerCase().includes('ps jewelshop'))
+  ) {
+    return PSJewelshopStorefront
   }
   if (
     template &&
