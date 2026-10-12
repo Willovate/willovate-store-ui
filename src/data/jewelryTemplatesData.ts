@@ -50,6 +50,59 @@ export const DIAMOND_JEWELRY_TEMPLATE: MarketplaceTemplate = {
   ],
 }
 
+export const JOHARY_JEWELRY_TEMPLATE: MarketplaceTemplate = {
+  id: 'jewelry-johary',
+  slug: 'jewelry-johary',
+  name: 'Johary Handmade Jewelry & Artisanal Gems',
+  businessType: 'jewelry-accessories',
+  industryCategory: 'Jewelry & Accessories',
+  style: 'luxury',
+  catalogSize: 'medium',
+  tags: [
+    'Handmade Jewelry',
+    'Artisanal Gems',
+    '18K Solid Gold',
+    'Freshwater Pearls',
+    'Filigree',
+    'Hoops',
+    'Bangles',
+    'Pendants',
+    'Rings',
+    'Ethical Gemstones',
+  ],
+  shortDescription:
+    'Artisanal handmade jewelry and heirloom gemstone storefront inspired by the authentic Johary Shopify 2.0 theme. Features circular category showcase, 3-column promo banners, tabbed trending collections, split atelier spotlight, full parallax banner, and slide-out cart drawer with free shipping meter.',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=800&auto=format&fit=crop&q=80',
+  fullPreviewUrl: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1600&auto=format&fit=crop&q=85',
+  popularityScore: 98,
+  isActive: true,
+  brandName: 'JOHARY',
+  headline: 'Exclusive Handmade Jewelry\nFor Every Moment.',
+  subtitle: 'Masterfully hand-forged by generational artisans using recycled 18K gold and conflict-free gemstones.',
+  buttonText: 'Shop Collection',
+  buttonColor: '#c19417',
+  isDark: false,
+  modelImage: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=800&auto=format&fit=crop&q=80',
+  badge: 'new',
+  rating: 4.96,
+  reviewCount: 240,
+  layoutType: 'card-grid',
+  accentColor: '#c19417',
+  features: [
+    'Authentic Johary Shopify 2.0 artisanal aesthetics with warm gold & linen palette',
+    'Interactive circular category showcase (Bracelets, Earrings, Pendants, Necklaces, Rings)',
+    '3-column promotional discount showcase cards (Hoops, Drops, Pearls)',
+    'Tab-filtered trending products grid with instant Add to Bag and Quick View',
+    'Split Atelier story highlight & spotlight piece customizer',
+    'Full-width atmospheric parallax atelier section',
+    '4 store service pillars (Free Shipping $199+, 24/7 Concierge, 30-Day Guarantee, Secure Checkout)',
+    'Slide-out shopping bag drawer with live $199 free shipping meter and promo coupon applicator',
+    'Verified patron testimonials & atelier journal editorial articles',
+  ],
+}
+
 export const ALL_JEWELRY_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   DIAMOND_JEWELRY_TEMPLATE,
+  JOHARY_JEWELRY_TEMPLATE,
 ]
+

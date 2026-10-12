@@ -1,7 +1,7 @@
 import type { MarketplaceTemplate } from '../types'
-import { DIAMOND_JEWELRY_TEMPLATE } from './jewelryTemplatesData'
 
 export const BELLE_FASHION_TEMPLATE: MarketplaceTemplate = {
+
   id: 'fashion-belle',
   slug: 'fashion-belle',
   name: 'Belle Fashion',
@@ -406,8 +406,8 @@ export const ALL_FASHION_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   CHUTTI_FASHION_TEMPLATE,
   BAGGO_FASHION_TEMPLATE,
   MR_TEVOR_FASHION_TEMPLATE,
-  DIAMOND_JEWELRY_TEMPLATE,
 ]
+
 
 
 

@@ -253,6 +253,11 @@ function App() {
             rawHash === 'jewelry-accessories' ||
             rawHash === 'jewelry-accessories-templates' ||
             rawHash === 'jewelry-accessories-template' ||
+            rawHash === 'johary' ||
+            rawHash === 'johary-jewelry' ||
+            rawHash === 'johary-templates' ||
+            rawHash === 'johary-template' ||
+            rawHash === 'jewelry-johary' ||
             rawHash === 'aurelia'
           )) ||
           (key === 'sporting-goods' && (

@@ -21,6 +21,7 @@ import { ChuttiFashionStorefront } from '../../templates/fashion/Chutti'
 import { BaggoFashionStorefront } from '../../templates/fashion/Baggo'
 import { MrTevorFashionStorefront } from '../../templates/fashion/MrTevor'
 import { DiamondJewelryStorefront } from '../../templates/jewelry/Diamond'
+import { JoharyJewelryStorefront } from '../../templates/jewelry/Johary'
 import '../../templates/fashion/fashionMobile.css'
 import {
   BELLE_FASHION_TEMPLATE,
@@ -33,9 +34,10 @@ import {
 } from '../../data/fashionTemplatesData'
 import {
   DIAMOND_JEWELRY_TEMPLATE,
+  JOHARY_JEWELRY_TEMPLATE,
   ALL_JEWELRY_MARKETPLACE_TEMPLATES,
 } from '../../data/jewelryTemplatesData'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront }
 
 // Re-export domain types
 export type {
@@ -86,8 +88,10 @@ export {
 
 export {
   DIAMOND_JEWELRY_TEMPLATE,
+  JOHARY_JEWELRY_TEMPLATE,
   ALL_JEWELRY_MARKETPLACE_TEMPLATES,
 } from '../../data/jewelryTemplatesData'
+
 
 export {
   TEMPLATE_REGISTRY,
@@ -537,6 +541,23 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
         device={device}
         deviceView={device}
         onBackToDirectory={onClose}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'jewelry-johary' ||
+      template.id === 'jewelry-johary' ||
+      template.slug === 'johary' ||
+      template.name?.toLowerCase().includes('johary'))
+  ) {
+    return (
+      <JoharyJewelryStorefront
+        templateData={template}
+        device={device}
+        deviceView={device}
+        onClose={onClose}
       />
     )
   }
@@ -1369,6 +1390,15 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
       return FRAGRANCE_FASHION_TEMPLATE
     }
     if (
+      rawHash === 'johary' ||
+      rawHash === 'johary-jewelry' ||
+      rawHash === 'jewelry-johary' ||
+      rawHash === 'johary-templates' ||
+      rawHash === 'johary-template'
+    ) {
+      return JOHARY_JEWELRY_TEMPLATE
+    }
+    if (
       rawHash === 'diamond' ||
       rawHash === 'jewelry' ||
       rawHash === 'jewelry-diamond' ||
@@ -1458,6 +1488,14 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
         rawHash === 'fragrance-templates'
       ) {
         setPreviewTemplate(FRAGRANCE_FASHION_TEMPLATE)
+      } else if (
+        rawHash === 'johary' ||
+        rawHash === 'johary-jewelry' ||
+        rawHash === 'jewelry-johary' ||
+        rawHash === 'johary-templates' ||
+        rawHash === 'johary-template'
+      ) {
+        setPreviewTemplate(JOHARY_JEWELRY_TEMPLATE)
       } else if (
         rawHash === 'diamond' ||
         rawHash === 'jewelry' ||
