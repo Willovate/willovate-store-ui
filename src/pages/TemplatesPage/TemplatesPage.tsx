@@ -22,6 +22,7 @@ import { BaggoFashionStorefront } from '../../templates/fashion/Baggo'
 import { MrTevorFashionStorefront } from '../../templates/fashion/MrTevor'
 import { DiamondJewelryStorefront } from '../../templates/jewelry/Diamond'
 import { JoharyJewelryStorefront } from '../../templates/jewelry/Johary'
+import { LopezJewelryStorefront } from '../../templates/jewelry/Lopez'
 import '../../templates/fashion/fashionMobile.css'
 import {
   BELLE_FASHION_TEMPLATE,
@@ -35,9 +36,10 @@ import {
 import {
   DIAMOND_JEWELRY_TEMPLATE,
   JOHARY_JEWELRY_TEMPLATE,
+  LOPEZ_JEWELRY_TEMPLATE,
   ALL_JEWELRY_MARKETPLACE_TEMPLATES,
 } from '../../data/jewelryTemplatesData'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront }
 
 // Re-export domain types
 export type {
@@ -89,6 +91,7 @@ export {
 export {
   DIAMOND_JEWELRY_TEMPLATE,
   JOHARY_JEWELRY_TEMPLATE,
+  LOPEZ_JEWELRY_TEMPLATE,
   ALL_JEWELRY_MARKETPLACE_TEMPLATES,
 } from '../../data/jewelryTemplatesData'
 
@@ -558,6 +561,25 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
         device={device}
         deviceView={device}
         onClose={onClose}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'jewelry-lopez' ||
+      template.id === 'jewelry-lopez' ||
+      template.slug === 'lopez' ||
+      template.slug === 'lopez-jewelry' ||
+      template.name?.toLowerCase().includes('lopez'))
+  ) {
+    return (
+      <LopezJewelryStorefront
+        templateData={template}
+        device={device}
+        deviceView={device}
+        onClose={onClose}
+        onUseTemplate={onUseTemplate}
       />
     )
   }
@@ -1399,6 +1421,15 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
       return JOHARY_JEWELRY_TEMPLATE
     }
     if (
+      rawHash === 'lopez' ||
+      rawHash === 'lopez-jewelry' ||
+      rawHash === 'jewelry-lopez' ||
+      rawHash === 'lopez-templates' ||
+      rawHash === 'lopez-template'
+    ) {
+      return LOPEZ_JEWELRY_TEMPLATE
+    }
+    if (
       rawHash === 'diamond' ||
       rawHash === 'jewelry' ||
       rawHash === 'jewelry-diamond' ||
@@ -1496,6 +1527,14 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
         rawHash === 'johary-template'
       ) {
         setPreviewTemplate(JOHARY_JEWELRY_TEMPLATE)
+      } else if (
+        rawHash === 'lopez' ||
+        rawHash === 'lopez-jewelry' ||
+        rawHash === 'jewelry-lopez' ||
+        rawHash === 'lopez-templates' ||
+        rawHash === 'lopez-template'
+      ) {
+        setPreviewTemplate(LOPEZ_JEWELRY_TEMPLATE)
       } else if (
         rawHash === 'diamond' ||
         rawHash === 'jewelry' ||

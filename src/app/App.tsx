@@ -258,6 +258,11 @@ function App() {
             rawHash === 'johary-templates' ||
             rawHash === 'johary-template' ||
             rawHash === 'jewelry-johary' ||
+            rawHash === 'lopez' ||
+            rawHash === 'lopez-jewelry' ||
+            rawHash === 'jewelry-lopez' ||
+            rawHash === 'lopez-templates' ||
+            rawHash === 'lopez-template' ||
             rawHash === 'aurelia'
           )) ||
           (key === 'sporting-goods' && (

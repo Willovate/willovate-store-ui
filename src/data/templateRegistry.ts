@@ -12,6 +12,7 @@ import { BaggoFashionStorefront } from '../templates/fashion/Baggo'
 import { MrTevorFashionStorefront } from '../templates/fashion/MrTevor'
 import { DiamondJewelryStorefront } from '../templates/jewelry/Diamond'
 import { JoharyJewelryStorefront } from '../templates/jewelry/Johary'
+import { LopezJewelryStorefront } from '../templates/jewelry/Lopez'
 import { VelocityStorefront } from '../templates/sports/Velocity'
 import { ArenaStorefront } from '../templates/sports/Arena'
 import { SprintStorefront } from '../templates/sports/Sprint'
@@ -258,6 +259,16 @@ export function getTemplateComponent(template?: MarketplaceTemplate | Template |
       template.name?.toLowerCase().includes('johary'))
   ) {
     return JoharyJewelryStorefront
+  }
+  if (
+    template &&
+    (template.slug === 'jewelry-lopez' ||
+      template.id === 'jewelry-lopez' ||
+      template.slug === 'lopez' ||
+      template.slug === 'lopez-jewelry' ||
+      template.name?.toLowerCase().includes('lopez'))
+  ) {
+    return LopezJewelryStorefront
   }
   if (
     template &&

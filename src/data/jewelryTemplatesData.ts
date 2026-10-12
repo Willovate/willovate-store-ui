@@ -101,8 +101,61 @@ export const JOHARY_JEWELRY_TEMPLATE: MarketplaceTemplate = {
   ],
 }
 
+export const LOPEZ_JEWELRY_TEMPLATE: MarketplaceTemplate = {
+  id: 'jewelry-lopez',
+  slug: 'jewelry-lopez',
+  name: 'Lopez Minimalist Luxury Jewelry',
+  businessType: 'jewelry-accessories',
+  industryCategory: 'Jewelry & Accessories',
+  style: 'luxury',
+  catalogSize: 'large',
+  tags: [
+    'Jewelry',
+    'Fine Jewelry',
+    'Diamonds',
+    'Minimalist',
+    '18K Gold',
+    'Earrings',
+    'Rings',
+    'Necklaces',
+    'Bracelets',
+    'Luxury',
+  ],
+  shortDescription:
+    'Contemporary minimalist fine jewelry storefront inspired by the authentic Lopez Shopify theme. Features Summer Collection hero slider, 3-column Free Shipping service bar, promotional collection image banners, New Arrival 8-product grid, client testimonials, and 3-card Recent News editorial.',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80',
+  fullPreviewUrl: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=1600&auto=format&fit=crop&q=85',
+  popularityScore: 97,
+  isActive: true,
+  brandName: 'LOPEZ',
+  headline: 'Summer Collection — Minimalist Handcrafted Fine Jewelry',
+  subtitle: 'Contemporary drop earrings, geometric threaders, and flush rings engineered for timeless elegance.',
+  buttonText: 'Discover Collection',
+  buttonColor: '#242424',
+  isDark: false,
+  modelImage: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80',
+  badge: 'new',
+  rating: 4.98,
+  reviewCount: 195,
+  layoutType: 'card-grid',
+  accentColor: '#c09578',
+  features: [
+    'Authentic Lopez Shopify theme aesthetics with clean white canvas and champagne rose-gold accents (#c09578)',
+    'Summer Collection editorial hero slider with promotional headline and Buy Now button',
+    '3-column Free Shipping service highlights bar directly beneath the hero slider',
+    '2 side-by-side image-led promotional collection banners with hover zoom',
+    'New Arrival 8-product grid featuring Dangle Earrings, Threader Earrings, Fashion Ring, Hoop Earrings, and Cocktail Rings',
+    'Authentic Lopez product card styling with prominent price on top, uppercase title below, and 5-star ratings',
+    'Client testimonials carousel with verified UI/UX designer and stylist reviews',
+    '6 minimalist partner brand wordmarks row',
+    'Recent News 3-card editorial journal articles with author, date, and comment counts',
+    'Get All Updates high-contrast VIP salon newsletter subscription capture',
+    'Interactive slide-out shopping bag drawer with free shipping goal meter and checkout trigger',
+  ],
+}
+
 export const ALL_JEWELRY_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   DIAMOND_JEWELRY_TEMPLATE,
   JOHARY_JEWELRY_TEMPLATE,
+  LOPEZ_JEWELRY_TEMPLATE,
 ]
-
