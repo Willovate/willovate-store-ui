@@ -24,6 +24,8 @@ import { DiamondJewelryStorefront } from '../../templates/jewelry/Diamond'
 import { JoharyJewelryStorefront } from '../../templates/jewelry/Johary'
 import { LopezJewelryStorefront } from '../../templates/jewelry/Lopez'
 import { PSJewelshopStorefront } from '../../templates/jewelry/PSJewelshop'
+import { TimzeeStorefront } from '../../templates/jewelry/Timzee'
+import { JewelsWorkDoStorefront } from '../../templates/jewelry/JewelsWorkDo'
 import '../../templates/fashion/fashionMobile.css'
 import {
   BELLE_FASHION_TEMPLATE,
@@ -39,9 +41,12 @@ import {
   JOHARY_JEWELRY_TEMPLATE,
   LOPEZ_JEWELRY_TEMPLATE,
   PS_JEWELSHOP_TEMPLATE,
+  TIMZEE_WATCHES_TEMPLATE,
+  JEWELS_WORKDO_TEMPLATE,
   ALL_JEWELRY_MARKETPLACE_TEMPLATES,
 } from '../../data/jewelryTemplatesData'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront }
+
 
 // Re-export domain types
 export type {
@@ -95,8 +100,11 @@ export {
   JOHARY_JEWELRY_TEMPLATE,
   LOPEZ_JEWELRY_TEMPLATE,
   PS_JEWELSHOP_TEMPLATE,
+  TIMZEE_WATCHES_TEMPLATE,
+  JEWELS_WORKDO_TEMPLATE,
   ALL_JEWELRY_MARKETPLACE_TEMPLATES,
 } from '../../data/jewelryTemplatesData'
+
 
 
 export {
@@ -606,6 +614,42 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
       />
     )
   }
+
+  if (
+    template &&
+    (template.slug === 'jewelry-timzee' ||
+      template.id === 'jewelry-timzee' ||
+      template.slug === 'timzee' ||
+      template.id === 'timzee' ||
+      template.name?.toLowerCase().includes('timzee'))
+  ) {
+    return (
+      <TimzeeStorefront
+        templateData={template}
+        device={device}
+        deviceView={device}
+        onClose={onClose}
+        onUseTemplate={onUseTemplate}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'jewelry-jewels-workdo' ||
+      template.id === 'jewelry-jewels-workdo' ||
+      template.slug === 'jewels-workdo' ||
+      template.slug === 'jewels' ||
+      template.name?.toLowerCase().includes('jewels'))
+  ) {
+    return (
+      <JewelsWorkDoStorefront
+        onBack={onClose}
+        onUseTemplate={onUseTemplate}
+      />
+    )
+  }
+
 
   if (
     template &&
@@ -1465,6 +1509,27 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
       return PS_JEWELSHOP_TEMPLATE
     }
     if (
+      rawHash === 'timzee' ||
+      rawHash === 'jewelry-timzee' ||
+      rawHash === 'timzee-watches' ||
+      rawHash === 'timzee-templates' ||
+      rawHash === 'timzee-template' ||
+      rawHash === 'watches' ||
+      rawHash === 'watches-timzee'
+    ) {
+      return TIMZEE_WATCHES_TEMPLATE
+    }
+    if (
+      rawHash === 'jewels' ||
+      rawHash === 'jewels-workdo' ||
+      rawHash === 'jewelry-jewels-workdo' ||
+      rawHash === 'jewels-templates' ||
+      rawHash === 'jewels-template'
+    ) {
+      return JEWELS_WORKDO_TEMPLATE
+    }
+
+    if (
       rawHash === 'diamond' ||
       rawHash === 'jewelry' ||
       rawHash === 'jewelry-diamond' ||
@@ -1582,6 +1647,25 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
       ) {
         setPreviewTemplate(PS_JEWELSHOP_TEMPLATE)
       } else if (
+        rawHash === 'timzee' ||
+        rawHash === 'jewelry-timzee' ||
+        rawHash === 'timzee-watches' ||
+        rawHash === 'timzee-templates' ||
+        rawHash === 'timzee-template' ||
+        rawHash === 'watches' ||
+        rawHash === 'watches-timzee'
+      ) {
+        setPreviewTemplate(TIMZEE_WATCHES_TEMPLATE)
+      } else if (
+        rawHash === 'jewels' ||
+        rawHash === 'jewels-workdo' ||
+        rawHash === 'jewelry-jewels-workdo' ||
+        rawHash === 'jewels-templates' ||
+        rawHash === 'jewels-template'
+      ) {
+        setPreviewTemplate(JEWELS_WORKDO_TEMPLATE)
+      } else if (
+
         rawHash === 'diamond' ||
         rawHash === 'jewelry' ||
         rawHash === 'jewelry-diamond' ||

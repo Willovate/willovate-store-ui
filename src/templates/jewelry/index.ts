@@ -6,4 +6,8 @@ export { LopezJewelryStorefront } from './Lopez'
 export * from './Lopez'
 export { PSJewelshopStorefront } from './PSJewelshop'
 export * from './PSJewelshop'
+export { TimzeeStorefront } from './Timzee'
+export * from './Timzee'
+export { JewelsWorkDoStorefront } from './JewelsWorkDo'
+export * from './JewelsWorkDo'
 

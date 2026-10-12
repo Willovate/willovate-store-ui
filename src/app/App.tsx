@@ -271,8 +271,21 @@ function App() {
             rawHash === 'jewelshop' ||
             rawHash === 'jewelshop-templates' ||
             rawHash === 'jewelshop-template' ||
+            rawHash === 'timzee' ||
+            rawHash === 'timzee-watches' ||
+            rawHash === 'jewelry-timzee' ||
+            rawHash === 'timzee-templates' ||
+            rawHash === 'timzee-template' ||
+            rawHash === 'watches' ||
+            rawHash === 'watches-timzee' ||
+            rawHash === 'jewels' ||
+            rawHash === 'jewels-workdo' ||
+            rawHash === 'jewelry-jewels-workdo' ||
+            rawHash === 'jewels-templates' ||
+            rawHash === 'jewels-template' ||
             rawHash === 'aurelia'
           )) ||
+
           (key === 'sporting-goods' && (
             rawHash === 'sports' ||
             rawHash === 'sports-store' ||

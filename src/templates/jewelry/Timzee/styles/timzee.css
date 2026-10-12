@@ -1,0 +1,1263 @@
+/* Timzee Luxury Horology Storefront Styles - Pixel-Perfect Replica of Reference Screenshot */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=Great+Vibes&display=swap');
+
+.tmz-root {
+  --tmz-bg-header: #08152e;
+  --tmz-bg-hero: #000000;
+  --tmz-bg-section-dark: #000000;
+  --tmz-bg-section-navy: #030d1d;
+  --tmz-bg-card: #081120;
+  --tmz-bg-card-slate: #101622;
+  --tmz-gold: #cca471;
+  --tmz-gold-bright: #dfba87;
+  --tmz-blue-border: #133b73;
+  --tmz-blue-glow: rgba(19, 59, 115, 0.4);
+  --tmz-text-white: #ffffff;
+  --tmz-text-muted: #94a3b8;
+  --tmz-text-dim: #64748b;
+  --tmz-font-heading: 'Playfair Display', Georgia, serif;
+  --tmz-font-body: 'Source Sans Pro', 'Outfit', sans-serif;
+  --tmz-font-script: 'Great Vibes', 'Playfair Display', cursive, serif;
+
+  background-color: var(--tmz-bg-section-navy);
+  color: var(--tmz-text-white);
+  font-family: var(--tmz-font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  position: relative;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.tmz-root *,
+.tmz-root *::before,
+.tmz-root *::after {
+  box-sizing: border-box;
+}
+
+.tmz-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ================= AUTHENTIC SECTION HEADINGS WITH GOLD UNDERLINE ================= */
+.tmz-heading-wrap {
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.tmz-section-heading {
+  font-family: var(--tmz-font-heading);
+  font-size: 32px;
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0;
+  position: relative;
+  display: inline-block;
+  padding: 0 40px;
+  letter-spacing: 0.5px;
+}
+
+/* Gold line flank on left and right */
+.tmz-section-heading::before,
+.tmz-section-heading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 35px;
+  height: 2px;
+  background-color: var(--tmz-gold);
+}
+
+.tmz-section-heading::before {
+  left: 0;
+}
+
+.tmz-section-heading::after {
+  right: 0;
+}
+
+/* Gold highlight underline directly under the title */
+.tmz-heading-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.tmz-heading-underline::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: var(--tmz-gold);
+  z-index: -1;
+  opacity: 0.9;
+}
+
+/* ================= 1. SLEEK TOP HEADER ================= */
+.tmz-header-bar {
+  background-color: var(--tmz-bg-header);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  height: 72px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+}
+
+.tmz-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.tmz-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.tmz-menu-toggle {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px;
+}
+
+.tmz-menu-bar {
+  width: 20px;
+  height: 2px;
+  background-color: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.tmz-logo-img {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+}
+
+.tmz-nav-center {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.tmz-nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.tmz-nav-link:hover,
+.tmz-nav-link.active {
+  color: var(--tmz-gold);
+}
+
+.tmz-header-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.tmz-hdr-icon-btn {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.tmz-hdr-icon-btn:hover {
+  color: var(--tmz-gold);
+  background: rgba(204, 164, 113, 0.12);
+}
+
+.tmz-hdr-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background-color: var(--tmz-gold);
+  color: #030d1d;
+  font-size: 10px;
+  font-weight: 700;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tmz-currency-dropdown {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  border-radius: 2px;
+}
+
+/* ================= 2. HERO SLIDESHOW SECTION ================= */
+.tmz-hero-viewport {
+  position: relative;
+  background-color: var(--tmz-bg-hero);
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 40px 0;
+}
+
+.tmz-hero-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 40px;
+}
+
+.tmz-hero-copy {
+  max-width: 540px;
+}
+
+.tmz-hero-pretitle-script {
+  font-family: var(--tmz-font-script);
+  font-size: 28px;
+  color: var(--tmz-gold);
+  display: block;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+.tmz-hero-main-title {
+  font-family: var(--tmz-font-heading);
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 1.18;
+  color: #ffffff;
+  margin: 0 0 16px;
+  letter-spacing: 0.5px;
+}
+
+.tmz-hero-paragraph {
+  font-size: 14px;
+  color: var(--tmz-text-muted);
+  line-height: 1.7;
+  margin-bottom: 22px;
+}
+
+.tmz-hero-price-tag {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 26px;
+}
+
+.tmz-hero-from {
+  font-size: 14px;
+  color: var(--tmz-text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.tmz-hero-gold-price {
+  font-family: var(--tmz-font-heading);
+  font-size: 38px;
+  font-weight: 600;
+  color: var(--tmz-gold);
+  line-height: 1;
+}
+
+.tmz-hero-strike-price {
+  font-size: 16px;
+  color: var(--tmz-text-dim);
+  text-decoration: line-through;
+}
+
+.tmz-hero-btn-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.tmz-btn-gold-bordered {
+  background: #000000;
+  color: #ffffff;
+  border: 1px solid var(--tmz-gold);
+  padding: 13px 32px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.tmz-btn-gold-bordered:hover {
+  background: var(--tmz-gold);
+  color: #030d1d;
+}
+
+.tmz-hero-arrows {
+  display: flex;
+  gap: 8px;
+}
+
+.tmz-square-nav-btn {
+  width: 36px;
+  height: 36px;
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.tmz-square-nav-btn:hover {
+  border-color: var(--tmz-gold);
+  color: var(--tmz-gold);
+}
+
+.tmz-hero-watch-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tmz-hero-watch-img {
+  max-width: 100%;
+  max-height: 480px;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.9));
+  transform: rotate(-4deg);
+  transition: transform 0.5s ease;
+}
+
+.tmz-hero-watch-wrap:hover .tmz-hero-watch-img {
+  transform: rotate(-1deg) scale(1.02);
+}
+
+/* ================= 3. FLASH SALE 3-PROMO BLUE-BORDERED CARDS ================= */
+.tmz-flash-promos-wrap {
+  padding: 50px 0;
+  background-color: var(--tmz-bg-hero);
+}
+
+.tmz-flash-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+
+.tmz-flash-card {
+  position: relative;
+  height: 250px;
+  background-size: cover;
+  background-position: center;
+  border: 2px solid var(--tmz-blue-border);
+  box-shadow: 0 0 16px var(--tmz-blue-glow);
+  display: flex;
+  align-items: center;
+  padding: 30px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.tmz-flash-card:hover {
+  transform: translateY(-4px);
+  border-color: #2563eb;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.5);
+}
+
+.tmz-flash-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(3, 13, 29, 0.92) 0%,
+    rgba(3, 13, 29, 0.45) 60%,
+    rgba(3, 13, 29, 0.1) 100%
+  );
+}
+
+.tmz-flash-content {
+  position: relative;
+  z-index: 2;
+  max-width: 220px;
+}
+
+.tmz-flash-script {
+  font-family: var(--tmz-font-script);
+  font-size: 26px;
+  color: var(--tmz-gold);
+  line-height: 1;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.tmz-flash-title {
+  font-family: var(--tmz-font-heading);
+  font-size: 26px;
+  color: #ffffff;
+  margin: 0 0 14px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.tmz-flash-link {
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tmz-flash-link:hover {
+  color: var(--tmz-gold);
+}
+
+/* ================= 4. POPULAR IN STORE TABBED CARDS ================= */
+.tmz-popular-section {
+  padding: 60px 0;
+  background-color: var(--tmz-bg-hero);
+  position: relative;
+}
+
+.tmz-tabs-row {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.tmz-tab-label {
+  background: transparent;
+  border: none;
+  color: var(--tmz-text-muted);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 4px;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.tmz-tab-label.active {
+  color: var(--tmz-gold);
+}
+
+.tmz-tab-label.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--tmz-gold);
+}
+
+.tmz-carousel-wrapper {
+  position: relative;
+  padding: 0 40px;
+}
+
+.tmz-side-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.tmz-side-arrow:hover {
+  border-color: var(--tmz-gold);
+  color: var(--tmz-gold);
+}
+
+.tmz-side-arrow-left {
+  left: 0;
+}
+
+.tmz-side-arrow-right {
+  right: 0;
+}
+
+.tmz-popular-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.tmz-watch-box {
+  background: var(--tmz-bg-card-slate);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 24px;
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.tmz-watch-box:hover {
+  border-color: rgba(204, 164, 113, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+}
+
+.tmz-badge-gold-topright {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background-color: var(--tmz-gold);
+  color: #000000;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  letter-spacing: 0.5px;
+}
+
+.tmz-watch-img-slot {
+  height: 230px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  position: relative;
+  cursor: pointer;
+}
+
+.tmz-watch-img-slot img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.tmz-watch-box:hover .tmz-watch-img-slot img {
+  transform: scale(1.05);
+}
+
+.tmz-watch-name {
+  font-family: var(--tmz-font-heading);
+  font-size: 18px;
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0 0 8px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.tmz-watch-name:hover {
+  color: var(--tmz-gold);
+}
+
+.tmz-watch-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.tmz-price-current {
+  color: var(--tmz-gold);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.tmz-price-strikethrough {
+  color: var(--tmz-text-dim);
+  font-size: 13px;
+  text-decoration: line-through;
+}
+
+.tmz-quick-buy-btn {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 10px 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.tmz-watch-box:hover .tmz-quick-buy-btn {
+  border-color: var(--tmz-gold);
+  background: var(--tmz-gold);
+  color: #030d1d;
+}
+
+/* ================= 5. PARALLAX DEAL BANNER ================= */
+.tmz-deal-countdown-section {
+  background-image: url('https://timzee-demo.myshopify.com/cdn/shop/files/Bg1full.jpg?v=1614300918&width=1920');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  padding: 100px 0;
+  text-align: center;
+  position: relative;
+}
+
+.tmz-deal-countdown-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(3, 13, 29, 0.78);
+}
+
+.tmz-deal-body {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.tmz-btn-shopnow-box {
+  background: #000000;
+  color: #ffffff;
+  border: 1px solid var(--tmz-gold);
+  padding: 12px 36px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 24px;
+  transition: all 0.2s ease;
+}
+
+.tmz-btn-shopnow-box:hover {
+  background: var(--tmz-gold);
+  color: #000000;
+}
+
+/* ================= 6. ROMAN OR NUMERAL FEATURE SPOTLIGHT ================= */
+.tmz-roman-numeral-section {
+  padding: 80px 0;
+  background-color: var(--tmz-bg-hero);
+}
+
+.tmz-roman-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 50px;
+}
+
+.tmz-roman-badge-icon {
+  width: 28px;
+  height: 28px;
+  background: #1e3a8a;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #60a5fa;
+  margin-bottom: 16px;
+}
+
+.tmz-roman-heading {
+  font-family: var(--tmz-font-heading);
+  font-size: 34px;
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0 0 20px;
+}
+
+.tmz-roman-desc {
+  font-size: 14px;
+  color: var(--tmz-text-muted);
+  line-height: 1.8;
+  margin-bottom: 18px;
+}
+
+.tmz-roman-watch-img {
+  max-width: 100%;
+  max-height: 440px;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.9));
+  transform: rotate(8deg);
+  transition: transform 0.4s ease;
+}
+
+.tmz-roman-watch-img:hover {
+  transform: rotate(5deg) scale(1.03);
+}
+
+/* ================= 7. PURE WATCH PHOTO MOSAIC (6-IMAGE GRID) ================= */
+.tmz-photo-mosaic-section {
+  padding: 40px 0;
+  background-color: var(--tmz-bg-hero);
+}
+
+.tmz-photo-grid-6 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.tmz-photo-slot {
+  height: 280px;
+  overflow: hidden;
+  position: relative;
+  background-color: #0a0e17;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tmz-photo-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.tmz-photo-slot:hover img {
+  transform: scale(1.08);
+}
+
+/* ================= 8. TESTIMONIAL QUOTATION BOXES ================= */
+.tmz-quote-section {
+  padding: 90px 0;
+  background-color: var(--tmz-bg-section-navy);
+  text-align: center;
+}
+
+.tmz-quote-container {
+  max-width: 860px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.tmz-gold-quote-box {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--tmz-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--tmz-gold);
+  font-family: var(--tmz-font-heading);
+  font-size: 26px;
+  flex-shrink: 0;
+}
+
+.tmz-quote-center {
+  flex: 1;
+}
+
+.tmz-quote-words {
+  font-family: var(--tmz-font-heading);
+  font-size: 24px;
+  font-style: italic;
+  line-height: 1.6;
+  color: #ffffff;
+  margin: 0 0 16px;
+}
+
+.tmz-quote-author {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--tmz-gold);
+}
+
+/* ================= 9. PRODUCT CATEGORIES (5-WATCH STAGGERED GRID) ================= */
+.tmz-categories-section {
+  padding: 70px 0;
+  background-color: var(--tmz-bg-hero);
+}
+
+.tmz-cat-grid-5 {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.tmz-cat-row-top {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.tmz-cat-row-bottom {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  max-width: 820px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ================= 10. RECENT BLOG ASYMMETRIC MOSAIC ================= */
+.tmz-recent-blog-section {
+  padding: 70px 0;
+  background-color: var(--tmz-bg-section-navy);
+}
+
+.tmz-blog-mosaic-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+.tmz-blog-large-left {
+  background: var(--tmz-bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.tmz-blog-hero-img {
+  height: 310px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.tmz-blog-large-content {
+  padding: 24px;
+}
+
+.tmz-blog-right-column {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 24px;
+}
+
+.tmz-blog-text-card {
+  background: var(--tmz-bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tmz-blog-model-card {
+  background: var(--tmz-bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  height: 240px;
+}
+
+.tmz-blog-model-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tmz-blog-date {
+  font-size: 12px;
+  color: var(--tmz-gold);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.tmz-blog-heading-title {
+  font-family: var(--tmz-font-heading);
+  font-size: 20px;
+  color: #ffffff;
+  margin: 0 0 16px;
+  font-weight: 500;
+}
+
+.tmz-btn-readmore {
+  background: #000000;
+  color: #ffffff;
+  border: 1px solid var(--tmz-gold);
+  padding: 9px 24px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  align-self: flex-start;
+  transition: all 0.2s ease;
+}
+
+.tmz-btn-readmore:hover {
+  background: var(--tmz-gold);
+  color: #030d1d;
+}
+
+/* ================= 11. NEWSLETTER SECTION WITH WATCHES FLANKING ================= */
+.tmz-newsletter-backdrop {
+  background-image: url('https://timzee-demo.myshopify.com/cdn/shop/files/Bg3_90e25fb7-6ee5-42d6-b55b-398e3c403fd8.jpg?v=1614310740&width=1920');
+  background-size: cover;
+  background-position: center;
+  padding: 90px 0;
+  text-align: center;
+  position: relative;
+}
+
+.tmz-newsletter-overlay-dark {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.tmz-newsletter-core {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.tmz-subscribe-box {
+  display: flex;
+  margin: 24px 0 16px;
+}
+
+.tmz-sub-input {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--tmz-gold);
+  border-right: none;
+  color: #ffffff;
+  padding: 13px 20px;
+  font-size: 14px;
+  outline: none;
+}
+
+.tmz-sub-btn {
+  background: var(--tmz-gold);
+  color: #000000;
+  border: 1px solid var(--tmz-gold);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 13px 28px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tmz-sub-btn:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+}
+
+.tmz-privacy-note {
+  font-size: 13px;
+  color: var(--tmz-text-muted);
+  margin-bottom: 24px;
+}
+
+.tmz-social-squares-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.tmz-social-sq-btn {
+  width: 38px;
+  height: 38px;
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.tmz-social-sq-btn:hover {
+  border-color: var(--tmz-gold);
+  color: var(--tmz-gold);
+}
+
+/* ================= 12. THE GREAT EXPERIENCE (BRAND LOGOS) ================= */
+.tmz-brands-experience-section {
+  padding: 60px 0;
+  background-color: var(--tmz-bg-section-navy);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.tmz-logos-row-sleek {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 36px;
+  margin-bottom: 24px;
+}
+
+.tmz-logos-row-sleek img {
+  height: 42px;
+  max-width: 150px;
+  object-fit: contain;
+  opacity: 0.7;
+  filter: brightness(1.2) grayscale(100%);
+  transition: all 0.3s ease;
+}
+
+.tmz-logos-row-sleek img:hover {
+  opacity: 1;
+  filter: brightness(1.5) grayscale(0%);
+}
+
+.tmz-dots-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.tmz-small-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.tmz-small-dot.active {
+  background: var(--tmz-gold);
+}
+
+/* ================= 13. FOOTER WITH WATCH WATERMARK ================= */
+.tmz-footer-watermark {
+  background-color: #000000;
+  background-image: url('https://timzee-demo.myshopify.com/cdn/shop/files/footer-img_052c2e02-57e9-473b-a7a4-2668c5104fbd.jpg?v=1614300923&width=1920');
+  background-size: cover;
+  background-position: center;
+  padding: 80px 0 0;
+  position: relative;
+}
+
+.tmz-footer-overlay-tint {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+}
+
+.tmz-footer-inner-content {
+  position: relative;
+  z-index: 2;
+}
+
+.tmz-footer-cols-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 36px;
+  margin-bottom: 50px;
+}
+
+.tmz-ft-title {
+  font-family: var(--tmz-font-heading);
+  font-size: 18px;
+  color: var(--tmz-gold);
+  margin: 0 0 18px;
+  font-weight: 500;
+}
+
+.tmz-ft-links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tmz-ft-links-list li {
+  margin-bottom: 10px;
+}
+
+.tmz-ft-links-list a {
+  color: var(--tmz-text-muted);
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s ease;
+}
+
+.tmz-ft-links-list a:hover {
+  color: #ffffff;
+}
+
+.tmz-ft-address-box {
+  font-size: 13px;
+  color: var(--tmz-text-muted);
+  line-height: 1.8;
+}
+
+.tmz-footer-apps-connect-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 24px 0;
+  margin-bottom: 0;
+}
+
+.tmz-ft-connect-left,
+.tmz-ft-apps-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.tmz-ft-label-sub {
+  font-size: 13px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.tmz-ft-bottom-strip {
+  background-color: #020712;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 16px 0;
+}
+
+.tmz-ft-bottom-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--tmz-text-dim);
+}
+
+.tmz-payment-cards-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.tmz-payment-pill {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+  .tmz-hero-layout {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .tmz-hero-copy {
+    margin: 0 auto;
+  }
+  .tmz-hero-btn-row {
+    justify-content: center;
+  }
+  .tmz-hero-price-tag {
+    justify-content: center;
+  }
+  .tmz-popular-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .tmz-photo-grid-6 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .tmz-cat-row-top {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .tmz-blog-mosaic-grid {
+    grid-template-columns: 1fr;
+  }
+  .tmz-footer-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .tmz-flash-grid {
+    grid-template-columns: 1fr;
+  }
+  .tmz-popular-grid-3 {
+    grid-template-columns: 1fr;
+  }
+  .tmz-roman-layout {
+    grid-template-columns: 1fr;
+  }
+  .tmz-photo-grid-6 {
+    grid-template-columns: 1fr;
+  }
+  .tmz-cat-row-top {
+    grid-template-columns: 1fr;
+  }
+  .tmz-cat-row-bottom {
+    grid-template-columns: 1fr;
+  }
+  .tmz-footer-cols-4 {
+    grid-template-columns: 1fr;
+  }
+  .tmz-footer-apps-connect-bar {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .tmz-ft-bottom-flex {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .tmz-nav-center {
+    display: none;
+  }
+}
