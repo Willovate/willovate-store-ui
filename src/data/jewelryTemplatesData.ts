@@ -346,8 +346,8 @@ export const DIAMOND_WORKDO_TEMPLATE: MarketplaceTemplate = {
   ],
   shortDescription:
     'Pixel-perfect replica of the authentic Diamond Shopify theme by WorkDo. Features soft peach palette (#faede3), deep forest green accents (#16332c), dual announcement banner, gold & diamond split showcase, ring collections, and luxury cart drawer.',
-  thumbnailUrl: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&auto=format&fit=crop&q=80',
-  fullPreviewUrl: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=1600&auto=format&fit=crop&q=85',
+  thumbnailUrl: 'https://jewels-workdo.myshopify.com/cdn/shop/files/design-img-chocolate2.png?v=1698818158',
+  fullPreviewUrl: 'https://jewels-workdo.myshopify.com/cdn/shop/files/design-img-chocolate2.png?v=1698818158',
   popularityScore: 100,
   isActive: true,
   brandName: 'DIAMOND WORKDO',
@@ -403,7 +403,7 @@ export const VT_OLIGHT_TEMPLATE: MarketplaceTemplate = {
   ],
   shortDescription:
     'Authentic Vt Olight Shopify theme replica featuring "Find the Perfect Ring Make" hero, gold Moroccan lanterns, 4-tier best sellers, handmade atelier showcase, and client stories.',
-  thumbnailUrl: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&auto=format&fit=crop&q=80',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=900&auto=format&fit=crop&q=80',
   fullPreviewUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1600&auto=format&fit=crop&q=85',
   popularityScore: 100,
   isActive: true,
@@ -413,7 +413,7 @@ export const VT_OLIGHT_TEMPLATE: MarketplaceTemplate = {
   buttonText: 'Explore Collection',
   buttonColor: '#c89e58',
   isDark: false,
-  modelImage: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80',
+  modelImage: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=900&auto=format&fit=crop&q=80',
   badge: 'trending',
   rating: 4.99,
   reviewCount: 460,
