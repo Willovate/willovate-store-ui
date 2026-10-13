@@ -1954,21 +1954,22 @@
 .card-title-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
   margin-bottom: 8px;
 }
 
 .card-theme-name {
   font-family: Georgia, 'Playfair Display', 'Times New Roman', serif;
-  font-size: 1.15rem;
+  font-size: 1.08rem;
   font-weight: 700;
   color: #111827;
   margin: 0;
-  line-height: 1.25;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.3;
+  flex: 1;
+  min-width: 0;
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
 .card-industry-label {
@@ -1989,9 +1990,12 @@
   color: #6b7280;
   line-height: 1.45;
   margin: 0 0 16px 0;
-  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  min-height: 2.38rem;
 }
 
 .card-bottom-action {

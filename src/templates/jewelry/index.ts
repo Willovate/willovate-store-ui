@@ -10,4 +10,7 @@ export { TimzeeStorefront } from './Timzee'
 export * from './Timzee'
 export { JewelsWorkDoStorefront } from './JewelsWorkDo'
 export * from './JewelsWorkDo'
+export { DiamondWorkDoStorefront } from './DiamondWorkDo'
+export * from './DiamondWorkDo'
+
 

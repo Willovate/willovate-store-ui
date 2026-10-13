@@ -16,6 +16,7 @@ import { LopezJewelryStorefront } from '../templates/jewelry/Lopez'
 import { PSJewelshopStorefront } from '../templates/jewelry/PSJewelshop'
 import { TimzeeStorefront } from '../templates/jewelry/Timzee'
 import { JewelsWorkDoStorefront } from '../templates/jewelry/JewelsWorkDo'
+import { DiamondWorkDoStorefront } from '../templates/jewelry/DiamondWorkDo'
 import { VelocityStorefront } from '../templates/sports/Velocity'
 import { ArenaStorefront } from '../templates/sports/Arena'
 import { SprintStorefront } from '../templates/sports/Sprint'
@@ -303,6 +304,17 @@ export function getTemplateComponent(template?: MarketplaceTemplate | Template |
       template.name?.toLowerCase().includes('jewels'))
   ) {
     return JewelsWorkDoStorefront
+  }
+
+  if (
+    template &&
+    (template.slug === 'jewelry-diamond-workdo' ||
+      template.id === 'jewelry-diamond-workdo' ||
+      template.slug === 'diamond-workdo' ||
+      template.name?.toLowerCase().includes('diamond-workdo') ||
+      template.name?.toLowerCase().includes('diamond workdo'))
+  ) {
+    return DiamondWorkDoStorefront
   }
 
   if (

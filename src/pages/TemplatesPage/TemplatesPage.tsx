@@ -26,6 +26,7 @@ import { LopezJewelryStorefront } from '../../templates/jewelry/Lopez'
 import { PSJewelshopStorefront } from '../../templates/jewelry/PSJewelshop'
 import { TimzeeStorefront } from '../../templates/jewelry/Timzee'
 import { JewelsWorkDoStorefront } from '../../templates/jewelry/JewelsWorkDo'
+import { DiamondWorkDoStorefront } from '../../templates/jewelry/DiamondWorkDo'
 import '../../templates/fashion/fashionMobile.css'
 import {
   BELLE_FASHION_TEMPLATE,
@@ -43,9 +44,10 @@ import {
   PS_JEWELSHOP_TEMPLATE,
   TIMZEE_WATCHES_TEMPLATE,
   JEWELS_WORKDO_TEMPLATE,
+  DIAMOND_WORKDO_TEMPLATE,
   ALL_JEWELRY_MARKETPLACE_TEMPLATES,
 } from '../../data/jewelryTemplatesData'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront }
 
 
 // Re-export domain types
@@ -102,6 +104,7 @@ export {
   PS_JEWELSHOP_TEMPLATE,
   TIMZEE_WATCHES_TEMPLATE,
   JEWELS_WORKDO_TEMPLATE,
+  DIAMOND_WORKDO_TEMPLATE,
   ALL_JEWELRY_MARKETPLACE_TEMPLATES,
 } from '../../data/jewelryTemplatesData'
 
@@ -167,7 +170,14 @@ export const TemplateCard: React.FC<TemplateCardProps> = ({
   const isFeatured =
     template.badge === 'recommended' || template.badge === "editor's pick"
 
-  const fallbackHero = 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&auto=format&fit=crop&q=80'
+  const fallbackHero =
+    template.businessType === 'jewelry-accessories' ||
+    template.industryCategory?.toLowerCase().includes('jewel') ||
+    template.tags?.some((t) => t.toLowerCase().includes('jewel') || t.toLowerCase().includes('diamond'))
+      ? 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&auto=format&fit=crop&q=80'
+      : template.businessType === 'sporting-goods'
+      ? 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&auto=format&fit=crop&q=80'
+      : 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format&fit=crop&q=80'
   const heroImage = template.thumbnailUrl || template.modelImage || template.fullPreviewUrl || fallbackHero
 
   return (
@@ -650,6 +660,22 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
     )
   }
 
+
+  if (
+    template &&
+    (template.slug === 'jewelry-diamond-workdo' ||
+      template.id === 'jewelry-diamond-workdo' ||
+      template.slug === 'diamond-workdo' ||
+      template.name?.toLowerCase().includes('diamond-workdo') ||
+      template.name?.toLowerCase().includes('diamond workdo'))
+  ) {
+    return (
+      <DiamondWorkDoStorefront
+        onBack={onClose}
+        onUseTemplate={onUseTemplate}
+      />
+    )
+  }
 
   if (
     template &&
@@ -1530,11 +1556,19 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
     }
 
     if (
+      rawHash === 'diamond-workdo' ||
+      rawHash === 'jewelry-diamond-workdo' ||
+      rawHash === 'diamond-workdo-templates' ||
+      rawHash === 'diamond-workdo-template'
+    ) {
+      return DIAMOND_WORKDO_TEMPLATE
+    }
+
+    if (
       rawHash === 'diamond' ||
       rawHash === 'jewelry' ||
       rawHash === 'jewelry-diamond' ||
       rawHash === 'jewelry-accessories' ||
-      rawHash === 'diamond-workdo' ||
       rawHash === 'diamond-jewelry' ||
       rawHash === 'diamond-templates' ||
       rawHash === 'diamond-template' ||
@@ -1665,12 +1699,18 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
       ) {
         setPreviewTemplate(JEWELS_WORKDO_TEMPLATE)
       } else if (
+        rawHash === 'diamond-workdo' ||
+        rawHash === 'jewelry-diamond-workdo' ||
+        rawHash === 'diamond-workdo-templates' ||
+        rawHash === 'diamond-workdo-template'
+      ) {
+        setPreviewTemplate(DIAMOND_WORKDO_TEMPLATE)
+      } else if (
 
         rawHash === 'diamond' ||
         rawHash === 'jewelry' ||
         rawHash === 'jewelry-diamond' ||
         rawHash === 'jewelry-accessories' ||
-        rawHash === 'diamond-workdo' ||
         rawHash === 'diamond-jewelry' ||
         rawHash === 'diamond-templates' ||
         rawHash === 'diamond-template' ||

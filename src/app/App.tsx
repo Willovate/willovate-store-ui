@@ -233,6 +233,9 @@ function App() {
             rawHash === 'diamond-template' ||
             rawHash === 'diamond-store' ||
             rawHash === 'diamond-workdo' ||
+            rawHash === 'jewelry-diamond-workdo' ||
+            rawHash === 'diamond-workdo-template' ||
+            rawHash === 'diamond-workdo-templates' ||
             rawHash === 'diamond-jewelry' ||
             rawHash === 'jewelry-diamond' ||
             rawHash === 'diamond-luxury' ||

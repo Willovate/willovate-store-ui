@@ -324,6 +324,63 @@ export const JEWELS_WORKDO_TEMPLATE: MarketplaceTemplate = {
   ],
 }
 
+export const DIAMOND_WORKDO_TEMPLATE: MarketplaceTemplate = {
+  id: 'jewelry-diamond-workdo',
+  slug: 'jewelry-diamond-workdo',
+  name: 'Diamond WorkDo Fine Jewelry',
+  businessType: 'jewelry-accessories',
+  industryCategory: 'Jewelry & Accessories',
+  style: 'luxury',
+  catalogSize: 'large',
+  tags: [
+    'Jewelry',
+    'Diamonds',
+    'Fine Jewelry',
+    'Gold',
+    'Rings',
+    'Earrings',
+    'Bracelets',
+    'Necklaces',
+    'Engagement',
+    'WorkDo',
+  ],
+  shortDescription:
+    'Pixel-perfect replica of the authentic Diamond Shopify theme by WorkDo. Features soft peach palette (#faede3), deep forest green accents (#16332c), dual announcement banner, gold & diamond split showcase, ring collections, and luxury cart drawer.',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&auto=format&fit=crop&q=80',
+  fullPreviewUrl: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=1600&auto=format&fit=crop&q=85',
+  popularityScore: 100,
+  isActive: true,
+  brandName: 'DIAMOND WORKDO',
+  headline: 'Gold jewellery & diamonds',
+  subtitle: 'We are a small, independently owned luxury jewellery store, offering certified solitaires, fine 18K gold and bespoke bridal designs.',
+  buttonText: 'Check more products',
+  buttonColor: '#16332c',
+  isDark: false,
+  modelImage: 'https://jewels-workdo.myshopify.com/cdn/shop/files/design-img-chocolate2.png?v=1698818158',
+  badge: 'trending',
+  rating: 4.99,
+  reviewCount: 420,
+  layoutType: 'editorial',
+  accentColor: '#16332c',
+  features: [
+    'Authentic Diamond WorkDo Shopify storefront replica with peach (#faede3) canvas and forest green (#16332c) accents',
+    'Top announcement strip with dual USD/EUR currency selectors and special 20% discount highlight',
+    'Modern header with serif lowercase "diamond" logo, nested navigation, search, and dynamic cart pill badge',
+    'Hero section with dual floating jewelry badges ("Trending Ring 2024 New" and "Ring Collection 2024 New")',
+    'Three category promo tiles (Featured, Bracelet, Earrings) with pill buttons',
+    'Three customer trust pillars (100% Secure delivery, 60 Days return guarantee, Free shipping over $99)',
+    'Diamonds & Engagement Ring split showcase featuring saltwater pearl necklace and rope twist chains',
+    'Find the perfect diamond for you 4-card catalog section with quick view and cart drawer addition',
+    'Get the best diamonds for your business editorial lookbook featuring high-fashion models',
+    'Diamonds are forever wide split cards featuring huggie and floral stud diamond earrings',
+    'Discover the world of jewellery & diamonds 4-card grid (bangles, charm bracelets, and tennis bracelets)',
+    'Luxury Jewellery Online Buy dark forest green highlight section with platinum solitaire spotlight',
+    'Client testimonials featuring Rachel Stevens and Sara Zhang with verified badge',
+    'From our blog 4-card jewelry editorial advice and care guide',
+    'Slide-out cart drawer, Quick View modal, and Interactive Ring Sizer guide',
+  ],
+}
+
 export const ALL_JEWELRY_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   DIAMOND_JEWELRY_TEMPLATE,
   JOHARY_JEWELRY_TEMPLATE,
@@ -331,6 +388,8 @@ export const ALL_JEWELRY_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   PS_JEWELSHOP_TEMPLATE,
   TIMZEE_WATCHES_TEMPLATE,
   JEWELS_WORKDO_TEMPLATE,
+  DIAMOND_WORKDO_TEMPLATE,
 ]
+
 
 
