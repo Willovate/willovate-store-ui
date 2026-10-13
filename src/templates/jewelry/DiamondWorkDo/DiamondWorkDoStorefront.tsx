@@ -732,7 +732,7 @@ export const DiamondWorkDoStorefront: React.FC<DiamondWorkDoStorefrontProps> = (
                         className="dwd-card-cart-btn"
                         onClick={() => addToCart(prod, prod.metals[0].name, 'US 6.5', undefined, 1)}
                       >
-                        Add to Cart 👜
+                        Add to Cart <span className="dwd-arrow">➔</span>
                       </button>
                     </article>
                   ))}
@@ -794,7 +794,7 @@ export const DiamondWorkDoStorefront: React.FC<DiamondWorkDoStorefrontProps> = (
                       className="dwd-card-cart-btn"
                       onClick={() => addToCart(prod, prod.metals[0].name, 'US 6.5', undefined, 1)}
                     >
-                      Add to Cart 👜
+                      Add to Cart <span className="dwd-arrow">➔</span>
                     </button>
                   </article>
                 ))}
@@ -882,7 +882,7 @@ export const DiamondWorkDoStorefront: React.FC<DiamondWorkDoStorefrontProps> = (
                         className="dwd-card-cart-btn"
                         onClick={() => addToCart(prod, prod.metals[0].name, 'US 6.5', undefined, 1)}
                       >
-                        Add to Cart 👜
+                        Add to Cart <span className="dwd-arrow">➔</span>
                       </button>
                     </div>
                   </article>
@@ -944,7 +944,7 @@ export const DiamondWorkDoStorefront: React.FC<DiamondWorkDoStorefrontProps> = (
                       className="dwd-card-cart-btn"
                       onClick={() => addToCart(prod, prod.metals[0].name, 'US 6.5', undefined, 1)}
                     >
-                      Add to Cart 👜
+                      Add to Cart <span className="dwd-arrow">➔</span>
                     </button>
                   </article>
                 ))}
@@ -1238,7 +1238,7 @@ export const DiamondWorkDoStorefront: React.FC<DiamondWorkDoStorefrontProps> = (
                     className="dwd-card-cart-btn"
                     onClick={() => addToCart(prod, prod.metals[0].name, 'US 6.5', undefined, 1)}
                   >
-                    Add to Cart 👜
+                    Add to Cart <span className="dwd-arrow">➔</span>
                   </button>
                 </article>
               ))}
@@ -1400,7 +1400,7 @@ export const DiamondWorkDoStorefront: React.FC<DiamondWorkDoStorefrontProps> = (
                     style={{ flex: 1, padding: '14px 28px' }}
                     onClick={() => addToCart(selectedProduct, pdpSelectedMetal, pdpSelectedRingSize, undefined, pdpQty)}
                   >
-                    Add to Cart 👜
+                    Add to Cart <span className="dwd-arrow">➔</span>
                   </button>
                 </div>
 
@@ -1463,7 +1463,7 @@ export const DiamondWorkDoStorefront: React.FC<DiamondWorkDoStorefrontProps> = (
                     setIsQuickViewOpen(false)
                   }}
                 >
-                  Add to Cart 👜
+                  Add to Cart <span className="dwd-arrow">➔</span>
                 </button>
               </div>
             </div>
