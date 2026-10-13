@@ -236,6 +236,13 @@ function App() {
             rawHash === 'jewelry-diamond-workdo' ||
             rawHash === 'diamond-workdo-template' ||
             rawHash === 'diamond-workdo-templates' ||
+            rawHash === 'vt-olight' ||
+            rawHash === 'jewelry-vt-olight' ||
+            rawHash === 'vt-olight-template' ||
+            rawHash === 'vt-olight-templates' ||
+            rawHash === 'olight' ||
+            rawHash === 'olight-template' ||
+            rawHash === 'olight-templates' ||
             rawHash === 'diamond-jewelry' ||
             rawHash === 'jewelry-diamond' ||
             rawHash === 'diamond-luxury' ||

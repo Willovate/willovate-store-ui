@@ -17,6 +17,7 @@ import { PSJewelshopStorefront } from '../templates/jewelry/PSJewelshop'
 import { TimzeeStorefront } from '../templates/jewelry/Timzee'
 import { JewelsWorkDoStorefront } from '../templates/jewelry/JewelsWorkDo'
 import { DiamondWorkDoStorefront } from '../templates/jewelry/DiamondWorkDo'
+import { VtOlightStorefront } from '../templates/jewelry/VtOlight'
 import { VelocityStorefront } from '../templates/sports/Velocity'
 import { ArenaStorefront } from '../templates/sports/Arena'
 import { SprintStorefront } from '../templates/sports/Sprint'
@@ -315,6 +316,19 @@ export function getTemplateComponent(template?: MarketplaceTemplate | Template |
       template.name?.toLowerCase().includes('diamond workdo'))
   ) {
     return DiamondWorkDoStorefront
+  }
+
+  if (
+    template &&
+    (template.slug === 'jewelry-vt-olight' ||
+      template.id === 'jewelry-vt-olight' ||
+      template.slug === 'vt-olight' ||
+      template.slug === 'olight' ||
+      template.name?.toLowerCase().includes('vt-olight') ||
+      template.name?.toLowerCase().includes('vt olight') ||
+      template.name?.toLowerCase().includes('olight'))
+  ) {
+    return VtOlightStorefront
   }
 
   if (

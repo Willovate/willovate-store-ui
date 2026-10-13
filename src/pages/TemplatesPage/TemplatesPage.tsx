@@ -27,6 +27,7 @@ import { PSJewelshopStorefront } from '../../templates/jewelry/PSJewelshop'
 import { TimzeeStorefront } from '../../templates/jewelry/Timzee'
 import { JewelsWorkDoStorefront } from '../../templates/jewelry/JewelsWorkDo'
 import { DiamondWorkDoStorefront } from '../../templates/jewelry/DiamondWorkDo'
+import { VtOlightStorefront } from '../../templates/jewelry/VtOlight'
 import '../../templates/fashion/fashionMobile.css'
 import {
   BELLE_FASHION_TEMPLATE,
@@ -45,9 +46,10 @@ import {
   TIMZEE_WATCHES_TEMPLATE,
   JEWELS_WORKDO_TEMPLATE,
   DIAMOND_WORKDO_TEMPLATE,
+  VT_OLIGHT_TEMPLATE,
   ALL_JEWELRY_MARKETPLACE_TEMPLATES,
 } from '../../data/jewelryTemplatesData'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront, VtOlightStorefront }
 
 
 // Re-export domain types
@@ -671,6 +673,24 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   ) {
     return (
       <DiamondWorkDoStorefront
+        onBack={onClose}
+        onUseTemplate={onUseTemplate}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'jewelry-vt-olight' ||
+      template.id === 'jewelry-vt-olight' ||
+      template.slug === 'vt-olight' ||
+      template.slug === 'olight' ||
+      template.name?.toLowerCase().includes('vt-olight') ||
+      template.name?.toLowerCase().includes('vt olight') ||
+      template.name?.toLowerCase().includes('olight'))
+  ) {
+    return (
+      <VtOlightStorefront
         onBack={onClose}
         onUseTemplate={onUseTemplate}
       />
@@ -1565,6 +1585,18 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
     }
 
     if (
+      rawHash === 'vt-olight' ||
+      rawHash === 'jewelry-vt-olight' ||
+      rawHash === 'olight' ||
+      rawHash === 'vt-olight-templates' ||
+      rawHash === 'vt-olight-template' ||
+      rawHash === 'olight-templates' ||
+      rawHash === 'olight-template'
+    ) {
+      return VT_OLIGHT_TEMPLATE
+    }
+
+    if (
       rawHash === 'diamond' ||
       rawHash === 'jewelry' ||
       rawHash === 'jewelry-diamond' ||
@@ -1705,6 +1737,16 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
         rawHash === 'diamond-workdo-template'
       ) {
         setPreviewTemplate(DIAMOND_WORKDO_TEMPLATE)
+      } else if (
+        rawHash === 'vt-olight' ||
+        rawHash === 'jewelry-vt-olight' ||
+        rawHash === 'olight' ||
+        rawHash === 'vt-olight-templates' ||
+        rawHash === 'vt-olight-template' ||
+        rawHash === 'olight-templates' ||
+        rawHash === 'olight-template'
+      ) {
+        setPreviewTemplate(VT_OLIGHT_TEMPLATE)
       } else if (
 
         rawHash === 'diamond' ||

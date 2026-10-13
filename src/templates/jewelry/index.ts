@@ -12,5 +12,7 @@ export { JewelsWorkDoStorefront } from './JewelsWorkDo'
 export * from './JewelsWorkDo'
 export { DiamondWorkDoStorefront } from './DiamondWorkDo'
 export * from './DiamondWorkDo'
+export { VtOlightStorefront } from './VtOlight'
+export * from './VtOlight'
 
 

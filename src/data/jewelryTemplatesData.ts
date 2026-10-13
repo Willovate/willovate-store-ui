@@ -381,6 +381,65 @@ export const DIAMOND_WORKDO_TEMPLATE: MarketplaceTemplate = {
   ],
 }
 
+export const VT_OLIGHT_TEMPLATE: MarketplaceTemplate = {
+  id: 'jewelry-vt-olight',
+  slug: 'jewelry-vt-olight',
+  name: 'Vt Olight Luxury Jewelry',
+  businessType: 'jewelry-accessories',
+  industryCategory: 'Jewelry & Accessories',
+  style: 'luxury',
+  catalogSize: 'large',
+  tags: [
+    'Jewelry',
+    'Diamonds',
+    'Solitaires',
+    'Fine Jewelry',
+    'Gold',
+    'Rings',
+    'Earrings',
+    'Necklaces',
+    'Engagement',
+    'Atelier',
+  ],
+  shortDescription:
+    'Authentic Vt Olight Shopify theme replica featuring "Find the Perfect Ring Make" hero, gold Moroccan lanterns, 4-tier best sellers, handmade atelier showcase, and client stories.',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&auto=format&fit=crop&q=80',
+  fullPreviewUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1600&auto=format&fit=crop&q=85',
+  popularityScore: 100,
+  isActive: true,
+  brandName: 'OLIGHT',
+  headline: 'Find the Perfect Ring Make',
+  subtitle: 'Handcrafted certified solitaire rings, bespoke bridal designs, and fine 18K solid gold jewelry for life\'s precious moments.',
+  buttonText: 'Explore Collection',
+  buttonColor: '#c89e58',
+  isDark: false,
+  modelImage: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80',
+  badge: 'trending',
+  rating: 4.99,
+  reviewCount: 460,
+  layoutType: 'editorial',
+  accentColor: '#c89e58',
+  features: [
+    'Authentic Vt Olight Shopify storefront replica matching vt-olight.myshopify.com 100%',
+    'Top announcement strip with discount code OLIGHT15 and worldwide delivery ticker',
+    'Clean white header with serif Olight brandmark, category dropdowns, and live bag counter',
+    'Find the Perfect Ring Make editorial hero with floating solitaire diamond ring card',
+    'Two promotional split feature cards ("Add Fire To Your Style Design" & "Unique Engagement Rings")',
+    'Continuous gold marquee guarantee ribbon with star ornaments',
+    'Ramadan / Festive gold atelier spotlight with illuminated hanging lanterns',
+    'Our Best Seller 4-category catalog grid with Sale badges and quick action bars',
+    '4-Column lifestyle photo tiles (Rings & Bands, Gold Bracelets, Drop Earrings, Pendants)',
+    '4 Customer trust service pillars (Worldwide shipping, 100% Certified, Secure checkout, 30-Day returns)',
+    'Trend Products Of The Week curated catalog showcase',
+    'Second split promo banners (Best Price Jewelry & Diamond Stud Earrings)',
+    'All Of Our Jewelry Is Handmade atelier craftsmanship highlight banner',
+    'What Our Clients Say verified buyer testimonial cards',
+    'Shop The Latest Trends parallax luxury banner',
+    'Our Latest Blog 3-article editorial advice journal',
+    'Slide-out shopping bag drawer, quick view modal, and international ring sizer table',
+  ],
+}
+
 export const ALL_JEWELRY_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   DIAMOND_JEWELRY_TEMPLATE,
   JOHARY_JEWELRY_TEMPLATE,
@@ -389,6 +448,7 @@ export const ALL_JEWELRY_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   TIMZEE_WATCHES_TEMPLATE,
   JEWELS_WORKDO_TEMPLATE,
   DIAMOND_WORKDO_TEMPLATE,
+  VT_OLIGHT_TEMPLATE,
 ]
 
 
