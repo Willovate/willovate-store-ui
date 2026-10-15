@@ -92,3 +92,4 @@ describe('Swarna Luxury Jewelry Storefront Template', () => {
     expect(SWARNA_FAQS[0].question).toBe('How Do I Find My Perfect Ring Size?')
   })
 })
+

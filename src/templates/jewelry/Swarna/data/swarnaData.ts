@@ -243,3 +243,4 @@ export const SWARNA_FAQS: SwarnaFaqItem[] = [
       'Absolutely! We offer complimentary laser and hand engraving on all wedding bands, solitaire rings, and lockets. You can engrave initials, anniversary dates, or heartfelt roman numerals up to 25 characters during checkout or by contacting our concierge.',
   },
 ]
+

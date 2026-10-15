@@ -1,4 +1,5 @@
 import type { MarketplaceTemplate } from '../types'
+import swarnaHeroBanner from '../templates/jewelry/Swarna/assets/swarna-hero-banner.jpg'
 
 export const DIAMOND_JEWELRY_TEMPLATE: MarketplaceTemplate = {
   id: 'jewelry-diamond',
@@ -461,17 +462,17 @@ export const SWARNA_TEMPLATE: MarketplaceTemplate = {
   ],
   shortDescription:
     'Authentic Swarna Shopify theme replica featuring "Elegance In Every Chain Beauty Unchained" hero, marquee style statement, 3-category highlights, dark atelier diamonds, and customer FAQ accordion.',
-  thumbnailUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=900&auto=format&fit=crop&q=80',
-  fullPreviewUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=1600&auto=format&fit=crop&q=85',
+  thumbnailUrl: swarnaHeroBanner,
+  fullPreviewUrl: swarnaHeroBanner,
   popularityScore: 100,
   isActive: true,
   brandName: 'SWARNA',
   headline: 'Elegance In Every Chain Beauty Unchained',
   subtitle: 'A line of classic fine jewelry with an eye toward understated luxury, made to be worn every day.',
-  buttonText: 'All Categories',
+  buttonText: 'Know More',
   buttonColor: '#b5894b',
   isDark: false,
-  modelImage: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=900&auto=format&fit=crop&q=80',
+  modelImage: swarnaHeroBanner,
   badge: 'trending',
   rating: 4.99,
   reviewCount: 480,

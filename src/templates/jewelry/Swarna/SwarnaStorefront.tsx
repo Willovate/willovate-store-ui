@@ -9,6 +9,8 @@ import {
   SWARNA_METALS,
   SWARNA_FAQS,
 } from './data/swarnaData'
+import swarnaLogo from './assets/swarna-logo.png'
+import swarnaHeroModel from './assets/swarna-hero-model.jpg'
 import './styles/swarna.css'
 
 export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = ({
@@ -184,149 +186,206 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = ({
       </div>
 
       {/* =========================================================================
-          1. HEADER & NAVIGATION
+          TOP ANNOUNCEMENT BAR (MATCHING media_1792041883104_e262b4db.png)
+          ========================================================================= */}
+      <div className="swarna-top-announcement">
+        <div className="swarna-announcement-container">
+          {/* Left: Social Media Icons */}
+          <div className="swarna-top-socials">
+            <a href="#facebook" className="swarna-social-link" title="Facebook" onClick={(e) => { e.preventDefault(); showToast('Swarna Facebook Community'); }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </a>
+            <a href="#instagram" className="swarna-social-link" title="Instagram" onClick={(e) => { e.preventDefault(); showToast('Swarna Instagram Feed'); }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </a>
+            <a href="#youtube" className="swarna-social-link" title="YouTube" onClick={(e) => { e.preventDefault(); showToast('Swarna YouTube Channel'); }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </a>
+            <a href="#tiktok" className="swarna-social-link" title="TikTok" onClick={(e) => { e.preventDefault(); showToast('Swarna TikTok Videos'); }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.29 0 .58.04.85.12V9.36a6.33 6.33 0 0 0-.85-.06A6.34 6.34 0 0 0 3 15.64 6.34 6.34 0 0 0 9.34 22a6.34 6.34 0 0 0 6.34-6.34V9.05a8.2 8.2 0 0 0 4.91 1.6V7.2a4.8 4.8 0 0 1-1-.51z"/>
+              </svg>
+            </a>
+            <a href="#twitter" className="swarna-social-link" title="X (Twitter)" onClick={(e) => { e.preventDefault(); showToast('Swarna Official X'); }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+          </div>
+
+          {/* Center: Exclusive Announcement */}
+          <div className="swarna-announcement-center">
+            Exclusive Engagement Rings — Your Perfect Choice!{' '}
+            <span
+              className="swarna-announcement-link"
+              onClick={() => {
+                setActiveCategory('Rings')
+                setViewMode('catalog')
+              }}
+            >
+              Shop Now
+            </span>
+          </div>
+
+          {/* Right: Currency Selector */}
+          <div className="swarna-currency-selector" onClick={() => showToast('Region: India (₹) INR Active')}>
+            <span>India(₹)</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      {/* =========================================================================
+          FIXED FLOATING RIGHT SIDE BADGES (COMPARE & WISHLIST)
+          ========================================================================= */}
+      <div className="swarna-fixed-side-tabs">
+        <button
+          type="button"
+          className="swarna-side-tab"
+          onClick={() => showToast('Compare (0) — No items added yet')}
+        >
+          <span className="swarna-side-tab-text">Compare (0)</span>
+        </button>
+        <button
+          type="button"
+          className="swarna-side-tab"
+          onClick={() => showToast(`Wishlist (${wishlistIds.length}) items stored`)}
+        >
+          <span className="swarna-side-tab-text">Wishlist ({wishlistIds.length})</span>
+        </button>
+      </div>
+
+      {/* =========================================================================
+          1. MAIN HEADER & NAVIGATION (AUTHENTIC SWARNA)
           ========================================================================= */}
       <header className="swarna-header">
-        <div className="swarna-container">
-          <div className="swarna-header-inner">
-            {/* Logo */}
-            <div className="swarna-logo-wrap" onClick={() => setViewMode('home')}>
-              <svg className="swarna-logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="5"></circle>
-                <line x1="12" y1="1" x2="12" y2="3"></line>
-                <line x1="12" y1="21" x2="12" y2="23"></line>
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                <line x1="1" y1="12" x2="3" y2="12"></line>
-                <line x1="21" y1="12" x2="23" y2="12"></line>
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        <div className="swarna-header-container">
+          {/* Left: Navigation Menu */}
+          <nav className="swarna-nav-left">
+            <span
+              className={`swarna-nav-link ${viewMode === 'home' ? 'active' : ''}`}
+              onClick={() => setViewMode('home')}
+            >
+              Home
+            </span>
+            <div
+              className="swarna-nav-dropdown-item"
+              onClick={() => {
+                setActiveCategory('All')
+                setViewMode('catalog')
+              }}
+            >
+              <span className={`swarna-nav-link ${viewMode === 'catalog' ? 'active' : ''}`}>Shop</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M6 9l6 6 6-6"/>
               </svg>
-              <h1 className="swarna-logo-text">SWARNA</h1>
             </div>
-
-            {/* Navigation Links */}
-            <nav className="swarna-nav">
-              <span
-                className={`swarna-nav-link ${viewMode === 'home' ? 'active' : ''}`}
-                onClick={() => setViewMode('home')}
-              >
-                Home
-              </span>
-              <span
-                className={`swarna-nav-link ${viewMode === 'catalog' ? 'active' : ''}`}
-                onClick={() => {
-                  setActiveCategory('All')
-                  setViewMode('catalog')
-                }}
-              >
-                Shop Collection
-              </span>
-              <span
-                className="swarna-nav-link"
-                onClick={() => {
-                  setActiveCategory('Rings')
-                  setViewMode('catalog')
-                }}
-              >
-                Rings
-              </span>
-              <span
-                className="swarna-nav-link"
-                onClick={() => {
-                  setActiveCategory('Earrings')
-                  setViewMode('catalog')
-                }}
-              >
-                Earrings
-              </span>
-              <span
-                className="swarna-nav-link"
-                onClick={() => {
-                  const el = document.getElementById('swarna-faq')
-                  if (el) el.scrollIntoView({ behavior: 'smooth' })
-                }}
-              >
-                FAQs
-              </span>
-              <span
-                className="swarna-nav-link"
-                onClick={() => showToast('Concierge: concierge@swarna-jewels.com')}
-              >
-                Contact
-              </span>
-            </nav>
-
-            {/* Header Actions */}
-            <div className="swarna-header-actions">
-              <button
-                type="button"
-                className="swarna-icon-btn"
-                title="Search"
-                onClick={() => setIsSearchOpen(!isSearchOpen)}
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="11" cy="11" r="8"></circle>
-                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-              </button>
-
-              <button
-                type="button"
-                className="swarna-icon-btn"
-                title="Account"
-                onClick={() => showToast('Welcome to Swarna VIP Privileges')}
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
-                </svg>
-              </button>
-
-              <button
-                type="button"
-                className="swarna-icon-btn"
-                title="Wishlist"
-                onClick={() => showToast(`Wishlist contains ${wishlistIds.length} item(s)`)}
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill={wishlistIds.length > 0 ? '#b5894b' : 'none'} stroke={wishlistIds.length > 0 ? '#b5894b' : 'currentColor'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                </svg>
-                {wishlistIds.length > 0 && <span className="swarna-badge-count">{wishlistIds.length}</span>}
-              </button>
-
-              <button
-                type="button"
-                className="swarna-icon-btn"
-                title="Shopping Bag"
-                onClick={() => setIsCartOpen(true)}
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                  <line x1="3" y1="6" x2="21" y2="6"></line>
-                  <path d="M16 10a4 4 0 0 1-8 0"></path>
-                </svg>
-                {totalCartCount > 0 && <span className="swarna-badge-count">{totalCartCount}</span>}
-              </button>
-
-              {/* Gold Pill Button matching screenshot */}
-              <button
-                type="button"
-                className="swarna-gold-btn"
-                onClick={() => {
-                  setViewMode('catalog')
-                  window.scrollTo({ top: 0, behavior: 'smooth' })
-                }}
-              >
-                All Categories ➔
-              </button>
+            <span
+              className="swarna-nav-link"
+              onClick={() => {
+                const el = document.getElementById('swarna-instagram')
+                if (el) el.scrollIntoView({ behavior: 'smooth' })
+                else showToast('Swarna Atelier Stories & Journal')
+              }}
+            >
+              Blog
+            </span>
+            <div
+              className="swarna-nav-dropdown-item"
+              onClick={() => {
+                const el = document.getElementById('swarna-faq')
+                if (el) el.scrollIntoView({ behavior: 'smooth' })
+              }}
+            >
+              <span className="swarna-nav-link">Pages</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
             </div>
+            <span
+              className="swarna-nav-link"
+              onClick={() => showToast('Swarna Concierge: concierge@swarna-theme.myshopify.com')}
+            >
+              Contact
+            </span>
+          </nav>
+
+          {/* Center: Swarna Logo with floral mandala mark */}
+          <div className="swarna-brand-logo-wrap" onClick={() => setViewMode('home')}>
+            <img
+              src={swarnaLogo}
+              alt="Swarna Luxury Jewelry"
+              className="swarna-brand-logo-img"
+            />
+          </div>
+
+          {/* Right: Header Action Controls & Special Offers Button */}
+          <div className="swarna-header-actions-right">
+            <button
+              type="button"
+              className="swarna-icon-btn"
+              title="Search"
+              onClick={() => setIsSearchOpen(!isSearchOpen)}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+
+            <button
+              type="button"
+              className="swarna-icon-btn"
+              title="Account"
+              onClick={() => showToast('Welcome to Swarna VIP Privileges')}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </button>
+
+            <button
+              type="button"
+              className="swarna-icon-btn swarna-bag-btn"
+              title="Shopping Bag"
+              onClick={() => setIsCartOpen(true)}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+              <span className="swarna-badge-count">{totalCartCount}</span>
+            </button>
+
+            {/* Gold rectangular button: Get Special Offers */}
+            <button
+              type="button"
+              className="swarna-special-offers-btn"
+              onClick={() => {
+                setViewMode('catalog')
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+              }}
+            >
+              Get Special Offers
+            </button>
           </div>
         </div>
 
         {/* Live Search Bar Dropdown */}
         {isSearchOpen && (
-          <div style={{ background: '#faf7f2', borderTop: '1px solid #ebd9c2', padding: '16px 0' }}>
+          <div className="swarna-search-dropdown-bar">
             <div className="swarna-container" style={{ display: 'flex', gap: 12 }}>
               <input
                 type="text"
@@ -344,7 +403,7 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = ({
               />
               <button
                 type="button"
-                className="swarna-gold-btn"
+                className="swarna-special-offers-btn"
                 onClick={() => {
                   setViewMode('catalog')
                   setIsSearchOpen(false)
@@ -362,46 +421,50 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = ({
           ========================================================================= */}
       {viewMode === 'home' && (
         <>
-          {/* 2. HERO SECTION */}
+          {/* 2. HERO SECTION (MATCHING DESKTOP SCREENSHOT media_1792041883104_e262b4db.png) */}
           <section className="swarna-hero-section">
-            <div className="swarna-container">
+            <div className="swarna-hero-container">
               <div className="swarna-hero-grid">
+                {/* Left: Headline & Call-To-Action */}
                 <div className="swarna-hero-content">
-                  <span className="swarna-hero-eyebrow">Authentic Jewelry</span>
+                  <span className="swarna-hero-eyebrow">TIMELESS BEAUTY</span>
                   <h2 className="swarna-hero-title">
-                    Elegance In Every Chain Beauty Unchained
+                    Elegance In Every Chain<br />
+                    Beauty Unchained
                   </h2>
                   <p className="swarna-hero-desc">
-                    A line of classic fine jewelry with an eye toward understated luxury, made to be worn every day.
+                    Sit nec quam bibendum finibus aliquam nisi mattis.scelerisque phasellus eros feugiat malesuada placerat adipiscing fringilla.
                   </p>
                   <button
                     type="button"
-                    className="swarna-navy-btn"
+                    className="swarna-know-more-btn"
                     onClick={() => {
                       setViewMode('catalog')
                       window.scrollTo({ top: 0, behavior: 'smooth' })
                     }}
                   >
-                    Shop Now ➔
+                    <span>Know More</span>
+                    <span className="swarna-arrow-circle">→</span>
                   </button>
 
                   <div className="swarna-hero-dots">
                     <span
-                      className={`swarna-dot ${heroSlide === 0 ? 'active' : ''}`}
+                      className={`swarna-hero-dot ${heroSlide === 0 ? 'active' : ''}`}
                       onClick={() => setHeroSlide(0)}
                     />
                     <span
-                      className={`swarna-dot ${heroSlide === 1 ? 'active' : ''}`}
+                      className={`swarna-hero-dot ${heroSlide === 1 ? 'active' : ''}`}
                       onClick={() => setHeroSlide(1)}
                     />
                   </div>
                 </div>
 
+                {/* Right: Indian Bridal Model in Kundan Jewels */}
                 <div className="swarna-hero-visual">
-                  <div className="swarna-hero-model-wrap">
+                  <div className="swarna-hero-model-container">
                     <img
-                      src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=900&auto=format&fit=crop&q=80"
-                      alt="Indian Bridal Model in Royal Gold Jewellery"
+                      src={swarnaHeroModel}
+                      alt="Swarna Timeless Beauty - Elegance In Every Chain"
                       className="swarna-hero-model-img"
                     />
                   </div>
