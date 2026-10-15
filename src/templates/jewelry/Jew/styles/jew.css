@@ -1,0 +1,1234 @@
+/* =========================================================================
+   JEW LUXURY JEWELRY THEME STYLES
+   100% Faithful Replica of https://jew-theme.myshopify.com/
+   Palette:
+   - Primary Burgundy / Maroon: #7d282b
+   - Dark Burgundy Hover: #5f1e20
+   - Black Obsidian: #111111 & #000000
+   - Off-White Canvas: #faf7f5 & #f6f3f0
+   - Gold Star Rating: #f59e0b
+   - Red Sold Out Badge: #dc2626
+   ========================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+.jew-root {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #212529;
+  background-color: #ffffff;
+  line-height: 1.6;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.jew-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* =========================================================================
+   TOP ANNOUNCEMENT BAR (BURGUNDY #7d282b)
+   ========================================================================= */
+.jew-top-bar {
+  background: #7d282b;
+  color: #ffffff;
+  font-size: 12px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+}
+
+.jew-top-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.jew-top-announcement {
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.jew-top-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.jew-top-select-btn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  transition: opacity 0.2s ease;
+}
+
+.jew-top-select-btn:hover {
+  opacity: 0.85;
+}
+
+.jew-top-auth-links {
+  font-size: 12px;
+  color: #ffffff;
+}
+
+.jew-top-auth-link {
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.jew-top-auth-link:hover {
+  opacity: 0.85;
+}
+
+/* =========================================================================
+   MAIN HEADER & NAVIGATION
+   ========================================================================= */
+.jew-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(125, 40, 43, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.jew-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 74px;
+}
+
+/* Left Nav */
+.jew-nav-left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex: 1;
+}
+
+.jew-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.jew-nav-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.jew-nav-link:hover,
+.jew-nav-link.active,
+.jew-nav-item:hover .jew-nav-link,
+.jew-nav-item:hover svg {
+  color: #7d282b;
+  stroke: #7d282b;
+}
+
+/* Center Logo: JEW */
+.jew-logo-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex: 1;
+  text-align: center;
+}
+
+.jew-logo-text {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 38px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #7d282b;
+  margin: 0;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* Right Actions (Search, Cart, Log in) */
+.jew-actions-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+  flex: 1;
+}
+
+.jew-action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #222222;
+  padding: 6px 4px;
+  transition: color 0.2s ease;
+}
+
+.jew-action-btn:hover {
+  color: #7d282b;
+}
+
+.jew-cart-count {
+  background: #7d282b;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 2px;
+}
+
+/* Search Dropdown */
+.jew-search-bar {
+  background: #faf7f5;
+  border-top: 1px solid #eee4df;
+  padding: 14px 0;
+}
+
+/* =========================================================================
+   HERO BANNER & SLIDER
+   ========================================================================= */
+.jew-hero-section {
+  position: relative;
+  overflow: hidden;
+  background: #cfb1a5;
+  min-height: 480px;
+}
+
+.jew-hero-slide {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 480px;
+  background-size: cover;
+  background-position: center;
+}
+
+.jew-hero-overlay-content {
+  position: relative;
+  z-index: 2;
+  max-width: 520px;
+  padding: 60px 0;
+}
+
+.jew-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.jew-hero-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 54px;
+  line-height: 1.12;
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: 1px;
+  margin: 0 0 18px 0;
+}
+
+.jew-hero-subtitle {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 28px 0;
+}
+
+.jew-hero-btn {
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  padding: 13px 28px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.jew-hero-btn:hover {
+  background: #7d282b;
+  transform: translateY(-2px);
+}
+
+.jew-hero-slide-nav {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 5;
+}
+
+.jew-hero-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.jew-hero-dot.active {
+  background: #ffffff;
+  transform: scale(1.3);
+}
+
+/* =========================================================================
+   SERVICE HIGHLIGHT CARDS (4 TILES WITH DIAMOND ICONS)
+   ========================================================================= */
+.jew-services-section {
+  padding: 40px 0;
+  background: #ffffff;
+  border-bottom: 1px solid #f2ede9;
+}
+
+.jew-services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.jew-service-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 6px;
+  transition: transform 0.2s ease;
+}
+
+.jew-service-card:hover {
+  transform: translateY(-2px);
+}
+
+.jew-diamond-icon-wrap {
+  width: 44px;
+  height: 44px;
+  background: #7d282b;
+  color: #ffffff;
+  transform: rotate(45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+
+.jew-diamond-icon-inner {
+  transform: rotate(-45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jew-service-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111111;
+  margin: 0 0 2px 0;
+}
+
+.jew-service-subtitle {
+  font-size: 12px;
+  color: #666666;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* =========================================================================
+   SHOP BY CATEGORY (3 TILES)
+   ========================================================================= */
+.jew-category-section {
+  padding: 60px 0 40px;
+  background: #f6f3f0;
+  text-align: center;
+}
+
+.jew-section-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #7d282b;
+  margin: 0 0 32px 0;
+  text-transform: uppercase;
+}
+
+.jew-three-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.jew-category-card {
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 2px;
+  background: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.jew-category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+.jew-category-img-wrap {
+  position: relative;
+  overflow: hidden;
+  height: 260px;
+}
+
+.jew-category-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.jew-category-card:hover .jew-category-img {
+  transform: scale(1.05);
+}
+
+.jew-category-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #111111;
+  padding: 16px 12px;
+  margin: 0;
+  background: #f6f3f0;
+}
+
+/* =========================================================================
+   SHOP BY COLLECTIONS (AUTO-SCROLLING CAROUSEL)
+   ========================================================================= */
+.jew-collections-section {
+  padding: 60px 0;
+  background: #f6f3f0;
+  text-align: center;
+}
+
+.jew-carousel-indicators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 0 36px 0;
+}
+
+.jew-diamond-dot {
+  width: 8px;
+  height: 8px;
+  background: #7d282b;
+  transform: rotate(45deg);
+  cursor: pointer;
+  opacity: 0.35;
+  transition: all 0.25s ease;
+}
+
+.jew-diamond-dot.active {
+  opacity: 1;
+  background: #ffffff;
+  border: 1.5px solid #7d282b;
+  transform: rotate(45deg) scale(1.3);
+}
+
+.jew-products-carousel-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.jew-products-track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  transition: transform 0.5s ease;
+}
+
+/* Product Card */
+.jew-product-card {
+  background: #ffffff;
+  padding: 0;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.25s ease;
+}
+
+.jew-product-card:hover {
+  transform: translateY(-3px);
+}
+
+.jew-product-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.jew-product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #ffffff;
+  transition: transform 0.4s ease;
+}
+
+.jew-product-card:hover .jew-product-img {
+  transform: scale(1.05);
+}
+
+/* Sold Out Badge */
+.jew-sold-out-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: #e53e3e;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 2px;
+  letter-spacing: 0.3px;
+  z-index: 3;
+  line-height: 1.4;
+}
+
+/* Card Hover Action Icons */
+.jew-hover-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  opacity: 0;
+  transform: translateX(8px);
+  transition: all 0.25s ease;
+  z-index: 4;
+}
+
+.jew-product-card:hover .jew-hover-actions {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.jew-hover-action-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.jew-hover-action-btn:hover {
+  background: #7d282b;
+  transform: scale(1.08);
+}
+
+.jew-product-brand {
+  font-size: 12px;
+  color: #7d282b;
+  font-weight: 500;
+  margin: 0 0 4px 0;
+  text-transform: capitalize;
+}
+
+.jew-product-name {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #111111;
+  margin: 0 0 6px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90%;
+}
+
+.jew-product-price {
+  font-size: 13.5px;
+  font-weight: 400;
+  color: #333333;
+  margin: 0 0 6px 0;
+}
+
+.jew-stars-wrap {
+  color: #f59e0b;
+  font-size: 12.5px;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+
+.jew-shop-now-wrap {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.jew-shop-now-btn {
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  padding: 7px 22px;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  border-radius: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+.jew-product-card:hover .jew-shop-now-btn {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.jew-shop-now-btn:hover {
+  background: #7d282b;
+}
+
+/* =========================================================================
+   THE PERFECT GIFTING & MATCHING COUPLE: 4-COLUMN QUAD GRIDS
+   ========================================================================= */
+.jew-split-selection-section {
+  padding: 50px 0;
+  background: #ffffff;
+}
+
+.jew-quad-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.jew-quad-banner-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  background: #ffffff;
+}
+
+.jew-quad-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 991px) {
+  .jew-quad-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .jew-quad-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* =========================================================================
+   PROMOTIONAL HOLLYWOOD BANNER (25% OFF)
+   ========================================================================= */
+.jew-promo-banner-section {
+  padding: 60px 0;
+  background: #fbf9f7;
+}
+
+.jew-promo-banner {
+  background: linear-gradient(135deg, #f5ede6 0%, #ece2d8 100%);
+  border-radius: 4px;
+  padding: 60px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid rgba(125, 40, 43, 0.1);
+}
+
+.jew-promo-content {
+  max-width: 480px;
+}
+
+.jew-promo-badge {
+  color: #7d282b;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.jew-promo-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 42px;
+  font-weight: 600;
+  color: #111111;
+  margin: 0 0 16px 0;
+}
+
+.jew-promo-desc {
+  font-size: 14px;
+  color: #555555;
+  margin: 0 0 24px 0;
+}
+
+/* =========================================================================
+   GIFTS FOR HIM & GIFTS FOR HER
+   ========================================================================= */
+.jew-gifting-dual-section {
+  padding: 50px 0;
+  background: #ffffff;
+}
+
+.jew-gifting-dual-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.jew-gifting-card {
+  position: relative;
+  height: 380px;
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.jew-gifting-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.jew-gifting-card:hover .jew-gifting-img {
+  transform: scale(1.05);
+}
+
+.jew-gifting-ribbon {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.jew-gifting-ribbon.him {
+  right: 0;
+  background: #7d282b;
+}
+
+.jew-gifting-ribbon.her {
+  right: 0;
+  background: #000000;
+}
+
+.jew-gifting-ribbon-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* =========================================================================
+   TESTIMONIAL SECTION
+   ========================================================================= */
+.jew-testimonial-section {
+  padding: 70px 0;
+  background: #f6f3f0;
+  text-align: center;
+}
+
+.jew-testimonial-quote {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 26px;
+  font-style: italic;
+  line-height: 1.6;
+  max-width: 780px;
+  margin: 0 auto 24px;
+  color: #222222;
+}
+
+.jew-testimonial-author {
+  font-size: 14px;
+  font-weight: 600;
+  color: #7d282b;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* =========================================================================
+   LATEST NEWS & BLOGS (4 CARDS)
+   ========================================================================= */
+.jew-blog-section {
+  padding: 60px 0;
+  background: #ffffff;
+  text-align: center;
+}
+
+.jew-blog-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.jew-blog-card {
+  background: #ffffff;
+  border: 1px solid #eee4df;
+  border-radius: 2px;
+  overflow: hidden;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.jew-blog-img-wrap {
+  height: 190px;
+  overflow: hidden;
+}
+
+.jew-blog-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.jew-blog-card:hover .jew-blog-img {
+  transform: scale(1.05);
+}
+
+.jew-blog-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.jew-blog-date {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #7d282b;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.jew-blog-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111111;
+  line-height: 1.35;
+  margin: 0 0 10px 0;
+}
+
+.jew-blog-excerpt {
+  font-size: 12.5px;
+  color: #666666;
+  line-height: 1.6;
+  margin: 0 0 16px 0;
+  flex: 1;
+}
+
+.jew-blog-btn {
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.2s ease;
+}
+
+.jew-blog-btn:hover {
+  background: #7d282b;
+}
+
+/* =========================================================================
+   INSTAGRAM GALLERY (5 TILES)
+   ========================================================================= */
+.jew-instagram-section {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.jew-insta-tile {
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+}
+
+.jew-insta-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.jew-insta-center-card {
+  background: #7d282b;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.jew-insta-center-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  margin: 8px 0 0;
+  text-transform: uppercase;
+}
+
+/* =========================================================================
+   VIP NEWSLETTER STRIP
+   ========================================================================= */
+.jew-newsletter-section {
+  padding: 60px 0;
+  background: #faf7f5;
+  text-align: center;
+}
+
+.jew-newsletter-logo {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 34px;
+  font-weight: 600;
+  color: #7d282b;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.jew-newsletter-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111111;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.jew-newsletter-desc {
+  font-size: 13px;
+  color: #666666;
+  margin-bottom: 24px;
+}
+
+.jew-newsletter-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.jew-newsletter-input {
+  flex: 1;
+  padding: 12px 18px;
+  border: 1px solid #d5c8c2;
+  font-size: 13px;
+  outline: none;
+  background: #ffffff;
+}
+
+.jew-newsletter-submit {
+  background: #7d282b;
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.jew-newsletter-submit:hover {
+  background: #5f1e20;
+}
+
+/* =========================================================================
+   FOOTER
+   ========================================================================= */
+.jew-footer {
+  background: #ffffff;
+  border-top: 1px solid #ede3de;
+  padding: 60px 0 24px;
+}
+
+.jew-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 36px;
+  margin-bottom: 48px;
+}
+
+.jew-footer-col-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #7d282b;
+  text-transform: uppercase;
+  margin: 0 0 18px 0;
+}
+
+.jew-footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.jew-footer-link {
+  font-size: 13px;
+  color: #555555;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.jew-footer-link:hover {
+  color: #7d282b;
+}
+
+.jew-footer-bottom {
+  border-top: 1px solid #f0e6e1;
+  padding-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #777777;
+}
+
+.jew-payment-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Floating Back-to-Top Button */
+.jew-back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: all 0.25s ease;
+}
+
+.jew-back-to-top:hover {
+  background: #7d282b;
+  transform: translateY(-2px);
+}
+
+/* Drawer / Modals */
+.jew-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+  animation: fadeIn 0.2s ease;
+}
+
+.jew-drawer {
+  background: #ffffff;
+  width: 100%;
+  max-width: 420px;
+  height: 100%;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
+  animation: slideInRight 0.3s ease;
+}
+
+.jew-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.jew-drawer-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 22px;
+  color: #7d282b;
+  margin: 0;
+}
+
+.jew-drawer-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+/* =========================================================================
+   RESPONSIVE (MOBILE & TABLET)
+   ========================================================================= */
+@media (max-width: 1024px) {
+  .jew-services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .jew-products-track {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .jew-split-grid,
+  .jew-split-grid-reversed {
+    grid-template-columns: 1fr;
+  }
+  .jew-three-products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .jew-blog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .jew-footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .jew-top-bar {
+    display: none;
+  }
+  .jew-nav-left {
+    display: none;
+  }
+  .jew-three-categories-grid {
+    grid-template-columns: 1fr;
+  }
+  .jew-services-grid {
+    grid-template-columns: 1fr;
+  }
+  .jew-products-track {
+    grid-template-columns: 1fr;
+  }
+  .jew-three-products-grid {
+    grid-template-columns: 1fr;
+  }
+  .jew-gifting-dual-grid {
+    grid-template-columns: 1fr;
+  }
+  .jew-blog-grid {
+    grid-template-columns: 1fr;
+  }
+  .jew-instagram-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .jew-footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .jew-hero-title {
+    font-size: 38px;
+  }
+  .jew-promo-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+

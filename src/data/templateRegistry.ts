@@ -19,6 +19,7 @@ import { JewelsWorkDoStorefront } from '../templates/jewelry/JewelsWorkDo'
 import { DiamondWorkDoStorefront } from '../templates/jewelry/DiamondWorkDo'
 import { VtOlightStorefront } from '../templates/jewelry/VtOlight'
 import { SwarnaStorefront } from '../templates/jewelry/Swarna'
+import { JewStorefront } from '../templates/jewelry/Jew'
 import { VelocityStorefront } from '../templates/sports/Velocity'
 import { ArenaStorefront } from '../templates/sports/Arena'
 import { SprintStorefront } from '../templates/sports/Sprint'
@@ -340,6 +341,18 @@ export function getTemplateComponent(template?: MarketplaceTemplate | Template |
       template.name?.toLowerCase().includes('swarna'))
   ) {
     return SwarnaStorefront
+  }
+
+  if (
+    template &&
+    (template.slug === 'jewelry-jew' ||
+      template.id === 'jewelry-jew' ||
+      template.slug === 'jew' ||
+      template.name?.toLowerCase().includes('jew luxury') ||
+      template.name?.toLowerCase() === 'jew' ||
+      template.headline?.toLowerCase().includes('featherweight finds'))
+  ) {
+    return JewStorefront
   }
 
   if (

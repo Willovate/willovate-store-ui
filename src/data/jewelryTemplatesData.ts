@@ -1,5 +1,6 @@
 import type { MarketplaceTemplate } from '../types'
 import swarnaHeroBanner from '../templates/jewelry/Swarna/assets/swarna-hero-banner.jpg'
+import jewHeroBanner from '../templates/jewelry/Jew/assets/hero-slide-1.jpg'
 
 export const DIAMOND_JEWELRY_TEMPLATE: MarketplaceTemplate = {
   id: 'jewelry-diamond',
@@ -497,6 +498,64 @@ export const SWARNA_TEMPLATE: MarketplaceTemplate = {
   ],
 }
 
+export const JEW_TEMPLATE: MarketplaceTemplate = {
+  id: 'jewelry-jew',
+  slug: 'jewelry-jew',
+  name: 'Jew Luxury Jewelry',
+  businessType: 'jewelry-accessories',
+  industryCategory: 'Jewelry & Accessories',
+  style: 'luxury',
+  catalogSize: 'large',
+  tags: [
+    'Jewelry',
+    'Gold',
+    'Wedding',
+    'Earrings',
+    'Necklaces',
+    'Pendants',
+    'Fine Jewelry',
+    'Vega',
+    'Jew',
+  ],
+  shortDescription:
+    'Authentic Jew Shopify theme replica (jew-theme.myshopify.com) featuring "Featherweight Finds" hero slider, 3-category cards, diamond-dot collections carousel, Hollywood collection promo, Golden Grace selection, Matching Couple wedding rings, and VIP privileges.',
+  thumbnailUrl: jewHeroBanner,
+  fullPreviewUrl: jewHeroBanner,
+  popularityScore: 100,
+  isActive: true,
+  brandName: 'JEW',
+  headline: 'FEATHERWEIGHT FINDS',
+  subtitle: 'A line of classic fine jewelry with an eye toward understated luxury, made to be worn every day.',
+  buttonText: 'Explore Collections',
+  buttonColor: '#7d282b',
+  isDark: false,
+  modelImage: jewHeroBanner,
+  badge: 'trending',
+  rating: 4.99,
+  reviewCount: 495,
+  layoutType: 'editorial',
+  accentColor: '#7d282b',
+  features: [
+    'Authentic Jew Shopify storefront replica matching jew-theme.myshopify.com 100%',
+    'Deep maroon top announcement strip with currency & language selectors and login links',
+    'Clean white header with serif JEW wordmark, search, cart bag, and account controls',
+    'Featherweight Finds luxury hero banner with auto-sliding transitions and Vega brandmark',
+    'Four service highlight tiles with rotated maroon diamond icons',
+    'Shop by Category 3-tile grid (Earrings, Wedding Collection, Necklaces)',
+    'Shop by Collections auto-scrolling carousel with diamond-shaped indicators (◆ ◇ ◆ ◆ ◆)',
+    'Hover product shortcuts with Compare, Quick View modal, and Wishlist toggles',
+    'Hollywood Collection 25% off luxury promotional banner',
+    'Dual split gifting showcase (Gifts for Him & Gifts for Her) with vertical ribbons',
+    'The Perfect Gifting Golden Grace selection staggered showcase with feature banner',
+    'Matching Couple Wedding Rings reversed staggered showcase with feature banner',
+    'Client testimonial highlight from verified buyer Jessica Alba',
+    'Latest News & From Our Blog 4-card editorial journal',
+    'Follow Us on Instagram 5-image gallery grid with center maroon insignia',
+    'VIP Privilege Club newsletter subscription capture strip',
+    'Full 4-column luxury footer with trust payment badges and floating back-to-top button',
+  ],
+}
+
 export const ALL_JEWELRY_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   DIAMOND_JEWELRY_TEMPLATE,
   JOHARY_JEWELRY_TEMPLATE,
@@ -507,7 +566,9 @@ export const ALL_JEWELRY_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   DIAMOND_WORKDO_TEMPLATE,
   VT_OLIGHT_TEMPLATE,
   SWARNA_TEMPLATE,
+  JEW_TEMPLATE,
 ]
+
 
 
 

@@ -18,8 +18,8 @@ export const DiamondWorkDoStorefront: React.FC<DiamondWorkDoStorefrontProps> = (
   device = 'desktop',
   deviceView,
   onClose: _onClose,
-  onBack,
-  onUseTemplate,
+  onBack: _onBack,
+  onUseTemplate: _onUseTemplate,
 }) => {
   const effectiveDevice = deviceView || device || 'desktop'
   const isMobile = effectiveDevice === 'mobile'
@@ -161,59 +161,6 @@ export const DiamondWorkDoStorefront: React.FC<DiamondWorkDoStorefrontProps> = (
 
   return (
     <div className={`diamond-workdo-root ${isMobile ? 'diamond-mobile device-mobile' : `diamond-${effectiveDevice}`}`}>
-      {/* Top Template Action Bar if previewing */}
-      {onBack && (
-        <div
-          style={{
-            backgroundColor: '#16332c',
-            padding: '10px 24px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            color: '#faede3',
-            fontSize: '13px',
-            borderBottom: '1px solid rgba(255,255,255,0.15)',
-            position: 'sticky',
-            top: 0,
-            zIndex: 10000,
-          }}
-        >
-          <button
-            onClick={onBack}
-            style={{
-              background: 'transparent',
-              border: '1px solid rgba(250,237,227,0.4)',
-              color: '#faede3',
-              padding: '6px 14px',
-              borderRadius: '6px',
-              cursor: 'pointer',
-              fontSize: '13px',
-            }}
-          >
-            ← Back to Marketplace
-          </button>
-          <div style={{ fontWeight: 600, letterSpacing: '0.5px' }}>
-            Diamond WorkDo Fine Jewelry — Authentic Shopify Replica
-          </div>
-          {onUseTemplate && (
-            <button
-              onClick={() => onUseTemplate('jewelry-diamond-workdo')}
-              style={{
-                backgroundColor: '#c8a370',
-                color: '#16332c',
-                border: 'none',
-                padding: '6px 16px',
-                borderRadius: '6px',
-                fontWeight: 700,
-                cursor: 'pointer',
-                fontSize: '13px',
-              }}
-            >
-              Use This Template
-            </button>
-          )}
-        </div>
-      )}
 
       {/* TOAST POPUP */}
       {toastMsg && (

@@ -12,11 +12,7 @@ import {
 } from './data/jewelsData'
 import './styles/jewelsWorkDo.css'
 
-export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = ({
-  onBack,
-  onSelectTemplate,
-  onUseTemplate,
-}) => {
+export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = () => {
   // Navigation & Category states
   const [activeCategory, setActiveCategory] = useState<JewelsCategory>('All')
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
@@ -127,59 +123,6 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = ({
 
   return (
     <div className="jwd-root">
-      {/* Top Template Action Bar if previewing */}
-      {onBack && (
-        <div
-          style={{
-            backgroundColor: '#1e3341',
-            padding: '10px 24px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            color: '#ffffff',
-            fontSize: '13px',
-            borderBottom: '1px solid rgba(255,255,255,0.1)',
-          }}
-        >
-          <button
-            onClick={onBack}
-            style={{
-              background: 'transparent',
-              border: '1px solid rgba(255,255,255,0.3)',
-              color: '#ffffff',
-              padding: '6px 14px',
-              borderRadius: '6px',
-              cursor: 'pointer',
-              fontSize: '13px',
-            }}
-          >
-            ← Back to Marketplace
-          </button>
-          <div style={{ fontWeight: 600, letterSpacing: '0.5px' }}>
-            Jewels WorkDo — Authentic Shopify Replica
-          </div>
-          {(onUseTemplate || onSelectTemplate) && (
-            <button
-              onClick={() => {
-                if (onUseTemplate) onUseTemplate('jewelry-jewels-workdo')
-                else if (onSelectTemplate) onSelectTemplate('jewelry-jewels-workdo')
-              }}
-              style={{
-                backgroundColor: '#d4ba9b',
-                color: '#1e293b',
-                border: 'none',
-                padding: '6px 16px',
-                borderRadius: '6px',
-                fontWeight: 700,
-                cursor: 'pointer',
-                fontSize: '13px',
-              }}
-            >
-              Use This Template
-            </button>
-          )}
-        </div>
-      )}
 
       {/* =====================================================================
           1. TOP UTILITY STRIP (STRICTLY SCREENSHOT 2)

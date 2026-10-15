@@ -18,8 +18,8 @@ export const VtOlightStorefront: React.FC<VtOlightStorefrontProps> = ({
   device = 'desktop',
   deviceView,
   onClose: _onClose,
-  onBack,
-  onUseTemplate,
+  onBack: _onBack,
+  onUseTemplate: _onUseTemplate,
 }) => {
   const effectiveDevice = deviceView || device || 'desktop'
   const isMobile = effectiveDevice === 'mobile'
@@ -162,59 +162,6 @@ export const VtOlightStorefront: React.FC<VtOlightStorefrontProps> = ({
 
   return (
     <div className={`vto-root ${isMobile ? 'vto-mobile' : `vto-${effectiveDevice}`}`}>
-      {/* 0. TOP TEMPLATE ACTION BAR (FOR MARKETPLACE PREVIEW) */}
-      {onBack && (
-        <div
-          style={{
-            backgroundColor: '#121315',
-            padding: '10px 24px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            color: '#fdf8ee',
-            fontSize: '13px',
-            borderBottom: '1px solid rgba(200, 158, 88, 0.3)',
-            position: 'sticky',
-            top: 0,
-            zIndex: 10001,
-          }}
-        >
-          <button
-            onClick={onBack}
-            style={{
-              background: 'transparent',
-              border: '1px solid rgba(200, 158, 88, 0.4)',
-              color: '#fdf8ee',
-              padding: '6px 14px',
-              borderRadius: '6px',
-              cursor: 'pointer',
-              fontSize: '13px',
-            }}
-          >
-            ← Back to Marketplace
-          </button>
-          <div style={{ fontWeight: 600, letterSpacing: '0.5px' }}>
-            Vt Olight Luxury Jewelry — Authentic Shopify Replica
-          </div>
-          {onUseTemplate && (
-            <button
-              onClick={() => onUseTemplate('jewelry-vt-olight')}
-              style={{
-                backgroundColor: '#c89e58',
-                color: '#ffffff',
-                border: 'none',
-                padding: '6px 16px',
-                borderRadius: '6px',
-                fontWeight: 700,
-                cursor: 'pointer',
-                fontSize: '13px',
-              }}
-            >
-              Use This Template
-            </button>
-          )}
-        </div>
-      )}
 
       {/* TOAST POPUP */}
       {toastMsg && (

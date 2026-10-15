@@ -16,6 +16,8 @@ export { VtOlightStorefront } from './VtOlight'
 export * from './VtOlight'
 export { SwarnaStorefront } from './Swarna'
 export * from './Swarna'
+export { JewStorefront } from './Jew'
+export * from './Jew'
 
 
 

@@ -13,12 +13,7 @@ import swarnaLogo from './assets/swarna-logo.png'
 import swarnaHeroModel from './assets/swarna-hero-model.png'
 import './styles/swarna.css'
 
-export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = ({
-  onBack,
-  onClose,
-  onUseTemplate,
-}) => {
-  const handleBack = onBack || onClose
+export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = () => {
   // Navigation & View Mode
   const [viewMode, setViewMode] = useState<'home' | 'catalog' | 'pdp'>('home')
   const [selectedProduct, setSelectedProduct] = useState<SwarnaProduct>(SWARNA_PRODUCTS[0])
@@ -128,18 +123,6 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = ({
 
   return (
     <div className="swarna-root">
-      {/* Floating minimal back button for Willovate UI (doesn't push down store layout) */}
-      {handleBack && (
-        <button
-          type="button"
-          onClick={handleBack}
-          className="swarna-floating-back-btn"
-          title="Back to Templates"
-        >
-          ← Back to Templates
-        </button>
-      )}
-
       {/* =========================================================================
           TOP ANNOUNCEMENT BAR (MATCHING media_1792043639081_b001652e.png EXACTLY)
           ========================================================================= */}
@@ -333,12 +316,8 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = ({
               type="button"
               className="swarna-special-offers-btn"
               onClick={() => {
-                if (onUseTemplate) {
-                  onUseTemplate('jewelry-swarna')
-                } else {
-                  setViewMode('catalog')
-                  window.scrollTo({ top: 0, behavior: 'smooth' })
-                }
+                setViewMode('catalog')
+                window.scrollTo({ top: 0, behavior: 'smooth' })
               }}
             >
               Get Special Offers

@@ -29,6 +29,7 @@ import { JewelsWorkDoStorefront } from '../../templates/jewelry/JewelsWorkDo'
 import { DiamondWorkDoStorefront } from '../../templates/jewelry/DiamondWorkDo'
 import { VtOlightStorefront } from '../../templates/jewelry/VtOlight'
 import { SwarnaStorefront } from '../../templates/jewelry/Swarna'
+import { JewStorefront } from '../../templates/jewelry/Jew'
 import '../../templates/fashion/fashionMobile.css'
 import {
   BELLE_FASHION_TEMPLATE,
@@ -48,9 +49,11 @@ import {
   JEWELS_WORKDO_TEMPLATE,
   DIAMOND_WORKDO_TEMPLATE,
   VT_OLIGHT_TEMPLATE,
+  SWARNA_TEMPLATE,
+  JEW_TEMPLATE,
   ALL_JEWELRY_MARKETPLACE_TEMPLATES,
 } from '../../data/jewelryTemplatesData'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront, VtOlightStorefront, SwarnaStorefront }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront, VtOlightStorefront, SwarnaStorefront, JewStorefront }
 
 
 // Re-export domain types
@@ -108,6 +111,9 @@ export {
   TIMZEE_WATCHES_TEMPLATE,
   JEWELS_WORKDO_TEMPLATE,
   DIAMOND_WORKDO_TEMPLATE,
+  VT_OLIGHT_TEMPLATE,
+  SWARNA_TEMPLATE,
+  JEW_TEMPLATE,
   ALL_JEWELRY_MARKETPLACE_TEMPLATES,
 } from '../../data/jewelryTemplatesData'
 
@@ -715,6 +721,23 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
 
   if (
     template &&
+    (template.slug === 'jewelry-jew' ||
+      template.id === 'jewelry-jew' ||
+      template.slug === 'jew' ||
+      template.name?.toLowerCase().includes('jew luxury') ||
+      template.name?.toLowerCase() === 'jew' ||
+      template.headline?.toLowerCase().includes('featherweight finds'))
+  ) {
+    return (
+      <JewStorefront
+        onBack={onClose}
+        onUseTemplate={onUseTemplate}
+      />
+    )
+  }
+
+  if (
+    template &&
     (template.slug === 'jewelry-diamond' ||
       template.id === 'jewelry-diamond' ||
       template.slug === 'clothing-reference-jewelry-accessories' ||
@@ -805,6 +828,13 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
         innerScroll.scrollTop = 0
       }
     }
+    const dialog = document.querySelector('.preview-modal-dialog')
+    if (dialog) dialog.scrollTop = 0
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    const allRoots = document.querySelectorAll('.jew-root, .swarna-root, .vto-root, .jwd-root, .diamond-workdo-root')
+    allRoots.forEach((el) => {
+      ;(el as HTMLElement).scrollTop = 0
+    })
   }, [template?.id, device, isOpen])
 
   const handleColorSelect = (color: string) => {
@@ -1613,6 +1643,25 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
     }
 
     if (
+      rawHash === 'swarna' ||
+      rawHash === 'jewelry-swarna' ||
+      rawHash === 'swarna-templates' ||
+      rawHash === 'swarna-template'
+    ) {
+      return SWARNA_TEMPLATE
+    }
+
+    if (
+      rawHash === 'jew' ||
+      rawHash === 'jewelry-jew' ||
+      rawHash === 'jew-templates' ||
+      rawHash === 'jew-template' ||
+      rawHash === 'jew-theme'
+    ) {
+      return JEW_TEMPLATE
+    }
+
+    if (
       rawHash === 'diamond' ||
       rawHash === 'jewelry' ||
       rawHash === 'jewelry-diamond' ||
@@ -1763,6 +1812,21 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
         rawHash === 'olight-template'
       ) {
         setPreviewTemplate(VT_OLIGHT_TEMPLATE)
+      } else if (
+        rawHash === 'swarna' ||
+        rawHash === 'jewelry-swarna' ||
+        rawHash === 'swarna-templates' ||
+        rawHash === 'swarna-template'
+      ) {
+        setPreviewTemplate(SWARNA_TEMPLATE)
+      } else if (
+        rawHash === 'jew' ||
+        rawHash === 'jewelry-jew' ||
+        rawHash === 'jew-templates' ||
+        rawHash === 'jew-template' ||
+        rawHash === 'jew-theme'
+      ) {
+        setPreviewTemplate(JEW_TEMPLATE)
       } else if (
 
         rawHash === 'diamond' ||
