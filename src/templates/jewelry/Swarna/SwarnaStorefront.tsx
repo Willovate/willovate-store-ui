@@ -10,7 +10,7 @@ import {
   SWARNA_FAQS,
 } from './data/swarnaData'
 import swarnaLogo from './assets/swarna-logo.png'
-import swarnaHeroModel from './assets/swarna-hero-model.jpg'
+import swarnaHeroModel from './assets/swarna-hero-model.png'
 import './styles/swarna.css'
 
 export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = ({
@@ -46,7 +46,6 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = ({
   const [searchQuery, setSearchQuery] = useState('')
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [toastMessage, setToastMessage] = useState<string | null>(null)
-  const [heroSlide, setHeroSlide] = useState(0)
   const [visibleProductCount, setVisibleProductCount] = useState(4)
 
   const showToast = (msg: string) => {
@@ -129,93 +128,49 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = ({
 
   return (
     <div className="swarna-root">
-      {/* =========================================================================
-          TOP STORE DIRECTORY BAR (WILLOVATE PREVIEW HEADER)
-          ========================================================================= */}
-      <div
-        style={{
-          background: '#151515',
-          color: '#ffffff',
-          padding: '8px 24px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          fontSize: '12px',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          {handleBack && (
-            <button
-              type="button"
-              onClick={handleBack}
-              style={{
-                background: 'rgba(255,255,255,0.15)',
-                border: 'none',
-                color: '#fff',
-                padding: '4px 10px',
-                borderRadius: '4px',
-                cursor: 'pointer',
-                fontSize: '11px',
-              }}
-            >
-              ← Back to Templates
-            </button>
-          )}
-          <span style={{ color: '#c59b5f', fontWeight: 600 }}>SWARNA LUXURY JEWELRY THEME</span>
-          <span style={{ color: '#9ca3af' }}>• Authentic Replica of swarna-theme.myshopify.com</span>
-        </div>
-        {onUseTemplate && (
-          <button
-            type="button"
-            onClick={() => onUseTemplate('jewelry-swarna')}
-            style={{
-              background: '#b5894b',
-              border: 'none',
-              color: '#fff',
-              padding: '6px 14px',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              fontWeight: 600,
-              fontSize: '11px',
-            }}
-          >
-            Use This Template
-          </button>
-        )}
-      </div>
+      {/* Floating minimal back button for Willovate UI (doesn't push down store layout) */}
+      {handleBack && (
+        <button
+          type="button"
+          onClick={handleBack}
+          className="swarna-floating-back-btn"
+          title="Back to Templates"
+        >
+          ← Back to Templates
+        </button>
+      )}
 
       {/* =========================================================================
-          TOP ANNOUNCEMENT BAR (MATCHING media_1792041883104_e262b4db.png)
+          TOP ANNOUNCEMENT BAR (MATCHING media_1792043639081_b001652e.png EXACTLY)
           ========================================================================= */}
       <div className="swarna-top-announcement">
         <div className="swarna-announcement-container">
           {/* Left: Social Media Icons */}
           <div className="swarna-top-socials">
-            <a href="#facebook" className="swarna-social-link" title="Facebook" onClick={(e) => { e.preventDefault(); showToast('Swarna Facebook Community'); }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <a href="#facebook" className="swarna-social-link" title="Facebook" onClick={(e) => { e.preventDefault(); showToast('Swarna Facebook'); }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
               </svg>
             </a>
-            <a href="#instagram" className="swarna-social-link" title="Instagram" onClick={(e) => { e.preventDefault(); showToast('Swarna Instagram Feed'); }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <a href="#instagram" className="swarna-social-link" title="Instagram" onClick={(e) => { e.preventDefault(); showToast('Swarna Instagram'); }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
               </svg>
             </a>
-            <a href="#youtube" className="swarna-social-link" title="YouTube" onClick={(e) => { e.preventDefault(); showToast('Swarna YouTube Channel'); }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <a href="#youtube" className="swarna-social-link" title="YouTube" onClick={(e) => { e.preventDefault(); showToast('Swarna YouTube'); }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
               </svg>
             </a>
-            <a href="#tiktok" className="swarna-social-link" title="TikTok" onClick={(e) => { e.preventDefault(); showToast('Swarna TikTok Videos'); }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <a href="#tiktok" className="swarna-social-link" title="TikTok" onClick={(e) => { e.preventDefault(); showToast('Swarna TikTok'); }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.29 0 .58.04.85.12V9.36a6.33 6.33 0 0 0-.85-.06A6.34 6.34 0 0 0 3 15.64 6.34 6.34 0 0 0 9.34 22a6.34 6.34 0 0 0 6.34-6.34V9.05a8.2 8.2 0 0 0 4.91 1.6V7.2a4.8 4.8 0 0 1-1-.51z"/>
               </svg>
             </a>
-            <a href="#twitter" className="swarna-social-link" title="X (Twitter)" onClick={(e) => { e.preventDefault(); showToast('Swarna Official X'); }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <a href="#twitter" className="swarna-social-link" title="X (Twitter)" onClick={(e) => { e.preventDefault(); showToast('Swarna X'); }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
               </svg>
             </a>
@@ -236,7 +191,7 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = ({
           </div>
 
           {/* Right: Currency Selector */}
-          <div className="swarna-currency-selector" onClick={() => showToast('Region: India (₹) INR Active')}>
+          <div className="swarna-currency-selector" onClick={() => showToast('Region: India (₹) INR')}>
             <span>India(₹)</span>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M6 9l6 6 6-6"/>
@@ -246,22 +201,26 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = ({
       </div>
 
       {/* =========================================================================
-          FIXED FLOATING RIGHT SIDE BADGES (COMPARE & WISHLIST)
+          FIXED FLOATING RIGHT SIDE TABS (COMPARE & WISHLIST)
           ========================================================================= */}
       <div className="swarna-fixed-side-tabs">
         <button
           type="button"
           className="swarna-side-tab"
-          onClick={() => showToast('Compare (0) — No items added yet')}
+          title="Compare Products"
+          onClick={() => showToast('Compare: 0 items selected')}
         >
-          <span className="swarna-side-tab-text">Compare (0)</span>
+          <span className="swarna-side-tab-label">Compare</span>
+          <span className="swarna-side-tab-badge">0</span>
         </button>
         <button
           type="button"
           className="swarna-side-tab"
-          onClick={() => showToast(`Wishlist (${wishlistIds.length}) items stored`)}
+          title="Wishlist"
+          onClick={() => showToast(`Wishlist: ${wishlistIds.length} items saved`)}
         >
-          <span className="swarna-side-tab-text">Wishlist ({wishlistIds.length})</span>
+          <span className="swarna-side-tab-label">Wishlist</span>
+          <span className="swarna-side-tab-badge">{wishlistIds.length}</span>
         </button>
       </div>
 
@@ -286,7 +245,7 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = ({
               }}
             >
               <span className={`swarna-nav-link ${viewMode === 'catalog' ? 'active' : ''}`}>Shop</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M6 9l6 6 6-6"/>
               </svg>
             </div>
@@ -295,7 +254,7 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = ({
               onClick={() => {
                 const el = document.getElementById('swarna-instagram')
                 if (el) el.scrollIntoView({ behavior: 'smooth' })
-                else showToast('Swarna Atelier Stories & Journal')
+                else showToast('Swarna Atelier Blog & Journal')
               }}
             >
               Blog
@@ -308,7 +267,7 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = ({
               }}
             >
               <span className="swarna-nav-link">Pages</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M6 9l6 6 6-6"/>
               </svg>
             </div>
@@ -337,7 +296,7 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = ({
               title="Search"
               onClick={() => setIsSearchOpen(!isSearchOpen)}
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
@@ -349,7 +308,7 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = ({
               title="Account"
               onClick={() => showToast('Welcome to Swarna VIP Privileges')}
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                 <circle cx="12" cy="7" r="4"></circle>
               </svg>
@@ -361,21 +320,25 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = ({
               title="Shopping Bag"
               onClick={() => setIsCartOpen(true)}
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
                 <line x1="3" y1="6" x2="21" y2="6"></line>
                 <path d="M16 10a4 4 0 0 1-8 0"></path>
               </svg>
-              <span className="swarna-badge-count">{totalCartCount}</span>
+              {totalCartCount > 0 && <span className="swarna-badge-count">{totalCartCount}</span>}
             </button>
 
-            {/* Gold rectangular button: Get Special Offers */}
+            {/* Solid rectangular gold button: Get Special Offers */}
             <button
               type="button"
               className="swarna-special-offers-btn"
               onClick={() => {
-                setViewMode('catalog')
-                window.scrollTo({ top: 0, behavior: 'smooth' })
+                if (onUseTemplate) {
+                  onUseTemplate('jewelry-swarna')
+                } else {
+                  setViewMode('catalog')
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }
               }}
             >
               Get Special Offers
@@ -421,11 +384,11 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = ({
           ========================================================================= */}
       {viewMode === 'home' && (
         <>
-          {/* 2. HERO SECTION (MATCHING DESKTOP SCREENSHOT media_1792041883104_e262b4db.png) */}
+          {/* 2. HERO SECTION (100% IDENTICAL REPLICA OF media_1792043639081_b001652e.png) */}
           <section className="swarna-hero-section">
             <div className="swarna-hero-container">
               <div className="swarna-hero-grid">
-                {/* Left: Headline & Call-To-Action */}
+                {/* Left: Eyebrow, Serif Title, Desc & Know More Button */}
                 <div className="swarna-hero-content">
                   <span className="swarna-hero-eyebrow">TIMELESS BEAUTY</span>
                   <h2 className="swarna-hero-title">
@@ -444,22 +407,11 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = ({
                     }}
                   >
                     <span>Know More</span>
-                    <span className="swarna-arrow-circle">→</span>
+                    <span className="swarna-arrow-circle">➔</span>
                   </button>
-
-                  <div className="swarna-hero-dots">
-                    <span
-                      className={`swarna-hero-dot ${heroSlide === 0 ? 'active' : ''}`}
-                      onClick={() => setHeroSlide(0)}
-                    />
-                    <span
-                      className={`swarna-hero-dot ${heroSlide === 1 ? 'active' : ''}`}
-                      onClick={() => setHeroSlide(1)}
-                    />
-                  </div>
                 </div>
 
-                {/* Right: Indian Bridal Model in Kundan Jewels */}
+                {/* Right: Indian Bridal Model with seamless background blend */}
                 <div className="swarna-hero-visual">
                   <div className="swarna-hero-model-container">
                     <img

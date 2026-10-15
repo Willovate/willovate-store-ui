@@ -28,20 +28,47 @@
   padding: 0 24px;
 }
 
+/* Floating back button for templates preview */
+.swarna-floating-back-btn {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 10000;
+  background: #2e2d3d;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ease;
+}
+
+.swarna-floating-back-btn:hover {
+  background: #1e1d28;
+  transform: translateY(-2px);
+}
+
 /* =========================================================================
-   TOP ANNOUNCEMENT BAR (MATCHING DESKTOP SCREENSHOT)
+   TOP ANNOUNCEMENT BAR (MATCHING media_1792043639081_b001652e.png EXACTLY)
    ========================================================================= */
 .swarna-top-announcement {
-  background: #232733;
+  background: #2e2d3d;
   color: #ffffff;
-  font-size: 13px;
+  font-size: 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  height: 34px;
+  display: flex;
+  align-items: center;
 }
 
 .swarna-announcement-container {
+  width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 8px 36px;
+  padding: 0 32px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -50,28 +77,30 @@
 .swarna-top-socials {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
 }
 
 .swarna-social-link {
-  color: #cfd4dc;
+  color: #ffffff;
+  opacity: 0.88;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .swarna-social-link:hover {
-  color: #c59b5f;
+  opacity: 1;
+  color: #b98d58;
   transform: translateY(-1px);
 }
 
 .swarna-announcement-center {
-  font-size: 13px;
-  color: #f1f3f7;
+  font-size: 12px;
+  color: #ffffff;
   font-weight: 400;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.2px;
   text-align: center;
 }
 
@@ -86,22 +115,22 @@
 }
 
 .swarna-announcement-link:hover {
-  color: #c59b5f;
+  color: #b98d58;
 }
 
 .swarna-currency-selector {
   display: flex;
   align-items: center;
-  gap: 6px;
-  color: #f1f3f7;
-  font-size: 13px;
+  gap: 5px;
+  color: #ffffff;
+  font-size: 12px;
   font-weight: 500;
   cursor: pointer;
   transition: color 0.2s ease;
 }
 
 .swarna-currency-selector:hover {
-  color: #c59b5f;
+  color: #b98d58;
 }
 
 /* =========================================================================
@@ -115,33 +144,51 @@
   z-index: 999;
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  box-shadow: -2px 4px 14px rgba(0, 0, 0, 0.12);
+  gap: 4px;
 }
 
 .swarna-side-tab {
-  background: #b5894b;
+  background: #b98d58;
   color: #ffffff;
   border: none;
-  border-radius: 4px 0 0 4px;
-  padding: 10px 14px;
+  border-radius: 6px 0 0 6px;
+  padding: 12px 6px 10px;
   cursor: pointer;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 8px;
+  box-shadow: -2px 4px 12px rgba(0, 0, 0, 0.15);
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .swarna-side-tab:hover {
   background: #9d7237;
-  transform: translateX(-3px);
+  transform: translateX(-2px);
 }
 
-.swarna-side-tab-text {
-  font-size: 12px;
+.swarna-side-tab-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.5px;
-  white-space: nowrap;
+  letter-spacing: 0.6px;
+  line-height: 1;
+}
+
+.swarna-side-tab-badge {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #2e2d3d;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
 /* =========================================================================
@@ -151,26 +198,26 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: #ffffff;
-  border-bottom: 1px solid rgba(197, 155, 95, 0.15);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  background: #f9f8f4;
+  border-bottom: 1px solid rgba(185, 141, 88, 0.12);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
 }
 
 .swarna-header-container {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 36px;
+  padding: 0 32px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 86px;
+  height: 72px;
 }
 
 /* Left Navigation */
 .swarna-nav-left {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 26px;
   flex: 1;
 }
 
@@ -182,10 +229,10 @@
 }
 
 .swarna-nav-link {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.2px;
-  color: #232838;
+  color: #2e2d3d;
   text-decoration: none;
   cursor: pointer;
   transition: color 0.2s ease;
@@ -195,8 +242,8 @@
 .swarna-nav-dropdown-item:hover svg,
 .swarna-nav-link:hover,
 .swarna-nav-link.active {
-  color: #b5894b;
-  stroke: #b5894b;
+  color: #b98d58;
+  stroke: #b98d58;
 }
 
 /* Center Logo */
@@ -210,7 +257,7 @@
 }
 
 .swarna-brand-logo-img {
-  height: 38px;
+  height: 32px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -227,7 +274,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 20px;
+  gap: 18px;
   flex: 1;
 }
 
@@ -236,7 +283,7 @@
   border: none;
   cursor: pointer;
   padding: 6px;
-  color: #232838;
+  color: #2e2d3d;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -245,7 +292,7 @@
 }
 
 .swarna-icon-btn:hover {
-  color: #b5894b;
+  color: #b98d58;
   transform: translateY(-1px);
 }
 
@@ -257,12 +304,12 @@
   position: absolute;
   top: -2px;
   right: -4px;
-  background: #b5894b;
+  background: #b98d58;
   color: #ffffff;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
-  min-width: 17px;
-  height: 17px;
+  min-width: 16px;
+  height: 16px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -270,30 +317,30 @@
   padding: 0 2px;
 }
 
-/* Rectangular Gold Button: Get Special Offers */
+/* Solid Rectangular Gold Button: Get Special Offers */
 .swarna-special-offers-btn {
-  background: #b5894b;
+  background: #b98d58;
   color: #ffffff;
   border: none;
-  padding: 13px 26px;
+  height: 42px;
+  padding: 0 22px;
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.3px;
   border-radius: 3px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-  box-shadow: 0 2px 6px rgba(181, 137, 75, 0.25);
+  box-shadow: 0 2px 6px rgba(185, 141, 88, 0.2);
   white-space: nowrap;
 }
 
 .swarna-special-offers-btn:hover {
   background: #9d7237;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(181, 137, 75, 0.35);
+  box-shadow: 0 4px 12px rgba(185, 141, 88, 0.3);
 }
 
 .swarna-search-dropdown-bar {
@@ -303,85 +350,85 @@
 }
 
 /* =========================================================================
-   2. HERO SECTION (EXACT REPLICA OF media_1792041883104_e262b4db.png)
+   2. HERO SECTION (100% IDENTICAL TO media_1792043639081_b001652e.png)
    ========================================================================= */
 .swarna-hero-section {
-  background: #debfa8;
+  background: linear-gradient(180deg, #c4a080 0%, #cda784 40%, #d1ab86 100%);
   position: relative;
   overflow: hidden;
-  padding: 30px 0 0 0;
+  padding: 0;
 }
 
 .swarna-hero-container {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 36px;
+  padding: 0 32px;
 }
 
 .swarna-hero-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.05fr 0.95fr;
   align-items: center;
-  min-height: 560px;
-  gap: 40px;
+  min-height: 434px;
+  gap: 20px;
 }
 
 .swarna-hero-content {
   position: relative;
   z-index: 2;
-  padding: 40px 0 60px;
+  padding: 24px 0 36px;
 }
 
 .swarna-hero-eyebrow {
   display: block;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: #5b4b3f;
-  margin-bottom: 18px;
+  color: #7a583e;
+  margin-bottom: 12px;
 }
 
 .swarna-hero-title {
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 58px;
+  font-size: 48px;
   line-height: 1.15;
   font-weight: 600;
-  color: #212635;
-  margin: 0 0 22px 0;
-  letter-spacing: -0.5px;
+  color: #2e2d3d;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.3px;
 }
 
 .swarna-hero-desc {
-  font-size: 15px;
-  line-height: 1.7;
-  color: #55493f;
-  max-width: 490px;
-  margin: 0 0 34px 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #3c3531;
+  max-width: 440px;
+  margin: 0 0 26px 0;
 }
 
 /* Know More CTA Button */
 .swarna-know-more-btn {
-  background: #232733;
+  background: #2e2d3d;
   color: #ffffff;
   border: none;
-  padding: 13px 26px;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  border-radius: 4px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  border-radius: 3px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 14px;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 14px rgba(35, 39, 51, 0.25);
+  box-shadow: 0 4px 12px rgba(46, 45, 61, 0.25);
 }
 
 .swarna-know-more-btn:hover {
-  background: #151821;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(35, 39, 51, 0.35);
+  background: #1b1a26;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(46, 45, 61, 0.35);
 }
 
 .swarna-arrow-circle {
@@ -391,31 +438,11 @@
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.16);
+  background: #ffffff;
+  color: #2e2d3d;
   font-size: 13px;
+  font-weight: 700;
   line-height: 1;
-}
-
-/* Slider Dots */
-.swarna-hero-dots {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 48px;
-}
-
-.swarna-hero-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: 1.5px solid #232733;
-  background: transparent;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-.swarna-hero-dot.active {
-  background: #232733;
 }
 
 /* Right Model Visual */
@@ -429,7 +456,7 @@
 
 .swarna-hero-model-container {
   width: 100%;
-  max-width: 560px;
+  max-width: 525px;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
@@ -438,10 +465,12 @@
 .swarna-hero-model-img {
   width: 100%;
   height: auto;
-  max-height: 590px;
+  max-height: 430px;
   object-fit: contain;
+  object-position: right bottom;
   display: block;
 }
+
 
 /* =========================================================================
    3. MARQUEE / CATEGORY TICKER
