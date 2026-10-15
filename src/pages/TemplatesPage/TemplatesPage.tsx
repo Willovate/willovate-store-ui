@@ -28,6 +28,7 @@ import { TimzeeStorefront } from '../../templates/jewelry/Timzee'
 import { JewelsWorkDoStorefront } from '../../templates/jewelry/JewelsWorkDo'
 import { DiamondWorkDoStorefront } from '../../templates/jewelry/DiamondWorkDo'
 import { VtOlightStorefront } from '../../templates/jewelry/VtOlight'
+import { SwarnaStorefront } from '../../templates/jewelry/Swarna'
 import '../../templates/fashion/fashionMobile.css'
 import {
   BELLE_FASHION_TEMPLATE,
@@ -49,7 +50,7 @@ import {
   VT_OLIGHT_TEMPLATE,
   ALL_JEWELRY_MARKETPLACE_TEMPLATES,
 } from '../../data/jewelryTemplatesData'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront, VtOlightStorefront }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront, VtOlightStorefront, SwarnaStorefront }
 
 
 // Re-export domain types
@@ -691,6 +692,21 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   ) {
     return (
       <VtOlightStorefront
+        onBack={onClose}
+        onUseTemplate={onUseTemplate}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'jewelry-swarna' ||
+      template.id === 'jewelry-swarna' ||
+      template.slug === 'swarna' ||
+      template.name?.toLowerCase().includes('swarna'))
+  ) {
+    return (
+      <SwarnaStorefront
         onBack={onClose}
         onUseTemplate={onUseTemplate}
       />

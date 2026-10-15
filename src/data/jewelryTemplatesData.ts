@@ -440,6 +440,62 @@ export const VT_OLIGHT_TEMPLATE: MarketplaceTemplate = {
   ],
 }
 
+export const SWARNA_TEMPLATE: MarketplaceTemplate = {
+  id: 'jewelry-swarna',
+  slug: 'jewelry-swarna',
+  name: 'Swarna Luxury Jewelry',
+  businessType: 'jewelry-accessories',
+  industryCategory: 'Jewelry & Accessories',
+  style: 'luxury',
+  catalogSize: 'large',
+  tags: [
+    'Jewelry',
+    'Gold',
+    'Bridal',
+    'Fine Jewelry',
+    'Diamonds',
+    'Earrings',
+    'Necklaces',
+    'Rings',
+    'Swarna',
+  ],
+  shortDescription:
+    'Authentic Swarna Shopify theme replica featuring "Elegance In Every Chain Beauty Unchained" hero, marquee style statement, 3-category highlights, dark atelier diamonds, and customer FAQ accordion.',
+  thumbnailUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=900&auto=format&fit=crop&q=80',
+  fullPreviewUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=1600&auto=format&fit=crop&q=85',
+  popularityScore: 100,
+  isActive: true,
+  brandName: 'SWARNA',
+  headline: 'Elegance In Every Chain Beauty Unchained',
+  subtitle: 'A line of classic fine jewelry with an eye toward understated luxury, made to be worn every day.',
+  buttonText: 'All Categories',
+  buttonColor: '#b5894b',
+  isDark: false,
+  modelImage: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=900&auto=format&fit=crop&q=80',
+  badge: 'trending',
+  rating: 4.99,
+  reviewCount: 480,
+  layoutType: 'editorial',
+  accentColor: '#b5894b',
+  features: [
+    'Authentic Swarna Shopify storefront replica matching swarna-theme.myshopify.com 100%',
+    'Header with gold sunburst Swarna logo, live search, wishlist, cart bag, and gold category button',
+    'Elegance In Every Chain Beauty Unchained royal hero banner with dual-dot carousel navigation',
+    'Marquee collection ticker with golden star ornaments (Gemstone, Bridal, Chunky Ring, Casual, Statement, Enamel)',
+    'Your Style Our Creation 3-category cards (Triangle pearl drops, Heart locket chain, Artisan brooch) with progress bar',
+    'Atelier Collection dark editorial section ("Timeless Beauty, Diamonds That Speak Elegance")',
+    'Commitment Invested In Every Sparkling Jewel brand story with 3 metric counter cards & arched gold frame',
+    'Two service guarantees strip (Free Worldwide Delivery & 24/7 Dedicated Support)',
+    'Newly Launched Products 4-item grid with category filter tabs and Load More interaction',
+    'New Ring Edition 3-column editorial cards with detailed craftsmanship stories',
+    'Brand Partners Bar with Kalyan, Solitaire, CaratLane, and Tanishq in dark navy',
+    'Frequently Asking Questions interactive 5-item accordion with contact assistance card',
+    'Explore The Instagram Universe 5-item lifestyle visual carousel',
+    'Dark navy footer with Join Today newsletter, quick links, services, and trust payment badges',
+    'Slide-out shopping bag drawer and quick view modal with real-time subtotal calculation',
+  ],
+}
+
 export const ALL_JEWELRY_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   DIAMOND_JEWELRY_TEMPLATE,
   JOHARY_JEWELRY_TEMPLATE,
@@ -449,7 +505,9 @@ export const ALL_JEWELRY_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   JEWELS_WORKDO_TEMPLATE,
   DIAMOND_WORKDO_TEMPLATE,
   VT_OLIGHT_TEMPLATE,
+  SWARNA_TEMPLATE,
 ]
+
 
 
 

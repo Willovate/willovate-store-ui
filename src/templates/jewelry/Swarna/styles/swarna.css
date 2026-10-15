@@ -1,0 +1,1095 @@
+/* =========================================================================
+   SWARNA LUXURY JEWELRY THEME STYLES
+   Exact 100% faithful replica of https://swarna-theme.myshopify.com/
+   Palette:
+   - Primary Soft Gold: #c59b5f
+   - Rich Antique Gold: #b5894b
+   - Deep Midnight Navy: #232838
+   - Footer Dark Navy: #1a1e2b
+   - Black Obsidian: #151515
+   - Cream Canvas: #fcf8f2 & #faf7f2
+   ========================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600;700&display=swap');
+
+.swarna-root {
+  font-family: 'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #232838;
+  background-color: #ffffff;
+  line-height: 1.6;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.swarna-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* =========================================================================
+   1. TOP HEADER & NAVIGATION
+   ========================================================================= */
+.swarna-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(197, 155, 95, 0.2);
+  transition: all 0.3s ease;
+}
+
+.swarna-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+}
+
+.swarna-logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.swarna-logo-icon {
+  width: 28px;
+  height: 28px;
+  color: #c59b5f;
+}
+
+.swarna-logo-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #232838;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.swarna-nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.swarna-nav-link {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: #4b5563;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.swarna-nav-link:hover,
+.swarna-nav-link.active {
+  color: #b5894b;
+}
+
+.swarna-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.swarna-icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: #232838;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.swarna-icon-btn:hover {
+  color: #c59b5f;
+}
+
+.swarna-badge-count {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: #b5894b;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swarna-gold-btn {
+  background: #b5894b;
+  color: #ffffff;
+  border: none;
+  padding: 10px 22px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.swarna-gold-btn:hover {
+  background: #9a7138;
+  transform: translateY(-1px);
+}
+
+/* =========================================================================
+   2. HERO SECTION (Elegance in Every Chain Beauty Unchained)
+   ========================================================================= */
+.swarna-hero-section {
+  background: linear-gradient(135deg, #fcf8f2 0%, #f6ede0 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 60px 0 80px;
+}
+
+.swarna-hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 48px;
+}
+
+.swarna-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.swarna-hero-eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #b5894b;
+  margin-bottom: 16px;
+}
+
+.swarna-hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 54px;
+  line-height: 1.15;
+  font-weight: 700;
+  color: #232838;
+  margin: 0 0 20px 0;
+  letter-spacing: -0.5px;
+}
+
+.swarna-hero-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #6b7280;
+  max-width: 480px;
+  margin-bottom: 32px;
+}
+
+.swarna-navy-btn {
+  background: #232838;
+  color: #ffffff;
+  border: none;
+  padding: 14px 28px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(35, 40, 56, 0.2);
+}
+
+.swarna-navy-btn:hover {
+  background: #171b26;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(35, 40, 56, 0.3);
+}
+
+.swarna-hero-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 40px;
+}
+
+.swarna-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(35, 40, 56, 0.3);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.swarna-dot.active {
+  width: 28px;
+  border-radius: 999px;
+  background: #232838;
+}
+
+.swarna-hero-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.swarna-hero-model-wrap {
+  width: 100%;
+  max-width: 480px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+.swarna-hero-model-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.swarna-hero-model-wrap:hover .swarna-hero-model-img {
+  transform: scale(1.02);
+}
+
+/* =========================================================================
+   3. MARQUEE / CATEGORY TICKER
+   ========================================================================= */
+.swarna-marquee-section {
+  padding: 48px 0;
+  background: #faf7f2;
+  text-align: center;
+  border-bottom: 1px solid rgba(197, 155, 95, 0.15);
+}
+
+.swarna-marquee-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #b5894b;
+  margin-bottom: 8px;
+}
+
+.swarna-marquee-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #232838;
+  margin: 0 0 28px 0;
+}
+
+.swarna-marquee-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px 32px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: #4b5563;
+}
+
+.swarna-star {
+  color: #b5894b;
+  font-size: 16px;
+}
+
+/* =========================================================================
+   4. YOUR STYLE OUR CREATION (3 Category Cards)
+   ========================================================================= */
+.swarna-categories-section {
+  padding: 80px 0;
+  background: #ffffff;
+  position: relative;
+}
+
+.swarna-section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.swarna-section-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #b5894b;
+  margin-bottom: 10px;
+}
+
+.swarna-section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: #232838;
+  margin: 0;
+}
+
+.swarna-three-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.swarna-product-card {
+  background: #fbf9f6;
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  border: 1px solid rgba(197, 155, 95, 0.15);
+}
+
+.swarna-product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+
+.swarna-card-thumb-wrap {
+  width: 100%;
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.swarna-card-thumb-img {
+  max-width: 85%;
+  max-height: 85%;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.swarna-product-card:hover .swarna-card-thumb-img {
+  transform: scale(1.08);
+}
+
+.swarna-card-cat-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #b5894b;
+  margin-bottom: 8px;
+}
+
+.swarna-card-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #232838;
+  margin: 0 0 8px 0;
+}
+
+.swarna-card-price {
+  font-size: 16px;
+  font-weight: 600;
+  color: #232838;
+}
+
+.swarna-card-compare-price {
+  font-size: 14px;
+  color: #9ca3af;
+  text-decoration: line-through;
+  margin-left: 8px;
+}
+
+.swarna-progress-bar-wrap {
+  width: 160px;
+  height: 3px;
+  margin: 40px auto 0;
+  background: #b5894b;
+  position: relative;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.swarna-progress-active {
+  width: 50%;
+  height: 100%;
+  background: #232838;
+}
+
+/* =========================================================================
+   5. DARK EDITORIAL SECTION (Timeless Beauty, Diamonds That Speak Elegance)
+   ========================================================================= */
+.swarna-dark-section {
+  background: #151515;
+  color: #ffffff;
+  padding: 90px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.swarna-dark-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 56px;
+}
+
+.swarna-dark-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #c59b5f;
+  margin-bottom: 16px;
+}
+
+.swarna-dark-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  line-height: 1.2;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+}
+
+.swarna-dark-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #9ca3af;
+  max-width: 480px;
+  margin-bottom: 32px;
+}
+
+.swarna-white-btn {
+  background: #ffffff;
+  color: #151515;
+  border: none;
+  padding: 14px 28px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.25s ease;
+}
+
+.swarna-white-btn:hover {
+  background: #c59b5f;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.swarna-dark-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.swarna-dark-img-wrap {
+  width: 100%;
+  max-width: 460px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.swarna-dark-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* =========================================================================
+   6. BRAND STORY & TRUST COUNTERS
+   ========================================================================= */
+.swarna-story-section {
+  padding: 90px 0;
+  background: #faf7f2;
+}
+
+.swarna-story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 64px;
+}
+
+.swarna-story-content {
+  max-width: 500px;
+}
+
+.swarna-counters-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 36px 0;
+}
+
+.swarna-counter-box {
+  background: #ffffff;
+  padding: 20px 16px;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid rgba(197, 155, 95, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.swarna-counter-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #232838;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.swarna-counter-label {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #6b7280;
+}
+
+.swarna-story-visual-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.swarna-arch-frame {
+  width: 320px;
+  height: 420px;
+  border-radius: 160px 160px 8px 8px;
+  overflow: hidden;
+  border: 4px solid #b5894b;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+.swarna-arch-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swarna-floating-avatar {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #ffffff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.swarna-floating-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =========================================================================
+   7. DARK NAVY SERVICE PILLARS STRIP
+   ========================================================================= */
+.swarna-pillars-strip {
+  background: #242838;
+  color: #ffffff;
+  padding: 36px 0;
+}
+
+.swarna-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 48px;
+}
+
+.swarna-pillar-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.swarna-pillar-icon {
+  width: 44px;
+  height: 44px;
+  color: #c59b5f;
+  flex-shrink: 0;
+}
+
+.swarna-pillar-text h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  color: #ffffff;
+}
+
+.swarna-pillar-text p {
+  font-size: 13px;
+  color: #9ca3af;
+  margin: 0;
+}
+
+/* =========================================================================
+   8. NEWLY LAUNCHED PRODUCTS
+   ========================================================================= */
+.swarna-catalog-section {
+  padding: 80px 0;
+  background: #ffffff;
+}
+
+.swarna-catalog-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.swarna-tab-btn {
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #6b7280;
+  padding: 8px 16px;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.swarna-tab-btn:hover,
+.swarna-tab-btn.active {
+  color: #b5894b;
+}
+
+.swarna-tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 16px;
+  right: 16px;
+  height: 2px;
+  background: #b5894b;
+}
+
+.swarna-catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.swarna-center-action {
+  text-align: center;
+  margin-top: 48px;
+}
+
+/* =========================================================================
+   9. NEW RING EDITION (3-Column Editorial Cards)
+   ========================================================================= */
+.swarna-edition-section {
+  padding: 80px 0;
+  background: #faf7f2;
+}
+
+.swarna-edition-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.swarna-edition-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.swarna-edition-card {
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s ease;
+}
+
+.swarna-edition-card:hover {
+  transform: translateY(-6px);
+}
+
+.swarna-edition-img-wrap {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.swarna-edition-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.swarna-edition-card:hover .swarna-edition-img {
+  transform: scale(1.05);
+}
+
+.swarna-edition-body {
+  padding: 24px;
+}
+
+.swarna-edition-body h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+  color: #232838;
+}
+
+.swarna-edition-body p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* =========================================================================
+   10. BRAND PARTNERS BAR
+   ========================================================================= */
+.swarna-partners-bar {
+  background: #242838;
+  padding: 28px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.swarna-partners-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.swarna-partner-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+}
+
+/* =========================================================================
+   11. FREQUENTLY ASKING QUESTIONS (FAQ)
+   ========================================================================= */
+.swarna-faq-section {
+  padding: 90px 0;
+  background: #ffffff;
+}
+
+.swarna-faq-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.swarna-faq-info-card {
+  background: #fbf7f1;
+  border: 1px solid rgba(197, 155, 95, 0.25);
+  border-radius: 8px;
+  padding: 32px;
+  margin-top: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.swarna-faq-info-card p {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+.swarna-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.swarna-accordion-item {
+  border-radius: 6px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.swarna-accordion-header {
+  background: #b5894b;
+  color: #ffffff;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  user-select: none;
+}
+
+.swarna-accordion-header:hover {
+  background: #9a7138;
+}
+
+.swarna-accordion-icon {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.swarna-accordion-body {
+  background: #ffffff;
+  padding: 20px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #4b5563;
+  border: 1px solid rgba(197, 155, 95, 0.25);
+  border-top: none;
+}
+
+/* =========================================================================
+   12. EXPLORE THE INSTAGRAM UNIVERSE
+   ========================================================================= */
+.swarna-insta-section {
+  padding: 80px 0;
+  background: #faf7f2;
+  text-align: center;
+}
+
+.swarna-insta-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.swarna-insta-item {
+  width: 100%;
+  height: 220px;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.swarna-insta-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.swarna-insta-item:hover .swarna-insta-img {
+  transform: scale(1.08);
+}
+
+/* =========================================================================
+   13. FOOTER
+   ========================================================================= */
+.swarna-footer {
+  background: #1a1e2b;
+  color: #ffffff;
+  padding: 80px 0 32px;
+}
+
+.swarna-footer-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr 1.3fr;
+  gap: 48px;
+  margin-bottom: 60px;
+}
+
+.swarna-footer-col h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  color: #ffffff;
+}
+
+.swarna-footer-col h4 {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0 0 20px 0;
+  color: #c59b5f;
+}
+
+.swarna-footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.swarna-footer-col li {
+  margin-bottom: 12px;
+}
+
+.swarna-footer-col a {
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.swarna-footer-col a:hover {
+  color: #c59b5f;
+}
+
+.swarna-newsletter-form {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.swarna-newsletter-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-right: none;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #ffffff;
+  border-radius: 4px 0 0 4px;
+  outline: none;
+}
+
+.swarna-newsletter-btn {
+  background: #b5894b;
+  color: #ffffff;
+  border: none;
+  padding: 0 20px;
+  cursor: pointer;
+  border-radius: 0 4px 4px 0;
+  transition: background 0.2s ease;
+}
+
+.swarna-newsletter-btn:hover {
+  background: #9a7138;
+}
+
+.swarna-subfooter {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.swarna-payments-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* =========================================================================
+   14. TOAST, DRAWER & MODAL STYLES
+   ========================================================================= */
+.swarna-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #232838;
+  color: #ffffff;
+  padding: 14px 24px;
+  border-radius: 6px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  font-size: 14px;
+  font-weight: 500;
+  border-left: 4px solid #b5894b;
+}
+
+.swarna-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.swarna-drawer {
+  background: #ffffff;
+  width: 100%;
+  max-width: 420px;
+  height: 100%;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+}
+
+.swarna-drawer-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.swarna-drawer-body {
+  padding: 24px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.swarna-drawer-footer {
+  padding: 24px;
+  border-top: 1px solid #e5e7eb;
+  background: #faf7f2;
+}
+
+@media (max-width: 900px) {
+  .swarna-hero-grid,
+  .swarna-dark-grid,
+  .swarna-story-grid,
+  .swarna-faq-grid,
+  .swarna-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .swarna-three-cards-grid,
+  .swarna-catalog-grid,
+  .swarna-edition-grid {
+    grid-template-columns: 1fr;
+  }
+  .swarna-insta-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

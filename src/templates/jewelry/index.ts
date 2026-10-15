@@ -14,5 +14,8 @@ export { DiamondWorkDoStorefront } from './DiamondWorkDo'
 export * from './DiamondWorkDo'
 export { VtOlightStorefront } from './VtOlight'
 export * from './VtOlight'
+export { SwarnaStorefront } from './Swarna'
+export * from './Swarna'
+
 
 

@@ -18,6 +18,7 @@ import { TimzeeStorefront } from '../templates/jewelry/Timzee'
 import { JewelsWorkDoStorefront } from '../templates/jewelry/JewelsWorkDo'
 import { DiamondWorkDoStorefront } from '../templates/jewelry/DiamondWorkDo'
 import { VtOlightStorefront } from '../templates/jewelry/VtOlight'
+import { SwarnaStorefront } from '../templates/jewelry/Swarna'
 import { VelocityStorefront } from '../templates/sports/Velocity'
 import { ArenaStorefront } from '../templates/sports/Arena'
 import { SprintStorefront } from '../templates/sports/Sprint'
@@ -333,7 +334,16 @@ export function getTemplateComponent(template?: MarketplaceTemplate | Template |
 
   if (
     template &&
+    (template.slug === 'jewelry-swarna' ||
+      template.id === 'jewelry-swarna' ||
+      template.slug === 'swarna' ||
+      template.name?.toLowerCase().includes('swarna'))
+  ) {
+    return SwarnaStorefront
+  }
 
+  if (
+    template &&
     (template.slug === 'jewelry-diamond' ||
       template.id === 'jewelry-diamond' ||
       template.name?.toLowerCase().includes('diamond') ||
