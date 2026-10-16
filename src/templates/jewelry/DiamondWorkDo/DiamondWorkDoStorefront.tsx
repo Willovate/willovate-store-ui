@@ -648,18 +648,6 @@ export const DiamondWorkDoStorefront: React.FC<DiamondWorkDoStorefrontProps> = (
                       <div className="dwd-card-top">
                         {prod.isNewDrop && <span className="dwd-card-badge">NEW</span>}
                         <span className="dwd-card-cat-label">{prod.category === 'Necklaces' ? 'Necklace' : prod.category}</span>
-                        <button
-                          type="button"
-                          className="dwd-card-quick-btn"
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            openQuickView(prod)
-                          }}
-                          title="Quick View"
-                          aria-label="Quick View"
-                        >
-                          👁️
-                        </button>
                       </div>
                       <h3 className="dwd-card-title" onClick={() => openPdp(prod)}>
                         {prod.name}
@@ -673,6 +661,21 @@ export const DiamondWorkDoStorefront: React.FC<DiamondWorkDoStorefrontProps> = (
                             e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
                           }}
                         />
+                        <button
+                          type="button"
+                          className="dwd-card-quick-btn"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            openQuickView(prod)
+                          }}
+                          title="Quick View"
+                          aria-label="Quick View"
+                        >
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                            <circle cx="12" cy="12" r="3" />
+                          </svg>
+                        </button>
                       </div>
                       <div className="dwd-card-pricing">
                         <span className="dwd-price">${prod.price.toLocaleString()}.00</span>
@@ -717,18 +720,6 @@ export const DiamondWorkDoStorefront: React.FC<DiamondWorkDoStorefrontProps> = (
                   <article key={prod.id} className="dwd-product-card">
                     <div className="dwd-card-top">
                       <span className="dwd-card-cat-label">{prod.category}</span>
-                      <button
-                        type="button"
-                        className="dwd-card-quick-btn"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          openQuickView(prod)
-                        }}
-                        title="Quick View"
-                        aria-label="Quick View"
-                      >
-                        👁️
-                      </button>
                     </div>
                     <h3 className="dwd-card-title" onClick={() => openPdp(prod)}>
                       {prod.name}
@@ -742,6 +733,21 @@ export const DiamondWorkDoStorefront: React.FC<DiamondWorkDoStorefrontProps> = (
                           e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
                         }}
                       />
+                      <button
+                        type="button"
+                        className="dwd-card-quick-btn"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          openQuickView(prod)
+                        }}
+                        title="Quick View"
+                        aria-label="Quick View"
+                      >
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                          <circle cx="12" cy="12" r="3" />
+                        </svg>
+                      </button>
                     </div>
                     <div className="dwd-card-pricing">
                       <span className="dwd-price">${prod.price.toLocaleString()}.00</span>
@@ -881,6 +887,12 @@ export const DiamondWorkDoStorefront: React.FC<DiamondWorkDoStorefrontProps> = (
                   <article key={prod.id} className="dwd-product-card">
                     <div className="dwd-card-top">
                       <span className="dwd-card-cat-label">{prod.category}</span>
+                    </div>
+                    <h3 className="dwd-card-title" onClick={() => openPdp(prod)}>
+                      {prod.name}
+                    </h3>
+                    <div className="dwd-card-img-wrap" onClick={() => openPdp(prod)}>
+                      <img src={prod.images[0]} alt={prod.name} className="dwd-card-img" />
                       <button
                         type="button"
                         className="dwd-card-quick-btn"
@@ -891,14 +903,11 @@ export const DiamondWorkDoStorefront: React.FC<DiamondWorkDoStorefrontProps> = (
                         title="Quick View"
                         aria-label="Quick View"
                       >
-                        👁️
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                          <circle cx="12" cy="12" r="3" />
+                        </svg>
                       </button>
-                    </div>
-                    <h3 className="dwd-card-title" onClick={() => openPdp(prod)}>
-                      {prod.name}
-                    </h3>
-                    <div className="dwd-card-img-wrap" onClick={() => openPdp(prod)}>
-                      <img src={prod.images[0]} alt={prod.name} className="dwd-card-img" />
                     </div>
                     <div className="dwd-card-pricing">
                       <span className="dwd-price">${prod.price.toLocaleString()}.00</span>
@@ -1175,18 +1184,6 @@ export const DiamondWorkDoStorefront: React.FC<DiamondWorkDoStorefrontProps> = (
                   <div className="dwd-card-top">
                     {prod.isNewDrop && <span className="dwd-card-badge">NEW</span>}
                     <span className="dwd-card-cat-label">{prod.category}</span>
-                    <button
-                      type="button"
-                      className="dwd-card-quick-btn"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        openQuickView(prod)
-                      }}
-                      title="Quick View"
-                      aria-label="Quick View"
-                    >
-                      👁️
-                    </button>
                   </div>
                   <h3 className="dwd-card-title" onClick={() => openPdp(prod)}>
                     {prod.name}
@@ -1200,6 +1197,21 @@ export const DiamondWorkDoStorefront: React.FC<DiamondWorkDoStorefrontProps> = (
                         e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
                       }}
                     />
+                    <button
+                      type="button"
+                      className="dwd-card-quick-btn"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        openQuickView(prod)
+                      }}
+                      title="Quick View"
+                      aria-label="Quick View"
+                    >
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                        <circle cx="12" cy="12" r="3" />
+                      </svg>
+                    </button>
                   </div>
                   <div className="dwd-card-pricing">
                     <span className="dwd-price">${prod.price.toLocaleString()}.00</span>
