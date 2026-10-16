@@ -20,9 +20,9 @@ export const TimzeeStorefront: React.FC<TimzeeStorefrontProps> = ({
   templateData: _templateData,
   device = 'desktop',
   deviceView,
-  onClose,
+  onClose: _onClose,
   initialView: _initialView = 'home',
-  onUseTemplate,
+  onUseTemplate: _onUseTemplate,
 }) => {
   const activeDevice = deviceView || device || 'desktop'
   const isMobile = activeDevice === 'mobile'
@@ -321,27 +321,6 @@ export const TimzeeStorefront: React.FC<TimzeeStorefrontProps> = ({
               <option value="GBP">GBP £</option>
               <option value="INR">INR ₹</option>
             </select>
-
-            {/* Use Template / Close Preview Buttons */}
-            {onUseTemplate && (
-              <button
-                className="tmz-btn-gold-bordered"
-                style={{ padding: '7px 16px', fontSize: '11px', marginLeft: '6px' }}
-                onClick={() => onUseTemplate('jewelry-timzee')}
-              >
-                Use Template
-              </button>
-            )}
-
-            {onClose && (
-              <button
-                className="tmz-hdr-icon-btn"
-                onClick={onClose}
-                aria-label="Close"
-              >
-                ✕
-              </button>
-            )}
           </div>
         </div>
       </header>
@@ -782,77 +761,116 @@ export const TimzeeStorefront: React.FC<TimzeeStorefrontProps> = ({
             ))}
           </div>
 
-          {/* Staggered 3 on top, 2 on bottom */}
+          {/* Staggered 3 on top, 2 on bottom on desktop; single unified 2-column grid on mobile */}
           <div className="tmz-cat-grid-5">
-            <div className="tmz-cat-row-top">
-              {categoryProducts5.slice(0, 3).map((watch) => (
-                <div key={watch.id} className="tmz-watch-box">
-                  <div
-                    className="tmz-watch-img-slot"
-                    onClick={() => {
-                      setQuickViewProduct(watch)
-                      setSelectedImageIndex(0)
-                    }}
-                  >
-                    <img
-                      src={watch.images[0]}
-                      alt={watch.name}
-                      loading="lazy"
-                      onError={(e) => {
-                        e.currentTarget.src = 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&auto=format&fit=crop&q=80'
+            {isMobile ? (
+              <div className="tmz-cat-mobile-grid">
+                {categoryProducts5.map((watch) => (
+                  <div key={watch.id} className="tmz-watch-box">
+                    <div
+                      className="tmz-watch-img-slot"
+                      onClick={() => {
+                        setQuickViewProduct(watch)
+                        setSelectedImageIndex(0)
                       }}
-                    />
+                    >
+                      <img
+                        src={watch.images[0]}
+                        alt={watch.name}
+                        loading="lazy"
+                        onError={(e) => {
+                          e.currentTarget.src = 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&auto=format&fit=crop&q=80'
+                        }}
+                      />
+                    </div>
+                    <h3
+                      className="tmz-watch-name"
+                      onClick={() => {
+                        setQuickViewProduct(watch)
+                        setSelectedImageIndex(0)
+                      }}
+                    >
+                      {watch.name}
+                    </h3>
+                    <div className="tmz-watch-price-row">
+                      <span className="tmz-price-current">${watch.price.toFixed(2)}</span>
+                    </div>
                   </div>
-                  <h3
-                    className="tmz-watch-name"
-                    onClick={() => {
-                      setQuickViewProduct(watch)
-                      setSelectedImageIndex(0)
-                    }}
-                  >
-                    {watch.name}
-                  </h3>
-                  <div className="tmz-watch-price-row">
-                    <span className="tmz-price-current">${watch.price.toFixed(2)}</span>
-                  </div>
+                ))}
+              </div>
+            ) : (
+              <>
+                <div className="tmz-cat-row-top">
+                  {categoryProducts5.slice(0, 3).map((watch) => (
+                    <div key={watch.id} className="tmz-watch-box">
+                      <div
+                        className="tmz-watch-img-slot"
+                        onClick={() => {
+                          setQuickViewProduct(watch)
+                          setSelectedImageIndex(0)
+                        }}
+                      >
+                        <img
+                          src={watch.images[0]}
+                          alt={watch.name}
+                          loading="lazy"
+                          onError={(e) => {
+                            e.currentTarget.src = 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&auto=format&fit=crop&q=80'
+                          }}
+                        />
+                      </div>
+                      <h3
+                        className="tmz-watch-name"
+                        onClick={() => {
+                          setQuickViewProduct(watch)
+                          setSelectedImageIndex(0)
+                        }}
+                      >
+                        {watch.name}
+                      </h3>
+                      <div className="tmz-watch-price-row">
+                        <span className="tmz-price-current">${watch.price.toFixed(2)}</span>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
 
-            <div className="tmz-cat-row-bottom">
-              {categoryProducts5.slice(3, 5).map((watch) => (
-                <div key={watch.id} className="tmz-watch-box">
-                  <div
-                    className="tmz-watch-img-slot"
-                    onClick={() => {
-                      setQuickViewProduct(watch)
-                      setSelectedImageIndex(0)
-                    }}
-                  >
-                    <img
-                      src={watch.images[0]}
-                      alt={watch.name}
-                      loading="lazy"
-                      onError={(e) => {
-                        e.currentTarget.src = 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&auto=format&fit=crop&q=80'
-                      }}
-                    />
-                  </div>
-                  <h3
-                    className="tmz-watch-name"
-                    onClick={() => {
-                      setQuickViewProduct(watch)
-                      setSelectedImageIndex(0)
-                    }}
-                  >
-                    {watch.name}
-                  </h3>
-                  <div className="tmz-watch-price-row">
-                    <span className="tmz-price-current">${watch.price.toFixed(2)}</span>
-                  </div>
+                <div className="tmz-cat-row-bottom">
+                  {categoryProducts5.slice(3, 5).map((watch) => (
+                    <div key={watch.id} className="tmz-watch-box">
+                      <div
+                        className="tmz-watch-img-slot"
+                        onClick={() => {
+                          setQuickViewProduct(watch)
+                          setSelectedImageIndex(0)
+                        }}
+                      >
+                        <img
+                          src={watch.images[0]}
+                          alt={watch.name}
+                          loading="lazy"
+                          onError={(e) => {
+                            e.currentTarget.src = 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&auto=format&fit=crop&q=80'
+                          }}
+                        />
+                      </div>
+                      <h3
+                        className="tmz-watch-name"
+                        onClick={() => {
+                          setQuickViewProduct(watch)
+                          setSelectedImageIndex(0)
+                        }}
+                      >
+                        {watch.name}
+                      </h3>
+                      <div className="tmz-watch-price-row">
+                        <span className="tmz-price-current">${watch.price.toFixed(2)}</span>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </>
+            )}
           </div>
         </div>
       </section>

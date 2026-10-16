@@ -176,9 +176,9 @@ export const PSJewelshopStorefront: React.FC<PSJewelshopStorefrontProps> = ({
   templateData: _templateData,
   device = 'desktop',
   deviceView,
-  onClose,
+  onClose: _onClose,
   initialView = 'home',
-  onUseTemplate,
+  onUseTemplate: _onUseTemplate,
 }) => {
   const effectiveDevice = deviceView || device || 'desktop'
   const isMobile = effectiveDevice === 'mobile'
@@ -426,15 +426,15 @@ export const PSJewelshopStorefront: React.FC<PSJewelshopStorefrontProps> = ({
               Blog
             </a>
             <a
-              href="#buy"
+              href="#products"
               className="psj-nav-link"
               onClick={(e) => {
                 e.preventDefault()
-                if (onUseTemplate) onUseTemplate('jewelry-ps-jewelshop')
-                else showToast('Applying PS Jewelshop Template!')
+                const el = document.querySelector('.psj-products-grid')
+                el?.scrollIntoView({ behavior: 'smooth' })
               }}
             >
-              Buy
+              Shop
             </a>
           </nav>
 
@@ -491,18 +491,6 @@ export const PSJewelshopStorefront: React.FC<PSJewelshopStorefrontProps> = ({
             >
               <Menu size={22} />
             </button>
-
-            {/* Optional Close Preview Button */}
-            {onClose && (
-              <button
-                type="button"
-                onClick={onClose}
-                className="psj-btn psj-btn-dark psj-btn-pill"
-                style={{ padding: '6px 14px', fontSize: '11px', marginLeft: '6px' }}
-              >
-                Close Preview
-              </button>
-            )}
           </div>
         </div>
 

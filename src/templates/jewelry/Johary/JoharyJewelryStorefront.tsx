@@ -15,7 +15,7 @@ import {
 export const JoharyJewelryStorefront: React.FC<JoharyStorefrontProps> = ({
   device = 'desktop',
   deviceView,
-  onClose,
+  onClose: _onClose,
   initialView = 'home',
 }) => {
   const effectiveDevice = deviceView || device || 'desktop'
@@ -1911,18 +1911,6 @@ export const JoharyJewelryStorefront: React.FC<JoharyStorefrontProps> = ({
               {cartItems.length > 0 && <span className="jh-badge">{cartItems.length}</span>}
               {!isMobile && <span>${subtotal.toFixed(0)}</span>}
             </button>
-
-            {onClose && (
-              <button
-                className="jh-action-btn"
-                onClick={onClose}
-                aria-label="Close Storefront Preview"
-                style={{ marginLeft: '10px', fontSize: '18px' }}
-                title="Back to Directory"
-              >
-                &times;
-              </button>
-            )}
           </div>
         </div>
 

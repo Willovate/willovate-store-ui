@@ -587,7 +587,7 @@
     .tmz-products-grid,
     .tmz-grid-4col,
     .tmz-popular-grid-3,
-    .tmz-cat-grid-5,
+    .tmz-cat-mobile-grid,
     .tmz-cat-row-top,
     .tmz-cat-row-bottom,
     .diamond-products-grid,
@@ -756,6 +756,22 @@
     border-radius: 4px !important;
   }
 
+  /* Product Card Footer Action Row - Stacking */
+  :is(.dia-product-footer, .dwd-product-footer) {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+
+  :is(.dia-price-group) {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 6px !important;
+    width: 100% !important;
+  }
+
   /* ===========================================================================
      5. SPLIT BANNERS & PROMO CARDS - 1-COLUMN VERTICAL STACK (ALL 10 TEMPLATES)
      =========================================================================== */
@@ -776,6 +792,7 @@
     .jwd-beauty-inner,
     .tmz-deal-grid,
     .tmz-split-grid,
+    .tmz-roman-layout,
     .diamond-split-grid,
     .dia-craft-grid,
     .dwd-engagement-split,
@@ -863,6 +880,44 @@
     height: auto !important;
     aspect-ratio: 1 !important;
     margin: 0 auto !important;
+  }
+
+  /* Spotlight Countdown Section (Screenshot 2 - Diamond & Atelier) */
+  :is(.dia-spotlight-countdown-wrap) {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    gap: 16px !important;
+  }
+
+  :is(.dia-spotlight-timer-boxes) {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  :is(.dia-spotlight-timer-box) {
+    padding: 10px 14px !important;
+    min-width: 68px !important;
+  }
+
+  :is(.dia-spotlight-timer-val) {
+    font-size: 22px !important;
+  }
+
+  :is(.dia-spotlight-timer-label) {
+    font-size: 9px !important;
+  }
+
+  :is(.dia-spotlight-btn) {
+    width: 100% !important;
+    max-width: 280px !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
   }
 
   :is(
@@ -1008,6 +1063,45 @@
     gap: 6px !important;
   }
 
+  /* Timzee Watch Photo Mosaic (2x3 square grid on mobile - Screenshot 3) */
+  :is(.tmz-photo-grid-6) {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  :is(.tmz-photo-slot) {
+    width: 100% !important;
+    aspect-ratio: 1 / 1 !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+  }
+
+  :is(.tmz-photo-slot img) {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  /* Timzee The Great Experience Brand Partners (Screenshot 5) */
+  :is(.tmz-logos-row-sleek) {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+    justify-items: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 10px !important;
+  }
+
+  :is(.tmz-logos-row-sleek img) {
+    max-height: 28px !important;
+    max-width: 120px !important;
+    object-fit: contain !important;
+  }
+
   /* ===========================================================================
      9. NEWSLETTER SUBSCRIPTION FORMS - VERTICAL STACK (Screenshot 5 - ALL 10 TEMPLATES)
      =========================================================================== */
@@ -1084,6 +1178,19 @@
     box-sizing: border-box !important;
   }
 
+  /* Verified Atelier Testimonials - 1 Column Stack (Screenshot 3 - All 10 Templates) */
+  :is(.dia-testi-grid, .dwd-testi-grid, .lp-testi-grid, .jew-testimonial-grid) {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    width: 100% !important;
+  }
+
+  :is(.dia-testi-card, .dwd-testi-card) {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
   /* ===========================================================================
      10. FOOTERS - STACKED 1-COLUMN LAYOUT WITH CENTERED PAYMENT ICONS (ALL 10 TEMPLATES)
      =========================================================================== */
@@ -1093,6 +1200,7 @@
     .vto-footer-grid,
     .jwd-footer-grid,
     .tmz-footer-grid,
+    .tmz-footer-cols-4,
     .diamond-footer-grid,
     .dia-footer-grid,
     .diamond-workdo-footer-grid,
@@ -1113,6 +1221,7 @@
     .vto-footer-col,
     .jwd-footer-col,
     .tmz-footer-col,
+    .tmz-footer-cols-4 > div,
     .diamond-footer-col,
     .dia-footer-col,
     .dwd-footer-col,
@@ -1481,7 +1590,7 @@
   .tmz-products-grid,
   .tmz-grid-4col,
   .tmz-popular-grid-3,
-  .tmz-cat-grid-5,
+  .tmz-cat-mobile-grid,
   .tmz-cat-row-top,
   .tmz-cat-row-bottom,
   .diamond-products-grid,
@@ -1728,6 +1837,203 @@
   border-radius: 4px !important;
 }
 
+/* Simulator & Mobile View Roots: Product Card Footer Action Row - Stacking */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.dia-product-footer, .dwd-product-footer) {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 8px !important;
+  width: 100% !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.dia-price-group) {
+  display: flex !important;
+  align-items: baseline !important;
+  gap: 6px !important;
+  width: 100% !important;
+}
+
+/* Simulator & Mobile View Roots: Spotlight Countdown Section */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.dia-spotlight-countdown-wrap) {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100% !important;
+  gap: 16px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.dia-spotlight-timer-boxes) {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.dia-spotlight-timer-box) {
+  padding: 10px 14px !important;
+  min-width: 68px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.dia-spotlight-timer-val) {
+  font-size: 22px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.dia-spotlight-timer-label) {
+  font-size: 9px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.dia-spotlight-btn) {
+  width: 100% !important;
+  max-width: 280px !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
+}
+
+/* Simulator & Mobile View Roots: Testimonials (1 column stack) */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.dia-testi-grid, .dwd-testi-grid, .lp-testi-grid, .jew-testimonial-grid) {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+  width: 100% !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.dia-testi-card, .dwd-testi-card) {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
 /* Simulator & Mobile View Roots: Split banners and Promo Cards (1 column) */
 :is(
   .simulated-frame.frame-mobile,
@@ -1759,6 +2065,7 @@
   .jwd-beauty-inner,
   .tmz-deal-grid,
   .tmz-split-grid,
+  .tmz-roman-layout,
   .diamond-split-grid,
   .dia-craft-grid,
   .dwd-engagement-split,
@@ -2143,6 +2450,7 @@
   .vto-footer-grid,
   .jwd-footer-grid,
   .tmz-footer-grid,
+  .tmz-footer-cols-4,
   .diamond-footer-grid,
   .dia-footer-grid,
   .diamond-workdo-footer-grid,
@@ -2176,6 +2484,7 @@
   .vto-footer-col,
   .jwd-footer-col,
   .tmz-footer-col,
+  .tmz-footer-cols-4 > div,
   .diamond-footer-col,
   .dia-footer-col,
   .dwd-footer-col,
@@ -2217,4 +2526,68 @@
   justify-content: center !important;
   gap: 8px !important;
   margin: 12px auto !important;
+}
+
+/* Simulator: Timzee Photo Mosaic 6-image square grid */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .tmz-root.is-mobile,
+  .tmz-root.tmz-mobile-view
+) .tmz-photo-grid-6 {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .tmz-root.is-mobile,
+  .tmz-root.tmz-mobile-view
+) .tmz-photo-slot {
+  width: 100% !important;
+  aspect-ratio: 1 / 1 !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .tmz-root.is-mobile,
+  .tmz-root.tmz-mobile-view
+) .tmz-photo-slot img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Simulator: Timzee Brand Partners 2x2 */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .tmz-root.is-mobile,
+  .tmz-root.tmz-mobile-view
+) .tmz-logos-row-sleek {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+  justify-items: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 0 10px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .tmz-root.is-mobile,
+  .tmz-root.tmz-mobile-view
+) .tmz-logos-row-sleek img {
+  max-height: 28px !important;
+  max-width: 120px !important;
+  object-fit: contain !important;
 }

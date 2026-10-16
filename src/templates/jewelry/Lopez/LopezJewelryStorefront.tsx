@@ -128,12 +128,12 @@ const Menu = ({ size = 24, className = '', style }: IconProps) => (
 )
 
 export const LopezJewelryStorefront: React.FC<LopezStorefrontProps> = ({
-  templateData,
+  templateData: _templateData,
   device = 'desktop',
   deviceView,
-  onClose,
+  onClose: _onClose,
   initialView = 'home',
-  onUseTemplate,
+  onUseTemplate: _onUseTemplate,
 }) => {
   const effectiveDevice = deviceView || device || 'desktop'
   const isMobile = effectiveDevice === 'mobile'
@@ -302,15 +302,6 @@ export const LopezJewelryStorefront: React.FC<LopezStorefrontProps> = ({
     return () => clearInterval(timer)
   }, [heroSlides.length])
 
-  // Handle template selection
-  const handleUseTemplateClick = () => {
-    if (onUseTemplate && templateData) {
-      onUseTemplate(templateData.id || 'jewelry-lopez')
-    } else {
-      showToast('Lopez Jewelry theme selected! Preparing your storefront...')
-    }
-  }
-
   return (
     <div className={`lp-root ${isMobile ? 'lp-mobile-view is-mobile' : ''}`} data-device={effectiveDevice}>
       {/* Toast Notification */}
@@ -342,15 +333,6 @@ export const LopezJewelryStorefront: React.FC<LopezStorefrontProps> = ({
                   <option value="GBP">GBP (£)</option>
                 </select>
               </div>
-              {onClose && (
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="lp-close-preview-btn"
-                >
-                  <X size={14} /> Close Preview
-                </button>
-              )}
             </div>
           </div>
         </div>
@@ -489,16 +471,6 @@ export const LopezJewelryStorefront: React.FC<LopezStorefrontProps> = ({
                 </div>
                 <span className="lp-cart-total">{formatPrice(cartSubtotal)}</span>
               </button>
-
-              {onUseTemplate && (
-                <button
-                  type="button"
-                  onClick={handleUseTemplateClick}
-                  className="lp-template-cta-btn"
-                >
-                  Use Template
-                </button>
-              )}
 
               <button
                 type="button"

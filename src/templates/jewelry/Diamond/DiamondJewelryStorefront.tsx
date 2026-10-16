@@ -799,36 +799,30 @@ export const DiamondJewelryStorefront: React.FC<DiamondStorefrontProps> = ({
                 </div>
 
                 {/* COUNTDOWN BOXES */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                  {[
-                    { label: 'Hours', val: timeLeft.hours },
-                    { label: 'Minutes', val: timeLeft.minutes },
-                    { label: 'Seconds', val: timeLeft.seconds },
-                  ].map((unit) => (
-                    <div
-                      key={unit.label}
-                      style={{
-                        background: 'rgba(255,255,255,0.08)',
-                        border: '1px solid rgba(197, 168, 128, 0.4)',
-                        padding: '14px 18px',
-                        borderRadius: 4,
-                        textAlign: 'center',
-                        minWidth: 72,
-                      }}
-                    >
-                      <div style={{ fontFamily: 'Cinzel, serif', fontSize: 28, fontWeight: 700, color: '#C5A880' }}>
-                        {String(unit.val).padStart(2, '0')}
+                <div className="dia-spotlight-countdown-wrap">
+                  <div className="dia-spotlight-timer-boxes">
+                    {[
+                      { label: 'Hours', val: timeLeft.hours },
+                      { label: 'Minutes', val: timeLeft.minutes },
+                      { label: 'Seconds', val: timeLeft.seconds },
+                    ].map((unit) => (
+                      <div
+                        key={unit.label}
+                        className="dia-spotlight-timer-box"
+                      >
+                        <div className="dia-spotlight-timer-val">
+                          {String(unit.val).padStart(2, '0')}
+                        </div>
+                        <div className="dia-spotlight-timer-label">
+                          {unit.label}
+                        </div>
                       </div>
-                      <div style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.6)' }}>
-                        {unit.label}
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
 
                   <button
                     type="button"
-                    className="dia-btn dia-btn-gold"
-                    style={{ marginLeft: 10 }}
+                    className="dia-btn dia-btn-gold dia-spotlight-btn"
                     onClick={() => openPdp(DIAMOND_PRODUCTS[0])}
                   >
                     Reserve Piece →
