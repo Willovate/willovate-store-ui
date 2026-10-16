@@ -1261,11 +1261,1685 @@
   .vto-footer-grid { grid-template-columns: 1fr 1fr; }
 }
 
-@media (max-width: 640px) {
-  .vto-products-grid { grid-template-columns: 1fr; }
-  .vto-lifestyle-grid { grid-template-columns: 1fr; }
-  .vto-trust-grid { grid-template-columns: 1fr; }
-  .vto-hero-title { font-size: 38px; }
-  .vto-footer-grid { grid-template-columns: 1fr; }
+@media (max-width: 768px) {
+  .vto-container {
+    padding: 0 14px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Announcement Strip */
+  .vto-top-bar {
+    padding: 8px 0 !important;
+  }
+
+  .vto-top-bar-inner {
+    flex-direction: column !important;
+    gap: 6px !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+
+  .vto-top-marquee {
+    font-size: 11px !important;
+    text-align: center !important;
+    white-space: normal !important;
+  }
+
+  .vto-top-controls {
+    justify-content: center !important;
+    gap: 8px !important;
+    font-size: 11px !important;
+  }
+
+  /* Header */
+  .vto-header {
+    padding: 8px 0 !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+  }
+
+  .vto-header-inner {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  .vto-mobile-menu-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  .vto-nav {
+    display: none !important;
+  }
+
+  .vto-logo-text {
+    font-size: 24px !important;
+  }
+
+  .vto-header-actions {
+    gap: 6px !important;
+  }
+
+  .vto-icon-btn {
+    width: 36px !important;
+    height: 36px !important;
+    padding: 0 !important;
+  }
+
+  .vto-cart-summary-btn {
+    padding: 6px 12px !important;
+    font-size: 11.5px !important;
+    height: 36px !important;
+    align-items: center !important;
+  }
+
+  .vto-cart-summary-btn span {
+    display: none !important;
+  }
+
+  /* Hero Section (Screenshot 1) */
+  .vto-hero-section {
+    padding: 30px 0 40px !important;
+    width: 100% !important;
+  }
+
+  .vto-hero-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+    text-align: center !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  .vto-hero-content {
+    text-align: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+  }
+
+  .vto-hero-title {
+    font-size: 32px !important;
+    line-height: 1.15 !important;
+    text-align: center !important;
+    margin-bottom: 12px !important;
+  }
+
+  .vto-hero-desc {
+    font-size: 13.5px !important;
+    line-height: 1.6 !important;
+    text-align: center !important;
+    margin: 0 auto 20px auto !important;
+    max-width: 95% !important;
+  }
+
+  .vto-hero-floating-card {
+    margin: 0 auto !important;
+    max-width: 320px !important;
+    width: 100% !important;
+    padding: 12px 14px !important;
+    box-sizing: border-box !important;
+  }
+
+  .vto-floating-thumb {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 8px !important;
+    object-fit: contain !important;
+  }
+
+  .vto-hero-visual {
+    width: 100% !important;
+    max-height: 280px !important;
+    overflow: hidden !important;
+    border-radius: 12px !important;
+    margin-top: 10px !important;
+  }
+
+  .vto-hero-model-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  /* Filter Tabs & Best Sellers (Screenshot 2) */
+  .vto-catalog-section {
+    padding: 40px 0 !important;
+  }
+
+  .vto-section-title {
+    font-size: 28px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .vto-filter-tabs {
+    display: flex !important;
+    justify-content: flex-start !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 4px 10px 10px 10px !important;
+    gap: 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    scrollbar-width: none !important;
+  }
+
+  .vto-filter-tabs::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .vto-tab-btn {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    padding: 6px 14px !important;
+    font-size: 13px !important;
+  }
+
+  .vto-products-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  .vto-product-card {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    border-radius: 10px !important;
+  }
+
+  .vto-card-image-box {
+    height: 170px !important;
+    padding: 12px !important;
+    background: #fbf9f5 !important;
+  }
+
+  .vto-card-img {
+    max-width: 85% !important;
+    max-height: 85% !important;
+    object-fit: contain !important;
+  }
+
+  .vto-card-actions-bar {
+    display: none !important;
+  }
+
+  .vto-card-body {
+    padding: 12px 10px !important;
+  }
+
+  .vto-card-title {
+    font-size: 12.5px !important;
+    line-height: 1.35 !important;
+    margin: 0 0 6px 0 !important;
+    min-height: 2.7em !important;
+    max-height: 2.7em !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+  }
+
+  .vto-card-stars {
+    font-size: 11px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .vto-card-pricing {
+    margin-bottom: 10px !important;
+    gap: 6px !important;
+  }
+
+  .vto-card-price {
+    font-size: 13.5px !important;
+  }
+
+  .vto-card-compare {
+    font-size: 11.5px !important;
+  }
+
+  .vto-card-cart-btn {
+    padding: 8px 10px !important;
+    font-size: 11.5px !important;
+    width: 100% !important;
+    border-radius: 999px !important;
+  }
+
+  /* 4 Lifestyle Category Tiles (Screenshot 3) */
+  .vto-lifestyle-section {
+    padding: 30px 0 40px !important;
+  }
+
+  .vto-lifestyle-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  .vto-lifestyle-tile {
+    height: 200px !important;
+    border-radius: 10px !important;
+    width: 100% !important;
+  }
+
+  .vto-lifestyle-overlay {
+    padding: 14px 12px !important;
+  }
+
+  .vto-lifestyle-title {
+    font-size: 14px !important;
+    line-height: 1.25 !important;
+    letter-spacing: 0.2px !important;
+  }
+
+  /* Trust Pillars */
+  .vto-trust-section {
+    padding: 30px 0 !important;
+  }
+
+  .vto-trust-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+
+  .vto-trust-item {
+    flex-direction: column !important;
+    text-align: center !important;
+    align-items: center !important;
+    padding: 12px 8px !important;
+    gap: 8px !important;
+  }
+
+  .vto-trust-icon {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 16px !important;
+  }
+
+  .vto-trust-meta h4 {
+    font-size: 12.5px !important;
+    margin: 0 0 2px 0 !important;
+  }
+
+  .vto-trust-meta p {
+    font-size: 10.5px !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Two Promo Cards */
+  .vto-two-promo-section {
+    padding: 30px 0 !important;
+  }
+
+  .vto-two-promo-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    width: 100% !important;
+  }
+
+  .vto-promo-card {
+    min-height: 220px !important;
+    width: 100% !important;
+  }
+
+  .vto-promo-content {
+    padding: 24px 18px !important;
+  }
+
+  .vto-promo-title {
+    font-size: 20px !important;
+  }
+
+  /* Atelier Story Banner */
+  .vto-atelier-banner {
+    min-height: 320px !important;
+    padding: 36px 16px !important;
+  }
+
+  .vto-atelier-title {
+    font-size: 28px !important;
+  }
+
+  .vto-atelier-desc {
+    font-size: 13.5px !important;
+  }
+
+  /* What Our Clients Say (Screenshot 4) */
+  .vto-testimonials-section {
+    padding: 40px 0 !important;
+  }
+
+  .vto-testi-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    width: 100% !important;
+  }
+
+  .vto-testi-card {
+    padding: 22px 18px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    border-radius: 12px !important;
+  }
+
+  .vto-testi-headline {
+    font-size: 16px !important;
+    line-height: 1.3 !important;
+  }
+
+  .vto-testi-quote {
+    font-size: 13.5px !important;
+    line-height: 1.6 !important;
+    margin: 0 0 16px 0 !important;
+  }
+
+  .vto-testi-author-row {
+    gap: 12px !important;
+  }
+
+  .vto-testi-avatar {
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  /* Latest Trends Parallax Banner */
+  .vto-trends-banner {
+    padding: 50px 14px !important;
+  }
+
+  .vto-trends-title {
+    font-size: 28px !important;
+  }
+
+  .vto-trends-desc {
+    font-size: 13.5px !important;
+  }
+
+  /* Our Latest Blog (Screenshot 5) */
+  .vto-blog-section {
+    padding: 40px 0 !important;
+  }
+
+  .vto-blog-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    width: 100% !important;
+  }
+
+  .vto-blog-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 12px !important;
+  }
+
+  .vto-blog-img {
+    height: 200px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .vto-blog-content {
+    padding: 18px 16px !important;
+    text-align: left !important;
+  }
+
+  .vto-blog-card-title {
+    font-size: 17px !important;
+    line-height: 1.35 !important;
+    margin: 0 0 8px 0 !important;
+  }
+
+  .vto-blog-excerpt {
+    font-size: 13px !important;
+    line-height: 1.55 !important;
+    margin: 0 0 14px 0 !important;
+  }
+
+  /* Newsletter & Instagram */
+  .vto-newsletter-section {
+    padding: 40px 0 !important;
+  }
+
+  .vto-nl-title {
+    font-size: 24px !important;
+  }
+
+  .vto-nl-desc {
+    font-size: 13.5px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .vto-nl-form {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+    max-width: 360px !important;
+    margin: 0 auto !important;
+  }
+
+  .vto-nl-input {
+    width: 100% !important;
+    height: 44px !important;
+    text-align: center !important;
+  }
+
+  .vto-nl-form .vto-pill-btn {
+    width: 100% !important;
+    height: 44px !important;
+    justify-content: center !important;
+  }
+
+  .vto-insta-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    margin-top: 32px !important;
+  }
+
+  .vto-insta-img {
+    height: 150px !important;
+    width: 100% !important;
+  }
+
+  /* Footer */
+  .vto-footer {
+    padding: 40px 0 24px !important;
+  }
+
+  .vto-footer-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 28px !important;
+    text-align: center !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  .vto-footer-col {
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .vto-footer-links {
+    align-items: center !important;
+  }
+
+  .vto-footer-bottom {
+    flex-direction: column !important;
+    gap: 12px !important;
+    text-align: center !important;
+  }
 }
+
+/* =========================================================================
+   SIMULATED FRAME & CLASS-BASED MOBILE RULES FOR VT OLIGHT
+   Guarantees 100% identical rendering inside Willovate preview simulator
+   ========================================================================= */
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-container {
+  padding: 0 14px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-top-bar {
+  padding: 8px 0 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-top-bar-inner {
+  flex-direction: column !important;
+  gap: 6px !important;
+  text-align: center !important;
+  justify-content: center !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-top-marquee {
+  font-size: 11px !important;
+  text-align: center !important;
+  white-space: normal !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-top-controls {
+  justify-content: center !important;
+  gap: 8px !important;
+  font-size: 11px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-header {
+  padding: 8px 0 !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-header-inner {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-mobile-menu-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 38px !important;
+  height: 38px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-nav {
+  display: none !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-logo-text {
+  font-size: 24px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-header-actions {
+  gap: 6px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-icon-btn {
+  width: 36px !important;
+  height: 36px !important;
+  padding: 0 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-cart-summary-btn {
+  padding: 6px 12px !important;
+  font-size: 11.5px !important;
+  height: 36px !important;
+  align-items: center !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-cart-summary-btn span {
+  display: none !important;
+}
+
+/* Hero Simulator */
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-hero-section {
+  padding: 30px 0 40px !important;
+  width: 100% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-hero-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 24px !important;
+  text-align: center !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-hero-content {
+  text-align: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-hero-title {
+  font-size: 32px !important;
+  line-height: 1.15 !important;
+  text-align: center !important;
+  margin-bottom: 12px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-hero-desc {
+  font-size: 13.5px !important;
+  line-height: 1.6 !important;
+  text-align: center !important;
+  margin: 0 auto 20px auto !important;
+  max-width: 95% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-hero-floating-card {
+  margin: 0 auto !important;
+  max-width: 320px !important;
+  width: 100% !important;
+  padding: 12px 14px !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-floating-thumb {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 8px !important;
+  object-fit: contain !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-hero-visual {
+  width: 100% !important;
+  max-height: 280px !important;
+  overflow: hidden !important;
+  border-radius: 12px !important;
+  margin-top: 10px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-hero-model-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Filter Tabs & Best Sellers Simulator (Screenshot 2) */
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-catalog-section {
+  padding: 40px 0 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-section-title {
+  font-size: 28px !important;
+  margin-bottom: 8px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-filter-tabs {
+  display: flex !important;
+  justify-content: flex-start !important;
+  overflow-x: auto !important;
+  scroll-snap-type: x mandatory !important;
+  -webkit-overflow-scrolling: touch !important;
+  padding: 4px 10px 10px 10px !important;
+  gap: 10px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  scrollbar-width: none !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-filter-tabs::-webkit-scrollbar {
+  display: none !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-tab-btn {
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+  padding: 6px 14px !important;
+  font-size: 13px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-products-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-product-card {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  border-radius: 10px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-card-image-box {
+  height: 170px !important;
+  padding: 12px !important;
+  background: #fbf9f5 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-card-img {
+  max-width: 85% !important;
+  max-height: 85% !important;
+  object-fit: contain !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-card-actions-bar {
+  display: none !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-card-body {
+  padding: 12px 10px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-card-title {
+  font-size: 12.5px !important;
+  line-height: 1.35 !important;
+  margin: 0 0 6px 0 !important;
+  min-height: 2.7em !important;
+  max-height: 2.7em !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-card-stars {
+  font-size: 11px !important;
+  margin-bottom: 6px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-card-pricing {
+  margin-bottom: 10px !important;
+  gap: 6px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-card-price {
+  font-size: 13.5px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-card-compare {
+  font-size: 11.5px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-card-cart-btn {
+  padding: 8px 10px !important;
+  font-size: 11.5px !important;
+  width: 100% !important;
+  border-radius: 999px !important;
+}
+
+/* 4 Lifestyle Category Tiles Simulator (Screenshot 3) */
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-lifestyle-section {
+  padding: 30px 0 40px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-lifestyle-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-lifestyle-tile {
+  height: 200px !important;
+  border-radius: 10px !important;
+  width: 100% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-lifestyle-overlay {
+  padding: 14px 12px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-lifestyle-title {
+  font-size: 14px !important;
+  line-height: 1.25 !important;
+  letter-spacing: 0.2px !important;
+}
+
+/* Trust Pillars Simulator */
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-trust-section {
+  padding: 30px 0 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-trust-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+  width: 100% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-trust-item {
+  flex-direction: column !important;
+  text-align: center !important;
+  align-items: center !important;
+  padding: 12px 8px !important;
+  gap: 8px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-trust-icon {
+  width: 36px !important;
+  height: 36px !important;
+  font-size: 16px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-trust-meta h4 {
+  font-size: 12.5px !important;
+  margin: 0 0 2px 0 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-trust-meta p {
+  font-size: 10.5px !important;
+  line-height: 1.3 !important;
+}
+
+/* Two Promo Cards Simulator */
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-two-promo-section {
+  padding: 30px 0 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-two-promo-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+  width: 100% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-promo-card {
+  min-height: 220px !important;
+  width: 100% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-promo-content {
+  padding: 24px 18px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-promo-title {
+  font-size: 20px !important;
+}
+
+/* Atelier Story Banner Simulator */
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-atelier-banner {
+  min-height: 320px !important;
+  padding: 36px 16px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-atelier-title {
+  font-size: 28px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-atelier-desc {
+  font-size: 13.5px !important;
+}
+
+/* What Our Clients Say Simulator (Screenshot 4) */
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-testimonials-section {
+  padding: 40px 0 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-testi-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+  width: 100% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-testi-card {
+  padding: 22px 18px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  border-radius: 12px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-testi-headline {
+  font-size: 16px !important;
+  line-height: 1.3 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-testi-quote {
+  font-size: 13.5px !important;
+  line-height: 1.6 !important;
+  margin: 0 0 16px 0 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-testi-author-row {
+  gap: 12px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-testi-avatar {
+  width: 42px !important;
+  height: 42px !important;
+}
+
+/* Latest Trends Parallax Banner Simulator */
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-trends-banner {
+  padding: 50px 14px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-trends-title {
+  font-size: 28px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-trends-desc {
+  font-size: 13.5px !important;
+}
+
+/* Our Latest Blog Simulator (Screenshot 5) */
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-blog-section {
+  padding: 40px 0 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-blog-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+  width: 100% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-blog-card {
+  width: 100% !important;
+  max-width: 100% !important;
+  border-radius: 12px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-blog-img {
+  height: 200px !important;
+  width: 100% !important;
+  object-fit: cover !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-blog-content {
+  padding: 18px 16px !important;
+  text-align: left !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-blog-card-title {
+  font-size: 17px !important;
+  line-height: 1.35 !important;
+  margin: 0 0 8px 0 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-blog-excerpt {
+  font-size: 13px !important;
+  line-height: 1.55 !important;
+  margin: 0 0 14px 0 !important;
+}
+
+/* Newsletter & Instagram Simulator */
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-newsletter-section {
+  padding: 40px 0 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-nl-title {
+  font-size: 24px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-nl-desc {
+  font-size: 13.5px !important;
+  margin-bottom: 20px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-nl-form {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  width: 100% !important;
+  max-width: 360px !important;
+  margin: 0 auto !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-nl-input {
+  width: 100% !important;
+  height: 44px !important;
+  text-align: center !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-nl-form .vto-pill-btn {
+  width: 100% !important;
+  height: 44px !important;
+  justify-content: center !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-insta-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+  margin-top: 32px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-insta-img {
+  height: 150px !important;
+  width: 100% !important;
+}
+
+/* Footer Simulator */
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-footer {
+  padding: 40px 0 24px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-footer-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 28px !important;
+  text-align: center !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-footer-col {
+  align-items: center !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-footer-links {
+  align-items: center !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-footer-bottom {
+  flex-direction: column !important;
+  gap: 12px !important;
+  text-align: center !important;
+}
+
 

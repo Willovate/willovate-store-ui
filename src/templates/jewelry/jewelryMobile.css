@@ -787,6 +787,7 @@
     .vto-rings-split-grid,
     .vto-promo-grid,
     .vto-two-promo-grid,
+    .vto-blog-grid,
     .jwd-regal-grid,
     .jwd-banner-grid,
     .jwd-beauty-inner,
@@ -1029,6 +1030,7 @@
     .jew-category-grid,
     .swarna-categories-grid,
     .vto-categories-grid,
+    .vto-lifestyle-grid,
     .jwd-categories-grid,
     .tmz-categories-grid,
     .dia-cat-grid,
@@ -1183,7 +1185,7 @@
   }
 
   /* Verified Atelier Testimonials - 1 Column Stack (Screenshot 3 - All 10 Templates) */
-  :is(.dia-testi-grid, .dwd-testi-grid, .lp-testi-grid, .jew-testimonial-grid) {
+  :is(.dia-testi-grid, .dwd-testi-grid, .lp-testi-grid, .jew-testimonial-grid, .vto-testi-grid) {
     display: grid !important;
     grid-template-columns: 1fr !important;
     gap: 16px !important;
@@ -2015,7 +2017,7 @@
   .swarna-root.is-mobile,
   .tmz-root.is-mobile,
   .vto-root.is-mobile
-) :is(.dia-testi-grid, .dwd-testi-grid, .lp-testi-grid, .jew-testimonial-grid) {
+) :is(.dia-testi-grid, .dwd-testi-grid, .lp-testi-grid, .jew-testimonial-grid, .vto-testi-grid) {
   display: grid !important;
   grid-template-columns: 1fr !important;
   gap: 16px !important;
@@ -2066,6 +2068,7 @@
   .vto-rings-split-grid,
   .vto-promo-grid,
   .vto-two-promo-grid,
+  .vto-blog-grid,
   .jwd-regal-grid,
   .jwd-banner-grid,
   .jwd-beauty-inner,

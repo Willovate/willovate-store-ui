@@ -791,7 +791,7 @@ export const VtOlightStorefront: React.FC<VtOlightStorefrontProps> = ({
                   },
                   {
                     title: 'Gold Bracelets',
-                    img: 'https://images.unsplash.com/photo-1611591475870-87a414605ea2?w=800&auto=format&fit=crop&q=80',
+                    img: 'https://jewels-workdo.myshopify.com/cdn/shop/files/card-img-2.png?v=1698821196',
                     cat: 'Bracelets',
                   },
                   {
@@ -813,7 +813,14 @@ export const VtOlightStorefront: React.FC<VtOlightStorefrontProps> = ({
                       setViewMode('catalog')
                     }}
                   >
-                    <img src={tile.img} alt={tile.title} className="vto-lifestyle-img" />
+                    <img
+                      src={tile.img}
+                      alt={tile.title}
+                      className="vto-lifestyle-img"
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                      }}
+                    />
                     <div className="vto-lifestyle-overlay">
                       <h3 className="vto-lifestyle-title">{tile.title}</h3>
                     </div>
