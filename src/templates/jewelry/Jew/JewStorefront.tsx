@@ -1057,7 +1057,7 @@ export const JewStorefront: React.FC<JewStorefrontProps> = ({
             </div>
             <div className="jew-insta-tile">
               <img
-                src="https://images.unsplash.com/photo-1611591475155-4284ec289e61?w=600&auto=format&fit=crop&q=80"
+                src="https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=600&auto=format&fit=crop&q=80"
                 alt="Instagram 3"
                 className="jew-insta-img"
               />

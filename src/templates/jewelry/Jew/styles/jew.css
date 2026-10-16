@@ -1194,41 +1194,785 @@
 
 @media (max-width: 768px) {
   .jew-top-bar {
-    display: none;
+    display: none !important;
   }
   .jew-nav-left {
-    display: none;
+    display: none !important;
+  }
+  .jew-container {
+    padding: 0 16px !important;
+    box-sizing: border-box !important;
   }
   .jew-three-categories-grid {
-    grid-template-columns: 1fr;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
   }
   .jew-services-grid {
-    grid-template-columns: 1fr;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
   }
   .jew-products-track {
-    grid-template-columns: 1fr;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
   }
   .jew-three-products-grid {
-    grid-template-columns: 1fr;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
   }
   .jew-gifting-dual-grid {
-    grid-template-columns: 1fr;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
   }
+  .jew-split-grid,
+  .jew-split-grid-reversed {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  /* Quad Selection Grids (Golden Grace & Wedding Rings) - Column Stack */
+  .jew-quad-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    width: 100% !important;
+  }
+  .jew-quad-banner-card {
+    width: 100% !important;
+    height: 190px !important;
+    border-radius: 6px !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+  .jew-quad-banner-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+  }
+  .jew-quad-grid .jew-product-card {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Product Card Actions on Mobile */
+  .jew-shop-now-wrap {
+    min-height: 36px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-top: 8px !important;
+    width: 100% !important;
+  }
+  .jew-shop-now-btn {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    display: block !important;
+    width: 100% !important;
+    padding: 9px 16px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.8px !important;
+    background: #000000 !important;
+    color: #ffffff !important;
+    text-align: center !important;
+    border-radius: 4px !important;
+    box-sizing: border-box !important;
+    cursor: pointer !important;
+  }
+  .jew-hover-actions {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    top: 8px !important;
+    right: 8px !important;
+    gap: 6px !important;
+  }
+  .jew-hover-action-btn {
+    width: 30px !important;
+    height: 30px !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+    border-radius: 50% !important;
+  }
+
+  /* Latest News & Blogs (1 Column) */
   .jew-blog-grid {
-    grid-template-columns: 1fr;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    width: 100% !important;
   }
+  .jew-blog-card {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    background: #ffffff !important;
+    border: 1px solid #eeeeee !important;
+    border-radius: 6px !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+  .jew-blog-img-wrap {
+    width: 100% !important;
+    height: 190px !important;
+    overflow: hidden !important;
+  }
+  .jew-blog-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+  .jew-blog-body {
+    padding: 16px !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .jew-blog-date {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: #7d282b !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+    margin-bottom: 6px !important;
+  }
+  .jew-blog-title {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: #111111 !important;
+    line-height: 1.35 !important;
+    margin: 0 0 8px 0 !important;
+  }
+  .jew-blog-excerpt {
+    font-size: 12.5px !important;
+    color: #666666 !important;
+    line-height: 1.5 !important;
+    margin: 0 0 14px 0 !important;
+  }
+  .jew-blog-btn {
+    align-self: flex-start !important;
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: none !important;
+    padding: 8px 18px !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    border-radius: 3px !important;
+    cursor: pointer !important;
+  }
+
+  /* Instagram 2-Column Grid with Full-Width Center Banner */
   .jew-instagram-section {
-    grid-template-columns: repeat(2, 1fr);
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6px !important;
+    width: 100% !important;
   }
+  .jew-insta-tile {
+    height: 160px !important;
+    width: 100% !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+  .jew-insta-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+  .jew-insta-center-card {
+    grid-column: 1 / -1 !important;
+    height: 130px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 16px !important;
+    text-align: center !important;
+    background: #7d282b !important;
+    color: #ffffff !important;
+  }
+  .jew-insta-center-title {
+    font-family: 'Cormorant Garamond', Georgia, serif !important;
+    font-size: 19px !important;
+    font-weight: 600 !important;
+    letter-spacing: 2px !important;
+    line-height: 1.25 !important;
+    margin: 8px 0 0 !important;
+    white-space: normal !important;
+  }
+
   .jew-footer-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+    text-align: center !important;
+  }
+  .jew-footer-col-title {
+    margin-bottom: 12px !important;
   }
   .jew-hero-title {
-    font-size: 38px;
+    font-size: 32px !important;
+    line-height: 1.15 !important;
+  }
+  .jew-hero-subtitle {
+    font-size: 13px !important;
   }
   .jew-promo-banner {
-    flex-direction: column;
-    text-align: center;
+    flex-direction: column !important;
+    text-align: center !important;
+    padding: 28px 16px !important;
   }
+  .jew-back-to-top {
+    position: absolute !important;
+    bottom: 16px !important;
+    right: 16px !important;
+    width: 36px !important;
+    height: 36px !important;
+    z-index: 100 !important;
+  }
+}
+
+/* =========================================================================
+   SIMULATOR FRAME PARITY (Frame-Mobile & Device-Mobile Selectors)
+   ========================================================================= */
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-top-bar {
+  display: none !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-nav-left {
+  display: none !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-container {
+  padding: 0 16px !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-three-categories-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-services-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 14px !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-products-track {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-three-products-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-gifting-dual-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) :is(.jew-split-grid, .jew-split-grid-reversed) {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-quad-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+  width: 100% !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-quad-banner-card {
+  width: 100% !important;
+  height: 190px !important;
+  border-radius: 6px !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-quad-banner-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-quad-grid .jew-product-card {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-shop-now-wrap {
+  min-height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-top: 8px !important;
+  width: 100% !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-shop-now-btn {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  display: block !important;
+  width: 100% !important;
+  padding: 9px 16px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.8px !important;
+  background: #000000 !important;
+  color: #ffffff !important;
+  text-align: center !important;
+  border-radius: 4px !important;
+  box-sizing: border-box !important;
+  cursor: pointer !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-hover-actions {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  top: 8px !important;
+  right: 8px !important;
+  gap: 6px !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-hover-action-btn {
+  width: 30px !important;
+  height: 30px !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+  border-radius: 50% !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-blog-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+  width: 100% !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-blog-card {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  background: #ffffff !important;
+  border: 1px solid #eeeeee !important;
+  border-radius: 6px !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-blog-img-wrap {
+  width: 100% !important;
+  height: 190px !important;
+  overflow: hidden !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-blog-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-blog-body {
+  padding: 16px !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-blog-date {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: #7d282b !important;
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase !important;
+  margin-bottom: 6px !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-blog-title {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #111111 !important;
+  line-height: 1.35 !important;
+  margin: 0 0 8px 0 !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-blog-excerpt {
+  font-size: 12.5px !important;
+  color: #666666 !important;
+  line-height: 1.5 !important;
+  margin: 0 0 14px 0 !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-blog-btn {
+  align-self: flex-start !important;
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: none !important;
+  padding: 8px 18px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  border-radius: 3px !important;
+  cursor: pointer !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-instagram-section {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 6px !important;
+  width: 100% !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-insta-tile {
+  height: 160px !important;
+  width: 100% !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-insta-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-insta-center-card {
+  grid-column: 1 / -1 !important;
+  height: 130px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 16px !important;
+  text-align: center !important;
+  background: #7d282b !important;
+  color: #ffffff !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-insta-center-title {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: 19px !important;
+  font-weight: 600 !important;
+  letter-spacing: 2px !important;
+  line-height: 1.25 !important;
+  margin: 8px 0 0 !important;
+  white-space: normal !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-footer-grid {
+  grid-template-columns: 1fr !important;
+  gap: 24px !important;
+  text-align: center !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-footer-col-title {
+  margin-bottom: 12px !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-hero-title {
+  font-size: 32px !important;
+  line-height: 1.15 !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-hero-subtitle {
+  font-size: 13px !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-promo-banner {
+  flex-direction: column !important;
+  text-align: center !important;
+  padding: 28px 16px !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-back-to-top {
+  position: absolute !important;
+  bottom: 16px !important;
+  right: 16px !important;
+  width: 36px !important;
+  height: 36px !important;
+  z-index: 100 !important;
 }
 

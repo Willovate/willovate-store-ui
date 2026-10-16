@@ -213,7 +213,7 @@ export const JEW_BLOG_POSTS = [
     date: '14 SEP',
     title: 'Preserving Heirloom Jewels: Cleaning & Storage Etiquette',
     excerpt: 'Gentle cleaning techniques and expert storage tips to keep your polki, emeralds, and diamonds sparkling for generations.',
-    image: 'https://images.unsplash.com/photo-1611591475155-4284ec289e61?w=700&auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=700&auto=format&fit=crop&q=80',
   },
   {
     id: 'blog-4',
