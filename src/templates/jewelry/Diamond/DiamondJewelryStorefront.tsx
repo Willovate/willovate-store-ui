@@ -663,7 +663,14 @@ export const DiamondJewelryStorefront: React.FC<DiamondStorefrontProps> = ({
                   return (
                     <article key={product.id} className="dia-product-card">
                       <div className="dia-product-media" onClick={() => openPdp(product)}>
-                        <img src={product.images[0]} alt={product.name} className="dia-product-img" />
+                        <img
+                          src={product.images[0]}
+                          alt={product.name}
+                          className="dia-product-img"
+                          onError={(e) => {
+                            e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                          }}
+                        />
 
                         {/* Badges */}
                         <div className="dia-card-badges">
@@ -1074,7 +1081,14 @@ export const DiamondJewelryStorefront: React.FC<DiamondStorefrontProps> = ({
                   return (
                     <article key={product.id} className="dia-product-card">
                       <div className="dia-product-media" onClick={() => openPdp(product)}>
-                        <img src={product.images[0]} alt={product.name} className="dia-product-img" />
+                        <img
+                          src={product.images[0]}
+                          alt={product.name}
+                          className="dia-product-img"
+                          onError={(e) => {
+                            e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                          }}
+                        />
 
                         <div className="dia-card-badges">
                           {product.isBestSeller && <span className="dia-badge-pill dia-badge-best">Bestseller</span>}

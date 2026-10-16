@@ -162,7 +162,7 @@ export const VtOlightStorefront: React.FC<VtOlightStorefrontProps> = ({
   const cartSubtotal = cartItems.reduce((acc, i) => acc + i.product.price * i.quantity, 0)
 
   return (
-    <div className={`vto-root ${isMobile ? 'vto-mobile' : `vto-${effectiveDevice}`}`}>
+    <div className={`vto-root ${isMobile ? 'vto-mobile vto-mobile-view is-mobile' : `vto-${effectiveDevice}`}`}>
 
       {/* TOAST POPUP */}
       {toastMsg && (
@@ -713,7 +713,14 @@ export const VtOlightStorefront: React.FC<VtOlightStorefrontProps> = ({
                   <div key={prod.id} className="vto-product-card">
                     <div className="vto-card-image-box" onClick={() => openPdp(prod)}>
                       {prod.isSale && <span className="vto-sale-badge">Sale</span>}
-                      <img src={prod.images[0]} alt={prod.name} className="vto-card-img" />
+                      <img
+                        src={prod.images[0]}
+                        alt={prod.name}
+                        className="vto-card-img"
+                        onError={(e) => {
+                          e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                        }}
+                      />
 
                       {/* Hover action bar */}
                       <div className="vto-card-actions-bar">
@@ -853,7 +860,14 @@ export const VtOlightStorefront: React.FC<VtOlightStorefrontProps> = ({
                   <div key={prod.id} className="vto-product-card">
                     <div className="vto-card-image-box" onClick={() => openPdp(prod)}>
                       {prod.isSale && <span className="vto-sale-badge">Sale</span>}
-                      <img src={prod.images[0]} alt={prod.name} className="vto-card-img" />
+                      <img
+                        src={prod.images[0]}
+                        alt={prod.name}
+                        className="vto-card-img"
+                        onError={(e) => {
+                          e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                        }}
+                      />
 
                       <div className="vto-card-actions-bar">
                         <button
@@ -1177,7 +1191,14 @@ export const VtOlightStorefront: React.FC<VtOlightStorefrontProps> = ({
                 <div key={prod.id} className="vto-product-card">
                   <div className="vto-card-image-box" onClick={() => openPdp(prod)}>
                     {prod.isSale && <span className="vto-sale-badge">Sale</span>}
-                    <img src={prod.images[0]} alt={prod.name} className="vto-card-img" />
+                    <img
+                      src={prod.images[0]}
+                      alt={prod.name}
+                      className="vto-card-img"
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                      }}
+                    />
 
                     <div className="vto-card-actions-bar">
                       <button

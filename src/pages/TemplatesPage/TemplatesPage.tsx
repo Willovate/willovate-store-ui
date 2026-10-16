@@ -664,6 +664,8 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   ) {
     return (
       <JewelsWorkDoStorefront
+        device={device}
+        deviceView={device}
         onBack={onClose}
         onUseTemplate={onUseTemplate}
       />
@@ -681,6 +683,8 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   ) {
     return (
       <DiamondWorkDoStorefront
+        device={device}
+        deviceView={device}
         onBack={onClose}
         onUseTemplate={onUseTemplate}
       />
@@ -699,6 +703,8 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   ) {
     return (
       <VtOlightStorefront
+        device={device}
+        deviceView={device}
         onBack={onClose}
         onUseTemplate={onUseTemplate}
       />
@@ -714,6 +720,8 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   ) {
     return (
       <SwarnaStorefront
+        device={device}
+        deviceView={device}
         onBack={onClose}
         onUseTemplate={onUseTemplate}
       />
@@ -731,6 +739,8 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   ) {
     return (
       <JewStorefront
+        device={device}
+        deviceView={device}
         onBack={onClose}
         onUseTemplate={onUseTemplate}
       />

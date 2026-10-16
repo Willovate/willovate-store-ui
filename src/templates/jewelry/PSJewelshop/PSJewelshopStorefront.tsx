@@ -180,7 +180,8 @@ export const PSJewelshopStorefront: React.FC<PSJewelshopStorefrontProps> = ({
   initialView = 'home',
   onUseTemplate,
 }) => {
-  const effectiveDevice = deviceView || device
+  const effectiveDevice = deviceView || device || 'desktop'
+  const isMobile = effectiveDevice === 'mobile'
 
   // State
   const [activeTab, setActiveTab] = useState<PSJewelshopCategoryType>('new')
@@ -280,7 +281,7 @@ export const PSJewelshopStorefront: React.FC<PSJewelshopStorefrontProps> = ({
   const formatPrice = (val: number) => `$${val.toFixed(2)}`
 
   return (
-    <div className={`psj-root psj-device-${effectiveDevice}`}>
+    <div className={`psj-root psj-device-${effectiveDevice} ${isMobile ? 'psj-mobile-view is-mobile' : ''}`}>
       {/* Toast Notification */}
       {toastMessage && (
         <div className="psj-toast">
@@ -856,7 +857,14 @@ export const PSJewelshopStorefront: React.FC<PSJewelshopStorefrontProps> = ({
                     <div key={prod.id} className="psj-product-card">
                       <div className="psj-product-thumb-wrap">
                         {prod.badge && <span className="psj-card-badge">{prod.badge}</span>}
-                        <img src={prod.images[0]} alt={prod.name} className="psj-product-thumb" />
+                        <img
+                          src={prod.images[0]}
+                          alt={prod.name}
+                          className="psj-product-thumb"
+                          onError={(e) => {
+                            e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                          }}
+                        />
 
                         <div className="psj-product-quick-actions">
                           <button

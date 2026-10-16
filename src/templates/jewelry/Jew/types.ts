@@ -28,6 +28,10 @@ export interface JewFilterState {
 }
 
 export interface JewStorefrontProps {
+  initialView?: 'home' | 'catalog' | 'pdp'
+  templateData?: any
+  device?: string
+  deviceView?: string
   onBack?: () => void
   onClose?: () => void
   onUseTemplate?: (templateId: string) => void

@@ -11,7 +11,16 @@ import {
 } from './data/jewData'
 import './styles/jew.css'
 
-export const JewStorefront: React.FC<JewStorefrontProps> = () => {
+export const JewStorefront: React.FC<JewStorefrontProps> = ({
+  device = 'desktop',
+  deviceView,
+  onBack: _onBack,
+  onClose: _onClose,
+  onUseTemplate: _onUseTemplate,
+}) => {
+  const effectiveDevice = deviceView || device || 'desktop'
+  const isMobile = effectiveDevice === 'mobile'
+
   // View Mode: 'home' | 'catalog' | 'pdp'
   const [viewMode, setViewMode] = useState<'home' | 'catalog' | 'pdp'>('home')
   const [selectedProduct, setSelectedProduct] = useState<JewProduct>(JEW_PRODUCTS[0])
@@ -161,7 +170,7 @@ export const JewStorefront: React.FC<JewStorefrontProps> = () => {
   const currentSlide = JEW_HERO_SLIDES[currentSlideIndex]
 
   return (
-    <div className="jew-root">
+    <div className={`jew-root ${isMobile ? 'jew-mobile-view is-mobile' : ''}`}>
       {/* =========================================================================
           1. TOP ANNOUNCEMENT STRIP (BURGUNDY #7d282b)
           ========================================================================= */}
@@ -663,7 +672,14 @@ export const JewStorefront: React.FC<JewStorefrontProps> = () => {
                       </div>
 
                       <div className="jew-product-img-wrap">
-                        <img src={product.image} alt={product.name} className="jew-product-img" />
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="jew-product-img"
+                          onError={(e) => {
+                            e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                          }}
+                        />
                       </div>
 
                       <span className="jew-product-brand">{product.brand}</span>
@@ -831,7 +847,14 @@ export const JewStorefront: React.FC<JewStorefrontProps> = () => {
                         </button>
                       </div>
 
-                      <img src={product.image} alt={product.name} className="jew-product-img" />
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="jew-product-img"
+                        onError={(e) => {
+                          e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                        }}
+                      />
                     </div>
 
                     <span className="jew-product-brand">{product.brand}</span>
@@ -919,7 +942,14 @@ export const JewStorefront: React.FC<JewStorefrontProps> = () => {
                       </div>
 
                       <div className="jew-product-img-wrap">
-                        <img src={product.image} alt={product.name} className="jew-product-img" />
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="jew-product-img"
+                          onError={(e) => {
+                            e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                          }}
+                        />
                       </div>
                     </div>
 
@@ -1120,7 +1150,14 @@ export const JewStorefront: React.FC<JewStorefrontProps> = () => {
                     <span className="jew-sold-out-badge">Sold Out</span>
                   )}
                   <div className="jew-product-img-wrap">
-                    <img src={product.image} alt={product.name} className="jew-product-img" />
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="jew-product-img"
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                      }}
+                    />
                   </div>
                   <span className="jew-product-brand">{product.brand}</span>
                   <h4 className="jew-product-name">{product.name}</h4>

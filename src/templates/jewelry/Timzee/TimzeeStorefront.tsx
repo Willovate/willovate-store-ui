@@ -24,7 +24,8 @@ export const TimzeeStorefront: React.FC<TimzeeStorefrontProps> = ({
   initialView: _initialView = 'home',
   onUseTemplate,
 }) => {
-  const activeDevice = deviceView || device
+  const activeDevice = deviceView || device || 'desktop'
+  const isMobile = activeDevice === 'mobile'
 
   // Hero Slider
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -198,7 +199,7 @@ export const TimzeeStorefront: React.FC<TimzeeStorefrontProps> = ({
 
   return (
     <div
-      className={`tmz-root tmz-device-${activeDevice}`}
+      className={`tmz-root tmz-device-${activeDevice} ${isMobile ? 'tmz-mobile-view is-mobile' : ''}`}
       data-testid="timzee-storefront"
     >
       {/* ================= 1. HEADER (AS OBSERVED IN SCREENSHOT) ================= */}
@@ -579,7 +580,14 @@ export const TimzeeStorefront: React.FC<TimzeeStorefrontProps> = ({
                       setSelectedImageIndex(0)
                     }}
                   >
-                    <img src={watch.images[0]} alt={watch.name} loading="lazy" />
+                    <img
+                      src={watch.images[0]}
+                      alt={watch.name}
+                      loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&auto=format&fit=crop&q=80'
+                      }}
+                    />
                   </div>
 
                   <h3
@@ -786,7 +794,14 @@ export const TimzeeStorefront: React.FC<TimzeeStorefrontProps> = ({
                       setSelectedImageIndex(0)
                     }}
                   >
-                    <img src={watch.images[0]} alt={watch.name} loading="lazy" />
+                    <img
+                      src={watch.images[0]}
+                      alt={watch.name}
+                      loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&auto=format&fit=crop&q=80'
+                      }}
+                    />
                   </div>
                   <h3
                     className="tmz-watch-name"
@@ -814,7 +829,14 @@ export const TimzeeStorefront: React.FC<TimzeeStorefrontProps> = ({
                       setSelectedImageIndex(0)
                     }}
                   >
-                    <img src={watch.images[0]} alt={watch.name} loading="lazy" />
+                    <img
+                      src={watch.images[0]}
+                      alt={watch.name}
+                      loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&auto=format&fit=crop&q=80'
+                      }}
+                    />
                   </div>
                   <h3
                     className="tmz-watch-name"

@@ -569,11 +569,14 @@
   }
 
   /* ===========================================================================
-     4. PRODUCT GRIDS & CARDS - 2-COLUMN LUXURY MOBILE PRESENTATION
+     4. PRODUCT GRIDS & CARDS - 2-COLUMN LUXURY MOBILE PRESENTATION (ALL 10 TEMPLATES)
      =========================================================================== */
   :is(
     .jew-products-grid,
     .jew-products-two-col-grid,
+    .jew-products-track,
+    .jew-three-products-grid,
+    .jew-quad-grid,
     .swarna-products-grid,
     .swarna-tab-products-grid,
     .vto-products-grid,
@@ -583,8 +586,16 @@
     .jwd-featured-grid,
     .tmz-products-grid,
     .tmz-grid-4col,
+    .tmz-popular-grid-3,
+    .tmz-cat-grid-5,
+    .tmz-cat-row-top,
+    .tmz-cat-row-bottom,
     .diamond-products-grid,
     .diamond-workdo-products-grid,
+    .dia-products-grid,
+    .dwd-four-products-grid,
+    .dwd-engagement-cards,
+    .dwd-split-wide-grid,
     .lp-products-grid,
     .psj-products-grid,
     .jh-product-grid,
@@ -604,8 +615,12 @@
     .vto-product-card,
     .jwd-card,
     .tmz-product-card,
+    .tmz-watch-box,
     .diamond-product-card,
+    .dia-product-card,
     .diamond-workdo-card,
+    .dwd-product-card,
+    .dwd-split-wide-card,
     .lp-product-card,
     .psj-product-card,
     .jh-product-card
@@ -620,12 +635,19 @@
   /* Product Image Aspect Ratio & Fit */
   :is(
     .jew-card-image-wrap,
+    .jew-product-img-wrap,
     .swarna-card-img-wrap,
     .vto-card-img-wrap,
     .jwd-card-media,
     .tmz-card-image-wrap,
+    .tmz-watch-img-slot,
     .diamond-card-img-wrap,
+    .dia-product-media,
+    .dwd-card-img-wrap,
+    .dwd-split-card-media,
+    .lp-card-thumb-wrap,
     .lp-card-img-wrap,
+    .psj-product-thumb-wrap,
     .jh-product-thumb
   ) {
     aspect-ratio: 1 / 1 !important;
@@ -637,12 +659,20 @@
 
   :is(
     .jew-card-image-wrap img,
+    .jew-product-img-wrap img,
     .swarna-card-img-wrap img,
     .vto-card-img-wrap img,
     .jwd-card-media img,
     .tmz-card-image-wrap img,
+    .tmz-watch-img-slot img,
     .diamond-card-img-wrap img,
+    .dia-product-img,
+    .dwd-card-img,
+    .dwd-split-card-img,
+    .lp-card-thumb,
+    .lp-card-thumb-hover,
     .lp-card-img-wrap img,
+    .psj-product-thumb,
     .jh-product-img
   ) {
     width: 100% !important;
@@ -658,8 +688,13 @@
     .vto-card-title,
     .jwd-card-title,
     .tmz-card-title,
+    .tmz-watch-name,
     .diamond-product-title,
+    .dia-product-title,
+    .dwd-card-title,
+    .dwd-split-card-title,
     .lp-product-title,
+    .psj-product-name,
     .jh-product-name
   ) {
     font-size: 12.5px !important;
@@ -671,6 +706,7 @@
     -webkit-line-clamp: 2 !important;
     -webkit-box-orient: vertical !important;
     min-height: 2.7em !important;
+    max-height: 2.7em !important;
   }
 
   /* Product Prices */
@@ -680,7 +716,12 @@
     .vto-card-price,
     .jwd-card-price,
     .tmz-card-price,
+    .tmz-watch-price-row,
     .diamond-price,
+    .dia-price,
+    .dwd-price,
+    .lp-price,
+    .psj-product-price,
     .jh-price-row,
     .jh-current-price
   ) {
@@ -693,10 +734,15 @@
   :is(
     .jh-add-cart-btn,
     .jew-card-btn,
+    .jew-shop-now-btn,
     .swarna-card-btn,
     .vto-card-btn,
     .jwd-card-btn,
-    .tmz-card-btn
+    .tmz-card-btn,
+    .dia-add-btn,
+    .dwd-card-cart-btn,
+    .lp-card-btn,
+    .psj-add-cart-btn
   ) {
     width: 100% !important;
     padding: 8px 4px !important;
@@ -711,21 +757,38 @@
   }
 
   /* ===========================================================================
-     5. SPLIT BANNERS & PROMO CARDS - 1-COLUMN VERTICAL STACK
+     5. SPLIT BANNERS & PROMO CARDS - 1-COLUMN VERTICAL STACK (ALL 10 TEMPLATES)
      =========================================================================== */
   :is(
     .jew-split-banner-grid,
     .jew-promo-banner-grid,
+    .jew-promo-banner,
+    .jew-gifting-dual-grid,
     .swarna-golden-grace-grid,
     .swarna-rings-split-grid,
+    .swarna-dark-grid,
+    .swarna-story-grid,
     .vto-rings-split-grid,
     .vto-promo-grid,
+    .vto-two-promo-grid,
     .jwd-regal-grid,
     .jwd-banner-grid,
+    .jwd-beauty-inner,
     .tmz-deal-grid,
     .tmz-split-grid,
     .diamond-split-grid,
+    .dia-craft-grid,
+    .dwd-engagement-split,
+    .dwd-business-split,
+    .dwd-split-wide-grid,
+    .dwd-luxury-dark-grid,
+    .dwd-silver-grid,
+    .lp-hero-grid,
     .lp-split-grid,
+    .lp-banners-grid,
+    .psj-staggered-row,
+    .psj-staggered-reverse,
+    .psj-dual-banners-grid,
     .jh-split-grid,
     .jh-promo-grid
   ) {
@@ -735,10 +798,25 @@
     width: 100% !important;
   }
 
-  /* Johary Promo Cards (Screenshot 1) */
-  :is(.jh-promo-card) {
-    height: 230px !important;
+  /* Promo Cards across all templates (Screenshot 1 & responsive sizing) */
+  :is(
+    .jh-promo-card,
+    .dia-cat-card,
+    .diamond-cat-card,
+    .dwd-cat-promo-card,
+    .jew-category-card,
+    .jwd-promo-card,
+    .lp-banner-card,
+    .swarna-promo-card,
+    .tmz-flash-card,
+    .vto-promo-card,
+    .psj-staggered-banner-side
+  ) {
+    min-height: 200px !important;
+    max-height: 260px !important;
     width: 100% !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
   }
 
   :is(.jh-promo-content) {
@@ -757,20 +835,20 @@
     margin-bottom: 8px !important;
   }
 
-  /* Johary Split Atelier & Spotlight (Screenshot 3) */
-  :is(.jh-story-title) {
+  /* Split Atelier & Spotlight Story (Screenshot 3 - All 10 Templates) */
+  :is(.jh-story-title, .dia-story-title, .dwd-story-title, .jew-story-title, .swarna-story-title) {
     font-size: 26px !important;
     line-height: 1.25 !important;
     margin: 0 0 14px 0 !important;
   }
 
-  :is(.jh-story-desc) {
+  :is(.jh-story-desc, .dia-story-desc, .dwd-story-desc, .jew-story-desc, .swarna-story-desc) {
     font-size: 13.5px !important;
     line-height: 1.55 !important;
     margin-bottom: 16px !important;
   }
 
-  :is(.jh-spotlight-card) {
+  :is(.jh-spotlight-card, .dia-craft-card, .dwd-spotlight-card, .jwd-regal-card) {
     flex-direction: column !important;
     text-align: center !important;
     padding: 18px !important;
@@ -779,7 +857,7 @@
     gap: 16px !important;
   }
 
-  :is(.jh-spotlight-img) {
+  :is(.jh-spotlight-img, .dia-craft-img, .dwd-spotlight-img) {
     width: 100% !important;
     max-width: 180px !important;
     height: auto !important;
@@ -791,7 +869,8 @@
     .swarna-grace-imagery,
     .jew-split-banner-image,
     .vto-rings-split-image,
-    .jwd-regal-media
+    .jwd-regal-media,
+    .dwd-split-card-media
   ) {
     width: 100% !important;
     max-height: 260px !important;
@@ -803,7 +882,8 @@
     .swarna-grace-imagery img,
     .jew-split-banner-image img,
     .vto-rings-split-image img,
-    .jwd-regal-media img
+    .jwd-regal-media img,
+    .dwd-split-card-media img
   ) {
     width: 100% !important;
     height: 100% !important;
@@ -812,15 +892,22 @@
   }
 
   /* ===========================================================================
-     6. VALUE PILLARS & SERVICES (2x2 GRID ON MOBILE) (Screenshot 4)
+     6. VALUE PILLARS & SERVICES (2x2 GRID ON MOBILE) (Screenshot 4 - ALL 10 TEMPLATES)
      =========================================================================== */
   :is(
     .jew-service-grid,
     .swarna-values-grid,
+    .swarna-counters-row,
     .vto-services-grid,
+    .vto-trust-grid,
     .jwd-features-grid,
+    .jwd-trust-row,
     .tmz-features-grid,
     .diamond-services-grid,
+    .dia-pillars-grid,
+    .dwd-trust-pillars-row,
+    .lp-services-grid,
+    .psj-features-grid,
     .jh-trust-grid
   ) {
     display: grid !important;
@@ -830,7 +917,23 @@
     width: 100% !important;
   }
 
-  :is(.jh-trust-item) {
+  :is(
+    .jh-trust-item,
+    .dia-pillar-item,
+    .diamond-service-item,
+    .dwd-trust-pillar,
+    .jew-service-item,
+    .jew-service-card,
+    .jwd-trust-card,
+    .jwd-feature-box,
+    .lp-service-item,
+    .psj-feature-item,
+    .swarna-counter-box,
+    .swarna-value-card,
+    .tmz-feature-box,
+    .vto-trust-item
+  ) {
+    display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     text-align: center !important;
@@ -838,19 +941,23 @@
     min-width: 0 !important;
   }
 
-  :is(.jh-trust-icon) {
+  :is(.jh-trust-icon, .dia-pillar-icon, .dwd-pillar-icon, .jew-service-icon, .lp-service-icon, .psj-feature-icon) {
     width: 44px !important;
     height: 44px !important;
     font-size: 20px !important;
     flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
   }
 
-  :is(.jh-trust-heading) {
+  :is(.jh-trust-heading, .dia-pillar-heading, .dwd-pillar-heading, .jew-service-heading, .lp-service-title, .psj-feature-title) {
     font-size: 12.5px !important;
     margin: 0 !important;
   }
 
-  :is(.jh-trust-desc) {
+  :is(.jh-trust-desc, .dia-pillar-desc, .dwd-pillar-desc, .jew-service-desc, .lp-service-desc, .psj-feature-desc) {
     font-size: 11px !important;
     line-height: 1.4 !important;
     margin: 0 !important;
@@ -864,7 +971,9 @@
     .swarna-categories-grid,
     .vto-categories-grid,
     .jwd-categories-grid,
-    .tmz-categories-grid
+    .tmz-categories-grid,
+    .dia-cat-grid,
+    .lp-cat-grid
   ) {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
@@ -900,7 +1009,7 @@
   }
 
   /* ===========================================================================
-     9. NEWSLETTER SUBSCRIPTION FORMS - VERTICAL STACK (Screenshot 5)
+     9. NEWSLETTER SUBSCRIPTION FORMS - VERTICAL STACK (Screenshot 5 - ALL 10 TEMPLATES)
      =========================================================================== */
   :is(
     .jew-newsletter-form,
@@ -909,6 +1018,10 @@
     .jwd-newsletter-form,
     .tmz-newsletter-form,
     .diamond-newsletter-form,
+    .dia-newsletter-form,
+    .dwd-newsletter-form,
+    .lp-newsletter-form,
+    .psj-newsletter-form,
     .jh-news-form
   ) {
     display: flex !important;
@@ -923,7 +1036,11 @@
     .jew-newsletter-input-group,
     .swarna-newsletter-wrap,
     .vto-newsletter-input-group,
-    .jwd-newsletter-input-wrap
+    .jwd-newsletter-input-wrap,
+    .dia-newsletter-wrap,
+    .dwd-newsletter-input-group,
+    .lp-newsletter-box,
+    .psj-newsletter-wrap
   ) {
     display: flex !important;
     flex-direction: column !important;
@@ -938,6 +1055,10 @@
     .jwd-newsletter-form input,
     .tmz-newsletter-form input,
     .diamond-newsletter-form input,
+    .dia-newsletter-form input,
+    .dwd-newsletter-form input,
+    .lp-newsletter-form input,
+    .psj-newsletter-form input,
     .jh-news-input
   ) {
     width: 100% !important;
@@ -952,6 +1073,10 @@
     .jwd-newsletter-form button,
     .tmz-newsletter-form button,
     .diamond-newsletter-form button,
+    .dia-newsletter-form button,
+    .dwd-newsletter-form button,
+    .lp-newsletter-form button,
+    .psj-newsletter-form button,
     .jh-news-btn
   ) {
     width: 100% !important;
@@ -960,7 +1085,7 @@
   }
 
   /* ===========================================================================
-     10. FOOTERS - STACKED 1-COLUMN LAYOUT WITH CENTERED PAYMENT ICONS
+     10. FOOTERS - STACKED 1-COLUMN LAYOUT WITH CENTERED PAYMENT ICONS (ALL 10 TEMPLATES)
      =========================================================================== */
   :is(
     .jew-footer-grid,
@@ -969,7 +1094,9 @@
     .jwd-footer-grid,
     .tmz-footer-grid,
     .diamond-footer-grid,
+    .dia-footer-grid,
     .diamond-workdo-footer-grid,
+    .dwd-footer-grid,
     .lp-footer-grid,
     .psj-footer-grid,
     .jh-footer-grid
@@ -987,12 +1114,17 @@
     .jwd-footer-col,
     .tmz-footer-col,
     .diamond-footer-col,
+    .dia-footer-col,
+    .dwd-footer-col,
+    .lp-footer-col,
+    .psj-footer-col,
     .jh-footer-col
   ) {
     align-items: center !important;
     display: flex !important;
     flex-direction: column !important;
     gap: 8px !important;
+    text-align: center !important;
   }
 
   :is(
@@ -1000,7 +1132,12 @@
     .swarna-payment-icons,
     .vto-payment-methods,
     .jwd-payment-badges,
-    .diamond-payment-icons
+    .diamond-payment-icons,
+    .dia-payment-icons,
+    .dwd-payment-icons,
+    .lp-payment-icons,
+    .psj-payment-icons,
+    .jh-payment-icons
   ) {
     display: flex !important;
     flex-wrap: wrap !important;
@@ -1314,10 +1451,26 @@
   line-height: 1.5 !important;
 }
 
-/* Simulator: Product grids (2 columns) */
-:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) :is(
+/* Simulator & Mobile View Roots: Product grids (2 columns) */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
   .jew-products-grid,
   .jew-products-two-col-grid,
+  .jew-products-track,
+  .jew-three-products-grid,
+  .jew-quad-grid,
   .swarna-products-grid,
   .swarna-tab-products-grid,
   .vto-products-grid,
@@ -1327,62 +1480,391 @@
   .jwd-featured-grid,
   .tmz-products-grid,
   .tmz-grid-4col,
+  .tmz-popular-grid-3,
+  .tmz-cat-grid-5,
+  .tmz-cat-row-top,
+  .tmz-cat-row-bottom,
   .diamond-products-grid,
   .diamond-workdo-products-grid,
+  .dia-products-grid,
+  .dwd-four-products-grid,
+  .dwd-engagement-cards,
+  .dwd-split-wide-grid,
   .lp-products-grid,
   .psj-products-grid,
   .jh-product-grid,
   .jh-products-grid
-),
-.jh-mobile-view .jh-product-grid {
+) {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 10px !important;
+  padding: 0 !important;
+  margin: 16px 0 !important;
 }
 
-/* Simulator: Split banners and Promo Cards (1 column) */
-:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) :is(
+/* Simulator & Mobile View Roots: Product Card normalization */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jew-product-card,
+  .swarna-product-card,
+  .vto-product-card,
+  .jwd-card,
+  .tmz-product-card,
+  .tmz-watch-box,
+  .diamond-product-card,
+  .dia-product-card,
+  .diamond-workdo-card,
+  .dwd-product-card,
+  .dwd-split-wide-card,
+  .lp-product-card,
+  .psj-product-card,
+  .jh-product-card
+) {
+  min-width: 0 !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-sizing: border-box !important;
+}
+
+/* Simulator & Mobile View Roots: Product Image Aspect Ratio & Fit */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jew-card-image-wrap,
+  .jew-product-img-wrap,
+  .swarna-card-img-wrap,
+  .vto-card-img-wrap,
+  .jwd-card-media,
+  .tmz-card-image-wrap,
+  .tmz-watch-img-slot,
+  .diamond-card-img-wrap,
+  .dia-product-media,
+  .dwd-card-img-wrap,
+  .dwd-split-card-media,
+  .lp-card-thumb-wrap,
+  .lp-card-img-wrap,
+  .psj-product-thumb-wrap,
+  .jh-product-thumb
+) {
+  aspect-ratio: 1 / 1 !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  position: relative !important;
+  border-radius: 6px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jew-card-image-wrap img,
+  .jew-product-img-wrap img,
+  .swarna-card-img-wrap img,
+  .vto-card-img-wrap img,
+  .jwd-card-media img,
+  .tmz-card-image-wrap img,
+  .tmz-watch-img-slot img,
+  .diamond-card-img-wrap img,
+  .dia-product-img,
+  .dwd-card-img,
+  .dwd-split-card-img,
+  .lp-card-thumb,
+  .lp-card-thumb-hover,
+  .lp-card-img-wrap img,
+  .psj-product-thumb,
+  .jh-product-img
+) {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+/* Simulator & Mobile View Roots: Product Card Titles Clamp */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jew-product-name,
+  .swarna-product-title,
+  .vto-card-title,
+  .jwd-card-title,
+  .tmz-card-title,
+  .tmz-watch-name,
+  .diamond-product-title,
+  .dia-product-title,
+  .dwd-card-title,
+  .dwd-split-card-title,
+  .lp-product-title,
+  .psj-product-name,
+  .jh-product-name
+) {
+  font-size: 12.5px !important;
+  line-height: 1.35 !important;
+  margin: 8px 0 4px 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  min-height: 2.7em !important;
+  max-height: 2.7em !important;
+}
+
+/* Simulator & Mobile View Roots: Product Prices */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jew-product-price,
+  .swarna-price-row,
+  .vto-card-price,
+  .jwd-card-price,
+  .tmz-card-price,
+  .tmz-watch-price-row,
+  .diamond-price,
+  .dia-price,
+  .dwd-price,
+  .lp-price,
+  .psj-product-price,
+  .jh-price-row,
+  .jh-current-price
+) {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  margin-bottom: 6px !important;
+}
+
+/* Simulator & Mobile View Roots: Add to Cart Card Buttons (Centered & Non-wrapping) */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jh-add-cart-btn,
+  .jew-card-btn,
+  .jew-shop-now-btn,
+  .swarna-card-btn,
+  .vto-card-btn,
+  .jwd-card-btn,
+  .tmz-card-btn,
+  .dia-add-btn,
+  .dwd-card-cart-btn,
+  .lp-card-btn,
+  .psj-add-cart-btn
+) {
+  width: 100% !important;
+  padding: 8px 4px !important;
+  font-size: 10.5px !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  box-sizing: border-box !important;
+  text-align: center !important;
+  border-radius: 4px !important;
+}
+
+/* Simulator & Mobile View Roots: Split banners and Promo Cards (1 column) */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
   .jew-split-banner-grid,
   .jew-promo-banner-grid,
+  .jew-promo-banner,
+  .jew-gifting-dual-grid,
   .swarna-golden-grace-grid,
   .swarna-rings-split-grid,
+  .swarna-dark-grid,
+  .swarna-story-grid,
   .vto-rings-split-grid,
   .vto-promo-grid,
+  .vto-two-promo-grid,
   .jwd-regal-grid,
   .jwd-banner-grid,
+  .jwd-beauty-inner,
   .tmz-deal-grid,
   .tmz-split-grid,
   .diamond-split-grid,
+  .dia-craft-grid,
+  .dwd-engagement-split,
+  .dwd-business-split,
+  .dwd-split-wide-grid,
+  .dwd-luxury-dark-grid,
+  .dwd-silver-grid,
+  .lp-hero-grid,
   .lp-split-grid,
+  .lp-banners-grid,
+  .psj-staggered-row,
+  .psj-staggered-reverse,
+  .psj-dual-banners-grid,
   .jh-split-grid,
   .jh-promo-grid
-),
-.jh-mobile-view :is(.jh-split-grid, .jh-promo-grid) {
+) {
   display: flex !important;
   flex-direction: column !important;
   gap: 16px !important;
-}
-
-:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) .jh-promo-card,
-.jh-mobile-view .jh-promo-card {
-  height: 230px !important;
   width: 100% !important;
 }
 
-:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) .jh-promo-content,
-.jh-mobile-view .jh-promo-content {
+/* Simulator & Mobile View Roots: Promo Cards across all 10 templates */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jh-promo-card,
+  .dia-cat-card,
+  .diamond-cat-card,
+  .dwd-cat-promo-card,
+  .jew-category-card,
+  .jwd-promo-card,
+  .lp-banner-card,
+  .swarna-promo-card,
+  .tmz-flash-card,
+  .vto-promo-card,
+  .psj-staggered-banner-side
+) {
+  min-height: 200px !important;
+  max-height: 260px !important;
+  width: 100% !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) .jh-promo-content {
   padding: 20px !important;
 }
 
-:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) .jh-promo-title,
-.jh-mobile-view .jh-promo-title {
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) .jh-promo-title {
   font-size: 19px !important;
   line-height: 1.25 !important;
   margin: 0 0 10px 0 !important;
 }
 
-:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) .jh-spotlight-card,
-.jh-mobile-view .jh-spotlight-card {
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.jh-spotlight-card, .dia-craft-card, .dwd-spotlight-card, .jwd-regal-card) {
   flex-direction: column !important;
   text-align: center !important;
   padding: 18px !important;
@@ -1391,8 +1873,20 @@
   gap: 16px !important;
 }
 
-:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) .jh-spotlight-img,
-.jh-mobile-view .jh-spotlight-img {
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.jh-spotlight-img, .dia-craft-img, .dwd-spotlight-img) {
   width: 100% !important;
   max-width: 180px !important;
   height: auto !important;
@@ -1400,24 +1894,73 @@
   margin: 0 auto !important;
 }
 
-/* Simulator: Value pillars (2x2) */
-:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) :is(
+/* Simulator & Mobile View Roots: Value pillars (2x2) */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
   .jew-service-grid,
   .swarna-values-grid,
+  .swarna-counters-row,
   .vto-services-grid,
+  .vto-trust-grid,
   .jwd-features-grid,
+  .jwd-trust-row,
   .tmz-features-grid,
   .diamond-services-grid,
+  .dia-pillars-grid,
+  .dwd-trust-pillars-row,
+  .lp-services-grid,
+  .psj-features-grid,
   .jh-trust-grid
-),
-.jh-mobile-view .jh-trust-grid {
+) {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 14px 10px !important;
+  padding: 16px 0 !important;
+  width: 100% !important;
 }
 
-:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) .jh-trust-item,
-.jh-mobile-view .jh-trust-item {
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jh-trust-item,
+  .dia-pillar-item,
+  .diamond-service-item,
+  .dwd-trust-pillar,
+  .jew-service-item,
+  .jew-service-card,
+  .jwd-trust-card,
+  .jwd-feature-box,
+  .lp-service-item,
+  .psj-feature-item,
+  .swarna-counter-box,
+  .swarna-value-card,
+  .tmz-feature-box,
+  .vto-trust-item
+) {
+  display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   text-align: center !important;
@@ -1425,66 +1968,253 @@
   min-width: 0 !important;
 }
 
-:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) .jh-trust-icon,
-.jh-mobile-view .jh-trust-icon {
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.jh-trust-icon, .dia-pillar-icon, .dwd-pillar-icon, .jew-service-icon, .lp-service-icon, .psj-feature-icon) {
   width: 44px !important;
   height: 44px !important;
   font-size: 20px !important;
   flex-shrink: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 auto !important;
 }
 
-/* Simulator: Newsletters (vertical stack) */
-:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) :is(
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.jh-trust-heading, .dia-pillar-heading, .dwd-pillar-heading, .jew-service-heading, .lp-service-title, .psj-feature-title) {
+  font-size: 12.5px !important;
+  margin: 0 !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.jh-trust-desc, .dia-pillar-desc, .dwd-pillar-desc, .jew-service-desc, .lp-service-desc, .psj-feature-desc) {
+  font-size: 11px !important;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+}
+
+/* Simulator & Mobile View Roots: Newsletters (vertical stack) */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
   .jew-newsletter-form,
   .swarna-newsletter-form,
   .vto-newsletter-form,
   .jwd-newsletter-form,
   .tmz-newsletter-form,
   .diamond-newsletter-form,
+  .dia-newsletter-form,
+  .dwd-newsletter-form,
+  .lp-newsletter-form,
+  .psj-newsletter-form,
   .jh-news-form
-),
-.jh-mobile-view .jh-news-form {
+) {
   display: flex !important;
   flex-direction: column !important;
   width: 100% !important;
   gap: 10px !important;
 }
 
-:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) .jh-news-input,
-.jh-mobile-view .jh-news-input {
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jew-newsletter-form input,
+  .swarna-newsletter-form input,
+  .vto-newsletter-form input,
+  .jwd-newsletter-form input,
+  .tmz-newsletter-form input,
+  .diamond-newsletter-form input,
+  .dia-newsletter-form input,
+  .dwd-newsletter-form input,
+  .lp-newsletter-form input,
+  .psj-newsletter-form input,
+  .jh-news-input
+) {
   width: 100% !important;
   height: 44px !important;
   box-sizing: border-box !important;
 }
 
-:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) .jh-news-btn,
-.jh-mobile-view .jh-news-btn {
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jew-newsletter-form button,
+  .swarna-newsletter-form button,
+  .vto-newsletter-form button,
+  .jwd-newsletter-form button,
+  .tmz-newsletter-form button,
+  .diamond-newsletter-form button,
+  .dia-newsletter-form button,
+  .dwd-newsletter-form button,
+  .lp-newsletter-form button,
+  .psj-newsletter-form button,
+  .jh-news-btn
+) {
   width: 100% !important;
   height: 44px !important;
 }
 
-/* Simulator: Footers (1 column) */
-:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) :is(
+/* Simulator & Mobile View Roots: Footers (1 column) */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
   .jew-footer-grid,
   .swarna-footer-grid,
   .vto-footer-grid,
   .jwd-footer-grid,
   .tmz-footer-grid,
   .diamond-footer-grid,
+  .dia-footer-grid,
   .diamond-workdo-footer-grid,
+  .dwd-footer-grid,
   .lp-footer-grid,
   .psj-footer-grid,
   .jh-footer-grid
-),
-.jh-mobile-view .jh-footer-grid {
+) {
   display: grid !important;
   grid-template-columns: 1fr !important;
   gap: 24px !important;
   text-align: center !important;
 }
 
-:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) .jh-footer-col,
-.jh-mobile-view .jh-footer-col {
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jew-footer-col,
+  .swarna-footer-col,
+  .vto-footer-col,
+  .jwd-footer-col,
+  .tmz-footer-col,
+  .diamond-footer-col,
+  .dia-footer-col,
+  .dwd-footer-col,
+  .lp-footer-col,
+  .psj-footer-col,
+  .jh-footer-col
+) {
   align-items: center !important;
   text-align: center !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jew-payment-icons,
+  .swarna-payment-icons,
+  .vto-payment-methods,
+  .jwd-payment-badges,
+  .diamond-payment-icons,
+  .dia-payment-icons,
+  .dwd-payment-icons,
+  .lp-payment-icons,
+  .psj-payment-icons,
+  .jh-payment-icons
+) {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  margin: 12px auto !important;
 }

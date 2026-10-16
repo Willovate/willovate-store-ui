@@ -13,7 +13,16 @@ import swarnaLogo from './assets/swarna-logo.png'
 import swarnaHeroModel from './assets/swarna-hero-model.png'
 import './styles/swarna.css'
 
-export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = () => {
+export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = ({
+  device = 'desktop',
+  deviceView,
+  onBack: _onBack,
+  onClose: _onClose,
+  onUseTemplate: _onUseTemplate,
+}) => {
+  const effectiveDevice = deviceView || device || 'desktop'
+  const isMobile = effectiveDevice === 'mobile'
+
   // Navigation & View Mode
   const [viewMode, setViewMode] = useState<'home' | 'catalog' | 'pdp'>('home')
   const [selectedProduct, setSelectedProduct] = useState<SwarnaProduct>(SWARNA_PRODUCTS[0])
@@ -123,7 +132,7 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = () => {
   }, [activeCategory])
 
   return (
-    <div className="swarna-root">
+    <div className={`swarna-root ${isMobile ? 'swarna-mobile-view is-mobile' : ''}`}>
       {/* =========================================================================
           TOP ANNOUNCEMENT BAR (MATCHING media_1792043639081_b001652e.png EXACTLY)
           ========================================================================= */}
@@ -597,6 +606,9 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = () => {
                         src={product.images[0]}
                         alt={product.name}
                         className="swarna-card-thumb-img"
+                        onError={(e) => {
+                          e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                        }}
                       />
                     </div>
                     <span className="swarna-card-cat-label">{product.category}</span>
@@ -778,6 +790,9 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = () => {
                         src={product.images[0]}
                         alt={product.name}
                         className="swarna-card-thumb-img"
+                        onError={(e) => {
+                          e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                        }}
                       />
                     </div>
                     <span className="swarna-card-cat-label">{product.category}</span>
@@ -1027,7 +1042,14 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = () => {
                   onClick={() => openPdp(product)}
                 >
                   <div className="swarna-card-thumb-wrap">
-                    <img src={product.images[0]} alt={product.name} className="swarna-card-thumb-img" />
+                    <img
+                      src={product.images[0]}
+                      alt={product.name}
+                      className="swarna-card-thumb-img"
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                      }}
+                    />
                   </div>
                   <span className="swarna-card-cat-label">{product.category}</span>
                   <h4 className="swarna-card-name">{product.name}</h4>

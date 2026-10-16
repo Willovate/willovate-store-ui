@@ -160,7 +160,7 @@ export const DiamondWorkDoStorefront: React.FC<DiamondWorkDoStorefrontProps> = (
   const cartSubtotal = cartItems.reduce((acc, i) => acc + i.product.price * i.quantity, 0)
 
   return (
-    <div className={`diamond-workdo-root ${isMobile ? 'diamond-mobile device-mobile' : `diamond-${effectiveDevice}`}`}>
+    <div className={`diamond-workdo-root ${isMobile ? 'diamond-mobile device-mobile is-mobile' : `diamond-${effectiveDevice}`}`}>
 
       {/* TOAST POPUP */}
       {toastMsg && (
@@ -665,7 +665,14 @@ export const DiamondWorkDoStorefront: React.FC<DiamondWorkDoStorefrontProps> = (
                         {prod.name}
                       </h3>
                       <div className="dwd-card-img-wrap" onClick={() => openPdp(prod)}>
-                        <img src={prod.images[0]} alt={prod.name} className="dwd-card-img" />
+                        <img
+                          src={prod.images[0]}
+                          alt={prod.name}
+                          className="dwd-card-img"
+                          onError={(e) => {
+                            e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                          }}
+                        />
                       </div>
                       <div className="dwd-card-pricing">
                         <span className="dwd-price">${prod.price.toLocaleString()}.00</span>
@@ -727,7 +734,14 @@ export const DiamondWorkDoStorefront: React.FC<DiamondWorkDoStorefrontProps> = (
                       {prod.name}
                     </h3>
                     <div className="dwd-card-img-wrap" onClick={() => openPdp(prod)}>
-                      <img src={prod.images[0]} alt={prod.name} className="dwd-card-img" />
+                      <img
+                        src={prod.images[0]}
+                        alt={prod.name}
+                        className="dwd-card-img"
+                        onError={(e) => {
+                          e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                        }}
+                      />
                     </div>
                     <div className="dwd-card-pricing">
                       <span className="dwd-price">${prod.price.toLocaleString()}.00</span>
@@ -813,7 +827,14 @@ export const DiamondWorkDoStorefront: React.FC<DiamondWorkDoStorefrontProps> = (
                 {[prodHuggieEarrings, prodFloralStuds].map((prod) => (
                   <article key={prod.id} className="dwd-split-wide-card">
                     <div className="dwd-split-card-media" onClick={() => openPdp(prod)}>
-                      <img src={prod.images[0]} alt={prod.name} className="dwd-split-card-img" />
+                      <img
+                        src={prod.images[0]}
+                        alt={prod.name}
+                        className="dwd-split-card-img"
+                        onError={(e) => {
+                          e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                        }}
+                      />
                     </div>
                     <div className="dwd-split-card-info">
                       <span className="dwd-card-cat-label">{prod.category}</span>
@@ -1171,7 +1192,14 @@ export const DiamondWorkDoStorefront: React.FC<DiamondWorkDoStorefrontProps> = (
                     {prod.name}
                   </h3>
                   <div className="dwd-card-img-wrap" onClick={() => openPdp(prod)}>
-                    <img src={prod.images[0]} alt={prod.name} className="dwd-card-img" />
+                    <img
+                      src={prod.images[0]}
+                      alt={prod.name}
+                      className="dwd-card-img"
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                      }}
+                    />
                   </div>
                   <div className="dwd-card-pricing">
                     <span className="dwd-price">${prod.price.toLocaleString()}.00</span>

@@ -12,7 +12,16 @@ import {
 } from './data/jewelsData'
 import './styles/jewelsWorkDo.css'
 
-export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = () => {
+export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = ({
+  device = 'desktop',
+  deviceView,
+  onBack: _onBack,
+  onSelectTemplate: _onSelectTemplate,
+  onUseTemplate: _onUseTemplate,
+}) => {
+  const effectiveDevice = deviceView || device || 'desktop'
+  const isMobile = effectiveDevice === 'mobile'
+
   // Navigation & Category states
   const [activeCategory, setActiveCategory] = useState<JewelsCategory>('All')
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
@@ -123,7 +132,7 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = () => {
   }
 
   return (
-    <div className="jwd-root">
+    <div className={`jwd-root ${isMobile ? 'jwd-mobile-view is-mobile' : ''}`}>
 
       {/* =====================================================================
           1. TOP UTILITY STRIP (STRICTLY SCREENSHOT 2)
@@ -448,6 +457,9 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = () => {
                   src={currentSlide.featuredProduct.image}
                   alt={currentSlide.featuredProduct.title}
                   className="jwd-hero-card-img"
+                  onError={(e) => {
+                    e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                  }}
                 />
               </div>
 
@@ -676,6 +688,9 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = () => {
                       src={prod.image}
                       alt={prod.title}
                       className="jwd-carousel-card-img"
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                      }}
                     />
                   </div>
 
@@ -837,6 +852,9 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = () => {
                   src={prod.image}
                   alt={prod.title}
                   className="jwd-carousel-card-img"
+                  onError={(e) => {
+                    e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                  }}
                 />
               </div>
 
@@ -1010,6 +1028,9 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = () => {
                     src={prod.image}
                     alt={prod.title}
                     className="jwd-carousel-card-img"
+                    onError={(e) => {
+                      e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                    }}
                   />
                 </div>
 

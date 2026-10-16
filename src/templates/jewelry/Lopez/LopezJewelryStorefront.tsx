@@ -136,6 +136,7 @@ export const LopezJewelryStorefront: React.FC<LopezStorefrontProps> = ({
   onUseTemplate,
 }) => {
   const effectiveDevice = deviceView || device || 'desktop'
+  const isMobile = effectiveDevice === 'mobile'
 
   // Navigation & View State
   const [activeTab, setActiveTab] = useState<'home' | 'shop' | 'about' | 'contact' | 'blog' | 'pdp'>(
@@ -311,7 +312,7 @@ export const LopezJewelryStorefront: React.FC<LopezStorefrontProps> = ({
   }
 
   return (
-    <div className="lp-root" data-device={effectiveDevice}>
+    <div className={`lp-root ${isMobile ? 'lp-mobile-view is-mobile' : ''}`} data-device={effectiveDevice}>
       {/* Toast Notification */}
       {toastMessage && (
         <div className="lp-toast">
@@ -771,12 +772,18 @@ export const LopezJewelryStorefront: React.FC<LopezStorefrontProps> = ({
                           src={product.images[0]}
                           alt={product.name}
                           className="lp-card-thumb"
+                          onError={(e) => {
+                            e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                          }}
                         />
                         {product.images[1] && (
                           <img
                             src={product.images[1]}
                             alt={product.name}
                             className="lp-card-thumb-hover"
+                            onError={(e) => {
+                              e.currentTarget.src = 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80'
+                            }}
                           />
                         )}
 
@@ -1038,6 +1045,9 @@ export const LopezJewelryStorefront: React.FC<LopezStorefrontProps> = ({
                       src={product.images[0]}
                       alt={product.name}
                       className="lp-card-thumb"
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                      }}
                     />
                     {product.isSale && <span className="lp-card-badge sale">SALE</span>}
 

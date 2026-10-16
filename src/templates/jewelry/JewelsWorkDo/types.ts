@@ -54,6 +54,10 @@ export interface JewelsTrustFeature {
 }
 
 export interface JewelsStorefrontProps {
+  initialView?: 'home' | 'catalog' | 'pdp'
+  templateData?: any
+  device?: string
+  deviceView?: string
   onBack?: () => void
   onSelectTemplate?: (templateId: string) => void
   onUseTemplate?: (templateId: string) => void
