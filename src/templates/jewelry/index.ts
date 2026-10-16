@@ -18,6 +18,7 @@ export { SwarnaStorefront } from './Swarna'
 export * from './Swarna'
 export { JewStorefront } from './Jew'
 export * from './Jew'
+import './jewelryMobile.css'
 
 
 

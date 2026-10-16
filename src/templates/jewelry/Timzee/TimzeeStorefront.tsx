@@ -73,6 +73,7 @@ export const TimzeeStorefront: React.FC<TimzeeStorefrontProps> = ({
 
   // Currency
   const [currency, setCurrency] = useState('USD')
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   // Newsletter
   const [newsletterEmail, setNewsletterEmail] = useState('')
@@ -208,7 +209,7 @@ export const TimzeeStorefront: React.FC<TimzeeStorefrontProps> = ({
             <button
               className="tmz-menu-toggle"
               aria-label="Toggle Navigation Menu"
-              onClick={() => showToast('Navigation Menu opened')}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               <span className="tmz-menu-bar" />
               <span className="tmz-menu-bar" />
@@ -343,6 +344,92 @@ export const TimzeeStorefront: React.FC<TimzeeStorefrontProps> = ({
           </div>
         </div>
       </header>
+
+      {/* MOBILE NAVIGATION DRAWER */}
+      {isMobileMenuOpen && (
+        <div className="tmz-drawer-overlay" onClick={() => setIsMobileMenuOpen(false)}>
+          <div className="tmz-mobile-nav-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className="tmz-mobile-nav-header">
+              <span style={{ fontFamily: 'var(--tmz-font-heading)', fontSize: '20px', fontWeight: 'bold', color: '#ffffff', letterSpacing: '2px' }}>
+                TIMZEE
+              </span>
+              <button
+                type="button"
+                className="tmz-drawer-close"
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="tmz-mobile-nav-links">
+              <a
+                href="#home"
+                className="tmz-mobile-link"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <span>Home Horology</span>
+                <span>›</span>
+              </a>
+              <a
+                href="#shop"
+                className="tmz-mobile-link"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <span>Luxury Timepieces (Shop)</span>
+                <span>›</span>
+              </a>
+              <a
+                href="#collections"
+                className="tmz-mobile-link"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <span>Collections & Novelties</span>
+                <span>›</span>
+              </a>
+              <a
+                href="#gallery"
+                className="tmz-mobile-link"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <span>Visual Gallery</span>
+                <span>›</span>
+              </a>
+              <a
+                href="#journal"
+                className="tmz-mobile-link"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <span>Watchmakers Journal</span>
+                <span>›</span>
+              </a>
+              <a
+                href="#footer"
+                className="tmz-mobile-link"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <span>Contact Atelier</span>
+                <span>›</span>
+              </a>
+            </div>
+            <div className="tmz-mobile-nav-footer">
+              <div className="tmz-mobile-currency">
+                <span>Currency: {currency}</span>
+              </div>
+              <button
+                type="button"
+                className="tmz-mobile-vip-btn"
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  showToast('VIP Horology Client Portal')
+                }}
+              >
+                VIP Member Login
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ================= 2. HERO SLIDESHOW ================= */}
       <section id="home" className="tmz-hero-viewport">

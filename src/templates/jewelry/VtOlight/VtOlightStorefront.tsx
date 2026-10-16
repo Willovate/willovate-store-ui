@@ -33,6 +33,7 @@ export const VtOlightStorefront: React.FC<VtOlightStorefrontProps> = ({
   const [quickViewProduct, setQuickViewProduct] = useState<VtOlightProduct>(VT_OLIGHT_PRODUCTS[0])
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isRingSizerOpen, setIsRingSizerOpen] = useState(false)
   const [wishlistIds, setWishlistIds] = useState<string[]>([])
   const [toastMsg, setToastMsg] = useState<string | null>(null)
@@ -210,6 +211,18 @@ export const VtOlightStorefront: React.FC<VtOlightStorefrontProps> = ({
       <header className="vto-header">
         <div className="vto-container">
           <div className="vto-header-inner">
+            {/* Mobile Hamburger Menu Toggle */}
+            <button
+              type="button"
+              className="vto-mobile-menu-btn"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle navigation menu"
+            >
+              <span className="vto-burger-bar" />
+              <span className="vto-burger-bar" />
+              <span className="vto-burger-bar" />
+            </button>
+
             {/* Left: Navigation Menu */}
             <nav className="vto-nav">
               <span
@@ -357,6 +370,159 @@ export const VtOlightStorefront: React.FC<VtOlightStorefrontProps> = ({
           </div>
         )}
       </header>
+
+      {/* MOBILE NAVIGATION DRAWER */}
+      {isMobileMenuOpen && (
+        <div className="vto-drawer-overlay" onClick={() => setIsMobileMenuOpen(false)}>
+          <div className="vto-mobile-nav-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className="vto-mobile-nav-header">
+              <div className="vto-logo-text" style={{ fontSize: '22px', margin: 0 }}>
+                Olight <span className="vto-logo-star">✦</span>
+              </div>
+              <button
+                type="button"
+                className="vto-drawer-close"
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="vto-mobile-nav-links">
+              <button
+                type="button"
+                className={`vto-mobile-link ${viewMode === 'home' ? 'active' : ''}`}
+                onClick={() => {
+                  setViewMode('home')
+                  setIsMobileMenuOpen(false)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                <span>Home</span>
+                <span>›</span>
+              </button>
+              <button
+                type="button"
+                className={`vto-mobile-link ${viewMode === 'catalog' && filters.category === 'All' ? 'active' : ''}`}
+                onClick={() => {
+                  setFilters((f) => ({ ...f, category: 'All' }))
+                  setViewMode('catalog')
+                  setIsMobileMenuOpen(false)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                <span>All Jewelry Collections</span>
+                <span>›</span>
+              </button>
+              <button
+                type="button"
+                className={`vto-mobile-link ${viewMode === 'catalog' && filters.category === 'Rings' ? 'active' : ''}`}
+                onClick={() => {
+                  setFilters((f) => ({ ...f, category: 'Rings' }))
+                  setViewMode('catalog')
+                  setIsMobileMenuOpen(false)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                <span>Solitaire & Engagement Rings</span>
+                <span>›</span>
+              </button>
+              <button
+                type="button"
+                className={`vto-mobile-link ${viewMode === 'catalog' && filters.category === 'Necklaces' ? 'active' : ''}`}
+                onClick={() => {
+                  setFilters((f) => ({ ...f, category: 'Necklaces' }))
+                  setViewMode('catalog')
+                  setIsMobileMenuOpen(false)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                <span>Diamond Necklaces</span>
+                <span>›</span>
+              </button>
+              <button
+                type="button"
+                className={`vto-mobile-link ${viewMode === 'catalog' && filters.category === 'Earrings' ? 'active' : ''}`}
+                onClick={() => {
+                  setFilters((f) => ({ ...f, category: 'Earrings' }))
+                  setViewMode('catalog')
+                  setIsMobileMenuOpen(false)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                <span>Earrings & Drops</span>
+                <span>›</span>
+              </button>
+              <button
+                type="button"
+                className={`vto-mobile-link ${viewMode === 'catalog' && filters.category === 'Bracelets' ? 'active' : ''}`}
+                onClick={() => {
+                  setFilters((f) => ({ ...f, category: 'Bracelets' }))
+                  setViewMode('catalog')
+                  setIsMobileMenuOpen(false)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                <span>Fine Bracelets</span>
+                <span>›</span>
+              </button>
+              <button
+                type="button"
+                className="vto-mobile-link"
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  setIsRingSizerOpen(true)
+                }}
+              >
+                <span>Ring Size Guide</span>
+                <span>›</span>
+              </button>
+              <button
+                type="button"
+                className="vto-mobile-link"
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  const el = document.getElementById('vto-blog')
+                  if (el) el.scrollIntoView({ behavior: 'smooth' })
+                  else {
+                    setViewMode('home')
+                    setTimeout(() => document.getElementById('vto-blog')?.scrollIntoView({ behavior: 'smooth' }), 100)
+                  }
+                }}
+              >
+                <span>Editorial Blog</span>
+                <span>›</span>
+              </button>
+              <button
+                type="button"
+                className="vto-mobile-link"
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  showToast('Concierge: concierge@vt-olight.com')
+                }}
+              >
+                <span>Contact Atelier</span>
+                <span>›</span>
+              </button>
+            </div>
+            <div className="vto-mobile-nav-footer">
+              <div className="vto-mobile-currency" onClick={() => showToast('Currency: USD ($)')}>
+                <span>Currency: USD ($)</span>
+              </div>
+              <button
+                type="button"
+                className="vto-mobile-vip-btn"
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  showToast('Welcome to Olight VIP Lounge')
+                }}
+              >
+                VIP Client Sign In
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* =========================================================================
           VIEW MODE: HOME (100% MATCHING SCREENSHOT)

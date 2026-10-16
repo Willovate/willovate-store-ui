@@ -679,7 +679,44 @@ export const JoharyJewelryStorefront: React.FC<JoharyStorefrontProps> = ({
         @media (max-width: 900px) {
           .jh-promo-grid {
             grid-template-columns: 1fr;
+            gap: 16px;
           }
+          .jh-promo-card {
+            height: 230px;
+          }
+          .jh-promo-content {
+            padding: 20px;
+          }
+          .jh-promo-title {
+            font-size: 19px;
+            margin-bottom: 10px;
+          }
+        }
+
+        .jh-mobile-view .jh-promo-grid {
+          grid-template-columns: 1fr !important;
+          gap: 16px !important;
+        }
+
+        .jh-mobile-view .jh-promo-card {
+          height: 230px !important;
+          width: 100% !important;
+        }
+
+        .jh-mobile-view .jh-promo-content {
+          padding: 20px !important;
+        }
+
+        .jh-mobile-view .jh-promo-title {
+          font-size: 19px !important;
+          line-height: 1.25 !important;
+          margin-bottom: 10px !important;
+        }
+
+        .jh-mobile-view .jh-promo-tag {
+          font-size: 10.5px !important;
+          padding: 4px 8px !important;
+          margin-bottom: 8px !important;
         }
 
         .jh-promo-card {
@@ -799,8 +836,69 @@ export const JoharyJewelryStorefront: React.FC<JoharyStorefrontProps> = ({
 
         @media (max-width: 480px) {
           .jh-product-grid {
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
           }
+        }
+
+        .jh-mobile-view .jh-product-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+          gap: 10px !important;
+        }
+
+        .jh-mobile-view .jh-product-card {
+          min-width: 0 !important;
+          width: 100% !important;
+        }
+
+        .jh-mobile-view .jh-product-info {
+          padding: 10px 8px !important;
+        }
+
+        .jh-mobile-view .jh-product-cat {
+          font-size: 10px !important;
+          margin-bottom: 2px !important;
+        }
+
+        .jh-mobile-view .jh-product-name {
+          font-size: 12.5px !important;
+          line-height: 1.35 !important;
+          min-height: 2.7em !important;
+          margin: 0 0 4px 0 !important;
+          overflow: hidden !important;
+          text-overflow: ellipsis !important;
+          display: -webkit-box !important;
+          -webkit-line-clamp: 2 !important;
+          -webkit-box-orient: vertical !important;
+        }
+
+        .jh-mobile-view .jh-product-rating {
+          font-size: 11px !important;
+          margin: 2px 0 !important;
+        }
+
+        .jh-mobile-view .jh-price-row {
+          font-size: 13px !important;
+          margin: 4px 0 8px 0 !important;
+        }
+
+        .jh-mobile-view .jh-current-price {
+          font-size: 14px !important;
+        }
+
+        .jh-mobile-view .jh-old-price {
+          font-size: 12px !important;
+        }
+
+        .jh-mobile-view .jh-add-cart-btn {
+          width: 100% !important;
+          padding: 8px 4px !important;
+          font-size: 10.5px !important;
+          white-space: nowrap !important;
+          letter-spacing: 0.5px !important;
+          box-sizing: border-box !important;
+          text-align: center !important;
+          font-weight: 700 !important;
         }
 
         .jh-product-card {
@@ -996,7 +1094,26 @@ export const JoharyJewelryStorefront: React.FC<JoharyStorefrontProps> = ({
         @media (max-width: 900px) {
           .jh-split-grid {
             grid-template-columns: 1fr;
+            gap: 24px;
           }
+        }
+
+        .jh-mobile-view .jh-split-grid {
+          grid-template-columns: 1fr !important;
+          gap: 24px !important;
+          width: 100% !important;
+        }
+
+        .jh-mobile-view .jh-story-title {
+          font-size: 26px !important;
+          line-height: 1.25 !important;
+          margin-bottom: 14px !important;
+        }
+
+        .jh-mobile-view .jh-story-desc {
+          font-size: 13.5px !important;
+          line-height: 1.55 !important;
+          margin-bottom: 16px !important;
         }
 
         .jh-story-title {
@@ -1032,11 +1149,28 @@ export const JoharyJewelryStorefront: React.FC<JoharyStorefrontProps> = ({
           }
         }
 
+        .jh-mobile-view .jh-spotlight-card {
+          flex-direction: column !important;
+          text-align: center !important;
+          padding: 18px !important;
+          width: 100% !important;
+          box-sizing: border-box !important;
+          gap: 16px !important;
+        }
+
         .jh-spotlight-img {
           width: 160px;
           height: 160px;
           object-fit: cover;
           border-radius: 4px;
+        }
+
+        .jh-mobile-view .jh-spotlight-img {
+          width: 100% !important;
+          max-width: 180px !important;
+          height: auto !important;
+          aspect-ratio: 1 !important;
+          margin: 0 auto !important;
         }
 
         /* Full Width Parallax Atelier Banner */
@@ -1096,13 +1230,48 @@ export const JoharyJewelryStorefront: React.FC<JoharyStorefrontProps> = ({
         @media (max-width: 900px) {
           .jh-trust-grid {
             grid-template-columns: repeat(2, 1fr);
+            gap: 16px 12px;
           }
         }
 
         @media (max-width: 500px) {
           .jh-trust-grid {
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px 10px;
           }
+        }
+
+        .jh-mobile-view .jh-trust-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+          gap: 16px 10px !important;
+          width: 100% !important;
+          padding: 16px 0 !important;
+        }
+
+        .jh-mobile-view .jh-trust-item {
+          flex-direction: column !important;
+          align-items: center !important;
+          text-align: center !important;
+          gap: 8px !important;
+          min-width: 0 !important;
+        }
+
+        .jh-mobile-view .jh-trust-icon {
+          width: 44px !important;
+          height: 44px !important;
+          font-size: 20px !important;
+          flex-shrink: 0 !important;
+        }
+
+        .jh-mobile-view .jh-trust-heading {
+          font-size: 12.5px !important;
+          margin: 0 !important;
+        }
+
+        .jh-mobile-view .jh-trust-desc {
+          font-size: 11px !important;
+          line-height: 1.4 !important;
+          margin: 0 !important;
         }
 
         .jh-trust-item {
@@ -1282,6 +1451,24 @@ export const JoharyJewelryStorefront: React.FC<JoharyStorefrontProps> = ({
           gap: 8px;
         }
 
+        .jh-mobile-view .jh-news-form {
+          flex-direction: column !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          gap: 10px !important;
+        }
+
+        .jh-mobile-view .jh-news-input {
+          width: 100% !important;
+          height: 44px !important;
+          box-sizing: border-box !important;
+        }
+
+        .jh-mobile-view .jh-news-btn {
+          width: 100% !important;
+          height: 44px !important;
+        }
+
         .jh-news-input {
           flex: 1;
           height: 48px;
@@ -1322,6 +1509,17 @@ export const JoharyJewelryStorefront: React.FC<JoharyStorefrontProps> = ({
           .jh-footer-grid {
             grid-template-columns: 1fr;
           }
+        }
+
+        .jh-mobile-view .jh-footer-grid {
+          grid-template-columns: 1fr !important;
+          gap: 24px !important;
+          text-align: center !important;
+        }
+
+        .jh-mobile-view .jh-footer-col {
+          align-items: center !important;
+          text-align: center !important;
         }
 
         .jh-footer-col h4 {
@@ -2042,7 +2240,14 @@ export const JoharyJewelryStorefront: React.FC<JoharyStorefrontProps> = ({
                   return (
                     <article key={product.id} className="jh-product-card">
                       <div className="jh-product-thumb" onClick={() => openPdp(product)}>
-                        <img src={product.images[0]} alt={product.name} className="jh-product-img" />
+                        <img
+                          src={product.images[0]}
+                          alt={product.name}
+                          className="jh-product-img"
+                          onError={(e) => {
+                            e.currentTarget.src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80'
+                          }}
+                        />
                         {product.isSale && <span className="jh-product-badge sale">SALE</span>}
                         {!product.isSale && product.isNew && <span className="jh-product-badge">NEW</span>}
 

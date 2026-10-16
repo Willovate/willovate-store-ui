@@ -9,7 +9,7 @@ export const JOHARY_CATEGORIES: JoharyCategoryCard[] = [
   {
     id: 'cat-bracelets',
     name: 'Bracelets',
-    image: 'https://images.unsplash.com/photo-1611591475882-720448148e65?w=600&auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=600&auto=format&fit=crop&q=80',
     itemCount: 24,
     tagline: 'Artisan Cuffs & Bangles',
   },
@@ -176,7 +176,7 @@ export const JOHARY_PRODUCTS: JoharyProduct[] = [
     price: 430.0,
     compareAtPrice: 510.0,
     images: [
-      'https://images.unsplash.com/photo-1611591475882-720448148e65?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=800&auto=format&fit=crop&q=80',
       'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80',
     ],
     rating: 4.92,
@@ -257,7 +257,7 @@ export const JOHARY_PRODUCTS: JoharyProduct[] = [
     compareAtPrice: 1100.0,
     images: [
       'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1611591475882-720448148e65?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=800&auto=format&fit=crop&q=80',
     ],
     rating: 4.97,
     reviewCount: 23,

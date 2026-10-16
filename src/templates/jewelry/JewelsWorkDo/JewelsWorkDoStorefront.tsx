@@ -32,6 +32,7 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = () => {
 
   // Wishlist state
   const [wishlistIds, setWishlistIds] = useState<string[]>([])
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   // Video Modal state
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
@@ -175,6 +176,18 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = () => {
           ===================================================================== */}
       <header className="jwd-main-header">
         <div className="jwd-main-header-inner">
+          {/* Mobile Hamburger Menu Toggle */}
+          <button
+            type="button"
+            className="jwd-mobile-menu-btn"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle navigation menu"
+          >
+            <span className="jwd-burger-bar" />
+            <span className="jwd-burger-bar" />
+            <span className="jwd-burger-bar" />
+          </button>
+
           <div className="jwd-header-left">
             <a href="#" className="jwd-brand-logo" aria-label="Jewels Homepage">
               <span className="jwd-brand-fallback">
@@ -271,6 +284,84 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = () => {
           </div>
         </div>
       </header>
+
+      {/* MOBILE NAVIGATION DRAWER */}
+      {isMobileMenuOpen && (
+        <div className="jwd-drawer-overlay" onClick={() => setIsMobileMenuOpen(false)}>
+          <div className="jwd-mobile-nav-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className="jwd-mobile-nav-header">
+              <span className="jwd-brand-fallback" style={{ fontSize: '20px' }}>
+                Jewels <span className="jwd-brand-sparkle">✦</span>
+              </span>
+              <button
+                type="button"
+                className="jwd-drawer-close"
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="jwd-mobile-nav-links">
+              <button
+                type="button"
+                className={`jwd-mobile-link ${activeCategory === 'All' ? 'active' : ''}`}
+                onClick={() => {
+                  setActiveCategory('All')
+                  setIsMobileMenuOpen(false)
+                  const el = document.getElementById('catalog')
+                  el?.scrollIntoView({ behavior: 'smooth' })
+                }}
+              >
+                <span>All Categories</span>
+                <span>›</span>
+              </button>
+              {JEWELS_CATEGORIES.filter((c) => c.slug !== 'all').map((cat) => (
+                <button
+                  key={cat.slug}
+                  type="button"
+                  className={`jwd-mobile-link ${activeCategory === cat.name ? 'active' : ''}`}
+                  onClick={() => {
+                    setActiveCategory(cat.name as JewelsCategory)
+                    setIsMobileMenuOpen(false)
+                    const el = document.getElementById('catalog')
+                    el?.scrollIntoView({ behavior: 'smooth' })
+                  }}
+                >
+                  <span>{cat.name}</span>
+                  <span style={{ fontSize: '11px', color: '#94a3b8' }}>{cat.count} items ›</span>
+                </button>
+              ))}
+              <button
+                type="button"
+                className="jwd-mobile-link"
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  const el = document.getElementById('about')
+                  el?.scrollIntoView({ behavior: 'smooth' })
+                }}
+              >
+                <span>About Atelier</span>
+                <span>›</span>
+              </button>
+            </div>
+            <div className="jwd-mobile-nav-footer">
+              <div className="jwd-mobile-currency">
+                <span>Currency: {selectedCurrency} (₹)</span>
+              </div>
+              <button
+                type="button"
+                className="jwd-mobile-vip-btn"
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                }}
+              >
+                Sign In to VIP Account
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* =====================================================================
           3. HERO SECTION ("Modern and trending jewellery for everyone")

@@ -31,6 +31,7 @@ import { VtOlightStorefront } from '../../templates/jewelry/VtOlight'
 import { SwarnaStorefront } from '../../templates/jewelry/Swarna'
 import { JewStorefront } from '../../templates/jewelry/Jew'
 import '../../templates/fashion/fashionMobile.css'
+import '../../templates/jewelry/jewelryMobile.css'
 import {
   BELLE_FASHION_TEMPLATE,
   VOGAL_FASHION_TEMPLATE,

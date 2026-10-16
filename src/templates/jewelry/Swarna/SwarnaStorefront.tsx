@@ -40,6 +40,7 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = () => {
   // Search & Toast
   const [searchQuery, setSearchQuery] = useState('')
   const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [toastMessage, setToastMessage] = useState<string | null>(null)
   const [visibleProductCount, setVisibleProductCount] = useState(4)
 
@@ -212,6 +213,18 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = () => {
           ========================================================================= */}
       <header className="swarna-header">
         <div className="swarna-header-container">
+          {/* Mobile Hamburger Menu Toggle */}
+          <button
+            type="button"
+            className="swarna-mobile-menu-btn"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle navigation menu"
+          >
+            <span className="swarna-burger-bar" />
+            <span className="swarna-burger-bar" />
+            <span className="swarna-burger-bar" />
+          </button>
+
           {/* Left: Navigation Menu */}
           <nav className="swarna-nav-left">
             <span
@@ -357,6 +370,143 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = () => {
           </div>
         )}
       </header>
+
+      {/* MOBILE NAVIGATION DRAWER */}
+      {isMobileMenuOpen && (
+        <div className="swarna-drawer-overlay" onClick={() => setIsMobileMenuOpen(false)}>
+          <div className="swarna-mobile-nav-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className="swarna-mobile-nav-header">
+              <img src={swarnaLogo} alt="Swarna" style={{ height: '28px', objectFit: 'contain' }} />
+              <button
+                type="button"
+                className="swarna-drawer-close"
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="swarna-mobile-nav-links">
+              <button
+                type="button"
+                className={`swarna-mobile-link ${viewMode === 'home' ? 'active' : ''}`}
+                onClick={() => {
+                  setViewMode('home')
+                  setIsMobileMenuOpen(false)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                <span>Home</span>
+                <span>›</span>
+              </button>
+              <button
+                type="button"
+                className={`swarna-mobile-link ${viewMode === 'catalog' && activeCategory === 'All' ? 'active' : ''}`}
+                onClick={() => {
+                  setActiveCategory('All')
+                  setViewMode('catalog')
+                  setIsMobileMenuOpen(false)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                <span>All Collections</span>
+                <span>›</span>
+              </button>
+              <button
+                type="button"
+                className={`swarna-mobile-link ${viewMode === 'catalog' && activeCategory === 'Rings' ? 'active' : ''}`}
+                onClick={() => {
+                  setActiveCategory('Rings')
+                  setViewMode('catalog')
+                  setIsMobileMenuOpen(false)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                <span>Engagement Rings</span>
+                <span>›</span>
+              </button>
+              <button
+                type="button"
+                className={`swarna-mobile-link ${viewMode === 'catalog' && activeCategory === 'Earrings' ? 'active' : ''}`}
+                onClick={() => {
+                  setActiveCategory('Earrings')
+                  setViewMode('catalog')
+                  setIsMobileMenuOpen(false)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                <span>Earrings</span>
+                <span>›</span>
+              </button>
+              <button
+                type="button"
+                className={`swarna-mobile-link ${viewMode === 'catalog' && activeCategory === 'Necklaces' ? 'active' : ''}`}
+                onClick={() => {
+                  setActiveCategory('Necklaces')
+                  setViewMode('catalog')
+                  setIsMobileMenuOpen(false)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                <span>Necklaces</span>
+                <span>›</span>
+              </button>
+              <button
+                type="button"
+                className={`swarna-mobile-link ${viewMode === 'catalog' && activeCategory === 'Bracelets' ? 'active' : ''}`}
+                onClick={() => {
+                  setActiveCategory('Bracelets')
+                  setViewMode('catalog')
+                  setIsMobileMenuOpen(false)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                <span>Bracelets</span>
+                <span>›</span>
+              </button>
+              <button
+                type="button"
+                className="swarna-mobile-link"
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  const el = document.getElementById('swarna-instagram')
+                  if (el) el.scrollIntoView({ behavior: 'smooth' })
+                  else showToast('Swarna Atelier Blog & Journal')
+                }}
+              >
+                <span>Journal & Blog</span>
+                <span>›</span>
+              </button>
+              <button
+                type="button"
+                className="swarna-mobile-link"
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  showToast('Swarna Concierge: concierge@swarna-theme.myshopify.com')
+                }}
+              >
+                <span>Contact Concierge</span>
+                <span>›</span>
+              </button>
+            </div>
+            <div className="swarna-mobile-nav-footer">
+              <div className="swarna-mobile-currency" onClick={() => showToast('Currency: India (₹) INR')}>
+                <span>Currency: India (₹) INR</span>
+              </div>
+              <button
+                type="button"
+                className="swarna-mobile-vip-btn"
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  showToast('Welcome to Swarna VIP Privileges')
+                }}
+              >
+                VIP Member Login
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* =========================================================================
           VIEW MODE: HOME

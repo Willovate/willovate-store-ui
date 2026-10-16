@@ -59,6 +59,7 @@ export const JewStorefront: React.FC<JewStorefrontProps> = () => {
   ])
   const [wishlistIds, setWishlistIds] = useState<string[]>([JEW_PRODUCTS[1].id])
   const [isCartOpen, setIsCartOpen] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false)
   const [quickViewProduct, setQuickViewProduct] = useState<JewProduct>(JEW_PRODUCTS[0])
 
@@ -208,6 +209,18 @@ export const JewStorefront: React.FC<JewStorefrontProps> = () => {
           ========================================================================= */}
       <header className="jew-header">
         <div className="jew-container jew-header-inner">
+          {/* Mobile Hamburger Menu Toggle */}
+          <button
+            type="button"
+            className="jew-mobile-menu-btn"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle navigation menu"
+          >
+            <span className="jew-burger-bar" />
+            <span className="jew-burger-bar" />
+            <span className="jew-burger-bar" />
+          </button>
+
           {/* Left Navigation */}
           <nav className="jew-nav-left">
             <span
@@ -347,6 +360,129 @@ export const JewStorefront: React.FC<JewStorefrontProps> = () => {
           </div>
         )}
       </header>
+
+      {/* MOBILE NAVIGATION DRAWER */}
+      {isMobileMenuOpen && (
+        <div className="jew-drawer-overlay" onClick={() => setIsMobileMenuOpen(false)}>
+          <div className="jew-mobile-nav-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className="jew-mobile-nav-header">
+              <div className="jew-logo-text" style={{ fontSize: '24px', margin: 0 }}>JEW</div>
+              <button
+                type="button"
+                className="jew-drawer-close"
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="jew-mobile-nav-links">
+              <button
+                type="button"
+                className={`jew-mobile-link ${viewMode === 'home' ? 'active' : ''}`}
+                onClick={() => {
+                  setViewMode('home')
+                  setIsMobileMenuOpen(false)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                <span>Home</span>
+                <span>›</span>
+              </button>
+              <button
+                type="button"
+                className={`jew-mobile-link ${viewMode === 'catalog' && activeCategory === 'All' ? 'active' : ''}`}
+                onClick={() => {
+                  setActiveCategory('All')
+                  setViewMode('catalog')
+                  setIsMobileMenuOpen(false)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                <span>All Collections (Catalog)</span>
+                <span>›</span>
+              </button>
+              <button
+                type="button"
+                className={`jew-mobile-link ${viewMode === 'catalog' && activeCategory === 'Earrings' ? 'active' : ''}`}
+                onClick={() => {
+                  setActiveCategory('Earrings')
+                  setViewMode('catalog')
+                  setIsMobileMenuOpen(false)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                <span>Earrings</span>
+                <span>›</span>
+              </button>
+              <button
+                type="button"
+                className={`jew-mobile-link ${viewMode === 'catalog' && activeCategory === 'Necklaces' ? 'active' : ''}`}
+                onClick={() => {
+                  setActiveCategory('Necklaces')
+                  setViewMode('catalog')
+                  setIsMobileMenuOpen(false)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                <span>Necklaces & Pendants</span>
+                <span>›</span>
+              </button>
+              <button
+                type="button"
+                className={`jew-mobile-link ${viewMode === 'catalog' && activeCategory === 'Wedding Collection' ? 'active' : ''}`}
+                onClick={() => {
+                  setActiveCategory('Wedding Collection')
+                  setViewMode('catalog')
+                  setIsMobileMenuOpen(false)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                <span>Wedding Collection</span>
+                <span>›</span>
+              </button>
+              <button
+                type="button"
+                className="jew-mobile-link"
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  const el = document.getElementById('jew-blog')
+                  if (el) el.scrollIntoView({ behavior: 'smooth' })
+                }}
+              >
+                <span>Editorial Journal</span>
+                <span>›</span>
+              </button>
+              <button
+                type="button"
+                className="jew-mobile-link"
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  showToast('Concierge: concierge@jew-theme.myshopify.com')
+                }}
+              >
+                <span>Contact Concierge</span>
+                <span>›</span>
+              </button>
+            </div>
+            <div className="jew-mobile-drawer-footer">
+              <div className="jew-mobile-currency-row">
+                <span>Currency: <strong>INR (₹) India</strong></span>
+              </div>
+              <button
+                type="button"
+                className="jew-mobile-drawer-btn"
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  showToast('VIP Member Sign-in')
+                }}
+              >
+                VIP Member Sign In
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* =========================================================================
           VIEW MODE: HOME
