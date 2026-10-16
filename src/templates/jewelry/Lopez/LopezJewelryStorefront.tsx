@@ -1026,33 +1026,40 @@ export const LopezJewelryStorefront: React.FC<LopezStorefrontProps> = ({
                     <div className="lp-card-actions">
                       <button
                         type="button"
+                        aria-label="Quick View"
                         onClick={(e) => {
                           e.stopPropagation()
                           setQuickViewProduct(product)
                         }}
                         className="lp-card-action-btn"
+                        title="Quick View"
                       >
                         <Eye size={16} />
                       </button>
                       <button
                         type="button"
+                        aria-label="Wishlist"
                         onClick={(e) => {
                           e.stopPropagation()
                           toggleWishlist(product.id)
                         }}
                         className={`lp-card-action-btn ${wishlist.includes(product.id) ? 'active' : ''}`}
+                        title="Add to Wishlist"
                       >
                         <Heart size={16} fill={wishlist.includes(product.id) ? '#e11d48' : 'none'} />
                       </button>
                       <button
                         type="button"
+                        aria-label="Add to Bag"
                         onClick={(e) => {
                           e.stopPropagation()
                           addToCart(product)
                         }}
                         className="lp-card-action-btn add-btn"
+                        title="Add to Bag"
                       >
-                        <ShoppingBag size={14} /> Add
+                        <ShoppingBag size={14} />
+                        <span>Add</span>
                       </button>
                     </div>
                   </div>

@@ -1687,7 +1687,6 @@
   .dia-product-media,
   .dwd-card-img-wrap,
   .dwd-split-card-media,
-  .lp-card-thumb-wrap,
   .lp-card-img-wrap,
   .psj-product-thumb-wrap,
   .jh-product-thumb
@@ -1697,6 +1696,21 @@
   overflow: hidden !important;
   position: relative !important;
   border-radius: 6px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .lp-root.is-mobile,
+  .lp-root.device-mobile,
+  .lp-root.lp-mobile-view,
+  .is-mobile .lp-root
+) .lp-card-thumb-wrap {
+  aspect-ratio: 4 / 5 !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  position: relative !important;
+  border-radius: 4px !important;
 }
 
 :is(
@@ -1765,6 +1779,7 @@
   .dwd-card-title,
   .dwd-split-card-title,
   .lp-product-title,
+  .lp-card-title,
   .psj-product-name,
   .jh-product-name
 ) {
@@ -1806,6 +1821,7 @@
   .dia-price,
   .dwd-price,
   .lp-price,
+  .lp-card-price,
   .psj-product-price,
   .jh-price-row,
   .jh-current-price
@@ -2728,5 +2744,142 @@
   text-align: center !important;
   align-items: center !important;
   width: 100% !important;
+}
+
+/* -----------------------------------------------------------------------------
+   LOPEZ LUXURY JEWELRY MOBILE & SIMULATOR OVERRIDES
+   ----------------------------------------------------------------------------- */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .lp-root.is-mobile,
+  .lp-root.device-mobile,
+  .lp-root.lp-mobile-view,
+  .is-mobile .lp-root
+) .lp-card-actions {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  position: absolute !important;
+  bottom: 8px !important;
+  left: 6px !important;
+  right: 6px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 5px !important;
+  z-index: 5 !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .lp-root.is-mobile,
+  .lp-root.device-mobile,
+  .lp-root.lp-mobile-view,
+  .is-mobile .lp-root
+) .lp-card-action-btn {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  padding: 0 !important;
+  border-radius: 4px !important;
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  color: #1a1a1a !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .lp-root.is-mobile,
+  .lp-root.device-mobile,
+  .lp-root.lp-mobile-view,
+  .is-mobile .lp-root
+) .lp-card-action-btn.active {
+  color: #e11d48 !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .lp-root.is-mobile,
+  .lp-root.device-mobile,
+  .lp-root.lp-mobile-view,
+  .is-mobile .lp-root
+) .lp-card-action-btn.add-btn {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  width: auto !important;
+  height: 32px !important;
+  padding: 0 8px !important;
+  background-color: #181818 !important;
+  color: #ffffff !important;
+  font-size: 10.5px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  gap: 4px !important;
+  white-space: nowrap !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+  border: none !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .lp-root.is-mobile,
+  .lp-root.device-mobile,
+  .lp-root.lp-mobile-view,
+  .is-mobile .lp-root
+) .lp-news-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+  width: 100% !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .lp-root.is-mobile,
+  .lp-root.device-mobile,
+  .lp-root.lp-mobile-view,
+  .is-mobile .lp-root
+) .lp-news-card {
+  width: 100% !important;
+  border-radius: 6px !important;
+  overflow: hidden !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .lp-root.is-mobile,
+  .lp-root.device-mobile,
+  .lp-root.lp-mobile-view,
+  .is-mobile .lp-root
+) .lp-news-thumb-wrap {
+  aspect-ratio: 16 / 10 !important;
+  width: 100% !important;
+  max-height: 220px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .lp-root.is-mobile,
+  .lp-root.device-mobile,
+  .lp-root.lp-mobile-view,
+  .is-mobile .lp-root
+) .lp-news-body {
+  padding: 20px 16px !important;
+  text-align: center !important;
 }
 
