@@ -39,6 +39,30 @@ export const JewStorefront: React.FC<JewStorefrontProps> = ({
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
   }, [viewMode])
 
+  // Back to top floating button visibility
+  const [showBackToTop, setShowBackToTop] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const rootEl = document.querySelector('.jew-root')
+      const rootScroll = rootEl ? rootEl.scrollTop : 0
+      const winScroll = window.scrollY || document.documentElement.scrollTop || 0
+      setShowBackToTop(winScroll > 350 || rootScroll > 350)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    const rootEl = document.querySelector('.jew-root')
+    if (rootEl) {
+      rootEl.addEventListener('scroll', handleScroll, { passive: true })
+    }
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (rootEl) {
+        rootEl.removeEventListener('scroll', handleScroll)
+      }
+    }
+  }, [])
+
   // Hero Slider Auto-Scroll State
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
 
@@ -1365,17 +1389,19 @@ export const JewStorefront: React.FC<JewStorefrontProps> = ({
       {/* =========================================================================
           16. FLOATING BACK TO TOP BUTTON (BLACK CIRCLE WITH ARROW)
           ========================================================================= */}
-      <button
-        type="button"
-        className="jew-back-to-top"
-        title="Scroll to Top"
-        onClick={scrollToTop}
-      >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-          <line x1="12" y1="19" x2="12" y2="5"/>
-          <polyline points="5 12 12 5 19 12"/>
-        </svg>
-      </button>
+      {showBackToTop && (
+        <button
+          type="button"
+          className="jew-back-to-top"
+          title="Scroll to Top"
+          onClick={scrollToTop}
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <line x1="12" y1="19" x2="12" y2="5"/>
+            <polyline points="5 12 12 5 19 12"/>
+          </svg>
+        </button>
+      )}
 
       {/* =========================================================================
           SLIDE-OUT SHOPPING CART DRAWER

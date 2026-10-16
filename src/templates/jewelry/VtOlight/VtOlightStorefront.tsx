@@ -332,7 +332,8 @@ export const VtOlightStorefront: React.FC<VtOlightStorefrontProps> = ({
                   <line x1="3" y1="6" x2="21" y2="6"></line>
                   <path d="M16 10a4 4 0 0 1-8 0"></path>
                 </svg>
-                <span>Bag ({totalCartCount}) • ${cartSubtotal.toLocaleString()}</span>
+                <span className="vto-cart-pill-text">Bag ({totalCartCount}) • ${cartSubtotal.toLocaleString()}</span>
+                {totalCartCount > 0 && <span className="vto-badge-count">{totalCartCount}</span>}
               </button>
             </div>
           </div>

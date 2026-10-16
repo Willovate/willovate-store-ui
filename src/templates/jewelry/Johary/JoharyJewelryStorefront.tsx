@@ -1359,8 +1359,25 @@ export const JoharyJewelryStorefront: React.FC<JoharyStorefrontProps> = ({
 
         @media (max-width: 850px) {
           .jh-blog-grid {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr !important;
+            gap: 24px !important;
           }
+        }
+
+        :is(.jh-root.is-mobile, .simulated-frame.frame-mobile .jh-root, .preview-viewport-container.device-mobile .jh-root, .is-mobile .jh-root) .jh-blog-grid {
+          grid-template-columns: 1fr !important;
+          gap: 24px !important;
+          width: 100% !important;
+        }
+
+        :is(.jh-root.is-mobile, .simulated-frame.frame-mobile .jh-root, .preview-viewport-container.device-mobile .jh-root, .is-mobile .jh-root) .jh-blog-card {
+          width: 100% !important;
+        }
+
+        :is(.jh-root.is-mobile, .simulated-frame.frame-mobile .jh-root, .preview-viewport-container.device-mobile .jh-root, .is-mobile .jh-root) .jh-blog-img {
+          width: 100% !important;
+          height: 220px !important;
+          object-fit: cover !important;
         }
 
         .jh-blog-card {

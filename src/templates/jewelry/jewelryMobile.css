@@ -424,7 +424,7 @@
   /* Hide bulky button text or secondary buttons in header on mobile */
   .swarna-special-offers-btn,
   .jew-top-auth-links,
-  .vto-cart-summary-btn span,
+  .vto-cart-summary-btn span:not(.vto-badge-count),
   .tmz-currency-dropdown,
   .tmz-btn-gold-bordered,
   .jwd-cart-pill-btn span:not(.jwd-cart-badge) {
@@ -1519,7 +1519,7 @@
 :is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) :is(
   .swarna-special-offers-btn,
   .jew-top-auth-links,
-  .vto-cart-summary-btn span,
+  .vto-cart-summary-btn span:not(.vto-badge-count),
   .tmz-currency-dropdown,
   .tmz-btn-gold-bordered,
   .jwd-cart-pill-btn span:not(.jwd-cart-badge)
@@ -2122,7 +2122,8 @@
   .psj-staggered-reverse,
   .psj-dual-banners-grid,
   .jh-split-grid,
-  .jh-promo-grid
+  .jh-promo-grid,
+  .jh-blog-grid
 ) {
   display: flex !important;
   flex-direction: column !important;
@@ -2570,6 +2571,57 @@
   margin: 12px auto !important;
 }
 
+/* Simulator: Swarna Instagram Gallery 2-column + 1-full */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .swarna-root.is-mobile,
+  .swarna-root.device-mobile,
+  .is-mobile .swarna-root
+) .swarna-insta-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  margin-top: 24px !important;
+  width: 100% !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .swarna-root.is-mobile,
+  .swarna-root.device-mobile,
+  .is-mobile .swarna-root
+) .swarna-insta-item {
+  width: 100% !important;
+  height: 160px !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .swarna-root.is-mobile,
+  .swarna-root.device-mobile,
+  .is-mobile .swarna-root
+) .swarna-insta-item:last-child {
+  grid-column: span 2 !important;
+  height: 160px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .swarna-root.is-mobile,
+  .swarna-root.device-mobile,
+  .is-mobile .swarna-root
+) .swarna-insta-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
 /* Simulator: Timzee Photo Mosaic 6-image square grid */
 :is(
   .simulated-frame.frame-mobile,
@@ -2882,4 +2934,24 @@
   padding: 20px 16px !important;
   text-align: center !important;
 }
+
+/* Jew Template Floating Back-to-Top Button Parity */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .is-mobile .jew-root
+) .jew-back-to-top {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 18px !important;
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  z-index: 9999 !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
+}
+
 

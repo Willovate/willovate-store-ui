@@ -1916,3 +1916,94 @@
 ) .tmz-nav-center {
   display: none !important;
 }
+
+/* Mobile & Simulator Header - Ensure Cart Button Is 100% Visible */
+:is(
+  .tmz-root.is-mobile,
+  .tmz-root.tmz-device-mobile,
+  .tmz-root.tmz-mobile-view,
+  .simulated-frame.frame-mobile .tmz-root,
+  .preview-viewport-container.device-mobile .tmz-root,
+  .is-mobile .tmz-root
+) .tmz-header-content {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 8px 10px !important;
+  gap: 4px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .tmz-root.is-mobile,
+  .tmz-root.tmz-device-mobile,
+  .tmz-root.tmz-mobile-view,
+  .simulated-frame.frame-mobile .tmz-root,
+  .preview-viewport-container.device-mobile .tmz-root,
+  .is-mobile .tmz-root
+) .tmz-header-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex-shrink: 0 !important;
+}
+
+:is(
+  .tmz-root.is-mobile,
+  .tmz-root.tmz-device-mobile,
+  .tmz-root.tmz-mobile-view,
+  .simulated-frame.frame-mobile .tmz-root,
+  .preview-viewport-container.device-mobile .tmz-root,
+  .is-mobile .tmz-root
+) .tmz-logo-img {
+  max-height: 24px !important;
+  max-width: 85px !important;
+  object-fit: contain !important;
+}
+
+:is(
+  .tmz-root.is-mobile,
+  .tmz-root.tmz-device-mobile,
+  .tmz-root.tmz-mobile-view,
+  .simulated-frame.frame-mobile .tmz-root,
+  .preview-viewport-container.device-mobile .tmz-root,
+  .is-mobile .tmz-root
+) .tmz-header-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 3px !important;
+  flex-shrink: 0 !important;
+  margin-left: auto !important;
+}
+
+:is(
+  .tmz-root.is-mobile,
+  .tmz-root.tmz-device-mobile,
+  .tmz-root.tmz-mobile-view,
+  .simulated-frame.frame-mobile .tmz-root,
+  .preview-viewport-container.device-mobile .tmz-root,
+  .is-mobile .tmz-root
+) .tmz-hdr-icon-btn {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+:is(
+  .tmz-root.is-mobile,
+  .tmz-root.tmz-device-mobile,
+  .tmz-root.tmz-mobile-view,
+  .simulated-frame.frame-mobile .tmz-root,
+  .preview-viewport-container.device-mobile .tmz-root,
+  .is-mobile .tmz-root
+) .tmz-currency-dropdown {
+  display: none !important;
+}

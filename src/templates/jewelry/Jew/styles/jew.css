@@ -1432,12 +1432,14 @@
     padding: 28px 16px !important;
   }
   .jew-back-to-top {
-    position: absolute !important;
-    bottom: 16px !important;
-    right: 16px !important;
-    width: 36px !important;
-    height: 36px !important;
-    z-index: 100 !important;
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 18px !important;
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 50% !important;
+    z-index: 9999 !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
   }
 }
 
@@ -1968,11 +1970,13 @@
   .preview-viewport-container.device-mobile .jew-root,
   .is-mobile .jew-root
 ) .jew-back-to-top {
-  position: absolute !important;
-  bottom: 16px !important;
-  right: 16px !important;
-  width: 36px !important;
-  height: 36px !important;
-  z-index: 100 !important;
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 18px !important;
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  z-index: 9999 !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
 }
 
