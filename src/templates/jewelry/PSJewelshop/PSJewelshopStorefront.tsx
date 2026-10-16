@@ -728,7 +728,7 @@ export const PSJewelshopStorefront: React.FC<PSJewelshopStorefrontProps> = ({
             <div className="psj-container">
               <div className="psj-section-header">
                 <p className="psj-section-subtitle">Exclusive Collection</p>
-                <h2 className="psj-section-title">Treading Products</h2>
+                <h2 className="psj-section-title">Trending Products</h2>
                 <OrnamentalFlourish />
 
                 {/* Tabs */}
@@ -752,7 +752,7 @@ export const PSJewelshopStorefront: React.FC<PSJewelshopStorefrontProps> = ({
                     className={`psj-tab-btn ${activeTab === 'bestsellers' ? 'active' : ''}`}
                     onClick={() => setActiveTab('bestsellers')}
                   >
-                    BEST SELLARS
+                    BEST SELLERS
                   </button>
                 </div>
               </div>
@@ -793,7 +793,7 @@ export const PSJewelshopStorefront: React.FC<PSJewelshopStorefrontProps> = ({
                       <h3 className="psj-promo-title">
                         Few Diamond Ring
                       </h3>
-                      <p className="psj-promo-discount">Stylish Desing For Jewellery</p>
+                      <p className="psj-promo-discount">Stylish Design For Jewellery</p>
                       <button
                         type="button"
                         onClick={() => addToCart(PSJEWELSHOP_PRODUCTS[1])}
@@ -983,7 +983,7 @@ export const PSJewelshopStorefront: React.FC<PSJewelshopStorefrontProps> = ({
             <div className="psj-dark-campaign-overlay" />
             <div className="psj-container psj-dark-campaign-inner">
               <div className="psj-dark-content">
-                <p className="psj-dark-subtitle">Stylish Desing</p>
+                <p className="psj-dark-subtitle">Stylish Design</p>
                 <h2 className="psj-dark-title">Jewellery Collection</h2>
                 <button
                   type="button"
