@@ -655,6 +655,7 @@
     overflow: hidden !important;
     position: relative !important;
     border-radius: 6px !important;
+    background: #ffffff !important;
   }
 
   :is(
@@ -1696,6 +1697,7 @@
   overflow: hidden !important;
   position: relative !important;
   border-radius: 6px !important;
+  background: #ffffff !important;
 }
 
 :is(
@@ -2953,5 +2955,88 @@
   z-index: 9999 !important;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
 }
+
+/* Jew Template Product Card Action Buttons (High Contrast Dark Controls) */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .is-mobile .jew-root
+) .jew-hover-actions {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  top: 8px !important;
+  right: 8px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  z-index: 4 !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .is-mobile .jew-root
+) .jew-hover-action-btn {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  background: #111111 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3) !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .is-mobile .jew-root
+) .jew-hover-action-btn svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .is-mobile .jew-root
+) .jew-hover-action-btn:hover,
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .is-mobile .jew-root
+) .jew-hover-action-btn:active,
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .is-mobile .jew-root
+) .jew-hover-action-btn.active {
+  background: #7d282b !important;
+  color: #ffffff !important;
+}
+
 
 

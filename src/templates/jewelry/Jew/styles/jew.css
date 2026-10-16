@@ -1297,11 +1297,31 @@
     gap: 6px !important;
   }
   .jew-hover-action-btn {
-    width: 30px !important;
-    height: 30px !important;
-    background: rgba(255, 255, 255, 0.95) !important;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+    width: 32px !important;
+    height: 32px !important;
+    background: #111111 !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3) !important;
     border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: transform 0.2s ease, background-color 0.2s ease !important;
+  }
+
+  .jew-hover-action-btn svg {
+    color: #ffffff !important;
+    stroke: #ffffff !important;
+  }
+
+  .jew-hover-action-btn:hover,
+  .jew-hover-action-btn:active,
+  .jew-hover-action-btn.active {
+    background: #7d282b !important;
+    color: #ffffff !important;
+    transform: scale(1.08) !important;
   }
 
   /* Latest News & Blogs (1 Column) */
@@ -1679,12 +1699,60 @@
   .simulated-frame.frame-mobile .jew-root,
   .preview-viewport-container.device-mobile .jew-root,
   .is-mobile .jew-root
-) .jew-hover-action-btn {
-  width: 30px !important;
-  height: 30px !important;
-  background: rgba(255, 255, 255, 0.95) !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+-) .jew-hover-action-btn {
+  width: 32px !important;
+  height: 32px !important;
+  background: #111111 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3) !important;
   border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: transform 0.2s ease, background-color 0.2s ease !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-hover-action-btn svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-hover-action-btn:hover,
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-hover-action-btn:active,
+:is(
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .simulated-frame.frame-mobile .jew-root,
+  .preview-viewport-container.device-mobile .jew-root,
+  .is-mobile .jew-root
+) .jew-hover-action-btn.active {
+  background: #7d282b !important;
+  color: #ffffff !important;
+  transform: scale(1.08) !important;
 }
 
 :is(
