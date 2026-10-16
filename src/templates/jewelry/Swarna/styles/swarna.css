@@ -1272,22 +1272,1187 @@
   background: #faf7f2;
 }
 
-@media (max-width: 900px) {
-  .swarna-hero-grid,
-  .swarna-dark-grid,
-  .swarna-story-grid,
-  .swarna-faq-grid,
-  .swarna-footer-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
+/* =========================================================================
+   18. RESPONSIVE MOBILE STYLES (max-width: 768px)
+   ========================================================================= */
+@media (max-width: 768px) {
+  .swarna-container,
+  .swarna-announcement-container,
+  .swarna-header-container,
+  .swarna-hero-container {
+    padding: 0 14px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
-  .swarna-three-cards-grid,
-  .swarna-catalog-grid,
+
+  /* Top Announcement */
+  .swarna-top-announcement {
+    padding: 6px 0 !important;
+  }
+
+  .swarna-announcement-inner {
+    flex-direction: column !important;
+    gap: 6px !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+
+  .swarna-top-socials,
+  .swarna-currency-selector {
+    display: none !important;
+  }
+
+  .swarna-announcement-center {
+    font-size: 11px !important;
+    text-align: center !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Header */
+  .swarna-header-container {
+    padding: 10px 14px !important;
+  }
+
+  .swarna-mobile-menu-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  .swarna-nav-left {
+    display: none !important;
+  }
+
+  .swarna-brand-logo-img {
+    height: 32px !important;
+  }
+
+  .swarna-header-actions {
+    gap: 8px !important;
+  }
+
+  .swarna-icon-btn {
+    width: 36px !important;
+    height: 36px !important;
+    padding: 0 !important;
+  }
+
+  /* Hero */
+  .swarna-hero-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    text-align: center !important;
+    min-height: auto !important;
+  }
+
+  .swarna-hero-content {
+    padding: 24px 0 12px !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .swarna-hero-title {
+    font-size: 32px !important;
+    line-height: 1.15 !important;
+    text-align: center !important;
+    margin-bottom: 12px !important;
+  }
+
+  .swarna-hero-desc {
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+    text-align: center !important;
+    margin: 0 auto 20px auto !important;
+    max-width: 95% !important;
+  }
+
+  .swarna-hero-badges-row {
+    justify-content: center !important;
+    margin-top: 20px !important;
+  }
+
+  .swarna-hero-visual {
+    width: 100% !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .swarna-hero-model-container {
+    max-width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .swarna-hero-model-img {
+    max-height: 280px !important;
+    object-position: center !important;
+  }
+
+  /* Marquee Tags */
+  .swarna-marquee-section {
+    padding: 32px 0 !important;
+  }
+
+  .swarna-marquee-title {
+    font-size: 22px !important;
+    margin-bottom: 18px !important;
+  }
+
+  .swarna-marquee-tags {
+    gap: 12px 18px !important;
+    font-size: 15px !important;
+  }
+
+  /* 4. Your Style, Our Creation (Screenshot 1) */
+  .swarna-categories-section {
+    padding: 40px 0 !important;
+  }
+
+  .swarna-three-cards-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    width: 100% !important;
+  }
+
+  .swarna-product-card {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 20px 16px !important;
+    border-radius: 8px !important;
+  }
+
+  .swarna-card-thumb-wrap {
+    width: 100% !important;
+    height: 190px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .swarna-card-thumb-img {
+    max-width: 80% !important;
+    max-height: 80% !important;
+    object-fit: contain !important;
+  }
+
+  .swarna-card-name {
+    font-size: 18px !important;
+    margin: 0 0 6px 0 !important;
+  }
+
+  .swarna-card-price {
+    font-size: 15px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+  }
+
+  /* 5. Dark Editorial */
+  .swarna-dark-section {
+    padding: 50px 0 !important;
+  }
+
+  .swarna-dark-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 28px !important;
+    text-align: center !important;
+  }
+
+  .swarna-dark-title {
+    font-size: 28px !important;
+  }
+
+  .swarna-dark-desc {
+    margin: 0 auto 24px auto !important;
+  }
+
+  .swarna-rings-split-image {
+    max-width: 280px !important;
+    margin: 0 auto !important;
+  }
+
+  /* 6. Story Section */
+  .swarna-story-section {
+    padding: 50px 0 !important;
+  }
+
+  .swarna-story-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 28px !important;
+    text-align: center !important;
+  }
+
+  .swarna-story-title {
+    font-size: 28px !important;
+  }
+
+  .swarna-story-desc {
+    margin: 0 auto 24px auto !important;
+  }
+
+  .swarna-story-visual-wrap {
+    width: 100% !important;
+    max-width: 280px !important;
+    margin: 0 auto !important;
+  }
+
+  /* 7. Pillars */
+  .swarna-pillars-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  .swarna-pillar-item {
+    padding: 16px !important;
+  }
+
+  /* 8. Newly Launched Products (Screenshot 2) */
+  .swarna-catalog-section {
+    padding: 40px 0 !important;
+  }
+
+  .swarna-catalog-tabs {
+    display: flex !important;
+    justify-content: flex-start !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 4px 10px 10px 10px !important;
+    gap: 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    scrollbar-width: none !important;
+  }
+
+  .swarna-catalog-tabs::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .swarna-tab-btn {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    padding: 8px 16px !important;
+    font-size: 13px !important;
+  }
+
+  .swarna-catalog-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    width: 100% !important;
+  }
+
+  .swarna-catalog-grid .swarna-product-card {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 20px 16px !important;
+  }
+
+  /* 9. New Ring Edition (Screenshot 3) */
+  .swarna-edition-section {
+    padding: 50px 0 !important;
+  }
+
+  .swarna-edition-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    margin-bottom: 24px !important;
+  }
+
   .swarna-edition-grid {
-    grid-template-columns: 1fr;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    width: 100% !important;
   }
+
+  .swarna-edition-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .swarna-edition-img-wrap {
+    width: 100% !important;
+    height: 200px !important;
+  }
+
+  .swarna-edition-body {
+    padding: 18px 16px !important;
+    text-align: left !important;
+  }
+
+  .swarna-edition-body h4 {
+    font-size: 20px !important;
+    margin: 0 0 8px 0 !important;
+  }
+
+  .swarna-edition-body p {
+    font-size: 13px !important;
+    line-height: 1.55 !important;
+  }
+
+  /* 10. Brand Partners Bar */
+  .swarna-partners-bar {
+    padding: 20px 0 !important;
+  }
+
+  .swarna-partners-inner {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 14px 20px !important;
+    padding: 0 10px !important;
+  }
+
+  .swarna-partner-brand {
+    font-size: 15px !important;
+  }
+
+  /* 11. Frequently Asking Questions (Screenshot 4 & 5) */
+  .swarna-faq-section {
+    padding: 40px 0 !important;
+  }
+
+  .swarna-faq-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 28px !important;
+    width: 100% !important;
+  }
+
+  .swarna-faq-grid > div:first-child {
+    width: 100% !important;
+    text-align: left !important;
+  }
+
+  .swarna-faq-info-card {
+    padding: 20px 16px !important;
+    margin-top: 20px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .swarna-accordion {
+    width: 100% !important;
+    gap: 12px !important;
+  }
+
+  .swarna-accordion-item {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .swarna-accordion-header {
+    padding: 14px 16px !important;
+    font-size: 14px !important;
+    line-height: 1.35 !important;
+  }
+
+  .swarna-accordion-body {
+    padding: 14px 16px !important;
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+  }
+
+  /* 12. Instagram */
   .swarna-insta-grid {
-    grid-template-columns: repeat(2, 1fr);
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
   }
+
+  .swarna-insta-item {
+    height: 150px !important;
+  }
+
+  /* 13. Newsletter */
+  .swarna-newsletter-form {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+    max-width: 360px !important;
+    margin: 0 auto !important;
+  }
+
+  .swarna-newsletter-form input {
+    width: 100% !important;
+    height: 44px !important;
+    text-align: center !important;
+  }
+
+  .swarna-newsletter-form button {
+    width: 100% !important;
+    height: 44px !important;
+  }
+
+  /* 14. Footer */
+  .swarna-footer-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 28px !important;
+    text-align: center !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  .swarna-footer-col {
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .swarna-footer-links {
+    align-items: center !important;
+  }
+
+  .swarna-footer-bottom {
+    flex-direction: column !important;
+    gap: 12px !important;
+    text-align: center !important;
+  }
+
+  /* Cart Drawer Mobile */
+  .swarna-drawer-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(0, 0, 0, 0.65) !important;
+    z-index: 99999 !important;
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+  }
+
+  .swarna-drawer {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    padding: 16px 14px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+}
+
+/* =========================================================================
+   19. SIMULATED FRAME & CLASS-BASED MOBILE RULES FOR SWARNA
+   Guarantees 100% identical rendering inside Willovate preview simulator
+   ========================================================================= */
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-container,
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-announcement-container,
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-header-container,
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-hero-container {
+  padding: 0 14px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-top-announcement {
+  padding: 6px 0 !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-announcement-inner {
+  flex-direction: column !important;
+  gap: 6px !important;
+  text-align: center !important;
+  justify-content: center !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-top-socials,
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-currency-selector {
+  display: none !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-announcement-center {
+  font-size: 11px !important;
+  text-align: center !important;
+  line-height: 1.3 !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-header-container {
+  padding: 10px 14px !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-mobile-menu-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 38px !important;
+  height: 38px !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-nav-left {
+  display: none !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-brand-logo-img {
+  height: 32px !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-hero-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+  text-align: center !important;
+  min-height: auto !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-hero-content {
+  padding: 24px 0 12px !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-hero-title {
+  font-size: 32px !important;
+  line-height: 1.15 !important;
+  text-align: center !important;
+  margin-bottom: 12px !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-hero-desc {
+  font-size: 13px !important;
+  line-height: 1.6 !important;
+  text-align: center !important;
+  margin: 0 auto 20px auto !important;
+  max-width: 95% !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-hero-badges-row {
+  justify-content: center !important;
+  margin-top: 20px !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-hero-visual {
+  width: 100% !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-hero-model-container {
+  max-width: 100% !important;
+  justify-content: center !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-hero-model-img {
+  max-height: 280px !important;
+  object-position: center !important;
+}
+
+/* 4. Your Style, Our Creation Simulator (Screenshot 1) */
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-categories-section {
+  padding: 40px 0 !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-three-cards-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 18px !important;
+  width: 100% !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-product-card {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 20px 16px !important;
+  border-radius: 8px !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-card-thumb-wrap {
+  width: 100% !important;
+  height: 190px !important;
+  margin-bottom: 14px !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-card-thumb-img {
+  max-width: 80% !important;
+  max-height: 80% !important;
+  object-fit: contain !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-card-name {
+  font-size: 18px !important;
+  margin: 0 0 6px 0 !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-card-price {
+  font-size: 15px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+
+/* 8. Newly Launched Products Simulator (Screenshot 2) */
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-catalog-section {
+  padding: 40px 0 !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-catalog-tabs {
+  display: flex !important;
+  justify-content: flex-start !important;
+  overflow-x: auto !important;
+  scroll-snap-type: x mandatory !important;
+  -webkit-overflow-scrolling: touch !important;
+  padding: 4px 10px 10px 10px !important;
+  gap: 10px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  scrollbar-width: none !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-catalog-tabs::-webkit-scrollbar {
+  display: none !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-tab-btn {
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+  padding: 8px 16px !important;
+  font-size: 13px !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-catalog-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 18px !important;
+  width: 100% !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-catalog-grid .swarna-product-card {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 20px 16px !important;
+}
+
+/* 9. New Ring Edition Simulator (Screenshot 3) */
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-edition-section {
+  padding: 50px 0 !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-edition-header {
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+  margin-bottom: 24px !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-edition-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+  width: 100% !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-edition-card {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-edition-img-wrap {
+  width: 100% !important;
+  height: 200px !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-edition-body {
+  padding: 18px 16px !important;
+  text-align: left !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-edition-body h4 {
+  font-size: 20px !important;
+  margin: 0 0 8px 0 !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-edition-body p {
+  font-size: 13px !important;
+  line-height: 1.55 !important;
+}
+
+/* 10. Brand Partners Bar Simulator */
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-partners-bar {
+  padding: 20px 0 !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-partners-inner {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 14px 20px !important;
+  padding: 0 10px !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-partner-brand {
+  font-size: 15px !important;
+}
+
+/* 11. Frequently Asking Questions Simulator (Screenshot 4 & 5) */
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-faq-section {
+  padding: 40px 0 !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-faq-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 28px !important;
+  width: 100% !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-faq-grid > div:first-child {
+  width: 100% !important;
+  text-align: left !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-faq-info-card {
+  padding: 20px 16px !important;
+  margin-top: 20px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-accordion {
+  width: 100% !important;
+  gap: 12px !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-accordion-item {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-accordion-header {
+  padding: 14px 16px !important;
+  font-size: 14px !important;
+  line-height: 1.35 !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-accordion-body {
+  padding: 14px 16px !important;
+  font-size: 13px !important;
+  line-height: 1.6 !important;
+}
+
+/* Cart Drawer Simulator */
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-drawer-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: rgba(0, 0, 0, 0.65) !important;
+  z-index: 1200 !important;
+  backdrop-filter: blur(4px) !important;
+}
+
+:is(
+  .swarna-root.is-mobile,
+  .swarna-root.swarna-mobile-view,
+  .swarna-root.device-mobile,
+  .simulated-frame.frame-mobile .swarna-root,
+  .preview-viewport-container.device-mobile .swarna-root,
+  .is-mobile .swarna-root
+) .swarna-drawer {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
+  padding: 16px 14px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
