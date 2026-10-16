@@ -757,7 +757,7 @@
   }
 
   /* Product Card Footer Action Row - Stacking */
-  :is(.dia-product-footer, .dwd-product-footer) {
+  :is(.dia-product-footer, .dwd-product-footer, .jwd-card-bottom-row) {
     display: flex !important;
     flex-direction: column !important;
     align-items: stretch !important;
@@ -790,6 +790,10 @@
     .jwd-regal-grid,
     .jwd-banner-grid,
     .jwd-beauty-inner,
+    .jwd-promo-grid,
+    .jwd-blog-grid,
+    .jwd-hoop-inner,
+    .jwd-hoop-right-grid,
     .tmz-deal-grid,
     .tmz-split-grid,
     .tmz-roman-layout,
@@ -1851,7 +1855,7 @@
   .swarna-root.is-mobile,
   .tmz-root.is-mobile,
   .vto-root.is-mobile
-) :is(.dia-product-footer, .dwd-product-footer) {
+) :is(.dia-product-footer, .dwd-product-footer, .jwd-card-bottom-row) {
   display: flex !important;
   flex-direction: column !important;
   align-items: stretch !important;
@@ -2063,6 +2067,10 @@
   .jwd-regal-grid,
   .jwd-banner-grid,
   .jwd-beauty-inner,
+  .jwd-promo-grid,
+  .jwd-blog-grid,
+  .jwd-hoop-inner,
+  .jwd-hoop-right-grid,
   .tmz-deal-grid,
   .tmz-split-grid,
   .tmz-roman-layout,
@@ -2591,3 +2599,116 @@
   max-width: 120px !important;
   object-fit: contain !important;
 }
+
+/* Simulator: JewelsWorkDo Spotlight, Newsletter, and Footer White */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jwd-root.is-mobile,
+  .jwd-root.device-mobile
+) .jwd-spotlight-inner {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 24px !important;
+  width: 100% !important;
+  align-items: center !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jwd-root.is-mobile,
+  .jwd-root.device-mobile
+) .jwd-spotlight-box {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 24px 18px !important;
+  text-align: center !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jwd-root.is-mobile,
+  .jwd-root.device-mobile
+) .jwd-floating-ring-img {
+  max-width: 200px !important;
+  max-height: 200px !important;
+  width: 100% !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jwd-root.is-mobile,
+  .jwd-root.device-mobile
+) .jwd-newsletter-form {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  width: 100% !important;
+  max-width: 380px !important;
+  margin: 0 auto !important;
+  background-color: #ffffff !important;
+  border-radius: 999px !important;
+  padding: 4px 5px 4px 18px !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jwd-root.is-mobile,
+  .jwd-root.device-mobile
+) .jwd-newsletter-input {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  padding: 10px 8px 10px 0 !important;
+  font-size: 13.5px !important;
+  border: none !important;
+  background: transparent !important;
+  color: #1e293b !important;
+  outline: none !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jwd-root.is-mobile,
+  .jwd-root.device-mobile
+) .jwd-newsletter-submit {
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  border-radius: 50% !important;
+  flex-shrink: 0 !important;
+  background-color: #cbb193 !important;
+  color: #1e293b !important;
+  border: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 15px !important;
+  cursor: pointer !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jwd-root.is-mobile,
+  .jwd-root.device-mobile
+) .jwd-footer-white-inner {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 32px !important;
+  text-align: center !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+

@@ -41,6 +41,9 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = ({
 
   // Wishlist state
   const [wishlistIds, setWishlistIds] = useState<string[]>([])
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   // Video Modal state
@@ -170,6 +173,31 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = ({
               <span style={{ fontSize: '10px' }}>∨</span>
             </button>
 
+            <button
+              type="button"
+              className="jwd-top-pill"
+              onClick={() => setIsSearchOpen(!isSearchOpen)}
+              title="Search fine jewelry"
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+              <span>Search</span>
+            </button>
+
+            <button
+              type="button"
+              className="jwd-top-pill"
+              onClick={() => setIsWishlistOpen(true)}
+              title="Saved Wishlist"
+            >
+              <span style={{ color: wishlistIds.length > 0 ? '#ef4444' : 'inherit' }}>
+                {wishlistIds.length > 0 ? '♥' : '♡'}
+              </span>
+              <span>Wishlist ({wishlistIds.length})</span>
+            </button>
+
             <a href="#faq" className="jwd-top-link">
               Faq
             </a>
@@ -266,7 +294,46 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = ({
           </div>
 
           <div className="jwd-header-right">
+            {/* Search Trigger */}
             <button
+              type="button"
+              className="jwd-icon-btn jwd-search-btn"
+              onClick={() => setIsSearchOpen(!isSearchOpen)}
+              title="Search fine jewelry"
+              aria-label="Search"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </button>
+
+            {/* Like / Wishlist Trigger */}
+            <button
+              type="button"
+              className="jwd-icon-btn jwd-wishlist-btn"
+              onClick={() => setIsWishlistOpen(true)}
+              title="Saved Wishlist"
+              aria-label="Wishlist"
+              style={{ position: 'relative' }}
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill={wishlistIds.length > 0 ? '#ef4444' : 'none'}
+                stroke={wishlistIds.length > 0 ? '#ef4444' : 'currentColor'}
+                strokeWidth="2"
+              >
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+              </svg>
+              {wishlistIds.length > 0 && (
+                <span className="jwd-badge-count">{wishlistIds.length}</span>
+              )}
+            </button>
+
+            <button
+              type="button"
               className="jwd-avatar-btn"
               title="My Account"
               aria-label="User Account"
@@ -278,6 +345,7 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = ({
             </button>
 
             <button
+              type="button"
               className="jwd-cart-pill-btn"
               onClick={() => setIsCartOpen(true)}
               aria-label="View Shopping Cart"
@@ -292,6 +360,68 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = ({
             </button>
           </div>
         </div>
+
+        {/* SEARCH BAR DROPDOWN */}
+        {isSearchOpen && (
+          <div className="jwd-search-bar-dropdown">
+            <div className="jwd-search-bar-inner">
+              <input
+                type="text"
+                placeholder="Search rings, necklaces, earrings, bracelets..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                autoFocus
+                className="jwd-search-input"
+              />
+              <button
+                type="button"
+                className="jwd-btn-cart-camel"
+                style={{ borderRadius: 999, padding: '9px 20px', fontSize: 13 }}
+                onClick={() => {
+                  const el = document.getElementById('catalog')
+                  el?.scrollIntoView({ behavior: 'smooth' })
+                }}
+              >
+                Search
+              </button>
+              <button
+                type="button"
+                className="jwd-search-close"
+                onClick={() => {
+                  setIsSearchOpen(false)
+                  setSearchQuery('')
+                }}
+                aria-label="Close search"
+              >
+                ✕
+              </button>
+            </div>
+
+            {searchQuery.trim().length > 0 && (
+              <div className="jwd-search-results">
+                {JEWELS_PRODUCTS.filter((p) =>
+                  p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                  p.category.toLowerCase().includes(searchQuery.toLowerCase())
+                ).slice(0, 5).map((prod) => (
+                  <div
+                    key={prod.id}
+                    className="jwd-search-result-item"
+                    onClick={() => {
+                      setQuickViewProduct(prod)
+                      setIsSearchOpen(false)
+                    }}
+                  >
+                    <img src={prod.image} alt={prod.title} className="jwd-search-thumb" />
+                    <div style={{ flex: 1 }}>
+                      <div className="jwd-search-res-title">{prod.title}</div>
+                      <div className="jwd-search-res-price">Rs. {prod.price.toLocaleString()}.00 INR</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
       </header>
 
       {/* MOBILE NAVIGATION DRAWER */}
@@ -642,17 +772,27 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = ({
         <div className="jwd-organic-container" id="catalog">
           <div className="jwd-organic-header">
             <h3 className="jwd-organic-title">Organic Inspirations in Jewelry</h3>
+            <div className="jwd-carousel-arrows-nav">
+              <button
+                type="button"
+                className="jwd-carousel-arrow-btn"
+                onClick={() => scrollCarousel('left')}
+                aria-label="Previous Products"
+              >
+                ←
+              </button>
+              <button
+                type="button"
+                className="jwd-carousel-arrow-btn"
+                onClick={() => scrollCarousel('right')}
+                aria-label="Next Products"
+              >
+                →
+              </button>
+            </div>
           </div>
 
           <div className="jwd-carousel-wrapper">
-            <button
-              className="jwd-carousel-arrow-btn jwd-carousel-arrow-left"
-              onClick={() => scrollCarousel('left')}
-              aria-label="Previous Products"
-            >
-              ←
-            </button>
-
             <div className="jwd-carousel-track" ref={carouselRef}>
               {filteredProducts.map((prod) => (
                 <div key={prod.id} className="jwd-carousel-card">
@@ -747,14 +887,6 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = ({
                 </div>
               ))}
             </div>
-
-            <button
-              className="jwd-carousel-arrow-btn jwd-carousel-arrow-right"
-              onClick={() => scrollCarousel('right')}
-              aria-label="Next Products"
-            >
-              →
-            </button>
           </div>
         </div>
       </section>
@@ -1301,6 +1433,42 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = ({
           </div>
 
           <div className="jwd-header-right">
+            <button
+              type="button"
+              className="jwd-icon-btn jwd-search-btn"
+              onClick={() => setIsSearchOpen(!isSearchOpen)}
+              title="Search fine jewelry"
+              aria-label="Search"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </button>
+
+            <button
+              type="button"
+              className="jwd-icon-btn jwd-wishlist-btn"
+              onClick={() => setIsWishlistOpen(true)}
+              title="Saved Wishlist"
+              aria-label="Wishlist"
+              style={{ position: 'relative' }}
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill={wishlistIds.length > 0 ? '#ef4444' : 'none'}
+                stroke={wishlistIds.length > 0 ? '#ef4444' : 'currentColor'}
+                strokeWidth="2"
+              >
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+              </svg>
+              {wishlistIds.length > 0 && (
+                <span className="jwd-badge-count">{wishlistIds.length}</span>
+              )}
+            </button>
+
             <button className="jwd-avatar-btn" title="My Account" aria-label="User Account">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
@@ -1539,6 +1707,96 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = ({
                 </button>
               </div>
             )}
+          </div>
+        </>
+      )}
+
+      {/* =====================================================================
+          WISHLIST DRAWER
+          ===================================================================== */}
+      {isWishlistOpen && (
+        <>
+          <div
+            className="jwd-drawer-backdrop"
+            onClick={() => setIsWishlistOpen(false)}
+          />
+          <div className="jwd-cart-drawer">
+            <div className="jwd-drawer-header">
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span style={{ fontSize: 20, color: '#ef4444' }}>♥</span>
+                <span className="jwd-drawer-title">Saved Wishlist ({wishlistIds.length})</span>
+              </div>
+              <button
+                type="button"
+                className="jwd-drawer-close"
+                onClick={() => setIsWishlistOpen(false)}
+                aria-label="Close wishlist"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="jwd-drawer-body">
+              {wishlistIds.length === 0 ? (
+                <div style={{ textAlign: 'center', padding: '60px 20px', color: '#64748b' }}>
+                  <div style={{ fontSize: '48px', marginBottom: '16px', color: '#cbd5e1' }}>♡</div>
+                  <h4 style={{ fontSize: '18px', fontWeight: 600, color: '#1e293b', margin: '0 0 8px' }}>
+                    Your Wishlist is Empty
+                  </h4>
+                  <p style={{ fontSize: '14px', margin: '0 0 20px', color: '#64748b' }}>
+                    Tap the heart icon on any jewelry item to save your favorite treasures.
+                  </p>
+                  <button
+                    type="button"
+                    className="jwd-btn-cart-camel"
+                    style={{ margin: '0 auto', display: 'inline-flex' }}
+                    onClick={() => {
+                      setIsWishlistOpen(false)
+                      document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' })
+                    }}
+                  >
+                    Explore Fine Jewelry
+                  </button>
+                </div>
+              ) : (
+                JEWELS_PRODUCTS.filter((p) => wishlistIds.includes(p.id)).map((item) => (
+                  <div key={item.id} className="jwd-drawer-item">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="jwd-drawer-item-img"
+                    />
+                    <div style={{ flex: 1 }}>
+                      <div className="jwd-drawer-item-title">{item.title}</div>
+                      <div className="jwd-drawer-item-meta">{item.category} • Certified Fine Jewelry</div>
+                      <div className="jwd-drawer-item-price">
+                        Rs. {item.price.toLocaleString()}.00 INR
+                      </div>
+                      <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
+                        <button
+                          type="button"
+                          className="jwd-btn-cart-camel"
+                          style={{ padding: '6px 14px', fontSize: 11 }}
+                          onClick={() => {
+                            handleAddToCart(item)
+                            setIsWishlistOpen(false)
+                          }}
+                        >
+                          Add to Bag
+                        </button>
+                        <button
+                          type="button"
+                          style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', fontSize: 12 }}
+                          onClick={() => toggleWishlist(item.id)}
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
           </div>
         </>
       )}
