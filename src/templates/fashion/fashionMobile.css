@@ -1,0 +1,320 @@
+@media (max-width: 768px) {
+  :is(
+    .baggo-root,
+    .belle-theme-root,
+    .chutti-root,
+    .fragrance-theme-root,
+    .jenie-theme-root,
+    .mr-tevor-storefront,
+    .naturya-root,
+    .optimal-root,
+    .trendy-storefront,
+    .vogal-theme-root
+  ) {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  :is(
+    .baggo-root,
+    .belle-theme-root,
+    .chutti-root,
+    .fragrance-theme-root,
+    .jenie-theme-root,
+    .mr-tevor-storefront,
+    .naturya-root,
+    .optimal-root,
+    .trendy-storefront,
+    .vogal-theme-root
+  ) :is(
+    .baggo-container,
+    .belle-container,
+    .chutti-container,
+    .fragrance-container,
+    .jenie-container,
+    .mt-container,
+    .naturya-container,
+    .optimal-container,
+    .trendy-container,
+    .vogal-container
+  ) {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-right: 16px !important;
+    padding-left: 16px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box !important;
+  }
+
+  :is(
+    .baggo-root,
+    .belle-theme-root,
+    .chutti-root,
+    .fragrance-theme-root,
+    .jenie-theme-root,
+    .mr-tevor-storefront,
+    .naturya-root,
+    .optimal-root,
+    .trendy-storefront,
+    .vogal-theme-root
+  ) img {
+    max-width: 100%;
+  }
+
+  :is(
+    .baggo-root,
+    .belle-theme-root,
+    .chutti-root,
+    .fragrance-theme-root,
+    .jenie-theme-root,
+    .mr-tevor-storefront,
+    .naturya-root,
+    .optimal-root,
+    .trendy-storefront,
+    .vogal-theme-root
+  ) :is(
+    [class*="products-grid"],
+    [class*="product-grid"],
+    [class*="bestseller-grid"]
+  ) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  :is(
+    .baggo-root,
+    .belle-theme-root,
+    .chutti-root,
+    .fragrance-theme-root,
+    .jenie-theme-root,
+    .mr-tevor-storefront,
+    .naturya-root,
+    .optimal-root,
+    .trendy-storefront,
+    .vogal-theme-root
+  ) :is(
+    [class*="category-grid"],
+    [class*="categories-grid"],
+    [class*="collection-grid"],
+    [class*="cat-grid"]
+  ) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  :is(
+    .baggo-root,
+    .belle-theme-root,
+    .chutti-root,
+    .fragrance-theme-root,
+    .jenie-theme-root,
+    .mr-tevor-storefront,
+    .naturya-root,
+    .optimal-root,
+    .trendy-storefront,
+    .vogal-theme-root
+  ) :is(
+    [class*="hero-grid"],
+    [class*="hero-inner"],
+    [class*="hero-row"],
+    [class*="featured-product-split"],
+    [class*="two-col-grid"],
+    [class*="pdp-layout"],
+    [class*="pdp-main"]
+  ) {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 20px !important;
+  }
+
+  :is(
+    .baggo-root,
+    .belle-theme-root,
+    .chutti-root,
+    .fragrance-theme-root,
+    .jenie-theme-root,
+    .mr-tevor-storefront,
+    .naturya-root,
+    .optimal-root,
+    .trendy-storefront,
+    .vogal-theme-root
+  ) :is(
+    [class*="product-media"],
+    [class*="product-image-wrap"],
+    [class*="product-img-wrap"],
+    [class*="category-image"],
+    [class*="collection-image"],
+    [class*="hero-image-wrap"]
+  ) img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  :is(
+    .baggo-root,
+    .belle-theme-root,
+    .chutti-root,
+    .fragrance-theme-root,
+    .jenie-theme-root,
+    .mr-tevor-storefront,
+    .naturya-root,
+    .optimal-root,
+    .trendy-storefront,
+    .vogal-theme-root
+  ) :is(
+    section[class*="hero"],
+    section[class*="banner"],
+    [class*="-hero-banner"]
+  ) {
+    background-size: cover;
+    background-position: center;
+  }
+
+  :is(
+    .baggo-root,
+    .belle-theme-root,
+    .chutti-root,
+    .fragrance-theme-root,
+    .jenie-theme-root,
+    .mr-tevor-storefront,
+    .naturya-root,
+    .optimal-root,
+    .trendy-storefront,
+    .vogal-theme-root
+  ) :is(
+    [class*="product-card"],
+    [class*="collection-card"],
+    [class*="category-card"]
+  ) {
+    min-width: 0;
+  }
+
+  :is(
+    .baggo-root,
+    .belle-theme-root,
+    .chutti-root,
+    .fragrance-theme-root,
+    .jenie-theme-root,
+    .mr-tevor-storefront,
+    .naturya-root,
+    .optimal-root,
+    .trendy-storefront,
+    .vogal-theme-root
+  ) :is(
+    [class*="footer-grid"],
+    [class*="reviews-grid"],
+    [class*="testimonial-grid"],
+    [class*="testimonials-grid"],
+    [class*="blog-grid"]
+  ) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+
+  :is(
+    .baggo-root,
+    .belle-theme-root,
+    .chutti-root,
+    .fragrance-theme-root,
+    .jenie-theme-root,
+    .mr-tevor-storefront,
+    .naturya-root,
+    .optimal-root,
+    .trendy-storefront,
+    .vogal-theme-root
+  ) :is(
+    [class*="drawer"],
+    [class*="quick-view"],
+    [class*="quickview"],
+    [class*="modal"]
+  ) {
+    max-width: 100vw;
+  }
+
+  .baggo-root .baggo-header-inner,
+  .chutti-root .chutti-header-inner {
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
+
+  .baggo-root .baggo-header-inner nav,
+  .chutti-root .chutti-header-inner nav {
+    flex: 1 0 100%;
+    order: 3;
+    min-width: 0;
+  }
+
+  .baggo-root .baggo-nav-list,
+  .chutti-root .chutti-nav-menu,
+  .fragrance-theme-root .fragrance-main-nav,
+  .naturya-root .naturya-nav-menu,
+  .optimal-root .optimal-nav-links,
+  .mr-tevor-storefront .mt-nav {
+    display: flex !important;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 18px;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 8px 0;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .baggo-root .baggo-nav-list::-webkit-scrollbar,
+  .chutti-root .chutti-nav-menu::-webkit-scrollbar,
+  .fragrance-theme-root .fragrance-main-nav::-webkit-scrollbar,
+  .naturya-root .naturya-nav-menu::-webkit-scrollbar,
+  .optimal-root .optimal-nav-links::-webkit-scrollbar,
+  .mr-tevor-storefront .mt-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .baggo-root .baggo-nav-list > *,
+  .chutti-root .chutti-nav-menu > *,
+  .fragrance-theme-root .fragrance-main-nav > *,
+  .naturya-root .naturya-nav-menu > *,
+  .optimal-root .optimal-nav-links > *,
+  .mr-tevor-storefront .mt-nav > * {
+    flex: 0 0 auto;
+  }
+
+  .fragrance-theme-root .fragrance-nav-row {
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
+
+  .fragrance-theme-root .fragrance-main-nav {
+    display: none !important;
+  }
+
+  .mr-tevor-storefront .mt-nav {
+    width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  :is(
+    .baggo-root,
+    .belle-theme-root,
+    .chutti-root,
+    .fragrance-theme-root,
+    .jenie-theme-root,
+    .mr-tevor-storefront,
+    .naturya-root,
+    .optimal-root,
+    .trendy-storefront,
+    .vogal-theme-root
+  ) :is(
+    [class*="products-grid"],
+    [class*="product-grid"],
+    [class*="bestseller-grid"]
+  ) {
+    gap: 8px !important;
+  }
+}

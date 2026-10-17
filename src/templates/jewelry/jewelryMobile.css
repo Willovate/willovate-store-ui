@@ -1,0 +1,3042 @@
+/* =============================================================================
+   JEWELRY STOREFRONTS - MASTER RESPONSIVE MOBILE STYLESHEET
+   100% Perfect Mobile Layout for all 10 Luxury Jewelry Templates:
+   1. Diamond (.diamond-root)
+   2. DiamondWorkDo (.diamond-workdo-root)
+   3. Jew (.jew-root)
+   4. JewelsWorkDo (.jwd-root)
+   5. Johary (.jh-root)
+   6. Lopez (.lp-root)
+   7. PSJewelshop (.psj-root)
+   8. Swarna (.swarna-root)
+   9. Timzee (.tmz-root)
+   10. VtOlight (.vto-root)
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   COMMON MOBILE DRAWER BASE STYLES (Used by Swarna, Jew, VtOlight, JewelsWorkDo, Timzee)
+   ----------------------------------------------------------------------------- */
+:is(.jew-drawer-overlay, .swarna-drawer-overlay, .vto-drawer-overlay, .jwd-drawer-overlay, .tmz-drawer-overlay) {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 999999;
+  display: flex;
+  animation: jwFadeIn 0.22s ease-out;
+}
+
+:is(.jew-mobile-nav-drawer, .swarna-mobile-nav-drawer, .vto-mobile-nav-drawer, .jwd-mobile-nav-drawer, .tmz-mobile-nav-drawer) {
+  width: 85%;
+  max-width: 320px;
+  height: 100%;
+  background: #ffffff;
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.2);
+  animation: jwSlideRight 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.tmz-drawer-overlay .tmz-mobile-nav-drawer {
+  background: #0f1115;
+  color: #f1f5f9;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+:is(.jew-mobile-nav-header, .swarna-mobile-nav-header, .vto-mobile-nav-header, .jwd-mobile-nav-header, .tmz-mobile-nav-header) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.tmz-drawer-overlay .tmz-mobile-nav-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+:is(.jew-drawer-close, .swarna-drawer-close, .vto-drawer-close, .jwd-drawer-close, .tmz-drawer-close) {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: inherit;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+:is(.jew-drawer-close, .swarna-drawer-close, .vto-drawer-close, .jwd-drawer-close, .tmz-drawer-close):hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.tmz-drawer-overlay .tmz-drawer-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+:is(.jew-mobile-nav-links, .swarna-mobile-nav-links, .vto-mobile-nav-links, .jwd-mobile-nav-links, .tmz-mobile-nav-links) {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 14px;
+  gap: 2px;
+  flex: 1;
+}
+
+:is(.jew-mobile-link, .swarna-mobile-link, .vto-mobile-link, .jwd-mobile-link, .tmz-mobile-link) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  text-align: left;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.18s ease, color 0.18s ease;
+  min-height: 44px;
+  box-sizing: border-box;
+}
+
+.tmz-drawer-overlay .tmz-mobile-link {
+  color: #e2e8f0;
+}
+
+:is(.jew-mobile-link, .swarna-mobile-link, .vto-mobile-link, .jwd-mobile-link, .tmz-mobile-link):hover,
+:is(.jew-mobile-link, .swarna-mobile-link, .vto-mobile-link, .jwd-mobile-link, .tmz-mobile-link).active {
+  background: #f8f6f0;
+  color: #a47133;
+}
+
+.tmz-drawer-overlay .tmz-mobile-link:hover,
+.tmz-drawer-overlay .tmz-mobile-link.active {
+  background: rgba(212, 175, 55, 0.15);
+  color: #d4af37;
+}
+
+:is(.jew-mobile-nav-footer, .swarna-mobile-nav-footer, .vto-mobile-nav-footer, .jwd-mobile-nav-footer, .tmz-mobile-nav-footer) {
+  padding: 18px 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.tmz-drawer-overlay .tmz-mobile-nav-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+:is(.jew-mobile-currency, .swarna-mobile-currency, .vto-mobile-currency, .jwd-mobile-currency, .tmz-mobile-currency) {
+  font-size: 12px;
+  color: #71717a;
+  cursor: pointer;
+}
+
+.tmz-drawer-overlay .tmz-mobile-currency {
+  color: #94a3b8;
+}
+
+:is(.jew-mobile-vip-btn, .swarna-mobile-vip-btn, .vto-mobile-vip-btn, .jwd-mobile-vip-btn, .tmz-mobile-vip-btn) {
+  width: 100%;
+  padding: 11px;
+  background: #111111;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  text-align: center;
+  transition: opacity 0.2s ease;
+}
+
+.swarna-drawer-overlay .swarna-mobile-vip-btn {
+  background: #b5843f;
+  color: #ffffff;
+}
+
+.vto-drawer-overlay .vto-mobile-vip-btn {
+  background: #c89e58;
+  color: #0b0c0e;
+}
+
+.tmz-drawer-overlay .tmz-mobile-vip-btn {
+  background: #d4af37;
+  color: #0b0c0e;
+}
+
+@keyframes jwFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes jwSlideRight {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+/* -----------------------------------------------------------------------------
+   RESPONSIVE MEDIA QUERY (< 768px) & SIMULATED FRAME SELECTOR
+   ----------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* ===========================================================================
+     1. GLOBAL SHELL & OVERFLOW SAFETY FOR ALL 10 TEMPLATES
+     =========================================================================== */
+  :is(
+    .diamond-root,
+    .diamond-workdo-root,
+    .jew-root,
+    .jwd-root,
+    .jh-root,
+    .lp-root,
+    .psj-root,
+    .swarna-root,
+    .tmz-root,
+    .vto-root
+  ) {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Containers padding normalization */
+  :is(
+    .diamond-root,
+    .diamond-workdo-root,
+    .jew-root,
+    .jwd-root,
+    .jh-root,
+    .lp-root,
+    .psj-root,
+    .swarna-root,
+    .tmz-root,
+    .vto-root
+  ) :is(
+    .diamond-container,
+    .diamond-workdo-container,
+    .jew-container,
+    .jwd-container,
+    .jwd-top-bar-inner,
+    .jwd-main-header-inner,
+    .jwd-hero-inner,
+    .jh-container,
+    .lp-container,
+    .psj-container,
+    .swarna-container,
+    .swarna-announcement-container,
+    .swarna-header-container,
+    .swarna-hero-container,
+    .tmz-container,
+    .vto-container,
+    .vto-top-bar-inner
+  ) {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Hide floating right side tabs that obstruct mobile viewport */
+  .swarna-fixed-side-tabs,
+  .diamond-fixed-tabs,
+  .jew-fixed-tabs {
+    display: none !important;
+  }
+
+  /* ===========================================================================
+     2. MOBILE HEADERS & BURGER MENUS ACROSS ALL 10 TEMPLATES
+     =========================================================================== */
+
+  /* Show hamburger button on mobile with proper 44px touch targets */
+  :is(
+    .diamond-mobile-menu-btn,
+    .diamond-workdo-burger,
+    .jew-mobile-menu-btn,
+    .jwd-mobile-menu-btn,
+    .jh-hamburger,
+    .lp-burger-btn,
+    .psj-mobile-menu-btn,
+    .swarna-mobile-menu-btn,
+    .tmz-menu-toggle,
+    .vto-mobile-menu-btn
+  ) {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 4.5px !important;
+    width: 44px !important;
+    height: 44px !important;
+    padding: 8px !important;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer !important;
+    z-index: 10 !important;
+    flex-shrink: 0 !important;
+  }
+
+  :is(
+    .diamond-burger-bar,
+    .jew-burger-bar,
+    .jwd-burger-bar,
+    .swarna-burger-bar,
+    .tmz-menu-bar,
+    .vto-burger-bar
+  ) {
+    display: block !important;
+    width: 20px !important;
+    height: 2px !important;
+    background-color: currentColor !important;
+    border-radius: 2px !important;
+    transition: all 0.2s ease !important;
+  }
+
+  /* Hide desktop horizontal menus on mobile */
+  :is(
+    .diamond-nav-center,
+    .diamond-workdo-nav,
+    .jew-nav-left,
+    .jwd-header-left nav,
+    .jwd-nav-divider,
+    .jh-nav,
+    .lp-nav,
+    .psj-nav-row,
+    .psj-nav,
+    .swarna-nav-left,
+    .tmz-nav-center,
+    .vto-nav
+  ) {
+    display: none !important;
+  }
+
+  /* Announcement bars normalization */
+  :is(.jew-top-bar, .swarna-top-announcement, .vto-top-bar, .jwd-top-bar, .diamond-top-announcement) {
+    padding: 7px 10px !important;
+    font-size: 11px !important;
+    text-align: center !important;
+  }
+
+  :is(.jew-top-right-actions, .swarna-top-socials, .swarna-currency-selector, .vto-top-controls, .jwd-top-actions) {
+    display: none !important;
+  }
+
+  :is(.jew-top-announcement, .swarna-announcement-center, .vto-top-marquee, .jwd-top-schedule) {
+    width: 100% !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    font-size: 11px !important;
+    margin: 0 auto !important;
+  }
+
+  /* Header main bar layout: 3-column distribution */
+  :is(
+    .jew-header-inner,
+    .swarna-header-container,
+    .vto-header-inner,
+    .jwd-main-header-inner,
+    .tmz-header-content,
+    .diamond-header-container,
+    .lp-header-inner,
+    .jh-header-inner
+  ) {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    gap: 8px !important;
+  }
+
+  /* Center logos cleanly */
+  :is(
+    .jew-brand-logo-wrap,
+    .swarna-brand-logo-wrap,
+    .vto-brand-logo,
+    .jwd-brand-logo,
+    .tmz-header-left a,
+    .diamond-logo,
+    .lp-logo,
+    .jh-logo
+  ) {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
+    flex-shrink: 0 !important;
+  }
+
+  :is(
+    .jew-logo-img,
+    .swarna-brand-logo-img,
+    .tmz-logo-img,
+    .diamond-logo img,
+    .lp-logo img,
+    .jh-logo img
+  ) {
+    max-height: 28px !important;
+    max-width: 130px !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+  }
+
+  :is(.vto-logo-text, .jew-logo-text, .jwd-brand-fallback) {
+    font-size: 20px !important;
+    letter-spacing: 1px !important;
+  }
+
+  /* Header action icons right */
+  :is(
+    .jew-actions-right,
+    .swarna-header-actions-right,
+    .vto-actions,
+    .jwd-header-right,
+    .tmz-header-right,
+    .diamond-header-actions,
+    .lp-actions,
+    .jh-actions
+  ) {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    margin: 0 !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Hide bulky button text or secondary buttons in header on mobile */
+  .swarna-special-offers-btn,
+  .jew-top-auth-links,
+  .vto-cart-summary-btn span:not(.vto-badge-count),
+  .tmz-currency-dropdown,
+  .tmz-btn-gold-bordered,
+  .jwd-cart-pill-btn span:not(.jwd-cart-badge) {
+    display: none !important;
+  }
+
+  /* Compact header buttons */
+  :is(
+    .jew-action-btn,
+    .swarna-icon-btn,
+    .vto-icon-btn,
+    .vto-cart-summary-btn,
+    .jwd-avatar-btn,
+    .jwd-cart-pill-btn,
+    .tmz-hdr-icon-btn
+  ) {
+    padding: 7px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+  }
+
+  /* ===========================================================================
+     3. HERO SECTIONS - 1-COLUMN MOBILE LAYOUT WITH PERFECT SCALING
+     =========================================================================== */
+  :is(
+    .diamond-hero-grid,
+    .jew-hero-slide-grid,
+    .jew-hero-inner,
+    .swarna-hero-grid,
+    .vto-hero-grid,
+    .jwd-hero-inner,
+    .tmz-hero-layout,
+    .lp-hero-grid,
+    .psj-hero-grid
+  ) {
+    display: flex !important;
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 20px !important;
+    padding-top: 20px !important;
+    padding-bottom: 24px !important;
+  }
+
+  /* Hero Headlines scaling */
+  :is(
+    .jew-hero-title,
+    .swarna-hero-title,
+    .vto-hero-title,
+    .jwd-hero-title,
+    .tmz-hero-main-title,
+    .diamond-hero-title,
+    .lp-hero-title
+  ) {
+    font-size: 26px !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.3px !important;
+    margin: 0 auto 12px auto !important;
+    max-width: 100% !important;
+  }
+
+  /* Hero descriptions */
+  :is(
+    .jew-hero-desc,
+    .swarna-hero-desc,
+    .vto-hero-desc,
+    .jwd-hero-desc,
+    .tmz-hero-paragraph,
+    .diamond-hero-desc
+  ) {
+    font-size: 13.5px !important;
+    line-height: 1.5 !important;
+    margin: 0 auto 16px auto !important;
+    max-width: 95% !important;
+  }
+
+  /* Hero CTA buttons */
+  :is(
+    .jew-hero-actions,
+    .swarna-hero-btn-row,
+    .jwd-hero-actions,
+    .tmz-hero-actions,
+    .diamond-hero-actions
+  ) {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    width: 100% !important;
+    max-width: 300px !important;
+    margin: 0 auto !important;
+  }
+
+  :is(
+    .jew-hero-btn,
+    .swarna-hero-cta-btn,
+    .jwd-btn-gold,
+    .jwd-btn-video,
+    .tmz-hero-btn,
+    .diamond-btn
+  ) {
+    width: 100% !important;
+    padding: 13px 20px !important;
+    font-size: 13px !important;
+    box-sizing: border-box !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  /* Hero images proportioning */
+  :is(
+    .jew-hero-image-col,
+    .swarna-hero-imagery,
+    .vto-hero-imagery,
+    .jwd-hero-right,
+    .tmz-hero-image-wrap,
+    .diamond-hero-img-wrap
+  ) {
+    width: 100% !important;
+    max-height: 340px !important;
+    overflow: hidden !important;
+    border-radius: 12px !important;
+    margin: 0 auto !important;
+  }
+
+  :is(
+    .jew-hero-image-col img,
+    .swarna-hero-image-main,
+    .vto-hero-img,
+    .jwd-hero-right img,
+    .tmz-hero-image-wrap img,
+    .diamond-hero-img-wrap img
+  ) {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 340px !important;
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+
+  /* ===========================================================================
+     4. PRODUCT GRIDS & CARDS - 2-COLUMN LUXURY MOBILE PRESENTATION (ALL 10 TEMPLATES)
+     =========================================================================== */
+  :is(
+    .jew-products-grid,
+    .jew-products-two-col-grid,
+    .jew-products-track,
+    .jew-three-products-grid,
+    .swarna-products-grid,
+    .swarna-tab-products-grid,
+    .vto-products-grid,
+    .vto-best-sellers-grid,
+    .jwd-product-grid,
+    .jwd-catalog-grid,
+    .jwd-featured-grid,
+    .tmz-products-grid,
+    .tmz-grid-4col,
+    .tmz-popular-grid-3,
+    .tmz-cat-mobile-grid,
+    .tmz-cat-row-top,
+    .tmz-cat-row-bottom,
+    .diamond-products-grid,
+    .diamond-workdo-products-grid,
+    .dia-products-grid,
+    .dwd-four-products-grid,
+    .dwd-engagement-cards,
+    .dwd-split-wide-grid,
+    .lp-products-grid,
+    .psj-products-grid,
+    .jh-product-grid,
+    .jh-products-grid
+  ) {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    padding: 0 !important;
+    margin: 16px 0 !important;
+  }
+
+  /* Product Card normalization */
+  :is(
+    .jew-product-card,
+    .swarna-product-card,
+    .vto-product-card,
+    .jwd-card,
+    .tmz-product-card,
+    .tmz-watch-box,
+    .diamond-product-card,
+    .dia-product-card,
+    .diamond-workdo-card,
+    .dwd-product-card,
+    .dwd-split-wide-card,
+    .lp-product-card,
+    .psj-product-card,
+    .jh-product-card
+  ) {
+    min-width: 0 !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Product Image Aspect Ratio & Fit */
+  :is(
+    .jew-card-image-wrap,
+    .jew-product-img-wrap,
+    .swarna-card-img-wrap,
+    .swarna-card-thumb-wrap,
+    .vto-card-img-wrap,
+    .jwd-card-media,
+    .tmz-card-image-wrap,
+    .tmz-watch-img-slot,
+    .diamond-card-img-wrap,
+    .dia-product-media,
+    .dwd-card-img-wrap,
+    .dwd-split-card-media,
+    .lp-card-thumb-wrap,
+    .lp-card-img-wrap,
+    .psj-product-thumb-wrap,
+    .jh-product-thumb
+  ) {
+    aspect-ratio: 1 / 1 !important;
+    width: 100% !important;
+    overflow: hidden !important;
+    position: relative !important;
+    border-radius: 6px !important;
+    background: #ffffff !important;
+  }
+
+  :is(
+    .jew-card-image-wrap img,
+    .jew-product-img-wrap img,
+    .swarna-card-img-wrap img,
+    .swarna-card-thumb-wrap img,
+    .swarna-card-thumb-img,
+    .vto-card-img-wrap img,
+    .jwd-card-media img,
+    .tmz-card-image-wrap img,
+    .tmz-watch-img-slot img,
+    .diamond-card-img-wrap img,
+    .dia-product-img,
+    .dwd-card-img,
+    .dwd-split-card-img,
+    .lp-card-thumb,
+    .lp-card-thumb-hover,
+    .lp-card-img-wrap img,
+    .psj-product-thumb,
+    .jh-product-img
+  ) {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+
+  /* Product Card Titles Clamp */
+  :is(
+    .jew-product-name,
+    .swarna-product-title,
+    .swarna-card-name,
+    .vto-card-title,
+    .jwd-card-title,
+    .tmz-card-title,
+    .tmz-watch-name,
+    .diamond-product-title,
+    .dia-product-title,
+    .dwd-card-title,
+    .dwd-split-card-title,
+    .lp-product-title,
+    .psj-product-name,
+    .jh-product-name
+  ) {
+    font-size: 12.5px !important;
+    line-height: 1.35 !important;
+    margin: 8px 0 4px 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    min-height: 2.7em !important;
+    max-height: 2.7em !important;
+  }
+
+  /* Product Prices */
+  :is(
+    .jew-product-price,
+    .swarna-price-row,
+    .swarna-card-price,
+    .vto-card-price,
+    .jwd-card-price,
+    .tmz-card-price,
+    .tmz-watch-price-row,
+    .diamond-price,
+    .dia-price,
+    .dwd-price,
+    .lp-price,
+    .psj-product-price,
+    .jh-price-row,
+    .jh-current-price
+  ) {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    margin-bottom: 6px !important;
+  }
+
+  /* Add to Cart Card Buttons (Centered & Non-wrapping) */
+  :is(
+    .jh-add-cart-btn,
+    .jew-card-btn,
+    .jew-shop-now-btn,
+    .swarna-card-btn,
+    .swarna-product-card .swarna-gold-btn,
+    .vto-card-btn,
+    .jwd-card-btn,
+    .tmz-card-btn,
+    .dia-add-btn,
+    .dwd-card-cart-btn,
+    .lp-card-btn,
+    .psj-add-cart-btn
+  ) {
+    width: 100% !important;
+    padding: 8px 4px !important;
+    font-size: 10.5px !important;
+    font-weight: 700 !important;
+    white-space: nowrap !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    border-radius: 4px !important;
+  }
+
+  /* Product Card Footer Action Row - Stacking */
+  :is(.dia-product-footer, .dwd-product-footer, .jwd-card-bottom-row) {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+
+  :is(.dia-price-group) {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 6px !important;
+    width: 100% !important;
+  }
+
+  /* ===========================================================================
+     5. SPLIT BANNERS & PROMO CARDS - 1-COLUMN VERTICAL STACK (ALL 10 TEMPLATES)
+     =========================================================================== */
+  :is(
+    .jew-split-banner-grid,
+    .jew-promo-banner-grid,
+    .jew-promo-banner,
+    .jew-gifting-dual-grid,
+    .swarna-golden-grace-grid,
+    .swarna-rings-split-grid,
+    .swarna-dark-grid,
+    .swarna-story-grid,
+    .vto-rings-split-grid,
+    .vto-promo-grid,
+    .vto-two-promo-grid,
+    .vto-blog-grid,
+    .jwd-regal-grid,
+    .jwd-banner-grid,
+    .jwd-beauty-inner,
+    .jwd-promo-grid,
+    .jwd-blog-grid,
+    .jwd-hoop-inner,
+    .jwd-hoop-right-grid,
+    .tmz-deal-grid,
+    .tmz-split-grid,
+    .tmz-roman-layout,
+    .diamond-split-grid,
+    .dia-craft-grid,
+    .dwd-engagement-split,
+    .dwd-business-split,
+    .dwd-split-wide-grid,
+    .dwd-luxury-dark-grid,
+    .dwd-silver-grid,
+    .lp-hero-grid,
+    .lp-split-grid,
+    .lp-banners-grid,
+    .psj-staggered-row,
+    .psj-staggered-reverse,
+    .psj-dual-banners-grid,
+    .jh-split-grid,
+    .jh-promo-grid
+  ) {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    width: 100% !important;
+  }
+
+  /* Promo Cards across all templates (Screenshot 1 & responsive sizing) */
+  :is(
+    .jh-promo-card,
+    .dia-cat-card,
+    .diamond-cat-card,
+    .dwd-cat-promo-card,
+    .jew-category-card,
+    .jwd-promo-card,
+    .lp-banner-card,
+    .swarna-promo-card,
+    .tmz-flash-card,
+    .vto-promo-card,
+    .psj-staggered-banner-side
+  ) {
+    min-height: 200px !important;
+    max-height: 260px !important;
+    width: 100% !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+  }
+
+  :is(.jh-promo-content) {
+    padding: 20px !important;
+  }
+
+  :is(.jh-promo-title) {
+    font-size: 19px !important;
+    line-height: 1.25 !important;
+    margin: 0 0 10px 0 !important;
+  }
+
+  :is(.jh-promo-tag) {
+    font-size: 10.5px !important;
+    padding: 4px 8px !important;
+    margin-bottom: 8px !important;
+  }
+
+  /* Split Atelier & Spotlight Story (Screenshot 3 - All 10 Templates) */
+  :is(.jh-story-title, .dia-story-title, .dwd-story-title, .jew-story-title, .swarna-story-title) {
+    font-size: 26px !important;
+    line-height: 1.25 !important;
+    margin: 0 0 14px 0 !important;
+  }
+
+  :is(.jh-story-desc, .dia-story-desc, .dwd-story-desc, .jew-story-desc, .swarna-story-desc) {
+    font-size: 13.5px !important;
+    line-height: 1.55 !important;
+    margin-bottom: 16px !important;
+  }
+
+  :is(.jh-spotlight-card, .dia-craft-card, .dwd-spotlight-card, .jwd-regal-card) {
+    flex-direction: column !important;
+    text-align: center !important;
+    padding: 18px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    gap: 16px !important;
+  }
+
+  :is(.jh-spotlight-img, .dia-craft-img, .dwd-spotlight-img) {
+    width: 100% !important;
+    max-width: 180px !important;
+    height: auto !important;
+    aspect-ratio: 1 !important;
+    margin: 0 auto !important;
+  }
+
+  /* Spotlight Countdown Section (Screenshot 2 - Diamond & Atelier) */
+  :is(.dia-spotlight-countdown-wrap) {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    gap: 16px !important;
+  }
+
+  :is(.dia-spotlight-timer-boxes) {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  :is(.dia-spotlight-timer-box) {
+    padding: 10px 14px !important;
+    min-width: 68px !important;
+  }
+
+  :is(.dia-spotlight-timer-val) {
+    font-size: 22px !important;
+  }
+
+  :is(.dia-spotlight-timer-label) {
+    font-size: 9px !important;
+  }
+
+  :is(.dia-spotlight-btn) {
+    width: 100% !important;
+    max-width: 280px !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+  }
+
+  :is(
+    .swarna-grace-imagery,
+    .jew-split-banner-image,
+    .vto-rings-split-image,
+    .jwd-regal-media,
+    .dwd-split-card-media
+  ) {
+    width: 100% !important;
+    max-height: 260px !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+  }
+
+  :is(
+    .swarna-grace-imagery img,
+    .jew-split-banner-image img,
+    .vto-rings-split-image img,
+    .jwd-regal-media img,
+    .dwd-split-card-media img
+  ) {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 260px !important;
+    object-fit: cover !important;
+  }
+
+  /* ===========================================================================
+     6. VALUE PILLARS & SERVICES (2x2 GRID ON MOBILE) (Screenshot 4 - ALL 10 TEMPLATES)
+     =========================================================================== */
+  :is(
+    .jew-service-grid,
+    .swarna-values-grid,
+    .swarna-counters-row,
+    .vto-services-grid,
+    .vto-trust-grid,
+    .jwd-features-grid,
+    .jwd-trust-row,
+    .tmz-features-grid,
+    .diamond-services-grid,
+    .dia-pillars-grid,
+    .dwd-trust-pillars-row,
+    .lp-services-grid,
+    .psj-features-grid,
+    .jh-trust-grid
+  ) {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px 10px !important;
+    padding: 16px 0 !important;
+    width: 100% !important;
+  }
+
+  :is(
+    .jh-trust-item,
+    .dia-pillar-item,
+    .diamond-service-item,
+    .dwd-trust-pillar,
+    .jew-service-item,
+    .jew-service-card,
+    .jwd-trust-card,
+    .jwd-feature-box,
+    .lp-service-item,
+    .psj-feature-item,
+    .swarna-counter-box,
+    .swarna-value-card,
+    .tmz-feature-box,
+    .vto-trust-item
+  ) {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 8px !important;
+    min-width: 0 !important;
+  }
+
+  :is(.jh-trust-icon, .dia-pillar-icon, .dwd-pillar-icon, .jew-service-icon, .lp-service-icon, .psj-feature-icon) {
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 20px !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
+  }
+
+  :is(.jh-trust-heading, .dia-pillar-heading, .dwd-pillar-heading, .jew-service-heading, .lp-service-title, .psj-feature-title) {
+    font-size: 12.5px !important;
+    margin: 0 !important;
+  }
+
+  :is(.jh-trust-desc, .dia-pillar-desc, .dwd-pillar-desc, .jew-service-desc, .lp-service-desc, .psj-feature-desc) {
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+  }
+
+  /* ===========================================================================
+     7. CATEGORY DISCOVERY & CIRCLES
+     =========================================================================== */
+  :is(
+    .jew-category-grid,
+    .swarna-categories-grid,
+    .vto-categories-grid,
+    .vto-lifestyle-grid,
+    .jwd-categories-grid,
+    .tmz-categories-grid,
+    .dia-cat-grid,
+    .lp-cat-grid
+  ) {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  :is(.jh-cat-card) {
+    flex: 0 0 110px !important;
+  }
+
+  :is(.jh-cat-img-wrap) {
+    width: 88px !important;
+    height: 88px !important;
+    margin: 0 auto 8px auto !important;
+  }
+
+  :is(.jh-cat-name) {
+    font-size: 13px !important;
+  }
+
+  /* ===========================================================================
+     8. INSTAGRAM / LOOKBOOK / JOURNAL GALLERY (3 COLS)
+     =========================================================================== */
+  :is(
+    .jew-instagram-grid,
+    .swarna-instagram-grid,
+    .vto-instagram-grid,
+    .tmz-gallery-grid
+  ) {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+  }
+
+  /* Timzee Watch Photo Mosaic (2x3 square grid on mobile - Screenshot 3) */
+  :is(.tmz-photo-grid-6) {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  :is(.tmz-photo-slot) {
+    width: 100% !important;
+    aspect-ratio: 1 / 1 !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+  }
+
+  :is(.tmz-photo-slot img) {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  /* Timzee The Great Experience Brand Partners (Screenshot 5) */
+  :is(.tmz-logos-row-sleek) {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+    justify-items: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 10px !important;
+  }
+
+  :is(.tmz-logos-row-sleek img) {
+    max-height: 28px !important;
+    max-width: 120px !important;
+    object-fit: contain !important;
+  }
+
+  /* ===========================================================================
+     9. NEWSLETTER SUBSCRIPTION FORMS - VERTICAL STACK (Screenshot 5 - ALL 10 TEMPLATES)
+     =========================================================================== */
+  :is(
+    .jew-newsletter-form,
+    .swarna-newsletter-form,
+    .vto-newsletter-form,
+    .jwd-newsletter-form,
+    .tmz-newsletter-form,
+    .diamond-newsletter-form,
+    .dia-newsletter-form,
+    .dwd-newsletter-form,
+    .lp-newsletter-form,
+    .psj-newsletter-form,
+    .jh-news-form
+  ) {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 10px !important;
+    box-sizing: border-box !important;
+  }
+
+  :is(
+    .jew-newsletter-input-group,
+    .swarna-newsletter-wrap,
+    .vto-newsletter-input-group,
+    .jwd-newsletter-input-wrap,
+    .dia-newsletter-wrap,
+    .dwd-newsletter-input-group,
+    .lp-newsletter-box,
+    .psj-newsletter-wrap
+  ) {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 8px !important;
+  }
+
+  :is(
+    .jew-newsletter-form input,
+    .swarna-newsletter-form input,
+    .vto-newsletter-form input,
+    .jwd-newsletter-form input,
+    .tmz-newsletter-form input,
+    .diamond-newsletter-form input,
+    .dia-newsletter-form input,
+    .dwd-newsletter-form input,
+    .lp-newsletter-form input,
+    .psj-newsletter-form input,
+    .jh-news-input
+  ) {
+    width: 100% !important;
+    min-height: 44px !important;
+    box-sizing: border-box !important;
+  }
+
+  :is(
+    .jew-newsletter-form button,
+    .swarna-newsletter-form button,
+    .vto-newsletter-form button,
+    .jwd-newsletter-form button,
+    .tmz-newsletter-form button,
+    .diamond-newsletter-form button,
+    .dia-newsletter-form button,
+    .dwd-newsletter-form button,
+    .lp-newsletter-form button,
+    .psj-newsletter-form button,
+    .jh-news-btn
+  ) {
+    width: 100% !important;
+    min-height: 44px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Verified Atelier Testimonials - 1 Column Stack (Screenshot 3 - All 10 Templates) */
+  :is(.dia-testi-grid, .dwd-testi-grid, .lp-testi-grid, .jew-testimonial-grid, .vto-testi-grid) {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    width: 100% !important;
+  }
+
+  :is(.dia-testi-card, .dwd-testi-card) {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ===========================================================================
+     10. FOOTERS - STACKED 1-COLUMN LAYOUT WITH CENTERED PAYMENT ICONS (ALL 10 TEMPLATES)
+     =========================================================================== */
+  :is(
+    .jew-footer-grid,
+    .swarna-footer-grid,
+    .vto-footer-grid,
+    .jwd-footer-grid,
+    .tmz-footer-grid,
+    .tmz-footer-cols-4,
+    .diamond-footer-grid,
+    .dia-footer-grid,
+    .diamond-workdo-footer-grid,
+    .dwd-footer-grid,
+    .lp-footer-grid,
+    .psj-footer-grid,
+    .jh-footer-grid
+  ) {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+    text-align: center !important;
+  }
+
+  :is(
+    .jew-footer-col,
+    .swarna-footer-col,
+    .vto-footer-col,
+    .jwd-footer-col,
+    .tmz-footer-col,
+    .tmz-footer-cols-4 > div,
+    .diamond-footer-col,
+    .dia-footer-col,
+    .dwd-footer-col,
+    .lp-footer-col,
+    .psj-footer-col,
+    .jh-footer-col
+  ) {
+    align-items: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    text-align: center !important;
+  }
+
+  :is(
+    .jew-payment-icons,
+    .swarna-payment-icons,
+    .vto-payment-methods,
+    .jwd-payment-badges,
+    .diamond-payment-icons,
+    .dia-payment-icons,
+    .dwd-payment-icons,
+    .lp-payment-icons,
+    .psj-payment-icons,
+    .jh-payment-icons
+  ) {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin: 12px auto !important;
+  }
+
+  /* ===========================================================================
+     11. CART DRAWERS & QUICK VIEW MODALS FULL MOBILE ADAPTATION
+     =========================================================================== */
+  :is(
+    .jew-cart-drawer,
+    .swarna-cart-drawer,
+    .vto-cart-drawer,
+    .jwd-cart-drawer,
+    .tmz-cart-drawer,
+    .diamond-cart-drawer
+  ) {
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+
+  :is(
+    .jew-quick-view-modal,
+    .swarna-quick-view-modal,
+    .vto-quick-view-modal,
+    .tmz-quick-view-modal
+  ) {
+    width: 92% !important;
+    max-width: 92vw !important;
+    max-height: 85vh !important;
+    overflow-y: auto !important;
+    flex-direction: column !important;
+    padding: 16px !important;
+  }
+
+  /* PDP (Product Detail Page) Mobile Stacking */
+  :is(
+    .jew-pdp-grid,
+    .swarna-pdp-layout,
+    .vto-pdp-grid,
+    .diamond-pdp-grid,
+    .jh-pdp-layout
+  ) {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+
+  :is(
+    .jew-pdp-gallery,
+    .swarna-pdp-imagery,
+    .vto-pdp-gallery
+  ) {
+    width: 100% !important;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   WILLOVATE DEVICE SIMULATOR (.frame-mobile / .device-mobile / .jh-mobile-view)
+   Guarantees that the simulated mobile preview frame displays 100% identically
+   regardless of host viewport width!
+   ----------------------------------------------------------------------------- */
+:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) :is(
+  .diamond-root,
+  .diamond-workdo-root,
+  .jew-root,
+  .jwd-root,
+  .jh-root,
+  .lp-root,
+  .psj-root,
+  .swarna-root,
+  .tmz-root,
+  .vto-root
+),
+.jh-mobile-view {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+}
+
+:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) :is(
+  .diamond-root,
+  .diamond-workdo-root,
+  .jew-root,
+  .jwd-root,
+  .jh-root,
+  .lp-root,
+  .psj-root,
+  .swarna-root,
+  .tmz-root,
+  .vto-root
+) :is(
+  .diamond-container,
+  .diamond-workdo-container,
+  .jew-container,
+  .jwd-container,
+  .jwd-top-bar-inner,
+  .jwd-main-header-inner,
+  .jwd-hero-inner,
+  .jh-container,
+  .lp-container,
+  .psj-container,
+  .swarna-container,
+  .swarna-announcement-container,
+  .swarna-header-container,
+  .swarna-hero-container,
+  .tmz-container,
+  .vto-container,
+  .vto-top-bar-inner
+),
+.jh-mobile-view .jh-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 14px !important;
+  padding-right: 14px !important;
+  box-sizing: border-box !important;
+}
+
+/* Simulator: Hide floating side tabs */
+:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) :is(
+  .swarna-fixed-side-tabs,
+  .diamond-fixed-tabs,
+  .jew-fixed-tabs
+) {
+  display: none !important;
+}
+
+/* Simulator: Hamburger buttons */
+:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) :is(
+  .diamond-mobile-menu-btn,
+  .diamond-workdo-burger,
+  .dwd-mobile-menu-btn,
+  .jew-mobile-menu-btn,
+  .jwd-mobile-menu-btn,
+  .jh-hamburger,
+  .lp-burger-btn,
+  .psj-mobile-menu-btn,
+  .swarna-mobile-menu-btn,
+  .tmz-menu-toggle,
+  .vto-mobile-menu-btn
+) {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 4.5px !important;
+  width: 44px !important;
+  height: 44px !important;
+  padding: 8px !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  z-index: 10 !important;
+  flex-shrink: 0 !important;
+}
+
+:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) :is(
+  .diamond-burger-bar,
+  .jew-burger-bar,
+  .jwd-burger-bar,
+  .swarna-burger-bar,
+  .tmz-menu-bar,
+  .vto-burger-bar
+) {
+  display: block !important;
+  width: 20px !important;
+  height: 2px !important;
+  background-color: currentColor !important;
+  border-radius: 2px !important;
+}
+
+/* Simulator: Hide desktop navs */
+:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) :is(
+  .diamond-nav-center,
+  .diamond-workdo-nav,
+  .dwd-header-nav,
+  .jew-nav-left,
+  .jwd-header-left nav,
+  .jwd-nav-divider,
+  .jh-nav,
+  .lp-nav,
+  .psj-nav-row,
+  .psj-nav,
+  .swarna-nav-left,
+  .tmz-nav-center,
+  .vto-nav
+) {
+  display: none !important;
+}
+
+/* Simulator: Announcement strips */
+:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) :is(
+  .jew-top-right-actions,
+  .swarna-top-socials,
+  .swarna-currency-selector,
+  .vto-top-controls,
+  .jwd-top-actions
+) {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) :is(
+  .jew-top-announcement,
+  .swarna-announcement-center,
+  .vto-top-marquee,
+  .jwd-top-schedule
+) {
+  width: 100% !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  font-size: 11px !important;
+}
+
+/* Simulator: Header layout */
+:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) :is(
+  .jew-header-inner,
+  .swarna-header-container,
+  .vto-header-inner,
+  .jwd-main-header-inner,
+  .tmz-header-content,
+  .diamond-header-container,
+  .lp-header-inner,
+  .jh-header-inner
+) {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  gap: 8px !important;
+}
+
+:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) :is(
+  .jew-logo-img,
+  .swarna-brand-logo-img,
+  .tmz-logo-img,
+  .diamond-logo img,
+  .lp-logo img,
+  .jh-logo img
+) {
+  max-height: 28px !important;
+  max-width: 130px !important;
+  object-fit: contain !important;
+}
+
+:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) :is(
+  .vto-logo-text,
+  .jew-logo-text,
+  .jwd-brand-fallback
+) {
+  font-size: 20px !important;
+}
+
+:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) :is(
+  .swarna-special-offers-btn,
+  .jew-top-auth-links,
+  .vto-cart-summary-btn span:not(.vto-badge-count),
+  .tmz-currency-dropdown,
+  .tmz-btn-gold-bordered,
+  .jwd-cart-pill-btn span:not(.jwd-cart-badge)
+) {
+  display: none !important;
+}
+
+/* Simulator: Heroes */
+:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) :is(
+  .diamond-hero-grid,
+  .jew-hero-slide-grid,
+  .jew-hero-inner,
+  .swarna-hero-grid,
+  .vto-hero-grid,
+  .jwd-hero-inner,
+  .tmz-hero-layout,
+  .lp-hero-grid,
+  .psj-hero-grid
+) {
+  display: flex !important;
+  flex-direction: column !important;
+  text-align: center !important;
+  gap: 20px !important;
+  padding-top: 20px !important;
+  padding-bottom: 24px !important;
+}
+
+:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) :is(
+  .jew-hero-title,
+  .swarna-hero-title,
+  .vto-hero-title,
+  .jwd-hero-title,
+  .tmz-hero-main-title,
+  .diamond-hero-title,
+  .lp-hero-title
+) {
+  font-size: 26px !important;
+  line-height: 1.25 !important;
+  margin: 0 auto 12px auto !important;
+}
+
+:is(.simulated-frame.frame-mobile, .preview-viewport-container.device-mobile) :is(
+  .jew-hero-desc,
+  .swarna-hero-desc,
+  .vto-hero-desc,
+  .jwd-hero-desc,
+  .tmz-hero-paragraph,
+  .diamond-hero-desc
+) {
+  font-size: 13.5px !important;
+  line-height: 1.5 !important;
+}
+
+/* Simulator & Mobile View Roots: Product grids (2 columns) */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jew-products-grid,
+  .jew-products-two-col-grid,
+  .jew-products-track,
+  .jew-three-products-grid,
+  .swarna-products-grid,
+  .swarna-tab-products-grid,
+  .vto-products-grid,
+  .vto-best-sellers-grid,
+  .jwd-product-grid,
+  .jwd-catalog-grid,
+  .jwd-featured-grid,
+  .tmz-products-grid,
+  .tmz-grid-4col,
+  .tmz-popular-grid-3,
+  .tmz-cat-mobile-grid,
+  .tmz-cat-row-top,
+  .tmz-cat-row-bottom,
+  .diamond-products-grid,
+  .diamond-workdo-products-grid,
+  .dia-products-grid,
+  .dwd-four-products-grid,
+  .dwd-engagement-cards,
+  .dwd-split-wide-grid,
+  .lp-products-grid,
+  .psj-products-grid,
+  .jh-product-grid,
+  .jh-products-grid
+) {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  padding: 0 !important;
+  margin: 16px 0 !important;
+}
+
+/* Simulator & Mobile View Roots: Product Card normalization */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jew-product-card,
+  .swarna-product-card,
+  .vto-product-card,
+  .jwd-card,
+  .tmz-product-card,
+  .tmz-watch-box,
+  .diamond-product-card,
+  .dia-product-card,
+  .diamond-workdo-card,
+  .dwd-product-card,
+  .dwd-split-wide-card,
+  .lp-product-card,
+  .psj-product-card,
+  .jh-product-card
+) {
+  min-width: 0 !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-sizing: border-box !important;
+}
+
+/* Simulator & Mobile View Roots: Product Image Aspect Ratio & Fit */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jew-card-image-wrap,
+  .jew-product-img-wrap,
+  .swarna-card-img-wrap,
+  .swarna-card-thumb-wrap,
+  .vto-card-img-wrap,
+  .jwd-card-media,
+  .tmz-card-image-wrap,
+  .tmz-watch-img-slot,
+  .diamond-card-img-wrap,
+  .dia-product-media,
+  .dwd-card-img-wrap,
+  .dwd-split-card-media,
+  .lp-card-img-wrap,
+  .psj-product-thumb-wrap,
+  .jh-product-thumb
+) {
+  aspect-ratio: 1 / 1 !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  position: relative !important;
+  border-radius: 6px !important;
+  background: #ffffff !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .lp-root.is-mobile,
+  .lp-root.device-mobile,
+  .lp-root.lp-mobile-view,
+  .is-mobile .lp-root
+) .lp-card-thumb-wrap {
+  aspect-ratio: 4 / 5 !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  position: relative !important;
+  border-radius: 4px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jew-card-image-wrap img,
+  .jew-product-img-wrap img,
+  .swarna-card-img-wrap img,
+  .swarna-card-thumb-wrap img,
+  .swarna-card-thumb-img,
+  .vto-card-img-wrap img,
+  .jwd-card-media img,
+  .tmz-card-image-wrap img,
+  .tmz-watch-img-slot img,
+  .diamond-card-img-wrap img,
+  .dia-product-img,
+  .dwd-card-img,
+  .dwd-split-card-img,
+  .lp-card-thumb,
+  .lp-card-thumb-hover,
+  .lp-card-img-wrap img,
+  .psj-product-thumb,
+  .jh-product-img
+) {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+/* Simulator & Mobile View Roots: Product Card Titles Clamp */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jew-product-name,
+  .swarna-product-title,
+  .swarna-card-name,
+  .vto-card-title,
+  .jwd-card-title,
+  .tmz-card-title,
+  .tmz-watch-name,
+  .diamond-product-title,
+  .dia-product-title,
+  .dwd-card-title,
+  .dwd-split-card-title,
+  .lp-product-title,
+  .lp-card-title,
+  .psj-product-name,
+  .jh-product-name
+) {
+  font-size: 12.5px !important;
+  line-height: 1.35 !important;
+  margin: 8px 0 4px 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  min-height: 2.7em !important;
+  max-height: 2.7em !important;
+}
+
+/* Simulator & Mobile View Roots: Product Prices */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jew-product-price,
+  .swarna-price-row,
+  .swarna-card-price,
+  .vto-card-price,
+  .jwd-card-price,
+  .tmz-card-price,
+  .tmz-watch-price-row,
+  .diamond-price,
+  .dia-price,
+  .dwd-price,
+  .lp-price,
+  .lp-card-price,
+  .psj-product-price,
+  .jh-price-row,
+  .jh-current-price
+) {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  margin-bottom: 6px !important;
+}
+
+/* Simulator & Mobile View Roots: Add to Cart Card Buttons (Centered & Non-wrapping) */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jh-add-cart-btn,
+  .jew-card-btn,
+  .jew-shop-now-btn,
+  .swarna-card-btn,
+  .swarna-product-card .swarna-gold-btn,
+  .vto-card-btn,
+  .jwd-card-btn,
+  .tmz-card-btn,
+  .dia-add-btn,
+  .dwd-card-cart-btn,
+  .lp-card-btn,
+  .psj-add-cart-btn
+) {
+  width: 100% !important;
+  padding: 8px 4px !important;
+  font-size: 10.5px !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  box-sizing: border-box !important;
+  text-align: center !important;
+  border-radius: 4px !important;
+}
+
+/* Simulator & Mobile View Roots: Product Card Footer Action Row - Stacking */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.dia-product-footer, .dwd-product-footer, .jwd-card-bottom-row) {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 8px !important;
+  width: 100% !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.dia-price-group) {
+  display: flex !important;
+  align-items: baseline !important;
+  gap: 6px !important;
+  width: 100% !important;
+}
+
+/* Simulator & Mobile View Roots: Spotlight Countdown Section */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.dia-spotlight-countdown-wrap) {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100% !important;
+  gap: 16px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.dia-spotlight-timer-boxes) {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.dia-spotlight-timer-box) {
+  padding: 10px 14px !important;
+  min-width: 68px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.dia-spotlight-timer-val) {
+  font-size: 22px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.dia-spotlight-timer-label) {
+  font-size: 9px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.dia-spotlight-btn) {
+  width: 100% !important;
+  max-width: 280px !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
+}
+
+/* Simulator & Mobile View Roots: Testimonials (1 column stack) */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.dia-testi-grid, .dwd-testi-grid, .lp-testi-grid, .jew-testimonial-grid, .vto-testi-grid) {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+  width: 100% !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.dia-testi-card, .dwd-testi-card) {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Simulator & Mobile View Roots: Split banners and Promo Cards (1 column) */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jew-split-banner-grid,
+  .jew-promo-banner-grid,
+  .jew-promo-banner,
+  .jew-gifting-dual-grid,
+  .swarna-golden-grace-grid,
+  .swarna-rings-split-grid,
+  .swarna-dark-grid,
+  .swarna-story-grid,
+  .vto-rings-split-grid,
+  .vto-promo-grid,
+  .vto-two-promo-grid,
+  .vto-blog-grid,
+  .jwd-regal-grid,
+  .jwd-banner-grid,
+  .jwd-beauty-inner,
+  .jwd-promo-grid,
+  .jwd-blog-grid,
+  .jwd-hoop-inner,
+  .jwd-hoop-right-grid,
+  .tmz-deal-grid,
+  .tmz-split-grid,
+  .tmz-roman-layout,
+  .diamond-split-grid,
+  .dia-craft-grid,
+  .dwd-cat-three-grid,
+  .dwd-engagement-split,
+  .dwd-business-split,
+  .dwd-split-wide-grid,
+  .dwd-luxury-dark-grid,
+  .dwd-silver-grid,
+  .dwd-silver-cards,
+  .dwd-blog-grid,
+  .lp-hero-grid,
+  .lp-split-grid,
+  .lp-banners-grid,
+  .psj-staggered-row,
+  .psj-staggered-reverse,
+  .psj-dual-banners-grid,
+  .jh-split-grid,
+  .jh-promo-grid,
+  .jh-blog-grid
+) {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+  width: 100% !important;
+}
+
+/* Simulator & Mobile View Roots: Promo Cards across all 10 templates */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jh-promo-card,
+  .dia-cat-card,
+  .diamond-cat-card,
+  .dwd-cat-promo-card,
+  .jew-category-card,
+  .jwd-promo-card,
+  .lp-banner-card,
+  .swarna-promo-card,
+  .tmz-flash-card,
+  .vto-promo-card,
+  .psj-staggered-banner-side
+) {
+  min-height: 200px !important;
+  max-height: 260px !important;
+  width: 100% !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) .jh-promo-content {
+  padding: 20px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) .jh-promo-title {
+  font-size: 19px !important;
+  line-height: 1.25 !important;
+  margin: 0 0 10px 0 !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.jh-spotlight-card, .dia-craft-card, .dwd-spotlight-card, .jwd-regal-card) {
+  flex-direction: column !important;
+  text-align: center !important;
+  padding: 18px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  gap: 16px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.jh-spotlight-img, .dia-craft-img, .dwd-spotlight-img) {
+  width: 100% !important;
+  max-width: 180px !important;
+  height: auto !important;
+  aspect-ratio: 1 !important;
+  margin: 0 auto !important;
+}
+
+/* Simulator & Mobile View Roots: Value pillars (2x2) */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jew-service-grid,
+  .swarna-values-grid,
+  .swarna-counters-row,
+  .vto-services-grid,
+  .vto-trust-grid,
+  .jwd-features-grid,
+  .jwd-trust-row,
+  .tmz-features-grid,
+  .diamond-services-grid,
+  .dia-pillars-grid,
+  .dwd-trust-pillars-row,
+  .lp-services-grid,
+  .psj-features-grid,
+  .jh-trust-grid
+) {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 14px 10px !important;
+  padding: 16px 0 !important;
+  width: 100% !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jh-trust-item,
+  .dia-pillar-item,
+  .diamond-service-item,
+  .dwd-trust-pillar,
+  .jew-service-item,
+  .jew-service-card,
+  .jwd-trust-card,
+  .jwd-feature-box,
+  .lp-service-item,
+  .psj-feature-item,
+  .swarna-counter-box,
+  .swarna-value-card,
+  .tmz-feature-box,
+  .vto-trust-item
+) {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  gap: 8px !important;
+  min-width: 0 !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.jh-trust-icon, .dia-pillar-icon, .dwd-pillar-icon, .jew-service-icon, .lp-service-icon, .psj-feature-icon) {
+  width: 44px !important;
+  height: 44px !important;
+  font-size: 20px !important;
+  flex-shrink: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 auto !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.jh-trust-heading, .dia-pillar-heading, .dwd-pillar-heading, .jew-service-heading, .lp-service-title, .psj-feature-title) {
+  font-size: 12.5px !important;
+  margin: 0 !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(.jh-trust-desc, .dia-pillar-desc, .dwd-pillar-desc, .jew-service-desc, .lp-service-desc, .psj-feature-desc) {
+  font-size: 11px !important;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+}
+
+/* Simulator & Mobile View Roots: Newsletters (vertical stack) */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jew-newsletter-form,
+  .swarna-newsletter-form,
+  .vto-newsletter-form,
+  .jwd-newsletter-form,
+  .tmz-newsletter-form,
+  .diamond-newsletter-form,
+  .dia-newsletter-form,
+  .dwd-newsletter-form,
+  .lp-newsletter-form,
+  .psj-newsletter-form,
+  .jh-news-form
+) {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  gap: 10px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jew-newsletter-form input,
+  .swarna-newsletter-form input,
+  .vto-newsletter-form input,
+  .jwd-newsletter-form input,
+  .tmz-newsletter-form input,
+  .diamond-newsletter-form input,
+  .dia-newsletter-form input,
+  .dwd-newsletter-form input,
+  .lp-newsletter-form input,
+  .psj-newsletter-form input,
+  .jh-news-input
+) {
+  width: 100% !important;
+  height: 44px !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jew-newsletter-form button,
+  .swarna-newsletter-form button,
+  .vto-newsletter-form button,
+  .jwd-newsletter-form button,
+  .tmz-newsletter-form button,
+  .diamond-newsletter-form button,
+  .dia-newsletter-form button,
+  .dwd-newsletter-form button,
+  .lp-newsletter-form button,
+  .psj-newsletter-form button,
+  .jh-news-btn
+) {
+  width: 100% !important;
+  height: 44px !important;
+}
+
+/* Simulator & Mobile View Roots: Footers (1 column) */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jew-footer-grid,
+  .swarna-footer-grid,
+  .vto-footer-grid,
+  .jwd-footer-grid,
+  .tmz-footer-grid,
+  .tmz-footer-cols-4,
+  .diamond-footer-grid,
+  .dia-footer-grid,
+  .diamond-workdo-footer-grid,
+  .dwd-footer-grid,
+  .lp-footer-grid,
+  .psj-footer-grid,
+  .jh-footer-grid
+) {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 24px !important;
+  text-align: center !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jew-footer-col,
+  .swarna-footer-col,
+  .vto-footer-col,
+  .jwd-footer-col,
+  .tmz-footer-col,
+  .tmz-footer-cols-4 > div,
+  .diamond-footer-col,
+  .dia-footer-col,
+  .dwd-footer-col,
+  .lp-footer-col,
+  .psj-footer-col,
+  .jh-footer-col
+) {
+  align-items: center !important;
+  text-align: center !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .diamond-root.is-mobile,
+  .diamond-workdo-root.is-mobile,
+  .jew-root.is-mobile,
+  .jwd-root.is-mobile,
+  .jh-root.is-mobile,
+  .lp-root.is-mobile,
+  .psj-root.is-mobile,
+  .swarna-root.is-mobile,
+  .tmz-root.is-mobile,
+  .vto-root.is-mobile
+) :is(
+  .jew-payment-icons,
+  .swarna-payment-icons,
+  .vto-payment-methods,
+  .jwd-payment-badges,
+  .diamond-payment-icons,
+  .dia-payment-icons,
+  .dwd-payment-icons,
+  .lp-payment-icons,
+  .psj-payment-icons,
+  .jh-payment-icons
+) {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  margin: 12px auto !important;
+}
+
+/* Simulator: Swarna Instagram Gallery 2-column + 1-full */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .swarna-root.is-mobile,
+  .swarna-root.device-mobile,
+  .is-mobile .swarna-root
+) .swarna-insta-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  margin-top: 24px !important;
+  width: 100% !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .swarna-root.is-mobile,
+  .swarna-root.device-mobile,
+  .is-mobile .swarna-root
+) .swarna-insta-item {
+  width: 100% !important;
+  height: 160px !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .swarna-root.is-mobile,
+  .swarna-root.device-mobile,
+  .is-mobile .swarna-root
+) .swarna-insta-item:last-child {
+  grid-column: span 2 !important;
+  height: 160px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .swarna-root.is-mobile,
+  .swarna-root.device-mobile,
+  .is-mobile .swarna-root
+) .swarna-insta-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Simulator: Timzee Photo Mosaic 6-image square grid */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .tmz-root.is-mobile,
+  .tmz-root.tmz-mobile-view
+) .tmz-photo-grid-6 {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .tmz-root.is-mobile,
+  .tmz-root.tmz-mobile-view
+) .tmz-photo-slot {
+  width: 100% !important;
+  aspect-ratio: 1 / 1 !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .tmz-root.is-mobile,
+  .tmz-root.tmz-mobile-view
+) .tmz-photo-slot img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Simulator: Timzee Brand Partners 2x2 */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .tmz-root.is-mobile,
+  .tmz-root.tmz-mobile-view
+) .tmz-logos-row-sleek {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+  justify-items: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 0 10px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .tmz-root.is-mobile,
+  .tmz-root.tmz-mobile-view
+) .tmz-logos-row-sleek img {
+  max-height: 28px !important;
+  max-width: 120px !important;
+  object-fit: contain !important;
+}
+
+/* Simulator: JewelsWorkDo Spotlight, Newsletter, and Footer White */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jwd-root.is-mobile,
+  .jwd-root.device-mobile
+) .jwd-spotlight-inner {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 24px !important;
+  width: 100% !important;
+  align-items: center !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jwd-root.is-mobile,
+  .jwd-root.device-mobile
+) .jwd-spotlight-box {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 24px 18px !important;
+  text-align: center !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jwd-root.is-mobile,
+  .jwd-root.device-mobile
+) .jwd-floating-ring-img {
+  max-width: 200px !important;
+  max-height: 200px !important;
+  width: 100% !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jwd-root.is-mobile,
+  .jwd-root.device-mobile
+) .jwd-newsletter-form {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  width: 100% !important;
+  max-width: 380px !important;
+  margin: 0 auto !important;
+  background-color: #ffffff !important;
+  border-radius: 999px !important;
+  padding: 4px 5px 4px 18px !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jwd-root.is-mobile,
+  .jwd-root.device-mobile
+) .jwd-newsletter-input {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  padding: 10px 8px 10px 0 !important;
+  font-size: 13.5px !important;
+  border: none !important;
+  background: transparent !important;
+  color: #1e293b !important;
+  outline: none !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jwd-root.is-mobile,
+  .jwd-root.device-mobile
+) .jwd-newsletter-submit {
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  border-radius: 50% !important;
+  flex-shrink: 0 !important;
+  background-color: #cbb193 !important;
+  color: #1e293b !important;
+  border: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 15px !important;
+  cursor: pointer !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jwd-root.is-mobile,
+  .jwd-root.device-mobile
+) .jwd-footer-white-inner {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 32px !important;
+  text-align: center !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+/* -----------------------------------------------------------------------------
+   LOPEZ LUXURY JEWELRY MOBILE & SIMULATOR OVERRIDES
+   ----------------------------------------------------------------------------- */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .lp-root.is-mobile,
+  .lp-root.device-mobile,
+  .lp-root.lp-mobile-view,
+  .is-mobile .lp-root
+) .lp-card-actions {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  position: absolute !important;
+  bottom: 8px !important;
+  left: 6px !important;
+  right: 6px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 5px !important;
+  z-index: 5 !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .lp-root.is-mobile,
+  .lp-root.device-mobile,
+  .lp-root.lp-mobile-view,
+  .is-mobile .lp-root
+) .lp-card-action-btn {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  padding: 0 !important;
+  border-radius: 4px !important;
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  color: #1a1a1a !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .lp-root.is-mobile,
+  .lp-root.device-mobile,
+  .lp-root.lp-mobile-view,
+  .is-mobile .lp-root
+) .lp-card-action-btn.active {
+  color: #e11d48 !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .lp-root.is-mobile,
+  .lp-root.device-mobile,
+  .lp-root.lp-mobile-view,
+  .is-mobile .lp-root
+) .lp-card-action-btn.add-btn {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  width: auto !important;
+  height: 32px !important;
+  padding: 0 8px !important;
+  background-color: #181818 !important;
+  color: #ffffff !important;
+  font-size: 10.5px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  gap: 4px !important;
+  white-space: nowrap !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+  border: none !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .lp-root.is-mobile,
+  .lp-root.device-mobile,
+  .lp-root.lp-mobile-view,
+  .is-mobile .lp-root
+) .lp-news-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+  width: 100% !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .lp-root.is-mobile,
+  .lp-root.device-mobile,
+  .lp-root.lp-mobile-view,
+  .is-mobile .lp-root
+) .lp-news-card {
+  width: 100% !important;
+  border-radius: 6px !important;
+  overflow: hidden !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .lp-root.is-mobile,
+  .lp-root.device-mobile,
+  .lp-root.lp-mobile-view,
+  .is-mobile .lp-root
+) .lp-news-thumb-wrap {
+  aspect-ratio: 16 / 10 !important;
+  width: 100% !important;
+  max-height: 220px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .lp-root.is-mobile,
+  .lp-root.device-mobile,
+  .lp-root.lp-mobile-view,
+  .is-mobile .lp-root
+) .lp-news-body {
+  padding: 20px 16px !important;
+  text-align: center !important;
+}
+
+/* Jew Template Floating Back-to-Top Button Parity */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .is-mobile .jew-root
+) .jew-back-to-top {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 18px !important;
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  z-index: 9999 !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Jew Template Product Card Action Buttons (High Contrast Dark Controls) */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .is-mobile .jew-root
+) .jew-hover-actions {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  top: 8px !important;
+  right: 8px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  z-index: 4 !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .is-mobile .jew-root
+) .jew-hover-action-btn {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  background: #111111 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3) !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .is-mobile .jew-root
+) .jew-hover-action-btn svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .is-mobile .jew-root
+) .jew-hover-action-btn:hover,
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .is-mobile .jew-root
+) .jew-hover-action-btn:active,
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .jew-root.is-mobile,
+  .jew-root.jew-mobile-view,
+  .jew-root.device-mobile,
+  .is-mobile .jew-root
+) .jew-hover-action-btn.active {
+  background: #7d282b !important;
+  color: #ffffff !important;
+}
+
+
+

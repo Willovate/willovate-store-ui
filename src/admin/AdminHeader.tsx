@@ -53,28 +53,12 @@ function ChevronDownIcon() {
 
 function LogoMark() {
   return (
-    <svg
-      width="24"
-      height="22"
-      viewBox="0 0 36 32"
-      fill="none"
+    <img
+      src="/favicon.png"
+      alt="Willovate One"
       className="adm-header__logo-mark"
-      aria-hidden="true"
-    >
-      <defs>
-        <linearGradient id="willovate-w-grad" x1="0" y1="0" x2="36" y2="32" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#5743F6" />
-          <stop offset="100%" stopColor="#7462F8" />
-        </linearGradient>
-      </defs>
-      <path
-        d="M3.5 6.5L10.2 25.2C10.6 26.3 12.1 26.4 12.7 25.4L18 16L23.3 25.4C23.9 26.4 25.4 26.3 25.8 25.2L32.5 6.5"
-        stroke="url(#willovate-w-grad)"
-        strokeWidth="4.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+      style={{ width: '26px', height: '26px', objectFit: 'contain' }}
+    />
   )
 }
 

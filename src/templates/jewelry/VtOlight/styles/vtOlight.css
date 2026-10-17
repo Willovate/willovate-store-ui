@@ -1,0 +1,3016 @@
+/* =========================================================================
+   VT OLIGHT LUXURY JEWELRY STOREFRONT STYLES
+   Exact 100% faithful replica of https://vt-olight.myshopify.com/
+   ========================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600;700&display=swap');
+
+.vto-root {
+  --vto-gold: #c89e58;
+  --vto-gold-hover: #b08743;
+  --vto-gold-light: #fdf8ee;
+  --vto-dark: #121315;
+  --vto-charcoal: #232427;
+  --vto-text-main: #2b2b2b;
+  --vto-text-muted: #666666;
+  --vto-bg-sand: #fbf9f5;
+  --vto-border-light: rgba(200, 158, 88, 0.2);
+  --vto-border-subtle: #eae6df;
+  
+  font-family: 'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--vto-text-main);
+  background-color: #ffffff;
+  line-height: 1.6;
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.vto-root * {
+  box-sizing: border-box;
+}
+
+.vto-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* =========================================================================
+   1. TOP ANNOUNCEMENT STRIP (DARK CHARCOAL WITH GOLD ACCENTS)
+   ========================================================================= */
+.vto-top-bar {
+  background-color: var(--vto-dark);
+  color: #e5e5e5;
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.vto-top-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.vto-top-marquee {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.vto-top-highlight {
+  color: var(--vto-gold);
+  font-weight: 600;
+}
+
+.vto-top-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.vto-top-btn {
+  background: none;
+  border: none;
+  color: #d1d5db;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.2s;
+}
+
+.vto-top-btn:hover {
+  color: var(--vto-gold);
+}
+
+/* =========================================================================
+   2. MAIN HEADER (WHITE BACKGROUND, SERIF LOGO, UTILITY ICONS)
+   ========================================================================= */
+.vto-header {
+  background: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--vto-border-subtle);
+  transition: all 0.3s ease;
+}
+
+.vto-header-inner {
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.vto-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.vto-nav-link {
+  font-family: 'Jost', sans-serif;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #1a1a1a;
+  text-decoration: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  letter-spacing: 0.2px;
+  transition: color 0.2s;
+}
+
+.vto-nav-link:hover,
+.vto-nav-link.active {
+  color: var(--vto-gold);
+}
+
+.vto-brand-logo {
+  cursor: pointer;
+  text-align: center;
+}
+
+.vto-logo-text {
+  font-family: 'Cinzel', serif;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #111111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.vto-logo-star {
+  color: var(--vto-gold);
+  font-size: 20px;
+}
+
+.vto-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.vto-icon-btn {
+  background: none;
+  border: none;
+  color: #1f2937;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.vto-icon-btn:hover {
+  color: var(--vto-gold);
+}
+
+.vto-badge-count {
+  position: absolute;
+  top: 0px;
+  right: -2px;
+  background: var(--vto-gold);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vto-cart-summary-btn {
+  background: var(--vto-gold-light);
+  border: 1px solid var(--vto-border-light);
+  border-radius: 999px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--vto-dark);
+  transition: all 0.2s;
+}
+
+.vto-cart-summary-btn:hover {
+  background: #f7edd8;
+  border-color: var(--vto-gold);
+}
+
+/* =========================================================================
+   3. HERO SECTION (EDITORIAL MODEL WITH RING BADGE)
+   ========================================================================= */
+.vto-hero-section {
+  position: relative;
+  background-color: #f7f3ee;
+  background-image: radial-gradient(circle at 75% 40%, rgba(200, 158, 88, 0.12) 0%, transparent 60%);
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.vto-hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  align-items: center;
+  gap: 40px;
+  padding: 60px 0;
+}
+
+.vto-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.vto-hero-eyebrow {
+  display: inline-block;
+  font-family: 'Jost', sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--vto-gold);
+  margin-bottom: 16px;
+}
+
+.vto-hero-title {
+  font-family: 'Cinzel', serif;
+  font-size: 58px;
+  line-height: 1.12;
+  font-weight: 600;
+  color: #111111;
+  margin: 0 0 20px;
+  letter-spacing: -0.5px;
+}
+
+.vto-hero-desc {
+  font-size: 16px;
+  color: #4b5563;
+  max-width: 480px;
+  margin: 0 0 32px;
+  line-height: 1.65;
+}
+
+.vto-hero-floating-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  background: #ffffff;
+  padding: 14px 20px;
+  border-radius: 12px;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(200, 158, 88, 0.25);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.vto-hero-floating-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+}
+
+.vto-floating-thumb {
+  width: 58px;
+  height: 58px;
+  border-radius: 8px;
+  background: #fdf8ee;
+  object-fit: contain;
+  padding: 4px;
+}
+
+.vto-floating-meta h4 {
+  font-family: 'Cinzel', serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 2px;
+  color: #111111;
+}
+
+.vto-floating-meta p {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 0 0 4px;
+}
+
+.vto-floating-price {
+  font-weight: 700;
+  color: var(--vto-gold);
+  font-size: 15px;
+}
+
+.vto-hero-visual {
+  position: relative;
+  text-align: center;
+}
+
+.vto-hero-model-img {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+}
+
+/* =========================================================================
+   4. TWO PROMOTIONAL FEATURE CARDS
+   ========================================================================= */
+.vto-two-promo-section {
+  padding: 40px 0;
+  background: #ffffff;
+}
+
+.vto-two-promo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.vto-promo-card {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  height: 340px;
+  display: flex;
+  align-items: center;
+  padding: 40px 44px;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.vto-promo-card:hover {
+  transform: translateY(-4px);
+}
+
+.vto-promo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.6) 55%, transparent 100%);
+  z-index: 1;
+}
+
+.vto-promo-content {
+  position: relative;
+  z-index: 2;
+  max-width: 320px;
+}
+
+.vto-promo-eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--vto-gold);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.vto-promo-title {
+  font-family: 'Cinzel', serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #111111;
+  margin: 0 0 12px;
+}
+
+.vto-promo-desc {
+  font-size: 13.5px;
+  color: #555555;
+  margin: 0 0 20px;
+  line-height: 1.5;
+}
+
+.vto-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.vto-pill-btn-dark {
+  background: #111111;
+  color: #ffffff;
+}
+
+.vto-pill-btn-dark:hover {
+  background: var(--vto-gold);
+  color: #ffffff;
+}
+
+.vto-pill-btn-gold {
+  background: var(--vto-gold);
+  color: #ffffff;
+}
+
+.vto-pill-btn-gold:hover {
+  background: var(--vto-gold-hover);
+}
+
+.vto-pill-btn-outline {
+  background: transparent;
+  border-color: #111111;
+  color: #111111;
+}
+
+.vto-pill-btn-outline:hover {
+  background: #111111;
+  color: #ffffff;
+}
+
+/* =========================================================================
+   5. GOLD MARQUEE TICKER RIBBON
+   ========================================================================= */
+.vto-ticker-strip {
+  background: #fbf5ea;
+  border-top: 1px solid rgba(200, 158, 88, 0.25);
+  border-bottom: 1px solid rgba(200, 158, 88, 0.25);
+  padding: 14px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.vto-ticker-content {
+  display: inline-flex;
+  gap: 36px;
+  animation: vtoScrollTicker 35s linear infinite;
+  font-family: 'Cinzel', serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #383127;
+  letter-spacing: 1px;
+}
+
+.vto-ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.vto-ticker-star {
+  color: var(--vto-gold);
+  font-size: 14px;
+}
+
+@keyframes vtoScrollTicker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* =========================================================================
+   6. RAMADAN / FESTIVE ATELIER SPOTLIGHT (HANGING LANTERNS)
+   ========================================================================= */
+.vto-festive-section {
+  position: relative;
+  background: #faf6f0;
+  padding: 80px 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+.vto-lantern-left,
+.vto-lantern-right {
+  position: absolute;
+  top: 0;
+  width: 140px;
+  height: 280px;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.vto-lantern-left { left: 4%; }
+.vto-lantern-right { right: 4%; }
+
+.vto-festive-icon {
+  font-size: 32px;
+  color: var(--vto-gold);
+  margin-bottom: 16px;
+}
+
+.vto-festive-title {
+  font-family: 'Cinzel', serif;
+  font-size: 38px;
+  font-weight: 700;
+  color: #111111;
+  margin: 0 auto 16px;
+  max-width: 700px;
+  line-height: 1.25;
+}
+
+.vto-festive-desc {
+  font-size: 15px;
+  color: #555555;
+  max-width: 620px;
+  margin: 0 auto 30px;
+  line-height: 1.7;
+}
+
+/* =========================================================================
+   7. "OUR BEST SELLER" & CATALOG GRIDS
+   ========================================================================= */
+.vto-catalog-section {
+  padding: 70px 0;
+  background: #ffffff;
+}
+
+.vto-section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.vto-section-title {
+  font-family: 'Cinzel', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: #111111;
+  margin: 0 0 12px;
+}
+
+.vto-filter-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.vto-tab-btn {
+  background: none;
+  border: none;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #666666;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-bottom: 2px solid transparent;
+}
+
+.vto-tab-btn.active,
+.vto-tab-btn:hover {
+  color: var(--vto-gold);
+  border-bottom-color: var(--vto-gold);
+  font-weight: 600;
+}
+
+.vto-products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.vto-product-card {
+  background: #ffffff;
+  border: 1px solid var(--vto-border-subtle);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.vto-product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+  border-color: rgba(200, 158, 88, 0.4);
+}
+
+.vto-card-image-box {
+  position: relative;
+  background: #fbf9f5;
+  padding: 24px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.vto-card-img {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.vto-product-card:hover .vto-card-img {
+  transform: scale(1.08);
+}
+
+.vto-sale-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: #739d43;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.5px;
+}
+
+.vto-card-actions-bar {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  opacity: 0;
+  display: flex;
+  gap: 8px;
+  transition: all 0.25s ease;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 6px 12px;
+  border-radius: 999px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.vto-product-card:hover .vto-card-actions-bar {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.vto-action-pill {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #374151;
+  font-size: 14px;
+  padding: 4px;
+  transition: color 0.2s;
+}
+
+.vto-action-pill:hover {
+  color: var(--vto-gold);
+}
+
+.vto-card-body {
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.vto-card-title {
+  font-family: 'Cinzel', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #111111;
+  margin: 0 0 6px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.vto-card-title:hover {
+  color: var(--vto-gold);
+}
+
+.vto-card-stars {
+  color: #f59e0b;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.vto-card-pricing {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.vto-card-price {
+  font-weight: 700;
+  font-size: 16px;
+  color: #111111;
+}
+
+.vto-card-compare {
+  font-size: 14px;
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+
+.vto-card-cart-btn {
+  margin-top: auto;
+  width: 100%;
+  background: #fbf9f5;
+  border: 1px solid #e5e7eb;
+  padding: 10px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #111111;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.vto-card-cart-btn:hover {
+  background: var(--vto-gold);
+  border-color: var(--vto-gold);
+  color: #ffffff;
+}
+
+/* =========================================================================
+   8. 4-COLUMN LIFESTYLE CATEGORY TILES
+   ========================================================================= */
+.vto-lifestyle-section {
+  padding: 40px 0 60px;
+  background: #ffffff;
+}
+
+.vto-lifestyle-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.vto-lifestyle-tile {
+  position: relative;
+  height: 380px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.vto-lifestyle-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.vto-lifestyle-tile:hover .vto-lifestyle-img {
+  transform: scale(1.06);
+}
+
+.vto-lifestyle-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.1) 60%, transparent 100%);
+  display: flex;
+  align-items: flex-end;
+  padding: 24px;
+}
+
+.vto-lifestyle-title {
+  font-family: 'Cinzel', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* =========================================================================
+   9. 4 TRUST SERVICE PILLARS
+   ========================================================================= */
+.vto-trust-section {
+  padding: 50px 0;
+  background: #fcfbf9;
+  border-top: 1px solid var(--vto-border-subtle);
+  border-bottom: 1px solid var(--vto-border-subtle);
+}
+
+.vto-trust-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.vto-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.vto-trust-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--vto-gold-light);
+  color: var(--vto-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.vto-trust-meta h4 {
+  font-family: 'Cinzel', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #111111;
+  margin: 0 0 3px;
+}
+
+.vto-trust-meta p {
+  font-size: 12.5px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* =========================================================================
+   10. ATELIER STORY BANNER ("All Of Our Jewelry Is Handmade")
+   ========================================================================= */
+.vto-atelier-banner {
+  position: relative;
+  min-height: 520px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  margin: 60px 0;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.vto-atelier-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
+}
+
+.vto-atelier-content {
+  position: relative;
+  z-index: 2;
+  max-width: 540px;
+  padding: 60px;
+  color: #ffffff;
+}
+
+.vto-atelier-title {
+  font-family: 'Cinzel', serif;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 16px;
+}
+
+.vto-atelier-desc {
+  font-size: 15px;
+  color: #e5e7eb;
+  line-height: 1.65;
+  margin: 0 0 28px;
+}
+
+/* =========================================================================
+   11. TESTIMONIALS ("What Our Clients Say")
+   ========================================================================= */
+.vto-testimonials-section {
+  padding: 70px 0;
+  background: #ffffff;
+}
+
+.vto-testi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.vto-testi-card {
+  background: #fdfbf7;
+  border: 1px solid rgba(200, 158, 88, 0.25);
+  border-radius: 14px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+.vto-testi-stars {
+  color: #f59e0b;
+  font-size: 15px;
+  margin-bottom: 12px;
+}
+
+.vto-testi-headline {
+  font-family: 'Cinzel', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111111;
+  margin: 0 0 10px;
+}
+
+.vto-testi-quote {
+  font-size: 14px;
+  color: #4b5563;
+  line-height: 1.65;
+  margin: 0 0 24px;
+  flex: 1;
+}
+
+.vto-testi-author-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.vto-testi-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.vto-testi-author-info h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111111;
+  margin: 0 0 2px;
+}
+
+.vto-testi-author-info p {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* =========================================================================
+   12. LATEST TRENDS PARALLAX BANNER
+   ========================================================================= */
+.vto-trends-banner {
+  background-color: #faf5ed;
+  background-size: cover;
+  background-position: center;
+  padding: 90px 0;
+  text-align: center;
+  border-top: 1px solid rgba(200, 158, 88, 0.2);
+  border-bottom: 1px solid rgba(200, 158, 88, 0.2);
+}
+
+.vto-trends-title {
+  font-family: 'Cinzel', serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: #111111;
+  margin: 0 0 12px;
+}
+
+.vto-trends-desc {
+  font-size: 15.5px;
+  color: #666666;
+  margin: 0 auto 28px;
+  max-width: 500px;
+}
+
+/* =========================================================================
+   13. BLOG POSTS & EDITORIAL
+   ========================================================================= */
+.vto-blog-section {
+  padding: 70px 0;
+  background: #ffffff;
+}
+
+.vto-blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.vto-blog-card {
+  border: 1px solid var(--vto-border-subtle);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.vto-blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.vto-blog-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.vto-blog-content {
+  padding: 22px;
+}
+
+.vto-blog-date {
+  font-size: 12px;
+  color: var(--vto-gold);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.vto-blog-card-title {
+  font-family: 'Cinzel', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #111111;
+  margin: 0 0 10px;
+  line-height: 1.35;
+}
+
+.vto-blog-excerpt {
+  font-size: 13.5px;
+  color: #555555;
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
+
+.vto-blog-link {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #111111;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.2s;
+}
+
+.vto-blog-link:hover {
+  color: var(--vto-gold);
+}
+
+/* =========================================================================
+   14. NEWSLETTER SIGNUP
+   ========================================================================= */
+.vto-newsletter-section {
+  padding: 70px 0;
+  background: #fcf9f4;
+  text-align: center;
+  border-top: 1px solid var(--vto-border-subtle);
+}
+
+.vto-nl-title {
+  font-family: 'Cinzel', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: #111111;
+  margin: 0 0 10px;
+}
+
+.vto-nl-desc {
+  font-size: 15px;
+  color: #666666;
+  max-width: 520px;
+  margin: 0 auto 28px;
+}
+
+.vto-nl-form {
+  display: flex;
+  max-width: 480px;
+  margin: 0 auto;
+  gap: 10px;
+}
+
+.vto-nl-input {
+  flex: 1;
+  padding: 12px 20px;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  outline: none;
+}
+
+.vto-nl-input:focus {
+  border-color: var(--vto-gold);
+}
+
+/* =========================================================================
+   15. INSTAGRAM GALLERY GRID
+   ========================================================================= */
+.vto-insta-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 50px;
+}
+
+.vto-insta-img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.vto-insta-img:hover {
+  transform: scale(1.04);
+}
+
+/* =========================================================================
+   16. FOOTER
+   ========================================================================= */
+.vto-footer {
+  background: #ffffff;
+  border-top: 1px solid var(--vto-border-subtle);
+  padding: 70px 0 30px;
+}
+
+.vto-footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.vto-footer-col h4 {
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #111111;
+  margin: 0 0 20px;
+  letter-spacing: 0.5px;
+}
+
+.vto-footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.vto-footer-links a {
+  color: #6b7280;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+
+.vto-footer-links a:hover {
+  color: var(--vto-gold);
+}
+
+.vto-footer-bottom {
+  border-top: 1px solid var(--vto-border-subtle);
+  padding-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* =========================================================================
+   17. CART DRAWER & QUICK VIEW MODAL
+   ========================================================================= */
+.vto-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99999;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.vto-drawer-panel {
+  width: 100%;
+  max-width: 440px;
+  background: #ffffff;
+  height: 100%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
+}
+
+.vto-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--vto-border-subtle);
+}
+
+.vto-drawer-header h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.vto-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.vto-modal-dialog {
+  background: #ffffff;
+  border-radius: 16px;
+  max-width: 800px;
+  width: 100%;
+  padding: 36px;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* =========================================================================
+   RESPONSIVE ADJUSTMENTS
+   ========================================================================= */
+@media (max-width: 1024px) {
+  .vto-hero-grid { grid-template-columns: 1fr; }
+  .vto-two-promo-grid { grid-template-columns: 1fr; }
+  .vto-products-grid { grid-template-columns: repeat(2, 1fr); }
+  .vto-lifestyle-grid { grid-template-columns: repeat(2, 1fr); }
+  .vto-trust-grid { grid-template-columns: repeat(2, 1fr); }
+  .vto-testi-grid { grid-template-columns: 1fr; }
+  .vto-blog-grid { grid-template-columns: 1fr; }
+  .vto-footer-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  .vto-container {
+    padding: 0 14px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Announcement Strip */
+  .vto-top-bar {
+    padding: 8px 0 !important;
+  }
+
+  .vto-top-bar-inner {
+    flex-direction: column !important;
+    gap: 6px !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+
+  .vto-top-marquee {
+    font-size: 11px !important;
+    text-align: center !important;
+    white-space: normal !important;
+  }
+
+  .vto-top-controls {
+    justify-content: center !important;
+    gap: 8px !important;
+    font-size: 11px !important;
+  }
+
+  /* Header */
+  .vto-header {
+    padding: 8px 0 !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+  }
+
+  .vto-header-inner {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  .vto-mobile-menu-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  .vto-nav {
+    display: none !important;
+  }
+
+  .vto-logo-text {
+    font-size: 24px !important;
+  }
+
+  .vto-header-actions {
+    gap: 6px !important;
+  }
+
+  .vto-icon-btn {
+    width: 36px !important;
+    height: 36px !important;
+    padding: 0 !important;
+  }
+
+  .vto-cart-summary-btn {
+    padding: 6px 12px !important;
+    font-size: 11.5px !important;
+    height: 36px !important;
+    align-items: center !important;
+  }
+
+  .vto-cart-summary-btn span {
+    display: none !important;
+  }
+
+  /* Hero Section (Screenshot 1) */
+  .vto-hero-section {
+    padding: 30px 0 40px !important;
+    width: 100% !important;
+  }
+
+  .vto-hero-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+    text-align: center !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  .vto-hero-content {
+    text-align: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+  }
+
+  .vto-hero-title {
+    font-size: 32px !important;
+    line-height: 1.15 !important;
+    text-align: center !important;
+    margin-bottom: 12px !important;
+  }
+
+  .vto-hero-desc {
+    font-size: 13.5px !important;
+    line-height: 1.6 !important;
+    text-align: center !important;
+    margin: 0 auto 20px auto !important;
+    max-width: 95% !important;
+  }
+
+  .vto-hero-floating-card {
+    margin: 0 auto !important;
+    max-width: 320px !important;
+    width: 100% !important;
+    padding: 12px 14px !important;
+    box-sizing: border-box !important;
+  }
+
+  .vto-floating-thumb {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 8px !important;
+    object-fit: contain !important;
+  }
+
+  .vto-hero-visual {
+    width: 100% !important;
+    max-height: 280px !important;
+    overflow: hidden !important;
+    border-radius: 12px !important;
+    margin-top: 10px !important;
+  }
+
+  .vto-hero-model-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  /* Filter Tabs & Best Sellers (Screenshot 2) */
+  .vto-catalog-section {
+    padding: 40px 0 !important;
+  }
+
+  .vto-section-title {
+    font-size: 28px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .vto-filter-tabs {
+    display: flex !important;
+    justify-content: flex-start !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 4px 10px 10px 10px !important;
+    gap: 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    scrollbar-width: none !important;
+  }
+
+  .vto-filter-tabs::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .vto-tab-btn {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    padding: 6px 14px !important;
+    font-size: 13px !important;
+  }
+
+  .vto-products-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  .vto-product-card {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    border-radius: 10px !important;
+  }
+
+  .vto-card-image-box {
+    height: 170px !important;
+    padding: 12px !important;
+    background: #fbf9f5 !important;
+  }
+
+  .vto-card-img {
+    max-width: 85% !important;
+    max-height: 85% !important;
+    object-fit: contain !important;
+  }
+
+  .vto-card-actions-bar {
+    display: none !important;
+  }
+
+  .vto-card-body {
+    padding: 12px 10px !important;
+  }
+
+  .vto-card-title {
+    font-size: 12.5px !important;
+    line-height: 1.35 !important;
+    margin: 0 0 6px 0 !important;
+    min-height: 2.7em !important;
+    max-height: 2.7em !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+  }
+
+  .vto-card-stars {
+    font-size: 11px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .vto-card-pricing {
+    margin-bottom: 10px !important;
+    gap: 6px !important;
+  }
+
+  .vto-card-price {
+    font-size: 13.5px !important;
+  }
+
+  .vto-card-compare {
+    font-size: 11.5px !important;
+  }
+
+  .vto-card-cart-btn {
+    padding: 8px 10px !important;
+    font-size: 11.5px !important;
+    width: 100% !important;
+    border-radius: 999px !important;
+  }
+
+  /* 4 Lifestyle Category Tiles (Screenshot 3) */
+  .vto-lifestyle-section {
+    padding: 30px 0 40px !important;
+  }
+
+  .vto-lifestyle-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  .vto-lifestyle-tile {
+    height: 200px !important;
+    border-radius: 10px !important;
+    width: 100% !important;
+  }
+
+  .vto-lifestyle-overlay {
+    padding: 14px 12px !important;
+  }
+
+  .vto-lifestyle-title {
+    font-size: 14px !important;
+    line-height: 1.25 !important;
+    letter-spacing: 0.2px !important;
+  }
+
+  /* Trust Pillars */
+  .vto-trust-section {
+    padding: 30px 0 !important;
+  }
+
+  .vto-trust-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+
+  .vto-trust-item {
+    flex-direction: column !important;
+    text-align: center !important;
+    align-items: center !important;
+    padding: 12px 8px !important;
+    gap: 8px !important;
+  }
+
+  .vto-trust-icon {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 16px !important;
+  }
+
+  .vto-trust-meta h4 {
+    font-size: 12.5px !important;
+    margin: 0 0 2px 0 !important;
+  }
+
+  .vto-trust-meta p {
+    font-size: 10.5px !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Two Promo Cards */
+  .vto-two-promo-section {
+    padding: 30px 0 !important;
+  }
+
+  .vto-two-promo-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    width: 100% !important;
+  }
+
+  .vto-promo-card {
+    min-height: 220px !important;
+    width: 100% !important;
+  }
+
+  .vto-promo-content {
+    padding: 24px 18px !important;
+  }
+
+  .vto-promo-title {
+    font-size: 20px !important;
+  }
+
+  /* Atelier Story Banner */
+  .vto-atelier-banner {
+    min-height: 320px !important;
+    padding: 36px 16px !important;
+  }
+
+  .vto-atelier-title {
+    font-size: 28px !important;
+  }
+
+  .vto-atelier-desc {
+    font-size: 13.5px !important;
+  }
+
+  /* What Our Clients Say (Screenshot 4) */
+  .vto-testimonials-section {
+    padding: 40px 0 !important;
+  }
+
+  .vto-testi-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    width: 100% !important;
+  }
+
+  .vto-testi-card {
+    padding: 22px 18px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    border-radius: 12px !important;
+  }
+
+  .vto-testi-headline {
+    font-size: 16px !important;
+    line-height: 1.3 !important;
+  }
+
+  .vto-testi-quote {
+    font-size: 13.5px !important;
+    line-height: 1.6 !important;
+    margin: 0 0 16px 0 !important;
+  }
+
+  .vto-testi-author-row {
+    gap: 12px !important;
+  }
+
+  .vto-testi-avatar {
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  /* Latest Trends Parallax Banner */
+  .vto-trends-banner {
+    padding: 50px 14px !important;
+  }
+
+  .vto-trends-title {
+    font-size: 28px !important;
+  }
+
+  .vto-trends-desc {
+    font-size: 13.5px !important;
+  }
+
+  /* Our Latest Blog (Screenshot 5) */
+  .vto-blog-section {
+    padding: 40px 0 !important;
+  }
+
+  .vto-blog-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    width: 100% !important;
+  }
+
+  .vto-blog-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 12px !important;
+  }
+
+  .vto-blog-img {
+    height: 200px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .vto-blog-content {
+    padding: 18px 16px !important;
+    text-align: left !important;
+  }
+
+  .vto-blog-card-title {
+    font-size: 17px !important;
+    line-height: 1.35 !important;
+    margin: 0 0 8px 0 !important;
+  }
+
+  .vto-blog-excerpt {
+    font-size: 13px !important;
+    line-height: 1.55 !important;
+    margin: 0 0 14px 0 !important;
+  }
+
+  /* Newsletter & Instagram */
+  .vto-newsletter-section {
+    padding: 40px 0 !important;
+  }
+
+  .vto-nl-title {
+    font-size: 24px !important;
+  }
+
+  .vto-nl-desc {
+    font-size: 13.5px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .vto-nl-form {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+    max-width: 360px !important;
+    margin: 0 auto !important;
+  }
+
+  .vto-nl-input {
+    width: 100% !important;
+    height: 44px !important;
+    text-align: center !important;
+  }
+
+  .vto-nl-form .vto-pill-btn {
+    width: 100% !important;
+    height: 44px !important;
+    justify-content: center !important;
+  }
+
+  .vto-insta-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    margin-top: 32px !important;
+  }
+
+  .vto-insta-img {
+    height: 150px !important;
+    width: 100% !important;
+  }
+
+  /* Footer */
+  .vto-footer {
+    padding: 40px 0 24px !important;
+  }
+
+  .vto-footer-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 28px !important;
+    text-align: center !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  .vto-footer-col {
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .vto-footer-links {
+    align-items: center !important;
+  }
+
+  .vto-footer-bottom {
+    flex-direction: column !important;
+    gap: 12px !important;
+    text-align: center !important;
+  }
+}
+
+/* =========================================================================
+   SIMULATED FRAME & CLASS-BASED MOBILE RULES FOR VT OLIGHT
+   Guarantees 100% identical rendering inside Willovate preview simulator
+   ========================================================================= */
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-container {
+  padding: 0 14px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-top-bar {
+  padding: 8px 0 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-top-bar-inner {
+  flex-direction: column !important;
+  gap: 6px !important;
+  text-align: center !important;
+  justify-content: center !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-top-marquee {
+  font-size: 11px !important;
+  text-align: center !important;
+  white-space: normal !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-top-controls {
+  justify-content: center !important;
+  gap: 8px !important;
+  font-size: 11px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-header {
+  padding: 8px 0 !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-header-inner {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-mobile-menu-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 38px !important;
+  height: 38px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-nav {
+  display: none !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-logo-text {
+  font-size: 24px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-header-actions {
+  gap: 6px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-icon-btn {
+  width: 36px !important;
+  height: 36px !important;
+  padding: 0 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-header-inner {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 8px 10px !important;
+  gap: 4px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 3px !important;
+  flex-shrink: 0 !important;
+  margin-left: auto !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-icon-btn {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-cart-summary-btn {
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  flex-shrink: 0 !important;
+  background: var(--vto-gold-light) !important;
+  border: 1px solid var(--vto-border-light) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-cart-summary-btn .vto-cart-pill-text {
+  display: none !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-cart-summary-btn span:not(.vto-badge-count) {
+  display: none !important;
+}
+
+/* Hero Simulator */
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-hero-section {
+  padding: 30px 0 40px !important;
+  width: 100% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-hero-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 24px !important;
+  text-align: center !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-hero-content {
+  text-align: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-hero-title {
+  font-size: 32px !important;
+  line-height: 1.15 !important;
+  text-align: center !important;
+  margin-bottom: 12px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-hero-desc {
+  font-size: 13.5px !important;
+  line-height: 1.6 !important;
+  text-align: center !important;
+  margin: 0 auto 20px auto !important;
+  max-width: 95% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-hero-floating-card {
+  margin: 0 auto !important;
+  max-width: 320px !important;
+  width: 100% !important;
+  padding: 12px 14px !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-floating-thumb {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 8px !important;
+  object-fit: contain !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-hero-visual {
+  width: 100% !important;
+  max-height: 280px !important;
+  overflow: hidden !important;
+  border-radius: 12px !important;
+  margin-top: 10px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-hero-model-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Filter Tabs & Best Sellers Simulator (Screenshot 2) */
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-catalog-section {
+  padding: 40px 0 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-section-title {
+  font-size: 28px !important;
+  margin-bottom: 8px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-filter-tabs {
+  display: flex !important;
+  justify-content: flex-start !important;
+  overflow-x: auto !important;
+  scroll-snap-type: x mandatory !important;
+  -webkit-overflow-scrolling: touch !important;
+  padding: 4px 10px 10px 10px !important;
+  gap: 10px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  scrollbar-width: none !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-filter-tabs::-webkit-scrollbar {
+  display: none !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-tab-btn {
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+  padding: 6px 14px !important;
+  font-size: 13px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-products-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-product-card {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  border-radius: 10px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-card-image-box {
+  height: 170px !important;
+  padding: 12px !important;
+  background: #fbf9f5 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-card-img {
+  max-width: 85% !important;
+  max-height: 85% !important;
+  object-fit: contain !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-card-actions-bar {
+  display: none !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-card-body {
+  padding: 12px 10px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-card-title {
+  font-size: 12.5px !important;
+  line-height: 1.35 !important;
+  margin: 0 0 6px 0 !important;
+  min-height: 2.7em !important;
+  max-height: 2.7em !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-card-stars {
+  font-size: 11px !important;
+  margin-bottom: 6px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-card-pricing {
+  margin-bottom: 10px !important;
+  gap: 6px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-card-price {
+  font-size: 13.5px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-card-compare {
+  font-size: 11.5px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-card-cart-btn {
+  padding: 8px 10px !important;
+  font-size: 11.5px !important;
+  width: 100% !important;
+  border-radius: 999px !important;
+}
+
+/* 4 Lifestyle Category Tiles Simulator (Screenshot 3) */
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-lifestyle-section {
+  padding: 30px 0 40px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-lifestyle-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-lifestyle-tile {
+  height: 200px !important;
+  border-radius: 10px !important;
+  width: 100% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-lifestyle-overlay {
+  padding: 14px 12px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-lifestyle-title {
+  font-size: 14px !important;
+  line-height: 1.25 !important;
+  letter-spacing: 0.2px !important;
+}
+
+/* Trust Pillars Simulator */
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-trust-section {
+  padding: 30px 0 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-trust-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+  width: 100% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-trust-item {
+  flex-direction: column !important;
+  text-align: center !important;
+  align-items: center !important;
+  padding: 12px 8px !important;
+  gap: 8px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-trust-icon {
+  width: 36px !important;
+  height: 36px !important;
+  font-size: 16px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-trust-meta h4 {
+  font-size: 12.5px !important;
+  margin: 0 0 2px 0 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-trust-meta p {
+  font-size: 10.5px !important;
+  line-height: 1.3 !important;
+}
+
+/* Two Promo Cards Simulator */
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-two-promo-section {
+  padding: 30px 0 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-two-promo-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+  width: 100% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-promo-card {
+  min-height: 220px !important;
+  width: 100% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-promo-content {
+  padding: 24px 18px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-promo-title {
+  font-size: 20px !important;
+}
+
+/* Atelier Story Banner Simulator */
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-atelier-banner {
+  min-height: 320px !important;
+  padding: 36px 16px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-atelier-title {
+  font-size: 28px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-atelier-desc {
+  font-size: 13.5px !important;
+}
+
+/* What Our Clients Say Simulator (Screenshot 4) */
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-testimonials-section {
+  padding: 40px 0 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-testi-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+  width: 100% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-testi-card {
+  padding: 22px 18px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  border-radius: 12px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-testi-headline {
+  font-size: 16px !important;
+  line-height: 1.3 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-testi-quote {
+  font-size: 13.5px !important;
+  line-height: 1.6 !important;
+  margin: 0 0 16px 0 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-testi-author-row {
+  gap: 12px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-testi-avatar {
+  width: 42px !important;
+  height: 42px !important;
+}
+
+/* Latest Trends Parallax Banner Simulator */
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-trends-banner {
+  padding: 50px 14px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-trends-title {
+  font-size: 28px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-trends-desc {
+  font-size: 13.5px !important;
+}
+
+/* Our Latest Blog Simulator (Screenshot 5) */
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-blog-section {
+  padding: 40px 0 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-blog-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+  width: 100% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-blog-card {
+  width: 100% !important;
+  max-width: 100% !important;
+  border-radius: 12px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-blog-img {
+  height: 200px !important;
+  width: 100% !important;
+  object-fit: cover !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-blog-content {
+  padding: 18px 16px !important;
+  text-align: left !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-blog-card-title {
+  font-size: 17px !important;
+  line-height: 1.35 !important;
+  margin: 0 0 8px 0 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-blog-excerpt {
+  font-size: 13px !important;
+  line-height: 1.55 !important;
+  margin: 0 0 14px 0 !important;
+}
+
+/* Newsletter & Instagram Simulator */
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-newsletter-section {
+  padding: 40px 0 !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-nl-title {
+  font-size: 24px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-nl-desc {
+  font-size: 13.5px !important;
+  margin-bottom: 20px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-nl-form {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  width: 100% !important;
+  max-width: 360px !important;
+  margin: 0 auto !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-nl-input {
+  width: 100% !important;
+  height: 44px !important;
+  text-align: center !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-nl-form .vto-pill-btn {
+  width: 100% !important;
+  height: 44px !important;
+  justify-content: center !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-insta-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+  margin-top: 32px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-insta-img {
+  height: 150px !important;
+  width: 100% !important;
+}
+
+/* Footer Simulator */
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-footer {
+  padding: 40px 0 24px !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-footer-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 28px !important;
+  text-align: center !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-footer-col {
+  align-items: center !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-footer-links {
+  align-items: center !important;
+}
+
+:is(
+  .vto-root.is-mobile,
+  .vto-root.vto-mobile-view,
+  .vto-root.device-mobile,
+  .simulated-frame.frame-mobile .vto-root,
+  .preview-viewport-container.device-mobile .vto-root,
+  .is-mobile .vto-root
+) .vto-footer-bottom {
+  flex-direction: column !important;
+  gap: 12px !important;
+  text-align: center !important;
+}
+
+

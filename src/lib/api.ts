@@ -1,8 +1,11 @@
 import type {
   AdminProductFilters,
+  AuthResponse,
   CreateProductInput,
+  LoginRequest,
   PagedResponse,
   Product,
+  RegisterRequest,
   UpdateProductInput,
 } from '../types'
 
@@ -13,6 +16,127 @@ interface ProductFilters {
   category?: string
 }
 
+export function getAuthHeaders(token?: string | null): Record<string, string> {
+  const headers: Record<string, string> = {
+    Accept: 'application/json',
+  }
+  if (token) {
+    headers.Authorization = `Bearer ${token}`
+  }
+  return headers
+}
+
+export function getStoredToken(): string | null {
+  try {
+    if (typeof localStorage === 'undefined') return null
+    const raw = localStorage.getItem('willovate_auth_session')
+    if (!raw) return null
+    const parsed = JSON.parse(raw) as { accessToken?: string }
+    return parsed?.accessToken ?? null
+  } catch {
+    return null
+  }
+}
+
+export const FALLBACK_PRODUCTS: Product[] = [
+  {
+    id: 'prod-1',
+    slug: 'cloud-linen-shirt',
+    name: 'Cloud Linen Shirt',
+    description: 'Relaxed tailoring in breathable European linen.',
+    category: 'Apparel',
+    price: 2499,
+    compareAtPrice: 3199,
+    stockQuantity: 18,
+    visualTheme: 'sky',
+    isFeatured: true,
+  },
+  {
+    id: 'prod-2',
+    slug: 'orbit-desk-lamp',
+    name: 'Orbit Desk Lamp',
+    description: 'Warm, focused light with a sculptural matte finish.',
+    category: 'Home',
+    price: 3899,
+    compareAtPrice: null,
+    stockQuantity: 9,
+    visualTheme: 'sun',
+    isFeatured: true,
+  },
+  {
+    id: 'prod-3',
+    slug: 'daybreak-tote',
+    name: 'Daybreak Tote',
+    description: 'A spacious everyday carry made from recycled canvas.',
+    category: 'Accessories',
+    price: 1799,
+    compareAtPrice: 2199,
+    stockQuantity: 24,
+    visualTheme: 'coral',
+    isFeatured: true,
+  },
+  {
+    id: 'prod-4',
+    slug: 'stillness-candle',
+    name: 'Stillness Candle',
+    description: 'Cedar, bergamot and rain with a clean soy wax burn.',
+    category: 'Home',
+    price: 899,
+    compareAtPrice: null,
+    stockQuantity: 34,
+    visualTheme: 'lavender',
+    isFeatured: false,
+  },
+  {
+    id: 'prod-5',
+    slug: 'studio-wireless-headphones',
+    name: 'Studio Wireless Headphones',
+    description: 'Balanced sound, soft-touch comfort and 40-hour battery life.',
+    category: 'Tech',
+    price: 6999,
+    compareAtPrice: 7999,
+    stockQuantity: 11,
+    visualTheme: 'ink',
+    isFeatured: true,
+  },
+  {
+    id: 'prod-6',
+    slug: 'everyday-sneakers',
+    name: 'Everyday Sneakers',
+    description: 'Low-profile comfort designed for long city walks.',
+    category: 'Apparel',
+    price: 4299,
+    compareAtPrice: null,
+    stockQuantity: 16,
+    visualTheme: 'mint',
+    isFeatured: false,
+  },
+  {
+    id: 'prod-7',
+    slug: 'field-notebook-set',
+    name: 'Field Notebook Set',
+    description: 'Three lay-flat notebooks with dot-grid recycled paper.',
+    category: 'Stationery',
+    price: 599,
+    compareAtPrice: 749,
+    stockQuantity: 42,
+    visualTheme: 'sand',
+    isFeatured: false,
+  },
+  {
+    id: 'prod-8',
+    slug: 'arc-water-bottle',
+    name: 'Arc Water Bottle',
+    description: 'Double-wall stainless steel that stays cold for 24 hours.',
+    category: 'Accessories',
+    price: 1299,
+    compareAtPrice: null,
+    stockQuantity: 27,
+    visualTheme: 'ocean',
+    isFeatured: false,
+  },
+]
+
 // ── Public (storefront) ────────────────────────────────────────────────────
 
 export async function getProducts(
@@ -20,29 +144,90 @@ export async function getProducts(
   signal?: AbortSignal,
 ): Promise<PagedResponse<Product>> {
   const query = new URLSearchParams({ pageSize: '50' })
+  let response: Response
 
   if (filters.search?.trim()) query.set('search', filters.search.trim())
   if (filters.category?.trim()) query.set('category', filters.category.trim())
 
-  const response = await fetch(`${API_URL}/api/products?${query}`, {
-    headers: { Accept: 'application/json' },
-    signal,
-  })
+  const headers = getAuthHeaders(getStoredToken())
+
+  try {
+    response = await fetch(`${API_URL}/api/products?${query}`, {
+      headers,
+      signal,
+    })
+  } catch (err: unknown) {
+    if (err instanceof DOMException && err.name === 'AbortError') {
+      throw err
+    }
+    if (!(err instanceof TypeError)) {
+      throw err
+    }
+
+    let filtered = [...FALLBACK_PRODUCTS]
+    const category = filters.category?.trim().toLowerCase()
+    if (category) {
+      filtered = filtered.filter(
+        (p) => p.category.toLowerCase() === category,
+      )
+    }
+    const search = filters.search?.trim().toLowerCase()
+    if (search) {
+      filtered = filtered.filter(
+        (p) => p.name.toLowerCase().includes(search) || p.description.toLowerCase().includes(search),
+      )
+    }
+
+    return {
+      items: filtered,
+      page: 1,
+      pageSize: 50,
+      totalItems: filtered.length,
+      totalPages: 1,
+    }
+  }
 
   if (!response.ok) {
+    if (response.status === 401) {
+      let filtered = [...FALLBACK_PRODUCTS]
+      const category = filters.category?.trim().toLowerCase()
+      if (category) {
+        filtered = filtered.filter(
+          (p) => p.category.toLowerCase() === category,
+        )
+      }
+      const search = filters.search?.trim().toLowerCase()
+      if (search) {
+        filtered = filtered.filter(
+          (p) => p.name.toLowerCase().includes(search) || p.description.toLowerCase().includes(search),
+        )
+      }
+
+      return {
+        items: filtered,
+        page: 1,
+        pageSize: 50,
+        totalItems: filtered.length,
+        totalPages: 1,
+      }
+    }
     throw new Error(`Catalog request failed with status ${response.status}`)
   }
 
-  return response.json() as Promise<PagedResponse<Product>>
+  return (await response.json()) as PagedResponse<Product>
 }
 
 export async function getCategories(signal?: AbortSignal): Promise<string[]> {
+  const headers = getAuthHeaders(getStoredToken())
   const response = await fetch(`${API_URL}/api/products/categories`, {
-    headers: { Accept: 'application/json' },
+    headers,
     signal,
   })
 
   if (!response.ok) {
+    if (response.status === 401) {
+      return ['Accessories', 'Apparel', 'Home', 'Stationery', 'Tech']
+    }
     throw new Error(`Categories request failed with status ${response.status}`)
   }
 
@@ -81,9 +266,9 @@ export async function getAdminProducts(
   if (filters.updatedDate && filters.updatedDate !== 'any') query.set('updatedRange', filters.updatedDate)
   if (filters.updatedFrom) query.set('updatedFrom', filters.updatedFrom)
   if (filters.updatedTo) query.set('updatedTo', filters.updatedTo)
-
+  const headers = getAuthHeaders(getStoredToken())
   const response = await fetch(`${API_URL}/api/admin/products?${query}`, {
-    headers: { Accept: 'application/json' },
+    headers,
     signal,
   })
 
@@ -184,4 +369,127 @@ export async function updateProductImages(id: string, imageUrls: string[]): Prom
   }
 
   return response.json() as Promise<Product>
+}
+
+// ── Auth ───────────────────────────────────────────────────────────────────
+
+export class ApiError extends Error {
+  status: number
+  constructor(message: string, status: number) {
+    super(message)
+    this.status = status
+    this.name = 'ApiError'
+  }
+}
+
+export async function register(data: RegisterRequest): Promise<AuthResponse> {
+  const response = await fetch(`${API_URL}/api/auth/register`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+
+  if (!response.ok) {
+    let errorMessage = `Registration failed with status ${response.status}`
+    try {
+      const errorJson = await response.json()
+      if (errorJson && typeof errorJson === 'object' && 'message' in errorJson && typeof errorJson.message === 'string') {
+        errorMessage = errorJson.message
+      } else if (errorJson && typeof errorJson === 'object' && 'title' in errorJson && typeof errorJson.title === 'string') {
+        errorMessage = errorJson.title
+      }
+    } catch {
+      // JSON parsing failed, use fallback message
+    }
+    throw new ApiError(errorMessage, response.status)
+  }
+
+  return response.json() as Promise<AuthResponse>
+}
+
+export async function login(data: LoginRequest): Promise<AuthResponse> {
+  const response = await fetch(`${API_URL}/api/auth/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+
+  if (!response.ok) {
+    let errorMessage = `Login failed with status ${response.status}`
+    try {
+      const errorJson = await response.json()
+      if (errorJson && typeof errorJson === 'object' && 'message' in errorJson && typeof errorJson.message === 'string') {
+        errorMessage = errorJson.message
+      } else if (errorJson && typeof errorJson === 'object' && 'title' in errorJson && typeof errorJson.title === 'string') {
+        errorMessage = errorJson.title
+      }
+    } catch {
+      // JSON parsing failed, use fallback message
+    }
+    throw new ApiError(errorMessage, response.status)
+  }
+
+  return response.json() as Promise<AuthResponse>
+}
+
+export async function authenticateWithGoogle(idToken: string): Promise<AuthResponse> {
+  const response = await fetch(`${API_URL}/api/auth/google`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify({ idToken }),
+  })
+
+  if (!response.ok) {
+    let errorMessage = `Google authentication failed with status ${response.status}`
+    try {
+      const errorJson = await response.json()
+      if (errorJson && typeof errorJson === 'object' && 'message' in errorJson && typeof errorJson.message === 'string') {
+        errorMessage = errorJson.message
+      } else if (errorJson && typeof errorJson === 'object' && 'title' in errorJson && typeof errorJson.title === 'string') {
+        errorMessage = errorJson.title
+      }
+    } catch {
+      // JSON parsing failed, use fallback message
+    }
+    throw new ApiError(errorMessage, response.status)
+  }
+
+  return response.json() as Promise<AuthResponse>
+}
+
+export async function authenticateWithMicrosoft(idToken: string): Promise<AuthResponse> {
+  const response = await fetch(`${API_URL}/api/auth/microsoft`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify({ idToken }),
+  })
+
+  if (!response.ok) {
+    let errorMessage = `Microsoft authentication failed with status ${response.status}`
+    try {
+      const errorJson = await response.json()
+      if (errorJson && typeof errorJson === 'object' && 'message' in errorJson && typeof errorJson.message === 'string') {
+        errorMessage = errorJson.message
+      } else if (errorJson && typeof errorJson === 'object' && 'title' in errorJson && typeof errorJson.title === 'string') {
+        errorMessage = errorJson.title
+      }
+    } catch {
+      // JSON parsing failed, use fallback message
+    }
+    throw new ApiError(errorMessage, response.status)
+  }
+
+  return response.json() as Promise<AuthResponse>
 }
