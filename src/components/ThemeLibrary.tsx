@@ -7,9 +7,10 @@ interface ThemeLibraryProps {
   websiteId: string
   onClose: () => void
   onRefresh: () => void
+  onSelectTheme?: (theme: Theme) => void
 }
 
-export default function ThemeLibrary({ websiteId, onClose, onRefresh }: ThemeLibraryProps) {
+export default function ThemeLibrary({ websiteId, onClose, onRefresh, onSelectTheme }: ThemeLibraryProps) {
   const [themes, setThemes] = useState<Theme[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
@@ -226,27 +227,43 @@ export default function ThemeLibrary({ websiteId, onClose, onRefresh }: ThemeLib
                     </div>
                   </div>
                   
-                  <div style={{ padding: '0.75rem 1rem', background: '#f8fafc', borderTop: '1px solid #e2e8f0', display: 'flex', gap: '0.5rem', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <div style={{ display: 'flex', gap: '0.5rem' }}>
-                      <button className="ws-btn-icon" title="Duplicate" onClick={() => handleDuplicate(theme.id)} disabled={busy}>
+                  <div style={{ padding: '0.75rem 1rem', background: '#f8fafc', borderTop: '1px solid #e2e8f0', display: 'flex', gap: '0.5rem', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
+                    <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}>
+                      <button className="ws-btn-icon" title="Duplicate template" onClick={() => handleDuplicate(theme.id)} disabled={busy}>
                         <Copy size={14} />
                       </button>
                       {!theme.isLive && (
-                        <button className="ws-btn-icon" title="Delete" onClick={() => handleDelete(theme.id)} disabled={busy} style={{ color: '#ef4444' }}>
+                        <button className="ws-btn-icon" title="Delete template" onClick={() => handleDelete(theme.id)} disabled={busy} style={{ color: '#ef4444' }}>
                           <Trash2 size={14} />
                         </button>
                       )}
                     </div>
-                    {!theme.isLive && (
+                    <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}>
                       <button 
-                        className="ws-btn ws-btn-primary" 
-                        style={{ padding: '0.3rem 0.75rem', fontSize: '0.75rem' }} 
-                        onClick={() => handlePublish(theme.id)} 
+                        className="ws-btn ws-btn-outline" 
+                        style={{ padding: '0.35rem 0.65rem', fontSize: '0.75rem', fontWeight: 600, color: '#4f46e5', borderColor: '#c7d2fe', background: '#ffffff', display: 'flex', alignItems: 'center', gap: '0.3rem' }} 
+                        onClick={() => {
+                          if (onSelectTheme) {
+                            onSelectTheme(theme)
+                            onClose()
+                          }
+                        }} 
                         disabled={busy}
+                        title="Open in Store Editor"
                       >
-                        Publish
+                        <Edit2 size={12} /> Edit Template
                       </button>
-                    )}
+                      {!theme.isLive && (
+                        <button 
+                          className="ws-btn ws-btn-primary" 
+                          style={{ padding: '0.35rem 0.65rem', fontSize: '0.75rem', fontWeight: 600 }} 
+                          onClick={() => handlePublish(theme.id)} 
+                          disabled={busy}
+                        >
+                          Publish
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}

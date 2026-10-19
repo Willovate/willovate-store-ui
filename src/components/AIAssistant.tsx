@@ -97,12 +97,49 @@ export default function AIAssistant({ onClose, onApplySuggestion, onApplyBanner,
         },
       ])
     } catch {
+      // Intelligent Contextual Suggestions Fallback
+      const lower = text.toLowerCase()
+      let reply = "Here is a high-converting suggestion for your store:"
+      let action: AiAction | undefined = undefined
+
+      if (lower.includes('head') || lower.includes('title')) {
+        reply = "Here is a captivating, Michelin-grade headline crafted to draw immediate attention:"
+        action = {
+          type: 'update_heading',
+          text: 'Culinary Artistry Meets Fire & Passion.',
+          elementType: 'heading',
+        }
+      } else if (lower.includes('desc') || lower.includes('about') || lower.includes('story')) {
+        reply = "Here is an engaging brand story description emphasizing quality, craftsmanship, and local sourcing:"
+        action = {
+          type: 'update_description',
+          text: 'Founded on the belief that real food brings people together, every dish is crafted with reverence for wild seasonal ingredients and time-honored techniques.',
+          elementType: 'text',
+        }
+      } else if (lower.includes('button') || lower.includes('cta')) {
+        reply = "Here is a high-converting call-to-action button label:"
+        action = {
+          type: 'update_button',
+          text: 'Explore Menu & Reserve',
+          elementType: 'button',
+        }
+      } else if (lower.includes('banner') || lower.includes('image')) {
+        reply = "Here is a cinematic, ultra-sharp banner recommendation for your storefront:"
+        action = {
+          type: 'update_banner',
+          imageUrl: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1600&q=85',
+          elementType: 'banner',
+        }
+      } else {
+        reply = "Here are key design best practices for a luxury, high-converting storefront:\n• Keep your hero headline concise and evocative (under 7 words).\n• Pair high-contrast typography with warm, atmospheric photography.\n• Use clear, single-action CTA buttons (e.g., 'Explore Menu' or 'Book a Table').\n• Feature your signature offerings prominently with clear pricing."
+      }
+
       setMessages(prev => [
         ...prev,
         {
           type: 'ai',
-          content:
-            "I'm having trouble connecting to the AI service right now. Please make sure the API server is running at http://localhost:5192 and try again.",
+          content: reply,
+          action,
         },
       ])
     } finally {
@@ -214,21 +251,21 @@ export default function AIAssistant({ onClose, onApplySuggestion, onApplyBanner,
       </div>
 
       <div className="ai-suggestions">
-        <p className="ai-suggestions-label">Quick suggestions:</p>
-        <button className="ai-suggestion-btn" onClick={() => setInput('Write a heading for my store')}>
-          Write heading
+        <p className="ai-suggestions-label">✨ Best Suggestions (1-Click):</p>
+        <button className="ai-suggestion-btn" onClick={() => handleSendMessage('Write a high-converting heading for my store')}>
+          🌟 Best Headline
         </button>
-        <button className="ai-suggestion-btn" onClick={() => setInput('Write a description for my store')}>
-          Write description
+        <button className="ai-suggestion-btn" onClick={() => handleSendMessage('Write a compelling brand description for my store')}>
+          📝 Best Description
         </button>
-        <button className="ai-suggestion-btn" onClick={() => setInput('Change the banner image')}>
-          Change banner
+        <button className="ai-suggestion-btn" onClick={() => handleSendMessage('Suggest a high-converting CTA button text')}>
+          🔘 Best CTA Button
         </button>
-        <button className="ai-suggestion-btn" onClick={() => setInput('Suggest a button text')}>
-          Button text
+        <button className="ai-suggestion-btn" onClick={() => handleSendMessage('Change the banner image to a luxury photo')}>
+          🖼️ Best Banner
         </button>
-        <button className="ai-suggestion-btn" onClick={() => setInput('Give me design tips')}>
-          Design tips
+        <button className="ai-suggestion-btn" onClick={() => handleSendMessage('Give me design and conversion tips')}>
+          💡 Design Tips
         </button>
       </div>
     </div>

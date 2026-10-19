@@ -2,19 +2,67 @@ import type { Website, Page, PageElement, Theme } from '../types'
 
 const API_URL = (import.meta.env.VITE_API_URL ?? 'http://localhost:5192').replace(/\/$/, '')
 
+export function getDemoWebsite(templateId?: string): Website {
+  const chosenTemplateId = templateId || (typeof localStorage !== 'undefined' ? localStorage.getItem('last_used_template_id') : null) || 'noir-ember';
+  return {
+    id: 'demo',
+    name: 'Restaurant Workspace',
+    description: 'Live interactive workspace',
+    templateId: chosenTemplateId,
+    themeColor: null,
+    isPublished: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    themes: [
+      {
+        id: 'theme-demo',
+        websiteId: 'demo',
+        name: 'Default Theme',
+        isLive: true,
+        lastEdited: new Date().toISOString(),
+        pages: [
+          {
+            id: 'page-demo-home',
+            themeId: 'theme-demo',
+            title: 'Home',
+            slug: '/',
+            description: null,
+            isHomePage: true,
+            isHidden: false,
+            displayOrder: 0,
+            elements: [],
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          },
+        ],
+      },
+    ],
+  };
+}
+
 // Website endpoints
 export async function getWebsite(websiteId: string, signal?: AbortSignal): Promise<Website> {
-  const response = await fetch(`${API_URL}/api/websites/${websiteId}`, {
-    headers: { Accept: 'application/json' },
-    signal,
-    cache: 'no-store',
-  })
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch website: ${response.status}`)
+  if (websiteId === 'demo') {
+    return getDemoWebsite();
   }
 
-  return response.json() as Promise<Website>
+  try {
+    const response = await fetch(`${API_URL}/api/websites/${websiteId}`, {
+      headers: { Accept: 'application/json' },
+      signal,
+      cache: 'no-store',
+    })
+
+    if (!response.ok) {
+      return getDemoWebsite();
+    }
+
+    return await (response.json() as Promise<Website>)
+  } catch (err: any) {
+    if (signal?.aborted) throw err;
+    console.warn(`[workspace-api] Backend unavailable at ${API_URL}, using fallback demo website:`, err);
+    return getDemoWebsite();
+  }
 }
 
 export async function getWebsites(signal?: AbortSignal): Promise<Website[]> {
@@ -302,4 +350,85 @@ export async function deleteElement(elementId: string, signal?: AbortSignal): Pr
   if (!response.ok) {
     throw new Error(`Failed to delete element: ${response.status}`)
   }
+}
+
+export interface CreateOrderPayload {
+  websiteId?: string;
+  customerName: string;
+  customerEmail: string;
+  customerPhone?: string;
+  deliveryAddress?: string;
+  orderMode: string;
+  items: Array<{
+    menuItemId: string;
+    name: string;
+    price: number;
+    quantity: number;
+  }>;
+}
+
+export interface OrderRecord {
+  id: string;
+  websiteId: string;
+  customerName: string;
+  customerEmail: string;
+  customerPhone?: string;
+  deliveryAddress?: string;
+  orderMode: string;
+  totalAmount: number;
+  status: string;
+  createdAt: string;
+  items: Array<{
+    id: string;
+    menuItemId: string;
+    name: string;
+    price: number;
+    quantity: number;
+  }>;
+}
+
+export async function createOrder(payload: CreateOrderPayload): Promise<OrderRecord> {
+  // Use well-known seeded website ID if demo or missing
+  const targetWebsiteId = payload.websiteId && payload.websiteId.length > 10 && payload.websiteId !== 'demo'
+    ? payload.websiteId
+    : 'a1b2c3d4-0000-0000-0000-000000000001';
+
+  const response = await fetch(`${API_URL}/api/orders`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify({
+      websiteId: targetWebsiteId,
+      customerName: payload.customerName,
+      customerEmail: payload.customerEmail,
+      customerPhone: payload.customerPhone || 'N/A',
+      deliveryAddress: payload.deliveryAddress || 'Store Pickup',
+      orderMode: payload.orderMode || 'pickup',
+      items: payload.items.map(item => ({
+        menuItemId: item.menuItemId || 'item-default',
+        name: item.name,
+        price: Number(item.price),
+        quantity: Math.max(1, Number(item.quantity) || 1)
+      }))
+    }),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Failed to place order (${response.status}): ${errorText}`);
+  }
+
+  return response.json() as Promise<OrderRecord>;
+}
+
+export async function fetchOrders(websiteId?: string): Promise<OrderRecord[]> {
+  const targetId = websiteId && websiteId.length > 10 && websiteId !== 'demo'
+    ? websiteId
+    : 'a1b2c3d4-0000-0000-0000-000000000001';
+
+  const response = await fetch(`${API_URL}/api/orders/${targetId}`, {
+    headers: { Accept: 'application/json' },
+  });
+
+  if (!response.ok) return [];
+  return response.json() as Promise<OrderRecord[]>;
 }

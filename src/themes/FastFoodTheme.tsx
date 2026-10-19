@@ -103,7 +103,19 @@ function FastFoodQuickViewModal({ item, image, onClose }: { item: string[], imag
   )
 }
 
+import BurgerBlitz from '../templates/food-restaurants/fast-food/BurgerBlitz'
+import StreetBites from '../templates/food-restaurants/fast-food/StreetBites'
+import CrunchBox from '../templates/food-restaurants/fast-food/CrunchBox'
+import WrapRush from '../templates/food-restaurants/fast-food/WrapRush'
+import QuickBowl from '../templates/food-restaurants/fast-food/QuickBowl'
+
 export default function FastFoodTheme({ theme }: { theme: RestaurantThemePreset }) {
+  if (theme.id === 'burger-district' || theme.id === 'burger-blitz') return <BurgerBlitz />
+  if (theme.id === 'street-stack' || theme.id === 'street-bites') return <StreetBites />
+  if (theme.id === 'crunch-club' || theme.id === 'crunch-box') return <CrunchBox />
+  if (theme.id === 'drive-and-dine' || theme.id === 'wrap-rush') return <WrapRush />
+  if (theme.id === 'quick-bite' || theme.id === 'quick-bowl') return <QuickBowl />
+
   const [path, setPath] = useState('/')
   const [mobile, setMobile] = useState(false)
   const [scrolled, setScrolled] = useState(false)

@@ -7,7 +7,7 @@ import './fine-dining-responsive.css'
 // Mock Data
 const restaurants = [
   { id: 'r1', name: 'Burger District', cuisine: 'American', rating: 4.8, reviews: '1.2k', time: '15-25 min', fee: '$1.99', min: '$15', image: '1550547660-d9450f859349', featured: true },
-  { id: 'r2', name: 'Spice Route', cuisine: 'Indian', rating: 4.9, reviews: '850', time: '30-45 min', fee: '$2.99', min: '$20', image: '1631452180519-c014fe946bc0', featured: true },
+  { id: 'r2', name: 'Spice Route', cuisine: 'Indian', rating: 4.9, reviews: '850', time: '30-45 min', fee: '$2.99', min: '$20', image: '1585937421612-70a008356fbe', featured: true },
   { id: 'r3', name: 'Maison Gourmet', cuisine: 'French', rating: 4.7, reviews: '420', time: '40-55 min', fee: '$4.99', min: '$40', image: '1559339352-11d035aa65de', featured: false },
   { id: 'r4', name: 'Woodfire 90', cuisine: 'Italian', rating: 4.6, reviews: '2.1k', time: '25-40 min', fee: 'Free', min: '$20', image: '1604382355076-af4b0a9ebcg9', featured: true },
   { id: 'r5', name: 'Sushi Zen', cuisine: 'Japanese', rating: 4.9, reviews: '3k', time: '20-35 min', fee: '$3.49', min: '$25', image: '1553621042-f6e147245754', featured: false },

@@ -59,22 +59,143 @@ export const registry: TemplateGroup[] = [{
       ['Burger Blitz', 'burger-blitz', 'BurgerBlitz'], ['Crunch Box', 'crunch-box', 'CrunchBox', true], ['Quick Bowl', 'quick-bowl', 'QuickBowl'], ['Street Bites', 'street-bites', 'StreetBites', true], ['Wrap Rush', 'wrap-rush', 'WrapRush'],
     ]),
     createCategory('cloud-kitchen', 'Cloud Kitchen', 'cloud-kitchen', palettes.cloud, [
-      ['Box & Go', 'box-and-go', 'BoxAndGo'], ['Dark Kitchen Pro', 'dark-kitchen-pro', 'DarkKitchenPro', true], ['Flame Hub', 'flame-hub', 'FlameHub'], ['Fresh Batch', 'fresh-batch', 'FreshBatch', true], ['Ghost Chef', 'ghost-chef', 'GhostChef'],
+      ['GhostBite', 'ghost-bite', 'GhostBite', true],
+      ['GreenFuel', 'green-fuel', 'GreenFuel', true],
+      ['Masala Route', 'masala-route', 'MasalaRoute', true],
+      ['Umami Express', 'umami-express', 'UmamiExpress', true],
+      ['The Cloud Collective', 'the-cloud-collective', 'TheCloudCollective', true],
     ]),
     createCategory('pizza', 'Pizza Restaurant', 'pizza', palettes.pizza, [
       ['Crust Theory', 'crust-theory', 'CrustTheory'], ["Mamma's Table", 'mammas-table', 'MammasTable', true], ['Napoli Fire', 'napoli-fire', 'NapoliFire'], ['Pie Lab', 'pie-lab', 'PieLab', true], ['Slice Society', 'slice-society', 'SliceSociety'],
     ]),
     createCategory('indian', 'Indian Restaurant', 'indian', palettes.indian, [
-      ['Chai & Chaat', 'chai-and-chaat', 'ChaiAndChaat'], ['Masala Royale', 'masala-royale', 'MasalaRoyale', true], ['Spice Route', 'spice-route', 'SpiceRoute'], ['Tandoor Nights', 'tandoor-nights', 'TandoorNights', true], ['Tiffin Tales', 'tiffin-tales', 'TiffinTales'],
+      ["Maharaja's Table", 'maharajas-table', 'MaharajasTable', true],
+      ['Sattva Kitchen', 'sattva-kitchen', 'SattvaKitchen', true],
+      ['Bombay Chowk', 'bombay-chowk', 'BombayChowk', true],
+      ['Tandoor & Tadka', 'tandoor-and-tadka', 'TandoorAndTadka', true],
+      ['Dakshin House', 'dakshin-house', 'DakshinHouse', true],
     ]),
     createCategory('dessert-shop', 'Dessert Shop', 'dessert-shop', palettes.dessert, [
-      ['Choco Vault', 'choco-vault', 'ChocoVault'], ['Frost & Fruit', 'frost-and-fruit', 'FrostAndFruit', true], ['Scoop Story', 'scoop-story', 'ScoopStory'], ['Sweet Tooth', 'sweet-tooth', 'SweetTooth', true], ['Waffle House Studio', 'waffle-house-studio', 'WaffleHouseStudio'],
+      ['Sugar Atelier', 'sugar-atelier', 'SugarAtelier', true],
+      ['ChocoCraft', 'chococraft', 'ChocoCraft', true],
+      ['Scoop Society', 'scoop-society', 'ScoopSociety', true],
+      ['Crumb & Cream', 'crumb-and-cream', 'CrumbAndCream', true],
+      ['Sugar Street', 'sugar-street', 'SugarStreet', true],
     ]),
     createCategory('food-delivery', 'Food Delivery', 'food-delivery', palettes.delivery, [
-      ['Dash Eats', 'dash-eats', 'DashEats'], ['Fork Express', 'fork-express', 'ForkExpress', true], ['Hungry Hero', 'hungry-hero', 'HungryHero'], ['Local Plate', 'local-plate', 'LocalPlate', true], ['Zip Meals', 'zip-meals', 'ZipMeals'],
+      ['SwiftBite', 'swift-bite', 'SwiftBite', true],
+      ['Midnight Munch', 'midnight-munch', 'MidnightMunch', true],
+      ['FreshRoute', 'fresh-route', 'FreshRoute', true],
+      ['TiffinTrail', 'tiffin-trail', 'TiffinTrail', true],
+      ['FeastFleet', 'feast-fleet', 'FeastFleet', true],
     ]),
     createCategory('bbq-grill', 'Barbecue / Grill Restaurant', 'bbq-grill', palettes.bbq, [
       ['Backyard Barbeque', 'backyard-barbeque', 'BackyardBarbeque'], ['Fire & Rib', 'fire-and-rib', 'FireAndRib', true], ['Grill Republic', 'grill-republic', 'GrillRepublic'], ['Kebab Kingdom', 'kebab-kingdom', 'KebabKingdom', true], ['Smokehouse 77', 'smokehouse-77', 'Smokehouse77'],
     ]),
   ],
 }]
+
+import { templateCategories } from '../data/templateCategories'
+
+const cloudKitchenAliases: Record<string, string> = {
+  'dark-kitchen-pro': 'ghost-bite',
+  'kitchen-x': 'ghost-bite',
+  'fresh-batch': 'green-fuel',
+  'urban-batch': 'green-fuel',
+  'fresh-dispatch': 'green-fuel',
+  'flame-hub': 'masala-route',
+  'ghost-chef': 'umami-express',
+  'ghost-kitchen': 'umami-express',
+  'box-and-go': 'the-cloud-collective',
+  'kitchen-express': 'the-cloud-collective',
+}
+
+const indianThemeAliases: Record<string, string> = {
+  'masala-royale': 'maharajas-table',
+  'saffron-house': 'maharajas-table',
+  'spice-route': 'sattva-kitchen',
+  'chai-and-chaat': 'bombay-chowk',
+  'masala-modern': 'bombay-chowk',
+  'tandoor-nights': 'tandoor-and-tadka',
+  'tandoor-tales': 'tandoor-and-tadka',
+  'tiffin-tales': 'dakshin-house',
+  'royal-thali': 'dakshin-house',
+}
+
+const dessertThemeAliases: Record<string, string> = {
+  'choco-vault': 'chococraft',
+  'cocoa-room': 'chococraft',
+  'sweet-tooth': 'sugar-atelier',
+  'sweet-atelier': 'sugar-atelier',
+  'frost-and-fruit': 'scoop-society',
+  'scoop-story': 'scoop-society',
+  'sugar-bloom': 'crumb-and-cream',
+  'velvet-cake': 'crumb-and-cream',
+  'waffle-house-studio': 'sugar-street',
+  'sprinkle-studio': 'sugar-street',
+}
+
+const foodDeliveryAliases: Record<string, string> = {
+  'dash-eats': 'swift-bite',
+  'dashdish': 'swift-bite',
+  'quick-bite': 'swift-bite',
+  'meal-rush': 'swift-bite',
+  'fork-express': 'midnight-munch',
+  'midnight-munchies': 'midnight-munch',
+  'local-plate': 'fresh-route',
+  'mealdrop': 'fresh-route',
+  'local-eats': 'fresh-route',
+  'hungry-hero': 'tiffin-trail',
+  'bitenow': 'tiffin-trail',
+  'tiffin-express': 'tiffin-trail',
+  'zip-meals': 'feast-fleet',
+  'cravego': 'feast-fleet',
+  'foodflow': 'feast-fleet',
+  'food-fleet': 'feast-fleet',
+  'door-dish': 'feast-fleet',
+}
+
+const bbqThemeAliases: Record<string, string> = {
+  'smokehouse': 'smokehouse-77',
+  'texas-bbq': 'smokehouse-77',
+  'smokehouse-77': 'smokehouse-77',
+  'modern-bbq': 'grill-republic',
+  'grill-republic': 'grill-republic',
+  'fire-and-grill': 'fire-and-rib',
+  'fire-and-rib': 'fire-and-rib',
+  'backyard-bbq': 'backyard-barbeque',
+  'backyard-barbeque': 'backyard-barbeque',
+  'kebab-kingdom': 'kebab-kingdom',
+}
+
+export function findTemplateInRegistry(slugOrId: string | undefined): Template | undefined {
+  if (!slugOrId) return undefined;
+  const targetId = cloudKitchenAliases[slugOrId] || indianThemeAliases[slugOrId] || dessertThemeAliases[slugOrId] || foodDeliveryAliases[slugOrId] || bbqThemeAliases[slugOrId] || slugOrId;
+  const foodGroup = registry.find(group => group.id === 'food-restaurants');
+  if (!foodGroup) return undefined;
+
+  // 1. Direct match
+  for (const cat of foodGroup.categories) {
+    const found = cat.templates.find(item => item.slug === targetId || item.id === targetId || item.slug === slugOrId || item.id === slugOrId);
+    if (found) return found;
+  }
+
+  // 2. Lookup in templateCategories (e.g. noir-table -> noir-ember)
+  const foodCat = templateCategories.find(c => c.id === 'food-and-restaurant');
+  if (foodCat) {
+    for (const sub of foodCat.subsections) {
+      for (const t of sub.themes) {
+        if (t.id === targetId || t.slug === targetId || t.presetId === targetId || t.id === slugOrId || t.slug === slugOrId || t.presetId === slugOrId) {
+          const targetSlug = t.templateSlug || t.slug;
+          for (const cat of foodGroup.categories) {
+            const found = cat.templates.find(item => item.slug === targetSlug || item.id === targetSlug);
+            if (found) return found;
+          }
+        }
+      }
+    }
+  }
+
+  return undefined;
+}
+

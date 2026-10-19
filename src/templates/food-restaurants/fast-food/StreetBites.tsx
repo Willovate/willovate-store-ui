@@ -1,178 +1,519 @@
-import React, { useState } from 'react';
-import './fast-food-shared.css';
-import { ArrowLeft } from 'lucide-react';
+import React from 'react';
+import { FoodStorefrontCore, type StorefrontThemeConfig } from '../shared/FoodStorefrontCore';
 
-const img = (id: string, w = 1600) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
+const img = (id: string, w = 1400) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
 
-const StreetBites = () => {
-  const [activeCategory, setActiveCategory] = useState('Tacos');
-
-  const headingStyle = { fontFamily: '"Bebas Neue", sans-serif', color: '#ffffff', letterSpacing: '2px' };
-  const navStyle = { color: '#ffffff', textDecoration: 'none', fontWeight: 600, fontFamily: '"Inter", sans-serif' };
-
-  return (
-    <div className="fast-food-theme" style={{ fontFamily: '"Inter", sans-serif', color: '#ffffff', backgroundColor: '#0a0a0a' }}>
-      {/* Navigation */}
-      <nav className="ff-nav" style={{ backgroundColor: '#111111', borderBottom: '1px solid #333' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <a href="/templates/category/fast-food" style={{ ...navStyle, color: '#ff0055', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <ArrowLeft size={18} /> Back to Fast Food
-          </a>
-          <div style={{ ...headingStyle, fontSize: '2.5rem', color: '#ff0055', margin: 0 }}>STREET BITES</div>
-        </div>
-        <div>
-          <a href="#specials" style={navStyle}>Specials</a>
-          <a href="#menu" style={navStyle}>Menu</a>
-          <a href="#story" style={navStyle}>The Truck</a>
-          <button className="ff-btn" style={{ marginLeft: '1.5rem', backgroundColor: '#00e5ff', color: '#111', borderRadius: '0' }}>Order Pickup</button>
-        </div>
-      </nav>
-
-      {/* Hero */}
-      <header className="ff-hero" style={{ backgroundImage: `url(${img('photo-1565299507177-b0ac66763828')})`, minHeight: '80vh', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-        <div className="ff-hero-overlay" style={{ background: 'linear-gradient(45deg, rgba(10,10,10,0.9), rgba(255,0,85,0.3))' }}></div>
-        <div className="ff-hero-content" style={{ maxWidth: '700px' }}>
-          <h1 style={{ ...headingStyle, fontSize: '6rem', margin: '0 0 1rem 0', color: '#ffffff', lineHeight: 1, textShadow: '2px 2px 0 #ff0055' }}>Straight From<br/>The Street.</h1>
-          <p style={{ fontSize: '1.25rem', marginBottom: '2.5rem', lineHeight: 1.6, color: '#ccc', fontWeight: 500 }}>
-            No tables, no waiters, just uncompromising flavor served hot and fast. Authentic street food, massive flavors.
-          </p>
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            <button className="ff-btn" style={{ backgroundColor: '#ff0055', color: '#fff', borderRadius: '0', fontSize: '1.2rem', padding: '1rem 3rem' }}>See Menu</button>
-            <button className="ff-btn" style={{ backgroundColor: 'transparent', color: '#00e5ff', border: '2px solid #00e5ff', borderRadius: '0', fontSize: '1.2rem', padding: '1rem 3rem' }}>Find Truck</button>
-          </div>
-        </div>
-      </header>
-
-      {/* Specials */}
-      <section id="specials" className="ff-section" style={{ backgroundColor: '#111111' }}>
-        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <h2 className="ff-title" style={{ ...headingStyle, fontSize: '4rem', color: '#00e5ff' }}>Street Specials</h2>
-          <p style={{ color: '#888', fontSize: '1.1rem' }}>The combos that made us famous.</p>
-        </div>
-        <div className="ff-grid">
-          {[
-            { name: 'Taco Trio', price: '$10.00', desc: 'Any 3 tacos + drink.', img: 'photo-1552332386-f8dd00dc2f85' },
-            { name: 'The Loaded Box', price: '$12.00', desc: 'Street fries + 2 tacos.', img: 'photo-1614707253590-50d4fc833076' },
-            { name: 'Late Night Fix', price: '$15.00', desc: '4 tacos, fries, and 2 drinks.', img: 'photo-1546069901-ba9599a7e63c' }
-          ].map((item, i) => (
-            <div key={i} className="ff-card" style={{ backgroundColor: '#1a1a1a', borderRadius: '0', border: '1px solid #333' }}>
-              <img src={img(item.img, 800)} alt={item.name} style={{ height: '240px', filter: 'contrast(1.2) saturate(1.2)' }} />
-              <div className="ff-card-content">
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
-                  <h3 style={{ ...headingStyle, fontSize: '2rem', margin: 0 }}>{item.name}</h3>
-                  <span style={{ fontWeight: 800, color: '#ff0055', fontSize: '1.5rem', fontFamily: '"Bebas Neue", sans-serif' }}>{item.price}</span>
-                </div>
-                <p style={{ color: '#aaa', lineHeight: 1.5, marginBottom: '1.5rem' }}>{item.desc}</p>
-                <button className="ff-btn" style={{ width: '100%', backgroundColor: '#00e5ff', color: '#111', borderRadius: '0', textTransform: 'uppercase', letterSpacing: '1px' }}>Add to Bag</button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Full Menu */}
-      <section id="menu" className="ff-section" style={{ backgroundColor: '#0a0a0a' }}>
-        <h2 className="ff-title" style={{ ...headingStyle, fontSize: '4rem', textAlign: 'center', color: '#ff0055' }}>The Menu</h2>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '4rem' }}>
-          {['Tacos', 'Loaded Fries', 'Drinks'].map(cat => (
-            <button 
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              style={{
-                background: activeCategory === cat ? '#ff0055' : 'transparent',
-                color: activeCategory === cat ? '#fff' : '#888',
-                border: '2px solid',
-                borderColor: activeCategory === cat ? '#ff0055' : '#333',
-                padding: '0.6rem 2.5rem',
-                borderRadius: '0',
-                cursor: 'pointer',
-                fontFamily: '"Bebas Neue", sans-serif',
-                fontSize: '1.5rem',
-                letterSpacing: '1px',
-                transition: 'all 0.2s'
-              }}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-        
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '1.5rem', maxWidth: '1200px', margin: '0 auto' }}>
-          {[
-            { cat: 'Tacos', name: 'Al Pastor', price: '$3.50', desc: 'Marinated pork, pineapple, cilantro, onions.', img: 'photo-1504674900247-0877df9cc836' },
-            { cat: 'Tacos', name: 'Carne Asada', price: '$4.00', desc: 'Grilled steak, salsa verde, onions.', img: 'photo-1504674900247-0877df9cc836' },
-            { cat: 'Tacos', name: 'Mushroom Tempura', price: '$3.50', desc: 'Crispy mushrooms, chipotle mayo, cabbage slaw.', img: 'photo-1504674900247-0877df9cc836' },
-            { cat: 'Loaded Fries', name: 'Street Fries', price: '$8.00', desc: 'Fries topped with asada, queso, pico, and crema.', img: 'photo-1567188040759-fb8a883dc6d8' },
-            { cat: 'Loaded Fries', name: 'Elote Fries', price: '$7.50', desc: 'Roasted corn, cotija cheese, mayo, chili powder.', img: 'photo-1504674900247-0877df9cc836' },
-            { cat: 'Drinks', name: 'Horchata', price: '$3.00', desc: 'Sweet rice milk with cinnamon.', img: 'photo-1490645935967-10de6ba17061' },
-            { cat: 'Drinks', name: 'Agua Fresca', price: '$3.00', desc: 'Watermelon or Pineapple, made daily.', img: 'photo-1512621776951-a57141f2eefd' },
-          ].filter(item => item.cat === activeCategory).map((item, i) => (
-            <div key={i} style={{ display: 'flex', backgroundColor: '#1a1a1a', borderRadius: '0', overflow: 'hidden', border: '1px solid #222' }}>
-              <img src={img(item.img, 400)} alt={item.name} style={{ width: '120px', objectFit: 'cover' }} />
-              <div style={{ padding: '1.25rem', flex: 1 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                  <h4 style={{ ...headingStyle, margin: 0, fontSize: '1.5rem', color: '#fff' }}>{item.name}</h4>
-                  <span style={{ fontWeight: 800, color: '#00e5ff' }}>{item.price}</span>
-                </div>
-                <p style={{ margin: 0, fontSize: '0.9rem', color: '#aaa', lineHeight: 1.4 }}>{item.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Story */}
-      <section id="story" className="ff-section" style={{ backgroundColor: '#ff0055', color: '#ffffff' }}>
-        <div className="ff-story">
-          <img src={img('photo-1504674900247-0877df9cc836', 1000)} alt="Food truck" style={{ borderRadius: '0', width: '100%', boxShadow: '-15px 15px 0px #00e5ff' }} />
-          <div>
-            <h2 className="ff-title" style={{ ...headingStyle, fontSize: '4.5rem', color: '#111' }}>Born In The Truck.</h2>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.7, marginBottom: '1.5rem', color: '#ffe' }}>
-              We started in a 10-foot food truck with a flat top grill and a dream. The lines grew, the menu expanded, but the hustle stayed the same.
-            </p>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.7, marginBottom: '2rem', color: '#ffe' }}>
-              We still cook every order like it's the only one that matters. No compromises.
-            </p>
-            <button className="ff-btn" style={{ backgroundColor: '#111', color: '#ff0055', borderRadius: '0', textTransform: 'uppercase', fontWeight: 800 }}>Read Our Story</button>
-          </div>
-        </div>
-      </section>
-
-      {/* App Promo / CTA */}
-      <section className="ff-section" style={{ backgroundColor: '#111111', textAlign: 'center', padding: '6rem 2rem', borderTop: '4px solid #00e5ff' }}>
-        <h2 className="ff-title" style={{ ...headingStyle, fontSize: '4rem', color: '#00e5ff' }}>Street Bites App</h2>
-        <p style={{ fontSize: '1.25rem', color: '#aaa', fontWeight: 500, marginBottom: '2rem' }}>Track the truck, order ahead, and skip the line.</p>
-        <button className="ff-btn" style={{ backgroundColor: '#00e5ff', color: '#111', borderRadius: '0', padding: '1rem 3rem', fontSize: '1.2rem', textTransform: 'uppercase', fontWeight: 800 }}>Download Now</button>
-      </section>
-
-      {/* Footer */}
-      <footer className="ff-footer" style={{ backgroundColor: '#0a0a0a', color: '#666' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '3rem', marginBottom: '3rem' }}>
-          <div>
-            <h3 style={{ ...headingStyle, color: '#ff0055', fontSize: '2rem', marginBottom: '1.5rem' }}>STREET BITES</h3>
-            <p style={{ margin: '0.5rem 0' }}>Find us roaming the streets</p>
-            <p style={{ margin: '0.5rem 0' }}>Los Angeles, CA</p>
-            <p style={{ margin: '0.5rem 0', color: '#00e5ff', fontWeight: 'bold' }}>@streetbites</p>
-          </div>
-          <div>
-            <h4 style={{ color: '#fff', fontWeight: 700, marginBottom: '1.5rem', textTransform: 'uppercase', fontFamily: '"Bebas Neue", sans-serif', fontSize: '1.5rem', letterSpacing: '1px' }}>Hours</h4>
-            <p style={{ margin: '0.5rem 0' }}>Tue-Thu: 5:00pm - 12:00am</p>
-            <p style={{ margin: '0.5rem 0' }}>Fri-Sat: 5:00pm - 3:00am</p>
-            <p style={{ margin: '0.5rem 0' }}>Sun-Mon: Closed</p>
-          </div>
-          <div>
-            <h4 style={{ color: '#fff', fontWeight: 700, marginBottom: '1.5rem', textTransform: 'uppercase', fontFamily: '"Bebas Neue", sans-serif', fontSize: '1.5rem', letterSpacing: '1px' }}>Links</h4>
-            <p style={{ margin: '0.5rem 0' }}><a href="#" style={{ color: '#888', textDecoration: 'none' }}>Order Pickup</a></p>
-            <p style={{ margin: '0.5rem 0' }}><a href="#" style={{ color: '#888', textDecoration: 'none' }}>Truck Schedule</a></p>
-            <p style={{ margin: '0.5rem 0' }}><a href="#" style={{ color: '#888', textDecoration: 'none' }}>Contact Us</a></p>
-          </div>
-        </div>
-        <div style={{ borderTop: '1px solid #222', paddingTop: '2rem', textAlign: 'center', fontSize: '0.9rem' }}>
-          &copy; {new Date().getFullYear()} Street Bites. All rights reserved.
-        </div>
-      </footer>
-    </div>
-  );
+export const streetBitesConfig: StorefrontThemeConfig = {
+  id: 'street-bites',
+  kind: 'fast-food',
+  currencySymbol: '₹',
+  layoutOptions: {
+    heroLayout: 'asymmetric',
+    productLayout: 'grid-4',
+    storyLayout: 'split-left',
+    featuresLayout: 'pills-row',
+    galleryLayout: 'editorial-collage',
+    sectionOrder: ['hero', 'products', 'features', 'promo', 'gallery', 'reviews', 'story', 'location', 'newsletter'],
+  },
+  name: 'Street Bites',
+  tagline: 'High-heat urban night market tacos, pillowy steamed baos, loaded waffle fries, and street churros',
+  brandSub: 'Urban Street Food Syndicate · Night Market Flavors',
+  palette: {
+    primary: '#ff1355',
+    primaryHover: '#e00040',
+    secondary: '#0c0a09',
+    background: '#12100e',
+    surface: '#1c1917',
+    text: '#fafaf9',
+    textMuted: '#a8a29e',
+    border: 'rgba(255, 19, 85, 0.25)',
+    badgeBg: 'rgba(255, 19, 85, 0.15)',
+    badgeText: '#ff3b6f',
+    heroOverlay: 'linear-gradient(to right, rgba(12, 10, 9, 0.95) 0%, rgba(12, 10, 9, 0.75) 60%, rgba(12, 10, 9, 0.3) 100%)',
+  },
+  typography: {
+    headingFont: '"Syne", "Outfit", sans-serif',
+    bodyFont: '"Inter", sans-serif',
+  },
+  hero: {
+    headline: 'Night Market Heat. High-Heat Street Food Packed With Attitude.',
+    subheadline:
+      'Slow-braised beef birria folded into charred tortillas with molten Oaxaca cheese, Taiwanese fluffy fried chicken baos, dirty loaded waffle fries, and crispy cinnamon street churros fried fresh to order.',
+    badge: 'NIGHT MARKET FLAVORS · SCRATCH MADE DAILY',
+    image: img('photo-1565299507177-b0ac66763828'),
+    imageAlt: 'Authentic street tacos with charred meat, fresh cilantro, onions, lime, and rich salsa',
+    primaryCtaText: 'Explore Street Menu',
+    primaryCtaPage: 'menu',
+    secondaryCtaText: 'The Street Story',
+    secondaryCtaPage: 'about',
+  },
+  announcement: {
+    text: 'Late Night Drop: Birria Consommé & Crispy Churro Boxes Live Until 2:00 AM · Curbside Express Ready',
+    badgeText: 'NIGHT MARKET LIVE',
+    linkText: 'Order Night Drop',
+    linkPage: 'menu',
+  },
+  proofBadges: [
+    { icon: '🌮', title: '12-Hour Beef Birria', subtitle: 'Slow-simmered in guajillo & ancho chili broth with aromatics' },
+    { icon: '🥟', title: 'Fluffy Steamed Baos', subtitle: 'Handcrafted daily and steamed fresh to order in bamboo baskets' },
+    { icon: '🌶️', title: 'House Chili Crunch', subtitle: 'Small-batch garlic crisp and gochujang glazes with serious kick' },
+    { icon: '⚡', title: 'Speedy Express Counter', subtitle: 'Piping hot street food in paper boat packaging within 8 minutes' },
+  ],
+  categories: ['Birria & Tacos', 'Steamed Baos', 'Street Burgers', 'Loaded Dirty Sides', 'Sweet Finishes & Sips'],
+  collections: [
+    {
+      id: 'birria-taco-drop',
+      name: 'Birria & Crispy Tacos',
+      tagline: 'Folded, dipped, and grilled on the plancha with warm consommé cups.',
+      image: img('photo-1551504734-5ee1c4a1479b'),
+      itemCount: 6,
+      filterCategory: 'Birria & Tacos',
+    },
+    {
+      id: 'taiwanese-baos',
+      name: 'Pillowy Steamed Baos',
+      tagline: 'Warm cloud-soft buns stuffed with crispy pork belly, hot chicken, or tempura shrimp.',
+      image: img('photo-1563245372-f21724e3856d'),
+      itemCount: 5,
+      filterCategory: 'Steamed Baos',
+    },
+    {
+      id: 'dirty-street-fries',
+      name: 'Loaded Dirty Sides',
+      tagline: 'Waffle fries topped with crumbled chorizo, cotija cheese, and chipotle crema.',
+      image: img('photo-1552332386-f8dd00dc2f85'),
+      itemCount: 6,
+      filterCategory: 'Loaded Dirty Sides',
+    },
+    {
+      id: 'street-churros-sips',
+      name: 'Churros & Craft Sips',
+      tagline: 'Hot dulce de leche churros, Mexican glass sodas, and house horchata.',
+      image: img('photo-1600618528240-fb9fc964b853'),
+      itemCount: 6,
+      filterCategory: 'Sweet Finishes & Sips',
+    },
+  ],
+  products: [
+    {
+      id: 'sb-birria-tacos',
+      slug: 'slow-braised-birria-tacos-3-pack',
+      name: 'Slow-Braised Birria Tacos (3-Pack)',
+      price: 13.95,
+      compareAtPrice: 15.50,
+      description: 'Three corn tortillas dipped in spiced chili oil, griddled crispy with molten Oaxaca cheese, filled with 12-hour braised beef shank, diced white onion, and cilantro. Served with a cup of rich beef dipping consommé and fresh lime wedges.',
+      category: 'Birria & Tacos',
+      image: img('photo-1551504734-5ee1c4a1479b'),
+      tags: ['Chef Signature', 'Bestseller'],
+      allergens: ['Contains Dairy'],
+      weightOrSize: '3 Tacos + 6oz Consommé',
+      available: true,
+      featured: true,
+      options: [
+        { name: 'Cheese Level', values: ['Molten Oaxaca (Standard)', 'Extra Crispy Cheese Skirt (+ $1.50)'] },
+        { name: 'Consommé Upgrade', values: ['Standard Consommé', 'Double Consommé Bowl (+ $2.00)'] },
+      ],
+    },
+    {
+      id: 'sb-nashville-bao',
+      slug: 'nashville-hot-fried-chicken-bao',
+      name: 'Nashville Hot Chicken Bao (2-Pack)',
+      price: 11.50,
+      description: 'Two fluffy steamed lotus-leaf bao buns stuffed with buttermilk fried chicken thigh tossed in fiery Nashville chili oil, crunchy Asian cabbage slaw, and pickled bread-and-butter cucumbers.',
+      category: 'Steamed Baos',
+      image: img('photo-1563245372-f21724e3856d'),
+      tags: ['Street Favorite', 'Spicy'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '2 Handcrafted Baos',
+      available: true,
+      featured: true,
+      options: [
+        { name: 'Heat Level', values: ['Street Medium', 'Hot As Hell (Ghost Chili)', 'Mild Honey'] },
+      ],
+    },
+    {
+      id: 'sb-street-stack',
+      slug: 'street-stack-double-smash',
+      name: 'Street Stack Double Smash Burger',
+      price: 12.25,
+      description: 'Two smashed beef patties, spicy gochujang aioli, melted pepper jack, pickled daikon radish, and crispy wonton crisps on a toasted brioche bun.',
+      category: 'Street Burgers',
+      image: img('photo-1568901346375-23c9450c58cd'),
+      tags: ['Fusion Burger', 'Crunchy'],
+      allergens: ['Contains Dairy', 'Contains Gluten', 'Contains Soy'],
+      weightOrSize: 'Double 3.5oz Patties',
+      available: true,
+      featured: true,
+    },
+    {
+      id: 'sb-pork-belly-bao',
+      slug: 'crispy-pork-belly-bao-buns',
+      name: 'Braised Pork Belly Bao (2-Pack)',
+      price: 11.95,
+      description: 'Tender 5-spice braised pork belly seared crisp on the plancha, sweet hoisin plum glaze, crushed toasted peanuts, fresh cucumber, and scallions in warm steamed buns.',
+      category: 'Steamed Baos',
+      image: img('photo-1541696432-82c6da8ce7bf'),
+      tags: ['Authentic', 'Umami'],
+      allergens: ['Contains Gluten', 'Contains Peanuts', 'Contains Soy'],
+      weightOrSize: '2 Handcrafted Baos',
+      available: true,
+    },
+    {
+      id: 'sb-korean-wings',
+      slug: 'korean-gochujang-sticky-wings-6pc',
+      name: 'Korean Gochujang Sticky Wings (6pc)',
+      price: 10.50,
+      description: 'Double-fried crispy chicken wings glazed in a sweet, savory, and spicy gochujang chili garlic sauce. Garnished with toasted sesame seeds and fresh scallions.',
+      category: 'Loaded Dirty Sides',
+      image: img('photo-1562967914-608f82629710'),
+      tags: ['Crispy Wings', 'Spicy Glaze'],
+      allergens: ['Contains Soy', 'Contains Sesame'],
+      weightOrSize: '6 Jumbo Wings',
+      available: true,
+    },
+    {
+      id: 'sb-dirty-waffle-fries',
+      slug: 'loaded-dirty-street-waffle-fries',
+      name: 'Loaded Dirty Street Waffle Fries',
+      price: 8.50,
+      compareAtPrice: 9.75,
+      description: 'Crisp seasoned waffle fries topped with crumbled Mexican pork chorizo, melted queso blanco, chipotle crema, pickled red onions, and fresh cilantro.',
+      category: 'Loaded Dirty Sides',
+      image: img('photo-1552332386-f8dd00dc2f85'),
+      tags: ['Top Crave', 'Bestseller'],
+      allergens: ['Contains Dairy'],
+      weightOrSize: 'Shareable (340g)',
+      available: true,
+      featured: true,
+    },
+    {
+      id: 'sb-birria-ramen',
+      slug: 'birria-beef-ramen-bowl',
+      name: 'Birria Beef Ramen Consommé Bowl',
+      price: 14.50,
+      description: 'Springy ramen noodles immersed in a bowl of 12-hour spiced birria broth, tender shredded beef shank, soft-boiled marinated egg, cilantro, lime, and chili crunch.',
+      category: 'Birria & Tacos',
+      image: img('photo-1569718212165-3a8278d5f624'),
+      tags: ['Warm Broth', 'Comfort Food'],
+      allergens: ['Contains Gluten', 'Contains Eggs'],
+      weightOrSize: 'Large 24oz Bowl',
+      available: true,
+    },
+    {
+      id: 'sb-elote-cup',
+      slug: 'crispy-street-elote-corn-cup',
+      name: 'Mexican Street Elote Corn Cup',
+      price: 5.75,
+      description: 'Charred sweet corn off the cob folded with lime aioli, crumbled cotija cheese, cilantro, and dusted with Mexican tajín chili-lime seasoning.',
+      category: 'Loaded Dirty Sides',
+      image: img('photo-1551024709-8f23befc6f87'),
+      tags: ['Vegetarian', 'Street Classic'],
+      allergens: ['Contains Dairy'],
+      weightOrSize: '8oz Cup',
+      available: true,
+    },
+    {
+      id: 'sb-duck-spring-rolls',
+      slug: 'crispy-duck-spring-rolls-4pc',
+      name: 'Crispy Duck Spring Rolls (4pc)',
+      price: 8.95,
+      description: 'Golden fried crispy spring rolls stuffed with tender shredded roast duck, scallions, ginger, and cabbage. Served with a sweet chili plum dipping dip.',
+      category: 'Loaded Dirty Sides',
+      image: img('photo-1565299585323-38d6b0865b47'),
+      tags: ['Crispy Rolls'],
+      allergens: ['Contains Gluten'],
+      weightOrSize: '4 Rolls',
+      available: true,
+    },
+    {
+      id: 'sb-tempura-shrimp-bao',
+      slug: 'firecracker-tempura-shrimp-bao',
+      name: 'Firecracker Shrimp Bao (2-Pack)',
+      price: 12.50,
+      description: 'Two fluffy steamed buns with golden panko tempura jumbo shrimp, spicy firecracker remoulade, crunchy shredded cabbage, and furikake seasoning.',
+      category: 'Steamed Baos',
+      image: img('photo-1535400255456-984241443b29'),
+      tags: ['Seafood', 'Crunchy'],
+      allergens: ['Contains Shellfish', 'Contains Gluten'],
+      weightOrSize: '2 Handcrafted Baos',
+      available: true,
+    },
+    {
+      id: 'sb-combo-birria-elote',
+      slug: 'night-market-combo-birria-elote',
+      name: 'Night Market Combo #1: Birria & Elote',
+      price: 17.50,
+      compareAtPrice: 19.70,
+      description: 'Three crispy birria tacos, warm dipping consommé cup, charred street elote corn cup, and your choice of chilled Jarritos Mexican soda.',
+      category: 'Birria & Tacos',
+      image: img('photo-1565299507177-b0ac66763828'),
+      tags: ['Value Combo', 'Bestseller'],
+      allergens: ['Contains Dairy'],
+      weightOrSize: 'Full Night Meal Set',
+      available: true,
+      featured: true,
+      options: [
+        { name: 'Jarritos Soda Flavor', values: ['Mandarin Orange', 'Mexican Lime', 'Pineapple', 'Tamarind'] },
+      ],
+    },
+    {
+      id: 'sb-combo-bao-fries',
+      slug: 'night-market-combo-bao-fries',
+      name: 'Night Market Combo #2: Bao & Dirty Fries',
+      price: 16.95,
+      description: 'Two steamed baos of your choice (Hot Chicken or Pork Belly), loaded dirty waffle fries with chorizo and crema, and an iced drink.',
+      category: 'Steamed Baos',
+      image: img('photo-1563245372-f21724e3856d'),
+      tags: ['Bao Combo'],
+      allergens: ['Contains Dairy', 'Contains Gluten'],
+      weightOrSize: 'Baos + Fries + Sip',
+      available: true,
+    },
+    {
+      id: 'sb-street-crew-feast',
+      slug: 'street-crew-night-market-box',
+      name: 'Street Crew 4-Person Night Market Box',
+      price: 52.00,
+      compareAtPrice: 62.00,
+      description: 'Six birria tacos with two consommé cups, 4 hot chicken or pork belly baos, a large basket of dirty waffle fries, 6 Korean wings, and 4 churros with dulce de leche.',
+      category: 'Birria & Tacos',
+      image: img('photo-1565299585323-38d6b0865b47'),
+      tags: ['Group Feast', 'Feeds 4-5'],
+      allergens: ['Contains Dairy', 'Contains Gluten', 'Contains Peanuts'],
+      weightOrSize: 'Feeds 4-5 Guests',
+      available: true,
+    },
+    {
+      id: 'sb-street-churros',
+      slug: 'cinnamon-sugar-street-churros-4pc',
+      name: 'Cinnamon Sugar Street Churros (4pc)',
+      price: 6.50,
+      description: 'Four piping hot crispy Spanish churros fried golden, rolled in Saigon cinnamon and cane sugar, served with warm dulce de leche and Mexican dark chocolate dips.',
+      category: 'Sweet Finishes & Sips',
+      image: img('photo-1600618528240-fb9fc964b853'),
+      tags: ['Hot Dessert', 'Sweet Street'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '4 Churros + 2 Dips',
+      available: true,
+      featured: true,
+    },
+    {
+      id: 'sb-churro-bites',
+      slug: 'dulce-de-leche-filled-churro-bites',
+      name: 'Dulce de Leche Filled Churro Bites (8pc)',
+      price: 7.25,
+      description: 'Bite-sized crispy fried churro nuggets injected with creamy dulce de leche caramel and dusted with powdered vanilla sugar.',
+      category: 'Sweet Finishes & Sips',
+      image: img('photo-1587314168485-3236d6710814'),
+      tags: ['Shareable Dessert'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '8 Bite Pieces',
+      available: true,
+    },
+    {
+      id: 'sb-yuca-fries',
+      slug: 'crispy-yuca-fries-cilantro-crema',
+      name: 'Crispy Yuca Fries & Cilantro Crema',
+      price: 5.95,
+      description: 'Thick cut cassava root fries fried golden and crisp on the exterior with a fluffy interior, served with zesty garlic cilantro crema.',
+      category: 'Loaded Dirty Sides',
+      image: img('photo-1585109649139-366815a0d713'),
+      tags: ['Gluten-Free Sides', 'Vegetarian'],
+      weightOrSize: '240g Basket',
+      available: true,
+    },
+    {
+      id: 'sb-shishito-peppers',
+      slug: 'blistered-shishito-peppers',
+      name: 'Blistered Shishito Peppers with Sesame Soy',
+      price: 6.25,
+      description: 'Cast-iron blistered sweet green shishito peppers tossed in toasted sesame oil, tamari reduction, and flaky Maldon sea salt.',
+      category: 'Loaded Dirty Sides',
+      image: img('photo-1540420773420-3366772f4999'),
+      tags: ['Vegan', 'Gluten-Free'],
+      allergens: ['Contains Soy', 'Contains Sesame'],
+      weightOrSize: 'Shareable Basket',
+      available: true,
+    },
+    {
+      id: 'sb-iced-horchata',
+      slug: 'handcrafted-iced-cinnamon-horchata',
+      name: 'Handcrafted Iced Cinnamon Horchata',
+      price: 4.50,
+      description: 'Traditional Mexican sweet rice milk steeped with whole Mexican cinnamon bark, Tahitian vanilla, and condensed milk over crushed ice.',
+      category: 'Sweet Finishes & Sips',
+      image: img('photo-1513558161293-cdaf765ed2fd'),
+      tags: ['House Drink', 'Refreshing'],
+      allergens: ['Contains Dairy'],
+      weightOrSize: '20oz Cup',
+      available: true,
+      featured: true,
+    },
+    {
+      id: 'sb-agua-fresca',
+      slug: 'hibiscus-berry-agua-fresca',
+      name: 'Hibiscus Agua Fresca (Jamaica)',
+      price: 4.25,
+      description: 'Steeped wild hibiscus flowers, fresh lime juice, and a hint of organic agave nectar. Tart, floral, and deeply thirst-quenching.',
+      category: 'Sweet Finishes & Sips',
+      image: img('photo-1536935338788-846bb9981813'),
+      tags: ['Vegan Drink', 'Refreshing'],
+      weightOrSize: '20oz Cup',
+      available: true,
+    },
+    {
+      id: 'sb-jarritos-mandarin',
+      slug: 'jarritos-mexican-mandarin-soda',
+      name: 'Jarritos Mexican Mandarin Glass Soda',
+      price: 3.50,
+      description: 'Classic Mexican glass bottled soda sweetened with 100% natural cane sugar with real mandarin orange flavor.',
+      category: 'Sweet Finishes & Sips',
+      image: img('photo-1622483767028-3f66f32aef97'),
+      tags: ['Imported Soda'],
+      weightOrSize: '12.5oz Glass Bottle',
+      available: true,
+    },
+    {
+      id: 'sb-consomme-cup',
+      slug: 'extra-12-hour-birria-consomme-cup',
+      name: 'Extra 12-Hour Beef Consommé Cup',
+      price: 2.25,
+      description: 'Rich, aromatic chili beef broth with rendered tallow, onions, and cilantro. The ultimate taco dipping essential.',
+      category: 'Birria & Tacos',
+      image: img('photo-1551504734-5ee1c4a1479b'),
+      tags: ['Dipping Essential'],
+      weightOrSize: '6oz Cup',
+      available: true,
+    },
+    {
+      id: 'sb-gochujang-aioli',
+      slug: 'fiery-gochujang-mayo-tub',
+      name: 'Fiery Gochujang Mayo Dip (2oz)',
+      price: 1.00,
+      description: 'Fermented Korean red pepper paste folded into creamy Japanese Kewpie mayo and roasted sesame oil.',
+      category: 'Loaded Dirty Sides',
+      image: img('photo-1562967914-608f82629710'),
+      tags: ['Spicy Mayo'],
+      weightOrSize: '2oz Tub',
+      available: true,
+    },
+  ],
+  craftProcess: {
+    badge: 'NIGHT MARKET CRAFT',
+    title: 'The 12-Hour Birria & Bao Craft',
+    subtitle: 'From charred ancho chilies to fluffy bamboo steam baskets, real street food demands obsessive prep.',
+    steps: [
+      { time: '6:00 AM', title: 'Chili Toast & Spice Rub', desc: 'Guajillo and ancho chilies are toasted dry on cast iron, ground with Mexican oregano, and rubbed over fresh beef shanks.' },
+      { time: '8:00 AM', title: '12-Hour Slow Simmer', desc: 'Beef shanks simmer slowly in copper cauldrons with roasted garlic and aromatics until tender enough to shred with spoons.' },
+      { time: '4:00 PM', title: 'Bao Dough Steam', desc: 'Fluffy lotus-leaf bao buns are proofed and steamed in stacked bamboo baskets right before evening dinner rush.' },
+      { time: 'MIDNIGHT', title: 'Late Night Plancha Sear', desc: 'Tortillas dipped in chili oil are seared crisp with molten Oaxaca cheese under neon lights until the early morning hours.' },
+    ],
+  },
+  story: {
+    badge: 'STREET FOOD ATTITUDE',
+    title: 'From Food Truck Planchas to Full-Scale Night Market Energy.',
+    paragraphs: [
+      'We started behind a roaring flattop inside a converted 1986 step-van on 24th Street. No shortcuts: we toast whole ancho and guajillo chilies on dry cast iron, hand-rub beef shanks with toasted cumin and Mexican oregano, and simmer our birria broth for 12 continuous hours.',
+      'Our buns are proofed in traditional bamboo baskets, our churros are pressed fresh to order, and our flavors never hold back.',
+    ],
+    image: img('photo-1555939594-58d7cb561ad1'),
+    imageAlt: 'Street food chef searing tacos on a blazing commercial plancha grill with flames and smoke',
+    founderQuote: 'Real street food should hit you with heat, crunch, and bold acidity all in the very first bite.',
+    founderName: 'Mateo Cruz & Elena Chen, Co-Founders & Street Chefs',
+    stats: [
+      { value: '12 Hours', label: 'Birria Simmer Time' },
+      { value: '800+', label: 'Daily Baos Steamed' },
+      { value: '7 Kinds', label: 'Scratch Salsas & Dips' },
+      { value: '4.9 ★', label: 'Night Market Rating' },
+    ],
+  },
+  promo: {
+    badge: 'LATE NIGHT DROP',
+    title: 'The Midnight Birria & Bao Drop Box',
+    desc: 'Order the Street Crew Box with 6 crispy birria tacos, 4 steamed baos, and dirty waffle fries. Late night express courier open until 3 AM.',
+    ctaText: 'Order Midnight Box',
+    ctaPage: 'menu',
+    image: img('photo-1565299507177-b0ac66763828'),
+    imageAlt: 'Street tacos platter with salsa and lime',
+  },
+  gallery: [
+    { src: img('photo-1565299507177-b0ac66763828'), alt: 'Street tacos with fresh cilantro and salsa', caption: 'Charred plancha tacos with salsa verde', tag: 'Tacos' },
+    { src: img('photo-1551504734-5ee1c4a1479b'), alt: 'Crispy birria tacos with dipping consomme cup', caption: '12-Hour Beef Birria with rich consommé cup', tag: 'Birria' },
+    { src: img('photo-1563245372-f21724e3856d'), alt: 'Steamed bao buns with crispy fried chicken', caption: 'Nashville Hot Chicken Steamed Baos', tag: 'Baos' },
+    { src: img('photo-1552332386-f8dd00dc2f85'), alt: 'Dirty waffle fries with chorizo and crema', caption: 'Loaded Dirty Street Waffle Fries', tag: 'Fries' },
+    { src: img('photo-1600618528240-fb9fc964b853'), alt: 'Fresh street churros with cinnamon sugar', caption: 'Cinnamon sugar street churros with dulce de leche', tag: 'Churros' },
+    { src: img('photo-1555939594-58d7cb561ad1'), alt: 'Chef cooking on sizzling night market grill', caption: 'Late-night plancha station in full swing', tag: 'Kitchen' },
+  ],
+  testimonials: [
+    {
+      name: 'Alejandro Morales',
+      rating: 5,
+      quote: 'The birria tacos here are on another planet. The tortilla has that crispy, cheese-crusted edge and the consommé is rich, spicy, and deeply savory.',
+      source: 'Street Food Columnist',
+      date: 'October 2026',
+    },
+    {
+      name: 'Chloe Tan',
+      rating: 5,
+      quote: 'Those Nashville hot chicken baos gave me goosebumps. Fluffy, cloud-soft bun on the outside, blistering crunch and juicy hot chicken on the inside.',
+      source: 'Culinary Blogger',
+      date: 'September 2026',
+    },
+    {
+      name: 'Liam O’Connor',
+      rating: 5,
+      quote: 'The Street Crew Feast Box saved our Friday night watch party. Everything arrived piping hot, and the dirty waffle fries are dangerously addictive.',
+      source: 'Verified Customer',
+      date: 'August 2026',
+    },
+  ],
+  location: {
+    address: '782 Mission Street, SOMA Arts District, San Francisco, CA 94103',
+    neighborhood: 'SOMA Night Market Concourse',
+    hoursWeekdays: '11:30 AM – 1:00 AM',
+    hoursWeekends: '11:30 AM – 3:00 AM (Late Night Express)',
+    phone: '(415) 554-9210',
+    email: 'soma@streetbites.com',
+    pickupNotice: 'Dedicated curbside order window open late. Most orders ready in 8 minutes.',
+  },
+  customInquiry: {
+    title: 'Street Food Platter & Night Market Party Catering',
+    subtitle: 'Full-service street taco bars, bao platter boxes, and dirty fry stations for 15 to 200 guests.',
+    occasions: ['Late Night Party', 'Office Night Market', 'Festival & Crew Catering', 'Birthday Party', 'Tailgate Gathering'],
+    sizes: [
+      { label: 'Taco & Bao Mini Platter (18 Pieces)', serves: '6-8 Guests', basePrice: 85 },
+      { label: 'Night Market Crew Box (35 Pieces)', serves: '12-15 Guests', basePrice: 175 },
+      { label: 'Full Street Food Station (70 Pieces)', serves: '25-30 Guests', basePrice: 340 },
+      { label: 'Festival Mega Drop (150+ Pieces)', serves: '50-60 Guests', basePrice: 680 },
+    ],
+    flavors: ['12-Hour Beef Birria with Consommé', 'Nashville Hot Fried Chicken Baos', '5-Spice Pork Belly Baos', 'Street Stack Smash Sliders'],
+    fillings: ['House 12-Hour Beef Consommé', 'Fiery Gochujang Mayo Dip', 'Zesty Cilantro Lime Crema', 'Sweet Hoisin Plum Sauce'],
+    finishes: ['Dirty Chorizo Waffle Fries', 'Crispy Street Elote Corn Cups', 'Hot Cinnamon Sugar Churros', 'Handcrafted Iced Horchata & Sips'],
+  },
+  faqs: [
+    {
+      question: 'What is authentic birria and how do I eat it?',
+      answer: 'Birria is a traditional Mexican stew slow-cooked with beef shank and a rich blend of dried chilies. Our tortillas are dipped in the seasoned broth, grilled crisp with cheese, and served with a cup of warm consommé for dipping your taco before each bite.',
+      category: 'Food & Ingredients',
+    },
+    {
+      question: 'Are your baos steamed fresh to order?',
+      answer: 'Yes! Our lotus-leaf bao dough is made fresh every morning and steamed in stacked bamboo baskets right as your order comes in, keeping them warm and cloud-soft.',
+      category: 'Freshness & Prep',
+    },
+    {
+      question: 'What late-night hours do you deliver until?',
+      answer: 'Our flagship SOMA kitchen runs deliveries and counter pickups until 3:00 AM on Friday and Saturday, and 1:00 AM on weeknights.',
+      category: 'Hours & Delivery',
+    },
+    {
+      question: 'Can you cater private events or office happy hours?',
+      answer: 'Yes! Check our Party & Catering section to customize taco stations, bao boxes, and churro platters. We provide insulated thermal packaging so everything stays sizzling hot.',
+      category: 'Catering & Events',
+    },
+  ],
 };
 
-export default StreetBites;
+export default function StreetBites() {
+  return <FoodStorefrontCore theme={streetBitesConfig} />;
+}

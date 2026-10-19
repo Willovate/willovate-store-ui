@@ -1,9 +1,11 @@
-import { useState, useEffect, useMemo, useCallback } from 'react'
+import { useState, useEffect, useMemo, useCallback, useRef, lazy, Suspense } from 'react'
 import type { Page, PageElement, Website } from '../types'
 import '../styles/storefront.css'
 import { getSyntheticElement, syntheticEl } from '../utils/editorUtils'
 import { RestaurantTheme, restaurantThemePresets } from '../themes/RestaurantTheme'
 import { templateCategories } from '../data/templateCategories'
+import { findTemplateInRegistry } from '../templates/registry'
+import { WebsiteContext, isGenericPlaceholder } from '../context/WebsiteContext'
 
 /**
  * PageEditor – renders the live website preview inside the Workspace editor.
@@ -35,6 +37,7 @@ interface PageEditorProps {
   selectedElementId?: string
   onSelectElement?: (element: PageElement | null) => void
   onAddElement?: (type: string) => void
+  previewMode?: 'desktop' | 'tablet' | 'mobile'
 }
 
 // ─── helpers ────────────────────────────────────────────────────────────────
@@ -42,6 +45,8 @@ interface PageEditorProps {
 /** Returns true if the given templateId belongs to the Food & Restaurant category */
 export function isRestaurantTemplate(templateId: string | undefined): boolean {
   if (!templateId) return false
+  // Check template registry (all 50 templates)
+  if (findTemplateInRegistry(templateId)) return true
   // Direct match in the fine-dining preset map (covers all 10 presets)
   if (restaurantThemePresets[templateId]) return true
   // Broad match: any theme in the food-and-restaurant templateCategories
@@ -59,17 +64,26 @@ function resolvePreset(templateId: string | undefined) {
   // 1) Direct key match
   if (restaurantThemePresets[templateId]) return restaurantThemePresets[templateId]
 
-  // 2) Match via templateCategories → presetId
+  // 2) Match via registry
+  const reg = findTemplateInRegistry(templateId)
+  if (reg && restaurantThemePresets[reg.slug]) return restaurantThemePresets[reg.slug]
+
+  // 3) Match via templateCategories → presetId
   const foodCat = templateCategories.find(c => c.id === 'food-and-restaurant')
   if (!foodCat) return null
   for (const sub of foodCat.subsections) {
     for (const t of sub.themes) {
-      if ((t.slug === templateId || t.templateSlug === templateId || t.id === templateId) && t.presetId) {
-        return restaurantThemePresets[t.presetId] ?? null
+      if (t.slug === templateId || t.templateSlug === templateId || t.id === templateId) {
+        if (t.presetId && restaurantThemePresets[t.presetId]) {
+          return restaurantThemePresets[t.presetId]
+        }
+        if (restaurantThemePresets[t.slug]) {
+          return restaurantThemePresets[t.slug]
+        }
       }
     }
   }
-  return null
+  return restaurantThemePresets['noir-table'] || null
 }
 
 // ─── Restaurant overlay editor ───────────────────────────────────────────────
@@ -103,7 +117,7 @@ function RestaurantEditorOverlay({
       if (heroEl.properties.eyebrow) result.eyebrow = heroEl.properties.eyebrow;
       if (heroEl.properties.primaryButtonText) result.heroButton1 = heroEl.properties.primaryButtonText;
       if (heroEl.properties.secondaryButtonText) result.heroButton2 = heroEl.properties.secondaryButtonText;
-      if (heroEl.properties.style_backgroundImage) {
+      if (heroEl.properties.style_backgroundImage && !isGenericPlaceholder(heroEl.properties.style_backgroundImage)) {
         result.images = [...result.images];
         result.images[0] = heroEl.properties.style_backgroundImage;
       }
@@ -141,7 +155,7 @@ function RestaurantEditorOverlay({
       if (elToUse.properties.title) result.storyTitle = elToUse.properties.title;
       if (elToUse.properties.content) result.storyCopy = elToUse.properties.content;
       if (elToUse.properties.buttonText) result.storyButton = elToUse.properties.buttonText;
-      if (elToUse.properties.image) {
+      if (elToUse.properties.image && elToUse.properties.image !== '/assets/lifestyle.jpg') {
         result.images = [...result.images];
         result.images[7] = elToUse.properties.image; // storyImg is index 7 in buildFoodConfig
       }
@@ -289,28 +303,331 @@ function SmoothHeroImage({ src }: { src: string }) {
   )
 }
 
+// ─── Universal Editor Bridge (Enables Live Editing for ALL 50 Themes) ─────────
+function UniversalEditorBridge({
+  page,
+  selectedElement,
+  selectedElementId,
+  onSelectElement,
+  children,
+}: {
+  page: Page
+  selectedElement?: PageElement | null
+  selectedElementId?: string
+  onSelectElement?: (el: PageElement | null) => void
+  children: React.ReactNode
+}) {
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  // 1. Live DOM Synchronization for standalone templates
+  useEffect(() => {
+    const root = containerRef.current
+    if (!root) return
+
+    // Find and update Hero
+    const heroEl = page.elements.find(e => e.elementType === 'hero')
+    if (heroEl?.properties) {
+      const heroSec = root.querySelector('#hero, .ff-hero, .ck-hero, [class*="hero"], header:not(.pe-header):not(.fd-nav):not(.ff-nav):not(.ck-nav)')
+      if (heroSec) {
+        if (heroEl.properties.title) {
+          const h1 = heroSec.querySelector('h1, .hero-title, [class*="title"]')
+          if (h1 && h1.textContent !== heroEl.properties.title) {
+            h1.textContent = heroEl.properties.title
+          }
+        }
+        if (heroEl.properties.subtitle) {
+          const p = heroSec.querySelector('p, .hero-sub, [class*="subtitle"]')
+          if (p && p.textContent !== heroEl.properties.subtitle) {
+            p.textContent = heroEl.properties.subtitle
+          }
+        }
+        if (heroEl.properties.buttonText) {
+          const btn = heroSec.querySelector('button, .hero-btn, a[class*="btn"]')
+          if (btn && btn.textContent !== heroEl.properties.buttonText) {
+            btn.textContent = heroEl.properties.buttonText
+          }
+        }
+        if (heroEl.properties.style_backgroundImage && !isGenericPlaceholder(heroEl.properties.style_backgroundImage)) {
+          const bgImg = heroSec.querySelector('img')
+          if (bgImg && bgImg.src !== heroEl.properties.style_backgroundImage) {
+            bgImg.src = heroEl.properties.style_backgroundImage
+          }
+        }
+      }
+    }
+
+    // Find and update Nav Logo
+    const navEl = page.elements.find(e => e.elementType === 'nav')
+    if (navEl?.properties?.logoText) {
+      const navSec = root.querySelector('nav, header, [class*="nav"]')
+      if (navSec) {
+        const logo = navSec.querySelector('.logo, [class*="brand"], [class*="logo"], div[style*="fontFamily"]')
+        if (logo && logo.textContent !== navEl.properties.logoText) {
+          logo.textContent = navEl.properties.logoText
+        }
+      }
+    }
+
+    // Find and update Story (img-text)
+    const storyEl = page.elements.find(e => e.elementType === 'img-text')
+    if (storyEl?.properties) {
+      const storySec = root.querySelector('#story, #about, [class*="story"], [class*="about"]')
+      if (storySec) {
+        if (storyEl.properties.title) {
+          const h2 = storySec.querySelector('h2, [class*="title"]')
+          if (h2 && h2.textContent !== storyEl.properties.title) {
+            h2.textContent = storyEl.properties.title
+          }
+        }
+        if (storyEl.properties.content) {
+          const p = storySec.querySelector('p, [class*="body"]')
+          if (p && p.textContent !== storyEl.properties.content) {
+            p.textContent = storyEl.properties.content
+          }
+        }
+      }
+    }
+
+    // Find and update Menu / Featured Title
+    const featEl = page.elements.find(e => e.elementType === 'featured-title' || e.elementType === 'featured-collection' || e.elementType === 'prod-grid')
+    if (featEl?.properties?.title) {
+      const menuSec = root.querySelector('#menu, #combos, [class*="menu"], [class*="dishes"]')
+      if (menuSec) {
+        const title = menuSec.querySelector('h2, [class*="title"]')
+        if (title && title.textContent !== featEl.properties.title) {
+          title.textContent = featEl.properties.title
+        }
+      }
+    }
+
+    // Find and update Gallery
+    const galleryEl = page.elements.find(e => e.elementType === 'gallery')
+    if (galleryEl?.properties) {
+      const gallerySec = root.querySelector('#gallery, [class*="gallery"]')
+      if (gallerySec) {
+        if (galleryEl.properties.title) {
+          const h2 = gallerySec.querySelector('h2, [class*="title"]')
+          if (h2 && h2.textContent !== galleryEl.properties.title) {
+            h2.textContent = galleryEl.properties.title
+          }
+        }
+        if (galleryEl.properties.subtitle) {
+          const p = gallerySec.querySelector('p, [class*="subtitle"], [class*="sub"]')
+          if (p && p.textContent !== galleryEl.properties.subtitle) {
+            p.textContent = galleryEl.properties.subtitle
+          }
+        }
+      }
+    }
+
+    // Find and update Footer
+    const footerEl = page.elements.find(e => e.elementType === 'footer')
+    if (footerEl?.properties) {
+      const footerSec = root.querySelector('footer, [class*="footer"]')
+      if (footerSec) {
+        if (footerEl.properties.brand) {
+          const brand = footerSec.querySelector('[class*="brand"], h3, h4')
+          if (brand && brand.textContent !== footerEl.properties.brand) {
+            brand.textContent = footerEl.properties.brand
+          }
+        }
+      }
+    }
+  }, [page.elements])
+
+  // 2. Click Interception for Selecting Sections in Editor Mode
+  const handleContainerClick = useCallback((e: React.MouseEvent) => {
+    const target = e.target as HTMLElement
+    // If an EditableSection or existing label handled it, let it be
+    if (target.closest('.pe-edit-label')) return
+
+    // Allow interactive storefront modals, drawers, and form inputs to receive events freely
+    if (
+      target.closest('[role="dialog"]') ||
+      target.closest('.rt-modal') ||
+      target.closest('.rt-drawer') ||
+      target.closest('.fs-modal') ||
+      target.closest('.fs-drawer') ||
+      target.closest('.fs-reservation-modal') ||
+      target.closest('input') ||
+      target.closest('select') ||
+      target.closest('textarea')
+    ) {
+      return
+    }
+
+    // Only prevent full navigation for external links (allow hash links and button actions)
+    const anchor = target.closest('a')
+    if (anchor) {
+      const href = anchor.getAttribute('href') || ''
+      if (!href.startsWith('#') && !href.startsWith('javascript:')) {
+        e.preventDefault()
+      }
+    }
+
+    const root = containerRef.current
+    if (!root) return
+
+    let current: HTMLElement | null = target
+    let matchedType: string | null = null
+
+    while (current && current !== root) {
+      const tag = current.tagName.toLowerCase()
+      const id = (current.id || '').toLowerCase()
+      const cls = (typeof current.className === 'string' ? current.className : '').toLowerCase()
+
+      if (current.getAttribute('data-editable-id')) {
+        matchedType = current.getAttribute('data-editable-id')
+        break
+      }
+      if (tag === 'nav' || cls.includes('nav') || id.includes('nav')) {
+        matchedType = 'nav'; break
+      }
+      if (id.includes('hero') || cls.includes('hero') || (tag === 'header' && !cls.includes('nav'))) {
+        matchedType = 'hero'; break
+      }
+      if (id.includes('menu') || id.includes('combos') || cls.includes('menu') || cls.includes('dishes') || cls.includes('grid')) {
+        matchedType = 'prod-grid'; break
+      }
+      if (id.includes('story') || id.includes('about') || cls.includes('story') || cls.includes('about')) {
+        matchedType = 'img-text'; break
+      }
+      if (id.includes('gallery') || cls.includes('gallery')) {
+        matchedType = 'gallery'; break
+      }
+      if (id.includes('promo') || id.includes('offers') || cls.includes('promo') || cls.includes('offers')) {
+        matchedType = 'promo'; break
+      }
+      if (id.includes('reviews') || id.includes('testimonials') || cls.includes('testimonial')) {
+        matchedType = 'testimonials'; break
+      }
+      if (id.includes('location') || id.includes('contact') || id.includes('visit') || cls.includes('location')) {
+        matchedType = 'location'; break
+      }
+      if (id.includes('newsletter') || id.includes('signup') || cls.includes('newsletter')) {
+        matchedType = 'email-signup'; break
+      }
+      if (tag === 'footer' || cls.includes('footer')) {
+        matchedType = 'footer'; break
+      }
+
+      current = current.parentElement
+    }
+
+    if (matchedType) {
+      const el = getSyntheticElement(matchedType, page, selectedElement)
+      if (el) onSelectElement?.(el)
+    }
+  }, [page, selectedElement, onSelectElement])
+
+  return (
+    <div
+      ref={containerRef}
+      onClickCapture={handleContainerClick}
+      style={{ position: 'relative', width: '100%' }}
+      className="pe-universal-editor-bridge"
+    >
+      {children}
+      <style>{`
+        .pe-universal-editor-bridge section,
+        .pe-universal-editor-bridge header,
+        .pe-universal-editor-bridge nav,
+        .pe-universal-editor-bridge footer {
+          cursor: pointer;
+          transition: outline 0.15s ease;
+        }
+        .pe-universal-editor-bridge section:hover,
+        .pe-universal-editor-bridge header:hover,
+        .pe-universal-editor-bridge footer:hover {
+          outline: 2px dashed rgba(99, 102, 241, 0.4);
+          outline-offset: -2px;
+        }
+      `}</style>
+    </div>
+  )
+}
+
 // ─── Main component ───────────────────────────────────────────────────────────
-export default function PageEditor({ website, page, selectedElement, selectedElementId, onSelectElement }: PageEditorProps) {
+export default function PageEditor({ website, page, selectedElement, selectedElementId, onSelectElement, previewMode = 'desktop' }: PageEditorProps) {
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null)
 
   const templateId = website?.templateId
 
-  // ── RESTAURANT BRANCH ──────────────────────────────────────────────────────
-  if (isRestaurantTemplate(templateId)) {
-    console.log('[PageEditor] Restaurant template detected:', templateId)
+  // ── 1. OPTIMIZED TEMPLATE BRANCH (50 high-fidelity food & restaurant themes) ──
+  const registeredTemplate = useMemo(() => findTemplateInRegistry(templateId), [templateId])
+  const OptimizedComponent = useMemo(() => {
+    return registeredTemplate?.component ? lazy(registeredTemplate.component) : null
+  }, [registeredTemplate])
+
+  if (OptimizedComponent) {
+    console.log('[PageEditor] Optimized template detected:', registeredTemplate?.id, registeredTemplate?.name)
     return (
-      <div
-        key={`restaurant-${templateId}`}
-        className="pe-template pe-template--restaurant"
-        data-template-id={templateId}
+      <WebsiteContext.Provider
+        value={{
+          website: website!,
+          page,
+          selectedElement,
+          selectedElementId: selectedElement?.id,
+          onSelectElement,
+          previewMode,
+        }}
       >
-        <RestaurantEditorOverlay
-          templateId={templateId!}
-          page={page}
-          selectedElement={selectedElement}
-          onSelectElement={onSelectElement}
-        />
-      </div>
+        <div
+          key={`optimized-${templateId}`}
+          className="pe-template pe-template--restaurant"
+          data-template-id={templateId}
+          data-template-kind="optimized-restaurant"
+          data-viewport={previewMode}
+        >
+          <Suspense
+            fallback={
+              <div style={{ padding: '6rem', textAlign: 'center', fontSize: '1.25rem', color: '#64748b' }}>
+                Loading {registeredTemplate?.name || 'optimized theme'}…
+              </div>
+            }
+          >
+            <UniversalEditorBridge
+              page={page}
+              selectedElement={selectedElement}
+              selectedElementId={selectedElementId || selectedElement?.id}
+              onSelectElement={onSelectElement}
+            >
+              <OptimizedComponent />
+            </UniversalEditorBridge>
+          </Suspense>
+        </div>
+      </WebsiteContext.Provider>
+    )
+  }
+
+  // ── 2. LEGACY RESTAURANT BRANCH ────────────────────────────────────────────
+  if (isRestaurantTemplate(templateId)) {
+    console.log('[PageEditor] Legacy restaurant template detected:', templateId)
+    return (
+      <WebsiteContext.Provider
+        value={{
+          website: website!,
+          page,
+          selectedElement,
+          selectedElementId: selectedElement?.id,
+          onSelectElement,
+          previewMode,
+        }}
+      >
+        <div
+          key={`restaurant-${templateId}`}
+          className="pe-template pe-template--restaurant"
+          data-template-id={templateId}
+          data-viewport={previewMode}
+        >
+          <RestaurantEditorOverlay
+            templateId={templateId!}
+            page={page}
+            selectedElement={selectedElement}
+            onSelectElement={onSelectElement}
+          />
+        </div>
+      </WebsiteContext.Provider>
     )
   }
 
@@ -347,8 +664,9 @@ export default function PageEditor({ website, page, selectedElement, selectedEle
   return (
     <div
       key={`ecommerce-${templateId}`}
-      className="pe-template"
+      className={`pe-template ws-canvas-${previewMode}`}
       data-template-id={templateId}
+      data-viewport={previewMode}
     >
       {/* ── ANNOUNCEMENT BAR ── */}
       {announcementEl.properties?.visibility !== false && announcementEl.properties?.isHidden !== true && (
@@ -411,7 +729,7 @@ export default function PageEditor({ website, page, selectedElement, selectedEle
           className={`hero ${isSelected('hero') ? 'pe-selected-hero' : ''}`}
           onClick={() => selectElement('hero')}
         >
-          <SmoothHeroImage src={(heroEl?.properties?.style_backgroundImage as string) || dynamicTemplate?.coverImage || '/assets/mino-hero-clean.jpg'} />
+          <SmoothHeroImage src={(heroEl?.properties?.style_backgroundImage && !isGenericPlaceholder(heroEl?.properties?.style_backgroundImage) ? (heroEl?.properties?.style_backgroundImage as string) : '') || dynamicTemplate?.coverImage || 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=85'} />
           <div className="hero__content">
             <p className="hero__label" style={{ fontWeight: 700, fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
               {(!heroEl?.properties?.eyebrow || (heroEl?.properties?.eyebrow as string) === '__DEFAULT_EYEBROW__')

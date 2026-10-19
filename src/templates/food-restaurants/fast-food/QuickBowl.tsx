@@ -1,181 +1,491 @@
-import React, { useState } from 'react';
-import './fast-food-shared.css';
-import { ArrowLeft } from 'lucide-react';
+import React from 'react';
+import { FoodStorefrontCore, type StorefrontThemeConfig } from '../shared/FoodStorefrontCore';
 
-const img = (id: string, w = 1600) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
+const img = (id: string, w = 1400) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
 
-const QuickBowl = () => {
-  const [activeCategory, setActiveCategory] = useState('Signature Bowls');
-
-  const headingStyle = { fontFamily: '"Montserrat", sans-serif', color: '#1a3326', fontWeight: 800 };
-  const navStyle = { color: '#1a3326', textDecoration: 'none', fontWeight: 600, fontFamily: '"Inter", sans-serif' };
-
-  return (
-    <div className="fast-food-theme" style={{ fontFamily: '"Inter", sans-serif', color: '#1a3326', backgroundColor: '#f4f9f6' }}>
-      {/* Navigation */}
-      <nav className="ff-nav" style={{ backgroundColor: '#ffffff', borderBottom: '1px solid #e0ece5' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <a href="/templates/category/fast-food" style={{ ...navStyle, color: '#00a35c', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <ArrowLeft size={18} /> Back to Fast Food
-          </a>
-          <div style={{ ...headingStyle, fontSize: '1.75rem', color: '#00a35c', margin: 0, letterSpacing: '-0.5px' }}>QuickBowl</div>
-        </div>
-        <div>
-          <a href="#featured" style={navStyle}>Featured</a>
-          <a href="#menu" style={navStyle}>Menu</a>
-          <a href="#story" style={navStyle}>Philosophy</a>
-          <button className="ff-btn" style={{ marginLeft: '1.5rem', backgroundColor: '#00a35c', color: '#fff', borderRadius: '30px' }}>Order Ahead</button>
-        </div>
-      </nav>
-
-      {/* Hero */}
-      <header className="ff-hero" style={{ backgroundColor: '#00a35c', minHeight: '70vh', padding: 0 }}>
-        <div style={{ display: 'flex', width: '100%', minHeight: '70vh' }}>
-          <div style={{ flex: 1, padding: '5% 8%', display: 'flex', flexDirection: 'column', justifyContent: 'center', backgroundColor: '#00a35c', color: '#fff' }}>
-            <h1 style={{ ...headingStyle, fontSize: '4rem', margin: '0 0 1.5rem 0', color: '#ffffff', lineHeight: 1.1 }}>
-              Fast Food,<br/>Redefined.
-            </h1>
-            <p style={{ fontSize: '1.2rem', marginBottom: '2.5rem', lineHeight: 1.6, fontWeight: 400, maxWidth: '500px' }}>
-              Wholesome ingredients, bold flavors, and served at the speed of life. Eating well shouldn't slow you down.
-            </p>
-            <div style={{ display: 'flex', gap: '1rem' }}>
-              <button className="ff-btn" style={{ backgroundColor: '#ffb800', color: '#1a3326', borderRadius: '30px', fontSize: '1.1rem' }}>Start Order</button>
-              <button className="ff-btn" style={{ backgroundColor: 'transparent', color: '#fff', border: '2px solid #fff', borderRadius: '30px', fontSize: '1.1rem' }}>View Menu</button>
-            </div>
-          </div>
-          <div style={{ flex: 1, backgroundImage: `url(${img('photo-1546069901-ba9599a7e63c')})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-          </div>
-        </div>
-      </header>
-
-      {/* Featured Combos */}
-      <section id="featured" className="ff-section" style={{ backgroundColor: '#ffffff' }}>
-        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <h2 className="ff-title" style={{ ...headingStyle, fontSize: '3rem' }}>Featured Bowls</h2>
-          <p style={{ color: '#555', fontSize: '1.1rem' }}>Chef-curated combinations ready in seconds.</p>
-        </div>
-        <div className="ff-grid">
-          {[
-            { name: 'Harvest Chicken', price: '$11.99', desc: 'Roasted chicken, sweet potatoes, wild rice, kale, balsamic vinaigrette.', img: 'photo-1546069901-ba9599a7e63c' },
-            { name: 'Spicy Tofu Crunch', price: '$10.99', desc: 'Crispy tofu, quinoa, edamame, carrots, spicy peanut dressing.', img: 'photo-1512621776951-a57141f2eefd' },
-            { name: 'Mediterranean Grain', price: '$11.49', desc: 'Falafel, brown rice, hummus, cucumber, feta, lemon tahini.', img: 'photo-1504674900247-0877df9cc836' }
-          ].map((item, i) => (
-            <div key={i} className="ff-card" style={{ backgroundColor: '#f4f9f6', borderRadius: '16px', border: 'none' }}>
-              <img src={img(item.img, 800)} alt={item.name} style={{ height: '260px' }} />
-              <div className="ff-card-content" style={{ padding: '2rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
-                  <h3 style={{ ...headingStyle, fontSize: '1.4rem', margin: 0 }}>{item.name}</h3>
-                  <span style={{ fontWeight: 800, color: '#00a35c', fontSize: '1.2rem' }}>{item.price}</span>
-                </div>
-                <p style={{ color: '#555', lineHeight: 1.5, marginBottom: '2rem' }}>{item.desc}</p>
-                <button className="ff-btn" style={{ width: '100%', backgroundColor: '#1a3326', color: '#fff', borderRadius: '30px' }}>Add to Bag</button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Full Menu */}
-      <section id="menu" className="ff-section" style={{ backgroundColor: '#f4f9f6' }}>
-        <h2 className="ff-title" style={{ ...headingStyle, fontSize: '3rem', textAlign: 'center' }}>Explore The Menu</h2>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '3rem' }}>
-          {['Signature Bowls', 'Build Your Own', 'Drinks & Sides'].map(cat => (
-            <button 
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              style={{
-                background: activeCategory === cat ? '#1a3326' : '#fff',
-                color: activeCategory === cat ? '#fff' : '#1a3326',
-                border: 'none',
-                padding: '0.8rem 2rem',
-                borderRadius: '30px',
-                cursor: 'pointer',
-                fontFamily: '"Montserrat", sans-serif',
-                fontWeight: 600,
-                transition: 'all 0.2s',
-                boxShadow: activeCategory === cat ? '0 4px 12px rgba(26,51,38,0.2)' : '0 2px 4px rgba(0,0,0,0.05)'
-              }}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-        
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))', gap: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-          {[
-            { cat: 'Signature Bowls', name: 'Harvest Chicken Bowl', price: '$11.99', desc: 'Roasted chicken, sweet potatoes, wild rice, kale, balsamic vinaigrette.', img: 'photo-1546069901-ba9599a7e63c' },
-            { cat: 'Signature Bowls', name: 'Spicy Tofu Crunch', price: '$10.99', desc: 'Crispy tofu, quinoa, edamame, carrots, spicy peanut dressing.', img: 'photo-1512621776951-a57141f2eefd' },
-            { cat: 'Signature Bowls', name: 'Mediterranean Grain', price: '$11.49', desc: 'Falafel, brown rice, hummus, cucumber, feta, lemon tahini.', img: 'photo-1504674900247-0877df9cc836' },
-            { cat: 'Build Your Own', name: 'Base & Greens', price: 'from $8.99', desc: 'Choose 2 bases (Quinoa, Rice, Kale, Spinach).', img: 'photo-1490645935967-10de6ba17061' },
-            { cat: 'Build Your Own', name: 'Add Protein', price: '+$3.00', desc: 'Chicken, Tofu, Steak, or Salmon.', img: 'photo-1555939594-58d7cb561ad1' },
-            { cat: 'Drinks & Sides', name: 'Green Glow Smoothie', price: '$6.99', desc: 'Spinach, apple, ginger, lemon, cucumber.', img: 'photo-1504674900247-0877df9cc836' },
-            { cat: 'Drinks & Sides', name: 'Berry Antioxidant', price: '$6.99', desc: 'Mixed berries, banana, almond milk, chia.', img: 'photo-1504674900247-0877df9cc836' },
-          ].filter(item => item.cat === activeCategory).map((item, i) => (
-            <div key={i} style={{ display: 'flex', backgroundColor: '#fff', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' }}>
-              <img src={img(item.img, 400)} alt={item.name} style={{ width: '140px', objectFit: 'cover' }} />
-              <div style={{ padding: '1.5rem', flex: 1 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                  <h4 style={{ ...headingStyle, margin: 0, fontSize: '1.2rem' }}>{item.name}</h4>
-                  <span style={{ fontWeight: 700, color: '#00a35c' }}>{item.price}</span>
-                </div>
-                <p style={{ margin: 0, fontSize: '0.95rem', color: '#666', lineHeight: 1.5 }}>{item.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Story */}
-      <section id="story" className="ff-section" style={{ backgroundColor: '#ffffff', color: '#1a3326' }}>
-        <div className="ff-story">
-          <div>
-            <h2 className="ff-title" style={{ ...headingStyle, fontSize: '3rem', color: '#00a35c' }}>Real Food. Real Fast.</h2>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '1.5rem', color: '#444' }}>
-              We believe that fast food doesn't have to mean junk food. We source our produce locally, prepare everything in-house daily, and build your bowl right in front of you.
-            </p>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '2rem', color: '#444' }}>
-              Good food is fuel. Let us power your day with ingredients you can feel good about.
-            </p>
-            <button className="ff-btn" style={{ backgroundColor: '#1a3326', color: '#fff', borderRadius: '30px' }}>Learn About Sourcing</button>
-          </div>
-          <img src={img('photo-1490645935967-10de6ba17061', 1000)} alt="Fresh ingredients" style={{ borderRadius: '20px', width: '100%', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }} />
-        </div>
-      </section>
-
-      {/* App Promo / CTA */}
-      <section className="ff-section" style={{ backgroundColor: '#00a35c', textAlign: 'center', padding: '6rem 2rem' }}>
-        <h2 className="ff-title" style={{ ...headingStyle, fontSize: '3.5rem', color: '#fff' }}>Fuel Up On The Go.</h2>
-        <p style={{ fontSize: '1.25rem', color: '#e0ece5', fontWeight: 500, marginBottom: '2.5rem' }}>Download our app to order ahead, customize your bowl, and earn rewards.</p>
-        <button className="ff-btn" style={{ backgroundColor: '#ffb800', color: '#1a3326', borderRadius: '30px', padding: '1rem 3rem', fontSize: '1.2rem' }}>Get The App</button>
-      </section>
-
-      {/* Footer */}
-      <footer className="ff-footer" style={{ backgroundColor: '#1a3326', color: '#a3b8ad' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '3rem', marginBottom: '3rem' }}>
-          <div>
-            <h3 style={{ ...headingStyle, color: '#fff', fontSize: '1.5rem', marginBottom: '1.5rem' }}>QuickBowl</h3>
-            <p style={{ margin: '0.5rem 0' }}>900 Green Way</p>
-            <p style={{ margin: '0.5rem 0' }}>Fresh City, CA 90210</p>
-            <p style={{ margin: '0.5rem 0', color: '#00a35c', fontWeight: 'bold' }}>(555) 555-5555</p>
-          </div>
-          <div>
-            <h4 style={{ color: '#fff', fontWeight: 700, marginBottom: '1.5rem', textTransform: 'uppercase' }}>Hours</h4>
-            <p style={{ margin: '0.5rem 0' }}>Mon-Fri: 10:30am - 9:00pm</p>
-            <p style={{ margin: '0.5rem 0' }}>Sat-Sun: 11:00am - 8:00pm</p>
-          </div>
-          <div>
-            <h4 style={{ color: '#fff', fontWeight: 700, marginBottom: '1.5rem', textTransform: 'uppercase' }}>Links</h4>
-            <p style={{ margin: '0.5rem 0' }}><a href="#" style={{ color: '#a3b8ad', textDecoration: 'none' }}>Order Now</a></p>
-            <p style={{ margin: '0.5rem 0' }}><a href="#" style={{ color: '#a3b8ad', textDecoration: 'none' }}>Nutrition Info</a></p>
-            <p style={{ margin: '0.5rem 0' }}><a href="#" style={{ color: '#a3b8ad', textDecoration: 'none' }}>Privacy Policy</a></p>
-          </div>
-        </div>
-        <div style={{ borderTop: '1px solid #2a4c3a', paddingTop: '2rem', textAlign: 'center', fontSize: '0.9rem' }}>
-          &copy; {new Date().getFullYear()} QuickBowl. All rights reserved.
-        </div>
-      </footer>
-    </div>
-  );
+export const quickBowlConfig: StorefrontThemeConfig = {
+  id: 'quick-bowl',
+  kind: 'fast-food',
+  currencySymbol: '₹',
+  layoutOptions: {
+    heroLayout: 'minimal-editorial',
+    productLayout: 'compact-rows',
+    storyLayout: 'split-left',
+    featuresLayout: 'pills-row',
+    galleryLayout: 'grid-3x2',
+    sectionOrder: ['hero', 'features', 'products', 'story', 'craft', 'gallery', 'promo', 'reviews', 'location', 'newsletter'],
+  },
+  name: 'Quick Bowl',
+  tagline: 'Fresh grilled protein bowls, wholesome family dinner bundles, crisp greens, and cold-pressed juices',
+  brandSub: 'Fresh Fast Casual & Family Bowls · Fast Wholesome Food',
+  palette: {
+    primary: '#16a34a',
+    primaryHover: '#15803d',
+    secondary: '#1e293b',
+    background: '#f8fafc',
+    surface: '#ffffff',
+    text: '#0f172a',
+    textMuted: '#64748b',
+    border: 'rgba(22, 163, 74, 0.2)',
+    badgeBg: '#f0fdf4',
+    badgeText: '#15803d',
+    heroOverlay: 'linear-gradient(to right, rgba(15, 23, 42, 0.92) 0%, rgba(15, 23, 42, 0.65) 55%, rgba(15, 23, 42, 0.2) 100%)',
+  },
+  typography: {
+    headingFont: '"Outfit", "Plus Jakarta Sans", sans-serif',
+    bodyFont: '"Inter", sans-serif',
+  },
+  hero: {
+    headline: 'Real Food, Real Fast. Wholesome Bowls & Family Meal Deals.',
+    subheadline:
+      'Warm ancient grains, fire-grilled marinated proteins, farmers market crisp greens, and scratch-made dressings prepared right before your eyes. Clean fast food designed for the whole family, served in minutes.',
+    badge: 'FARM FRESH INGREDIENTS · SCRATCH DRESSINGS DAILY',
+    image: img('photo-1546069901-ba9599a7e63c'),
+    imageAlt: 'Vibrant wholesome warm grain bowl with grilled chicken, avocado, broccoli, and sesame seeds',
+    primaryCtaText: 'Order Fresh Bowls',
+    primaryCtaPage: 'menu',
+    secondaryCtaText: 'Family Meal Bundles',
+    secondaryCtaPage: 'about',
+  },
+  announcement: {
+    text: 'Family Feast Boxes Live! Feed 4 with Build-Your-Own Bowl Bars & Kids Meals · Free Curbside Drop Over $40',
+    badgeText: 'FAMILY SPECIAL',
+    linkText: 'Order Family Box',
+    linkPage: 'menu',
+  },
+  proofBadges: [
+    { icon: '🥗', title: 'Farm Fresh Produce', subtitle: 'Delivered crisp daily from certified local cooperative farms' },
+    { icon: '🔥', title: 'Fire-Grilled Proteins', subtitle: 'Never fried or frozen: chicken, wild salmon, flank steak, and organic tofu' },
+    { icon: '👨‍👩‍👧‍👦', title: 'Family Meal Bundles', subtitle: 'Generous sharing boxes designed for parents, kids, and gatherings' },
+    { icon: '⚡', title: '5-Minute Assembly', subtitle: 'Assembled hot down the line and packaged in 100% compostable bowls' },
+  ],
+  categories: ['Signature Protein Bowls', 'Family & Group Bundles', 'Kids & Mini Meals', 'Fresh Sides & Greens', 'Cold-Pressed Sips'],
+  collections: [
+    {
+      id: 'protein-bowls',
+      name: 'Signature Protein Bowls',
+      tagline: 'Warm grain bases with fire-grilled chicken, steak, salmon, or crispy tofu.',
+      image: img('photo-1546069901-ba9599a7e63c'),
+      itemCount: 7,
+      filterCategory: 'Signature Protein Bowls',
+    },
+    {
+      id: 'family-boxes',
+      name: 'Family Feasts & Bundles',
+      tagline: 'Complete 4-person sharing dinners, taco bowl bars, and group catering packs.',
+      image: img('photo-1555939594-58d7cb561ad1'),
+      itemCount: 4,
+      filterCategory: 'Family & Group Bundles',
+    },
+    {
+      id: 'kids-meals',
+      name: 'Kids Mini Protein Meals',
+      tagline: 'Wholesome balanced portions for children with fruit slices and 100% juice.',
+      image: img('photo-1562967914-608f82629710'),
+      itemCount: 4,
+      filterCategory: 'Kids & Mini Meals',
+    },
+    {
+      id: 'cold-pressed-drinks',
+      name: 'Cold-Pressed & Scratch Sips',
+      tagline: 'Fresh mint lemonades, hibiscus berry coolers, and organic green teas.',
+      image: img('photo-1513558161293-cdaf765ed2fd'),
+      itemCount: 5,
+      filterCategory: 'Cold-Pressed Sips',
+    },
+  ],
+  products: [
+    {
+      id: 'qb-teriyaki-chicken',
+      slug: 'signature-teriyaki-chicken-bowl',
+      name: 'Signature Teriyaki Glazed Chicken Bowl',
+      price: 12.50,
+      compareAtPrice: 13.95,
+      description: 'Fire-grilled chicken thighs glazed in small-batch house ginger teriyaki, warm jasmine rice, steamed broccoli florets, sweet edamame, pickled carrots, and toasted sesame seeds.',
+      category: 'Signature Protein Bowls',
+      image: img('photo-1553163147-622ab57be1c7'),
+      tags: ['Chef Signature', 'Bestseller'],
+      allergens: ['Contains Soy', 'Contains Sesame'],
+      weightOrSize: 'Large 24oz Bowl (~480g)',
+      available: true,
+      featured: true,
+      options: [
+        { name: 'Base Grain', values: ['Warm Jasmine Rice', 'Cilantro Brown Rice', 'Organic Quinoa Blend (+ $1.00)', 'Cauliflower Rice (+ $1.50)'] },
+        { name: 'Protein Portion', values: ['Regular Chicken', 'Double Chicken (+ $3.50)'] },
+        { name: 'Extra Veggie', values: ['Standard Veggies', 'Add Haas Avocado (+ $1.75)'] },
+      ],
+    },
+    {
+      id: 'qb-chipotle-steak',
+      slug: 'chipotle-flank-steak-fiesta-bowl',
+      name: 'Chipotle Flank Steak Fiesta Bowl',
+      price: 14.50,
+      compareAtPrice: 16.00,
+      description: 'Marinated fire-seared flank steak, cilantro lime brown rice, simmered black beans, roasted sweet corn salsa, cotija cheese, fresh cilantro, and creamy chipotle lime drizzle.',
+      category: 'Signature Protein Bowls',
+      image: img('photo-1544025162-d76694265947'),
+      tags: ['Steak Protein', 'Gluten-Free'],
+      allergens: ['Contains Dairy'],
+      weightOrSize: 'Large 24oz Bowl (~510g)',
+      available: true,
+      featured: true,
+      options: [
+        { name: 'Heat Level', values: ['Medium Chipotle Crema', 'Mild Avocado Crema', 'Fiery Habanero Salsa'] },
+      ],
+    },
+    {
+      id: 'qb-salmon-grain',
+      slug: 'lemon-herb-roasted-salmon-bowl',
+      name: 'Lemon Herb Wild Salmon Grain Bowl',
+      price: 15.95,
+      description: 'Pan-seared wild salmon fillet seasoned with fresh dill and lemon zest, tri-color organic quinoa, roasted sweet potatoes, baby spinach, Persian cucumbers, and lemon tahini dressing.',
+      category: 'Signature Protein Bowls',
+      image: img('photo-1519708227418-c8fd9a32b7a2'),
+      tags: ['Omega-3', 'High Protein'],
+      allergens: ['Contains Fish', 'Contains Sesame'],
+      weightOrSize: 'Large 24oz Bowl (~490g)',
+      available: true,
+      featured: true,
+    },
+    {
+      id: 'qb-hot-honey-chicken',
+      slug: 'hot-honey-crispy-chicken-protein-bowl',
+      name: 'Crispy Hot Honey Chicken Protein Bowl',
+      price: 13.25,
+      description: 'Hand-breaded buttermilk chicken tenders tossed in wildflower hot honey, ancient grains, shaved purple cabbage, pickled cucumbers, and house buttermilk herb ranch.',
+      category: 'Signature Protein Bowls',
+      image: img('photo-1562967914-608f82629710'),
+      tags: ['Crunchy', 'Staff Pick'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: 'Large 24oz Bowl',
+      available: true,
+    },
+    {
+      id: 'qb-chicken-shawarma',
+      slug: 'mediterranean-chicken-shawarma-bowl',
+      name: 'Mediterranean Chicken Shawarma Bowl',
+      price: 12.95,
+      description: 'Spiced chicken thighs roasted with coriander and turmeric, golden saffron rice, diced tomato-cucumber salad, garlic hummus, pickled turnips, and creamy toum sauce.',
+      category: 'Signature Protein Bowls',
+      image: img('photo-1511690656952-34342bb7c2f2'),
+      tags: ['Mediterranean', 'Flavor Packed'],
+      allergens: ['Contains Sesame'],
+      weightOrSize: 'Large 24oz Bowl',
+      available: true,
+    },
+    {
+      id: 'qb-tofu-power',
+      slug: 'crispy-sesame-tofu-power-bowl',
+      name: 'Crispy Sesame Tofu Power Bowl (Vegan)',
+      price: 11.50,
+      description: 'Pan-crisped organic non-GMO tofu glazed in sweet soy garlic, steamed broccoli, edamame, shredded purple cabbage, avocado slices, and toasted sesame ginger dressing on warm brown rice.',
+      category: 'Signature Protein Bowls',
+      image: img('photo-1546069901-ba9599a7e63c'),
+      tags: ['Vegan', 'Plant Powered'],
+      allergens: ['Contains Soy', 'Contains Sesame'],
+      weightOrSize: 'Large 24oz Bowl',
+      available: true,
+    },
+    {
+      id: 'qb-shrimp-chimichurri',
+      slug: 'chimichurri-tiger-shrimp-fiesta-bowl',
+      name: 'Chimichurri Grilled Shrimp Fiesta Bowl',
+      price: 14.95,
+      description: 'Jumbo tiger shrimp flame-grilled with fresh herb chimichurri, yellow cilantro rice, sweet roasted peppers, black beans, charred corn, and avocado crema.',
+      category: 'Signature Protein Bowls',
+      image: img('photo-1535400255456-984241443b29'),
+      tags: ['Seafood', 'Gluten-Free'],
+      allergens: ['Contains Shellfish'],
+      weightOrSize: 'Large 24oz Bowl',
+      available: true,
+    },
+    {
+      id: 'qb-family-4person-box',
+      slug: 'family-4-person-sharing-dinner-box',
+      name: '4-Person Family Sharing Dinner Box',
+      price: 48.00,
+      compareAtPrice: 56.00,
+      description: 'A complete build-your-own bowl bar for the whole family: includes two large warm grain bases (jasmine & brown rice), two proteins of choice (grilled chicken & flank steak), roasted veggies, black beans, chips & guac, and four house dressings.',
+      category: 'Family & Group Bundles',
+      image: img('photo-1555939594-58d7cb561ad1'),
+      tags: ['Family Value', 'Feeds 4-5'],
+      weightOrSize: 'Feeds 4-5 Guests',
+      available: true,
+      featured: true,
+      options: [
+        { name: 'Protein 1', values: ['Grilled Teriyaki Chicken', 'Chipotle Flank Steak', 'Crispy Tofu'] },
+        { name: 'Protein 2', values: ['Grilled Teriyaki Chicken', 'Chipotle Flank Steak', 'Crispy Tofu'] },
+      ],
+    },
+    {
+      id: 'qb-kids-teriyaki-mini',
+      slug: 'kids-mini-teriyaki-chicken-bowl',
+      name: 'Kid\'s Mini Teriyaki Chicken Bowl',
+      price: 6.95,
+      description: 'Kid-sized portion of grilled teriyaki chicken over fluffy white jasmine rice with steamed sweet broccoli florets, crisp organic apple slices, and an organic 100% juice box.',
+      category: 'Kids & Mini Meals',
+      image: img('photo-1540189549336-e6e99c3679fe'),
+      tags: ['Kids Meal', 'Healthy Choice'],
+      allergens: ['Contains Soy'],
+      weightOrSize: 'Kids Bento Box',
+      available: true,
+    },
+    {
+      id: 'qb-kids-tenders',
+      slug: 'kids-crispy-chicken-tenders-meal',
+      name: 'Kid\'s Crispy Tenders & Sweet Potato Fries',
+      price: 7.25,
+      description: 'Three hand-breaded chicken tenders with baked sweet potato fries, honey mustard dipping cup, fresh fruit slices, and a 100% juice box.',
+      category: 'Kids & Mini Meals',
+      image: img('photo-1562967914-608f82629710'),
+      tags: ['Kids Favorite'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: 'Kids Bento Box',
+      available: true,
+    },
+    {
+      id: 'qb-guac-wonton-chips',
+      slug: 'fresh-guacamole-crispy-wonton-chips',
+      name: 'Fresh Guacamole & Crispy Wonton Chips',
+      price: 5.95,
+      description: 'Fresh Haas avocados mashed with lime juice, sea salt, diced jalapeño, and cilantro. Served with a bag of golden house-fried wonton dipping chips.',
+      category: 'Fresh Sides & Greens',
+      image: img('photo-1541544741938-0af808871cc0'),
+      tags: ['Fresh Dip', 'Vegetarian'],
+      weightOrSize: 'Shareable (220g)',
+      available: true,
+      featured: true,
+    },
+    {
+      id: 'qb-edamame',
+      slug: 'warm-sea-salt-edamame-pods',
+      name: 'Warm Sea Salt Edamame Pods',
+      price: 4.50,
+      description: 'Fresh steamed whole young soybean pods tossed in coarse flaky Maldon sea salt and a touch of roasted sesame oil.',
+      category: 'Fresh Sides & Greens',
+      image: img('photo-1540420773420-3366772f4999'),
+      tags: ['Vegan', 'High Protein'],
+      allergens: ['Contains Soy'],
+      weightOrSize: '200g Box',
+      available: true,
+    },
+    {
+      id: 'qb-sweet-potato-wedges',
+      slug: 'roasted-sweet-potato-wedges-tahini',
+      name: 'Roasted Sweet Potato Wedges & Tahini',
+      price: 5.25,
+      description: 'Thick cut garnet sweet potatoes roasted with olive oil and rosemary until caramelized. Served with creamy lemon garlic tahini dip.',
+      category: 'Fresh Sides & Greens',
+      image: img('photo-1585109649139-366815a0d713'),
+      tags: ['Vegan', 'Gluten-Free'],
+      allergens: ['Contains Sesame'],
+      weightOrSize: '240g Basket',
+      available: true,
+    },
+    {
+      id: 'qb-brussels-sprouts',
+      slug: 'crispy-roasted-brussels-sprouts',
+      name: 'Crispy Roasted Brussels Sprouts',
+      price: 5.75,
+      description: 'Halved Brussels sprouts roasted at high heat until crispy and charred on the leaves, tossed in sweet hot honey and toasted pumpkin seeds.',
+      category: 'Fresh Sides & Greens',
+      image: img('photo-1540420773420-3366772f4999'),
+      tags: ['Vegetarian', 'Crunchy Veg'],
+      weightOrSize: '200g Cup',
+      available: true,
+    },
+    {
+      id: 'qb-mint-lemonade',
+      slug: 'house-fresh-mint-lemonade',
+      name: 'House Fresh Mint Lemonade (20oz)',
+      price: 4.25,
+      description: 'Freshly squeezed California lemons, muddled garden spearmint leaves, pure organic cane sugar, and chilled filtered spring water.',
+      category: 'Cold-Pressed Sips',
+      image: img('photo-1513558161293-cdaf765ed2fd'),
+      tags: ['House Drink', 'Refreshing'],
+      weightOrSize: '20oz Cup',
+      available: true,
+      featured: true,
+    },
+    {
+      id: 'qb-hibiscus-cooler',
+      slug: 'sparkling-hibiscus-berry-cooler',
+      name: 'Sparkling Hibiscus Berry Cooler',
+      price: 4.50,
+      description: 'Cold-steeped wild hibiscus flowers, blackberries, fresh lime juice, and a splash of sparkling bubbly water. Zero artificial sugars.',
+      category: 'Cold-Pressed Sips',
+      image: img('photo-1536935338788-846bb9981813'),
+      tags: ['Sparkling', 'Antioxidant'],
+      weightOrSize: '20oz Cup',
+      available: true,
+    },
+    {
+      id: 'qb-orange-turmeric-juice',
+      slug: 'cold-pressed-orange-turmeric-juice',
+      name: 'Cold-Pressed Orange & Turmeric Juice',
+      price: 5.95,
+      description: '100% raw cold-pressed Valencia oranges, organic turmeric root, ginger, and a dash of black pepper. Unpasteurized and packed with vitamin C.',
+      category: 'Cold-Pressed Sips',
+      image: img('photo-1622483767028-3f66f32aef97'),
+      tags: ['Cold-Pressed', 'Immunity'],
+      weightOrSize: '12oz Bottle',
+      available: true,
+    },
+    {
+      id: 'qb-dark-choc-cookie',
+      slug: 'warm-dark-chocolate-chip-cookie',
+      name: 'Warm Dark Chocolate Chip Cookie',
+      price: 3.25,
+      description: 'Baked fresh every two hours: brown butter dough loaded with 70% dark Belgian chocolate chunks and finished with flaky Maldon sea salt.',
+      category: 'Fresh Sides & Greens',
+      image: img('photo-1499636136210-6f4ee915583e'),
+      tags: ['Fresh Baked', 'Sweet Finish'],
+      allergens: ['Contains Gluten', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: 'Single Large Cookie (110g)',
+      available: true,
+      featured: true,
+    },
+    {
+      id: 'qb-teriyaki-sauce-cup',
+      slug: 'extra-house-teriyaki-glaze-cup',
+      name: 'Extra House Teriyaki Glaze (2oz)',
+      price: 0.95,
+      description: 'Simmered tamari, fresh ginger root, garlic, and raw cane sugar reduction.',
+      category: 'Fresh Sides & Greens',
+      image: img('photo-1472476443507-c7a5948772fc'),
+      tags: ['Sauce Dip'],
+      weightOrSize: '2oz Cup',
+      available: true,
+    },
+    {
+      id: 'qb-avocado-mash',
+      slug: 'extra-fresh-avocado-mash-cup',
+      name: 'Fresh Avocado Mash Cup (3oz)',
+      price: 1.75,
+      description: 'One whole ripe Haas avocado mashed with lime juice and sea salt.',
+      category: 'Fresh Sides & Greens',
+      image: img('photo-1541544741938-0af808871cc0'),
+      tags: ['Avocado Side'],
+      weightOrSize: '3oz Cup',
+      available: true,
+    },
+  ],
+  craftProcess: {
+    badge: 'FRESH BOWL LINE',
+    title: 'The Farm-to-Bowl Speed Assembly',
+    subtitle: 'From local morning deliveries to customized steaming hot bowls in under 4 minutes.',
+    steps: [
+      { time: 'MORNING 7 AM', title: 'Local Harvest Prep', desc: 'Over 300 lbs of fresh vegetables, herbs, and greens washed, chopped, and prepped from cooperative farms.' },
+      { time: 'HOURLY', title: 'Ancient Grains & Sauces', desc: 'Jasmine rice, cilantro brown rice, and organic quinoa steamed fresh in small batches every hour.' },
+      { time: 'TO ORDER', title: 'Flame-Grill Searing', desc: 'Chicken, salmon, and flank steak seared over open flames to order with fresh house marinades.' },
+      { time: 'AT COUNTER', title: 'Dress & Compostable Pack', desc: 'Layered with fresh toppings, drizzled with scratch dressings, and packed in 100% plant fiber bowls.' },
+    ],
+  },
+  story: {
+    badge: 'CLEAN FAST FOOD',
+    title: 'Real Whole Foods. Zero Seed Oils. Fast Food Without The Food Coma.',
+    paragraphs: [
+      'We believe fast food should energize you, not weigh you down. Every morning, our prep cooks chop hundreds of pounds of crisp produce, simmer our teriyaki reductions from whole ginger and tamari, and fire-grill marinated proteins over high heat.',
+      'No deep-fryers, no synthetic additives, and no mystery meats—just real food that feels good to feed your family.',
+    ],
+    image: img('photo-1490645935967-10de6ba17061'),
+    imageAlt: 'Chef arranging fresh vibrant ingredients, vegetables, avocados, and proteins for bowl assembly',
+    founderQuote: 'Eating fast food on a busy evening shouldn’t mean compromising your family’s health.',
+    founderName: 'Maya Lin, Clinical Nutritionist & Founder',
+    stats: [
+      { value: '350 Lbs', label: 'Fresh Veggies Daily' },
+      { value: '< 4 Min', label: 'Assembly Line Speed' },
+      { value: '100%', label: 'Compostable Packaging' },
+      { value: '14 Farms', label: 'Local Farm Partners' },
+    ],
+  },
+  promo: {
+    badge: 'FAMILY DEAL',
+    title: 'The 4-Person Family Sharing Dinner Box',
+    desc: 'Build-your-own bowl bar for the whole family: 2 large warm grain bases, 2 proteins, roasted veggies, chips & guac for $48.',
+    ctaText: 'Order Family Box',
+    ctaPage: 'menu',
+    image: img('photo-1555939594-58d7cb561ad1'),
+    imageAlt: 'Family meal table spread with grain bowls and sides',
+  },
+  gallery: [
+    { src: img('photo-1553163147-622ab57be1c7'), alt: 'Fresh teriyaki chicken bowl with sesame seeds', caption: 'Signature Teriyaki Glazed Chicken Bowl', tag: 'Bowls' },
+    { src: img('photo-1490645935967-10de6ba17061'), alt: 'Fresh market produce and vegetables', caption: 'Fresh morning farm prep on our kitchen counter', tag: 'Fresh' },
+    { src: img('photo-1512621776951-a57141f2eefd'), alt: 'Colorful crispy tofu grain bowl', caption: 'Crispy Sesame Organic Tofu Power Bowl', tag: 'Vegan' },
+    { src: img('photo-1519708227418-c8fd9a32b7a2'), alt: 'Roasted wild salmon grain bowl', caption: 'Lemon Herb Wild Salmon & Quinoa Bowl', tag: 'Seafood' },
+    { src: img('photo-1540420773420-3366772f4999'), alt: 'Steamed green edamame pods', caption: 'Warm Sea Salt Steamed Edamame Pods', tag: 'Sides' },
+    { src: img('photo-1555396273-367ea4eb4db5'), alt: 'Clean bright fast-casual restaurant interior', caption: 'Civic Commons flagship dining room', tag: 'Store' },
+  ],
+  testimonials: [
+    {
+      name: 'Rebecca Thorne',
+      rating: 5,
+      quote: 'The 4-Person Family Sharing Box has completely revolutionized our busy weeknight dinners. Both kids love building their own bowls and the food is actually nutritious.',
+      source: 'Mother & Architect',
+      date: 'October 2026',
+    },
+    {
+      name: 'Kenji Sato',
+      rating: 5,
+      quote: 'The Flank Steak Fiesta Bowl is tender, perfectly seared, and the roasted corn salsa has so much flavor. Fast food speed with fast-casual quality.',
+      source: 'Fitness Coach',
+      date: 'September 2026',
+    },
+    {
+      name: 'Dana Walsh',
+      rating: 5,
+      quote: 'Finally a place where I can get a salmon grain bowl that doesn’t taste dry or bland, while my husband gets a spicy chicken bowl and both are ready in 5 minutes.',
+      source: 'Verified Local Diner',
+      date: 'August 2026',
+    },
+  ],
+  location: {
+    address: '210 Grove Street, Civic Commons, San Francisco, CA 94102',
+    neighborhood: 'Civic Center Arts District',
+    hoursWeekdays: '10:30 AM – 9:30 PM',
+    hoursWeekends: '11:00 AM – 9:00 PM',
+    phone: '(415) 621-4400',
+    email: 'civic@quickbowl.com',
+    pickupNotice: 'Rapid express pickup shelf in lobby. Most bowls ready in under 4 minutes.',
+  },
+  customInquiry: {
+    title: 'Family Gathering & Office Bowl Bar Catering',
+    subtitle: 'Build-your-own grain bowl bars, individually packaged meals, and sharing feasts for 15 to 250 guests.',
+    occasions: ['Office Team Lunch', 'Family Reunion Dinner', 'Youth Sports Banquet', 'School & Faculty Lunch', 'Community Health Gathering'],
+    sizes: [
+      { label: 'Mini Bowl Bar (12 Bowls)', serves: '6-8 Guests', basePrice: 80 },
+      { label: 'Family & Team Spread (25 Bowls)', serves: '12-15 Guests', basePrice: 165 },
+      { label: 'Full Gathering Station (50 Bowls)', serves: '25-30 Guests', basePrice: 320 },
+      { label: 'Corporate Wellness Feast (100+ Bowls)', serves: '50-60 Guests', basePrice: 620 },
+    ],
+    flavors: ['Fire-Grilled Teriyaki Chicken', 'Chipotle Marinated Flank Steak', 'Lemon Herb Wild Salmon', 'Crispy Sesame Organic Tofu'],
+    fillings: ['House Ginger Teriyaki Reduction', 'Chipotle Lime Crema', 'Lemon Garlic Herb Tahini', 'Avocado Salsa Verde'],
+    finishes: ['Fresh Guacamole & Wonton Chips', 'Roasted Sweet Potato Wedges', 'Warm Sea Salt Edamame', 'House Mint Lemonade & Cold-Pressed Juices'],
+  },
+  faqs: [
+    {
+      question: 'How customizable are the bowls?',
+      answer: 'Every bowl can be fully customized! You can swap bases between jasmine rice, brown rice, organic quinoa, or cauliflower rice, choose your protein, add double protein, and request sauces on the side.',
+      category: 'Customization & Food',
+    },
+    {
+      question: 'Are there gluten-free and vegan options available?',
+      answer: 'Yes! Most of our bowls are naturally gluten-free (look for the GF tag on the Flank Steak and Salmon bowls), and our Crispy Sesame Tofu Power Bowl is 100% plant-based and vegan.',
+      category: 'Dietary & Allergens',
+    },
+    {
+      question: 'How does the Family Sharing Box work?',
+      answer: 'The 4-Person Family Sharing Box comes with two large bases, your choice of two proteins, black beans, roasted veggies, house dressings, and wonton chips with guac, packed in insulated containers so everyone can assemble their ideal bowl at home.',
+      category: 'Family Meals',
+    },
+    {
+      question: 'Do you offer individual corporate lunch boxes?',
+      answer: 'Yes! Through our Party & Catering tab, you can order individually labeled boxed bowls for corporate meetings with custom guest names and dietary tags.',
+      category: 'Catering & Events',
+    },
+  ],
 };
 
-export default QuickBowl;
+export default function QuickBowl() {
+  return <FoodStorefrontCore theme={quickBowlConfig} />;
+}

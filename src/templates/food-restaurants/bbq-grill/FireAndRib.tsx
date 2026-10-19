@@ -1,213 +1,569 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowLeft, MapPin, Clock, Phone, Flame, ChevronRight, Star, Beer } from 'lucide-react';
-import { useReveal } from '../components/RestaurantCore';
+import React from 'react';
+import { FoodStorefrontCore, type StorefrontThemeConfig } from '../shared/FoodStorefrontCore';
 
-const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
+const img = (id: string, w = 1200) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
 
-const IMAGES = {
-  hero: img('photo-1504674900247-0877df9cc836'),
-  story: img('photo-1555939594-58d7cb561ad1'),
-  ribs: img('photo-1504674900247-0877df9cc836'),
-  brisket: img('photo-1504674900247-0877df9cc836'),
-  chicken: img('photo-1504674900247-0877df9cc836'),
-  pork: img('photo-1504674900247-0877df9cc836'),
-  sausage: img('photo-1504674900247-0877df9cc836'),
-  pit: img('photo-1555939594-58d7cb561ad1')
+export const fireAndRibConfig: StorefrontThemeConfig = {
+  id: 'fire-and-rib',
+  kind: 'bbq-grill',
+  currencySymbol: '₹',
+  layoutOptions: {
+    heroLayout: 'centered',
+    productLayout: 'editorial-2',
+    featuresLayout: 'pills-row',
+    storyLayout: 'card-overlay',
+    galleryLayout: 'editorial-collage',
+    sectionOrder: ['hero', 'features', 'products', 'craft', 'story', 'gallery', 'promo', 'reviews', 'location', 'newsletter'],
+  },
+  name: 'Fire & Rib',
+  tagline: 'Rustic Wood-Fired Barbecue, Fall-Off-The-Bone Ribs & Campfire Feasts',
+  brandSub: 'Live Hearth Cooking · Seasoned Applewood Smoke · Hand-Crafted Mops',
+  palette: {
+    primary: '#c2410c',
+    primaryHover: '#9a3412',
+    secondary: '#1c1917',
+    background: '#141210',
+    surface: '#1c1917',
+    text: '#fafaf9',
+    textMuted: '#a8a29e',
+    border: '#292524',
+    badgeBg: '#292524',
+    badgeText: '#ea580c',
+    heroOverlay: 'linear-gradient(135deg, rgba(28,25,23,0.92) 0%, rgba(194,65,12,0.32) 100%)',
+  },
+  typography: {
+    headingFont: '"Playfair Display", "Georgia", serif',
+    bodyFont: '"Inter", sans-serif',
+    accentFont: '"Playfair Display", serif',
+  },
+  hero: {
+    headline: 'Born of Embers. Glazed in Bourbon. Ribs that Melt Straight Off the Bone.',
+    subheadline:
+      'We slow-smoke our ribs over aromatic sweet applewood and seasoned hickory logs, basting each rack with caramelized brown sugar and apple cider mop sauce until the meat yields to the gentlest touch.',
+    badge: '🪵 WOOD-FIRED HEARTH & APPLEWOOD SMOKE · SLOW COOKED DAILY',
+    image: img('photo-1529193591184-b1d58069ecdd'),
+    imageAlt: 'Rustic wood-fired baby back ribs on cutting board with fresh rosemary sprigs',
+    primaryCtaText: 'View Ribs & Grill Menu',
+    primaryCtaPage: 'menu',
+    secondaryCtaText: 'Reserve Hearth Table',
+    secondaryCtaPage: 'contact',
+  },
+  announcement: {
+    text: '🍖 Fall-Off-Bone Rib Festivals Every Weekend · Live Wood Hearth Dining · Complimentary Skillet Cornbread with Sharing Platters',
+    badgeText: 'HEARTH SPECIAL',
+    linkText: 'Reserve Table',
+    linkPage: 'contact',
+  },
+  proofBadges: [
+    { icon: '🪵', title: 'Sweet Applewood Logs', subtitle: 'Aromatic fruitwood smoke imparts a mild, sweet reddish mahogany crust' },
+    { icon: '🍯', title: 'Brown Sugar Cider Mop', subtitle: 'Basted every 45 minutes on the grate with raw honey and spiced cider vinegar' },
+    { icon: '🔥', title: 'Open-Hearth Brick Pit', subtitle: 'Cast iron grates suspended above glowing hardwood lump coals' },
+    { icon: '🦴', title: 'Fall-Off-The-Bone Chew', subtitle: 'Tender enough to pull clean off the bone while maintaining juicy bite' },
+  ],
+  categories: [
+    'Wood-Fired Signature Ribs',
+    'Fire-Roasted Chicken & Pork',
+    'Oak-Smoked Beef & Steaks',
+    'Campfire Sharing Platters',
+    'Vegetarian Woodfire Grill',
+    'Cast-Iron Skillet Sides',
+    'Hand-Bottled Mops & Sauces',
+    'Country Desserts & Ciders',
+  ],
+  collections: [
+    {
+      id: 'signature-ribs',
+      name: 'Applewood Fall-Off-Bone Ribs',
+      tagline: 'Baby back and St. Louis cuts caramelized with our dark bourbon mop.',
+      image: img('photo-1529193591184-b1d58069ecdd'),
+      itemCount: 4,
+      filterCategory: 'Wood-Fired Signature Ribs',
+    },
+    {
+      id: 'campfire-platters',
+      name: 'Campfire Sharing Feasts',
+      tagline: 'Generous rustic platters packed with ribs, chicken, sausages, and cast-iron sides.',
+      image: img('photo-1508615070457-7baeba4003ab'),
+      itemCount: 4,
+      filterCategory: 'Campfire Sharing Platters',
+    },
+    {
+      id: 'fire-chicken-steaks',
+      name: 'Hearth-Roasted Chicken & Cuts',
+      tagline: 'Free-range chicken, pork burnt ends, and open-flame charred skillet steaks.',
+      image: img('photo-1532550907401-a500c9a57435'),
+      itemCount: 4,
+      filterCategory: 'Fire-Roasted Chicken & Pork',
+    },
+    {
+      id: 'skillet-country-sides',
+      name: 'Cast-Iron Skillet Country Sides',
+      tagline: 'Three-cheese skillet mac, blistered shishitos, and warm sweet cornbread.',
+      image: img('photo-1541592106381-b31e9677c0e5'),
+      itemCount: 4,
+      filterCategory: 'Cast-Iron Skillet Sides',
+    },
+  ],
+  products: [
+    // ── 1. Wood-Fired Signature Ribs ───────────────────────────────────────
+    {
+      id: 'fr-woodfired-baby-back-ribs',
+      slug: 'applewood-wood-fired-baby-back-ribs-full-rack',
+      name: 'Applewood Wood-Fired Baby Back Pork Ribs (Full Rack)',
+      price: 899,
+      compareAtPrice: 999,
+      description: 'Center-cut pork baby back ribs dry-rubbed with brown sugar, smoked paprika, and mustard seed. Smoked 5 hours over sweet applewood and glazed with bourbon cider mop.',
+      category: 'Wood-Fired Signature Ribs',
+      image: img('photo-1529193591184-b1d58069ecdd'),
+      imageAlt: 'Full rack of glazed wood fired pork ribs with fresh rosemary sprigs',
+      tags: ['Signature Ribs', '#1 Bestseller', 'Fall-Off-Bone'],
+      dietary: 'non-veg',
+      weightOrSize: 'Full Rack · 12 Bones · 750g',
+      calories: '1240 kcal',
+      featured: true,
+      options: [
+        { name: 'Rib Glaze', choices: [{ label: 'Bourbon Brown Sugar (Sticky Sweet)' }, { label: 'Apple Cider Vinegar Tang (Savory)' }, { label: 'Fiery Habanero Peach (+₹30)', priceDelta: 30 }] },
+      ],
+    },
+    {
+      id: 'fr-hickory-st-louis-ribs',
+      slug: 'hickory-smoked-st-louis-spare-ribs-half-rack',
+      name: 'Hickory Smoked St. Louis Spare Ribs (Half Rack)',
+      price: 549,
+      description: 'Hearty St. Louis cut spare ribs with deeper meat marbling, smoked over hickory wood until tender and brushed with honey mustard glaze.',
+      category: 'Wood-Fired Signature Ribs',
+      image: img('photo-1544025162-d76694265947'),
+      imageAlt: 'Half rack of smoked St. Louis pork ribs with dark caramelized bark',
+      tags: ['Hearty Cut'],
+      dietary: 'non-veg',
+      weightOrSize: 'Half Rack · 6 Large Bones · 400g',
+      calories: '680 kcal',
+    },
+    {
+      id: 'fr-3rib-tasting-flight',
+      slug: 'the-fire-and-rib-3-rib-tasting-flight',
+      name: 'The Fire & Rib 3-Rib Tasting Flight (9 Bones)',
+      price: 699,
+      compareAtPrice: 799,
+      description: 'Why settle for one glaze? 3 bones Bourbon Brown Sugar, 3 bones Apple Cider Tang, and 3 bones Texas Dry Rub. Served with pickled red onions and Texas toast.',
+      category: 'Wood-Fired Signature Ribs',
+      image: img('photo-1529193591184-b1d58069ecdd'),
+      imageAlt: 'Three different styles of ribs displayed side by side on wooden board',
+      tags: ['Tasting Flight', 'Taster Favorite'],
+      dietary: 'non-veg',
+      weightOrSize: '9 Bones Total · 550g',
+      calories: '920 kcal',
+      featured: true,
+    },
+
+    // ── 2. Fire-Roasted Chicken & Pork ─────────────────────────────────────
+    {
+      id: 'fr-fire-roasted-half-chicken',
+      slug: 'fire-roasted-cast-iron-half-chicken-rosemary',
+      name: 'Fire-Roasted Cast-Iron Half Chicken with Rosemary Butter',
+      price: 449,
+      description: 'Heritage free-range chicken roasted in sizzling cast iron over wood embers. Crispy skin, succulent dark meat, basted with garlic rosemary reduction.',
+      category: 'Fire-Roasted Chicken & Pork',
+      image: img('photo-1532550907401-a500c9a57435'),
+      imageAlt: 'Cast iron roasted chicken with golden brown skin and fresh herbs',
+      tags: ['Cast-Iron Roasted', 'Gluten-Free'],
+      dietary: 'non-veg',
+      weightOrSize: 'Half Chicken · 450g',
+      calories: '560 kcal',
+      featured: true,
+    },
+    {
+      id: 'fr-pork-burnt-ends',
+      slug: 'smoked-pork-belly-burnt-ends-honey-glaze',
+      name: 'Smoked Pork Belly Burnt Ends with Honey Glaze (200g)',
+      price: 499,
+      description: 'Pork belly cubes smoked 4 hours, braised in clover honey, brown sugar, and dark butter until they melt like butter on your tongue.',
+      category: 'Fire-Roasted Chicken & Pork',
+      image: img('photo-1558030006-450675393462'),
+      imageAlt: 'Tender pork belly burnt ends coated in dark glistening sauce',
+      tags: ['Meat Candy', 'Rich & Savory'],
+      dietary: 'non-veg',
+      weightOrSize: '200g Portion',
+      calories: '610 kcal',
+    },
+    {
+      id: 'fr-country-wood-sausages',
+      slug: 'wood-fired-country-coarse-sausages-2links',
+      name: 'Wood-Fired Country Pork Sausages with Mustard (2 Pcs)',
+      price: 349,
+      description: 'Coarse ground pork and herb sausages smoked over hickory, finished on open flames for a blistered snappy skin. Served with house whole grain cider mustard.',
+      category: 'Fire-Roasted Chicken & Pork',
+      image: img('photo-1529042410759-befb1204b468'),
+      imageAlt: 'Charred country sausages sliced diagonally on wooden board',
+      tags: ['House Recipe', 'Snappy Casing'],
+      dietary: 'non-veg',
+      weightOrSize: '2 Sausage Links · 260g',
+      calories: '540 kcal',
+    },
+
+    // ── 3. Oak-Smoked Beef & Steaks ────────────────────────────────────────
+    {
+      id: 'fr-16hr-oak-brisket',
+      slug: '16-hour-oak-smoked-beef-brisket-peppercorn-bark',
+      name: '16-Hour Oak-Smoked Beef Brisket (250g)',
+      price: 679,
+      compareAtPrice: 759,
+      description: 'Prime beef brisket slow-cooked overnight over aged white oak wood. Thick black peppercorn bark, lush marbling, and intense beefy smoke depth.',
+      category: 'Oak-Smoked Beef & Steaks',
+      image: img('photo-1555939594-58d7cb561ad1'),
+      imageAlt: 'Thick slices of slow cooked oak brisket with dark crust and smoke ring',
+      tags: ['16-Hour Smoke', 'Tender'],
+      dietary: 'non-veg',
+      weightOrSize: '250g Slices',
+      calories: '690 kcal',
+      featured: true,
+      options: [
+        { name: 'Cut Style', choices: [{ label: 'Moist Point Cuts' }, { label: 'Lean Flat Cuts' }, { label: 'Pitmaster Blend' }] },
+      ],
+    },
+    {
+      id: 'fr-charred-skillet-ribeye',
+      slug: 'open-flame-charred-cast-iron-skillet-ribeye',
+      name: 'Open-Flame Charred Skillet Ribeye Steak (300g)',
+      price: 1199,
+      description: 'Prime cut ribeye steak dropped into a white-hot cast iron skillet placed directly onto glowing embers. Seared with thyme, garlic cloves, and butter.',
+      category: 'Oak-Smoked Beef & Steaks',
+      image: img('photo-1558030006-450675393462'),
+      imageAlt: 'Sizzling ribeye steak in cast iron skillet with melted herb butter',
+      tags: ['Skillet Sear', 'Prime Cut'],
+      dietary: 'non-veg',
+      weightOrSize: '300g Steak',
+      calories: '740 kcal',
+      options: [
+        { name: 'Doneness', choices: [{ label: 'Medium Rare' }, { label: 'Medium' }] },
+      ],
+    },
+
+    // ── 4. Campfire Sharing Platters ───────────────────────────────────────
+    {
+      id: 'fr-campfire-sharing-feast',
+      slug: 'the-fire-and-rib-campfire-sharing-platter-serves-4',
+      name: 'The Fire & Rib Campfire Sharing Platter (Serves 4)',
+      price: 2599,
+      compareAtPrice: 2999,
+      description: 'Our ultimate communal feast board: Full Rack Applewood Baby Back Ribs, Half Fire-Roasted Chicken, 250g Oak Brisket, 2× Country Sausages, 3-Cheese Mac, Charred Corn, and Cornbread.',
+      category: 'Campfire Sharing Platters',
+      image: img('photo-1508615070457-7baeba4003ab'),
+      imageAlt: 'Massive campfire feasting board with ribs, chicken, brisket, corn, and sides',
+      tags: ['Grand Campfire Feast', 'Serves 4-5', 'Top Value'],
+      dietary: 'non-veg',
+      weightOrSize: 'Over 2.3 kg Total Feast',
+      calories: '3500 kcal total',
+      featured: true,
+      options: [
+        { name: 'Platter Size', choices: [{ label: 'Standard 4-Person Platter (₹2,599)' }, { label: 'Upgrade to 6-Person Feast (+₹850)', priceDelta: 850 }] },
+        { name: 'Rib Glaze', choices: [{ label: 'Bourbon Brown Sugar Glaze' }, { label: 'Apple Cider Vinegar Tang' }] },
+      ],
+    },
+    {
+      id: 'fr-rib-and-bird-duo',
+      slug: 'rib-and-bird-campfire-combo-plate-serves-2',
+      name: 'The Rib & Bird Campfire Combo Plate (Serves 2)',
+      price: 999,
+      description: 'Half rack of applewood pork ribs paired with a quarter fire-roasted chicken, skillet beans, and two wedges of honey butter cornbread.',
+      category: 'Campfire Sharing Platters',
+      image: img('photo-1544025162-d76694265947'),
+      imageAlt: 'Barbecue combination plate with pork ribs and roasted chicken',
+      tags: ['Perfect for Two'],
+      dietary: 'non-veg',
+      weightOrSize: 'Approx 750g Feast',
+      calories: '1380 kcal',
+    },
+
+    // ── 5. Vegetarian Woodfire Grill ───────────────────────────────────────
+    {
+      id: 'fr-smoked-paneer-tikka-platter',
+      slug: 'applewood-smoked-malai-paneer-platter-with-mint',
+      name: 'Applewood Smoked Malai Paneer Platter (6 Pcs)',
+      price: 379,
+      description: 'Large cubes of artisanal malai paneer marinated in stone-ground spices, cold-smoked with applewood, then flash-seared over glowing coals with mint chutney.',
+      category: 'Vegetarian Woodfire Grill',
+      image: img('photo-1601050690597-df0568f70950'),
+      imageAlt: 'Charred paneer skewers with grilled peppers and fresh mint dip',
+      tags: ['Vegetarian Favorite', 'Smoked Paneer'],
+      dietary: 'veg',
+      weightOrSize: '320g Platter',
+      calories: '490 kcal',
+      featured: true,
+    },
+    {
+      id: 'fr-charred-veggie-skewer-board',
+      slug: 'charred-seasonal-vegetable-skewer-board',
+      name: 'Charred Seasonal Vegetable Skewer Board with Chimichurri',
+      price: 349,
+      description: 'King oyster mushrooms, bell peppers, zucchini ribbons, red onions, and cherry tomatoes grilled over hickory fire with house chimichurri drizzle.',
+      category: 'Vegetarian Woodfire Grill',
+      image: img('photo-1540420773420-3366772f4999'),
+      imageAlt: 'Colorful grilled vegetable skewers resting on rustic wood board',
+      tags: ['Farm Fresh', 'Vegan'],
+      dietary: 'vegan',
+      weightOrSize: '300g Board',
+      calories: '210 kcal',
+    },
+
+    // ── 6. Cast-Iron Skillet Sides ─────────────────────────────────────────
+    {
+      id: 'fr-skillet-3cheese-mac',
+      slug: 'cast-iron-skillet-macaroni-with-3-smoked-cheeses',
+      name: 'Cast-Iron Skillet 3-Cheese Smoked Macaroni',
+      price: 249,
+      description: 'Trophy-winning macaroni folded into sharp cheddar, Monterey Jack, and smoked provolone cream, baked in cast iron until bubbly and golden.',
+      category: 'Cast-Iron Skillet Sides',
+      image: img('photo-1541592106381-b31e9677c0e5'),
+      imageAlt: 'Golden bubbling cast iron skillet of macaroni and cheese',
+      tags: ['Comfort Classic', 'Vegetarian'],
+      dietary: 'veg',
+      weightOrSize: '280g Skillet',
+      calories: '480 kcal',
+      featured: true,
+    },
+    {
+      id: 'fr-wood-roasted-sweet-corn',
+      slug: 'wood-roasted-sweet-corn-with-spiced-herb-butter',
+      name: 'Wood-Roasted Sweet Corn on the Cob (2 Cobs)',
+      price: 179,
+      description: 'Fresh sweet corn roasted in their natural husks on live coals, pulled back and brushed with smoked paprika, sea salt, and herb butter.',
+      category: 'Cast-Iron Skillet Sides',
+      image: img('photo-1508615070457-7baeba4003ab'),
+      imageAlt: 'Charred sweet corn cobs with butter and herbs on cutting board',
+      tags: ['Wood-Roasted', 'Vegetarian'],
+      dietary: 'veg',
+      weightOrSize: '2 Cobs · 220g',
+      calories: '210 kcal',
+    },
+    {
+      id: 'fr-fire-blistered-peppers',
+      slug: 'fire-blistered-shishito-peppers-maldon-salt',
+      name: 'Fire-Blistered Shishito Peppers with Maldon Salt',
+      price: 199,
+      description: 'Mild shishito peppers tossed in a screaming-hot iron pan until blistered and smokey, finished with flaky Maldon sea salt and fresh lemon juice.',
+      category: 'Cast-Iron Skillet Sides',
+      image: img('photo-1540420773420-3366772f4999'),
+      imageAlt: 'Blistered green peppers with coarse salt in rustic bowl',
+      tags: ['Snack Pick', 'Vegan'],
+      dietary: 'vegan',
+      weightOrSize: '160g Bowl',
+      calories: '90 kcal',
+    },
+    {
+      id: 'fr-campfire-beans',
+      slug: 'skillet-smoked-campfire-beans-with-bacon',
+      name: 'Skillet Smoked Campfire Beans with Bacon Ends',
+      price: 189,
+      description: 'Navy beans slow-cooked with dark molasses, dry mustard, diced smoked pork belly, and onion scraps in a gentle wood smoker.',
+      category: 'Cast-Iron Skillet Sides',
+      image: img('photo-1555939594-58d7cb561ad1'),
+      imageAlt: 'Iron bowl of slow cooked barbecue baked beans with bacon',
+      tags: ['Smoked Beans'],
+      dietary: 'non-veg',
+      weightOrSize: '260g Dish',
+      calories: '340 kcal',
+    },
+
+    // ── 7. Hand-Bottled Mops & Sauces ──────────────────────────────────────
+    {
+      id: 'fr-bourbon-sugar-glaze-jar',
+      slug: 'fire-and-rib-bourbon-brown-sugar-bbq-glaze-jar',
+      name: 'Bourbon & Brown Sugar BBQ Glaze (350ml Glass Jar)',
+      price: 249,
+      description: 'Our signature rib glaze made from Kentucky bourbon, dark Demerara cane sugar, tomato reduction, and smoked garlic. Incredible on pork and wings.',
+      category: 'Hand-Bottled Mops & Sauces',
+      image: img('photo-1586190848861-99aa4a171e90'),
+      imageAlt: 'Glass jar of amber brown barbecue glaze with cork lid',
+      tags: ['House Recipe', 'Vegan'],
+      dietary: 'vegan',
+      weightOrSize: '350ml Glass Jar',
+      calories: '170 kcal',
+    },
+    {
+      id: 'fr-spicy-cider-mop-jar',
+      slug: 'fire-and-rib-spicy-apple-cider-moppin-sauce-jar',
+      name: 'Spicy Apple Cider Moppin’ Sauce (350ml Glass Jar)',
+      price: 249,
+      description: 'Thin, sharp, and peppery vinegar mop sauce infused with crisp apple cider, cayenne flakes, and crushed black peppercorns.',
+      category: 'Hand-Bottled Mops & Sauces',
+      image: img('photo-1555396273-367ea4eb4db5'),
+      imageAlt: 'Bottle of tangy vinegar mop sauce with herbs',
+      tags: ['Cider Tang', 'Vegan'],
+      dietary: 'vegan',
+      weightOrSize: '350ml Glass Jar',
+      calories: '110 kcal',
+    },
+
+    // ── 8. Country Desserts & Ciders ───────────────────────────────────────
+    {
+      id: 'fr-skillet-apple-berry-cobbler',
+      slug: 'warm-cast-iron-skillet-apple-berry-cobbler',
+      name: 'Warm Cast-Iron Skillet Apple & Berry Cobbler',
+      price: 269,
+      description: 'Cinnamon spiced Granny Smith apples and wild blackberries bubbling under a golden butter drop biscuit crust. Served warm with clotted cream.',
+      category: 'Country Desserts & Ciders',
+      image: img('photo-1551024709-8f23befc6f87'),
+      imageAlt: 'Cast iron skillet of warm apple berry cobbler with biscuit crust',
+      tags: ['Campfire Dessert', 'Vegetarian'],
+      dietary: 'veg',
+      weightOrSize: '240g Skillet',
+      calories: '490 kcal',
+      featured: true,
+    },
+    {
+      id: 'fr-campfire-smores-sundae',
+      slug: 'campfire-roasted-marshmallow-smores-sundae',
+      name: 'Campfire Roasted Marshmallow S’mores Sundae',
+      price: 239,
+      description: 'Graham cracker crumble base, double scoop of chocolate fudge ice cream, molten dark chocolate drizzle, and flame-toasted giant campfire marshmallows.',
+      category: 'Country Desserts & Ciders',
+      image: img('photo-1501443762994-82bd5dace89a'),
+      imageAlt: 'Dessert glass of chocolate sundae with toasted marshmallows and graham crackers',
+      tags: ['Toasted Marshmallow', 'Vegetarian'],
+      dietary: 'veg',
+      weightOrSize: '220g Glass',
+      calories: '520 kcal',
+    },
+  ],
+  craftProcess: {
+    badge: 'OUR WOOD-FIRED HEARTH PHILOSOPHY',
+    title: 'How Fire & Rib Preserves the Ancient Art of Live-Fire Smoking',
+    subtitle: 'No gas valves. No thermostat dials. Only seasoned firewood, glowing coals, and intuition.',
+    steps: [
+      { time: '04:30 AM', title: 'Hardwood Kindling & Draft', desc: 'Applewood logs and dry red cedar kindling are lit to build a massive bed of coals.' },
+      { time: '06:00 AM', title: 'Dry Sugar-Paprika Rub', desc: 'Racks of ribs are hand-rubbed with dark brown sugar, coarse sea salt, and smoked paprika.' },
+      { time: '10:00 AM', title: 'The Apple Cider Mopping', desc: 'Every 45 minutes, racks are mopped with spiced cider vinegar to keep the meat moist and form bark.' },
+      { time: '01:00 PM', title: 'Final Ember Glazing', desc: 'Finished over direct coals for 3 minutes to bubble and caramelize the rich bourbon glaze.' },
+    ],
+    image: img('photo-1529193591184-b1d58069ecdd'),
+  },
+  story: {
+    badge: 'HEARTH & HERITAGE',
+    kicker: 'HONEST COOKING WITH WOOD AND EMBERS',
+    title: 'We Built Fire & Rib Around an Open Brick Hearth in the Center of the Room.',
+    paragraphs: [
+      'In a world of mass-produced dining and digital buttons, there is something deeply primal about gathering around a crackling wood fire with friends.',
+      'Fire & Rib was born out of backcountry campfire trips where ribs and chicken were cooked over hand-dug pits with seasoned forest logs and cast iron skillets.',
+      'We brought that exact rustic spirit indoors. Our massive open-hearth brick smoker sits directly in the dining room, filling the space with sweet applewood aroma and providing a true communal feast.',
+    ],
+    image: img('photo-1555396273-367ea4eb4db5'),
+    imageAlt: 'The rustic wood hearth at Fire & Rib with burning logs and cast iron cookware',
+    founderQuote: 'Fire is alive. It reacts to the wind, the season, and the wood. When you cook with live fire, you listen to the crackle and let nature take the wheel.',
+    founderName: 'Chef Caleb Vance · Pit Director & Co-Founder, Fire & Rib',
+    stats: [
+      { value: '100%', label: 'Natural Fruit & Hardwood' },
+      { value: '6 Hours', label: 'Average Rib Smoke Cycle' },
+      { value: '3 Glazes', label: 'House-Simmered Mops' },
+      { value: '4.9 ★', label: 'Over 28,000 Diner Reviews' },
+    ],
+  },
+  promo: {
+    badge: 'HEARTH RESERVATION SPECIAL',
+    title: 'Reserve a Hearthside Table & Receive Free Cornbread & Cider Pitcher',
+    desc: 'Book a table for 4 or more near our open brick fireplace this week and enjoy complimentary hot skillet cornbread and a pitcher of cold-brewed hickory sweet tea.',
+    ctaText: 'Book Hearth Table',
+    ctaPage: 'contact',
+    image: img('photo-1508615070457-7baeba4003ab'),
+    imageAlt: 'Rustic table spread at Fire and Rib with ribs, corn and cast iron sides',
+  },
+  gallery: [
+    { src: img('photo-1529193591184-b1d58069ecdd'), alt: 'Rustic wood fired baby back ribs with fresh rosemary', caption: 'Applewood Wood-Fired Baby Back Ribs Glazed with Bourbon Mop', tag: 'Baby Back Ribs' },
+    { src: img('photo-1544025162-d76694265947'), alt: 'St. Louis cut smoked pork ribs with caramelized edges', caption: 'Hickory Smoked St. Louis Spare Ribs with Deep Mahogany Bark', tag: 'Spare Ribs' },
+    { src: img('photo-1508615070457-7baeba4003ab'), alt: 'The Campfire sharing feast board loaded with meats and sides', caption: 'The Fire & Rib Campfire Sharing Platter for 4-5 Guests', tag: 'Campfire Feast' },
+    { src: img('photo-1532550907401-a500c9a57435'), alt: 'Cast iron roasted half chicken with rosemary butter', caption: 'Fire-Roasted Free-Range Half Chicken in Cast-Iron Skillet', tag: 'Hearth Chicken' },
+    { src: img('photo-1555939594-58d7cb561ad1'), alt: '16-hour oak smoked brisket slices with dark peppercorn bark', caption: '16-Hour Oak-Smoked Beef Brisket with Lush Marbling', tag: 'Oak Brisket' },
+    { src: img('photo-1541592106381-b31e9677c0e5'), alt: 'Cast iron skillet of bubbling three cheese macaroni', caption: 'Cast-Iron Skillet 3-Cheese Smoked Macaroni with Cracker Crust', tag: 'Skillet Mac' },
+  ],
+  testimonials: [
+    {
+      name: 'Elena Rostova',
+      role: 'Culinary Travel Writer · Feast & Fire Magazine',
+      rating: 5,
+      quote: 'The applewood baby back ribs at Fire & Rib are pure poetry. The meat pulls cleanly away from the bone with just the right tenderness, and the bourbon brown sugar glaze has incredible caramelized depth.',
+      source: 'Verified Dine-In Guest',
+      date: 'Yesterday',
+    },
+    {
+      name: 'Aditya Mathur',
+      role: 'Tech Director & Weekend Feaster · HSR Layout',
+      rating: 5,
+      quote: 'We reserved the Campfire Platter for our family dinner. The open hearth in the dining room gives the whole restaurant an unforgettable warm rustic aroma. The skillet cornbread and beans are unbelievable.',
+      source: 'Verified Table Booking',
+      date: '4 days ago',
+    },
+    {
+      name: 'Rohan Deshmukh',
+      role: 'Home Smoker & Pit Enthusiast · Koramangala',
+      rating: 5,
+      quote: 'You rarely find restaurants willing to do live-wood open-hearth cooking because it takes so much labor. Fire & Rib is the real deal. The 3-rib tasting flight lets you appreciate how glaze elevates meat.',
+      source: 'Verified Diner',
+      date: 'Last weekend',
+    },
+    {
+      name: 'Simran Bajaj',
+      role: 'Architect · Indiranagar',
+      rating: 5,
+      quote: 'Ordered curbside takeout for a Friday movie night with friends. Wrapped securely in heavy foil and butcher paper. The ribs and roasted half chicken were steaming hot, succulent, and full of wood smoke.',
+      source: 'Verified Online Order',
+      date: 'Last week',
+    },
+  ],
+  location: {
+    address: 'Fire & Rib Hearth House #18, 12th Main, HAL 2nd Stage, Indiranagar',
+    neighborhood: 'Indiranagar / Domlur / Koramangala, Bengaluru, Karnataka 560008',
+    hoursWeekdays: 'Tuesday – Friday: 12:30 PM – 11:00 PM (Hearth Cooking Daily)',
+    hoursWeekends: 'Saturday – Sunday: 11:30 AM – 11:30 PM (Weekend Smoked Rib Specials)',
+    phone: '+91 (080) 4125-9988',
+    email: 'hearth@fireandrib.com',
+    pickupNotice: 'Curbside takeout pickup window at Hearth Gate 1. Advance reservations recommended for fireside tables.',
+    mapEmbedUrl: 'https://maps.google.com/?q=HAL+2nd+Stage+Bengaluru',
+  },
+  customInquiry: {
+    title: 'Rustic Outdoor Farm Gatherings & Hearthside Feasts',
+    subtitle: 'From intimate 15-person family dinners to 100-person rustic outdoor celebrations with live wood-fire cooking.',
+    occasions: ['Rustic Farm Gathering', 'Family Reunion Feast', 'Milestone Celebration', 'Corporate Fireside Dinner'],
+    sizes: [
+      { label: 'Hearth Table (15 People)', serves: '15 people', basePrice: 6999 },
+      { label: 'Campfire Feast Squad (30 People)', serves: '30 people', basePrice: 15499 },
+      { label: 'Grand Rustic Takeover (60 People)', serves: '60 people', basePrice: 31999 },
+    ],
+    flavors: [
+      'Applewood Wood-Fired Baby Back Ribs',
+      'Hickory Smoked St. Louis Spare Ribs',
+      'Fire-Roasted Cast-Iron Half Chickens',
+      '16-Hour Oak-Smoked Beef Brisket Cuts',
+    ],
+  },
+  faqs: [
+    {
+      category: 'Hearth Wood',
+      question: 'What kind of wood do you burn in your hearth smoker?',
+      answer: 'We exclusively burn seasoned fruitwood (native applewood) and dry oak hardwood. Applewood imparts a gentle, aromatic, sweet mahogany glaze that complements pork ribs without overpowering them.',
+    },
+    {
+      category: 'Rib Tenderness',
+      question: 'Are the ribs fall-off-the-bone tender?',
+      answer: 'Yes! We smoke our ribs for 5 to 6 hours until the meat easily pulls clean away from the bone with zero gristle, while retaining moist, succulent juices in every bite.',
+    },
+    {
+      category: 'Dining & Tables',
+      question: 'Can we book a table next to the open hearth fireplace?',
+      answer: 'Yes! When placing your table reservation online, simply select "Hearthside Seating" to enjoy dining directly facing our live open-flame brick pit.',
+    },
+    {
+      category: 'Dietary Options',
+      question: 'Are there vegetarian options available?',
+      answer: 'Absolutely. We feature Applewood Smoked Malai Paneer Platter, Charred Seasonal Vegetable Skewer Boards, Cast-Iron 3-Cheese Mac, and Wood-Roasted Sweet Corn with Herb Butter.',
+    },
+    {
+      category: 'House Sauces',
+      question: 'Can we buy your house BBQ glazes in bottles?',
+      answer: 'Yes! Both our Bourbon Brown Sugar BBQ Glaze and Spicy Apple Cider Moppin’ Sauce are available in 350ml take-home glass jars directly from our menu.',
+    },
+  ],
 };
 
 export default function FireAndRib() {
-  const [scrolled, setScrolled] = useState(false);
-  const [activeMenuTab, setActiveMenuTab] = useState('From the Grill');
-  
-  const heroRef = useReveal(100);
-  const storyRef = useReveal(200);
-  const menuRef = useReveal(200);
-  
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const theme = {
-    name: 'Fire & Rib',
-    tagline: 'Live-fire BBQ & craft beer, the way it should be',
-    palette: { primary: '#ef4444', secondary: '#18181b', surface: '#f4f1ec', text: '#18181b', background: '#faf9f7', textLight: '#71717a' }
-  };
-
-  const menu = [
-    { tab: 'From the Grill', items: [
-      { name: 'Full Rack St. Louis Ribs', price: '$34', desc: 'Applewood smoked for 6 hours, finished on the open grill with house sauce.', tags: ['Bestseller'], image: IMAGES.ribs },
-      { name: 'Prime Cowboy Chop', price: '$45', desc: '24oz bone-in ribeye, open-fire seared, compound butter.', tags: ['Premium'], image: IMAGES.brisket },
-      { name: 'Smoked Half Chicken', price: '$22', desc: 'Spatchcocked, smoked with cherry wood, crispy herb skin.', image: IMAGES.chicken },
-    ]},
-    { tab: 'Sandwiches', items: [
-      { name: 'Fire & Rib Classic', price: '$16', desc: 'Pulled pork shoulder, pickled red onion, vinegar slaw, brioche.', image: IMAGES.pork },
-      { name: 'Smoked Brisket Melt', price: '$18', desc: 'Sliced brisket, smoked cheddar, pickled jalapeño, Texas toast.', image: IMAGES.brisket },
-    ]},
-    { tab: 'Craft Beers', items: [
-      { name: 'Pitfire Amber Ale', price: '$7', desc: 'Our house brew. Pairs perfectly with ribs — malty, smooth, balanced.', image: IMAGES.pit },
-      { name: 'Smokehouse Stout', price: '$8', desc: 'Dark, roasty, notes of coffee and chocolate. Made for brisket.', image: IMAGES.pit },
-    ]},
-  ];
-
-  return (
-    <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif', minHeight: '100vh' }}>
-      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(250,249,247,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(239,68,68,0.2)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none', color: scrolled ? theme.palette.secondary : '#fff' }}>
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          
-          <div style={{ fontSize: '1.75rem', fontWeight: 800, fontFamily: '"Alfa Slab One", serif', color: scrolled ? theme.palette.secondary : '#fff', letterSpacing: '1px' }}>
-            {theme.name}
-          </div>
-        </div>
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', padding: '0.75rem 2rem', borderRadius: '4px', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontFamily: '"Inter", sans-serif', transition: 'all 0.3s' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#dc2626'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = theme.palette.primary}>
-            Reserve Now
-          </button>
-        </div>
-      </nav>
-
-      <header style={{ height: '90vh', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundColor: '#000' }}>
-          <img src={IMAGES.hero} alt="BBQ Ribs" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.6 }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(24,24,27,0.9) 0%, rgba(24,24,27,0.5) 50%, rgba(239,68,68,0.1) 100%)' }}></div>
-        </div>
-        <div ref={heroRef as any} style={{ position: 'relative', zIndex: 10, color: '#fff', maxWidth: '750px', padding: '0 5%' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem', color: theme.palette.primary }}>
-            <Flame size={28} />
-            <span style={{ fontWeight: 700, fontSize: '1.1rem', letterSpacing: '2px', textTransform: 'uppercase' }}>Live-Fire BBQ</span>
-          </div>
-          <h1 style={{ fontFamily: '"Alfa Slab One", serif', fontSize: 'clamp(4rem, 8vw, 6rem)', lineHeight: 1.1, marginBottom: '1.5rem', fontWeight: 400, letterSpacing: '1px' }}>Fire Makes It<br/><span style={{ color: theme.palette.primary }}>Better.</span></h1>
-          <p style={{ fontSize: '1.25rem', fontWeight: 400, marginBottom: '3rem', lineHeight: 1.6, color: '#d4d4d8' }}>Open live-fire grilling, craft beer on tap, and the kind of ribs that require a full roll of paper towels.</p>
-          <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
-            <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', padding: '1.2rem 3rem', borderRadius: '4px', fontWeight: 700, fontSize: '1.1rem', cursor: 'pointer', fontFamily: '"Inter", sans-serif', transition: 'all 0.3s' }}>
-              Book a Pit Table
-            </button>
-          </div>
-        </div>
-      </header>
-      
-      <section ref={storyRef as any} style={{ padding: '8rem 5%', backgroundColor: theme.palette.surface, color: theme.palette.secondary }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5rem', alignItems: 'center', maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ flex: '1 1 500px' }}>
-            <h2 style={{ fontFamily: '"Alfa Slab One", serif', fontSize: '3.5rem', color: theme.palette.secondary, marginBottom: '1.5rem', lineHeight: 1.2, fontWeight: 400 }}>Fire is the <br/>Ingredient.</h2>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '1.5rem', color: theme.palette.textLight }}>Fire & Rib was born from a simple idea: the best BBQ isn't made in a kitchen. It's made over live fire, with patience, good wood, and even better beer.</p>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '2.5rem', color: theme.palette.textLight }}>We run three types of fires simultaneously — open grill for steaks, offset smoker for ribs, and a coal pit for the brisket. Each needs its own attention. That's what we give it.</p>
-            <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <div style={{ backgroundColor: theme.palette.secondary, padding: '1rem', borderRadius: '50%', color: theme.palette.primary }}><Flame size={24} /></div>
-                <div><h4 style={{ margin: '0 0 0.25rem 0', fontWeight: 800 }}>Live Grilling</h4></div>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <div style={{ backgroundColor: theme.palette.secondary, padding: '1rem', borderRadius: '50%', color: theme.palette.primary }}><Beer size={24} /></div>
-                <div><h4 style={{ margin: '0 0 0.25rem 0', fontWeight: 800 }}>Craft Beers</h4></div>
-              </div>
-            </div>
-          </div>
-          <div style={{ flex: '1 1 400px', position: 'relative' }}>
-            <div style={{ position: 'absolute', top: '-1.5rem', left: '-1.5rem', right: '1.5rem', bottom: '1.5rem', border: `2px solid ${theme.palette.primary}`, opacity: 0.5 }}></div>
-            <img src={IMAGES.story} alt="Pitmaster" style={{ width: '100%', position: 'relative', zIndex: 2, boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }} />
-          </div>
-        </div>
-      </section>
-
-      <section ref={menuRef as any} style={{ padding: '8rem 5%', backgroundColor: theme.palette.background }}>
-        <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-          <h2 style={{ fontFamily: '"Alfa Slab One", serif', fontSize: '3.5rem', color: theme.palette.secondary, fontWeight: 400, margin: 0 }}>The Smoke Menu</h2>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '3rem', flexWrap: 'wrap' }}>
-            {menu.map((cat) => (
-              <button 
-                key={cat.tab}
-                onClick={() => setActiveMenuTab(cat.tab)}
-                style={{ 
-                  padding: '0.75rem 2rem', 
-                  backgroundColor: activeMenuTab === cat.tab ? theme.palette.primary : 'transparent',
-                  color: activeMenuTab === cat.tab ? '#fff' : theme.palette.secondary,
-                  border: activeMenuTab === cat.tab ? 'none' : `1px solid ${theme.palette.textLight}`,
-                  borderRadius: '4px',
-                  fontFamily: '"Inter", sans-serif',
-                  fontSize: '1.1rem',
-                  fontWeight: 700,
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  textTransform: 'uppercase',
-                  letterSpacing: '1px'
-                }}
-              >
-                {cat.tab}
-              </button>
-            ))}
-          </div>
-        </div>
-        
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem', maxWidth: '1200px', margin: '0 auto' }}>
-          {menu.find(c => c.tab === activeMenuTab)?.items.map((item, i) => (
-            <div key={i} style={{ display: 'flex', flexDirection: 'column', backgroundColor: '#fff', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.05)', transition: 'transform 0.3s, box-shadow 0.3s', cursor: 'pointer', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }} onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-8px)'; e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(239,68,68,0.15)'; }} onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.05)'; }}>
-              <div style={{ position: 'relative' }}>
-                <img src={item.image} alt={item.name} style={{ width: '100%', height: '260px', objectFit: 'cover' }} />
-                <div style={{ position: 'absolute', top: '1rem', right: '1rem', backgroundColor: theme.palette.secondary, color: '#fff', padding: '0.5rem 1rem', fontWeight: 800, fontFamily: '"Alfa Slab One", serif', fontSize: '1.2rem', letterSpacing: '1px' }}>{item.price}</div>
-              </div>
-              <div style={{ padding: '2rem' }}>
-                <h3 style={{ fontFamily: '"Alfa Slab One", serif', fontSize: '1.4rem', fontWeight: 400, margin: '0 0 1rem 0', color: theme.palette.secondary, letterSpacing: '1px' }}>{item.name}</h3>
-                <p style={{ color: theme.palette.textLight, fontSize: '1rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>{item.desc}</p>
-                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                  {item.tags?.map(tag => (
-                    <span key={tag} style={{ fontSize: '0.8rem', padding: '0.35rem 1rem', backgroundColor: 'rgba(239,68,68,0.1)', color: theme.palette.primary, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>{tag}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section style={{ padding: '8rem 5%', backgroundColor: theme.palette.surface }}>
-        <h2 style={{ fontFamily: '"Alfa Slab One", serif', fontSize: '3rem', color: theme.palette.secondary, textAlign: 'center', marginBottom: '4rem', fontWeight: 400, letterSpacing: '1px' }}>From the Patrons</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-          {[
-            { name: 'Bobby S.', quote: 'The St. Louis Ribs are next-level. Smoke ring for days, sauce caramelized on the grill, meat falls right off.' },
-            { name: 'Dana K.', quote: 'They have the Cowboy Chop — a 24oz bone-in ribeye. I ordered it, and I will never be the same person again.' },
-            { name: 'Ryan P.', quote: 'The Pitfire Amber Ale with the brisket sandwich is the combination I did not know I needed. Now I need it weekly.' }
-          ].map((test, i) => (
-            <div key={i} style={{ backgroundColor: theme.palette.background, padding: '2.5rem', borderTop: `4px solid ${theme.palette.primary}`, boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
-              <div style={{ display: 'flex', color: theme.palette.primary, marginBottom: '1.5rem' }}>
-                {[...Array(5)].map((_, j) => <Star key={j} size={20} fill={theme.palette.primary} stroke="none" />)}
-              </div>
-              <p style={{ color: theme.palette.text, lineHeight: 1.7, marginBottom: '2rem', fontSize: '1.05rem', fontStyle: 'italic' }}>"{test.quote}"</p>
-              <h4 style={{ fontWeight: 800, color: theme.palette.secondary, margin: 0, fontSize: '1.1rem', fontFamily: '"Inter", sans-serif', textTransform: 'uppercase', letterSpacing: '1px' }}>- {test.name}</h4>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <footer style={{ backgroundColor: theme.palette.secondary, color: '#d1d5db', padding: '6rem 5% 3rem' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '4rem', marginBottom: '4rem' }}>
-            <div>
-              <h2 style={{ fontFamily: '"Alfa Slab One", serif', fontSize: '2.5rem', fontWeight: 400, marginBottom: '1rem', color: '#fff', letterSpacing: '1px' }}>{theme.name}</h2>
-              <p style={{ color: '#a1a1aa', marginBottom: '2rem', fontSize: '1.05rem', lineHeight: 1.6 }}>{theme.tagline}</p>
-            </div>
-            <div>
-              <h4 style={{ color: '#fff', fontWeight: 800, marginBottom: '1.5rem', fontSize: '1.25rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Location</h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}><MapPin size={24} color={theme.palette.primary} style={{ flexShrink: 0 }} /><span style={{ lineHeight: 1.5 }}>9 Ember Lane<br/>Nashville, TN 37201</span></div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}><Phone size={24} color={theme.palette.primary} style={{ flexShrink: 0 }} /><span>+1 (615) 555-0312</span></div>
-              </div>
-            </div>
-            <div>
-              <h4 style={{ color: '#fff', fontWeight: 800, marginBottom: '1.5rem', fontSize: '1.25rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Hours</h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}><Clock size={24} color={theme.palette.primary} style={{ flexShrink: 0 }} /><span style={{ lineHeight: 1.5 }}>Fri – Wed: 4pm – 11pm<br/>Sat – Sun: 12pm – 12am</span></div>
-              </div>
-            </div>
-          </div>
-          <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '2rem', textAlign: 'center' }}>
-            <p style={{ fontSize: '0.95rem', margin: 0, color: '#71717a' }}>© 2026 {theme.name}. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
+  return <FoodStorefrontCore config={fireAndRibConfig} />;
 }
-
-

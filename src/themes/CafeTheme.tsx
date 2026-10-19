@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react'
 import type { CSSProperties, FormEvent } from 'react'
 import type { RestaurantThemePreset } from './RestaurantTheme'
+import MorningRitual from '../templates/food-restaurants/cafe/MorningRitual'
+import BrewHouse from '../templates/food-restaurants/cafe/BrewHouse'
+import CornerCafe from '../templates/food-restaurants/cafe/CornerCafe'
+import LatteLane from '../templates/food-restaurants/cafe/LatteLane'
+import DailyGrind from '../templates/food-restaurants/cafe/DailyGrind'
 import MorningRitualTheme from './MorningRitualTheme'
 import BrewHouseTheme from './BrewHouseTheme'
 import CornerCafeTheme from './CornerCafeTheme'
@@ -98,11 +103,11 @@ function CafeQuickViewModal({ item, image, type, onClose }: { item: string[], im
 }
 
 export default function CafeTheme({ theme }: { theme: RestaurantThemePreset }) {
-  if (theme.id === 'morning-ritual') return <MorningRitualTheme theme={theme} />
-  if (theme.id === 'brew-house') return <BrewHouseTheme theme={theme} />
-  if (theme.id === 'corner-cafe') return <CornerCafeTheme theme={theme} />
-  if (theme.id === 'latte-lane') return <LatteLaneTheme theme={theme} />
-  if (theme.id === 'the-daily-grind') return <DailyGrindTheme theme={theme} />
+  if (theme.id === 'morning-ritual') return <MorningRitual />
+  if (theme.id === 'brew-house') return <BrewHouse />
+  if (theme.id === 'corner-cafe') return <CornerCafe />
+  if (theme.id === 'latte-lane') return <LatteLane />
+  if (theme.id === 'the-daily-grind') return <DailyGrind />
 
   const [path, setPath] = useState('/')
   const [mobile, setMobile] = useState(false)

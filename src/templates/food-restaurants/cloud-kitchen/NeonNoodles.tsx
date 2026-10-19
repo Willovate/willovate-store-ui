@@ -11,12 +11,12 @@ const NeonNoodles = () => {
   const font = { heading: '"Orbitron", sans-serif', body: '"Inter", sans-serif' };
 
   const menu = [
-    { tab: 'Ramen', name: 'Cyber-Miso Ramen', price: '$16', desc: 'Rich chicken and miso broth, pork chashu, ajitsuke tamago, bamboo shoots, scallion oil.', tags: ['Bestseller'], img: 'photo-1504674900247-0877df9cc836' },
-    { tab: 'Ramen', name: 'Spicy Glitch Tonkotsu', price: '$17', desc: '24-hour pork bone broth, spicy chili crisp, minced pork, black garlic oil.', tags: ['Spicy'], img: 'photo-1504674900247-0877df9cc836' },
-    { tab: 'Ramen', name: 'Vegan Matrix', price: '$15', desc: 'Shiitake mushroom and kombu broth, grilled tofu, bok choy, corn, truffle oil.', tags: ['Vegan'], img: 'photo-1504674900247-0877df9cc836' },
-    { tab: 'Bao & Dumplings', name: 'Pork Belly Bao (2)', price: '$9', desc: 'Steamed buns, braised pork belly, hoisin, crushed peanuts, cilantro.', tags: [], img: 'photo-1504674900247-0877df9cc836' },
-    { tab: 'Bao & Dumplings', name: 'Pan-Seared Gyoza (6)', price: '$8', desc: 'Chicken and cabbage dumplings, crispy bottom, ponzu dip.', tags: [], img: 'photo-1504674900247-0877df9cc836' },
-    { tab: 'Wok Noodles', name: 'Dan Dan Hack', price: '$14', desc: 'Thick noodles, spicy sesame sauce, Szechuan peppercorns, minced pork.', tags: ['Numbing'], img: 'photo-1504674900247-0877df9cc836' },
+    { tab: 'Ramen', name: 'Cyber-Miso Ramen', price: '$16', desc: 'Rich chicken and miso broth, pork chashu, ajitsuke tamago, bamboo shoots, scallion oil.', tags: ['Bestseller'], img: 'photo-1569718212165-3a8278d5f624' },
+    { tab: 'Ramen', name: 'Spicy Glitch Tonkotsu', price: '$17', desc: '24-hour pork bone broth, spicy chili crisp, minced pork, black garlic oil.', tags: ['Spicy'], img: 'photo-1552611052-33e04de081de' },
+    { tab: 'Ramen', name: 'Vegan Matrix', price: '$15', desc: 'Shiitake mushroom and kombu broth, grilled tofu, bok choy, corn, truffle oil.', tags: ['Vegan'], img: 'photo-1546069901-ba9599a7e63c' },
+    { tab: 'Bao & Dumplings', name: 'Pork Belly Bao (2)', price: '$9', desc: 'Steamed buns, braised pork belly, hoisin, crushed peanuts, cilantro.', tags: [], img: 'photo-1541696432-82c6da8ce7bf' },
+    { tab: 'Bao & Dumplings', name: 'Pan-Seared Gyoza (6)', price: '$8', desc: 'Chicken and cabbage dumplings, crispy bottom, ponzu dip.', tags: [], img: 'photo-1496116218417-1a781b1c416c' },
+    { tab: 'Wok Noodles', name: 'Dan Dan Hack', price: '$14', desc: 'Thick noodles, spicy sesame sauce, Szechuan peppercorns, minced pork.', tags: ['Numbing'], img: 'photo-1541832676-9b763b0239ab' },
   ];
 
   return (
@@ -39,7 +39,7 @@ const NeonNoodles = () => {
 
       {/* Hero */}
       <header className="ck-hero" style={{ height: '100vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(${img('photo-1504674900247-0877df9cc836', 2000)})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'contrast(120%) saturate(150%) brightness(0.8)', mixBlendMode: 'lighten' }}></div>
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(${img('photo-1569718212165-3a8278d5f624', 2000)})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'contrast(120%) saturate(150%) brightness(0.8)', mixBlendMode: 'lighten' }}></div>
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(2,6,23,0.95) 0%, rgba(2,6,23,0.7) 40%, rgba(236,72,153,0.15) 100%)' }}></div>
         
         {/* Cyberpunk Grid Overlay */}
@@ -67,7 +67,7 @@ const NeonNoodles = () => {
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', gap: '4rem', alignItems: 'center', flexWrap: 'wrap' }}>
           <div style={{ flex: '1 1 500px', position: 'relative' }}>
             <div style={{ position: 'absolute', top: '-2rem', left: '-2rem', width: '100px', height: '100px', borderTop: `2px solid ${palette.cyan}`, borderLeft: `2px solid ${palette.cyan}`, opacity: 0.5 }}></div>
-            <img src={img('photo-1504674900247-0877df9cc836', 1000)} alt="Chef Prep" style={{ width: '100%', height: '400px', objectFit: 'cover', filter: 'contrast(1.2) sepia(0.2) hue-rotate(-50deg)', border: `1px solid ${palette.primary}` }} />
+            <img src={img('photo-1556911220-bff31c812dba', 1000)} alt="Chef Prep" style={{ width: '100%', height: '400px', objectFit: 'cover', filter: 'contrast(1.2) sepia(0.2) hue-rotate(-50deg)', border: `1px solid ${palette.primary}` }} />
             <div style={{ position: 'absolute', bottom: '-2rem', right: '-2rem', width: '100px', height: '100px', borderBottom: `2px solid ${palette.primary}`, borderRight: `2px solid ${palette.primary}`, opacity: 0.5 }}></div>
           </div>
           

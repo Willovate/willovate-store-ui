@@ -1,213 +1,572 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowLeft, MapPin, Clock, Phone, Flame, ChevronRight, Star, Utensils } from 'lucide-react';
-import { useReveal } from '../components/RestaurantCore';
+import React from 'react';
+import { FoodStorefrontCore, type StorefrontThemeConfig } from '../shared/FoodStorefrontCore';
 
-const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
+const img = (id: string, w = 1200) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
 
-const IMAGES = {
-  hero: img('photo-1555939594-58d7cb561ad1'),
-  story: img('photo-1504674900247-0877df9cc836'),
-  lamb: img('photo-1504674900247-0877df9cc836'),
-  adana: img('photo-1504674900247-0877df9cc836'),
-  chicken: img('photo-1504674900247-0877df9cc836'),
-  mezze1: img('photo-1555939594-58d7cb561ad1'), 
-  mezze2: img('photo-1504674900247-0877df9cc836'),
-  wrap: img('photo-1504674900247-0877df9cc836')
+export const kebabKingdomConfig: StorefrontThemeConfig = {
+  id: 'kebab-kingdom',
+  kind: 'bbq-grill',
+  currencySymbol: '₹',
+  layoutOptions: {
+    heroLayout: 'minimal-editorial',
+    productLayout: 'grid-4',
+    featuresLayout: 'pills-row',
+    storyLayout: 'split-right',
+    galleryLayout: 'masonry',
+    sectionOrder: ['hero', 'craft', 'features', 'products', 'promo', 'story', 'gallery', 'reviews', 'location', 'newsletter'],
+  },
+  name: 'Kebab Kingdom',
+  tagline: 'Royal Middle Eastern & Awadhi Charcoal Grills, Seekh Kebabs & Shahi Feasts',
+  brandSub: 'Charcoal Sigri Grates · 24-Hour Spiced Marinades · Saffron Dastarkhwans',
+  palette: {
+    primary: '#047857',
+    primaryHover: '#065f46',
+    secondary: '#022c22',
+    background: '#fefbf6',
+    surface: '#fffbeb',
+    text: '#0f172a',
+    textMuted: '#64748b',
+    border: '#fde68a',
+    badgeBg: '#ecfdf5',
+    badgeText: '#047857',
+    heroOverlay: 'linear-gradient(135deg, rgba(2,44,34,0.92) 0%, rgba(4,120,87,0.35) 100%)',
+  },
+  typography: {
+    headingFont: '"Cinzel", "Playfair Display", serif',
+    bodyFont: '"Inter", sans-serif',
+    accentFont: '"Cinzel", serif',
+  },
+  hero: {
+    headline: 'Scent of Charcoal. Touch of Saffron. The Art of the Royal Kebab.',
+    subheadline:
+      'From melt-in-the-mouth Awadhi Galouti kebabs and charcoal-charred mutton seekhs to fragrant Peshawari lamb chops and saffron Dastarkhwan feasts, welcome to the imperial grill traditions of kings and sultans.',
+    badge: '👑 ROYAL MUGHALAI & MIDDLE EASTERN CHARCOAL GRILLS · ESTD 1988',
+    image: img('photo-1529042410759-befb1204b468'),
+    imageAlt: 'Platter of sizzling grilled Middle Eastern seekh kebabs with herbs and flatbread',
+    primaryCtaText: 'Explore Royal Menu',
+    primaryCtaPage: 'menu',
+    secondaryCtaText: 'Reserve Dastarkhwan',
+    secondaryCtaPage: 'contact',
+  },
+  announcement: {
+    text: '👑 Royal Kebab Dastarkhwan Feasts Now Booking · Candlelit Table & Floor Seating · Use Code SULTAN25 for 25% Off Orders Above ₹1,499',
+    badgeText: 'ROYAL FEAST',
+    linkText: 'Book Table',
+    linkPage: 'contact',
+  },
+  proofBadges: [
+    { icon: '🍢', title: 'Live Charcoal Sigri', subtitle: 'Hand-skewered meats grilled over open coconut shell embers for gentle smoky warmth' },
+    { icon: '🌿', title: '24-Hour Awadhi Potli', subtitle: 'Whole spices tied in muslin potlis slowly infuse into yogurt and yellow mustard marinades' },
+    { icon: '🧈', title: 'Melt-In-Mouth Texture', subtitle: 'Finely minced cuts blended with raw papaya and cardamom for velvety silkiness' },
+    { icon: '🌾', title: 'Clay Tandoor Breads', subtitle: 'Khamiri rotis, saffron sheermals, and garlic naans baked to order on clay walls' },
+  ],
+  categories: [
+    'Signature Seekh & Galouti',
+    'Charcoal Chicken Tikkas',
+    'Peshawari Chops & Lamb',
+    'Royal Kebab Dastarkhwans',
+    'Tandoori Paneer & Veg Grill',
+    'Clay-Oven Breads & Rices',
+    'House Dips & Cold Raitas',
+    'Shahi Desserts & Kahwa',
+  ],
+  collections: [
+    {
+      id: 'dastarkhwan-feasts',
+      name: 'Grand Royal Dastarkhwans',
+      tagline: 'Multi-kebab sharing banquets with naans, biryani, and house accompaniments.',
+      image: img('photo-1529042410759-befb1204b468'),
+      itemCount: 4,
+      filterCategory: 'Royal Kebab Dastarkhwans',
+    },
+    {
+      id: 'mutton-seekh-chops',
+      name: 'Mutton Seekh & Lamb Chops',
+      tagline: 'Lucknowi hand-pounded seekhs and char-grilled Peshawari lamb chops.',
+      image: img('photo-1544025162-d76694265947'),
+      itemCount: 3,
+      filterCategory: 'Signature Seekh & Galouti',
+    },
+    {
+      id: 'chicken-tikkas',
+      name: 'Charcoal Chicken Tikkas',
+      tagline: 'Silky Malai tikkas, fiery Angara, and charcoal roasted Bhatti chickens.',
+      image: img('photo-1599488615731-7e5c2823ff28'),
+      itemCount: 4,
+      filterCategory: 'Charcoal Chicken Tikkas',
+    },
+    {
+      id: 'veg-royal-grill',
+      name: 'Tandoori Paneer & Veg Feasts',
+      tagline: 'Zafrani paneer tikkas, stuffed mushrooms, and falafel beetroot hummus.',
+      image: img('photo-1601050690597-df0568f70950'),
+      itemCount: 4,
+      filterCategory: 'Tandoori Paneer & Veg Grill',
+    },
+  ],
+  products: [
+    // ── 1. Signature Seekh & Galouti ───────────────────────────────────────
+    {
+      id: 'kk-galouti-kebab-paratha',
+      slug: 'royal-awadhi-galouti-kebab-ulta-tawa-paratha',
+      name: 'Royal Awadhi Galouti Kebabs with Ulta Tawa Paratha (4 Pcs)',
+      price: 549,
+      compareAtPrice: 629,
+      description: 'Finely minced lamb blended with 16 royal aromatic spices and raw green papaya, pan-seared in pure desi ghee until melt-in-the-mouth soft. Served on flaky saffron Mughlai paratha.',
+      category: 'Signature Seekh & Galouti',
+      image: img('photo-1529042410759-befb1204b468'),
+      imageAlt: 'Tender Galouti kebabs served over flaky saffron flatbread with mint chutney',
+      tags: ['Royal Signature', '#1 Bestseller', 'Melt-in-Mouth'],
+      dietary: 'non-veg',
+      weightOrSize: '4 Kebabs + 2 Parathas · 340g',
+      calories: '680 kcal',
+      featured: true,
+      options: [
+        { name: 'Ghee Style', choices: [{ label: 'Pure Desi Cow Ghee (Authentic)' }, { label: 'Light Olive Baste' }] },
+      ],
+    },
+    {
+      id: 'kk-lucknowi-mutton-seekh',
+      slug: 'charcoal-grilled-lucknowi-mutton-seekh-kebabs',
+      name: 'Charcoal Grilled Lucknowi Mutton Seekh Kebabs (4 Pcs)',
+      price: 529,
+      description: 'Hand-pounded spring mutton seasoned with royal cumin, brown onion paste, ginger juliennes, and fresh mint, molded onto wide iron skewers and grilled over white embers.',
+      category: 'Signature Seekh & Galouti',
+      image: img('photo-1544025162-d76694265947'),
+      imageAlt: 'Sizzling mutton seekh kebabs resting on wooden board with lemon wedges',
+      tags: ['Sigri Charred', 'Juicy'],
+      dietary: 'non-veg',
+      spiceLevel: 2,
+      weightOrSize: '4 Large Skewers · 360g',
+      calories: '610 kcal',
+      featured: true,
+    },
+    {
+      id: 'kk-kakori-kebab',
+      slug: 'imperial-kakori-melt-kebab-4pc',
+      name: 'Imperial Kakori Velvety Lamb Kebabs (4 Pcs)',
+      price: 579,
+      description: 'The crowning glory of Awadhi gastronomy: minced lamb infused with cloves, saffron, mace, and rosewater, roasted on thin skewers to an ethereal, buttery texture.',
+      category: 'Signature Seekh & Galouti',
+      image: img('photo-1529193591184-b1d58069ecdd'),
+      imageAlt: 'Delicate Kakori kebabs garnished with silver leaf and coriander',
+      tags: ['Royal Heritage', 'Mace & Saffron'],
+      dietary: 'non-veg',
+      weightOrSize: '4 Pieces · 320g',
+      calories: '590 kcal',
+    },
+
+    // ── 2. Charcoal Chicken Tikkas ─────────────────────────────────────────
+    {
+      id: 'kk-murgh-malai-tikka',
+      slug: 'kastoori-murgh-malai-tikka-cardamom-cream-6pc',
+      name: 'Kastoori Murgh Malai Tikka with Cardamom Cream (6 Pcs)',
+      price: 469,
+      compareAtPrice: 519,
+      description: 'Boneless tender chicken thigh chunks marinated in clotted malai cream, cashew paste, green cardamom, and crushed fenugreek leaves. Gently charred over coals.',
+      category: 'Charcoal Chicken Tikkas',
+      image: img('photo-1599488615731-7e5c2823ff28'),
+      imageAlt: 'Creamy white chicken malai tikka skewers with mild char marks',
+      tags: ['Mild & Creamy', 'Crowd Favorite'],
+      dietary: 'non-veg',
+      weightOrSize: '6 Pieces · 350g',
+      calories: '540 kcal',
+      featured: true,
+    },
+    {
+      id: 'kk-angara-chicken-tikka',
+      slug: 'fiery-angara-charcoal-chicken-tikka-6pc',
+      name: 'Fiery Angara Charcoal Chicken Tikka (6 Pcs)',
+      price: 429,
+      description: 'Juicy chicken chunks marinated in mustard oil, roasted Kashmiri red chili paste, black pepper, and garlic. Charred intensely for that authentic fiery smoky bite.',
+      category: 'Charcoal Chicken Tikkas',
+      image: img('photo-1567188040759-fb8a883dc6d8'),
+      imageAlt: 'Bright red charred chicken tikka with sliced red onions and lime',
+      tags: ['Spicy & Smoky'],
+      dietary: 'non-veg',
+      spiceLevel: 3,
+      weightOrSize: '6 Pieces · 340g',
+      calories: '490 kcal',
+    },
+    {
+      id: 'kk-bhatti-ka-murgh',
+      slug: 'bhatti-ka-murgh-charcoal-roasted-chicken',
+      name: 'Bhatti Ka Murgh (Charcoal Sigri Roasted Chicken)',
+      price: 489,
+      description: 'Bone-in chicken legs and breast steeped in roasted gram flour, carom seeds, ginger, and hung curd, slow-roasted over the sigri until charred and bursting with juice.',
+      category: 'Charcoal Chicken Tikkas',
+      image: img('photo-1532550907401-a500c9a57435'),
+      imageAlt: 'Roasted spiced chicken with charred grill marks and lemon',
+      tags: ['Traditional Sigri'],
+      dietary: 'non-veg',
+      spiceLevel: 2,
+      weightOrSize: 'Half Chicken · 450g',
+      calories: '580 kcal',
+    },
+
+    // ── 3. Peshawari Chops & Lamb ──────────────────────────────────────────
+    {
+      id: 'kk-peshawari-lamb-chops',
+      slug: 'peshawari-char-grilled-lamb-chops-4pc',
+      name: 'Peshawari Char-Grilled Lamb Chops (4 Pcs)',
+      price: 899,
+      compareAtPrice: 999,
+      description: 'French-trimmed tender lamb cutlets marinated in raw papaya, crushed coriander, black cardamom, and malt vinegar. Fire-charred over glowing charcoal.',
+      category: 'Peshawari Chops & Lamb',
+      image: img('photo-1544025162-d76694265947'),
+      imageAlt: 'Grilled lamb chops with charred bone ends and fresh herbs on slate',
+      tags: ['Chef Signature', 'Prime Cut'],
+      dietary: 'non-veg',
+      weightOrSize: '4 Chops · 420g',
+      calories: '780 kcal',
+      featured: true,
+      options: [
+        { name: 'Chop Doneness', choices: [{ label: 'Medium (Pink Center & Tender)' }, { label: 'Medium Well' }] },
+      ],
+    },
+
+    // ── 4. Royal Kebab Dastarkhwans ────────────────────────────────────────
+    {
+      id: 'kk-grand-sultan-dastarkhwan',
+      slug: 'the-grand-sultan-kebab-dastarkhwan-serves-4',
+      name: 'The Grand Sultan Kebab Dastarkhwan (Serves 4)',
+      price: 2699,
+      compareAtPrice: 3099,
+      description: 'The ultimate royal Mughlai feast: 4× Galouti Kebabs with Ulta Tawa Paratha, 4× Mutton Seekh Kebabs, 6× Murgh Malai Tikkas, 4× Peshawari Lamb Chops, Clay Handi Dum Biryani, 4× Garlic Naans, and Phirni.',
+      category: 'Royal Kebab Dastarkhwans',
+      image: img('photo-1589302168068-964664d93dc0'),
+      imageAlt: 'Grand royal Dastarkhwan table feast with kebabs, biryani, naans and dips',
+      tags: ['Grand Banquet Feast', 'Serves 4-5', 'Best Value'],
+      dietary: 'non-veg',
+      weightOrSize: 'Over 2.4 kg Multi-Dish Feast',
+      calories: '3600 kcal total',
+      featured: true,
+      options: [
+        { name: 'Feast Style', choices: [{ label: 'Standard Sultan Feast (₹2,699)' }, { label: 'Upgrade to 6-Person Emperor Board (+₹890)', priceDelta: 890 }] },
+        { name: 'Biryani Type', choices: [{ label: 'Awadhi Mutton Dum Biryani' }, { label: 'Kolkata Saffron Chicken Dum Biryani' }] },
+      ],
+    },
+    {
+      id: 'kk-vegetable-kebab-dastarkhwan',
+      slug: 'the-shahi-vegetarian-kebab-dastarkhwan-serves-4',
+      name: 'The Shahi Vegetarian Kebab Dastarkhwan (Serves 4)',
+      price: 1999,
+      compareAtPrice: 2299,
+      description: 'An imperial vegetarian feast: 6× Zafrani Paneer Tikkas, 6× Stuffed Khumb Tikkas, 6× Crispy Herb Falafels, 4× Dahi Ke Kebab, Veg Handi Dum Biryani, Garlic Naans, Dal Makhani, and Phirni.',
+      category: 'Royal Kebab Dastarkhwans',
+      image: img('photo-1601050690597-df0568f70950'),
+      imageAlt: 'Royal vegetarian feast spread with paneer tikka, stuffed mushrooms, dal and breads',
+      tags: ['Vegetarian Banquet', 'Serves 4', 'Rich & Royal'],
+      dietary: 'veg',
+      weightOrSize: 'Over 2.2 kg Vegetarian Board',
+      calories: '2800 kcal total',
+      featured: true,
+    },
+
+    // ── 5. Tandoori Paneer & Veg Grill ─────────────────────────────────────
+    {
+      id: 'kk-zafrani-paneer-tikka',
+      slug: 'zafrani-malai-paneer-tikka-6pc',
+      name: 'Zafrani Malai Paneer Tikka with Bell Peppers (6 Pcs)',
+      price: 389,
+      description: 'Thick slabs of fresh malai paneer soaked in Kashmiri saffron cream, yellow mustard oil, and carom seeds. Skewered with crunchy capsicum and grilled over coals.',
+      category: 'Tandoori Paneer & Veg Grill',
+      image: img('photo-1601050690597-df0568f70950'),
+      imageAlt: 'Charred paneer tikka skewers with yellow saffron marinade and grilled peppers',
+      tags: ['Vegetarian Star', 'Kashmiri Saffron'],
+      dietary: 'veg',
+      weightOrSize: '6 Pieces · 340g',
+      calories: '490 kcal',
+      featured: true,
+    },
+    {
+      id: 'kk-stuffed-mushroom-tikka',
+      slug: 'tandoori-stuffed-khumb-mushroom-tikka-6pc',
+      name: 'Tandoori Stuffed Khumb (Mushroom) Tikka (6 Pcs)',
+      price: 349,
+      description: 'Jumbo button mushrooms stuffed with spiced minced paneer, roasted nuts, and fresh coriander, bathed in tandoori masala and charred to juicy perfection.',
+      category: 'Tandoori Paneer & Veg Grill',
+      image: img('photo-1540420773420-3366772f4999'),
+      imageAlt: 'Stuffed grilled mushrooms with char marks and herb garnish',
+      tags: ['Earthy & Stuffed', 'Vegetarian'],
+      dietary: 'veg',
+      weightOrSize: '6 Pieces · 300g',
+      calories: '360 kcal',
+    },
+    {
+      id: 'kk-falafel-hummus-platter',
+      slug: 'crispy-herb-falafel-velvet-beetroot-hummus-board',
+      name: 'Crispy Herb Falafel & Velvet Beetroot Hummus Board',
+      price: 369,
+      description: 'Six golden fried chickpea and herb falafels served with two bowls of velvety garlic hummus and ruby beetroot hummus, warm pita flatbreads, and pickled turnips.',
+      category: 'Tandoori Paneer & Veg Grill',
+      image: img('photo-1541696432-82c6da8ce7bf'),
+      imageAlt: 'Platter of falafel with pink beetroot hummus and warm pita bread',
+      tags: ['Middle Eastern', 'Vegan'],
+      dietary: 'vegan',
+      weightOrSize: '360g Board',
+      calories: '440 kcal',
+    },
+
+    // ── 6. Clay-Oven Breads & Rices ────────────────────────────────────────
+    {
+      id: 'kk-shahi-dum-biryani',
+      slug: 'shahi-zafrani-dum-handi-biryani',
+      name: 'Shahi Zafrani Dum Biryani in Sealed Clay Handi',
+      price: 499,
+      description: 'Long-grain aged basmati rice layered with tender marinated chicken or mutton, saffron milk, fried onions (birista), and whole spices, dough-sealed and slow-steamed.',
+      category: 'Clay-Oven Breads & Rices',
+      image: img('photo-1589302168068-964664d93dc0'),
+      imageAlt: 'Clay handi sealed with dough opened to reveal fragrant saffron biryani',
+      tags: ['Sealed Clay Pot', 'Awadhi Royal'],
+      dietary: 'non-veg',
+      weightOrSize: '550g Clay Handi · Serves 1-2',
+      calories: '720 kcal',
+      featured: true,
+    },
+    {
+      id: 'kk-butter-garlic-naan',
+      slug: 'tandoori-butter-garlic-naan-2pc',
+      name: 'Tandoori Butter Garlic Naan (Set of 2)',
+      price: 129,
+      description: 'Soft and pillowy leavened bread slapped onto 800°F clay tandoor walls, brushed generously with melted butter, minced garlic, and fresh coriander.',
+      category: 'Clay-Oven Breads & Rices',
+      image: img('photo-1509440159596-0249088772ff'),
+      imageAlt: 'Hot butter garlic naan with blistered bubbles from tandoor',
+      tags: ['Clay Tandoor', 'Vegetarian'],
+      dietary: 'veg',
+      weightOrSize: '2 Naans · 220g',
+      calories: '340 kcal',
+    },
+    {
+      id: 'kk-khamiri-sheermal-duo',
+      slug: 'mughlai-khamiri-roti-saffron-sheermal-duo',
+      name: 'Mughlai Khamiri Roti & Saffron Sheermal Duo',
+      price: 169,
+      description: 'One traditional fermented sourdough Khamiri roti paired with one slightly sweet saffron-infused milk bread (Sheermal). The royal companions to kebabs.',
+      category: 'Clay-Oven Breads & Rices',
+      image: img('photo-1512058564366-18510be2db19'),
+      imageAlt: 'Golden saffron sheermal flatbread with sesame seeds',
+      tags: ['Heritage Breads', 'Vegetarian'],
+      dietary: 'veg',
+      weightOrSize: '2 Breads · 240g',
+      calories: '380 kcal',
+    },
+
+    // ── 7. House Dips & Cold Raitas ────────────────────────────────────────
+    {
+      id: 'kk-dal-makhani-1947',
+      slug: '24-hour-charcoal-dal-makhani-white-butter',
+      name: '24-Hour Charcoal Dal Makhani with White Butter',
+      price: 299,
+      description: 'Black urad lentils and red kidney beans simmered all night over dying tandoor coals with ripe tomato reduction, cream, and pure country white butter.',
+      category: 'House Dips & Cold Raitas',
+      image: img('photo-1585937421612-70a008356fbe'),
+      imageAlt: 'Rich creamy dal makhani with swirl of white butter in brass bowl',
+      tags: ['Overnight Simmer', 'Vegetarian'],
+      dietary: 'veg',
+      weightOrSize: '450ml Bowl',
+      calories: '390 kcal',
+      featured: true,
+    },
+    {
+      id: 'kk-middle-eastern-dip-trio',
+      slug: 'house-middle-eastern-dip-trio-pita',
+      name: 'House Middle Eastern Dip Trio with Warm Pita',
+      price: 249,
+      description: 'Three authentic cold mezze dips: Classic Silky Chickpea Hummus, Smoked Roasted Eggplant Mutabbal, and Fluffy Garlic Toum with two warm pita breads.',
+      category: 'House Dips & Cold Raitas',
+      image: img('photo-1541696432-82c6da8ce7bf'),
+      imageAlt: 'Three ceramic bowls of hummus, mutabbal and garlic dip with pita bread',
+      tags: ['Cold Mezze', 'Vegan'],
+      dietary: 'vegan',
+      weightOrSize: '240g Total Dips + Pita',
+      calories: '360 kcal',
+    },
+    {
+      id: 'kk-pomegranate-walnut-raita',
+      slug: 'pomegranate-cucumber-toasted-walnut-raita',
+      name: 'Ruby Pomegranate & Toasted Walnut Cold Raita',
+      price: 159,
+      description: 'Thick strained curd whipped with roasted cumin, rock salt, diced Persian cucumbers, ruby pomegranate pearls, and crushed roasted walnuts.',
+      category: 'House Dips & Cold Raitas',
+      image: img('photo-1546833999-b9f581a1996d'),
+      imageAlt: 'Bowl of white creamy raita topped with red pomegranate seeds and herbs',
+      tags: ['Cooling Balance', 'Vegetarian'],
+      dietary: 'veg',
+      weightOrSize: '300ml Bowl',
+      calories: '160 kcal',
+    },
+
+    // ── 8. Shahi Desserts & Kahwa ──────────────────────────────────────────
+    {
+      id: 'kk-kesar-pista-phirni',
+      slug: 'royal-kesar-pista-shahi-phirni-clay-matka',
+      name: 'Royal Kesar Pista Shahi Phirni in Clay Matka',
+      price: 169,
+      description: 'Slow-cooked ground basmati rice pudding infused with Kashmiri saffron strands, green cardamom, and slivered pistachios and almonds in an unglazed clay bowl.',
+      category: 'Shahi Desserts & Kahwa',
+      image: img('photo-1569864358642-9d1684040f43'),
+      imageAlt: 'Clay matka filled with creamy saffron phirni topped with pistachios',
+      tags: ['Royal Dessert', 'Vegetarian'],
+      dietary: 'veg',
+      weightOrSize: '180g Clay Matka',
+      calories: '240 kcal',
+      featured: true,
+    },
+    {
+      id: 'kk-kashmiri-kahwa',
+      slug: 'kashmiri-saffron-almond-green-kahwa-flask',
+      name: 'Kashmiri Saffron & Almond Green Kahwa (500ml Flask)',
+      price: 179,
+      description: 'Traditional green tea brewed with cinnamon barks, cardamom pods, crushed Kashmiri almonds, and golden saffron strands. Digestive and warming.',
+      category: 'Shahi Desserts & Kahwa',
+      image: img('photo-1510812431401-41d2bd2722f3'),
+      imageAlt: 'Traditional brass samovar and cup of golden saffron kahwa tea with almonds',
+      tags: ['Digestive Elixir', 'Vegan'],
+      dietary: 'vegan',
+      weightOrSize: '500ml Flask · 3 Cups',
+      calories: '80 kcal',
+    },
+  ],
+  craftProcess: {
+    badge: 'THE ANCIENT ART OF THE KEBAB',
+    title: 'How Kebab Kingdom Recreates 300 Years of Royal Awadhi Gastronomy',
+    subtitle: 'True royal kebabs were created for emperors who demanded sublime texture without tough fibers.',
+    steps: [
+      { time: '07:00 AM', title: 'Stone-Pounded Spices (Potli)', desc: 'Whole cloves, star anise, cubeb pepper, and green cardamom are toasted and stone-pounded.' },
+      { time: '09:30 AM', title: '24-Hour Papaya & Yogurt Maceration', desc: 'Prime meat rests with raw green papaya enzyme and hung curd to naturally tenderize fibers.' },
+      { time: '04:00 PM', title: 'Hand-Molding onto Flat Skewers', desc: 'Each seekh is hand-molded onto custom heavy iron skewers with ice-water dipping.' },
+      { time: '07:30 PM', title: 'Coconut Embers Sigri Char', desc: 'Slowly rotated over live coconut shell coals and brushed with pure desi cow ghee.' },
+    ],
+    image: img('photo-1529042410759-befb1204b468'),
+  },
+  story: {
+    badge: 'ESTABLISHED 1988',
+    kicker: 'THE LEGACY OF IMPERIAL DASTARKHWANS',
+    title: 'Centuries of Nawabi Feasting Brought to the Modern Flame.',
+    paragraphs: [
+      'In the historic royal kitchens of Lucknow and Peshawar, culinary mastery was measured not by speed, but by nuance. Master bawarchis competed to create kebabs so tender that toothless Nawabs could savor every mouthful with pure delight.',
+      'Kebab Kingdom was founded in 1988 by Master Chef Aslam Qureshi, direct descendant of royal court chefs. He brought those sacred 16-spice secret masala recipes and live-charcoal sigri techniques to our dining rooms.',
+      'When you sit down at Kebab Kingdom, you are not simply having dinner; you are participating in a royal Dastarkhwan tradition where every skewer, flatbread, and saffron handi biryani is an offering of regal hospitality.',
+    ],
+    image: img('photo-1517248135467-4c7edcad34c4'),
+    imageAlt: 'Regal dining hall with candlelight and chandeliers at Kebab Kingdom',
+    founderQuote: 'The secret to an unforgettable kebab is not heat; it is patience. When the spices are ground fresh and the meat yields like cream, you have touched the soul of Mughlai cooking.',
+    founderName: 'Ustad Aslam Qureshi · Master Bawarchi & Founder, Kebab Kingdom',
+    stats: [
+      { value: '16 Spices', label: 'Secret Royal Potli Masala' },
+      { value: '24 Hours', label: 'Yogurt & Herb Marination' },
+      { value: '36 Years', label: 'Continuous Culinary Heritage' },
+      { value: '4.9 ★', label: 'Over 42,000 Royal Guest Reviews' },
+    ],
+  },
+  promo: {
+    badge: 'ROYAL DASTARKHWAN TABLE OFFER',
+    title: 'Reserve an Imperial Dastarkhwan Table & Enjoy Complimentary Shahi Phirni',
+    desc: 'Reserve a table for 4 or more this week and receive complimentary clay matkas of our slow-simmered Kesar Pista Shahi Phirni for your entire royal party.',
+    ctaText: 'Reserve Dastarkhwan',
+    ctaPage: 'contact',
+    image: img('photo-1589302168068-964664d93dc0'),
+    imageAlt: 'Clay handi biryani and royal kebabs spread for dinner service',
+  },
+  gallery: [
+    { src: img('photo-1529042410759-befb1204b468'), alt: 'Platter of sizzling Middle Eastern seekh kebabs with herbs', caption: 'Charcoal Sigri Grilled Mutton Seekh Kebabs with Mint Dip', tag: 'Seekh Kebabs' },
+    { src: img('photo-1599488615731-7e5c2823ff28'), alt: 'Chicken malai tikka skewers with cream and herbs', caption: 'Kastoori Murgh Malai Tikka Roasted with Cardamom Cream', tag: 'Malai Tikka' },
+    { src: img('photo-1544025162-d76694265947'), alt: 'Peshawari lamb chops on slate board with fresh lime', caption: 'Char-Grilled Peshawari Lamb Chops with Black Cardamom', tag: 'Lamb Chops' },
+    { src: img('photo-1589302168068-964664d93dc0'), alt: 'The Grand Sultan Kebab Dastarkhwan with clay pot dum biryani', caption: 'The Grand Sultan Dastarkhwan Banquet for 4-5 Guests', tag: 'Royal Feast' },
+    { src: img('photo-1601050690597-df0568f70950'), alt: 'Tandoori paneer tikka skewers with peppers and onions', caption: 'Zafrani Malai Paneer Tikka Skewers Roasted in Clay Tandoor', tag: 'Paneer Tikka' },
+    { src: img('photo-1517248135467-4c7edcad34c4'), alt: 'Royal dining setting with candlelight and Persian carpets', caption: 'Our Candlelit Royal Dining Hall with Persian Carpet Accents', tag: 'Royal Hall' },
+  ],
+  testimonials: [
+    {
+      name: 'Nawabzada Fahim Ali',
+      role: 'Culinary Historian · Lucknow',
+      rating: 5,
+      quote: 'Kebab Kingdom is the only place outside of old Lucknow that prepares Galouti kebabs with genuine 16-spice potli masala and raw papaya. The kebab melts on your tongue without even requiring teeth. Truly royal.',
+      source: 'Verified Dastarkhwan Guest',
+      date: 'Yesterday',
+    },
+    {
+      name: 'Zoya Khan',
+      role: 'Fashion Stylist & Foodie · Lavelle Road',
+      rating: 5,
+      quote: 'The Grand Sultan Dastarkhwan is an experience everyone in Bengaluru should enjoy at least once. The aroma of saffron, charcoal, and cardamom filled our table, and the lamb chops were charred to absolute perfection.',
+      source: 'Verified Banquet Booking',
+      date: '4 days ago',
+    },
+    {
+      name: 'Farhan Siddiqui',
+      role: 'Corporate Executive · Koramangala',
+      rating: 5,
+      quote: 'We held our annual board dinner in their private Dastarkhwan room. The service was impeccable, the mutton seekh kebabs were juicy and aromatic, and the Kashmiri Kahwa was the ideal digestive finale.',
+      source: 'Verified Private Table',
+      date: 'Last weekend',
+    },
+    {
+      name: 'Ananya Roy',
+      role: 'Architect · Indiranagar',
+      rating: 5,
+      quote: 'Ordered the Shahi Vegetarian Dastarkhwan for a family dinner at home. Delivered hot in clay handis and sealed foil boxes. The saffron paneer tikka and dal makhani tasted like they were served straight from royal court.',
+      source: 'Verified Online Order',
+      date: '6 days ago',
+    },
+  ],
+  location: {
+    address: 'Kebab Kingdom Royal Palace #88, Mosque Road, Frazer Town',
+    neighborhood: 'Frazer Town / Benson Town / Richards Town / MG Road, Bengaluru, Karnataka 560005',
+    hoursWeekdays: 'Tuesday – Friday: 12:30 PM – 11:30 PM (Lunch & Evening Dastarkhwan)',
+    hoursWeekends: 'Saturday – Sunday: 12:00 PM – 12:00 AM (Grand Royal Weekend Feasts)',
+    phone: '+91 (080) 4888-1988',
+    email: 'dastarkhwan@kebabkingdom.com',
+    pickupNotice: 'Dedicated royal takeaway counter at Palace Gate 1. Advance reservations recommended for Dastarkhwan seating.',
+    mapEmbedUrl: 'https://maps.google.com/?q=Frazer+Town+Bengaluru',
+  },
+  customInquiry: {
+    title: 'Royal Dastarkhwan Banquets, Nikah Feasts & Corporate Catering',
+    subtitle: 'From intimate family celebrations to 200-person grand imperial Mughlai banquets with live sigri and clay tandoors.',
+    occasions: ['Grand Wedding Nikah Feast', 'Family Milestone Dastarkhwan', 'Corporate Executive Banquet', 'Eid & Festive Celebration'],
+    sizes: [
+      { label: 'Royal Majlis (15 People)', serves: '15 people', basePrice: 7999 },
+      { label: 'Sultan Banquet (35 People)', serves: '35 people', basePrice: 17499 },
+      { label: 'Imperial Feast (75 People)', serves: '75 people', basePrice: 36999 },
+    ],
+    flavors: [
+      'Royal Awadhi Galouti Kebabs with Ulta Tawa Paratha',
+      'Charcoal Grilled Lucknowi Mutton Seekh Kebabs',
+      'Peshawari Char-Grilled Lamb Chops',
+      'Shahi Zafrani Dum Biryani Handis',
+    ],
+  },
+  faqs: [
+    {
+      category: 'Dining Tradition',
+      question: 'What is a Dastarkhwan seating experience?',
+      answer: 'A Dastarkhwan is the traditional Persian and Mughal dining spread laid upon low tables or plush carpeted seating where family and guests share multi-course grilled meats, breads, and biryanis communally.',
+    },
+    {
+      category: 'Halal Certification',
+      question: 'Are all meats 100% Halal certified?',
+      answer: 'Yes! All poultry, mutton, and lamb cuts used across Kebab Kingdom are 100% Halal certified, fresh, and sourced from certified heritage farms daily.',
+    },
+    {
+      category: 'Vegetarian Options',
+      question: 'Do you have vegetarian royal kebab options?',
+      answer: 'Yes! We take immense pride in our Shahi Vegetarian Kebab Dastarkhwan featuring Zafrani Malai Paneer Tikka, Tandoori Stuffed Khumb, Dahi Ke Kebab, and Crispy Herb Falafels with Beetroot Hummus.',
+    },
+    {
+      category: 'Majlis Reservations',
+      question: 'Can we reserve private Dastarkhwan rooms for family gatherings?',
+      answer: 'Yes! You can reserve our private royal dining majlis online for groups of 6 or more for birthday celebrations, family reunions, and festive dinners.',
+    },
+    {
+      category: 'Takeout & Delivery',
+      question: 'Can we order kebabs and biryani for takeout and home delivery?',
+      answer: 'Yes. Order online through our website. All kebabs are wrapped in foil and insulated boxes, and biryanis are delivered in sealed earthen clay handis to retain authentic dum steam.',
+    },
+  ],
 };
 
 export default function KebabKingdom() {
-  const [scrolled, setScrolled] = useState(false);
-  const [activeMenuTab, setActiveMenuTab] = useState('Kebab Plates');
-  
-  const heroRef = useReveal(100);
-  const storyRef = useReveal(200);
-  const menuRef = useReveal(200);
-  
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const theme = {
-    name: 'Kebab Kingdom',
-    tagline: 'Charcoal-grilled Middle Eastern & Mediterranean kebabs',
-    palette: { primary: '#d97706', secondary: '#1c1408', surface: '#fffbf0', text: '#1c1408', background: '#fefdf8', textLight: '#92400e' }
-  };
-
-  const menu = [
-    { tab: 'Kebab Plates', items: [
-      { name: 'Lamb Shish Kebab', price: '$22', desc: 'Marinated cubed lamb, onion, peppers, charcoal grilled. Served with rice and salad.', tags: ['Chef\'s Favourite'], image: IMAGES.lamb },
-      { name: 'Adana Kebab', price: '$21', desc: 'Spiced minced lamb with herbs, hand-pressed on a flat skewer. Served with lavash.', tags: ['Spicy'], image: IMAGES.adana },
-      { name: 'Chicken Döner Plate', price: '$18', desc: 'Slow-roasted vertical spit chicken, rice, salad, garlic sauce.', image: IMAGES.chicken },
-    ]},
-    { tab: 'Mezze', items: [
-      { name: 'Hummus & Pita', price: '$9', desc: 'Creamy hummus made from scratch, warm pita, olive oil drizzle.', image: IMAGES.mezze1 },
-      { name: 'Baba Ganoush', price: '$10', desc: 'Charcoal-roasted eggplant with tahini, garlic, lemon.', tags: ['Vegan'], image: IMAGES.mezze2 },
-    ]},
-    { tab: 'Wraps', items: [
-      { name: 'Chicken Shawarma Wrap', price: '$14', desc: 'Marinated chicken, garlic sauce, pickles, tomato, fresh flatbread.', image: IMAGES.wrap },
-      { name: 'Falafel Wrap', price: '$12', desc: 'Crispy falafel, hummus, Israeli salad, hot sauce.', tags: ['Vegetarian'], image: IMAGES.mezze1 },
-    ]},
-  ];
-
-  return (
-    <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif', minHeight: '100vh' }}>
-      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(254,253,248,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(217,119,6,0.15)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none', color: scrolled ? theme.palette.secondary : '#fff' }}>
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          
-          <div style={{ fontSize: '1.5rem', fontWeight: 700, fontFamily: '"Cairo", sans-serif', color: scrolled ? theme.palette.secondary : '#fff', letterSpacing: '1px' }}>
-            {theme.name}
-          </div>
-        </div>
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', padding: '0.65rem 1.75rem', borderRadius: '30px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontFamily: '"Inter", sans-serif', transition: 'all 0.3s' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#b45309'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = theme.palette.primary}>
-            Order Now
-          </button>
-        </div>
-      </nav>
-
-      <header style={{ height: '90vh', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundColor: '#000' }}>
-          <img src={IMAGES.hero} alt="Charcoal Grill" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.6 }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(28,20,8,0.9), rgba(217,119,6,0.3))' }}></div>
-        </div>
-        <div ref={heroRef as any} style={{ position: 'relative', zIndex: 10, color: '#fff', maxWidth: '800px', padding: '0 5%' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', marginBottom: '1.5rem', color: '#fcd34d' }}>
-            <Flame size={24} />
-            <span style={{ fontWeight: 600, fontSize: '1.1rem', letterSpacing: '3px', textTransform: 'uppercase' }}>Authentic Charcoal Mangal</span>
-          </div>
-          <h1 style={{ fontFamily: '"Cairo", sans-serif', fontSize: 'clamp(3.5rem, 8vw, 6rem)', lineHeight: 1.1, marginBottom: '1.5rem', fontWeight: 800 }}>The King of <span style={{ color: theme.palette.primary }}>Kebabs.</span></h1>
-          <p style={{ fontSize: '1.25rem', fontWeight: 400, marginBottom: '3rem', lineHeight: 1.6, color: '#fef3c7', maxWidth: '600px', margin: '0 auto 3rem' }}>Charcoal-grilled lamb, chicken, and beef kebabs served with hand-rolled flatbread, mezze, and centuries of tradition.</p>
-          <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', padding: '1.1rem 3rem', borderRadius: '30px', fontWeight: 600, fontSize: '1.1rem', cursor: 'pointer', fontFamily: '"Inter", sans-serif', transition: 'all 0.3s' }}>
-              Order Kebabs Now
-            </button>
-          </div>
-        </div>
-      </header>
-      
-      <section ref={storyRef as any} style={{ padding: '8rem 5%', backgroundColor: '#fff', color: theme.palette.secondary }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5rem', alignItems: 'center', maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ flex: '1 1 500px' }}>
-            <div style={{ color: theme.palette.primary, marginBottom: '1rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '2px' }}>Our Story</div>
-            <h2 style={{ fontFamily: '"Cairo", sans-serif', fontSize: '3.5rem', color: theme.palette.secondary, marginBottom: '1.5rem', lineHeight: 1.2, fontWeight: 800 }}>From Ankara to Your Plate.</h2>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '1.5rem', color: theme.palette.textLight }}>Chef Mehmet Arslan learned to grill from his father in Ankara. The charcoal selection, the skewer technique, the resting time — everything was passed down with strict instructions to never change a thing.</p>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '2.5rem', color: theme.palette.textLight }}>Every kebab at Kebab Kingdom is made from fresh-ground and marinated meat, loaded on hand-rolled skewers, and grilled over natural charcoal. The flatbread is baked fresh every 2 hours.</p>
-            <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <div style={{ backgroundColor: theme.palette.surface, padding: '1rem', borderRadius: '50%', color: theme.palette.primary }}><Flame size={24} /></div>
-                <div><h4 style={{ margin: '0 0 0.25rem 0', fontWeight: 700 }}>Natural Charcoal</h4></div>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <div style={{ backgroundColor: theme.palette.surface, padding: '1rem', borderRadius: '50%', color: theme.palette.primary }}><Utensils size={24} /></div>
-                <div><h4 style={{ margin: '0 0 0.25rem 0', fontWeight: 700 }}>Fresh Flatbread</h4></div>
-              </div>
-            </div>
-          </div>
-          <div style={{ flex: '1 1 400px', position: 'relative' }}>
-            <div style={{ position: 'absolute', top: '1.5rem', right: '-1.5rem', left: '1.5rem', bottom: '-1.5rem', backgroundColor: theme.palette.surface, borderRadius: '8px', zIndex: 1 }}></div>
-            <img src={IMAGES.story} alt="Chef" style={{ width: '100%', borderRadius: '8px', position: 'relative', zIndex: 2, boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }} />
-          </div>
-        </div>
-      </section>
-
-      <section ref={menuRef as any} style={{ padding: '8rem 5%', backgroundColor: theme.palette.surface }}>
-        <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-          <h2 style={{ fontFamily: '"Cairo", sans-serif', fontSize: '3.5rem', color: theme.palette.secondary, fontWeight: 800, margin: 0 }}>Mangal Menu</h2>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '3rem', flexWrap: 'wrap' }}>
-            {menu.map((cat) => (
-              <button 
-                key={cat.tab}
-                onClick={() => setActiveMenuTab(cat.tab)}
-                style={{ 
-                  padding: '0.75rem 2rem', 
-                  backgroundColor: activeMenuTab === cat.tab ? theme.palette.primary : '#fff',
-                  color: activeMenuTab === cat.tab ? '#fff' : theme.palette.secondary,
-                  border: `1px solid ${activeMenuTab === cat.tab ? theme.palette.primary : '#d1d5db'}`,
-                  borderRadius: '30px',
-                  fontFamily: '"Inter", sans-serif',
-                  fontSize: '1rem',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  boxShadow: activeMenuTab === cat.tab ? '0 4px 10px rgba(217,119,6,0.3)' : 'none'
-                }}
-              >
-                {cat.tab}
-              </button>
-            ))}
-          </div>
-        </div>
-        
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem', maxWidth: '1200px', margin: '0 auto' }}>
-          {menu.find(c => c.tab === activeMenuTab)?.items.map((item, i) => (
-            <div key={i} style={{ display: 'flex', flexDirection: 'column', backgroundColor: '#fff', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.05)', transition: 'transform 0.3s, box-shadow 0.3s', cursor: 'pointer', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' }} onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-8px)'; e.currentTarget.style.boxShadow = '0 15px 30px rgba(217,119,6,0.1)'; }} onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.03)'; }}>
-              <div style={{ position: 'relative' }}>
-                <img src={item.image} alt={item.name} style={{ width: '100%', height: '220px', objectFit: 'cover' }} />
-                <div style={{ position: 'absolute', bottom: '-15px', right: '1.5rem', backgroundColor: theme.palette.primary, color: '#fff', padding: '0.5rem 1.5rem', borderRadius: '30px', fontWeight: 700, fontFamily: '"Inter", sans-serif', fontSize: '1.1rem', boxShadow: '0 4px 10px rgba(217,119,6,0.4)' }}>{item.price}</div>
-              </div>
-              <div style={{ padding: '2.5rem 2rem 2rem' }}>
-                <h3 style={{ fontFamily: '"Cairo", sans-serif', fontSize: '1.5rem', fontWeight: 700, margin: '0 0 1rem 0', color: theme.palette.secondary }}>{item.name}</h3>
-                <p style={{ color: theme.palette.textLight, fontSize: '1rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>{item.desc}</p>
-                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                  {item.tags?.map(tag => (
-                    <span key={tag} style={{ fontSize: '0.75rem', padding: '0.3rem 0.8rem', backgroundColor: theme.palette.surface, color: theme.palette.primary, fontWeight: 600, borderRadius: '4px' }}>{tag}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section style={{ padding: '8rem 5%', backgroundColor: theme.palette.background }}>
-        <h2 style={{ fontFamily: '"Cairo", sans-serif', fontSize: '3rem', color: theme.palette.secondary, textAlign: 'center', marginBottom: '4rem', fontWeight: 800 }}>Our Guests</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-          {[
-            { name: 'Aisha M.', quote: 'I am half Lebanese and this is the most authentic kebab I have had in America. The Adana is extraordinary.' },
-            { name: 'Stefan B.', quote: 'The lamb shish is perfect — charred outside, pink inside, and the marinade is deeply flavored. Outstanding.' },
-            { name: 'Omar F.', quote: 'The flatbread alone is worth the trip. Fresh, warm, slightly charred — it makes every bite better.' }
-          ].map((test, i) => (
-            <div key={i} style={{ backgroundColor: '#fff', padding: '2.5rem', borderRadius: '12px', border: `1px solid rgba(217,119,6,0.1)`, boxShadow: '0 4px 15px rgba(0,0,0,0.02)' }}>
-              <div style={{ display: 'flex', color: theme.palette.primary, marginBottom: '1.5rem' }}>
-                {[...Array(5)].map((_, j) => <Star key={j} size={20} fill={theme.palette.primary} stroke="none" />)}
-              </div>
-              <p style={{ color: theme.palette.text, lineHeight: 1.7, marginBottom: '2rem', fontSize: '1.05rem', fontStyle: 'italic' }}>"{test.quote}"</p>
-              <h4 style={{ fontWeight: 700, color: theme.palette.secondary, margin: 0, fontSize: '1.1rem', fontFamily: '"Inter", sans-serif' }}>- {test.name}</h4>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <footer style={{ backgroundColor: theme.palette.secondary, color: '#fef3c7', padding: '6rem 5% 3rem' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '4rem', marginBottom: '4rem' }}>
-            <div>
-              <h2 style={{ fontFamily: '"Cairo", sans-serif', fontSize: '2.5rem', fontWeight: 800, marginBottom: '1rem', color: '#fff' }}>{theme.name}</h2>
-              <p style={{ color: '#d97706', marginBottom: '2rem', fontSize: '1.05rem', lineHeight: 1.6 }}>{theme.tagline}</p>
-            </div>
-            <div>
-              <h4 style={{ color: '#fff', fontWeight: 700, marginBottom: '1.5rem', fontSize: '1.2rem', fontFamily: '"Cairo", sans-serif' }}>Location</h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}><MapPin size={24} color={theme.palette.primary} style={{ flexShrink: 0 }} /><span style={{ lineHeight: 1.5, color: '#fefdf8' }}>18 Sultan Bazaar Rd<br/>Dearborn, MI 48126</span></div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}><Phone size={24} color={theme.palette.primary} style={{ flexShrink: 0 }} /><span style={{ color: '#fefdf8' }}>+1 (313) 555-0188</span></div>
-              </div>
-            </div>
-            <div>
-              <h4 style={{ color: '#fff', fontWeight: 700, marginBottom: '1.5rem', fontSize: '1.2rem', fontFamily: '"Cairo", sans-serif' }}>Hours</h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}><Clock size={24} color={theme.palette.primary} style={{ flexShrink: 0 }} /><span style={{ lineHeight: 1.5, color: '#fefdf8' }}>Mon–Sun: 12pm – 11pm<br/>(Fri–Sat until Midnight)</span></div>
-              </div>
-            </div>
-          </div>
-          <div style={{ borderTop: '1px solid rgba(254,253,248,0.1)', paddingTop: '2rem', textAlign: 'center' }}>
-            <p style={{ fontSize: '0.95rem', margin: 0, color: '#92400e' }}>© 2026 {theme.name}. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
+  return <FoodStorefrontCore config={kebabKingdomConfig} />;
 }
-
-

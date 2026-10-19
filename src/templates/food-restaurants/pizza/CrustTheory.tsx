@@ -1,188 +1,520 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowLeft, MapPin, Clock, Phone, ShoppingBag, ChevronRight, Star } from 'lucide-react';
-import { useReveal } from '../components/RestaurantCore';
+import React from 'react';
+import { FoodStorefrontCore, type StorefrontThemeConfig } from '../shared/FoodStorefrontCore';
 
-const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
+const img = (id: string, w = 1400) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
 
-const PIZZA_IMAGES = {
-  hero: img('photo-1504674900247-0877df9cc836'), // Detroit style
-  story: img('photo-1504674900247-0877df9cc836'), // baker preparing dough
-  promo: img('photo-1504674900247-0877df9cc836'), // deep dish cheese pull
-  detroit: img('photo-1504674900247-0877df9cc836'), // original detroit
-  chicago: img('photo-1504674900247-0877df9cc836'), // original chicago
-  gallery1: img('photo-1504674900247-0877df9cc836'),
-  gallery2: img('photo-1504674900247-0877df9cc836'),
-  gallery3: img('photo-1504674900247-0877df9cc836'),
-  gallery4: img('photo-1504674900247-0877df9cc836'),
+export const crustTheoryConfig: StorefrontThemeConfig = {
+  id: 'crust-theory',
+  kind: 'pizza',
+  currencySymbol: '₹',
+  layoutOptions: {
+    heroLayout: 'minimal-editorial',
+    productLayout: 'editorial-2',
+    featuresLayout: 'cards-grid',
+    storyLayout: 'split-left',
+    galleryLayout: 'grid-3x2',
+    sectionOrder: ['hero', 'features', 'products', 'craft', 'story', 'gallery', 'reviews', 'promo', 'location', 'newsletter'],
+  },
+  name: 'Crust Theory',
+  tagline: 'Detroit square and Chicago deep-dish craft pizza — where crust is the whole point',
+  brandSub: 'Detroit Square · Chicago Deep-Dish · Two Cities. One Obsession.',
+  palette: {
+    primary: '#f59e0b',
+    primaryHover: '#d97706',
+    secondary: '#1c1c1c',
+    background: '#fafafa',
+    surface: '#f5f5f5',
+    text: '#1c1c1c',
+    textMuted: '#6b7280',
+    border: 'rgba(245, 158, 11, 0.2)',
+    badgeBg: 'rgba(245, 158, 11, 0.1)',
+    badgeText: '#b45309',
+    heroOverlay: 'linear-gradient(to bottom right, rgba(28,28,28,0.92), rgba(245,158,11,0.35))',
+  },
+  typography: {
+    headingFont: '"Bebas Neue", "Oswald", sans-serif',
+    bodyFont: '"Inter", sans-serif',
+    accentFont: '"Bebas Neue", sans-serif',
+  },
+  hero: {
+    headline: 'Where Crust Is The Point. Two Cities. One Obsession.',
+    subheadline:
+      'Detroit-style square pizza with caramelized brick cheese to the edges, baked in 3-year seasoned steel pans. Chicago deep-dish stuffed with Italian sausage and crushed tomato — requiring a full 45-minute bake. Neither can be rushed. That is the whole philosophy.',
+    badge: 'DETROIT SQUARE · CHICAGO DEEP-DISH · CHICAGO, IL',
+    image: img('photo-1564936281291-294551497d81'),
+    imageAlt: 'Thick Detroit-style square pizza with caramelized cheese crust edges fresh from the steel pan',
+    primaryCtaText: 'Pre-Order Deep Dish',
+    primaryCtaPage: 'menu',
+    secondaryCtaText: 'Compare Pizza Styles',
+    secondaryCtaPage: 'collections',
+  },
+  announcement: {
+    text: 'Deep Dish Takes 45 Minutes to Bake — Pre-Order Online & Arrive To A Perfect Pie · New Detroit Seasonal Square Added Weekly',
+    badgeText: 'PRE-ORDER',
+    linkText: 'Pre-Order Now',
+    linkPage: 'menu',
+  },
+  proofBadges: [
+    { icon: '🟫', title: 'Detroit Square Pan', subtitle: 'Blue steel pans seasoned for 3+ years to achieve the signature crispy caramelized cheese crust edge' },
+    { icon: '⏱️', title: '45-Minute Deep Dish', subtitle: 'Chicago deep-dish cannot be rushed. Pre-order online and arrive to a perfectly bubbling pie' },
+    { icon: '🧀', title: 'Brick Cheese Walls', subtitle: 'Wisconsin brick cheese pressed to the pan edge creates Detroit\'s legendary caramelized crust wall' },
+    { icon: '🌿', title: 'Italian Sausage Fennel', subtitle: 'House-made fennel Italian sausage in every Chicago deep-dish, layered below the tomato' },
+  ],
+  categories: ['Detroit Square', 'Chicago Deep-Dish', 'Pan Sides & Sauces', 'Salads & Starters', 'Craft Drinks'],
+  collections: [
+    {
+      id: 'detroit-square',
+      name: 'Detroit Square',
+      tagline: 'Rectangular pies baked in seasoned blue steel pans with brick cheese pressed to the edges — the Motor City original.',
+      image: img('photo-1564936281291-294551497d81'),
+      itemCount: 7,
+      filterCategory: 'Detroit Square',
+    },
+    {
+      id: 'chicago-deep-dish',
+      name: 'Chicago Deep-Dish',
+      tagline: 'A Chicago institution requiring 45 minutes and layers of patience. Pre-order and arrive to perfection.',
+      image: img('photo-1579751626657-72bc17010498'),
+      itemCount: 6,
+      filterCategory: 'Chicago Deep-Dish',
+    },
+    {
+      id: 'sides-sauces',
+      name: 'Sides & Sauces',
+      tagline: 'House-made garlic knots, cheese sauces, dipping oils, and crispy additions.',
+      image: img('photo-1572695157366-5e585ab2b69f'),
+      itemCount: 6,
+      filterCategory: 'Pan Sides & Sauces',
+    },
+    {
+      id: 'salads-starters',
+      name: 'Salads & Starters',
+      tagline: 'Fresh starters to start before the main event arrives.',
+      image: img('photo-1512621776951-a57141f2eefd'),
+      itemCount: 5,
+      filterCategory: 'Salads & Starters',
+    },
+  ],
+  products: [
+    // — Detroit Square —
+    {
+      id: 'ct-original-detroit',
+      slug: 'original-detroit-square',
+      name: 'The Original Detroit',
+      price: 26,
+      description: 'The quintessential Detroit square: Wisconsin brick cheese pressed to the pan edges, cup-and-char pepperoni cups, house-crushed tomato sauce ladled on top after baking. Serve hot.',
+      category: 'Detroit Square',
+      image: img('photo-1594007654729-407eedc4be65'),
+      imageAlt: 'Original Detroit square pizza with crispy caramelized cheese edge',
+      tags: ['Most Popular', 'Bestseller', 'Classic'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: 'Half Pan (2–3 people)',
+      featured: true,
+      options: [
+        { name: 'Pan Size', choices: [{ label: '6-Cut Half Pan (2-3)' }, { label: '12-Cut Full Pan (4-6)', priceDelta: 18 }] },
+        { name: 'Sauce', choices: [{ label: 'House Crushed Tomato (on top)' }, { label: 'Garlic Butter & Herb' }, { label: 'Vodka Cream Blush', priceDelta: 1.5 }] },
+      ],
+    },
+    {
+      id: 'ct-white-detroit',
+      slug: 'white-detroit-garlic-cream',
+      name: 'White Detroit',
+      price: 25,
+      description: 'No tomato. Roasted garlic cream base, Wisconsin brick cheese to the edges, aged provolone, fontina, fresh rosemary, flake sea salt.',
+      category: 'Detroit Square',
+      image: img('photo-1565299715199-866c917257d5'),
+      imageAlt: 'White Detroit square pizza with garlic cream and triple cheese',
+      tags: ['No Tomato', 'Vegetarian'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: 'Half Pan (2–3 people)',
+      options: [
+        { name: 'Pan Size', choices: [{ label: '6-Cut Half Pan (2-3)' }, { label: '12-Cut Full Pan (4-6)', priceDelta: 18 }] },
+      ],
+    },
+    {
+      id: 'ct-bbq-brisket-detroit',
+      slug: 'bbq-brisket-detroit',
+      name: 'BBQ Brisket Detroit',
+      price: 28,
+      description: 'House smoked and braised brisket, Kentucky bourbon BBQ drizzle, pickled jalapeños, red onion, brick and smoked cheddar, cilantro finish.',
+      category: 'Detroit Square',
+      image: img('photo-1565299624946-b28f40a0ae38'),
+      imageAlt: 'BBQ brisket Detroit square with bourbon drizzle and jalapeños',
+      tags: ['Bestseller', 'Smoky', 'Premium'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: 'Half Pan (2–3 people)',
+      featured: true,
+      options: [
+        { name: 'Pan Size', choices: [{ label: '6-Cut Half Pan (2-3)' }, { label: '12-Cut Full Pan (4-6)', priceDelta: 18 }] },
+        { name: 'Heat', choices: [{ label: 'Mild' }, { label: 'Spicy Jalapeño' }] },
+      ],
+    },
+    {
+      id: 'ct-mushroom-truffle-detroit',
+      slug: 'mushroom-truffle-detroit',
+      name: 'Mushroom & Truffle Detroit',
+      price: 27,
+      description: 'Wild mushroom medley (porcini, cremini, shiitake), truffle cream, Wisconsin brick cheese, Parmigiano, fresh thyme, truffle oil finish.',
+      category: 'Detroit Square',
+      image: img('photo-1576402187878-974f70c890a5'),
+      imageAlt: 'Mushroom and truffle Detroit square pizza',
+      tags: ['Vegetarian', 'Premium', 'Truffle'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: 'Half Pan (2–3 people)',
+    },
+    {
+      id: 'ct-pepperoni-cup-detroit',
+      slug: 'pepperoni-cup-detroit',
+      name: 'Pepperoni Cup',
+      price: 26,
+      description: 'Double-layer cup-and-char pepperoni on brick cheese base, house tomato, honey drizzle, chilli flakes. Classic Detroit amplified.',
+      category: 'Detroit Square',
+      image: img('photo-1548369937-47519962c11a'),
+      imageAlt: 'Pepperoni cup Detroit square with honey drizzle',
+      tags: ['Pepperoni', 'Popular'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: 'Half Pan (2–3 people)',
+    },
+    {
+      id: 'ct-veggie-detroit',
+      slug: 'veggie-harvest-detroit',
+      name: 'Veggie Harvest Detroit',
+      price: 24,
+      description: 'Roasted red pepper, zucchini, caramelized onion, sun-dried tomatoes, Kalamata olives, brick cheese, goat cheese crumble, basil.',
+      category: 'Detroit Square',
+      image: img('photo-1565557623262-b51c2513a641'),
+      imageAlt: 'Veggie harvest Detroit square with roasted vegetables',
+      tags: ['Vegetarian', 'Colourful'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: 'Half Pan (2–3 people)',
+    },
+    {
+      id: 'ct-buffalo-chicken-detroit',
+      slug: 'buffalo-chicken-detroit',
+      name: 'Buffalo Chicken Detroit',
+      price: 27,
+      description: 'Frank\'s RedHot buffalo chicken, brick and gorgonzola cheese, ranch drizzle, celery chips, spring onion. The sports-night special.',
+      category: 'Detroit Square',
+      image: img('photo-1534308983496-4fabb1a015ee'),
+      imageAlt: 'Buffalo chicken Detroit square with ranch and gorgonzola',
+      tags: ['Spicy', 'Game Day'],
+      allergens: ['Contains Gluten', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: 'Half Pan (2–3 people)',
+    },
+    // — Chicago Deep-Dish —
+    {
+      id: 'ct-original-chicago',
+      slug: 'the-original-chicago',
+      name: 'The Original Chicago',
+      price: 28,
+      compareAtPrice: 33,
+      description: 'The Chicago institution: buttery cornmeal crust built up the sides, house-made fennel Italian sausage layer, whole-milk mozzarella, crushed San Marzano tomato on top. 45-minute bake. Pre-order required.',
+      category: 'Chicago Deep-Dish',
+      image: img('photo-1579751626657-72bc17010498'),
+      imageAlt: 'Authentic Chicago deep-dish pizza cross-section showing sausage and cheese layers',
+      tags: ['Most Popular', '45-Minute Bake', 'Pre-Order'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: 'Individual 9" (1–2 people)',
+      featured: true,
+      options: [
+        { name: 'Size', choices: [{ label: '9" Individual (1-2)' }, { label: '12" Large (2-3)', priceDelta: 10 }] },
+        { name: 'Crust', choices: [{ label: 'Classic Buttery Cornmeal' }, { label: 'Herb Garlic Cornmeal', priceDelta: 1 }] },
+      ],
+    },
+    {
+      id: 'ct-spinach-mushroom-chicago',
+      slug: 'spinach-mushroom-chicago',
+      name: 'Spinach & Mushroom Deep-Dish',
+      price: 26,
+      description: 'Fresh spinach, cremini mushrooms, roasted garlic, whole-milk ricotta layer, mozzarella, crushed tomato, Parmigiano finish. Vegetarian comfort supreme.',
+      category: 'Chicago Deep-Dish',
+      image: img('photo-1576402187878-974f70c890a5'),
+      imageAlt: 'Vegetarian spinach and mushroom Chicago deep-dish',
+      tags: ['Vegetarian', '45-Minute Bake'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: 'Individual 9" (1–2 people)',
+      options: [
+        { name: 'Size', choices: [{ label: '9" Individual (1-2)' }, { label: '12" Large (2-3)', priceDelta: 10 }] },
+      ],
+    },
+    {
+      id: 'ct-meat-lovers-chicago',
+      slug: 'meat-lovers-deep-dish',
+      name: 'Meat Lovers Deep-Dish',
+      price: 31,
+      description: 'Fennel Italian sausage, cup-and-char pepperoni, house beef meatballs, thick-cut peppered bacon, mozzarella, crushed tomato. Maximum protein. Minimum regret.',
+      category: 'Chicago Deep-Dish',
+      image: img('photo-1565299624946-b28f40a0ae38'),
+      imageAlt: 'Chicago meat lovers deep-dish with multiple protein layers',
+      tags: ['Most Popular', '45-Minute Bake', 'Meat Lovers'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: 'Individual 9" (1–2 people)',
+      featured: true,
+      options: [
+        { name: 'Size', choices: [{ label: '9" Individual (1-2)' }, { label: '12" Large (2-3)', priceDelta: 11 }] },
+      ],
+    },
+    {
+      id: 'ct-sausage-peppers-chicago',
+      slug: 'sausage-peppers-chicago',
+      name: 'Sausage & Peppers',
+      price: 27,
+      description: 'Italian sausage, roasted bell peppers, caramelized onions, mozzarella, basil-crushed tomato. A Chicago classic combination in deep-dish form.',
+      category: 'Chicago Deep-Dish',
+      image: img('photo-1533622597524-a1215e26c0a2'),
+      imageAlt: 'Sausage and peppers Chicago deep-dish',
+      tags: ['Classic', '45-Minute Bake'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: 'Individual 9" (1–2 people)',
+    },
+    {
+      id: 'ct-bbq-chicken-chicago',
+      slug: 'bbq-chicken-deep-dish',
+      name: 'BBQ Chicken Deep-Dish',
+      price: 28,
+      description: 'Pulled BBQ chicken, mozzarella and Monterey Jack, smoky BBQ sauce mixed into crushed tomato, pickled jalapeño, red onion.',
+      category: 'Chicago Deep-Dish',
+      image: img('photo-1562967914-608f82629710'),
+      imageAlt: 'BBQ chicken Chicago deep-dish with pickled jalapeños',
+      tags: ['BBQ', '45-Minute Bake'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: 'Individual 9" (1–2 people)',
+    },
+    {
+      id: 'ct-four-cheese-chicago',
+      slug: 'four-cheese-deep-dish',
+      name: 'Quattro Formaggio Deep-Dish',
+      price: 26,
+      description: 'Mozzarella, provolone, fontina, and Parmigiano layers, no meat — a pure cheese experience with a garlic herb tomato topping.',
+      category: 'Chicago Deep-Dish',
+      image: img('photo-1588315029754-2dd089d39a1a'),
+      imageAlt: 'Four cheese Chicago deep-dish with herb tomato',
+      tags: ['Vegetarian', '45-Minute Bake', 'Cheese Lover'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: 'Individual 9" (1–2 people)',
+    },
+    // — Pan Sides & Sauces —
+    {
+      id: 'ct-garlic-knots',
+      slug: 'house-garlic-knots',
+      name: 'House Garlic Knots',
+      price: 9,
+      description: 'Six Detroit-dough garlic knots brushed with roasted garlic compound butter, Parmigiano, fresh parsley. House marinara on the side.',
+      category: 'Pan Sides & Sauces',
+      image: img('photo-1572695157366-5e585ab2b69f'),
+      imageAlt: 'Golden garlic knots with parmesan and parsley',
+      tags: ['Side', 'Popular', 'Vegetarian'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '6 pieces',
+    },
+    {
+      id: 'ct-cheese-sauce',
+      slug: 'double-cheese-sauce',
+      name: 'Double Cheese Dip',
+      price: 5,
+      description: 'Warm blend of Wisconsin brick and aged cheddar cheeses with smoked paprika and mustard. Ideal for Detroit square corners.',
+      category: 'Pan Sides & Sauces',
+      image: img('photo-1565557623262-b51c2513a641'),
+      imageAlt: 'Warm double cheese dipping sauce',
+      tags: ['Side', 'Dip'],
+      allergens: ['Contains Dairy'],
+      weightOrSize: '150ml pot',
+    },
+    {
+      id: 'ct-wings-side',
+      slug: 'dry-rub-wings',
+      name: 'Dry-Rub Chicken Wings',
+      price: 17,
+      description: 'Eight crispy wings dry-rubbed with house Detroit spice blend (smoked paprika, garlic, fennel, cayenne), served with blue cheese dip.',
+      category: 'Pan Sides & Sauces',
+      image: img('photo-1548369937-47519962c11a'),
+      imageAlt: 'Crispy dry-rub chicken wings with blue cheese dip',
+      tags: ['Side', 'Popular', 'Wings'],
+      allergens: ['Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '8 wings',
+    },
+    // — Salads & Starters —
+    {
+      id: 'ct-caesar-salad',
+      slug: 'classic-caesar-salad',
+      name: 'Classic Caesar',
+      price: 12,
+      description: 'Crisp romaine, house Caesar dressing, Parmigiano shavings, house-made sourdough croutons, anchovy optional.',
+      category: 'Salads & Starters',
+      image: img('photo-1512621776951-a57141f2eefd'),
+      imageAlt: 'Classic Caesar salad with romaine, parmesan and croutons',
+      tags: ['Salad', 'Classic'],
+      allergens: ['Contains Gluten', 'Contains Dairy', 'Contains Eggs', 'Contains Fish (optional anchovy)'],
+      weightOrSize: 'Full size',
+    },
+    {
+      id: 'ct-mozzarella-sticks',
+      slug: 'house-mozzarella-sticks',
+      name: 'Mozzarella Sticks',
+      price: 11,
+      description: 'Six deep-fried hand-breaded whole-milk mozzarella sticks with house marinara dip and a pinch of dried oregano.',
+      category: 'Salads & Starters',
+      image: img('photo-1531749668029-2db88e4276c7'),
+      imageAlt: 'Golden crispy mozzarella sticks with marinara',
+      tags: ['Starter', 'Popular', 'Vegetarian'],
+      allergens: ['Contains Gluten', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '6 sticks',
+    },
+    // — Craft Drinks —
+    {
+      id: 'ct-old-style-beer',
+      slug: 'old-style-draught',
+      name: 'Old Style Draught',
+      price: 7,
+      description: 'Chicago\'s hometown lager — the perfect crisp companion to deep-dish. Cold-poured and served tall.',
+      category: 'Craft Drinks',
+      image: img('photo-1510812431401-41d2bd2722f3'),
+      imageAlt: 'Tall glass of Old Style draught beer',
+      tags: ['Beer', 'Chicago Classic'],
+      allergens: ['Contains Gluten'],
+      weightOrSize: 'Pint (568ml)',
+    },
+    {
+      id: 'ct-craft-soda',
+      slug: 'house-craft-soda',
+      name: 'House Craft Soda',
+      price: 4.5,
+      description: 'Rotating house-made sodas: Detroit Cream, Chicago Cherry, or Ginger Citrus. Ask your server for today\'s selection.',
+      category: 'Craft Drinks',
+      image: img('photo-1548839140-29a749e1cf4d'),
+      imageAlt: 'House craft soda in a glass with ice',
+      tags: ['Non-Alcoholic', 'House Made'],
+      weightOrSize: '375ml glass',
+    },
+  ],
+  craftProcess: {
+    badge: 'THE CRUST OBSESSION',
+    title: 'Every Pan Tells a Story of Craft and Patience',
+    subtitle: 'Our Detroit steel pans have been seasoned for years. Our deep-dish bake time is non-negotiable.',
+    steps: [
+      { time: 'Pan Seasoning', title: 'The Blue Steel Detroit Pan', desc: 'Our Detroit pans are authentic rectangular blue steel pans sourced from the same manufacturer as the originals. Each pan is seasoned over 3 years through repeated use and oiling — creating a naturally non-stick surface that contributes to the legendary caramelized cheese crust.' },
+      { time: 'Dough', title: 'House Detroit & Deep-Dish Doughs', desc: 'Our Detroit dough is a medium-hydration focaccia-style dough that rises tall in the pan. Our Chicago dough incorporates cornmeal and butter for a flaky, short-crust quality at the base and sides.' },
+      { time: 'The Build', title: 'Layers From the Bottom Up', desc: 'For Chicago deep-dish, we build in reverse: cheese first (directly on the dough), toppings second, tomato sauce last. This protects the cheese during the long bake and prevents it from burning.' },
+      { time: '45 Minutes', title: 'The Deep-Dish Bake', desc: 'Chicago deep-dish is baked at 425°F for a minimum of 45 minutes. This is not negotiable. There is no shortcut. Pre-order online and time your arrival accordingly — your pie will be at its peak the moment you sit down.' },
+      { time: 'The Finish', title: 'Cheese Edge Caramelization (Detroit)', desc: 'Detroit square is done when the brick cheese pressed to the edge of the pan has melted, crawled up the side, and caramelized into a deep amber crust wall. This is the signature that cannot be faked.' },
+    ],
+    image: img('photo-1528137871618-79d2761e3fd5'),
+  },
+  story: {
+    badge: 'OUR STORY',
+    title: 'Two Founders. One Argument. The Best Possible Outcome.',
+    paragraphs: [
+      'Matt Kowalski grew up in Detroit. Sofia Marchetti grew up in Chicago. They met in culinary school in 2011 arguing about whose city made better pizza. The argument has never been resolved — which is exactly why Crust Theory exists.',
+      'They decided to do both styles, and do both better. Matt spent 6 months consulting with Detroit\'s original pizza pan manufacturers and veteran pizzaiolos on Livernois Avenue. Sofia staged in three Chicago deep-dish institutions before developing her own cornmeal crust formula.',
+      'When Crust Theory opened on South Wabash in 2015, local food critics called it "the first pizza restaurant that made Chicago and Detroit proud simultaneously." We have been sold out on weekends ever since.',
+    ],
+    image: img('photo-1528137871618-79d2761e3fd5'),
+    imageAlt: 'Matt Kowalski and Sofia Marchetti at the original Crust Theory kitchen',
+    founderQuote: 'We started as a rivalry. We became a partnership. The pizza became a philosophy.',
+    founderName: 'Matt Kowalski & Sofia Marchetti, Founders',
+    stats: [
+      { value: '3yr+', label: 'Pan Seasoning Time' },
+      { value: '45min', label: 'Deep-Dish Bake Time' },
+      { value: '2', label: 'Pizza Styles Done Right' },
+      { value: '9+', label: 'Years on South Wabash' },
+    ],
+  },
+  promo: {
+    badge: 'PRE-ORDER',
+    title: '45 Minutes. Worth Every Second. Pre-Order Your Deep Dish.',
+    desc: 'Chicago deep-dish requires time, and we won\'t rush it. Pre-order your pie before you arrive — arrive at your pick-up time and it comes out hot, bubbling, and perfect. No waiting.',
+    ctaText: 'Pre-Order Your Deep Dish',
+    ctaPage: 'menu',
+    image: img('photo-1579751626657-72bc17010498'),
+    imageAlt: 'Perfect Chicago deep-dish just out of the oven, cheese bubbling and crust golden',
+  },
+  gallery: [
+    { src: img('photo-1564936281291-294551497d81'), alt: 'Original Detroit square pizza with caramelized cheese edge crust', caption: 'The Original Detroit — caramelized cheese to every corner', tag: 'Detroit Square' },
+    { src: img('photo-1579751626657-72bc17010498'), alt: 'Chicago deep-dish cross-section showing layers', caption: 'The Original Chicago — 45 minutes of perfection', tag: 'Deep Dish' },
+    { src: img('photo-1565299624946-b28f40a0ae38'), alt: 'BBQ brisket Detroit square with bourbon drizzle', caption: 'BBQ Brisket Detroit — the brisket game-changer', tag: 'Detroit Square' },
+    { src: img('photo-1528137871618-79d2761e3fd5'), alt: 'Detroit blue steel pan seasoning and pizza preparation', caption: 'Three years of seasoning go into every pan', tag: 'Craft' },
+    { src: img('photo-1576402187878-974f70c890a5'), alt: 'Mushroom truffle Detroit square fresh from the oven', caption: 'Mushroom & Truffle Detroit — earthy and indulgent', tag: 'Detroit Square' },
+    { src: img('photo-1548369937-47519962c11a'), alt: 'Pepperoni cup Detroit with honey drizzle', caption: 'Pepperoni Cup — cup-and-char perfection', tag: 'Detroit Square' },
+    { src: img('photo-1572695157366-5e585ab2b69f'), alt: 'House garlic knots with garlic butter', caption: 'House Garlic Knots — the essential companion', tag: 'Sides' },
+    { src: img('photo-1557499305-0af888c3d8ec'), alt: 'Crust Theory dining room on South Wabash', caption: 'Crust Theory — 770 S Wabash Avenue, Chicago', tag: 'Restaurant' },
+  ],
+  testimonials: [
+    {
+      name: 'Mike Theodorakis',
+      rating: 5,
+      quote: 'The Detroit Original is a religious experience. That caramelized cheese crust wall is absolutely addictive. We ordered a full pan to share and it disappeared in ten minutes. Everyone was silent and happy.',
+      source: 'Verified Regular',
+      date: 'October 2026',
+      role: 'Chicago Food Blogger',
+    },
+    {
+      name: 'Karen Liu',
+      rating: 5,
+      quote: 'The 45-minute wait for the deep-dish is worth it. This is the best Chicago deep-dish I have had outside of Pizzeria Uno, and I genuinely think the crust is better. I have been converted.',
+      source: 'Verified Guest',
+      date: 'September 2026',
+    },
+    {
+      name: 'David Park',
+      rating: 5,
+      quote: 'Crust Theory has ruined all other pizza for me. Once you understand the caramelized edge, the layers, the patience required — you simply cannot go back to thin-crust. This is serious pizza.',
+      source: 'Verified Regular',
+      date: 'August 2026',
+    },
+  ],
+  location: {
+    address: '770 S Wabash Avenue, South Loop, Chicago, IL 60605',
+    neighborhood: 'South Loop, Chicago',
+    hoursWeekdays: 'Wednesday – Friday: 11:00 AM – 10:00 PM',
+    hoursWeekends: 'Saturday – Sunday: 11:00 AM – 11:00 PM · Monday–Tuesday: Closed',
+    phone: '+1 (312) 555-0299',
+    email: 'pans@crusttheory.com',
+    pickupNotice: 'Deep-dish pre-orders must be placed at least 1 hour in advance. Pickup at the South Wabash counter. Detroit squares are available fresh from the pan during service hours without pre-order.',
+  },
+  customInquiry: {
+    title: 'Deep-Dish Party Pre-Orders & Catering',
+    subtitle: 'Feed a crowd with whole pans of Detroit square or pre-ordered Chicago deep-dish. We handle pick-up events, corporate lunches, and tailgate boxes.',
+    type: 'catering',
+    occasions: ['Office Team Lunch', 'Game Day Party', 'Birthday Celebration', 'Corporate Catering', 'Sports Watch Party'],
+    sizes: [
+      { label: 'Detroit Half-Pan Pack (6 cuts)', serves: '2-3 guests', basePrice: 26 },
+      { label: 'Detroit Full-Pan Pack (12 cuts)', serves: '4-6 guests', basePrice: 44 },
+      { label: 'Tailgate Box (2 Full Detroit Pans + Sides)', serves: '8-12 guests', basePrice: 98 },
+      { label: 'Party Catering Set (Mixed 4 Full Pans)', serves: '16-24 guests', basePrice: 180 },
+    ],
+    flavors: ['Original Detroit Selection', 'Deep-Dish Sampler', 'Meat Lovers Mix', 'Veggie & White Pies'],
+    fillings: ['House Garlic Knots (dozen)', 'Mozzarella Sticks (dozen)', 'Wing Platter (24 wings)'],
+    finishes: ['Delivery Available (>$100 orders)', 'Custom Pizza Style Mix', '72-Hour Advance Booking Required'],
+  },
+  faqs: [
+    {
+      question: 'Why does the Chicago deep-dish take 45 minutes?',
+      answer: 'Chicago deep-dish is a thick, layered pie baked at 425°F. The layers of cheese, meat, and sauce need time to heat through completely from the bottom up. A rushed deep-dish will be undercooked in the centre and have a pale, soft crust. Our 45-minute bake produces a perfectly golden, flaky cornmeal crust with a fully bubbling, hot interior.',
+      category: 'About Deep-Dish',
+    },
+    {
+      question: 'Do I have to pre-order the deep-dish?',
+      answer: 'Yes — we strongly recommend pre-ordering online, at least 1 hour before your desired pickup or arrival time. Walk-in orders are accepted but may require a 45-60 minute wait at the table. Pre-ordering ensures your pie comes out of the oven exactly when you arrive.',
+      category: 'Ordering',
+    },
+    {
+      question: 'What is the difference between Detroit-style and New York-style pizza?',
+      answer: 'Detroit-style is baked in a rectangular blue steel pan with a thick, airy focaccia-style crust. The cheese is pressed to the pan edges and caramelizes into a crispy crust wall. Sauce goes on top. New York-style has a thin, foldable round crust with sauce below cheese. They are fundamentally different pizza forms.',
+      category: 'About Our Styles',
+    },
+    {
+      question: 'Can I get a half Detroit and half Chicago in one order?',
+      answer: 'Yes — you can order both styles separately in any combination for group orders or catering. We do not combine the doughs in a single pan, but our catering packages include mixed style selections.',
+      category: 'Ordering',
+    },
+    {
+      question: 'Are there vegetarian or gluten-free options?',
+      answer: 'Yes. We have multiple vegetarian Detroit squares (White Detroit, Veggie Harvest, Mushroom Truffle) and the Spinach & Mushroom deep-dish. Gluten-free is not currently available as our kitchen handles wheat flour extensively — we cannot guarantee a gluten-safe environment.',
+      category: 'Dietary & Allergens',
+    },
+  ],
 };
 
 export default function CrustTheory() {
-  const [scrolled, setScrolled] = useState(false);
-  const [activeMenuTab, setActiveMenuTab] = useState('Detroit Square');
-  
-  const heroRef = useReveal(100);
-  const menuRef = useReveal(200);
-  
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const theme = {
-    name: 'Crust Theory',
-    tagline: 'Detroit & Chicago deep-dish craft pizza',
-    palette: { primary: '#f59e0b', secondary: '#1c1c1c', surface: '#f5f5f5', text: '#1c1c1c', background: '#fafafa' }
-  };
-
-  const menu = [
-    { tab: 'Detroit Square', items: [
-      { name: 'Original Detroit', price: '$26', desc: 'Brick cheese to the edges, tomato sauce on top, pepperoni cups.', tags: ['Most Popular'], image: PIZZA_IMAGES.detroit },
-      { name: 'White Detroit', price: '$25', desc: 'Garlic cream, mozzarella, provolone, fresh herbs. No tomato.', tags: ['No Sauce'], image: PIZZA_IMAGES.gallery1 },
-    ]},
-    { tab: 'Chicago Deep Dish', items: [
-      { name: 'The Original Chicago', price: '$28', desc: 'Italian sausage, crushed tomato on top, thick mozzarella layer.', tags: ['45 min bake'], image: PIZZA_IMAGES.chicago },
-      { name: 'Spinach & Mushroom', price: '$26', desc: 'Fresh spinach, cremini mushrooms, ricotta layer, tomato.', tags: ['Vegetarian', '45 min bake'], image: PIZZA_IMAGES.story },
-    ]}
-  ];
-
-  return (
-    <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif' }}>
-      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.3s', backgroundColor: scrolled ? 'rgba(255,255,255,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid #eaeaea' : 'none', backdropFilter: scrolled ? 'blur(10px)' : 'none' }}>
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          
-          <div style={{ fontSize: '1.5rem', fontWeight: 900, fontFamily: '"Bebas Neue", sans-serif', color: scrolled ? theme.palette.primary : '#fff', letterSpacing: '1px' }}>
-            {theme.name}
-          </div>
-        </div>
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', padding: '0.75rem 1.5rem', borderRadius: '4px', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontFamily: '"Bebas Neue", sans-serif', fontSize: '1.1rem', letterSpacing: '0.5px' }}>
-            <ShoppingBag size={18} /> Pre-Order Now
-          </button>
-        </div>
-      </nav>
-
-      <header style={{ height: '100vh', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundColor: '#000' }}>
-          <img src={PIZZA_IMAGES.hero} alt="Pizza" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.5, transform: 'scale(1.05)' }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom right, rgba(28,28,28,0.9), rgba(245,158,11,0.4))' }}></div>
-        </div>
-        <div ref={heroRef as any} style={{ position: 'relative', zIndex: 10, color: '#fff', maxWidth: '900px', padding: '0 2rem' }}>
-          <h1 style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: 'clamp(4rem, 10vw, 8rem)', lineHeight: 0.9, marginBottom: '1.5rem', letterSpacing: '2px' }}>Where Crust Is The Point.</h1>
-          <p style={{ fontSize: '1.2rem', fontWeight: 400, marginBottom: '2.5rem', maxWidth: '600px', margin: '0 auto 3rem auto', lineHeight: 1.6 }}>{theme.tagline}. Two cities, one obsession — the perfect crust.</p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-            <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', padding: '1rem 2.5rem', borderRadius: '4px', fontWeight: 700, fontSize: '1.2rem', fontFamily: '"Bebas Neue", sans-serif', letterSpacing: '1px', cursor: 'pointer' }}>Order Deep Dish</button>
-            <button style={{ backgroundColor: 'transparent', color: '#fff', border: '2px solid #fff', padding: '1rem 2.5rem', borderRadius: '4px', fontWeight: 700, fontSize: '1.2rem', fontFamily: '"Bebas Neue", sans-serif', letterSpacing: '1px', cursor: 'pointer' }}>Compare Styles</button>
-          </div>
-        </div>
-      </header>
-      
-      <section style={{ padding: '6rem 5%', backgroundColor: '#1c1c1c', color: '#fff' }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4rem', alignItems: 'center' }}>
-          <div style={{ flex: '1 1 400px' }}>
-            <img src={PIZZA_IMAGES.story} alt="Pizza prep" style={{ width: '100%', borderRadius: '8px', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }} />
-          </div>
-          <div style={{ flex: '1 1 400px' }}>
-            <h2 style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '3.5rem', color: theme.palette.primary, marginBottom: '1.5rem', letterSpacing: '1px' }}>We Started A Crust Revolution.</h2>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '1.5rem', color: '#ccc' }}>The founders of Crust Theory grew up arguing about which city does pizza better — Detroit or Chicago. So they decided to do both, and do both better.</p>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '2rem', color: '#ccc' }}>Our Detroit-style pans are seasoned for 3 years. Our Chicago deep dish takes 45 minutes to bake. Neither can be rushed. That is the whole point.</p>
-            <button style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'none', border: 'none', color: '#fff', fontSize: '1.1rem', fontWeight: 600, cursor: 'pointer', borderBottom: `2px solid ${theme.palette.primary}`, paddingBottom: '4px' }}>
-              Read Our Story <ChevronRight size={18} />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <section ref={menuRef as any} style={{ padding: '6rem 5%', backgroundColor: theme.palette.surface }}>
-        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <h2 style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '3.5rem', color: theme.palette.secondary, letterSpacing: '1px' }}>The Menu</h2>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '2rem' }}>
-            {menu.map((cat) => (
-              <button 
-                key={cat.tab}
-                onClick={() => setActiveMenuTab(cat.tab)}
-                style={{ 
-                  padding: '0.75rem 2rem', 
-                  backgroundColor: activeMenuTab === cat.tab ? theme.palette.secondary : 'transparent',
-                  color: activeMenuTab === cat.tab ? '#fff' : theme.palette.secondary,
-                  border: `2px solid ${theme.palette.secondary}`,
-                  borderRadius: '4px',
-                  fontFamily: '"Bebas Neue", sans-serif',
-                  fontSize: '1.2rem',
-                  letterSpacing: '1px',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s'
-                }}
-              >
-                {cat.tab}
-              </button>
-            ))}
-          </div>
-        </div>
-        
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-          {menu.find(c => c.tab === activeMenuTab)?.items.map((item, i) => (
-            <div key={i} style={{ display: 'flex', gap: '1.5rem', backgroundColor: '#fff', padding: '1.5rem', borderRadius: '8px', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }}>
-              <img src={item.image} alt={item.name} style={{ width: '120px', height: '120px', objectFit: 'cover', borderRadius: '4px' }} />
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
-                  <h3 style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '1.8rem', margin: 0, letterSpacing: '0.5px' }}>{item.name}</h3>
-                  <span style={{ fontWeight: 700, color: theme.palette.primary, fontSize: '1.2rem' }}>{item.price}</span>
-                </div>
-                <p style={{ color: '#666', fontSize: '0.95rem', lineHeight: 1.5, marginBottom: '1rem' }}>{item.desc}</p>
-                <div style={{ display: 'flex', gap: '0.5rem' }}>
-                  {item.tags.map(tag => (
-                    <span key={tag} style={{ fontSize: '0.75rem', padding: '0.25rem 0.5rem', backgroundColor: theme.palette.surface, color: theme.palette.secondary, borderRadius: '4px', fontWeight: 600 }}>{tag}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-      
-      <section style={{ position: 'relative', padding: '8rem 5%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundColor: '#000' }}>
-          <img src={PIZZA_IMAGES.promo} alt="Cheese pull" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.6 }} />
-        </div>
-        <div style={{ position: 'relative', zIndex: 10, textAlign: 'center', color: '#fff' }}>
-          <h2 style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '4rem', letterSpacing: '2px', lineHeight: 1, marginBottom: '1.5rem' }}>45 Minutes.<br/>Worth Every Second.</h2>
-          <p style={{ fontSize: '1.2rem', marginBottom: '2.5rem', maxWidth: '600px', margin: '0 auto 2.5rem' }}>Quality takes time. Pre-order your deep dish before you arrive and we'll time it perfectly to come out fresh and bubbling as you sit down.</p>
-          <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', padding: '1rem 3rem', borderRadius: '4px', fontWeight: 700, fontSize: '1.2rem', fontFamily: '"Bebas Neue", sans-serif', letterSpacing: '1px', cursor: 'pointer' }}>Pre-Order Your Pizza</button>
-        </div>
-      </section>
-
-      <section style={{ padding: '6rem 5%', backgroundColor: '#fff' }}>
-        <h2 style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '3.5rem', color: theme.palette.secondary, textAlign: 'center', marginBottom: '3rem', letterSpacing: '1px' }}>What They Say</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-          {[
-            { name: 'Mike T.', quote: 'The Detroit Original is a religious experience. That caramelized cheese crust is absolutely addictive.' },
-            { name: 'Karen L.', quote: 'The 45-minute wait for the Chicago deep dish is completely worth it. It\'s the best deep dish I\'ve had outside of Chicago.' },
-            { name: 'David P.', quote: 'Crust Theory has ruined all other pizza for me. Once you go deep-dish square, you just can\'t go back.' }
-          ].map((test, i) => (
-            <div key={i} style={{ backgroundColor: theme.palette.surface, padding: '2rem', borderRadius: '8px' }}>
-              <div style={{ display: 'flex', color: theme.palette.primary, marginBottom: '1rem' }}>
-                {[...Array(5)].map((_, j) => <Star key={j} size={18} fill={theme.palette.primary} />)}
-              </div>
-              <p style={{ fontStyle: 'italic', color: '#444', lineHeight: 1.6, marginBottom: '1.5rem' }}>"{test.quote}"</p>
-              <h4 style={{ fontWeight: 700, color: theme.palette.secondary, margin: 0 }}>— {test.name}</h4>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <footer style={{ backgroundColor: '#1c1c1c', color: '#fff', padding: '4rem 5% 2rem', textAlign: 'center' }}>
-        <h2 style={{ fontFamily: '"Bebas Neue", sans-serif', fontSize: '3rem', letterSpacing: '2px', marginBottom: '1rem', color: theme.palette.primary }}>{theme.name}</h2>
-        <p style={{ color: '#999', marginBottom: '3rem', fontFamily: '"Bebas Neue", sans-serif', fontSize: '1.2rem', letterSpacing: '1px' }}>{theme.tagline}</p>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '3rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
-          <div><MapPin size={24} style={{ color: theme.palette.primary, margin: '0 auto 1rem' }} /><p style={{ color: '#ccc' }}>770 S Wabash Ave, Chicago</p></div>
-          <div><Clock size={24} style={{ color: theme.palette.primary, margin: '0 auto 1rem' }} /><p style={{ color: '#ccc' }}>Wed–Sun: 11am – 10pm</p></div>
-          <div><Phone size={24} style={{ color: theme.palette.primary, margin: '0 auto 1rem' }} /><p style={{ color: '#ccc' }}>+1 (312) 555-0299</p></div>
-        </div>
-        <p style={{ color: '#666', fontSize: '0.9rem' }}>© 2026 {theme.name}. All rights reserved.</p>
-      </footer>
-    </div>
-  );
+  return <FoodStorefrontCore theme={crustTheoryConfig} />;
 }
-
-

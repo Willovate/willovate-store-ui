@@ -45,7 +45,7 @@ export const NoirTableConfig: RestaurantConfig = {
           name: 'Scallop Crudo',
           description: 'Black truffle ponzu, finger lime, micro-cilantro.',
           price: 2200,
-          image: 'https://images.unsplash.com/photo-1599084929471-29c36195df38?auto=format&fit=crop&w=800&q=80',
+          image: 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=800&q=80',
           tags: ['Seasonal'],
           dietary: ['Gluten-free'],
         },
@@ -54,7 +54,7 @@ export const NoirTableConfig: RestaurantConfig = {
           name: 'Ash-Roasted Leeks',
           description: 'Whipped ricotta, hazelnut dukkah, burnt honey vinaigrette.',
           price: 1400,
-          image: 'https://images.unsplash.com/photo-1628198754178-0e199d750a99?auto=format&fit=crop&w=800&q=80',
+          image: 'https://images.unsplash.com/photo-1544148103-0773bf10d330?auto=format&fit=crop&w=800&q=80',
           tags: ['Chef\'s Pick', 'Vegetarian'],
           dietary: ['Vegetarian', 'Gluten-free'],
         }
@@ -83,7 +83,7 @@ export const NoirTableConfig: RestaurantConfig = {
           name: 'Blackened Cod',
           description: 'Miso charcoal glaze, charred broccolini, squid ink reduction.',
           price: 3200,
-          image: 'https://images.unsplash.com/photo-1511871926618-9710d0f4d30c?auto=format&fit=crop&w=800&q=80',
+          image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80',
           tags: [],
           dietary: ['Gluten-free']
         },

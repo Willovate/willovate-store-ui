@@ -35,7 +35,7 @@ export const MaisonGourmetConfig: RestaurantConfig = {
           name: 'Steak Frites',
           description: 'Entrecôte, sauce béarnaise, hand-cut pommes frites.',
           price: 3600,
-          image: 'https://images.unsplash.com/photo-1600891964092-4316c2883c44?auto=format&fit=crop&w=800&q=80',
+          image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80',
           tags: ['Bestseller'],
           dietary: [],
           options: [{ name: 'Cuisson', choices: [{ label: 'Saignant (Rare)' }, { label: 'À Point (Medium Rare)' }] }]

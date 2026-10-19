@@ -1,198 +1,525 @@
-import React, { useState } from 'react';
-import './fast-food-shared.css';
-import { ArrowLeft } from 'lucide-react';
+import React from 'react';
+import { FoodStorefrontCore, type StorefrontThemeConfig } from '../shared/FoodStorefrontCore';
 
-const img = (id: string, w = 1600) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
+const img = (id: string, w = 1400) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
 
-const CrunchBox = () => {
-  const [activeCategory, setActiveCategory] = useState('Tenders & Wings');
-
-  const headingStyle = { fontFamily: '"Oswald", sans-serif', color: '#221100', textTransform: 'uppercase' as const };
-  const navStyle = { color: '#221100', textDecoration: 'none', fontWeight: 600, fontFamily: '"Inter", sans-serif' };
-
-  return (
-    <div className="fast-food-theme" style={{ fontFamily: '"Inter", sans-serif', color: '#221100', backgroundColor: '#fcf8f2' }}>
-      {/* Navigation */}
-      <nav className="ff-nav" style={{ backgroundColor: '#ffffff', borderBottom: '2px solid #ff8a00' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <a href="/templates/category/fast-food" style={{ ...navStyle, color: '#ff8a00', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <ArrowLeft size={18} /> Back to Fast Food
-          </a>
-          <div style={{ ...headingStyle, fontSize: '2rem', color: '#ff8a00', margin: 0 }}>CRUNCHBOX</div>
-        </div>
-        <div>
-          <a href="#combos" style={navStyle}>Boxes</a>
-          <a href="#menu" style={navStyle}>Menu</a>
-          <a href="#story" style={navStyle}>Our Story</a>
-          <button className="ff-btn" style={{ marginLeft: '1.5rem', backgroundColor: '#d91a1a', color: '#fff', borderRadius: '4px' }}>Order Now</button>
-        </div>
-      </nav>
-
-      {/* Hero */}
-      <header className="ff-hero" style={{ backgroundImage: `url(${img('photo-1626082927389-6cd097cdc6ec')})`, minHeight: '80vh', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-        <div className="ff-hero-overlay" style={{ background: 'linear-gradient(to right, rgba(34,17,0,0.8), rgba(34,17,0,0.2))' }}></div>
-        <div className="ff-hero-content" style={{ maxWidth: '600px' }}>
-          <h1 style={{ ...headingStyle, fontSize: '5rem', margin: '0 0 1rem 0', color: '#ffffff', lineHeight: 1 }}>Respect The Crunch.</h1>
-          <p style={{ fontSize: '1.25rem', marginBottom: '2.5rem', lineHeight: 1.6, color: '#fcf8f2', fontWeight: 500 }}>
-            Hand-breaded, perfectly seasoned, and fried to golden perfection. This is southern comfort in a box.
-          </p>
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            <button className="ff-btn" style={{ backgroundColor: '#ff8a00', color: '#111', borderRadius: '4px', fontSize: '1.1rem' }}>Order For Pickup</button>
-            <button className="ff-btn" style={{ backgroundColor: '#d91a1a', color: '#fff', borderRadius: '4px', fontSize: '1.1rem' }}>Get Delivery</button>
-          </div>
-        </div>
-      </header>
-
-      {/* Top Combos */}
-      <section id="combos" className="ff-section" style={{ backgroundColor: '#ffffff' }}>
-        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <h2 className="ff-title" style={{ ...headingStyle, fontSize: '3rem' }}>Fan Favorites</h2>
-          <p style={{ color: '#666', fontSize: '1.1rem' }}>The boxes everyone is talking about.</p>
-        </div>
-        <div className="ff-grid">
-          {[
-            { name: 'The Tender Box', price: '$11.99', desc: '4 Hand-breaded tenders, fries, Texas toast, and drink.', img: 'photo-1614707253590-50d4fc833076' },
-            { name: 'The Sandwich Meal', price: '$10.99', desc: 'Original crispy chicken sandwich, fries, and drink.', img: 'photo-1626082927389-6cd097cdc6ec' },
-            { name: 'Wings Combo', price: '$12.99', desc: '6 Crispy bone-in wings, fries, and drink.', img: 'photo-1504674900247-0877df9cc836' }
-          ].map((item, i) => (
-            <div key={i} className="ff-card" style={{ backgroundColor: '#fcf8f2', borderRadius: '12px', border: '1px solid #ffe6cc' }}>
-              <img src={img(item.img, 800)} alt={item.name} style={{ height: '240px' }} />
-              <div className="ff-card-content">
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
-                  <h3 style={{ ...headingStyle, fontSize: '1.5rem', margin: 0 }}>{item.name}</h3>
-                  <span style={{ fontWeight: 800, color: '#d91a1a', fontSize: '1.25rem' }}>{item.price}</span>
-                </div>
-                <p style={{ color: '#555', lineHeight: 1.5, marginBottom: '1.5rem' }}>{item.desc}</p>
-                <button className="ff-btn" style={{ width: '100%', backgroundColor: '#221100', color: '#fff', borderRadius: '4px' }}>Add to Box</button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Full Menu */}
-      <section id="menu" className="ff-section" style={{ backgroundColor: '#fcf8f2' }}>
-        <h2 className="ff-title" style={{ ...headingStyle, fontSize: '3rem', textAlign: 'center' }}>Full Menu</h2>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '3rem' }}>
-          {['Tenders & Wings', 'Sandwiches', 'Sides'].map(cat => (
-            <button 
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              style={{
-                background: activeCategory === cat ? '#221100' : '#fff',
-                color: activeCategory === cat ? '#fff' : '#221100',
-                border: '2px solid #221100',
-                padding: '0.6rem 2rem',
-                borderRadius: '4px',
-                cursor: 'pointer',
-                fontFamily: '"Oswald", sans-serif',
-                textTransform: 'uppercase',
-                transition: 'all 0.2s',
-                fontSize: '1.1rem'
-              }}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-        
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '1.5rem', maxWidth: '1200px', margin: '0 auto' }}>
-          {[
-            { cat: 'Tenders & Wings', name: '4-Piece Box', price: '$8.99', desc: '4 hand-breaded tenders, fries, Texas toast, and Crunch sauce.', img: 'photo-1614707253590-50d4fc833076' },
-            { cat: 'Tenders & Wings', name: '6-Piece Wings', price: '$9.49', desc: 'Crispy bone-in wings tossed in your choice of sauce.', img: 'photo-1504674900247-0877df9cc836' },
-            { cat: 'Tenders & Wings', name: 'Family Bucket', price: '$24.99', desc: '12 tenders, 2 large sides, 4 toasts, and plenty of sauce.', img: 'photo-1504674900247-0877df9cc836' },
-            { cat: 'Sandwiches', name: 'The Original Crunch', price: '$7.49', desc: 'Crispy breast, pickles, mayo, toasted brioche.', img: 'photo-1504674900247-0877df9cc836' },
-            { cat: 'Sandwiches', name: 'Spicy Firebird', price: '$7.99', desc: 'Dipped in Nashville hot oil, slaw, pickles.', img: 'photo-1504674900247-0877df9cc836' },
-            { cat: 'Sides', name: 'Seasoned Fries', price: '$3.49', desc: 'Tossed in our secret spice blend.', img: 'photo-1504674900247-0877df9cc836' },
-            { cat: 'Sides', name: 'Mac & Cheese', price: '$3.99', desc: 'Creamy, cheesy, and baked golden.', img: 'photo-1567188040759-fb8a883dc6d8' },
-            { cat: 'Sides', name: 'Coleslaw', price: '$2.99', desc: 'Fresh and tangy.', img: 'photo-1504674900247-0877df9cc836' },
-          ].filter(item => item.cat === activeCategory).map((item, i) => (
-            <div key={i} style={{ display: 'flex', backgroundColor: '#fff', borderRadius: '4px', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.05)', border: '1px solid #ffe6cc' }}>
-              <img src={img(item.img, 400)} alt={item.name} style={{ width: '120px', objectFit: 'cover' }} />
-              <div style={{ padding: '1.25rem', flex: 1 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                  <h4 style={{ ...headingStyle, margin: 0, fontSize: '1.2rem' }}>{item.name}</h4>
-                  <span style={{ fontWeight: 800, color: '#d91a1a' }}>{item.price}</span>
-                </div>
-                <p style={{ margin: 0, fontSize: '0.9rem', color: '#666', lineHeight: 1.4 }}>{item.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Story */}
-      <section id="story" className="ff-section" style={{ backgroundColor: '#221100', color: '#ffffff' }}>
-        <div className="ff-story">
-          <img src={img('photo-1626645738196-c2a7c87a8f58', 1000)} alt="Frying chicken" style={{ borderRadius: '8px', width: '100%', boxShadow: '10px 10px 0px #ff8a00' }} />
-          <div>
-            <h2 className="ff-title" style={{ ...headingStyle, fontSize: '3.5rem', color: '#ff8a00' }}>Secret Spices. Real Chicken.</h2>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.7, marginBottom: '1.5rem', color: '#eed' }}>
-              We don't cut corners. Our chicken is marinated for 24 hours, hand-breaded to order, and fried perfectly every single time.
-            </p>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.7, marginBottom: '2rem', color: '#eed' }}>
-              It's about doing one thing, and doing it better than anyone else.
-            </p>
-            <button className="ff-btn" style={{ backgroundColor: '#ff8a00', color: '#111', borderRadius: '4px' }}>See Our Process</button>
-          </div>
-        </div>
-      </section>
-
-      {/* Gallery */}
-      <section className="ff-section" style={{ backgroundColor: '#ffffff' }}>
-        <h2 className="ff-title" style={{ ...headingStyle, fontSize: '3rem', textAlign: 'center', marginBottom: '3rem' }}>The Crunch Collection</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
-          {[
-            'photo-1614707253590-50d4fc833076',
-            'photo-1626645738196-c2a7c87a8f58',
-            'photo-1626082927389-6cd097cdc6ec',
-            'photo-1504674900247-0877df9cc836'
-          ].map((src, i) => (
-            <div key={i} className="ff-gallery-item" style={{ borderRadius: '8px' }}>
-              <img src={img(src, 600)} alt="Gallery" />
-              <div className="ff-gallery-overlay">
-                <span style={{ color: '#fff', fontWeight: 'bold' }}>@crunchbox</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* App Promo / CTA */}
-      <section className="ff-section" style={{ backgroundColor: '#d91a1a', textAlign: 'center', padding: '6rem 2rem' }}>
-        <h2 className="ff-title" style={{ ...headingStyle, fontSize: '3.5rem', color: '#fff' }}>Crunch Cravings?</h2>
-        <p style={{ fontSize: '1.25rem', color: '#ffe', fontWeight: 500, marginBottom: '2rem' }}>Download our app to get exclusive deals and skip the line.</p>
-        <button className="ff-btn" style={{ backgroundColor: '#fff', color: '#d91a1a', borderRadius: '4px', padding: '1rem 3rem', fontSize: '1.2rem' }}>Download App</button>
-      </section>
-
-      {/* Footer */}
-      <footer className="ff-footer" style={{ backgroundColor: '#221100', color: '#bba' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '3rem', marginBottom: '3rem' }}>
-          <div>
-            <h3 style={{ ...headingStyle, color: '#ff8a00', fontSize: '1.8rem', marginBottom: '1.5rem' }}>CRUNCHBOX</h3>
-            <p style={{ margin: '0.5rem 0' }}>400 Fryer Way</p>
-            <p style={{ margin: '0.5rem 0' }}>Chicken City, TN 38000</p>
-            <p style={{ margin: '0.5rem 0', color: '#fff', fontWeight: 'bold' }}>(555) 123-4567</p>
-          </div>
-          <div>
-            <h4 style={{ color: '#fff', fontWeight: 700, marginBottom: '1.5rem', textTransform: 'uppercase' }}>Hours</h4>
-            <p style={{ margin: '0.5rem 0' }}>Mon-Thu: 11:00am - 10:00pm</p>
-            <p style={{ margin: '0.5rem 0' }}>Fri-Sat: 11:00am - 12:00am</p>
-            <p style={{ margin: '0.5rem 0' }}>Sun: 11:00am - 9:00pm</p>
-          </div>
-          <div>
-            <h4 style={{ color: '#fff', fontWeight: 700, marginBottom: '1.5rem', textTransform: 'uppercase' }}>Links</h4>
-            <p style={{ margin: '0.5rem 0' }}><a href="#" style={{ color: '#bba', textDecoration: 'none' }}>Order Now</a></p>
-            <p style={{ margin: '0.5rem 0' }}><a href="#" style={{ color: '#bba', textDecoration: 'none' }}>Careers</a></p>
-            <p style={{ margin: '0.5rem 0' }}><a href="#" style={{ color: '#bba', textDecoration: 'none' }}>Privacy Policy</a></p>
-          </div>
-        </div>
-        <div style={{ borderTop: '1px solid #443', paddingTop: '2rem', textAlign: 'center', fontSize: '0.9rem' }}>
-          &copy; {new Date().getFullYear()} CrunchBox. All rights reserved.
-        </div>
-      </footer>
-    </div>
-  );
+export const crunchBoxConfig: StorefrontThemeConfig = {
+  id: 'crunch-box',
+  kind: 'fast-food',
+  currencySymbol: '₹',
+  layoutOptions: {
+    heroLayout: 'split',
+    productLayout: 'grid-4',
+    storyLayout: 'card-overlay',
+    featuresLayout: 'cards-grid',
+    galleryLayout: 'editorial-collage',
+    sectionOrder: ['hero', 'features', 'products', 'promo', 'craft', 'gallery', 'reviews', 'location', 'newsletter'],
+  },
+  name: 'Crunch Box',
+  tagline: '24-hour buttermilk-brined crispy fried chicken, hand-breaded tenders, bone-in buckets, and honey butter biscuits',
+  brandSub: 'Southern Fried Chicken House · Loud Crunch Tradition',
+  palette: {
+    primary: '#d97706',
+    primaryHover: '#b45309',
+    secondary: '#1c130d',
+    background: '#fffdf5',
+    surface: '#ffffff',
+    text: '#1f150e',
+    textMuted: '#78685c',
+    border: 'rgba(217, 119, 6, 0.22)',
+    badgeBg: '#fef3c7',
+    badgeText: '#92400e',
+    heroOverlay: 'linear-gradient(to right, rgba(28, 19, 13, 0.94) 0%, rgba(28, 19, 13, 0.72) 55%, rgba(28, 19, 13, 0.25) 100%)',
+  },
+  typography: {
+    headingFont: '"Outfit", "Plus Jakarta Sans", sans-serif',
+    bodyFont: '"Inter", sans-serif',
+  },
+  hero: {
+    headline: 'Loud Crunch. 24-Hour Buttermilk Brine. Pure Fried Chicken Authority.',
+    subheadline:
+      'Farm-raised chicken soaked for 24 hours in seasoned whole buttermilk, dredged in our 11-spice crackle flour, and pressure-fried golden for maximum crunch and unrivaled juicy tenderness. Served with flaky honey-butter biscuits.',
+    badge: '11-SPICE CRACKLE CRUST · NEVER FROZEN POULTRY',
+    image: img('photo-1626082927389-6cd097cdc6ec'),
+    imageAlt: 'Golden brown crispy fried chicken drumsticks and thighs in a rustic takeout box with dipping sauces',
+    primaryCtaText: 'Order Fried Chicken',
+    primaryCtaPage: 'menu',
+    secondaryCtaText: 'The 24hr Brine Secret',
+    secondaryCtaPage: 'about',
+  },
+  announcement: {
+    text: 'Sunday Supper Buckets Live! 16-Piece Feast with 4 Large Sides & 6 Warm Biscuits · Order Ahead For Pick-Up',
+    badgeText: 'FAMILY BUNDLE',
+    linkText: 'Order Family Feast',
+    linkPage: 'menu',
+  },
+  proofBadges: [
+    { icon: '🍗', title: '24-Hour Buttermilk Brine', subtitle: 'Breaks down protein fibers for ultra-juicy meat through the bone' },
+    { icon: '🌾', title: '11-Spice Double Dredge', subtitle: 'Craggy, ridged exterior that stays crunchy through delivery' },
+    { icon: '🍯', title: 'Wildflower Hot Honey', subtitle: 'Warm habanero-infused Tennessee honey brushed fresh at the window' },
+    { icon: '🧈', title: 'Layered Cheddar Biscuits', subtitle: 'Folded by hand daily with cultured butter and baked hourly' },
+  ],
+  categories: ['Chicken Sandos', 'Hand-Breaded Tenders', 'Bone-In Buckets', 'Southern Sides & Biscuits', 'House Dips & Sips'],
+  collections: [
+    {
+      id: 'crispy-sandos',
+      name: 'Signature Chicken Sandos',
+      tagline: 'Jumbo buttermilk breasts, spicy glazes, tangy slaws, and buttered brioche.',
+      image: img('photo-1606755962773-d324e0a13086'),
+      itemCount: 6,
+      filterCategory: 'Chicken Sandos',
+    },
+    {
+      id: 'tender-boxes',
+      name: 'Hand-Breaded Tenders',
+      tagline: 'Whole breast tenderloins fried crisp with your pick of signature dips.',
+      image: img('photo-1626645738196-c2a7c87a8f58'),
+      itemCount: 6,
+      filterCategory: 'Hand-Breaded Tenders',
+    },
+    {
+      id: 'family-buckets',
+      name: 'Southern Bone-In Buckets',
+      tagline: '8-piece and 16-piece buckets with family-sized comfort sides and warm biscuits.',
+      image: img('photo-1562967914-608f82629710'),
+      itemCount: 6,
+      filterCategory: 'Bone-In Buckets',
+    },
+    {
+      id: 'southern-comfort-sides',
+      name: 'Southern Comfort Sides',
+      tagline: 'Baked mac and cheese, cajun waffle fries, buttermilk slaw, and honey biscuits.',
+      image: img('photo-1543339308-43e59d6b73a6'),
+      itemCount: 6,
+      filterCategory: 'Southern Sides & Biscuits',
+    },
+  ],
+  products: [
+    {
+      id: 'cb-hot-honey-sando',
+      slug: 'the-hot-honey-crunch-sando',
+      name: 'The Hot Honey Southern Crunch Sando',
+      price: 11.95,
+      compareAtPrice: 13.50,
+      description: 'Jumbo 24-hour buttermilk fried chicken breast dipped in Nashville hot honey, topped with creamy southern buttermilk cabbage slaw and sweet bread & butter pickles on a toasted buttered brioche bun.',
+      category: 'Chicken Sandos',
+      image: img('photo-1606755962773-d324e0a13086'),
+      tags: ['Chef Signature', 'Bestseller'],
+      allergens: ['Contains Dairy', 'Contains Gluten'],
+      weightOrSize: 'Jumbo 6oz Chicken Breast',
+      available: true,
+      featured: true,
+      options: [
+        { name: 'Heat Level', values: ['Sweet Hot Honey (Classic)', 'Fiery Habanero Hot', 'No Heat (Original Honey)'] },
+        { name: 'Combo Upgrade', values: ['Sando Only', 'Make it a Meal (Cajun Fries & Drink) (+ $4.50)', 'Feast Meal (Mac & Biscuit & Shake) (+ $7.50)'] },
+      ],
+    },
+    {
+      id: 'cb-classic-sando',
+      slug: 'classic-crispy-buttermilk-sando',
+      name: 'Classic Crispy Buttermilk Sando',
+      price: 10.50,
+      description: 'Golden fried chicken breast, roasted garlic herb mayo, crisp iceberg lettuce, and crinkle-cut dill pickles on a toasted brioche bun. Simplicity perfected.',
+      category: 'Chicken Sandos',
+      image: img('photo-1625813506062-0aeb1d7a094b'),
+      tags: ['Classic', 'Popular'],
+      allergens: ['Contains Dairy', 'Contains Gluten'],
+      weightOrSize: 'Jumbo 6oz Chicken Breast',
+      available: true,
+      featured: true,
+    },
+    {
+      id: 'cb-ghost-sando',
+      slug: 'ghost-pepper-blaze-sando',
+      name: 'Ghost Pepper Blaze Sando',
+      price: 12.25,
+      description: 'Fried chicken breast tossed in ghost pepper dust, spicy pepper jack cheese, habanero crema, and pickled jalapeños. Not for the faint of heart.',
+      category: 'Chicken Sandos',
+      image: img('photo-1568901346375-23c9450c58cd'),
+      tags: ['Extreme Heat', 'Spicy'],
+      allergens: ['Contains Dairy', 'Contains Gluten'],
+      weightOrSize: 'Jumbo 6oz Chicken Breast',
+      available: true,
+    },
+    {
+      id: 'cb-tenders-6pc',
+      slug: 'hand-breaded-tenders-6pc',
+      name: '6-Piece Hand-Breaded Chicken Tenders',
+      price: 11.50,
+      compareAtPrice: 12.75,
+      description: 'Six jumbo whole chicken breast tenderloins brined in buttermilk and double-dredged for maximum crackle. Includes your choice of two signature house dipping sauces.',
+      category: 'Hand-Breaded Tenders',
+      image: img('photo-1626645738196-c2a7c87a8f58'),
+      tags: ['Bestseller', 'Crispy Tenders'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '6 Jumbo Tenders (~350g)',
+      available: true,
+      featured: true,
+      options: [
+        { name: '1st Dipping Sauce', values: ['Signature Crunch Sauce', 'Nashville Hot Honey', 'Buttermilk Herb Ranch', 'Sweet Carolina BBQ'] },
+        { name: '2nd Dipping Sauce', values: ['Signature Crunch Sauce', 'Nashville Hot Honey', 'Buttermilk Herb Ranch', 'Garlic Parmesan Dip'] },
+      ],
+    },
+    {
+      id: 'cb-tenders-12pc',
+      slug: '12-piece-tender-sharing-box',
+      name: '12-Piece Tender Sharing Box',
+      price: 21.95,
+      description: 'Twelve crispy hand-breaded tenders packed in our thermal steam-vented box with four dipping sauces and two warm honey-butter cheddar biscuits.',
+      category: 'Hand-Breaded Tenders',
+      image: img('photo-1562967914-608f82629710'),
+      tags: ['Sharing Deal', 'Party Crave'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '12 Tenders + 2 Biscuits',
+      available: true,
+    },
+    {
+      id: 'cb-bonein-8pc',
+      slug: 'southern-bone-in-bucket-8pc',
+      name: 'Southern 8-Piece Bone-In Bucket',
+      price: 23.50,
+      compareAtPrice: 26.00,
+      description: 'Eight pieces of golden bone-in chicken (2 drums, 2 thighs, 2 breasts, 2 wings) brined for 24 hours and fried to crisp perfection. Juicy inside, loud crunch outside.',
+      category: 'Bone-In Buckets',
+      image: img('photo-1562967914-608f82629710'),
+      tags: ['Traditional Bucket', 'Family Favorite'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '8 Pieces Whole Chicken',
+      available: true,
+      featured: true,
+      options: [
+        { name: 'Style', values: ['Original 11-Spice Crunch', 'Nashville Hot Honey Glazed (+ $2.00)', 'Half Original / Half Hot Honey (+ $1.50)'] },
+      ],
+    },
+    {
+      id: 'cb-bonein-16pc',
+      slug: 'family-feast-bone-in-bucket-16pc',
+      name: '16-Piece Family Feast Bone-In Bucket',
+      price: 42.00,
+      compareAtPrice: 48.00,
+      description: 'Sixteen pieces of crispy bone-in chicken, two family-sized sides (choice of mac & cheese, cajun fries, or slaw), and four warm honey-butter cheddar biscuits.',
+      category: 'Bone-In Buckets',
+      image: img('photo-1513639776629-7b61b0ac49cb'),
+      tags: ['Feeds 5-6', 'Mega Feast'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: 'Feeds 5-6 Guests',
+      available: true,
+      options: [
+        { name: 'Side 1', values: ['Southern Baked Mac & Cheese', 'Crispy Cajun Waffle Fries', 'Creamy Buttermilk Slaw'] },
+        { name: 'Side 2', values: ['Southern Baked Mac & Cheese', 'Crispy Cajun Waffle Fries', 'Creamy Buttermilk Slaw'] },
+      ],
+    },
+    {
+      id: 'cb-buffalo-wings',
+      slug: 'crispy-buffalo-wings-8pc',
+      name: 'Crispy Buffalo Wings (8pc)',
+      price: 11.95,
+      description: 'Eight crispy whole wings tossed in our signature buttery cayenne buffalo sauce. Served with crisp celery sticks and homemade buttermilk blue cheese dressing.',
+      category: 'Bone-In Buckets',
+      image: img('photo-1567620832903-9fc6debc209f'),
+      tags: ['Classic Wings', 'Spicy'],
+      allergens: ['Contains Dairy'],
+      weightOrSize: '8 Jumbo Wings',
+      available: true,
+    },
+    {
+      id: 'cb-garlic-parm-wings',
+      slug: 'garlic-parmesan-crunch-wings-8pc',
+      name: 'Garlic Parmesan Crunch Wings (8pc)',
+      price: 12.25,
+      description: 'Eight crispy chicken wings tossed in rich roasted garlic butter, grated aged parmesan reggiano, and fresh chopped Italian parsley.',
+      category: 'Bone-In Buckets',
+      image: img('photo-1567620832903-9fc6debc209f'),
+      tags: ['Garlic Butter', 'Savory'],
+      allergens: ['Contains Dairy'],
+      weightOrSize: '8 Jumbo Wings',
+      available: true,
+    },
+    {
+      id: 'cb-popcorn-chicken',
+      slug: 'crispy-popcorn-chicken-basket',
+      name: 'Crispy Popcorn Chicken Box',
+      price: 8.50,
+      description: 'Bite-sized pieces of 100% chicken breast coated in our seasoned crackle batter. The ultimate snack for dipping while on the go.',
+      category: 'Hand-Breaded Tenders',
+      image: img('photo-1569058242252-623df46b5025'),
+      tags: ['Snack Crave', 'Kid Friendly'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '250g Box',
+      available: true,
+    },
+    {
+      id: 'cb-cheddar-biscuits',
+      slug: 'warm-honey-butter-cheddar-biscuits-4pc',
+      name: 'Honey-Butter Cheddar Biscuits (4pc)',
+      price: 5.75,
+      description: 'Four flaky, golden-baked southern buttermilk biscuits folded with sharp cheddar cheese and brushed straight out of the oven with whipped wildflower honey butter.',
+      category: 'Southern Sides & Biscuits',
+      image: img('photo-1509440159596-0249088772ff'),
+      tags: ['Baked Fresh Daily', 'Bestseller'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '4 Warm Biscuits',
+      available: true,
+      featured: true,
+    },
+    {
+      id: 'cb-baked-mac',
+      slug: 'southern-three-cheese-baked-macaroni',
+      name: 'Southern Three-Cheese Baked Macaroni',
+      price: 6.50,
+      description: 'Elbow macaroni tossed in a velvety sauce of sharp cheddar, smoked gouda, and Monterey Jack, topped with buttered panko breadcrumbs and baked golden.',
+      category: 'Southern Sides & Biscuits',
+      image: img('photo-1543339308-43e59d6b73a6'),
+      tags: ['Comfort Classic', 'Vegetarian'],
+      allergens: ['Contains Dairy', 'Contains Gluten'],
+      weightOrSize: 'Regular (280g)',
+      available: true,
+      featured: true,
+    },
+    {
+      id: 'cb-cajun-fries',
+      slug: 'crispy-cajun-waffle-fries',
+      name: 'Crispy Cajun Seasoned Waffle Fries',
+      price: 4.75,
+      description: 'Golden waffle-cut Idaho potatoes fried extra crispy and tossed in our signature smoky New Orleans cajun spice blend.',
+      category: 'Southern Sides & Biscuits',
+      image: img('photo-1573080496219-bb080dd4f877'),
+      tags: ['Cajun Spice', 'Vegetarian'],
+      weightOrSize: '240g Basket',
+      available: true,
+    },
+    {
+      id: 'cb-buttermilk-slaw',
+      slug: 'creamy-southern-buttermilk-slaw',
+      name: 'Creamy Southern Buttermilk Slaw',
+      price: 3.95,
+      description: 'Crisp green and purple cabbage and grated carrots tossed in our light, tangy buttermilk dressing with celery seed and cider vinegar.',
+      category: 'Southern Sides & Biscuits',
+      image: img('photo-1625944525533-473f1a3d54e7'),
+      tags: ['Refreshing', 'Gluten-Free'],
+      allergens: ['Contains Dairy'],
+      weightOrSize: '8oz Cup',
+      available: true,
+    },
+    {
+      id: 'cb-fried-okra',
+      slug: 'crispy-southern-fried-okra-bites',
+      name: 'Crispy Southern Fried Okra Bites',
+      price: 4.95,
+      description: 'Tender sliced okra pods dusted in yellow cornmeal batter and fried until crunchy and golden. Served with remoulade dip.',
+      category: 'Southern Sides & Biscuits',
+      image: img('photo-1540420773420-3366772f4999'),
+      tags: ['Southern Classic', 'Vegetarian'],
+      allergens: ['Contains Gluten'],
+      weightOrSize: '200g Box',
+      available: true,
+    },
+    {
+      id: 'cb-loaded-mac-bowl',
+      slug: 'loaded-chicken-mac-and-cheese-bowl',
+      name: 'Loaded Chicken Mac & Cheese Bowl',
+      price: 12.50,
+      description: 'A hearty bowl of three-cheese baked macaroni layered with crispy chopped buttermilk tenders, applewood bacon crumbles, sweet BBQ drizzle, and scallions.',
+      category: 'Southern Sides & Biscuits',
+      image: img('photo-1546069901-ba9599a7e63c'),
+      tags: ['Ultimate Comfort', 'Filling'],
+      allergens: ['Contains Dairy', 'Contains Gluten'],
+      weightOrSize: 'Large 20oz Bowl',
+      available: true,
+    },
+    {
+      id: 'cb-combo-tender-meal',
+      slug: 'tender-combo-meal-4pc',
+      name: 'Tender Combo Meal (4 Tenders, Fries, Biscuit & Drink)',
+      price: 15.50,
+      compareAtPrice: 17.50,
+      description: 'Four hand-breaded chicken tenders, cajun waffle fries, one warm honey-butter biscuit, your choice of two dipping sauces, and a cold drink.',
+      category: 'Hand-Breaded Tenders',
+      image: img('photo-1562967914-608f82629710'),
+      tags: ['Best Value', 'Top Combo'],
+      allergens: ['Contains Dairy', 'Contains Gluten'],
+      weightOrSize: 'Complete Meal Box',
+      available: true,
+    },
+    {
+      id: 'cb-sweet-tea',
+      slug: 'southern-brewed-sweet-tea-32oz',
+      name: 'Southern Brewed Sweet Tea (32oz Jug)',
+      price: 3.50,
+      description: 'Traditional slow-steeped orange pekoe black tea sweetened with pure cane sugar while hot and poured over pebble ice with lemon.',
+      category: 'House Dips & Sips',
+      image: img('photo-1513558161293-cdaf765ed2fd'),
+      tags: ['House Classic', 'Refreshing'],
+      weightOrSize: '32oz Quart Jug',
+      available: true,
+      featured: true,
+    },
+    {
+      id: 'cb-peach-lemonade',
+      slug: 'fresh-peach-honey-lemonade',
+      name: 'Fresh Peach & Honey Lemonade',
+      price: 4.25,
+      description: 'Fresh-squeezed California lemons blended with sweet Georgia peach purée and wildflower honey. Tart, sweet, and ice cold.',
+      category: 'House Dips & Sips',
+      image: img('photo-1536935338788-846bb9981813'),
+      tags: ['Summer Classic'],
+      weightOrSize: '20oz Cup',
+      available: true,
+    },
+    {
+      id: 'cb-vanilla-shake',
+      slug: 'buttermilk-vanilla-bean-shake',
+      name: 'Handspun Buttermilk Vanilla Shake',
+      price: 5.95,
+      description: 'Rich vanilla bean custard churned with a splash of cultured sweet cream, topped with whipped cream and a butter biscuit crumble.',
+      category: 'House Dips & Sips',
+      image: img('photo-1572490122747-3968b75cc699'),
+      tags: ['Handspun Shake'],
+      allergens: ['Contains Dairy'],
+      weightOrSize: '16oz Glass',
+      available: true,
+    },
+    {
+      id: 'cb-crunch-sauce',
+      slug: 'signature-crunch-dipping-sauce',
+      name: 'Signature Crunch Sauce (2oz)',
+      price: 0.95,
+      description: 'Our house specialty: smoky sweet paprika, honey mustard, cracked pepper, and creamy mayo with a hint of pickle brine.',
+      category: 'House Dips & Sips',
+      image: img('photo-1557499305-0af888c3d8ec'),
+      tags: ['House Sauce'],
+      weightOrSize: '2oz Tub',
+      available: true,
+    },
+    {
+      id: 'cb-hot-honey-dip',
+      slug: 'wildflower-nashville-hot-honey-dip',
+      name: 'Wildflower Nashville Hot Honey Dip (2oz)',
+      price: 1.25,
+      description: 'Warm pure wildflower honey steeped with cayenne pepper, garlic, and habanero chilies. The perfect balance of sweet and fiery heat.',
+      category: 'House Dips & Sips',
+      image: img('photo-1606755962773-d324e0a13086'),
+      tags: ['Hot Honey'],
+      weightOrSize: '2oz Tub',
+      available: true,
+    },
+  ],
+  craftProcess: {
+    badge: '24-HOUR BRINE CYCLE',
+    title: 'The Secret to Impossible Crunch and Juicy Meat',
+    subtitle: 'From seasoned buttermilk soak to 11-spice golden crackle in our commercial pressure fryers.',
+    steps: [
+      { time: 'HOUR 0', title: 'Buttermilk Submersion', desc: 'Farm-fresh chicken is submerged in whole cultured buttermilk with sea salt, garlic, and smoked paprika for 24 hours.' },
+      { time: 'HOUR 24', title: '11-Spice Double Dredge', desc: 'Each piece is hand-lifted and rolled in our seasoned crackle flour to form hundreds of miniature flaky ridges.' },
+      { time: 'HOUR 24.5', title: 'Pressure-Fry Bath', desc: 'Cooked at precise 325°F under sealed pressure, sealing the outer shell into a crackle while trapping 100% of moisture inside.' },
+      { time: 'AT COUNTER', title: 'Hot Honey Glaze & Biscuits', desc: 'Dipped in warm wildflower hot honey and boxed hot alongside fresh honey-butter cheddar biscuits.' },
+    ],
+  },
+  story: {
+    badge: 'CRUNCH TRADITION',
+    title: '24 Hours In Buttermilk. 11 Spices In The Dredge. Zero Shortcuts.',
+    paragraphs: [
+      'Great fried chicken cannot be rushed. Every piece of fresh poultry rests in seasoned whole buttermilk for twenty-four full hours, absorbing subtle salt and acidity right to the bone.',
+      'When ordered, our cooks double-dredge the chicken by hand in our signature 11-spice flour, creating dozens of miniature ridges and pockets that crisp into an audible, shatteringly loud crackle in clean oil.',
+    ],
+    image: img('photo-1626645738196-c2a7c87a8f58'),
+    imageAlt: 'Cook hand-dredging chicken pieces in seasoned flour and lowering into golden hot oil',
+    founderQuote: 'You should be able to hear someone biting into our chicken from across the dining room.',
+    founderName: 'Big Earl Jenkins, Master Pitmaster & Fryer',
+    stats: [
+      { value: '24 Hours', label: 'Buttermilk Brining' },
+      { value: '11 Spices', label: 'Crackle Dredge' },
+      { value: '600+', label: 'Biscuits Baked Daily' },
+      { value: '100%', label: 'Farm Fresh Poultry' },
+    ],
+  },
+  promo: {
+    badge: 'SUNDAY SUPPER',
+    title: 'The 16-Piece Family Feast Bucket',
+    desc: 'Feed the whole crew with 16 crispy bone-in pieces, 2 family-sized comfort sides, and 6 warm honey-butter cheddar biscuits for $42.',
+    ctaText: 'Order Family Feast',
+    ctaPage: 'menu',
+    image: img('photo-1626082927389-6cd097cdc6ec'),
+    imageAlt: 'Fried chicken feast bucket spread',
+  },
+  gallery: [
+    { src: img('photo-1626082927389-6cd097cdc6ec'), alt: 'Crispy fried chicken in takeout box', caption: '8-Piece Southern Bone-In Chicken Bucket', tag: 'Chicken' },
+    { src: img('photo-1606755962773-d324e0a13086'), alt: 'Hot honey chicken sandwich with coleslaw', caption: 'The Hot Honey Southern Crunch Sando', tag: 'Sandos' },
+    { src: img('photo-1562967914-608f82629710'), alt: 'Golden chicken tenders with dipping sauce', caption: 'Hand-Breaded Tenders with Crunch Dip', tag: 'Tenders' },
+    { src: img('photo-1543339308-43e59d6b73a6'), alt: 'Baked three-cheese macaroni', caption: 'Southern Three-Cheese Baked Macaroni', tag: 'Sides' },
+    { src: img('photo-1509440159596-0249088772ff'), alt: 'Flaky honey butter biscuits', caption: 'Honey-Butter Cheddar Biscuits hot from the oven', tag: 'Biscuits' },
+    { src: img('photo-1562967914-608f82629710'), alt: 'Southern fried chicken bucket platter', caption: 'Family supper platter with dipping sauces', tag: 'Family' },
+  ],
+  testimonials: [
+    {
+      name: 'Elijah Brooks',
+      rating: 5,
+      quote: 'That Hot Honey Sando is the undisputed king of fried chicken sandwiches. The chicken is massive, the breading stays unbelievably crunchy, and the honey glaze has just the right kick.',
+      source: 'Southern Culinary Reviewer',
+      date: 'October 2026',
+    },
+    {
+      name: 'Amanda Sterling',
+      rating: 5,
+      quote: 'We get the 16-Piece Family Feast every Sunday after football. The biscuits are flaky and buttery, the mac and cheese is incredible, and the kids finish every tender.',
+      source: 'Mother of Three',
+      date: 'September 2026',
+    },
+    {
+      name: 'Jordan Miller',
+      rating: 5,
+      quote: 'You can actually hear the crunch from across the table. Truly 24-hour brined quality—even the chicken breasts are impossibly juicy inside.',
+      source: 'Verified Customer',
+      date: 'August 2026',
+    },
+  ],
+  location: {
+    address: '512 South Elm Street, Midtown District, San Francisco, CA 94107',
+    neighborhood: 'Midtown Chicken Row',
+    hoursWeekdays: '10:30 AM – 11:00 PM',
+    hoursWeekends: '10:30 AM – 1:00 AM (Late Night Pick-up)',
+    phone: '(415) 773-4410',
+    email: 'midtown@crunchbox.com',
+    pickupNotice: 'Express pick-up counter open daily. Pre-orders ready in 12-15 minutes.',
+  },
+  customInquiry: {
+    title: 'Game Day Tailgate & Fried Chicken Party Catering',
+    subtitle: 'Full-service fried chicken tender bars, bone-in bucket spreads, and biscuit towers for 15 to 300 guests.',
+    occasions: ['Game Day Tailgate', 'Office Lunch Feast', 'Family Reunion Picnic', 'Birthday Bash', 'Church & Community Gathering'],
+    sizes: [
+      { label: 'Tender Platter Box (25 Tenders)', serves: '6-8 Guests', basePrice: 65 },
+      { label: 'Tailgate Bucket Spread (50 Pieces)', serves: '12-15 Guests', basePrice: 150 },
+      { label: 'Full Southern Feast Bar (100 Pieces)', serves: '25-30 Guests', basePrice: 295 },
+      { label: 'Mega Reunion Feast (200+ Pieces)', serves: '50-60 Guests', basePrice: 580 },
+    ],
+    flavors: ['Original 11-Spice Crackle Chicken', 'Nashville Hot Honey Glazed Tenders', 'Garlic Parmesan Wings & Tenders', 'Buttery Buffalo Wings'],
+    fillings: ['Signature Crunch Sauce', 'Nashville Hot Honey Dip', 'Buttermilk Herb Ranch', 'Sweet Carolina Honey BBQ'],
+    finishes: ['Southern Baked Mac & Cheese', 'Warm Cheddar Biscuits (Dozen)', 'Crispy Cajun Waffle Fries', 'Southern Sweet Tea (Gallons)'],
+  },
+  faqs: [
+    {
+      question: 'Why do you brine your chicken for 24 hours?',
+      answer: 'Brining chicken in seasoned whole buttermilk breaks down tough muscle proteins and draws moisture and aromatics deep into the meat. It guarantees that every bite—even thick chicken breasts—stays intensely juicy.',
+      category: 'Preparation & Flavor',
+    },
+    {
+      question: 'Does the chicken stay crispy during delivery?',
+      answer: 'Yes! We use custom vented thermal packaging that allows steam to escape while retaining heat, preventing the breading from becoming soggy during transport.',
+      category: 'Packaging & Delivery',
+    },
+    {
+      question: 'Can I choose between bone-in pieces and hand-breaded tenders?',
+      answer: 'Absolutely. We offer bone-in drums, thighs, breasts, and wings as well as 100% whole-breast hand-breaded chicken tenders with your pick of 6 signature dips.',
+      category: 'Menu & Options',
+    },
+    {
+      question: 'How far in advance do I need to order catering for tailgates?',
+      answer: 'For orders of 50 pieces or more, we recommend placing your order at least 24 hours in advance through our Party & Catering tab so our kitchen can brine and prepare your batch fresh.',
+      category: 'Catering & Events',
+    },
+  ],
 };
 
-export default CrunchBox;
+export default function CrunchBox() {
+  return <FoodStorefrontCore theme={crunchBoxConfig} />;
+}

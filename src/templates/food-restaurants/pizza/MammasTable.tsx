@@ -1,203 +1,588 @@
-// @ts-nocheck
-import React, { useState, useEffect } from 'react';
-import { ArrowLeft, MapPin, Clock, Phone, ShoppingBag, ChevronRight, Star } from 'lucide-react';
-import { useReveal } from '../components/RestaurantCore';
+// @ts-nocheck — historic family brand; uses FoodStorefrontCore for full multi-page support
+import React from 'react';
+import { FoodStorefrontCore, type StorefrontThemeConfig } from '../shared/FoodStorefrontCore';
 
-const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
+const img = (id: string, w = 1400) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
 
-const IMAGES = {
-  hero: img('photo-1504674900247-0877df9cc836'), 
-  story: img('photo-1571115177098-24ec42ed204d'),
-  promo: img('photo-1504674900247-0877df9cc836'), 
-  pizza1: img('photo-1504674900247-0877df9cc836'),
-  pizza2: img('photo-1504674900247-0877df9cc836'),
-  pasta1: img('photo-1504674900247-0877df9cc836'),
-  pasta2: img('photo-1504674900247-0877df9cc836'),
-  anti1: img('photo-1504674900247-0877df9cc836'),
-  anti2: img('photo-1504674900247-0877df9cc836'),
+export const mammasTableConfig: StorefrontThemeConfig = {
+  id: 'mammas-table',
+  kind: 'italian',
+  currencySymbol: '₹',
+  layoutOptions: {
+    heroLayout: 'split',
+    productLayout: 'editorial-2',
+    featuresLayout: 'pills-row',
+    storyLayout: 'card-overlay',
+    galleryLayout: 'editorial-collage',
+    sectionOrder: ['hero', 'features', 'story', 'products', 'craft', 'promo', 'gallery', 'reviews', 'location', 'newsletter'],
+  },
+  name: "Mamma's Table",
+  tagline: 'Southern Italian home cooking and hand-made pizza — four generations, one recipe notebook',
+  brandSub: 'Family Pizzeria · Calabrian Tradition · Mulberry Street, New York · Est. 1965',
+  palette: {
+    primary: '#c0392b',
+    primaryHover: '#a93226',
+    secondary: '#2c1810',
+    background: '#fdf7f2',
+    surface: '#fff9f5',
+    text: '#2c1810',
+    textMuted: '#7c6c66',
+    border: 'rgba(192, 57, 43, 0.15)',
+    badgeBg: '#fef0ed',
+    badgeText: '#c0392b',
+    heroOverlay: 'linear-gradient(to right, rgba(44,24,16,0.88), rgba(44,24,16,0.4))',
+  },
+  typography: {
+    headingFont: '"Cormorant Garamond", "Playfair Display", serif',
+    bodyFont: '"Lato", "Inter", sans-serif',
+    accentFont: '"Cormorant Garamond", serif',
+  },
+  hero: {
+    headline: 'Cooked Like Mamma Made It. Four Generations at Your Table.',
+    subheadline:
+      'Every recipe comes from a well-worn notebook passed down through four generations of the Ferrara family. Hand-rolled dough, slow-cooked ragù, wood-fired pizza, and a dining room that has been making people feel at home since 1965.',
+    badge: 'FAMILY PIZZERIA · CALABRIAN TRADITION · LITTLE ITALY, NY · EST. 1965',
+    image: img('photo-1555396273-367ea4eb4db5'),
+    imageAlt: "A warm family Italian table at Mamma's Table with pizzas, pasta, antipasti and wine",
+    primaryCtaText: 'Book a Table',
+    primaryCtaPage: 'contact',
+    secondaryCtaText: 'View the Menu',
+    secondaryCtaPage: 'menu',
+  },
+  announcement: {
+    text: 'Sunday Supper: Family-Style Feast Every Sunday — Book Now · Free Delivery on Sharing Orders Over ₹599',
+    badgeText: 'FAMILY SUNDAY',
+    linkText: 'Reserve Sunday Supper',
+    linkPage: 'contact',
+  },
+  proofBadges: [
+    { icon: '📖', title: "Rosa's Recipe Notebook", subtitle: "All recipes trace back to Nonna Rosa Ferrara's original handwritten cookbook from Calabria, 1965" },
+    { icon: '🍕', title: 'Hand-Rolled Daily Dough', subtitle: 'Our pizza dough is hand-rolled each morning — never frozen, never machine-formed' },
+    { icon: '🫕', title: '5-Hour Slow Ragù', subtitle: 'Our Sunday ragù slow-cooks for a minimum of 5 hours with hand-crushed San Marzano tomatoes' },
+    { icon: '👨‍👩‍👧‍👦', title: '4 Generations, 1 Kitchen', subtitle: 'From Rosa to her daughter Maria to her son Luca to his daughter Elena — the family has never left the kitchen' },
+  ],
+  categories: ['Pizza', 'Pasta', 'Antipasti', 'Secondi & Contorni', 'Dolci & Desserts', 'Family Sharing Deals', 'Vino & Drinks'],
+  collections: [
+    {
+      id: 'pizza-collection',
+      name: 'Pizze della Casa',
+      tagline: 'Hand-rolled Calabrian pizza dough, San Marzano tomato, fior di latte — made exactly as Mamma intended.',
+      image: img('photo-1513104890138-7c749659a591'),
+      itemCount: 9,
+      filterCategory: 'Pizza',
+    },
+    {
+      id: 'pasta-collection',
+      name: 'Pasta Fatta in Casa',
+      tagline: "Hand-rolled pasta with Nonna Rosa's slow-cooked sauces. Made fresh each morning.",
+      image: img('photo-1621996346565-e3dbc646d9a9'),
+      itemCount: 6,
+      filterCategory: 'Pasta',
+    },
+    {
+      id: 'family-sharing',
+      name: 'Family Sharing Deals',
+      tagline: 'Feast tables, Sunday suppers, and party platters designed for sharing.',
+      image: img('photo-1555396273-367ea4eb4db5'),
+      itemCount: 5,
+      filterCategory: 'Family Sharing Deals',
+    },
+    {
+      id: 'antipasti-starters',
+      name: 'Antipasti',
+      tagline: 'Begin the meal as Rosa always insisted — slowly, with generous sharing plates.',
+      image: img('photo-1546069901-ba9599a7e63c'),
+      itemCount: 7,
+      filterCategory: 'Antipasti',
+    },
+  ],
+  products: [
+    // — Pizza —
+    {
+      id: 'mt-capricciosa',
+      slug: 'capricciosa-della-casa',
+      name: 'Capricciosa della Casa',
+      price: 22,
+      description: 'San Marzano tomato, fior di latte, prosciutto cotto, artichoke hearts, button mushrooms, black olives, egg. The family favourite since Mamma first made it.',
+      category: 'Pizza',
+      image: img('photo-1548369937-47519962c11a'),
+      imageAlt: "Capricciosa della Casa — Mamma's Table house favourite pizza",
+      tags: ['House Favourite', 'Classic'],
+      allergens: ['Contains Gluten', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '30cm / 12"',
+      featured: true,
+      options: [
+        { name: 'Size', choices: [{ label: '30cm Standard' }, { label: '40cm Family', priceDelta: 8 }] },
+        { name: 'Dough', choices: [{ label: 'Classic Hand-Rolled' }, { label: 'Wholemeal', priceDelta: 1.5 }] },
+      ],
+    },
+    {
+      id: 'mt-quattro-stagioni',
+      slug: 'quattro-stagioni-ferrara',
+      name: 'Quattro Stagioni Ferrara',
+      price: 24,
+      description: 'Four sections honouring every Italian season: prosciutto crudo & fig (autumn), mushroom & truffle (winter), asparagus & burrata (spring), cherry tomato & basil (summer).',
+      category: 'Pizza',
+      image: img('photo-1534308983496-4fabb1a015ee'),
+      imageAlt: 'Quattro Stagioni pizza with four Italian seasonal sections',
+      tags: ['Seasonal', 'Classic'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '30cm / 12"',
+      options: [
+        { name: 'Size', choices: [{ label: '30cm Standard' }, { label: '40cm Family', priceDelta: 8 }] },
+      ],
+    },
+    {
+      id: 'mt-mammas-special',
+      slug: 'mammas-weekly-special',
+      name: "Mamma's Special",
+      price: 26,
+      compareAtPrice: 30,
+      description: "Elena's weekly creation — a unique pizza made with whatever arrived at the market that morning. Ask your server for today's version. It has never appeared twice in the same form.",
+      category: 'Pizza',
+      image: img('photo-1574071318508-1cdbab80d002'),
+      imageAlt: "Mamma's Special — weekly unique creation at Mamma's Table",
+      tags: ['Daily Special', 'Chef Creation', 'Limited'],
+      allergens: ['Ask Server for Today\'s Allergens'],
+      weightOrSize: '30cm / 12"',
+      featured: true,
+    },
+    {
+      id: 'mt-margherita-classica',
+      slug: 'margherita-classica',
+      name: 'Margherita Classica',
+      price: 18,
+      description: 'San Marzano tomato, fior di latte, fresh basil, olive oil. No shortcuts, no additions. Mamma\'s original and most requested.',
+      category: 'Pizza',
+      image: img('photo-1513104890138-7c749659a591'),
+      imageAlt: "Classic Margherita pizza at Mamma's Table",
+      tags: ['Classic', 'Vegetarian'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '30cm / 12"',
+      options: [
+        { name: 'Size', choices: [{ label: '30cm Standard' }, { label: '40cm Family', priceDelta: 8 }] },
+        { name: 'Extra Cheese', choices: [{ label: 'Standard Fior di Latte' }, { label: 'Buffalo Mozzarella DOP', priceDelta: 3.5 }] },
+      ],
+    },
+    {
+      id: 'mt-diavola-calabrese',
+      slug: 'diavola-calabrese',
+      name: 'Diavola Calabrese',
+      price: 22,
+      description: 'San Marzano tomato, fior di latte, Calabrian nduja, spicy soppressata, Tropea red onion, basil. A love letter to Calabria.',
+      category: 'Pizza',
+      image: img('photo-1565299624946-b28f40a0ae38'),
+      imageAlt: 'Diavola Calabrese pizza with nduja and soppressata',
+      tags: ['Spicy', 'Calabrian Tradition'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '30cm / 12"',
+    },
+    {
+      id: 'mt-prosciutto-funghi',
+      slug: 'prosciutto-e-funghi',
+      name: 'Prosciutto e Funghi',
+      price: 21,
+      description: 'Tomato, fior di latte, prosciutto cotto, mixed porcini and button mushrooms, Parmigiano, fresh oregano.',
+      category: 'Pizza',
+      image: img('photo-1576402187878-974f70c890a5'),
+      imageAlt: 'Prosciutto and mushroom pizza at Mamma Table',
+      tags: ['Classic', 'Popular'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '30cm / 12"',
+    },
+    {
+      id: 'mt-vegetariana',
+      slug: 'pizza-vegetariana',
+      name: 'Pizza Vegetariana',
+      price: 20,
+      description: 'San Marzano tomato, fior di latte, roasted courgette, aubergine, grilled peppers, sundried tomatoes, capers, basil.',
+      category: 'Pizza',
+      image: img('photo-1565557623262-b51c2513a641'),
+      imageAlt: 'Vegetarian pizza with seasonal grilled vegetables',
+      tags: ['Vegetarian', 'Garden Fresh'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '30cm / 12"',
+    },
+    {
+      id: 'mt-quattro-formaggi',
+      slug: 'quattro-formaggi-mamma',
+      name: 'Quattro Formaggi',
+      price: 22,
+      description: 'No tomato: fior di latte, gorgonzola dolce, Taleggio, Parmigiano Reggiano, honey, rosemary, walnut.',
+      category: 'Pizza',
+      image: img('photo-1565299715199-866c917257d5'),
+      imageAlt: 'Four cheese white pizza with honey and rosemary',
+      tags: ['Vegetarian', 'Cheese Lover'],
+      allergens: ['Contains Gluten', 'Contains Dairy', 'Contains Nuts'],
+      weightOrSize: '30cm / 12"',
+    },
+    {
+      id: 'mt-calzone-rosa',
+      slug: 'calzone-della-rosa',
+      name: "Calzone della Rosa",
+      price: 20,
+      description: "Nonna Rosa's original baked calzone: hand-rolled dough folded over fresh ricotta, salami, provola affumicata, spinach, black pepper. Baked golden.",
+      category: 'Pizza',
+      image: img('photo-1598023696416-0193a0bcd302'),
+      imageAlt: "Rosa's original baked calzone cut open",
+      tags: ['Family Recipe', 'Baked'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: 'Single serving',
+    },
+    // — Pasta —
+    {
+      id: 'mt-pappardelle-ragu',
+      slug: 'pappardelle-ragu-napoletano',
+      name: 'Pappardelle al Ragù',
+      price: 19,
+      description: "Rosa's 5-hour Neapolitan ragù: slow-cooked beef, pork, and Calabrian sausage in San Marzano tomato. Hand-rolled pappardelle, Parmigiano, basil. Sunday cooking in a bowl.",
+      category: 'Pasta',
+      image: img('photo-1621996346565-e3dbc646d9a9'),
+      imageAlt: "Pappardelle al Ragù from Nonna Rosa's recipe",
+      tags: ['Family Recipe', 'Pasta', 'House Special'],
+      allergens: ['Contains Gluten', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: 'Single serving',
+      featured: true,
+    },
+    {
+      id: 'mt-cacio-e-pepe',
+      slug: 'cacio-e-pepe-mamma',
+      name: 'Cacio e Pepe',
+      price: 17,
+      description: 'Tonnarelli, aged Pecorino Romano, freshly cracked black Tellicherry pepper. Two ingredients, infinite technique.',
+      category: 'Pasta',
+      image: img('photo-1473093295043-cdd812d0e601'),
+      imageAlt: 'Cacio e Pepe with aged Pecorino and fresh black pepper',
+      tags: ['Pasta', 'Vegetarian', 'Classic Roman'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: 'Single serving',
+    },
+    {
+      id: 'mt-lasagna',
+      slug: 'lasagna-al-forno',
+      name: 'Lasagna al Forno',
+      price: 21,
+      description: "Rosa's layered lasagna: hand-rolled pasta, slow ragù, béchamel, mozzarella, Parmigiano. Baked until golden and bubbling. Serves 1 generously.",
+      category: 'Pasta',
+      image: img('photo-1574894709920-11b28e7367e3'),
+      imageAlt: "Lasagna al forno from Mamma's kitchen",
+      tags: ['Family Recipe', 'Pasta', 'Baked'],
+      allergens: ['Contains Gluten', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: 'Single serving',
+    },
+    {
+      id: 'mt-amatriciana',
+      slug: 'rigatoni-amatriciana',
+      name: 'Rigatoni all\'Amatriciana',
+      price: 18,
+      description: 'Bronze-extruded rigatoni, guanciale, San Marzano tomato, Pecorino Romano, chilli, black pepper. The Roman classic, as it should be.',
+      category: 'Pasta',
+      image: img('photo-1548369937-47519962c11a'),
+      imageAlt: 'Rigatoni all\'Amatriciana with guanciale and Pecorino',
+      tags: ['Pasta', 'Roman Classic'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: 'Single serving',
+    },
+    // — Antipasti —
+    {
+      id: 'mt-burrata-prosciutto',
+      slug: 'burrata-con-prosciutto',
+      name: 'Burrata con Prosciutto',
+      price: 16,
+      description: 'Creamy burrata, San Daniele prosciutto crudo 24-month, grilled stone peaches, rocket, balsamic glaze. A summer plate all year round.',
+      category: 'Antipasti',
+      image: img('photo-1593560708920-61dd98c46a4e'),
+      imageAlt: 'Burrata with prosciutto San Daniele and grilled peaches',
+      tags: ['Popular', 'Antipasto'],
+      allergens: ['Contains Dairy'],
+      weightOrSize: 'Serves 2',
+    },
+    {
+      id: 'mt-bruschetta',
+      slug: 'bruschetta-al-pomodoro',
+      name: 'Bruschetta al Pomodoro',
+      price: 10,
+      description: 'Grilled sourdough, vine-ripe tomatoes, Tropea red onion, basil, garlic, cold-pressed Calabrian olive oil, sea salt.',
+      category: 'Antipasti',
+      image: img('photo-1572695157366-5e585ab2b69f'),
+      imageAlt: 'Classic bruschetta al pomodoro with basil and olive oil',
+      tags: ['Vegan', 'Antipasto'],
+      allergens: ['Contains Gluten'],
+      weightOrSize: '3 pieces',
+    },
+    {
+      id: 'mt-arancini',
+      slug: 'arancini-della-casa',
+      name: 'Arancini della Casa',
+      price: 13,
+      description: 'House arancini: saffron risotto balls filled with slow ragù, peas, and smoked mozzarella. Served with house tomato sauce.',
+      category: 'Antipasti',
+      image: img('photo-1557499305-0af888c3d8ec'),
+      imageAlt: "Saffron arancini from Mamma's kitchen",
+      tags: ['Popular', 'Antipasto', 'Fried'],
+      allergens: ['Contains Gluten', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '3 pieces',
+    },
+    // — Family Sharing Deals —
+    {
+      id: 'mt-sunday-feast',
+      slug: 'sunday-family-feast',
+      name: "Sunday Family Feast",
+      price: 89,
+      compareAtPrice: 108,
+      description: "Two sharing antipasti, one large family-size pizza of your choice, one portion of pappardelle al ragù, one lasagna, and a dessert platter. Feeds a family of 4. Mamma's Sunday table in a single order.",
+      category: 'Family Sharing Deals',
+      image: img('photo-1555396273-367ea4eb4db5'),
+      imageAlt: "Full Sunday family feast spread at Mamma's Table",
+      tags: ['Best Value', 'Serves 4', 'Sunday Special', 'Family Deal'],
+      allergens: ['See Individual Items for Allergens'],
+      weightOrSize: 'Serves 4–5',
+      featured: true,
+      options: [
+        { name: 'Pizza Choice', choices: [{ label: 'Capricciosa della Casa' }, { label: 'Margherita Classica' }, { label: 'Diavola Calabrese' }, { label: "Mamma's Special (Ask Server)" }] },
+      ],
+    },
+    {
+      id: 'mt-pizza-party-box',
+      slug: 'pizza-party-box',
+      name: "Pizza Party Box",
+      price: 65,
+      compareAtPrice: 78,
+      description: 'Three large family-size pizzas (mix and match), two portions of garlic bread, and a house antipasto platter. Ideal for a gathering of 6–8 people.',
+      category: 'Family Sharing Deals',
+      image: img('photo-1565299624946-b28f40a0ae38'),
+      imageAlt: "Three family pizzas and garlic bread in Mamma's Party Box",
+      tags: ['Party', 'Serves 6-8', 'Value'],
+      allergens: ['See Individual Items for Allergens'],
+      weightOrSize: 'Serves 6–8',
+      options: [
+        { name: 'Pizza 1', choices: [{ label: 'Capricciosa' }, { label: 'Margherita' }, { label: 'Quattro Formaggi' }, { label: 'Vegetariana' }] },
+        { name: 'Pizza 2', choices: [{ label: 'Diavola Calabrese' }, { label: 'Prosciutto e Funghi' }, { label: 'Quattro Stagioni' }] },
+        { name: 'Pizza 3', choices: [{ label: 'Capricciosa' }, { label: 'Margherita' }, { label: 'Quattro Formaggi' }, { label: "Mamma's Special" }] },
+      ],
+    },
+    {
+      id: 'mt-date-night',
+      slug: 'date-night-for-two',
+      name: 'Date Night for Two',
+      price: 52,
+      compareAtPrice: 64,
+      description: 'One sharing antipasto, two house pizzas (any choice), two desserts, and a house carafe of wine or soft drinks. The complete Mamma\'s Table evening for two.',
+      category: 'Family Sharing Deals',
+      image: img('photo-1557499305-0af888c3d8ec'),
+      imageAlt: "Date night for two at Mamma's Table — pizza, antipasto, and wine",
+      tags: ['Date Night', 'Serves 2', 'Wine Included'],
+      allergens: ['See Individual Items for Allergens'],
+      weightOrSize: 'Serves 2',
+    },
+    // — Dolci —
+    {
+      id: 'mt-tiramisu',
+      slug: 'tiramisu-della-rosa',
+      name: "Tiramisù della Rosa",
+      price: 10,
+      description: "Nonna Rosa's tiramisù recipe: layers of Savoiardi soaked in espresso and Marsala, mascarpone cream, dark cocoa powder. Made fresh each morning.",
+      category: 'Dolci & Desserts',
+      image: img('photo-1571877227200-a0d98ea607e9'),
+      imageAlt: "Classic Italian tiramisù from Mamma's recipe",
+      tags: ['Dessert', 'Family Recipe', 'Classic'],
+      allergens: ['Contains Dairy', 'Contains Gluten', 'Contains Eggs', 'Contains Alcohol (Marsala)'],
+      weightOrSize: 'Single portion',
+    },
+    {
+      id: 'mt-cannoli-siciliani',
+      slug: 'cannoli-siciliani',
+      name: 'Cannoli Siciliani',
+      price: 9,
+      description: 'Three crispy fried pastry tubes filled with sweetened fresh ricotta, candied orange, dark chocolate chips, and chopped pistachios.',
+      category: 'Dolci & Desserts',
+      image: img('photo-1625772299848-391b6a87d7b3'),
+      imageAlt: 'Three Sicilian cannoli with ricotta and pistachio',
+      tags: ['Dessert', 'Classic', 'Sicilian'],
+      allergens: ['Contains Gluten', 'Contains Dairy', 'Contains Nuts'],
+      weightOrSize: '3 pieces',
+    },
+    {
+      id: 'mt-panna-cotta',
+      slug: 'panna-cotta-fragola',
+      name: 'Panna Cotta alla Fragola',
+      price: 8.5,
+      description: 'Silky vanilla panna cotta with fresh strawberry coulis, candied strawberry, mint. Light, elegant, and unmistakably Italian.',
+      category: 'Dolci & Desserts',
+      image: img('photo-1565299715199-866c917257d5'),
+      imageAlt: 'Strawberry panna cotta with coulis and fresh mint',
+      tags: ['Dessert', 'Gluten-Free', 'Light'],
+      allergens: ['Contains Dairy'],
+      weightOrSize: 'Single portion',
+    },
+    // — Vino & Drinks —
+    {
+      id: 'mt-vino-rosso',
+      slug: 'primitivo-di-manduria',
+      name: 'Primitivo di Manduria',
+      price: 12,
+      description: 'A plush, full-bodied Puglian Primitivo with ripe dark fruit and a warm, earthy finish. Ideal with Diavola or Pappardelle al Ragù.',
+      category: 'Vino & Drinks',
+      image: img('photo-1510812431401-41d2bd2722f3'),
+      imageAlt: 'Glass of Primitivo di Manduria red wine',
+      tags: ['Wine', 'Red', 'Italian'],
+      allergens: ['Contains Sulphites'],
+      weightOrSize: '175ml glass',
+    },
+    {
+      id: 'mt-limonata',
+      slug: 'limonata-siciliana',
+      name: 'Limonata Siciliana',
+      price: 4.5,
+      description: 'House-pressed Sicilian lemon lemonade, cane sugar, sparkling water, fresh mint. The non-alcoholic heart of the Italian table.',
+      category: 'Vino & Drinks',
+      image: img('photo-1548839140-29a749e1cf4d'),
+      imageAlt: 'Tall glass of house Sicilian lemonade',
+      tags: ['Drink', 'Non-Alcoholic', 'House Made'],
+      weightOrSize: 'Large glass',
+    },
+    {
+      id: 'mt-limoncello',
+      slug: 'limoncello-della-nonna',
+      name: "Limoncello della Nonna",
+      price: 8,
+      description: "Nonna Rosa's homemade Amalfi lemon Limoncello — serve ice-cold. The traditional digestivo that ends every proper Italian meal.",
+      category: 'Vino & Drinks',
+      image: img('photo-1472476443507-c7a5948772fc'),
+      imageAlt: 'Ice-cold shot of homemade limoncello',
+      tags: ['Digestivo', 'Limoncello', 'After Dinner'],
+      allergens: ['Contains Alcohol'],
+      weightOrSize: '50ml shot',
+    },
+  ],
+  craftProcess: {
+    badge: 'IL NOSTRO SEGRETO',
+    title: "Rosa's Recipe Notebook — The Foundation of Everything",
+    subtitle: "Every recipe at Mamma's Table traces back to one notebook. Here is how we use it every day.",
+    steps: [
+      { time: 'Every Morning', title: 'Hand-Rolling the Dough', desc: "The dough at Mamma's Table is hand-rolled each morning by Elena and her team. No machines. No shortcuts. The technique was taught by Nonna Rosa and hasn't changed in 60 years." },
+      { time: '5 Hours', title: "Rosa's Slow Sunday Ragù", desc: "Available every day, not just Sunday. The ragù is started at 7am — beef shin, pork ribs, Calabrian sausage, hand-crushed San Marzano tomatoes, onion, celery, carrot, and red wine. It reduces for 5 hours until it becomes the rich, dark sauce you will taste in every drop." },
+      { time: 'Fresh Daily', title: 'Pasta al Fresco', desc: "Pasta is rolled fresh each morning from '00' flour and eggs from a family farm in New Jersey. We never serve yesterday's pasta." },
+      { time: 'On Order', title: 'Wood-Fired Pizza', desc: 'Our pizza oven reaches 800°F. Each pizza is hand-stretched to order by Elena\'s team and fired for 90 seconds, developing a beautiful char on the cornicione.' },
+      { time: 'Every Plate', title: 'Finishing with Olive Oil', desc: "Every dish at Mamma's Table is finished with a drizzle of cold-pressed Calabrian olive oil — the same brand the Ferrara family has used since 1965. It is the final touch Nonna Rosa always insisted upon." },
+    ],
+    image: img('photo-1571115177098-24ec42ed204d'),
+  },
+  story: {
+    badge: 'LA NOSTRA STORIA',
+    title: 'From Calabria to Mulberry Street — A Family Story',
+    paragraphs: [
+      'Rosa Ferrara arrived in New York City in 1965 with $40, a battered suitcase, and a recipe notebook containing everything her mother and grandmother had ever taught her about Calabrian cooking.',
+      'She opened a tiny kitchen on Mulberry Street — six tables, a wood oven, and a menu of four items. People came for the food and stayed for Rosa herself — a force of nature who cooked with love and expected nothing less in return.',
+      "Today, four generations of the Ferrara family work in this kitchen. Rosa's granddaughter Elena leads the team, still using the original notebook. The notebook sits framed above the oven — never changed, never replaced. Everything we cook comes from it.",
+    ],
+    image: img('photo-1571115177098-24ec42ed204d'),
+    imageAlt: "Elena Ferrara rolling dough at Mamma's Table — fourth generation of the family",
+    founderQuote: "You cook with your hands, your memory, and your love. The recipe is only the beginning.",
+    founderName: 'Nonna Rosa Ferrara, Founder (1925–2018)',
+    stats: [
+      { value: '1965', label: 'Year Rosa Opened on Mulberry St' },
+      { value: '4', label: 'Generations in the Kitchen' },
+      { value: '60+', label: 'Years of the Same Recipe' },
+      { value: '1', label: 'Original Recipe Notebook' },
+    ],
+  },
+  promo: {
+    badge: 'EVERY SUNDAY',
+    title: "Sunday Supper. Every Night. The Ferrara Table is Open.",
+    desc: 'Join us for a family-style Sunday Supper — a set sharing menu of antipasti, pasta, pizza, and dessert. Flowing house wine, generous portions, and an atmosphere that makes every guest feel part of the Ferrara family.',
+    ctaText: 'Book Sunday Supper',
+    ctaPage: 'contact',
+    image: img('photo-1565299715199-866c917257d5'),
+    imageAlt: "Beautiful Sunday supper table at Mamma's Table with pizzas, pasta, and wine",
+  },
+  gallery: [
+    { src: img('photo-1555396273-367ea4eb4db5'), alt: "Family gathering at Mamma's Table with multiple pizzas and pasta dishes", caption: "Sunday supper — the full Ferrara family experience", tag: 'Family' },
+    { src: img('photo-1513104890138-7c749659a591'), alt: 'Capricciosa della Casa pizza fresh from the wood oven', caption: 'Capricciosa della Casa — the house favourite since 1965', tag: 'Pizza' },
+    { src: img('photo-1571115177098-24ec42ed204d'), alt: "Elena Ferrara rolling pizza dough by hand in Mamma's kitchen", caption: "Elena rolls the dough — same technique as Rosa taught", tag: 'Craft' },
+    { src: img('photo-1621996346565-e3dbc646d9a9'), alt: "Pappardelle al Ragù with Rosa's 5-hour sauce", caption: "5-hour slow ragù on hand-rolled pappardelle", tag: 'Pasta' },
+    { src: img('photo-1546069901-ba9599a7e63c'), alt: 'Burrata con Prosciutto starter with grilled peaches', caption: 'Burrata con Prosciutto — the perfect opening plate', tag: 'Antipasti' },
+    { src: img('photo-1571877227200-a0d98ea607e9'), alt: "Tiramisù della Rosa — Nonna's original recipe", caption: "Tiramisù della Rosa — from the notebook, unchanged", tag: 'Dolci' },
+    { src: img('photo-1533622597524-a1215e26c0a2'), alt: "Calzone della Rosa fresh from the oven", caption: "Calzone della Rosa — folded and golden", tag: 'Pizza' },
+    { src: img('photo-1557499305-0af888c3d8ec'), alt: "Warm dining room at Mamma's Table on Mulberry Street", caption: "42 Mulberry Street — where every guest becomes family", tag: 'Restaurant' },
+  ],
+  testimonials: [
+    {
+      name: 'Giulia Marchetti',
+      rating: 5,
+      quote: "This is the closest to my grandmother's cooking I have ever found outside of Italy. The ragù made me cry — in the best possible way. I will be back every week.",
+      source: 'Verified Guest',
+      date: 'October 2026',
+      role: 'Rome native, food writer',
+    },
+    {
+      name: 'Robert Tanner',
+      rating: 5,
+      quote: 'The Capricciosa is a work of art. Generous toppings, incredible hand-rolled dough. We have been coming for every anniversary for six years and the quality has never dropped once.',
+      source: 'Verified Regular',
+      date: 'September 2026',
+    },
+    {
+      name: 'Sophie Bertrand',
+      rating: 5,
+      quote: "Warm, welcoming, and utterly delicious. Mamma's Table is exactly what Italian dining should feel like. Elena and her team make you feel part of the family from the moment you sit down.",
+      source: 'Verified Guest',
+      date: 'August 2026',
+    },
+  ],
+  location: {
+    address: '42 Mulberry Street, Little Italy, New York, NY 10013',
+    neighborhood: 'Little Italy, Lower Manhattan',
+    hoursWeekdays: 'Tuesday – Friday: 12:00 PM – 10:00 PM',
+    hoursWeekends: 'Saturday: 12:00 PM – 11:00 PM · Sunday: 12:00 PM – 9:00 PM · Monday: Closed',
+    phone: '+1 (212) 555-0164',
+    email: 'ciao@mammastable.com',
+    pickupNotice: 'Takeaway and delivery available. Family Sharing Deals require 2-hour advance order. Pickup at Mulberry Street entrance.',
+  },
+  customInquiry: {
+    title: 'Private Events & Family Celebrations',
+    subtitle: "Celebrate with us. Mamma's Table hosts private family celebrations, wedding rehearsals, birthday suppers, and corporate dinners in our private dining room on the Mulberry Street terrace.",
+    type: 'catering',
+    occasions: ['Family Birthday Celebration', 'Wedding Rehearsal Dinner', 'Anniversary Dinner', 'Christening Celebration', 'Corporate Team Dinner', 'Holiday Family Feast'],
+    sizes: [
+      { label: 'Private Table (8 guests)', serves: '6-10 guests', basePrice: 320 },
+      { label: 'Private Room (16 guests)', serves: '14-18 guests', basePrice: 680 },
+      { label: 'Terrace Buyout (30 guests)', serves: '26-35 guests', basePrice: 1400 },
+      { label: 'Off-Site Catering', serves: '20-80 guests', basePrice: 900 },
+    ],
+    flavors: ['Full Sunday Supper Menu', 'Pizza & Pasta Sharing Feast', 'Multi-Course Italian Tasting', 'Bespoke Family Menu'],
+    fillings: ['House Wine & Limoncello Service', 'Cocktail Reception with Aperol & Negroni', 'Dessert & Coffee Station'],
+    finishes: ['Personalised Menu Cards', 'Family Photo in the Dining Room', 'Mamma\'s Signature Limoncello Takeaway'],
+  },
+  faqs: [
+    {
+      question: "Is Mamma's Table an authentic Italian restaurant?",
+      answer: "Yes. The Ferrara family is originally from Calabria, Southern Italy. Every recipe on our menu comes from Nonna Rosa's handwritten recipe notebook, which she brought from Calabria in 1965. Our pizza technique, our pasta, and our ragù are all authentic Southern Italian methods passed down through four generations.",
+      category: 'About Us',
+    },
+    {
+      question: 'Can I book a table for Sunday Supper?',
+      answer: 'Yes — reservations are strongly recommended for Sunday and Saturday evenings. Sunday Supper is our most popular service. Book via the Contact page, call +1 (212) 555-0164, or use our reservation form. Walk-in seats at the bar are sometimes available.',
+      category: 'Reservations',
+    },
+    {
+      question: 'Do you offer family sharing meals for delivery?',
+      answer: 'Yes. Our Family Sharing Deals — including the Sunday Family Feast and Pizza Party Box — are available for delivery. We recommend ordering at least 2 hours in advance for sharing orders to ensure freshness and proper packaging.',
+      category: 'Ordering & Delivery',
+    },
+    {
+      question: 'What is in "Mamma\'s Special" pizza?',
+      answer: "Mamma's Special is Elena's weekly creation based on what arrived at the market that morning. It changes weekly and sometimes daily. It has never appeared in exactly the same form twice. Ask your server when you arrive and they will describe the day's version.",
+      category: 'About Our Food',
+    },
+    {
+      question: 'Are there options for children?',
+      answer: "Absolutely — children are always welcome at Mamma's Table. We offer a children's menu with a small Margherita pizza, spaghetti pomodoro, and a dessert. Highchairs are available. Our dining room is family-friendly, and we love hosting multigenerational family dinners.",
+      category: 'Family & Children',
+    },
+  ],
 };
 
 export default function MammasTable() {
-  const [scrolled, setScrolled] = useState(false);
-  const [activeMenuTab, setActiveMenuTab] = useState('Pizza');
-  
-  const heroRef = useReveal(100);
-  const menuRef = useReveal(200);
-  
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const theme = {
-    name: "Mamma's Table",
-    tagline: 'Southern Italian home cooking & hand-made pizza',
-    palette: { primary: '#c0392b', secondary: '#2c1810', surface: '#fff9f5', text: '#2c1810', background: '#fdf7f2' }
-  };
-
-  const menu = [
-    { tab: 'Pizza', items: [
-      { name: 'Capricciosa', price: '$22', desc: 'Tomato, mozzarella, ham, artichokes, olives, mushrooms.', tags: ['House Favourite'], image: IMAGES.pizza1 },
-      { name: 'Quattro Stagioni', price: '$24', desc: 'Four sections: prosciutto, mushrooms, artichokes, olives.', tags: ['Classic'], image: IMAGES.pizza2 },
-      { name: "Mamma's Special", price: '$26', desc: 'Rosa\'s secret recipe — ask your server for today\'s creation.', tags: ['Daily Special'], image: IMAGES.promo },
-    ]},
-    { tab: 'Pasta', items: [
-      { name: 'Pasta al Ragù', price: '$19', desc: 'Slow-cooked beef ragù, hand-rolled pappardelle, parmesan.', tags: ['Hand-rolled'], image: IMAGES.pasta1 },
-      { name: 'Cacio e Pepe', price: '$17', desc: 'Tonnarelli, aged Pecorino Romano, fresh-cracked black pepper.', tags: ['Vegetarian'], image: IMAGES.pasta2 },
-    ]},
-    { tab: 'Antipasti', items: [
-      { name: 'Bruschetta al Pomodoro', price: '$10', desc: 'Grilled sourdough, ripe tomatoes, basil, garlic, extra-virgin olive oil.', tags: ['Vegan'], image: IMAGES.anti1 },
-      { name: 'Burrata con Prosciutto', price: '$16', desc: 'Creamy burrata, San Daniele prosciutto, grilled peaches.', tags: ['Popular'], image: IMAGES.anti2 },
-    ]},
-  ];
-
-  return (
-    <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Lato", sans-serif' }}>
-      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.3s', backgroundColor: scrolled ? 'rgba(253,247,242,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid #eaeaea' : 'none', backdropFilter: scrolled ? 'blur(10px)' : 'none' }}>
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          
-          <div style={{ fontSize: '1.5rem', fontWeight: 700, fontFamily: '"Cormorant Garamond", serif', color: scrolled ? theme.palette.primary : '#fff', letterSpacing: '1px' }}>
-            {theme.name}
-          </div>
-        </div>
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', padding: '0.75rem 1.5rem', borderRadius: '50px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontFamily: '"Lato", sans-serif', fontSize: '1rem' }}>
-            <ShoppingBag size={18} /> Book a Table
-          </button>
-        </div>
-      </nav>
-
-      <header style={{ height: '100vh', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundColor: '#000' }}>
-          <img src={IMAGES.hero} alt="Restaurant interior" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.6, transform: 'scale(1.05)' }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(44,24,16,0.85), rgba(44,24,16,0.35))' }}></div>
-        </div>
-        <div ref={heroRef as any} style={{ position: 'relative', zIndex: 10, color: '#fdf7f2', maxWidth: '800px', padding: '0 2rem' }}>
-          <h1 style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 'clamp(3.5rem, 8vw, 6rem)', lineHeight: 1.1, marginBottom: '1.5rem', fontStyle: 'italic' }}>Cooked Like Mamma Made It.</h1>
-          <p style={{ fontSize: '1.25rem', fontWeight: 400, marginBottom: '3rem', maxWidth: '600px', margin: '0 auto 3rem auto', lineHeight: 1.6 }}>Every recipe comes from a well-worn notebook passed down through four generations of the Ferrara family.</p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-            <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', padding: '1rem 2.5rem', borderRadius: '50px', fontWeight: 600, fontSize: '1.1rem', cursor: 'pointer', boxShadow: '0 4px 15px rgba(192, 57, 43, 0.4)' }}>Book a Table</button>
-            <button style={{ backgroundColor: 'transparent', color: '#fff', border: '2px solid #fff', padding: '1rem 2.5rem', borderRadius: '50px', fontWeight: 600, fontSize: '1.1rem', cursor: 'pointer' }}>View Menu</button>
-          </div>
-        </div>
-      </header>
-      
-      <section style={{ padding: '8rem 5%', backgroundColor: theme.palette.background, color: theme.palette.secondary }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5rem', alignItems: 'center', maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ flex: '1 1 450px' }}>
-            <div style={{ position: 'relative' }}>
-              <img src={IMAGES.story} alt="Rolling dough" style={{ width: '100%', borderRadius: '16px', boxShadow: '0 20px 40px rgba(44,24,16,0.1)' }} />
-              <div style={{ position: 'absolute', bottom: '-2rem', right: '-2rem', backgroundColor: '#fff', padding: '2rem', borderRadius: '50%', width: '150px', height: '150px', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', boxShadow: '0 10px 30px rgba(44,24,16,0.08)' }}>
-                <span style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: '1.5rem', color: theme.palette.primary, fontWeight: 700, fontStyle: 'italic', lineHeight: 1.2 }}>Since<br/>1965</span>
-              </div>
-            </div>
-          </div>
-          <div style={{ flex: '1 1 450px' }}>
-            <h2 style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: '3.5rem', color: theme.palette.secondary, marginBottom: '1.5rem', lineHeight: 1.1 }}>From Calabria to Your Table.</h2>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '1.5rem', color: theme.palette.textLight }}>Rosa Ferrara came to America in 1965 with $40, a suitcase, and a recipe notebook. She opened a tiny kitchen on Mulberry Street serving the food she grew up with in Calabria.</p>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '2.5rem', color: theme.palette.textLight }}>Today, her granddaughter Elena runs the kitchen, making the same dough, the same sauce, and serving the same warmth that made Mamma's Table a neighbourhood institution.</p>
-            <button style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'none', border: 'none', color: theme.palette.primary, fontSize: '1.1rem', fontWeight: 700, cursor: 'pointer', borderBottom: `2px solid ${theme.palette.primary}`, paddingBottom: '4px' }}>
-              Read Our Family Story <ChevronRight size={18} />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <section ref={menuRef as any} style={{ padding: '6rem 5%', backgroundColor: theme.palette.surface }}>
-        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <h2 style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: '3.5rem', color: theme.palette.secondary }}>Our Menu</h2>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '2rem' }}>
-            {menu.map((cat) => (
-              <button 
-                key={cat.tab}
-                onClick={() => setActiveMenuTab(cat.tab)}
-                style={{ 
-                  padding: '0.75rem 2.5rem', 
-                  backgroundColor: activeMenuTab === cat.tab ? theme.palette.primary : 'transparent',
-                  color: activeMenuTab === cat.tab ? '#fff' : theme.palette.secondary,
-                  border: activeMenuTab === cat.tab ? `1px solid ${theme.palette.primary}` : `1px solid #e0d5ce`,
-                  borderRadius: '50px',
-                  fontFamily: '"Lato", sans-serif',
-                  fontSize: '1.1rem',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  transition: 'all 0.3s',
-                  boxShadow: activeMenuTab === cat.tab ? '0 4px 15px rgba(192, 57, 43, 0.3)' : 'none'
-                }}
-              >
-                {cat.tab}
-              </button>
-            ))}
-          </div>
-        </div>
-        
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2.5rem', maxWidth: '1200px', margin: '0 auto' }}>
-          {menu.find(c => c.tab === activeMenuTab)?.items.map((item, i) => (
-            <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', backgroundColor: '#fff', padding: '2rem', borderRadius: '16px', boxShadow: '0 4px 20px rgba(44,24,16,0.04)', transition: 'transform 0.3s', cursor: 'pointer' }} onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-5px)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
-              <img src={item.image} alt={item.name} style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px' }} />
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                  <h3 style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: '1.8rem', margin: 0 }}>{item.name}</h3>
-                  <span style={{ fontWeight: 700, color: theme.palette.primary, fontSize: '1.25rem' }}>{item.price}</span>
-                </div>
-                <p style={{ color: theme.palette.textLight, fontSize: '1rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>{item.desc}</p>
-                <div style={{ display: 'flex', gap: '0.5rem' }}>
-                  {item.tags.map(tag => (
-                    <span key={tag} style={{ fontSize: '0.8rem', padding: '0.3rem 0.8rem', backgroundColor: theme.palette.surface, color: theme.palette.secondary, borderRadius: '50px', fontWeight: 600, border: '1px solid #eaeaea' }}>{tag}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-      
-      <section style={{ position: 'relative', padding: '8rem 5%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundColor: '#000' }}>
-          <img src={IMAGES.promo} alt="Fresh Pizza" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.7 }} />
-        </div>
-        <div style={{ position: 'relative', zIndex: 10, textAlign: 'center', color: '#fff', backgroundColor: 'rgba(44,24,16,0.7)', padding: '4rem', borderRadius: '16px', backdropFilter: 'blur(5px)', maxWidth: '800px' }}>
-          <h2 style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: '3.5rem', lineHeight: 1.1, marginBottom: '1.5rem', fontStyle: 'italic' }}>Sunday Supper.<br/>Every Night.</h2>
-          <p style={{ fontSize: '1.2rem', marginBottom: '2.5rem', margin: '0 auto 2.5rem', lineHeight: 1.6 }}>Join us for a family-style dining experience. Generous portions, flowing wine, and an atmosphere that makes everyone feel like part of the Ferrara family.</p>
-          <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', padding: '1rem 3rem', borderRadius: '50px', fontWeight: 600, fontSize: '1.1rem', cursor: 'pointer', boxShadow: '0 4px 15px rgba(192, 57, 43, 0.4)' }}>Reserve Your Table</button>
-        </div>
-      </section>
-
-      <section style={{ padding: '6rem 5%', backgroundColor: theme.palette.background }}>
-        <h2 style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: '3.5rem', color: theme.palette.secondary, textAlign: 'center', marginBottom: '4rem' }}>Words From Our Guests</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-          {[
-            { name: 'Giulia M.', quote: 'This is the closest to my grandmother\'s cooking I have ever found outside of Italy. It makes me cry (in the best way).' },
-            { name: 'Robert T.', quote: 'The Capricciosa is a work of art. Generous toppings, incredible dough. We come here for every anniversary.' },
-            { name: 'Sophie B.', quote: 'Warm, welcoming, and utterly delicious. Mamma\'s Table is exactly what Italian dining should feel like.' }
-          ].map((test, i) => (
-            <div key={i} style={{ backgroundColor: '#fff', padding: '3rem 2rem', borderRadius: '16px', textAlign: 'center', boxShadow: '0 10px 30px rgba(44,24,16,0.05)' }}>
-              <div style={{ display: 'flex', justifyContent: 'center', color: '#f39c12', marginBottom: '1.5rem' }}>
-                {[...Array(5)].map((_, j) => <Star key={j} size={20} fill="#f39c12" />)}
-              </div>
-              <p style={{ fontStyle: 'italic', color: theme.palette.textLight, lineHeight: 1.7, marginBottom: '2rem', fontSize: '1.1rem' }}>"{test.quote}"</p>
-              <h4 style={{ fontWeight: 700, color: theme.palette.secondary, margin: 0, fontFamily: '"Cormorant Garamond", serif', fontSize: '1.3rem' }}>— {test.name}</h4>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <footer style={{ backgroundColor: theme.palette.secondary, color: '#fdf7f2', padding: '5rem 5% 2rem', textAlign: 'center' }}>
-        <h2 style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: '3rem', marginBottom: '1rem', fontStyle: 'italic' }}>{theme.name}</h2>
-        <p style={{ color: '#d0c3be', marginBottom: '4rem', fontSize: '1.1rem' }}>{theme.tagline}</p>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '4rem', marginBottom: '4rem', flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}><MapPin size={28} style={{ color: theme.palette.primary, marginBottom: '1rem' }} /><p style={{ color: '#d0c3be', lineHeight: 1.6 }}>42 Mulberry St<br/>Little Italy, NY 10013</p></div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}><Clock size={28} style={{ color: theme.palette.primary, marginBottom: '1rem' }} /><p style={{ color: '#d0c3be', lineHeight: 1.6 }}>Tue–Sun: 12pm – 10pm<br/>Sundays: Noon – 9pm</p></div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}><Phone size={28} style={{ color: theme.palette.primary, marginBottom: '1rem' }} /><p style={{ color: '#d0c3be', lineHeight: 1.6 }}>Reservations<br/>+1 (212) 555-0164</p></div>
-        </div>
-        <div style={{ borderTop: '1px solid rgba(253,247,242,0.1)', paddingTop: '2rem' }}>
-          <p style={{ color: '#8b7a73', fontSize: '0.9rem' }}>© 2026 {theme.name}. All rights reserved.</p>
-        </div>
-      </footer>
-    </div>
-  );
+  return <FoodStorefrontCore theme={mammasTableConfig} />;
 }
-
-
-

@@ -6,10 +6,14 @@ export interface Product {
   description: string
   category: string
   price: number
-  compareAtPrice: number | null
-  stockQuantity: number
-  visualTheme: string
+  compareAtPrice?: number | null
+  stockQuantity?: number
+  visualTheme?: string
   isFeatured: boolean
+  imageUrl?: string
+  isAvailable?: boolean
+  createdAt?: string
+  updatedAt?: string
 }
 
 export interface PagedResponse<T> {

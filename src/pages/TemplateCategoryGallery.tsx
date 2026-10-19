@@ -32,7 +32,7 @@ export default function TemplateCategoryGallery() {
       const sectionConfig = JSON.stringify([
         { type: "announcement", text: "Free shipping on orders above ₹499", visibility: false },
         { type: "nav", logoText: template.name },
-        { type: "hero", title: template.name, subtitle: template.name + " Store", buttonText: "Explore", buttonLink: "/", style_backgroundColor: "#f6ebd9", style_textColor: "#111111", style_buttonColor: "#1A1C20", style_buttonTextColor: "#ffffff", style_backgroundImage: "/mino_bag_preview.jpg" },
+        { type: "hero", title: template.name, subtitle: template.name + " Store", buttonText: "Explore", buttonLink: "/", style_backgroundColor: "#f6ebd9", style_textColor: "#111111", style_buttonColor: "#1A1C20", style_buttonTextColor: "#ffffff", style_backgroundImage: (template as any).thumbnail || "" },
         { type: "featured-title", title: "Featured Collection" },
         { type: "prod-grid", title: "New Arrivals", productsToShow: 4, columns: 4 },
         { type: "img-text", title: "Designed for your lifestyle", content: "Simple, elegant and crafted with care to bring comfort into your everyday.", buttonText: "Explore Collection", buttonLink: "/about", image: "/assets/lifestyle.jpg" },

@@ -214,9 +214,30 @@ export default function IndianTheme({ theme }: { theme: RestaurantThemePreset })
   }, [])
   
   useEffect(() => {
-    const observer = new IntersectionObserver(entries => entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('fd-visible')), { threshold: .1 })
+    const el = document.querySelector('.fine-theme') as HTMLElement | null
+    const scrollParent: Element | null = (() => {
+      let node = el?.parentElement ?? null
+      while (node && node !== document.body) {
+        const s = window.getComputedStyle(node)
+        if (s.overflowY === 'auto' || s.overflowY === 'scroll') return node
+        node = node.parentElement
+      }
+      return null
+    })()
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('fd-visible')),
+      { root: scrollParent, threshold: 0.05 }
+    )
     document.querySelectorAll('.fd-reveal').forEach(element => observer.observe(element))
-    return () => observer.disconnect()
+
+    const timer = setTimeout(() => {
+      document.querySelectorAll('.fd-reveal').forEach(element => element.classList.add('fd-visible'))
+    }, 600)
+
+    return () => {
+      observer.disconnect()
+      clearTimeout(timer)
+    }
   }, [path])
 
   const HomeView = () => (
@@ -259,6 +280,49 @@ export default function IndianTheme({ theme }: { theme: RestaurantThemePreset })
                 <h3 style={{ fontSize: '2rem', margin: '0 0 1rem 0', fontWeight: 'normal' }}>{region.title}</h3>
                 <p style={{ margin: 0, opacity: 0.9, lineHeight: 1.6 }}>{region.desc}</p>
               </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Signature Dishes Preview */}
+      <section style={{ padding: '0 5% 8rem', background: 'var(--fd-paper)' }}>
+        <div className="fd-reveal" style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <span style={{ color: 'var(--fd-accent)', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.85rem' }}>Masterpieces</span>
+          <h2 style={{ fontSize: '3rem', margin: '0.5rem 0 1rem', fontWeight: 'normal' }}>Curated Selections</h2>
+          <div style={{ width: '60px', height: '2px', background: 'var(--fd-accent)', margin: '0 auto' }} />
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem' }}>
+          {indianDishes.slice(0, 3).map((item, index) => (
+            <article className="fd-dish fd-reveal" key={item[0]} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              <div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '4/3' }}>
+                <img src={dishImages[index % dishImages.length]} alt={item[0]} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="fd-hover-zoom" />
+              </div>
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderBottom: '1px dotted var(--fd-line)', paddingBottom: '0.5rem', marginBottom: '0.75rem' }}>
+                  <h3 style={{ margin: '0', fontSize: '1.35rem', fontWeight: 'normal' }}>{item[0]}</h3>
+                  <strong style={{ fontSize: '1.15rem', color: 'var(--fd-accent)' }}>${item[2]}</strong>
+                </div>
+                <p style={{ opacity: 0.75, margin: 0, lineHeight: 1.6, fontSize: '0.95rem' }}>{item[1]}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div style={{ textAlign: 'center', marginTop: '4rem' }} className="fd-reveal">
+          <a href="/menu" onClick={(e) => navigate(e, '/menu')} className="fd-text-link" style={{ fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'var(--fd-ink)', textDecoration: 'none', borderBottom: '1px solid currentColor', paddingBottom: '4px' }}>Explore Full Menu →</a>
+        </div>
+      </section>
+
+      {/* Atmosphere Gallery Preview */}
+      <section style={{ padding: '0 5% 8rem', background: 'var(--fd-paper)' }}>
+        <div className="fd-reveal" style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <span style={{ color: 'var(--fd-accent)', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.85rem' }}>Atmosphere</span>
+          <h2 style={{ fontSize: '2.5rem', margin: '0.5rem 0 1rem', fontWeight: 'normal' }}>The Dining Experience</h2>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem' }}>
+          {galleryImages.slice(0, 4).map((src, i) => (
+            <div key={src} className="fd-reveal" style={{ overflow: 'hidden', aspectRatio: '1/1' }}>
+              <img src={src} alt="Ambiance" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="fd-hover-zoom" />
             </div>
           ))}
         </div>

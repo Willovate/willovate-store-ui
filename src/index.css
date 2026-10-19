@@ -209,3 +209,47 @@ a {
     font-size: 12.5px !important;
   }
 }
+
+/* ── Universal Scrollbar Removal Across All Themes & Previews ── */
+/* Preserves full vertical and horizontal scrollability while eliminating visible scrollbars */
+html, body, #root, main, * {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+::-webkit-scrollbar {
+  width: 0px !important;
+  height: 0px !important;
+  display: none !important;
+  background: transparent !important;
+}
+
+/* ── Atmosphere Gallery Responsive Balanced Grid ── */
+.fs-gallery-grid-responsive {
+  display: grid !important;
+  gap: 1.25rem !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+}
+
+@media (min-width: 768px) {
+  .fs-gallery-grid-responsive {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+  .fs-gallery-grid-responsive.fs-gallery-cols-4 {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+
+.rc-gallery-grid-responsive {
+  display: grid !important;
+  gap: 1.25rem !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+}
+
+@media (min-width: 768px) {
+  .rc-gallery-grid-responsive {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+

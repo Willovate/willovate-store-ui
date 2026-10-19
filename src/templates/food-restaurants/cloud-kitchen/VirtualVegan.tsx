@@ -13,11 +13,11 @@ const VirtualVegan = () => {
   const menu = [
     { tab: 'Signature Bowls', name: 'The Golden Buddha', price: '$14', desc: 'Turmeric quinoa, roasted sweet potato, massaged kale, crispy chickpeas, lemon-tahini dressing.', tags: ['Bestseller'], img: 'photo-1512621776951-a57141f2eefd' },
     { tab: 'Signature Bowls', name: 'Spicy Peanut Tofu', price: '$15', desc: 'Brown rice, charred tofu, edamame, shredded carrots, red cabbage, spicy peanut sauce.', tags: ['High Protein'], img: 'photo-1546069901-ba9599a7e63c' },
-    { tab: 'Signature Bowls', name: 'Mediterranean Falafel', price: '$14', desc: 'Mixed greens, baked falafel, cucumber, cherry tomatoes, kalamata olives, vegan tzatziki.', tags: [], img: 'photo-1512621776951-a57141f2eefd' },
-    { tab: 'Wraps', name: 'Buffalo Cauliflower Wrap', price: '$12', desc: 'Roasted buffalo cauliflower, vegan ranch, romaine, tomato, spinach wrap.', tags: ['Spicy'], img: 'photo-1546069901-ba9599a7e63c' },
-    { tab: 'Wraps', name: 'Smoky Tempeh Wrap', price: '$13', desc: 'Smoked tempeh bacon, avocado, spinach, chipotle aioli, whole wheat wrap.', tags: [], img: 'photo-1512621776951-a57141f2eefd' },
-    { tab: 'Sides & Drinks', name: 'Roasted Garlic Hummus', price: '$6', desc: 'Served with carrot sticks and cucumber.', tags: [], img: 'photo-1504674900247-0877df9cc836' },
-    { tab: 'Sides & Drinks', name: 'Cold Pressed Green Juice', price: '$7', desc: 'Kale, apple, celery, lemon, ginger.', tags: [], img: 'photo-1504674900247-0877df9cc836' },
+    { tab: 'Signature Bowls', name: 'Mediterranean Falafel', price: '$14', desc: 'Mixed greens, baked falafel, cucumber, cherry tomatoes, kalamata olives, vegan tzatziki.', tags: [], img: 'photo-1511690656952-34342bb7c2f2' },
+    { tab: 'Wraps', name: 'Buffalo Cauliflower Wrap', price: '$12', desc: 'Roasted buffalo cauliflower, vegan ranch, romaine, tomato, spinach wrap.', tags: ['Spicy'], img: 'photo-1626700051175-6818013e1d4f' },
+    { tab: 'Wraps', name: 'Smoky Tempeh Wrap', price: '$13', desc: 'Smoked tempeh bacon, avocado, spinach, chipotle aioli, whole wheat wrap.', tags: [], img: 'photo-1528735602780-2552fd46c7af' },
+    { tab: 'Sides & Drinks', name: 'Roasted Garlic Hummus', price: '$6', desc: 'Served with carrot sticks and cucumber.', tags: [], img: 'photo-1540420773420-3366772f4999' },
+    { tab: 'Sides & Drinks', name: 'Cold Pressed Green Juice', price: '$7', desc: 'Kale, apple, celery, lemon, ginger.', tags: [], img: 'photo-1622483767028-3f66f32aef97' },
   ];
 
   return (
@@ -92,8 +92,8 @@ const VirtualVegan = () => {
             </div>
           </div>
           <div style={{ flex: '1 1 400px', position: 'relative' }}>
-            <img src={img('photo-1504674900247-0877df9cc836', 800)} alt="Chef Prep" style={{ width: '90%', height: '500px', objectFit: 'cover', borderRadius: '24px 24px 0 24px', position: 'relative', zIndex: 2 }} />
-            <img src={img('photo-1504674900247-0877df9cc836', 600)} alt="Eco Packaging" style={{ width: '50%', height: '250px', objectFit: 'cover', borderRadius: '24px', position: 'absolute', bottom: '-2rem', right: '0', zIndex: 3, border: `8px solid ${palette.surface}` }} />
+            <img src={img('photo-1556911220-bff31c812dba', 800)} alt="Chef Prep" style={{ width: '90%', height: '500px', objectFit: 'cover', borderRadius: '24px 24px 0 24px', position: 'relative', zIndex: 2 }} />
+            <img src={img('photo-1546069901-ba9599a7e63c', 600)} alt="Eco Packaging" style={{ width: '50%', height: '250px', objectFit: 'cover', borderRadius: '24px', position: 'absolute', bottom: '-2rem', right: '0', zIndex: 3, border: `8px solid ${palette.surface}` }} />
             <div style={{ position: 'absolute', top: '2rem', right: '2rem', width: '90%', height: '500px', backgroundColor: palette.background, borderRadius: '24px 24px 0 24px', zIndex: 1 }}></div>
           </div>
         </div>

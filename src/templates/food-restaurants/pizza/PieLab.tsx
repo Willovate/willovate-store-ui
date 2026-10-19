@@ -1,202 +1,469 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowLeft, MapPin, Clock, Phone, ShoppingBag, ChevronRight, Star, FlaskConical } from 'lucide-react';
-import { useReveal } from '../components/RestaurantCore';
+import React from 'react';
+import { FoodStorefrontCore, type StorefrontThemeConfig } from '../shared/FoodStorefrontCore';
 
-const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
+const img = (id: string, w = 1400) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
 
-const IMAGES = {
-  hero: img('photo-1504674900247-0877df9cc836'), // creative gourmet pizza
-  story: img('photo-1534432182912-63863115e106'), // chef crafting pizza
-  promo: img('photo-1568901346375-23c9450c58cd'), // artisan pizza
-  pizza1: img('photo-1534432182912-63863115e106'),
-  pizza2: img('photo-1504674900247-0877df9cc836'),
-  pizza3: img('photo-1504674900247-0877df9cc836'),
-  pizza4: img('photo-1504674900247-0877df9cc836'),
-  pizza5: img('photo-1504674900247-0877df9cc836'),
-  pizza6: img('photo-1504674900247-0877df9cc836'),
+export const pieLAbConfig: StorefrontThemeConfig = {
+  id: 'pie-lab',
+  kind: 'pizza',
+  currencySymbol: '₹',
+  layoutOptions: {
+    heroLayout: 'asymmetric',
+    productLayout: 'grid-3',
+    featuresLayout: 'pills-row',
+    storyLayout: 'stats-prominent',
+    galleryLayout: 'masonry',
+    sectionOrder: ['hero', 'craft', 'features', 'products', 'promo', 'story', 'gallery', 'reviews', 'location', 'newsletter'],
+  },
+  name: 'Pie Lab',
+  tagline: 'Experimental craft pizza for the adventurous palate — new menu every month',
+  brandSub: 'Science-Driven Pizza · SoHo, New York · Pushing the Boundary of Dough',
+  palette: {
+    primary: '#7c3aed',
+    primaryHover: '#6d28d9',
+    secondary: '#0f0f1a',
+    background: '#f8f7ff',
+    surface: '#ffffff',
+    text: '#0f0f1a',
+    textMuted: '#64748b',
+    border: 'rgba(124, 58, 237, 0.15)',
+    badgeBg: 'rgba(124, 58, 237, 0.08)',
+    badgeText: '#7c3aed',
+    heroOverlay: 'linear-gradient(135deg, rgba(15,15,26,0.88) 0%, rgba(124,58,237,0.45) 100%)',
+  },
+  typography: {
+    headingFont: '"Space Grotesk", "Outfit", sans-serif',
+    bodyFont: '"Inter", sans-serif',
+    accentFont: '"Space Grotesk", sans-serif',
+  },
+  hero: {
+    headline: 'Pizza is a Canvas. We Paint With Flavor.',
+    subheadline:
+      'Pie Lab is where two food scientists with serious pizza obsessions challenged everything conventional. Rotating monthly menus, rare fermentation techniques, squid-ink doughs, and unexpected global flavor pairings. This is not your usual slice.',
+    badge: 'ROTATING MONTHLY MENU · EXPERIMENTAL CRAFT PIZZA · SOHO, NYC',
+    image: img('photo-1565299624946-b28f40a0ae38'),
+    imageAlt: 'Bold experimental pizza at Pie Lab with innovative toppings and a striking dark dough crust',
+    primaryCtaText: "This Month's Lab Menu",
+    primaryCtaPage: 'menu',
+    secondaryCtaText: 'Our Process',
+    secondaryCtaPage: 'about',
+  },
+  announcement: {
+    text: 'October Lab Drop: Miso Black Garlic & The Wagyu X — Available Until Sold Out · Order Before 2PM for Same-Day Pickup',
+    badgeText: 'LAB DROP #47',
+    linkText: 'See October Menu',
+    linkPage: 'menu',
+  },
+  proofBadges: [
+    { icon: '🧪', title: 'Monthly Rotating Menu', subtitle: 'Never the same pizza twice — our R&D team creates 5–7 new pies every month' },
+    { icon: '🫧', title: 'Experimental Fermentation', subtitle: 'Levain, poolish, biga, and wild-caught sourdough starters in controlled lab conditions' },
+    { icon: '🌍', title: 'Global Fusion Toppings', subtitle: 'Korean gochujang, Japanese miso, Peruvian anticucho, and Middle Eastern za\'atar' },
+    { icon: '📊', title: 'Precision Baking Science', subtitle: 'Temperature-logged ovens, hydration tracking, and flavour pairing data from 5,000+ test bakes' },
+  ],
+  categories: ['Lab Series (Monthly)', 'Classics — Remixed', 'Dessert Pies', 'Starter Plates', 'Lab Drinks & Pairings'],
+  collections: [
+    {
+      id: 'lab-series',
+      name: 'October Lab Series',
+      tagline: 'Five experimental pies available for a limited time only. Once they\'re gone, they\'re gone.',
+      image: img('photo-1565299624946-b28f40a0ae38'),
+      itemCount: 5,
+      filterCategory: 'Lab Series (Monthly)',
+    },
+    {
+      id: 'classics-remixed',
+      name: 'Classics — Remixed',
+      tagline: 'Your favourite pizza classics, deconstructed and elevated with unexpected techniques.',
+      image: img('photo-1574071318508-1cdbab80d002'),
+      itemCount: 6,
+      filterCategory: 'Classics — Remixed',
+    },
+    {
+      id: 'dessert-pies',
+      name: 'Dessert Pies',
+      tagline: 'Sweet pizza is a real thing and once you try ours, you will understand why.',
+      image: img('photo-1571877227200-a0d98ea607e9'),
+      itemCount: 4,
+      filterCategory: 'Dessert Pies',
+    },
+    {
+      id: 'starters',
+      name: 'Starter Plates',
+      tagline: 'Lab-inspired small plates to begin your experimental dining experience.',
+      image: img('photo-1546069901-ba9599a7e63c'),
+      itemCount: 5,
+      filterCategory: 'Starter Plates',
+    },
+  ],
+  products: [
+    // — Lab Series (October) —
+    {
+      id: 'pl-miso-black-garlic',
+      slug: 'miso-black-garlic',
+      name: 'Miso Black Garlic',
+      price: 27,
+      description: 'White miso & black garlic cream base, wild mushroom medley, crispy shallots, yuzu zest, black sesame, toasted nori strips, truffle oil. Umami-forward, deeply complex.',
+      category: 'Lab Series (Monthly)',
+      image: img('photo-1604382354936-07c5d9983bd3'),
+      imageAlt: 'Experimental miso black garlic pizza with wild mushrooms and toasted nori',
+      tags: ['Lab Drop #47', 'Vegan Option', 'Umami', 'Limited'],
+      allergens: ['Contains Gluten', 'Contains Soy', 'Contains Sesame'],
+      weightOrSize: '30cm / 12"',
+      featured: true,
+      options: [
+        { name: 'Dough', choices: [{ label: 'Squid Ink (Black)' }, { label: 'Classic Sourdough' }, { label: 'Seeded Multigrain', priceDelta: 1.5 }] },
+        { name: 'Heat', choices: [{ label: 'Mild' }, { label: 'Medium Chilli' }, { label: 'Shichimi Fire', priceDelta: 0.5 }] },
+      ],
+    },
+    {
+      id: 'pl-wagyu-x',
+      slug: 'wagyu-x-pizza',
+      name: 'Wagyu X',
+      price: 38,
+      description: 'A5 Wagyu beef carpaccio-style on a warm dough, Parmigiano cream base, rocket, shaved black truffle, Worcestershire gel, crispy capers, bone marrow gremolata. The most indulgent pie in our Lab history.',
+      category: 'Lab Series (Monthly)',
+      image: img('photo-1590947132387-155cc02f3212'),
+      imageAlt: 'Luxury Wagyu A5 pizza with black truffle and bone marrow',
+      tags: ['Lab Drop #47', 'Premium', 'Limited', 'A5 Wagyu'],
+      allergens: ['Contains Gluten', 'Contains Dairy', 'Contains Fish'],
+      weightOrSize: '30cm / 12"',
+      featured: true,
+      options: [
+        { name: 'Size', choices: [{ label: '30cm (Standard)' }, { label: '36cm (Large)', priceDelta: 8 }] },
+        { name: 'Extra Truffle', choices: [{ label: 'Standard' }, { label: '+Extra Truffle Shaving', priceDelta: 6 }] },
+      ],
+    },
+    {
+      id: 'pl-korean-bbq',
+      slug: 'korean-bbq-pizza',
+      name: 'Korean BBQ',
+      price: 26,
+      description: 'Gochujang & doenjang sauce, slow-braised bulgogi beef, pickled daikon, sesame seeds, spring onions, crispy rice, kimchi drizzle.',
+      category: 'Lab Series (Monthly)',
+      image: img('photo-1534308983496-4fabb1a015ee'),
+      imageAlt: 'Korean BBQ fusion pizza with bulgogi and kimchi drizzle',
+      tags: ['Lab Drop #47', 'Fusion', 'Spicy'],
+      allergens: ['Contains Gluten', 'Contains Soy', 'Contains Sesame'],
+      weightOrSize: '30cm / 12"',
+      options: [
+        { name: 'Spice Level', choices: [{ label: 'Medium' }, { label: 'Hot (Traditional)' }, { label: 'Extra Fiery', priceDelta: 0.5 }] },
+        { name: 'Protein', choices: [{ label: 'Bulgogi Beef' }, { label: 'Crispy Tofu (Vegan)', priceDelta: 0 }] },
+      ],
+    },
+    {
+      id: 'pl-fig-prosciutto',
+      slug: 'fig-prosciutto-ricotta',
+      name: 'Fig & Prosciutto',
+      price: 25,
+      description: 'Honey-whipped ricotta base, fresh mission figs, San Daniele prosciutto crudo, rocket, candied walnuts, balsamic pearls.',
+      category: 'Lab Series (Monthly)',
+      image: img('photo-1571066811602-716837d681de'),
+      imageAlt: 'Sweet and savoury pizza with fresh figs, prosciutto and ricotta',
+      tags: ['Lab Drop #47', 'Sweet-Savoury', 'Seasonal'],
+      allergens: ['Contains Gluten', 'Contains Dairy', 'Contains Nuts'],
+      weightOrSize: '30cm / 12"',
+    },
+    {
+      id: 'pl-anticucho-peru',
+      slug: 'anticucho-peruano',
+      name: 'Anticucho Peruano',
+      price: 26,
+      description: 'Aji panca & cumin charred beef heart skewers atop a huancaína cream base with sweet potato purée, crispy corn, chimichurri oil, fresh cilantro.',
+      category: 'Lab Series (Monthly)',
+      image: img('photo-1565557623262-b51c2513a641'),
+      imageAlt: 'Peruvian-inspired anticucho pizza with beef heart and huancaina cream',
+      tags: ['Lab Drop #47', 'Fusion', 'Bold'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '30cm / 12"',
+    },
+    // — Classics Remixed —
+    {
+      id: 'pl-pepperoni-noir',
+      slug: 'pepperoni-noir',
+      name: 'Pepperoni Noir',
+      price: 22,
+      description: 'Squid ink dough, spicy cup-and-char pepperoni, smoked mozzarella, tomato confit, Calabrian chilli oil, micro basil.',
+      category: 'Classics — Remixed',
+      image: img('photo-1548369937-47519962c11a'),
+      imageAlt: 'Dramatic black squid ink dough pepperoni pizza',
+      tags: ['Bestseller', 'Bold', 'Remixed'],
+      allergens: ['Contains Gluten', 'Contains Dairy', 'Contains Fish'],
+      weightOrSize: '30cm / 12"',
+      featured: true,
+    },
+    {
+      id: 'pl-margherita-2',
+      slug: 'margherita-2-point-0',
+      name: 'Margherita 2.0',
+      price: 20,
+      description: 'Roasted cherry tomato gel, creamy burrata, micro basil, 25-year aged balsamic reduction, sea salt, cold-pressed olive oil. Everything familiar, elevated.',
+      category: 'Classics — Remixed',
+      image: img('photo-1513104890138-7c749659a591'),
+      imageAlt: 'Elevated Margherita 2.0 with burrata and aged balsamic',
+      tags: ['Remixed Classic', 'Vegetarian'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '30cm / 12"',
+    },
+    {
+      id: 'pl-quattro-formaggi-carbon',
+      slug: 'quattro-formaggi-carbone',
+      name: 'Quattro Formaggi Carbone',
+      price: 23,
+      description: 'Activated charcoal dough, gorgonzola dolce, Taleggio, aged Cheddar, Parmigiano, honey drizzle, black pepper. The ultimate cheese lover\'s remix.',
+      category: 'Classics — Remixed',
+      image: img('photo-1588315029754-2dd089d39a1a'),
+      imageAlt: 'Four cheese pizza on dramatic charcoal black dough',
+      tags: ['Remixed', 'Cheese Lover', 'Vegetarian'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '30cm / 12"',
+    },
+    {
+      id: 'pl-caesar-pizza',
+      slug: 'caesar-salad-pizza',
+      name: 'Caesar Salad Pizza',
+      price: 21,
+      description: 'Whole-milk mozzarella base, warm gem lettuce, shaved Parmigiano, house Caesar dressing, anchovy crouton crumbles, black pepper.',
+      category: 'Classics — Remixed',
+      image: img('photo-1512621776951-a57141f2eefd'),
+      imageAlt: 'Caesar salad pizza hybrid with gem lettuce and Caesar dressing',
+      tags: ['Remixed', 'Light', 'Unique'],
+      allergens: ['Contains Gluten', 'Contains Dairy', 'Contains Fish', 'Contains Eggs'],
+      weightOrSize: '30cm / 12"',
+    },
+    // — Dessert Pies —
+    {
+      id: 'pl-nutella-strawberry',
+      slug: 'nutella-strawberry-pie',
+      name: 'Nutella & Strawberry',
+      price: 15,
+      description: 'Sweet brioche-style dough base, Nutella spread, fresh strawberries, powdered sugar, crushed pistachios, strawberry coulis.',
+      category: 'Dessert Pies',
+      image: img('photo-1571877227200-a0d98ea607e9'),
+      imageAlt: 'Sweet Nutella and fresh strawberry dessert pizza',
+      tags: ['Dessert', 'Sweet', 'Popular'],
+      allergens: ['Contains Gluten', 'Contains Dairy', 'Contains Nuts', 'Contains Eggs'],
+      weightOrSize: '28cm / 11" dessert size',
+    },
+    {
+      id: 'pl-smores-pizza',
+      slug: 'smores-pizza',
+      name: "S'mores Lab Pizza",
+      price: 16,
+      description: 'Graham cracker crust, Valrhona dark chocolate ganache, house-toasted marshmallow fluff, chocolate drizzle, sea salt flake.',
+      category: 'Dessert Pies',
+      image: img('photo-1488477181946-6428a0291777'),
+      imageAlt: "S'mores dessert pizza with toasted marshmallow and dark chocolate",
+      tags: ['Dessert', 'Sweet', 'Indulgent'],
+      allergens: ['Contains Gluten', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '28cm / 11" dessert size',
+    },
+    {
+      id: 'pl-lemon-ricotta-dessert',
+      slug: 'lemon-ricotta-honey-pie',
+      name: 'Lemon Ricotta & Honey',
+      price: 14,
+      description: 'Sweet dough, whipped ricotta, Amalfi lemon zest, wildflower honey drizzle, candied lemon slices, fresh thyme.',
+      category: 'Dessert Pies',
+      image: img('photo-1565299715199-866c917257d5'),
+      imageAlt: 'Light lemon ricotta dessert pizza with honey and candied lemon',
+      tags: ['Dessert', 'Light', 'Vegetarian'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '28cm / 11" dessert size',
+    },
+    // — Starters —
+    {
+      id: 'pl-focaccia-board',
+      slug: 'lab-focaccia-board',
+      name: 'Lab Focaccia Board',
+      price: 14,
+      description: 'House focaccia (rosemary, sea salt, EVOO), burrata, olive tapenade, roasted garlic, pickled vegetables, fig jam. Serves 2.',
+      category: 'Starter Plates',
+      image: img('photo-1572695157366-5e585ab2b69f'),
+      imageAlt: 'Sharing board with house focaccia, burrata and accompaniments',
+      tags: ['Sharing', 'Vegetarian', 'Starter'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: 'Serves 2',
+    },
+    {
+      id: 'pl-arancini-lab',
+      slug: 'lab-arancini',
+      name: 'Black Truffle Arancini',
+      price: 13,
+      description: 'Risotto balls with black truffle and Parmigiano filling, crispy breadcrumb exterior, truffle aioli dipping sauce. (3 pieces)',
+      category: 'Starter Plates',
+      image: img('photo-1557499305-0af888c3d8ec'),
+      imageAlt: 'Crispy black truffle arancini with truffle aioli',
+      tags: ['Starter', 'Truffle', 'Popular'],
+      allergens: ['Contains Gluten', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '3 pieces',
+    },
+    {
+      id: 'pl-wings-gochujang',
+      slug: 'gochujang-wings',
+      name: 'Gochujang Wings',
+      price: 16,
+      description: 'Double-fried chicken wings glazed in Korean gochujang honey, sesame seeds, spring onion, pickled cucumber. (8 wings)',
+      category: 'Starter Plates',
+      image: img('photo-1562967914-608f82629710'),
+      imageAlt: 'Crispy chicken wings with gochujang glaze and sesame',
+      tags: ['Starter', 'Spicy', 'Fried'],
+      allergens: ['Contains Gluten', 'Contains Sesame'],
+      weightOrSize: '8 wings',
+    },
+    // — Lab Drinks —
+    {
+      id: 'pl-lab-lemonade',
+      slug: 'yuzu-lab-lemonade',
+      name: 'Yuzu Lab Lemonade',
+      price: 7,
+      description: 'Fresh-pressed yuzu lemonade with house lychee syrup, sparkling water, fresh mint, edible flower garnish.',
+      category: 'Lab Drinks & Pairings',
+      image: img('photo-1513558161293-cdaf765ed2fd'),
+      imageAlt: 'Yuzu lemonade with edible flowers in a tall glass',
+      tags: ['Drink', 'Non-Alcoholic', 'Signature'],
+      weightOrSize: '375ml glass',
+    },
+    {
+      id: 'pl-natural-wine',
+      slug: 'natural-wine-pairing',
+      name: 'Natural Wine — Lab Pairing',
+      price: 13,
+      description: 'A curated rotating natural wine selected by our sommelier to pair with our current Lab Series menu. Ask your server for this week\'s pick.',
+      category: 'Lab Drinks & Pairings',
+      image: img('photo-1510812431401-41d2bd2722f3'),
+      imageAlt: 'Glass of natural wine selected to pair with the lab menu',
+      tags: ['Wine', 'Natural', 'Curated'],
+      allergens: ['Contains Sulphites'],
+      weightOrSize: '175ml glass',
+    },
+  ],
+  craftProcess: {
+    badge: 'THE SCIENCE OF PIZZA',
+    title: 'We Treat Every Pizza Like a Lab Project',
+    subtitle: 'Our process is rigorous, documented, and endlessly curious.',
+    steps: [
+      { time: 'Concept Phase', title: 'Flavor Pairing Research', desc: 'Every new pizza starts with flavor science. We use flavor compound databases and inspiration from global cuisines to design pairings that challenge expectations and reward curiosity.' },
+      { time: 'R&D Bakes', title: 'Test Kitchen Development', desc: 'We run 15–25 test bakes per new pizza, adjusting fermentation, hydration, topping ratios, and oven time before anything reaches the menu.' },
+      { time: 'Fermentation Lab', title: 'Dough Experiments', desc: 'We work with levain, poolish, biga, and wild-caught sourdough starters. Some doughs ferment for 72 hours. Others require specific controlled-temperature chambers for precise yeast activity.' },
+      { time: 'Staff Tasting', title: 'Team Blind Tasting', desc: 'Each candidate pizza goes through a structured blind tasting with our full team. Scores are recorded on flavor, texture, visual impact, and uniqueness before any pizza is approved for the menu.' },
+      { time: 'Launch Day', title: 'Monthly Lab Drop', desc: 'Approved pizzas drop on the first day of each month. Each Lab Drop gets a number. They\'re available until they sell out and never return in exactly the same form.' },
+    ],
+    image: img('photo-1528137871618-79d2761e3fd5'),
+  },
+  story: {
+    badge: 'OUR STORY',
+    title: 'Where Science Meets the Oven',
+    paragraphs: [
+      'Pie Lab was founded in 2017 by Dr. James Park and Chef Elena Vasquez — a food scientist and a Michelin-trained chef who shared one obsession: why do most pizza menus never change?',
+      'They believed pizza was the ultimate culinary canvas — a universal format that could carry any ingredient, any tradition, any idea. They set up a test kitchen in Brooklyn and spent 18 months developing 200+ pizza concepts before opening.',
+      'Today, Pie Lab\'s monthly Lab Drop is one of the most anticipated events in New York\'s food scene. Our subscriber list for early access grows by hundreds every month. We have never repeated a Lab Drop in exactly the same form.',
+    ],
+    image: img('photo-1534432182912-63863115e106'),
+    imageAlt: 'Chef Elena Vasquez and Dr. James Park in the Pie Lab test kitchen',
+    founderQuote: 'Conventional pizza menus exist because people stopped asking "what if." We never stopped asking.',
+    founderName: 'Dr. James Park & Chef Elena Vasquez, Co-Founders',
+    stats: [
+      { value: '200+', label: 'Pizza Concepts Developed' },
+      { value: '47', label: 'Monthly Lab Drops' },
+      { value: '15+', label: 'Global Cuisines Explored' },
+      { value: '0', label: 'Menus Ever Repeated Exactly' },
+    ],
+  },
+  promo: {
+    badge: 'JOIN THE LAB',
+    title: 'New Menu. Every Month. Never the Same Twice.',
+    desc: 'Join our Lab subscriber list to get 48-hour early access to each monthly Lab Drop, behind-the-scenes development notes, and an exclusive Lab Member discount.',
+    ctaText: 'Join the Lab Subscribers',
+    ctaPage: 'contact',
+    image: img('photo-1571407970349-bc81e7e96d47'),
+    imageAlt: 'Pie Lab experimental pizza being sliced showing unique toppings and creative crust',
+  },
+  gallery: [
+    { src: img('photo-1565299624946-b28f40a0ae38'), alt: 'Miso Black Garlic pizza — Lab Drop #47 hero pie', caption: 'Lab Drop #47 — Miso Black Garlic on squid ink dough', tag: 'Lab Series' },
+    { src: img('photo-1590947132387-155cc02f3212'), alt: 'Wagyu X pizza with A5 wagyu and black truffle', caption: 'Wagyu X — the most indulgent pie in our lab history', tag: 'Premium' },
+    { src: img('photo-1534308983496-4fabb1a015ee'), alt: 'Korean BBQ fusion pizza', caption: 'Korean BBQ — gochujang meets the Neapolitan method', tag: 'Fusion' },
+    { src: img('photo-1548369937-47519962c11a'), alt: 'Pepperoni Noir on black squid ink dough', caption: 'Pepperoni Noir — when classics go dark', tag: 'Classics Remixed' },
+    { src: img('photo-1528137871618-79d2761e3fd5'), alt: 'Test kitchen dough development', caption: 'R&D Lab — 25 test bakes per new pizza', tag: 'Process' },
+    { src: img('photo-1571877227200-a0d98ea607e9'), alt: 'Nutella strawberry dessert pizza', caption: 'Sweet pies are not an afterthought', tag: 'Dessert Pies' },
+    { src: img('photo-1562967914-608f82629710'), alt: 'Gochujang wings as starters', caption: 'Lab starters to begin the experiment', tag: 'Starters' },
+    { src: img('photo-1557499305-0af888c3d8ec'), alt: 'Modern SoHo restaurant interior at Pie Lab', caption: 'Pie Lab SoHo — 42 Innovation Avenue', tag: 'Restaurant' },
+  ],
+  testimonials: [
+    {
+      name: 'Priya Krishnamurthy',
+      rating: 5,
+      quote: 'The Korean BBQ pizza broke my brain in the best way. Gochujang and pizza should not work. They absolutely do. I have never ordered anything so unexpected and felt so confident doing it again.',
+      source: 'Verified Lab Member',
+      date: 'October 2026',
+      role: 'Food Journalist',
+    },
+    {
+      name: 'Daniel Chen',
+      rating: 5,
+      quote: 'Every visit is a different experience. I have been coming monthly since Lab Drop #12 and I have never had the same pizza twice. The Wagyu X this month deserves its own Michelin star.',
+      source: 'Verified Lab Member',
+      date: 'October 2026',
+    },
+    {
+      name: 'Emma Watts',
+      rating: 5,
+      quote: 'The squid ink dough on the Pepperoni Noir is stunning — visually and in terms of taste. And the S\'mores dessert pizza completely changed my understanding of what pizza can be.',
+      source: 'Verified Guest',
+      date: 'September 2026',
+    },
+  ],
+  location: {
+    address: '42 Innovation Avenue, SoHo, New York, NY 10012',
+    neighborhood: 'SoHo, Lower Manhattan',
+    hoursWeekdays: 'Wednesday – Monday: 5:00 PM – 12:00 AM',
+    hoursWeekends: 'Saturday: 12:00 PM – 12:00 AM · Sunday: 12:00 PM – 10:00 PM · Tuesday: Closed',
+    phone: '+1 (212) 555-0388',
+    email: 'labs@pielab.nyc',
+    pickupNotice: 'Pickup available for Lab Drop orders. Order by 2PM for same-day. Lab Members get priority pickup slots.',
+  },
+  customInquiry: {
+    title: 'Private Lab Events & Corporate Pizza Science Sessions',
+    subtitle: 'Book an exclusive Lab Session — a hosted tasting and pizza-making experience for your team or event group. Guided by our R&D team, guests see the science behind the pizza.',
+    type: 'catering',
+    occasions: ['Corporate Team Building', 'Product Launch Dinner', 'Private Birthday Tasting', 'Food Media & Press Event', 'Chef\'s Table Experience'],
+    sizes: [
+      { label: 'Lab Table (6–8 guests)', serves: '6-8 guests', basePrice: 320 },
+      { label: 'Private Session (12–16 guests)', serves: '12-16 guests', basePrice: 650 },
+      { label: 'Full Lab Buyout (24–32 guests)', serves: '24-32 guests', basePrice: 1400 },
+    ],
+    flavors: ['October Lab Drop Tasting Menu', 'All-Time Greatest Hits Lab Menu', 'Fully Custom Lab Menu Creation', 'Dessert Pie & Wine Pairing Session'],
+    fillings: ['Natural Wine Flight Pairing', 'Non-Alcoholic Yuzu & Kombucha Flight', 'Chef\'s Table Commentary & Science Notes'],
+    finishes: ['Lab Member Kits to Take Home', 'Custom Menu Cards', 'Recipe Development Consultation'],
+  },
+  faqs: [
+    {
+      question: 'Does the menu really change every single month?',
+      answer: 'Yes, completely. Each month our R&D team releases a new "Lab Drop" of 5–7 original pizzas. Once the month ends, those specific pizzas retire. Some concepts return in evolved forms in later drops, but never identically. Our Classics — Remixed section has a more stable selection.',
+      category: 'About Pie Lab',
+    },
+    {
+      question: 'How can I make sure I do not miss a Lab Drop?',
+      answer: 'Join our Lab subscriber list via our Contact page. Subscribers receive a 48-hour early access notification with the full menu before it goes public. Lab Members also get a 10% discount on the first order of each drop.',
+      category: 'Lab Drops & Membership',
+    },
+    {
+      question: 'What is squid ink dough?',
+      answer: 'We add a small amount of cephalopod ink to our dough during mixing. This gives the dough its striking black colour and adds a subtle oceanic umami note without overpowering the flavour of the toppings. It\'s safe and allergen-disclosed on every relevant menu item.',
+      category: 'About Our Ingredients',
+    },
+    {
+      question: 'Do you have vegetarian or vegan options?',
+      answer: 'Yes. Most months include at least 2–3 vegetarian and 1–2 vegan Lab Series options. These are clearly tagged on the menu. Several Classics Remixed are also vegetarian.',
+      category: 'Dietary & Allergens',
+    },
+    {
+      question: 'Can I book a private Lab experience for my company?',
+      answer: 'Absolutely. We offer private Lab Sessions for 6–32 guests, hosted by our R&D team. These include a curated pizza tasting menu, a dough fermentation science presentation, and a Q&A with the chefs. Use our Inquiry page to book.',
+      category: 'Events & Private Dining',
+    },
+  ],
 };
 
 export default function PieLab() {
-  const [scrolled, setScrolled] = useState(false);
-  const [activeMenuTab, setActiveMenuTab] = useState('Lab Series');
-  
-  const heroRef = useReveal(100);
-  const menuRef = useReveal(200);
-  
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const theme = {
-    name: 'Pie Lab',
-    tagline: 'Experimental craft pizza for the adventurous palate',
-    palette: { primary: '#7c3aed', secondary: '#0f0f1a', surface: '#ffffff', text: '#0f0f1a', background: '#f8f7ff' }
-  };
-
-  const menu = [
-    { tab: 'Lab Series', items: [
-      { name: 'Miso Mushroom', price: '$24', desc: 'White miso base, wild mushroom medley, truffle oil, crispy shallots.', tags: ['Umami', 'Vegan'], image: IMAGES.pizza1 },
-      { name: 'Korean BBQ', price: '$26', desc: 'Gochujang sauce, bulgogi beef, pickled daikon, sesame, scallions.', tags: ['Fusion', 'Spicy'], image: IMAGES.pizza2 },
-      { name: 'Fig & Prosciutto', price: '$25', desc: 'Honey-whipped ricotta, fresh fig, prosciutto crudo, arugula.', tags: ['Sweet-Savory'], image: IMAGES.hero },
-    ]},
-    { tab: 'Classics Remixed', items: [
-      { name: 'Pepperoni Noir', price: '$22', desc: 'Squid ink dough, spicy pepperoni, smoked mozzarella, basil oil.', tags: ['Bold'], image: IMAGES.pizza4 },
-      { name: 'The Margherita 2.0', price: '$20', desc: 'Roasted tomato gel, burrata, micro basil, balsamic reduction.', tags: ['Elevated Classic'], image: IMAGES.pizza5 },
-    ]},
-    { tab: 'Dessert Pies', items: [
-      { name: 'Nutella & Strawberry', price: '$14', desc: 'Sweet dough base, Nutella, fresh strawberry, powdered sugar.', tags: ['Sweet'], image: IMAGES.pizza6 },
-      { name: 'S\'mores Pizza', price: '$15', desc: 'Graham cracker base, Nutella, toasted marshmallow, chocolate drizzle.', tags: ['Indulgent'], image: IMAGES.promo },
-    ]},
-  ];
-
-  return (
-    <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif' }}>
-      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1.5rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.3s', backgroundColor: scrolled ? 'rgba(248,247,255,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid #eaeaea' : 'none', backdropFilter: scrolled ? 'blur(10px)' : 'none' }}>
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.5rem', fontWeight: 800, fontFamily: '"Space Grotesk", sans-serif', color: scrolled ? theme.palette.primary : '#fff', letterSpacing: '-0.5px' }}>
-            <FlaskConical size={24} /> {theme.name}
-          </div>
-        </div>
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', padding: '0.75rem 1.5rem', borderRadius: '8px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontFamily: '"Space Grotesk", sans-serif' }}>
-            <ShoppingBag size={18} /> Join the Lab
-          </button>
-        </div>
-      </nav>
-
-      <header style={{ height: '100vh', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundColor: theme.palette.secondary }}>
-          <img src={IMAGES.hero} alt="Experimental Pizza" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.4, transform: 'scale(1.05)' }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(15,15,26,0.7) 0%, rgba(124,58,237,0.3) 100%)' }}></div>
-        </div>
-        <div ref={heroRef as any} style={{ position: 'relative', zIndex: 10, color: '#fff', maxWidth: '800px', padding: '0 2rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem', color: '#a78bfa' }}>
-             <FlaskConical size={48} />
-          </div>
-          <h1 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 'clamp(3rem, 8vw, 6rem)', fontWeight: 800, letterSpacing: '-2px', lineHeight: 1.1, marginBottom: '1.5rem' }}>Pizza is a Canvas.</h1>
-          <p style={{ fontSize: '1.2rem', fontWeight: 400, marginBottom: '3rem', maxWidth: '600px', margin: '0 auto 3rem auto', lineHeight: 1.6, color: '#e2e8f0' }}>At Pie Lab, every pizza is an experiment. We challenge tradition, celebrate creativity, and bake outside the box — literally.</p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-            <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', padding: '1rem 2.5rem', borderRadius: '8px', fontWeight: 600, fontSize: '1.1rem', cursor: 'pointer', fontFamily: '"Space Grotesk", sans-serif' }}>Order Now</button>
-            <button style={{ backgroundColor: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', backdropFilter: 'blur(10px)', padding: '1rem 2.5rem', borderRadius: '8px', fontWeight: 600, fontSize: '1.1rem', cursor: 'pointer', fontFamily: '"Space Grotesk", sans-serif' }}>See Menu</button>
-          </div>
-        </div>
-      </header>
-      
-      <section style={{ padding: '8rem 5%', backgroundColor: theme.palette.background }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4rem', alignItems: 'center', maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ flex: '1 1 450px' }}>
-            <h2 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: '3rem', fontWeight: 800, color: theme.palette.secondary, marginBottom: '1.5rem', lineHeight: 1.1, letterSpacing: '-1px' }}>Where Science Meets the Oven.</h2>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '1.5rem', color: '#4b5563' }}>Pie Lab was founded by two food scientists who got tired of predictable menus. We treat each pizza like a lab project — testing new fermentation methods, unusual toppings, and unexpected flavor combinations.</p>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '2.5rem', color: '#4b5563' }}>Our rotating seasonal menu ensures no two visits are the same. Come in weekly and discover something completely new.</p>
-            <button style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'none', border: 'none', color: theme.palette.primary, fontSize: '1.1rem', fontWeight: 700, cursor: 'pointer', borderBottom: `2px solid ${theme.palette.primary}`, paddingBottom: '4px', fontFamily: '"Space Grotesk", sans-serif' }}>
-              Read Our Process <ChevronRight size={18} />
-            </button>
-          </div>
-          <div style={{ flex: '1 1 450px' }}>
-            <img src={IMAGES.story} alt="Chef crafting pizza" style={{ width: '100%', borderRadius: '24px', boxShadow: '0 20px 40px rgba(124,58,237,0.15)' }} />
-          </div>
-        </div>
-      </section>
-
-      <section ref={menuRef as any} style={{ padding: '6rem 5%', backgroundColor: theme.palette.surface }}>
-        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <h2 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: '3rem', fontWeight: 800, color: theme.palette.secondary, letterSpacing: '-1px' }}>The Current Lab</h2>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '2.5rem' }}>
-            {menu.map((cat) => (
-              <button 
-                key={cat.tab}
-                onClick={() => setActiveMenuTab(cat.tab)}
-                style={{ 
-                  padding: '0.75rem 2rem', 
-                  backgroundColor: activeMenuTab === cat.tab ? theme.palette.primary : '#f1f5f9',
-                  color: activeMenuTab === cat.tab ? '#fff' : '#64748b',
-                  border: 'none',
-                  borderRadius: '12px',
-                  fontFamily: '"Space Grotesk", sans-serif',
-                  fontSize: '1.1rem',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  transition: 'all 0.2s',
-                  boxShadow: activeMenuTab === cat.tab ? '0 10px 20px rgba(124,58,237,0.2)' : 'none'
-                }}
-              >
-                {cat.tab}
-              </button>
-            ))}
-          </div>
-        </div>
-        
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-          {menu.find(c => c.tab === activeMenuTab)?.items.map((item, i) => (
-            <div key={i} style={{ display: 'flex', gap: '1.5rem', backgroundColor: theme.palette.background, padding: '1.5rem', borderRadius: '16px', border: '1px solid #e2e8f0', transition: 'all 0.3s', cursor: 'pointer' }} onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.borderColor = theme.palette.primary; }} onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = '#e2e8f0'; }}>
-              <img src={item.image} alt={item.name} style={{ width: '120px', height: '120px', objectFit: 'cover', borderRadius: '12px' }} />
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
-                  <h3 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: '1.4rem', fontWeight: 700, margin: 0 }}>{item.name}</h3>
-                  <span style={{ fontWeight: 700, color: theme.palette.primary, fontSize: '1.2rem' }}>{item.price}</span>
-                </div>
-                <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: 1.5, marginBottom: '1rem' }}>{item.desc}</p>
-                <div style={{ display: 'flex', gap: '0.5rem' }}>
-                  {item.tags.map(tag => (
-                    <span key={tag} style={{ fontSize: '0.75rem', padding: '0.3rem 0.6rem', backgroundColor: 'rgba(124,58,237,0.1)', color: theme.palette.primary, borderRadius: '6px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>{tag}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-      
-      <section style={{ position: 'relative', padding: '8rem 5%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundColor: theme.palette.secondary }}>
-          <img src={IMAGES.promo} alt="New Menu" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.4 }} />
-        </div>
-        <div style={{ position: 'relative', zIndex: 10, textAlign: 'center', color: '#fff', maxWidth: '800px', backgroundColor: 'rgba(15,15,26,0.6)', padding: '4rem', borderRadius: '24px', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-          <h2 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: '3.5rem', fontWeight: 800, lineHeight: 1.1, marginBottom: '1.5rem', letterSpacing: '-1px' }}>New Menu.<br/>Every Month.</h2>
-          <p style={{ fontSize: '1.2rem', marginBottom: '2.5rem', margin: '0 auto 2.5rem', lineHeight: 1.6, color: '#cbd5e1' }}>Our culinary team is always testing. Join our mailing list to get early access to next month's experimental pies.</p>
-          <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', padding: '1rem 3rem', borderRadius: '8px', fontWeight: 600, fontSize: '1.1rem', cursor: 'pointer', fontFamily: '"Space Grotesk", sans-serif' }}>See This Month's Lab</button>
-        </div>
-      </section>
-
-      <section style={{ padding: '6rem 5%', backgroundColor: theme.palette.surface }}>
-        <h2 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: '3rem', fontWeight: 800, color: theme.palette.secondary, textAlign: 'center', marginBottom: '4rem', letterSpacing: '-1px' }}>Lab Reports (Reviews)</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-          {[
-            { name: 'Priya K.', quote: 'The Korean BBQ pizza broke my brain in the best way. I never would have ordered it, but my friend made me and now it\'s my #1.' },
-            { name: 'Daniel C.', quote: 'Every visit is a different experience. I have been coming here monthly since they opened and I have never had the same pizza twice.' },
-            { name: 'Emma W.', quote: 'The squid ink dough on the Pepperoni Noir is stunning — visually and taste-wise. True craft.' }
-          ].map((test, i) => (
-            <div key={i} style={{ backgroundColor: theme.palette.background, padding: '2.5rem', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
-              <div style={{ display: 'flex', color: theme.palette.primary, marginBottom: '1.5rem' }}>
-                {[...Array(5)].map((_, j) => <Star key={j} size={18} fill={theme.palette.primary} stroke="none" />)}
-              </div>
-              <p style={{ color: '#334155', lineHeight: 1.7, marginBottom: '2rem', fontSize: '1.05rem' }}>"{test.quote}"</p>
-              <h4 style={{ fontWeight: 700, color: theme.palette.secondary, margin: 0, fontSize: '1.1rem', fontFamily: '"Space Grotesk", sans-serif' }}>— {test.name}</h4>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <footer style={{ backgroundColor: theme.palette.secondary, color: '#fff', padding: '5rem 5% 2rem', textAlign: 'center' }}>
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem', color: theme.palette.primary }}>
-           <FlaskConical size={40} />
-        </div>
-        <h2 style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: '2.5rem', fontWeight: 800, marginBottom: '1rem', letterSpacing: '-1px' }}>{theme.name}</h2>
-        <p style={{ color: '#94a3b8', marginBottom: '4rem', fontSize: '1.1rem' }}>{theme.tagline}</p>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '4rem', marginBottom: '4rem', flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}><MapPin size={24} style={{ color: theme.palette.primary, marginBottom: '1rem' }} /><p style={{ color: '#cbd5e1', lineHeight: 1.6 }}>42 Innovation Ave<br/>SoHo, NY 10012</p></div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}><Clock size={24} style={{ color: theme.palette.primary, marginBottom: '1rem' }} /><p style={{ color: '#cbd5e1', lineHeight: 1.6 }}>Wed–Mon: 5pm – 12am<br/>Closed Tuesday</p></div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}><Phone size={24} style={{ color: theme.palette.primary, marginBottom: '1rem' }} /><p style={{ color: '#cbd5e1', lineHeight: 1.6 }}>Reservations<br/>+1 (212) 555-0388</p></div>
-        </div>
-        <div style={{ borderTop: '1px solid #1e293b', paddingTop: '2rem' }}>
-          <p style={{ color: '#475569', fontSize: '0.9rem' }}>© 2026 {theme.name}. All rights reserved.</p>
-        </div>
-      </footer>
-    </div>
-  );
+  return <FoodStorefrontCore theme={pieLAbConfig} />;
 }
-
-

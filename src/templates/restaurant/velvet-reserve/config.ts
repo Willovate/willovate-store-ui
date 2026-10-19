@@ -44,7 +44,7 @@ export const VelvetReserveConfig: RestaurantConfig = {
           name: 'Burrata & Stone Fruit',
           description: 'Grilled peaches, aged balsamic, micro arugula.',
           price: 1900,
-          image: 'https://images.unsplash.com/photo-1606850780554-b55ea487eea9?auto=format&fit=crop&w=800&q=80',
+          image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80',
           tags: ['Bestseller'],
           dietary: ['Vegetarian', 'Gluten-free'],
         }
@@ -60,7 +60,7 @@ export const VelvetReserveConfig: RestaurantConfig = {
           name: 'Herb-Crusted Lamb Rack',
           description: 'Spring pea purée, minted jus, roasted baby carrots.',
           price: 4500,
-          image: 'https://images.unsplash.com/photo-1600891964092-4316c2883c44?auto=format&fit=crop&w=800&q=80',
+          image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80',
           tags: ['Signature'],
           dietary: ['Gluten-free'],
           options: [{ name: 'Cooking Preference', choices: [{ label: 'Medium Rare' }, { label: 'Medium' }] }]

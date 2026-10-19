@@ -36,19 +36,34 @@ const FIXED_TEMPLATE_ITEMS = [
   { id: 'newsletter',     name: 'Newsletter' },
 ]
 
+const RESTAURANT_TEMPLATE_ITEMS = [
+  { id: 'hero',         name: 'Hero Banner' },
+  { id: 'features',     name: 'Features & Highlights' },
+  { id: 'prod-grid',    name: 'Menu & Signatures' },
+  { id: 'experience',   name: 'Tasting Experience' },
+  { id: 'img-text',     name: 'Our Story' },
+  { id: 'promo',        name: 'Private Dining & Offers' },
+  { id: 'gallery',      name: 'Atmosphere Gallery' },
+  { id: 'testimonials', name: 'Reviews & Acclaim' },
+  { id: 'location',     name: 'Location & Hours' },
+]
+
 // IDs that are synthetic (not DB-backed user elements)
 const SYNTHETIC_IDS = new Set([
   'announcement', 'nav', 'hero', 'badges', 'featured-title',
   'heading-dummy', 'prod-grid', 'coll-list', 'img-text', 'testimonials', 'newsletter',
   'footer', 'email-signup', 'policies',
+  'features', 'experience', 'promo', 'gallery', 'location',
 ])
 // ElementTypes that are handled as fixed synthetic sections — DB elements with
 // these types must NOT appear in the user-editable Template list because they
 // are already represented by the fixed synthetic rows above.
 const SYNTHETIC_ELEMENT_TYPES = new Set([
-  'announcement', 'nav', 'hero', 'featured-title', 'heading', 'prod-grid',
+  'announcement', 'announcement-bar', 'nav', 'hero', 'featured-title', 'heading', 'prod-grid',
   'coll-list', 'img-text', 'testimonials', 'newsletter', 'email-signup',
   'footer', 'policies', 'section-title',
+  'features', 'experience', 'promo', 'gallery', 'location',
+  'categories', 'process',
 ])
 const isSynthetic = (id: string) =>
   SYNTHETIC_IDS.has(id) || id.startsWith('product-')
@@ -193,9 +208,7 @@ export default function SectionsPanel({
   // This is the root-cause fix for duplicate "Main Hero Section" / "Hero Heading" etc.
   // EXCEPT for restaurant themes, where we want to manage sections fully dynamically!
   const userElements = elements.filter(
-    el => isRestaurantTheme 
-      ? !['nav', 'footer', 'announcement-bar'].includes(el.elementType) 
-      : (!isSynthetic(el.id) && !SYNTHETIC_ELEMENT_TYPES.has(el.elementType))
+    el => !isSynthetic(el.id) && !SYNTHETIC_ELEMENT_TYPES.has(el.elementType)
   )
 
   const toggleVisibility = async (element: PageElement) => {
@@ -344,11 +357,18 @@ export default function SectionsPanel({
   )
 
   return (
-    <div className="ws-sections-panel" style={{ display: 'flex', flexDirection: 'column', padding: '6px 8px', flex: 1, overflowY: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+    <div className="ws-sections-panel" style={{ display: 'flex', flexDirection: 'column', padding: '6px 8px', flex: 1, overflowY: 'auto' }}>
       <style>
         {`
           .ws-sections-panel::-webkit-scrollbar {
-            display: none;
+            width: 5px;
+          }
+          .ws-sections-panel::-webkit-scrollbar-thumb {
+            background: #D1D5DB;
+            border-radius: 4px;
+          }
+          .ws-sections-panel::-webkit-scrollbar-thumb:hover {
+            background: #9CA3AF;
           }
         `}
       </style>
@@ -365,8 +385,12 @@ export default function SectionsPanel({
       {/* ── TEMPLATE ── */}
       {renderGroupHeader({ label: "Template" })}
       <div className="ws-sections-list" style={{ display: 'flex', flexDirection: 'column' }}>
-        {!isRestaurantTheme && FIXED_TEMPLATE_ITEMS.map((item, idx) => <div key={item.id}>{renderRow(item.id, item.name, false, idx, true, undefined, false)}</div>)}
-        {userElements.map((el, idx) => <div key={el.id}>{renderRow(el.id, el.name, el.properties?.isHidden === true, (isRestaurantTheme ? 0 : FIXED_TEMPLATE_ITEMS.length) + idx, false, el, false, true)}</div>)}
+        {(isRestaurantTheme ? RESTAURANT_TEMPLATE_ITEMS : FIXED_TEMPLATE_ITEMS).map((item, idx) => (
+          <div key={item.id}>{renderRow(item.id, item.name, false, idx, true, undefined, false)}</div>
+        ))}
+        {userElements.map((el, idx) => (
+          <div key={el.id}>{renderRow(el.id, el.name, el.properties?.isHidden === true, (isRestaurantTheme ? RESTAURANT_TEMPLATE_ITEMS.length : FIXED_TEMPLATE_ITEMS.length) + idx, false, el, false, true)}</div>
+        ))}
         {renderAddBtn()}
       </div>
 
@@ -375,7 +399,9 @@ export default function SectionsPanel({
       {/* ── FOOTER ── */}
       {renderGroupHeader({ label: "Footer" })}
       <div className="ws-sections-list ws-footer-sections-list" style={{ display: 'flex', flexDirection: 'column' }}>
-        {FOOTER_ITEMS.filter(item => isRestaurantTheme ? item.id === 'footer' : true).map((item, idx) => <div key={item.id}>{renderRow(item.id, item.name, false, idx, true, undefined, false)}</div>)}
+        {FOOTER_ITEMS.filter(item => isRestaurantTheme ? (item.id === 'email-signup' || item.id === 'footer') : true).map((item, idx) => (
+          <div key={item.id}>{renderRow(item.id, item.name, false, idx, true, undefined, false)}</div>
+        ))}
         {renderAddBtn('up', true)}
       </div>
 

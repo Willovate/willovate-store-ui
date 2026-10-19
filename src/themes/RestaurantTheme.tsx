@@ -474,6 +474,71 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
   },
 
   // ── CLOUD KITCHEN ─────────────────────────────────────────────────────────
+  'ghost-bite': {
+    id: 'ghost-bite', kind: 'cloud-kitchen', name: 'GhostBite',
+    eyebrow: '28-Min Hot Dispatch · Late Night 4 AM',
+    heroTitle: 'Smashed Hot. Packed Crisp. Delivered Until 4 AM.',
+    heroCopy: 'Double lacy smash patties, hand-cut loaded crinkle fries, and midnight box deals delivered in ventilated thermal foil bags.',
+    palette: { ink: '#f8fafc', paper: '#0c0c0e', accent: '#f97316', muted: '#94a3b8', line: '#27272a' },
+    font: 'sans', layout: 'bold',
+    images: [
+      img('1586190848861-99aa4a171e90'), img('1568901346375-23c9450c58cd'), img('1625813506062-0aeb1d7a094b'),
+      img('1576107232684-1279f3908594'), img('1544025162-d76694265947'), img('1550547660-d9450f859349'),
+    ],
+    menu: ['Ghost Double Smash', 'Nashville Fire Fries', 'Late Night Box for 2'],
+  },
+  'green-fuel': {
+    id: 'green-fuel', kind: 'cloud-kitchen', name: 'GreenFuel',
+    eyebrow: '100% Clean Ingredients · Macro Counted',
+    heroTitle: 'Eat Real Food. Feel Unstoppable. Delivered Clean.',
+    heroCopy: 'Warm grain bowls, hydroponic salads, and chef-curated weekly meal prep with exact protein, carb, and calorie breakdown.',
+    palette: { ink: '#142316', paper: '#fcfbf7', accent: '#166534', muted: '#4b5563', line: '#e2e8f0' },
+    font: 'sans', layout: 'airy',
+    images: [
+      img('1512621776951-a57141f2eefd'), img('1540420773420-3366772f4999'), img('1546069901-ba9599a7e63c'),
+      img('1556910103-1c02745aae4d'), img('1511690656952-34342bb7c2f2'), img('1547592180-85f173990554'),
+    ],
+    menu: ['Miso Salmon Power Bowl', 'Wild Quinoa Harvest Bowl', 'Hydraulic Green Elixir'],
+  },
+  'masala-route': {
+    id: 'masala-route', kind: 'cloud-kitchen', name: 'Masala Route',
+    eyebrow: 'Royal Dum Heritage · Sealed at the Flame',
+    heroTitle: 'Earthen Dum Biryani & Slow-Simmered Curries.',
+    heroCopy: 'Aged basmati rice and succulent cuts sealed in clay handis with whole-wheat dough. Delivered hot and fragrant.',
+    palette: { ink: '#1c1917', paper: '#fffdfa', accent: '#991b1b', muted: '#57534e', line: '#fed7aa' },
+    font: 'serif', layout: 'editorial',
+    images: [
+      img('1589302168068-964664d93dc0'), img('1563379091339-03b21ab4a4f8'), img('1546833999-b9f581a1996d'),
+      img('1585937421612-70a008356fbe'), img('1599488615731-7e5c2823ff28'), img('1626777552726-4a6b54c97e46'),
+    ],
+    menu: ['Shahi Awadhi Mutton Biryani', '18-Hour Dal Makhani', 'Purani Dilli Butter Chicken'],
+  },
+  'umami-express': {
+    id: 'umami-express', kind: 'cloud-kitchen', name: 'Umami Express',
+    eyebrow: 'Two-Tier Pressurized Bowls · Zero Soggy Deliveries',
+    heroTitle: 'Two-Tier Broth Ramen. Springy Noodles at Your Door.',
+    heroCopy: 'Broth and springy alkaline noodles packed in separate pressurized chambers. Craft ramen and baos delivered fresh.',
+    palette: { ink: '#0f172a', paper: '#faf9f5', accent: '#e11d48', muted: '#475569', line: '#fecdd3' },
+    font: 'sans', layout: 'bold',
+    images: [
+      img('1569718212165-3a8278d5f624'), img('1552611052-33e04de081de'), img('1541832676-9b763b0239ab'),
+      img('1541696432-82c6da8ce7bf'), img('1496116218417-1a781b1c416c'), img('1603133872878-684f208fb84b'),
+    ],
+    menu: ['Black Garlic Tonkotsu Ramen', 'Sichuan Dan Dan Noodles', 'Tokyo Katsu Curry Bento'],
+  },
+  'the-cloud-collective': {
+    id: 'the-cloud-collective', kind: 'cloud-kitchen', name: 'The Cloud Collective',
+    eyebrow: '4 Brands · 1 Unified Shared Cart · Single Delivery Fee',
+    heroTitle: 'Craving Burgers, Wok, and Biryani? Order All 3.',
+    heroCopy: 'BurgerDistrict, WokStar, DesiTable, and SweetLab operating under one commissary. Mix cuisines into one order.',
+    palette: { ink: '#0f172a', paper: '#f8fafc', accent: '#4f46e5', muted: '#475569', line: '#e0e7ff' },
+    font: 'sans', layout: 'airy',
+    images: [
+      img('1555396273-367ea4eb4db5'), img('1568901346375-23c9450c58cd'), img('1541832676-9b763b0239ab'),
+      img('1589302168068-964664d93dc0'), img('1551024709-8f23befc6f87'), img('1546069901-ba9599a7e63c'),
+    ],
+    menu: ['Truffle Double Smash', 'Kung Pao Flame Wok Bowl', 'DesiTable Dum Biryani', 'Belgian Fudge Brownie'],
+  },
   'kitchen-x': {
     id: 'kitchen-x', kind: 'cloud-kitchen', name: 'Kitchen X',
     eyebrow: 'Delivery-first. Always.',
@@ -559,7 +624,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     palette: { ink: '#302a24', paper: '#f4efe5', accent: '#c46d2d', muted: '#786d60', line: '#d8cdbd' },
     font: 'serif', layout: 'romantic',
     images: [
-      img('1548365328-8b849e6f6b92'), img('1513104890138-7c749659a591'), img('1574071318508-1cdbab80d002'),
+      img('1513104890138-7c749659a591'), img('1513104890138-7c749659a591'), img('1574071318508-1cdbab80d002'),
       img('1593560708920-61dd98c46a4e'), img('1604382354936-07c5d9983bd3'), img('1574484284002-952d92456975'),
       img('1563379926898-05f4575a45d8'), img('1577219491135-ce391730fb2c'), img('1571091718767-18b5b1457add'),
       img('1504674900247-0877df9cc836'), img('1559847844-5315695dadae'), img('1476224203421-9ac39bcb3327'),
@@ -574,7 +639,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     palette: { ink: '#2d3733', paper: '#f2f5f3', accent: '#4a7c59', muted: '#8da897', line: '#d3dfd7' },
     font: 'script', layout: 'bold',
     images: [
-      img('1513104890138-7c749659a591'), img('1548365328-8b849e6f6b92'), img('1574071318508-1cdbab80d002'),
+      img('1513104890138-7c749659a591'), img('1513104890138-7c749659a591'), img('1574071318508-1cdbab80d002'),
       img('1604382354936-07c5d9983bd3'), img('1593560708920-61dd98c46a4e'), img('1574484284002-952d92456975'),
       img('1563379926898-05f4575a45d8'), img('1504674900247-0877df9cc836'), img('1571091718767-18b5b1457add'),
       img('1577219491135-ce391730fb2c'), img('1559847844-5315695dadae'), img('1476224203421-9ac39bcb3327'),
@@ -589,7 +654,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     palette: { ink: '#201b18', paper: '#fdfbf7', accent: '#d9846f', muted: '#927262', line: '#ead4bf' },
     font: 'rounded', layout: 'airy',
     images: [
-      img('1574071318508-1cdbab80d002'), img('1513104890138-7c749659a591'), img('1548365328-8b849e6f6b92'),
+      img('1574071318508-1cdbab80d002'), img('1513104890138-7c749659a591'), img('1513104890138-7c749659a591'),
       img('1593560708920-61dd98c46a4e'), img('1604382354936-07c5d9983bd3'), img('1574484284002-952d92456975'),
       img('1559847844-5315695dadae'), img('1563379926898-05f4575a45d8'), img('1577219491135-ce391730fb2c'),
       img('1504674900247-0877df9cc836'), img('1571091718767-18b5b1457add'), img('1476224203421-9ac39bcb3327'),
@@ -604,7 +669,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     palette: { ink: '#2d3733', paper: '#f2f5f3', accent: '#4a7c59', muted: '#8da897', line: '#d3dfd7' },
     font: 'script', layout: 'minimal',
     images: [
-      img('1593560708920-61dd98c46a4e'), img('1548365328-8b849e6f6b92'), img('1513104890138-7c749659a591'),
+      img('1593560708920-61dd98c46a4e'), img('1513104890138-7c749659a591'), img('1513104890138-7c749659a591'),
       img('1574071318508-1cdbab80d002'), img('1604382354936-07c5d9983bd3'), img('1574484284002-952d92456975'),
       img('1563379926898-05f4575a45d8'), img('1571091718767-18b5b1457add'), img('1559847844-5315695dadae'),
       img('1577219491135-ce391730fb2c'), img('1476224203421-9ac39bcb3327'), img('1504674900247-0877df9cc836'),
@@ -619,7 +684,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     palette: { ink: '#2d3733', paper: '#f2f5f3', accent: '#f59e0b', muted: '#8da897', line: '#d3dfd7' },
     font: 'serif', layout: 'airy',
     images: [
-      img('1604382354936-07c5d9983bd3'), img('1548365328-8b849e6f6b92'), img('1513104890138-7c749659a591'),
+      img('1604382354936-07c5d9983bd3'), img('1513104890138-7c749659a591'), img('1513104890138-7c749659a591'),
       img('1574071318508-1cdbab80d002'), img('1593560708920-61dd98c46a4e'), img('1574484284002-952d92456975'),
       img('1563379926898-05f4575a45d8'), img('1504674900247-0877df9cc836'), img('1577219491135-ce391730fb2c'),
       img('1559847844-5315695dadae'), img('1571091718767-18b5b1457add'), img('1476224203421-9ac39bcb3327'),
@@ -636,7 +701,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     palette: { ink: '#201b18', paper: '#fdfbf7', accent: '#c17f24', muted: '#927262', line: '#ead4bf' },
     font: 'rounded', layout: 'editorial',
     images: [
-      img('1601050690597-df0568f70950'), img('1631452180519-c014fe946bc0'), img('1567188040759-fb8a883dc6d8'),
+      img('1601050690597-df0568f70950'), img('1585937421612-70a008356fbe'), img('1567188040759-fb8a883dc6d8'),
       img('1626132647523-66f5bf380027'), img('1567620905732-2d7d1a7c6b05'), img('1604152135947-3a4e3ee4e5b2'),
       img('1587116861464-da3947e40a9e'), img('1476224203421-9ac39bcb3327'), img('1504674900247-0877df9cc836'),
       img('1514533650086-7a7a09e14063'), img('1556742049-0cfed4f6a45d'), img('1529193591184-b1d58069ecdd'),
@@ -651,7 +716,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     palette: { ink: '#fdfbf7', paper: '#11100f', accent: '#d9b46c', muted: '#b6afa3', line: '#3b3732' },
     font: 'rounded', layout: 'minimal',
     images: [
-      img('1601050690597-df0568f70950'), img('1567188040759-fb8a883dc6d8'), img('1631452180519-c014fe946bc0'),
+      img('1601050690597-df0568f70950'), img('1567188040759-fb8a883dc6d8'), img('1585937421612-70a008356fbe'),
       img('1626132647523-66f5bf380027'), img('1567620905732-2d7d1a7c6b05'), img('1604152135947-3a4e3ee4e5b2'),
       img('1556742049-0cfed4f6a45d'), img('1514533650086-7a7a09e14063'), img('1476224203421-9ac39bcb3327'),
       img('1504674900247-0877df9cc836'), img('1587116861464-da3947e40a9e'), img('1529193591184-b1d58069ecdd'),
@@ -666,7 +731,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     palette: { ink: '#302a24', paper: '#f4efe5', accent: '#c46d2d', muted: '#786d60', line: '#d8cdbd' },
     font: 'sans', layout: 'rustic',
     images: [
-      img('1631452180519-c014fe946bc0'), img('1601050690597-df0568f70950'), img('1567188040759-fb8a883dc6d8'),
+      img('1585937421612-70a008356fbe'), img('1601050690597-df0568f70950'), img('1567188040759-fb8a883dc6d8'),
       img('1626132647523-66f5bf380027'), img('1567620905732-2d7d1a7c6b05'), img('1604152135947-3a4e3ee4e5b2'),
       img('1514533650086-7a7a09e14063'), img('1476224203421-9ac39bcb3327'), img('1556742049-0cfed4f6a45d'),
       img('1504674900247-0877df9cc836'), img('1587116861464-da3947e40a9e'), img('1529193591184-b1d58069ecdd'),
@@ -681,7 +746,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     palette: { ink: '#201b18', paper: '#fdfbf7', accent: '#d9846f', muted: '#927262', line: '#ead4bf' },
     font: 'rounded', layout: 'bold',
     images: [
-      img('1567188040759-fb8a883dc6d8'), img('1601050690597-df0568f70950'), img('1631452180519-c014fe946bc0'),
+      img('1567188040759-fb8a883dc6d8'), img('1601050690597-df0568f70950'), img('1585937421612-70a008356fbe'),
       img('1626132647523-66f5bf380027'), img('1567620905732-2d7d1a7c6b05'), img('1604152135947-3a4e3ee4e5b2'),
       img('1514533650086-7a7a09e14063'), img('1556742049-0cfed4f6a45d'), img('1476224203421-9ac39bcb3327'),
       img('1587116861464-da3947e40a9e'), img('1504674900247-0877df9cc836'), img('1529193591184-b1d58069ecdd'),
@@ -697,7 +762,7 @@ export const restaurantThemePresets: Record<string, RestaurantThemePreset> = {
     font: 'sans', layout: 'bold',
     images: [
       img('1626132647523-66f5bf380027'), img('1601050690597-df0568f70950'), img('1567188040759-fb8a883dc6d8'),
-      img('1631452180519-c014fe946bc0'), img('1567620905732-2d7d1a7c6b05'), img('1604152135947-3a4e3ee4e5b2'),
+      img('1585937421612-70a008356fbe'), img('1567620905732-2d7d1a7c6b05'), img('1604152135947-3a4e3ee4e5b2'),
       img('1514533650086-7a7a09e14063'), img('1476224203421-9ac39bcb3327'), img('1556742049-0cfed4f6a45d'),
       img('1504674900247-0877df9cc836'), img('1587116861464-da3947e40a9e'), img('1529193591184-b1d58069ecdd'),
     ],
@@ -947,30 +1012,58 @@ export function RestaurantTheme(props: { theme: RestaurantThemePreset; compact?:
 function InnerRestaurantTheme({ theme, compact = false, elements = [] }: { theme: RestaurantThemePreset; compact?: boolean, elements?: any[] }) {
   const { state, dispatch } = useRestaurant()
   const cafeThemes = ['morning-ritual', 'brew-house', 'corner-cafe', 'latte-lane', 'the-daily-grind']
-  const bakeryThemes = ['butter-and-bloom', 'oven-and-crumb', 'parisian-crust', 'golden-loaf', 'daily-bread-co']
-  const fastFoodThemes = ['street-stack', 'crunch-club', 'burger-district', 'drive-and-dine', 'quick-bite']
-  const cloudThemes = ['kitchen-x', 'ghost-kitchen', 'urban-batch', 'fresh-dispatch', 'kitchen-express']
-  const fineThemes = ['noir-table', 'velvet-reserve', 'the-tasting-room', 'ember-and-oak', 'maison-gourmet']
-  const pizzaThemes = ['napoli-flame', 'pizza-district', 'crust-and-co', 'woodfire-90', 'slice-society']
-  const indianThemes = ['saffron-house', 'spice-route', 'masala-modern', 'tandoor-tales', 'royal-thali']
-  const dessertThemes = ['sugar-bloom', 'sweet-atelier', 'cocoa-room', 'sprinkle-studio', 'velvet-cake']
-  const deliveryThemes = ['foodflow', 'dashdish', 'mealdrop', 'cravego', 'bitenow']
+  const bakeryThemes = ['butter-and-bloom', 'oven-and-crumb', 'parisian-crust', 'golden-loaf', 'daily-bread-co', 'golden-crumb', 'rustic-oven', 'patisserie-lune', 'rise-and-knead', 'sugar-petal']
+  const fastFoodThemes = ['street-stack', 'crunch-club', 'burger-district', 'drive-and-dine', 'quick-bite', 'burger-blitz', 'crunch-box', 'quick-bowl', 'street-bites', 'wrap-rush']
+  const cloudThemes = ['ghost-bite', 'green-fuel', 'masala-route', 'umami-express', 'the-cloud-collective', 'kitchen-x', 'ghost-kitchen', 'urban-batch', 'fresh-dispatch', 'kitchen-express', 'box-and-go', 'dark-kitchen-pro', 'flame-hub', 'fresh-batch', 'ghost-chef']
+  const fineThemes = ['noir-table', 'velvet-reserve', 'the-tasting-room', 'ember-and-oak', 'maison-gourmet', 'noir-ember', 'ivory-court', 'azure-bistro', 'velvet-table', 'minimal-omakase']
+  const pizzaThemes = ['napoli-flame', 'pizza-district', 'crust-and-co', 'woodfire-90', 'slice-society', 'crust-theory', 'mammas-table', 'napoli-fire', 'pie-lab']
+  const indianThemes = ['saffron-house', 'spice-route', 'masala-modern', 'tandoor-tales', 'royal-thali', 'chai-and-chaat', 'masala-royale', 'tandoor-nights', 'tiffin-tales']
+  const dessertThemes = ['sugar-bloom', 'sweet-atelier', 'cocoa-room', 'sprinkle-studio', 'velvet-cake', 'choco-vault', 'frost-and-fruit', 'scoop-story', 'sweet-tooth', 'waffle-house-studio']
+  const deliveryThemes = ['foodflow', 'dashdish', 'mealdrop', 'cravego', 'bitenow', 'dash-eats', 'fork-express', 'hungry-hero', 'local-plate', 'zip-meals']
   const bbqThemes = ['smokehouse-77', 'grill-republic', 'fire-and-rib', 'backyard-barbeque', 'kebab-kingdom']
 
+  // Live merge properties edited in the Store Editor
+  const activeTheme = (() => {
+    const res = { ...theme }
+    if (elements && elements.length > 0) {
+      const hero = elements.find(e => e.elementType === 'hero')
+      if (hero?.properties) {
+        if (hero.properties.title) res.heroTitle = hero.properties.title
+        if (hero.properties.subtitle) res.heroCopy = hero.properties.subtitle
+        if (hero.properties.eyebrow) res.eyebrow = hero.properties.eyebrow
+        if (hero.properties.buttonText) res.heroButton1 = hero.properties.buttonText
+        if (hero.properties.style_backgroundImage) {
+          res.images = [...res.images]
+          res.images[0] = hero.properties.style_backgroundImage
+        }
+      }
+      const nav = elements.find(e => e.elementType === 'nav')
+      if (nav?.properties?.logoText) res.name = nav.properties.logoText
+      const story = elements.find(e => e.elementType === 'img-text')
+      if (story?.properties) {
+        if (story.properties.title) res.storyTitle = story.properties.title
+        if (story.properties.content) res.storyCopy = story.properties.content
+      }
+      const announcement = elements.find(e => e.elementType === 'announcement' || e.elementType === 'announcement-bar')
+      if (announcement?.properties?.text) res.announcementText = announcement.properties.text
+    }
+    return res
+  })()
+
   const renderTheme = () => {
-    if (bbqThemes.includes(theme.id)) return <BbqTheme theme={theme} />
-    if (deliveryThemes.includes(theme.id)) return <DeliveryTheme theme={theme} />
-    if (dessertThemes.includes(theme.id)) return <DessertTheme theme={theme} />
-    if (indianThemes.includes(theme.id)) return <IndianTheme theme={theme} />
-    if (pizzaThemes.includes(theme.id)) return <PizzaTheme theme={theme} />
-    if (cloudThemes.includes(theme.id)) return <CloudKitchenTheme theme={theme} />
-    if (bakeryThemes.includes(theme.id)) return <BakeryTheme theme={theme} />
-    if (fastFoodThemes.includes(theme.id)) return <FastFoodTheme theme={theme} />
-    if (cafeThemes.includes(theme.id)) return <CafeTheme theme={theme} />
-    if (fineThemes.includes(theme.id)) return <FineDiningTheme theme={theme} />
+    if (bbqThemes.includes(theme.id)) return <BbqTheme theme={activeTheme} elements={elements} />
+    if (deliveryThemes.includes(theme.id)) return <DeliveryTheme theme={activeTheme} elements={elements} />
+    if (dessertThemes.includes(theme.id)) return <DessertTheme theme={activeTheme} elements={elements} />
+    if (indianThemes.includes(theme.id)) return <IndianTheme theme={activeTheme} elements={elements} />
+    if (pizzaThemes.includes(theme.id)) return <PizzaTheme theme={activeTheme} elements={elements} />
+    if (cloudThemes.includes(theme.id)) return <CloudKitchenTheme theme={activeTheme} elements={elements} />
+    if (bakeryThemes.includes(theme.id)) return <BakeryTheme theme={activeTheme} elements={elements} />
+    if (fastFoodThemes.includes(theme.id)) return <FastFoodTheme theme={activeTheme} elements={elements} />
+    if (cafeThemes.includes(theme.id)) return <CafeTheme theme={activeTheme} elements={elements} />
+    if (fineThemes.includes(theme.id)) return <FineDiningTheme theme={activeTheme} elements={elements} />
     
-    // Use the new FoodTheme architecture for the remaining 40 themes
-    const config = buildFoodConfig(theme)
+    // Use the FoodTheme architecture for any custom themes
+    const config = buildFoodConfig(activeTheme)
     return <FoodTheme config={config} elements={elements} />
   }
 

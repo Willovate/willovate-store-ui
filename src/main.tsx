@@ -18,7 +18,12 @@ createRoot(document.getElementById('root')!).render(
     <Router>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/workspace" element={<WorkspacePage />} />
         <Route path="/workspace/:websiteId" element={<WorkspacePage />} />
+        <Route path="/workspace/:websiteId/:tab" element={<WorkspacePage />} />
+        <Route path="/edit-templates" element={<WorkspacePage />} />
+        <Route path="/edit-templates/:websiteId" element={<WorkspacePage />} />
+        <Route path="/preview" element={<PreviewPage />} />
         <Route path="/preview/:websiteId" element={<PreviewPage />} />
         <Route path="/browse-templates" element={<TemplatesBrowse />} />
         <Route path="/browse-templates/:categorySlug" element={<BrowseTemplateCategory />} />

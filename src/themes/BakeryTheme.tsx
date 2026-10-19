@@ -72,7 +72,19 @@ function BakeryQuickViewModal({ item, image, onClose }: { item: string[], image:
   )
 }
 
+import GoldenCrumb from '../templates/food-restaurants/bakery/GoldenCrumb'
+import PatisserieLune from '../templates/food-restaurants/bakery/PatisserieLune'
+import RusticOven from '../templates/food-restaurants/bakery/RusticOven'
+import SugarPetal from '../templates/food-restaurants/bakery/SugarPetal'
+import RiseAndKnead from '../templates/food-restaurants/bakery/RiseAndKnead'
+
 export default function BakeryTheme({ theme }: { theme: RestaurantThemePreset }) {
+  if (theme.id === 'butter-and-bloom' || theme.id === 'golden-crumb') return <GoldenCrumb />
+  if (theme.id === 'parisian-crust' || theme.id === 'patisserie-lune') return <PatisserieLune />
+  if (theme.id === 'oven-and-crumb' || theme.id === 'rustic-oven') return <RusticOven />
+  if (theme.id === 'daily-bread-co' || theme.id === 'sugar-petal') return <SugarPetal />
+  if (theme.id === 'golden-loaf' || theme.id === 'rise-and-knead') return <RiseAndKnead />
+
   const [path, setPath] = useState('/')
   const [mobile, setMobile] = useState(false)
   const [scrolled, setScrolled] = useState(false)

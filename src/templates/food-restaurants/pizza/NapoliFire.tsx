@@ -1,201 +1,583 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowLeft, MapPin, Clock, Phone, ShoppingBag, ChevronRight, Star, Flame } from 'lucide-react';
-import { useReveal } from '../components/RestaurantCore';
+import React from 'react';
+import { FoodStorefrontCore, type StorefrontThemeConfig } from '../shared/FoodStorefrontCore';
 
-const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
+const img = (id: string, w = 1400) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
 
-const IMAGES = {
-  hero: img('photo-1504674900247-0877df9cc836'), // classic neapolitan
-  story: img('photo-1504674900247-0877df9cc836'), // pizza chef
-  promo: img('photo-1504674900247-0877df9cc836'), // wood-fired oven flames
-  pizza1: img('photo-1504674900247-0877df9cc836'),
-  pizza2: img('photo-1504674900247-0877df9cc836'),
-  pizza3: img('photo-1555939594-58d7cb561ad1'),
-  pizza4: img('photo-1504674900247-0877df9cc836'),
-  pizza5: img('photo-1504674900247-0877df9cc836'),
-  pizza6: img('photo-1488477181946-6428a0291777'),
+export const napoliFireConfig: StorefrontThemeConfig = {
+  id: 'napoli-fire',
+  kind: 'pizza',
+  currencySymbol: '₹',
+  layoutOptions: {
+    heroLayout: 'centered',
+    productLayout: 'grid-4',
+    storyLayout: 'card-overlay',
+    featuresLayout: 'cards-grid',
+    galleryLayout: 'editorial-collage',
+    sectionOrder: ['hero', 'features', 'craft', 'products', 'story', 'promo', 'gallery', 'reviews', 'location', 'newsletter'],
+  },
+  name: 'Napoli Fire',
+  tagline: 'Authentic Neapolitan pizza, wood-fired to perfection in a 900°F stone oven',
+  brandSub: 'Born in Naples · Baked in Fire · Est. 1982',
+  palette: {
+    primary: '#c2410c',
+    primaryHover: '#9a3412',
+    secondary: '#1a0f08',
+    background: '#fffbf7',
+    surface: '#fff5ee',
+    text: '#1a0f08',
+    textMuted: '#78614f',
+    border: 'rgba(194, 65, 12, 0.15)',
+    badgeBg: '#fff1e8',
+    badgeText: '#c2410c',
+    heroOverlay: 'linear-gradient(to bottom, rgba(26,15,8,0.78) 0%, rgba(194,65,12,0.25) 100%)',
+  },
+  typography: {
+    headingFont: '"Playfair Display", "Georgia", serif',
+    bodyFont: '"Inter", sans-serif',
+    accentFont: '"Cormorant Garamond", serif',
+  },
+  hero: {
+    headline: 'Born in Naples. Baked in Fire. Every Pizza a Work of Art.',
+    subheadline:
+      'Caputo 00 flour dough cold-fermented for 48 hours, San Marzano DOP tomatoes, fresh fior di latte mozzarella, and 90 seconds in our 900°F wood-fired stone oven. This is Neapolitan pizza in its purest form.',
+    badge: 'CERTIFIED VERA PIZZA NAPOLETANA · WOOD-FIRED SINCE 1982',
+    image: img('photo-1513104890138-7c749659a591'),
+    imageAlt: 'Authentic Neapolitan Margherita pizza fresh from a 900°F wood-fired stone oven with charred leopard-spotted crust',
+    primaryCtaText: 'View Our Menu',
+    primaryCtaPage: 'menu',
+    secondaryCtaText: 'Our Neapolitan Story',
+    secondaryCtaPage: 'about',
+  },
+  announcement: {
+    text: 'Dine-In Reservations Now Open · Free Delivery On Orders Over $40 · Book Your Table for Weekend Service',
+    badgeText: 'PRENOTAZIONE',
+    linkText: 'Reserve a Table',
+    linkPage: 'contact',
+  },
+  proofBadges: [
+    { icon: '🌾', title: 'Caputo 00 Flour', subtitle: 'Imported Neapolitan flour for the perfect airy crust with leopard char' },
+    { icon: '🍅', title: 'DOP San Marzano', subtitle: 'Certified Protected Designation of Origin tomatoes from the volcanic Agro Nocerino Sarnese' },
+    { icon: '🔥', title: '900°F Stone Oven', subtitle: 'Traditional Stefano Ferrara wood-fired oven; 90-second bake time' },
+    { icon: '⏳', title: '48-Hour Cold Ferment', subtitle: 'Slow cold fermentation develops complex flavour and perfect crumb structure' },
+  ],
+  categories: ['Neapolitan Classics', 'White (Bianca)', 'Calzone & Fritti', 'Antipasti & Salads', 'Pasta & Secondi', 'Dolci & Desserts', 'Wine & Drinks'],
+  collections: [
+    {
+      id: 'neapolitan-classics',
+      name: 'Neapolitan Classics',
+      tagline: 'The originals — Margherita, Marinara, Diavola — made exactly as intended in Naples.',
+      image: img('photo-1513104890138-7c749659a591'),
+      itemCount: 9,
+      filterCategory: 'Neapolitan Classics',
+    },
+    {
+      id: 'white-bianca',
+      name: 'White (Bianca) Pizze',
+      tagline: 'Inventive no-tomato pizzas celebrating Italian cheese, truffle, and seasonal ingredients.',
+      image: img('photo-1574071318508-1cdbab80d002'),
+      itemCount: 5,
+      filterCategory: 'White (Bianca)',
+    },
+    {
+      id: 'calzone-fritti',
+      name: 'Calzone & Fritti',
+      tagline: 'Fried and baked folded specialties fresh from the oven.',
+      image: img('photo-1565299624946-b28f40a0ae38'),
+      itemCount: 4,
+      filterCategory: 'Calzone & Fritti',
+    },
+    {
+      id: 'antipasti-salads',
+      name: 'Antipasti & Insalate',
+      tagline: 'Start with burrata, bruschetta, arancini, and crisp seasonal salads.',
+      image: img('photo-1546069901-ba9599a7e63c'),
+      itemCount: 7,
+      filterCategory: 'Antipasti & Salads',
+    },
+  ],
+  products: [
+    // — Neapolitan Classics —
+    {
+      id: 'nf-margherita-dop',
+      slug: 'margherita-dop',
+      name: 'Margherita DOP',
+      price: 18,
+      description: 'San Marzano DOP tomato, fior di latte mozzarella, fresh basil, extra-virgin olive oil. The original — unchanged since 1889.',
+      category: 'Neapolitan Classics',
+      image: img('photo-1513104890138-7c749659a591'),
+      imageAlt: 'Classic Neapolitan Margherita pizza with fior di latte and fresh basil',
+      tags: ['Bestseller', 'Vegetarian', 'DOP Certified'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '30cm / 12"',
+      featured: true,
+      options: [
+        { name: 'Size', choices: [{ label: '30cm (Standard)' }, { label: '36cm (Large)', priceDelta: 4 }] },
+        { name: 'Dough', choices: [{ label: 'Classic (48h Ferment)' }, { label: 'Wholegrain', priceDelta: 1.5 }, { label: 'Gluten-Free', priceDelta: 3 }] },
+      ],
+    },
+    {
+      id: 'nf-marinara',
+      slug: 'pizza-marinara',
+      name: 'Pizza Marinara',
+      price: 14,
+      description: 'San Marzano DOP tomato, garlic, oregano, extra-virgin olive oil. The oldest Neapolitan pizza — simple, vegan, extraordinary.',
+      category: 'Neapolitan Classics',
+      image: img('photo-1571407970349-bc81e7e96d47'),
+      imageAlt: 'Pizza Marinara — the original tomato and garlic Neapolitan pizza',
+      tags: ['Vegan', 'Classic'],
+      allergens: ['Contains Gluten'],
+      weightOrSize: '30cm / 12"',
+      options: [
+        { name: 'Size', choices: [{ label: '30cm (Standard)' }, { label: '36cm (Large)', priceDelta: 4 }] },
+        { name: 'Dough', choices: [{ label: 'Classic (48h Ferment)' }, { label: 'Gluten-Free', priceDelta: 3 }] },
+      ],
+    },
+    {
+      id: 'nf-diavola',
+      slug: 'diavola',
+      name: 'Diavola',
+      price: 21,
+      description: 'San Marzano tomato, fior di latte, Calabrian nduja, spicy salami, smoked mozzarella, fresh basil.',
+      category: 'Neapolitan Classics',
+      image: img('photo-1565299624946-b28f40a0ae38'),
+      imageAlt: 'Diavola pizza with spicy Calabrian salami and nduja',
+      tags: ['Spicy', 'Bestseller'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '30cm / 12"',
+      options: [
+        { name: 'Size', choices: [{ label: '30cm (Standard)' }, { label: '36cm (Large)', priceDelta: 4 }] },
+        { name: 'Spice Level', choices: [{ label: 'Mild' }, { label: 'Hot' }, { label: 'Extra Fiery', priceDelta: 1 }] },
+      ],
+    },
+    {
+      id: 'nf-prosciutto-rucola',
+      slug: 'prosciutto-e-rucola',
+      name: 'Prosciutto e Rucola',
+      price: 24,
+      description: 'Fior di latte, cherry tomatoes, San Daniele prosciutto crudo, fresh rocket, shaved Parmigiano Reggiano, lemon zest.',
+      category: 'Neapolitan Classics',
+      image: img('photo-1528137871618-79d2761e3fd5'),
+      imageAlt: 'Pizza with prosciutto, rocket and Parmigiano',
+      tags: ['Premium', 'Popular'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '30cm / 12"',
+      options: [
+        { name: 'Size', choices: [{ label: '30cm (Standard)' }, { label: '36cm (Large)', priceDelta: 4 }] },
+      ],
+    },
+    {
+      id: 'nf-tartufo-nero',
+      slug: 'tartufo-nero',
+      name: 'Tartufo Nero',
+      price: 28,
+      compareAtPrice: 32,
+      description: 'Black truffle cream base, fior di latte, wild porcini mushrooms, fresh thyme, shaved Parmigiano, truffle oil drizzle.',
+      category: 'Neapolitan Classics',
+      image: img('photo-1595854341625-f33ee10dbf94'),
+      imageAlt: 'Black truffle pizza with porcini mushrooms and Parmigiano',
+      tags: ['Premium', 'Chef Favourite', 'Truffle'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '30cm / 12"',
+      featured: true,
+      options: [
+        { name: 'Size', choices: [{ label: '30cm (Standard)' }, { label: '36cm (Large)', priceDelta: 5 }] },
+        { name: 'Extra Truffle', choices: [{ label: 'Standard' }, { label: 'Extra Truffle Shaving', priceDelta: 4 }] },
+      ],
+    },
+    {
+      id: 'nf-bufala',
+      slug: 'bufala-e-basilico',
+      name: 'Bufala e Basilico',
+      price: 22,
+      description: 'San Marzano tomato, Campania buffalo mozzarella DOP, torn fresh basil, Sicilian sea salt, Puglian extra-virgin olive oil.',
+      category: 'Neapolitan Classics',
+      image: img('photo-1590947132387-155cc02f3212'),
+      imageAlt: 'Pizza with buffalo mozzarella DOP and fresh basil',
+      tags: ['Vegetarian', 'DOP Certified'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '30cm / 12"',
+    },
+    {
+      id: 'nf-salsiccia',
+      slug: 'salsiccia-e-friarielli',
+      name: 'Salsiccia e Friarielli',
+      price: 23,
+      description: 'Fior di latte, Neapolitan sausage, sautéed broccoli rabe (friarielli), garlic, chilli, extra-virgin olive oil.',
+      category: 'Neapolitan Classics',
+      image: img('photo-1565557623262-b51c2513a641'),
+      imageAlt: 'Salsiccia pizza with Neapolitan sausage and friarielli',
+      tags: ['Neapolitan Tradition'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '30cm / 12"',
+    },
+    {
+      id: 'nf-capricciosa',
+      slug: 'capricciosa',
+      name: 'Capricciosa',
+      price: 22,
+      description: 'Tomato, fior di latte, prosciutto cotto, artichokes, button mushrooms, black olives, egg.',
+      category: 'Neapolitan Classics',
+      image: img('photo-1548369937-47519962c11a'),
+      imageAlt: 'Capricciosa pizza loaded with prosciutto, artichokes, mushrooms and olives',
+      tags: ['Classic', 'Popular'],
+      allergens: ['Contains Gluten', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '30cm / 12"',
+    },
+    {
+      id: 'nf-quattro-stagioni',
+      slug: 'quattro-stagioni',
+      name: 'Quattro Stagioni',
+      price: 23,
+      description: 'Four zones: cherry tomato & basil (spring), prosciutto & egg (summer), porcini & truffle (autumn), black olives & anchovies (winter).',
+      category: 'Neapolitan Classics',
+      image: img('photo-1534308983496-4fabb1a015ee'),
+      imageAlt: 'Quattro Stagioni pizza with four seasonal sections',
+      tags: ['Seasonal'],
+      allergens: ['Contains Gluten', 'Contains Dairy', 'Contains Fish'],
+      weightOrSize: '30cm / 12"',
+    },
+    // — White (Bianca) —
+    {
+      id: 'nf-quattro-formaggi',
+      slug: 'quattro-formaggi',
+      name: 'Quattro Formaggi',
+      price: 22,
+      description: 'Fior di latte, gorgonzola dolce, Pecorino Romano, Parmigiano Reggiano, walnut oil, fresh herbs.',
+      category: 'White (Bianca)',
+      image: img('photo-1565299715199-866c917257d5'),
+      imageAlt: 'Four cheese white pizza with gorgonzola, mozzarella, pecorino and parmigiano',
+      tags: ['Vegetarian', 'Cheese Lover'],
+      allergens: ['Contains Gluten', 'Contains Dairy', 'Contains Nuts'],
+      weightOrSize: '30cm / 12"',
+    },
+    {
+      id: 'nf-patata-rosmarino',
+      slug: 'patata-e-rosmarino',
+      name: 'Patata e Rosmarino',
+      price: 19,
+      description: 'Thinly sliced Amalfi lemon potatoes, rosemary, stracciatella di bufala, crispy guanciale, sea salt.',
+      category: 'White (Bianca)',
+      image: img('photo-1576402187878-974f70c890a5'),
+      imageAlt: 'White pizza with potato, rosemary and stracciatella',
+      tags: ['Seasonal', 'No Tomato'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '30cm / 12"',
+    },
+    {
+      id: 'nf-stracciatella',
+      slug: 'stracciatella-e-prosciutto',
+      name: 'Stracciatella Cruda',
+      price: 25,
+      description: 'Cream cheese base, stracciatella, raw San Daniele prosciutto, fig preserve, fresh arugula, balsamic glaze.',
+      category: 'White (Bianca)',
+      image: img('photo-1541745537411-b8046dc6d66c'),
+      imageAlt: 'White pizza topped with stracciatella, prosciutto, fig and arugula',
+      tags: ['Premium', 'Fig Season'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: '30cm / 12"',
+      featured: true,
+    },
+    // — Calzone & Fritti —
+    {
+      id: 'nf-calzone-classico',
+      slug: 'calzone-classico-fritto',
+      name: 'Calzone Classico Fritto',
+      price: 20,
+      description: 'Deep-fried Neapolitan calzone filled with fresh ricotta, provola affumicata, salami, black pepper.',
+      category: 'Calzone & Fritti',
+      image: img('photo-1598023696416-0193a0bcd302'),
+      imageAlt: 'Golden fried Neapolitan calzone cut open showing ricotta filling',
+      tags: ['Fried', 'Traditional'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: 'Single serving',
+    },
+    {
+      id: 'nf-calzone-vegetariano',
+      slug: 'calzone-vegetariano',
+      name: 'Calzone Vegetariano',
+      price: 18,
+      description: 'Baked calzone: roasted courgette, spinach, ricotta, fior di latte, Parmigiano, olive oil.',
+      category: 'Calzone & Fritti',
+      image: img('photo-1604382354936-07c5d9983bd3'),
+      imageAlt: 'Baked vegetarian calzone with vegetables and ricotta',
+      tags: ['Vegetarian', 'Baked'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: 'Single serving',
+    },
+    {
+      id: 'nf-arancini',
+      slug: 'arancini-al-ragu',
+      name: 'Arancini al Ragù',
+      price: 12,
+      description: 'Three crispy Sicilian rice balls filled with slow-braised beef ragù, peas, and Pecorino Romano.',
+      category: 'Calzone & Fritti',
+      image: img('photo-1565557623262-b51c2513a641'),
+      imageAlt: 'Three golden arancini rice balls with beef ragù filling',
+      tags: ['Starter', 'Fried'],
+      allergens: ['Contains Gluten', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '3 pieces',
+    },
+    // — Antipasti & Salads —
+    {
+      id: 'nf-burrata',
+      slug: 'burrata-con-pomodoro',
+      name: 'Burrata con Pomodoro',
+      price: 16,
+      description: 'Creamy Pugliese burrata, heirloom cherry tomatoes, fresh basil, aged balsamic, Sicilian sea salt, olive oil.',
+      category: 'Antipasti & Salads',
+      image: img('photo-1593560708920-61dd98c46a4e'),
+      imageAlt: 'Burrata with heirloom tomatoes and fresh basil',
+      tags: ['Vegetarian', 'Antipasto'],
+      allergens: ['Contains Dairy'],
+      weightOrSize: 'Serves 2',
+    },
+    {
+      id: 'nf-bruschetta',
+      slug: 'bruschetta-al-pomodoro',
+      name: 'Bruschetta al Pomodoro',
+      price: 10,
+      description: 'Grilled sourdough bruschetta with vine-ripe tomatoes, garlic, basil, and cold-pressed Sicilian olive oil.',
+      category: 'Antipasti & Salads',
+      image: img('photo-1572695157366-5e585ab2b69f'),
+      imageAlt: 'Classic bruschetta with tomatoes and basil',
+      tags: ['Vegan', 'Antipasto'],
+      allergens: ['Contains Gluten'],
+      weightOrSize: '3 pieces',
+    },
+    {
+      id: 'nf-insalata-caprese',
+      slug: 'insalata-caprese',
+      name: 'Insalata Caprese',
+      price: 14,
+      description: 'Alternating sliced buffalo mozzarella and heirloom tomatoes, fresh basil, black pepper, olive oil.',
+      category: 'Antipasti & Salads',
+      image: img('photo-1512621776951-a57141f2eefd'),
+      imageAlt: 'Classic Caprese salad with buffalo mozzarella and tomatoes',
+      tags: ['Vegetarian', 'Classic'],
+      allergens: ['Contains Dairy'],
+      weightOrSize: 'Serves 2',
+    },
+    // — Pasta & Secondi —
+    {
+      id: 'nf-pasta-ragu',
+      slug: 'pasta-al-ragu-napoletano',
+      name: "Pasta al Ragù Napoletano",
+      price: 19,
+      description: 'Hand-rolled pappardelle with a 5-hour Neapolitan slow-cooked beef, pork and sausage ragù, basil, Parmigiano.',
+      category: 'Pasta & Secondi',
+      image: img('photo-1621996346565-e3dbc646d9a9'),
+      imageAlt: 'Rich Neapolitan ragù with pappardelle pasta',
+      tags: ['Pasta', 'House Special'],
+      allergens: ['Contains Gluten', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: 'Single serving',
+    },
+    {
+      id: 'nf-cacio-pepe',
+      slug: 'cacio-e-pepe',
+      name: 'Cacio e Pepe',
+      price: 17,
+      description: 'Tonnarelli pasta, aged Pecorino Romano, freshly cracked black Tellicherry pepper. The Roman classic, done perfectly.',
+      category: 'Pasta & Secondi',
+      image: img('photo-1473093295043-cdd812d0e601'),
+      imageAlt: 'Cacio e pepe pasta with aged pecorino',
+      tags: ['Pasta', 'Vegetarian'],
+      allergens: ['Contains Gluten', 'Contains Dairy'],
+      weightOrSize: 'Single serving',
+    },
+    // — Dolci —
+    {
+      id: 'nf-tiramisu',
+      slug: 'tiramisu-della-casa',
+      name: "Tiramisù della Casa",
+      price: 10,
+      description: 'Classic Neapolitan tiramisù with Savoiardi biscuits, mascarpone cream, espresso, Marsala, dark cocoa.',
+      category: 'Dolci & Desserts',
+      image: img('photo-1571877227200-a0d98ea607e9'),
+      imageAlt: 'Tiramisu dusted with dark cocoa and served in a glass',
+      tags: ['Dessert', 'Classic'],
+      allergens: ['Contains Dairy', 'Contains Gluten', 'Contains Eggs'],
+      weightOrSize: 'Single portion',
+    },
+    {
+      id: 'nf-panna-cotta',
+      slug: 'panna-cotta-al-limone',
+      name: 'Panna Cotta al Limone',
+      price: 9,
+      description: 'Silky vanilla panna cotta, Amalfi lemon coulis, candied lemon peel, fresh mint.',
+      category: 'Dolci & Desserts',
+      image: img('photo-1488477181946-6428a0291777'),
+      imageAlt: 'Panna cotta with lemon coulis and candied lemon',
+      tags: ['Dessert', 'Gluten-Free'],
+      allergens: ['Contains Dairy'],
+      weightOrSize: 'Single portion',
+    },
+    // — Wine & Drinks —
+    {
+      id: 'nf-aglianico',
+      slug: 'aglianico-del-vulture',
+      name: 'Aglianico del Vulture',
+      price: 14,
+      description: 'A bold, structured Basilicata Aglianico with dark cherry, tar, and spice notes. Perfect with Diavola or Salsiccia pizza.',
+      category: 'Wine & Drinks',
+      image: img('photo-1510812431401-41d2bd2722f3'),
+      imageAlt: 'Glass of deep red Aglianico del Vulture wine',
+      tags: ['Wine', 'Red'],
+      allergens: ['Contains Sulphites'],
+      weightOrSize: '175ml glass',
+    },
+    {
+      id: 'nf-acqua-panna',
+      slug: 'acqua-panna-naturale',
+      name: 'Acqua Panna Naturale',
+      price: 4.5,
+      description: 'Still mineral water from the Apennine hills of Tuscany. The traditional table water of Italy.',
+      category: 'Wine & Drinks',
+      image: img('photo-1548839140-29a749e1cf4d'),
+      imageAlt: 'Bottle of Acqua Panna still mineral water',
+      tags: ['Drink', 'Non-Alcoholic'],
+      weightOrSize: '750ml',
+    },
+    {
+      id: 'nf-espresso',
+      slug: 'espresso-napoletano',
+      name: 'Espresso Napoletano',
+      price: 3.5,
+      description: 'Short, intense espresso made with a traditional Neapolitan blend. Served with a glass of sparkling water.',
+      category: 'Wine & Drinks',
+      image: img('photo-1509042239860-f550ce710b93'),
+      imageAlt: 'Small espresso cup with Neapolitan blend',
+      tags: ['Coffee', 'Hot'],
+      weightOrSize: 'Single shot',
+    },
+  ],
+  craftProcess: {
+    badge: 'LA NOSTRA ARTE',
+    title: 'The Art of Neapolitan Dough',
+    subtitle: 'Every step of our process has been unchanged for over four decades.',
+    steps: [
+      { time: 'Day 1', title: 'Impasto — The Dough', desc: 'Caputo 00 flour, filtered water, sea salt, and a minimal amount of active yeast are hand-mixed and kneaded for 20 minutes until perfectly smooth and elastic.' },
+      { time: '+6 Hours', title: 'Puntata — Bulk Rest', desc: 'The dough bulk-ferments at room temperature, developing initial flavour and structure. Gluten bonds form naturally without forcing.' },
+      { time: '+42 Hours', title: 'Staglio — Ball Formation', desc: 'The dough is divided by hand into 280g balls and placed in airtight wooden trays to cold-ferment in our walk-in refrigerator for up to 48 hours.' },
+      { time: 'Service', title: 'Stesura — Hand Stretch', desc: 'Our pizzaioli stretch each dough ball by hand — never with a rolling pin — to achieve the classic thick cornicione crust and thin centre characteristic of Neapolitan pizza.' },
+      { time: '90 Seconds', title: 'Cottura — Wood-Fired Bake', desc: 'The pizza is placed in our 900°F Stefano Ferrara oven on the stone floor and rotated manually to achieve an even leopard-spotted char. No pizza takes longer than 90 seconds.' },
+    ],
+    image: img('photo-1571066811602-716837d681de'),
+  },
+  story: {
+    badge: 'LA NOSTRA STORIA',
+    title: 'Three Generations of Fire and Dough',
+    paragraphs: [
+      'Napoli Fire was founded in 1982 when Chef Marco Esposito arrived from Spaccanapoli, Naples, with his grandmother\'s handwritten recipe notebook and a dream of sharing real Neapolitan pizza with the world.',
+      'Marco trained under the legendary Pizzaiolo Enzo Coccia before emigrating. Every technique — the 48-hour cold ferment, the hand-stretch, the 90-second wood-fire bake — was refined under true Neapolitan masters.',
+      'Today, Marco\'s daughter Sofia leads the kitchen. The original recipe notebook sits framed above the oven. Nothing about how we make our dough has changed. Nothing about how we select our ingredients has changed. The only thing that has changed is the number of people who know the name.',
+    ],
+    image: img('photo-1571066811602-716837d681de'),
+    imageAlt: 'Pizzaiolo stretching Neapolitan dough by hand in front of the wood-fired oven',
+    founderQuote: 'Pizza is not food — it is a philosophy. If you understand the dough, you understand the culture.',
+    founderName: 'Chef Marco Esposito, Founder',
+    stats: [
+      { value: '40+', label: 'Years Serving Naples\'s Best' },
+      { value: '48h', label: 'Cold Fermentation' },
+      { value: '900°F', label: 'Wood-Fired Oven' },
+      { value: '90s', label: 'Perfect Bake Time' },
+    ],
+  },
+  promo: {
+    badge: 'WEEKEND SPECIAL',
+    title: "The Oven Does the Talking. Taste the Difference.",
+    desc: 'Every Sunday, Chef Sofia bakes a limited-edition seasonal pizza inspired by the markets of Naples. Join our mailing list to get first access and a complimentary glass of house wine with every Sunday booking.',
+    ctaText: 'Join the Sunday List',
+    ctaPage: 'contact',
+    image: img('photo-1574071318508-1cdbab80d002'),
+    imageAlt: 'Wood-fired oven at Napoli Fire with glowing flames and a perfect Neapolitan pizza cooking on the stone',
+  },
+  gallery: [
+    { src: img('photo-1513104890138-7c749659a591'), alt: 'Perfect Neapolitan Margherita DOP with leopard-spotted crust', caption: 'Margherita DOP — 90 seconds in the fire', tag: 'Classics' },
+    { src: img('photo-1571066811602-716837d681de'), alt: 'Pizzaiolo hand-stretching Neapolitan dough', caption: 'Stesura — the art of the hand stretch', tag: 'Craft' },
+    { src: img('photo-1574071318508-1cdbab80d002'), alt: 'Wood-fired oven interior with flames and glowing embers', caption: 'Our 900°F Stefano Ferrara stone oven', tag: 'Oven' },
+    { src: img('photo-1565299624946-b28f40a0ae38'), alt: 'Diavola pizza with spicy Calabrian nduja', caption: 'Diavola — fire meets Calabrian heat', tag: 'Specialties' },
+    { src: img('photo-1546069901-ba9599a7e63c'), alt: 'Burrata with heirloom tomatoes', caption: 'Burrata con Pomodoro — summer on a plate', tag: 'Antipasti' },
+    { src: img('photo-1590947132387-155cc02f3212'), alt: 'Beautiful stracciatella and prosciutto pizza', caption: 'Stracciatella Cruda — a white pizza masterpiece', tag: 'Bianca' },
+    { src: img('photo-1528137871618-79d2761e3fd5'), alt: 'Pizza preparation with tomato sauce and fresh ingredients', caption: 'Fresh San Marzano DOP tomato sauce', tag: 'Ingredients' },
+    { src: img('photo-1557499305-0af888c3d8ec'), alt: 'Warm restaurant interior with exposed brick and soft lighting', caption: 'Come dine with us — the full Napoli Fire experience', tag: 'Restaurant' },
+  ],
+  testimonials: [
+    {
+      name: 'Elena Ferrantino',
+      rating: 5,
+      quote: 'I grew up in Naples and this is the real thing. The dough has the perfect leopard-spotted char, the fior di latte is incredibly fresh, and the Margherita is exactly as it should be. Bravo.',
+      source: 'Verified Guest',
+      date: 'October 2026',
+      role: 'Naples native, food writer',
+    },
+    {
+      name: 'James Kincaid',
+      rating: 5,
+      quote: 'Napoli Fire is my date-night staple. The Tartufo Nero is extraordinary — earthy, rich, and worth every penny. The wine pairing suggestion from the server was perfect.',
+      source: 'Verified Guest',
+      date: 'September 2026',
+    },
+    {
+      name: 'Marco Bellini',
+      rating: 5,
+      quote: 'The 48-hour dough genuinely makes a difference. Light, airy, perfectly charred. We have been coming every other Friday for two years and it has never faltered.',
+      source: 'Regular Guest',
+      date: 'August 2026',
+    },
+  ],
+  location: {
+    address: '14 Via Roma, Little Italy, New York, NY 10013',
+    neighborhood: 'Little Italy, Lower Manhattan',
+    hoursWeekdays: 'Tuesday – Friday: 12:00 PM – 10:30 PM',
+    hoursWeekends: 'Saturday – Sunday: 12:00 PM – 11:00 PM · Monday: Closed',
+    phone: '+1 (212) 555-0182',
+    email: 'ciao@napolifire.com',
+    pickupNotice: 'Takeaway available Tue–Sun. Curbside pickup at Via Roma entrance. Most pizzas ready in 15–20 minutes.',
+  },
+  customInquiry: {
+    title: 'Private Dining & Catering — La Tavola Grande',
+    subtitle: 'Host your next celebration at Napoli Fire with a private dining room, bespoke menus, and a dedicated pizzaiolo. We cater weddings, corporate events, and birthday feasts.',
+    type: 'catering',
+    occasions: ['Wedding Dinner', 'Milestone Birthday', 'Corporate Event', 'Family Reunion', 'Engagement Party', 'Graduation Feast'],
+    sizes: [
+      { label: 'Private Room — Intimate (12 Guests)', serves: '10-14 guests', basePrice: 450 },
+      { label: 'Private Room — Classic (24 Guests)', serves: '20-28 guests', basePrice: 850 },
+      { label: 'Full Restaurant Buy-Out', serves: '50-80 guests', basePrice: 2400 },
+      { label: 'Off-Site Pizza Station Catering', serves: '30-120 guests', basePrice: 1200 },
+    ],
+    flavors: ['Full Neapolitan Classics Tasting Menu', 'White Pizza & Antipasti Experience', 'Chef\'s Seasonal Tasting Menu', 'Bespoke Custom Menu'],
+    fillings: ['Paired Italian Wine Service', 'Cocktail & Aperitivo Hour', 'Dessert & Limoncello Finale'],
+    finishes: ['Floral Table Décor', 'Custom Menu Cards', 'Live Dough-Throwing Demonstration'],
+  },
+  faqs: [
+    {
+      question: 'Are your pizzas truly Neapolitan? What certifies them?',
+      answer: 'Yes. We adhere to the standards set by the Associazione Verace Pizza Napoletana (AVPN). Our dough uses only Caputo 00 flour, San Marzano DOP tomatoes, fior di latte mozzarella, and our oven is a certified Stefano Ferrara wood-burning stone oven reaching 900°F. Our Margherita DOP is certified.',
+      category: 'About Our Pizza',
+    },
+    {
+      question: 'How long does a pizza take to cook?',
+      answer: 'In our 900°F stone oven, a Neapolitan pizza bakes in exactly 90 seconds. The total time from order to table is typically 12–18 minutes, including dough preparation, topping, and resting.',
+      category: 'About Our Pizza',
+    },
+    {
+      question: 'Do you offer gluten-free pizza dough?',
+      answer: 'Yes, we offer a certified gluten-free dough option (+$3). Note: Our kitchen works with wheat flour daily so we cannot guarantee a 100% gluten-free environment. Guests with celiac disease should inform their server.',
+      category: 'Dietary & Allergens',
+    },
+    {
+      question: 'Can I make a reservation?',
+      answer: 'Yes, reservations are strongly recommended, especially for Friday and Saturday evenings. Please book via our Contact page or call +1 (212) 555-0182. Walk-in seats are available at the bar and at our wood-oven counter.',
+      category: 'Reservations',
+    },
+    {
+      question: 'Is takeaway or delivery available?',
+      answer: 'Yes. Takeaway is available Tuesday through Sunday. We use insulated pizza boxes to maintain temperature. We partner with select delivery platforms for a limited delivery radius — please check our ordering options during checkout.',
+      category: 'Ordering',
+    },
+  ],
 };
 
 export default function NapoliFire() {
-  const [scrolled, setScrolled] = useState(false);
-  const [activeMenuTab, setActiveMenuTab] = useState('Neapolitan');
-  
-  const heroRef = useReveal(100);
-  const menuRef = useReveal(200);
-  
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const theme = {
-    name: 'Napoli Fire',
-    tagline: 'Authentic Neapolitan pizza, wood-fired to perfection',
-    palette: { primary: '#e63312', secondary: '#1a1008', surface: '#fff5ee', text: '#1a1008', background: '#fffbf7' }
-  };
-
-  const menu = [
-    { tab: 'Neapolitan', items: [
-      { name: 'Margherita DOP', price: '$18', desc: 'San Marzano tomato, fior di latte, fresh basil, extra virgin olive oil.', tags: ['Classic', 'Vegetarian'], image: IMAGES.hero },
-      { name: 'Diavola', price: '$21', desc: 'Spicy Calabrian salami, tomato, smoked mozzarella, basil.', tags: ['Spicy'], image: IMAGES.pizza1 },
-      { name: 'Tartufo Nero', price: '$26', desc: 'Black truffle cream, fior di latte, wild mushrooms, parmesan.', tags: ['Premium'], image: IMAGES.pizza3 },
-    ]},
-    { tab: 'White (Bianca)', items: [
-      { name: 'Quattro Formaggi', price: '$22', desc: 'Mozzarella, gorgonzola, parmesan, provolone, walnuts.', tags: ['Vegetarian'], image: IMAGES.pizza4 },
-      { name: 'Patata e Rosmarino', price: '$19', desc: 'Thinly sliced potato, rosemary, stracciatella, crispy guanciale.', tags: ['Seasonal'], image: IMAGES.pizza5 },
-    ]},
-    { tab: 'Calzone', items: [
-      { name: 'Classico Fritto', price: '$20', desc: 'Deep-fried calzone filled with ricotta, salami, and smoked mozzarella.', tags: ['Specialty'], image: IMAGES.pizza2 },
-      { name: 'Vegetariano', price: '$18', desc: 'Roasted vegetables, ricotta, mozzarella, spinach.', tags: ['Vegetarian'], image: IMAGES.pizza6 },
-    ]},
-  ];
-
-  return (
-    <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif' }}>
-      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.3s', backgroundColor: scrolled ? 'rgba(255,251,247,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid #eaeaea' : 'none', backdropFilter: scrolled ? 'blur(10px)' : 'none' }}>
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          
-          <div style={{ fontSize: '1.8rem', fontWeight: 700, fontFamily: '"Playfair Display", serif', color: scrolled ? theme.palette.primary : '#fff', letterSpacing: '0.5px' }}>
-            {theme.name}
-          </div>
-        </div>
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', padding: '0.75rem 1.5rem', borderRadius: '4px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontFamily: '"Inter", sans-serif' }}>
-            <ShoppingBag size={18} /> Order Now
-          </button>
-        </div>
-      </nav>
-
-      <header style={{ height: '100vh', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundColor: '#000' }}>
-          <img src={IMAGES.hero} alt="Neapolitan Pizza" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.6, transform: 'scale(1.05)' }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(26,16,8,0.7) 0%, rgba(230,51,18,0.3) 100%)' }}></div>
-        </div>
-        <div ref={heroRef as any} style={{ position: 'relative', zIndex: 10, color: '#fff', maxWidth: '800px', padding: '0 2rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem', color: theme.palette.primary }}>
-             <Flame size={48} fill={theme.palette.primary} />
-          </div>
-          <h1 style={{ fontFamily: '"Playfair Display", serif', fontSize: 'clamp(3.5rem, 8vw, 6rem)', lineHeight: 1, marginBottom: '1.5rem' }}>Born in Naples.<br/>Baked in Fire.</h1>
-          <p style={{ fontSize: '1.25rem', fontWeight: 400, marginBottom: '3rem', maxWidth: '600px', margin: '0 auto 3rem auto', lineHeight: 1.6 }}>Every pizza is made with imported Caputo 00 flour, San Marzano tomatoes, and baked in a 900°F wood-fired oven.</p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-            <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', padding: '1rem 2.5rem', borderRadius: '4px', fontWeight: 600, fontSize: '1.1rem', cursor: 'pointer' }}>Reserve a Table</button>
-            <button style={{ backgroundColor: 'transparent', color: '#fff', border: '2px solid #fff', padding: '1rem 2.5rem', borderRadius: '4px', fontWeight: 600, fontSize: '1.1rem', cursor: 'pointer' }}>View Menu</button>
-          </div>
-        </div>
-      </header>
-      
-      <section style={{ padding: '8rem 5%', backgroundColor: theme.palette.background, color: theme.palette.secondary }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4rem', alignItems: 'center', maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ flex: '1 1 450px' }}>
-            <h2 style={{ fontFamily: '"Playfair Display", serif', fontSize: '3.5rem', color: theme.palette.secondary, marginBottom: '1.5rem', lineHeight: 1.1 }}>Three Generations of Dough.</h2>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '1.5rem', color: '#555' }}>Napoli Fire was founded in 1982 when Chef Marco Esposito brought his grandmother's recipe from Naples. Every dough ball is fermented for 48 hours before it is stretched and fired.</p>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '2.5rem', color: '#555' }}>We use nothing but Italian-imported ingredients — Caputo 00 flour, DOP San Marzano tomatoes, and fresh fior di latte. The result is a pizza that is crisp on the outside, soft and airy inside.</p>
-            <button style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'none', border: 'none', color: theme.palette.primary, fontSize: '1.1rem', fontWeight: 700, cursor: 'pointer', borderBottom: `2px solid ${theme.palette.primary}`, paddingBottom: '4px' }}>
-              Read Our Story <ChevronRight size={18} />
-            </button>
-          </div>
-          <div style={{ flex: '1 1 450px' }}>
-            <img src={IMAGES.story} alt="Pizza chef stretching dough" style={{ width: '100%', borderRadius: '4px', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }} />
-          </div>
-        </div>
-      </section>
-
-      <section ref={menuRef as any} style={{ padding: '6rem 5%', backgroundColor: theme.palette.surface }}>
-        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <h2 style={{ fontFamily: '"Playfair Display", serif', fontSize: '3.5rem', color: theme.palette.secondary }}>The Menu</h2>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '2rem' }}>
-            {menu.map((cat) => (
-              <button 
-                key={cat.tab}
-                onClick={() => setActiveMenuTab(cat.tab)}
-                style={{ 
-                  padding: '0.75rem 2.5rem', 
-                  backgroundColor: activeMenuTab === cat.tab ? theme.palette.secondary : 'transparent',
-                  color: activeMenuTab === cat.tab ? '#fff' : theme.palette.secondary,
-                  border: activeMenuTab === cat.tab ? `1px solid ${theme.palette.secondary}` : `1px solid #ccc`,
-                  borderRadius: '4px',
-                  fontFamily: '"Inter", sans-serif',
-                  fontSize: '1.1rem',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  transition: 'all 0.3s'
-                }}
-              >
-                {cat.tab}
-              </button>
-            ))}
-          </div>
-        </div>
-        
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-          {menu.find(c => c.tab === activeMenuTab)?.items.map((item, i) => (
-            <div key={i} style={{ display: 'flex', gap: '1.5rem', backgroundColor: '#fff', padding: '1.5rem', borderRadius: '4px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', transition: 'box-shadow 0.3s', cursor: 'pointer' }} onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.08)'} onMouseLeave={(e) => e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.03)'}>
-              <img src={item.image} alt={item.name} style={{ width: '130px', height: '130px', objectFit: 'cover', borderRadius: '2px' }} />
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
-                  <h3 style={{ fontFamily: '"Playfair Display", serif', fontSize: '1.6rem', margin: 0 }}>{item.name}</h3>
-                  <span style={{ fontWeight: 700, color: theme.palette.primary, fontSize: '1.2rem' }}>{item.price}</span>
-                </div>
-                <p style={{ color: '#666', fontSize: '0.95rem', lineHeight: 1.5, marginBottom: '1rem' }}>{item.desc}</p>
-                <div style={{ display: 'flex', gap: '0.5rem' }}>
-                  {item.tags.map(tag => (
-                    <span key={tag} style={{ fontSize: '0.75rem', padding: '0.25rem 0.5rem', backgroundColor: theme.palette.background, color: theme.palette.secondary, borderRadius: '2px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>{tag}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-      
-      <section style={{ position: 'relative', padding: '8rem 5%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundColor: '#000' }}>
-          <img src={IMAGES.promo} alt="Wood Fired Oven" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.6 }} />
-        </div>
-        <div style={{ position: 'relative', zIndex: 10, textAlign: 'center', color: '#fff', maxWidth: '800px' }}>
-          <h2 style={{ fontFamily: '"Playfair Display", serif', fontSize: '4rem', lineHeight: 1.1, marginBottom: '1.5rem' }}>The Oven Does<br/>the Talking.</h2>
-          <p style={{ fontSize: '1.2rem', marginBottom: '2.5rem', margin: '0 auto 2.5rem', lineHeight: 1.6 }}>90 seconds at 900°F. That's all it takes to transform simple ingredients into something magical.</p>
-          <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', padding: '1rem 3rem', borderRadius: '4px', fontWeight: 600, fontSize: '1.1rem', cursor: 'pointer' }}>Experience It Live</button>
-        </div>
-      </section>
-
-      <section style={{ padding: '6rem 5%', backgroundColor: '#fff' }}>
-        <h2 style={{ fontFamily: '"Playfair Display", serif', fontSize: '3.5rem', color: theme.palette.secondary, textAlign: 'center', marginBottom: '4rem' }}>What Critics Say</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-          {[
-            { name: 'Sarah M.', quote: 'The Margherita DOP is the most authentic Neapolitan pizza I have had outside of Naples. The crust is absolute perfection.' },
-            { name: 'James K.', quote: 'Napoli Fire is our date night staple. The Tartufo Nero is extraordinary — earthy, rich, and worth every penny.' },
-            { name: 'Lucia P.', quote: 'I grew up in Naples and this is the real thing. The dough has the perfect char and leopard spotting. Bravo!' }
-          ].map((test, i) => (
-            <div key={i} style={{ backgroundColor: theme.palette.surface, padding: '2.5rem', borderRadius: '4px', border: '1px solid #eee' }}>
-              <div style={{ display: 'flex', color: theme.palette.primary, marginBottom: '1.5rem' }}>
-                {[...Array(5)].map((_, j) => <Star key={j} size={18} fill={theme.palette.primary} stroke="none" />)}
-              </div>
-              <p style={{ color: '#444', lineHeight: 1.7, marginBottom: '2rem', fontSize: '1.05rem' }}>"{test.quote}"</p>
-              <h4 style={{ fontWeight: 700, color: theme.palette.secondary, margin: 0, fontSize: '1.1rem' }}>— {test.name}</h4>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <footer style={{ backgroundColor: theme.palette.secondary, color: '#fff', padding: '5rem 5% 2rem', textAlign: 'center' }}>
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem', color: theme.palette.primary }}>
-           <Flame size={40} fill={theme.palette.primary} />
-        </div>
-        <h2 style={{ fontFamily: '"Playfair Display", serif', fontSize: '2.5rem', marginBottom: '1rem' }}>{theme.name}</h2>
-        <p style={{ color: '#aaa', marginBottom: '4rem', fontSize: '1.1rem' }}>{theme.tagline}</p>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '4rem', marginBottom: '4rem', flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}><MapPin size={24} style={{ color: theme.palette.primary, marginBottom: '1rem' }} /><p style={{ color: '#ccc', lineHeight: 1.6 }}>14 Via Roma<br/>Little Italy, NY 10013</p></div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}><Clock size={24} style={{ color: theme.palette.primary, marginBottom: '1rem' }} /><p style={{ color: '#ccc', lineHeight: 1.6 }}>Tue–Sun: 12pm – 11pm<br/>Closed Monday</p></div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}><Phone size={24} style={{ color: theme.palette.primary, marginBottom: '1rem' }} /><p style={{ color: '#ccc', lineHeight: 1.6 }}>Delivery & Pickup<br/>+1 (212) 555-0182</p></div>
-        </div>
-        <div style={{ borderTop: '1px solid #333', paddingTop: '2rem' }}>
-          <p style={{ color: '#777', fontSize: '0.9rem' }}>© 2026 {theme.name}. All rights reserved.</p>
-        </div>
-      </footer>
-    </div>
-  );
+  return <FoodStorefrontCore theme={napoliFireConfig} />;
 }
-
-

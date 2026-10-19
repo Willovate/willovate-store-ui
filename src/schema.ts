@@ -282,24 +282,55 @@ export const SECTION_SCHEMAS: SectionSchema[] = [
     settings: []
   },
   {
+    type: 'features',
+    name: 'Features & Highlights',
+    settings: [
+      { name: 'title', label: 'Section Title', type: 'text', tab: 'content' },
+      { name: 'subtitle', label: 'Description', type: 'textarea', tab: 'content' }
+    ]
+  },
+  {
+    type: 'experience',
+    name: 'Tasting Experience',
+    settings: [
+      { name: 'title', label: 'Experience Heading', type: 'text', tab: 'content' },
+      { name: 'subtitle', label: 'Description', type: 'textarea', tab: 'content' },
+      { name: 'price', label: 'Price per Guest', type: 'text', tab: 'content' }
+    ]
+  },
+  {
     type: 'promo',
-    name: 'Special Offer',
-    settings: []
+    name: 'Private Dining & Offers',
+    settings: [
+      { name: 'title', label: 'Headline', type: 'text', tab: 'content' },
+      { name: 'description', label: 'Description', type: 'textarea', tab: 'content' },
+      { name: 'ctaText', label: 'Button text', type: 'text', tab: 'content' }
+    ]
   },
   {
     type: 'gallery',
-    name: 'Gallery',
-    settings: []
+    name: 'Atmosphere Gallery',
+    settings: [
+      { name: 'title', label: 'Gallery Heading', type: 'text', tab: 'content' },
+      { name: 'subtitle', label: 'Subtitle', type: 'textarea', tab: 'content' }
+    ]
   },
   {
     type: 'location',
-    name: 'Visit Us',
-    settings: []
+    name: 'Location & Hours',
+    settings: [
+      { name: 'address', label: 'Address', type: 'textarea', tab: 'content' },
+      { name: 'hours', label: 'Hours of Operation', type: 'textarea', tab: 'content' },
+      { name: 'phone', label: 'Phone Number', type: 'text', tab: 'content' }
+    ]
   },
   {
     type: 'testimonials',
-    name: 'Testimonials',
-    settings: []
+    name: 'Reviews & Acclaim',
+    settings: [
+      { name: 'title', label: 'Heading', type: 'text', tab: 'content' },
+      { name: 'subtitle', label: 'Subtitle', type: 'text', tab: 'content' }
+    ]
   }
 ];
 

@@ -1,222 +1,588 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowLeft, MapPin, Clock, Phone, Flame, ChevronRight, Star, Utensils } from 'lucide-react';
-import { useReveal } from '../components/RestaurantCore';
+import React from 'react';
+import { FoodStorefrontCore, type StorefrontThemeConfig } from '../shared/FoodStorefrontCore';
 
-const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
+const img = (id: string, w = 1200) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
 
-const IMAGES = {
-  hero: img('photo-1504674900247-0877df9cc836'),
-  story: img('photo-1555939594-58d7cb561ad1'),
-  promo: img('photo-1504674900247-0877df9cc836'),
-  brisket: img('photo-1504674900247-0877df9cc836'),
-  ribs: img('photo-1504674900247-0877df9cc836'),
-  pork: img('photo-1504674900247-0877df9cc836'),
-  sausage: img('photo-1504674900247-0877df9cc836'),
-  plate: img('photo-1504674900247-0877df9cc836'),
-  sides: img('photo-1504674900247-0877df9cc836')
+export const smokehouse77Config: StorefrontThemeConfig = {
+  id: 'smokehouse-77',
+  kind: 'bbq-grill',
+  currencySymbol: '₹',
+  layoutOptions: {
+    heroLayout: 'banner-full',
+    productLayout: 'compact-rows',
+    featuresLayout: 'strip-4',
+    storyLayout: 'split-right',
+    galleryLayout: 'masonry',
+    sectionOrder: ['hero', 'products', 'craft', 'features', 'promo', 'story', 'gallery', 'reviews', 'location', 'newsletter'],
+  },
+  name: 'Smokehouse 77',
+  tagline: 'Low & Slow Post-Oak Smoked Texas Barbecue Since 1977',
+  brandSub: '14-Hour Hardwood Smoke · House-Crafted Mops · Zero Shortcuts',
+  palette: {
+    primary: '#ea580c',
+    primaryHover: '#c2410c',
+    secondary: '#0c0a09',
+    background: '#141210',
+    surface: '#1c1917',
+    text: '#fafaf9',
+    textMuted: '#a8a29e',
+    border: '#292524',
+    badgeBg: '#292524',
+    badgeText: '#f97316',
+    heroOverlay: 'linear-gradient(135deg, rgba(12,10,9,0.92) 0%, rgba(234,88,12,0.35) 100%)',
+  },
+  typography: {
+    headingFont: '"Oswald", "Inter", sans-serif',
+    bodyFont: '"Inter", sans-serif',
+    accentFont: '"Oswald", sans-serif',
+  },
+  hero: {
+    headline: 'Smoke. Time. Patience. True Texas BBQ Smoked 14 Hours Low & Slow.',
+    subheadline:
+      'We ignite our 1,000-gallon offset smokers at midnight using aged Texas post oak hardwood. By noon, prime briskets emerge with a dark peppercorn bark, and fall-off-the-bone ribs glisten with caramelized brown sugar mop sauce.',
+    badge: '🔥 POST OAK WOOD SMOKERS · SERVING DAILY UNTIL SOLD OUT',
+    image: img('photo-1544025162-d76694265947'),
+    imageAlt: 'Slow-smoked Texas ribs with caramelized sticky glaze and dark bark',
+    primaryCtaText: 'Explore Smoked Menu',
+    primaryCtaPage: 'menu',
+    secondaryCtaText: 'Reserve a Pit Table',
+    secondaryCtaPage: 'contact',
+  },
+  announcement: {
+    text: '🔥 Weekend Pitmaster Feasts Now Booking · Dine-In Pit Tables & Curbside Pickup Available · Code SMOKE20 for 20% Off Takeout',
+    badgeText: 'PIT NOTICE',
+    linkText: 'Order Smoke Feast',
+    linkPage: 'menu',
+  },
+  proofBadges: [
+    { icon: '🪵', title: '100% Texas Post Oak', subtitle: 'Naturally seasoned native hardwood burns clean with zero bitter resin' },
+    { icon: '⏳', title: '14-Hour Slow Smoker', subtitle: 'Uncut whole packer briskets smoked overnight at a steady 225°F' },
+    { icon: '🧂', title: 'Coarse Dal-Black Bark', subtitle: 'Heavy coarse black pepper, kosher salt, and garlic rub forms an obsidian crust' },
+    { icon: '🍖', title: 'Cut-To-Order Carving', subtitle: 'Every slice sliced fresh at the carving block straight onto butcher paper' },
+  ],
+  categories: [
+    'Smoked Brisket & Beef',
+    'Fall-Off-Bone Pork Ribs',
+    'Smoked Chicken & Wings',
+    'Pulled Pork & Sausage',
+    'Pitmaster Sharing Platters',
+    'Cast-Iron Skillet Sides',
+    'House-Bottled BBQ Sauces',
+    'Desserts & Cold Brews',
+  ],
+  collections: [
+    {
+      id: 'smoked-meats',
+      name: 'Hardwood Smoked Cuts',
+      tagline: 'Sold by the half pound, served hot on brown butcher paper with pickles and onions.',
+      image: img('photo-1555939594-58d7cb561ad1'),
+      itemCount: 5,
+      filterCategory: 'Smoked Brisket & Beef',
+    },
+    {
+      id: 'glaze-ribs',
+      name: 'St. Louis Glazed Ribs',
+      tagline: 'Smoked over hickory and post oak until tender enough to pull apart with two fingers.',
+      image: img('photo-1529193591184-b1d58069ecdd'),
+      itemCount: 4,
+      filterCategory: 'Fall-Off-Bone Pork Ribs',
+    },
+    {
+      id: 'pit-platters',
+      name: 'Pitmaster Feasting Boards',
+      tagline: 'Multi-meat combination platters designed for hungry tables and family gatherings.',
+      image: img('photo-1508615070457-7baeba4003ab'),
+      itemCount: 4,
+      filterCategory: 'Pitmaster Sharing Platters',
+    },
+    {
+      id: 'skillet-sides',
+      name: 'Smoked Cast-Iron Sides',
+      tagline: 'Three-cheese smoked mac, pit baked beans with burnt ends, and warm cornbread.',
+      image: img('photo-1541592106381-b31e9677c0e5'),
+      itemCount: 4,
+      filterCategory: 'Cast-Iron Skillet Sides',
+    },
+  ],
+  products: [
+    // ── 1. Smoked Brisket & Beef ───────────────────────────────────────────
+    {
+      id: 's77-prime-brisket',
+      slug: '14-hour-smoked-prime-texas-brisket',
+      name: '14-Hour Smoked Prime Texas Brisket (250g)',
+      price: 649,
+      compareAtPrice: 729,
+      description: 'USDA Prime whole packer beef brisket seasoned with coarse butcher black pepper and salt, smoked 14 hours over post oak. Sliced to order with smoke ring and bark.',
+      category: 'Smoked Brisket & Beef',
+      image: img('photo-1555939594-58d7cb561ad1'),
+      imageAlt: 'Sliced Texas beef brisket with smoke ring and dark pepper bark',
+      tags: ['Pitmaster Signature', '#1 Bestseller', 'Sells Out Fast'],
+      dietary: 'non-veg',
+      weightOrSize: '250g · Sliced to Order',
+      calories: '690 kcal',
+      featured: true,
+      options: [
+        { name: 'Cut Preference', choices: [{ label: 'Moist Point (Fatty & Juicy)' }, { label: 'Lean Flat (Tender & Clean)' }, { label: 'Pitmaster Half & Half' }] },
+        { name: 'Sauce on Side', choices: [{ label: 'Original Espresso BBQ Mop' }, { label: 'Sweet Bourbon Molasses' }, { label: 'No Sauce (Authentic Texas Style)' }] },
+      ],
+    },
+    {
+      id: 's77-burnt-ends',
+      slug: 'smoked-caramelized-brisket-burnt-ends',
+      name: 'Caramelized Brisket Burnt Ends (200g)',
+      price: 549,
+      description: 'Double-smoked brisket point cubes re-tossed in brown sugar, apple cider vinegar, and spicy BBQ glaze until sticky, charred, and melt-in-your-mouth tender.',
+      category: 'Smoked Brisket & Beef',
+      image: img('photo-1544025162-d76694265947'),
+      imageAlt: 'Caramelized brisket burnt ends cubes with glossy barbecue glaze',
+      tags: ['Meat Candy', 'Limited Daily Batch'],
+      dietary: 'non-veg',
+      weightOrSize: '200g Portion',
+      calories: '580 kcal',
+      featured: true,
+    },
+    {
+      id: 's77-dino-beef-rib',
+      slug: 'giant-smoked-dino-beef-short-rib',
+      name: 'Giant Smoked "Dino" Beef Short Rib (1 Bone)',
+      price: 1199,
+      compareAtPrice: 1349,
+      description: 'Massive plate short rib smoked on the bone for 10 hours. Incredible marbling, deep crimson smoke ring, and beefy bark that shrinks back from the bone.',
+      category: 'Smoked Brisket & Beef',
+      image: img('photo-1529193591184-b1d58069ecdd'),
+      imageAlt: 'Massive beef short rib on bone with dark charred exterior',
+      tags: ['Heavyweight', 'Showstopper'],
+      dietary: 'non-veg',
+      weightOrSize: 'Approx 500g on Bone',
+      calories: '1150 kcal',
+      featured: true,
+    },
+
+    // ── 2. Fall-Off-Bone Pork Ribs ─────────────────────────────────────────
+    {
+      id: 's77-st-louis-ribs-full',
+      slug: 'st-louis-cut-smoked-pork-ribs-full-rack',
+      name: 'St. Louis Hickory Smoked Pork Ribs (Full Rack)',
+      price: 899,
+      compareAtPrice: 999,
+      description: 'Full rack of center-cut pork ribs dry-rubbed with brown sugar and smoked paprika, spritzed with apple cider, and glazed with our house bourbon mop.',
+      category: 'Fall-Off-Bone Pork Ribs',
+      image: img('photo-1544025162-d76694265947'),
+      imageAlt: 'Full rack of glazed pork ribs with caramel crust',
+      tags: ['Top Rated', 'Full Rack'],
+      dietary: 'non-veg',
+      weightOrSize: 'Full Rack · 12-13 Bones · 750g',
+      calories: '1280 kcal',
+      featured: true,
+      options: [
+        { name: 'Glaze Style', choices: [{ label: 'Sticky Bourbon BBQ' }, { label: 'Dry-Rubbed (No Glaze)' }, { label: 'Fiery Habanero Honey (+₹30)', priceDelta: 30 }] },
+      ],
+    },
+    {
+      id: 's77-st-louis-ribs-half',
+      slug: 'st-louis-cut-smoked-pork-ribs-half-rack',
+      name: 'St. Louis Hickory Smoked Pork Ribs (Half Rack)',
+      price: 499,
+      description: 'Half rack of tender slow-smoked pork ribs. Fall-off-the-bone tenderness with just the right chew. Served with pickled jalapeños and Texas toast.',
+      category: 'Fall-Off-Bone Pork Ribs',
+      image: img('photo-1529193591184-b1d58069ecdd'),
+      imageAlt: 'Half rack of smoked barbecue ribs on cutting board',
+      tags: ['Solo Feaster'],
+      dietary: 'non-veg',
+      weightOrSize: 'Half Rack · 6 Bones · 380g',
+      calories: '640 kcal',
+    },
+
+    // ── 3. Smoked Chicken & Wings ──────────────────────────────────────────
+    {
+      id: 's77-half-smoked-chicken',
+      slug: 'slow-smoked-heritage-half-chicken',
+      name: 'Slow-Smoked Heritage Half Chicken with White Sauce',
+      price: 429,
+      description: 'Free-range chicken brined 24 hours in lemon herb tea, smoked 4 hours over applewood, and dipped in tangy North Alabama white horseradish BBQ sauce.',
+      category: 'Smoked Chicken & Wings',
+      image: img('photo-1532550907401-a500c9a57435'),
+      imageAlt: 'Smoked golden half chicken with Alabama white sauce',
+      tags: ['Juicy & Tender', 'Alabama Classic'],
+      dietary: 'non-veg',
+      weightOrSize: 'Half Chicken · 450g',
+      calories: '580 kcal',
+      featured: true,
+    },
+    {
+      id: 's77-smoked-jumbo-wings',
+      slug: 'smoked-crisp-jumbo-buffalo-wings-8pc',
+      name: 'Smoked & Flash-Fried Jumbo Wings (8 Pcs)',
+      price: 389,
+      compareAtPrice: 439,
+      description: 'Jumbo chicken wings smoked 2 hours for deep hickory flavor, then flash-fried for an audible crunch. Tossed in house cayenne butter BBQ sauce with ranch dip.',
+      category: 'Smoked Chicken & Wings',
+      image: img('photo-1527477321055-43615b629c76'),
+      imageAlt: 'Crispy smoked chicken wings with celery and blue cheese',
+      tags: ['Crispy & Smoky', 'Crowd Favorite'],
+      dietary: 'non-veg',
+      spiceLevel: 2,
+      weightOrSize: '8 Jumbo Wings · 380g',
+      calories: '720 kcal',
+      options: [
+        { name: 'Wing Sauce', choices: [{ label: 'Smoky Cayenne Buffalo' }, { label: 'Honey Chipotle BBQ' }, { label: 'Dry Texas Rub' }] },
+      ],
+    },
+
+    // ── 4. Pulled Pork & Sausage ───────────────────────────────────────────
+    {
+      id: 's77-pulled-pork-platter',
+      slug: 'carolina-style-slow-pulled-pork-platter',
+      name: 'Carolina Style Slow Pulled Pork (250g)',
+      price: 479,
+      description: 'Pork shoulder smoked 12 hours until bone slips out effortlessly. Hand-pulled and dressed in a light cider vinegar pepper mop. Served with slaw.',
+      category: 'Pulled Pork & Sausage',
+      image: img('photo-1558030006-450675393462'),
+      imageAlt: 'Mound of hand-pulled pork with vinegar mop sauce',
+      tags: ['Carolina Heritage', 'Tender'],
+      dietary: 'non-veg',
+      weightOrSize: '250g Meat + Slaw',
+      calories: '540 kcal',
+    },
+    {
+      id: 's77-jalapeno-cheddar-sausage',
+      slug: 'texas-smoked-jalapeno-cheddar-sausage-2links',
+      name: 'Texas Jalapeño Cheddar Sausage Links (2 Pcs)',
+      price: 349,
+      description: 'House-ground coarse pork and beef links stuffed with diced fresh jalapeños and sharp Wisconsin cheddar. Snappy natural casing and molten cheese pockets.',
+      category: 'Pulled Pork & Sausage',
+      image: img('photo-1555939594-58d7cb561ad1'),
+      imageAlt: 'Grilled jalapeño cheddar sausage links sliced on wood board',
+      tags: ['House Ground', 'Snappy Casing'],
+      dietary: 'non-veg',
+      spiceLevel: 2,
+      weightOrSize: '2 Links · 260g',
+      calories: '610 kcal',
+    },
+    {
+      id: 's77-brisket-sandwich',
+      slug: 'the-77-monster-chopped-brisket-sandwich',
+      name: 'The "77" Monster Chopped Brisket Sandwich',
+      price: 399,
+      description: 'Heaping mound of chopped smoked brisket drenched in espresso BBQ sauce, topped with creamy slaw, pickled jalapeños, and crispy onions on Texas toast.',
+      category: 'Pulled Pork & Sausage',
+      image: img('photo-1568901346375-23c9450c58cd'),
+      imageAlt: 'Monster brisket sandwich overflowing with meat and slaw on toasted bun',
+      tags: ['Lunch Bestseller'],
+      dietary: 'non-veg',
+      weightOrSize: '360g Sandwich + Fries',
+      calories: '810 kcal',
+    },
+
+    // ── 5. Pitmaster Sharing Platters ──────────────────────────────────────
+    {
+      id: 's77-platter-pitmaster-feast',
+      slug: 'the-ultimate-pitmaster-grand-sharing-platter',
+      name: 'The Ultimate Pitmaster Feast Board (Serves 4)',
+      price: 2499,
+      compareAtPrice: 2899,
+      description: 'The definitive Texas BBQ experience: 300g Prime Brisket, Full Rack St. Louis Pork Ribs, 2× Jalapeño Cheddar Sausages, 250g Pulled Pork, Smoked Mac & Cheese, Pinto Beans, 4× Cornbreads, and Pickles.',
+      category: 'Pitmaster Sharing Platters',
+      image: img('photo-1508615070457-7baeba4003ab'),
+      imageAlt: 'Grand barbecue sharing platter loaded with brisket, ribs, sausages and sides',
+      tags: ['Feeds 4-5', 'Chef Signature', 'Best Value'],
+      dietary: 'non-veg',
+      weightOrSize: 'Over 2.2 kg Total Feast',
+      calories: '3400 kcal total',
+      featured: true,
+      options: [
+        { name: 'Platter Size', choices: [{ label: 'Standard 4-Person Feast (₹2,499)' }, { label: 'Upgrade to 6-Person Monster Board (+₹850)', priceDelta: 850 }] },
+        { name: 'Brisket Cut', choices: [{ label: 'Pitmaster Choice (Half Moist / Half Lean)' }, { label: 'All Moist Point Cuts (+₹80)', priceDelta: 80 }] },
+      ],
+    },
+    {
+      id: 's77-platter-duo-smoke',
+      slug: 'the-smokehouse-duo-combination-plate',
+      name: 'The Smokehouse Duo Combo Plate (Serves 2)',
+      price: 999,
+      compareAtPrice: 1149,
+      description: 'Choose any 2 smoked meats (150g Brisket, Half Rack Ribs, or 200g Pulled Pork). Served with 2 house sides, warm cornbread, and house pickles.',
+      category: 'Pitmaster Sharing Platters',
+      image: img('photo-1544025162-d76694265947'),
+      imageAlt: 'Barbecue combo plate with brisket, ribs, beans and cornbread',
+      tags: ['Perfect for Two'],
+      dietary: 'non-veg',
+      weightOrSize: 'Approx 700g Feast',
+      calories: '1420 kcal',
+    },
+
+    // ── 6. Cast-Iron Skillet Sides ─────────────────────────────────────────
+    {
+      id: 's77-smoked-mac-cheese',
+      slug: 'smoked-three-cheese-cast-iron-macaroni',
+      name: 'Cast-Iron Smoked 3-Cheese Mac & Cheese',
+      price: 249,
+      description: 'Cavatappi corkscrew pasta enveloped in smoked Gouda, aged yellow cheddar, and Gruyère cream sauce. Topped with crushed buttery cracker crumble.',
+      category: 'Cast-Iron Skillet Sides',
+      image: img('photo-1541592106381-b31e9677c0e5'),
+      imageAlt: 'Skillet of bubbling golden smoked macaroni and cheese with crispy top',
+      tags: ['Cheesy Indulgence', 'Vegetarian'],
+      dietary: 'veg',
+      weightOrSize: '300g Skillet',
+      calories: '490 kcal',
+      featured: true,
+    },
+    {
+      id: 's77-texas-pit-beans',
+      slug: 'texas-pit-baked-beans-with-burnt-ends',
+      name: 'Texas Pit Baked Beans with Smoked Burnt Ends',
+      price: 199,
+      description: 'Pinto beans simmered all night in the bottom of our pit smoker to catch falling brisket drippings, with molasses, brown sugar, and bacon scraps.',
+      category: 'Cast-Iron Skillet Sides',
+      image: img('photo-1555939594-58d7cb561ad1'),
+      imageAlt: 'Cast iron pot of rich brown pit baked beans with meat pieces',
+      tags: ['Pit Drippings', 'Hearty'],
+      dietary: 'non-veg',
+      weightOrSize: '280g Bowl',
+      calories: '380 kcal',
+    },
+    {
+      id: 's77-honey-cornbread',
+      slug: 'southern-skillet-honey-butter-cornbread-2pc',
+      name: 'Skillet Honey Butter Cornbread (2 Large Slices)',
+      price: 149,
+      description: 'Southern sweet golden cornbread baked in cast-iron skillets with crispy browned edges, brushed with whipped wildflower honey butter.',
+      category: 'Cast-Iron Skillet Sides',
+      image: img('photo-1509440159596-0249088772ff'),
+      imageAlt: 'Golden baked cornbread slices with melting honey butter',
+      tags: ['Fresh Baked', 'Vegetarian'],
+      dietary: 'veg',
+      weightOrSize: '2 Large Wedges · 180g',
+      calories: '320 kcal',
+    },
+    {
+      id: 's77-charred-corn-cob',
+      slug: 'fire-charred-sweet-corn-with-chipotle-butter',
+      name: 'Fire-Charred Sweet Corn on the Cob (2 Pcs)',
+      price: 169,
+      description: 'Sweet corn cobs grilled directly over hardwood coals until blistered and charred, basted with smoked chipotle lime butter and cotija cheese.',
+      category: 'Cast-Iron Skillet Sides',
+      image: img('photo-1540420773420-3366772f4999'),
+      imageAlt: 'Charred sweet corn cobs with spices and herb butter',
+      tags: ['Charred', 'Vegetarian'],
+      dietary: 'veg',
+      weightOrSize: '2 Cobs',
+      calories: '220 kcal',
+    },
+    {
+      id: 's77-apple-cider-slaw',
+      slug: 'crisp-apple-cider-vinegar-coleslaw',
+      name: 'Crisp Apple Cider & Dijon Slaw (200g)',
+      price: 129,
+      description: 'Shredded green and purple cabbage, crisp carrots, and tart green apples tossed in a light tangy cider vinegar and coarse grain Dijon dressing.',
+      category: 'Cast-Iron Skillet Sides',
+      image: img('photo-1512621776951-a57141f2eefd'),
+      imageAlt: 'Bowl of fresh colorful shredded coleslaw with herbs',
+      tags: ['Palate Cleanser', 'Vegan'],
+      dietary: 'vegan',
+      weightOrSize: '200g Portion',
+      calories: '110 kcal',
+    },
+
+    // ── 7. House-Bottled BBQ Sauces ────────────────────────────────────────
+    {
+      id: 's77-bourbon-sauce-bottle',
+      slug: 'smokehouse-77-espresso-bourbon-bbq-sauce-bottle',
+      name: 'House Espresso & Bourbon BBQ Sauce (350ml Bottle)',
+      price: 249,
+      description: 'Our award-winning dark BBQ sauce simmered with dark espresso, Kentucky bourbon, blackstrap molasses, and coarse cracked black pepper.',
+      category: 'House-Bottled BBQ Sauces',
+      image: img('photo-1586190848861-99aa4a171e90'),
+      imageAlt: 'Glass bottle of dark rich barbecue sauce with label',
+      tags: ['House Specialty', 'Vegan'],
+      dietary: 'vegan',
+      weightOrSize: '350ml Glass Bottle',
+      calories: '180 kcal',
+    },
+    {
+      id: 's77-carolina-gold-sauce',
+      slug: 'carolina-gold-tangy-mustard-sauce-bottle',
+      name: 'Carolina Gold Tangy Mustard BBQ Sauce (350ml)',
+      price: 249,
+      description: 'Traditional yellow mustard BBQ sauce infused with clover honey, cider vinegar, cayenne, and Worcestershire. The perfect pairing for pulled pork.',
+      category: 'House-Bottled BBQ Sauces',
+      image: img('photo-1555396273-367ea4eb4db5'),
+      imageAlt: 'Bottle of yellow Carolina gold barbecue sauce',
+      tags: ['Mustard Base', 'Vegan'],
+      dietary: 'vegan',
+      weightOrSize: '350ml Glass Bottle',
+      calories: '160 kcal',
+    },
+
+    // ── 8. Desserts & Cold Brews ───────────────────────────────────────────
+    {
+      id: 's77-warm-pecan-pie',
+      slug: 'deep-dish-warm-texas-pecan-pie',
+      name: 'Deep Dish Texas Bourbon Pecan Pie',
+      price: 289,
+      description: 'Flaky butter pastry shell packed with roasted Texas pecans, dark brown sugar custard, and bourbon reduction. Served warm with vanilla bean gelato.',
+      category: 'Desserts & Cold Brews',
+      image: img('photo-1551024709-8f23befc6f87'),
+      imageAlt: 'Slice of warm pecan pie with toasted nuts and vanilla ice cream',
+      tags: ['Southern Classic', 'Vegetarian'],
+      dietary: 'veg',
+      weightOrSize: 'Generous Slice · 180g',
+      calories: '540 kcal',
+      featured: true,
+    },
+    {
+      id: 's77-smoked-lemonade-pitcher',
+      slug: 'wood-smoked-charred-lemonade-pitcher',
+      name: 'Charred Meyer Lemon Smoked Lemonade (1 Liter)',
+      price: 219,
+      description: 'Fresh lemons charred directly over post-oak embers to caramelize citrus sugars, pressed with raw cane sugar and mountain spring water.',
+      category: 'Desserts & Cold Brews',
+      image: img('photo-1513558161293-cdaf765ed2fd'),
+      imageAlt: 'Glass pitcher of ice cold charred lemon lemonade with lemon wheels',
+      tags: ['Refreshing', 'Vegan'],
+      dietary: 'vegan',
+      weightOrSize: '1 Liter Pitcher',
+      calories: '180 kcal',
+    },
+  ],
+  craftProcess: {
+    badge: 'OUR 14-HOUR PITMASTER CRAFT',
+    title: 'How Smokehouse 77 Turns Tough Beef Cuts Into Pure Velvet',
+    subtitle: 'True central Texas barbecue cannot be rushed with electric ovens or liquid smoke. Here is our daily ritual.',
+    steps: [
+      { time: '11:30 PM', title: 'Midnight Fire Ignition', desc: 'Aged Texas post-oak logs are stacked and lit in our 1,000-gallon twin steel offset pits.' },
+      { time: '01:00 AM', title: 'Coarse Dal-Black Rub', desc: 'Whole prime briskets are seasoned with heavy coarse 16-mesh black pepper and kosher salt.' },
+      { time: '07:30 AM', title: 'The Stall & Peach Wrap', desc: 'When the brisket hits 165°F, it is swaddled in un-waxed pink butcher paper to lock in rich fat juices.' },
+      { time: '11:45 AM', title: 'Carving Block Service', desc: 'Rested for two full hours in warming chambers, then carved thick straight onto butcher paper.' },
+    ],
+    image: img('photo-1555939594-58d7cb561ad1'),
+  },
+  story: {
+    badge: 'ESTABLISHED 1977',
+    kicker: 'FOUR DECADES OF POST OAK AND IRON',
+    title: 'Hank Williams Built His First Smoker Out of an Old 500-Gallon Propane Tank.',
+    paragraphs: [
+      'In the summer of 1977, Henry "Hank" Williams wheeled a hand-welded offset smoker onto his driveway on the outskirts of town. He didn’t have a neon sign or a printed menu. He just had aged post oak, prime beef, and a stubborn belief that good barbecue takes as long as it takes.',
+      'By noon on Saturdays, trucks were backed up two miles down the farm road. People waited three hours in ninety-degree heat just to get two pounds of moist brisket wrapped in greasy brown butcher paper.',
+      'Today, his granddaughter Maya runs our smokehouse pits. The pits are bigger and we feed hundreds of guests every day, but Hank’s law remains unbroken: low heat, slow time, native wood, and no shortcuts.',
+    ],
+    image: img('photo-1555396273-367ea4eb4db5'),
+    imageAlt: 'The historic Smokehouse 77 pit room with wood stacks and glowing embers',
+    founderQuote: 'Barbecue is not cooking. Barbecue is stewardship. You don’t force the brisket; you keep the fire steady, and you let the smoke do what it has done for centuries.',
+    founderName: 'Maya Williams · 3rd Generation Head Pitmaster, Smokehouse 77',
+    stats: [
+      { value: '14 Hours', label: 'Average Overnight Smoke Time' },
+      { value: '100%', label: 'Seasoned Texas Post Oak' },
+      { value: '225°F', label: 'Strict Firebox Temperature' },
+      { value: '47 Years', label: 'Continuous Pitmaster Heritage' },
+    ],
+  },
+  promo: {
+    badge: 'WEEKEND PIT RESERVATION OFFER',
+    title: 'Book a Smokehouse Table & Get a Free Burnt Ends Taster',
+    desc: 'Reserve a table for 4 or more this weekend and receive a complimentary 150g cast-iron plate of our famous double-smoked caramelized brisket burnt ends with house Texas toast.',
+    ctaText: 'Reserve Your Pit Table',
+    ctaPage: 'contact',
+    image: img('photo-1508615070457-7baeba4003ab'),
+    imageAlt: 'Smokehouse table spread with meats, sides and drinks ready for guests',
+  },
+  gallery: [
+    { src: img('photo-1544025162-d76694265947'), alt: 'Full rack of glazed St. Louis pork ribs with fall off the bone meat', caption: 'St. Louis Cut Pork Ribs Glazed with Brown Sugar Bourbon Mop', tag: 'Smoked Ribs' },
+    { src: img('photo-1555939594-58d7cb561ad1'), alt: 'Sliced prime Texas beef brisket with prominent dark pepper bark', caption: '14-Hour Post Oak Smoked Prime Brisket Sliced Fresh at the Block', tag: 'Prime Brisket' },
+    { src: img('photo-1529193591184-b1d58069ecdd'), alt: 'Smoked barbecue ribs on rustic wood board with herbs', caption: 'Hickory Smoked Rib Bones with Crisp Caramelized Edges', tag: 'Hickory Ribs' },
+    { src: img('photo-1508615070457-7baeba4003ab'), alt: 'The Grand Pitmaster sharing platter loaded with brisket, ribs, and sausages', caption: 'The Grand Pitmaster Feasting Board for Hungry Groups', tag: 'Feast Board' },
+    { src: img('photo-1527477321055-43615b629c76'), alt: 'Smoked and flash-fried jumbo chicken wings with blue cheese sauce', caption: 'Flash-Fried Smoked Jumbo Wings Tossed in Cayenne Butter BBQ', tag: 'Smoked Wings' },
+    { src: img('photo-1541592106381-b31e9677c0e5'), alt: 'Cast iron skillet of bubbling three cheese smoked macaroni', caption: 'Smoked Gouda, Gruyère and Sharp Cheddar Skillet Mac', tag: 'Skillet Sides' },
+  ],
+  testimonials: [
+    {
+      name: 'Austin Miller',
+      role: 'BBQ Enthusiast & Food Critic · Texas BBQ Trail',
+      rating: 5,
+      quote: 'I have traveled across Lockhart, Austin, and Kansas City testing barbecue. Smokehouse 77 brisket has that holy grail combination of buttery rendered fat, deep smoke ring, and a crunchy black pepper bark that stays crisp.',
+      source: 'Verified Dine-In Guest',
+      date: 'Yesterday',
+    },
+    {
+      name: 'Devika Singhania',
+      role: 'Corporate Event Organizer · Whitefield',
+      rating: 5,
+      quote: 'We booked the Pitmaster Grand Platter for our tech company reunion. Every single meat was tender, the burnt ends melted like candy, and the cornbread with honey butter had people fighting over the last crumb.',
+      source: 'Verified Event Booking',
+      date: '3 days ago',
+    },
+    {
+      name: 'Marcus Vance',
+      role: 'Chef & Pitmaster · Pit Guild',
+      rating: 5,
+      quote: 'You can tell within ten seconds of walking into this room that they burn real hardwood. The smoke is thin and blue, not white and acrid. The St. Louis ribs are fall-off-the-bone without turning mushy. Absolute perfection.',
+      source: 'Verified Table Reservation',
+      date: 'Last weekend',
+    },
+    {
+      name: 'Siddharth Rao',
+      role: 'Weekend Feaster · Indiranagar',
+      rating: 5,
+      quote: 'Ordered the curbside pickup for family Sunday lunch. Arrived wrapped in heavy butcher paper inside insulated foil bags. Everything was steaming hot, and the jalapeño cheddar sausages had that incredible snappy pop.',
+      source: 'Verified Pickup Order',
+      date: 'Last week',
+    },
+  ],
+  location: {
+    address: 'Smokehouse 77 Central Pit Hub #77, 100 Feet Road, Indiranagar',
+    neighborhood: 'Indiranagar / Koramangala / CBD Corridor, Bengaluru, Karnataka 560038',
+    hoursWeekdays: 'Tuesday – Friday: 12:00 PM – 11:00 PM (Serving Meats Until Sold Out)',
+    hoursWeekends: 'Saturday – Sunday: 11:30 AM – 11:30 PM (Weekend Smoked Specials)',
+    phone: '+91 (080) 4777-1977',
+    email: 'pits@smokehouse77.com',
+    pickupNotice: 'Curbside pickup counter at Pit Door 1. Table reservations recommended for Friday & Saturday dinner.',
+    mapEmbedUrl: 'https://maps.google.com/?q=Indiranagar+Bengaluru',
+  },
+  customInquiry: {
+    title: 'Smoked Meats Whole-Pig & Corporate Pit Catering',
+    subtitle: 'From 15-person family celebrations to 250-person corporate outdoor pit feasts, let our pitmasters feed your crowd.',
+    occasions: ['Corporate Outdoor BBQ', 'Family Reunion Feast', 'Wedding Rehearsal Dinner', 'Weekend Sports Tailgate'],
+    sizes: [
+      { label: 'Backyard Gathering (15 People)', serves: '15 people', basePrice: 7499 },
+      { label: 'Pitmaster Feasting Squad (35 People)', serves: '35 people', basePrice: 16999 },
+      { label: 'Grand Smokehouse Takeover (75 People)', serves: '75 people', basePrice: 34999 },
+    ],
+    flavors: [
+      '14-Hour Post Oak Smoked Prime Brisket',
+      'St. Louis Hickory Smoked Pork Ribs',
+      'Caramelized Double-Smoked Burnt Ends',
+      'Texas Jalapeño Cheddar Sausages',
+    ],
+  },
+  faqs: [
+    {
+      category: 'Smoking Craft',
+      question: 'Do you really smoke your meats for 14 hours every single day?',
+      answer: 'Yes! We never use electric ovens, artificial smoke liquids, or reheating shortcuts. Our pit team lights the offset smokers at midnight, and meats smoke gently over native Texas post oak hardwood until service.',
+    },
+    {
+      category: 'Daily Service',
+      question: 'What happens if you sell out of brisket early?',
+      answer: 'Authentic barbecue is governed by smoker capacity. Once a day’s batch is carved and gone, that’s it until the next day! We strongly recommend arriving early or reserving your sharing platters in advance.',
+    },
+    {
+      category: 'Dining & Tables',
+      question: 'Are table reservations required or can we walk in?',
+      answer: 'We welcome both walk-in guests and reservations! For Friday dinner, Saturday, and Sunday lunch, reserving a pit table online ensures your party is seated immediately without waiting.',
+    },
+    {
+      category: 'Dietary Options',
+      question: 'Do you offer vegetarian options on the menu?',
+      answer: 'Yes! Our Cast-Iron Smoked 3-Cheese Mac & Cheese, Fire-Charred Sweet Corn on the Cob with Chipotle Butter, Honey Butter Cornbread, and Apple Cider Slaw are 100% vegetarian friendly.',
+    },
+    {
+      category: 'Online Orders',
+      question: 'Can we order takeout and pickup online?',
+      answer: 'Absolutely. You can order online directly through this website, choose your meats and custom sides, select pickup time, and collect your hot butcher-paper wrapped feast at our dedicated curbside pickup dock.',
+    },
+  ],
 };
 
 export default function Smokehouse77() {
-  const [scrolled, setScrolled] = useState(false);
-  const [activeMenuTab, setActiveMenuTab] = useState('Meats by the Pound');
-  
-  const heroRef = useReveal(100);
-  const storyRef = useReveal(200);
-  const menuRef = useReveal(200);
-  
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const theme = {
-    name: 'Smokehouse 77',
-    tagline: 'Low & slow Texas-style BBQ since 1977',
-    palette: { primary: '#b45309', secondary: '#1c0d00', surface: '#2a1a0d', text: '#fdf6ee', background: '#1c0d00', textLight: '#d97706' }
-  };
-
-  const menu = [
-    { tab: 'Meats by the Pound', items: [
-      { name: 'Prime Brisket', price: '$28/lb', desc: '14-hour smoked USDA prime, post oak, salt & pepper crust.', tags: ['Pitmaster\'s Pride', 'Sells Out Fast'], image: IMAGES.brisket },
-      { name: 'Baby Back Ribs', price: '$24/rack', desc: 'Hickory-smoked, fall-off-the-bone tender, dry-rubbed.', tags: ['Bestseller'], image: IMAGES.ribs },
-      { name: 'Pulled Pork', price: '$18/lb', desc: 'Slow-smoked pork shoulder, hand-pulled to order.', image: IMAGES.pork },
-      { name: 'Jalapeño-Cheddar Sausage', price: '$8/link', desc: 'House-made sausage with fresh jalapeños and sharp cheddar.', tags: ['In-House Made'], image: IMAGES.sausage },
-    ]},
-    { tab: 'Plates', items: [
-      { name: '2-Meat Plate', price: '$22', desc: 'Choose any 2 meats. Served with 2 sides and white bread.', image: IMAGES.plate },
-      { name: 'Brisket Sandwich', price: '$14', desc: 'Sliced brisket on buttered Texas toast. Pickles, onions.', image: IMAGES.pork },
-    ]},
-    { tab: 'Sides', items: [
-      { name: 'Smoked Mac & Cheese', price: '$7', desc: 'Three-cheese smoked mac. As important as the meat.', image: IMAGES.sides },
-      { name: 'Pinto Beans', price: '$5', desc: 'Cooked all day with brisket scraps.', image: IMAGES.sides },
-    ]},
-  ];
-
-  return (
-    <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif', minHeight: '100vh' }}>
-      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(28,13,0,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(180,83,9,0.2)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none' }}>
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          
-          <div style={{ fontSize: '1.75rem', fontWeight: 800, fontFamily: '"Oswald", sans-serif', color: '#fff', textTransform: 'uppercase', letterSpacing: '1px' }}>
-            {theme.name}
-          </div>
-        </div>
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', padding: '0.75rem 2rem', borderRadius: '4px', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontFamily: '"Inter", sans-serif', transition: 'all 0.3s', textTransform: 'uppercase', letterSpacing: '1px' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#d97706'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = theme.palette.primary}>
-            Order Pickup
-          </button>
-        </div>
-      </nav>
-
-      <header style={{ height: '100vh', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', textAlign: 'center' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundColor: '#000' }}>
-          <img src={IMAGES.hero} alt="Smoked BBQ Ribs" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.6 }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(28,13,0,1) 0%, rgba(28,13,0,0.4) 100%)' }}></div>
-        </div>
-        <div ref={heroRef as any} style={{ position: 'relative', zIndex: 10, color: '#fff', maxWidth: '800px', padding: '0 5%' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '1.5rem', color: theme.palette.primary }}>
-            <Flame size={24} />
-            <span style={{ fontWeight: 600, fontSize: '1.1rem', letterSpacing: '2px', textTransform: 'uppercase' }}>Authentic Texas BBQ</span>
-            <Flame size={24} />
-          </div>
-          <h1 style={{ fontFamily: '"Oswald", sans-serif', fontSize: 'clamp(4rem, 10vw, 8rem)', lineHeight: 1, marginBottom: '1.5rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '2px' }}>Smoke.<br/>Time.<br/>Flavor.</h1>
-          <p style={{ fontSize: '1.25rem', fontWeight: 400, marginBottom: '3rem', lineHeight: 1.6, color: '#fcd34d' }}>Real Texas-style BBQ is a 14-hour commitment. We start the fire at midnight so you can eat at noon.</p>
-          <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', padding: '1.2rem 3rem', borderRadius: '4px', fontWeight: 700, fontSize: '1.1rem', cursor: 'pointer', fontFamily: '"Oswald", sans-serif', transition: 'all 0.3s', textTransform: 'uppercase', letterSpacing: '1px' }}>
-              View Menu
-            </button>
-          </div>
-        </div>
-      </header>
-      
-      <section ref={storyRef as any} style={{ padding: '8rem 5%', backgroundColor: theme.palette.background, color: theme.palette.text }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4rem', alignItems: 'center', maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ flex: '1 1 500px' }}>
-            <h2 style={{ fontFamily: '"Oswald", sans-serif', fontSize: '3.5rem', color: '#fff', marginBottom: '1.5rem', lineHeight: 1.1, fontWeight: 700, textTransform: 'uppercase' }}>Hank's Recipes.<br/><span style={{ color: theme.palette.primary }}>Four Generations Later.</span></h2>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '1.5rem', color: '#d1d5db' }}>Henry "Hank" Williams started smoking meats in 1977 with a single offset smoker built from a 500-gallon propane tank. He sold plates out of his driveway every Saturday until the lines got too long.</p>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '2.5rem', color: '#d1d5db' }}>Today, his great-granddaughter Tamara runs the pits. The smoker is bigger, but the wood is still post oak, the rub is still the family recipe, and the rules are the same: low heat, slow time, and no shortcuts.</p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
-              <div style={{ borderLeft: `3px solid ${theme.palette.primary}`, paddingLeft: '1rem' }}>
-                <h4 style={{ fontWeight: 700, color: '#fff', margin: '0 0 0.5rem 0', fontFamily: '"Oswald", sans-serif', fontSize: '1.25rem', letterSpacing: '1px' }}>14-HOUR SMOKE</h4>
-                <p style={{ fontSize: '0.95rem', color: '#9ca3af', margin: 0 }}>Every brisket gets the time it needs.</p>
-              </div>
-              <div style={{ borderLeft: `3px solid ${theme.palette.primary}`, paddingLeft: '1rem' }}>
-                <h4 style={{ fontWeight: 700, color: '#fff', margin: '0 0 0.5rem 0', fontFamily: '"Oswald", sans-serif', fontSize: '1.25rem', letterSpacing: '1px' }}>POST OAK ONLY</h4>
-                <p style={{ fontSize: '0.95rem', color: '#9ca3af', margin: 0 }}>Sourced locally for the perfect flavor.</p>
-              </div>
-            </div>
-          </div>
-          <div style={{ flex: '1 1 400px', position: 'relative' }}>
-            <img src={IMAGES.story} alt="Pitmaster" style={{ width: '100%', borderRadius: '4px', position: 'relative', zIndex: 2, boxShadow: '20px 20px 0 rgba(180,83,9,0.2)' }} />
-          </div>
-        </div>
-      </section>
-
-      <section ref={menuRef as any} style={{ padding: '8rem 5%', backgroundColor: theme.palette.surface }}>
-        <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '1rem', color: theme.palette.primary }}>
-            <Utensils size={20} />
-            <span style={{ fontWeight: 600, fontSize: '1rem', letterSpacing: '2px', textTransform: 'uppercase' }}>From The Pit</span>
-          </div>
-          <h2 style={{ fontFamily: '"Oswald", sans-serif', fontSize: '3.5rem', color: '#fff', fontWeight: 700, textTransform: 'uppercase', margin: 0 }}>BBQ Menu</h2>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '3rem', flexWrap: 'wrap' }}>
-            {menu.map((cat) => (
-              <button 
-                key={cat.tab}
-                onClick={() => setActiveMenuTab(cat.tab)}
-                style={{ 
-                  padding: '0.75rem 2rem', 
-                  backgroundColor: activeMenuTab === cat.tab ? theme.palette.primary : 'transparent',
-                  color: activeMenuTab === cat.tab ? '#fff' : '#d1d5db',
-                  border: activeMenuTab === cat.tab ? 'none' : '1px solid #4b5563',
-                  borderRadius: '4px',
-                  fontFamily: '"Oswald", sans-serif',
-                  fontSize: '1.1rem',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  textTransform: 'uppercase',
-                  letterSpacing: '1px'
-                }}
-              >
-                {cat.tab}
-              </button>
-            ))}
-          </div>
-        </div>
-        
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem', maxWidth: '1200px', margin: '0 auto' }}>
-          {menu.find(c => c.tab === activeMenuTab)?.items.map((item, i) => (
-            <div key={i} style={{ display: 'flex', flexDirection: 'column', backgroundColor: theme.palette.background, borderRadius: '4px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.05)', transition: 'transform 0.3s', cursor: 'pointer' }} onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-8px)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
-              <div style={{ position: 'relative' }}>
-                <img src={item.image} alt={item.name} style={{ width: '100%', height: '240px', objectFit: 'cover' }} />
-                <div style={{ position: 'absolute', top: '1rem', right: '1rem', backgroundColor: 'rgba(28,13,0,0.8)', color: '#fff', padding: '0.5rem 1rem', borderRadius: '4px', fontWeight: 700, fontFamily: '"Oswald", sans-serif', fontSize: '1.1rem', backdropFilter: 'blur(4px)' }}>{item.price}</div>
-              </div>
-              <div style={{ padding: '2rem' }}>
-                <h3 style={{ fontFamily: '"Oswald", sans-serif', fontSize: '1.5rem', fontWeight: 700, margin: '0 0 1rem 0', color: '#fff', textTransform: 'uppercase', letterSpacing: '1px' }}>{item.name}</h3>
-                <p style={{ color: '#9ca3af', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>{item.desc}</p>
-                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                  {item.tags?.map(tag => (
-                    <span key={tag} style={{ fontSize: '0.75rem', padding: '0.35rem 0.75rem', backgroundColor: 'rgba(180,83,9,0.1)', color: theme.palette.primary, borderRadius: '4px', fontWeight: 600, border: `1px solid rgba(180,83,9,0.2)`, textTransform: 'uppercase', letterSpacing: '1px' }}>{tag}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section style={{ padding: '8rem 5%', backgroundColor: theme.palette.background }}>
-        <h2 style={{ fontFamily: '"Oswald", sans-serif', fontSize: '3rem', color: '#fff', textAlign: 'center', marginBottom: '4rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>What They Say</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-          {[
-            { name: 'Jake R.', quote: 'The brisket here has the deepest smoke ring I have ever seen. The fat is perfectly rendered. This is Texas BBQ done right.' },
-            { name: 'Linda H.', quote: 'We drove 4 hours from Dallas and it was worth every mile. Best smoked ribs in the state, full stop.' },
-            { name: 'Marcus T.', quote: 'Get there early. The line forms before they open. But the brisket makes you forget everything.' }
-          ].map((test, i) => (
-            <div key={i} style={{ backgroundColor: theme.palette.surface, padding: '2.5rem', borderRadius: '4px', borderLeft: `4px solid ${theme.palette.primary}` }}>
-              <div style={{ display: 'flex', color: theme.palette.primary, marginBottom: '1.5rem' }}>
-                {[...Array(5)].map((_, j) => <Star key={j} size={16} fill={theme.palette.primary} stroke="none" />)}
-              </div>
-              <p style={{ color: '#d1d5db', lineHeight: 1.7, marginBottom: '2rem', fontSize: '1rem', fontStyle: 'italic' }}>"{test.quote}"</p>
-              <h4 style={{ fontWeight: 700, color: '#fff', margin: 0, fontSize: '1rem', fontFamily: '"Oswald", sans-serif', textTransform: 'uppercase', letterSpacing: '1px' }}>- {test.name}</h4>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <footer style={{ backgroundColor: '#000', color: '#9ca3af', padding: '6rem 5% 3rem' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '4rem', marginBottom: '4rem' }}>
-            <div>
-              <h2 style={{ fontFamily: '"Oswald", sans-serif', fontSize: '2.5rem', fontWeight: 700, marginBottom: '1rem', color: '#fff', textTransform: 'uppercase', letterSpacing: '1px' }}>{theme.name}</h2>
-              <p style={{ color: '#6b7280', marginBottom: '2rem', fontSize: '1rem', lineHeight: 1.6 }}>{theme.tagline}</p>
-              <div style={{ display: 'flex', gap: '1rem' }}>
-                <Flame size={24} color={theme.palette.primary} />
-              </div>
-            </div>
-            <div>
-              <h4 style={{ color: '#fff', fontWeight: 700, marginBottom: '1.5rem', fontSize: '1.25rem', fontFamily: '"Oswald", sans-serif', textTransform: 'uppercase', letterSpacing: '1px' }}>Visit Us</h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}><MapPin size={20} color={theme.palette.primary} style={{ flexShrink: 0, marginTop: '0.25rem' }} /><span style={{ lineHeight: 1.5 }}>77 Brisket Blvd<br/>Austin, TX 78701</span></div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}><Phone size={20} color={theme.palette.primary} style={{ flexShrink: 0 }} /><span>+1 (512) 555-0077</span></div>
-              </div>
-            </div>
-            <div>
-              <h4 style={{ color: '#fff', fontWeight: 700, marginBottom: '1.5rem', fontSize: '1.25rem', fontFamily: '"Oswald", sans-serif', textTransform: 'uppercase', letterSpacing: '1px' }}>Hours</h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}><Clock size={20} color={theme.palette.primary} style={{ flexShrink: 0, marginTop: '0.25rem' }} /><span style={{ lineHeight: 1.5 }}>Thu – Sun:<br/>Open at 11am<br/>Until we sell out</span></div>
-              </div>
-            </div>
-          </div>
-          <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '2rem', textAlign: 'center' }}>
-            <p style={{ fontSize: '0.9rem', margin: 0 }}>© 2026 {theme.name}. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
+  return <FoodStorefrontCore config={smokehouse77Config} />;
 }
-
-

@@ -1,247 +1,544 @@
-import React, { useState } from 'react';
-import './bakery-production.css';
+import React from 'react';
+import { FoodStorefrontCore, type StorefrontThemeConfig } from '../shared/FoodStorefrontCore';
 
-const img = (id: string, w = 1200) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
+const img = (id: string, w = 1400) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
+
+export const riseAndKneadConfig: StorefrontThemeConfig = {
+  id: 'rise-and-knead',
+  kind: 'bakery',
+  currencySymbol: '₹',
+  layoutOptions: {
+    heroLayout: 'centered',
+    productLayout: 'editorial-2',
+    storyLayout: 'stats-prominent',
+    featuresLayout: 'strip-4',
+    galleryLayout: 'editorial-collage',
+    sectionOrder: ['hero', 'features', 'products', 'story', 'promo', 'craft', 'gallery', 'reviews', 'location', 'newsletter'],
+  },
+  name: 'Rise & Knead',
+  tagline: 'Bespoke multi-tiered wedding cakes, milestone celebrations, and artisanal celebratory confections',
+  brandSub: 'Master Wedding Cake Atelier & Celebration Bakery',
+  palette: {
+    primary: '#ca8a04',
+    primaryHover: '#a16207',
+    secondary: '#1c1917',
+    background: '#fffdf5',
+    surface: '#fefce8',
+    text: '#1c1917',
+    textMuted: '#78716c',
+    border: 'rgba(202, 138, 4, 0.18)',
+    badgeBg: '#fef08a',
+    badgeText: '#854d0e',
+  },
+  typography: {
+    headingFont: '"Playfair Display", Georgia, serif',
+    bodyFont: '"Inter", sans-serif',
+  },
+  hero: {
+    headline: 'Bespoke Multi-Tiered Wedding & Milestone Celebration Cakes.',
+    subheadline:
+      'Hand-sculpted sugar floristry, champagne-infused Swiss meringue buttercreams, and architectural tiers crafted for unforgettable milestone celebrations and grand ballroom receptions.',
+    badge: 'BESPOKE CAKE ATELIER & TASTING SUITE',
+    image: img('photo-1555507036-ab1f4038808a'),
+    imageAlt: 'Grand multi-tiered white wedding cake decorated with delicate hand-crafted white sugar flowers',
+    primaryCtaText: 'Explore Celebration Cakes',
+    primaryCtaPage: 'menu',
+    secondaryCtaText: 'Book Cake Consultation',
+    secondaryCtaPage: 'inquiry',
+  },
+  announcement: {
+    text: '2026 & 2027 Wedding Dates Now Booking · Complimentary At-Home Cake Tasting Boxes Available',
+    badgeText: 'WEDDING SEASON',
+    linkText: 'Order Tasting Box',
+    linkPage: 'menu',
+  },
+  proofBadges: [
+    { icon: '🎂', title: 'Hand-Sculpted Sugar Floristry', subtitle: 'Individually petal-veined and wired botanical blossoms in sugar paste' },
+    { icon: '🥂', title: 'Champagne Swiss Buttercream', subtitle: 'Whipped Swiss meringue buttercreams infused with Veuve Clicquot' },
+    { icon: '📦', title: 'White-Glove Delivery', subtitle: 'Climate-controlled delivery van and master on-site banquet assembly' },
+    { icon: '🍰', title: 'At-Home Cake Tasting Flights', subtitle: 'Six signature sponge and filling pairings shipped fresh to your door' },
+  ],
+  categories: ['Multi-Tiered Wedding Cakes', 'Milestone Birthday Cakes', 'Vintage Lambeth Cakes', 'Cake Tasting Boxes', 'Celebration Sweet Tables'],
+  collections: [
+    {
+      id: 'wedding-cakes',
+      name: 'Bespoke Multi-Tier Wedding Cakes',
+      tagline: 'Grand two to five-tier architectural wedding cakes with hand-crafted sugar flowers.',
+      image: img('photo-1555507036-ab1f4038808a'),
+      itemCount: 6,
+      filterCategory: 'Multi-Tiered Wedding Cakes',
+    },
+    {
+      id: 'milestone-celebrations',
+      name: 'Milestone Birthday & Anniversary Cakes',
+      tagline: 'Modern textured cakes, gold leaf accents, and customized acrylic toppers.',
+      image: img('photo-1578985545062-69928b1d9587'),
+      itemCount: 5,
+      filterCategory: 'Milestone Birthday Cakes',
+    },
+    {
+      id: 'vintage-lambeth',
+      name: 'Vintage Victorian Lambeth Cakes',
+      tagline: 'Intricate royal over-piping, ruffled borders, and romantic pastel cherries.',
+      image: img('photo-1588195538326-c5b1e9f80a1b'),
+      itemCount: 4,
+      filterCategory: 'Vintage Lambeth Cakes',
+    },
+    {
+      id: 'tasting-favors',
+      name: 'Cake Tasting Boxes & Sweet Favors',
+      tagline: 'Pre-wedding tasting flight sets and personalized guest macaron favor boxes.',
+      image: img('photo-1563729784474-d77dbb933a9e'),
+      itemCount: 5,
+      filterCategory: 'Cake Tasting Boxes',
+    },
+  ],
+  products: [
+    {
+      id: 'rk-botanical-flora-3tier',
+      slug: 'the-botanical-flora-3-tier-wedding-cake',
+      name: 'The Botanical Flora 3-Tier Grand Wedding Cake (Serves 85)',
+      price: 495.00,
+      compareAtPrice: 550.00,
+      description: 'Three stacked tiers of Madagascar vanilla bean sponge, strawberry rosewater compote, and whipped white chocolate Swiss buttercream. Styled with cascading handmade sugar peonies and eucalyptus.',
+      category: 'Multi-Tiered Wedding Cakes',
+      image: img('photo-1578985545062-69928b1d9587'),
+      tags: ['Wedding Centerpiece', 'Handmade Sugar Florals'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '3 Tiers / Serves 85 Guests',
+      available: true,
+      options: [
+        { name: 'Flavor Pairing', choices: [{ label: 'Vanilla Bean & Strawberry Rosewater' }, { label: 'Lemon Elderflower & Blackberry Curd' }, { label: 'Champagne Sponge & Raspberry Ganache' }] },
+        { name: 'Sugar Flower Colorway', choices: [{ label: 'Classic Ivory & Blush Peonies' }, { label: 'Earthy Terracotta & White Ranunculus' }, { label: 'Lavender & White Sweet Peas' }] },
+      ],
+    },
+    {
+      id: 'rk-champagne-berry-2tier',
+      slug: 'champagne-raspberry-2-tier-milestone-cake',
+      name: 'Champagne & Raspberry 2-Tier Celebration Cake (Serves 40)',
+      price: 265.00,
+      description: 'Two tiers of champagne-infused sponge layered with tart raspberry coulis and smooth vanilla Swiss meringue buttercream. Accented with 24K edible gold leaf leafing.',
+      category: 'Multi-Tiered Wedding Cakes',
+      image: img('photo-1565958011703-44f9829ba187'),
+      tags: ['Bestseller Tiered', 'Gold Leaf Accents'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '2 Tiers / Serves 40 Guests',
+      available: true,
+    },
+    {
+      id: 'rk-vintage-lambeth-heart',
+      slug: 'vintage-victorian-lambeth-piped-heart-cake',
+      name: 'Vintage Victorian Lambeth Over-Piped Heart Cake (Serves 15)',
+      price: 85.00,
+      description: 'Heart-shaped celebration cake featuring intricate Victorian Lambeth over-piped swags, ruffled shell borders, hand-piped ribbon bows, and Maraschino cherries.',
+      category: 'Vintage Lambeth Cakes',
+      image: img('photo-1588195538326-c5b1e9f80a1b'),
+      tags: ['Trending Victorian', 'Heart Shaped'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '8" Heart / Serves 12-15',
+      available: true,
+      options: [
+        { name: 'Color Theme', choices: [{ label: 'Pastel Baby Pink & Cream' }, { label: 'Vintage Cherry Red & White' }, { label: 'Pale Lavender & Ivory' }] },
+        { name: 'Custom Message', choices: [{ label: 'Happy Birthday' }, { label: 'Just Married' }, { label: 'Forever & Always' }] },
+      ],
+    },
+    {
+      id: 'rk-grand-gold-leaf-4tier',
+      slug: '24k-gold-leaf-tahitian-vanilla-4-tier-cake',
+      name: '24K Gold Leaf & Tahitian Vanilla 4-Tier Grand Cake (Serves 140)',
+      price: 780.00,
+      description: 'Showstopping ballroom centerpiece: four grand tiers covered in smooth white velvet texture, accented with hand-torn 24K edible gold leaf and white sugar orchids.',
+      category: 'Multi-Tiered Wedding Cakes',
+      image: img('photo-1535254973040-607b474cb50d'),
+      tags: ['Grand Ballroom', 'Serves 140'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '4 Tiers / Serves 140 Guests',
+      available: true,
+    },
+    {
+      id: 'rk-salted-caramel-espresso-cake',
+      slug: 'salted-caramel-espresso-chocolate-tiered-cake',
+      name: 'Salted Caramel & Espresso Chocolate Tiered Cake (Serves 30)',
+      price: 195.00,
+      description: 'Dark Valrhona chocolate cake layers soaked in espresso syrup, filled with house-made salted caramel and dark chocolate ganache, finished with semi-naked frosting.',
+      category: 'Milestone Birthday Cakes',
+      image: img('photo-1579372786545-d24232daf58c'),
+      tags: ['Decadent Chocolate'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '2 Tiers / Serves 30 Guests',
+      available: true,
+    },
+    {
+      id: 'rk-lemon-elderflower-cake',
+      slug: 'lemon-elderflower-blackberry-curd-cake',
+      name: 'Lemon Elderflower & Blackberry Curd Celebration Cake',
+      price: 165.00,
+      description: 'Zesty lemon sponge soaked with St. Germain elderflower cordial, layered with tart blackberry curd and lemon buttercream. Decorated with fresh organic blackberries.',
+      category: 'Milestone Birthday Cakes',
+      image: img('photo-1588195538326-c5b1e9f80a1b'),
+      tags: ['Royal Wedding Flavor'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '8" Cake / Serves 20-25',
+      available: true,
+    },
+    {
+      id: 'rk-bento-lunchbox-cake',
+      slug: 'bento-lunchbox-mini-celebration-cake',
+      name: 'Bento Lunchbox Mini Celebration Cake (Serves 2-3)',
+      price: 32.00,
+      description: 'Miniature 4-inch celebration cake presented inside a compostable sugarcane clamshell box with colorful sprinkles, mini candle, and wooden fork.',
+      category: 'Milestone Birthday Cakes',
+      image: img('photo-1582293041079-7814c2f12063'),
+      tags: ['Cute Gift', 'Lunchbox Cake'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '4" Cake / Serves 2-3',
+      available: true,
+    },
+    {
+      id: 'rk-cake-tasting-flight-box',
+      slug: 'master-cake-tasting-flight-box-6pk',
+      name: 'Master Cake Tasting Flight Box (6 Signature Flavors)',
+      price: 45.00,
+      compareAtPrice: 50.00,
+      description: 'The ultimate wedding cake tasting kit: six mini cake jars featuring our signature sponge and filling combinations, complete with tasting scorecards and pencil.',
+      category: 'Cake Tasting Boxes',
+      image: img('photo-1569864358642-9d1684040f43'),
+      tags: ['Wedding Tasting Kit', 'Bestseller'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs', 'Contains Almonds'],
+      weightOrSize: '6 x 100g Tasting Jars',
+      available: true,
+    },
+    {
+      id: 'rk-cupcake-bouquet-12',
+      slug: 'hand-piped-sugar-blossom-cupcake-bouquet-12',
+      name: 'Hand-Piped Sugar Blossom Cupcake Bouquet (12 pcs)',
+      price: 58.00,
+      description: 'Twelve moist vanilla and red velvet cupcakes hand-piped with realistic buttercream roses, hydrangeas, and peonies, packaged inside an elegant presentation bouquet box.',
+      category: 'Celebration Sweet Tables',
+      image: img('photo-1576618148400-f54bed99fcfd'),
+      tags: ['Edible Floral Bouquet'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: 'Bouquet of 12 Cupcakes',
+      available: true,
+    },
+    {
+      id: 'rk-wedding-macaron-favors-20pk',
+      slug: 'wedding-macaron-guest-favor-boxes-20pk',
+      name: 'Wedding Macaron Guest Favor Boxes (Pack of 20 Boxes)',
+      price: 95.00,
+      description: 'Twenty individual clear gift boxes, each holding two artisanal macarons tied with your choice of silk ribbon and customized guest tag.',
+      category: 'Cake Tasting Boxes',
+      image: img('photo-1569864358642-9d1684040f43'),
+      tags: ['Guest Favors', 'Pack of 20'],
+      allergens: ['Contains Almonds', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '20 Individual Boxes (40 Macarons)',
+      available: true,
+    },
+    {
+      id: 'rk-red-velvet-bourbon-cake',
+      slug: 'red-velvet-madagascar-bourbon-cake',
+      name: 'Southern Red Velvet & Madagascar Bourbon Cream Cheese Cake',
+      price: 75.00,
+      description: 'Velvety cocoa-infused red sponge layered with rich cream cheese frosting scented with real Madagascar Bourbon vanilla bean caviar.',
+      category: 'Milestone Birthday Cakes',
+      image: img('photo-1578985545062-69928b1d9587'),
+      tags: ['Classic Favorite'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '8" Cake / Serves 12-16',
+      available: true,
+    },
+    {
+      id: 'rk-pistachio-rosewater-cake',
+      slug: 'pistachio-rosewater-white-peach-celebration-cake',
+      name: 'Pistachio Rosewater & White Peach Celebration Cake',
+      price: 88.00,
+      description: 'Ground Sicilian pistachio sponge layered with fragrant white peach compote and whipped rosewater Swiss meringue buttercream.',
+      category: 'Milestone Birthday Cakes',
+      image: img('photo-1579372786545-d24232daf58c'),
+      tags: ['Pistachio Sponge'],
+      allergens: ['Contains Pistachios', 'Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '8" Cake / Serves 14-18',
+      available: true,
+    },
+    {
+      id: 'rk-hazelnut-praline-velvet-cake',
+      slug: 'hazelnut-praline-dark-chocolate-velvet-cake',
+      name: 'Piedmont Hazelnut Praliné & Dark Chocolate Velvet Cake',
+      price: 92.00,
+      description: 'Rich dark chocolate cake filled with crunchy Piedmont hazelnut praliné feuilletine and dark chocolate whipped ganache.',
+      category: 'Milestone Birthday Cakes',
+      image: img('photo-1578985545062-69928b1d9587'),
+      tags: ['Crunchy Praline'],
+      allergens: ['Contains Hazelnuts', 'Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '8" Cake / Serves 14-18',
+      available: true,
+    },
+    {
+      id: 'rk-mini-tiered-cutting-cake',
+      slug: 'mini-tiered-cutting-cake-for-receptions',
+      name: 'Mini Tiered Cutting Cake for Intimate Receptions (Serves 18)',
+      price: 120.00,
+      description: 'Two petite stacked tiers (6" base, 4" top tier) designed specifically for ceremonial cake-cutting moments at dessert bar weddings.',
+      category: 'Multi-Tiered Wedding Cakes',
+      image: img('photo-1588195538326-c5b1e9f80a1b'),
+      tags: ['Intimate Wedding'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: 'Petite 2-Tier / Serves 18',
+      available: true,
+    },
+    {
+      id: 'rk-cake-pop-platter-30',
+      slug: 'mini-cake-pop-sweet-table-platter-30pk',
+      name: 'Celebration Cake Pop Sweet Table Platter (30 pcs)',
+      price: 75.00,
+      description: 'Thirty chocolate and vanilla cake pops dipped in white chocolate with edible gold luster dust and matching ribbon sticks.',
+      category: 'Celebration Sweet Tables',
+      image: img('photo-1563729784474-d77dbb933a9e'),
+      tags: ['Sweet Table Platter'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: 'Platter of 30 Cake Pops',
+      available: true,
+    },
+    {
+      id: 'rk-croquembouche-choux-tower',
+      slug: 'traditional-french-croquembouche-choux-tower',
+      name: 'Traditional French Croquembouche Choux Tower (Serves 40)',
+      price: 240.00,
+      description: 'Cone-shaped tower of vanilla diplomat choux puffs bound together with spun caramelized sugar webs and edible sugared almonds.',
+      category: 'Celebration Sweet Tables',
+      image: img('photo-1519869325930-281384150729'),
+      tags: ['Dramatic Centerpiece'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs', 'Contains Almonds'],
+      weightOrSize: 'Tower / Serves 40 Guests',
+      available: true,
+    },
+    {
+      id: 'rk-stenciled-celebration-boule',
+      slug: 'golden-wheat-sourdough-celebration-boule',
+      name: 'Golden Wheat Sourdough Celebration Boule with Custom Stencil',
+      price: 18.00,
+      description: 'A 1kg round artisan sourdough loaf stenciled with the couple’s monogram or anniversary year in white flour before baking.',
+      category: 'Celebration Sweet Tables',
+      image: img('photo-1509440159596-0249088772ff'),
+      tags: ['Monogrammed Loaf'],
+      allergens: ['Contains Wheat', 'Vegan'],
+      weightOrSize: '1kg Stenciled Boule',
+      available: true,
+    },
+    {
+      id: 'rk-monogram-acrylic-topper',
+      slug: 'custom-monogram-acrylic-cake-topper',
+      name: 'Custom Calligraphy Monogram Acrylic Cake Topper',
+      price: 25.00,
+      description: 'Precision laser-cut mirrored gold, rose gold, or champagne acrylic topper tailored with your wedding or birthday initials.',
+      category: 'Milestone Birthday Cakes',
+      image: img('photo-1587314168485-3236d6710814'),
+      tags: ['Cake Accessory'],
+      allergens: [],
+      weightOrSize: 'Custom Laser Topper',
+      available: true,
+    },
+    {
+      id: 'rk-white-glove-delivery-service',
+      slug: 'white-glove-on-site-delivery-assembly',
+      name: 'White-Glove On-Site Delivery, Setup & Floral Styling',
+      price: 150.00,
+      description: 'Includes temperature-controlled transport, on-site tier stacking by our master decorator, fresh floral placement, and coordination with banquet staff.',
+      category: 'Multi-Tiered Wedding Cakes',
+      image: img('photo-1517248135467-4c7edcad34c4'),
+      tags: ['Peace of Mind Service'],
+      allergens: [],
+      weightOrSize: 'Venue Service Package',
+      available: true,
+    },
+    {
+      id: 'rk-cake-knife-server-set',
+      slug: 'luxury-celebration-cake-knife-server-set',
+      name: 'Engraved Luxury Gold Cake Knife & Server Keepsake Set',
+      price: 48.00,
+      description: 'Heavy gold-plated stainless steel cake knife and server in a velvet-lined wooden keepsake box, ready for ceremonial cake cutting.',
+      category: 'Cake Tasting Boxes',
+      image: img('photo-1510812431401-41d2bd2722f3'),
+      tags: ['Keepsake Set'],
+      allergens: [],
+      weightOrSize: 'Gift Boxed Set',
+      available: true,
+    },
+    {
+      id: 'rk-sf-sourdough',
+      slug: 'san-francisco-style-extra-tangy-batard',
+      name: 'San Francisco Style Extra-Tangy Batard',
+      price: 8.50,
+      description: 'Classic cold-proofed San Francisco sourdough with an open lacy crumb, blistered blister crust, and deep lactic sourness.',
+      category: 'Heritage Sourdough',
+      image: img('photo-1509440159596-0249088772ff'),
+      tags: ['Extra Sour', 'Bestseller'],
+      allergens: ['Contains Wheat', 'Vegan'],
+      weightOrSize: '800g Batard',
+      available: true,
+    },
+    {
+      id: 'rk-jalapeno-focaccia',
+      slug: 'charred-jalapeno-aged-cheddar-focaccia-slab',
+      name: 'Charred Jalapeño & Aged Cheddar Focaccia Slab',
+      price: 7.50,
+      description: 'High-hydration olive oil focaccia dimpled with pickled jalapeño rings, Vermont sharp cheddar, and flaky sea salt.',
+      category: 'Focaccia & Flatbreads',
+      image: img('photo-1589367920969-ab8e050bbb04'),
+      tags: ['Spicy & Cheesy'],
+      allergens: ['Contains Wheat', 'Contains Dairy'],
+      weightOrSize: '350g Slab',
+      available: true,
+    },
+    {
+      id: 'rk-molasses-buns',
+      slug: 'brioche-molasses-dinner-buns-pack-of-4',
+      name: 'Brioche Molasses Dinner Buns (Pack of 4)',
+      price: 6.50,
+      description: 'Tender pull-apart golden potato brioche buns brushed with blackstrap molasses honey butter and flaky Maldon salt.',
+      category: 'Artisan Rolls & Buns',
+      image: img('photo-1612201142855-7873bc1661b4'),
+      tags: ['Dinner Rolls'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '4-Pack (320g)',
+      available: true,
+    },
+    {
+      id: 'rk-sea-salt-cruffin',
+      slug: 'dulce-de-leche-sea-salt-caramel-cruffin',
+      name: 'Dulce de Leche & Sea Salt Caramel Cruffin',
+      price: 5.25,
+      description: 'Croissant dough baked in a muffin tin until towering and crisp, piped full of house dulce de leche, rolled in sugar.',
+      category: 'Breakfast Pastries',
+      image: img('photo-1555507036-ab1f4038808a'),
+      tags: ['Decadent'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '135g',
+      available: true,
+    },
+    {
+      id: 'rk-apricot-tart',
+      slug: 'roasted-apricot-sweet-almond-frangipane-tart',
+      name: 'Roasted Apricot & Sweet Almond Frangipane Tart',
+      price: 6.75,
+      description: 'Flaky shortcrust shell filled with rich almond frangipane, topped with caramelized Turkish apricots and rosemary.',
+      category: 'Breakfast Pastries',
+      image: img('photo-1603532648955-039310d9ed75'),
+      tags: ['Seasonal'],
+      allergens: ['Contains Almonds', 'Contains Wheat', 'Contains Dairy'],
+      weightOrSize: '150g',
+      available: true,
+    },
+],
+  craftProcess: {
+    badge: 'THE WEDDING CAKE JOURNEY',
+    title: 'From Vision to Grand Ballroom Centerpiece',
+    subtitle: 'Every bespoke celebration cake is crafted through our four-stage atelier consultation protocol.',
+    steps: [
+      { time: 'STEP 1', title: 'Consultation & Concept Sketch', desc: 'We review your floral vision, color palette, venue architecture, and guest count to create a custom scaled digital sketch.' },
+      { time: 'STEP 2', title: 'At-Home Cake Tasting Flight', desc: 'Receive six of our signature sponge and Swiss meringue fillings at home to select your tier flavor combinations.' },
+      { time: 'STEP 3', title: 'Petal-by-Petal Sugar Floristry', desc: 'Our sugar artists spend dozens of hours individually rolling, veining, and dusting lifelike botanical flowers.' },
+      { time: 'STEP 4', title: 'White-Glove Banquet Assembly', desc: 'On your wedding morning, our head decorator travels in our climate-controlled van to personally stack and style your cake.' },
+    ],
+  },
+  story: {
+    badge: 'ATELIER HERITAGE',
+    title: 'Centerpieces for Life’s Most Unforgettable Moments.',
+    paragraphs: [
+      'Rise & Knead began with a passion for architectural celebration baking: creating cakes that do not merely look breathtaking across a ballroom, but taste rich, light, and celebratory when served to your guests.',
+      'Our cake artists train extensively in the historic art of sugar floristry, creating lifelike garden roses, peonies, and olive foliage that can be preserved as keepsakes for years. We never use shortening or overly sweet American fondants; our canvases are coated in silky whipped Swiss meringue buttercream made with real European churned butter.',
+    ],
+    image: img('photo-1555507036-ab1f4038808a'),
+    imageAlt: 'Cake designer carefully applying sugar rose petal to tiered wedding cake',
+    founderQuote: 'Your wedding cake is the sweet memory that concludes the greatest celebration of your life. It deserves devotion in every detail.',
+    founderName: 'Vivienne St. Claire, Founder & Lead Cake Architect',
+    stats: [
+      { value: '450+', label: 'Weddings Styled Across New York' },
+      { value: '100%', label: 'Swiss Meringue Buttercream' },
+      { value: '12+', label: 'Signature Flavor Combinations' },
+    ],
+  },
+  promo: {
+    badge: 'WEDDING TASTING BOX',
+    title: 'Order Your At-Home Wedding Cake Tasting Flight',
+    desc: 'Planning a 2026 or 2027 wedding? Order our signature tasting flight box of 6 cake pairings delivered to your home. The $45 cost is credited toward any custom tiered wedding cake order.',
+    ctaText: 'Order Tasting Flight',
+    ctaPage: 'menu',
+    image: img('photo-1555507036-ab1f4038808a'),
+    imageAlt: 'Cake tasting flight box with miniature cake jars and flavor notes',
+  },
+  gallery: [
+    { src: img('photo-1555507036-ab1f4038808a'), alt: 'Bespoke 3-tier wedding cake with sugar roses', caption: 'The Botanical Flora 3-Tier Grand Wedding Cake', tag: 'Wedding' },
+    { src: img('photo-1578985545062-69928b1d9587'), alt: 'Two-tier gold leaf milestone celebration cake', caption: 'Champagne & raspberry gold leaf milestone cake', tag: 'Celebration' },
+    { src: img('photo-1588195538326-c5b1e9f80a1b'), alt: 'Vintage heart lambeth piped birthday cake', caption: 'Victorian Lambeth over-piped heart cake', tag: 'Vintage' },
+    { src: img('photo-1555507036-ab1f4038808a'), alt: 'Wedding cake tasting box jars and packaging', caption: 'Master wedding cake tasting flight set', tag: 'Tasting' },
+    { src: img('photo-1569864358642-9d1684040f43'), alt: 'Pastel wedding macaron favors on display', caption: 'Custom ribboned wedding macaron favors', tag: 'Favors' },
+    { src: img('photo-1517248135467-4c7edcad34c4'), alt: 'Cake designer assembling multi-tiered cake at venue', caption: 'White-glove venue assembly and styling', tag: 'Atelier' },
+  ],
+  testimonials: [
+    {
+      name: 'Victoria & Brandon Cole',
+      rating: 5,
+      quote: 'Vivienne and the Rise & Knead team created our 4-tier wedding cake for our Oheka Castle reception. The sugar flowers were indistinguishable from real garden roses, and the champagne raspberry sponge was the talk of the night.',
+      source: 'Bride & Groom (October 2026)',
+      date: 'October 2026',
+    },
+    {
+      name: 'Eleanor Vance',
+      rating: 5,
+      quote: 'We ordered the Vintage Lambeth Heart cake for my daughter’s 21st birthday. It arrived in perfect condition, and the piping was jaw-droppingly intricate. Worth every single penny.',
+      source: 'Verified Customer',
+      date: 'September 2026',
+    },
+  ],
+  location: {
+    address: '450 Park Avenue South Suite 8A, Flatiron, New York, NY 10016',
+    neighborhood: 'Flatiron Atelier District',
+    hoursWeekdays: 'Tuesday–Friday: 10:00 AM – 6:00 PM (By Appointment)',
+    hoursWeekends: 'Saturday: 9:00 AM – 5:00 PM (Tasting Suite Consultations)',
+    phone: '(212) 555-0185',
+    email: 'weddings@riseandknead.com',
+    pickupNotice: 'Private tasting suite open for booked consultations. Curbside pickup available for small celebration cakes.',
+  },
+  customInquiry: {
+    title: 'Bespoke Tiered Cake Consultation & Tasting Box Inquiry',
+    subtitle: 'Inquire about our bespoke multi-tiered wedding cakes, milestone celebration centerpieces, or tasting box delivery.',
+    type: 'cake',
+    occasions: ['Wedding Reception (50-200+ Guests)', 'Milestone Birthday / Anniversary', 'Bridal Shower / Engagement Celebration', 'Corporate Gala & Ballroom Event'],
+    sizes: [
+      { label: 'Petite 2-Tier Cake (Serves 25-35 Guests)', serves: '25-35 Guests', basePrice: 195 },
+      { label: 'Classic 3-Tier Grand Wedding (Serves 65-85 Guests)', serves: '65-85 Guests', basePrice: 480 },
+      { label: 'Imperial 4-Tier Ballroom Cake (Serves 120-150 Guests)', serves: '120-150 Guests', basePrice: 750 },
+      { label: 'Celebration Sweet Table Package (100 Guests)', serves: '100 Guests', basePrice: 850 },
+    ],
+    flavors: ['Madagascar Vanilla & Strawberry Rosewater', 'Lemon Elderflower & Blackberry Curd', 'Champagne Sponge & Raspberry Ganache', 'Salted Caramel & Espresso Valrhona Chocolate'],
+    fillings: ['Whipped White Chocolate Swiss Buttercream', 'Tangy Passion Fruit Curd', 'Rich Dark Chocolate Ganache', 'Pistachio Frangipane Cream'],
+    finishes: ['Handmade Sugar Floral Cascade', 'Torn 24K Edible Gold Leaf', 'Smooth Contemporary Concrete Texture', 'Intricate Victorian Lambeth Piping'],
+  },
+  faqs: [
+    {
+      question: 'How far in advance should we book our wedding cake?',
+      answer: 'We recommend reserving your wedding date 6 to 9 months in advance, especially for peak wedding season (May through October). We limit the number of weddings we take each weekend to ensure dedicated focus.',
+      category: 'Booking',
+    },
+    {
+      question: 'How does the at-home tasting box work?',
+      answer: 'You can order our tasting flight directly through our shop. It contains six generous sample jars of our top cake combinations. If you book your tiered cake with us, the $45 price is credited back to your final order.',
+      category: 'Tasting',
+    },
+    {
+      question: 'Do you deliver and set up the cake at our venue?',
+      answer: 'Yes! All tiered cakes include or can add our white-glove delivery service. We transport the cake in our specialized temperature-monitored vehicle and stack and dress it with flowers on-site at your venue.',
+      category: 'Delivery',
+    },
+    {
+      question: 'Can the sugar flowers be kept after the wedding?',
+      answer: 'Yes! Unlike real flowers that wilt, our handcrafted sugar flowers can be kept indefinitely as sentimental keepsakes. Store them in a cool, dry place away from direct sunlight and humidity.',
+      category: 'Sugar Flowers',
+    },
+  ],
+};
 
 export default function RiseAndKnead() {
-  const [cartCount, setCartCount] = useState(0);
-  const [cartNotice, setCartNotice] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState('All');
-
-  const addToCart = (item: string) => {
-    setCartCount(c => c + 1);
-    setCartNotice(`Added "${item}" to bag.`);
-    setTimeout(() => setCartNotice(null), 3000);
-  };
-
-  return (
-    <div className="bk-root" style={{
-      '--bk-cream-50': '#fafaf9',
-      '--bk-cream-100': '#f5f5f4',
-      '--bk-hearth-900': '#1c1917',
-      '--bk-amber-600': '#d97706',
-      '--bk-golden-500': '#f59e0b'
-    } as React.CSSProperties}>
-      {cartNotice && (
-        <div style={{
-          position: 'fixed',
-          bottom: '24px',
-          right: '24px',
-          background: 'var(--bk-hearth-900)',
-          color: '#fff',
-          padding: '12px 24px',
-          borderRadius: '8px',
-          zIndex: 9999,
-          fontSize: '0.9rem'
-        }}>
-          🌾 {cartNotice}
-        </div>
-      )}
-
-      {/* 1. Utility Strip */}
-      <div className="bk-utility-strip">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-          <span className="bk-utility-badge">LOCAL GRAIN HARVEST</span>
-          <span>100% Regional Rye, Spelt & Hard Red Wheat · Stone-Ground On Site</span>
-        </div>
-        <div style={{ fontSize: '0.82rem', color: '#fbbf24' }}>
-          Next Day Loaf Subscriptions Open for Neighborhood Residents
-        </div>
-      </div>
-
-      {/* Navigation */}
-      <nav style={{
-        background: '#ffffff',
-        padding: '1.25rem 6vw',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        borderBottom: '1px solid var(--bk-border-soft)',
-        position: 'sticky',
-        top: 0,
-        zIndex: 100
-      }}>
-        <div>
-          <a href="/" style={{
-            fontFamily: '"DM Sans", sans-serif',
-            fontSize: '1.9rem',
-            fontWeight: 800,
-            color: 'var(--bk-hearth-900)',
-            textDecoration: 'none'
-          }}>
-            Rise & Knead<span style={{ color: 'var(--bk-amber-600)' }}>.</span>
-          </a>
-          <span style={{ display: 'block', fontSize: '0.75rem', letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--bk-toast-700)' }}>
-            Heritage Grain Hearth Bakery
-          </span>
-        </div>
-
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-          <a href="/templates/category/bakery" style={{ fontSize: '0.88rem', fontWeight: 600, color: 'var(--bk-toast-700)', textDecoration: 'none' }}>← Category Index</a>
-          <button
-            onClick={() => document.getElementById('loaves')?.scrollIntoView({ behavior: 'smooth' })}
-            style={{
-              background: 'var(--bk-hearth-900)',
-              color: '#fff',
-              border: 'none',
-              padding: '0.55rem 1.25rem',
-              borderRadius: 'var(--bk-radius-pill)',
-              fontWeight: 700,
-              fontSize: '0.88rem',
-              cursor: 'pointer'
-            }}
-          >
-            Daily Basket ({cartCount})
-          </button>
-        </div>
-      </nav>
-
-      {/* 2. Hero */}
-      <header className="bk-hero" style={{ backgroundImage: `url(${img('photo-1509440159596-0249088772ff', 1600)})` }}>
-        <div className="bk-hero-scrim" />
-        <div className="bk-hero-card">
-          <span className="bk-hero-tagline">ANCIENT FERMENTATION · REAL NOURISHMENT</span>
-          <h1 className="bk-hero-title">Flour, Water, Salt, Time. Nothing Else.</h1>
-          <p className="bk-hero-desc">
-            We partner with regional regenerative farmers to source untreated heirloom grains, stone-milled into living flour every 48 hours for maximum nutrient density and deep flavor.
-          </p>
-          <div className="bk-hero-actions">
-            <a href="#loaves" className="bk-btn-primary">Explore Daily Bakes →</a>
-            <a href="#grains" className="bk-btn-secondary">Meet Our Farmers 🌾</a>
-          </div>
-        </div>
-      </header>
-
-      {/* 3. Proof Bar */}
-      <section className="bk-proof-strip">
-        <div className="bk-proof-grid">
-          <div className="bk-proof-item">
-            <span className="bk-proof-stat">36 Hours</span>
-            <span className="bk-proof-label">Slow Wild Ferment</span>
-          </div>
-          <div className="bk-proof-item">
-            <span className="bk-proof-stat">0 Additives</span>
-            <span className="bk-proof-label">No Commercial Dough Improvers</span>
-          </div>
-          <div className="bk-proof-item">
-            <span className="bk-proof-stat">5 Regional Farms</span>
-            <span className="bk-proof-label">100% Transparent Grain Sourcing</span>
-          </div>
-          <div className="bk-proof-item">
-            <span className="bk-proof-stat">4.92★</span>
-            <span className="bk-proof-label">Community Sourdough Rating</span>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Menu & Loaf Vitrine */}
-      <section id="loaves" className="bk-section">
-        <div className="bk-section-header">
-          <span className="bk-section-eyebrow">The Morning Bake</span>
-          <h2 className="bk-section-title">Fresh Hearth Loaves & Pastries</h2>
-          <p className="bk-section-subtitle">Pulled from our wood-fired deck oven twice every morning.</p>
-        </div>
-
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.75rem', marginBottom: '2.5rem', flexWrap: 'wrap' }}>
-          {['All', 'Heirloom Breads', 'Morning Bakes', 'Grain Bowls'].map(cat => (
-            <button
-              key={cat}
-              onClick={() => setActiveTab(cat)}
-              style={{
-                background: activeTab === cat ? 'var(--bk-hearth-900)' : '#fff',
-                color: activeTab === cat ? '#fff' : 'var(--bk-toast-700)',
-                border: '1px solid var(--bk-border-soft)',
-                padding: '0.5rem 1.25rem',
-                borderRadius: 'var(--bk-radius-pill)',
-                fontWeight: 600,
-                cursor: 'pointer'
-              }}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        <div className="bk-occasion-grid">
-          {[
-            { cat: 'Heirloom Breads', title: 'Red Fife Miche (1kg)', price: '$10.50', desc: 'Dense, nutty heirloom wheat with complex sour tang and blistered crust.', img: 'photo-1509440159596-0249088772ff' },
-            { cat: 'Heirloom Breads', title: 'Danish Dark Rye (Rugbrød)', price: '$9.00', desc: '100% cracked rye grains and malted barley, loaded with sunflower seeds.', img: 'photo-1549931319-a545dcf3bc7c' },
-            { cat: 'Morning Bakes', title: 'Spelt & Wild Blueberry Muffin', price: '$4.75', desc: 'Whole spelt flour, wild mountain berries, brown sugar oat streusel.', img: 'photo-1586444248902-2f64eddc13df' },
-            { cat: 'Morning Bakes', title: 'Brown Butter Cinnamon Knot', price: '$5.25', desc: 'Twisted brioche laminated with toasted Ceylon cinnamon and brown sugar.', img: 'photo-1558961363-fa8fdf82db35' }
-          ].filter(item => activeTab === 'All' || item.cat === activeTab).map((item, idx) => (
-            <div key={idx} className="bk-occasion-card">
-              <div className="bk-occasion-media">
-                <img src={img(item.img, 700)} alt={item.title} loading="lazy" />
-              </div>
-              <div className="bk-occasion-content">
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
-                  <h3 style={{ margin: 0 }}>{item.title}</h3>
-                  <strong style={{ color: 'var(--bk-amber-600)' }}>{item.price}</strong>
-                </div>
-                <p>{item.desc}</p>
-                <button
-                  onClick={() => addToCart(item.title)}
-                  className="bk-btn-primary"
-                  style={{ width: '100%', justifyContent: 'center', padding: '0.65rem' }}
-                >
-                  Add to Morning Basket +
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 5. Grain Provenance (Flourist pattern) */}
-      <section id="grains" className="bk-section" style={{ background: 'var(--bk-cream-100)', maxWidth: '100%' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div className="bk-section-header">
-            <span className="bk-section-eyebrow">Direct From The Soil</span>
-            <h2 className="bk-section-title">Know Your Grain, Know Your Baker</h2>
-            <p className="bk-section-subtitle">We list the farm, harvest year, and milling date for every sack of grain that enters our hearth.</p>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
-            {[
-              { farm: 'Cedar Valley Mill', grain: 'Organic Red Fife Wheat', loc: 'Peace River Region', role: 'Base for all Country Loaves' },
-              { farm: 'Heritage Acres', grain: 'Organic Spelt & Emmer', loc: 'Columbia River Basin', role: 'Ancient Grain Batards' },
-              { farm: 'Black Oak Farm', grain: 'Whole Rye & Hull-less Barley', loc: 'Saskatchewan Prairie', role: 'Danish Rye & Porridge Bakes' }
-            ].map((f, i) => (
-              <div key={i} style={{ background: '#fff', padding: '2rem', borderRadius: '12px', border: '1px solid var(--bk-border-soft)' }}>
-                <span style={{ color: 'var(--bk-amber-600)', fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase' }}>{f.loc}</span>
-                <h3 style={{ margin: '0.5rem 0 0.25rem 0' }}>{f.grain}</h3>
-                <p style={{ margin: '0 0 1rem 0', fontWeight: 600, color: 'var(--bk-toast-700)', fontSize: '0.9rem' }}>Grower: {f.farm}</p>
-                <div style={{ borderTop: '1px solid var(--bk-border-soft)', paddingTop: '0.75rem', fontSize: '0.82rem', color: 'var(--bk-toast-700)' }}>
-                  Used for: <strong>{f.role}</strong>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 6. Footer */}
-      <footer className="bk-footer">
-        <div className="bk-footer-grid">
-          <div className="bk-footer-col">
-            <h4 style={{ color: '#fff', fontSize: '1.4rem' }}>Rise & Knead Bakehouse</h4>
-            <p>Committed to honest fermentation, living grain nutrients, and neighborhood community breakfast tables.</p>
-            <div className="bk-fssai-stamp">FSSAI / FDA COMPLIANT · STONE HEARTH CERTIFIED</div>
-          </div>
-          <div className="bk-footer-col">
-            <h4>Bake Hours</h4>
-            <p>Tuesday – Sunday: <strong>7:00 AM – 2:00 PM</strong> (or until sold out)<br />Monday: <em>Closed</em></p>
-          </div>
-          <div className="bk-footer-col">
-            <h4>Hearth Location</h4>
-            <p>108 Grainfield Road, Mill District<br />Phone: +1 (555) 839-2041<br />hello@riseandknead.com</p>
-          </div>
-          <div className="bk-footer-col">
-            <h4>Zero Waste Mission</h4>
-            <p style={{ fontSize: '0.82rem', opacity: 0.85 }}>All day-old loaves are converted into sourdough breadcrumbs or donated to the Community Food Kitchen every evening at 4 PM.</p>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
+  return <FoodStorefrontCore theme={riseAndKneadConfig} />;
 }

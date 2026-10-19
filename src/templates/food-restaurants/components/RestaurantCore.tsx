@@ -23,32 +23,42 @@ export function useReveal(delay = 0) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    // Set initial visible state first for safety, then apply gentle transition
+    // Always visible by default — scroll reveal is progressive enhancement only.
+    // This prevents sections from being trapped at opacity:0 inside nested scroll containers.
     el.style.opacity = '1';
     el.style.transform = 'none';
     if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
-      el.style.opacity = '0.01';
-      el.style.transform = 'translateY(24px)';
-      el.style.transition = `opacity 0.7s ease ${delay}ms, transform 0.7s ease ${delay}ms`;
-      const obs = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting) {
-          el.style.opacity = '1';
-          el.style.transform = 'none';
-          obs.disconnect();
+      // Find the actual scroll container (may not be window in preview frames)
+      const scrollParent: Element | null = (() => {
+        let node: HTMLElement | null = el.parentElement;
+        while (node && node !== document.body) {
+          const s = window.getComputedStyle(node);
+          if (s.overflowY === 'auto' || s.overflowY === 'scroll') return node;
+          node = node.parentElement;
         }
-      }, { threshold: 0.05 });
-      obs.observe(el);
-      // Fallback: force visibility after 1.2s to prevent blank screens
-      const timer = setTimeout(() => {
-        if (el) {
-          el.style.opacity = '1';
-          el.style.transform = 'none';
-        }
-      }, 1200 + delay);
-      return () => {
-        obs.disconnect();
-        clearTimeout(timer);
-      };
+        return null;
+      })();
+      // Only hide+animate if element is currently below the visible area
+      const rect = el.getBoundingClientRect();
+      const parentRect = scrollParent ? scrollParent.getBoundingClientRect() : { bottom: window.innerHeight };
+      if (rect.top >= parentRect.bottom - 40) {
+        el.style.opacity = '0.01';
+        el.style.transform = 'translateY(24px)';
+        el.style.transition = `opacity 0.7s ease ${delay}ms, transform 0.7s ease ${delay}ms`;
+        const obs = new IntersectionObserver(([entry]) => {
+          if (entry.isIntersecting) {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+            obs.disconnect();
+          }
+        }, { root: scrollParent, threshold: 0.05 });
+        obs.observe(el);
+        // Safety fallback: force visible after 800ms no matter what
+        const timer = setTimeout(() => {
+          if (el) { el.style.opacity = '1'; el.style.transform = 'none'; }
+        }, 800 + delay);
+        return () => { obs.disconnect(); clearTimeout(timer); };
+      }
     }
   }, [delay]);
   return ref;
@@ -171,6 +181,7 @@ export interface RestaurantThemeConfig {
   name: string;
   tagline: string;
   category: string;
+  currencySymbol?: string;
   palette: {
     primary: string;     // dominant accent (gold, firebrick, ruby, amber)
     secondary: string;   // secondary accent / dark bg
@@ -261,24 +272,29 @@ export function RestaurantNavbar({ theme }: { theme: RestaurantThemeConfig }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
-
       const sectionIds = ['menu', 'story', 'tasting', 'gallery', 'visit'];
-      const scrollPos = window.scrollY + 160;
       for (const id of sectionIds) {
         const el = document.getElementById(id);
         if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 160 && rect.bottom >= 80) {
             setActiveSection(id);
             break;
           }
         }
       }
+
+      const menuEl = document.getElementById('menu') || document.querySelector('section');
+      if (menuEl) {
+        const rect = menuEl.getBoundingClientRect();
+        setScrolled(rect.top < 300);
+      } else {
+        setScrolled(window.scrollY > 30);
+      }
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true, capture: true });
+    return () => window.removeEventListener('scroll', handleScroll, true);
   }, []);
 
   const totalCartCount = store.cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -295,13 +311,40 @@ export function RestaurantNavbar({ theme }: { theme: RestaurantThemeConfig }) {
     const id = href.replace('#', '');
     const el = document.getElementById(id);
     if (el) {
-      const navHeight = 80;
-      const elementPosition = el.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - navHeight;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
+      // Find nearest scrollable container (e.g. <main> in preview, or editor canvas)
+      let scrollContainer: HTMLElement | null = null;
+      let curr = el.parentElement;
+      while (curr && curr !== document.body) {
+        const style = window.getComputedStyle(curr);
+        if ((style.overflowY === 'auto' || style.overflowY === 'scroll') && curr.scrollHeight > curr.clientHeight) {
+          scrollContainer = curr;
+          break;
+        }
+        curr = curr.parentElement;
+      }
+
+      if (scrollContainer) {
+        const containerRect = scrollContainer.getBoundingClientRect();
+        const elRect = el.getBoundingClientRect();
+        const targetScrollTop = scrollContainer.scrollTop + (elRect.top - containerRect.top) - 76;
+        scrollContainer.scrollTo({
+          top: Math.max(0, targetScrollTop),
+          behavior: 'smooth',
+        });
+      } else {
+        const navHeight = 80;
+        const elementPosition = el.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + (window.pageYOffset || document.documentElement.scrollTop || 0) - navHeight;
+        window.scrollTo({
+          top: Math.max(0, offsetPosition),
+          behavior: 'smooth',
+        });
+      }
+
+      try {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } catch {}
+
       setActiveSection(id);
     }
     setMobileMenuOpen(false);
@@ -332,7 +375,7 @@ export function RestaurantNavbar({ theme }: { theme: RestaurantThemeConfig }) {
         boxShadow: scrolled ? '0 10px 30px rgba(0,0,0,0.1)' : 'none',
       }}>
         {/* Brand & Back Button */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexShrink: 0, minWidth: 'max-content' }}>
           <a
             href={`/browse-templates/food-and-restaurant/${theme.category}`}
             style={{
@@ -346,6 +389,8 @@ export function RestaurantNavbar({ theme }: { theme: RestaurantThemeConfig }) {
               fontFamily: theme.typography.body,
               letterSpacing: '0.04em',
               transition: 'color 0.2s',
+              whiteSpace: 'nowrap',
+              flexShrink: 0,
             }}
             onMouseOver={e => e.currentTarget.style.color = theme.palette.primary}
             onMouseOut={e => e.currentTarget.style.color = scrolled ? theme.palette.textLight : 'rgba(255,255,255,0.78)'}
@@ -358,14 +403,18 @@ export function RestaurantNavbar({ theme }: { theme: RestaurantThemeConfig }) {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
+            className="rt-brand"
             style={{
               fontFamily: theme.typography.heading,
-              fontSize: '1.65rem',
+              fontSize: 'clamp(1.2rem, 1.8cqw, 1.65rem)',
               fontWeight: 800,
               color: scrolled ? theme.palette.primary : '#ffffff',
               letterSpacing: '-0.02em',
               textDecoration: 'none',
               transition: 'color 0.2s',
+              whiteSpace: 'nowrap',
+              flexShrink: 0,
+              display: 'inline-block',
             }}
           >
             {useEditableOverrides('nav', { logoText: theme.name }).logoText}
@@ -373,11 +422,50 @@ export function RestaurantNavbar({ theme }: { theme: RestaurantThemeConfig }) {
         </div>
 
         {/* Desktop Navigation Links */}
-        <div style={{ display: 'none', gap: '2rem', alignItems: 'center' }} className="rt-desktop-nav">
+        <div style={{ display: 'flex', gap: 'clamp(0.65rem, 1.25cqw, 1.5rem)', alignItems: 'center', flexShrink: 0 }} className="rt-desktop-nav">
           <style>{`
+            .ws-canvas-desktop .rt-desktop-nav,
+            [data-viewport="desktop"] .rt-desktop-nav {
+              display: flex !important;
+            }
+            .ws-canvas-desktop .rt-mobile-toggle,
+            [data-viewport="desktop"] .rt-mobile-toggle {
+              display: none !important;
+            }
             @media (min-width: 900px) {
-              .rt-desktop-nav { display: flex !important; }
-              .rt-mobile-toggle { display: none !important; }
+              .rt-desktop-nav { display: flex; }
+              .rt-mobile-toggle { display: none; }
+            }
+            .ws-canvas-mobile .rt-desktop-nav,
+            [data-viewport="mobile"] .rt-desktop-nav {
+              display: none !important;
+            }
+            .ws-canvas-mobile .rt-mobile-toggle,
+            [data-viewport="mobile"] .rt-mobile-toggle {
+              display: flex !important;
+            }
+            .ws-canvas-tablet .rt-desktop-nav,
+            [data-viewport="tablet"] .rt-desktop-nav {
+              display: flex !important;
+              gap: 0.75rem !important;
+            }
+            .ws-canvas-tablet .rt-desktop-nav a,
+            [data-viewport="tablet"] .rt-desktop-nav a {
+              font-size: 0.76rem !important;
+              letter-spacing: 0.03em !important;
+            }
+            .ws-canvas-tablet .rt-desktop-nav button,
+            [data-viewport="tablet"] .rt-desktop-nav button {
+              padding: 0.45rem 0.85rem !important;
+              font-size: 0.78rem !important;
+            }
+            .ws-canvas-tablet .rt-mobile-toggle,
+            [data-viewport="tablet"] .rt-mobile-toggle {
+              display: none !important;
+            }
+            @container storefront (max-width: 680px) {
+              .rt-desktop-nav { display: none !important; }
+              .rt-mobile-toggle { display: flex !important; }
             }
           `}</style>
           {navLinks.map(link => {
@@ -399,6 +487,8 @@ export function RestaurantNavbar({ theme }: { theme: RestaurantThemeConfig }) {
                   opacity: isActive ? 1 : 0.85,
                   position: 'relative',
                   padding: '0.4rem 0',
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0,
                 }}
                 onMouseOver={e => {
                   e.currentTarget.style.opacity = '1';
@@ -445,6 +535,8 @@ export function RestaurantNavbar({ theme }: { theme: RestaurantThemeConfig }) {
               fontWeight: 600,
               position: 'relative',
               transition: 'all 0.2s ease',
+              whiteSpace: 'nowrap',
+              flexShrink: 0,
             }}
             onMouseOver={e => {
               e.currentTarget.style.borderColor = theme.palette.primary;
@@ -481,7 +573,7 @@ export function RestaurantNavbar({ theme }: { theme: RestaurantThemeConfig }) {
               color: '#ffffff',
               border: 'none',
               borderRadius: '8px',
-              padding: '0.7rem 1.6rem',
+              padding: '0.65rem 1.4rem',
               fontFamily: theme.typography.body,
               fontWeight: 700,
               fontSize: '0.88rem',
@@ -492,6 +584,8 @@ export function RestaurantNavbar({ theme }: { theme: RestaurantThemeConfig }) {
               alignItems: 'center',
               gap: '0.55rem',
               transition: 'transform 0.2s, box-shadow 0.2s',
+              whiteSpace: 'nowrap',
+              flexShrink: 0,
               boxShadow: store.bookingConfirmed
                 ? '0 4px 16px rgba(21,128,61,0.5)'
                 : `0 4px 16px ${theme.palette.primary}55`,
@@ -522,7 +616,7 @@ export function RestaurantNavbar({ theme }: { theme: RestaurantThemeConfig }) {
         </div>
 
         {/* Mobile Hamburger Button */}
-        <div className="rt-mobile-toggle" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <div className="rt-mobile-toggle" style={{ alignItems: 'center', gap: '0.75rem' }}>
           <button
             onClick={() => store.openCart()}
             aria-label="View Selection"
@@ -708,6 +802,10 @@ export function RestaurantHero({ theme }: { theme: RestaurantThemeConfig }) {
               src={overrides.style_backgroundImage}
               alt={theme.images.heroAlt}
               onLoad={() => setImgLoaded(true)}
+              onError={(e) => {
+                e.currentTarget.src = 'https://images.unsplash.com/photo-1544148103-0773bf10d330?auto=format&fit=crop&w=1600&q=80';
+                setImgLoaded(true);
+              }}
               style={{
                 width: '100%',
                 height: '110%',
@@ -892,33 +990,35 @@ export function FeaturesStrip({ theme }: { theme: RestaurantThemeConfig }) {
   const list = theme.features?.length ? theme.features : defaultFeatures;
 
   return (
-    <div style={{
-      backgroundColor: theme.palette.surface,
-      borderTop: `1px solid ${theme.palette.border || `${theme.palette.text}12`}`,
-      borderBottom: `1px solid ${theme.palette.border || `${theme.palette.text}12`}`,
-      padding: '1.4rem 5%',
-      display: 'flex',
-      justifyContent: 'center',
-      gap: '3.5rem',
-      flexWrap: 'wrap',
-    }}>
-      {list.map((f, i) => (
-        <div key={i} style={{
-          color: theme.palette.text,
-          fontFamily: theme.typography.body,
-          fontWeight: 700,
-          fontSize: '0.88rem',
-          textTransform: 'uppercase',
-          letterSpacing: '0.08em',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.6rem',
-        }}>
-          <Sparkles size={14} color={theme.palette.primary} />
-          <span>{f}</span>
-        </div>
-      ))}
-    </div>
+    <EditableSection id="features" elementType="features" name="Features Strip" defaultProps={{}}>
+      <div style={{
+        backgroundColor: theme.palette.surface,
+        borderTop: `1px solid ${theme.palette.border || `${theme.palette.text}12`}`,
+        borderBottom: `1px solid ${theme.palette.border || `${theme.palette.text}12`}`,
+        padding: '1.4rem 5%',
+        display: 'flex',
+        justifyContent: 'center',
+        gap: '3.5rem',
+        flexWrap: 'wrap',
+      }}>
+        {list.map((f, i) => (
+          <div key={i} style={{
+            color: theme.palette.text,
+            fontFamily: theme.typography.body,
+            fontWeight: 700,
+            fontSize: '0.88rem',
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.6rem',
+          }}>
+            <Sparkles size={14} color={theme.palette.primary} />
+            <span>{f}</span>
+          </div>
+        ))}
+      </div>
+    </EditableSection>
   );
 }
 
@@ -1016,11 +1116,14 @@ export function RestaurantMenu({ theme }: { theme: RestaurantThemeConfig }) {
           </div>
 
           {/* Dish Cards Grid */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(330px, 1fr))',
-            gap: '2rem',
-          }}>
+          <div
+            className="rt-dish-grid"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(min(330px, 100%), 1fr))',
+              gap: '2rem',
+            }}
+          >
             {theme.menu[activeTab]?.items.map((item, i) => (
               <article
                 key={i}
@@ -1059,6 +1162,9 @@ export function RestaurantMenu({ theme }: { theme: RestaurantThemeConfig }) {
                         src={item.image}
                         alt={item.imageAlt || item.name}
                         loading="lazy"
+                        onError={(e) => {
+                          e.currentTarget.src = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80';
+                        }}
                         style={{
                           width: '100%',
                           height: '100%',
@@ -1282,7 +1388,8 @@ export function TastingMenuExperience({ theme }: { theme: RestaurantThemeConfig 
   };
 
   return (
-    <section id="tasting" style={{
+    <EditableSection id="experience" elementType="featured-title" name="Tasting Experience" defaultProps={{ title: 'The Tasting Menu Experience' }}>
+      <section id="tasting" style={{
       backgroundColor: theme.palette.secondary,
       color: '#ffffff',
       padding: '7rem 5%',
@@ -1506,6 +1613,7 @@ export function TastingMenuExperience({ theme }: { theme: RestaurantThemeConfig 
         </div>
       </div>
     </section>
+    </EditableSection>
   );
 }
 
@@ -1516,22 +1624,32 @@ export function RestaurantStory({ theme }: { theme: RestaurantThemeConfig }) {
   const ref = useReveal();
   const imgRef = useReveal(120);
 
+  const overrides = useEditableOverrides('img-text', {
+    title: theme.content.storyTitle,
+    content: theme.content.storyBody.join('\n\n'),
+    image: theme.images.story,
+  });
+
   return (
-    <section id="story" style={{
+    <EditableSection id="img-text" elementType="img-text" name="Our Story" defaultProps={overrides}>
+      <section id="story" style={{
       backgroundColor: theme.palette.surface,
       color: theme.palette.text,
       padding: '7rem 5%',
       borderTop: `1px solid ${theme.palette.border || `${theme.palette.text}10`}`,
       scrollMarginTop: '80px',
     }}>
-      <div style={{
-        maxWidth: '1280px',
-        margin: '0 auto',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
-        gap: '5rem',
-        alignItems: 'center',
-      }}>
+      <div
+        className="rt-story-grid"
+        style={{
+          maxWidth: '1280px',
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(340px, 100%), 1fr))',
+          gap: '5rem',
+          alignItems: 'center',
+        }}
+      >
         {/* Visual Frame */}
         <div ref={imgRef as any} style={{ position: 'relative' }}>
           <div style={{
@@ -1541,36 +1659,45 @@ export function RestaurantStory({ theme }: { theme: RestaurantThemeConfig }) {
             aspectRatio: '4/5',
           }}>
             <img
-              src={theme.images.story}
+              src={(overrides.image && overrides.image !== '/assets/lifestyle.jpg' && overrides.image !== '/assets/vase.jpg') ? overrides.image : theme.images.story}
               alt={theme.images.storyAlt}
               loading="lazy"
+              onError={(e) => {
+                e.currentTarget.src = 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1200&q=80';
+              }}
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           </div>
           {/* Subtle Decorative Golden Border Frame */}
-          <div style={{
-            position: 'absolute',
-            inset: '-16px',
-            border: `2px solid ${theme.palette.primary}`,
-            borderRadius: '26px',
-            pointerEvents: 'none',
-            opacity: 0.75,
-          }} />
+          <div
+            className="rt-deco-frame"
+            style={{
+              position: 'absolute',
+              inset: '-16px',
+              border: `2px solid ${theme.palette.primary}`,
+              borderRadius: '26px',
+              pointerEvents: 'none',
+              opacity: 0.75,
+            }}
+          />
 
           {/* Floating Accolade Badge */}
-          <div style={{
-            position: 'absolute',
-            bottom: '24px',
-            right: '-12px',
-            backgroundColor: theme.palette.primary,
-            color: '#fff',
-            borderRadius: '12px',
-            padding: '1rem 1.4rem',
-            boxShadow: '0 12px 30px rgba(0,0,0,0.25)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.75rem',
-          }}>
+          <div
+            className="rt-accolade-badge"
+            style={{
+              position: 'absolute',
+              bottom: '24px',
+              right: '0',
+              backgroundColor: theme.palette.primary,
+              color: '#fff',
+              borderRadius: '12px',
+              padding: '1rem 1.4rem',
+              boxShadow: '0 12px 30px rgba(0,0,0,0.25)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.75rem',
+            }}
+          >
             <Award size={26} />
             <div>
               <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700 }}>Recognised By</div>
@@ -1692,6 +1819,7 @@ export function RestaurantStory({ theme }: { theme: RestaurantThemeConfig }) {
         </div>
       </div>
     </section>
+    </EditableSection>
   );
 }
 
@@ -1702,7 +1830,8 @@ export function PromoSection({ theme }: { theme: RestaurantThemeConfig }) {
   const ref = useReveal();
 
   return (
-    <section style={{
+    <EditableSection id="promo" elementType="promo" name="Special Offers" defaultProps={{ title: theme.content.promoTitle }}>
+      <section style={{
       position: 'relative',
       padding: '10rem 5%',
       overflow: 'hidden',
@@ -1783,6 +1912,7 @@ export function PromoSection({ theme }: { theme: RestaurantThemeConfig }) {
         </button>
       </div>
     </section>
+    </EditableSection>
   );
 }
 
@@ -1793,10 +1923,25 @@ export function RestaurantGallery({ theme }: { theme: RestaurantThemeConfig }) {
   const ref = useReveal();
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
+  const overrides = useEditableOverrides('gallery', {
+    title: 'Through the Lens',
+    eyebrow: 'Atmosphere & Details',
+    subtitle: 'Click any image to view in high resolution.',
+  });
+
   const imgs = theme.images.gallery;
 
   return (
-    <section id="gallery" style={{
+    <EditableSection
+      id="gallery"
+      elementType="gallery"
+      name="Atmosphere Gallery"
+      defaultProps={{
+        title: overrides.title || 'Through the Lens',
+        subtitle: overrides.subtitle || 'Click any image to view in high resolution.',
+      }}
+    >
+      <section id="gallery" style={{
       backgroundColor: theme.palette.background,
       padding: '7rem 5%',
       scrollMarginTop: '80px',
@@ -1812,7 +1957,7 @@ export function RestaurantGallery({ theme }: { theme: RestaurantThemeConfig }) {
             color: theme.palette.primary,
             marginBottom: '0.9rem',
           }}>
-            Atmosphere & Details
+            {overrides.eyebrow || 'Atmosphere & Details'}
           </div>
           <h2 style={{
             fontFamily: theme.typography.heading,
@@ -1821,7 +1966,7 @@ export function RestaurantGallery({ theme }: { theme: RestaurantThemeConfig }) {
             color: theme.palette.text,
             margin: '0 0 1rem 0',
           }}>
-            Through the Lens
+            {overrides.title || 'Through the Lens'}
           </h2>
           <p style={{
             fontFamily: theme.typography.body,
@@ -1829,19 +1974,20 @@ export function RestaurantGallery({ theme }: { theme: RestaurantThemeConfig }) {
             color: theme.palette.textLight,
             margin: 0,
           }}>
-            Click any image to view in high resolution.
+            {overrides.subtitle || 'Click any image to view in high resolution.'}
           </p>
         </div>
 
-        {/* Masonry Grid */}
+        {/* Balanced Gallery Grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-          gridAutoRows: '280px',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
           gap: '1.25rem',
           maxWidth: '1360px',
           margin: '0 auto',
-        }}>
+        }}
+        className="rc-gallery-grid-responsive"
+        >
           {imgs.map((img, i) => (
             <div
               key={i}
@@ -1852,7 +1998,7 @@ export function RestaurantGallery({ theme }: { theme: RestaurantThemeConfig }) {
                 position: 'relative',
                 overflow: 'hidden',
                 borderRadius: '16px',
-                gridRow: i === 0 || i === 3 ? 'span 2' : 'span 1',
+                aspectRatio: '4/3',
                 cursor: 'pointer',
                 boxShadow: '0 8px 30px rgba(0,0,0,0.1)',
                 backgroundColor: theme.palette.surface,
@@ -1905,12 +2051,17 @@ export function RestaurantGallery({ theme }: { theme: RestaurantThemeConfig }) {
         </div>
       </div>
     </section>
+    </EditableSection>
   );
 }
 
 // ─── TESTIMONIALS & CRITICAL ACCLAIM ────────────────────────────────────────
 
 export function Testimonials({ theme }: { theme: RestaurantThemeConfig }) {
+  const overrides = useEditableOverrides('testimonials', {
+    title: 'What Guests & Critics Say',
+    subtitle: 'Acclaim & Recognition',
+  });
   const [current, setCurrent] = useState(0);
   const total = theme.testimonials.length;
   const ref = useReveal();
@@ -1918,6 +2069,7 @@ export function Testimonials({ theme }: { theme: RestaurantThemeConfig }) {
   if (total === 0) return null;
 
   return (
+    <EditableSection id="testimonials" elementType="testimonials" name="Reviews & Critics" defaultProps={overrides}>
     <section style={{
       backgroundColor: theme.palette.surface,
       padding: '7rem 5%',
@@ -1934,7 +2086,7 @@ export function Testimonials({ theme }: { theme: RestaurantThemeConfig }) {
           color: theme.palette.primary,
           marginBottom: '0.9rem',
         }}>
-          Acclaim & Recognition
+          {overrides.subtitle || 'Acclaim & Recognition'}
         </div>
         <h2 style={{
           fontFamily: theme.typography.heading,
@@ -1942,7 +2094,7 @@ export function Testimonials({ theme }: { theme: RestaurantThemeConfig }) {
           fontWeight: 900,
           marginBottom: '3.5rem',
         }}>
-          What Guests & Critics Say
+          {overrides.title || 'What Guests & Critics Say'}
         </h2>
 
         {/* Active Testimonial Card */}
@@ -2064,12 +2216,18 @@ export function Testimonials({ theme }: { theme: RestaurantThemeConfig }) {
         </div>
       </div>
     </section>
+    </EditableSection>
   );
 }
 
 // ─── LOCATION, CONTACT & IN-PAGE RESERVATION WIDGET ─────────────────────────
 
 export function LocationCTA({ theme }: { theme: RestaurantThemeConfig }) {
+  const overrides = useEditableOverrides('location', {
+    address: theme.content.address,
+    hours: theme.content.hours,
+    phone: theme.content.phone,
+  });
   const store = useRestaurantStore();
   const ref = useReveal();
 
@@ -2098,20 +2256,25 @@ export function LocationCTA({ theme }: { theme: RestaurantThemeConfig }) {
   };
 
   return (
+    <EditableSection id="location" elementType="location" name="Location & Hours" defaultProps={overrides}>
     <section id="visit" style={{
       backgroundColor: theme.palette.secondary,
       color: '#ffffff',
       padding: '7rem 5%',
       scrollMarginTop: '80px',
     }}>
-      <div ref={ref as any} style={{
-        maxWidth: '1240px',
-        margin: '0 auto',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
-        gap: '4.5rem',
-        alignItems: 'center',
-      }}>
+      <div
+        ref={ref as any}
+        className="rt-visit-grid"
+        style={{
+          maxWidth: '1240px',
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(340px, 100%), 1fr))',
+          gap: '4.5rem',
+          alignItems: 'center',
+        }}
+      >
         {/* Contact Info */}
         <div>
           <div style={{
@@ -2346,12 +2509,19 @@ export function LocationCTA({ theme }: { theme: RestaurantThemeConfig }) {
         </div>
       </div>
     </section>
+    </EditableSection>
   );
 }
 
 // ─── NEWSLETTER SIGNUP ──────────────────────────────────────────────────────
 
 export function NewsletterSection({ theme }: { theme: RestaurantThemeConfig }) {
+  const overrides = useEditableOverrides('email-signup', {
+    heading: 'Join our newsletter',
+    subtext: 'Receive private releases of seasonal menus, rare cellar vintage allocations, and invitation-only guest chef collaborations.',
+    placeholder: 'Enter your email',
+    buttonText: 'Subscribe',
+  });
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
@@ -2363,6 +2533,7 @@ export function NewsletterSection({ theme }: { theme: RestaurantThemeConfig }) {
   };
 
   return (
+    <EditableSection id="email-signup" elementType="email-signup" name="Email signup" defaultProps={overrides}>
     <section style={{
       backgroundColor: theme.palette.background,
       padding: '5.5rem 5%',
@@ -2378,7 +2549,7 @@ export function NewsletterSection({ theme }: { theme: RestaurantThemeConfig }) {
           color: theme.palette.text,
           margin: '0 0 0.8rem 0',
         }}>
-          Join Our Gastronomy Journal
+          {overrides.heading || 'Join Our Gastronomy Journal'}
         </h3>
         <p style={{
           fontFamily: theme.typography.body,
@@ -2387,7 +2558,7 @@ export function NewsletterSection({ theme }: { theme: RestaurantThemeConfig }) {
           lineHeight: 1.6,
           marginBottom: '2rem',
         }}>
-          Receive private releases of seasonal menus, rare cellar vintage allocations, and invitation-only guest chef collaborations.
+          {overrides.subtext || 'Receive private releases of seasonal menus, rare cellar vintage allocations, and invitation-only guest chef collaborations.'}
         </p>
 
         {submitted ? (
@@ -2417,7 +2588,7 @@ export function NewsletterSection({ theme }: { theme: RestaurantThemeConfig }) {
             <input
               type="email"
               required
-              placeholder="Enter your personal email address"
+              placeholder={overrides.placeholder || 'Enter your email'}
               value={email}
               onChange={e => setEmail(e.target.value)}
               style={{
@@ -2450,34 +2621,44 @@ export function NewsletterSection({ theme }: { theme: RestaurantThemeConfig }) {
               onMouseOver={e => e.currentTarget.style.opacity = '0.9'}
               onMouseOut={e => e.currentTarget.style.opacity = '1'}
             >
-              Subscribe
+              {overrides.buttonText || 'Subscribe'}
             </button>
           </form>
         )}
       </div>
     </section>
+    </EditableSection>
   );
 }
 
 // ─── FOOTER ──────────────────────────────────────────────────────────────────
 
 export function RestaurantFooter({ theme }: { theme: RestaurantThemeConfig }) {
+  const overrides = useEditableOverrides('footer', {
+    brand: theme.name,
+    tagline: theme.tagline,
+  });
   const store = useRestaurantStore();
 
   return (
+    <EditableSection id="footer" elementType="footer" name="Footer" defaultProps={overrides}>
     <footer style={{
       backgroundColor: '#0a0a0c',
       color: '#94a3b8',
       padding: '5rem 5% 2.5rem',
       borderTop: '1px solid #1e293b',
     }}>
-      <div style={{ maxWidth: '1240px', margin: '0 auto' }}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-          gap: '3.5rem',
-          marginBottom: '4.5rem',
-        }}>
+      <div style={{ width: '100%', maxWidth: '1240px', margin: '0 auto', display: 'block' }}>
+        <div 
+          className="rc-footer-grid"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+            gap: '3.5rem',
+            marginBottom: '4.5rem',
+            width: '100%',
+          }}
+        >
           {/* Brand Info */}
           <div>
             <div style={{
@@ -2487,7 +2668,7 @@ export function RestaurantFooter({ theme }: { theme: RestaurantThemeConfig }) {
               color: theme.palette.primary,
               marginBottom: '0.85rem',
             }}>
-              {theme.name}
+              {overrides.brand || theme.name}
             </div>
             <p style={{
               fontFamily: theme.typography.body,
@@ -2496,7 +2677,7 @@ export function RestaurantFooter({ theme }: { theme: RestaurantThemeConfig }) {
               color: '#94a3b8',
               marginBottom: '1.5rem',
             }}>
-              {theme.tagline}
+              {overrides.tagline || theme.tagline}
             </p>
             <div style={{ display: 'flex', gap: '0.75rem' }}>
               <button
@@ -2619,6 +2800,7 @@ export function RestaurantFooter({ theme }: { theme: RestaurantThemeConfig }) {
         </div>
       </div>
     </footer>
+    </EditableSection>
   );
 }
 
@@ -2754,6 +2936,7 @@ export function ReservationModal({ theme }: { theme: RestaurantThemeConfig }) {
     }} onClick={handleClose}>
       <div
         onClick={e => e.stopPropagation()}
+        className="rt-modal-dialog"
         style={{
           backgroundColor: theme.palette.surface,
           color: theme.palette.text,
@@ -3488,6 +3671,7 @@ export function DishQuickViewModal({ theme }: { theme: RestaurantThemeConfig }) 
 export function OrderDrawer({ theme }: { theme: RestaurantThemeConfig }) {
   const store = useRestaurantStore();
   const [orderCode, setOrderCode] = useState<string | null>(null);
+  const currSymbol = theme.currencySymbol || '₹';
 
   if (!store.isCartOpen) return null;
 
@@ -3498,9 +3682,9 @@ export function OrderDrawer({ theme }: { theme: RestaurantThemeConfig }) {
   }, 0);
 
   const sampleItems: MenuItem[] = (theme.menu?.[0]?.items?.slice(0, 3)) || [
-    { name: '45-Day Dry-Aged Wagyu BMS 11', price: '$95', desc: 'Seared over white oak coals, bone marrow glaze', chefNote: 'Signature' },
-    { name: 'Ossetra Caviar Tartlet', price: '$48', desc: 'Buckwheat tart, meyer lemon crème fraîche', chefNote: 'Starter' },
-    { name: 'Smoked Dark Chocolate Ganache', price: '$24', desc: 'Single-origin 74% cacao with gold leaf', chefNote: 'Dessert' },
+    { name: '45-Day Dry-Aged Wagyu BMS 11', price: `${currSymbol}1,450`, desc: 'Seared over white oak coals, bone marrow glaze', chefNote: 'Signature' },
+    { name: 'Ossetra Caviar Tartlet', price: `${currSymbol}850`, desc: 'Buckwheat tart, meyer lemon crème fraîche', chefNote: 'Starter' },
+    { name: 'Smoked Dark Chocolate Ganache', price: `${currSymbol}450`, desc: 'Single-origin 74% cacao with gold leaf', chefNote: 'Dessert' },
   ];
 
   const handleCheckoutToReservation = () => {
@@ -3517,10 +3701,32 @@ export function OrderDrawer({ theme }: { theme: RestaurantThemeConfig }) {
     store.closeCart();
     const el = document.getElementById('menu');
     if (el) {
-      const navOffset = 80;
-      const elementPosition = el.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - navOffset;
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      let scrollContainer: HTMLElement | null = null;
+      let curr = el.parentElement;
+      while (curr && curr !== document.body) {
+        const style = window.getComputedStyle(curr);
+        if ((style.overflowY === 'auto' || style.overflowY === 'scroll') && curr.scrollHeight > curr.clientHeight) {
+          scrollContainer = curr;
+          break;
+        }
+        curr = curr.parentElement;
+      }
+
+      if (scrollContainer) {
+        const containerRect = scrollContainer.getBoundingClientRect();
+        const elRect = el.getBoundingClientRect();
+        const targetScrollTop = scrollContainer.scrollTop + (elRect.top - containerRect.top) - 76;
+        scrollContainer.scrollTo({ top: Math.max(0, targetScrollTop), behavior: 'smooth' });
+      } else {
+        const navOffset = 80;
+        const elementPosition = el.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + (window.pageYOffset || document.documentElement.scrollTop || 0) - navOffset;
+        window.scrollTo({ top: Math.max(0, offsetPosition), behavior: 'smooth' });
+      }
+
+      try {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } catch {}
     }
   };
 
@@ -3651,7 +3857,7 @@ export function OrderDrawer({ theme }: { theme: RestaurantThemeConfig }) {
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.88rem' }}>
                   <span style={{ color: theme.palette.textLight }}>Total Amount:</span>
-                  <strong>${subtotal.toFixed(2)}</strong>
+                  <strong>{currSymbol}{subtotal.toFixed(2)}</strong>
                 </div>
               </div>
 
@@ -3899,7 +4105,7 @@ export function OrderDrawer({ theme }: { theme: RestaurantThemeConfig }) {
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem', fontSize: '0.92rem' }}>
               <span style={{ color: theme.palette.textLight }}>Tasting Subtotal:</span>
-              <strong style={{ color: theme.palette.text }}>${subtotal.toFixed(2)}</strong>
+              <strong style={{ color: theme.palette.text }}>{currSymbol}{subtotal.toFixed(2)}</strong>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.25rem', fontSize: '0.82rem' }}>
               <span style={{ color: theme.palette.textLight }}>Sommelier Pairing & Gratuity:</span>

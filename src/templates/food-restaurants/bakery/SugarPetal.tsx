@@ -1,201 +1,550 @@
-import React, { useState } from 'react';
-import './bakery-production.css';
+import React from 'react';
+import { FoodStorefrontCore, type StorefrontThemeConfig } from '../shared/FoodStorefrontCore';
 
-const img = (id: string, w = 1200) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
+const img = (id: string, w = 1400) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
+
+export const sugarPetalConfig: StorefrontThemeConfig = {
+  id: 'sugar-petal',
+  kind: 'bakery',
+  currencySymbol: '₹',
+  layoutOptions: {
+    heroLayout: 'banner-full',
+    productLayout: 'compact-rows',
+    storyLayout: 'split-right',
+    featuresLayout: 'cards-grid',
+    galleryLayout: 'masonry',
+    sectionOrder: ['hero', 'products', 'promo', 'features', 'gallery', 'reviews', 'story', 'location', 'newsletter'],
+  },
+  name: 'Sugar Petal',
+  tagline: 'Sculptural modern desserts, botanical infusions, and architectural celebration cakes',
+  brandSub: 'Avant-Garde Dessert Atelier & Botanical Cake Studio',
+  palette: {
+    primary: '#db2777',
+    primaryHover: '#be185d',
+    secondary: '#0f172a',
+    background: '#fafafa',
+    surface: '#fdf2f8',
+    text: '#18181b',
+    textMuted: '#71717a',
+    border: 'rgba(219, 39, 119, 0.15)',
+    badgeBg: '#fce7f3',
+    badgeText: '#9d174d',
+  },
+  typography: {
+    headingFont: '"Playfair Display", Georgia, serif',
+    bodyFont: '"Inter", sans-serif',
+  },
+  hero: {
+    headline: 'Sculptural Modern Desserts. Botanical Infusions.',
+    subheadline:
+      'Architectural mono-portion desserts, botanical tea infusions, and modern minimalist celebration cakes crafted with seasonal organic florals, low-sugar precision, and avant-garde technique.',
+    badge: 'AVANT-GARDE DESSERT ATELIER',
+    image: img('photo-1578985545062-69928b1d9587'),
+    imageAlt: 'Sleek architectural modern celebration cake with edible pressed flowers and velvet texture',
+    primaryCtaText: 'Explore Dessert Studio',
+    primaryCtaPage: 'menu',
+    secondaryCtaText: 'Studio Philosophy',
+    secondaryCtaPage: 'about',
+  },
+  announcement: {
+    text: 'Autumn Botanical Tasting Flight Available Thursday–Sunday · Studio Pickup by Appointment',
+    badgeText: 'DESSERT TASTING MENU',
+    linkText: 'Book Tasting Flight',
+    linkPage: 'menu',
+  },
+  proofBadges: [
+    { icon: '🌺', title: 'Organic Botanical Infusions', subtitle: 'Distilled cold-pressed lavender, chamomile, and damask rose hydrosols' },
+    { icon: '📐', title: 'Architectural Minimalism', subtitle: 'Clean geometric forms, velvet textures, and high-gloss mirror finishes' },
+    { icon: '🍵', title: 'Ceremonial Grade Matcha', subtitle: 'First-harvest Uji Kyoto ceremonial green tea in our signature cubes' },
+    { icon: '✨', title: 'Low-Sugar Precision', subtitle: 'Engineered for pure ingredient expression without cloying sweetness' },
+  ],
+  categories: ['Architectural Desserts', 'Botanical Celebration Cakes', 'Tasting Flights', 'Modern Tarts', 'Studio Confections'],
+  collections: [
+    {
+      id: 'sculptural-desserts',
+      name: 'Sculptural Mono-Portions',
+      tagline: 'Geometric entremets, spheres, and cubes balancing bold texture and acidity.',
+      image: img('photo-1578985545062-69928b1d9587'),
+      itemCount: 6,
+      filterCategory: 'Architectural Desserts',
+    },
+    {
+      id: 'modern-cakes',
+      name: 'Botanical Celebration Cakes',
+      tagline: 'Tiered minimalist celebration cakes decorated with pressed organic edible petals.',
+      image: img('photo-1555507036-ab1f4038808a'),
+      itemCount: 5,
+      filterCategory: 'Botanical Celebration Cakes',
+    },
+    {
+      id: 'tasting-flights',
+      name: 'Seasonal Dessert Tasting Flights',
+      tagline: 'Curated 4-course dessert tasting sets with paired botanical tea infusions.',
+      image: img('photo-1551024506-0bccd828d307'),
+      itemCount: 4,
+      filterCategory: 'Tasting Flights',
+    },
+    {
+      id: 'studio-sweets',
+      name: 'Artisanal Confections & Macarons',
+      tagline: 'Smoked ganache truffles, lavender macarons, and small-batch dessert kits.',
+      image: img('photo-1569864358642-9d1684040f43'),
+      itemCount: 5,
+      filterCategory: 'Studio Confections',
+    },
+  ],
+  products: [
+    {
+      id: 'sp-yuzu-blossom-sphere',
+      slug: 'yuzu-blossom-white-peach-sphere',
+      name: 'Yuzu Blossom & White Peach Velvet Sphère',
+      price: 13.50,
+      compareAtPrice: 15.00,
+      description: 'Japanese yuzu curd center surrounded by white peach compote and light elderflower mousse inside a velvet-sprayed white chocolate shell.',
+      category: 'Architectural Desserts',
+      image: img('photo-1569864358642-9d1684040f43'),
+      tags: ['Chef Signature', 'Velvet Finish'],
+      allergens: ['Contains Dairy', 'Contains Eggs', 'Gluten-Free'],
+      weightOrSize: 'Single Sphere (160g)',
+      available: true,
+      options: [
+        { name: 'Finish Style', choices: [{ label: 'Powder Pink Velvet' }, { label: 'Opal High-Gloss Mirror (+ $2)', priceDelta: 2 }] },
+      ],
+    },
+    {
+      id: 'sp-matcha-sesame-cube',
+      slug: 'black-sesame-ceremonial-matcha-cube',
+      name: 'Black Sesame, Ceremonial Matcha & White Chocolate Cube',
+      price: 12.50,
+      description: 'Geometric architectural cube: roasted black sesame praliné base, Uji Kyoto ceremonial matcha namelaka, and light aerated white chocolate mousse.',
+      category: 'Architectural Desserts',
+      image: img('photo-1563729784474-d77dbb933a9e'),
+      tags: ['Kyoto Matcha', 'Minimalist'],
+      allergens: ['Contains Sesame', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: 'Single Cube (150g)',
+      available: true,
+    },
+    {
+      id: 'sp-earl-grey-blackberry-tart',
+      slug: 'earl-grey-blackberry-smoked-vanilla-tart',
+      name: 'Earl Grey, Wild Blackberry & Smoked Vanilla Tart',
+      price: 11.00,
+      description: 'Charcoal pâte sablée tart shell filled with bergamot-infused Earl Grey ganache, tart wild blackberry compote, and smoked Tahitian vanilla chantilly.',
+      category: 'Modern Tarts',
+      image: img('photo-1519869325930-281384150729'),
+      tags: ['Smoked Vanilla'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: 'Individual Tart (145g)',
+      available: true,
+    },
+    {
+      id: 'sp-rose-lychee-cloud-cake',
+      slug: 'sculptural-rose-lychee-cloud-cake',
+      name: 'Sculptural Rose Lychee Cloud Cake (6" Serves 8)',
+      price: 68.00,
+      compareAtPrice: 75.00,
+      description: 'Organic damask rose sponge layered with fragrant lychee jelly, fresh raspberries, and whipped vanilla mascarpone. Crowned with pressed edible pansies.',
+      category: 'Botanical Celebration Cakes',
+      image: img('photo-1588195538326-c5b1e9f80a1b'),
+      tags: ['Celebration Cake', 'Edible Florals'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '6" Cake / Serves 6-8',
+      available: true,
+      options: [
+        { name: 'Cake Size', choices: [{ label: '6" Cake (Serves 6-8)' }, { label: '8" Cake (Serves 12-14)', priceDelta: 45 }] },
+        { name: 'Custom Plaque', choices: [{ label: 'None' }, { label: 'Minimalist Inscribed Sugar Tile (+ $5)', priceDelta: 5 }] },
+      ],
+    },
+    {
+      id: 'sp-chocolate-sea-salt-monolith',
+      slug: 'dark-chocolate-smoked-sea-salt-monolith',
+      name: 'Dark Chocolate & Smoked Sea Salt Monolith',
+      price: 12.00,
+      description: '74% single-origin Venezuelan chocolate mousse, crunchy salted cacao nib streusel, and a core of smoked sea salt caramel.',
+      category: 'Architectural Desserts',
+      image: img('photo-1511381939415-e44015466834'),
+      tags: ['74% Single-Origin'],
+      allergens: ['Contains Dairy', 'Contains Eggs', 'Gluten-Free Crumb'],
+      weightOrSize: 'Single Monolith (160g)',
+      available: true,
+    },
+    {
+      id: 'sp-violet-blueberry-dome',
+      slug: 'violet-wild-blueberry-velvet-dome',
+      name: 'Violet Blossom & Wild Blueberry Velvet Dome',
+      price: 11.50,
+      description: 'French candied violet mousse, wild Maine blueberry gelée, and a soft almond dacquoise biscuit with a velvety lilac finish.',
+      category: 'Architectural Desserts',
+      image: img('photo-1587314168485-3236d6710814'),
+      tags: ['French Violet'],
+      allergens: ['Contains Almonds', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: 'Single Dome (140g)',
+      available: true,
+    },
+    {
+      id: 'sp-jasmine-blood-orange-choux',
+      slug: 'jasmine-tea-blood-orange-choux',
+      name: 'Jasmine Pearl Tea & Blood Orange Choux Bun',
+      price: 9.50,
+      description: 'Crisp craquelin choux filled with fragrant silver needle jasmine tea diplomat cream and a tart blood orange reduction center.',
+      category: 'Modern Tarts',
+      image: img('photo-1519869325930-281384150729'),
+      tags: ['Tea Infused'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '120g Pastry',
+      available: true,
+    },
+    {
+      id: 'sp-deconstructed-tiramisu-jar',
+      slug: 'deconstructed-vanilla-espresso-jar',
+      name: 'Deconstructed Tahitian Vanilla & Espresso Bean Glass Jar',
+      price: 10.50,
+      description: 'Savoiardi sponge soaked in specialty cold brew espresso, whipped mascarpone mousse, cocoa soil, and coffee jelly cubes served in a reusable studio jar.',
+      category: 'Architectural Desserts',
+      image: img('photo-1579372786545-d24232daf58c'),
+      tags: ['In a Reusable Jar'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '200g Jar',
+      available: true,
+    },
+    {
+      id: 'sp-bergamot-lemon-entremet',
+      slug: 'bergamot-meyer-lemon-entremet',
+      name: 'Calabrian Bergamot & Meyer Lemon Geometric Entremet',
+      price: 12.75,
+      description: 'Crisp shortbread base topped with Meyer lemon curd, candied bergamot peel, and a pillowy whipped chamomile ganache.',
+      category: 'Architectural Desserts',
+      image: img('photo-1603532648955-039310d9ed75'),
+      tags: ['Citrus & Floral'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '150g Entremet',
+      available: true,
+    },
+    {
+      id: 'sp-modern-celebration-cake-8',
+      slug: 'modern-botanical-celebration-cake-8',
+      name: 'Modern Botanical Celebration Cake (8" Two-Tier Minimalist)',
+      price: 125.00,
+      description: 'Two-tier modern cake featuring vanilla bean and lavender sponge, blackberry curd, and smooth Swiss meringue buttercream styled with organic edible flowers.',
+      category: 'Botanical Celebration Cakes',
+      image: img('photo-1578985545062-69928b1d9587'),
+      tags: ['Centerpiece Cake', 'Serves 15-18'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: 'Two-Tier / Serves 15-18',
+      available: true,
+      options: [
+        { name: 'Color Palette', choices: [{ label: 'Blush Pink & Ivory' }, { label: 'Sage Green & Gold' }, { label: 'Slate Gray & Lilac' }] },
+      ],
+    },
+    {
+      id: 'sp-tasting-flight-4course',
+      slug: '4-course-dessert-studio-tasting-flight',
+      name: '4-Course Dessert Studio Tasting Flight (Box for Two)',
+      price: 38.00,
+      compareAtPrice: 44.00,
+      description: 'An at-home tasting experience: mini portions of Yuzu Sphère, Matcha Cube, Violet Dome, and Dark Chocolate Monolith, with 2 botanical cold-brew tea vials.',
+      category: 'Tasting Flights',
+      image: img('photo-1563729784474-d77dbb933a9e'),
+      tags: ['Bestseller Flight', 'Date Night Set'],
+      allergens: ['Contains Dairy', 'Contains Eggs', 'Contains Almonds', 'Contains Sesame'],
+      weightOrSize: '4 Tasting Portions + 2 Vials',
+      available: true,
+    },
+    {
+      id: 'sp-pistachio-strawberry-tart',
+      slug: 'salted-pistachio-strawberry-blossom-tart',
+      name: 'Salted Pistachio & Strawberry Blossom Tart',
+      price: 11.25,
+      description: 'Flaky tart shell lined with roasted pistachio paste, sweet local strawberry reduction, and finished with delicate strawberry blossom petals.',
+      category: 'Modern Tarts',
+      image: img('photo-1565958011703-44f9829ba187'),
+      tags: ['Local Berries'],
+      allergens: ['Contains Pistachios', 'Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '150g Tart',
+      available: true,
+    },
+    {
+      id: 'sp-lavender-honey-macaron-box',
+      slug: 'lavender-honey-botanical-macaron-box-9pk',
+      name: 'Lavender & Wild Honey Macaron Collection (9 pcs)',
+      price: 27.00,
+      description: 'Nine botanical macarons flavored with French lavender, chamomile citrus, rose cardamom, and matcha white chocolate in a blush presentation box.',
+      category: 'Studio Confections',
+      image: img('photo-1569864358642-9d1684040f43'),
+      tags: ['Botanical Flavors', 'Gluten-Free'],
+      allergens: ['Contains Almonds', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: 'Box of 9 Macarons',
+      available: true,
+    },
+    {
+      id: 'sp-smoked-rosemary-truffles',
+      slug: 'smoked-rosemary-dark-chocolate-truffles-12pk',
+      name: 'Smoked Rosemary Chocolate Ganache Truffle Box (12 pcs)',
+      price: 24.00,
+      description: 'Hand-rolled 70% dark chocolate truffles infused with garden rosemary smoke and rolled in roasted cocoa nib flour and fine sea salt.',
+      category: 'Studio Confections',
+      image: img('photo-1511381939415-e44015466834'),
+      tags: ['Artisanal Truffles'],
+      allergens: ['Contains Dairy'],
+      weightOrSize: 'Box of 12 Truffles',
+      available: true,
+    },
+    {
+      id: 'sp-coconut-pandan-pavilion',
+      slug: 'chilled-coconut-pandan-leaf-pavilion',
+      name: 'Chilled Coconut Cream & Pandan Leaf Pavilion',
+      price: 11.00,
+      description: 'Fresh aromatic pandan chiffon base, coconut water jelly, whipped young coconut mousse, and toasted coconut flakes.',
+      category: 'Architectural Desserts',
+      image: img('photo-1563729784474-d77dbb933a9e'),
+      tags: ['Pandan & Coconut'],
+      allergens: ['Contains Wheat', 'Contains Eggs', 'Dairy-Free'],
+      weightOrSize: '140g Pastry',
+      available: true,
+    },
+    {
+      id: 'sp-bento-lunchbox-cake',
+      slug: 'minimalist-bento-lunchbox-cake',
+      name: 'Minimalist Bento Lunchbox Cake (4" Serves 2-3)',
+      price: 28.00,
+      description: 'Single-tier Korean-style bento cake with pastel watercolor buttercream, vanilla chiffon, and fresh fruit filling. Includes mini wooden spoon and candle.',
+      category: 'Botanical Celebration Cakes',
+      image: img('photo-1582293041079-7814c2f12063'),
+      tags: ['Bento Cake', 'Gift Boxed'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '4" Cake / Serves 2-3',
+      available: true,
+      options: [
+        { name: 'Custom Message', choices: [{ label: 'Happy Birthday' }, { label: 'Love You' }, { label: 'Congratulations' }, { label: 'Blank Minimalist' }] },
+      ],
+    },
+    {
+      id: 'sp-botanical-hydrosol-elixir',
+      slug: 'cold-pressed-botanical-hydrosol-elixir-300ml',
+      name: 'Cold-Pressed Botanical Hydrosol Elixir (300ml Bottle)',
+      price: 8.50,
+      description: 'Sparkling spring water infused with distilled organic rose petals, hibiscus flowers, and lemon verbena. Zero added sugar.',
+      category: 'Tasting Flights',
+      image: img('photo-1517248135467-4c7edcad34c4'),
+      tags: ['Floral Hydration'],
+      allergens: [],
+      weightOrSize: '300ml Glass Bottle',
+      available: true,
+    },
+    {
+      id: 'sp-ceremonial-matcha-slice',
+      slug: 'ceremonial-matcha-velvet-cake-slice',
+      name: 'Ceremonial Matcha Velvet Cake Slice',
+      price: 9.50,
+      description: 'Thick slice of steamed matcha sponge with white chocolate buttercream and crisp roasted genmaicha toasted rice topping.',
+      category: 'Botanical Celebration Cakes',
+      image: img('photo-1579372786545-d24232daf58c'),
+      tags: ['Kyoto Tea'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '130g Slice',
+      available: true,
+    },
+    {
+      id: 'sp-sugar-petal-gift-set',
+      slug: 'modern-sugar-petal-curated-gift-set',
+      name: 'The Signature Sugar Petal Curated Studio Gift Box',
+      price: 55.00,
+      description: 'Our signature white studio box featuring a 9-piece botanical macaron set, 6 rosemary truffles, and a 300ml botanical elixir bottle with satin ribbon.',
+      category: 'Studio Confections',
+      image: img('photo-1569864358642-9d1684040f43'),
+      tags: ['Complete Gift Box'],
+      allergens: ['Contains Almonds', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: 'Studio Gift Box',
+      available: true,
+    },
+    {
+      id: 'sp-diy-plating-kit',
+      slug: 'diy-studio-dessert-plating-kit',
+      name: 'At-Home Studio Dessert Plating & Garnish Kit',
+      price: 45.00,
+      description: 'Includes a jar of pressed edible blossoms, freeze-dried raspberry powder, gold tweezers, velvet cocoa butter spray bottle, and plating instructions.',
+      category: 'Studio Confections',
+      image: img('photo-1587314168485-3236d6710814'),
+      tags: ['Creative Kit'],
+      allergens: [],
+      weightOrSize: 'Garnish Box',
+      available: true,
+    },
+    {
+      id: 'sp-rose-lychee-choux',
+      slug: 'rosewater-lychee-craquelin-choux-puff',
+      name: 'Rosewater & Lychee Craquelin Choux Puff',
+      price: 5.75,
+      description: 'Crisp pink craquelin shell filled with light Damask rosewater diplomat cream and diced sweet lychee pearls.',
+      category: 'Delicate Choux',
+      image: img('photo-1551024709-8f23befc6f87'),
+      tags: ['Floral Specialty'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '95g',
+      available: true,
+    },
+    {
+      id: 'sp-strawberry-frangipane',
+      slug: 'wild-mara-des-bois-strawberry-frangipane',
+      name: 'Wild Mara des Bois Strawberry Frangipane',
+      price: 7.25,
+      description: 'Tender almond cream tartlet topped with fresh tiny alpine strawberries, edible cornflower petals, and strawberry glaze.',
+      category: 'Artisan Tarts',
+      image: img('photo-1495474472287-4d71bcdd2085'),
+      tags: ['Seasonal Berries'],
+      allergens: ['Contains Almonds', 'Contains Wheat', 'Contains Dairy'],
+      weightOrSize: '125g Tartlet',
+      available: true,
+    },
+    {
+      id: 'sp-violet-eclair',
+      slug: 'candied-violet-blossom-crisp-french-eclair',
+      name: 'Candied Violet Blossom Crisp French Éclair',
+      price: 6.25,
+      description: 'Choux pastry filled with lavender violet bean cream, glossy purple mirror glaze, and crystallized Toulouse violet petals.',
+      category: 'Delicate Choux',
+      image: img('photo-1509440159596-0249088772ff'),
+      tags: ['Botanical Luxury'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '110g',
+      available: true,
+    },
+    {
+      id: 'sp-earl-grey-shortbread',
+      slug: 'lavender-earl-grey-butter-shortbread-tin',
+      name: 'Lavender & Earl Grey Butter Shortbread Tin',
+      price: 15.00,
+      description: 'Tin of 16 melt-in-the-mouth French butter shortbread rounds pressed with dried culinary lavender and blue cornflowers.',
+      category: 'Floral Petal Bakes',
+      image: img('photo-1509440159596-0249088772ff'),
+      tags: ['Artisan Gift Tin'],
+      allergens: ['Contains Wheat', 'Contains Dairy'],
+      weightOrSize: '250g Gift Tin',
+      available: true,
+    },
+    {
+      id: 'sp-mango-charlotte',
+      slug: 'champagne-mango-passionfruit-charlotte-cake',
+      name: 'Champagne Mango & Passionfruit Charlotte Cake',
+      price: 48.00,
+      description: 'Ring of ladyfinger sponge filled with silky Champagne mango mousse, passionfruit gelée, and edible pansy blossoms.',
+      category: 'Celebration Cakes',
+      image: img('photo-1555507036-ab1f4038808a'),
+      tags: ['Party Centerpiece'],
+      allergens: ['Contains Wheat', 'Contains Dairy', 'Contains Eggs'],
+      weightOrSize: '6-Inch Cake (Serves 6-8)',
+      available: true,
+    },
+],
+  craftProcess: {
+    badge: 'STUDIO CRAFT METHOD',
+    title: 'The Architecture of Modern Dessert',
+    subtitle: 'Where minimalist design meets botanical culinary chemistry.',
+    steps: [
+      { time: 'STEP 1', title: 'Botanical Cold Extraction', desc: 'Edible flowers and single-origin teas are slowly steeped in cold hydrosol chambers to capture volatile floral aromatics.' },
+      { time: 'STEP 2', title: 'Geometric 3D Molds', desc: 'Entremets are cast into custom-engineered silicone spheres, cubes, and monoliths under strict temperature curves.' },
+      { time: 'STEP 3', title: 'Nitrogen Velvet Enrobing', desc: 'Chilled entremets are airbrush-sprayed with tempered cocoa butter and ruby chocolate at -18°C for velvet texture.' },
+      { time: 'STEP 4', title: 'Petal Placement & Tasting', desc: 'Each single-portion sculpture is hand-finished with organic pressed petals, gold leaf, and micro-herbs before service.' },
+    ],
+  },
+  story: {
+    badge: 'STUDIO MANIFESTO',
+    title: 'Dessert as Modern Architecture. Less Sugar, More Sensation.',
+    paragraphs: [
+      'Sugar Petal was conceived at the intersection of modern industrial design and high patisserie. We believe traditional desserts have grown excessively sugary, masking the delicate natural brilliance of fruits, herbs, and single-origin botanicals.',
+      'Our studio treats every creation as an architectural object. We sculpt geometric forms, incorporate savory herbs like rosemary and thyme, and use organic floral hydrosols to craft unexpected aromatic journeys. The result is pure, clean, and visually arresting.',
+    ],
+    image: img('photo-1578985545062-69928b1d9587'),
+    imageAlt: 'Pastry designer placing delicate pressed violet petal onto modern dessert sphere',
+    founderQuote: 'When you strip away excess sugar, the genuine voice of the lavender, bergamot, and chocolate comes alive.',
+    founderName: 'Aria Chen, Creative Director & Master Pâtissier',
+    stats: [
+      { value: '40%', label: 'Reduced Sugar Formulation' },
+      { value: '100%', label: 'Organic Edible Florals' },
+      { value: '18', label: 'Bespoke Molds Engineered' },
+    ],
+  },
+  promo: {
+    badge: 'STUDIO TASTING CLUB',
+    title: 'The Weekend Modern Dessert Flight Reservation',
+    desc: 'Reserve a seated tasting flight inside our white minimalist studio on Saturday or Sunday afternoons. Experience four seasonal architectural courses paired with rare floral teas.',
+    ctaText: 'Reserve Studio Flight',
+    ctaPage: 'inquiry',
+    image: img('photo-1551024506-0bccd828d307'),
+    imageAlt: 'Sleek dessert tasting flight with white porcelain plates and botanical teas',
+  },
+  gallery: [
+    { src: img('photo-1578985545062-69928b1d9587'), alt: 'Architectural modern dessert with edible flowers', caption: 'Sculptural Yuzu & White Peach Velvet Sphère', tag: 'Architectural' },
+    { src: img('photo-1555507036-ab1f4038808a'), alt: 'Minimalist two-tier celebration cake with pressed flowers', caption: 'Modern botanical celebration centerpiece cake', tag: 'Cakes' },
+    { src: img('photo-1563729784474-d77dbb933a9e'), alt: 'Ceremonial matcha cube entremet with gold leaf', caption: 'Black sesame and Uji matcha architectural cube', tag: 'Matcha' },
+    { src: img('photo-1551024506-0bccd828d307'), alt: 'Curated 4-course dessert studio tasting flight', caption: 'Seasonal dessert flight with botanical elixir pairings', tag: 'Tastings' },
+    { src: img('photo-1569864358642-9d1684040f43'), alt: 'Pastel botanical macarons in gift box', caption: 'Lavender and wild honey botanical macaron set', tag: 'Macarons' },
+    { src: img('photo-1519869325930-281384150729'), alt: 'Modern fruit tart with geometric strawberry design', caption: 'Salted pistachio and strawberry blossom tart', tag: 'Tarts' },
+  ],
+  testimonials: [
+    {
+      name: 'Chloe Vane',
+      rating: 5,
+      quote: 'Sugar Petal is doing something completely fresh. The Yuzu Blossom Sphere is not only a work of modern art, but the acidity and low sugar level make it an unforgettable experience.',
+      source: 'Design Milk Magazine',
+      date: 'November 2026',
+    },
+    {
+      name: 'Julian Thorne',
+      rating: 5,
+      quote: 'We ordered the two-tier botanical cake for our gallery opening. Guests were photographing it all night before we even cut it. Incredible flavor.',
+      source: 'Verified Customer',
+      date: 'October 2026',
+    },
+  ],
+  location: {
+    address: '210 Bowery Studio 4B, Lower East Side, New York, NY 10002',
+    neighborhood: 'Bowery Arts District',
+    hoursWeekdays: 'Wednesday–Friday: 11:00 AM – 7:00 PM',
+    hoursWeekends: 'Saturday & Sunday: 10:00 AM – 8:00 PM (Tasting Flights by Appointment)',
+    phone: '(212) 555-0164',
+    email: 'studio@sugarpetal.com',
+    pickupNotice: 'Curbside boutique pickup lobby open during studio hours for pre-reserved cakes and tasting boxes.',
+  },
+  customInquiry: {
+    title: 'Bespoke Modern Celebration Cake Studio & Dessert Tables',
+    subtitle: 'Custom architectural wedding cakes, editorial birthday cakes, and interactive dessert styling for brand launches.',
+    type: 'cake',
+    occasions: ['Modern Architectural Wedding Cake', 'Editorial Milestone Birthday Cake', 'Brand Launch & Gallery Dessert Table', 'Private 5-Course Studio Tasting Event'],
+    sizes: [
+      { label: '6" Single-Tier Minimalist (Serves 8-10)', serves: '8-10 Guests', basePrice: 68 },
+      { label: '8" Two-Tier Architectural (Serves 20-25)', serves: '20-25 Guests', basePrice: 165 },
+      { label: '3-Tier Grand Botanical Sculpture (Serves 50-65)', serves: '50-65 Guests', basePrice: 380 },
+      { label: 'Curated 100-Piece Modern Dessert Table', serves: '60-80 Guests', basePrice: 650 },
+    ],
+    flavors: ['Damask Rose & Lychee Chiffon', 'Uji Matcha & Black Sesame Praliné', 'Calabrian Bergamot & Chamomile Cream', 'Valrhona Guanaja & Smoked Sea Salt'],
+    fillings: ['White Peach & Elderflower Confit', 'Wild Blackberry & Thyme Purée', 'Whipped Tahitian Vanilla Mascarpone', 'Pistachio Frangipane Crunch'],
+    finishes: ['Velvet Spray Matte Texture', 'Pressed Edible Floral Collage', 'Minimalist Acrylic Stencil Monogram', '24K Gold Leaf Fragmenting'],
+  },
+  faqs: [
+    {
+      question: 'How do your low-sugar formulations work?',
+      answer: 'We reduce refined white sugars by 40% compared to traditional bakeries, instead balancing sweetness with natural fruit pectins, reduced purees, and aromatic botanical infusions that elevate taste rather than overwhelm it.',
+      category: 'Nutrition',
+    },
+    {
+      question: 'Are the flowers on your cakes safe to eat?',
+      answer: 'Yes! 100% of the florals used in our studio are grown organically by certified pesticide-free culinary herb farms and are entirely safe for human consumption.',
+      category: 'Florals',
+    },
+    {
+      question: 'How should celebration cakes be transported and stored?',
+      answer: 'All modern cakes are assembled on heavy acrylic bases and boxed in rigid insulated studio boxes. Transport them flat on the car floorboard in an air-conditioned vehicle, and refrigerate until 30 minutes before serving.',
+      category: 'Care',
+    },
+    {
+      question: 'Can you customize cake color palettes to match my event?',
+      answer: 'Absolutely. Our custom cake orders include a digital color consultation where we match our natural food-grade botanical pigments to your event decor or invitation palette.',
+      category: 'Customization',
+    },
+  ],
+};
 
 export default function SugarPetal() {
-  const [cartCount, setCartCount] = useState(0);
-  const [cartNotice, setCartNotice] = useState<string | null>(null);
-  const [cupcakeBox, setCupcakeBox] = useState('Box of 6 ($24)');
-
-  const addToCart = (item: string) => {
-    setCartCount(c => c + 1);
-    setCartNotice(`Added "${item}" to party box.`);
-    setTimeout(() => setCartNotice(null), 3000);
-  };
-
-  return (
-    <div className="bk-root" style={{
-      '--bk-cream-50': '#fff1f8',
-      '--bk-cream-100': '#fce7f3',
-      '--bk-hearth-900': '#500724',
-      '--bk-amber-600': '#db2777',
-      '--bk-golden-500': '#ec4899'
-    } as React.CSSProperties}>
-      {cartNotice && (
-        <div style={{
-          position: 'fixed',
-          bottom: '24px',
-          right: '24px',
-          background: 'var(--bk-hearth-900)',
-          color: '#fff',
-          padding: '12px 24px',
-          borderRadius: '8px',
-          zIndex: 9999,
-          fontSize: '0.9rem'
-        }}>
-          🧁 {cartNotice}
-        </div>
-      )}
-
-      {/* 1. Utility Strip */}
-      <div className="bk-utility-strip">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-          <span className="bk-utility-badge" style={{ background: 'rgba(236, 72, 153, 0.25)', color: '#fbcfe8' }}>
-            CELEBRATION BOUTIQUE
-          </span>
-          <span>Freshly Frosted Cupcakes & Party Bakes · Order by 12 PM for Same-Day Party Drops</span>
-        </div>
-        <div style={{ fontSize: '0.82rem', color: '#fbcfe8' }}>
-          Custom Birthday Plaque Included with Every Cake Order
-        </div>
-      </div>
-
-      {/* Navigation */}
-      <nav style={{
-        background: '#ffffff',
-        padding: '1.25rem 6vw',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        borderBottom: '1px solid var(--bk-border-soft)',
-        position: 'sticky',
-        top: 0,
-        zIndex: 100
-      }}>
-        <div>
-          <a href="/" style={{
-            fontFamily: '"Quicksand", sans-serif',
-            fontSize: '2rem',
-            fontWeight: 800,
-            color: 'var(--bk-amber-600)',
-            textDecoration: 'none'
-          }}>
-            Sugar Petal<span style={{ color: 'var(--bk-golden-500)' }}>✿</span>
-          </a>
-          <span style={{ display: 'block', fontSize: '0.75rem', letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--bk-toast-700)' }}>
-            Celebration Cakes & Floral Confectionery
-          </span>
-        </div>
-
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-          <a href="/templates/category/bakery" style={{ fontSize: '0.88rem', fontWeight: 600, color: 'var(--bk-toast-700)', textDecoration: 'none' }}>← Category Index</a>
-          <button
-            onClick={() => document.getElementById('cupcakes')?.scrollIntoView({ behavior: 'smooth' })}
-            style={{
-              background: 'var(--bk-amber-600)',
-              color: '#fff',
-              border: 'none',
-              padding: '0.55rem 1.25rem',
-              borderRadius: 'var(--bk-radius-pill)',
-              fontWeight: 700,
-              fontSize: '0.88rem',
-              cursor: 'pointer'
-            }}
-          >
-            Party Box ({cartCount})
-          </button>
-        </div>
-      </nav>
-
-      {/* 2. Hero */}
-      <header className="bk-hero" style={{ backgroundImage: `url(${img('photo-1486427944299-d1955d23e34d', 1600)})` }}>
-        <div className="bk-hero-scrim" style={{ background: 'linear-gradient(90deg, rgba(80,7,36,0.92) 0%, rgba(80,7,36,0.68) 60%, rgba(80,7,36,0.25) 100%)' }} />
-        <div className="bk-hero-card">
-          <span className="bk-hero-tagline" style={{ color: '#fbcfe8' }}>HAND-PIPED BUTTERCREAM & SPRINKLES</span>
-          <h1 className="bk-hero-title">Life is Worth Celebrating Every Single Day.</h1>
-          <p className="bk-hero-desc">
-            Vibrant gourmet cupcakes, custom birthday cakes, and dessert platters crafted with pure Madagascar vanilla, fresh berries, and whimsical floral touches.
-          </p>
-          <div className="bk-hero-actions">
-            <a href="#cupcakes" className="bk-btn-primary" style={{ background: 'var(--bk-amber-600)' }}>Shop Cupcake Flavors →</a>
-            <a href="#custom" className="bk-btn-secondary">Custom Cake Inquiry 🎂</a>
-          </div>
-        </div>
-      </header>
-
-      {/* 3. Proof Bar */}
-      <section className="bk-proof-strip">
-        <div className="bk-proof-grid">
-          <div className="bk-proof-item">
-            <span className="bk-proof-stat">50,000+</span>
-            <span className="bk-proof-label">Cupcakes Hand-Piped</span>
-          </div>
-          <div className="bk-proof-item">
-            <span className="bk-proof-stat">100% Real</span>
-            <span className="bk-proof-label">Farm Butter & Madagascar Vanilla</span>
-          </div>
-          <div className="bk-proof-item">
-            <span className="bk-proof-stat">Eggless Pure</span>
-            <span className="bk-proof-label">Dedicated Vegetarian Flavor Line</span>
-          </div>
-          <div className="bk-proof-item">
-            <span className="bk-proof-stat">4.97★</span>
-            <span className="bk-proof-label">From 2,100+ Party Planners</span>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Cupcakes Grid */}
-      <section id="cupcakes" className="bk-section">
-        <div className="bk-section-header">
-          <span className="bk-section-eyebrow">Freshly Frosted Today</span>
-          <h2 className="bk-section-title">Signature Cupcake Flavors</h2>
-          <p className="bk-section-subtitle">Baked fresh from scratch each morning using heirloom recipe bases.</p>
-        </div>
-
-        <div className="bk-occasion-grid">
-          {[
-            { title: 'Funfetti Birthday Explosion', price: '$4.25', desc: 'Vanilla bean sponge with rainbow sprinkles & fluffy vanilla frosting.', img: 'photo-1486427944299-d1955d23e34d' },
-            { title: 'Red Velvet Dream Cloud', price: '$4.50', desc: 'Silky cocoa-buttermilk sponge topped with tangy whipped cream cheese.', img: 'photo-1567188040759-fb8a883dc6d8' },
-            { title: 'Salted Caramel Chocolate Fudge', price: '$4.50', desc: 'Dark Valrhona chocolate cake filled with gooey salted caramel center.', img: 'photo-1534432182912-63863115e106' },
-            { title: 'Wild Strawberry Lemon Blossom', price: '$4.25', desc: 'Zesty lemon sponge with house wild strawberry buttercream frosting.', img: 'photo-1558961363-fa8fdf82db35' }
-          ].map((item, idx) => (
-            <div key={idx} className="bk-occasion-card">
-              <div className="bk-occasion-media">
-                <img src={img(item.img, 700)} alt={item.title} loading="lazy" />
-              </div>
-              <div className="bk-occasion-content">
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
-                  <h3 style={{ margin: 0 }}>{item.title}</h3>
-                  <strong style={{ color: 'var(--bk-amber-600)' }}>{item.price}</strong>
-                </div>
-                <p>{item.desc}</p>
-                <button
-                  onClick={() => addToCart(item.title)}
-                  className="bk-btn-primary"
-                  style={{ width: '100%', justifyContent: 'center', padding: '0.65rem', background: 'var(--bk-amber-600)' }}
-                >
-                  Add to Box +
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 5. Footer */}
-      <footer className="bk-footer">
-        <div className="bk-footer-grid">
-          <div className="bk-footer-col">
-            <h4 style={{ color: '#fbcfe8', fontSize: '1.4rem' }}>Sugar Petal Boutique</h4>
-            <p>Bringing cheer, vibrant colors, and unforgettable sweet memories to every birthday and family gathering.</p>
-            <div className="bk-fssai-stamp">FSSAI / FDA COMPLIANT · HYGIENE EXCELLENCE CERTIFIED</div>
-          </div>
-          <div className="bk-footer-col">
-            <h4>Boutique Hours</h4>
-            <p>Tuesday – Saturday: <strong>9:00 AM – 6:00 PM</strong><br />Sunday: <strong>10:00 AM – 4:00 PM</strong><br />Monday: <em>Closed</em></p>
-          </div>
-          <div className="bk-footer-col">
-            <h4>Location & Pickups</h4>
-            <p>12 Petal Court, Blossom Valley<br />Party Concierge: +1 (555) 612-4091<br />celebrate@sugarpetal.com</p>
-          </div>
-          <div className="bk-footer-col">
-            <h4>Dietary Customization</h4>
-            <p style={{ fontSize: '0.82rem', opacity: 0.85 }}>All our cupcakes can be ordered in 100% eggless (vegetarian) or gluten-friendly formulations. Inquire 24 hours prior to your event.</p>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
+  return <FoodStorefrontCore theme={sugarPetalConfig} />;
 }

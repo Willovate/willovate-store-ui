@@ -11,6 +11,13 @@ import ContactSupportModal from '../components/ContactSupportModal'
 import PublishSuccessModal from '../components/PublishSuccessModal'
 import ThemeLibrary from '../components/ThemeLibrary'
 import SectionsPanel from '../components/SectionsPanel'
+import ProductsModule from '../components/dashboard/ProductsModule'
+import OrdersModule from '../components/dashboard/OrdersModule'
+import CustomersModule from '../components/dashboard/CustomersModule'
+import SalesModule from '../components/dashboard/SalesModule'
+import MarketingModule from '../components/dashboard/MarketingModule'
+import SettingsModule from '../components/dashboard/SettingsModule'
+import WillovateLogo from '../components/WillovateLogo'
 import {
   Home,
   ShoppingBag,
@@ -48,20 +55,44 @@ import '../styles/workspace.css'
 
 interface WorkspaceProps {
   websiteId: string
+  initialTab?: string
+  forceEditorView?: boolean
 }
 
-
-
-export default function Workspace({ websiteId }: WorkspaceProps) {
+export default function Workspace({ websiteId, initialTab, forceEditorView }: WorkspaceProps) {
   const navigate = useNavigate()
+  const location = useLocation()
+  const queryParams = new URLSearchParams(location.search)
+
+  const isEditorInitial = Boolean(
+    forceEditorView ||
+    location.state?.viewMode === 'editor' ||
+    queryParams.get('view') === 'editor' ||
+    location.pathname.includes('/edit-templates') ||
+    initialTab === 'edit-templates'
+  )
+
   const [website, setWebsite] = useState<Website | null>(null)
   const [activeTheme, setActiveTheme] = useState<Theme | null>(null)
   const [selectedPageId, setSelectedPageId] = useState<string | null>(null)
   const [pagesState, setPagesState] = useState<Page[]>([])
-  const location = useLocation()
   const [viewMode, setViewMode] = useState<'dashboard' | 'editor'>(
-    location.state?.viewMode === 'editor' ? 'editor' : 'dashboard'
+    isEditorInitial ? 'editor' : 'dashboard'
   )
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search)
+    if (
+      forceEditorView ||
+      location.state?.viewMode === 'editor' ||
+      params.get('view') === 'editor' ||
+      location.pathname.includes('/edit-templates') ||
+      initialTab === 'edit-templates'
+    ) {
+      setViewMode('editor')
+    }
+  }, [forceEditorView, location.state, location.search, location.pathname, initialTab])
+
   const [history, setHistory] = useState<string[]>([])
   const [historyIndex, setHistoryIndex] = useState(-1)
 
@@ -78,7 +109,31 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
   const [showThemeLibrary, setShowThemeLibrary] = useState(false)
   const [previewMode, setPreviewMode] = useState<'desktop' | 'tablet' | 'mobile'>('desktop')
   const [isAddingElement, setIsAddingElement] = useState(false)
-  const [activeNav, setActiveNav] = useState<string>('online-store')
+  const [activeNav, setActiveNav] = useState<string>(initialTab && initialTab !== 'edit-templates' ? initialTab : 'workspace')
+
+  useEffect(() => {
+    if (initialTab && initialTab !== 'edit-templates') {
+      setActiveNav(initialTab)
+    }
+  }, [initialTab])
+
+  const handleNavClick = (nav: string) => {
+    setActiveNav(nav)
+    if (viewMode === 'editor') {
+      setViewMode('dashboard')
+    }
+    if (website?.id) {
+      navigate(`/workspace/${website.id}/${nav}`, { replace: true })
+    }
+  }
+
+  const handleEditTemplates = () => {
+    setViewMode('editor')
+    if (website?.id) {
+      navigate(`/workspace/${website.id}/edit-templates`, { replace: true })
+    }
+  }
+
   const [comingSoonToast, setComingSoonToast] = useState<string | null>(null)
   const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const frameRef = useRef<HTMLDivElement>(null)
@@ -289,37 +344,23 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
       const name = type.charAt(0).toUpperCase() + type.slice(1) + ' Block'
 
       let initialProps: Record<string, unknown> = {}
-      if (type === 'heading') initialProps = { content: 'New Heading' }
-      else if (type === 'text') initialProps = { content: 'New text block. Click to edit.' }
-      else if (type === 'button') initialProps = { label: 'Click Here' }
-      else if (type === 'image') initialProps = { url: '' }
+      if (type === 'heading') initialProps = { content: 'Artisan Specials & Highlights' }
+      else if (type === 'text') initialProps = { content: 'Small-batch creations made fresh daily with organic local ingredients.' }
+      else if (type === 'button') initialProps = { label: 'Explore Menu', link: '#menu' }
+      else if (type === 'image') initialProps = { url: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1200&auto=format&fit=crop' }
       else if (type === 'banner_slider') initialProps = {
         images: JSON.stringify([
-          'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1445205170230-053b83016050?w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1485230895905-ef082490cc32?w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1505022610485-0249ba5b36ee?w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1483181957632-8bda974ce91c?w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1479064555552-3ef4979f8908?w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1550614000-4b95d4662d54?w=1200&auto=format&fit=crop',
-          'https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?w=1200&auto=format&fit=crop'
+          'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1512568400610-62da28bc8a13?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1511081692775-05d0f180a065?w=1200&auto=format&fit=crop'
         ])
       }
-      else if (type === 'services_grid') initialProps = { title: 'Our Services', subtitle: 'What we offer' }
-      else if (type === 'image_text') initialProps = { title: 'About Us', content: 'We are a luxury fashion brand...', image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format&fit=crop' }
-      else if (type === 'newsletter') initialProps = { title: 'Subscribe to our Newsletter', subtitle: 'Get 10% off your first order', buttonText: 'Subscribe' }
+      else if (type === 'services_grid') initialProps = { title: 'Our Offerings', subtitle: 'Crafted daily by master bakers and baristas' }
+      else if (type === 'image_text') initialProps = { title: 'Our Story & Philosophy', content: 'We believe exceptional food starts with time, honest ingredients, and passionate craft.', image: 'https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?w=800&auto=format&fit=crop' }
+      else if (type === 'newsletter') initialProps = { title: 'Join Our Morning Club', subtitle: 'Get morning batch updates and exclusive seasonal tasting invites.', buttonText: 'Subscribe' }
       else if (type === 'video') initialProps = { url: 'https://www.youtube.com/embed/dQw4w9WgXcQ' }
 
       await createElement(selectedPage.id, type, name, initialProps, 99)
@@ -408,6 +449,14 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
           websiteId={website?.id || ''}
           onClose={() => setShowThemeLibrary(false)}
           onRefresh={() => loadWebsite()}
+          onSelectTheme={(theme) => {
+            setActiveTheme(theme)
+            setPagesState(theme.pages)
+            activeThemeIdRef.current = theme.id
+            setSelectedPageId(theme.pages.find(p => p.isHomePage)?.id || theme.pages[0]?.id || null)
+            setViewMode('editor')
+            setShowThemeLibrary(false)
+          }}
         />
       )}
       {showSupportModal && (
@@ -428,21 +477,14 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
           {/* ── GLOBAL DASHBOARD HEADER ── */}
           <header className="ws-topbar ws-dashboard-topbar" style={{ display: 'flex', justifyContent: 'space-between', padding: '0 1.25rem', height: '60px', background: '#fff', borderBottom: '1px solid #eef0f5', flexShrink: 0, zIndex: 90 }}>
             <div className="ws-topbar-left" style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
-              <div className="ws-sidebar-brand" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexShrink: 0 }}>
-                <svg width="24" height="18" viewBox="0 0 32 24" fill="none">
-                  <path d="M4 4L10 20L16 8L22 20L28 4" stroke="url(#logo-grad)" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  <defs>
-                    <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#8b5cf6" />
-                      <stop offset="40%" stopColor="#3b82f6" />
-                      <stop offset="100%" stopColor="#0ea5e9" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-                <span style={{ fontSize: '1.25rem', fontWeight: 700, color: '#1e1b4b', letterSpacing: '-0.5px' }}>
-                  Willovate <span style={{ color: '#4F46E5' }}>One</span>
-                </span>
-              </div>
+              <WillovateLogo
+                height={34}
+                onClick={() => {
+                  setActiveNav('workspace');
+                  setViewMode('dashboard');
+                }}
+                style={{ cursor: 'pointer' }}
+              />
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <SaveIndicator status={saveStatus} hasUnsavedChanges={hasUnsavedChanges} onSave={handleSave} />
               </div>
@@ -464,31 +506,76 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
               <nav className="ws-sidebar-nav" style={{ padding: '1rem', flex: 1, display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
                 <p className="ws-sidebar-section-label" style={{ color: '#1e1b4b', fontSize: '0.7rem', fontWeight: 800, letterSpacing: '1px', marginBottom: '0.4rem', padding: '0 0.5rem' }}>MAIN MENU</p>
                 <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem', padding: 0, margin: 0, listStyle: 'none' }}>
-                  <li className={`ws-nav-item ${activeNav === 'workspace' ? 'ws-nav-active' : ''}`} style={{ background: activeNav === 'workspace' ? '#EEF2FF' : 'transparent', color: activeNav === 'workspace' ? '#4F46E5' : '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }} onClick={() => setActiveNav('workspace')}><Home size={18} /> Workspace</li>
-                  <li className={`ws-nav-item ${activeNav === 'online-store' ? 'ws-nav-active' : ''}`} style={{ background: activeNav === 'online-store' ? '#EEF2FF' : 'transparent', color: activeNav === 'online-store' ? '#4F46E5' : '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }} onClick={() => setActiveNav('online-store')}><AppWindow size={18} /> Online Store</li>
-                  <li className={`ws-nav-item ${activeNav === 'products' ? 'ws-nav-active' : ''}`} style={{ background: activeNav === 'products' ? '#EEF2FF' : 'transparent', color: activeNav === 'products' ? '#4F46E5' : '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }} onClick={() => { setActiveNav('products'); showComingSoon('Products'); }}><ShoppingBag size={18} /> Products</li>
-                  <li className={`ws-nav-item ${activeNav === 'orders' ? 'ws-nav-active' : ''}`} style={{ background: activeNav === 'orders' ? '#EEF2FF' : 'transparent', color: activeNav === 'orders' ? '#4F46E5' : '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }} onClick={() => { setActiveNav('orders'); showComingSoon('Orders'); }}><Folder size={18} /> Orders</li>
-                  <li className={`ws-nav-item ${activeNav === 'customers' ? 'ws-nav-active' : ''}`} style={{ background: activeNav === 'customers' ? '#EEF2FF' : 'transparent', color: activeNav === 'customers' ? '#4F46E5' : '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }} onClick={() => { setActiveNav('customers'); showComingSoon('Customers'); }}><Users size={18} /> Customers</li>
-                  <li className={`ws-nav-item ${activeNav === 'sales' ? 'ws-nav-active' : ''}`} style={{ background: activeNav === 'sales' ? '#EEF2FF' : 'transparent', color: activeNav === 'sales' ? '#4F46E5' : '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }} onClick={() => { setActiveNav('sales'); showComingSoon('Sales'); }}><TrendingUp size={18} /> Sales</li>
-                  <li className={`ws-nav-item ${activeNav === 'marketing' ? 'ws-nav-active' : ''}`} style={{ background: activeNav === 'marketing' ? '#EEF2FF' : 'transparent', color: activeNav === 'marketing' ? '#4F46E5' : '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }} onClick={() => { setActiveNav('marketing'); showComingSoon('Marketing & Growth'); }}><Megaphone size={18} /> Marketing &amp; Growth</li>
+                  <li
+                    className={`ws-nav-item ${activeNav === 'workspace' && viewMode === 'dashboard' ? 'ws-nav-active' : ''}`}
+                    style={{
+                      background: (activeNav === 'workspace' && viewMode === 'dashboard') ? '#EEF2FF' : 'transparent',
+                      color: (activeNav === 'workspace' && viewMode === 'dashboard') ? '#4F46E5' : '#1e1b4b',
+                      fontWeight: 600,
+                      padding: '0.5rem 0.75rem',
+                      borderRadius: '8px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      cursor: 'pointer'
+                    }}
+                    onClick={() => {
+                      setActiveNav('workspace')
+                      setViewMode('dashboard')
+                      if (website?.id) {
+                        navigate(`/workspace/${website.id}`, { replace: true })
+                      }
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        setActiveNav('workspace')
+                        setViewMode('dashboard')
+                        if (website?.id) {
+                          navigate(`/workspace/${website.id}`, { replace: true })
+                        }
+                      }
+                    }}
+                  >
+                    <Home size={18} /> Workspace
+                  </li>
+                  <li className="ws-nav-item ws-nav-disabled" style={{ color: '#334155', fontWeight: 500, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem' }} aria-disabled="true" tabIndex={-1}><ShoppingBag size={18} /> Products</li>
+                  <li className="ws-nav-item ws-nav-disabled" style={{ color: '#334155', fontWeight: 500, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem' }} aria-disabled="true" tabIndex={-1}><Folder size={18} /> Orders</li>
+                  <li className="ws-nav-item ws-nav-disabled" style={{ color: '#334155', fontWeight: 500, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem' }} aria-disabled="true" tabIndex={-1}><Users size={18} /> Customers</li>
+                  <li className="ws-nav-item ws-nav-disabled" style={{ color: '#334155', fontWeight: 500, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem' }} aria-disabled="true" tabIndex={-1}><TrendingUp size={18} /> Sales</li>
+                  <li className="ws-nav-item ws-nav-disabled" style={{ color: '#334155', fontWeight: 500, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem' }} aria-disabled="true" tabIndex={-1}><Megaphone size={18} /> Marketing &amp; Growth</li>
                 </ul>
 
                 <div style={{ height: '1px', background: '#f1f5f9', margin: '0.5rem' }}></div>
 
                 <p className="ws-sidebar-section-label" style={{ color: '#1e1b4b', fontSize: '0.7rem', fontWeight: 800, letterSpacing: '1px', marginBottom: '0.4rem', padding: '0 0.5rem' }}>TEMPLATES</p>
                 <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem', padding: 0, margin: 0, listStyle: 'none' }}>
-                  <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }} onClick={() => navigate(`/browse-templates?websiteId=${website?.id}`)}>
+                  <li
+                    className="ws-nav-item"
+                    style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}
+                    onClick={() => navigate(`/browse-templates?websiteId=${website?.id}`)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        navigate(`/browse-templates?websiteId=${website?.id}`)
+                      }
+                    }}
+                  >
                     <SlidersHorizontal size={18} /> Browse Templates
                     <div style={{ width: '56px', background: '#FF4500', color: '#fff', fontSize: '10px', fontWeight: 800, padding: '2px 0', textAlign: 'center', borderRadius: '12px', marginLeft: 'auto' }}>NEW</div>
                   </li>
-                  <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }} onClick={() => setShowThemeLibrary(true)}><Bookmark size={18} /> My Templates</li>
+                  <li className="ws-nav-item ws-nav-disabled" style={{ color: '#334155', fontWeight: 500, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem' }} aria-disabled="true" tabIndex={-1}><Bookmark size={18} /> My Templates</li>
                 </ul>
 
                 <div style={{ height: '1px', background: '#f1f5f9', margin: '0.5rem' }}></div>
 
                 <p className="ws-sidebar-section-label" style={{ color: '#1e1b4b', fontSize: '0.7rem', fontWeight: 800, letterSpacing: '1px', marginBottom: '0.4rem', padding: '0 0.5rem' }}>SETTINGS</p>
                 <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem', padding: 0, margin: 0, listStyle: 'none' }}>
-                  <li className={`ws-nav-item ${activeNav === 'settings' ? 'ws-nav-active' : ''}`} style={{ background: activeNav === 'settings' ? '#EEF2FF' : 'transparent', color: activeNav === 'settings' ? '#4F46E5' : '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }} onClick={() => { setActiveNav('settings'); showComingSoon('Settings'); }}><Settings size={18} /> Settings</li>
+                  <li className="ws-nav-item ws-nav-disabled" style={{ color: '#334155', fontWeight: 500, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem' }} aria-disabled="true" tabIndex={-1}><Settings size={18} /> Settings</li>
                 </ul>
               </nav>
 
@@ -497,7 +584,7 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
                   <HelpCircle size={20} />
                   <h4 style={{ fontSize: '0.85rem', fontWeight: 700, margin: 0 }}>Need Help?</h4>
                 </div>
-                <p style={{ fontSize: '0.75rem', color: '#1e1b4b', margin: '0 0 0.75rem 0', lineHeight: 1.4, fontWeight: 500 }}>Our support team to here to help you with anything.</p>
+                <p style={{ fontSize: '0.75rem', color: '#1e1b4b', margin: '0 0 0.75rem 0', lineHeight: 1.4, fontWeight: 500 }}>Our support team is here to help you with anything.</p>
                 <button style={{ width: '100%', padding: '0.5rem', background: 'transparent', color: '#5c3ce6', border: '1px solid #ddd6fe', borderRadius: '8px', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer', transition: 'background 0.15s' }} onClick={() => setShowSupportModal(true)}>
                   Contact Support
                 </button>
@@ -506,116 +593,131 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
 
             {/* ── DASHBOARD MAIN COLUMN ── */}
             <main className="ws-main-col ws-dashboard-main" style={{ flex: 1, display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
-                        <div className="ws-store-dashboard" style={{ padding: '1.5rem 2.5rem', maxWidth: '1300px', margin: '0 auto', width: '100%', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <div className="ws-store-dashboard-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div>
-                  <h1 style={{ fontSize: '1.4rem', fontWeight: 700, margin: '0 0 0.25rem 0', color: '#1a202c' }}>Online Store</h1>
-                  <p style={{ color: '#4a5568', margin: 0, fontSize: '0.85rem' }}>Manage your storefront and design.</p>
-                </div>
-                <div className="ws-store-dashboard-actions" style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-                  <button className="ws-btn ws-btn-outline" style={{ background: '#fff', borderColor: '#e2e8f0', color: '#4a5568', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem', boxShadow: '0 1px 2px rgba(0,0,0,0.05)' }} onClick={() => window.open(`/preview/${website?.id}`, '_blank')}>
-                    <Eye size={16} /> Preview
-                  </button>
-                  <div style={{ display: 'flex', borderRadius: '8px', overflow: 'hidden' }}>
-                    <button style={{ background: '#5c3ce6', color: '#fff', border: 'none', padding: '0.5rem 1rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.85rem' }} onClick={handlePublish}>
-                      <Send size={15} /> Publish
-                    </button>
-                    <button style={{ background: '#5c3ce6', color: '#fff', border: 'none', borderLeft: '1px solid rgba(255,255,255,0.2)', padding: '0.5rem 0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
-                      <ChevronDown size={16} />
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="ws-store-summary-card" style={{ background: '#fff', border: '1px solid #eef0f5', borderRadius: '20px', display: 'flex', alignItems: 'stretch', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
-                <div className="ws-store-preview-pane" style={{ flex: 1.8, background: '#f9f9fa', padding: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: '20px', borderBottomLeftRadius: '20px' }}>
-                   <div className="ws-store-preview-card" style={{ width: '100%', height: '400px', background: '#fff', borderRadius: '8px', display: 'flex', flexDirection: 'column', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', position: 'relative', overflow: 'hidden' }}>
-                      <div style={{ transform: 'scale(0.4)', transformOrigin: 'top left', width: '250%', height: '250%' }}>
-                        {selectedPage ? (
-                          <PageEditor website={website} page={selectedPage} />
-                        ) : (
-                          <div style={{ padding: '2rem' }}>Loading...</div>
-                        )}
-                      </div>
-                   </div>
-                </div>
-                <div className="ws-store-details-pane" style={{ flex: 1, padding: '1.5rem', borderLeft: '1px solid #eef0f5', display: 'flex', flexDirection: 'column' }}>
-                  <h3 className="ws-store-details-title" style={{ fontSize: '1.2rem', fontWeight: 700, margin: '0 0 0.25rem 0', color: '#1e1b4b' }}>{website.name || 'Mino Fashion Store'}</h3>
-                  <p className="ws-store-details-description" style={{ color: '#64748b', fontSize: '0.8rem', marginBottom: '1.5rem' }}>{website.description || 'Minimal fashion store for everyday style.'}</p>
-
-                  <div className="ws-store-meta-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #eef0f5', paddingBottom: '1rem', marginBottom: '1rem' }}>
-                    <div className="ws-store-meta-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#475569', fontSize: '0.85rem', fontWeight: 500 }}><Calendar size={16} strokeWidth={1.5}/> Template</div>
-                    <span className="ws-store-meta-value" style={{ fontWeight: 600, fontSize: '0.85rem', color: '#0f172a', textTransform: 'capitalize' }}>{website.templateId?.replace(/-/g, ' ') || 'Default'}</span>
-                  </div>
-                  <div className="ws-store-meta-row ws-store-meta-row-last" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '1rem', marginBottom: 'auto' }}>
-                    <div className="ws-store-meta-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#475569', fontSize: '0.85rem', fontWeight: 500 }}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> Last updated</div>
-                    <span className="ws-store-meta-value" style={{ fontWeight: 600, fontSize: '0.85rem', color: '#0f172a' }}>{new Date(website.updatedAt).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit' })}</span>
-                  </div>
-
-                  <button className="ws-btn ws-btn-outline" style={{ width: '100%', justifyContent: 'center', color: '#5c3ce6', borderColor: '#ddd6fe', background: '#fff', fontWeight: 600, padding: '0.6rem', borderRadius: '8px', fontSize: '0.85rem' }} onClick={() => setViewMode('editor')}>
-                    <Edit3 size={15}/> Edit
-                  </button>
-                </div>
-              </div>
-
-              {/* AI Assistant Banner */}
-              <div className="ws-ai-dashboard-panel" style={{ background: 'linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%)', borderRadius: '20px', padding: '1.5rem 2rem', position: 'relative', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
-                 <div style={{ position: 'absolute', top: '15%', right: '5%', opacity: 0.5 }}>
-                   <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#a855f7" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
-                 </div>
-                 <div style={{ position: 'absolute', top: '40%', right: '12%', opacity: 0.3 }}>
-                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a855f7" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
-                 </div>
-
-                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#4F46E5', fontWeight: 700, marginBottom: '0.75rem', fontSize: '0.85rem' }}>
-                    <Sparkles size={16}/> AI Assistant
-                 </div>
-                 <h3 style={{ margin: '0 0 0.25rem 0', fontSize: '1.1rem', fontWeight: 700, color: '#1e1b4b' }}>What would you like to work on?</h3>
-                 <p style={{ margin: '0 0 1rem 0', color: '#475569', fontSize: '0.85rem' }}>Get help with your store, products, content and ideas.</p>
-
-                 <div style={{ display: 'flex', alignItems: 'center', background: '#fff', borderRadius: '30px', padding: '0.4rem', boxShadow: '0 2px 5px rgba(0,0,0,0.02)', border: '1px solid #C7D2FE', marginBottom: '1.25rem', maxWidth: '850px' }}>
-                    <div style={{ padding: '0.4rem 0.75rem', color: '#4F46E5' }}><Sparkles size={18}/></div>
-                    <input
-                      type="text"
-                      placeholder="Ask AI Assistant anything..."
-                      style={{ flex: 1, border: 'none', outline: 'none', background: 'transparent', fontSize: '0.9rem', color: '#334155' }}
-                      value={initialAiPrompt || ''}
-                      onChange={e => setInitialAiPrompt(e.target.value)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' && initialAiPrompt?.trim()) {
-                          setViewMode('editor');
-                          setShowAI(true);
-                        }
-                      }}
-                    />
-                    <button
-                      style={{ background: '#4F46E5', color: '#fff', border: 'none', borderRadius: '50%', width: '34px', height: '34px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 2px 4px rgba(79, 70, 229, 0.2)' }}
-                      onClick={() => { if (initialAiPrompt?.trim()) { setViewMode('editor'); setShowAI(true); } }}
-                    ><Send size={14}/></button>
-                 </div>
-
-                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                    <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#1e1b4b' }}>Suggested actions</span>
-                    <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                      <button className="ws-btn ws-btn-outline" onClick={() => { setInitialAiPrompt('Create a product'); setViewMode('editor'); setShowAI(true); }} style={{ borderRadius: '24px', padding: '0.5rem 1rem', fontSize: '0.8rem', background: '#fff', borderColor: '#e9d5ff', color: '#6b21a8', fontWeight: 500, display: 'flex', gap: '0.4rem' }}><Plus size={14} strokeWidth={2}/> Create a product</button>
-                      <button className="ws-btn ws-btn-outline" onClick={() => { setInitialAiPrompt('Improve storefront'); setViewMode('editor'); setShowAI(true); }} style={{ borderRadius: '24px', padding: '0.5rem 1rem', fontSize: '0.8rem', background: '#fff', borderColor: '#e9d5ff', color: '#6b21a8', fontWeight: 500, display: 'flex', gap: '0.4rem' }}><Store size={14} strokeWidth={2}/> Improve storefront</button>
-                      <button className="ws-btn ws-btn-outline" onClick={() => { setInitialAiPrompt('Write product description'); setViewMode('editor'); setShowAI(true); }} style={{ borderRadius: '24px', padding: '0.5rem 1rem', fontSize: '0.8rem', background: '#fff', borderColor: '#e9d5ff', color: '#6b21a8', fontWeight: 500, display: 'flex', gap: '0.4rem' }}><FileText size={14} strokeWidth={2}/> Write product description</button>
-                      <button className="ws-btn ws-btn-outline" onClick={() => { setInitialAiPrompt('Give me design advice'); setViewMode('editor'); setShowAI(true); }} style={{ borderRadius: '24px', padding: '0.5rem 1rem', fontSize: '0.8rem', background: '#fff', borderColor: '#e9d5ff', color: '#6b21a8', fontWeight: 500, display: 'flex', gap: '0.4rem' }}><Lightbulb size={14} strokeWidth={2}/> Generate ideas</button>
+              {activeNav === 'products' ? (
+                <ProductsModule />
+              ) : activeNav === 'orders' ? (
+                <OrdersModule websiteId={website?.id} />
+              ) : activeNav === 'customers' ? (
+                <CustomersModule />
+              ) : activeNav === 'sales' ? (
+                <SalesModule />
+              ) : activeNav === 'marketing' ? (
+                <MarketingModule websiteName={website.name} />
+              ) : activeNav === 'settings' ? (
+                <SettingsModule website={website} onUpdateWebsite={loadWebsite} />
+              ) : (
+                <div className="ws-store-dashboard" style={{ padding: '1.5rem 2.5rem', maxWidth: '1300px', margin: '0 auto', width: '100%', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                  <div className="ws-store-dashboard-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div>
+                      <h1 style={{ fontSize: '1.4rem', fontWeight: 700, margin: '0 0 0.25rem 0', color: '#1a202c' }}>Store Workspace</h1>
+                      <p style={{ color: '#4a5568', margin: 0, fontSize: '0.85rem' }}>Business overview and active storefront management.</p>
                     </div>
-                 </div>
-              </div>
-            </div>
-          </main>
+                    <div className="ws-store-dashboard-actions" style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                      <button className="ws-btn ws-btn-outline" style={{ background: '#fff', borderColor: '#e2e8f0', color: '#4a5568', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem', boxShadow: '0 1px 2px rgba(0,0,0,0.05)' }} onClick={() => window.open(`/preview/${website?.id}`, '_blank')}>
+                        <Eye size={16} /> Preview Store
+                      </button>
+                      <div style={{ display: 'flex', borderRadius: '8px', overflow: 'hidden' }}>
+                        <button style={{ background: '#5c3ce6', color: '#fff', border: 'none', padding: '0.5rem 1rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.85rem' }} onClick={handlePublish}>
+                          <Send size={15} /> Publish
+                        </button>
+                        <button style={{ background: '#5c3ce6', color: '#fff', border: 'none', borderLeft: '1px solid rgba(255,255,255,0.2)', padding: '0.5rem 0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+                          <ChevronDown size={16} />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="ws-store-summary-card" style={{ background: '#fff', border: '1px solid #eef0f5', borderRadius: '20px', display: 'flex', alignItems: 'stretch', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}>
+                    <div className="ws-store-preview-pane" style={{ flex: 1.8, background: '#f9f9fa', padding: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: '20px', borderBottomLeftRadius: '20px' }}>
+                       <div className="ws-store-preview-card" style={{ width: '100%', height: '400px', background: '#fff', borderRadius: '8px', display: 'flex', flexDirection: 'column', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', position: 'relative', overflow: 'hidden' }}>
+                          <div style={{ transform: 'scale(0.4)', transformOrigin: 'top left', width: '250%', height: '250%' }}>
+                            {selectedPage ? (
+                              <PageEditor website={website} page={selectedPage} />
+                            ) : (
+                              <div style={{ padding: '2rem' }}>Loading...</div>
+                            )}
+                          </div>
+                       </div>
+                    </div>
+                    <div className="ws-store-details-pane" style={{ flex: 1, padding: '1.5rem', borderLeft: '1px solid #eef0f5', display: 'flex', flexDirection: 'column' }}>
+                      <h3 className="ws-store-details-title" style={{ fontSize: '1.2rem', fontWeight: 700, margin: '0 0 0.25rem 0', color: '#1e1b4b' }}>{website.name || 'Artisan Dining'}</h3>
+                      <p className="ws-store-details-description" style={{ color: '#64748b', fontSize: '0.8rem', marginBottom: '1.5rem' }}>{website.description || 'Artisanal kitchen & dining room.'}</p>
+
+                      <div className="ws-store-meta-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #eef0f5', paddingBottom: '1rem', marginBottom: '1rem' }}>
+                        <div className="ws-store-meta-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#475569', fontSize: '0.85rem', fontWeight: 500 }}><Calendar size={16} strokeWidth={1.5}/> Template</div>
+                        <span className="ws-store-meta-value" style={{ fontWeight: 600, fontSize: '0.85rem', color: '#0f172a', textTransform: 'capitalize' }}>{website.templateId?.replace(/-/g, ' ') || 'Default'}</span>
+                      </div>
+                      <div className="ws-store-meta-row ws-store-meta-row-last" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '1rem', marginBottom: 'auto' }}>
+                        <div className="ws-store-meta-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#475569', fontSize: '0.85rem', fontWeight: 500 }}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> Last updated</div>
+                        <span className="ws-store-meta-value" style={{ fontWeight: 600, fontSize: '0.85rem', color: '#0f172a' }}>{new Date(website.updatedAt).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit' })}</span>
+                      </div>
+
+                      <button className="ws-btn ws-btn-outline" style={{ width: '100%', justifyContent: 'center', color: '#5c3ce6', borderColor: '#ddd6fe', background: '#fff', fontWeight: 600, padding: '0.6rem', borderRadius: '8px', fontSize: '0.85rem' }} onClick={handleEditTemplates}>
+                        <Edit3 size={15}/> Edit Templates
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* AI Assistant Banner */}
+                  <div className="ws-ai-dashboard-panel" style={{ background: 'linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%)', borderRadius: '20px', padding: '1.5rem 2rem', position: 'relative', overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.04)' }}>
+                     <div style={{ position: 'absolute', top: '15%', right: '5%', opacity: 0.5 }}>
+                       <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#a855f7" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                     </div>
+                     <div style={{ position: 'absolute', top: '40%', right: '12%', opacity: 0.3 }}>
+                       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a855f7" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                     </div>
+
+                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#4F46E5', fontWeight: 700, marginBottom: '0.75rem', fontSize: '0.85rem' }}>
+                        <Sparkles size={16}/> AI Assistant
+                     </div>
+                     <h3 style={{ margin: '0 0 0.25rem 0', fontSize: '1.1rem', fontWeight: 700, color: '#1e1b4b' }}>What would you like to work on?</h3>
+                     <p style={{ margin: '0 0 1rem 0', color: '#475569', fontSize: '0.85rem' }}>Get help with your store, products, content and ideas.</p>
+
+                     <div style={{ display: 'flex', alignItems: 'center', background: '#fff', borderRadius: '30px', padding: '0.4rem', boxShadow: '0 2px 5px rgba(0,0,0,0.02)', border: '1px solid #C7D2FE', marginBottom: '1.25rem', maxWidth: '850px' }}>
+                        <div style={{ padding: '0.4rem 0.75rem', color: '#4F46E5' }}><Sparkles size={18}/></div>
+                        <input
+                          type="text"
+                          placeholder="Ask AI Assistant anything..."
+                          style={{ flex: 1, border: 'none', outline: 'none', background: 'transparent', fontSize: '0.9rem', color: '#334155' }}
+                          value={initialAiPrompt || ''}
+                          onChange={e => setInitialAiPrompt(e.target.value)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' && initialAiPrompt?.trim()) {
+                              setViewMode('editor');
+                              setShowAI(true);
+                            }
+                          }}
+                        />
+                        <button
+                          style={{ background: '#4F46E5', color: '#fff', border: 'none', borderRadius: '50%', width: '34px', height: '34px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 2px 4px rgba(79, 70, 229, 0.2)' }}
+                          onClick={() => { if (initialAiPrompt?.trim()) { setViewMode('editor'); setShowAI(true); } }}
+                        ><Send size={14}/></button>
+                     </div>
+
+                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                        <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#1e1b4b' }}>Suggested actions</span>
+                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                          <button className="ws-btn ws-btn-outline" onClick={() => { setInitialAiPrompt('Create a product'); setViewMode('editor'); setShowAI(true); }} style={{ borderRadius: '24px', padding: '0.5rem 1rem', fontSize: '0.8rem', background: '#fff', borderColor: '#e9d5ff', color: '#6b21a8', fontWeight: 500, display: 'flex', gap: '0.4rem' }}><Plus size={14} strokeWidth={2}/> Create a product</button>
+                          <button className="ws-btn ws-btn-outline" onClick={() => { setInitialAiPrompt('Improve storefront'); setViewMode('editor'); setShowAI(true); }} style={{ borderRadius: '24px', padding: '0.5rem 1rem', fontSize: '0.8rem', background: '#fff', borderColor: '#e9d5ff', color: '#6b21a8', fontWeight: 500, display: 'flex', gap: '0.4rem' }}><Store size={14} strokeWidth={2}/> Improve storefront</button>
+                          <button className="ws-btn ws-btn-outline" onClick={() => { setInitialAiPrompt('Write product description'); setViewMode('editor'); setShowAI(true); }} style={{ borderRadius: '24px', padding: '0.5rem 1rem', fontSize: '0.8rem', background: '#fff', borderColor: '#e9d5ff', color: '#6b21a8', fontWeight: 500, display: 'flex', gap: '0.4rem' }}><FileText size={14} strokeWidth={2}/> Write product description</button>
+                          <button className="ws-btn ws-btn-outline" onClick={() => { setInitialAiPrompt('Give me design advice'); setViewMode('editor'); setShowAI(true); }} style={{ borderRadius: '24px', padding: '0.5rem 1rem', fontSize: '0.8rem', background: '#fff', borderColor: '#e9d5ff', color: '#6b21a8', fontWeight: 500, display: 'flex', gap: '0.4rem' }}><Lightbulb size={14} strokeWidth={2}/> Generate ideas</button>
+                        </div>
+                     </div>
+                  </div>
+                </div>
+              )}
+            </main>
+          </div>
         </div>
-      </div>
       ) : (
         <div className="editor-layout">
           <header className="ws-topbar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 1rem', background: '#fff', borderBottom: '1px solid #e5e7eb', gridColumn: '1 / -1', gridRow: '1', zIndex: 10 }}>
               <div className="ws-topbar-left" style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer' }} onClick={() => setViewMode('dashboard')}>
-                  <div style={{ width: '28px', height: '28px', background: 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 'bold', fontSize: '14px' }}>W</div>
-                  <span style={{ fontWeight: 600, fontSize: '16px', color: '#111827' }}>Willovate One</span>
-                </div>
+                <WillovateLogo
+                  height={30}
+                  onClick={() => setViewMode('dashboard')}
+                  style={{ cursor: 'pointer' }}
+                />
                 <button className="ws-page-switcher" onClick={() => setShowPageManager(true)} title="Manage pages" style={{ background: '#fff', border: '1px solid var(--line)', color: 'var(--ink)', borderRadius: '8px', padding: '0 1rem', fontWeight: 500, fontSize: '14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '235px', height: '36px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><Home size={16} color="var(--muted)"/> {selectedPage?.title || 'Home'}</div> <ChevronDown size={16} color="var(--muted)" />
                 </button>
@@ -648,11 +750,31 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
             </header>
 
             <aside className="ws-sidebar-mini" style={{ width: '64px', borderRight: '1px solid #E5E7EB', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '16px 0', gap: '24px', background: '#fff', gridColumn: '1', gridRow: '2' }}>
-              <div className="ws-icon-btn" onClick={() => setViewMode('dashboard')} title="Back to Dashboard" style={{ width: '40px', height: '40px', color: '#6B7280', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+              <div
+                className="ws-icon-btn"
+                onClick={() => {
+                  setViewMode('dashboard')
+                  setActiveNav('workspace')
+                  if (website?.id) {
+                    navigate(`/workspace/${website.id}`, { replace: true })
+                  }
+                }}
+                title="Workspace"
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    setViewMode('dashboard')
+                    setActiveNav('workspace')
+                    if (website?.id) {
+                      navigate(`/workspace/${website.id}`, { replace: true })
+                    }
+                  }
+                }}
+                style={{ width: '40px', height: '40px', color: '#6B7280', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
+              >
                 <Home size={20} />
-              </div>
-              <div className="ws-icon-btn active" style={{ width: '40px', height: '40px', background: '#F5F3FF', color: '#4F46E5', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
-                <AppWindow size={20} />
               </div>
               <div
                 className="ws-icon-btn"
@@ -670,11 +792,16 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
               >
                 <LayoutTemplate size={20} />
               </div>
-              <div className="ws-icon-btn" onClick={() => setShowSupportModal(true)} title="Help & Support" style={{ width: '40px', height: '40px', color: '#6B7280', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', marginTop: 'auto' }}>
+              <div
+                className="ws-icon-btn"
+                onClick={() => setShowSupportModal(true)}
+                title="Help & Support"
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setShowSupportModal(true); } }}
+                style={{ width: '40px', height: '40px', color: '#6B7280', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', marginTop: 'auto' }}
+              >
                 <HelpCircle size={20} />
-              </div>
-              <div className="ws-icon-btn" style={{ width: '40px', height: '40px', color: '#6B7280', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
-                <Settings size={20} />
               </div>
             </aside>
             <div className="editor-left-panel" style={{ gridColumn: '2', gridRow: '2' }}>
@@ -702,13 +829,14 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
             <main className="ws-canvas-area" style={{ gridColumn: '3', gridRow: '2', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
               <div className="storefront-frame-container" ref={frameRef}>
                 <div className="ws-canvas-wrapper">
-                  <div className={`ws-canvas ws-canvas-${previewMode}`} ref={canvasRef}>
+                  <div className={`ws-canvas ws-canvas-${previewMode}`} ref={canvasRef} data-viewport={previewMode}>
                     {selectedPage ? (
                       <PageEditor
                         website={website}
                         page={selectedPage}
                         selectedElement={selectedElement}
                         selectedElementId={selectedElement?.id}
+                        previewMode={previewMode}
                         onSelectElement={(el) => {
                           setSelectedElement(el)
                           setShowAI(false)
@@ -733,7 +861,12 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
                     if (!selectedPage) return
                     const heroEl = getSyntheticElement('hero', selectedPage)
                     if (heroEl) {
-                      const currentProps = { ...(heroEl.properties || {}) }
+                      const currentProps: Record<string, any> = {}
+                      for (const [k, v] of Object.entries(heroEl.properties || {})) {
+                        if (v !== '' && v !== null && v !== undefined && !k.startsWith('_')) {
+                          currentProps[k] = v
+                        }
+                      }
                       if (type === 'heading') currentProps.title = text
                       else if (type === 'text' || type === 'description') currentProps.subtitle = text
                       else if (type === 'button') currentProps.buttonText = text
@@ -741,11 +874,13 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
                       // Optimistic UI update
                       const newPages = pagesState.map(p => {
                         if (p.id === selectedPage.id) {
-                          const existingIdx = p.elements.findIndex(e => e.id === heroEl.id)
+                          const existingIdx = p.elements.findIndex(e => e.id === heroEl.id || e.elementType === 'hero')
                           if (existingIdx >= 0) {
                             const newElements = [...p.elements]
-                            newElements[existingIdx] = { ...newElements[existingIdx], properties: currentProps }
+                            newElements[existingIdx] = { ...newElements[existingIdx], properties: { ...newElements[existingIdx].properties, ...currentProps } }
                             return { ...p, elements: newElements }
+                          } else {
+                            return { ...p, elements: [...p.elements, { ...heroEl, properties: currentProps }] }
                           }
                         }
                         return p;
@@ -768,16 +903,24 @@ export default function Workspace({ websiteId }: WorkspaceProps) {
                     if (!selectedPage) return
                     const heroEl = getSyntheticElement('hero', selectedPage)
                     if (heroEl) {
-                      const currentProps = { ...(heroEl.properties || {}), style_backgroundImage: imageUrl }
+                      const currentProps: Record<string, any> = {}
+                      for (const [k, v] of Object.entries(heroEl.properties || {})) {
+                        if (v !== '' && v !== null && v !== undefined && !k.startsWith('_')) {
+                          currentProps[k] = v
+                        }
+                      }
+                      currentProps.style_backgroundImage = imageUrl
 
                       // Optimistic UI update
                       const newPages = pagesState.map(p => {
                         if (p.id === selectedPage.id) {
-                          const existingIdx = p.elements.findIndex(e => e.id === heroEl.id)
+                          const existingIdx = p.elements.findIndex(e => e.id === heroEl.id || e.elementType === 'hero')
                           if (existingIdx >= 0) {
                             const newElements = [...p.elements]
-                            newElements[existingIdx] = { ...newElements[existingIdx], properties: currentProps }
+                            newElements[existingIdx] = { ...newElements[existingIdx], properties: { ...newElements[existingIdx].properties, ...currentProps } }
                             return { ...p, elements: newElements }
+                          } else {
+                            return { ...p, elements: [...p.elements, { ...heroEl, properties: currentProps }] }
                           }
                         }
                         return p;

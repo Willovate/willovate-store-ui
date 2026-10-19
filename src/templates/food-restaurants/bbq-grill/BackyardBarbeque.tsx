@@ -1,214 +1,585 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowLeft, MapPin, Clock, Phone, Flame, ChevronRight, Star, Users } from 'lucide-react';
-import { useReveal } from '../components/RestaurantCore';
+import React from 'react';
+import { FoodStorefrontCore, type StorefrontThemeConfig } from '../shared/FoodStorefrontCore';
 
-const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
+const img = (id: string, w = 1200) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
 
-const IMAGES = {
-  hero: img('photo-1504674900247-0877df9cc836'),
-  story: img('photo-1504674900247-0877df9cc836'),
-  promo: img('photo-1504674900247-0877df9cc836'),
-  plate: img('photo-1504674900247-0877df9cc836'),
-  feast: img('photo-1504674900247-0877df9cc836'),
-  chicken: img('photo-1504674900247-0877df9cc836'),
-  sandwich1: img('photo-1504674900247-0877df9cc836'),
-  sandwich2: img('photo-1504674900247-0877df9cc836'),
-  sides1: img('photo-1504674900247-0877df9cc836'),
-  sides2: img('photo-1504674900247-0877df9cc836'),
+export const backyardBarbequeConfig: StorefrontThemeConfig = {
+  id: 'backyard-barbeque',
+  kind: 'bbq-grill',
+  currencySymbol: '₹',
+  layoutOptions: {
+    heroLayout: 'asymmetric',
+    productLayout: 'grid-3',
+    featuresLayout: 'cards-grid',
+    storyLayout: 'stats-prominent',
+    galleryLayout: 'masonry',
+    sectionOrder: ['hero', 'products', 'craft', 'features', 'promo', 'story', 'gallery', 'reviews', 'location', 'newsletter'],
+  },
+  name: 'Backyard Barbeque',
+  tagline: 'Warm Family BBQ, Generous Sharing Feasts & Sunny Garden Grills',
+  brandSub: 'Honey-Glazed Chicken · Smashed Burgers · Big Portions for Everyone',
+  palette: {
+    primary: '#dc2626',
+    primaryHover: '#b91c1c',
+    secondary: '#78350f',
+    background: '#fffdfa',
+    surface: '#fffbeb',
+    text: '#1c1917',
+    textMuted: '#78716c',
+    border: '#fde68a',
+    badgeBg: '#fee2e2',
+    badgeText: '#dc2626',
+    heroOverlay: 'linear-gradient(135deg, rgba(28,25,23,0.82) 0%, rgba(220,38,38,0.28) 100%)',
+  },
+  typography: {
+    headingFont: '"Outfit", "Inter", sans-serif',
+    bodyFont: '"Inter", sans-serif',
+    accentFont: '"Outfit", sans-serif',
+  },
+  hero: {
+    headline: 'Bring Everyone to the Table. Generous Family BBQ, Glazed Ribs & Golden Chicken.',
+    subheadline:
+      'Nothing brings family and friends closer than a giant picnic table loaded with tender ribs, whole honey-glazed smoked chicken, sweet skillet cornbread, and warm peach cobbler. Dig in together!',
+    badge: '🍖 FAMILY-STYLE SHARING BOARDS · OUTDOOR GARDEN DINING',
+    image: img('photo-1508615070457-7baeba4003ab'),
+    imageAlt: 'Generous family barbecue feast spread on outdoor wooden picnic table with meats and sides',
+    primaryCtaText: 'Explore Family Feasts',
+    primaryCtaPage: 'menu',
+    secondaryCtaText: 'Book a Garden Table',
+    secondaryCtaPage: 'contact',
+  },
+  announcement: {
+    text: '🎉 Family Sunday BBQ Buffets Now Booking · Kids Eat Free with Any Family Platter · Takeout Combos 20% Off with Code FAMILY20',
+    badgeText: 'FAMILY DEAL',
+    linkText: 'Order Family Box',
+    linkPage: 'menu',
+  },
+  proofBadges: [
+    { icon: '👨‍👩‍👧‍👦', title: 'Generous Family Sizes', subtitle: 'Platters engineered to feed 4 to 10 guests with big, joyful portions' },
+    { icon: '🍯', title: 'Wildflower Honey Glaze', subtitle: 'Sweet and sticky barbecue glazes crafted with organic honey and sweet butter' },
+    { icon: '🌳', title: 'Sunny Garden Seating', subtitle: 'Open-air lawn picnic tables under fairy lights with playground space for kids' },
+    { icon: '🧒', title: 'Dedicated Kids’ Menu', subtitle: 'Mild mini cheeseburger sliders, crispy tenders, and fun potato smileys' },
+  ],
+  categories: [
+    'Family Feasting Platters',
+    'Honey-Glazed BBQ Chicken',
+    'Backyard Smashed Burgers',
+    'Tender Pork Ribs & Sliders',
+    'Crispy Wings & Sausages',
+    'Homestyle Country Sides',
+    'Kids’ BBQ Corner',
+    'Southern Pies & Pitchers',
+  ],
+  collections: [
+    {
+      id: 'family-platters',
+      name: 'Grand Family Feasting Platters',
+      tagline: 'Multi-meat boards with ribs, chicken, sausages, cornbread, and 4 sides.',
+      image: img('photo-1508615070457-7baeba4003ab'),
+      itemCount: 4,
+      filterCategory: 'Family Feasting Platters',
+    },
+    {
+      id: 'honey-chicken',
+      name: 'Honey-Glazed Golden Chicken',
+      tagline: 'Whole and half smoked chickens basted in sweet honey butter and herbs.',
+      image: img('photo-1532550907401-a500c9a57435'),
+      itemCount: 3,
+      filterCategory: 'Honey-Glazed BBQ Chicken',
+    },
+    {
+      id: 'backyard-burgers',
+      name: 'Smashed Backyard Burgers',
+      tagline: 'Double beef patties, melted cheddar, crispy bacon, and tangy sauce.',
+      image: img('photo-1568901346375-23c9450c58cd'),
+      itemCount: 3,
+      filterCategory: 'Backyard Smashed Burgers',
+    },
+    {
+      id: 'country-sides',
+      name: 'Homestyle Skillet Sides',
+      tagline: 'Sweet cornbread with honey butter, 4-cheese mac, and charred sweet corn.',
+      image: img('photo-1541592106381-b31e9677c0e5'),
+      itemCount: 4,
+      filterCategory: 'Homestyle Country Sides',
+    },
+  ],
+  products: [
+    // ── 1. Family Feasting Platters ────────────────────────────────────────
+    {
+      id: 'bb-grand-family-platter',
+      slug: 'the-backyard-grand-family-sharing-platter',
+      name: 'The Backyard Grand Family Platter (Serves 4-6)',
+      price: 2399,
+      compareAtPrice: 2799,
+      description: 'The ultimate family crowd-pleaser: 1 Whole Honey-Glazed Smoked Chicken, Full Rack Hickory Ribs, 4× Cheddar Bratwursts, Creamy 4-Cheese Mac, 4× Sweet Cornbreads, Charred Corn, and Slaw.',
+      category: 'Family Feasting Platters',
+      image: img('photo-1508615070457-7baeba4003ab'),
+      imageAlt: 'Huge family barbecue feast board with chicken, ribs, sausages and colorful sides',
+      tags: ['Family Favorite', 'Feeds 4-6', 'Best Value'],
+      dietary: 'non-veg',
+      weightOrSize: 'Over 2.5 kg Total Feast',
+      calories: '3800 kcal total',
+      featured: true,
+      options: [
+        { name: 'Package Size', choices: [{ label: 'Family of 4-6 (₹2,399)' }, { label: 'Upgrade to Big Crew of 8-10 (+₹950)', priceDelta: 950 }] },
+        { name: 'Chicken Style', choices: [{ label: 'Wildflower Honey Butter (Sweet)' }, { label: 'Smoky Chipotle BBQ (Savory)' }] },
+      ],
+    },
+    {
+      id: 'bb-weekend-neighborhood-box',
+      slug: 'weekend-neighborhood-gathering-platter-serves-6-8',
+      name: 'Weekend Neighborhood Gathering Platter (Serves 6-8)',
+      price: 3499,
+      compareAtPrice: 3999,
+      description: 'Designed for block parties and big family birthdays: 2 Whole Chickens, 2 Full Racks Ribs, 8 Pulled Pork Sliders, 8× Corn Cobs, Mac & Cheese, and Pitcher of Lemonade.',
+      category: 'Family Feasting Platters',
+      image: img('photo-1544025162-d76694265947'),
+      imageAlt: 'Massive barbecue spread on picnic tables with chicken, ribs, and sides',
+      tags: ['Feeds 8-10', 'Party Hero'],
+      dietary: 'non-veg',
+      weightOrSize: 'Approx 3.8 kg Total Feast',
+      calories: '5600 kcal total',
+      featured: true,
+    },
+
+    // ── 2. Honey-Glazed BBQ Chicken ────────────────────────────────────────
+    {
+      id: 'bb-honey-glazed-chicken',
+      slug: 'whole-honey-glazed-golden-smoked-chicken',
+      name: 'Whole Honey-Glazed Golden Smoked Chicken',
+      price: 649,
+      compareAtPrice: 729,
+      description: 'Whole farm chicken brined in sweet tea and citrus, smoked gently over pecan wood until golden, basted with clover honey and butter. Carved in four pieces.',
+      category: 'Honey-Glazed BBQ Chicken',
+      image: img('photo-1532550907401-a500c9a57435'),
+      imageAlt: 'Whole golden brown roast chicken with honey glaze on serving platter',
+      tags: ['Family Bestseller', 'Juicy & Sweet'],
+      dietary: 'non-veg',
+      weightOrSize: 'Whole Chicken · 900g',
+      calories: '1120 kcal',
+      featured: true,
+      options: [
+        { name: 'Carving Preference', choices: [{ label: 'Carved into 4 Pieces' }, { label: 'Carved into 8 Pieces' }, { label: 'Whole Uncut' }] },
+      ],
+    },
+    {
+      id: 'bb-half-honey-chicken',
+      slug: 'half-honey-glazed-golden-smoked-chicken',
+      name: 'Half Honey-Glazed Golden Smoked Chicken',
+      price: 379,
+      description: 'Generous half smoked chicken with crisp honey-basted skin and succulent tender breast and thigh meat. Served with two slices of Texas bread.',
+      category: 'Honey-Glazed BBQ Chicken',
+      image: img('photo-1532550907401-a500c9a57435'),
+      imageAlt: 'Half roasted barbecue chicken with crispy skin and herbs',
+      tags: ['Solo Feaster'],
+      dietary: 'non-veg',
+      weightOrSize: 'Half Chicken · 450g',
+      calories: '560 kcal',
+    },
+
+    // ── 3. Backyard Smashed Burgers ────────────────────────────────────────
+    {
+      id: 'bb-backyard-double-cheeseburger',
+      slug: 'the-backyard-classic-double-cheeseburger',
+      name: 'The Backyard Classic Double Cheeseburger',
+      price: 349,
+      compareAtPrice: 389,
+      description: 'Two smashed beef patties grilled with lacy edges, double yellow American cheese, shredded lettuce, ripe tomatoes, red onions, and house burger spread on brioche.',
+      category: 'Backyard Smashed Burgers',
+      image: img('photo-1568901346375-23c9450c58cd'),
+      imageAlt: 'Double cheeseburger with melted cheese, lettuce, tomato and pickles on brioche',
+      tags: ['Classic Smash', '#1 Burger'],
+      dietary: 'non-veg',
+      weightOrSize: '320g Burger + Crinkle Fries',
+      calories: '760 kcal',
+      featured: true,
+      options: [
+        { name: 'Patty Count', choices: [{ label: 'Double Patty (Standard)' }, { label: 'Triple Monster (+₹89)', priceDelta: 89 }] },
+        { name: 'Bacon Add-on', choices: [{ label: 'No Bacon' }, { label: 'Add Crispy Hickory Bacon (+₹49)', priceDelta: 49 }] },
+      ],
+    },
+    {
+      id: 'bb-crispy-bbq-chicken-sandwich',
+      slug: 'crispy-buttermilk-bbq-fried-chicken-sandwich',
+      name: 'Crispy Buttermilk BBQ Fried Chicken Sandwich',
+      price: 329,
+      description: 'Jumbo chicken breast soaked in buttermilk, fried extra crunchy, tossed in sweet honey BBQ sauce with creamy coleslaw and dill pickles on butter brioche.',
+      category: 'Backyard Smashed Burgers',
+      image: img('photo-1625813506062-0aeb1d7a094b'),
+      imageAlt: 'Crispy fried chicken sandwich with barbecue sauce and coleslaw',
+      tags: ['Crunchy Favorite'],
+      dietary: 'non-veg',
+      weightOrSize: '310g Sandwich',
+      calories: '710 kcal',
+    },
+
+    // ── 4. Tender Pork Ribs & Sliders ──────────────────────────────────────
+    {
+      id: 'bb-double-hickory-ribs',
+      slug: 'double-glazed-hickory-pork-ribs-full-rack',
+      name: 'Double-Glazed Hickory Pork Ribs (Full Rack)',
+      price: 849,
+      compareAtPrice: 949,
+      description: 'Slow-smoked baby back ribs brushed twice with sweet honey hickory glaze. Tender, juicy, and fall-off-the-bone goodness that kids and adults adore.',
+      category: 'Tender Pork Ribs & Sliders',
+      image: img('photo-1529193591184-b1d58069ecdd'),
+      imageAlt: 'Full rack of tender glazed pork ribs on wooden tray',
+      tags: ['Crowd Pleaser', 'Full Rack'],
+      dietary: 'non-veg',
+      weightOrSize: 'Full Rack · 700g',
+      calories: '1180 kcal',
+      featured: true,
+    },
+    {
+      id: 'bb-pulled-pork-sliders',
+      slug: 'slow-pulled-pork-sliders-sweet-brioche-4pc',
+      name: 'Slow-Pulled Pork Sliders on Sweet Brioche (4 Pcs)',
+      price: 389,
+      description: 'Four mini slider buns piled with 10-hour tender pulled pork, sweet cider glaze, and crunchy pickled cabbage slaw. Perfect for passing around the table.',
+      category: 'Tender Pork Ribs & Sliders',
+      image: img('photo-1558030006-450675393462'),
+      imageAlt: 'Set of four mini pulled pork sliders on wooden board',
+      tags: ['Sharing Plate', '4 Sliders'],
+      dietary: 'non-veg',
+      weightOrSize: '4 Sliders · 340g',
+      calories: '680 kcal',
+    },
+
+    // ── 5. Crispy Wings & Sausages ─────────────────────────────────────────
+    {
+      id: 'bb-jumbo-sweet-chili-wings',
+      slug: 'jumbo-crispy-sweet-chili-honey-wings-12pc',
+      name: 'Jumbo Crispy Sweet Honey BBQ Wings (12 Pcs)',
+      price: 469,
+      compareAtPrice: 529,
+      description: '12 jumbo chicken wings fried golden and crunchy, coated in sweet wildflower honey BBQ sauce. Served with celery sticks and herb ranch dip.',
+      category: 'Crispy Wings & Sausages',
+      image: img('photo-1527477321055-43615b629c76'),
+      imageAlt: 'Platter of sweet honey barbecue chicken wings with ranch dip',
+      tags: ['Party 12-Pack', 'Finger Food'],
+      dietary: 'non-veg',
+      weightOrSize: '12 Wings · 500g',
+      calories: '860 kcal',
+      featured: true,
+    },
+    {
+      id: 'bb-smoked-cheddar-bratwurst',
+      slug: 'smoked-cheddar-bratwurst-links-grilled-onions-2pc',
+      name: 'Smoked Cheddar Bratwursts with Sweet Grilled Onions (2 Pcs)',
+      price: 299,
+      description: 'Juicy pork bratwursts loaded with molten cheddar pockets, grilled over coals with caramelized sweet onions and yellow ballpark mustard.',
+      category: 'Crispy Wings & Sausages',
+      image: img('photo-1555939594-58d7cb561ad1'),
+      imageAlt: 'Grilled sausages with caramelized onions in skillet',
+      tags: ['Snappy & Cheesy'],
+      dietary: 'non-veg',
+      weightOrSize: '2 Links · 250g',
+      calories: '540 kcal',
+    },
+
+    // ── 6. Homestyle Country Sides ─────────────────────────────────────────
+    {
+      id: 'bb-cast-iron-cornbread',
+      slug: 'cast-iron-sweet-cornbread-whipped-honey-butter-4pc',
+      name: 'Cast-Iron Sweet Cornbread with Honey Butter (4 Pcs)',
+      price: 199,
+      description: 'Four large wedges of sweet southern cornbread baked fresh in heavy cast iron, served with a big tub of whipped honey sea salt butter.',
+      category: 'Homestyle Country Sides',
+      image: img('photo-1509440159596-0249088772ff'),
+      imageAlt: 'Wedges of golden cornbread with melting honey butter',
+      tags: ['Freshly Baked', 'Vegetarian'],
+      dietary: 'veg',
+      weightOrSize: '4 Large Wedges · 280g',
+      calories: '420 kcal',
+      featured: true,
+    },
+    {
+      id: 'bb-homestyle-mac-cheese',
+      slug: 'creamy-southern-homestyle-4-cheese-mac-cheese',
+      name: 'Creamy Southern Homestyle 4-Cheese Mac & Cheese',
+      price: 229,
+      description: 'Elbow macaroni baked in rich velvety yellow cheddar, mozzarella, provolone, and parmesan sauce with a golden toasted breadcrumb top.',
+      category: 'Homestyle Country Sides',
+      image: img('photo-1541592106381-b31e9677c0e5'),
+      imageAlt: 'Baking dish of creamy baked macaroni and cheese with cheese pull',
+      tags: ['Kids & Adults Love It', 'Vegetarian'],
+      dietary: 'veg',
+      weightOrSize: '300g Dish',
+      calories: '470 kcal',
+      featured: true,
+    },
+    {
+      id: 'bb-charred-corn-4pc',
+      slug: 'char-grilled-sweet-corn-cobs-herb-butter-4pc',
+      name: 'Char-Grilled Sweet Corn on the Cob (4 Pcs)',
+      price: 249,
+      description: 'Four whole sweet yellow corn cobs charred over open coals, brushed with sweet cream butter and light sea salt seasoning.',
+      category: 'Homestyle Country Sides',
+      image: img('photo-1540420773420-3366772f4999'),
+      imageAlt: 'Plate of four charred corn cobs with melted butter and herbs',
+      tags: ['Sweet Corn', 'Vegetarian'],
+      dietary: 'veg',
+      weightOrSize: '4 Cobs',
+      calories: '280 kcal',
+    },
+    {
+      id: 'bb-crinkle-fries-seasoned',
+      slug: 'golden-crisp-crinkle-cut-fries-backyard-seasoning',
+      name: 'Golden Crisp Crinkle Cut Fries with Backyard Seasoning',
+      price: 169,
+      description: 'Extra crispy crinkle cut potato fries tossed in our sweet and savory garlic paprika house spice rub. Served with ketchup and ranch.',
+      category: 'Homestyle Country Sides',
+      image: img('photo-1573080496219-bb080dd4f877'),
+      imageAlt: 'Basket of crinkle cut french fries with barbecue dipping sauce',
+      tags: ['Crispy Classic', 'Vegan'],
+      dietary: 'vegan',
+      weightOrSize: '250g Basket',
+      calories: '360 kcal',
+    },
+    {
+      id: 'bb-tangy-garden-slaw',
+      slug: 'fresh-garden-tangy-coleslaw-bowl',
+      name: 'Fresh Garden Tangy Coleslaw Bowl (250g)',
+      price: 139,
+      description: 'Crisp green and purple cabbage shreds with grated carrots in a sweet and creamy buttermilk dressing with celery seeds.',
+      category: 'Homestyle Country Sides',
+      image: img('photo-1512621776951-a57141f2eefd'),
+      imageAlt: 'Bowl of creamy coleslaw with shredded carrots and red cabbage',
+      tags: ['Crunchy & Cool', 'Vegetarian'],
+      dietary: 'veg',
+      weightOrSize: '250g Bowl',
+      calories: '160 kcal',
+    },
+
+    // ── 7. Kids’ BBQ Corner ────────────────────────────────────────────────
+    {
+      id: 'bb-kids-tenders-basket',
+      slug: 'kids-crispy-chicken-tenders-fries-basket',
+      name: 'Kids’ Crispy Chicken Tenders & Fries Basket',
+      price: 219,
+      description: 'Three 100% chicken breast tenders in a light golden breading, served with crinkle fries, honey BBQ dip, and a fruit juice box.',
+      category: 'Kids’ BBQ Corner',
+      image: img('photo-1562967914-608f82629710'),
+      imageAlt: 'Kids meal basket with chicken tenders and french fries',
+      tags: ['Kids Favorite', 'Includes Juice'],
+      dietary: 'non-veg',
+      weightOrSize: 'Child Portion',
+      calories: '420 kcal',
+      featured: true,
+    },
+    {
+      id: 'bb-kids-cheeseburger-sliders',
+      slug: 'kids-mini-cheeseburger-sliders-2pc',
+      name: 'Kids’ Mini Cheeseburger Sliders (2 Pcs)',
+      price: 229,
+      description: 'Two mild beef sliders with melted yellow cheese on soft brioche, served with crispy crinkle fries and sweet apple slices.',
+      category: 'Kids’ BBQ Corner',
+      image: img('photo-1568901346375-23c9450c58cd'),
+      imageAlt: 'Two mini cheeseburger sliders for children on colorful tray',
+      tags: ['Child Friendly'],
+      dietary: 'non-veg',
+      weightOrSize: '2 Sliders + Fries',
+      calories: '440 kcal',
+    },
+
+    // ── 8. Southern Pies & Pitchers ────────────────────────────────────────
+    {
+      id: 'bb-warm-peach-cobbler',
+      slug: 'warm-southern-deep-dish-peach-cobbler',
+      name: 'Warm Southern Deep Dish Peach Cobbler',
+      price: 249,
+      description: 'Sweet sliced Georgia peaches baked with cinnamon sugar under a tender buttermilk biscuit crust, topped with a scoop of vanilla ice cream.',
+      category: 'Southern Pies & Pitchers',
+      image: img('photo-1551024709-8f23befc6f87'),
+      imageAlt: 'Warm peach cobbler in baking dish with melting vanilla ice cream scoop',
+      tags: ['Southern Treat', 'Vegetarian'],
+      dietary: 'veg',
+      weightOrSize: '220g Dessert',
+      calories: '460 kcal',
+      featured: true,
+    },
+    {
+      id: 'bb-lemonade-iced-tea-pitcher',
+      slug: 'country-lemonade-sweet-iced-tea-pitcher-15l',
+      name: 'Country Lemonade & Sweet Iced Tea Pitcher (1.5L)',
+      price: 199,
+      description: 'A 1.5-liter family pitcher of fresh-squeezed yellow country lemonade and southern sweet black iced tea served over crushed ice with mint.',
+      category: 'Southern Pies & Pitchers',
+      image: img('photo-1513558161293-cdaf765ed2fd'),
+      imageAlt: 'Large pitcher of refreshing iced tea with lemon slices and ice',
+      tags: ['Family Pitcher', 'Vegan'],
+      dietary: 'vegan',
+      weightOrSize: '1.5 Liter Pitcher',
+      calories: '220 kcal',
+    },
+    {
+      id: 'bb-mississippi-mud-pie',
+      slug: 'mississippi-mud-chocolate-fudge-pie-slice',
+      name: 'Mississippi Mud Chocolate Fudge Pie Slice',
+      price: 239,
+      description: 'Decadent chilled chocolate fudge pie with Oreo crumb crust, dark chocolate mousse layer, and freshly whipped cream with shaved chocolate curls.',
+      category: 'Southern Pies & Pitchers',
+      image: img('photo-1578985545062-69928b1d9587'),
+      imageAlt: 'Rich slice of Mississippi mud chocolate fudge pie with whipped cream',
+      tags: ['Family Favorite', 'Vegetarian'],
+      dietary: 'veg',
+      weightOrSize: '180g Slice',
+      calories: '490 kcal',
+    },
+    {
+      id: 'bb-smoked-sausage-bites',
+      slug: 'honey-bbq-smoked-sausage-bites-plate',
+      name: 'Honey BBQ Smoked Sausage Bites Plate (300g)',
+      price: 299,
+      description: 'Sliced smoked country pork and beef sausages glazed in sweet honey mustard BBQ sauce, served with pretzel bites and house pickle spear.',
+      category: 'Crispy Wings & Sausages',
+      image: img('photo-1544025162-d76694265947'),
+      imageAlt: 'Plate of sliced glazed smoked barbecue sausages with toothpicks and dipping sauce',
+      tags: ['Sharing Appetizer', 'Crowd Pleaser'],
+      dietary: 'non-veg',
+      weightOrSize: '300g Plate',
+      calories: '510 kcal',
+    },
+  ],
+  craftProcess: {
+    badge: 'HOW BACKYARD BBQ FEEDS WHOLE FAMILIES',
+    title: 'Comfort Food, Fresh Air & Big Warm Smiles',
+    subtitle: 'Great family barbecue is about bringing all generations together with food everyone loves.',
+    steps: [
+      { time: '06:00 AM', title: 'Citrus & Sweet Tea Brine', desc: 'Whole chickens and tender pork cuts rest in sweet tea brine to stay exceptionally juicy.' },
+      { time: '08:30 AM', title: 'Pecan Wood Smoke', desc: 'Gentle, sweet pecan smoke bathes meats without strong bitter tones so kids enjoy every bite.' },
+      { time: '11:00 AM', title: 'Double Honey Glazing', desc: 'Basted with clover honey, butter, and mild spices for that finger-licking sticky caramel glaze.' },
+      { time: '12:30 PM', title: 'Grand Family Board Assembly', desc: 'Assembled on huge wooden boards with cornbread, corn on the cob, and mac & cheese.' },
+    ],
+    image: img('photo-1508615070457-7baeba4003ab'),
+  },
+  story: {
+    badge: 'FAMILY OWNED & OPERATED',
+    kicker: 'A PLACE WHERE EVERYONE FEELS WELCOME',
+    title: 'The Backyard Started as Weekend Cookouts for the Whole Neighborhood.',
+    paragraphs: [
+      'Twenty years ago, Sarah and Joe Miller started setting up folding tables on their backyard lawn every Sunday. They grilled honey chickens, smoked ribs, and baked giant pans of mac & cheese for neighbors and cousins.',
+      'Soon, friends started bringing their friends, and families with kids realized it was the only place in town where children could play on the grass while parents enjoyed a warm, relaxed meal together.',
+      'We opened Backyard Barbecue with that exact feeling: big communal wooden picnic tables, fairy lights, warm cornbread fresh from the oven, and generous sharing platters built for happy gatherings.',
+    ],
+    image: img('photo-1555396273-367ea4eb4db5'),
+    imageAlt: 'Sunny garden dining at Backyard Barbecue with picnic tables and happy guests',
+    founderQuote: 'Food always tastes better outside with the people you love. We serve portions that encourage passing plates, sharing stories, and laughing until your cheeks hurt.',
+    founderName: 'Sarah & Joe Miller · Founders, Backyard Barbecue',
+    stats: [
+      { value: '4–10 Guests', label: 'Per Family Sharing Board' },
+      { value: '100% Free', label: 'Kids Eat Free Sundays' },
+      { value: '150+', label: 'Outdoor Garden Seats' },
+      { value: '20 Years', label: 'Of Community Cookouts' },
+    ],
+  },
+  promo: {
+    badge: 'SUNDAY FAMILY BBQ FEAST OFFER',
+    title: 'Book a Family Table for 4+ & Get a Complimentary Peach Cobbler',
+    desc: 'Reserve an outdoor garden picnic table this weekend and your table will receive a complimentary warm deep-dish southern peach cobbler with vanilla bean gelato.',
+    ctaText: 'Reserve Family Table',
+    ctaPage: 'contact',
+    image: img('photo-1544025162-d76694265947'),
+    imageAlt: 'Platter of barbecue ribs and chicken served with dessert',
+  },
+  gallery: [
+    { src: img('photo-1508615070457-7baeba4003ab'), alt: 'Generous family barbecue feast spread on outdoor picnic table', caption: 'The Backyard Grand Family Feasting Board for 4 to 6 Guests', tag: 'Family Feasts' },
+    { src: img('photo-1532550907401-a500c9a57435'), alt: 'Whole honey glazed golden smoked chicken carved into pieces', caption: 'Whole Honey-Glazed Golden Chicken with Sweet Butter Baste', tag: 'Honey Chicken' },
+    { src: img('photo-1529193591184-b1d58069ecdd'), alt: 'Full rack of tender glazed pork ribs with fall off the bone meat', caption: 'Double-Glazed Hickory Pork Ribs with Sticky Finger-Licking Bark', tag: 'Hickory Ribs' },
+    { src: img('photo-1568901346375-23c9450c58cd'), alt: 'Double cheeseburger with melted cheddar and crinkle fries', caption: 'The Backyard Classic Double Cheeseburger on Toasted Brioche', tag: 'Smash Burgers' },
+    { src: img('photo-1527477321055-43615b629c76'), alt: 'Jumbo sweet chili honey barbecue wings with dip', caption: 'Jumbo Sweet Honey BBQ Wings 12-Pack for Family Tables', tag: 'Jumbo Wings' },
+    { src: img('photo-1541592106381-b31e9677c0e5'), alt: 'Baking dish of four cheese macaroni with breadcrumb topping', caption: 'Creamy Southern Homestyle 4-Cheese Macaroni and Cheese', tag: 'Homestyle Mac' },
+  ],
+  testimonials: [
+    {
+      name: 'Ritu & Aniket Sharma',
+      role: 'Parents of Three · Koramangala',
+      rating: 5,
+      quote: 'Dining out with three young kids is usually stressful. At Backyard Barbecue, our children ate the chicken tenders and corn on the cob happily, while we enjoyed the ribs and craft beer. Outstanding family experience.',
+      source: 'Verified Family Dining',
+      date: 'Yesterday',
+    },
+    {
+      name: 'Harish Sundaram',
+      role: 'Grandfather & Family Host · Jayanagar',
+      rating: 5,
+      quote: 'We booked the 8-person Neighborhood Platter for my 70th birthday. The wooden boards arrived overflowing with chicken, ribs, and cornbread. The honey butter is unforgettable.',
+      source: 'Verified Birthday Celebration',
+      date: '3 days ago',
+    },
+    {
+      name: 'Priyanka Das',
+      role: 'HR Manager & Team Lead · Bellandur',
+      rating: 5,
+      quote: 'We held our department’s team offsite lunch in their garden area. The sharing platters made the team bond effortlessly, and the peach cobbler dessert was the highlight of the week.',
+      source: 'Verified Corporate Event',
+      date: 'Last weekend',
+    },
+    {
+      name: 'Vikram Patel',
+      role: 'Weekend Grill Lover · Whitefield',
+      rating: 5,
+      quote: 'Ordered the Backyard Grand Family Platter for takeout on a rainy Saturday. Everything arrived hot in heavy kraft boxes, and the double-glazed ribs were fall-off-the-bone tender. Incredible value.',
+      source: 'Verified Online Order',
+      date: '5 days ago',
+    },
+  ],
+  location: {
+    address: 'Backyard Barbecue Garden #24, Green Glen Layout, Bellandur Outer Ring Road',
+    neighborhood: 'Bellandur / Sarjapur Road / HSR Layout / Marathahalli, Bengaluru, Karnataka 560103',
+    hoursWeekdays: 'Wednesday – Friday: 12:00 PM – 10:30 PM (Family Lunch & Dinner)',
+    hoursWeekends: 'Saturday – Sunday: 11:30 AM – 11:00 PM (Weekend Family Buffets & Lawn Grills)',
+    phone: '+91 (080) 4199-8822',
+    email: 'family@backyardbarbeque.com',
+    pickupNotice: 'Dedicated curbside family pickup parking bay at Garden Gate A. Outdoor playground open daily.',
+    mapEmbedUrl: 'https://maps.google.com/?q=Bellandur+Bengaluru',
+  },
+  customInquiry: {
+    title: 'Birthday Parties, Family Reunions & Group Celebrations',
+    subtitle: 'From kids’ birthday parties on our lawn to 80-person multi-generation family reunions with generous barbecue spreads.',
+    occasions: ['Kids’ Birthday Party', 'Family Milestone Reunion', 'Baby Shower BBQ', 'Weekend Sports Gathering'],
+    sizes: [
+      { label: 'Family Squad (15 People)', serves: '15 people', basePrice: 6499 },
+      { label: 'Lawn Party (35 People)', serves: '35 people', basePrice: 14999 },
+      { label: 'Grand Garden Takeover (70 People)', serves: '70 people', basePrice: 28999 },
+    ],
+    flavors: [
+      'The Backyard Grand Family Platters',
+      'Whole Honey-Glazed Golden Chickens',
+      'Double-Glazed Hickory Pork Ribs',
+      'Southern 4-Cheese Macaroni & Cornbread',
+    ],
+  },
+  faqs: [
+    {
+      category: 'Family Dining',
+      question: 'Is Backyard Barbecue suitable for young children?',
+      answer: 'Extremely! We have dedicated kids’ meal baskets (chicken tenders, mini sliders, mac & cheese), high chairs, open lawn space, and a safe enclosed playground area so parents can relax.',
+    },
+    {
+      category: 'Portion Sizes',
+      question: 'How large are the family sharing platters?',
+      answer: 'Our standard Grand Family Platter feeds 4 to 6 hungry adults generously with over 2.5 kg of food, while our Neighborhood Gathering Box easily satisfies 8 to 10 guests.',
+    },
+    {
+      category: 'Dietary Options',
+      question: 'Are there vegetarian choices on the family menu?',
+      answer: 'Yes! We offer our Southern 4-Cheese Mac & Cheese, Char-Grilled Sweet Corn on the Cob with Herb Butter, Cast-Iron Sweet Cornbread with Honey Butter, and Fresh Garden Slaw.',
+    },
+    {
+      category: 'Garden Reservations',
+      question: 'Can we reserve picnic tables in advance?',
+      answer: 'Yes. Reserving online is highly recommended for weekend lunches and dinner celebrations to ensure your family gets contiguous picnic table seating in our garden.',
+    },
+    {
+      category: 'Takeout Packages',
+      question: 'Can we order family meal packages for home pickup?',
+      answer: 'Yes! Order online through our website, and we will have your complete family board packed in thermal insulation boxes ready at our drive-up pickup bay.',
+    },
+  ],
 };
 
 export default function BackyardBarbeque() {
-  const [scrolled, setScrolled] = useState(false);
-  const [activeMenuTab, setActiveMenuTab] = useState('Platters');
-  
-  const heroRef = useReveal(100);
-  const storyRef = useReveal(200);
-  const menuRef = useReveal(200);
-  
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const theme = {
-    name: 'Backyard Barbeque',
-    tagline: 'Family-style BBQ with Southern soul & big portions',
-    palette: { primary: '#f97316', secondary: '#292524', surface: '#fdf8f1', text: '#1c1917', background: '#fefce8', textLight: '#78716c' }
-  };
-
-  const menu = [
-    { tab: 'Platters', items: [
-      { name: 'Classic 2-Meat Plate', price: '$19', desc: 'Pick any 2 meats, 2 sides, cornbread. Ribs, chicken, pulled pork, or brisket.', image: IMAGES.plate },
-      { name: 'The Backyard Feast', price: '$65', desc: 'Full rack ribs, whole chicken, 1lb pulled pork, 4 sides — feeds 4–5.', tags: ['Family Size'], image: IMAGES.feast },
-      { name: 'Smoked Chicken Plate', price: '$15', desc: 'Half chicken smoked with pecan wood, 1 side, cornbread.', image: IMAGES.chicken },
-    ]},
-    { tab: 'Sandwiches', items: [
-      { name: 'Pulled Pork Sandwich', price: '$12', desc: 'Slow-smoked pork, tangy slaw, pickles, toasted brioche.', image: IMAGES.sandwich1 },
-      { name: 'BBQ Sausage Sandwich', price: '$13', desc: 'Smoked house sausage, house sauce, pickled onion, jalapeños.', image: IMAGES.sandwich2 },
-    ]},
-    { tab: 'Sides', items: [
-      { name: 'Southern Baked Beans', price: '$5', desc: 'Slow-cooked with brown sugar, mustard, and smoked pork bits.', image: IMAGES.sides1 },
-      { name: 'Creamy Coleslaw', price: '$4', desc: 'Classic, creamy, tangy — a must.', image: IMAGES.sides2 },
-    ]},
-  ];
-
-  return (
-    <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif', minHeight: '100vh' }}>
-      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(254,252,232,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(249,115,22,0.2)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none', color: scrolled ? theme.palette.secondary : '#fff' }}>
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          
-          <div style={{ fontSize: '1.75rem', fontWeight: 800, fontFamily: '"Roboto Slab", serif', color: scrolled ? theme.palette.secondary : '#fff' }}>
-            {theme.name}
-          </div>
-        </div>
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', padding: '0.75rem 2rem', borderRadius: '8px', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontFamily: '"Inter", sans-serif', transition: 'all 0.3s', boxShadow: '0 4px 10px rgba(249,115,22,0.3)' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#ea580c'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = theme.palette.primary}>
-            <Users size={18} /> Order Family Pack
-          </button>
-        </div>
-      </nav>
-
-      <header style={{ height: '90vh', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundColor: '#000' }}>
-          <img src={IMAGES.hero} alt="Family BBQ Spread" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.7 }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, rgba(249,115,22,0.2) 100%)' }}></div>
-        </div>
-        <div ref={heroRef as any} style={{ position: 'relative', zIndex: 10, color: '#fff', maxWidth: '700px', padding: '0 5%' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem', color: theme.palette.primary }}>
-            <Flame size={28} />
-            <span style={{ fontWeight: 700, fontSize: '1.1rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Authentic Southern Soul</span>
-          </div>
-          <h1 style={{ fontFamily: '"Roboto Slab", serif', fontSize: 'clamp(3.5rem, 8vw, 6rem)', lineHeight: 1.1, marginBottom: '1.5rem', fontWeight: 800 }}>Big Food.<br/>Big Family.<br/><span style={{ color: theme.palette.primary }}>Big Love.</span></h1>
-          <p style={{ fontSize: '1.25rem', fontWeight: 400, marginBottom: '3rem', lineHeight: 1.6, color: '#fefce8' }}>Southern-style backyard BBQ where the food is made to share, the portions are massive, and no one leaves hungry.</p>
-          <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
-            <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', padding: '1.2rem 3rem', borderRadius: '8px', fontWeight: 700, fontSize: '1.1rem', cursor: 'pointer', fontFamily: '"Inter", sans-serif', transition: 'all 0.3s' }}>
-              Order Now
-            </button>
-          </div>
-        </div>
-      </header>
-      
-      <section ref={storyRef as any} style={{ padding: '8rem 5%', backgroundColor: theme.palette.surface, color: theme.palette.secondary }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap-reverse', gap: '5rem', alignItems: 'center', maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ flex: '1 1 400px', position: 'relative' }}>
-            <div style={{ position: 'absolute', top: '-1.5rem', left: '-1.5rem', right: '1.5rem', bottom: '1.5rem', backgroundColor: theme.palette.primary, borderRadius: '12px', opacity: 0.2 }}></div>
-            <img src={IMAGES.story} alt="Backyard Grill" style={{ width: '100%', borderRadius: '12px', position: 'relative', zIndex: 2, boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }} />
-          </div>
-          <div style={{ flex: '1 1 500px' }}>
-            <h2 style={{ fontFamily: '"Roboto Slab", serif', fontSize: '3rem', color: theme.palette.secondary, marginBottom: '1.5rem', lineHeight: 1.2, fontWeight: 800 }}>Straight Off the <br/>Backyard Grill.</h2>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '1.5rem', color: theme.palette.textLight }}>Backyard Barbeque started as a literal backyard cookout in 2008. The neighbourhood kept showing up, so we eventually had to open a restaurant to keep up with demand.</p>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '2.5rem', color: theme.palette.textLight }}>We still cook on charcoal, still serve family-style, and still make the same sweet-and-smoky sauce that has been requested by every guest for 15 years.</p>
-            <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <div style={{ backgroundColor: 'rgba(249,115,22,0.1)', padding: '1rem', borderRadius: '50%', color: theme.palette.primary }}><Flame size={24} /></div>
-                <div><h4 style={{ margin: '0 0 0.25rem 0', fontWeight: 700 }}>Real Charcoal</h4><p style={{ margin: 0, fontSize: '0.9rem', color: theme.palette.textLight }}>Smoked daily</p></div>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <div style={{ backgroundColor: 'rgba(249,115,22,0.1)', padding: '1rem', borderRadius: '50%', color: theme.palette.primary }}><Users size={24} /></div>
-                <div><h4 style={{ margin: '0 0 0.25rem 0', fontWeight: 700 }}>Family Portions</h4><p style={{ margin: 0, fontSize: '0.9rem', color: theme.palette.textLight }}>Made to share</p></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section ref={menuRef as any} style={{ padding: '8rem 5%', backgroundColor: theme.palette.background }}>
-        <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-          <h2 style={{ fontFamily: '"Roboto Slab", serif', fontSize: '3.5rem', color: theme.palette.secondary, fontWeight: 800, margin: 0 }}>The Menu</h2>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '3rem', flexWrap: 'wrap' }}>
-            {menu.map((cat) => (
-              <button 
-                key={cat.tab}
-                onClick={() => setActiveMenuTab(cat.tab)}
-                style={{ 
-                  padding: '0.75rem 2rem', 
-                  backgroundColor: activeMenuTab === cat.tab ? theme.palette.secondary : '#fff',
-                  color: activeMenuTab === cat.tab ? '#fff' : theme.palette.secondary,
-                  border: 'none',
-                  borderRadius: '30px',
-                  fontFamily: '"Inter", sans-serif',
-                  fontSize: '1.1rem',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  boxShadow: activeMenuTab === cat.tab ? '0 10px 20px rgba(41,37,36,0.2)' : '0 2px 4px rgba(0,0,0,0.05)'
-                }}
-              >
-                {cat.tab}
-              </button>
-            ))}
-          </div>
-        </div>
-        
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem', maxWidth: '1200px', margin: '0 auto' }}>
-          {menu.find(c => c.tab === activeMenuTab)?.items.map((item, i) => (
-            <div key={i} style={{ display: 'flex', flexDirection: 'column', backgroundColor: '#fff', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.05)', transition: 'transform 0.3s, box-shadow 0.3s', cursor: 'pointer', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }} onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-8px)'; e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(0,0,0,0.1)'; }} onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.05)'; }}>
-              <div style={{ position: 'relative' }}>
-                <img src={item.image} alt={item.name} style={{ width: '100%', height: '260px', objectFit: 'cover' }} />
-                <div style={{ position: 'absolute', top: '1rem', right: '1rem', backgroundColor: theme.palette.primary, color: '#fff', padding: '0.5rem 1rem', borderRadius: '20px', fontWeight: 700, fontFamily: '"Inter", sans-serif', fontSize: '1.1rem', boxShadow: '0 4px 6px rgba(249,115,22,0.3)' }}>{item.price}</div>
-              </div>
-              <div style={{ padding: '2rem' }}>
-                <h3 style={{ fontFamily: '"Roboto Slab", serif', fontSize: '1.5rem', fontWeight: 800, margin: '0 0 1rem 0', color: theme.palette.secondary }}>{item.name}</h3>
-                <p style={{ color: theme.palette.textLight, fontSize: '1rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>{item.desc}</p>
-                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                  {item.tags?.map(tag => (
-                    <span key={tag} style={{ fontSize: '0.85rem', padding: '0.35rem 1rem', backgroundColor: theme.palette.surface, color: theme.palette.primary, borderRadius: '20px', fontWeight: 600 }}>{tag}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section style={{ padding: '8rem 5%', backgroundColor: theme.palette.surface }}>
-        <h2 style={{ fontFamily: '"Roboto Slab", serif', fontSize: '3rem', color: theme.palette.secondary, textAlign: 'center', marginBottom: '4rem', fontWeight: 800 }}>The Word On The Street</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-          {[
-            { name: 'James W.', quote: 'We got the Backyard Feast for my son\'s birthday. Five people ate until they could not move. Every bite was incredible.' },
-            { name: 'Carol B.', quote: 'That sweet-and-smoky house sauce should be illegal. I asked them to bottle it. They said no. I\'m going back anyway.' },
-            { name: 'Tom H.', quote: 'This is the most authentic Southern BBQ I\'ve had outside of a church cookout. And I mean that as the highest compliment.' }
-          ].map((test, i) => (
-            <div key={i} style={{ backgroundColor: '#fff', padding: '2.5rem', borderRadius: '16px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
-              <div style={{ display: 'flex', color: '#fbbf24', marginBottom: '1.5rem' }}>
-                {[...Array(5)].map((_, j) => <Star key={j} size={20} fill="#fbbf24" stroke="none" />)}
-              </div>
-              <p style={{ color: theme.palette.text, lineHeight: 1.7, marginBottom: '2rem', fontSize: '1.05rem', fontStyle: 'italic' }}>"{test.quote}"</p>
-              <h4 style={{ fontWeight: 700, color: theme.palette.secondary, margin: 0, fontSize: '1.1rem', fontFamily: '"Inter", sans-serif' }}>- {test.name}</h4>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <footer style={{ backgroundColor: theme.palette.secondary, color: '#d1d5db', padding: '6rem 5% 3rem' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '4rem', marginBottom: '4rem' }}>
-            <div>
-              <h2 style={{ fontFamily: '"Roboto Slab", serif', fontSize: '2.5rem', fontWeight: 800, marginBottom: '1rem', color: '#fff' }}>{theme.name}</h2>
-              <p style={{ color: '#9ca3af', marginBottom: '2rem', fontSize: '1.05rem', lineHeight: 1.6 }}>{theme.tagline}</p>
-            </div>
-            <div>
-              <h4 style={{ color: '#fff', fontWeight: 700, marginBottom: '1.5rem', fontSize: '1.25rem' }}>Location</h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}><MapPin size={24} color={theme.palette.primary} style={{ flexShrink: 0 }} /><span style={{ lineHeight: 1.5 }}>2208 Southern Ave<br/>Memphis, TN 38114</span></div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}><Phone size={24} color={theme.palette.primary} style={{ flexShrink: 0 }} /><span>+1 (901) 555-0222</span></div>
-              </div>
-            </div>
-            <div>
-              <h4 style={{ color: '#fff', fontWeight: 700, marginBottom: '1.5rem', fontSize: '1.25rem' }}>Hours</h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}><Clock size={24} color={theme.palette.primary} style={{ flexShrink: 0 }} /><span style={{ lineHeight: 1.5 }}>Tue – Sun:<br/>11am – 9pm<br/>Sunday Brunch: 10am</span></div>
-              </div>
-            </div>
-          </div>
-          <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '2rem', textAlign: 'center' }}>
-            <p style={{ fontSize: '0.95rem', margin: 0 }}>© 2026 {theme.name}. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
+  return <FoodStorefrontCore config={backyardBarbequeConfig} />;
 }
-
-

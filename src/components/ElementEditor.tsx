@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import type { PageElement } from '../types'
 import { updateElement, createElement, deleteElement } from '../lib/workspace-api'
-import { Trash2, MoreHorizontal, Link as LinkIcon, Image as ImageIcon, Plus, ArrowLeft, Eye, EyeOff, GripVertical, CornerUpLeft, CornerUpRight, X } from 'lucide-react'
+import { Trash2, MoreHorizontal, Link as LinkIcon, Image as ImageIcon, Plus, ArrowLeft, Eye, EyeOff, GripVertical, CornerUpLeft, CornerUpRight, X, Sparkles } from 'lucide-react'
 import { getSchemaForSection, type FieldDef, type BlockDef } from '../schema'
+import { getSuggestionsForField } from '../data/copySuggestions'
 
 interface ElementEditorProps {
   element: PageElement
@@ -20,6 +21,7 @@ export default function ElementEditor({ element, onClose, onUpdate, onOptimistic
   const [activeTab, setActiveTab] = useState<Tab>('content')
   const [saveState, setSaveState] = useState<SaveState>('idle')
   const [showMenu, setShowMenu] = useState(false)
+  const [activeSuggestionField, setActiveSuggestionField] = useState<string | null>(null)
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   // Undo/Redo stack
@@ -85,13 +87,19 @@ export default function ElementEditor({ element, onClose, onUpdate, onOptimistic
     setSaveState('saving')
     try {
       const isSynthetic = !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(element.id)
+      const cleanedProps: Record<string, any> = {}
+      for (const [k, v] of Object.entries(props)) {
+        if (v !== '' && v !== null && v !== undefined && !k.startsWith('_')) {
+          cleanedProps[k] = v
+        }
+      }
       if (isSynthetic) {
-        await createElement(element.pageId, element.elementType, element.name, props, element.displayOrder)
+        await createElement(element.pageId, element.elementType, element.name, cleanedProps, element.displayOrder)
       } else {
         await updateElement(element.id, {
           name: element.name,
           displayOrder: element.displayOrder,
-          properties: props,
+          properties: cleanedProps,
         })
       }
       setSaveState('saved')
@@ -152,11 +160,109 @@ export default function ElementEditor({ element, onClose, onUpdate, onOptimistic
 
   const renderField = (f: FieldDef, value: any, onChange: (v: any) => void) => {
     const isTextarea = f.type === 'textarea' || f.type === 'richtext'
+    const isTextField = f.type === 'text' || isTextarea
+    const suggestions = isTextField ? getSuggestionsForField(f.name) : []
+
     return (
-      <div className="ee-field" key={f.name} style={{ marginBottom: '10px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
-          <label style={{ fontSize: '13px', fontWeight: 500, color: '#374151' }}>{f.label}</label>
+      <div className="ee-field" key={f.name} style={{ marginBottom: '14px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+          <label style={{ fontSize: '13px', fontWeight: 600, color: '#374151' }}>{f.label}</label>
+          {isTextField && suggestions.length > 0 && (
+            <button
+              type="button"
+              onClick={() => setActiveSuggestionField(activeSuggestionField === f.name ? null : f.name)}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px',
+                padding: '2px 8px',
+                fontSize: '11px',
+                fontWeight: 600,
+                backgroundColor: activeSuggestionField === f.name ? '#4f46e5' : '#f5f3ff',
+                color: activeSuggestionField === f.name ? '#ffffff' : '#5c3ce6',
+                border: '1px solid #ddd6fe',
+                borderRadius: '12px',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease',
+              }}
+              title="Click to view curated high-converting suggestions"
+            >
+              <Sparkles size={11} />
+              <span>{activeSuggestionField === f.name ? 'Hide Suggestions' : 'Best Suggestions'}</span>
+            </button>
+          )}
         </div>
+
+        {/* ── Best Suggestions Dropdown Panel ── */}
+        {isTextField && activeSuggestionField === f.name && (
+          <div
+            style={{
+              backgroundColor: '#faf5ff',
+              border: '1px solid #e9d5ff',
+              borderRadius: '8px',
+              padding: '10px',
+              marginBottom: '10px',
+              boxShadow: '0 4px 14px rgba(124, 58, 237, 0.08)',
+              maxHeight: '230px',
+              overflowY: 'auto',
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+              <span style={{ fontSize: '11px', fontWeight: 700, color: '#6b21a8', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+                ✨ Curated Best Suggestions
+              </span>
+              <button
+                type="button"
+                onClick={() => setActiveSuggestionField(null)}
+                style={{ background: 'none', border: 'none', color: '#9333ea', cursor: 'pointer', padding: '2px' }}
+              >
+                <X size={13} />
+              </button>
+            </div>
+            {suggestions.map((group) => (
+              <div key={group.category} style={{ marginBottom: '8px' }}>
+                <div style={{ fontSize: '10px', fontWeight: 700, color: '#7e22ce', margin: '4px 0 3px', textTransform: 'uppercase' }}>
+                  {group.category}
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  {group.items.map((item, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => {
+                        onChange(item)
+                        setActiveSuggestionField(null)
+                      }}
+                      style={{
+                        textAlign: 'left',
+                        backgroundColor: '#ffffff',
+                        border: '1px solid #e9d5ff',
+                        borderRadius: '6px',
+                        padding: '6px 10px',
+                        fontSize: '12px',
+                        color: '#1e1b4b',
+                        cursor: 'pointer',
+                        lineHeight: 1.4,
+                        transition: 'all 0.15s ease',
+                      }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.backgroundColor = '#f3e8ff'
+                        e.currentTarget.style.borderColor = '#c084fc'
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.backgroundColor = '#ffffff'
+                        e.currentTarget.style.borderColor = '#e9d5ff'
+                      }}
+                    >
+                      "{item}"
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
         <div style={{ position: 'relative' }}>
           {isTextarea ? (
             <textarea
@@ -170,46 +276,10 @@ export default function ElementEditor({ element, onClose, onUpdate, onOptimistic
               }}
             />
           ) : f.type === ('image' as any) ? (
-            <div>
-              {value && (
-                <div style={{ width: '100%', height: '100px', borderRadius: '8px', overflow: 'hidden', border: '1px solid #E5E7EB', marginBottom: '8px' }}>
-                  <img src={value} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="Preview" />
-                </div>
-              )}
-              <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
-                <button style={{ flex: 1, padding: '8px', background: '#fff', border: '1px solid #E5E7EB', borderRadius: '8px', fontSize: '13px', fontWeight: 500, cursor: 'pointer', color: '#374151' }} onClick={() => {
-                  const url = prompt('Enter image URL:', value || '')
-                  if (url !== null) onChange(url)
-                }}>Custom URL</button>
-                <button style={{ flex: 1, padding: '8px', background: '#fff', border: '1px solid #E5E7EB', borderRadius: '8px', fontSize: '13px', fontWeight: 500, cursor: 'pointer', color: '#374151' }} onClick={() => onChange('')}>Clear</button>
-              </div>
-              <div style={{ fontSize: '12px', fontWeight: 600, color: '#6B7280', marginBottom: '8px', textTransform: 'uppercase' }}>Suggested Banners</div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
-                {[
-                  '/assets/luxora-hero.jpg',
-                  'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1445205170230-053b83016050?w=1200&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1200&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=1200&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?w=1200&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1200&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=1200&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=1200&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1200&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=1200&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1200&auto=format&fit=crop'
-                ].map((url, i) => (
-                  <button
-                    key={i}
-                    onClick={() => onChange(url)}
-                    style={{ padding: 0, border: value === url ? '2px solid #5B4FE5' : '1px solid #E5E7EB', borderRadius: '6px', overflow: 'hidden', height: '48px', cursor: 'pointer', background: '#F3F4F6' }}
-                  >
-                    <img src={url} alt={`Banner ${i}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  </button>
-                ))}
-              </div>
-            </div>
+            <ImageFieldEditor
+              value={value}
+              onChange={onChange}
+            />
           ) : f.type === ('color' as any) ? (
             <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
               <input type="color" value={value || '#ffffff'} onChange={e => onChange(e.target.value)} style={{ width: '40px', height: '40px', padding: '2px', borderRadius: '8px', border: '1px solid #E5E7EB', cursor: 'pointer' }} />
@@ -359,3 +429,163 @@ export default function ElementEditor({ element, onClose, onUpdate, onOptimistic
     </div>
   )
 }
+
+const DEFAULT_IMAGE_FALLBACK = 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&auto=format&fit=crop'
+
+const SUGGESTED_BANNERS = [
+  // Fine Dining & Restaurant
+  'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=1200&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1544025162-d76694265947?w=1200&auto=format&fit=crop',
+  // Bakery & Cafe
+  'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1200&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1200&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1200&auto=format&fit=crop',
+  // Gourmet Pizza & Burgers
+  'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1200&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1200&auto=format&fit=crop',
+  // Boutique & Lifestyle
+  'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&auto=format&fit=crop',
+]
+
+function ImageFieldEditor({ value, onChange }: { value: string | undefined; onChange: (url: string) => void }) {
+  const [isEditingCustom, setIsEditingCustom] = useState(false)
+  const [customUrlInput, setCustomUrlInput] = useState('')
+  const [previewError, setPreviewError] = useState(false)
+
+  const handleApplyCustom = () => {
+    const trimmed = customUrlInput.trim()
+    if (trimmed) {
+      onChange(trimmed)
+    }
+    setIsEditingCustom(false)
+    setCustomUrlInput('')
+    setPreviewError(false)
+  }
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      {/* Current Image Preview */}
+      {value && (
+        <div style={{ width: '100%', height: '110px', borderRadius: '8px', overflow: 'hidden', border: '1px solid #E5E7EB', position: 'relative', background: '#F3F4F6' }}>
+          <img
+            src={value}
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            alt="Current image preview"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = DEFAULT_IMAGE_FALLBACK
+            }}
+          />
+          <div style={{ position: 'absolute', bottom: 4, right: 4, background: 'rgba(0,0,0,0.65)', color: '#fff', fontSize: '10px', padding: '2px 6px', borderRadius: '4px', fontWeight: 600 }}>
+            Active
+          </div>
+        </div>
+      )}
+
+      {/* Action Buttons */}
+      <div style={{ display: 'flex', gap: '8px' }}>
+        <button
+          type="button"
+          style={{ flex: 1, padding: '7px', background: isEditingCustom ? '#EEF2FF' : '#fff', border: isEditingCustom ? '1px solid #6366F1' : '1px solid #E5E7EB', borderRadius: '8px', fontSize: '12px', fontWeight: 600, cursor: 'pointer', color: isEditingCustom ? '#4F46E5' : '#374151' }}
+          onClick={() => {
+            setIsEditingCustom(!isEditingCustom)
+            setCustomUrlInput(value || '')
+            setPreviewError(false)
+          }}
+        >
+          {isEditingCustom ? 'Close URL Form' : 'Custom URL'}
+        </button>
+        <button
+          type="button"
+          style={{ flex: 1, padding: '7px', background: '#fff', border: '1px solid #E5E7EB', borderRadius: '8px', fontSize: '12px', fontWeight: 500, cursor: 'pointer', color: '#6B7280' }}
+          onClick={() => onChange('')}
+        >
+          Clear
+        </button>
+      </div>
+
+      {/* Custom URL In-Panel Form (Replaces prompt) */}
+      {isEditingCustom && (
+        <div style={{ background: '#F9FAFB', border: '1px solid #E5E7EB', borderRadius: '8px', padding: '10px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <label style={{ fontSize: '11px', fontWeight: 700, color: '#374151', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+            Paste Image URL:
+          </label>
+          <input
+            type="url"
+            value={customUrlInput}
+            onChange={(e) => {
+              setCustomUrlInput(e.target.value)
+              setPreviewError(false)
+            }}
+            placeholder="https://images.unsplash.com/..."
+            style={{ width: '100%', padding: '6px 10px', fontSize: '12px', border: '1px solid #D1D5DB', borderRadius: '6px', background: '#fff', boxSizing: 'border-box' }}
+          />
+
+          {customUrlInput.trim() && (
+            <div style={{ width: '100%', height: '70px', borderRadius: '6px', overflow: 'hidden', border: '1px solid #E5E7EB', background: '#fff' }}>
+              <img
+                src={previewError ? DEFAULT_IMAGE_FALLBACK : customUrlInput.trim()}
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                alt="URL live preview"
+                onError={() => setPreviewError(true)}
+              />
+            </div>
+          )}
+
+          <div style={{ display: 'flex', gap: '6px', justifyContent: 'flex-end', marginTop: '2px' }}>
+            <button
+              type="button"
+              onClick={() => setIsEditingCustom(false)}
+              style={{ padding: '5px 10px', fontSize: '12px', background: '#fff', border: '1px solid #D1D5DB', borderRadius: '6px', cursor: 'pointer' }}
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={handleApplyCustom}
+              style={{ padding: '5px 12px', fontSize: '12px', background: '#4F46E5', color: '#fff', border: 'none', borderRadius: '6px', fontWeight: 600, cursor: 'pointer' }}
+            >
+              Apply Image
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Curated Suggested Banners */}
+      <div style={{ fontSize: '11px', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.04em', marginTop: '4px' }}>
+        Curated Banners & Photography
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '5px' }}>
+        {SUGGESTED_BANNERS.map((url, i) => (
+          <button
+            key={i}
+            type="button"
+            onClick={() => onChange(url)}
+            title="Click to apply this photo"
+            style={{
+              padding: 0,
+              border: value === url ? '2px solid #4F46E5' : '1px solid #E5E7EB',
+              borderRadius: '6px',
+              overflow: 'hidden',
+              height: '42px',
+              cursor: 'pointer',
+              background: '#F3F4F6',
+              transition: 'transform 0.1s',
+            }}
+          >
+            <img
+              src={url}
+              alt={`Banner ${i}`}
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = DEFAULT_IMAGE_FALLBACK
+              }}
+            />
+          </button>
+        ))}
+      </div>
+    </div>
+  )
+}
+

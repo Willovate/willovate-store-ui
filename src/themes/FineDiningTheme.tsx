@@ -97,7 +97,7 @@ export default function FineDiningTheme({ theme }: { theme: RestaurantThemePrese
   const heroImage = images[0]
   const menuImages = hasDedicatedSectionImages ? images.slice(1, 4) : images.slice(0, 3)
   const chefImage = hasDedicatedSectionImages ? images[4] : images[3]
-  const galleryImages = hasDedicatedSectionImages ? images.slice(5, 9) : images
+  const galleryImages = hasDedicatedSectionImages ? images.slice(5, 10) : images
   const experienceImages = hasDedicatedSectionImages ? images.slice(9, 14) : images
   const ctaImage = hasDedicatedSectionImages ? images[14] : images[2]
   const dark = theme.layout === 'editorial' || theme.layout === 'rustic'
@@ -116,13 +116,42 @@ export default function FineDiningTheme({ theme }: { theme: RestaurantThemePrese
   }, [])
   
   useEffect(() => {
-    const observer = new IntersectionObserver(entries => entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('fd-visible')), { threshold: .1 })
+    const el = document.querySelector('.fine-theme') as HTMLElement | null
+    const scrollParent: Element | null = (() => {
+      let node = el?.parentElement ?? null
+      while (node && node !== document.body) {
+        const s = window.getComputedStyle(node)
+        if (s.overflowY === 'auto' || s.overflowY === 'scroll') return node
+        node = node.parentElement
+      }
+      return null
+    })()
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('fd-visible')),
+      { root: scrollParent, threshold: 0.05 }
+    )
     document.querySelectorAll('.fd-reveal').forEach(element => observer.observe(element))
-    return () => observer.disconnect()
+
+    // Fallback timer so no content stays hidden
+    const timer = setTimeout(() => {
+      document.querySelectorAll('.fd-reveal').forEach(element => element.classList.add('fd-visible'))
+    }, 600)
+
+    return () => {
+      observer.disconnect()
+      clearTimeout(timer)
+    }
   }, [path])
 
-  const HomeView = () => (
+  const HomeView = () => {
+    const [course, setCourse] = useState<Course>('Starters')
+    const [moment, setMoment] = useState(0)
+    const [quickView, setQuickView] = useState<{dish: string[], img: string} | null>(null)
+    const [subHovered, setSubHovered] = useState(false)
+
+    return (
     <>
+      {/* ── HERO ─────────────────────────────────────────── */}
       <section className="fd-hero">
         <img src={heroImage} alt={theme.name + ' restaurant interior'} />
         <div className="fd-hero-shade" />
@@ -137,19 +166,75 @@ export default function FineDiningTheme({ theme }: { theme: RestaurantThemePrese
           </section>
         </div>
       </section>
-      
+
+      {/* ── INTRO ────────────────────────────────────────── */}
       <section className="fd-intro fd-reveal">
         <span>01 · THE RESTAURANT</span>
         <h2>{theme.storyTitle || 'Seasonal cuisine, served with a <em>point of view.</em>'}</h2>
         <p>{theme.storyCopy || 'Our menu follows the season and the people who grow it. Every course is an invitation to slow down and taste more closely.'}</p>
-        <div style={{ marginTop: '2rem' }}>
-           <a href="/about" onClick={(e) => navigate(e, '/about')} className="fd-text-link">Read our story <b>→</b></a>
+        <div style={{ display: 'flex', gap: '2rem', marginTop: '2rem', flexWrap: 'wrap' }}>
+          <a href="/about" onClick={(e) => navigate(e, '/about')} className="fd-text-link">Read our story <b>→</b></a>
+          <a href="/reservation" onClick={(e) => navigate(e, '/reservation')} className="fd-text-link">Reserve a table <b>→</b></a>
         </div>
       </section>
-      
+
+      {/* ── MENU PREVIEW ─────────────────────────────────── */}
+      <section className="fd-menu-section" style={{ padding: '5rem 5%' }}>
+        <div className="fd-section-title fd-reveal" style={{ marginBottom: '3rem' }}>
+          <span>02 · THE MENU</span>
+          <h2>Tonight's<br /><em>selection.</em></h2>
+        </div>
+        <div className="fd-tabs" role="tablist">
+          {(Object.keys(courses) as Course[]).map(name => (
+            <button key={name} role="tab" aria-selected={course === name} className={course === name ? 'active' : ''} onClick={() => setCourse(name)}>{name}</button>
+          ))}
+        </div>
+        <div className="fd-dishes">
+          {courses[course].map((dish, index) => (
+            <article className="fd-dish fd-reveal" key={dish[0]} style={{ transitionDelay: index * 80 + 'ms' }}>
+              <img src={menuImages[index % menuImages.length]} alt={dish[0]} loading="lazy" />
+              <div className="fd-dish-hover">
+                <button onClick={() => setQuickView({dish, img: menuImages[index % menuImages.length]})}>Quick View</button>
+              </div>
+              <div>
+                <span>{dish[3]}</span>
+                <h3>{dish[0]}</h3>
+                <p>{dish[1]}</p>
+                <strong>{'$' + dish[2]}</strong>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div style={{ textAlign: 'center', marginTop: '3rem' }} className="fd-reveal">
+          <a href="/menu" onClick={(e) => navigate(e, '/menu')} className="fd-text-link">View full menu <b>→</b></a>
+        </div>
+        {quickView && (
+          <QuickViewModal dish={quickView.dish} image={quickView.img} onClose={() => setQuickView(null)} themeName={theme.name} />
+        )}
+      </section>
+
+      {/* ── CHEF / STORY ─────────────────────────────────── */}
+      <section className="fd-chef" id="story">
+        <div className={'fd-chef-image fd-reveal' + (hasDedicatedSectionImages ? '' : ' fd-chef-image--typographic')}>
+          {hasDedicatedSectionImages && <img src={chefImage} alt="Chef plating a seasonal dish" loading="lazy" />}
+          <p>"Cooking is memory,<br />expressed on a plate."</p>
+        </div>
+        <div className="fd-chef-copy fd-reveal">
+          <span>03 · MEET THE CHEF</span>
+          <h2>A philosophy of<br /><em>focus.</em></h2>
+          <p>Chef Elise Laurent brings a quiet precision to each plate: French technique, local ingredients, and a belief that the finest service should always feel effortless.</p>
+          <dl>
+            <dt>Signature dish</dt>
+            <dd>Dry-aged Duck <b>·</b> $42</dd>
+          </dl>
+          <a href="/about" onClick={(e) => navigate(e, '/about')} className="fd-text-link" style={{ marginTop: '2rem', display: 'inline-block' }}>Full story <b>→</b></a>
+        </div>
+      </section>
+
+      {/* ── GALLERY ──────────────────────────────────────── */}
       <section className="fd-gallery">
         <div className="fd-section-title fd-reveal">
-          <span>02 · THE ATMOSPHERE</span>
+          <span>04 · THE ATMOSPHERE</span>
           <h2>A table set for<br /><em>the evening.</em></h2>
         </div>
         {hasDedicatedSectionImages ? <div className="fd-gallery-grid">
@@ -165,8 +250,68 @@ export default function FineDiningTheme({ theme }: { theme: RestaurantThemePrese
            <a href="/gallery" onClick={(e) => navigate(e, '/gallery')} className="fd-text-link">View full gallery <b>→</b></a>
         </div>
       </section>
+
+      {/* ── EXPERIENCE ───────────────────────────────────── */}
+      <section className="fd-experience" id="experience">
+        <div className="fd-section-title fd-reveal">
+          <span>05 · THE EXPERIENCE</span>
+          <h2>More than a<br /><em>meal.</em></h2>
+        </div>
+        <div className="fd-experience-grid">
+          <div className="fd-steps" role="tablist">
+            {journey.map((item, index) => (
+              <button key={item[0]} className={moment === index ? 'active' : ''} role="tab" aria-selected={moment === index} onClick={() => setMoment(index)}>
+                <b>{item[0]}</b>{item[1]}
+              </button>
+            ))}
+          </div>
+          <div className="fd-step-detail fd-reveal">
+            {hasDedicatedSectionImages && <img src={experienceImages[moment % experienceImages.length]} alt="" loading="lazy" />}
+            <span>{journey[moment][0] + ' · ' + journey[moment][1]}</span>
+            <p>{journey[moment][2]}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── VISIT / HOURS ─────────────────────────────────── */}
+      <section className="fd-visit">
+        <div className="fd-reveal">
+          <span>06 · VISIT US</span>
+          <h2>We are located in<br /><em>the heart of the city.</em></h2>
+          <a href="/reservation" onClick={(e) => navigate(e, '/reservation')} style={{ display: 'inline-block', marginTop: '2rem', padding: '1rem 2rem', background: 'var(--fd-ink)', color: 'var(--fd-paper)', textDecoration: 'none' }}>Reserve a table ↗</a>
+        </div>
+        <dl className="fd-reveal">
+          <div>
+            <dt>Address</dt>
+            <dd>18 Mercer Street<br />New York, NY 10013</dd>
+          </div>
+          <div>
+            <dt>Hours</dt>
+            <dd>Tuesday–Saturday<br />5:30 PM – Late</dd>
+          </div>
+          <div>
+            <dt>Contact</dt>
+            <dd>+1 212 555 0148<br />hello@finedining.example</dd>
+          </div>
+        </dl>
+      </section>
+
+      {/* ── NEWSLETTER / CTA ─────────────────────────────── */}
+      <section className="fd-newsletter fd-reveal">
+        <span>STAY AT THE TABLE</span>
+        <h2>Seasonal news,<br /><em>from our kitchen.</em></h2>
+        {subHovered ? (
+          <p style={{ color: 'var(--fd-accent)', fontStyle: 'italic', margin: '1rem 0' }}>✓ Merci. You have been added to our private cellar bulletin.</p>
+        ) : (
+          <form onSubmit={e => { e.preventDefault(); setSubHovered(true) }}>
+            <label className="sr-only" htmlFor="fine-email-home">Email address</label>
+            <input id="fine-email-home" required type="email" placeholder="Your email address" />
+            <button>Subscribe →</button>
+          </form>
+        )}
+      </section>
     </>
-  )
+  )}
 
   const MenuView = () => {
     const [course, setCourse] = useState<Course>('Starters')

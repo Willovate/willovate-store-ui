@@ -126,7 +126,19 @@ function CloudQuickViewModal({ item, image, onClose, onAdd }: { item: (string | 
   )
 }
 
+import GhostBite from '../templates/food-restaurants/cloud-kitchen/GhostBite'
+import GreenFuel from '../templates/food-restaurants/cloud-kitchen/GreenFuel'
+import MasalaRoute from '../templates/food-restaurants/cloud-kitchen/MasalaRoute'
+import UmamiExpress from '../templates/food-restaurants/cloud-kitchen/UmamiExpress'
+import TheCloudCollective from '../templates/food-restaurants/cloud-kitchen/TheCloudCollective'
+
 export default function CloudKitchenTheme({ theme }: { theme: RestaurantThemePreset }) {
+  if (theme.id === 'ghost-bite' || theme.id === 'dark-kitchen-pro' || theme.id === 'kitchen-x') return <GhostBite />
+  if (theme.id === 'green-fuel' || theme.id === 'fresh-batch' || theme.id === 'fresh-dispatch' || theme.id === 'urban-batch') return <GreenFuel />
+  if (theme.id === 'masala-route' || theme.id === 'flame-hub') return <MasalaRoute />
+  if (theme.id === 'umami-express' || theme.id === 'ghost-chef' || theme.id === 'ghost-kitchen') return <UmamiExpress />
+  if (theme.id === 'the-cloud-collective' || theme.id === 'box-and-go' || theme.id === 'kitchen-express') return <TheCloudCollective />
+
   const [path, setPath] = useState('/')
   const [mobile, setMobile] = useState(false)
   const [scrolled, setScrolled] = useState(false)

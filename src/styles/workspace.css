@@ -1,3 +1,5 @@
+@import './storefront-responsive.css';
+
 :root{
   --bg:#ffffff; --ink:#1b1d26; --muted:#6b6f7b; --line:#e6e7ec; --soft:#f4f5f8;
   --accent:#4f46e5;        /* Publish, active tab, active rail icon */
@@ -459,6 +461,17 @@ html, body, #root {
   font-weight: 600;
 }
 
+.ws-nav-disabled,
+.ws-nav-disabled:hover {
+  color: #334155 !important;
+  background: transparent !important;
+  cursor: default !important;
+  user-select: none;
+  opacity: 1 !important;
+  pointer-events: none;
+  font-weight: 500;
+}
+
 .ws-support-card {
   margin: 1rem 0.75rem 1.25rem;
   background: #f5f3ff;
@@ -649,7 +662,7 @@ html, body, #root {
   min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 16px 14px;
+  padding: 16px 14px 48px 14px;
   position: relative;
   display: flex;
   justify-content: flex-start;
@@ -671,18 +684,122 @@ html, body, #root {
   /* NOT absolute - let it be in flow, wrapper JS sets its height */
   position: relative;
   max-width: none;
+  box-sizing: border-box;
+  container-type: inline-size;
+  container-name: storefront;
 }
 
 .ws-canvas-desktop {
   width: 1200px;
+  border-radius: 6px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
 }
 
 .ws-canvas-tablet {
   width: 768px;
+  border-radius: 20px;
+  border: 8px solid #334155;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .ws-canvas-mobile {
   width: 390px;
+  border-radius: 36px;
+  border: 8px solid #1e293b;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.ws-canvas-mobile::before {
+  content: '';
+  position: sticky;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 16px;
+  background: #1e293b;
+  border-radius: 12px;
+  z-index: 9999;
+  display: block;
+  margin: 0 auto -16px;
+  pointer-events: none !important;
+}
+
+/* Responsive Canvas Adaptations for Mobile Preview Frame */
+.ws-canvas-mobile h1,
+.ws-canvas-mobile .rt-hero h1,
+.ws-canvas-mobile .fd-hero h1,
+.ws-canvas-mobile [class*="hero"] h1 {
+  font-size: clamp(1.6rem, 6vw, 2.2rem) !important;
+  line-height: 1.15 !important;
+}
+
+.ws-canvas-mobile .rt-hero,
+.ws-canvas-mobile .fd-hero,
+.ws-canvas-mobile [class*="hero"] {
+  min-height: 440px !important;
+  padding: 1.5rem 1rem !important;
+}
+
+.ws-canvas-mobile .rt-nav nav,
+.ws-canvas-mobile .fd-nav nav,
+.ws-canvas-mobile [class*="nav"] nav:not(.open) {
+  display: none !important;
+}
+
+.ws-canvas-mobile .rt-mobile,
+.ws-canvas-mobile [class*="mobile-toggle"] {
+  display: block !important;
+}
+
+.ws-canvas-mobile .rt-product-grid,
+.ws-canvas-mobile .fd-grid,
+.ws-canvas-mobile .products,
+.ws-canvas-mobile [class*="product-grid"],
+.ws-canvas-mobile [class*="menu-grid"] {
+  grid-template-columns: 1fr !important;
+  gap: 1rem !important;
+  padding: 0 1rem !important;
+}
+
+.ws-canvas-mobile .rt-split,
+.ws-canvas-mobile .fd-split,
+.ws-canvas-mobile [class*="split"] {
+  grid-template-columns: 1fr !important;
+}
+
+.ws-canvas-mobile .rt-gallery-grid,
+.ws-canvas-mobile [class*="gallery-grid"] {
+  grid-template-columns: repeat(2, 1fr) !important;
+  grid-auto-rows: 140px !important;
+}
+
+.ws-canvas-mobile .rt-footer,
+.ws-canvas-mobile .fd-footer,
+.ws-canvas-mobile footer {
+  grid-template-columns: 1fr !important;
+  padding: 2rem 1rem !important;
+}
+
+/* Tablet Preview Frame Adaptations */
+.ws-canvas-tablet .rt-product-grid,
+.ws-canvas-tablet .fd-grid,
+.ws-canvas-tablet .products,
+.ws-canvas-tablet [class*="product-grid"],
+.ws-canvas-tablet [class*="menu-grid"] {
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 1.25rem !important;
+}
+
+.ws-canvas-tablet h1,
+.ws-canvas-tablet .rt-hero h1 {
+  font-size: clamp(2rem, 5vw, 2.8rem) !important;
 }
 
 .ws-canvas-empty {

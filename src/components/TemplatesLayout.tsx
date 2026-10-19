@@ -1,17 +1,19 @@
 import type { ReactNode } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import {
-  Home, ShoppingBag, Folder, Users, BarChart3, TrendingUp, Megaphone,
+  Home, ShoppingBag, Folder, Users, TrendingUp, Megaphone,
   SlidersHorizontal, Bookmark, Settings, HelpCircle, ChevronDown
 } from 'lucide-react';
 import '../styles/workspace.css';
 import { useState } from 'react';
 import ContactSupportModal from './ContactSupportModal';
+import WillovateLogo from './WillovateLogo';
 
 export default function TemplatesLayout({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
   const location = useLocation();
-  const workspacePath = '/workspace/a1b2c3d4-0000-0000-0000-000000000001';
+  const storedWebsiteId = typeof window !== 'undefined' ? localStorage.getItem('last_used_website_id') : null;
+  const workspacePath = storedWebsiteId ? `/workspace/${storedWebsiteId}` : '/workspace';
   const [showSupportModal, setShowSupportModal] = useState(false);
 
   return (
@@ -19,20 +21,8 @@ export default function TemplatesLayout({ children }: { children: ReactNode }) {
       {/* ── GLOBAL DASHBOARD HEADER ── */}
       <header className="ws-topbar" style={{ display: 'flex', justifyContent: 'space-between', padding: '0 1.25rem', height: '60px', background: '#fff', borderBottom: '1px solid #eef0f5', flexShrink: 0, zIndex: 90 }}>
         <div className="ws-topbar-left" style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
-          <Link to="/" className="ws-sidebar-brand" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexShrink: 0, textDecoration: 'none' }}>
-            <svg width="24" height="18" viewBox="0 0 32 24" fill="none">
-              <path d="M4 4L10 20L16 8L22 20L28 4" stroke="url(#logo-grad)" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <defs>
-                <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#8b5cf6" />
-                  <stop offset="40%" stopColor="#3b82f6" />
-                  <stop offset="100%" stopColor="#0ea5e9" />
-                </linearGradient>
-              </defs>
-            </svg>
-            <span style={{ fontSize: '1.25rem', fontWeight: 700, color: '#1e1b4b', letterSpacing: '-0.5px' }}>
-              Willovate <span style={{ color: '#5c3ce6' }}>One</span>
-            </span>
+          <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }}>
+            <WillovateLogo height={34} style={{ cursor: 'pointer' }} />
           </Link>
         </div>
         <div className="ws-topbar-right" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -53,32 +43,47 @@ export default function TemplatesLayout({ children }: { children: ReactNode }) {
                 <Link
                   to={workspacePath}
                   className="ws-nav-item"
-                  style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}
+                  style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', textDecoration: 'none' }}
+                  tabIndex={0}
                 >
                   <Home size={18} /> Workspace
                 </Link>
               </li>
-              <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}><BarChart3 size={18} /> Dashboard</li>
-              <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}><ShoppingBag size={18} /> Products</li>
-              <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}><Folder size={18} /> Orders</li>
-              <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}><Users size={18} /> Customers</li>
-              <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}><TrendingUp size={18} /> Sales</li>
-              <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}><Megaphone size={18} /> Marketing &amp; Growth</li>
+              <li className="ws-nav-item ws-nav-disabled" style={{ color: '#334155', fontWeight: 500, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem' }} aria-disabled="true" tabIndex={-1}><ShoppingBag size={18} /> Products</li>
+              <li className="ws-nav-item ws-nav-disabled" style={{ color: '#334155', fontWeight: 500, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem' }} aria-disabled="true" tabIndex={-1}><Folder size={18} /> Orders</li>
+              <li className="ws-nav-item ws-nav-disabled" style={{ color: '#334155', fontWeight: 500, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem' }} aria-disabled="true" tabIndex={-1}><Users size={18} /> Customers</li>
+              <li className="ws-nav-item ws-nav-disabled" style={{ color: '#334155', fontWeight: 500, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem' }} aria-disabled="true" tabIndex={-1}><TrendingUp size={18} /> Sales</li>
+              <li className="ws-nav-item ws-nav-disabled" style={{ color: '#334155', fontWeight: 500, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem' }} aria-disabled="true" tabIndex={-1}><Megaphone size={18} /> Marketing &amp; Growth</li>
             </ul>
 
             <div style={{ height: '1px', background: '#f1f5f9', margin: '0.5rem' }}></div>
 
             <p className="ws-sidebar-section-label" style={{ color: '#1e1b4b', fontSize: '0.7rem', fontWeight: 800, letterSpacing: '1px', marginBottom: '0.4rem', padding: '0 0.5rem' }}>TEMPLATES</p>
             <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem', padding: 0, margin: 0, listStyle: 'none' }}>
-              <li className={`ws-nav-item ${location.pathname.startsWith('/browse-templates') ? 'ws-nav-active' : ''}`} style={{ background: location.pathname.startsWith('/browse-templates') ? '#f5f3ff' : 'transparent', color: location.pathname.startsWith('/browse-templates') ? '#5c3ce6' : '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }} onClick={() => navigate('/browse-templates')}><SlidersHorizontal size={18} /> Browse Templates</li>
-              <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}><Bookmark size={18} /> My Templates</li>
+              <li
+                className={`ws-nav-item ${location.pathname.startsWith('/browse-templates') ? 'ws-nav-active' : ''}`}
+                style={{ background: location.pathname.startsWith('/browse-templates') ? '#f5f3ff' : 'transparent', color: location.pathname.startsWith('/browse-templates') ? '#5c3ce6' : '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}
+                onClick={() => navigate('/browse-templates')}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    navigate('/browse-templates');
+                  }
+                }}
+              >
+                <SlidersHorizontal size={18} /> Browse Templates
+                <div style={{ width: '56px', background: '#FF4500', color: '#fff', fontSize: '10px', fontWeight: 800, padding: '2px 0', textAlign: 'center', borderRadius: '12px', marginLeft: 'auto' }}>NEW</div>
+              </li>
+              <li className="ws-nav-item ws-nav-disabled" style={{ color: '#334155', fontWeight: 500, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem' }} aria-disabled="true" tabIndex={-1}><Bookmark size={18} /> My Templates</li>
             </ul>
 
             <div style={{ height: '1px', background: '#f1f5f9', margin: '0.5rem' }}></div>
 
             <p className="ws-sidebar-section-label" style={{ color: '#1e1b4b', fontSize: '0.7rem', fontWeight: 800, letterSpacing: '1px', marginBottom: '0.4rem', padding: '0 0.5rem' }}>SETTINGS</p>
             <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem', padding: 0, margin: 0, listStyle: 'none' }}>
-              <li className="ws-nav-item" style={{ color: '#1e1b4b', fontWeight: 600, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}><Settings size={18} /> Settings</li>
+              <li className="ws-nav-item ws-nav-disabled" style={{ color: '#334155', fontWeight: 500, padding: '0.5rem 0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem' }} aria-disabled="true" tabIndex={-1}><Settings size={18} /> Settings</li>
             </ul>
           </nav>
           

@@ -1,197 +1,534 @@
-import React, { useState } from 'react';
-import './fast-food-shared.css';
-import { ArrowLeft } from 'lucide-react';
+import React from 'react';
+import { FoodStorefrontCore, type StorefrontThemeConfig } from '../shared/FoodStorefrontCore';
 
-const img = (id: string, w = 1600) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
+const img = (id: string, w = 1400) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
 
-const BurgerBlitz = () => {
-  const [activeCategory, setActiveCategory] = useState('Burgers');
-
-  const headingStyle = { fontFamily: '"Russo One", sans-serif', color: '#111111', textTransform: 'uppercase' as const };
-  const navStyle = { color: '#111111', textDecoration: 'none', fontWeight: 700, fontFamily: '"Inter", sans-serif' };
-
-  return (
-    <div className="fast-food-theme" style={{ fontFamily: '"Inter", sans-serif', color: '#111111', backgroundColor: '#fafafa' }}>
-      {/* Navigation */}
-      <nav className="ff-nav" style={{ backgroundColor: '#ffffff', borderBottom: '2px solid #ff312e' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <a href="/templates/category/fast-food" style={{ ...navStyle, color: '#ff312e', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <ArrowLeft size={18} /> Back to Fast Food
-          </a>
-          <div style={{ ...headingStyle, fontSize: '2rem', color: '#ff312e', margin: 0, letterSpacing: '-1px' }}>Burger Blitz</div>
-        </div>
-        <div>
-          <a href="#combos" style={navStyle}>Combos</a>
-          <a href="#menu" style={navStyle}>Menu</a>
-          <a href="#story" style={navStyle}>Our Story</a>
-          <button className="ff-btn" style={{ marginLeft: '1.5rem', backgroundColor: '#ff312e', color: '#fff', borderRadius: '4px' }}>Order Now</button>
-        </div>
-      </nav>
-
-      {/* Hero */}
-      <header className="ff-hero" style={{ backgroundImage: `url(${img('photo-1568901346375-23c9450c58cd')})`, minHeight: '80vh', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-        <div className="ff-hero-overlay" style={{ background: 'linear-gradient(to right, rgba(17,17,17,0.9), rgba(17,17,17,0.4))' }}></div>
-        <div className="ff-hero-content" style={{ maxWidth: '600px' }}>
-          <h1 style={{ ...headingStyle, fontSize: '4.5rem', margin: '0 0 1rem 0', color: '#ffffff', lineHeight: 1 }}>Smash. Eat. Repeat.</h1>
-          <p style={{ fontSize: '1.25rem', marginBottom: '2.5rem', lineHeight: 1.6, color: '#f5f5f4', fontWeight: 500 }}>
-            100% Angus beef smashed to perfection. The juiciest burgers in town, served fast and fresh.
-          </p>
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            <button className="ff-btn" style={{ backgroundColor: '#ffc800', color: '#111', borderRadius: '4px', fontSize: '1.1rem' }}>View Menu</button>
-            <button className="ff-btn" style={{ backgroundColor: 'transparent', color: '#fff', border: '2px solid #fff', borderRadius: '4px', fontSize: '1.1rem' }}>Find Location</button>
-          </div>
-        </div>
-      </header>
-
-      {/* Top Combos */}
-      <section id="combos" className="ff-section" style={{ backgroundColor: '#ffffff' }}>
-        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <h2 className="ff-title" style={{ ...headingStyle, fontSize: '3rem' }}>Top Combos</h2>
-          <p style={{ color: '#666', fontSize: '1.1rem' }}>Complete meals that hit the spot.</p>
-        </div>
-        <div className="ff-grid">
-          {[
-            { name: 'The Blitz Meal', price: '$12.99', desc: 'Classic Blitz burger, medium fries, and a drink.', img: 'photo-1551782450-a2132b4ba21d' },
-            { name: 'Spicy Combo', price: '$13.49', desc: 'Spicy Inferno burger, loaded fries, and a drink.', img: 'photo-1594212204628-941d4c2fdce1' },
-            { name: 'Double Trouble', price: '$15.99', desc: 'Two classic burgers, large fries, and two drinks.', img: 'photo-1504674900247-0877df9cc836' }
-          ].map((item, i) => (
-            <div key={i} className="ff-card" style={{ backgroundColor: '#fafafa', borderRadius: '12px', border: '1px solid #eee' }}>
-              <img src={img(item.img, 800)} alt={item.name} style={{ height: '240px' }} />
-              <div className="ff-card-content">
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
-                  <h3 style={{ ...headingStyle, fontSize: '1.5rem', margin: 0 }}>{item.name}</h3>
-                  <span style={{ fontWeight: 800, color: '#ff312e', fontSize: '1.25rem' }}>{item.price}</span>
-                </div>
-                <p style={{ color: '#555', lineHeight: 1.5, marginBottom: '1.5rem' }}>{item.desc}</p>
-                <button className="ff-btn" style={{ width: '100%', backgroundColor: '#111', color: '#fff', borderRadius: '4px' }}>Add to Order</button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Full Menu */}
-      <section id="menu" className="ff-section" style={{ backgroundColor: '#fafafa' }}>
-        <h2 className="ff-title" style={{ ...headingStyle, fontSize: '3rem', textAlign: 'center' }}>Full Menu</h2>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '3rem' }}>
-          {['Burgers', 'Sides', 'Shakes'].map(cat => (
-            <button 
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              style={{
-                background: activeCategory === cat ? '#ff312e' : '#fff',
-                color: activeCategory === cat ? '#fff' : '#111',
-                border: '2px solid',
-                borderColor: activeCategory === cat ? '#ff312e' : '#ddd',
-                padding: '0.6rem 2rem',
-                borderRadius: '30px',
-                cursor: 'pointer',
-                fontFamily: '"Russo One", sans-serif',
-                textTransform: 'uppercase',
-                transition: 'all 0.2s'
-              }}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-        
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '1.5rem', maxWidth: '1200px', margin: '0 auto' }}>
-          {[
-            { cat: 'Burgers', name: 'The Blitz Classic', price: '$8.99', desc: 'Double smash patty, American cheese, Blitz sauce, pickles.', img: 'photo-1504674900247-0877df9cc836' },
-            { cat: 'Burgers', name: 'Spicy Inferno', price: '$9.49', desc: 'Pepper jack, jalapeños, crispy onions, habanero aioli.', img: 'photo-1568901346375-23c9450c58cd' },
-            { cat: 'Burgers', name: 'Shroom & Swiss', price: '$9.99', desc: 'Sautéed mushrooms, Swiss cheese, truffle mayo.', img: 'photo-1504674900247-0877df9cc836' },
-            { cat: 'Sides', name: 'Crinkle Cut Fries', price: '$3.49', desc: 'Golden, crispy, and salted perfectly.', img: 'photo-1568901346375-23c9450c58cd' },
-            { cat: 'Sides', name: 'Loaded Cheese Fries', price: '$5.99', desc: 'Topped with melted cheddar, bacon bits, and scallions.', img: 'photo-1504674900247-0877df9cc836' },
-            { cat: 'Shakes', name: 'Classic Vanilla', price: '$4.99', desc: 'Thick spun vanilla bean shake.', img: 'photo-1550547660-d9450f859349' },
-            { cat: 'Shakes', name: 'Double Chocolate', price: '$4.99', desc: 'Fudge swirl, whipped cream, cherry.', img: 'photo-1550547660-d9450f859349' },
-          ].filter(item => item.cat === activeCategory).map((item, i) => (
-            <div key={i} style={{ display: 'flex', backgroundColor: '#fff', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.05)', border: '1px solid #eee' }}>
-              <img src={img(item.img, 400)} alt={item.name} style={{ width: '120px', objectFit: 'cover' }} />
-              <div style={{ padding: '1.25rem', flex: 1 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                  <h4 style={{ ...headingStyle, margin: 0, fontSize: '1.1rem' }}>{item.name}</h4>
-                  <span style={{ fontWeight: 800, color: '#ff312e' }}>{item.price}</span>
-                </div>
-                <p style={{ margin: 0, fontSize: '0.9rem', color: '#666', lineHeight: 1.4 }}>{item.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Story */}
-      <section id="story" className="ff-section" style={{ backgroundColor: '#111111', color: '#ffffff' }}>
-        <div className="ff-story">
-          <img src={img('photo-1550547660-d9450f859349', 1000)} alt="Burger ingredients" style={{ borderRadius: '8px', width: '100%', boxShadow: '10px 10px 0px #ff312e' }} />
-          <div>
-            <h2 className="ff-title" style={{ ...headingStyle, fontSize: '3rem', color: '#ffc800' }}>We Don't Fake The Funk.</h2>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.7, marginBottom: '1.5rem', color: '#ccc' }}>
-              We started with one goal: make the perfect smash burger. No frozen patties, no artificial nonsense. Just high-quality meat, fresh veggies, and our signature sauce.
-            </p>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.7, marginBottom: '2rem', color: '#ccc' }}>
-              Every burger is smashed fresh on the grill to create that perfect, crispy edge that locks in the flavor.
-            </p>
-            <button className="ff-btn" style={{ backgroundColor: '#ff312e', color: '#fff', borderRadius: '4px' }}>Learn More</button>
-          </div>
-        </div>
-      </section>
-
-      {/* Gallery */}
-      <section className="ff-section" style={{ backgroundColor: '#ffffff' }}>
-        <h2 className="ff-title" style={{ ...headingStyle, fontSize: '3rem', textAlign: 'center', marginBottom: '3rem' }}>Burger Gram</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
-          {[
-            'photo-1551782450-a2132b4ba21d',
-            'photo-1594212204628-941d4c2fdce1',
-            'photo-1550547660-d9450f859349',
-            'photo-1568901346375-23c9450c58cd'
-          ].map((src, i) => (
-            <div key={i} className="ff-gallery-item" style={{ borderRadius: '8px' }}>
-              <img src={img(src, 600)} alt="Gallery" />
-              <div className="ff-gallery-overlay">
-                <span style={{ color: '#fff', fontWeight: 'bold' }}>@burgerblitz</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* App Promo / CTA */}
-      <section className="ff-section" style={{ backgroundColor: '#ffc800', textAlign: 'center', padding: '6rem 2rem' }}>
-        <h2 className="ff-title" style={{ ...headingStyle, fontSize: '3.5rem' }}>Skip the Line.</h2>
-        <p style={{ fontSize: '1.25rem', color: '#111', fontWeight: 600, marginBottom: '2rem' }}>Download our app to order ahead and earn free burgers.</p>
-        <button className="ff-btn" style={{ backgroundColor: '#111', color: '#fff', borderRadius: '4px', padding: '1rem 3rem', fontSize: '1.2rem' }}>Download App</button>
-      </section>
-
-      {/* Footer */}
-      <footer className="ff-footer" style={{ backgroundColor: '#111111', color: '#888' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '3rem', marginBottom: '3rem' }}>
-          <div>
-            <h3 style={{ ...headingStyle, color: '#fff', fontSize: '1.5rem', marginBottom: '1.5rem' }}>Burger Blitz</h3>
-            <p style={{ margin: '0.5rem 0' }}>123 Patty Lane</p>
-            <p style={{ margin: '0.5rem 0' }}>Meatville, TX 75001</p>
-            <p style={{ margin: '0.5rem 0', color: '#ff312e', fontWeight: 'bold' }}>(555) 000-1111</p>
-          </div>
-          <div>
-            <h4 style={{ color: '#fff', fontWeight: 700, marginBottom: '1.5rem', textTransform: 'uppercase' }}>Hours</h4>
-            <p style={{ margin: '0.5rem 0' }}>Mon-Thu: 10:30am - 10:00pm</p>
-            <p style={{ margin: '0.5rem 0' }}>Fri-Sat: 10:30am - 12:00am</p>
-            <p style={{ margin: '0.5rem 0' }}>Sun: 11:00am - 9:00pm</p>
-          </div>
-          <div>
-            <h4 style={{ color: '#fff', fontWeight: 700, marginBottom: '1.5rem', textTransform: 'uppercase' }}>Links</h4>
-            <p style={{ margin: '0.5rem 0' }}><a href="#" style={{ color: '#888', textDecoration: 'none' }}>Order Now</a></p>
-            <p style={{ margin: '0.5rem 0' }}><a href="#" style={{ color: '#888', textDecoration: 'none' }}>Careers</a></p>
-            <p style={{ margin: '0.5rem 0' }}><a href="#" style={{ color: '#888', textDecoration: 'none' }}>Privacy Policy</a></p>
-          </div>
-        </div>
-        <div style={{ borderTop: '1px solid #333', paddingTop: '2rem', textAlign: 'center', fontSize: '0.9rem' }}>
-          &copy; {new Date().getFullYear()} Burger Blitz. All rights reserved.
-        </div>
-      </footer>
-    </div>
-  );
+export const burgerBlitzConfig: StorefrontThemeConfig = {
+  id: 'burger-blitz',
+  kind: 'fast-food',
+  currencySymbol: '₹',
+  layoutOptions: {
+    heroLayout: 'banner-full',
+    productLayout: 'grid-3',
+    storyLayout: 'split-right',
+    featuresLayout: 'cards-grid',
+    galleryLayout: 'masonry',
+    sectionOrder: ['hero', 'products', 'promo', 'features', 'gallery', 'reviews', 'story', 'location', 'newsletter'],
+  },
+  name: 'Burger Blitz',
+  tagline: '100% Certified Angus smash burgers, crispy crinkle fries, and handcrafted thick malts',
+  brandSub: 'Smash. Eat. Repeat. · Handcrafted Burger Institution',
+  palette: {
+    primary: '#ef4444',
+    primaryHover: '#dc2626',
+    secondary: '#181411',
+    background: '#faf8f5',
+    surface: '#ffffff',
+    text: '#1a1816',
+    textMuted: '#78716c',
+    border: 'rgba(239, 68, 68, 0.18)',
+    badgeBg: '#fef2f2',
+    badgeText: '#dc2626',
+    heroOverlay: 'linear-gradient(to right, rgba(18, 16, 14, 0.94) 0%, rgba(18, 16, 14, 0.72) 55%, rgba(18, 16, 14, 0.3) 100%)',
+  },
+  typography: {
+    headingFont: '"Russo One", "Outfit", sans-serif',
+    bodyFont: '"Inter", sans-serif',
+  },
+  hero: {
+    headline: 'Smash. Eat. Repeat. 100% Angus Smashed To Lacy Perfection.',
+    subheadline:
+      'High-heat seared Angus patties with crisp caramelized lacy edges, double melted American cheddar, grilled butter onions, and house Blitz secret sauce on pillowy toasted potato brioche buns.',
+    badge: 'FRESH SMASHED PATTY CRAFT · NEVER FROZEN',
+    image: img('photo-1568901346375-23c9450c58cd'),
+    imageAlt: 'Sizzling double smash burger with melted American cheese, crisp pickles, and secret blitz sauce',
+    primaryCtaText: 'Order Smash Burgers',
+    primaryCtaPage: 'menu',
+    secondaryCtaText: 'Our Grill Story',
+    secondaryCtaPage: 'about',
+  },
+  announcement: {
+    text: 'Tailgate Blitz Boxes & Free Priority Drop On Orders Over $35 · 15-Minute Pickup Counter Ready',
+    badgeText: 'GAME DAY SPECIAL',
+    linkText: 'Order Tailgate Box',
+    linkPage: 'menu',
+  },
+  proofBadges: [
+    { icon: '🥩', title: '100% Certified Angus', subtitle: 'Custom chuck, brisket & short-rib blend ground fresh daily' },
+    { icon: '🔥', title: '500°F Hard Smash', subtitle: 'Ultra-hot plancha sear locking in maximum juice & lacy crust' },
+    { icon: '🥔', title: 'Potato Brioche Buns', subtitle: 'Golden toasted potato buns with cultured butter gloss' },
+    { icon: '⚡', title: '15-Minute Speed Drop', subtitle: 'Cooked to order in minutes with piping hot thermal packaging' },
+  ],
+  categories: ['Smash Burgers', 'Combo Meals & Boxes', 'Loaded Fries & Sides', 'Handspun Shakes & Sips', 'Dipping Sauces'],
+  collections: [
+    {
+      id: 'signature-smashes',
+      name: 'Signature Smashed Angus',
+      tagline: 'Lacy edges, melted cheese, and chef-curated sauce profiles.',
+      image: img('photo-1568901346375-23c9450c58cd'),
+      itemCount: 8,
+      filterCategory: 'Smash Burgers',
+    },
+    {
+      id: 'combos-and-tailgate',
+      name: 'Combos & Tailgate Boxes',
+      tagline: 'Full meal combos with seasoned fries, thick shakes, and party bundles.',
+      image: img('photo-1551782450-a2132b4ba21d'),
+      itemCount: 6,
+      filterCategory: 'Combo Meals & Boxes',
+    },
+    {
+      id: 'loaded-sides',
+      name: 'Loaded Fries & Crispy Sides',
+      tagline: 'Sea salt crinkle fries, bacon cheddar tots, and crispy onion rings.',
+      image: img('photo-1585109649139-366815a0d713'),
+      itemCount: 6,
+      filterCategory: 'Loaded Fries & Sides',
+    },
+    {
+      id: 'handcrafted-shakes',
+      name: 'Handcrafted Shakes & Dips',
+      tagline: 'Double-churned cream shakes, salted caramel malts, and signature sauces.',
+      image: img('photo-1572490122747-3968b75cc699'),
+      itemCount: 6,
+      filterCategory: 'Handspun Shakes & Sips',
+    },
+  ],
+  products: [
+    {
+      id: 'bb-blitz-double',
+      slug: 'the-blitz-double-smash',
+      name: 'The Blitz Smashed Double',
+      price: 11.95,
+      compareAtPrice: 13.50,
+      description: 'Two 100% Angus patties smashed thin with crisp lacy edges, double American cheese, caramelized sweet onions, dill pickles, and signature house Blitz burger sauce on a butter-toasted potato bun.',
+      category: 'Smash Burgers',
+      image: img('photo-1568901346375-23c9450c58cd'),
+      tags: ['Chef Signature', 'Bestseller'],
+      allergens: ['Contains Dairy', 'Contains Gluten', 'Contains Soy'],
+      weightOrSize: 'Double 3.5oz Patties',
+      available: true,
+      featured: true,
+      options: [
+        { name: 'Patty Count', values: ['Double (Standard)', 'Triple (+ $3.00)', 'Single (- $2.00)'] },
+        { name: 'Combo Upgrade', values: ['A La Carte', 'Meal (Fries & Drink) (+ $4.50)', 'Mega Meal (Loaded Tots & Shake) (+ $7.50)'] },
+        { name: 'Sauce Level', values: ['Regular Blitz Sauce', 'Extra Blitz Sauce', 'Blitz on the Side'] },
+      ],
+    },
+    {
+      id: 'bb-truffle-wagyu',
+      slug: 'truffle-wagyu-melt',
+      name: 'Truffle Wagyu Melt Burger',
+      price: 14.50,
+      compareAtPrice: 16.00,
+      description: 'American Wagyu smashed patty, balsamic-glazed crimini mushrooms, aged Swiss Gruyère, crispy shallots, and house black truffle aioli on a toasted brioche bun.',
+      category: 'Smash Burgers',
+      image: img('photo-1586190848861-99aa4a171e90'),
+      tags: ['Premium Reserve', 'Truffle'],
+      allergens: ['Contains Dairy', 'Contains Gluten', 'Contains Eggs'],
+      weightOrSize: 'Single 5.5oz Wagyu',
+      available: true,
+      featured: true,
+      options: [
+        { name: 'Cheese', values: ['Aged Swiss Gruyère', 'Extra Cheddar (+ $1.00)'] },
+        { name: 'Add Bacon', values: ['No Bacon', 'Applewood Smoked Bacon (+ $2.00)'] },
+      ],
+    },
+    {
+      id: 'bb-ghost-inferno',
+      slug: 'ghost-pepper-inferno-smash',
+      name: 'Ghost Pepper Inferno Smash',
+      price: 12.75,
+      description: 'Double Angus smash, fiery ghost pepper jack cheese, crispy jalapeño chips, charred serrano peppers, and smoked habanero bacon jam. Bold, smoky, and serious heat.',
+      category: 'Smash Burgers',
+      image: img('photo-1606755962773-d324e0a13086'),
+      tags: ['Extra Spicy', 'Staff Favorite'],
+      allergens: ['Contains Dairy', 'Contains Gluten'],
+      weightOrSize: 'Double 3.5oz Patties',
+      available: true,
+      featured: true,
+      options: [
+        { name: 'Heat Level', values: ['Inferno (Standard)', 'Milder Jalapeño', 'Volcano (Extra Ghost Dust)'] },
+        { name: 'Cooling Dip', values: ['None', 'Side Garlic Herb Ranch (+ $0.75)'] },
+      ],
+    },
+    {
+      id: 'bb-bourbon-bbq',
+      slug: 'bourbon-bacon-bbq-smash',
+      name: 'Bourbon Bacon BBQ Smash',
+      price: 13.25,
+      description: 'Double smashed Angus patties, thick-cut applewood smoked bacon, crispy beer-battered onion tanglers, aged Wisconsin cheddar, and small-batch Kentucky bourbon BBQ glaze.',
+      category: 'Smash Burgers',
+      image: img('photo-1553979459-d2229ba7433b'),
+      tags: ['Smoky BBQ', 'Bestseller'],
+      allergens: ['Contains Dairy', 'Contains Gluten'],
+      weightOrSize: 'Double 3.5oz Patties',
+      available: true,
+      featured: true,
+      options: [
+        { name: 'Bacon Style', values: ['Crispy Applewood', 'Extra Double Bacon (+ $2.25)'] },
+      ],
+    },
+    {
+      id: 'bb-classic-single',
+      slug: 'classic-smashed-single',
+      name: 'Classic Smashed Single',
+      price: 8.50,
+      description: 'Single 100% Angus patty smashed with crisp lacy rim, American cheddar, shaved white onions, crinkle-cut dill pickles, yellow mustard, and Heinz ketchup on a potato bun.',
+      category: 'Smash Burgers',
+      image: img('photo-1572802419224-296b0aeee0d9'),
+      tags: ['Classic', 'Value Favorite'],
+      allergens: ['Contains Dairy', 'Contains Gluten'],
+      weightOrSize: 'Single 3.5oz Patty',
+      available: true,
+      options: [
+        { name: 'Pickles', values: ['Extra Pickles', 'Standard Pickles', 'No Pickles'] },
+      ],
+    },
+    {
+      id: 'bb-oklahoma-onion',
+      slug: 'oklahoma-onion-smash',
+      name: 'Oklahoma Sweet Onion Smash',
+      price: 11.50,
+      description: 'Authentic 1920s diner tradition: thinly sliced sweet Vidalia onions pressed directly into the raw beef on the 500°F griddle, steaming the meat while creating charred crispy onion edges. Double cheese.',
+      category: 'Smash Burgers',
+      image: img('photo-1565299585323-38d6b0865b47'),
+      tags: ['Heritage Recipe', 'Crispy Onion'],
+      allergens: ['Contains Dairy', 'Contains Gluten'],
+      weightOrSize: 'Double 3.5oz Patties',
+      available: true,
+    },
+    {
+      id: 'bb-district-quad',
+      slug: 'district-quad-meat-feast',
+      name: 'The District Quad Feast',
+      price: 17.50,
+      compareAtPrice: 19.50,
+      description: 'Four smashed Angus patties, quadruple melted American cheese, double bacon, grilled onions, and a double-dose of house Blitz sauce. Built for champions.',
+      category: 'Smash Burgers',
+      image: img('photo-1550547660-d9450f859349'),
+      tags: ['Hungry Hero', 'Monster Sized'],
+      allergens: ['Contains Dairy', 'Contains Gluten'],
+      weightOrSize: 'Quad 14oz Total Beef',
+      available: true,
+    },
+    {
+      id: 'bb-beyond-umami',
+      slug: 'beyond-umami-plant-smash',
+      name: 'Beyond Umami Plant Smash',
+      price: 12.95,
+      description: 'Plant-based smash patty seared with crispy edges, dairy-free smoked gouda, butterhead lettuce, heirloom tomato, vegan garlic aioli on a toasted vegan brioche.',
+      category: 'Smash Burgers',
+      image: img('photo-1520072959219-c595dc870360'),
+      tags: ['Vegetarian', 'Plant Based'],
+      allergens: ['Contains Gluten', 'Contains Soy'],
+      weightOrSize: 'Single 4oz Plant Patty',
+      available: true,
+    },
+    {
+      id: 'bb-combo-blitz-meal',
+      slug: 'the-blitz-double-combo-meal',
+      name: 'Combo #1: The Blitz Double Meal',
+      price: 16.50,
+      compareAtPrice: 18.50,
+      description: 'The signature Blitz Smashed Double paired with hot sea salt crinkle fries and your choice of 24oz cold fountain soda or iced tea.',
+      category: 'Combo Meals & Boxes',
+      image: img('photo-1551782450-a2132b4ba21d'),
+      tags: ['Best Value', 'Top Combo'],
+      allergens: ['Contains Dairy', 'Contains Gluten'],
+      weightOrSize: 'Burger + Fries + Drink',
+      available: true,
+      featured: true,
+      options: [
+        { name: 'Drink Choice', values: ['Coca-Cola', 'Diet Coke', 'Sprite', 'Iced Tea', 'Dr Pepper'] },
+        { name: 'Fry Dip', values: ['Blitz Sauce', 'Garlic Aioli', 'Ranch Dip', 'Ketchup'] },
+      ],
+    },
+    {
+      id: 'bb-combo-inferno-box',
+      slug: 'ghost-inferno-combo-box',
+      name: 'Combo #2: Inferno Fire Box',
+      price: 17.75,
+      description: 'Ghost Pepper Inferno Smash, loaded fire jalapeño cheese tots, and an ice-cold fountain drink to tame the flame.',
+      category: 'Combo Meals & Boxes',
+      image: img('photo-1551782450-a2132b4ba21d'),
+      tags: ['Spicy Combo', 'Popular'],
+      allergens: ['Contains Dairy', 'Contains Gluten'],
+      weightOrSize: 'Full Meal Set',
+      available: true,
+    },
+    {
+      id: 'bb-tailgate-bundle',
+      slug: 'tailgate-party-bundle-4-burgers',
+      name: 'The Tailgate 4-Burger Bundle',
+      price: 49.00,
+      compareAtPrice: 56.00,
+      description: 'Four signature smash burgers (2 Blitz Doubles, 1 BBQ Bacon, 1 Classic), two large baskets of crinkle fries, 1 large loaded bacon cheese tots, and 4 fountain drinks.',
+      category: 'Combo Meals & Boxes',
+      image: img('photo-1550547660-d9450f859349'),
+      tags: ['Family Deal', 'Game Day Box'],
+      allergens: ['Contains Dairy', 'Contains Gluten'],
+      weightOrSize: 'Feeds 4-5 Guests',
+      available: true,
+    },
+    {
+      id: 'bb-crinkle-fries',
+      slug: 'sea-salt-crinkle-cut-fries',
+      name: 'Golden Crinkle-Cut Sea Salt Fries',
+      price: 4.50,
+      description: 'Signature thick crinkle-cut Idaho potatoes fried golden and crisp on the ridges, tossed in coarse sea salt and cracked pepper.',
+      category: 'Loaded Fries & Sides',
+      image: img('photo-1573080496219-bb080dd4f877'),
+      tags: ['Crispy Sides', 'Vegetarian'],
+      allergens: ['Gluten-Free Prepared'],
+      weightOrSize: 'Regular (220g)',
+      available: true,
+    },
+    {
+      id: 'bb-loaded-cheese-fries',
+      slug: 'loaded-blitz-cheese-bacon-fries',
+      name: 'Loaded Blitz Cheese & Bacon Fries',
+      price: 7.25,
+      description: 'Piping hot crinkle fries smothered in warm aged cheddar cheese sauce, crisp crumbled applewood bacon, diced scallions, and pickled jalapeños.',
+      category: 'Loaded Fries & Sides',
+      image: img('photo-1585109649139-366815a0d713'),
+      tags: ['Loaded', 'Bestseller'],
+      allergens: ['Contains Dairy'],
+      weightOrSize: 'Large Shareable (360g)',
+      available: true,
+      featured: true,
+    },
+    {
+      id: 'bb-truffle-tots',
+      slug: 'truffle-parmesan-crispy-tots',
+      name: 'Truffle Parmesan Crispy Tater Tots',
+      price: 6.75,
+      description: 'Crispy grated potato tots tossed in white truffle oil, grated aged parmesan reggiano, and fresh chopped rosemary with garlic aioli dip.',
+      category: 'Loaded Fries & Sides',
+      image: img('photo-1541592106381-b31e9677c0e5'),
+      tags: ['Truffle Crave', 'Vegetarian'],
+      allergens: ['Contains Dairy'],
+      weightOrSize: 'Shareable (280g)',
+      available: true,
+    },
+    {
+      id: 'bb-onion-rings',
+      slug: 'beer-battered-crispy-onion-rings',
+      name: 'Beer-Battered Golden Onion Rings',
+      price: 5.50,
+      description: 'Thick sweet yellow onion slices dipped in IPA craft beer batter and flash-fried to golden perfection. Served with smoky BBQ dip.',
+      category: 'Loaded Fries & Sides',
+      image: img('photo-1541592106381-b31e9677c0e5'),
+      tags: ['Crunchy', 'Vegetarian'],
+      allergens: ['Contains Gluten'],
+      weightOrSize: '8 Jumbo Rings',
+      available: true,
+    },
+    {
+      id: 'bb-salted-caramel-shake',
+      slug: 'salted-caramel-pretzel-malt-shake',
+      name: 'Salted Caramel Pretzel Malt Shake',
+      price: 6.95,
+      description: 'Double-churned vanilla bean ice cream spun with buttery house caramel, crushed salted Bavarian pretzels, malt powder, and whipped cream.',
+      category: 'Handspun Shakes & Sips',
+      image: img('photo-1572490122747-3968b75cc699'),
+      tags: ['Handspun', 'Signature Shake'],
+      allergens: ['Contains Dairy', 'Contains Gluten'],
+      weightOrSize: '16oz Glass',
+      available: true,
+      featured: true,
+    },
+    {
+      id: 'bb-dutch-chocolate-shake',
+      slug: 'double-dutch-dark-chocolate-shake',
+      name: 'Double Dutch Dark Chocolate Shake',
+      price: 6.50,
+      description: 'Rich Dutch cocoa fudge blended with dark chocolate ganache, vanilla custard, chocolate sprinkles, and maraschino cherry.',
+      category: 'Handspun Shakes & Sips',
+      image: img('photo-1579954115545-a95591f28bfc'),
+      tags: ['Chocoholic', 'Handspun'],
+      allergens: ['Contains Dairy'],
+      weightOrSize: '16oz Glass',
+      available: true,
+    },
+    {
+      id: 'bb-strawberry-shake',
+      slug: 'fresh-strawberry-shortcake-shake',
+      name: 'Fresh Strawberry Shortcake Shake',
+      price: 6.50,
+      description: 'Sweet California strawberry purée blended with vanilla cream and graham cracker crumble. Fluffy whipped cream topper.',
+      category: 'Handspun Shakes & Sips',
+      image: img('photo-1553787499-6f9133860278'),
+      tags: ['Fruity', 'Handspun'],
+      allergens: ['Contains Dairy', 'Contains Gluten'],
+      weightOrSize: '16oz Glass',
+      available: true,
+    },
+    {
+      id: 'bb-fountain-soda',
+      slug: 'cold-craft-fountain-soda-24oz',
+      name: 'Cold Craft Fountain Soda (24oz)',
+      price: 2.95,
+      description: 'Crisp, ice-cold fountain soda poured over pebble ice. Choice of Coca-Cola, Coke Zero, Cherry Coke, Sprite, or Root Beer.',
+      category: 'Handspun Shakes & Sips',
+      image: img('photo-1581009146145-b5ef050c2e1e'),
+      tags: ['Cold Drink'],
+      weightOrSize: '24oz Large',
+      available: true,
+    },
+    {
+      id: 'bb-sauce-blitz',
+      slug: 'signature-house-blitz-sauce-tub',
+      name: 'Signature House Blitz Sauce (2oz)',
+      price: 0.95,
+      description: 'Our top-secret burger sauce: sweet pickled relish, smoked paprika, roasted garlic, cracked black pepper, and kewpie mayo.',
+      category: 'Dipping Sauces',
+      image: img('photo-1550547660-d9450f859349'),
+      tags: ['House Dip'],
+      weightOrSize: '2oz Tub',
+      available: true,
+    },
+    {
+      id: 'bb-sauce-truffle',
+      slug: 'black-truffle-garlic-aioli-tub',
+      name: 'Black Truffle Garlic Aioli (2oz)',
+      price: 1.50,
+      description: 'Decadent aioli infused with Italian black winter truffles, confit roasted garlic, and freshly cracked peppercorn.',
+      category: 'Dipping Sauces',
+      image: img('photo-1586190848861-99aa4a171e90'),
+      tags: ['Truffle Dip'],
+      weightOrSize: '2oz Tub',
+      available: true,
+    },
+    {
+      id: 'bb-sauce-habanero',
+      slug: 'smoked-habanero-bacon-ranch-tub',
+      name: 'Smoked Habanero Bacon Ranch (2oz)',
+      price: 1.25,
+      description: 'Cool buttermilk herb ranch with a kick of fire-roasted habanero chilies and crumbled smoked bacon bits.',
+      category: 'Dipping Sauces',
+      image: img('photo-1557499305-0af888c3d8ec'),
+      tags: ['Spicy Ranch'],
+      weightOrSize: '2oz Tub',
+      available: true,
+    },
+  ],
+  craftProcess: {
+    badge: 'SMASH CRAFT CYCLE',
+    title: 'The 500°F Hard Smash Science',
+    subtitle: 'From chilled coarse Angus chuck to caramelized lacy crust in 90 seconds flat.',
+    steps: [
+      { time: 'STEP 1', title: 'Fresh Coarse Grind', desc: '100% Certified Angus chuck, brisket, and short-rib ground daily into chilled 3.5oz sphere balls.' },
+      { time: 'STEP 2', title: '500°F Plancha Drop', desc: 'High-heat seasoned flat-top drop with sliced sweet onions under 15 lbs of steel pressure.' },
+      { time: 'STEP 3', title: 'The Maillard Sear', desc: 'Continuous 12-second press locking in natural juice while caramelizing paper-thin crispy edges.' },
+      { time: 'STEP 4', title: 'Double Melt & Potato Bun', desc: 'Aged American cheddar melt covered under cloche, assembled with Blitz sauce on toasted potato brioche.' },
+    ],
+  },
+  story: {
+    badge: 'HARD SMASH PHILOSOPHY',
+    title: 'Lacy Edges Are Not A Trend, They Are Pure Science.',
+    paragraphs: [
+      'When fresh ground Angus hits our seasoned 500-degree cast-iron planchas under custom steel pressure, magic happens. The Maillard reaction caramelizes the outer rim into an ultra-crisp, savory crust while trapping 100% of the natural juices inside.',
+      'We don’t steam burgers. We don’t hide bad meat under heavy bread. We smash pure Certified Angus beef and serve it scorching hot in minutes.',
+    ],
+    image: img('photo-1550547660-d9450f859349'),
+    imageAlt: 'Grill master smashing beef patties on high-heat commercial plancha',
+    founderQuote: 'If a burger doesn’t have that crispy, lace-thin edge that shatters when you bite in, it is just meat on bread.',
+    founderName: 'Jack "Blitz" Callahan, Founder & Pitmaster',
+    stats: [
+      { value: '500°F', label: 'Plancha Sear Heat' },
+      { value: '100%', label: 'Certified Angus' },
+      { value: '12 Sec', label: 'Sear Press Time' },
+      { value: '1,200+', label: 'Burgers Smashed Daily' },
+    ],
+  },
+  promo: {
+    badge: 'BLITZ REWARDS',
+    title: 'The Game Day Tailgate Smash Box Drop',
+    desc: 'Order the 4-Burger Tailgate Box with loaded bacon cheese tots and earn double Blitz reward points on every order over $35.',
+    ctaText: 'Order Tailgate Box',
+    ctaPage: 'menu',
+    image: img('photo-1551782450-a2132b4ba21d'),
+    imageAlt: 'Sizzling smash burger combo with fries and beverage',
+  },
+  gallery: [
+    { src: img('photo-1568901346375-23c9450c58cd'), alt: 'Juicy smash burger with melted cheese', caption: 'The Blitz Smashed Double with lacy edges', tag: 'Smash' },
+    { src: img('photo-1551782450-a2132b4ba21d'), alt: 'Burger combo with crispy fries and beverage', caption: 'Combo #1: Blitz Double, crinkle fries & shake', tag: 'Combos' },
+    { src: img('photo-1585109649139-366815a0d713'), alt: 'Loaded fries with bacon bits and cheddar', caption: 'Loaded Blitz Cheese & Bacon Crinkle Fries', tag: 'Sides' },
+    { src: img('photo-1572490122747-3968b75cc699'), alt: 'Thick handcrafted salted caramel shake', caption: 'Handcrafted Salted Caramel Pretzel Malt', tag: 'Shakes' },
+    { src: img('photo-1550547660-d9450f859349'), alt: 'Grill master smashing patties on the plancha', caption: 'Live flat-top smash sear at 500 degrees', tag: 'Grill' },
+    { src: img('photo-1555396273-367ea4eb4db5'), alt: 'Modern restaurant dining atmosphere', caption: 'Downtown Flagship dining room and pickup bay', tag: 'Vibes' },
+  ],
+  testimonials: [
+    {
+      name: 'Marcus Vance',
+      rating: 5,
+      quote: 'The lacy edge on the Blitz Double is legitimately life-changing. Crunchy edges, gooey cheese, and that potato bun holds up perfectly without getting soggy.',
+      source: 'Food & Wine Critic, City Weekly',
+      date: 'October 2026',
+    },
+    {
+      name: 'Sarah Lin',
+      rating: 5,
+      quote: 'Ordered the 4-Burger Tailgate Box for our office lunch. Ready in under 12 minutes, hot, and the truffle tots disappeared in literally three minutes.',
+      source: 'Creative Director',
+      date: 'September 2026',
+    },
+    {
+      name: 'Devon Campbell',
+      rating: 5,
+      quote: 'The Ghost Pepper Inferno burger actually has real heat, not that artificial jalapeño flavor. Paired with a salted caramel shake, it is absolute heaven.',
+      source: 'Verified Local Diner',
+      date: 'August 2026',
+    },
+  ],
+  location: {
+    address: '442 Market Street, Financial District, San Francisco, CA 94105',
+    neighborhood: 'Downtown Financial District',
+    hoursWeekdays: '11:00 AM – Midnight',
+    hoursWeekends: '11:00 AM – 3:00 AM (Late Night Express)',
+    phone: '(415) 882-9010',
+    email: 'downtown@burgerblitz.com',
+    pickupNotice: 'Dedicated curbside counter open daily. Most orders ready in 10-12 minutes.',
+  },
+  customInquiry: {
+    title: 'Tailgate Party & Office Burger Bar Catering',
+    subtitle: 'Full-service build-your-own smash burger stations, boxed meals, and slider platters for 15 to 250 guests.',
+    occasions: ['Corporate Office Lunch', 'Game Day Tailgate', 'Birthday Bash', 'Graduation Party', 'Late-Night Wedding Snacks'],
+    sizes: [
+      { label: 'Platter Mini Box (15 Sliders)', serves: '6-8 Guests', basePrice: 75 },
+      { label: 'Party Bundle Box (25 Burgers)', serves: '12-15 Guests', basePrice: 165 },
+      { label: 'Full Tailgate Bar (50 Burgers)', serves: '25-30 Guests', basePrice: 320 },
+      { label: 'Mega District Feast (100+ Smashes)', serves: '50-60 Guests', basePrice: 620 },
+    ],
+    flavors: ['Classic Blitz Angus Doubles', 'Bourbon Bacon BBQ Smashes', 'Ghost Pepper Inferno Smashes', 'Beyond Plant Smashes'],
+    fillings: ['House Blitz Special Sauce', 'Smoked Habanero Ranch', 'Kentucky Bourbon BBQ', 'Black Truffle Garlic Aioli'],
+    finishes: ['Seasoned Crinkle Fries', 'Loaded Bacon Cheese Tots', 'Crispy Beer Onion Rings', 'Assorted Sodas & Shakes'],
+  },
+  faqs: [
+    {
+      question: 'What makes your smash burgers different from regular burgers?',
+      answer: 'We use a proprietary blend of 100% Certified Angus chuck, brisket, and short-rib ground fresh daily. We sear on 500-degree planchas with heavy cast-iron presses, creating crispy caramelized lacy edges while locking in natural beef juices.',
+      category: 'Burgers & Ingredients',
+    },
+    {
+      question: 'How fast will my order be ready for pickup?',
+      answer: 'Our average cook-to-counter time is under 12 minutes. Place your order online, head to our dedicated pickup window, and your meal is handed over piping hot.',
+      category: 'Ordering & Speed',
+    },
+    {
+      question: 'Do you offer gluten-free or vegetarian alternatives?',
+      answer: 'Yes! We offer our Beyond Umami Plant Smash featuring a 100% plant-based patty, and any burger can be ordered in a crisp butterhead lettuce wrap upon request.',
+      category: 'Dietary & Allergens',
+    },
+    {
+      question: 'Can I order a custom catering package for game day or an office event?',
+      answer: 'Absolutely. Use our Party & Catering tab to customize slider platters, slider bars, or individual combo boxed meals. We recommend at least 24 hours advance notice for orders of 25+ burgers.',
+      category: 'Catering & Events',
+    },
+  ],
 };
 
-export default BurgerBlitz;
+export default function BurgerBlitz() {
+  return <FoodStorefrontCore theme={burgerBlitzConfig} />;
+}

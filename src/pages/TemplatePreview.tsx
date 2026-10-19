@@ -3,6 +3,11 @@ import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { registry } from '../templates/registry';
 import { createWebsite } from '../lib/workspace-api';
 import { ArrowLeft, Monitor, Tablet, Smartphone } from 'lucide-react';
+import '../styles/workspace.css';
+import '../styles/storefront.css';
+import { templateCategories } from '../data/templateCategories';
+import { restaurantThemePresets } from '../themes/RestaurantTheme';
+
 export default function TemplatePreview() {
   const { groupId, categorySlug, templateSlug } = useParams();
   const navigate = useNavigate();
@@ -35,16 +40,59 @@ export default function TemplatePreview() {
   const handleUseTemplate = async () => {
     setIsCreating(true);
     try {
-      const sectionConfig = JSON.stringify([
-        { type: "announcement", text: "Free shipping on orders above ₹499", visibility: false },
-        { type: "nav", logoText: template.name },
-        { type: "hero", title: template.name, subtitle: '', buttonText: "Explore", buttonLink: "/", style_backgroundColor: "#f6ebd9", style_textColor: "#111111", style_buttonColor: "#1A1C20", style_buttonTextColor: "#ffffff", style_backgroundImage: "/mino_bag_preview.jpg" },
-        { type: "featured-title", title: "Featured Collection" },
-        { type: "prod-grid", title: "New Arrivals", productsToShow: 4, columns: 4 },
-        { type: "img-text", title: "Designed for your lifestyle", content: "Simple, elegant and crafted with care to bring comfort into your everyday.", buttonText: "Explore Collection", buttonLink: "/about", image: "/assets/lifestyle.jpg" },
-        { type: "email-signup", heading: "Join our newsletter", subtext: "Get updates on new arrivals and exclusive offers.", buttonText: "Subscribe", placeholder: "Enter your email" },
-        { type: "footer", brand: template.name, tagline: '', showSocial: true }
-      ]);
+      const themeMatch = templateCategories
+        .flatMap(c => c.subsections)
+        .flatMap(s => s.themes)
+        .find(t => t.templateSlug === template.slug || t.slug === template.slug);
+      const preset = themeMatch?.presetId
+        ? restaurantThemePresets[themeMatch.presetId]
+        : (restaurantThemePresets[template.slug] || undefined);
+
+      const isRestaurant = groupId === 'food-restaurants' || categorySlug === 'food-and-restaurant' || !!preset;
+      const heroImage = preset?.images?.[0] || themeMatch?.coverImage || (template as any).thumbnail || '';
+
+      const sectionConfig = isRestaurant
+        ? JSON.stringify([
+            { type: "announcement", text: preset?.announcementText || `Welcome to ${template.name}`, visibility: false },
+            { type: "nav", logoText: template.name },
+            { 
+              type: "hero", 
+              title: preset?.heroTitle || template.name, 
+              subtitle: preset?.heroCopy || (template as any).description || '', 
+              eyebrow: preset?.eyebrow || '',
+              buttonText: preset?.heroButton1 || "Explore Menu", 
+              buttonLink: "#menu", 
+              style_backgroundColor: preset?.palette?.paper || template.palette?.background || "#0f172a", 
+              style_textColor: "#ffffff", 
+              style_buttonColor: preset?.palette?.accent || template.palette?.secondary || "#c29d59", 
+              style_buttonTextColor: "#ffffff", 
+              style_backgroundImage: heroImage 
+            },
+            { type: "featured-title", title: preset?.featuredTitle || "Signature Specialties", description: preset?.featuredSubtitle || '' },
+            { type: "img-text", title: preset?.storyTitle || "Our Story & Philosophy", content: preset?.storyCopy || 'Crafted with precision, passion, and finest ingredients.', buttonText: preset?.storyButton || "Learn More", buttonLink: "#story", image: preset?.images?.[7] || heroImage },
+            { type: "categories" },
+            { type: "process" },
+            { type: "promo" },
+            { type: "gallery" },
+            { type: "testimonials" },
+            { type: "location" },
+            { type: "newsletter" },
+            { type: "footer", brand: template.name, tagline: (template as any).description || '', showSocial: true }
+          ])
+        : JSON.stringify([
+            { type: "announcement", text: "Special Offer Available", visibility: false },
+            { type: "nav", logoText: template.name },
+            { type: "hero", title: template.name, subtitle: '', buttonText: "Explore", buttonLink: "/", style_backgroundColor: template.palette?.background || "#f6ebd9", style_textColor: template.palette?.text || "#111111", style_buttonColor: template.palette?.primary || "#1A1C20", style_buttonTextColor: "#ffffff", style_backgroundImage: heroImage },
+            { type: "featured-title", title: "Featured Collection" },
+            { type: "prod-grid", title: "New Arrivals", productsToShow: 4, columns: 4 },
+            { type: "img-text", title: "Artisan Craftsmanship", content: "Dedicated to quality, detail, and lasting experience.", buttonText: "Explore Collection", buttonLink: "/about", image: heroImage },
+            { type: "email-signup", heading: "Join our newsletter", subtext: "Get updates on new releases and exclusive offers.", buttonText: "Subscribe", placeholder: "Enter your email" },
+            { type: "footer", brand: template.name, tagline: '', showSocial: true }
+          ]);
+
+      try {
+        localStorage.setItem('last_used_template_id', template.slug);
+      } catch (e) {}
 
       const website = await createWebsite(
         `${template.name} Store`,
@@ -120,19 +168,36 @@ export default function TemplatePreview() {
       </header>
 
       {/* Frame Area */}
-      <main style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'hidden', padding: '2rem' }}>
-        <div style={{ 
-          width: getWidth(), 
-          height: '100%', 
-          background: '#fff', 
-          borderRadius: device === 'desktop' ? '8px' : '36px',
-          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-          border: device === 'desktop' ? 'none' : '12px solid #1e1b4b',
-          transition: 'width 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-          overflow: 'hidden',
-          display: 'flex',
-          flexDirection: 'column'
-        }}>
+      <main style={{
+        flex: 1,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: device === 'desktop' ? 'stretch' : 'center',
+        overflow: device === 'desktop' ? 'auto' : 'hidden',
+        padding: device === 'desktop' ? 0 : '1.5rem',
+        backgroundColor: '#0b0f19',
+        transition: 'background-color 0.25s ease',
+      }}>
+        <div 
+          className={`ws-canvas ws-canvas-${device}`}
+          data-viewport={device}
+          style={{ 
+            width: device === 'desktop' ? '100%' : device === 'tablet' ? '768px' : '390px', 
+            maxWidth: '100%',
+            height: device === 'desktop' ? '100%' : device === 'mobile' ? '844px' : '100%', 
+            maxHeight: device === 'desktop' ? 'none' : 'calc(100vh - 100px)',
+            background: 'transparent', 
+            borderRadius: device === 'desktop' ? 0 : device === 'mobile' ? '40px' : '24px',
+            boxShadow: device === 'desktop' ? 'none' : '0 25px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.1)',
+            border: device === 'desktop' ? 'none' : '10px solid #1e293b',
+            transition: 'width 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-radius 0.3s ease',
+            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
+            boxSizing: 'border-box',
+            containerType: 'inline-size',
+            containerName: 'storefront',
+          }}>
           {/* Actual Template Content */}
           <div style={{ flex: 1, overflowY: 'auto', background: template.palette.background }}>
             <Suspense fallback={<div style={{ padding: '4rem', textAlign: 'center', fontSize: '1.5rem', color: '#666' }}>Loading template...</div>}>

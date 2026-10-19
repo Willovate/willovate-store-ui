@@ -1,202 +1,578 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowLeft, MapPin, Clock, Phone, Flame, ChevronRight, Star, Utensils } from 'lucide-react';
-import { useReveal } from '../components/RestaurantCore';
+import React from 'react';
+import { FoodStorefrontCore, type StorefrontThemeConfig } from '../shared/FoodStorefrontCore';
 
-const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=85`;
+const img = (id: string, w = 1200) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
 
-const IMAGES = {
-  hero: img('photo-1504674900247-0877df9cc836'),
-  story: img('photo-1504674900247-0877df9cc836'),
-  steak1: img('photo-1504674900247-0877df9cc836'),
-  steak2: img('photo-1504674900247-0877df9cc836'),
-  tomahawk: img('photo-1504674900247-0877df9cc836'),
-  seafood: img('photo-1504674900247-0877df9cc836'), // safe food
-  starter1: img('photo-1504674900247-0877df9cc836'),
-  starter2: img('photo-1504674900247-0877df9cc836')
+export const grillRepublicConfig: StorefrontThemeConfig = {
+  id: 'grill-republic',
+  kind: 'bbq-grill',
+  currencySymbol: '₹',
+  layoutOptions: {
+    heroLayout: 'split',
+    productLayout: 'grid-4',
+    featuresLayout: 'cards-grid',
+    storyLayout: 'card-overlay',
+    galleryLayout: 'editorial-collage',
+    sectionOrder: ['hero', 'features', 'craft', 'products', 'promo', 'story', 'gallery', 'reviews', 'location', 'newsletter'],
+  },
+  name: 'Grill Republic',
+  tagline: 'Precision Char-Grilled Steaks, Gourmet Burgers & Open-Flame Feasts',
+  brandSub: '800°F Cast-Iron Sear · 45-Day Dry-Aged Beef · Modern Urban Grill',
+  palette: {
+    primary: '#dc2626',
+    primaryHover: '#b91c1c',
+    secondary: '#0a0b0e',
+    background: '#0e1117',
+    surface: '#161922',
+    text: '#ffffff',
+    textMuted: '#94a3b8',
+    border: '#232734',
+    badgeBg: '#232734',
+    badgeText: '#ef4444',
+    heroOverlay: 'linear-gradient(135deg, rgba(10,11,14,0.92) 0%, rgba(220,38,38,0.32) 100%)',
+  },
+  typography: {
+    headingFont: '"Montserrat", "Inter", sans-serif',
+    bodyFont: '"Inter", sans-serif',
+    accentFont: '"Montserrat", sans-serif',
+  },
+  hero: {
+    headline: 'Made for the Grill. Sizzling Prime Steaks, Smashed Wagyu & Charred Feasts.',
+    subheadline:
+      'We sear prime dry-aged cuts over glowing coconut charcoal at 800°F. Experience edge-to-edge crust, smoky wood aromas, and buttery tenderness paired with house chimichurri and hand-cut truffle steak fries.',
+    badge: '🔥 800°F HARDWOOD CHARCOAL SEAR · PRIME DRY-AGED STEAKS',
+    image: img('photo-1558030006-450675393462'),
+    imageAlt: 'Sizzling prime dry-aged ribeye steak over open charcoal flame with herbs',
+    primaryCtaText: 'View Grill Menu',
+    primaryCtaPage: 'menu',
+    secondaryCtaText: 'Reserve Grill Table',
+    secondaryCtaPage: 'contact',
+  },
+  announcement: {
+    text: '🥩 Tomahawk & Mixed Grill Nights Active · Reserve Your Table Online · Complimentary Truffle Fries on Orders Over ₹1,499',
+    badgeText: 'HOT GRATE',
+    linkText: 'Book Table Now',
+    linkPage: 'contact',
+  },
+  proofBadges: [
+    { icon: '🥩', title: '45-Day Dry-Aged Beef', subtitle: 'Himalayan salt-brick aging chambers concentrate deep nutty beef umami' },
+    { icon: '🔥', title: '800°F Cast-Iron Sear', subtitle: 'Direct contact high-heat grates lock in succulent natural meat juices' },
+    { icon: '🌿', title: 'Herb & Chimichurri Baste', subtitle: 'Basted with fresh rosemary, garlic confit butter, and cold-pressed olive oil' },
+    { icon: '🍷', title: 'Wine & Grill Cellar', subtitle: 'Sommelier curated bold reds and craft smoked mocktails built for grilled cuts' },
+  ],
+  categories: [
+    'Signature Char-Grilled Steaks',
+    'Gourmet Brioche Burgers',
+    'Flame-Grilled Spiced Chicken',
+    'Mixed-Grill Skewers & Boards',
+    'Smoked Baby Back Ribs',
+    'Vegetarian & Paneer Grill',
+    'Republic Loaded Sides',
+    'Desserts & Craft Drinks',
+  ],
+  collections: [
+    {
+      id: 'prime-steaks',
+      name: 'Dry-Aged Steakhouse Cuts',
+      tagline: 'Hand-selected Angus ribeyes, tender filets, and giant sharing tomahawks.',
+      image: img('photo-1558030006-450675393462'),
+      itemCount: 4,
+      filterCategory: 'Signature Char-Grilled Steaks',
+    },
+    {
+      id: 'gourmet-burgers',
+      name: 'Wagyu & Smashed Burgers',
+      tagline: 'Coarse ground prime cuts on butter toasted brioche with smoked cheeses.',
+      image: img('photo-1568901346375-23c9450c58cd'),
+      itemCount: 3,
+      filterCategory: 'Gourmet Brioche Burgers',
+    },
+    {
+      id: 'mixed-grill-boards',
+      name: 'Grand Mixed Grill Boards',
+      tagline: 'Multi-meat feasting platters pairing steaks, skewers, ribs, and loaded sides.',
+      image: img('photo-1544025162-d76694265947'),
+      itemCount: 3,
+      filterCategory: 'Mixed-Grill Skewers & Boards',
+    },
+    {
+      id: 'republic-sides',
+      name: 'Truffle & Skillet Sides',
+      tagline: 'Truffle parmesan fries, charred asparagus, and rich creamed spinach.',
+      image: img('photo-1541592106381-b31e9677c0e5'),
+      itemCount: 4,
+      filterCategory: 'Republic Loaded Sides',
+    },
+  ],
+  products: [
+    // ── 1. Signature Char-Grilled Steaks ───────────────────────────────────
+    {
+      id: 'gr-45day-dryaged-ribeye',
+      slug: '45-day-dry-aged-angus-ribeye-steak-350g',
+      name: '45-Day Dry-Aged Angus Ribeye Steak (350g)',
+      price: 1299,
+      compareAtPrice: 1449,
+      description: 'Hand-cut 350g prime Angus ribeye dry-aged for 45 days in our Himalayan salt room. Seared over glowing charcoal, basted with bone marrow butter and fresh rosemary.',
+      category: 'Signature Char-Grilled Steaks',
+      image: img('photo-1558030006-450675393462'),
+      imageAlt: 'Thick cut dry aged ribeye steak sizzling on grill grates with grill marks',
+      tags: ['Chef Signature', '#1 Steak Choice', '45-Day Aged'],
+      dietary: 'non-veg',
+      weightOrSize: '350g Cut',
+      calories: '780 kcal',
+      featured: true,
+      options: [
+        { name: 'Meat Doneness', choices: [{ label: 'Medium Rare (Recommended 54°C)' }, { label: 'Medium (60°C)' }, { label: 'Medium Well (65°C)' }] },
+        { name: 'Compound Butter', choices: [{ label: 'Garlic Confit & Rosemary Butter' }, { label: 'Truffle Bone Marrow Butter (+₹80)', priceDelta: 80 }] },
+      ],
+    },
+    {
+      id: 'gr-filet-mignon',
+      slug: 'prime-center-cut-filet-mignon-250g',
+      name: 'Prime Center-Cut Filet Mignon with Truffle Butter (250g)',
+      price: 1499,
+      description: 'The most tender cut of all. Center-cut beef tenderloin wrapped in smoked bacon rashers, flame-seared medium-rare with black truffle emulsion and red wine demi-glace.',
+      category: 'Signature Char-Grilled Steaks',
+      image: img('photo-1544025162-d76694265947'),
+      imageAlt: 'Tender filet mignon steak with truffle herb butter melting on top',
+      tags: ['Melt-in-Mouth', 'Ultra Premium'],
+      dietary: 'non-veg',
+      weightOrSize: '250g Tenderloin',
+      calories: '610 kcal',
+      featured: true,
+      options: [
+        { name: 'Meat Doneness', choices: [{ label: 'Medium Rare (Recommended)' }, { label: 'Rare' }, { label: 'Medium' }] },
+      ],
+    },
+    {
+      id: 'gr-tomahawk-steak',
+      slug: 'giant-char-grilled-1kg-tomahawk-rib-steak',
+      name: 'Char-Grilled 1kg Giant Tomahawk Rib Steak',
+      price: 2899,
+      compareAtPrice: 3299,
+      description: 'Massive 1000g bone-in ribeye with full french-trimmed bone. Fire-roasted over charcoal embers and carved tableside with roasted garlic bulbs, Maldon sea salt, and two sauces.',
+      category: 'Signature Char-Grilled Steaks',
+      image: img('photo-1529193591184-b1d58069ecdd'),
+      imageAlt: 'Massive 1kg tomahawk steak with long rib bone on butcher board',
+      tags: ['Grand Showstopper', 'Serves 2-3'],
+      dietary: 'non-veg',
+      weightOrSize: 'Approx 1.0 kg on Bone',
+      calories: '1850 kcal',
+      featured: true,
+    },
+    {
+      id: 'gr-chimichurri-skirt-steak',
+      slug: 'argentine-chimichurri-char-grilled-skirt-steak',
+      name: 'Argentine Chimichurri Skirt Steak Platter (300g)',
+      price: 749,
+      description: 'Intensely flavorful skirt steak flash-seared over high flame, sliced against the grain, and smothered in our vibrant fresh parsley, oregano, garlic, and vinegar chimichurri.',
+      category: 'Signature Char-Grilled Steaks',
+      image: img('photo-1555939594-58d7cb561ad1'),
+      imageAlt: 'Sliced grilled skirt steak covered in bright green fresh chimichurri sauce',
+      tags: ['Argentine Classic', 'Bold Flavor'],
+      dietary: 'non-veg',
+      weightOrSize: '300g Sliced Steak',
+      calories: '680 kcal',
+    },
+
+    // ── 2. Gourmet Brioche Burgers ─────────────────────────────────────────
+    {
+      id: 'gr-wagyu-smash-burger',
+      slug: 'the-republic-double-wagyu-smash-burger',
+      name: 'The Republic Double Wagyu Smash Burger',
+      price: 449,
+      compareAtPrice: 499,
+      description: 'Two 100% Wagyu beef smash patties with lacy crispy edges, double aged white cheddar, caramelized onions, smoked bacon jam, and truffle aioli on toasted butter brioche.',
+      category: 'Gourmet Brioche Burgers',
+      image: img('photo-1568901346375-23c9450c58cd'),
+      imageAlt: 'Gourmet Wagyu burger with melting white cheddar and bacon jam on glossy bun',
+      tags: ['#1 Burger', 'Top Rated'],
+      dietary: 'non-veg',
+      weightOrSize: '340g Burger + Fries',
+      calories: '840 kcal',
+      featured: true,
+      options: [
+        { name: 'Patty Upgrade', choices: [{ label: 'Double Wagyu (Standard)' }, { label: 'Triple Wagyu Beast (+₹120)', priceDelta: 120 }] },
+      ],
+    },
+    {
+      id: 'gr-smoky-bacon-cheddar-burger',
+      slug: 'hickory-smoked-bacon-double-cheddar-burger',
+      name: 'Hickory Smoked Bacon & Double Cheddar Burger',
+      price: 399,
+      description: 'Prime char-grilled beef patty, double yellow cheddar, crispy smoked bacon strips, bourbon BBQ sauce, beer-battered onion ring, and dill pickles on toasted sesame brioche.',
+      category: 'Gourmet Brioche Burgers',
+      image: img('photo-1586190848861-99aa4a171e90'),
+      imageAlt: 'Bacon double cheeseburger with crispy onion rings and barbecue glaze',
+      tags: ['Smoky Crunch'],
+      dietary: 'non-veg',
+      weightOrSize: '320g Burger',
+      calories: '790 kcal',
+    },
+
+    // ── 3. Flame-Grilled Spiced Chicken ────────────────────────────────────
+    {
+      id: 'gr-peri-peri-chicken',
+      slug: 'flame-grilled-peri-peri-half-spatchcock-chicken',
+      name: 'Flame-Grilled Peri-Peri Spatchcock Half Chicken',
+      price: 429,
+      description: 'Half chicken marinated 24 hours in bird’s eye chili, garlic, lemon, and smoked paprika. Flame-grilled over charcoal for crispy charred skin and juicy tender meat.',
+      category: 'Flame-Grilled Spiced Chicken',
+      image: img('photo-1532550907401-a500c9a57435'),
+      imageAlt: 'Flame grilled chicken with charred grill marks and lemon wedges',
+      tags: ['Spicy & Charred', 'Gluten-Free'],
+      dietary: 'non-veg',
+      spiceLevel: 2,
+      weightOrSize: 'Half Chicken · 450g',
+      calories: '590 kcal',
+      featured: true,
+      options: [
+        { name: 'Heat Level', choices: [{ label: 'Medium Peri-Peri 🌶️' }, { label: 'Hot African Birdseye 🌶️🌶️' }, { label: 'Extra Hot Inferno (+₹20)', priceDelta: 20 }] },
+      ],
+    },
+    {
+      id: 'gr-lemon-herb-grilled-breast',
+      slug: 'char-grilled-lemon-herb-chicken-breast-plate',
+      name: 'Char-Grilled Lemon Herb Chicken Breasts (2 Pcs)',
+      price: 389,
+      description: 'Twin chicken breasts marinated in fresh oregano, lemon zest, garlic, and extra virgin olive oil. Served with grilled zucchini and house tzatziki dip.',
+      category: 'Flame-Grilled Spiced Chicken',
+      image: img('photo-1546069901-d6a86c6c59d9'),
+      imageAlt: 'Grilled chicken breast with herb seasoning and grilled vegetables',
+      tags: ['Lean & High Protein'],
+      dietary: 'non-veg',
+      weightOrSize: '350g Plate',
+      calories: '460 kcal',
+    },
+
+    // ── 4. Mixed-Grill Skewers & Boards ────────────────────────────────────
+    {
+      id: 'gr-grand-mixed-grill',
+      slug: 'the-republic-grand-mixed-grill-feasting-board',
+      name: 'The Republic Grand Mixed Grill Feasting Board (Serves 4)',
+      price: 2799,
+      compareAtPrice: 3199,
+      description: 'The definitive urban grill feast: 250g Dry-Aged Ribeye Slices, Half Flame-Grilled Peri-Peri Chicken, Full Rack Bourbon Baby Back Ribs, 4× Jumbo Garlic Prawn Skewers, Truffle Steak Fries, and Charred Corn.',
+      category: 'Mixed-Grill Skewers & Boards',
+      image: img('photo-1544025162-d76694265947'),
+      imageAlt: 'Grand mixed grill platter loaded with ribeye steak, ribs, chicken and grilled prawns',
+      tags: ['Chef Signature Board', 'Serves 4-5', 'Best Value'],
+      dietary: 'non-veg',
+      weightOrSize: 'Over 2.4 kg Multi-Meat Board',
+      calories: '3600 kcal total',
+      featured: true,
+      options: [
+        { name: 'Steak Doneness', choices: [{ label: 'Medium Rare (Recommended)' }, { label: 'Medium' }] },
+        { name: 'Sauce Pair', choices: [{ label: 'Chimichurri & Peppercorn Cognac' }, { label: 'Chipotle Ranch & Bourbon BBQ' }] },
+      ],
+    },
+    {
+      id: 'gr-mixed-skewer-board',
+      slug: 'republic-charcoal-flame-skewer-trio-board',
+      name: 'Republic Flame Skewer Trio (Beef, Lamb & Chicken)',
+      price: 849,
+      description: 'Three heavy skewers of prime tenderloin cubes, rosemary minced lamb kebab, and harissa chicken breast chunks grilled over high heat with bell peppers and onions.',
+      category: 'Mixed-Grill Skewers & Boards',
+      image: img('photo-1529042410759-befb1204b468'),
+      imageAlt: 'Charcoal skewers of mixed meats resting on flatbread with dips',
+      tags: ['3 Meats', 'Kebab Platter'],
+      dietary: 'non-veg',
+      weightOrSize: '3 Large Skewers · 480g',
+      calories: '720 kcal',
+    },
+    {
+      id: 'gr-jumbo-prawn-skewers',
+      slug: 'char-grilled-jumbo-garlic-butter-prawn-skewers',
+      name: 'Char-Grilled Jumbo Garlic Butter Prawns (4 Skewers)',
+      price: 649,
+      description: 'Wild tiger prawns brushed with smoked paprika, crushed garlic, parsley butter, and fresh lemon. Charred on open flames for a delicate smoky crunch.',
+      category: 'Mixed-Grill Skewers & Boards',
+      image: img('photo-1533777857889-4be7c70b33f7'),
+      imageAlt: 'Grilled jumbo tiger prawns on skewers with fresh lemon wedges',
+      tags: ['Wild Harvest', 'Seafood Grill'],
+      dietary: 'non-veg',
+      weightOrSize: '4 Skewers · 8 Jumbo Prawns',
+      calories: '340 kcal',
+    },
+
+    // ── 5. Smoked Baby Back Ribs ───────────────────────────────────────────
+    {
+      id: 'gr-baby-back-ribs',
+      slug: 'bourbon-glazed-charred-baby-back-ribs-full-rack',
+      name: 'Bourbon Glazed Charred Baby Back Ribs (Full Rack)',
+      price: 899,
+      compareAtPrice: 999,
+      description: 'Tender baby back pork ribs smoked 5 hours, then finished on high-heat grill grates to caramelize our Kentucky bourbon and dark brown sugar glaze.',
+      category: 'Smoked Baby Back Ribs',
+      image: img('photo-1529193591184-b1d58069ecdd'),
+      imageAlt: 'Full rack of charred baby back pork ribs with sticky glaze',
+      tags: ['Fall-Off-Bone', 'Full Rack'],
+      dietary: 'non-veg',
+      weightOrSize: 'Full Rack · 720g',
+      calories: '1190 kcal',
+      featured: true,
+    },
+
+    // ── 6. Vegetarian & Paneer Grill ───────────────────────────────────────
+    {
+      id: 'gr-harissa-paneer-steak',
+      slug: 'char-grilled-harissa-malai-paneer-steaks',
+      name: 'Char-Grilled Harissa Malai Paneer Steaks (2 Pcs)',
+      price: 369,
+      description: 'Thick slabs of fresh malai paneer marinated in North African harissa chili paste, Greek yogurt, and crushed cumin. Charred over coals with quinoa tabbouleh.',
+      category: 'Vegetarian & Paneer Grill',
+      image: img('photo-1601050690597-df0568f70950'),
+      imageAlt: 'Charred paneer steaks with grill marks and fresh herb salad',
+      tags: ['Vegetarian Star', 'High Protein'],
+      dietary: 'veg',
+      spiceLevel: 2,
+      weightOrSize: '320g Plate',
+      calories: '510 kcal',
+      featured: true,
+    },
+    {
+      id: 'gr-portobello-goat-cheese',
+      slug: 'grilled-portobello-mushroom-goat-cheese-stack',
+      name: 'Charred Portobello Mushroom & Goat Cheese Stack',
+      price: 329,
+      description: 'Giant portobello mushroom caps basted in balsamic garlic glaze, grilled tender and topped with melted French chèvre goat cheese and pine nut pesto.',
+      category: 'Vegetarian & Paneer Grill',
+      image: img('photo-1540420773420-3366772f4999'),
+      imageAlt: 'Grilled portobello mushroom with melted goat cheese and herbs',
+      tags: ['Earthy Umami', 'Vegetarian'],
+      dietary: 'veg',
+      weightOrSize: '240g Stack',
+      calories: '340 kcal',
+    },
+
+    // ── 7. Republic Loaded Sides ───────────────────────────────────────────
+    {
+      id: 'gr-truffle-parmesan-fries',
+      slug: 'steakhouse-crispy-truffle-parmesan-fries',
+      name: 'Steakhouse Truffle & 24-Month Parmesan Fries',
+      price: 249,
+      description: 'Hand-cut Idaho Russet potato steak fries fried double crisp, tossed in white truffle oil, freshly grated 24-month Parmigiano Reggiano, and chopped chives.',
+      category: 'Republic Loaded Sides',
+      image: img('photo-1541592106381-b31e9677c0e5'),
+      imageAlt: 'Crisp steak fries tossed in truffle oil and shaved parmesan',
+      tags: ['Signature Side', 'Vegetarian'],
+      dietary: 'veg',
+      weightOrSize: '280g Bowl',
+      calories: '460 kcal',
+      featured: true,
+    },
+    {
+      id: 'gr-grilled-asparagus',
+      slug: 'charred-jumbo-green-asparagus-with-lemon',
+      name: 'Charred Jumbo Green Asparagus with Lemon Zest',
+      price: 229,
+      description: 'Tender jumbo asparagus spears grilled on high heat with cold-pressed olive oil, fresh grated lemon zest, cracked black pepper, and flaked Maldon sea salt.',
+      category: 'Republic Loaded Sides',
+      image: img('photo-1532550907401-a500c9a57435'),
+      imageAlt: 'Grilled green asparagus spears with lemon and coarse sea salt',
+      tags: ['Clean Green', 'Vegan'],
+      dietary: 'vegan',
+      weightOrSize: '180g Portion',
+      calories: '90 kcal',
+    },
+    {
+      id: 'gr-creamed-spinach',
+      slug: 'nutmeg-creamed-baby-spinach-with-mascarpone',
+      name: 'Nutmeg Creamed Baby Spinach with Mascarpone',
+      price: 199,
+      description: 'Slow-simmered tender baby spinach leaves folded into rich mascarpone cream, roasted garlic, shallots, and freshly grated nutmeg.',
+      category: 'Republic Loaded Sides',
+      image: img('photo-1589301760014-d929f3979dbc'),
+      imageAlt: 'Cast iron dish of rich creamed spinach with melted cheese topping',
+      tags: ['Steakhouse Classic', 'Vegetarian'],
+      dietary: 'veg',
+      weightOrSize: '220g Dish',
+      calories: '280 kcal',
+    },
+    {
+      id: 'gr-peppercorn-sauce',
+      slug: 'house-peppercorn-cognac-steak-sauce-jar',
+      name: 'House Peppercorn & French Cognac Sauce (200ml)',
+      price: 169,
+      description: 'Green Madagascar peppercorns flambéed with French cognac, beef stock reduction, and heavy whipping cream. The ultimate steak accompaniment.',
+      category: 'Republic Loaded Sides',
+      image: img('photo-1555939594-58d7cb561ad1'),
+      imageAlt: 'Ceramic sauceboat of creamy green peppercorn steak sauce',
+      tags: ['Steak Pairing'],
+      dietary: 'non-veg',
+      weightOrSize: '200ml Glass Jar',
+      calories: '190 kcal',
+    },
+
+    // ── 8. Desserts & Craft Drinks ─────────────────────────────────────────
+    {
+      id: 'gr-molten-lava-cake',
+      slug: 'warm-valrhona-dark-chocolate-molten-lava-cake',
+      name: 'Warm Valrhona 70% Dark Chocolate Molten Lava Cake',
+      price: 289,
+      description: 'Baked to order with pure French Valrhona dark chocolate. Piercing the crust unleashes a molten chocolate center. Served with Madagascar vanilla gelato.',
+      category: 'Desserts & Craft Drinks',
+      image: img('photo-1551024709-8f23befc6f87'),
+      imageAlt: 'Chocolate lava cake with flowing molten center and vanilla ice cream',
+      tags: ['Baked to Order', 'Vegetarian'],
+      dietary: 'veg',
+      weightOrSize: '220g Dessert',
+      calories: '560 kcal',
+      featured: true,
+    },
+    {
+      id: 'gr-smoked-old-fashioned',
+      slug: 'smoked-rosemary-citrus-craft-mocktail',
+      name: 'Smoked Rosemary & Blood Orange Craft Mocktail',
+      price: 199,
+      description: 'Pressed blood orange juice, aromatic house bitters, fresh charred rosemary sprig, and smoked oak syrup served over a hand-carved crystal ice sphere.',
+      category: 'Desserts & Craft Drinks',
+      image: img('photo-1510812431401-41d2bd2722f3'),
+      imageAlt: 'Smoky cocktail in crystal glass with smoking rosemary sprig and orange peel',
+      tags: ['Smoked Glass', 'Vegan'],
+      dietary: 'vegan',
+      weightOrSize: '250ml Glass',
+      calories: '120 kcal',
+    },
+  ],
+  craftProcess: {
+    badge: 'OUR 800°F CHAR-GRILL METHOD',
+    title: 'The Science of High-Heat Charcoal Searing & Dry-Aging',
+    subtitle: 'Steak is not just cooked; it is engineered through time, temperature, and fire.',
+    steps: [
+      { time: 'Day 01–45', title: 'Himalayan Salt Dry-Aging', desc: 'Whole prime loins rest in humidity-controlled chambers lined with pink salt bricks.' },
+      { time: 'T – 30 Mins', title: 'Tempering & Diamond Coarse Salt', desc: 'Steaks rest to room temperature and receive heavy flaky sea salt to draw out surface moisture.' },
+      { time: 'T – 00 Mins', title: '800°F Hardwood Flame Sear', desc: 'Placed onto cast iron grates over white-hot lump charcoal to create a millimeter-thin crust.' },
+      { time: 'T + 08 Mins', title: 'Herb Butter Board Resting', desc: 'Resting on warm wood boards allows muscle fibers to relax and retain rich juices.' },
+    ],
+    image: img('photo-1558030006-450675393462'),
+  },
+  story: {
+    badge: 'THE URBAN STEAKHOUSE',
+    kicker: 'FIRE, STEEL & DRY-AGED ARTISTRY',
+    title: 'We Rejected Boring Traditional Steakhouses to Build a Modern Temple of Fire.',
+    paragraphs: [
+      'For decades, steakhouses were trapped in outdated tropes: dim lighting, overpriced generic wine lists, and steaks broiled under electric heating coils.',
+      'Grill Republic was founded on an uncompromising principle: real fire produces real flavor. We built open exhibition kitchens where guests can watch executive chefs work towering hardwood charcoal hearths at 800°F.',
+      'From 45-day dry-aged Angus ribeyes to Wagyu burgers and charred prawn skewers, every plate that leaves our pass has met open flame and seasoned hardwood.',
+    ],
+    image: img('photo-1555396273-367ea4eb4db5'),
+    imageAlt: 'Modern open kitchen at Grill Republic with chefs flame searing steaks',
+    founderQuote: 'When you take a prime dry-aged steak and drop it onto an 800-degree grate, the sizzle is music and the crust is pure magic. There is no hiding behind sauces.',
+    founderName: 'Chef Victor Cruz · Culinary Director, Grill Republic',
+    stats: [
+      { value: '45 Days', label: 'In-House Salt-Brick Aging' },
+      { value: '800°F', label: 'Charcoal Grate Temperature' },
+      { value: 'USDA Prime', label: 'Hand-Selected Angus Cuts' },
+      { value: '18,000+', label: 'Steaks Flame-Seared Monthly' },
+    ],
+  },
+  promo: {
+    badge: 'PRIVATE DINING & BOOTH RESERVATIONS',
+    title: 'Reserve a Chef’s Counter Table & Enjoy a Complimentary Wine Flight',
+    desc: 'Book a table for 4 or more at our exhibition grill counter this week and receive a complimentary flight of sommelier selected bold reds or artisanal smoked mocktails.',
+    ctaText: 'Book Grill Counter',
+    ctaPage: 'contact',
+    image: img('photo-1544025162-d76694265947'),
+    imageAlt: 'Sizzling steak and wine glasses set for evening dinner service',
+  },
+  gallery: [
+    { src: img('photo-1558030006-450675393462'), alt: 'Sizzling dry aged ribeye steak on open charcoal fire', caption: 'Prime 45-Day Dry-Aged Ribeye Searing over 800°F Charcoal', tag: 'Prime Steaks' },
+    { src: img('photo-1544025162-d76694265947'), alt: 'Grand mixed grill platter with ribeye, ribs and skewers', caption: 'The Republic Grand Mixed Grill Feasting Board for Groups', tag: 'Mixed Grill' },
+    { src: img('photo-1568901346375-23c9450c58cd'), alt: 'Gourmet Wagyu burger with melted cheddar and bacon jam', caption: 'The Republic Double Wagyu Smash Burger on Toasted Brioche', tag: 'Wagyu Burger' },
+    { src: img('photo-1532550907401-a500c9a57435'), alt: 'Flame grilled half chicken with herb butter', caption: 'Flame-Grilled Spatchcock Half Chicken with Peri-Peri Glaze', tag: 'Grilled Chicken' },
+    { src: img('photo-1529193591184-b1d58069ecdd'), alt: 'Bourbon glazed baby back ribs with charred exterior', caption: 'Bourbon Glazed Baby Back Pork Ribs Finished on the Grill Grate', tag: 'Baby Back Ribs' },
+    { src: img('photo-1541592106381-b31e9677c0e5'), alt: 'Crisp steak fries tossed in truffle oil and parmesan', caption: 'Hand-Cut Steak Fries with White Truffle Oil and 24-Month Parm', tag: 'Truffle Fries' },
+  ],
+  testimonials: [
+    {
+      name: 'Kabir Singhal',
+      role: 'Investment Banker & Food Connoisseur · UB City',
+      rating: 5,
+      quote: 'The 45-day dry-aged ribeye at Grill Republic is without question the best steak in the city. The crust is deeply caramelized and peppery, and the inside was a perfect warm pink edge to edge.',
+      source: 'Verified Dine-In Reservation',
+      date: 'Yesterday',
+    },
+    {
+      name: 'Natasha Oberoi',
+      role: 'Creative Director · Indiranagar',
+      rating: 5,
+      quote: 'We celebrated our firm’s product milestone with the Grand Mixed Grill Board. Watching the chefs work the 800°F flame grills from our booth was incredible, and the chimichurri skirt steak was breathtaking.',
+      source: 'Verified Event Booking',
+      date: '3 days ago',
+    },
+    {
+      name: 'David Reynolds',
+      role: 'Visiting Sommelier · London',
+      rating: 5,
+      quote: 'A magnificent urban grill. Modern, energetic, and completely focused on execution. The Tomahawk rib steak carved tableside with roasted bone marrow butter was an unforgettable culinary experience.',
+      source: 'Verified Table Guest',
+      date: 'Last weekend',
+    },
+    {
+      name: 'Rhea Sen',
+      role: 'Food & Wine Blogger · Koramangala',
+      rating: 5,
+      quote: 'The Republic Wagyu burger with bacon jam and truffle parmesan fries is pure perfection for a Saturday lunch. Everything is cooked over real charcoal, and you taste the difference in every single bite.',
+      source: 'Verified Online Order',
+      date: '5 days ago',
+    },
+  ],
+  location: {
+    address: 'Grill Republic Tower #01, Level 2, UB City Promenade, Vittal Mallya Road',
+    neighborhood: 'CBD / MG Road / Lavelle Road / Richmond Town, Bengaluru, Karnataka 560001',
+    hoursWeekdays: 'Monday – Thursday: 12:00 PM – 11:30 PM (Lunch & Dinner Grill)',
+    hoursWeekends: 'Friday – Sunday: 12:00 PM – 12:30 AM (Late-Night Steakhouse Service)',
+    phone: '+91 (080) 4988-7700',
+    email: 'reservations@grillrepublic.com',
+    pickupNotice: 'Dedicated curbside grill express pickup window at West Valet Entrance.',
+    mapEmbedUrl: 'https://maps.google.com/?q=UB+City+Bengaluru',
+  },
+  customInquiry: {
+    title: 'Private Dining Room & Corporate Steakhouse Banquets',
+    subtitle: 'Host executive board dinners, milestone celebrations, and cocktail receptions in our glass-enclosed grill wine room.',
+    occasions: ['Executive Board Dinner', 'Product Milestone Celebration', 'Anniversary Banquet', 'Private Chef’s Table'],
+    sizes: [
+      { label: 'Private Cellar (12 People)', serves: '12 people', basePrice: 14999 },
+      { label: 'Executive Grill Room (25 People)', serves: '25 people', basePrice: 28999 },
+      { label: 'Grand Terrace Takeover (60 People)', serves: '60 people', basePrice: 64999 },
+    ],
+    flavors: [
+      '45-Day Dry-Aged Angus Ribeye Steaks',
+      'Center-Cut Filet Mignon with Truffle Butter',
+      'The Republic Grand Mixed Grill Boards',
+      'Flame-Grilled Jumbo Tiger Prawn Skewers',
+    ],
+  },
+  faqs: [
+    {
+      category: 'Grill Technique',
+      question: 'What charcoal do you use for your 800°F grills?',
+      answer: 'We burn 100% natural compressed coconut shell and hardwood lump charcoal. It reaches temperatures in excess of 800°F without producing sulfur or chemical smoke, delivering an ultra-clean char.',
+    },
+    {
+      category: 'Steak Aging',
+      question: 'How do you age your steaks in-house?',
+      answer: 'Our whole beef primals are dry-aged for 45 days in an Italian-built glass aging chamber lined with authentic pink Himalayan salt bricks. The salt purifies the air and accelerates moisture evaporation, concentrating the rich beef flavor.',
+    },
+    {
+      category: 'Dining & Tables',
+      question: 'Are table reservations required?',
+      answer: 'While we hold a limited number of walk-in seats at our bar and high-top counter, advance reservations are strongly recommended for booth seating and weekend dinners.',
+    },
+    {
+      category: 'Dietary Options',
+      question: 'Do you offer non-beef and vegetarian grill options?',
+      answer: 'Yes! We feature flame-grilled peri-peri half spatchcock chicken, jumbo garlic butter tiger prawns, Char-Grilled Harissa Paneer Steaks, and Grilled Portobello Mushroom stacks with chèvre.',
+    },
+    {
+      category: 'Online Orders',
+      question: 'Can we order steaks and burgers for pickup?',
+      answer: 'Yes. You can order online through our website. Our kitchen packages all steaks and burgers in thermal-insulated venting boxes to preserve crust crispness and meat juiciness.',
+    },
+  ],
 };
 
 export default function GrillRepublic() {
-  const [scrolled, setScrolled] = useState(false);
-  const [activeMenuTab, setActiveMenuTab] = useState('Steaks & Grills');
-  
-  const heroRef = useReveal(100);
-  const storyRef = useReveal(200);
-  const menuRef = useReveal(200);
-  
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const theme = {
-    name: 'Grill Republic',
-    tagline: 'Modern steakhouse & grill with bold flavors',
-    palette: { primary: '#0ea5e9', secondary: '#0f172a', surface: '#f1f5f9', text: '#0f172a', background: '#f8fafc', textLight: '#64748b' }
-  };
-
-  const menu = [
-    { tab: 'Steaks & Grills', items: [
-      { name: 'USDA Prime Ribeye', price: '$62', desc: '18oz bone-in, Josper charcoal grilled, compound butter, truffle salt.', tags: ['Prime Cut'], image: IMAGES.steak1 },
-      { name: 'Wagyu Flat Iron', price: '$55', desc: 'A5 Wagyu, served with chimichurri and roasted bone marrow.', tags: ['Wagyu', 'Premium'], image: IMAGES.steak2 },
-      { name: 'Tomahawk for Two', price: '$120', desc: '36oz bone-in tomahawk, dry-aged 30 days, shared tableside.', tags: ['Share', 'Signature'], image: IMAGES.tomahawk },
-    ]},
-    { tab: 'From the Sea', items: [
-      { name: 'Grilled Swordfish', price: '$42', desc: 'Lemon herb crust, caperberry butter, charred asparagus.', image: IMAGES.seafood },
-      { name: 'Lobster Tail', price: '$55', desc: 'Split, brushed with garlic-herb butter, charcoal-grilled.', tags: ['Luxury'], image: IMAGES.seafood },
-    ]},
-    { tab: 'Starters', items: [
-      { name: 'Wagyu Carpaccio', price: '$22', desc: 'Paper-thin Wagyu, truffle oil, parmesan, capers, micro arugula.', image: IMAGES.starter1 },
-      { name: 'Grilled Bone Marrow', price: '$18', desc: 'Charred marrow bones, herb gremolata, grilled sourdough.', image: IMAGES.starter2 },
-    ]},
-  ];
-
-  return (
-    <div style={{ backgroundColor: theme.palette.background, color: theme.palette.text, fontFamily: '"Inter", sans-serif', minHeight: '100vh' }}>
-      <nav style={{ position: 'sticky', top: 0, width: '100%', padding: '1.25rem 5%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100, transition: 'all 0.4s ease', backgroundColor: scrolled ? 'rgba(248,250,252,0.95)' : 'transparent', borderBottom: scrolled ? '1px solid rgba(14,165,233,0.15)' : 'none', backdropFilter: scrolled ? 'blur(12px)' : 'none', color: scrolled ? theme.palette.secondary : '#fff' }}>
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          
-          <div style={{ fontSize: '1.75rem', fontWeight: 700, fontFamily: '"Rajdhani", sans-serif', color: scrolled ? theme.palette.secondary : '#fff', letterSpacing: '2px', textTransform: 'uppercase' }}>
-            {theme.name}
-          </div>
-        </div>
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', padding: '0.75rem 2rem', borderRadius: '4px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontFamily: '"Inter", sans-serif', transition: 'all 0.3s' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#0284c7'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = theme.palette.primary}>
-            Reserve Now
-          </button>
-        </div>
-      </nav>
-
-      <header style={{ height: '100vh', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundColor: '#000' }}>
-          <img src={IMAGES.hero} alt="Grill" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.55 }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(160deg, rgba(15,23,42,0.95) 0%, rgba(14,165,233,0.2) 100%)' }}></div>
-        </div>
-        <div ref={heroRef as any} style={{ position: 'relative', zIndex: 10, color: '#fff', maxWidth: '900px', padding: '0 5%' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', marginBottom: '2rem', color: theme.palette.primary }}>
-            <Flame size={24} />
-            <span style={{ fontWeight: 600, fontSize: '1rem', letterSpacing: '4px', textTransform: 'uppercase' }}>Premium Meats & High Heat</span>
-          </div>
-          <h1 style={{ fontFamily: '"Rajdhani", sans-serif', fontSize: 'clamp(4rem, 8vw, 7rem)', lineHeight: 1, marginBottom: '1.5rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '2px' }}>The Grill is the<br/><span style={{ color: theme.palette.primary }}>Throne.</span></h1>
-          <p style={{ fontSize: '1.25rem', fontWeight: 300, marginBottom: '3rem', lineHeight: 1.6, color: '#cbd5e1', maxWidth: '600px', margin: '0 auto 3rem' }}>Premium meats, high-heat grilling, and modern plates. Grill Republic is where carnivores dine like royalty.</p>
-          <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <button style={{ backgroundColor: theme.palette.primary, color: '#fff', border: 'none', padding: '1.2rem 3.5rem', borderRadius: '4px', fontWeight: 600, fontSize: '1.1rem', cursor: 'pointer', fontFamily: '"Inter", sans-serif', transition: 'all 0.3s', textTransform: 'uppercase', letterSpacing: '1px' }}>
-              Book a Table
-            </button>
-          </div>
-        </div>
-      </header>
-      
-      <section ref={storyRef as any} style={{ padding: '8rem 5%', backgroundColor: '#fff', color: theme.palette.secondary }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5rem', alignItems: 'center', maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ flex: '1 1 400px' }}>
-            <img src={IMAGES.story} alt="Chef" style={{ width: '100%', borderRadius: '4px', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }} />
-          </div>
-          <div style={{ flex: '1 1 500px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', color: theme.palette.primary, marginBottom: '1rem' }}>
-              <span style={{ width: '40px', height: '2px', backgroundColor: theme.palette.primary }}></span>
-              <span style={{ fontWeight: 600, textTransform: 'uppercase', letterSpacing: '2px' }}>Our Method</span>
-            </div>
-            <h2 style={{ fontFamily: '"Rajdhani", sans-serif', fontSize: '4rem', color: theme.palette.secondary, marginBottom: '1.5rem', lineHeight: 1.1, fontWeight: 700, textTransform: 'uppercase' }}>Built on Fire & Precision.</h2>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '1.5rem', color: theme.palette.textLight }}>Grill Republic was designed for those who believe that great meat needs nothing but heat, fire, and excellent technique. Our chefs are trained in the Josper technique — a closed charcoal oven that reaches 750°F.</p>
-            <p style={{ fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '2.5rem', color: theme.palette.textLight }}>Our sourcing is uncompromising. Every steak is USDA Prime or Wagyu. Every fish is sustainable. Every cut is fresh, never frozen.</p>
-            <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <div style={{ backgroundColor: theme.palette.surface, padding: '1rem', borderRadius: '4px', color: theme.palette.primary }}><Flame size={24} /></div>
-                <div><h4 style={{ margin: '0 0 0.25rem 0', fontWeight: 600 }}>Josper Grill</h4></div>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <div style={{ backgroundColor: theme.palette.surface, padding: '1rem', borderRadius: '4px', color: theme.palette.primary }}><Utensils size={24} /></div>
-                <div><h4 style={{ margin: '0 0 0.25rem 0', fontWeight: 600 }}>USDA Prime</h4></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section ref={menuRef as any} style={{ padding: '8rem 5%', backgroundColor: theme.palette.surface }}>
-        <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', color: theme.palette.primary, marginBottom: '1rem' }}>
-            <span style={{ width: '40px', height: '2px', backgroundColor: theme.palette.primary }}></span>
-            <span style={{ fontWeight: 600, textTransform: 'uppercase', letterSpacing: '2px' }}>The Selection</span>
-            <span style={{ width: '40px', height: '2px', backgroundColor: theme.palette.primary }}></span>
-          </div>
-          <h2 style={{ fontFamily: '"Rajdhani", sans-serif', fontSize: '4rem', color: theme.palette.secondary, fontWeight: 700, margin: 0, textTransform: 'uppercase' }}>Modern Menu</h2>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '3rem', flexWrap: 'wrap' }}>
-            {menu.map((cat) => (
-              <button 
-                key={cat.tab}
-                onClick={() => setActiveMenuTab(cat.tab)}
-                style={{ 
-                  padding: '0.75rem 2rem', 
-                  backgroundColor: activeMenuTab === cat.tab ? theme.palette.secondary : 'transparent',
-                  color: activeMenuTab === cat.tab ? '#fff' : theme.palette.secondary,
-                  border: activeMenuTab === cat.tab ? 'none' : `1px solid ${theme.palette.textLight}`,
-                  borderRadius: '30px',
-                  fontFamily: '"Inter", sans-serif',
-                  fontSize: '1rem',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  letterSpacing: '1px'
-                }}
-              >
-                {cat.tab}
-              </button>
-            ))}
-          </div>
-        </div>
-        
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '3rem', maxWidth: '1200px', margin: '0 auto' }}>
-          {menu.find(c => c.tab === activeMenuTab)?.items.map((item, i) => (
-            <div key={i} style={{ display: 'flex', flexDirection: 'column', backgroundColor: '#fff', borderRadius: '4px', overflow: 'hidden', transition: 'transform 0.4s, box-shadow 0.4s', cursor: 'pointer', boxShadow: '0 10px 30px rgba(0,0,0,0.03)' }} onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-10px)'; e.currentTarget.style.boxShadow = '0 20px 40px rgba(14,165,233,0.1)'; }} onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.03)'; }}>
-              <div style={{ position: 'relative' }}>
-                <img src={item.image} alt={item.name} style={{ width: '100%', height: '240px', objectFit: 'cover' }} />
-                <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '50%', background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)' }}></div>
-                <div style={{ position: 'absolute', bottom: '1rem', right: '1.5rem', color: theme.palette.primary, fontWeight: 700, fontFamily: '"Rajdhani", sans-serif', fontSize: '1.75rem' }}>{item.price}</div>
-              </div>
-              <div style={{ padding: '2.5rem' }}>
-                <h3 style={{ fontFamily: '"Rajdhani", sans-serif', fontSize: '1.75rem', fontWeight: 700, margin: '0 0 1rem 0', color: theme.palette.secondary, textTransform: 'uppercase' }}>{item.name}</h3>
-                <p style={{ color: theme.palette.textLight, fontSize: '1rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>{item.desc}</p>
-                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                  {item.tags?.map(tag => (
-                    <span key={tag} style={{ fontSize: '0.75rem', padding: '0.4rem 1rem', backgroundColor: theme.palette.surface, color: theme.palette.secondary, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px', borderRadius: '30px' }}>{tag}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <footer style={{ backgroundColor: theme.palette.secondary, color: '#f1f5f9', padding: '6rem 5% 3rem' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '4rem', marginBottom: '4rem' }}>
-            <div>
-              <h2 style={{ fontFamily: '"Rajdhani", sans-serif', fontSize: '3rem', fontWeight: 700, marginBottom: '1rem', color: '#fff', letterSpacing: '2px', textTransform: 'uppercase' }}>{theme.name}</h2>
-              <p style={{ color: '#94a3b8', marginBottom: '2rem', fontSize: '1.05rem', lineHeight: 1.6 }}>{theme.tagline}</p>
-            </div>
-            <div>
-              <h4 style={{ color: theme.palette.primary, fontWeight: 700, marginBottom: '1.5rem', fontSize: '1.25rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Location</h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}><MapPin size={24} color={theme.palette.primary} style={{ flexShrink: 0 }} /><span style={{ lineHeight: 1.5, color: '#e2e8f0' }}>1 Republic Ave<br/>Manhattan, NY 10004</span></div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}><Phone size={24} color={theme.palette.primary} style={{ flexShrink: 0 }} /><span style={{ color: '#e2e8f0' }}>+1 (212) 555-0444</span></div>
-              </div>
-            </div>
-            <div>
-              <h4 style={{ color: theme.palette.primary, fontWeight: 700, marginBottom: '1.5rem', fontSize: '1.25rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Hours</h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}><Clock size={24} color={theme.palette.primary} style={{ flexShrink: 0 }} /><span style={{ lineHeight: 1.5, color: '#e2e8f0' }}>Mon–Sun: 5pm – 11pm<br/>Lunch: Fri–Sun 12pm</span></div>
-              </div>
-            </div>
-          </div>
-          <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '2rem', textAlign: 'center' }}>
-            <p style={{ fontSize: '0.95rem', margin: 0, color: '#64748b' }}>© 2026 {theme.name}. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
+  return <FoodStorefrontCore config={grillRepublicConfig} />;
 }
-
-

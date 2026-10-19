@@ -30,13 +30,13 @@ const curatedSection = (id: string, name: string, description: string, themes: r
 const covers = {
   cafe: image('photo-1495474472287-4d71bcdd2085'),
   bakery: image('photo-1509440159596-0249088772ff'),
-  fastFood: image('photo-1504674900247-0877df9cc836'),
+  fastFood: image('photo-1550547660-d9450f859349'),
   cloudKitchen: image('photo-1556911220-bff31c812dba'),
-  pizza: image('photo-1504674900247-0877df9cc836'),
-  indian: image('photo-1504674900247-0877df9cc836'),
+  pizza: image('photo-1513104890138-7c749659a591'),
+  indian: image('photo-1585937421612-70a008356fbe'),
   dessert: image('photo-1558961363-fa8fdf82db35'),
-  delivery: image('photo-1504674900247-0877df9cc836'),
-  bbq: image('photo-1504674900247-0877df9cc836'),
+  delivery: image('photo-1526367790999-0150786686a2'),
+  bbq: image('photo-1544025162-d76694265947'),
 }
 
 const fineDining: TemplateSubsection = {
@@ -76,7 +76,7 @@ export const templateCategories: TemplateCategory[] = [{
     cafe,
     curatedSection('bakery', 'Bakery', 'Fresh-from-the-oven brands with a distinct point of view.', [
       ['Butter & Bloom', 'butter-and-bloom', 'golden-crumb', 'photo-1509440159596-0249088772ff', 'A floral, handcrafted bakehouse in butter yellow and soft green.', ['bakery', 'organic', 'serif']],
-      ['Oven & Crumb', 'oven-and-crumb', 'rustic-oven', 'photo-1549931319-a545dcf3bc7c', 'Rustic, grain-led baking with terracotta warmth and wood texture.', ['artisan', 'rustic', 'warm']],
+      ['Oven & Crumb', 'oven-and-crumb', 'rustic-oven', 'photo-1589367920969-ab8e050bbb04', 'Rustic, grain-led baking with terracotta warmth and wood texture.', ['artisan', 'rustic', 'warm']],
       ['Parisian Crust', 'parisian-crust', 'patisserie-lune', 'photo-1603532648955-039310d9ed75', 'A refined French bakery with editorial cream and burgundy details.', ['french', 'editorial', 'bistro']],
       ['Golden Loaf', 'golden-loaf', 'rise-and-knead', 'photo-1612201142855-7873bc1661b4', 'Luxury food photography and a dominant artisan-bread hero.', ['premium', 'golden', 'artisan']],
       ['Daily Bread Co.', 'daily-bread-co', 'sugar-petal', 'photo-1586444248902-2f64eddc13df', 'Bright neighbourhood baking with rounded, friendly product cards.', ['modern', 'friendly', 'daily']],
@@ -89,39 +89,39 @@ export const templateCategories: TemplateCategory[] = [{
       ['Quick Bite', 'quick-bite', 'quick-bowl', 'photo-1568901346375-23c9450c58cd', 'Minimal contemporary fast food with a sharp ordering flow.', ['minimal', 'quick-service', 'clean']],
     ]),
     curatedSection('cloud-kitchen', 'Cloud Kitchen', 'Delivery-first concepts with production-minded design.', [
-      ['Kitchen X', 'kitchen-x', 'dark-kitchen-pro', 'photo-1556911220-bff31c812dba', 'A futuristic dark kitchen with a delivery command-center feel.', ['futuristic', 'dark', 'delivery']],
-      ['Ghost Kitchen', 'ghost-kitchen', 'ghost-chef', 'photo-1556740749-887f6717d7e4', 'Editorial delivery design built around virtual restaurant brands.', ['editorial', 'ghost', 'night']],
-      ['Urban Batch', 'urban-batch', 'fresh-batch', 'photo-1600891964092-4316c2883c44', 'A modern food-production experience for considered everyday meals.', ['production', 'urban', 'modern']],
-      ['Fresh Dispatch', 'fresh-dispatch', 'flame-hub', 'photo-1540420773420-3366772f4999', 'Fresh ingredients and transparent delivery benefits in a light system.', ['fresh', 'clean', 'dispatch']],
-      ['Kitchen Express', 'kitchen-express', 'box-and-go', 'photo-1528712306091-ed0763094c98', 'A fast, mobile-minded ordering interface with live delivery cues.', ['express', 'mobile-first', 'order']],
+      ['GhostBite', 'ghost-bite', 'ghost-bite', 'photo-1586190848861-99aa4a171e90', 'Urban dark kitchen with smash burgers, loaded fries, and late-night delivery.', ['urban', 'dark-kitchen', 'late-night']],
+      ['GreenFuel', 'green-fuel', 'green-fuel', 'photo-1512621776951-a57141f2eefd', 'Macro-counted warm grain bowls, organic salads, and chef-curated weekly meal prep.', ['healthy', 'macro-counted', 'meal-prep']],
+      ['Masala Route', 'masala-route', 'masala-route', 'photo-1589302168068-964664d93dc0', 'Royal Indian delivery kitchen with dough-sealed earthen handi biryanis and clay-pot curries.', ['indian', 'dum-biryani', 'royal']],
+      ['Umami Express', 'umami-express', 'umami-express', 'photo-1569718212165-3a8278d5f624', 'Asian fusion delivery with two-tier separated broth ramen and handcrafted baos.', ['asian-fusion', 'ramen', 'dim-sum']],
+      ['The Cloud Collective', 'the-cloud-collective', 'the-cloud-collective', 'photo-1555396273-367ea4eb4db5', 'Multi-brand virtual food hall uniting 4 restaurant brands in one cart with a single delivery fee.', ['multi-brand', 'shared-cart', 'food-hall']],
     ]),
     curatedSection('pizza', 'Pizza Restaurant', 'Pizza-first restaurant concepts with oven-to-table personality.', [
-      ['Napoli Flame', 'napoli-flame', 'napoli-fire', 'photo-1548365328-8b849e6f6b92', 'Traditional Italian warmth, flame, and generous pizza imagery.', ['italian', 'flame', 'traditional']],
-      ['Pizza District', 'pizza-district', 'pie-lab', 'photo-1513104890138-7c749659a591', 'An urban pizza brand driven by high-contrast menu moments.', ['urban', 'pizza', 'bold']],
+      ['Napoli Flame', 'napoli-flame', 'napoli-fire', 'photo-1513104890138-7c749659a591', 'Traditional Italian warmth, flame, and generous pizza imagery.', ['italian', 'flame', 'traditional']],
+      ['Pizza District', 'pizza-district', 'pie-lab', 'photo-1534308983496-4fabb1a015ee', 'An urban pizza brand driven by high-contrast menu moments.', ['urban', 'pizza', 'bold']],
       ['Crust & Co.', 'crust-and-co', 'crust-theory', 'photo-1574071318508-1cdbab80d002', 'Premium contemporary pizza with a refined ingredient story.', ['premium', 'contemporary', 'crust']],
       ['Woodfire 90', 'woodfire-90', 'mammas-table', 'photo-1590947132387-155cc02f3212', 'Artisan wood-fired pizza in an amber, craft-led layout.', ['wood-fired', 'artisan', 'amber']],
       ['Slice Society', 'slice-society', 'slice-society', 'photo-1565299624946-b28f40a0ae38', 'A youthful pizza concept with fast category navigation.', ['youthful', 'slice', 'modern']],
     ]),
     curatedSection('indian', 'Indian Restaurant', 'Contemporary Indian hospitality with depth, colour, and craft.', [
-      ['Saffron House', 'saffron-house', 'masala-royale', 'photo-1585937421612-70a008356fbe', 'Luxury contemporary Indian dining in saffron and brass.', ['luxury', 'saffron', 'contemporary']],
-      ['Spice Route', 'spice-route', 'spice-route', 'photo-1601050690597-df0568f70950', 'An editorial journey through regional flavour and spice.', ['editorial', 'regional', 'spice']],
-      ['Masala Modern', 'masala-modern', 'chai-and-chaat', 'photo-1631452180519-c014fe946bc0', 'Modern Indian cuisine in a clean, expressive visual system.', ['modern', 'masala', 'clean']],
-      ['Tandoor Tales', 'tandoor-tales', 'tandoor-nights', 'photo-1567188040759-fb8a883dc6d8', 'Fire-led tandoor cooking with smoky, dramatic presentation.', ['tandoor', 'fire', 'smoky']],
-      ['Royal Thali', 'royal-thali', 'tiffin-tales', 'photo-1626132647523-66f5bf380027', 'A royal dining experience with restrained textile and brass cues.', ['royal', 'thali', 'heritage']],
+      ["Maharaja's Table", 'maharajas-table', 'maharajas-table', 'photo-1585937421612-70a008356fbe', 'Imperial Awadhi and Mughal royal court fine dining with sealed dum handis and saffron.', ['royal', 'awadhi', 'fine-dining', 'luxury', 'biryani']],
+      ['Sattva Kitchen', 'sattva-kitchen', 'sattva-kitchen', 'photo-1601050690597-df0568f70950', 'Contemporary plant-forward vegetarian Indian dining celebrating organic seasonal harvests.', ['vegetarian', 'vegan', 'organic', 'contemporary', 'wholesome']],
+      ['Bombay Chowk', 'bombay-chowk', 'bombay-chowk', 'photo-1565557623262-b51c2513a641', 'Modern energetic Mumbai street food brand featuring tawa pav bhaji, crispy chaat, and kathi rolls.', ['street-food', 'mumbai', 'chaat', 'bold', 'snack']],
+      ['Tandoor & Tadka', 'tandoor-and-tadka', 'tandoor-and-tadka', 'photo-1567188040759-fb8a883dc6d8', 'Premium Punjabi grill and North Indian smokehouse with 800°F live charcoal clay tandoors.', ['tandoor', 'punjabi', 'grill', 'smokehouse', 'charcoal']],
+      ['Dakshin House', 'dakshin-house', 'dakshin-house', 'photo-1626132647523-66f5bf380027', 'Contemporary South Indian restaurant celebrating stone-ground dosas, thatte idli, and degree coffee.', ['south-indian', 'dosa', 'coastal', 'filter-coffee', 'tiffin']],
     ]),
-    curatedSection('dessert-shop', 'Dessert Shop', 'Dessert concepts from soft-playful to polished patisserie.', [
-      ['Sugar Bloom', 'sugar-bloom', 'frost-and-fruit', 'photo-1551024506-0bccd828d307', 'Soft pastels and fruit-forward desserts with a gentle, playful feel.', ['pastel', 'soft', 'dessert']],
-      ['Sweet Atelier', 'sweet-atelier', 'sweet-tooth', 'photo-1534432182912-63863115e106', 'A luxurious patisserie with exacting editorial composition.', ['patisserie', 'luxury', 'editorial']],
-      ['Cocoa Room', 'cocoa-room', 'choco-vault', 'photo-1511381939415-e44015466834', 'Deep chocolate tones and a rich, premium product focus.', ['chocolate', 'dark', 'premium']],
-      ['Sprinkle Studio', 'sprinkle-studio', 'scoop-story', 'photo-1477090792565-af1b2f0fd1e4', 'A playful modern studio for colourful sweet discoveries.', ['playful', 'colourful', 'modern']],
-      ['Velvet Cake', 'velvet-cake', 'waffle-house-studio', 'photo-1558303420-f814d8a590f5', 'An elegant cake boutique with velvet-toned detail.', ['cake', 'elegant', 'boutique']],
+    curatedSection('dessert-shop', 'Dessert Shop', 'Artisanal patisserie, single-origin chocolate, craft ice creams, and celebration cakes.', [
+      ['Sugar Atelier', 'sugar-atelier', 'sugar-atelier', 'photo-1569864358642-9d1684040f43', 'Haute French patisserie and luxury dessert boutique with macarons, tarts, and viennoiserie.', ['patisserie', 'luxury', 'macaron', 'french', 'gifting']],
+      ['ChocoCraft', 'chococraft', 'chococraft', 'photo-1511381939415-e44015466834', 'Artisanal bean-to-bar single-origin chocolates, hand-rolled truffles, and copper hampers.', ['chocolate', 'bean-to-bar', 'dark-chocolate', 'truffles', 'artisan']],
+      ['Scoop Society', 'scoop-society', 'scoop-society', 'photo-1501443762994-82bd5dace89a', 'Contemporary small-batch craft ice cream, slow-churned gelatos, and sundae kits.', ['ice-cream', 'gelato', 'sundae', 'craft', 'playful']],
+      ['Crumb & Cream', 'crumb-and-cream', 'crumb-and-cream', 'photo-1578985545062-69928b1d9587', 'Modern celebration cake studio featuring minimalist bento cakes, tiers, and baked cheesecakes.', ['cake', 'celebration', 'wedding', 'bento', 'bakery']],
+      ['Sugar Street', 'sugar-street', 'sugar-street', 'photo-1551024709-8f23befc6f87', 'Energetic colorful dessert bar with 150g NYC stuffed cookies, fudge brownies, and brioche donuts.', ['cookies', 'brownies', 'donuts', 'street', 'vibrant']],
     ]),
-    curatedSection('food-delivery', 'Food Delivery', 'Platform-style delivery templates made for discovery and speed.', [
-      ['FoodFlow', 'foodflow', 'fork-express', 'photo-1526367790999-0150786686a2', 'A modern food marketplace with clear search and discovery moments.', ['platform', 'search', 'modern']],
-      ['DashDish', 'dashdish', 'dash-eats', 'photo-1626082927389-6cd097cdc6ec', 'Fast delivery identity with prominent tracking and offers.', ['fast', 'tracking', 'offers']],
-      ['MealDrop', 'mealdrop', 'local-plate', 'photo-1546069901-ba9599a7e63c', 'A minimal delivery interface centred on useful restaurant choices.', ['minimal', 'local', 'delivery']],
-      ['BiteNow', 'bitenow', 'hungry-hero', 'photo-1565299585323-38d6b0865b47', 'A bold mobile-first ordering experience for immediate cravings.', ['mobile-first', 'bold', 'order']],
-      ['CraveGo', 'cravego', 'zip-meals', 'photo-1555939594-58d7cb561ad1', 'A polished premium marketplace for food and daily convenience.', ['premium', 'marketplace', 'convenience']],
+    curatedSection('food-delivery', 'Food Delivery', 'Express food delivery, late-night kitchens, healthy meal routes, homestyle tiffins, and multi-restaurant marketplaces.', [
+      ['SwiftBite', 'swift-bite', 'swift-bite', 'photo-1626082927389-6cd097cdc6ec', 'Bold, high-speed food delivery engineered for blistering 25-minute drops and hot cravings.', ['fast-delivery', 'burgers', 'wings', 'express', 'combos']],
+      ['Midnight Munch', 'midnight-munch', 'midnight-munch', 'photo-1565299585323-38d6b0865b47', 'Dramatic dark food-delivery brand specializing in late-night cravings, smash burgers, and loaded fries.', ['late-night', 'dark', 'smash-burgers', 'cravings', 'nocturnal']],
+      ['FreshRoute', 'fresh-route', 'fresh-route', 'photo-1546069901-ba9599a7e63c', 'Modern healthy food delivery service focused on salads, nutritious bowls, cold-pressed juices, and meal plans.', ['healthy', 'organic', 'bowls', 'salads', 'wellness']],
+      ['TiffinTrail', 'tiffin-trail', 'tiffin-trail', 'photo-1610057099443-fde8c4d50f91', 'Homestyle Indian meal delivery and daily tiffin service offering regional thalis and lunch subscriptions.', ['indian', 'homestyle', 'thali', 'tiffin', 'desi-ghee']],
+      ['FeastFleet', 'feast-fleet', 'feast-fleet', 'photo-1526367790999-0150786686a2', 'Modern food delivery marketplace where customers can explore multiple restaurants and cuisines in one cart.', ['marketplace', 'multi-brand', 'discovery', 'shared-cart', 'curated']],
     ]),
     curatedSection('bbq-grill', 'Barbecue / Grill Restaurant', 'Fire-forward grill brands with unmistakable heat and hospitality.', [
       ['Smokehouse 77', 'smokehouse-77', 'smokehouse-77', 'photo-1544025162-d76694265947', 'Charcoal, ember orange, and premium smokehouse cuts.', ['bbq', 'charcoal', 'ember']],
@@ -131,6 +131,16 @@ export const templateCategories: TemplateCategory[] = [{
       ['Kebab Kingdom', 'kebab-kingdom', 'kebab-kingdom', 'photo-1529042410759-befb1204b468', 'Warm Middle Eastern-inspired skewer dining with elegant spice notes.', ['kebab', 'warm', 'skewers']],
     ]),
   ],
+},
+
+{
+  id: 'business',
+  name: 'Business & Corporate',
+  slug: 'business',
+  description: 'Corporate firms, technology startups, financial consultancies, and professional agencies.',
+  coverImage: image('photo-1486406146926-c627a92ad1ab'),
+  subsectionCount: 0,
+  subsections: []
 },
 {
   id: 'e-commerce',
@@ -147,6 +157,15 @@ export const templateCategories: TemplateCategory[] = [{
   slug: 'fashion-store',
   description: 'Modern fashion and apparel storefronts.',
   coverImage: image('photo-1483985988355-763728e1935b'),
+  subsectionCount: 0,
+  subsections: []
+},
+{
+  id: 'real-estate',
+  name: 'Real Estate & Property',
+  slug: 'real-estate',
+  description: 'Real estate and property templates.',
+  coverImage: image('photo-1600585154340-be6161a56a0c'),
   subsectionCount: 0,
   subsections: []
 }]
