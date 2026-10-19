@@ -44,6 +44,7 @@ import {
   SensationStorefront,
   GiarosStorefront,
   StepGlamStorefront,
+  ApShoesStorefront,
 } from '../templates/shoes'
 
 export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
@@ -167,6 +168,20 @@ export function getTemplateComponent(input?: MarketplaceTemplate | Template | st
       template.name?.toLowerCase().includes('stepglam'))
   ) {
     return StepGlamStorefront
+  }
+  if (
+    template &&
+    (template.slug === 'shoes-ap-shoes' ||
+      template.id === 'shoes-ap-shoes' ||
+      template.slug === 'ap-shoes' ||
+      template.id === 'ap-shoes' ||
+      template.slug === 'noz' ||
+      template.id === 'noz' ||
+      template.name?.toLowerCase().includes('ap shoes') ||
+      template.name?.toLowerCase().includes('n.o.z') ||
+      template.brandName?.toLowerCase().includes('n.o.z'))
+  ) {
+    return ApShoesStorefront
   }
   if (
     template &&

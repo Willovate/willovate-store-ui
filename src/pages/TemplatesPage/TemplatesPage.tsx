@@ -40,6 +40,7 @@ import {
   SensationStorefront,
   GiarosStorefront,
   StepGlamStorefront,
+  ApShoesStorefront,
 } from '../../templates/shoes'
 import '../../templates/fashion/fashionMobile.css'
 import '../../templates/jewelry/jewelryMobile.css'
@@ -75,9 +76,10 @@ import {
   SENSATION_WORKDO_TEMPLATE,
   GIAROS_TEMPLATE,
   STEPGLAM_TEMPLATE,
+  AP_SHOES_TEMPLATE,
   ALL_SHOES_MARKETPLACE_TEMPLATES,
 } from '../../data/shoesTemplatesData'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront, VtOlightStorefront, SwarnaStorefront, JewStorefront, HappyFeetStorefront, ShoeZoneStorefront, SusieShoesStorefront, FashionFeetStorefront, FootwearWorkDoStorefront, ShoesWorkDoStorefront, SensationStorefront, GiarosStorefront, StepGlamStorefront, HAPPY_FEET_TEMPLATE, SHOE_ZONE_TEMPLATE, SUSIE_SHOES_TEMPLATE, FASHION_FEET_TEMPLATE, FOOTWEAR_WORKDO_TEMPLATE, SHOES_WORKDO_TEMPLATE, SENSATION_WORKDO_TEMPLATE, GIAROS_TEMPLATE, STEPGLAM_TEMPLATE }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront, VtOlightStorefront, SwarnaStorefront, JewStorefront, HappyFeetStorefront, ShoeZoneStorefront, SusieShoesStorefront, FashionFeetStorefront, FootwearWorkDoStorefront, ShoesWorkDoStorefront, SensationStorefront, GiarosStorefront, StepGlamStorefront, ApShoesStorefront, HAPPY_FEET_TEMPLATE, SHOE_ZONE_TEMPLATE, SUSIE_SHOES_TEMPLATE, FASHION_FEET_TEMPLATE, FOOTWEAR_WORKDO_TEMPLATE, SHOES_WORKDO_TEMPLATE, SENSATION_WORKDO_TEMPLATE, GIAROS_TEMPLATE, STEPGLAM_TEMPLATE, AP_SHOES_TEMPLATE }
 
 
 // Re-export domain types
@@ -884,6 +886,31 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   ) {
     return (
       <StepGlamStorefront
+        template={template}
+        device={device === 'fullscreen' ? 'desktop' : device}
+        customAccentColor={customAccentColor || undefined}
+        onUseTemplate={() => {
+          onUseTemplate?.(template.id)
+          onClose?.()
+        }}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'shoes-ap-shoes' ||
+      template.id === 'shoes-ap-shoes' ||
+      template.slug === 'ap-shoes' ||
+      template.id === 'ap-shoes' ||
+      template.slug === 'noz' ||
+      template.id === 'noz' ||
+      template.name?.toLowerCase().includes('ap shoes') ||
+      template.name?.toLowerCase().includes('n.o.z') ||
+      template.brandName?.toLowerCase().includes('n.o.z'))
+  ) {
+    return (
+      <ApShoesStorefront
         template={template}
         device={device === 'fullscreen' ? 'desktop' : device}
         customAccentColor={customAccentColor || undefined}
@@ -1903,6 +1930,15 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
       return STEPGLAM_TEMPLATE
     }
     if (
+      rawHash === 'ap-shoes' ||
+      rawHash === 'shoes-ap-shoes' ||
+      rawHash === 'ap-shoes-store' ||
+      rawHash === 'noz' ||
+      rawHash === 'noz-shoes'
+    ) {
+      return AP_SHOES_TEMPLATE
+    }
+    if (
       rawHash === 'fashion-feet' ||
       rawHash === 'fashionfeet' ||
       rawHash === 'shoes-fashion-feet' ||
@@ -2156,6 +2192,14 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
         rawHash === 'stepglam-shoes'
       ) {
         setPreviewTemplate(STEPGLAM_TEMPLATE)
+      } else if (
+        rawHash === 'ap-shoes' ||
+        rawHash === 'shoes-ap-shoes' ||
+        rawHash === 'ap-shoes-store' ||
+        rawHash === 'noz' ||
+        rawHash === 'noz-shoes'
+      ) {
+        setPreviewTemplate(AP_SHOES_TEMPLATE)
       } else if (
         rawHash === 'fashion-feet' ||
         rawHash === 'fashionfeet' ||

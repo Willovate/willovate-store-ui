@@ -7,4 +7,5 @@ export * from './ShoesWorkDo'
 export * from './Sensation'
 export * from './Giaros'
 export * from './StepGlam'
+export * from './ApShoes'
 

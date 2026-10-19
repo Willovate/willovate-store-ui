@@ -404,6 +404,49 @@ export const STEPGLAM_TEMPLATE: MarketplaceTemplate = {
   layoutType: 'editorial',
 }
 
+export const AP_SHOES_TEMPLATE: MarketplaceTemplate = {
+  id: 'shoes-ap-shoes',
+  slug: 'shoes-ap-shoes',
+  name: 'Ap Shoes Store',
+  businessType: 'shoes',
+  tags: ['Shoes', 'Sneakers', 'Streetstyle', 'Casual', 'Loafers', 'Deck Shoes', 'Skate'],
+  shortDescription:
+    'Clean minimalist streetstyle casual sneaker and boat shoe storefront with dual-arrow slide showcase, cyan circular action triggers, and 6-column comprehensive directory.',
+  thumbnailUrl:
+    'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=80',
+  fullPreviewUrl: 'https://ap-shoes-store.myshopify.com/?pb=0',
+  popularityScore: 97,
+  isActive: true,
+  brandName: 'N.O.Z',
+  headline: 'SELECT YOUR STYLE',
+  subtitle:
+    'STREETSTYLE - High-durability canvas sneakers, deck shoes, and urban lifestyle footwear.',
+  buttonText: 'SELECT STYLE',
+  buttonColor: '#d32f2f',
+  isDark: false,
+  modelImage:
+    'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=1200&q=80',
+  industryCategory: 'Streetstyle Footwear',
+  style: 'clean',
+  catalogSize: 'medium',
+  features: [
+    'Streetstyle Minimalist Canvas and Deck Shoe Hero',
+    '4-Column Red Icon Value Propositions Strip',
+    'Spring & Classical Casual Shoes Collection Banners',
+    'NEW PRODUCTS Grid with 3 Cyan Circular Action Buttons',
+    'Centered Dual Testimonial Quote Section',
+    'About Us, Facebook Card, and Instagram Feed Pre-Footer',
+    'Newsletter Join Strip with Instant Confirmation',
+    'Comprehensive 6-Column Footer Directory',
+    'Quick View Modal and Slide-Over Shopping Bag Drawer',
+  ],
+  badge: 'new',
+  accentColor: '#d32f2f',
+  rating: 4.95,
+  reviewCount: 142,
+  layoutType: 'centered',
+}
+
 export const SHOES_TEMPLATES_CONFIG: Record<string, ShoesTemplateConfig> = {
   'shoes-happy-feet': {
     template: HAPPY_FEET_TEMPLATE,
@@ -714,6 +757,38 @@ export const SHOES_TEMPLATES_CONFIG: Record<string, ShoesTemplateConfig> = {
       },
     ],
   },
+  'shoes-ap-shoes': {
+    template: AP_SHOES_TEMPLATE,
+    announcement: 'FREE SHIPPING ON ALL ORDERS OVER $2000 • 24/7 PREMIUM SUPPORT',
+    navItems: ['Home', 'Collections', 'Products', 'Shortcode', 'Blog', 'Pages'],
+    categories: [
+      { id: 'casual', name: 'Casual Shoes', image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600&q=80', count: '18 Shoes' },
+      { id: 'deck', name: 'Deck & Boat Shoes', image: 'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=600&q=80', count: '14 Shoes' },
+      { id: 'loafers', name: 'Slip-On Loafers', image: 'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?auto=format&fit=crop&w=600&q=80', count: '12 Shoes' },
+    ],
+    featuredProducts: [
+      {
+        id: 'ap-prod-1',
+        name: 'AENEN CONSECUATED SAGITT PLACINI',
+        category: 'Casual Shoes',
+        price: '$17.90',
+        compareAtPrice: '$20.00',
+        image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600&q=80',
+        badge: 'SALE',
+        rating: 5,
+        reviewCount: 34,
+      },
+      {
+        id: 'ap-prod-2',
+        name: 'EROSIL ZNOSAGGED BORTSTEC VEL JUMUFURYLE4212',
+        category: 'Casual Shoes',
+        price: '$41.65',
+        image: 'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=600&q=80',
+        rating: 5,
+        reviewCount: 42,
+      },
+    ],
+  },
 }
 
 export const ALL_SHOES_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
@@ -726,6 +801,7 @@ export const ALL_SHOES_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   SENSATION_WORKDO_TEMPLATE,
   GIAROS_TEMPLATE,
   STEPGLAM_TEMPLATE,
+  AP_SHOES_TEMPLATE,
 ]
 
 

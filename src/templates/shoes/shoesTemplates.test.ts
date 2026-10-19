@@ -10,6 +10,7 @@ import {
   SENSATION_WORKDO_TEMPLATE,
   GIAROS_TEMPLATE,
   STEPGLAM_TEMPLATE,
+  AP_SHOES_TEMPLATE,
 } from '../../data/shoesTemplatesData'
 import { TEMPLATE_REGISTRY, getTemplateComponent } from '../../data/templateRegistry'
 import {
@@ -75,6 +76,12 @@ import {
   STEPGLAM_ACCORDION_ITEMS,
   STEPGLAM_NEW_COLLECTIONS,
 } from './StepGlam/data/stepglamData'
+import {
+  AP_SHOES_HERO_SLIDES,
+  AP_SHOES_VALUE_PROPS,
+  AP_SHOES_NEW_PRODUCTS,
+  AP_SHOES_TESTIMONIALS,
+} from './ApShoes/data/apShoesData'
 import { HappyFeetStorefront } from './HappyFeet'
 import { ShoeZoneStorefront } from './ShoeZone'
 import { SusieShoesStorefront } from './SusieShoes'
@@ -84,11 +91,12 @@ import { ShoesWorkDoStorefront } from './ShoesWorkDo'
 import { SensationStorefront } from './Sensation'
 import { GiarosStorefront } from './Giaros'
 import { StepGlamStorefront } from './StepGlam'
+import { ApShoesStorefront } from './ApShoes'
 
-describe('Shoes Templates Suite (9 Complete Shoe Store Themes)', () => {
+describe('Shoes Templates Suite (10 Complete Shoe Store Themes)', () => {
   describe('Marketplace Configuration', () => {
-    it('has all 9 shoe store templates in ALL_SHOES_MARKETPLACE_TEMPLATES', () => {
-      expect(ALL_SHOES_MARKETPLACE_TEMPLATES).toHaveLength(9)
+    it('has all 10 shoe store templates in ALL_SHOES_MARKETPLACE_TEMPLATES', () => {
+      expect(ALL_SHOES_MARKETPLACE_TEMPLATES).toHaveLength(10)
       const ids = ALL_SHOES_MARKETPLACE_TEMPLATES.map((t) => t.id)
       expect(ids).toContain('shoes-happy-feet')
       expect(ids).toContain('shoes-shoezone')
@@ -99,6 +107,7 @@ describe('Shoes Templates Suite (9 Complete Shoe Store Themes)', () => {
       expect(ids).toContain('shoes-sensation')
       expect(ids).toContain('shoes-giaros')
       expect(ids).toContain('shoes-stepglam')
+      expect(ids).toContain('shoes-ap-shoes')
     })
 
     it('HappyFeet template is configured correctly', () => {
@@ -172,11 +181,19 @@ describe('Shoes Templates Suite (9 Complete Shoe Store Themes)', () => {
       expect(STEPGLAM_TEMPLATE.features).toContain('Direct [6] [7] [8] Size Button Selectors on Product Cards')
     })
 
-    it('registers all 9 shoe templates under shoes category in TEMPLATE_REGISTRY', () => {
+    it('Ap Shoes template is configured correctly with streetstyle sneakers and deck shoes', () => {
+      expect(AP_SHOES_TEMPLATE.id).toBe('shoes-ap-shoes')
+      expect(AP_SHOES_TEMPLATE.name).toBe('Ap Shoes Store')
+      expect(AP_SHOES_TEMPLATE.brandName).toBe('N.O.Z')
+      expect(AP_SHOES_TEMPLATE.accentColor).toBe('#d32f2f')
+      expect(AP_SHOES_TEMPLATE.features).toContain('NEW PRODUCTS Grid with 3 Cyan Circular Action Buttons')
+    })
+
+    it('registers all 10 shoe templates under shoes category in TEMPLATE_REGISTRY', () => {
       const shoesEntry = TEMPLATE_REGISTRY['shoes']
       expect(shoesEntry).toBeDefined()
       expect(shoesEntry.displayName).toBe('Shoes Store')
-      expect(shoesEntry.templates).toHaveLength(9)
+      expect(shoesEntry.templates).toHaveLength(10)
       const slugs = shoesEntry.templates.map((t) => t.slug)
       expect(slugs).toContain('shoes-happy-feet')
       expect(slugs).toContain('shoes-shoezone')
@@ -187,6 +204,7 @@ describe('Shoes Templates Suite (9 Complete Shoe Store Themes)', () => {
       expect(slugs).toContain('shoes-sensation')
       expect(slugs).toContain('shoes-giaros')
       expect(slugs).toContain('shoes-stepglam')
+      expect(slugs).toContain('shoes-ap-shoes')
     })
 
     it('resolves correct storefront components from getTemplateComponent', () => {
@@ -199,6 +217,7 @@ describe('Shoes Templates Suite (9 Complete Shoe Store Themes)', () => {
       expect(getTemplateComponent(SENSATION_WORKDO_TEMPLATE)).toBe(SensationStorefront)
       expect(getTemplateComponent(GIAROS_TEMPLATE)).toBe(GiarosStorefront)
       expect(getTemplateComponent(STEPGLAM_TEMPLATE)).toBe(StepGlamStorefront)
+      expect(getTemplateComponent(AP_SHOES_TEMPLATE)).toBe(ApShoesStorefront)
 
       expect(getTemplateComponent('shoes-happy-feet')).toBe(HappyFeetStorefront)
       expect(getTemplateComponent('shoes-shoezone')).toBe(ShoeZoneStorefront)
@@ -209,6 +228,7 @@ describe('Shoes Templates Suite (9 Complete Shoe Store Themes)', () => {
       expect(getTemplateComponent('shoes-sensation')).toBe(SensationStorefront)
       expect(getTemplateComponent('shoes-giaros')).toBe(GiarosStorefront)
       expect(getTemplateComponent('shoes-stepglam')).toBe(StepGlamStorefront)
+      expect(getTemplateComponent('shoes-ap-shoes')).toBe(ApShoesStorefront)
     })
   })
 
@@ -358,6 +378,38 @@ describe('Shoes Templates Suite (9 Complete Shoe Store Themes)', () => {
         expect(product.image).toMatch(/^https?:\/\//)
         expect(product.availableSizes).toEqual([6, 7, 8])
         expect(product.colors?.length).toBeGreaterThanOrEqual(2)
+      }
+    })
+  })
+
+  describe('Ap Shoes Data Integrity (ap-shoes-store.myshopify.com/?pb=0)', () => {
+    it('has streetstyle hero slides, 4 value propositions, 6 products, and testimonials', () => {
+      expect(AP_SHOES_HERO_SLIDES.length).toBeGreaterThanOrEqual(2)
+      expect(AP_SHOES_HERO_SLIDES[0].subtitle).toBe('STREETSTYLE')
+      expect(AP_SHOES_HERO_SLIDES[0].title).toBe('SELECT YOUR STYLE')
+
+      expect(AP_SHOES_VALUE_PROPS).toHaveLength(4)
+      expect(AP_SHOES_VALUE_PROPS[0].title).toBe('FREE SHIPPING')
+      expect(AP_SHOES_VALUE_PROPS[2].title).toBe('MEMBER DISCOUNT')
+      expect(AP_SHOES_VALUE_PROPS[3].title).toBe('PREMIUM SUPPORT')
+
+      expect(AP_SHOES_NEW_PRODUCTS).toHaveLength(6)
+      expect(AP_SHOES_NEW_PRODUCTS[0].name).toBe('AENEN CONSECUATED SAGITT PLACINI')
+      expect(AP_SHOES_NEW_PRODUCTS[0].badge).toBe('Sale')
+      expect(AP_SHOES_NEW_PRODUCTS[1].name).toBe('EROSIL ZNOSAGGED BORTSTEC VEL JUMUFURYLE4212')
+      expect(AP_SHOES_NEW_PRODUCTS[5].name).toBe('BLACK & DECKER PHADCEY')
+
+      expect(AP_SHOES_TESTIMONIALS).toHaveLength(2)
+      expect(AP_SHOES_TESTIMONIALS[0].author).toBe('KEVIN LEE AT WALL STREET - NEW YORK')
+    })
+
+    it('Ap Shoes products have valid prices, sizes, and images', () => {
+      for (const product of AP_SHOES_NEW_PRODUCTS) {
+        expect(product.id).toBeDefined()
+        expect(product.name).toBeDefined()
+        expect(product.price).toBeGreaterThan(0)
+        expect(product.image).toMatch(/^https?:\/\//)
+        expect(product.availableSizes.length).toBeGreaterThanOrEqual(4)
       }
     })
   })
