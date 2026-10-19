@@ -296,6 +296,11 @@ export function FoodStorefrontCore({
     return <div style={{ padding: '2rem', textAlign: 'center' }}>No theme configuration provided.</div>;
   }
 
+  return <ActiveFoodStorefrontCore theme={activeTheme} />;
+}
+
+function ActiveFoodStorefrontCore({ theme }: { theme: StorefrontThemeConfig }) {
+  const activeTheme = theme;
   const websiteCtx = useWebsiteContext();
   const isEditor = Boolean(websiteCtx?.onSelectElement);
 

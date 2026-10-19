@@ -116,6 +116,10 @@ export default function FastFoodTheme({ theme }: { theme: RestaurantThemePreset 
   if (theme.id === 'drive-and-dine' || theme.id === 'wrap-rush') return <WrapRush />
   if (theme.id === 'quick-bite' || theme.id === 'quick-bowl') return <QuickBowl />
 
+  return <GenericFastFoodTheme theme={theme} />
+}
+
+function GenericFastFoodTheme({ theme }: { theme: RestaurantThemePreset }) {
   const [path, setPath] = useState('/')
   const [mobile, setMobile] = useState(false)
   const [scrolled, setScrolled] = useState(false)

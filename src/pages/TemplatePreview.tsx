@@ -14,6 +14,7 @@ export default function TemplatePreview() {
   const [searchParams] = useSearchParams();
   const isPreviewOnly = searchParams.get('preview') === '1';
   const [device, setDevice] = useState<'desktop' | 'tablet' | 'mobile'>('desktop');
+  const [isCreating, setIsCreating] = useState(false);
 
   const group = registry.find(g => g.id === groupId);
   const category = group?.categories.find(c => c.slug === categorySlug);
@@ -36,7 +37,6 @@ export default function TemplatePreview() {
     return '390px';
   };
 
-  const [isCreating, setIsCreating] = useState(false);
   const handleUseTemplate = async () => {
     setIsCreating(true);
     try {

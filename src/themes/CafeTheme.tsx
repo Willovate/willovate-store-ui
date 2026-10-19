@@ -109,6 +109,10 @@ export default function CafeTheme({ theme }: { theme: RestaurantThemePreset }) {
   if (theme.id === 'latte-lane') return <LatteLane />
   if (theme.id === 'the-daily-grind') return <DailyGrind />
 
+  return <GenericCafeTheme theme={theme} />
+}
+
+function GenericCafeTheme({ theme }: { theme: RestaurantThemePreset }) {
   const [path, setPath] = useState('/')
   const [mobile, setMobile] = useState(false)
   const [scrolled, setScrolled] = useState(false)

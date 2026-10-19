@@ -85,6 +85,10 @@ export default function BakeryTheme({ theme }: { theme: RestaurantThemePreset })
   if (theme.id === 'daily-bread-co' || theme.id === 'sugar-petal') return <SugarPetal />
   if (theme.id === 'golden-loaf' || theme.id === 'rise-and-knead') return <RiseAndKnead />
 
+  return <GenericBakeryTheme theme={theme} />
+}
+
+function GenericBakeryTheme({ theme }: { theme: RestaurantThemePreset }) {
   const [path, setPath] = useState('/')
   const [mobile, setMobile] = useState(false)
   const [scrolled, setScrolled] = useState(false)

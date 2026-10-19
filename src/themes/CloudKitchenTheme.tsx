@@ -139,6 +139,10 @@ export default function CloudKitchenTheme({ theme }: { theme: RestaurantThemePre
   if (theme.id === 'umami-express' || theme.id === 'ghost-chef' || theme.id === 'ghost-kitchen') return <UmamiExpress />
   if (theme.id === 'the-cloud-collective' || theme.id === 'box-and-go' || theme.id === 'kitchen-express') return <TheCloudCollective />
 
+  return <GenericCloudKitchenTheme theme={theme} />
+}
+
+function GenericCloudKitchenTheme({ theme }: { theme: RestaurantThemePreset }) {
   const [path, setPath] = useState('/')
   const [mobile, setMobile] = useState(false)
   const [scrolled, setScrolled] = useState(false)
