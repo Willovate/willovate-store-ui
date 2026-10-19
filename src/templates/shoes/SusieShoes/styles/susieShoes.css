@@ -1,0 +1,1305 @@
+/* =========================================================================
+   SUSIE KIDS SHOES STOREFRONT THEME (kids-outfit.myshopify.com)
+   ========================================================================= */
+
+.susie-root {
+  --susie-pink: #e81a7f;
+  --susie-pink-dark: #c21367;
+  --susie-pink-light: #fdf2f8;
+  --susie-yellow: #f59e0b;
+  --susie-blue: #0284c7;
+  --susie-green: #10b981;
+  --susie-text: #2d3748;
+  --susie-muted: #718096;
+  --susie-border: #f1f5f9;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: var(--susie-text);
+  background-color: #ffffff;
+  line-height: 1.5;
+  box-sizing: border-box;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.susie-root *, .susie-root *::before, .susie-root *::after {
+  box-sizing: inherit;
+}
+
+/* 1. TOP HEADER */
+.susie-top-header {
+  padding: 18px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+}
+
+.susie-logo-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.susie-bunny-avatar {
+  width: 48px;
+  height: 48px;
+  background: #fdf2f8;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  box-shadow: 0 4px 10px rgba(232, 26, 127, 0.15);
+}
+
+.susie-logo-brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.susie-logo-title {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--susie-pink);
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+.susie-logo-subtitle {
+  font-size: 11px;
+  font-weight: 800;
+  color: #0284c7;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.susie-header-right {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.susie-header-action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #4a5568;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 6px;
+}
+
+.susie-header-action:hover {
+  color: var(--susie-pink);
+}
+
+.susie-cart-icon-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fdf2f8;
+  border: 1px solid #fbcfe8;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  color: var(--susie-pink);
+  font-weight: 800;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+
+.susie-cart-icon-btn:hover {
+  background: var(--susie-pink);
+  color: #ffffff;
+}
+
+/* 2. HOT PINK NAVIGATION BAR */
+.susie-nav-bar {
+  background: var(--susie-pink);
+  padding: 0 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(232, 26, 127, 0.2);
+}
+
+.susie-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.susie-nav-link {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 14px 4px;
+  transition: opacity 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.susie-nav-link:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* 3. HERO BANNER */
+.susie-hero-stage {
+  position: relative;
+  background: #fce7f3;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.susie-hero-bg-watermark {
+  position: absolute;
+  bottom: 20px;
+  left: 36px;
+  font-size: 76px;
+  font-weight: 900;
+  color: rgba(232, 26, 127, 0.08);
+  letter-spacing: 4px;
+  user-select: none;
+  pointer-events: none;
+}
+
+.susie-hero-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 40px 36px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: center;
+  gap: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.susie-hero-img-wrap {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(232, 26, 127, 0.15);
+}
+
+.susie-hero-img {
+  width: 100%;
+  max-height: 440px;
+  object-fit: cover;
+  display: block;
+}
+
+.susie-hero-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border: 2px solid #ffffff;
+  border-radius: 24px;
+  padding: 44px;
+  box-shadow: 0 16px 36px rgba(232, 26, 127, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.susie-hero-tag {
+  color: var(--susie-pink);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.susie-hero-title {
+  font-size: 52px;
+  font-weight: 900;
+  color: #ffffff;
+  background: var(--susie-pink);
+  padding: 8px 20px;
+  border-radius: 12px;
+  display: inline-block;
+  width: fit-content;
+  letter-spacing: 1px;
+  margin: 0;
+  box-shadow: 0 6px 18px rgba(232, 26, 127, 0.35);
+}
+
+.susie-hero-cursive {
+  font-family: 'Brush Script MT', 'Dancing Script', cursive, sans-serif;
+  font-size: 38px;
+  color: #db2777;
+  margin: 0;
+}
+
+.susie-hero-desc {
+  font-size: 15px;
+  color: #4b5563;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.susie-hero-btn {
+  display: inline-block;
+  background: #db7093;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 800;
+  padding: 14px 36px;
+  border-radius: 30px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  width: fit-content;
+  margin-top: 10px;
+  box-shadow: 0 8px 20px rgba(219, 112, 147, 0.4);
+  transition: all 0.25s;
+}
+
+.susie-hero-btn:hover {
+  background: var(--susie-pink);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(232, 26, 127, 0.45);
+}
+
+.susie-hero-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--susie-pink);
+  border: 1px solid #fbcfe8;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s;
+}
+
+.susie-hero-arrow:hover {
+  background: var(--susie-pink);
+  color: #ffffff;
+}
+
+.susie-arrow-prev { left: 24px; }
+.susie-arrow-next { right: 24px; }
+
+/* 4. COLLAGE CATEGORIES (5 Colorful Boxes + Center Photo) */
+.susie-collage-section {
+  max-width: 1240px;
+  margin: 50px auto;
+  padding: 0 36px;
+}
+
+.susie-collage-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(2, 230px);
+  gap: 20px;
+}
+
+.susie-collage-box {
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.susie-collage-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+}
+
+.susie-box-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 2;
+}
+
+.susie-box-title {
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  color: #1f2937;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.susie-box-subtitle {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 0 0 8px;
+}
+
+.susie-box-btn {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.9);
+  color: #111827;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 6px 16px;
+  border-radius: 20px;
+  width: fit-content;
+  text-transform: uppercase;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.susie-box-img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+  transition: transform 0.35s ease;
+}
+
+.susie-collage-box:hover .susie-box-img {
+  transform: scale(1.08) rotate(-3deg);
+}
+
+.susie-collage-center {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.susie-center-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.susie-collage-center:hover .susie-center-img {
+  transform: scale(1.05);
+}
+
+/* 5. PROMOTION HURRY BANNER */
+.susie-promo-section {
+  background: linear-gradient(135deg, #ffffff 0%, #fff5f8 100%);
+  border-top: 1px solid #fce7f3;
+  border-bottom: 1px solid #fce7f3;
+  padding: 50px 36px;
+  text-align: center;
+  margin: 40px 0;
+}
+
+.susie-promo-badge {
+  font-size: 14px;
+  letter-spacing: 3px;
+  font-weight: 900;
+  color: #374151;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.susie-promo-badge span {
+  color: #dc2626;
+}
+
+.susie-promo-hurry {
+  font-size: 72px;
+  font-weight: 900;
+  letter-spacing: 8px;
+  color: #b91c1c;
+  margin: 0 0 16px;
+  line-height: 1;
+}
+
+.susie-promo-btn {
+  display: inline-block;
+  background: #111827;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  padding: 12px 36px;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.susie-promo-btn:hover {
+  background: var(--susie-pink);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(232, 26, 127, 0.35);
+}
+
+/* 6. BEST SELLERS SECTION */
+.susie-section-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.susie-section-title {
+  font-size: 28px;
+  font-weight: 900;
+  color: #1f2937;
+  margin: 0 0 8px;
+  letter-spacing: -0.5px;
+}
+
+.susie-section-subtitle {
+  font-size: 14px;
+  color: var(--susie-muted);
+  margin: 0 0 20px;
+}
+
+.susie-tabs-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.susie-tab-btn {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  color: #4b5563;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.susie-tab-btn.active {
+  background: var(--susie-pink);
+  color: #ffffff;
+  border-color: var(--susie-pink);
+  box-shadow: 0 4px 12px rgba(232, 26, 127, 0.25);
+}
+
+.susie-tab-btn:hover:not(.active) {
+  border-color: var(--susie-pink);
+  color: var(--susie-pink);
+}
+
+/* Product Cards Grid */
+.susie-products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 36px;
+}
+
+.susie-product-card {
+  background: #ffffff;
+  border: 1px solid #f1f5f9;
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.susie-product-card:hover {
+  border-color: #fbcfe8;
+  box-shadow: 0 12px 28px rgba(232, 26, 127, 0.1);
+  transform: translateY(-3px);
+}
+
+.susie-prod-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: var(--susie-pink);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  border-radius: 10px;
+  z-index: 2;
+  text-transform: uppercase;
+}
+
+.susie-prod-img-wrap {
+  width: 100%;
+  height: 200px;
+  background: #fdf2f8;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+
+.susie-prod-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.susie-product-card:hover .susie-prod-img {
+  transform: scale(1.08);
+}
+
+.susie-prod-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: #1f2937;
+  margin: 0 0 6px;
+  line-height: 1.35;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.susie-prod-title:hover {
+  color: var(--susie-pink);
+}
+
+.susie-prod-rating {
+  font-size: 12px;
+  color: #f59e0b;
+  margin-bottom: 8px;
+}
+
+.susie-prod-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.susie-price-num {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--susie-pink);
+}
+
+.susie-compare-price {
+  font-size: 12px;
+  color: #9ca3af;
+  text-decoration: line-through;
+  margin-left: 6px;
+}
+
+.susie-add-cart-btn {
+  background: #ffffff;
+  border: 1px solid #fbcfe8;
+  color: var(--susie-pink);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.susie-add-cart-btn:hover {
+  background: var(--susie-pink);
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(232, 26, 127, 0.3);
+}
+
+/* 7. THREE COLORFUL FEATURE CARDS */
+.susie-features-section {
+  max-width: 1240px;
+  margin: 60px auto;
+  padding: 0 36px;
+}
+
+.susie-features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.susie-feature-card {
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.susie-feature-card.yellow { background: #fef08a; }
+.susie-feature-card.blue { background: #bae6fd; }
+.susie-feature-card.green { background: #bbf7d0; }
+
+.susie-feat-img-wrap {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.susie-feat-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.susie-feature-card:hover .susie-feat-img {
+  transform: scale(1.06);
+}
+
+.susie-feat-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.susie-feat-title {
+  font-size: 18px;
+  font-weight: 900;
+  color: #1f2937;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.susie-feat-desc {
+  font-size: 13px;
+  color: #4b5563;
+  margin: 0 0 10px;
+  line-height: 1.5;
+}
+
+.susie-feat-btn {
+  display: inline-block;
+  background: #ffffff;
+  color: #111827;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 10px 22px;
+  border-radius: 20px;
+  text-decoration: none;
+  width: fit-content;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s;
+}
+
+.susie-feat-btn:hover {
+  background: var(--susie-pink);
+  color: #ffffff;
+}
+
+/* 8. TESTIMONIALS */
+.susie-testimonials-section {
+  background: #fff5f8;
+  padding: 60px 36px;
+  margin: 40px 0;
+}
+
+.susie-testimonials-grid {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.susie-test-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 8px 24px rgba(232, 26, 127, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+  align-items: center;
+}
+
+.susie-test-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fbcfe8;
+}
+
+.susie-test-quote {
+  font-size: 14px;
+  color: #4b5563;
+  font-style: italic;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.susie-test-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: #111827;
+  margin: 0;
+}
+
+.susie-test-role {
+  font-size: 12px;
+  color: var(--susie-pink);
+  font-weight: 700;
+}
+
+/* 9. SERVICE BADGES */
+.susie-service-badges-section {
+  max-width: 1240px;
+  margin: 40px auto;
+  padding: 0 36px;
+}
+
+.susie-service-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  padding: 30px 20px;
+  background: #ffffff;
+  border: 1px solid #fbcfe8;
+  border-radius: 18px;
+}
+
+.susie-svc-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.susie-svc-icon {
+  font-size: 28px;
+  width: 48px;
+  height: 48px;
+  background: #fdf2f8;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.susie-svc-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: #1f2937;
+  margin: 0 0 2px;
+}
+
+.susie-svc-desc {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* 10. BLOG SECTION */
+.susie-blog-section {
+  max-width: 1240px;
+  margin: 60px auto;
+  padding: 0 36px;
+}
+
+.susie-blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.susie-blog-card {
+  background: #ffffff;
+  border: 1px solid #f1f5f9;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.susie-blog-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.susie-blog-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.susie-blog-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.susie-blog-date {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--susie-pink);
+  letter-spacing: 1px;
+}
+
+.susie-blog-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #111827;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.susie-blog-excerpt {
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* 11. PLAYFUL FOOTER */
+.susie-footer {
+  background: #2a2d34;
+  color: #e2e8f0;
+  padding: 60px 36px 30px;
+  margin-top: 60px;
+}
+
+.susie-footer-doodle-strip {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 40px;
+}
+
+.susie-footer-newsletter {
+  max-width: 520px;
+  margin: 0 auto 50px;
+  text-align: center;
+}
+
+.susie-footer-newsletter h3 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 6px;
+}
+
+.susie-footer-newsletter p {
+  font-size: 13px;
+  color: #9ca3af;
+  margin: 0 0 18px;
+}
+
+.susie-newsletter-form {
+  display: flex;
+  background: #ffffff;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.susie-news-input {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  font-size: 14px;
+  outline: none;
+  color: #1f2937;
+}
+
+.susie-news-btn {
+  background: var(--susie-pink);
+  color: #ffffff;
+  font-weight: 800;
+  border: none;
+  padding: 12px 26px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.susie-news-btn:hover {
+  background: var(--susie-pink-dark);
+}
+
+.susie-footer-grid {
+  max-width: 1240px;
+  margin: 0 auto 50px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 36px;
+}
+
+.susie-footer-col h4 {
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 16px;
+  padding-bottom: 8px;
+  position: relative;
+}
+
+.susie-footer-col.blue h4::after { content: ''; position: absolute; left: 0; bottom: 0; width: 34px; height: 3px; background: #38bdf8; border-radius: 2px; }
+.susie-footer-col.green h4::after { content: ''; position: absolute; left: 0; bottom: 0; width: 34px; height: 3px; background: #4ade80; border-radius: 2px; }
+.susie-footer-col.magenta h4::after { content: ''; position: absolute; left: 0; bottom: 0; width: 34px; height: 3px; background: #f472b6; border-radius: 2px; }
+.susie-footer-col.yellow h4::after { content: ''; position: absolute; left: 0; bottom: 0; width: 34px; height: 3px; background: #facc15; border-radius: 2px; }
+
+.susie-footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.susie-footer-links a {
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s;
+}
+
+.susie-footer-links a:hover {
+  color: #ffffff;
+}
+
+.susie-footer-bottom {
+  max-width: 1240px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+/* 12. CART DRAWER & QUICK VIEW */
+.susie-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+  animation: szFade 0.2s ease;
+}
+
+.susie-drawer-panel {
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 25px rgba(0, 0, 0, 0.15);
+  animation: szSlideLeft 0.3s ease;
+}
+
+.susie-drawer-head {
+  padding: 20px;
+  border-bottom: 1px solid #fce7f3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.susie-drawer-head h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--susie-pink);
+}
+
+.susie-drawer-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #6b7280;
+}
+
+.susie-drawer-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.susie-drawer-item {
+  display: flex;
+  gap: 14px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #fdf2f8;
+}
+
+.susie-drawer-item-img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.susie-drawer-item-info {
+  flex: 1;
+}
+
+.susie-drawer-item-title {
+  font-size: 13px;
+  font-weight: 800;
+  margin: 0 0 4px;
+}
+
+.susie-drawer-item-price {
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--susie-pink);
+  margin-bottom: 6px;
+}
+
+.susie-drawer-foot {
+  padding: 20px;
+  border-top: 1px solid #fce7f3;
+  background: #fff5f8;
+}
+
+.susie-drawer-subtotal {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 900;
+  margin-bottom: 16px;
+}
+
+.susie-drawer-checkout-btn {
+  width: 100%;
+  background: var(--susie-pink);
+  color: #ffffff;
+  border: none;
+  border-radius: 25px;
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(232, 26, 127, 0.35);
+  transition: all 0.2s;
+}
+
+.susie-drawer-checkout-btn:hover {
+  background: var(--susie-pink-dark);
+}
+
+/* Quick View Modal */
+.susie-qv-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: szFade 0.2s ease;
+}
+
+.susie-qv-modal {
+  background: #ffffff;
+  border-radius: 20px;
+  max-width: 760px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  padding: 32px;
+  box-shadow: 0 20px 40px rgba(232, 26, 127, 0.2);
+}
+
+.susie-qv-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #9ca3af;
+}
+
+.susie-qv-img-wrap {
+  background: #fdf2f8;
+  border-radius: 14px;
+  overflow: hidden;
+  height: 320px;
+}
+
+.susie-qv-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.susie-qv-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.susie-qv-title {
+  font-size: 22px;
+  font-weight: 900;
+  color: #111827;
+  margin: 0 0 10px;
+}
+
+.susie-qv-price {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--susie-pink);
+  margin-bottom: 14px;
+}
+
+.susie-qv-desc {
+  font-size: 14px;
+  color: #4b5563;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.susie-size-pill {
+  border: 1px solid #fbcfe8;
+  background: #fdf2f8;
+  color: #374151;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.susie-size-pill.active {
+  background: var(--susie-pink);
+  color: #ffffff;
+  border-color: var(--susie-pink);
+}
+
+.susie-qv-cart-btn {
+  background: var(--susie-pink);
+  color: #ffffff;
+  border: none;
+  border-radius: 25px;
+  padding: 14px 24px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: auto;
+  box-shadow: 0 6px 18px rgba(232, 26, 127, 0.35);
+  transition: all 0.2s;
+}
+
+.susie-qv-cart-btn:hover {
+  background: var(--susie-pink-dark);
+}
+
+/* Toast */
+.susie-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1f2937;
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  z-index: 2000;
+  animation: szFade 0.2s ease;
+}
+
+/* Responsive Overrides */
+.susie-root.device-mobile .susie-top-header {
+  padding: 14px 16px;
+}
+
+.susie-root.device-mobile .susie-nav-bar {
+  display: none;
+}
+
+.susie-root.device-mobile .susie-hero-container {
+  grid-template-columns: 1fr;
+  padding: 30px 16px;
+}
+
+.susie-root.device-mobile .susie-collage-grid {
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+}
+
+.susie-root.device-mobile .susie-collage-center {
+  grid-column: 1;
+  grid-row: auto;
+  height: 240px;
+}
+
+.susie-root.device-mobile .susie-products-grid {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 0 16px;
+}
+
+.susie-root.device-mobile .susie-features-grid {
+  grid-template-columns: 1fr;
+}
+
+.susie-root.device-mobile .susie-testimonials-grid {
+  grid-template-columns: 1fr;
+}
+
+.susie-root.device-mobile .susie-service-grid {
+  grid-template-columns: 1fr;
+}
+
+.susie-root.device-mobile .susie-blog-grid {
+  grid-template-columns: 1fr;
+}
+
+.susie-root.device-mobile .susie-footer-grid {
+  grid-template-columns: 1fr;
+}
+
+.susie-root.device-mobile .susie-qv-modal {
+  grid-template-columns: 1fr;
+  padding: 20px;
+}

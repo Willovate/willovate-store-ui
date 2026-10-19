@@ -34,14 +34,14 @@ import { ALL_SPORTS_MARKETPLACE_TEMPLATES } from './sportsTemplatesData'
 import { ALL_FASHION_MARKETPLACE_TEMPLATES } from './fashionTemplatesData'
 import { ALL_JEWELRY_MARKETPLACE_TEMPLATES } from './jewelryTemplatesData'
 import { ALL_SHOES_MARKETPLACE_TEMPLATES } from './shoesTemplatesData'
-import { HappyFeetStorefront } from '../templates/shoes'
+import { HappyFeetStorefront, ShoeZoneStorefront, SusieShoesStorefront } from '../templates/shoes'
 
 export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
   'shoes': {
     displayName: 'Shoes Store',
     badgeIcon: '👟',
-    description: 'High-performance athletic sneakers, casual walking trainers, and luxury leather footwear.',
-    filterTags: ['All', 'Sneakers', 'Loafer', 'Sports', 'Formal', 'Boots', 'Athletic', 'Streetwear'],
+    description: 'High-performance athletic sneakers, rugged trail boots, and comfortable children footwear.',
+    filterTags: ['All', 'Sneakers', 'Boots', 'Athletic', 'Running', 'Loafers', 'Oxford', 'Kids', 'Children'],
     templates: ALL_SHOES_MARKETPLACE_TEMPLATES,
   },
   'jewelry-accessories': {
@@ -133,7 +133,34 @@ export function getTemplateCategoryKey(categoryKey: string): string {
   return categoryKey
 }
 
-export function getTemplateComponent(template?: MarketplaceTemplate | Template | null): ComponentType<any> {
+export function getTemplateComponent(input?: MarketplaceTemplate | Template | string | null): ComponentType<any> {
+  const template: (MarketplaceTemplate | Template) | null =
+    typeof input === 'string'
+      ? ({ id: input, slug: input, name: input } as unknown as MarketplaceTemplate)
+      : input || null
+  if (
+    template &&
+    (template.slug === 'shoes-susie' ||
+      template.id === 'shoes-susie' ||
+      template.slug === 'susie' ||
+      template.id === 'susie' ||
+      template.name?.toLowerCase().includes('susie') ||
+      template.industryCategory?.toLowerCase().includes('children footwear') ||
+      template.industryCategory?.toLowerCase().includes('kids'))
+  ) {
+    return SusieShoesStorefront
+  }
+  if (
+    template &&
+    (template.slug === 'shoes-shoezone' ||
+      template.id === 'shoes-shoezone' ||
+      template.slug === 'shoezone' ||
+      template.id === 'shoezone' ||
+      template.name?.toLowerCase().includes('shoezone') ||
+      template.name?.toLowerCase().includes('shoe zone'))
+  ) {
+    return ShoeZoneStorefront
+  }
   if (
     template &&
     (template.slug === 'shoes-happy-feet' ||
@@ -141,7 +168,9 @@ export function getTemplateComponent(template?: MarketplaceTemplate | Template |
       template.slug === 'happy-feet' ||
       template.id === 'happy-feet' ||
       template.name?.toLowerCase().includes('happy feet') ||
-      template.businessType === 'shoes')
+      template.businessType === 'shoes' ||
+      template.industryCategory?.toLowerCase().includes('shoe') ||
+      template.industryCategory?.toLowerCase().includes('footwear'))
   ) {
     return HappyFeetStorefront
   }
@@ -412,6 +441,43 @@ export function getTemplateComponent(template?: MarketplaceTemplate | Template |
   ) {
     return BelleFashionStorefront
   }
+  if (
+    template &&
+    (template.slug === 'shoes-susie' ||
+      template.id === 'shoes-susie' ||
+      template.slug === 'susie-shoes' ||
+      template.id === 'susie-shoes' ||
+      template.name?.toLowerCase().includes('susie'))
+  ) {
+    return SusieShoesStorefront
+  }
+
+  if (
+    template &&
+    (template.slug === 'shoes-shoezone' ||
+      template.id === 'shoes-shoezone' ||
+      template.slug === 'shoezone' ||
+      template.id === 'shoezone' ||
+      template.name?.toLowerCase().includes('shoezone') ||
+      template.name?.toLowerCase().includes('shoe zone'))
+  ) {
+    return ShoeZoneStorefront
+  }
+
+  if (
+    template &&
+    (template.slug === 'shoes-happy-feet' ||
+      template.id === 'shoes-happy-feet' ||
+      template.slug === 'happy-feet' ||
+      template.id === 'happy-feet' ||
+      template.name?.toLowerCase().includes('happy feet') ||
+      template.businessType === 'shoes' ||
+      template.industryCategory?.toLowerCase().includes('shoe') ||
+      template.industryCategory?.toLowerCase().includes('footwear'))
+  ) {
+    return HappyFeetStorefront
+  }
+
   if (template && template.businessType !== 'sporting-goods') {
     return BelleFashionStorefront
   }

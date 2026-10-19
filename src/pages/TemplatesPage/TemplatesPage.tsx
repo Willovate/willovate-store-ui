@@ -30,7 +30,7 @@ import { DiamondWorkDoStorefront } from '../../templates/jewelry/DiamondWorkDo'
 import { VtOlightStorefront } from '../../templates/jewelry/VtOlight'
 import { SwarnaStorefront } from '../../templates/jewelry/Swarna'
 import { JewStorefront } from '../../templates/jewelry/Jew'
-import { HappyFeetStorefront } from '../../templates/shoes'
+import { HappyFeetStorefront, ShoeZoneStorefront, SusieShoesStorefront } from '../../templates/shoes'
 import '../../templates/fashion/fashionMobile.css'
 import '../../templates/jewelry/jewelryMobile.css'
 import {
@@ -57,9 +57,11 @@ import {
 } from '../../data/jewelryTemplatesData'
 import {
   HAPPY_FEET_TEMPLATE,
+  SHOE_ZONE_TEMPLATE,
+  SUSIE_SHOES_TEMPLATE,
   ALL_SHOES_MARKETPLACE_TEMPLATES,
 } from '../../data/shoesTemplatesData'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront, VtOlightStorefront, SwarnaStorefront, JewStorefront, HappyFeetStorefront, HAPPY_FEET_TEMPLATE }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront, VtOlightStorefront, SwarnaStorefront, JewStorefront, HappyFeetStorefront, ShoeZoneStorefront, SusieShoesStorefront, HAPPY_FEET_TEMPLATE, SHOE_ZONE_TEMPLATE, SUSIE_SHOES_TEMPLATE }
 
 
 // Re-export domain types
@@ -795,6 +797,49 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
 
   if (
     template &&
+    (template.slug === 'shoes-susie' ||
+      template.id === 'shoes-susie' ||
+      template.slug === 'susie-shoes' ||
+      template.id === 'susie-shoes' ||
+      template.name?.toLowerCase().includes('susie'))
+  ) {
+    return (
+      <SusieShoesStorefront
+        template={template}
+        device={device === 'fullscreen' ? 'desktop' : device}
+        customAccentColor={customAccentColor || undefined}
+        onUseTemplate={() => {
+          onUseTemplate?.(template.id)
+          onClose?.()
+        }}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'shoes-shoezone' ||
+      template.id === 'shoes-shoezone' ||
+      template.slug === 'shoezone' ||
+      template.id === 'shoezone' ||
+      template.name?.toLowerCase().includes('shoezone') ||
+      template.name?.toLowerCase().includes('shoe zone'))
+  ) {
+    return (
+      <ShoeZoneStorefront
+        template={template}
+        device={device === 'fullscreen' ? 'desktop' : device}
+        customAccentColor={customAccentColor || undefined}
+        onUseTemplate={() => {
+          onUseTemplate?.(template.id)
+          onClose?.()
+        }}
+      />
+    )
+  }
+
+  if (
+    template &&
     (template.slug === 'shoes-happy-feet' ||
       template.id === 'shoes-happy-feet' ||
       template.slug === 'happy-feet' ||
@@ -1351,6 +1396,8 @@ export function TemplateDirectoryPage({
         lower.includes('kicks') ||
         lower.includes('boot') ||
         lower.includes('loafer') ||
+        lower.includes('shoezone') ||
+        lower.includes('susie') ||
         lower.includes('happy feet')
       ) {
         onSelectBusinessType('shoes', 'Shoes Store', customPrompt.trim())
@@ -1603,6 +1650,8 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
     normPrompt.includes('kicks') ||
     normPrompt.includes('boot') ||
     normPrompt.includes('loafer') ||
+    normPrompt.includes('shoezone') ||
+    normPrompt.includes('susie') ||
     normPrompt.includes('happy feet')
 
   const effectiveBusinessType =
@@ -1677,6 +1726,20 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
   const [previewTemplate, setPreviewTemplate] = useState<MarketplaceTemplate | null>(() => {
     const rawHash = typeof window !== 'undefined' ? window.location.hash.toLowerCase().replace(/^#/, '') : ''
     if (
+      rawHash === 'susie' ||
+      rawHash === 'shoes-susie' ||
+      rawHash === 'susie-shoes' ||
+      rawHash === 'kids-shoes'
+    ) {
+      return SUSIE_SHOES_TEMPLATE
+    }
+    if (
+      rawHash === 'shoezone' ||
+      rawHash === 'shoes-shoezone'
+    ) {
+      return SHOE_ZONE_TEMPLATE
+    }
+    if (
       rawHash === 'shoes' ||
       rawHash === 'shoes-store' ||
       rawHash === 'shoes-footwear' ||
@@ -1687,7 +1750,7 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
       rawHash === 'footwear' ||
       rawHash === 'sneakers'
     ) {
-      return ALL_SHOES_MARKETPLACE_TEMPLATES[0] || HAPPY_FEET_TEMPLATE
+      return HAPPY_FEET_TEMPLATE
     }
     if (rawHash === 'sports-storefront' || rawHash === 'velocity' || rawHash === 'sports-preview' || rawHash === 'velocity-preview') {
       return ALL_SPORTS_MARKETPLACE_TEMPLATES[0] || null
@@ -1876,6 +1939,18 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
     const handleHash = () => {
       const rawHash = window.location.hash.toLowerCase().replace(/^#/, '')
       if (
+        rawHash === 'susie' ||
+        rawHash === 'shoes-susie' ||
+        rawHash === 'susie-shoes' ||
+        rawHash === 'kids-shoes'
+      ) {
+        setPreviewTemplate(SUSIE_SHOES_TEMPLATE)
+      } else if (
+        rawHash === 'shoezone' ||
+        rawHash === 'shoes-shoezone'
+      ) {
+        setPreviewTemplate(SHOE_ZONE_TEMPLATE)
+      } else if (
         rawHash === 'shoes' ||
         rawHash === 'shoes-store' ||
         rawHash === 'shoes-footwear' ||
@@ -1886,7 +1961,7 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
         rawHash === 'footwear' ||
         rawHash === 'sneakers'
       ) {
-        setPreviewTemplate(ALL_SHOES_MARKETPLACE_TEMPLATES[0] || HAPPY_FEET_TEMPLATE)
+        setPreviewTemplate(HAPPY_FEET_TEMPLATE)
       } else if (rawHash === 'sports-storefront' || rawHash === 'velocity' || rawHash === 'sports-preview' || rawHash === 'velocity-preview') {
         const match = ALL_SPORTS_MARKETPLACE_TEMPLATES[0]
         if (match) setPreviewTemplate(match)
