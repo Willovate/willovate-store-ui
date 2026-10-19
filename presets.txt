@@ -1,0 +1,240 @@
+  'butter-and-bloom': { 
+    id: 'butter-and-bloom', kind: 'cafe', name: 'Butter & Bloom', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Butter & Bloom.', heroCopy: 'A floral, handcrafted bakehouse in butter yellow and soft green.', 
+    palette: {"ink":"#302a24","paper":"#f4efe5","accent":"#c46d2d","muted":"#786d60","line":"#d8cdbd"}, font: 'script', layout: 'editorial', 
+    images: [image('photo-1509440159596-0249088772ff'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'oven-and-crumb': { 
+    id: 'oven-and-crumb', kind: 'cafe', name: 'Oven & Crumb', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Oven & Crumb.', heroCopy: 'Rustic, grain-led baking with terracotta warmth and wood texture.', 
+    palette: {"ink":"#181411","paper":"#efe4d4","accent":"#e27a35","muted":"#8b7564","line":"#5b4940"}, font: 'rounded', layout: 'bold', 
+    images: [image('photo-1555507036-ab1f4038808a'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'parisian-crust': { 
+    id: 'parisian-crust', kind: 'cafe', name: 'Parisian Crust', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Parisian Crust.', heroCopy: 'A refined French bakery with editorial cream and burgundy details.', 
+    palette: {"ink":"#201b18","paper":"#fdfbf7","accent":"#d9846f","muted":"#927262","line":"#ead4bf"}, font: 'sans', layout: 'rustic', 
+    images: [image('photo-1549931319-a545dcf3bc7b'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'golden-loaf': { 
+    id: 'golden-loaf', kind: 'cafe', name: 'Golden Loaf', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Golden Loaf.', heroCopy: 'Luxury food photography and a dominant artisan-bread hero.', 
+    palette: {"ink":"#302a24","paper":"#f4efe5","accent":"#c46d2d","muted":"#786d60","line":"#d8cdbd"}, font: 'sans', layout: 'romantic', 
+    images: [image('photo-1612201142855-7873bc1661b4'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'daily-bread-co': { 
+    id: 'daily-bread-co', kind: 'cafe', name: 'Daily Bread Co.', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Daily Bread Co..', heroCopy: 'Bright neighbourhood baking with rounded, friendly product cards.', 
+    palette: {"ink":"#201b18","paper":"#fdfbf7","accent":"#d9846f","muted":"#927262","line":"#ead4bf"}, font: 'script', layout: 'rustic', 
+    images: [image('photo-1588195538326-c5b1e9f80a1b'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'street-stack': { 
+    id: 'street-stack', kind: 'cafe', name: 'Street Stack', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Street Stack.', heroCopy: 'An urban street-food system with assertive type and stacked offers.', 
+    palette: {"ink":"#fdfbf7","paper":"#11100f","accent":"#d9b46c","muted":"#b6afa3","line":"#3b3732"}, font: 'serif', layout: 'rustic', 
+    images: [image('photo-1565299624946-b28f40a0ae38'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'crunch-club': { 
+    id: 'crunch-club', kind: 'cafe', name: 'Crunch Club', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Crunch Club.', heroCopy: 'Crisp textures, punchy promotions, and playful menu interactions.', 
+    palette: {"ink":"#302a24","paper":"#f4efe5","accent":"#c46d2d","muted":"#786d60","line":"#d8cdbd"}, font: 'script', layout: 'airy', 
+    images: [image('photo-1571091718767-18b5b1457add'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'burger-district': { 
+    id: 'burger-district', kind: 'cafe', name: 'Burger District', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Burger District.', heroCopy: 'A modern burger destination with a clean, graphic menu rhythm.', 
+    palette: {"ink":"#1e293b","paper":"#f8fafc","accent":"#3b82f6","muted":"#94a3b8","line":"#e2e8f0"}, font: 'serif', layout: 'airy', 
+    images: [image('photo-1550547660-d9450f859349'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'drive-and-dine': { 
+    id: 'drive-and-dine', kind: 'cafe', name: 'Drive & Dine', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Drive & Dine.', heroCopy: 'Retro drive-through energy with vivid calls to action.', 
+    palette: {"ink":"#1e293b","paper":"#f8fafc","accent":"#3b82f6","muted":"#94a3b8","line":"#e2e8f0"}, font: 'script', layout: 'bold', 
+    images: [image('photo-1551782450-a2132b4ba21d'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'quick-bite': { 
+    id: 'quick-bite', kind: 'cafe', name: 'Quick Bite', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Quick Bite.', heroCopy: 'Minimal contemporary fast food with a sharp ordering flow.', 
+    palette: {"ink":"#2d3733","paper":"#f2f5f3","accent":"#4a7c59","muted":"#8da897","line":"#d3dfd7"}, font: 'script', layout: 'bold', 
+    images: [image('photo-1594007654729-407eedc4be65'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'kitchen-x': { 
+    id: 'kitchen-x', kind: 'cafe', name: 'Kitchen X', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Kitchen X.', heroCopy: 'A futuristic dark kitchen with a delivery command-center feel.', 
+    palette: {"ink":"#fdfbf7","paper":"#11100f","accent":"#d9b46c","muted":"#b6afa3","line":"#3b3732"}, font: 'rounded', layout: 'bold', 
+    images: [image('photo-1556911220-bff31c812dba'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'ghost-kitchen': { 
+    id: 'ghost-kitchen', kind: 'cafe', name: 'Ghost Kitchen', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Ghost Kitchen.', heroCopy: 'Editorial delivery design built around virtual restaurant brands.', 
+    palette: {"ink":"#2d3733","paper":"#f2f5f3","accent":"#4a7c59","muted":"#8da897","line":"#d3dfd7"}, font: 'rounded', layout: 'romantic', 
+    images: [image('photo-1556740749-887f6717d7e4'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'urban-batch': { 
+    id: 'urban-batch', kind: 'cafe', name: 'Urban Batch', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Urban Batch.', heroCopy: 'A modern food-production experience for considered everyday meals.', 
+    palette: {"ink":"#f8fafc","paper":"#450a0a","accent":"#ef4444","muted":"#fca5a5","line":"#991b1b"}, font: 'script', layout: 'romantic', 
+    images: [image('photo-1600891964092-4316c2883c44'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'fresh-dispatch': { 
+    id: 'fresh-dispatch', kind: 'cafe', name: 'Fresh Dispatch', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Fresh Dispatch.', heroCopy: 'Fresh ingredients and transparent delivery benefits in a light system.', 
+    palette: {"ink":"#f8fafc","paper":"#450a0a","accent":"#ef4444","muted":"#fca5a5","line":"#991b1b"}, font: 'sans', layout: 'airy', 
+    images: [image('photo-1547592180-85f173990554'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'kitchen-express': { 
+    id: 'kitchen-express', kind: 'cafe', name: 'Kitchen Express', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Kitchen Express.', heroCopy: 'A fast, mobile-minded ordering interface with live delivery cues.', 
+    palette: {"ink":"#201b18","paper":"#fdfbf7","accent":"#d9846f","muted":"#927262","line":"#ead4bf"}, font: 'sans', layout: 'editorial', 
+    images: [image('photo-1528712306091-ed0763094c98'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'napoli-flame': { 
+    id: 'napoli-flame', kind: 'cafe', name: 'Napoli Flame', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Napoli Flame.', heroCopy: 'Traditional Italian warmth, flame, and generous pizza imagery.', 
+    palette: {"ink":"#302a24","paper":"#f4efe5","accent":"#c46d2d","muted":"#786d60","line":"#d8cdbd"}, font: 'serif', layout: 'romantic', 
+    images: [image('photo-1548365328-8b849e6f6b92'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'pizza-district': { 
+    id: 'pizza-district', kind: 'cafe', name: 'Pizza District', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Pizza District.', heroCopy: 'An urban pizza brand driven by high-contrast menu moments.', 
+    palette: {"ink":"#2d3733","paper":"#f2f5f3","accent":"#4a7c59","muted":"#8da897","line":"#d3dfd7"}, font: 'script', layout: 'bold', 
+    images: [image('photo-1513104890138-7c749659a591'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'crust-and-co': { 
+    id: 'crust-and-co', kind: 'cafe', name: 'Crust & Co.', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Crust & Co..', heroCopy: 'Premium contemporary pizza with a refined ingredient story.', 
+    palette: {"ink":"#201b18","paper":"#fdfbf7","accent":"#d9846f","muted":"#927262","line":"#ead4bf"}, font: 'rounded', layout: 'airy', 
+    images: [image('photo-1574071318508-1cdbab80d002'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'woodfire-90': { 
+    id: 'woodfire-90', kind: 'cafe', name: 'Woodfire 90', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Woodfire 90.', heroCopy: 'Artisan wood-fired pizza in an amber, craft-led layout.', 
+    palette: {"ink":"#2d3733","paper":"#f2f5f3","accent":"#4a7c59","muted":"#8da897","line":"#d3dfd7"}, font: 'script', layout: 'minimal', 
+    images: [image('photo-1593560708920-61dd98c46a4e'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'slice-society': { 
+    id: 'slice-society', kind: 'cafe', name: 'Slice Society', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Slice Society.', heroCopy: 'A youthful pizza concept with fast category navigation.', 
+    palette: {"ink":"#2d3733","paper":"#f2f5f3","accent":"#4a7c59","muted":"#8da897","line":"#d3dfd7"}, font: 'serif', layout: 'airy', 
+    images: [image('photo-1604382354936-07c5d9983bd3'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'saffron-house': { 
+    id: 'saffron-house', kind: 'cafe', name: 'Saffron House', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Saffron House.', heroCopy: 'Luxury contemporary Indian dining in saffron and brass.', 
+    palette: {"ink":"#201b18","paper":"#fdfbf7","accent":"#d9846f","muted":"#927262","line":"#ead4bf"}, font: 'rounded', layout: 'editorial', 
+    images: [image('photo-1585937421612-70a008356fbe'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'spice-route': { 
+    id: 'spice-route', kind: 'cafe', name: 'Spice Route', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Spice Route.', heroCopy: 'An editorial journey through regional flavour and spice.', 
+    palette: {"ink":"#fdfbf7","paper":"#11100f","accent":"#d9b46c","muted":"#b6afa3","line":"#3b3732"}, font: 'rounded', layout: 'minimal', 
+    images: [image('photo-1601050690597-df0568f70950'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'masala-modern': { 
+    id: 'masala-modern', kind: 'cafe', name: 'Masala Modern', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Masala Modern.', heroCopy: 'Modern Indian cuisine in a clean, expressive visual system.', 
+    palette: {"ink":"#302a24","paper":"#f4efe5","accent":"#c46d2d","muted":"#786d60","line":"#d8cdbd"}, font: 'sans', layout: 'rustic', 
+    images: [image('photo-1631452180519-c014fe946bc0'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'tandoor-tales': { 
+    id: 'tandoor-tales', kind: 'cafe', name: 'Tandoor Tales', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Tandoor Tales.', heroCopy: 'Fire-led tandoor cooking with smoky, dramatic presentation.', 
+    palette: {"ink":"#201b18","paper":"#fdfbf7","accent":"#d9846f","muted":"#927262","line":"#ead4bf"}, font: 'rounded', layout: 'bold', 
+    images: [image('photo-1567188040759-fb8a883dc6d8'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'royal-thali': { 
+    id: 'royal-thali', kind: 'cafe', name: 'Royal Thali', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Royal Thali.', heroCopy: 'A royal dining experience with restrained textile and brass cues.', 
+    palette: {"ink":"#fdfbf7","paper":"#11100f","accent":"#d9b46c","muted":"#b6afa3","line":"#3b3732"}, font: 'sans', layout: 'bold', 
+    images: [image('photo-1626132647523-66f5bf380027'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'sugar-bloom': { 
+    id: 'sugar-bloom', kind: 'cafe', name: 'Sugar Bloom', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Sugar Bloom.', heroCopy: 'Soft pastels and fruit-forward desserts with a gentle, playful feel.', 
+    palette: {"ink":"#302a24","paper":"#f4efe5","accent":"#c46d2d","muted":"#786d60","line":"#d8cdbd"}, font: 'rounded', layout: 'minimal', 
+    images: [image('photo-1551024506-0bccd828d307'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'sweet-atelier': { 
+    id: 'sweet-atelier', kind: 'cafe', name: 'Sweet Atelier', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Sweet Atelier.', heroCopy: 'A luxurious patisserie with exacting editorial composition.', 
+    palette: {"ink":"#f8fafc","paper":"#450a0a","accent":"#ef4444","muted":"#fca5a5","line":"#991b1b"}, font: 'rounded', layout: 'minimal', 
+    images: [image('photo-1578985545062-69928b1d9587'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'cocoa-room': { 
+    id: 'cocoa-room', kind: 'cafe', name: 'Cocoa Room', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Cocoa Room.', heroCopy: 'Deep chocolate tones and a rich, premium product focus.', 
+    palette: {"ink":"#201b18","paper":"#fdfbf7","accent":"#d9846f","muted":"#927262","line":"#ead4bf"}, font: 'rounded', layout: 'minimal', 
+    images: [image('photo-1511381939415-e44015466834'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'sprinkle-studio': { 
+    id: 'sprinkle-studio', kind: 'cafe', name: 'Sprinkle Studio', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Sprinkle Studio.', heroCopy: 'A playful modern studio for colourful sweet discoveries.', 
+    palette: {"ink":"#fdfbf7","paper":"#11100f","accent":"#d9b46c","muted":"#b6afa3","line":"#3b3732"}, font: 'rounded', layout: 'minimal', 
+    images: [image('photo-1563805042-7684c019e1cb'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'velvet-cake': { 
+    id: 'velvet-cake', kind: 'cafe', name: 'Velvet Cake', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Velvet Cake.', heroCopy: 'An elegant cake boutique with velvet-toned detail.', 
+    palette: {"ink":"#fdfbf7","paper":"#11100f","accent":"#d9b46c","muted":"#b6afa3","line":"#3b3732"}, font: 'rounded', layout: 'romantic', 
+    images: [image('photo-1558303420-f814d8a590f5'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'foodflow': { 
+    id: 'foodflow', kind: 'cafe', name: 'FoodFlow', eyebrow: 'Taste the difference', heroTitle: 'Welcome to FoodFlow.', heroCopy: 'A modern food marketplace with clear search and discovery moments.', 
+    palette: {"ink":"#2d3733","paper":"#f2f5f3","accent":"#4a7c59","muted":"#8da897","line":"#d3dfd7"}, font: 'script', layout: 'romantic', 
+    images: [image('photo-1526367790999-0150786686a2'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'dashdish': { 
+    id: 'dashdish', kind: 'cafe', name: 'DashDish', eyebrow: 'Taste the difference', heroTitle: 'Welcome to DashDish.', heroCopy: 'Fast delivery identity with prominent tracking and offers.', 
+    palette: {"ink":"#181411","paper":"#efe4d4","accent":"#e27a35","muted":"#8b7564","line":"#5b4940"}, font: 'script', layout: 'rustic', 
+    images: [image('photo-1569058242253-92a9c755a0ec'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'mealdrop': { 
+    id: 'mealdrop', kind: 'cafe', name: 'MealDrop', eyebrow: 'Taste the difference', heroTitle: 'Welcome to MealDrop.', heroCopy: 'A minimal delivery interface centred on useful restaurant choices.', 
+    palette: {"ink":"#1e293b","paper":"#f8fafc","accent":"#3b82f6","muted":"#94a3b8","line":"#e2e8f0"}, font: 'rounded', layout: 'rustic', 
+    images: [image('photo-1546069901-ba9599a7e63c'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'bitenow': { 
+    id: 'bitenow', kind: 'cafe', name: 'BiteNow', eyebrow: 'Taste the difference', heroTitle: 'Welcome to BiteNow.', heroCopy: 'A bold mobile-first ordering experience for immediate cravings.', 
+    palette: {"ink":"#181411","paper":"#efe4d4","accent":"#e27a35","muted":"#8b7564","line":"#5b4940"}, font: 'script', layout: 'bold', 
+    images: [image('photo-1515003197210-e0cd71810b5f'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'cravego': { 
+    id: 'cravego', kind: 'cafe', name: 'CraveGo', eyebrow: 'Taste the difference', heroTitle: 'Welcome to CraveGo.', heroCopy: 'A polished premium marketplace for food and daily convenience.', 
+    palette: {"ink":"#2d3733","paper":"#f2f5f3","accent":"#4a7c59","muted":"#8da897","line":"#d3dfd7"}, font: 'script', layout: 'romantic', 
+    images: [image('photo-1540189549336-e6e99c3679fe'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'smokehouse-77': { 
+    id: 'smokehouse-77', kind: 'cafe', name: 'Smokehouse 77', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Smokehouse 77.', heroCopy: 'Charcoal, ember orange, and premium smokehouse cuts.', 
+    palette: {"ink":"#1e293b","paper":"#f8fafc","accent":"#3b82f6","muted":"#94a3b8","line":"#e2e8f0"}, font: 'rounded', layout: 'editorial', 
+    images: [image('photo-1529193591184-b1d58069ecdd'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'grill-republic': { 
+    id: 'grill-republic', kind: 'cafe', name: 'Grill Republic', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Grill Republic.', heroCopy: 'Industrial steel, black, and red with a strong menu grid.', 
+    palette: {"ink":"#fdfbf7","paper":"#11100f","accent":"#d9b46c","muted":"#b6afa3","line":"#3b3732"}, font: 'sans', layout: 'editorial', 
+    images: [image('photo-1558030006-450675393462'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'fire-and-rib': { 
+    id: 'fire-and-rib', kind: 'cafe', name: 'Fire & Rib', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Fire & Rib.', heroCopy: 'Rustic fire and smoke with hand-crafted, premium barbecue cues.', 
+    palette: {"ink":"#302a24","paper":"#f4efe5","accent":"#c46d2d","muted":"#786d60","line":"#d8cdbd"}, font: 'script', layout: 'minimal', 
+    images: [image('photo-1544025162-d76694265947'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'backyard-barbeque': { 
+    id: 'backyard-barbeque', kind: 'cafe', name: 'Backyard Barbeque', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Backyard Barbeque.', heroCopy: 'A warm outdoor family barbecue with easy combo choices.', 
+    palette: {"ink":"#f8fafc","paper":"#450a0a","accent":"#ef4444","muted":"#fca5a5","line":"#991b1b"}, font: 'rounded', layout: 'rustic', 
+    images: [image('photo-1555939594-58d7cb561ad1'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },
+  'kebab-kingdom': { 
+    id: 'kebab-kingdom', kind: 'cafe', name: 'Kebab Kingdom', eyebrow: 'Taste the difference', heroTitle: 'Welcome to Kebab Kingdom.', heroCopy: 'Warm Middle Eastern-inspired skewer dining with elegant spice notes.', 
+    palette: {"ink":"#2d3733","paper":"#f2f5f3","accent":"#4a7c59","muted":"#8da897","line":"#d3dfd7"}, font: 'sans', layout: 'rustic', 
+    images: [image('photo-1529042410759-befb1204b468'), image('1495474472287-4d71bcdd2085'), image('1442512595331-e89e73853f31'), image('1501339847302-ac426a4a7cbb')], 
+    menu: ['Signature Item', 'Chef\'s Special', 'Classic Favorite'] 
+  },

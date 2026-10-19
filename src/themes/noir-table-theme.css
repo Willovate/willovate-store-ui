@@ -1,0 +1,53 @@
+/* Maintain readable contrast when the fine-dining layout uses Noir Table's dark paper. */
+.fine-theme--dark {
+  color: #f7f3ed;
+}
+
+.fine-theme--dark .fd-tabs .active,
+.fine-theme--dark .fd-testimonial,
+.fine-theme--dark .fd-footer,
+.fine-theme--dark .fd-testimonial button {
+  color: #f7f3ed;
+}
+
+.fine-theme--dark .fd-dish-hover button {
+  background: #f7f3ed;
+  color: #11100f;
+}
+
+.fine-theme--dark .fd-newsletter input {
+  border-color: #f7f3ed;
+  color: #f7f3ed;
+}
+
+.fine-theme--dark .fd-newsletter form button {
+  color: #f7f3ed;
+}
+
+.fine-theme--dark .fd-hamburger i {
+  background: #f7f3ed;
+}
+
+/* Form controls do not consistently inherit text color from a dark modal. */
+.fine-theme--dark .fd-modal-panel input:not([type='radio']),
+.fine-theme--dark .fd-modal-panel select {
+  color: #f7f3ed;
+  color-scheme: dark;
+}
+
+.fine-theme--dark .fd-modal-panel option {
+  background: #181716;
+  color: #f7f3ed;
+}
+
+/* Keep the chef headline inside its column in tablet-sized previews. */
+@media (min-width: 761px) and (max-width: 900px) {
+  .fine-theme--dark .fd-chef-copy {
+    padding: 9%;
+  }
+
+  .fine-theme--dark .fd-chef-copy h2 {
+    font-size: clamp(38px, 5vw, 54px);
+    overflow-wrap: anywhere;
+  }
+}

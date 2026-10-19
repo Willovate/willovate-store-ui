@@ -1,0 +1,1039 @@
+/* ==========================================================================
+   WILLOVATE STORE EDITOR — MASTER RESPONSIVE PREVIEW SYSTEM
+   Desktop (1200-1440px), Tablet (768px), and Mobile (390px)
+   Supports Container Queries (@container) and Preview Class Selectors
+   ========================================================================== */
+
+/* ── 1. CONTAINER QUERY CONTEXT & BOX-SIZING RESET ── */
+.ws-canvas,
+.storefront-frame-container {
+  container-type: inline-size;
+  container-name: storefront;
+  box-sizing: border-box;
+}
+
+.ws-canvas,
+.ws-canvas *,
+.ws-canvas *::before,
+.ws-canvas *::after,
+[data-viewport],
+[data-viewport] *,
+[data-viewport] *::before,
+[data-viewport] *::after {
+  box-sizing: border-box;
+}
+
+/* Base image & media safety rules to prevent any element from exceeding its container */
+.ws-canvas img,
+.ws-canvas video,
+.ws-canvas svg,
+[data-viewport] img,
+[data-viewport] video,
+[data-viewport] svg {
+  max-width: 100%;
+}
+
+.ws-canvas img[style*="object-fit: cover"],
+[data-viewport] img[style*="object-fit: cover"] {
+  height: 100%;
+}
+
+/* Ensure long text wraps naturally without breaking viewport */
+.ws-canvas h1,
+.ws-canvas h2,
+.ws-canvas h3,
+.ws-canvas h4,
+.ws-canvas p,
+.ws-canvas span,
+.ws-canvas a,
+[data-viewport] h1,
+[data-viewport] h2,
+[data-viewport] h3,
+[data-viewport] h4,
+[data-viewport] p,
+[data-viewport] span,
+[data-viewport] a {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+/* Mobile camera notch safely click-through */
+.ws-canvas-mobile::before {
+  pointer-events: none !important;
+}
+
+
+/* ==========================================================================
+   ── 1B. DESKTOP PREVIEW RULES (Width: >= 841px / default 1200px)
+   Applies to .ws-canvas-desktop, [data-viewport="desktop"]
+   ========================================================================== */
+
+.ws-canvas-desktop {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box !important;
+  background-color: transparent !important;
+}
+
+.storefront-frame-container .ws-canvas-desktop {
+  width: 1200px !important;
+  max-width: none !important;
+  border-radius: 6px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.ws-canvas-desktop .pe-template,
+.ws-canvas-desktop .pe-universal-editor-bridge,
+[data-viewport="desktop"] .pe-template,
+[data-viewport="desktop"] .pe-universal-editor-bridge {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Brand Name — Always single line, never wrap or collapse */
+.rt-brand,
+.fs-brand-name,
+.fd-brand,
+.cafe-brand,
+.mr-brand,
+.rws-brand {
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
+
+/* Desktop Navigation Links — ALWAYS Visible on Desktop */
+.ws-canvas-desktop .fs-desktop-nav,
+[data-viewport="desktop"] .fs-desktop-nav,
+.ws-canvas-desktop .rt-desktop-nav,
+[data-viewport="desktop"] .rt-desktop-nav,
+.ws-canvas-desktop .fd-nav nav,
+[data-viewport="desktop"] .fd-nav nav,
+.ws-canvas-desktop .cafe-header nav,
+[data-viewport="desktop"] .cafe-header nav,
+.ws-canvas-desktop .mr-header nav,
+[data-viewport="desktop"] .mr-header nav,
+.ws-canvas-desktop .cc-nav nav,
+[data-viewport="desktop"] .cc-nav nav,
+.ws-canvas-desktop .ll-nav nav,
+[data-viewport="desktop"] .ll-nav nav,
+.ws-canvas-desktop .dg-nav nav,
+[data-viewport="desktop"] .dg-nav nav,
+.ws-canvas-desktop .rws-nav nav,
+[data-viewport="desktop"] .rws-nav nav,
+.ws-canvas-desktop .pe-nav,
+[data-viewport="desktop"] .pe-nav,
+.ws-canvas-desktop [class*="desktop-nav"],
+[data-viewport="desktop"] [class*="desktop-nav"] {
+  display: flex !important;
+  align-items: center !important;
+  gap: clamp(0.75rem, 1.25cqw, 1.5rem) !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Desktop Hamburger Toggle — ALWAYS Hidden on Desktop */
+.ws-canvas-desktop .fs-mobile-toggle,
+[data-viewport="desktop"] .fs-mobile-toggle,
+.ws-canvas-desktop .rt-mobile-toggle,
+[data-viewport="desktop"] .rt-mobile-toggle,
+.ws-canvas-desktop .fd-hamburger,
+[data-viewport="desktop"] .fd-hamburger,
+.ws-canvas-desktop .cafe-toggle,
+[data-viewport="desktop"] .cafe-toggle,
+.ws-canvas-desktop .rws-mobile,
+[data-viewport="desktop"] .rws-mobile,
+.ws-canvas-desktop .rws-mobile-links,
+[data-viewport="desktop"] .rws-mobile-links,
+.ws-canvas-desktop .rt-mobile,
+[data-viewport="desktop"] .rt-mobile,
+.ws-canvas-desktop [class*="mobile-toggle"],
+[data-viewport="desktop"] [class*="mobile-toggle"] {
+  display: none !important;
+}
+
+.ws-canvas-desktop .rws-order,
+[data-viewport="desktop"] .rws-order {
+  display: inline-block !important;
+}
+
+.ws-canvas-desktop .fs-btn-label-desktop,
+[data-viewport="desktop"] .fs-btn-label-desktop {
+  display: inline !important;
+}
+
+/* Desktop Hero */
+.ws-canvas-desktop .fs-hero,
+.ws-canvas-desktop .rt-hero,
+.ws-canvas-desktop .fd-hero,
+.ws-canvas-desktop .cafe-hero,
+.ws-canvas-desktop .mr-hero,
+.ws-canvas-desktop .rws-hero,
+.ws-canvas-desktop [class*="hero"],
+[data-viewport="desktop"] .fs-hero,
+[data-viewport="desktop"] .rt-hero,
+[data-viewport="desktop"] [class*="hero"] {
+  min-height: 580px !important;
+  padding: 5rem 3rem !important;
+}
+
+.ws-canvas-desktop .fs-hero-actions,
+.ws-canvas-desktop .rt-hero-actions,
+[data-viewport="desktop"] .fs-hero-actions,
+[data-viewport="desktop"] .rt-hero-actions {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 1.25rem !important;
+  width: auto !important;
+}
+
+.ws-canvas-desktop .fs-hero-actions button,
+.ws-canvas-desktop .fs-hero-actions a,
+.ws-canvas-desktop .rt-hero-actions button,
+.ws-canvas-desktop .rt-hero-actions a,
+[data-viewport="desktop"] .fs-hero-actions button,
+[data-viewport="desktop"] .fs-hero-actions a {
+  width: auto !important;
+}
+
+/* Desktop Product Grids — Multi-column layout */
+.ws-canvas-desktop .fs-product-grid,
+.ws-canvas-desktop .rt-product-grid,
+.ws-canvas-desktop .rt-dish-grid,
+.ws-canvas-desktop .fd-dishes,
+.ws-canvas-desktop .fd-grid,
+.ws-canvas-desktop .products,
+.ws-canvas-desktop .rws-featured>div,
+.ws-canvas-desktop .rws-menu-list,
+.ws-canvas-desktop .mr-menu-grid,
+.ws-canvas-desktop .cafe-products,
+.ws-canvas-desktop [class*="product-grid"],
+.ws-canvas-desktop [class*="menu-grid"],
+[data-viewport="desktop"] .fs-product-grid,
+[data-viewport="desktop"] .rt-product-grid,
+[data-viewport="desktop"] .rt-dish-grid,
+[data-viewport="desktop"] .fd-dishes,
+[data-viewport="desktop"] .products {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)) !important;
+  gap: 1.75rem !important;
+}
+
+/* Desktop Feature Grids */
+.ws-canvas-desktop .fs-features-grid,
+.ws-canvas-desktop .rws-metrics,
+[data-viewport="desktop"] .fs-features-grid,
+[data-viewport="desktop"] .rws-metrics {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 1.5rem !important;
+}
+
+/* Desktop Split & Story Sections */
+.ws-canvas-desktop .fs-story-grid,
+.ws-canvas-desktop .rt-story-grid,
+.ws-canvas-desktop .rt-visit-grid,
+.ws-canvas-desktop .rt-split,
+.ws-canvas-desktop .fd-split,
+.ws-canvas-desktop .fd-chef,
+.ws-canvas-desktop .rws-story,
+.ws-canvas-desktop .rws-promo,
+.ws-canvas-desktop .rws-visit,
+.ws-canvas-desktop .mr-coffee,
+.ws-canvas-desktop .mr-story,
+.ws-canvas-desktop .mr-visit,
+.ws-canvas-desktop .cafe-story,
+.ws-canvas-desktop .cafe-visit,
+.ws-canvas-desktop [class*="split"],
+[data-viewport="desktop"] .fs-story-grid,
+[data-viewport="desktop"] .rt-story-grid,
+[data-viewport="desktop"] .rt-visit-grid,
+[data-viewport="desktop"] .rt-split {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 3.5rem !important;
+}
+
+/* Desktop Atmosphere Gallery Grids */
+.ws-canvas-desktop .fs-gallery-grid,
+.ws-canvas-desktop .rt-gallery-grid,
+.ws-canvas-desktop .fd-gallery-grid,
+.ws-canvas-desktop .cafe-gallery-grid,
+.ws-canvas-desktop [class*="gallery-grid"],
+[data-viewport="desktop"] .fs-gallery-grid,
+[data-viewport="desktop"] .rt-gallery-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  grid-auto-rows: 220px !important;
+  gap: 1.25rem !important;
+}
+
+/* Desktop Footers — 4 Columns */
+.ws-canvas-desktop .fs-footer-grid,
+.ws-canvas-desktop .rc-footer-grid,
+.ws-canvas-desktop .rt-footer,
+.ws-canvas-desktop .fd-footer,
+[data-viewport="desktop"] .fs-footer-grid,
+[data-viewport="desktop"] .rc-footer-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 2.5rem !important;
+}
+
+
+/* ==========================================================================
+   ── 2. TABLET PREVIEW RULES (Width: 501px – 840px)
+   Applies to .ws-canvas-tablet, [data-viewport="tablet"], and @container (min-width: 501px) and (max-width: 840px)
+   ========================================================================== */
+
+/* Tablet Canvas Device Frame Dimensions */
+.ws-canvas-tablet {
+  width: 768px !important;
+  max-width: 768px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
+/* Navigation & Header */
+.ws-canvas-tablet .fs-desktop-nav,
+[data-viewport="tablet"] .fs-desktop-nav {
+  gap: 0.85rem !important;
+}
+
+.ws-canvas-tablet .fs-desktop-nav button,
+[data-viewport="tablet"] .fs-desktop-nav button {
+  font-size: 0.76rem !important;
+  letter-spacing: 0.05em !important;
+  padding: 0.35rem 0 !important;
+}
+
+.ws-canvas-tablet .rt-desktop-nav,
+[data-viewport="tablet"] .rt-desktop-nav {
+  display: flex !important;
+  gap: 0.85rem !important;
+}
+
+.ws-canvas-tablet .rt-desktop-nav a,
+[data-viewport="tablet"] .rt-desktop-nav a {
+  font-size: 0.76rem !important;
+  letter-spacing: 0.05em !important;
+  padding: 0.35rem 0 !important;
+}
+
+.ws-canvas-tablet .rt-mobile-toggle,
+[data-viewport="tablet"] .rt-mobile-toggle {
+  display: none !important;
+}
+
+.ws-canvas-tablet .fs-mobile-toggle,
+[data-viewport="tablet"] .fs-mobile-toggle {
+  display: none !important;
+}
+
+/* Compact action buttons on tablet to avoid any header collision */
+.ws-canvas-tablet .fs-header-actions button,
+[data-viewport="tablet"] .fs-header-actions button,
+.ws-canvas-tablet .rt-desktop-nav~div button,
+[data-viewport="tablet"] .rt-desktop-nav~div button {
+  padding: 0.5rem 0.9rem !important;
+  font-size: 0.8rem !important;
+}
+
+/* Hero Sections */
+.ws-canvas-tablet .fs-hero,
+[data-viewport="tablet"] .fs-hero,
+.ws-canvas-tablet .rt-hero,
+[data-viewport="tablet"] .rt-hero,
+.ws-canvas-tablet .fd-hero,
+[data-viewport="tablet"] .fd-hero,
+.ws-canvas-tablet .rws-hero,
+[data-viewport="tablet"] .rws-hero,
+.ws-canvas-tablet [class*="hero"] {
+  min-height: 520px !important;
+  padding: 4rem 2rem !important;
+}
+
+.ws-canvas-tablet h1,
+.ws-canvas-tablet .rt-hero h1,
+.ws-canvas-tablet .fd-hero h1,
+.ws-canvas-tablet .rws-hero h1,
+.ws-canvas-tablet [class*="hero"] h1,
+[data-viewport="tablet"] h1,
+[data-viewport="tablet"] [class*="hero"] h1 {
+  font-size: clamp(2.1rem, 5cqw, 3rem) !important;
+  line-height: 1.12 !important;
+}
+
+.ws-canvas-tablet h2,
+.ws-canvas-tablet [class*="heading"] h2,
+[data-viewport="tablet"] h2 {
+  font-size: clamp(1.8rem, 4.2cqw, 2.35rem) !important;
+}
+
+/* Product & Menu Grids — 2 Columns on Tablet */
+.ws-canvas-tablet .fs-product-grid,
+.ws-canvas-tablet .rt-product-grid,
+.ws-canvas-tablet .rt-dish-grid,
+.ws-canvas-tablet .fd-dishes,
+.ws-canvas-tablet .fd-grid,
+.ws-canvas-tablet .products,
+.ws-canvas-tablet .rws-featured>div,
+.ws-canvas-tablet .rws-menu-list,
+.ws-canvas-tablet .mr-menu-grid,
+.ws-canvas-tablet .cafe-products,
+.ws-canvas-tablet [class*="product-grid"],
+.ws-canvas-tablet [class*="menu-grid"],
+[data-viewport="tablet"] .fs-product-grid,
+[data-viewport="tablet"] .rt-product-grid,
+[data-viewport="tablet"] .rt-dish-grid,
+[data-viewport="tablet"] .fd-dishes,
+[data-viewport="tablet"] .products,
+[data-viewport="tablet"] [class*="product-grid"],
+[data-viewport="tablet"] [class*="menu-grid"] {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 1.25rem !important;
+}
+
+/* Feature Strips & Proof Badges */
+.ws-canvas-tablet .fs-features-grid,
+[data-viewport="tablet"] .fs-features-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 1.25rem !important;
+}
+
+/* Split & Story Sections — Balanced 2 Columns with proportional padding */
+.ws-canvas-tablet .fs-story-section,
+[data-viewport="tablet"] .fs-story-section {
+  padding: 4rem 2rem !important;
+}
+
+.ws-canvas-tablet .fs-story-grid,
+[data-viewport="tablet"] .fs-story-grid,
+.ws-canvas-tablet .rt-story-grid,
+[data-viewport="tablet"] .rt-story-grid,
+.ws-canvas-tablet .rt-visit-grid,
+[data-viewport="tablet"] .rt-visit-grid,
+.ws-canvas-tablet .rt-split,
+.ws-canvas-tablet .fd-split,
+.ws-canvas-tablet .fd-chef,
+.ws-canvas-tablet .rws-story,
+.ws-canvas-tablet .mr-coffee,
+.ws-canvas-tablet .cafe-story,
+.ws-canvas-tablet [class*="split"] {
+  grid-template-columns: 1fr 1fr !important;
+  gap: 2rem !important;
+}
+
+.ws-canvas-tablet .fs-story-quote-badge,
+[data-viewport="tablet"] .fs-story-quote-badge {
+  right: 0 !important;
+  bottom: -12px !important;
+  max-width: 280px !important;
+  padding: 1.15rem !important;
+}
+
+/* Atmosphere Gallery Grids — 3 Columns on Tablet */
+.ws-canvas-tablet .fs-gallery-grid,
+.ws-canvas-tablet .rt-gallery-grid,
+.ws-canvas-tablet .fd-gallery-grid,
+.ws-canvas-tablet .cafe-gallery-grid,
+.ws-canvas-tablet .rws-gallery>div,
+[data-viewport="tablet"] .fs-gallery-grid,
+[data-viewport="tablet"] .rt-gallery-grid,
+[data-viewport="tablet"] .fd-gallery-grid,
+[data-viewport="tablet"] [class*="gallery-grid"] {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  grid-auto-rows: 170px !important;
+  gap: 1rem !important;
+}
+
+/* Footers — 2 Columns on Tablet */
+.ws-canvas-tablet .fs-footer,
+[data-viewport="tablet"] .fs-footer,
+.ws-canvas-tablet .rt-footer,
+.ws-canvas-tablet .fd-footer,
+.ws-canvas-tablet .rws-footer,
+.ws-canvas-tablet .mr-footer,
+.ws-canvas-tablet footer {
+  padding: 3.5rem 2rem 2rem !important;
+}
+
+.ws-canvas-tablet .fs-footer-grid,
+.ws-canvas-tablet .rc-footer-grid,
+.ws-canvas-tablet .rt-footer,
+.ws-canvas-tablet .fd-footer,
+[data-viewport="tablet"] .fs-footer-grid,
+[data-viewport="tablet"] .rc-footer-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 2rem !important;
+}
+
+
+/* ==========================================================================
+   ── 3. MOBILE PREVIEW RULES (Width: <= 500px)
+   Applies to .ws-canvas-mobile, [data-viewport="mobile"], and @container (max-width: 500px)
+   ========================================================================== */
+
+/* Mobile Canvas Device Frame Dimensions */
+.ws-canvas-mobile {
+  width: 390px !important;
+  max-width: 390px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
+/* Universal Mobile Overflow Guard — Applied to Content INSIDE Mobile Viewport */
+.ws-canvas-mobile > *,
+.ws-canvas-mobile .pe-template,
+.ws-canvas-mobile .pe-universal-editor-bridge,
+.ws-canvas-mobile .fine-theme,
+.ws-canvas-mobile .restaurant-theme,
+.ws-canvas-mobile .cafe-theme,
+.ws-canvas-mobile .morning-ritual,
+.ws-canvas-mobile .corner-site,
+.ws-canvas-mobile .ll-site,
+.ws-canvas-mobile .dg-site,
+.ws-canvas-mobile .rws,
+[data-viewport="mobile"] .pe-template,
+[data-viewport="mobile"] .pe-universal-editor-bridge,
+[data-viewport="mobile"] .fine-theme,
+[data-viewport="mobile"] .restaurant-theme,
+[data-viewport="mobile"] .cafe-theme,
+[data-viewport="mobile"] .morning-ritual,
+[data-viewport="mobile"] .corner-site,
+[data-viewport="mobile"] .ll-site,
+[data-viewport="mobile"] .dg-site,
+[data-viewport="mobile"] .rws {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow-x: hidden !important;
+}
+
+/* Navigation: Hide Desktop Nav Links & Display Mobile Hamburger */
+.ws-canvas-mobile .fs-desktop-nav,
+[data-viewport="mobile"] .fs-desktop-nav,
+.ws-canvas-mobile .rt-desktop-nav,
+[data-viewport="mobile"] .rt-desktop-nav,
+.ws-canvas-mobile .fd-nav nav,
+[data-viewport="mobile"] .fd-nav nav,
+.ws-canvas-mobile .cafe-header nav,
+[data-viewport="mobile"] .cafe-header nav,
+.ws-canvas-mobile .mr-header nav,
+[data-viewport="mobile"] .mr-header nav,
+.ws-canvas-mobile .cc-nav nav,
+[data-viewport="mobile"] .cc-nav nav,
+.ws-canvas-mobile .ll-nav nav,
+[data-viewport="mobile"] .ll-nav nav,
+.ws-canvas-mobile .dg-nav nav,
+[data-viewport="mobile"] .dg-nav nav,
+.ws-canvas-mobile .rws-nav nav,
+[data-viewport="mobile"] .rws-nav nav,
+.ws-canvas-mobile .pe-nav,
+[data-viewport="mobile"] .pe-nav,
+.ws-canvas-mobile [class*="desktop-nav"],
+[data-viewport="mobile"] [class*="desktop-nav"] {
+  display: none !important;
+}
+
+.ws-canvas-mobile .fs-mobile-toggle,
+[data-viewport="mobile"] .fs-mobile-toggle,
+.ws-canvas-mobile .rt-mobile-toggle,
+[data-viewport="mobile"] .rt-mobile-toggle,
+.ws-canvas-mobile .fd-hamburger,
+[data-viewport="mobile"] .fd-hamburger,
+.ws-canvas-mobile .cafe-toggle,
+[data-viewport="mobile"] .cafe-toggle,
+.ws-canvas-mobile .rws-mobile,
+[data-viewport="mobile"] .rws-mobile,
+.ws-canvas-mobile .rt-mobile,
+[data-viewport="mobile"] .rt-mobile,
+.ws-canvas-mobile [class*="mobile-toggle"],
+[data-viewport="mobile"] [class*="mobile-toggle"] {
+  display: flex !important;
+  display: inline-flex !important;
+}
+
+/* Mobile Nav Bar Header Layout */
+.ws-canvas-mobile header,
+.ws-canvas-mobile nav,
+[data-viewport="mobile"] header,
+[data-viewport="mobile"] nav {
+  padding-left: 0.85rem !important;
+  padding-right: 0.85rem !important;
+}
+
+/* Mobile Brand Logo Size */
+.ws-canvas-mobile .fs-brand-name,
+.ws-canvas-mobile .rt-brand,
+.ws-canvas-mobile .fd-brand,
+.ws-canvas-mobile .cafe-brand,
+.ws-canvas-mobile .mr-brand,
+.ws-canvas-mobile .rws-brand,
+.ws-canvas-mobile [class*="brand"],
+[data-viewport="mobile"] [class*="brand"] {
+  font-size: clamp(1.15rem, 5.5cqw, 1.4rem) !important;
+  line-height: 1.15 !important;
+  max-width: 160px !important;
+}
+
+/* Mobile Action Buttons (Selection & Book a Table) */
+.ws-canvas-mobile .fs-header-actions,
+[data-viewport="mobile"] .fs-header-actions {
+  gap: 0.45rem !important;
+}
+
+.ws-canvas-mobile .fs-header-actions button,
+[data-viewport="mobile"] .fs-header-actions button,
+.ws-canvas-mobile .rt-mobile-toggle button,
+[data-viewport="mobile"] .rt-mobile-toggle button {
+  padding: 0.45rem 0.65rem !important;
+  font-size: 0.78rem !important;
+}
+
+.ws-canvas-mobile .fs-btn-label-desktop,
+[data-viewport="mobile"] .fs-btn-label-desktop {
+  display: none !important;
+}
+
+/* Mobile Announcement Bar */
+.ws-canvas-mobile .fs-announcement,
+.ws-canvas-mobile .pe-announcement,
+.ws-canvas-mobile .rws-announcement,
+.ws-canvas-mobile .mr-promo,
+.ws-canvas-mobile .cafe-promo,
+[data-viewport="mobile"] .fs-announcement,
+[data-viewport="mobile"] .pe-announcement {
+  font-size: 0.74rem !important;
+  padding: 0.45rem 0.75rem !important;
+  line-height: 1.35 !important;
+  height: auto !important;
+  min-height: 28px !important;
+}
+
+/* Mobile Hero Sections */
+.ws-canvas-mobile .fs-hero,
+.ws-canvas-mobile .rt-hero,
+.ws-canvas-mobile .fd-hero,
+.ws-canvas-mobile .cafe-hero,
+.ws-canvas-mobile .mr-hero,
+.ws-canvas-mobile .rws-hero,
+.ws-canvas-mobile [class*="hero"],
+[data-viewport="mobile"] .fs-hero,
+[data-viewport="mobile"] .rt-hero,
+[data-viewport="mobile"] [class*="hero"] {
+  min-height: 440px !important;
+  height: auto !important;
+  padding: 3rem 1rem !important;
+}
+
+.ws-canvas-mobile h1,
+.ws-canvas-mobile .rt-hero h1,
+.ws-canvas-mobile .fd-hero h1,
+.ws-canvas-mobile .cafe-hero h1,
+.ws-canvas-mobile .mr-hero h1,
+.ws-canvas-mobile .rws-hero h1,
+.ws-canvas-mobile [class*="hero"] h1,
+[data-viewport="mobile"] h1,
+[data-viewport="mobile"] [class*="hero"] h1 {
+  font-size: clamp(1.65rem, 8cqw, 2.25rem) !important;
+  line-height: 1.15 !important;
+  margin: 0 0 1rem 0 !important;
+}
+
+.ws-canvas-mobile .rt-hero p,
+.ws-canvas-mobile .fd-hero p,
+.ws-canvas-mobile .fs-hero p,
+.ws-canvas-mobile [class*="hero"] p,
+[data-viewport="mobile"] [class*="hero"] p {
+  font-size: 0.92rem !important;
+  line-height: 1.55 !important;
+  max-width: 100% !important;
+}
+
+/* Mobile Hero Action Buttons — Full Width Stack */
+.ws-canvas-mobile .fs-hero-actions,
+.ws-canvas-mobile .rt-hero-actions,
+.ws-canvas-mobile .fd-hero-copy section,
+.ws-canvas-mobile [class*="hero-actions"],
+[data-viewport="mobile"] .fs-hero-actions,
+[data-viewport="mobile"] [class*="hero-actions"] {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  gap: 0.65rem !important;
+}
+
+.ws-canvas-mobile .fs-hero-actions button,
+.ws-canvas-mobile .fs-hero-actions a,
+.ws-canvas-mobile .rt-hero-actions button,
+.ws-canvas-mobile .rt-hero-actions a,
+.ws-canvas-mobile .fd-hero-copy section button,
+.ws-canvas-mobile .fd-hero-copy section a,
+[data-viewport="mobile"] .fs-hero-actions button,
+[data-viewport="mobile"] .fs-hero-actions a {
+  width: 100% !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 0.8rem 1.25rem !important;
+  font-size: 0.88rem !important;
+}
+
+/* Mobile Section Headings & Spacing */
+.ws-canvas-mobile section,
+[data-viewport="mobile"] section {
+  padding: 3rem 1rem !important;
+}
+
+.ws-canvas-mobile h2,
+.ws-canvas-mobile [class*="heading"] h2,
+[data-viewport="mobile"] h2 {
+  font-size: clamp(1.45rem, 6.5cqw, 1.95rem) !important;
+  line-height: 1.2 !important;
+  margin: 0 0 0.75rem 0 !important;
+}
+
+/* Mobile Product Grids — Single Column */
+.ws-canvas-mobile .fs-product-grid,
+.ws-canvas-mobile .rt-product-grid,
+.ws-canvas-mobile .rt-dish-grid,
+.ws-canvas-mobile .fd-dishes,
+.ws-canvas-mobile .fd-grid,
+.ws-canvas-mobile .products,
+.ws-canvas-mobile .rws-featured>div,
+.ws-canvas-mobile .rws-menu-list,
+.ws-canvas-mobile .mr-menu-grid,
+.ws-canvas-mobile .cafe-products,
+.ws-canvas-mobile [class*="product-grid"],
+.ws-canvas-mobile [class*="menu-grid"],
+[data-viewport="mobile"] .fs-product-grid,
+[data-viewport="mobile"] .rt-product-grid,
+[data-viewport="mobile"] .rt-dish-grid,
+[data-viewport="mobile"] .fd-dishes,
+[data-viewport="mobile"] .products,
+[data-viewport="mobile"] [class*="product-grid"],
+[data-viewport="mobile"] [class*="menu-grid"] {
+  grid-template-columns: 1fr !important;
+  gap: 1.25rem !important;
+  padding: 0 0.5rem !important;
+}
+
+/* Product Card Sizing & Image Aspect Ratio on Mobile */
+.ws-canvas-mobile .fs-product-card,
+.ws-canvas-mobile .rt-product,
+.ws-canvas-mobile .fd-dish,
+.ws-canvas-mobile .rws-featured article,
+.ws-canvas-mobile [class*="product-card"],
+[data-viewport="mobile"] .fs-product-card,
+[data-viewport="mobile"] [class*="product-card"] {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+
+.ws-canvas-mobile .fs-product-card img,
+.ws-canvas-mobile .rt-product img,
+.ws-canvas-mobile .fd-dish img,
+[data-viewport="mobile"] .fs-product-card img {
+  aspect-ratio: 16/10 !important;
+  width: 100% !important;
+  height: auto !important;
+  max-height: 220px !important;
+  object-fit: cover !important;
+}
+
+/* Mobile Features & Proof Strips */
+.ws-canvas-mobile .fs-features-grid,
+.ws-canvas-mobile .rws-metrics,
+[data-viewport="mobile"] .fs-features-grid {
+  grid-template-columns: 1fr !important;
+  gap: 1rem !important;
+}
+
+/* Mobile Split, Story & Chef Sections */
+.ws-canvas-mobile .fs-story-grid,
+.ws-canvas-mobile .rt-story-grid,
+.ws-canvas-mobile .rt-visit-grid,
+.ws-canvas-mobile .rt-split,
+.ws-canvas-mobile .fd-split,
+.ws-canvas-mobile .fd-chef,
+.ws-canvas-mobile .rws-story,
+.ws-canvas-mobile .rws-promo,
+.ws-canvas-mobile .rws-visit,
+.ws-canvas-mobile .mr-coffee,
+.ws-canvas-mobile .mr-story,
+.ws-canvas-mobile .mr-visit,
+.ws-canvas-mobile .cafe-story,
+.ws-canvas-mobile .cafe-visit,
+.ws-canvas-mobile [class*="split"],
+[data-viewport="mobile"] .fs-story-grid,
+[data-viewport="mobile"] .rt-story-grid,
+[data-viewport="mobile"] .rt-visit-grid,
+[data-viewport="mobile"] [class*="split"] {
+  grid-template-columns: 1fr !important;
+  gap: 1.5rem !important;
+  min-height: 0 !important;
+}
+
+.ws-canvas-mobile .fs-story-grid img,
+.ws-canvas-mobile .rt-story-grid img,
+.ws-canvas-mobile .rt-split img,
+.ws-canvas-mobile .fd-chef img,
+.ws-canvas-mobile .rws-story img,
+[data-viewport="mobile"] .fs-story-grid img,
+[data-viewport="mobile"] .rt-story-grid img {
+  height: 250px !important;
+  min-height: 0 !important;
+  max-height: 280px !important;
+  width: 100% !important;
+  object-fit: cover !important;
+  border-radius: 16px !important;
+}
+
+/* Quote Badge on Mobile — No negative coordinate overhang */
+.ws-canvas-mobile .fs-story-quote-badge,
+[data-viewport="mobile"] .fs-story-quote-badge,
+.ws-canvas-mobile .rt-accolade-badge,
+[data-viewport="mobile"] .rt-accolade-badge {
+  position: relative !important;
+  bottom: 0 !important;
+  right: 0 !important;
+  margin-top: 1rem !important;
+  max-width: 100% !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.ws-canvas-mobile .rt-deco-frame,
+[data-viewport="mobile"] .rt-deco-frame {
+  inset: -4px !important;
+}
+
+/* Mobile Atmosphere Gallery Grids */
+.ws-canvas-mobile .fs-gallery-grid,
+.ws-canvas-mobile .rt-gallery-grid,
+.ws-canvas-mobile .fd-gallery-grid,
+.ws-canvas-mobile .cafe-gallery-grid,
+.ws-canvas-mobile .rws-gallery>div,
+[data-viewport="mobile"] .fs-gallery-grid,
+[data-viewport="mobile"] .rt-gallery-grid,
+[data-viewport="mobile"] [class*="gallery-grid"] {
+  grid-template-columns: repeat(2, 1fr) !important;
+  grid-auto-rows: 135px !important;
+  gap: 0.65rem !important;
+}
+
+.ws-canvas-mobile .fs-gallery-grid>*,
+.ws-canvas-mobile .rt-gallery-grid>*,
+.ws-canvas-mobile .fd-gallery-grid>*,
+[data-viewport="mobile"] .fs-gallery-grid>* {
+  grid-row: auto !important;
+  grid-column: auto !important;
+  height: 135px !important;
+}
+
+/* Mobile Promo / Special Spotlight */
+.ws-canvas-mobile .fs-promo-card,
+[data-viewport="mobile"] .fs-promo-card {
+  grid-template-columns: 1fr !important;
+  border-radius: 18px !important;
+}
+
+.ws-canvas-mobile .fs-promo-content,
+[data-viewport="mobile"] .fs-promo-content {
+  padding: 2rem 1.25rem !important;
+}
+
+/* Mobile Location & Hours */
+.ws-canvas-mobile .fs-location-grid,
+.ws-canvas-mobile .rt-visit,
+.ws-canvas-mobile .fd-visit,
+[data-viewport="mobile"] .fs-location-grid {
+  grid-template-columns: 1fr !important;
+  gap: 2rem !important;
+}
+
+.ws-canvas-mobile .fd-visit dl,
+.ws-canvas-mobile .mr-visit dl,
+.ws-canvas-mobile .cafe-visit dl,
+[data-viewport="mobile"] .fd-visit dl {
+  border-left: 0 !important;
+  border-top: 1px solid currentColor !important;
+  padding-left: 0 !important;
+  padding-top: 1.25rem !important;
+  grid-template-columns: 1fr !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1rem !important;
+}
+
+/* Mobile Footers */
+.ws-canvas-mobile .fs-footer,
+.ws-canvas-mobile .rt-footer,
+.ws-canvas-mobile .fd-footer,
+.ws-canvas-mobile .rws-footer,
+.ws-canvas-mobile .mr-footer,
+.ws-canvas-mobile footer,
+[data-viewport="mobile"] .fs-footer,
+[data-viewport="mobile"] footer {
+  padding: 2.5rem 1rem 1.5rem !important;
+}
+
+.ws-canvas-mobile .fs-footer-grid,
+.ws-canvas-mobile .rc-footer-grid,
+.ws-canvas-mobile .rt-footer,
+.ws-canvas-mobile .fd-footer,
+[data-viewport="mobile"] .fs-footer-grid,
+[data-viewport="mobile"] .rc-footer-grid {
+  grid-template-columns: 1fr !important;
+  gap: 1.75rem !important;
+  margin-bottom: 2rem !important;
+}
+
+/* Mobile Modals, Drawers & Lightboxes */
+.ws-canvas-mobile .fs-modal>div,
+.ws-canvas-mobile .rt-modal>div,
+.ws-canvas-mobile .rt-modal-dialog,
+.ws-canvas-mobile .fd-modal-panel,
+[data-viewport="mobile"] .fs-modal>div,
+[data-viewport="mobile"] .rt-modal-dialog,
+[data-viewport="mobile"] [role="dialog"]>div {
+  width: calc(100% - 20px) !important;
+  max-width: 100% !important;
+  padding: 1.35rem !important;
+  border-radius: 18px !important;
+  margin: 10px auto !important;
+}
+
+.ws-canvas-mobile .fs-modal input,
+.ws-canvas-mobile .fs-modal select,
+.ws-canvas-mobile .fs-modal textarea,
+.ws-canvas-mobile [role="dialog"] input,
+.ws-canvas-mobile [role="dialog"] select,
+.ws-canvas-mobile [role="dialog"] textarea {
+  font-size: 16px !important;
+  /* Prevents auto-zoom on mobile devices */
+}
+
+
+/* ==========================================================================
+   ── 4. CONTAINER QUERIES (@container)
+   Automatically triggers when the rendered canvas or preview wrapper resizes
+   ========================================================================== */
+
+@container storefront (max-width: 840px) {
+  .fs-desktop-nav {
+    gap: 0.85rem !important;
+  }
+
+  .fs-desktop-nav button {
+    font-size: 0.76rem !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  .rt-desktop-nav {
+    display: flex !important;
+    gap: 0.85rem !important;
+  }
+
+  .rt-desktop-nav a {
+    font-size: 0.76rem !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  .fs-product-grid,
+  .rt-product-grid,
+  .rt-dish-grid,
+  .fd-dishes,
+  .products {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 1.25rem !important;
+  }
+
+  .fs-gallery-grid,
+  .rt-gallery-grid,
+  .fd-gallery-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    grid-auto-rows: 170px !important;
+  }
+}
+
+@container storefront (max-width: 500px) {
+
+  .fs-desktop-nav,
+  .rt-desktop-nav,
+  .fd-nav nav,
+  .cafe-header nav,
+  .mr-header nav,
+  .cc-nav nav,
+  .ll-nav nav,
+  .dg-nav nav,
+  .rws-nav nav,
+  .pe-nav {
+    display: none !important;
+  }
+
+  .fs-mobile-toggle,
+  .rt-mobile-toggle,
+  .fd-hamburger,
+  .cafe-toggle,
+  .rws-mobile,
+  .rt-mobile {
+    display: flex !important;
+    display: inline-flex !important;
+  }
+
+  h1,
+  [class*="hero"] h1 {
+    font-size: clamp(1.65rem, 8cqw, 2.25rem) !important;
+    line-height: 1.15 !important;
+  }
+
+  h2 {
+    font-size: clamp(1.45rem, 6.5cqw, 1.95rem) !important;
+    line-height: 1.2 !important;
+  }
+
+  .fs-product-grid,
+  .rt-product-grid,
+  .rt-dish-grid,
+  .fd-dishes,
+  .products,
+  .fs-features-grid,
+  .fs-story-grid,
+  .rt-story-grid,
+  .rt-visit-grid,
+  .rt-split,
+  .fd-chef,
+  .fs-promo-card,
+  .fs-location-grid,
+  .fs-footer-grid,
+  .rt-footer,
+  .fd-footer {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+
+  .fs-gallery-grid,
+  .rt-gallery-grid,
+  .fd-gallery-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-auto-rows: 135px !important;
+  }
+
+  .fs-hero-actions,
+  .rt-hero-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .fs-hero-actions button,
+  .fs-hero-actions a,
+  .rt-hero-actions button,
+  .rt-hero-actions a {
+    width: 100% !important;
+  }
+}

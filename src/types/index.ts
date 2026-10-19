@@ -12,12 +12,15 @@ export interface Product {
   visualTheme: string
   isFeatured: boolean
   isActive?: boolean
+  isAvailable?: boolean
   sku?: string | null
   productType?: string | null
   tags?: string | null
   lowStockAlert?: number
   imageUrls?: string[]
+  imageUrl?: string
   variants?: string | null
+  createdAt?: string
   updatedAt?: string
 }
 
