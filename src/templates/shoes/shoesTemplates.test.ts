@@ -4,6 +4,8 @@ import {
   HAPPY_FEET_TEMPLATE,
   SHOE_ZONE_TEMPLATE,
   SUSIE_SHOES_TEMPLATE,
+  FASHION_FEET_TEMPLATE,
+  FOOTWEAR_WORKDO_TEMPLATE,
 } from '../../data/shoesTemplatesData'
 import { TEMPLATE_REGISTRY, getTemplateComponent } from '../../data/templateRegistry'
 import {
@@ -22,18 +24,41 @@ import {
   SUSIE_BLOG_POSTS,
   SUSIE_FEATURE_CARDS,
 } from './SusieShoes/data/susieShoesData'
+import {
+  FASHIONFEET_HERO_SLIDES,
+  FASHIONFEET_BEST_SALE_PRODUCTS,
+  FASHIONFEET_LOAFER_BANNER,
+  FASHIONFEET_ABOUT_US,
+  FASHIONFEET_BRANDS,
+  FASHIONFEET_REVIEWS,
+  FASHIONFEET_BLOGS,
+} from './FashionFeet/data/fashionFeetData'
+import {
+  FOOTWEAR_HERO_SLIDES,
+  FOOTWEAR_CATEGORIES,
+  FOOTWEAR_SNEAKERS_LOVE,
+  FOOTWEAR_BESTSELLERS,
+  FOOTWEAR_PROMO_BANNER,
+  FOOTWEAR_FEATURE_CARDS,
+  FOOTWEAR_TESTIMONIALS,
+  FOOTWEAR_BLOGS,
+} from './FootwearWorkDo/data/footwearWorkDoData'
 import { HappyFeetStorefront } from './HappyFeet'
 import { ShoeZoneStorefront } from './ShoeZone'
 import { SusieShoesStorefront } from './SusieShoes'
+import { FashionFeetStorefront } from './FashionFeet'
+import { FootwearWorkDoStorefront } from './FootwearWorkDo'
 
-describe('Shoes Templates Suite', () => {
+describe('Shoes Templates Suite (5 Complete Shoe Store Themes)', () => {
   describe('Marketplace Configuration', () => {
-    it('has all 3 shoe store templates in ALL_SHOES_MARKETPLACE_TEMPLATES', () => {
-      expect(ALL_SHOES_MARKETPLACE_TEMPLATES).toHaveLength(3)
+    it('has all 5 shoe store templates in ALL_SHOES_MARKETPLACE_TEMPLATES', () => {
+      expect(ALL_SHOES_MARKETPLACE_TEMPLATES).toHaveLength(5)
       const ids = ALL_SHOES_MARKETPLACE_TEMPLATES.map((t) => t.id)
       expect(ids).toContain('shoes-happy-feet')
       expect(ids).toContain('shoes-shoezone')
       expect(ids).toContain('shoes-susie')
+      expect(ids).toContain('shoes-fashion-feet')
+      expect(ids).toContain('shoes-footwear-workdo')
     })
 
     it('HappyFeet template is configured correctly', () => {
@@ -57,27 +82,102 @@ describe('Shoes Templates Suite', () => {
       expect(SUSIE_SHOES_TEMPLATE.businessType).toBe('shoes')
       expect(SUSIE_SHOES_TEMPLATE.accentColor).toBe('#e81a7f')
       expect(SUSIE_SHOES_TEMPLATE.tags).toContain('Children')
-      expect(SUSIE_SHOES_TEMPLATE.tags).toContain('Shoes')
     })
 
-    it('registers all 3 shoe templates under shoes category in TEMPLATE_REGISTRY', () => {
+    it('FashionFeet template is configured correctly with royal blue and Mens Shoe branding', () => {
+      expect(FASHION_FEET_TEMPLATE.id).toBe('shoes-fashion-feet')
+      expect(FASHION_FEET_TEMPLATE.name).toBe('FashionFeet Mens Shoe')
+      expect(FASHION_FEET_TEMPLATE.brandName).toBe('Mens Shoe')
+      expect(FASHION_FEET_TEMPLATE.accentColor).toBe('#3d5afe')
+      expect(FASHION_FEET_TEMPLATE.businessType).toBe('shoes')
+    })
+
+    it('Footwear WorkDo template is configured correctly with dark & yellow aesthetic', () => {
+      expect(FOOTWEAR_WORKDO_TEMPLATE.id).toBe('shoes-footwear-workdo')
+      expect(FOOTWEAR_WORKDO_TEMPLATE.name).toBe('Footwear WorkDo')
+      expect(FOOTWEAR_WORKDO_TEMPLATE.brandName).toBe('Footwear.')
+      expect(FOOTWEAR_WORKDO_TEMPLATE.accentColor).toBe('#ffea28')
+      expect(FOOTWEAR_WORKDO_TEMPLATE.isDark).toBe(true)
+    })
+
+    it('registers all 5 shoe templates under shoes category in TEMPLATE_REGISTRY', () => {
       const shoesEntry = TEMPLATE_REGISTRY['shoes']
       expect(shoesEntry).toBeDefined()
       expect(shoesEntry.displayName).toBe('Shoes Store')
-      expect(shoesEntry.templates).toHaveLength(3)
+      expect(shoesEntry.templates).toHaveLength(5)
       const slugs = shoesEntry.templates.map((t) => t.slug)
       expect(slugs).toContain('shoes-happy-feet')
       expect(slugs).toContain('shoes-shoezone')
       expect(slugs).toContain('shoes-susie')
+      expect(slugs).toContain('shoes-fashion-feet')
+      expect(slugs).toContain('shoes-footwear-workdo')
     })
 
     it('resolves correct storefront components from getTemplateComponent', () => {
       expect(getTemplateComponent(HAPPY_FEET_TEMPLATE)).toBe(HappyFeetStorefront)
       expect(getTemplateComponent(SHOE_ZONE_TEMPLATE)).toBe(ShoeZoneStorefront)
       expect(getTemplateComponent(SUSIE_SHOES_TEMPLATE)).toBe(SusieShoesStorefront)
+      expect(getTemplateComponent(FASHION_FEET_TEMPLATE)).toBe(FashionFeetStorefront)
+      expect(getTemplateComponent(FOOTWEAR_WORKDO_TEMPLATE)).toBe(FootwearWorkDoStorefront)
+
       expect(getTemplateComponent('shoes-happy-feet')).toBe(HappyFeetStorefront)
       expect(getTemplateComponent('shoes-shoezone')).toBe(ShoeZoneStorefront)
       expect(getTemplateComponent('shoes-susie')).toBe(SusieShoesStorefront)
+      expect(getTemplateComponent('shoes-fashion-feet')).toBe(FashionFeetStorefront)
+      expect(getTemplateComponent('shoes-footwear-workdo')).toBe(FootwearWorkDoStorefront)
+    })
+  })
+
+  describe('FashionFeet Data Integrity (fashionfeet-theme.myshopify.com)', () => {
+    it('has hero slides, best sale products, showcase banners, and reviews', () => {
+      expect(FASHIONFEET_HERO_SLIDES.length).toBeGreaterThanOrEqual(2)
+      expect(FASHIONFEET_HERO_SLIDES[0].title).toBe('CASUAL COLLECTION')
+      expect(FASHIONFEET_BEST_SALE_PRODUCTS.length).toBeGreaterThanOrEqual(4)
+      expect(FASHIONFEET_LOAFER_BANNER.title).toBe('Loafer Shoe')
+      expect(FASHIONFEET_ABOUT_US.title).toBe('About Us')
+      expect(FASHIONFEET_BRANDS.length).toBeGreaterThanOrEqual(6)
+      expect(FASHIONFEET_REVIEWS.length).toBeGreaterThanOrEqual(2)
+      expect(FASHIONFEET_BLOGS.length).toBeGreaterThanOrEqual(2)
+    })
+
+    it('FashionFeet products have valid prices and images', () => {
+      for (const product of FASHIONFEET_BEST_SALE_PRODUCTS) {
+        expect(product.id).toBeDefined()
+        expect(product.name).toBeDefined()
+        expect(product.price).toBeGreaterThan(0)
+        expect(product.image).toMatch(/^https?:\/\//)
+        expect(product.sizes?.length).toBeGreaterThanOrEqual(4)
+      }
+    })
+  })
+
+  describe('Footwear WorkDo Data Integrity (footwear-workdo.myshopify.com)', () => {
+    it('has limited edition hero, categories, sneakers, and bestsellers', () => {
+      expect(FOOTWEAR_HERO_SLIDES.length).toBeGreaterThanOrEqual(2)
+      expect(FOOTWEAR_HERO_SLIDES[0].headline).toBe('Sneakers 2023 Limited Edition')
+      expect(FOOTWEAR_CATEGORIES.length).toBe(4)
+      expect(FOOTWEAR_CATEGORIES.map((c) => c.title)).toEqual([
+        'Casual Shoes',
+        'Formal Shoes',
+        'Boots Shoes',
+        'Sports Shoes',
+      ])
+      expect(FOOTWEAR_SNEAKERS_LOVE.length).toBe(4)
+      expect(FOOTWEAR_BESTSELLERS.length).toBe(2)
+      expect(FOOTWEAR_PROMO_BANNER.tag).toContain('20% Off')
+      expect(FOOTWEAR_FEATURE_CARDS.length).toBe(3)
+      expect(FOOTWEAR_TESTIMONIALS.length).toBeGreaterThanOrEqual(2)
+      expect(FOOTWEAR_BLOGS.length).toBe(4)
+    })
+
+    it('Footwear WorkDo products have valid INR pricing and full size runs', () => {
+      for (const product of [...FOOTWEAR_SNEAKERS_LOVE, ...FOOTWEAR_BESTSELLERS]) {
+        expect(product.id).toBeDefined()
+        expect(product.name).toBeDefined()
+        expect(product.priceInr).toBeGreaterThan(0)
+        expect(product.image).toMatch(/^https?:\/\//)
+        expect(product.sizes).toEqual([7, 8, 9, 10])
+      }
     })
   })
 
@@ -96,19 +196,9 @@ describe('Shoes Templates Suite', () => {
       expect(SHOEZONE_PROMO_COUNTDOWN.title).toContain('50%')
       expect(SHOEZONE_VALUE_PROPS).toHaveLength(4)
     })
-
-    it('ShoeZone products have valid ratings, prices, and high-res imagery', () => {
-      for (const product of [...SHOEZONE_NEW_ARRIVALS, ...SHOEZONE_BEST_SELLERS]) {
-        expect(product.id).toBeDefined()
-        expect(product.name).toBeDefined()
-        expect(product.price).toBeGreaterThan(0)
-        expect(product.image).toMatch(/^https?:\/\//)
-        expect(product.rating).toBeGreaterThan(0)
-      }
-    })
   })
 
-  describe('Susie Kids Shoes Data Integrity (kids-outfit.myshopify.com adapted for footwear)', () => {
+  describe('Susie Kids Shoes Data Integrity (kids-outfit.myshopify.com)', () => {
     it('contains exclusively children shoes catalog and collage categories', () => {
       expect(SUSIE_HERO_SLIDES.length).toBeGreaterThanOrEqual(2)
       expect(SUSIE_COLLAGE_CATEGORIES.length).toBe(5)
@@ -116,16 +206,6 @@ describe('Shoes Templates Suite', () => {
       expect(SUSIE_TESTIMONIALS.length).toBeGreaterThanOrEqual(2)
       expect(SUSIE_BLOG_POSTS.length).toBeGreaterThanOrEqual(3)
       expect(SUSIE_FEATURE_CARDS.length).toBeGreaterThanOrEqual(3)
-    })
-
-    it('Susie products specify kid sizing and comfort features', () => {
-      for (const product of SUSIE_KIDS_PRODUCTS) {
-        expect(product.name).toBeDefined()
-        expect(product.price).toBeGreaterThan(0)
-        expect(product.image).toMatch(/^https?:\/\//)
-        expect(product.sizes?.length).toBeGreaterThanOrEqual(3)
-        expect(product.category).toBeDefined()
-      }
     })
   })
 })

@@ -1,5 +1,5 @@
 export * from './HappyFeet'
-export * from './HappyFeet'
 export * from './ShoeZone'
 export * from './SusieShoes'
-
+export * from './FashionFeet'
+export * from './FootwearWorkDo'

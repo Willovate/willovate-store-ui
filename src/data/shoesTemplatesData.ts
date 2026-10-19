@@ -156,6 +156,84 @@ export const SUSIE_SHOES_TEMPLATE: MarketplaceTemplate = {
   layoutType: 'card-grid',
 }
 
+export const FASHION_FEET_TEMPLATE: MarketplaceTemplate = {
+  id: 'shoes-fashion-feet',
+  slug: 'shoes-fashion-feet',
+  name: 'FashionFeet Mens Shoe',
+  businessType: 'shoes',
+  tags: ['Shoes', 'Sneakers', 'Men', 'Casual', 'Loafers', 'Running', 'Athletic'],
+  shortDescription:
+    'Contemporary athletic casual and gentlemen loafer footwear storefront with 3-stripe royal blue branding, floating sneaker hero, and editorial reviews.',
+  thumbnailUrl:
+    'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80',
+  fullPreviewUrl: 'https://fashionfeet-theme.myshopify.com/',
+  popularityScore: 97,
+  isActive: true,
+  brandName: 'Mens Shoe',
+  headline: 'CASUAL COLLECTION',
+  subtitle: 'High Kinetic Cushioning & Performance Street Style',
+  buttonText: 'KNOW MORE',
+  buttonColor: '#3d5afe',
+  isDark: false,
+  modelImage:
+    'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1200&q=80',
+  industryCategory: 'Shoes & Footwear',
+  style: 'bold',
+  catalogSize: 'medium',
+  features: [
+    '3-Stripe Diagonal Brand Logo & Nav Centerpiece',
+    'Dynamic Floating Black Sneaker Hero with Angled Posture',
+    'Royal Blue Best Sale Split Banner with $190 Products',
+    'Loafer Shoe & About Us Dual Showcase',
+    'Customer Reviews Spotlight & Master Cordwainer Blog',
+    'Quick View with US Size Selector & Slide Drawer',
+  ],
+  badge: 'trending',
+  accentColor: '#3d5afe',
+  rating: 4.96,
+  reviewCount: 118,
+  layoutType: 'split',
+}
+
+export const FOOTWEAR_WORKDO_TEMPLATE: MarketplaceTemplate = {
+  id: 'shoes-footwear-workdo',
+  slug: 'shoes-footwear-workdo',
+  name: 'Footwear WorkDo',
+  businessType: 'shoes',
+  tags: ['Shoes', 'Sneakers', 'Limited Edition', 'Streetwear', 'Sports', 'Casual', 'INR'],
+  shortDescription:
+    'High-octane dark slate & electric yellow streetwear sneakers storefront with floating hexagonal frames, live INR size selectors, and video showcase.',
+  thumbnailUrl:
+    'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80',
+  fullPreviewUrl: 'https://footwear-workdo.myshopify.com/',
+  popularityScore: 99,
+  isActive: true,
+  brandName: 'Footwear.',
+  headline: 'Sneakers 2023 Limited Edition',
+  subtitle: 'Exclusive limited numbers and online raffles for high-grade kicks',
+  buttonText: 'Show Collections',
+  buttonColor: '#ffea28',
+  isDark: true,
+  modelImage:
+    'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=1200&q=80',
+  industryCategory: 'Sneakers & Streetwear',
+  style: 'bold',
+  catalogSize: 'large',
+  features: [
+    'Floating Pill Navigation Bar on Dark Slate Backdrop',
+    'Sneakers 2023 Limited Edition Hero with Glowing Hexagon Frame',
+    'High-Voltage Yellow Shop By Category Grid',
+    'Direct Size Selector Buttons [7] [8] [9] [10] with INR Pricing',
+    'Dual Bestseller Highlight Containers in Electric Yellow',
+    '20% Off Sport Shoe Banner & 4 Rich Editorial Blogs',
+  ],
+  badge: 'new',
+  accentColor: '#ffea28',
+  rating: 4.97,
+  reviewCount: 154,
+  layoutType: 'card-grid',
+}
+
 export const SHOES_TEMPLATES_CONFIG: Record<string, ShoesTemplateConfig> = {
   'shoes-happy-feet': {
     template: HAPPY_FEET_TEMPLATE,
@@ -262,10 +340,80 @@ export const SHOES_TEMPLATES_CONFIG: Record<string, ShoesTemplateConfig> = {
       },
     ],
   },
+  'shoes-fashion-feet': {
+    template: FASHION_FEET_TEMPLATE,
+    announcement: '⚡ Free worldwide express courier on all footwear orders over $120',
+    navItems: ['HOME', 'SHOP', 'PAGES', 'PRODUCTS', 'FAQ', 'BLOG', 'CONTACT'],
+    categories: [
+      { id: 'running', name: 'Running Shoes', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80' },
+      { id: 'loafers', name: 'Loafer Shoe', image: 'https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?auto=format&fit=crop&w=600&q=80' },
+      { id: 'trail', name: 'Trail & Sports', image: 'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?auto=format&fit=crop&w=600&q=80' },
+      { id: 'gym', name: 'Gym Sneakers', image: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=600&q=80' },
+    ],
+    featuredProducts: [
+      {
+        id: 'ff-prod-1',
+        name: 'Mens Runner Pro Air Blue',
+        category: 'Running Shoes',
+        price: '$190.00',
+        compareAtPrice: '$240.00',
+        image: 'https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?auto=format&fit=crop&w=600&q=80',
+        badge: 'SALE',
+        rating: 5,
+        reviewCount: 48,
+      },
+      {
+        id: 'ff-prod-2',
+        name: 'Turbo Lime Trail Runner',
+        category: 'Trail & Sports',
+        price: '$190.00',
+        compareAtPrice: '$220.00',
+        image: 'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?auto=format&fit=crop&w=600&q=80',
+        badge: 'HOT',
+        rating: 5,
+        reviewCount: 36,
+      },
+    ],
+  },
+  'shoes-footwear-workdo': {
+    template: FOOTWEAR_WORKDO_TEMPLATE,
+    announcement: '📞 Call Us : 610-403-403 | Free shipping across India on prepaid sneaker orders',
+    navItems: ['All Categories', 'Products', 'Pages', 'Services'],
+    categories: [
+      { id: 'casual', name: 'Casual Shoes', image: 'https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?auto=format&fit=crop&w=600&q=80' },
+      { id: 'formal', name: 'Formal Shoes', image: 'https://images.unsplash.com/photo-1533867617858-e7b97e060509?auto=format&fit=crop&w=600&q=80' },
+      { id: 'boots', name: 'Boots Shoes', image: 'https://images.unsplash.com/photo-1520639888713-7851133b1ed0?auto=format&fit=crop&w=600&q=80' },
+      { id: 'sports', name: 'Sports Shoes', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80' },
+    ],
+    featuredProducts: [
+      {
+        id: 'fwd-sneaker-1',
+        name: "Grey Men's Sneakers",
+        category: 'Men',
+        price: 'Rs. 2,500.00',
+        compareAtPrice: 'Rs. 3,200.00',
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80',
+        rating: 5,
+        reviewCount: 42,
+      },
+      {
+        id: 'fwd-sneaker-2',
+        name: "Black Men's Sneakers",
+        category: 'Men',
+        price: 'Rs. 2,400.00',
+        compareAtPrice: 'Rs. 3,000.00',
+        image: 'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?auto=format&fit=crop&w=600&q=80',
+        rating: 5,
+        reviewCount: 38,
+      },
+    ],
+  },
 }
 
 export const ALL_SHOES_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   HAPPY_FEET_TEMPLATE,
   SHOE_ZONE_TEMPLATE,
   SUSIE_SHOES_TEMPLATE,
+  FASHION_FEET_TEMPLATE,
+  FOOTWEAR_WORKDO_TEMPLATE,
 ]
