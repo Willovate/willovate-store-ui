@@ -40,6 +40,8 @@ import {
   SusieShoesStorefront,
   FashionFeetStorefront,
   FootwearWorkDoStorefront,
+  ShoesWorkDoStorefront,
+  SensationStorefront,
 } from '../templates/shoes'
 
 export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
@@ -144,6 +146,26 @@ export function getTemplateComponent(input?: MarketplaceTemplate | Template | st
     typeof input === 'string'
       ? ({ id: input, slug: input, name: input } as unknown as MarketplaceTemplate)
       : input || null
+  if (
+    template &&
+    (template.slug === 'shoes-workdo' ||
+      template.id === 'shoes-workdo' ||
+      template.slug === 'shoesworkdo' ||
+      template.id === 'shoesworkdo' ||
+      template.name?.toLowerCase().includes('shoes workdo'))
+  ) {
+    return ShoesWorkDoStorefront
+  }
+  if (
+    template &&
+    (template.slug === 'shoes-sensation' ||
+      template.id === 'shoes-sensation' ||
+      template.slug === 'sensation' ||
+      template.id === 'sensation' ||
+      template.name?.toLowerCase().includes('sensation'))
+  ) {
+    return SensationStorefront
+  }
   if (
     template &&
     (template.slug === 'shoes-fashion-feet' ||

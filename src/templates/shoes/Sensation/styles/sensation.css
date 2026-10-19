@@ -1,0 +1,566 @@
+/* ============================================================
+   SENSATION WORKDO STOREFRONT STYLES
+   Exact reproduction of https://sensation-workdo.myshopify.com/
+   ============================================================ */
+
+.sen-wrapper {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: #27272a;
+  background-color: #ffffff;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Announcement Top Bar */
+.sen-topbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #f4f4f5;
+  padding: 8px 32px;
+  font-size: 13px;
+  color: #18181b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sen-topbar-center {
+  font-weight: 700;
+}
+.sen-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.sen-dropdown-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  border-radius: 9999px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.sen-dropdown-pill select {
+  border: none;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  color: #18181b;
+}
+
+/* Main Navigation Header */
+.sen-header {
+  background-color: #656c4d;
+  color: #ffffff;
+  padding: 16px 32px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.sen-header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.sen-logo {
+  font-size: 26px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+  cursor: pointer;
+}
+
+.sen-nav-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.sen-cat-pill-btn {
+  background-color: #ffffff;
+  color: #18181b;
+  border: none;
+  border-radius: 9999px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.sen-cat-pill-btn:hover {
+  background-color: #f4f4f5;
+}
+.sen-nav-link {
+  color: #f4f4f5;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.sen-nav-link:hover {
+  color: #ffffff;
+}
+
+.sen-header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sen-circle-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: #18181b;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.sen-circle-btn:hover {
+  background-color: #f4f4f5;
+}
+.sen-cart-btn {
+  background-color: #ffffff;
+  color: #18181b;
+  border: none;
+  border-radius: 9999px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+/* ============================================================
+   HERO BANNER
+   ============================================================ */
+.sen-hero {
+  position: relative;
+  min-height: 540px;
+  display: flex;
+  align-items: center;
+  background: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+  padding: 60px 0;
+}
+.sen-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(24, 24, 27, 0.75) 0%, rgba(24, 24, 27, 0.35) 60%, rgba(24, 24, 27, 0.1) 100%);
+}
+.sen-hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px;
+  width: 100%;
+}
+.sen-hero-box {
+  max-width: 580px;
+  color: #ffffff;
+}
+.sen-hero-subtitle {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fef08a;
+  margin-bottom: 16px;
+}
+.sen-hero-title {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 18px;
+}
+.sen-hero-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #e4e4e7;
+  margin-bottom: 32px;
+}
+.sen-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.sen-btn-white {
+  background-color: #ffffff;
+  color: #18181b;
+  border: none;
+  border-radius: 9999px;
+  padding: 12px 28px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.sen-btn-white:hover {
+  background-color: #f4f4f5;
+  transform: translateY(-2px);
+}
+.sen-btn-outline {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 9999px;
+  padding: 12px 28px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.sen-btn-outline:hover {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ============================================================
+   SECTIONS GENERAL
+   ============================================================ */
+.sen-section {
+  padding: 60px 0;
+}
+.sen-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.sen-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 36px;
+}
+.sen-section-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #18181b;
+}
+.sen-pill-link-btn {
+  background-color: #656c4d;
+  color: #ffffff;
+  border: none;
+  border-radius: 9999px;
+  padding: 10px 24px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.sen-pill-link-btn:hover {
+  background-color: #535a3e;
+}
+
+/* Products Grid */
+.sen-products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.sen-product-card {
+  background-color: #ffffff;
+  border: 1px solid #e4e4e7;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.25s ease;
+}
+.sen-product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+.sen-product-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background-color: #656c4d;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  z-index: 5;
+}
+.sen-product-img-wrap {
+  width: 100%;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  background-color: #fafafa;
+  border-radius: 8px;
+}
+.sen-product-img {
+  max-width: 90%;
+  max-height: 200px;
+  object-fit: contain;
+}
+.sen-product-name {
+  font-size: 16px;
+  font-weight: 800;
+  color: #18181b;
+  margin-bottom: 8px;
+}
+.sen-product-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.sen-price {
+  font-size: 18px;
+  font-weight: 800;
+  color: #18181b;
+}
+.sen-color-swatches {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+.sen-swatch-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid #e4e4e7;
+  cursor: pointer;
+}
+.sen-add-cart-btn {
+  background-color: #656c4d;
+  color: #ffffff;
+  border: none;
+  border-radius: 9999px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 100%;
+}
+.sen-add-cart-btn:hover {
+  background-color: #535a3e;
+}
+
+/* Tale of Exhilaration */
+.sen-tale-banner {
+  background-color: #fdfbf7;
+  border-radius: 20px;
+  padding: 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
+  margin: 40px 0;
+}
+.sen-tale-img {
+  width: 100%;
+  height: 280px;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+/* Deep Olive Section: Journey Through Amazing Clothes */
+.sen-olive-section {
+  background-color: #656c4d;
+  color: #ffffff;
+  padding: 60px 0;
+}
+.sen-journey-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 32px;
+}
+.sen-journey-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 24px;
+  align-items: center;
+}
+.sen-journey-thumb {
+  width: 100%;
+  height: 200px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* Copper / Terracotta Banner */
+.sen-copper-banner {
+  background-color: #8b4528;
+  color: #ffffff;
+  padding: 60px 0;
+  display: flex;
+  align-items: center;
+}
+.sen-copper-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
+  align-items: center;
+}
+.sen-copper-img {
+  width: 100%;
+  height: 320px;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+/* Embracing Fashion for Every Body: 3 Visual Category Cards */
+.sen-visual-cats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.sen-visual-cat-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+  color: #ffffff;
+  background-size: cover;
+  background-position: center;
+}
+.sen-visual-cat-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.2) 100%);
+}
+.sen-visual-cat-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Testimonials 4-grid */
+.sen-test-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.sen-test-card {
+  border: 1px solid #e4e4e7;
+  border-radius: 12px;
+  padding: 24px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.sen-test-card.highlighted {
+  background-color: #656c4d;
+  color: #ffffff;
+  border-color: #656c4d;
+}
+
+/* Exclusive Doorstep Banner */
+.sen-doorstep-banner {
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  min-height: 280px;
+  background: url('https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+  padding: 48px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  margin: 40px 0;
+}
+.sen-doorstep-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+/* Style Chronicle Blogs */
+.sen-blogs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.sen-blog-card {
+  border: 1px solid #e4e4e7;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+.sen-blog-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+.sen-blog-body {
+  padding: 20px;
+}
+
+/* Footer */
+.sen-footer {
+  background-color: #fafafa;
+  border-top: 1px solid #e4e4e7;
+  padding: 60px 0 24px;
+}
+.sen-footer-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 1.2fr 2fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+/* Floating social proof notification */
+.sen-social-proof {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  background-color: #656c4d;
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  max-width: 320px;
+}
+

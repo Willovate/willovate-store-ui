@@ -306,6 +306,12 @@ function App() {
             rawHash === 'shoes-susie' ||
             rawHash === 'susie-shoes' ||
             rawHash === 'kids-shoes' ||
+            rawHash === 'shoes-workdo' ||
+            rawHash === 'shoesworkdo' ||
+            rawHash === 'sensation' ||
+            rawHash === 'shoes-sensation' ||
+            rawHash === 'sensation-workdo' ||
+            rawHash === 'sensation-shoes' ||
             rawHash === 'fashion-feet' ||
             rawHash === 'fashionfeet' ||
             rawHash === 'shoes-fashion-feet' ||

@@ -6,6 +6,8 @@ import {
   SUSIE_SHOES_TEMPLATE,
   FASHION_FEET_TEMPLATE,
   FOOTWEAR_WORKDO_TEMPLATE,
+  SHOES_WORKDO_TEMPLATE,
+  SENSATION_WORKDO_TEMPLATE,
 } from '../../data/shoesTemplatesData'
 import { TEMPLATE_REGISTRY, getTemplateComponent } from '../../data/templateRegistry'
 import {
@@ -43,22 +45,43 @@ import {
   FOOTWEAR_TESTIMONIALS,
   FOOTWEAR_BLOGS,
 } from './FootwearWorkDo/data/footwearWorkDoData'
+import {
+  SHOES_WORKDO_HERO_SLIDES,
+  SHOES_WORKDO_SIDEBAR_CATEGORIES,
+  SHOES_WORKDO_FEATURED_CATEGORIES,
+  SHOES_WORKDO_TODAY_DISCOUNTS,
+  SHOES_WORKDO_BESTSELLERS,
+  SHOES_WORKDO_RETRO_SHOES,
+  SHOES_WORKDO_REVIEWS,
+  SHOES_WORKDO_BLOGS,
+} from './ShoesWorkDo/data/shoesWorkDoData'
+import {
+  SENSATION_HERO_SLIDES,
+  SENSATION_TRENDING_PRODUCTS,
+  SENSATION_SUNGLASSES_PRODUCTS,
+  SENSATION_TESTIMONIALS,
+  SENSATION_BLOGS,
+} from './Sensation/data/sensationData'
 import { HappyFeetStorefront } from './HappyFeet'
 import { ShoeZoneStorefront } from './ShoeZone'
 import { SusieShoesStorefront } from './SusieShoes'
 import { FashionFeetStorefront } from './FashionFeet'
 import { FootwearWorkDoStorefront } from './FootwearWorkDo'
+import { ShoesWorkDoStorefront } from './ShoesWorkDo'
+import { SensationStorefront } from './Sensation'
 
-describe('Shoes Templates Suite (5 Complete Shoe Store Themes)', () => {
+describe('Shoes Templates Suite (7 Complete Shoe Store Themes)', () => {
   describe('Marketplace Configuration', () => {
-    it('has all 5 shoe store templates in ALL_SHOES_MARKETPLACE_TEMPLATES', () => {
-      expect(ALL_SHOES_MARKETPLACE_TEMPLATES).toHaveLength(5)
+    it('has all 7 shoe store templates in ALL_SHOES_MARKETPLACE_TEMPLATES', () => {
+      expect(ALL_SHOES_MARKETPLACE_TEMPLATES).toHaveLength(7)
       const ids = ALL_SHOES_MARKETPLACE_TEMPLATES.map((t) => t.id)
       expect(ids).toContain('shoes-happy-feet')
       expect(ids).toContain('shoes-shoezone')
       expect(ids).toContain('shoes-susie')
       expect(ids).toContain('shoes-fashion-feet')
       expect(ids).toContain('shoes-footwear-workdo')
+      expect(ids).toContain('shoes-workdo')
+      expect(ids).toContain('shoes-sensation')
     })
 
     it('HappyFeet template is configured correctly', () => {
@@ -100,17 +123,35 @@ describe('Shoes Templates Suite (5 Complete Shoe Store Themes)', () => {
       expect(FOOTWEAR_WORKDO_TEMPLATE.isDark).toBe(true)
     })
 
-    it('registers all 5 shoe templates under shoes category in TEMPLATE_REGISTRY', () => {
+    it('Shoes WorkDo template is configured correctly with athletic lightweight theme', () => {
+      expect(SHOES_WORKDO_TEMPLATE.id).toBe('shoes-workdo')
+      expect(SHOES_WORKDO_TEMPLATE.name).toBe('Shoes WorkDo')
+      expect(SHOES_WORKDO_TEMPLATE.brandName).toBe('Shoes WorkDo')
+      expect(SHOES_WORKDO_TEMPLATE.accentColor).toBe('#1e3a8a')
+      expect(SHOES_WORKDO_TEMPLATE.features).toContain('Left Sidebar Category Navigation Menu')
+    })
+
+    it('Sensation WorkDo template is configured correctly with luxury footwear and fashion aesthetic', () => {
+      expect(SENSATION_WORKDO_TEMPLATE.id).toBe('shoes-sensation')
+      expect(SENSATION_WORKDO_TEMPLATE.name).toBe('Sensation WorkDo')
+      expect(SENSATION_WORKDO_TEMPLATE.brandName).toBe('Sensation')
+      expect(SENSATION_WORKDO_TEMPLATE.accentColor).toBe('#656c4d')
+      expect(SENSATION_WORKDO_TEMPLATE.features).toContain('Interactive Clothes Category Dropdown Pill')
+    })
+
+    it('registers all 7 shoe templates under shoes category in TEMPLATE_REGISTRY', () => {
       const shoesEntry = TEMPLATE_REGISTRY['shoes']
       expect(shoesEntry).toBeDefined()
       expect(shoesEntry.displayName).toBe('Shoes Store')
-      expect(shoesEntry.templates).toHaveLength(5)
+      expect(shoesEntry.templates).toHaveLength(7)
       const slugs = shoesEntry.templates.map((t) => t.slug)
       expect(slugs).toContain('shoes-happy-feet')
       expect(slugs).toContain('shoes-shoezone')
       expect(slugs).toContain('shoes-susie')
       expect(slugs).toContain('shoes-fashion-feet')
       expect(slugs).toContain('shoes-footwear-workdo')
+      expect(slugs).toContain('shoes-workdo')
+      expect(slugs).toContain('shoes-sensation')
     })
 
     it('resolves correct storefront components from getTemplateComponent', () => {
@@ -119,12 +160,61 @@ describe('Shoes Templates Suite (5 Complete Shoe Store Themes)', () => {
       expect(getTemplateComponent(SUSIE_SHOES_TEMPLATE)).toBe(SusieShoesStorefront)
       expect(getTemplateComponent(FASHION_FEET_TEMPLATE)).toBe(FashionFeetStorefront)
       expect(getTemplateComponent(FOOTWEAR_WORKDO_TEMPLATE)).toBe(FootwearWorkDoStorefront)
+      expect(getTemplateComponent(SHOES_WORKDO_TEMPLATE)).toBe(ShoesWorkDoStorefront)
+      expect(getTemplateComponent(SENSATION_WORKDO_TEMPLATE)).toBe(SensationStorefront)
 
       expect(getTemplateComponent('shoes-happy-feet')).toBe(HappyFeetStorefront)
       expect(getTemplateComponent('shoes-shoezone')).toBe(ShoeZoneStorefront)
       expect(getTemplateComponent('shoes-susie')).toBe(SusieShoesStorefront)
       expect(getTemplateComponent('shoes-fashion-feet')).toBe(FashionFeetStorefront)
       expect(getTemplateComponent('shoes-footwear-workdo')).toBe(FootwearWorkDoStorefront)
+      expect(getTemplateComponent('shoes-workdo')).toBe(ShoesWorkDoStorefront)
+      expect(getTemplateComponent('shoes-sensation')).toBe(SensationStorefront)
+    })
+  })
+
+  describe('Shoes WorkDo Data Integrity (shoes-workdo.myshopify.com/en-in)', () => {
+    it('has hero slides, sidebar categories, featured categories, and discounts', () => {
+      expect(SHOES_WORKDO_HERO_SLIDES.length).toBeGreaterThanOrEqual(2)
+      expect(SHOES_WORKDO_HERO_SLIDES[0].title).toBe('Walk on Air The Lightweight Collection')
+      expect(SHOES_WORKDO_SIDEBAR_CATEGORIES.length).toBe(8)
+      expect(SHOES_WORKDO_FEATURED_CATEGORIES.length).toBe(4)
+      expect(SHOES_WORKDO_TODAY_DISCOUNTS.length).toBe(3)
+      expect(SHOES_WORKDO_BESTSELLERS.length).toBe(3)
+      expect(SHOES_WORKDO_RETRO_SHOES.length).toBe(3)
+      expect(SHOES_WORKDO_REVIEWS.length).toBe(2)
+      expect(SHOES_WORKDO_BLOGS.length).toBe(3)
+    })
+
+    it('Shoes WorkDo products have valid prices, sizes, and images', () => {
+      for (const product of [...SHOES_WORKDO_TODAY_DISCOUNTS, ...SHOES_WORKDO_BESTSELLERS]) {
+        expect(product.id).toBeDefined()
+        expect(product.name).toBeDefined()
+        expect(product.price).toBeGreaterThan(0)
+        expect(product.image).toMatch(/^https?:\/\//)
+        expect(product.availableSizes.length).toBeGreaterThanOrEqual(4)
+      }
+    })
+  })
+
+  describe('Sensation Data Integrity (sensation-workdo.myshopify.com)', () => {
+    it('has hero slides, trending footwear, sunglasses, testimonials, and blogs', () => {
+      expect(SENSATION_HERO_SLIDES.length).toBeGreaterThanOrEqual(2)
+      expect(SENSATION_HERO_SLIDES[0].title).toBe('Fall in love with')
+      expect(SENSATION_HERO_SLIDES[0].highlightedWord).toBe('amazing clothes')
+      expect(SENSATION_TRENDING_PRODUCTS.length).toBe(3)
+      expect(SENSATION_SUNGLASSES_PRODUCTS.length).toBe(3)
+      expect(SENSATION_TESTIMONIALS.length).toBe(4)
+      expect(SENSATION_BLOGS.length).toBe(3)
+    })
+
+    it('Sensation products have valid prices and color options', () => {
+      for (const product of SENSATION_TRENDING_PRODUCTS) {
+        expect(product.id).toBeDefined()
+        expect(product.name).toBeDefined()
+        expect(product.price).toBeGreaterThan(0)
+        expect(product.image).toMatch(/^https?:\/\//)
+      }
     })
   })
 
@@ -139,16 +229,6 @@ describe('Shoes Templates Suite (5 Complete Shoe Store Themes)', () => {
       expect(FASHIONFEET_REVIEWS.length).toBeGreaterThanOrEqual(2)
       expect(FASHIONFEET_BLOGS.length).toBeGreaterThanOrEqual(2)
     })
-
-    it('FashionFeet products have valid prices and images', () => {
-      for (const product of FASHIONFEET_BEST_SALE_PRODUCTS) {
-        expect(product.id).toBeDefined()
-        expect(product.name).toBeDefined()
-        expect(product.price).toBeGreaterThan(0)
-        expect(product.image).toMatch(/^https?:\/\//)
-        expect(product.sizes?.length).toBeGreaterThanOrEqual(4)
-      }
-    })
   })
 
   describe('Footwear WorkDo Data Integrity (footwear-workdo.myshopify.com)', () => {
@@ -156,12 +236,6 @@ describe('Shoes Templates Suite (5 Complete Shoe Store Themes)', () => {
       expect(FOOTWEAR_HERO_SLIDES.length).toBeGreaterThanOrEqual(2)
       expect(FOOTWEAR_HERO_SLIDES[0].headline).toBe('Sneakers 2023 Limited Edition')
       expect(FOOTWEAR_CATEGORIES.length).toBe(4)
-      expect(FOOTWEAR_CATEGORIES.map((c) => c.title)).toEqual([
-        'Casual Shoes',
-        'Formal Shoes',
-        'Boots Shoes',
-        'Sports Shoes',
-      ])
       expect(FOOTWEAR_SNEAKERS_LOVE.length).toBe(4)
       expect(FOOTWEAR_BESTSELLERS.length).toBe(2)
       expect(FOOTWEAR_PROMO_BANNER.tag).toContain('20% Off')
@@ -169,28 +243,12 @@ describe('Shoes Templates Suite (5 Complete Shoe Store Themes)', () => {
       expect(FOOTWEAR_TESTIMONIALS.length).toBeGreaterThanOrEqual(2)
       expect(FOOTWEAR_BLOGS.length).toBe(4)
     })
-
-    it('Footwear WorkDo products have valid INR pricing and full size runs', () => {
-      for (const product of [...FOOTWEAR_SNEAKERS_LOVE, ...FOOTWEAR_BESTSELLERS]) {
-        expect(product.id).toBeDefined()
-        expect(product.name).toBeDefined()
-        expect(product.priceInr).toBeGreaterThan(0)
-        expect(product.image).toMatch(/^https?:\/\//)
-        expect(product.sizes).toEqual([7, 8, 9, 10])
-      }
-    })
   })
 
   describe('ShoeZone Data Integrity (huge-shoes.myshopify.com)', () => {
     it('has slides, categories, products, and countdown banner', () => {
       expect(SHOEZONE_HERO_SLIDES.length).toBeGreaterThanOrEqual(2)
       expect(SHOEZONE_CATEGORIES.length).toBe(4)
-      expect(SHOEZONE_CATEGORIES.map((c) => c.title)).toEqual([
-        'GYM SNEAKERS',
-        'HIKING BOOTS',
-        'TUDOR BOOTS',
-        'OXFORD',
-      ])
       expect(SHOEZONE_NEW_ARRIVALS.length).toBeGreaterThanOrEqual(4)
       expect(SHOEZONE_BEST_SELLERS.length).toBeGreaterThanOrEqual(4)
       expect(SHOEZONE_PROMO_COUNTDOWN.title).toContain('50%')

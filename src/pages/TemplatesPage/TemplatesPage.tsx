@@ -36,6 +36,8 @@ import {
   SusieShoesStorefront,
   FashionFeetStorefront,
   FootwearWorkDoStorefront,
+  ShoesWorkDoStorefront,
+  SensationStorefront,
 } from '../../templates/shoes'
 import '../../templates/fashion/fashionMobile.css'
 import '../../templates/jewelry/jewelryMobile.css'
@@ -67,9 +69,11 @@ import {
   SUSIE_SHOES_TEMPLATE,
   FASHION_FEET_TEMPLATE,
   FOOTWEAR_WORKDO_TEMPLATE,
+  SHOES_WORKDO_TEMPLATE,
+  SENSATION_WORKDO_TEMPLATE,
   ALL_SHOES_MARKETPLACE_TEMPLATES,
 } from '../../data/shoesTemplatesData'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront, VtOlightStorefront, SwarnaStorefront, JewStorefront, HappyFeetStorefront, ShoeZoneStorefront, SusieShoesStorefront, FashionFeetStorefront, FootwearWorkDoStorefront, HAPPY_FEET_TEMPLATE, SHOE_ZONE_TEMPLATE, SUSIE_SHOES_TEMPLATE, FASHION_FEET_TEMPLATE, FOOTWEAR_WORKDO_TEMPLATE }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront, VtOlightStorefront, SwarnaStorefront, JewStorefront, HappyFeetStorefront, ShoeZoneStorefront, SusieShoesStorefront, FashionFeetStorefront, FootwearWorkDoStorefront, ShoesWorkDoStorefront, SensationStorefront, HAPPY_FEET_TEMPLATE, SHOE_ZONE_TEMPLATE, SUSIE_SHOES_TEMPLATE, FASHION_FEET_TEMPLATE, FOOTWEAR_WORKDO_TEMPLATE, SHOES_WORKDO_TEMPLATE, SENSATION_WORKDO_TEMPLATE }
 
 
 // Re-export domain types
@@ -799,6 +803,48 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
         onColorChange={_onColorChange}
         onUseTemplate={onUseTemplate}
         onClose={onClose}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'shoes-workdo' ||
+      template.id === 'shoes-workdo' ||
+      template.slug === 'shoesworkdo' ||
+      template.id === 'shoesworkdo' ||
+      template.name?.toLowerCase().includes('shoes workdo'))
+  ) {
+    return (
+      <ShoesWorkDoStorefront
+        template={template}
+        device={device === 'fullscreen' ? 'desktop' : device}
+        customAccentColor={customAccentColor || undefined}
+        onUseTemplate={() => {
+          onUseTemplate?.(template.id)
+          onClose?.()
+        }}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'shoes-sensation' ||
+      template.id === 'shoes-sensation' ||
+      template.slug === 'sensation' ||
+      template.id === 'sensation' ||
+      template.name?.toLowerCase().includes('sensation'))
+  ) {
+    return (
+      <SensationStorefront
+        template={template}
+        device={device === 'fullscreen' ? 'desktop' : device}
+        customAccentColor={customAccentColor || undefined}
+        onUseTemplate={() => {
+          onUseTemplate?.(template.id)
+          onClose?.()
+        }}
       />
     )
   }
@@ -1781,6 +1827,21 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
   const [previewTemplate, setPreviewTemplate] = useState<MarketplaceTemplate | null>(() => {
     const rawHash = typeof window !== 'undefined' ? window.location.hash.toLowerCase().replace(/^#/, '') : ''
     if (
+      rawHash === 'shoes-workdo' ||
+      rawHash === 'shoesworkdo' ||
+      rawHash === 'workdo-shoes-store'
+    ) {
+      return SHOES_WORKDO_TEMPLATE
+    }
+    if (
+      rawHash === 'sensation' ||
+      rawHash === 'shoes-sensation' ||
+      rawHash === 'sensation-workdo' ||
+      rawHash === 'sensation-shoes'
+    ) {
+      return SENSATION_WORKDO_TEMPLATE
+    }
+    if (
       rawHash === 'fashion-feet' ||
       rawHash === 'fashionfeet' ||
       rawHash === 'shoes-fashion-feet' ||
@@ -2009,6 +2070,19 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
     const handleHash = () => {
       const rawHash = window.location.hash.toLowerCase().replace(/^#/, '')
       if (
+        rawHash === 'shoes-workdo' ||
+        rawHash === 'shoesworkdo' ||
+        rawHash === 'workdo-shoes-store'
+      ) {
+        setPreviewTemplate(SHOES_WORKDO_TEMPLATE)
+      } else if (
+        rawHash === 'sensation' ||
+        rawHash === 'shoes-sensation' ||
+        rawHash === 'sensation-workdo' ||
+        rawHash === 'sensation-shoes'
+      ) {
+        setPreviewTemplate(SENSATION_WORKDO_TEMPLATE)
+      } else if (
         rawHash === 'fashion-feet' ||
         rawHash === 'fashionfeet' ||
         rawHash === 'shoes-fashion-feet' ||

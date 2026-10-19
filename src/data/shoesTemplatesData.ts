@@ -234,6 +234,92 @@ export const FOOTWEAR_WORKDO_TEMPLATE: MarketplaceTemplate = {
   layoutType: 'card-grid',
 }
 
+export const SHOES_WORKDO_TEMPLATE: MarketplaceTemplate = {
+  id: 'shoes-workdo',
+  slug: 'shoes-workdo',
+  name: 'Shoes WorkDo',
+  businessType: 'shoes',
+  tags: ['Shoes', 'Running Shoes', 'Sneakers', 'Football', 'Walking Shoes', 'Athletic', 'Men', 'Discounts'],
+  shortDescription:
+    'High-performance athletic shoe store featuring category sidebar navigation, daily discounts, live size selectors, and responsive dual statement shoe banners.',
+  thumbnailUrl:
+    'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80',
+  fullPreviewUrl: 'https://shoes-workdo.myshopify.com/en-in',
+  popularityScore: 99,
+  isActive: true,
+  brandName: 'Shoes WorkDo',
+  headline: 'Walk on Air The Lightweight Collection',
+  subtitle:
+    '-30% OFF daily discounts on lightweight running and training shoes with 24h express delivery.',
+  buttonText: 'Show products',
+  buttonColor: '#1e3a8a',
+  isDark: false,
+  modelImage:
+    'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=1200&q=80',
+  industryCategory: 'Athletic Shoes',
+  style: 'bold',
+  catalogSize: 'large',
+  features: [
+    'Left Sidebar Category Navigation Menu',
+    'Daily Discounts Showcase with -30% OFF Badge',
+    'Bestsellers Filterable Category Pills',
+    'Loved Category Split Section with Urban Model',
+    'Retro-Inspired Athletic Shoes Showcase',
+    'Dual Runway & Futuristic Performance Banners',
+    'Customer Testimonials with Runner Reviews',
+    'Shoe Size Dropdown Selectors on Cards',
+    'Sliding Cart Drawer with INR & USD Currencies',
+  ],
+  badge: 'popular',
+  accentColor: '#1e3a8a',
+  rating: 4.96,
+  reviewCount: 178,
+  layoutType: 'split',
+}
+
+export const SENSATION_WORKDO_TEMPLATE: MarketplaceTemplate = {
+  id: 'shoes-sensation',
+  slug: 'shoes-sensation',
+  name: 'Sensation WorkDo',
+  businessType: 'shoes',
+  tags: ['Shoes', 'Sandals', 'Footwear', 'Clothes', 'Fashion', 'Sunglasses', 'Accessories', 'Boutique'],
+  shortDescription:
+    'Sunny olive-toned luxury fashion & footwear storefront with interactive category dropdowns, curated leather sandals, and editorial collection storytelling.',
+  thumbnailUrl:
+    'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80',
+  fullPreviewUrl: 'https://sensation-workdo.myshopify.com/',
+  popularityScore: 98,
+  isActive: true,
+  brandName: 'Sensation',
+  headline: 'Fall in love with amazing clothes',
+  subtitle:
+    'Curated luxury sandals, artisanal leather footwear, and chic accessories for summer and autumn.',
+  buttonText: 'Go To Shop',
+  buttonColor: '#656c4d',
+  isDark: false,
+  modelImage:
+    'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=80',
+  industryCategory: 'Footwear & Lifestyle',
+  style: 'editorial',
+  catalogSize: 'medium',
+  features: [
+    'Interactive Clothes Category Dropdown Pill',
+    'Shop All & Pages Navigation Menus',
+    'Trending Leather Sandals with Color Swatches',
+    'Deep Olive "Journey Through Amazing Clothes" Section',
+    'Embracing Allure of Sunglasses with Tabs',
+    'Terracotta Glamour of Fashion Editorial Banner',
+    '3-Column "Embracing Fashion for Every Body" Cards',
+    'Fashionably Satisfied 4-Card Testimonial Grid',
+    'Slide-over Bag Drawer with Multi-Currency Support',
+  ],
+  badge: 'trending',
+  accentColor: '#656c4d',
+  rating: 4.94,
+  reviewCount: 136,
+  layoutType: 'editorial',
+}
+
 export const SHOES_TEMPLATES_CONFIG: Record<string, ShoesTemplateConfig> = {
   'shoes-happy-feet': {
     template: HAPPY_FEET_TEMPLATE,
@@ -408,6 +494,76 @@ export const SHOES_TEMPLATES_CONFIG: Record<string, ShoesTemplateConfig> = {
       },
     ],
   },
+  'shoes-workdo': {
+    template: SHOES_WORKDO_TEMPLATE,
+    announcement: '📞 Support 24/7: +12 002-224-111 | -30% off for first order with 200 USD in cart',
+    navItems: ['All Categories', 'Running Shoes', 'Football', 'Sneakers', 'Walking Shoes', 'Pages', 'Blogs'],
+    categories: [
+      { id: 'running', name: 'Running', image: 'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?auto=format&fit=crop&w=600&q=80' },
+      { id: 'football', name: 'Football', image: 'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&w=600&q=80' },
+      { id: 'sneakers', name: 'Sneakers', image: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=600&q=80' },
+      { id: 'walking', name: 'Walking', image: 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=600&q=80' },
+    ],
+    featuredProducts: [
+      {
+        id: 'swd-td-1',
+        name: 'Air Force Impact 4',
+        category: 'Running Shoes',
+        price: 'Rs. 1,600.00',
+        compareAtPrice: 'Rs. 2,200.00',
+        image: 'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=600&q=80',
+        badge: 'SALE',
+        rating: 5,
+        reviewCount: 32,
+      },
+      {
+        id: 'swd-td-2',
+        name: 'Air Max 97 SE',
+        category: 'Sneakers',
+        price: 'Rs. 2,100.00',
+        compareAtPrice: 'Rs. 2,800.00',
+        image: 'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?auto=format&fit=crop&w=600&q=80',
+        badge: '-30%',
+        rating: 5,
+        reviewCount: 45,
+      },
+    ],
+  },
+  'shoes-sensation': {
+    template: SENSATION_WORKDO_TEMPLATE,
+    announcement: '7 Days A Week From 9:00 Am To 7:00 Pm | Curated Luxury Fashion & Footwear',
+    navItems: ['Clothes', 'Shop All', 'Brands', 'Bestseller', 'Pages'],
+    categories: [
+      { id: 'sandals', name: 'Sandals', image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=80' },
+      { id: 'shoes', name: 'Shoes', image: 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=600&q=80' },
+      { id: 'sunglasses', name: 'Sunglasses', image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80' },
+      { id: 'bags', name: 'Bags & Purses', image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=600&q=80' },
+    ],
+    featuredProducts: [
+      {
+        id: 'sen-trend-1',
+        name: 'Women ARCOCO Stylish Leather',
+        category: 'Sandals',
+        price: '$28.00',
+        compareAtPrice: '$35.00',
+        image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=80',
+        badge: 'HOT',
+        rating: 5,
+        reviewCount: 38,
+      },
+      {
+        id: 'sen-trend-2',
+        name: 'Women Open Toe Ankle Sandals',
+        category: 'Sandals',
+        price: '$35.00',
+        compareAtPrice: '$45.00',
+        image: 'https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?auto=format&fit=crop&w=600&q=80',
+        badge: 'HOT',
+        rating: 5,
+        reviewCount: 42,
+      },
+    ],
+  },
 }
 
 export const ALL_SHOES_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
@@ -416,4 +572,7 @@ export const ALL_SHOES_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   SUSIE_SHOES_TEMPLATE,
   FASHION_FEET_TEMPLATE,
   FOOTWEAR_WORKDO_TEMPLATE,
+  SHOES_WORKDO_TEMPLATE,
+  SENSATION_WORKDO_TEMPLATE,
 ]
+
