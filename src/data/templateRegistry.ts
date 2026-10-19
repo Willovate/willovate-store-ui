@@ -33,8 +33,17 @@ import { MotionStorefront } from '../templates/sports/Motion'
 import { ALL_SPORTS_MARKETPLACE_TEMPLATES } from './sportsTemplatesData'
 import { ALL_FASHION_MARKETPLACE_TEMPLATES } from './fashionTemplatesData'
 import { ALL_JEWELRY_MARKETPLACE_TEMPLATES } from './jewelryTemplatesData'
+import { ALL_SHOES_MARKETPLACE_TEMPLATES } from './shoesTemplatesData'
+import { HappyFeetStorefront } from '../templates/shoes'
 
 export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
+  'shoes': {
+    displayName: 'Shoes Store',
+    badgeIcon: '👟',
+    description: 'High-performance athletic sneakers, casual walking trainers, and luxury leather footwear.',
+    filterTags: ['All', 'Sneakers', 'Loafer', 'Sports', 'Formal', 'Boots', 'Athletic', 'Streetwear'],
+    templates: ALL_SHOES_MARKETPLACE_TEMPLATES,
+  },
   'jewelry-accessories': {
     displayName: 'Jewelry & Accessories',
     badgeIcon: '💎',
@@ -107,7 +116,35 @@ export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
   },
 }
 
+export function getTemplateCategoryKey(categoryKey: string): string {
+  const norm = (categoryKey || '').toLowerCase().trim()
+  if (
+    norm === 'shoes' ||
+    norm === 'shoes-store' ||
+    norm === 'shoes-footwear' ||
+    norm === 'footwear' ||
+    norm === 'sneakers' ||
+    norm.includes('shoe') ||
+    norm.includes('sneaker') ||
+    norm.includes('footwear')
+  ) {
+    return 'shoes'
+  }
+  return categoryKey
+}
+
 export function getTemplateComponent(template?: MarketplaceTemplate | Template | null): ComponentType<any> {
+  if (
+    template &&
+    (template.slug === 'shoes-happy-feet' ||
+      template.id === 'shoes-happy-feet' ||
+      template.slug === 'happy-feet' ||
+      template.id === 'happy-feet' ||
+      template.name?.toLowerCase().includes('happy feet') ||
+      template.businessType === 'shoes')
+  ) {
+    return HappyFeetStorefront
+  }
   if (
     template &&
     (template.slug === 'sports-motion' ||

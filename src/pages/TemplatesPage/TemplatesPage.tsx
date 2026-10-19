@@ -30,6 +30,7 @@ import { DiamondWorkDoStorefront } from '../../templates/jewelry/DiamondWorkDo'
 import { VtOlightStorefront } from '../../templates/jewelry/VtOlight'
 import { SwarnaStorefront } from '../../templates/jewelry/Swarna'
 import { JewStorefront } from '../../templates/jewelry/Jew'
+import { HappyFeetStorefront } from '../../templates/shoes'
 import '../../templates/fashion/fashionMobile.css'
 import '../../templates/jewelry/jewelryMobile.css'
 import {
@@ -54,7 +55,11 @@ import {
   JEW_TEMPLATE,
   ALL_JEWELRY_MARKETPLACE_TEMPLATES,
 } from '../../data/jewelryTemplatesData'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront, VtOlightStorefront, SwarnaStorefront, JewStorefront }
+import {
+  HAPPY_FEET_TEMPLATE,
+  ALL_SHOES_MARKETPLACE_TEMPLATES,
+} from '../../data/shoesTemplatesData'
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront, VtOlightStorefront, SwarnaStorefront, JewStorefront, HappyFeetStorefront, HAPPY_FEET_TEMPLATE }
 
 
 // Re-export domain types
@@ -122,6 +127,7 @@ export {
 
 export {
   TEMPLATE_REGISTRY,
+  getTemplateCategoryKey,
   getTemplateComponent,
 } from '../../data/templateRegistry'
 
@@ -136,7 +142,7 @@ export {
   getAllMarketplaceTemplates,
 } from '../../data/marketplaceTemplatesData'
 
-import { TEMPLATE_REGISTRY } from '../../data/templateRegistry'
+import { getTemplateCategoryKey, TEMPLATE_REGISTRY } from '../../data/templateRegistry'
 import { ALL_SPORTS_MARKETPLACE_TEMPLATES } from '../../data/sportsTemplatesData'
 /* =========================================================================
    INLINE WILLOVATE ONE LOGO
@@ -787,6 +793,30 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
     )
   }
 
+  if (
+    template &&
+    (template.slug === 'shoes-happy-feet' ||
+      template.id === 'shoes-happy-feet' ||
+      template.slug === 'happy-feet' ||
+      template.id === 'happy-feet' ||
+      template.name?.toLowerCase().includes('happy feet') ||
+      template.businessType === 'shoes' ||
+      template.industryCategory?.toLowerCase().includes('shoe') ||
+      template.industryCategory?.toLowerCase().includes('footwear'))
+  ) {
+    return (
+      <HappyFeetStorefront
+        template={template}
+        device={device === 'fullscreen' ? 'desktop' : device}
+        customAccentColor={customAccentColor || undefined}
+        onUseTemplate={() => {
+          onUseTemplate?.(template.id)
+          onClose?.()
+        }}
+      />
+    )
+  }
+
   if (template && template.businessType !== 'sporting-goods') {
     return (
       <BelleFashionStorefront
@@ -1116,6 +1146,19 @@ export const BUSINESS_TYPES: BusinessTypeItem[] = [
     ),
   },
   {
+    id: 'shoes',
+    name: 'Shoes Store',
+    description: 'High-performance sneakers, running footwear, casual trainers, and boots.',
+    tone: 'orange',
+    iconSvg: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M2.5 13.5c0-2.2 1.8-4 4-4h2.5l3.5-3.5h4c1.4 0 2.5 1.1 2.5 2.5v1.5c0 1.4-.8 2.3-2 2.5h-1.5l-2 3.5h-7c-2.2 0-4-1.1-4-2.5z" />
+        <path d="M2 17.5h20v2H2z" />
+        <circle cx="7.5" cy="13.5" r="1" />
+      </svg>
+    ),
+  },
+  {
     id: 'restaurant',
     name: 'Restaurant',
     description: 'Show your menu and take orders online.',
@@ -1127,21 +1170,6 @@ export const BUSINESS_TYPES: BusinessTypeItem[] = [
         <line x1="6" y1="1" x2="6" y2="4" />
         <line x1="10" y1="1" x2="10" y2="4" />
         <line x1="14" y1="1" x2="14" y2="4" />
-      </svg>
-    ),
-  },
-  {
-    id: 'salon',
-    name: 'Salon',
-    description: 'Manage services and bookings.',
-    tone: 'pink',
-    iconSvg: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="6" cy="6" r="3" />
-        <circle cx="6" cy="18" r="3" />
-        <line x1="20" y1="4" x2="8.12" y2="15.88" />
-        <line x1="14.47" y1="14.48" x2="20" y2="20" />
-        <line x1="8.12" y1="8.12" x2="12" y2="12" />
       </svg>
     ),
   },
@@ -1204,8 +1232,8 @@ export interface OtherSuggestionItem {
 }
 
 export const ALL_OTHER_SUGGESTIONS: OtherSuggestionItem[] = [
+  { id: 'salon', label: 'Salon', icon: '✂️', prompt: 'Manage hair styling, spa services, beauty appointments and bookings' },
   { id: 'sporting-goods', label: 'Sports Store', icon: '⚽', prompt: 'Athletic wear, workout equipment and outdoor adventure gear' },
-  { id: 'shoes-footwear', label: 'Shoes & Footwear', icon: '👟', prompt: 'Sneaker boutique, athletic footwear, leather formal shoes and boots' },
   { id: 'food-beverages', label: 'Food & Beverages', icon: '☕', prompt: 'Specialty roasters, gourmet pantry and beverage store' },
   { id: 'furniture', label: 'Furniture', icon: '🛋️', prompt: 'Artisan furniture, modern home decor and interior design' },
   { id: 'health-beauty', label: 'Cosmetics & Beauty', icon: '💄', prompt: 'Cosmetics, luxury makeup, skincare and fragrance' },
@@ -1237,14 +1265,17 @@ export function TemplateDirectoryPage({
   onBack,
   onSelectBusinessType,
 }: TemplateDirectoryPageProps) {
+  const initialCategoryKey = getTemplateCategoryKey(initialBusinessType || '')
   const [selectedType, setSelectedType] = useState<string>(() => {
     if (initialCustomPrompt && (!initialBusinessType || initialBusinessType === 'other')) {
       return 'other'
     }
-    if (initialBusinessType && BUSINESS_TYPES.some((b) => b.id === initialBusinessType && b.id !== 'other')) {
-      return initialBusinessType
+    if (initialCategoryKey && BUSINESS_TYPES.some((b) => b.id === initialCategoryKey && b.id !== 'other')) {
+      return initialCategoryKey
     }
-    if (initialBusinessType && ALL_OTHER_SUGGESTIONS.some((suggestion) => suggestion.id === initialBusinessType)) {
+    if (initialBusinessType && ALL_OTHER_SUGGESTIONS.some(
+      (suggestion) => suggestion.id === initialBusinessType || getTemplateCategoryKey(suggestion.id) === initialCategoryKey
+    )) {
       return 'other'
     }
     return 'online-store'
@@ -1252,7 +1283,10 @@ export function TemplateDirectoryPage({
 
   const [selectedSuggestion, setSelectedSuggestion] = useState<OtherSuggestionItem | null>(() => {
     if (initialBusinessType && initialBusinessType !== 'online-store') {
-      return ALL_OTHER_SUGGESTIONS.find((s) => s.id === initialBusinessType) || null
+      return ALL_OTHER_SUGGESTIONS.find(
+        (suggestion) => suggestion.id === initialBusinessType ||
+          getTemplateCategoryKey(suggestion.id) === initialCategoryKey
+      ) || null
     }
     return null
   })
@@ -1298,17 +1332,88 @@ export function TemplateDirectoryPage({
 
     // When 'other' is selected:
     if (selectedSuggestion) {
-      const catKey = TEMPLATE_REGISTRY[selectedSuggestion.id] ? selectedSuggestion.id : 'other'
-      onSelectBusinessType(catKey, selectedSuggestion.label, customPrompt || selectedSuggestion.prompt)
+      const catKey = getTemplateCategoryKey(selectedSuggestion.id)
+      const category = TEMPLATE_REGISTRY[catKey]
+      onSelectBusinessType(
+        category ? catKey : 'other',
+        category?.displayName || selectedSuggestion.label,
+        customPrompt || selectedSuggestion.prompt,
+      )
       return
     }
 
     if (customPrompt.trim()) {
+      const lower = customPrompt.toLowerCase()
+      if (
+        lower.includes('shoe') ||
+        lower.includes('footwear') ||
+        lower.includes('sneaker') ||
+        lower.includes('kicks') ||
+        lower.includes('boot') ||
+        lower.includes('loafer') ||
+        lower.includes('happy feet')
+      ) {
+        onSelectBusinessType('shoes', 'Shoes Store', customPrompt.trim())
+        return
+      }
+
+      if (
+        lower.includes('jewel') ||
+        lower.includes('diamond') ||
+        lower.includes('ring') ||
+        lower.includes('necklace') ||
+        lower.includes('earring') ||
+        lower.includes('bracelet') ||
+        lower.includes('watch') ||
+        lower.includes('gold')
+      ) {
+        onSelectBusinessType('jewelry-accessories', 'Jewelry & Accessories', customPrompt.trim())
+        return
+      }
+
+      if (
+        lower.includes('sport') ||
+        lower.includes('athletic') ||
+        lower.includes('gym') ||
+        lower.includes('fitness') ||
+        lower.includes('workout')
+      ) {
+        onSelectBusinessType('sporting-goods', 'Sports Store', customPrompt.trim())
+        return
+      }
+
+      if (
+        lower.includes('fashion') ||
+        lower.includes('cloth') ||
+        lower.includes('apparel') ||
+        lower.includes('wear') ||
+        lower.includes('dress')
+      ) {
+        onSelectBusinessType('clothing-store', 'Fashion Store', customPrompt.trim())
+        return
+      }
+
+      if (
+        lower.includes('salon') ||
+        lower.includes('hair') ||
+        lower.includes('barber') ||
+        lower.includes('spa') ||
+        lower.includes('beauty parlor')
+      ) {
+        onSelectBusinessType('salon', 'Salon', customPrompt.trim())
+        return
+      }
+
       const match = ALL_OTHER_SUGGESTIONS.find(
-        (s) => customPrompt.toLowerCase().includes(s.label.toLowerCase()) || s.label.toLowerCase().includes(customPrompt.toLowerCase())
+        (s) => lower.includes(s.label.toLowerCase()) || s.label.toLowerCase().includes(lower)
       )
-      const catKey = match && TEMPLATE_REGISTRY[match.id] ? match.id : 'other'
-      onSelectBusinessType(catKey, match ? match.label : 'Other', customPrompt.trim())
+      const catKey = match ? getTemplateCategoryKey(match.id) : 'other'
+      const category = TEMPLATE_REGISTRY[catKey]
+      onSelectBusinessType(
+        category ? catKey : 'other',
+        category?.displayName || (match ? match.label : 'Other'),
+        customPrompt.trim(),
+      )
       return
     }
 
@@ -1485,41 +1590,81 @@ const CLOTHING_REFERENCE_TEMPLATE: MarketplaceTemplate = BELLE_FASHION_TEMPLATE
 export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
   businessType = 'online-store',
   businessTypeDisplay,
+  customPrompt,
   sessionId: _sessionId = 'sess_onboarding_101',
   onBack,
   onComplete,
 }) => {
+  const normPrompt = (customPrompt || '').toLowerCase()
+  const isShoePrompt =
+    normPrompt.includes('shoe') ||
+    normPrompt.includes('sneaker') ||
+    normPrompt.includes('footwear') ||
+    normPrompt.includes('kicks') ||
+    normPrompt.includes('boot') ||
+    normPrompt.includes('loafer') ||
+    normPrompt.includes('happy feet')
+
+  const effectiveBusinessType =
+    isShoePrompt && (businessType === 'other' || !businessType)
+      ? 'shoes'
+      : businessType
+
+  const categoryKey = getTemplateCategoryKey(effectiveBusinessType)
   // Resolve display title and category
   const resolvedCategory = useMemo(() => {
-    return TEMPLATE_REGISTRY[businessType] || TEMPLATE_REGISTRY['online-store']
-  }, [businessType])
+    return TEMPLATE_REGISTRY[categoryKey] || TEMPLATE_REGISTRY['online-store']
+  }, [categoryKey])
 
-  const displayTitle = businessTypeDisplay || resolvedCategory?.displayName || 'Online Store'
+  const displayTitle = useMemo(() => {
+    if (
+      categoryKey === 'shoes' ||
+      isShoePrompt ||
+      businessType?.toLowerCase().includes('shoe') ||
+      businessTypeDisplay?.toLowerCase().includes('shoe')
+    ) {
+      return 'Shoes Store'
+    }
+    return businessTypeDisplay || resolvedCategory?.displayName || 'Online Store'
+  }, [categoryKey, isShoePrompt, businessType, businessTypeDisplay, resolvedCategory])
 
-  // Sports keeps its full catalog; clothing-store uses fashion templates; jewelry uses jewelry templates.
+  // Sports keeps its full catalog; clothing-store uses fashion templates; jewelry uses jewelry templates; shoes uses shoes templates.
   const categoryTemplates: MarketplaceTemplate[] = useMemo(() => {
-    if (businessType === 'sporting-goods') {
+    if (
+      categoryKey === 'shoes' ||
+      categoryKey === 'shoes-store' ||
+      categoryKey === 'shoes-footwear' ||
+      categoryKey === 'sneakers' ||
+      categoryKey === 'footwear' ||
+      isShoePrompt ||
+      displayTitle.toLowerCase().includes('shoe') ||
+      displayTitle.toLowerCase().includes('footwear') ||
+      displayTitle.toLowerCase().includes('sneaker')
+    ) {
+      return ALL_SHOES_MARKETPLACE_TEMPLATES
+    }
+    if (categoryKey === 'sporting-goods') {
       return ALL_SPORTS_MARKETPLACE_TEMPLATES
     }
-    if (businessType === 'clothing-store') {
+    if (categoryKey === 'clothing-store') {
       return ALL_FASHION_MARKETPLACE_TEMPLATES
     }
-    if (businessType === 'jewelry-accessories' || businessType === 'jewelry') {
+    if (categoryKey === 'jewelry-accessories' || categoryKey === 'jewelry') {
       return ALL_JEWELRY_MARKETPLACE_TEMPLATES
     }
-    if (TEMPLATE_REGISTRY[businessType]?.templates?.length) {
-      return TEMPLATE_REGISTRY[businessType].templates as unknown as MarketplaceTemplate[]
+    if (TEMPLATE_REGISTRY[categoryKey]?.templates?.length) {
+      return TEMPLATE_REGISTRY[categoryKey].templates as unknown as MarketplaceTemplate[]
     }
 
     return [{
       ...CLOTHING_REFERENCE_TEMPLATE,
-      id: `clothing-reference-${businessType}`,
-      slug: `clothing-reference-${businessType}`,
-      businessType,
+      id: `clothing-reference-${categoryKey}`,
+      slug: `clothing-reference-${categoryKey}`,
+      businessType: categoryKey,
       industryCategory: displayTitle,
       shortDescription: `A high-end fashion storefront for ${displayTitle}.`,
     }]
-  }, [businessType, displayTitle])
+  }, [categoryKey, displayTitle, isShoePrompt])
 
   // Selection state
   const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(categoryTemplates[0]?.id || null)
@@ -1531,6 +1676,19 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
   // Preview Modal state
   const [previewTemplate, setPreviewTemplate] = useState<MarketplaceTemplate | null>(() => {
     const rawHash = typeof window !== 'undefined' ? window.location.hash.toLowerCase().replace(/^#/, '') : ''
+    if (
+      rawHash === 'shoes' ||
+      rawHash === 'shoes-store' ||
+      rawHash === 'shoes-footwear' ||
+      rawHash === 'happy-feet' ||
+      rawHash === 'shoes-happy-feet' ||
+      rawHash === 'shoes-templates' ||
+      rawHash === 'shoes-template' ||
+      rawHash === 'footwear' ||
+      rawHash === 'sneakers'
+    ) {
+      return ALL_SHOES_MARKETPLACE_TEMPLATES[0] || HAPPY_FEET_TEMPLATE
+    }
     if (rawHash === 'sports-storefront' || rawHash === 'velocity' || rawHash === 'sports-preview' || rawHash === 'velocity-preview') {
       return ALL_SPORTS_MARKETPLACE_TEMPLATES[0] || null
     }
@@ -1713,11 +1871,23 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
     setPreviewTemplate(null)
   }, [businessType, categoryTemplates])
 
-  // Auto-launch preview if URL hash changes to sports, fashion, or jewelry presets
+  // Auto-launch preview if URL hash changes to sports, fashion, jewelry, or shoes presets
   useEffect(() => {
     const handleHash = () => {
       const rawHash = window.location.hash.toLowerCase().replace(/^#/, '')
-      if (rawHash === 'sports-storefront' || rawHash === 'velocity' || rawHash === 'sports-preview' || rawHash === 'velocity-preview') {
+      if (
+        rawHash === 'shoes' ||
+        rawHash === 'shoes-store' ||
+        rawHash === 'shoes-footwear' ||
+        rawHash === 'happy-feet' ||
+        rawHash === 'shoes-happy-feet' ||
+        rawHash === 'shoes-templates' ||
+        rawHash === 'shoes-template' ||
+        rawHash === 'footwear' ||
+        rawHash === 'sneakers'
+      ) {
+        setPreviewTemplate(ALL_SHOES_MARKETPLACE_TEMPLATES[0] || HAPPY_FEET_TEMPLATE)
+      } else if (rawHash === 'sports-storefront' || rawHash === 'velocity' || rawHash === 'sports-preview' || rawHash === 'velocity-preview') {
         const match = ALL_SPORTS_MARKETPLACE_TEMPLATES[0]
         if (match) setPreviewTemplate(match)
       } else if (
@@ -1931,7 +2101,7 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
 
       if (onComplete) {
         onComplete(
-          `proj_${businessType}_${Date.now()}`,
+          `proj_${categoryKey}_${Date.now()}`,
           '/workspace',
           chosen.name ?? `${displayTitle} Template`,
           `Your ${chosen.name || displayTitle} template is ready in your workspace.`,

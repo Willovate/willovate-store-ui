@@ -296,6 +296,17 @@ function App() {
             rawHash === 'aurelia'
           )) ||
 
+          (key === 'shoes' && (
+            rawHash === 'shoes' ||
+            rawHash === 'shoes-store' ||
+            rawHash === 'shoes-storefront' ||
+            rawHash === 'happy-feet' ||
+            rawHash === 'shoes-happy-feet' ||
+            rawHash === 'shoes-templates' ||
+            rawHash === 'shoes-template' ||
+            rawHash === 'footwear' ||
+            rawHash === 'sneakers'
+          )) ||
           (key === 'sporting-goods' && (
             rawHash === 'sports' ||
             rawHash === 'sports-store' ||
