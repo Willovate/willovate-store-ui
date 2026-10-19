@@ -320,6 +320,90 @@ export const SENSATION_WORKDO_TEMPLATE: MarketplaceTemplate = {
   layoutType: 'editorial',
 }
 
+export const GIAROS_TEMPLATE: MarketplaceTemplate = {
+  id: 'shoes-giaros',
+  slug: 'shoes-giaros',
+  name: 'Giaros Footwear Premium',
+  businessType: 'shoes',
+  tags: ['Shoes', 'High Heels', 'Stilettos', 'Boots', 'Flats', 'Luxury', 'Women', 'Velour'],
+  shortDescription:
+    'Ultra-luxury high-fashion women footwear boutique featuring circular spotlight hero, video presentation campaign, and stiletto collection grid.',
+  thumbnailUrl:
+    'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=800&q=80',
+  fullPreviewUrl: 'https://giaros-store-demo.myshopify.com/?pb=0',
+  popularityScore: 99,
+  isActive: true,
+  brandName: 'GIAROS',
+  headline: 'Premium Velour Shoes',
+  subtitle:
+    'A scene-stealing high heel in an iconic embroidered silhouette is crowned with 30% off.',
+  buttonText: 'SHOP NOW',
+  buttonColor: '#000000',
+  isDark: false,
+  modelImage:
+    'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=1200&q=80',
+  industryCategory: 'Luxury Footwear',
+  style: 'luxury',
+  catalogSize: 'large',
+  features: [
+    'Split Hero with Circular Cutout Shoe Spotlight',
+    '3 Model Editorial Categories (Platform Heeled, Should, Boots)',
+    'New Arrivals 2-Card Spotlight (Ryfon & Ebory)',
+    'Video Presentation Banner with Full Modal Player',
+    'Best Seller 8-Product Grid with Category Tabs',
+    'The Latest Shoes From La Destination Banner',
+    'Interactive Bag Drawer and Size Picker',
+  ],
+  badge: 'trending',
+  accentColor: '#e11d48',
+  rating: 4.97,
+  reviewCount: 162,
+  layoutType: 'split',
+}
+
+export const STEPGLAM_TEMPLATE: MarketplaceTemplate = {
+  id: 'shoes-stepglam',
+  slug: 'shoes-stepglam',
+  name: 'StepGlam Juttis & Mojaris',
+  businessType: 'shoes',
+  tags: ['Shoes', 'Juttis', 'Mojaris', 'Handcrafted', 'Ethnic', 'Bridal', 'Flats', 'Slip-Ons', 'INR'],
+  shortDescription:
+    'Royal plum & blush pink handcrafted artisanal juttis boutique with live size buttons, interactive craftsmanship accordion, and summer flash deal countdown.',
+  thumbnailUrl:
+    'https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?auto=format&fit=crop&w=800&q=80',
+  fullPreviewUrl: 'https://stepglam-workdo.myshopify.com/',
+  popularityScore: 98,
+  isActive: true,
+  brandName: 'StepGlam',
+  headline: 'A New Generation Of Juttis',
+  subtitle:
+    'Step into elegance with our handcrafted juttis, perfect for weddings, festivities, and modern ethnic chic.',
+  buttonText: 'Shop Now',
+  buttonColor: '#581d4e',
+  isDark: false,
+  modelImage:
+    'https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?auto=format&fit=crop&w=1200&q=80',
+  industryCategory: 'Artisanal Ethnic Footwear',
+  style: 'editorial',
+  catalogSize: 'medium',
+  features: [
+    '3-Column Handcrafted Juttis Hero with 25% Off Arch Badge',
+    'Browse Modern Categories with Pill Filter Tabs',
+    'Continuous Scrolling Embroidered Ticker Ribbon',
+    'Why Choose Us Interactive Accordion on Royal Plum',
+    'Direct [6] [7] [8] Size Button Selectors on Product Cards',
+    'Live Flash Deal Countdown Timer (Days, Hours, Mins, Secs)',
+    'Ayesha Kapoor Fashion Stylist Customer Spotlight',
+    '4 Handcrafted Heritage Trust Badges & Instagram Strip',
+    'Slide-Over Shopping Bag with Dual INR / USD Currency',
+  ],
+  badge: 'popular',
+  accentColor: '#581d4e',
+  rating: 4.98,
+  reviewCount: 184,
+  layoutType: 'editorial',
+}
+
 export const SHOES_TEMPLATES_CONFIG: Record<string, ShoesTemplateConfig> = {
   'shoes-happy-feet': {
     template: HAPPY_FEET_TEMPLATE,
@@ -564,6 +648,72 @@ export const SHOES_TEMPLATES_CONFIG: Record<string, ShoesTemplateConfig> = {
       },
     ],
   },
+  'shoes-giaros': {
+    template: GIAROS_TEMPLATE,
+    announcement: '✨ Get UP To 30% Off | Handcrafted Luxury Velour Stilettos & High Heels',
+    navItems: ['Home', 'Shop', 'Featured', 'Pages', 'Blogs'],
+    categories: [
+      { id: 'heels', name: 'Platform Heeled', image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=80' },
+      { id: 'should', name: 'Platform Should', image: 'https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?auto=format&fit=crop&w=600&q=80' },
+      { id: 'boots', name: 'High Heels Boots', image: 'https://images.unsplash.com/photo-1520639888713-7851133b1ed0?auto=format&fit=crop&w=600&q=80' },
+    ],
+    featuredProducts: [
+      {
+        id: 'arrival-1',
+        name: 'Ryfon Patent Heels',
+        category: 'Women Heels',
+        price: '$64.00',
+        image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=80',
+        badge: 'NEW',
+        rating: 5,
+        reviewCount: 38,
+      },
+      {
+        id: 'arrival-2',
+        name: 'Ebory Gradient Pumps',
+        category: 'Women Heels',
+        price: '$48.00',
+        image: 'https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?auto=format&fit=crop&w=600&q=80',
+        badge: 'HOT',
+        rating: 5,
+        reviewCount: 26,
+      },
+    ],
+  },
+  'shoes-stepglam': {
+    template: STEPGLAM_TEMPLATE,
+    announcement: '📞 +2146414547 | Handcrafted Indian Juttis & Mojaris with Memory Foam Cushion',
+    navItems: ['Home', 'Products', 'Shop All', 'Pages', 'Blogs'],
+    categories: [
+      { id: 'juttis', name: 'Juttis', image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=80' },
+      { id: 'mojaris', name: 'Mojaris', image: 'https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?auto=format&fit=crop&w=600&q=80' },
+      { id: 'flats', name: 'Flats', image: 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=600&q=80' },
+    ],
+    featuredProducts: [
+      {
+        id: 'sg-prod-1',
+        name: 'Sweetheart Cross Slides',
+        category: 'Flats',
+        price: 'Rs. 1,499.00',
+        compareAtPrice: 'Rs. 1,899.00',
+        image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=80',
+        badge: 'SALE',
+        rating: 5,
+        reviewCount: 38,
+      },
+      {
+        id: 'sg-prod-2',
+        name: 'Monochrome Slides',
+        category: 'Slip-Ons',
+        price: 'Rs. 1,699.00',
+        compareAtPrice: 'Rs. 2,199.00',
+        image: 'https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?auto=format&fit=crop&w=600&q=80',
+        badge: 'NEW',
+        rating: 5,
+        reviewCount: 46,
+      },
+    ],
+  },
 }
 
 export const ALL_SHOES_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
@@ -574,5 +724,8 @@ export const ALL_SHOES_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   FOOTWEAR_WORKDO_TEMPLATE,
   SHOES_WORKDO_TEMPLATE,
   SENSATION_WORKDO_TEMPLATE,
+  GIAROS_TEMPLATE,
+  STEPGLAM_TEMPLATE,
 ]
+
 

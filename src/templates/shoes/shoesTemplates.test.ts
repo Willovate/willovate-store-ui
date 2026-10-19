@@ -8,6 +8,8 @@ import {
   FOOTWEAR_WORKDO_TEMPLATE,
   SHOES_WORKDO_TEMPLATE,
   SENSATION_WORKDO_TEMPLATE,
+  GIAROS_TEMPLATE,
+  STEPGLAM_TEMPLATE,
 } from '../../data/shoesTemplatesData'
 import { TEMPLATE_REGISTRY, getTemplateComponent } from '../../data/templateRegistry'
 import {
@@ -62,6 +64,17 @@ import {
   SENSATION_TESTIMONIALS,
   SENSATION_BLOGS,
 } from './Sensation/data/sensationData'
+import {
+  GIAROS_HERO_SLIDES,
+  GIAROS_MODEL_CATEGORIES,
+  GIAROS_NEW_ARRIVALS,
+  GIAROS_BEST_SELLERS,
+} from './Giaros/data/giarosData'
+import {
+  STEPGLAM_CATEGORIES,
+  STEPGLAM_ACCORDION_ITEMS,
+  STEPGLAM_NEW_COLLECTIONS,
+} from './StepGlam/data/stepglamData'
 import { HappyFeetStorefront } from './HappyFeet'
 import { ShoeZoneStorefront } from './ShoeZone'
 import { SusieShoesStorefront } from './SusieShoes'
@@ -69,11 +82,13 @@ import { FashionFeetStorefront } from './FashionFeet'
 import { FootwearWorkDoStorefront } from './FootwearWorkDo'
 import { ShoesWorkDoStorefront } from './ShoesWorkDo'
 import { SensationStorefront } from './Sensation'
+import { GiarosStorefront } from './Giaros'
+import { StepGlamStorefront } from './StepGlam'
 
-describe('Shoes Templates Suite (7 Complete Shoe Store Themes)', () => {
+describe('Shoes Templates Suite (9 Complete Shoe Store Themes)', () => {
   describe('Marketplace Configuration', () => {
-    it('has all 7 shoe store templates in ALL_SHOES_MARKETPLACE_TEMPLATES', () => {
-      expect(ALL_SHOES_MARKETPLACE_TEMPLATES).toHaveLength(7)
+    it('has all 9 shoe store templates in ALL_SHOES_MARKETPLACE_TEMPLATES', () => {
+      expect(ALL_SHOES_MARKETPLACE_TEMPLATES).toHaveLength(9)
       const ids = ALL_SHOES_MARKETPLACE_TEMPLATES.map((t) => t.id)
       expect(ids).toContain('shoes-happy-feet')
       expect(ids).toContain('shoes-shoezone')
@@ -82,6 +97,8 @@ describe('Shoes Templates Suite (7 Complete Shoe Store Themes)', () => {
       expect(ids).toContain('shoes-footwear-workdo')
       expect(ids).toContain('shoes-workdo')
       expect(ids).toContain('shoes-sensation')
+      expect(ids).toContain('shoes-giaros')
+      expect(ids).toContain('shoes-stepglam')
     })
 
     it('HappyFeet template is configured correctly', () => {
@@ -139,11 +156,27 @@ describe('Shoes Templates Suite (7 Complete Shoe Store Themes)', () => {
       expect(SENSATION_WORKDO_TEMPLATE.features).toContain('Interactive Clothes Category Dropdown Pill')
     })
 
-    it('registers all 7 shoe templates under shoes category in TEMPLATE_REGISTRY', () => {
+    it('Giaros template is configured correctly with ultra-luxury high-fashion footwear', () => {
+      expect(GIAROS_TEMPLATE.id).toBe('shoes-giaros')
+      expect(GIAROS_TEMPLATE.name).toBe('Giaros Footwear Premium')
+      expect(GIAROS_TEMPLATE.brandName).toBe('GIAROS')
+      expect(GIAROS_TEMPLATE.accentColor).toBe('#e11d48')
+      expect(GIAROS_TEMPLATE.features).toContain('Split Hero with Circular Cutout Shoe Spotlight')
+    })
+
+    it('StepGlam template is configured correctly with royal artisanal bridal footwear', () => {
+      expect(STEPGLAM_TEMPLATE.id).toBe('shoes-stepglam')
+      expect(STEPGLAM_TEMPLATE.name).toBe('StepGlam Juttis & Mojaris')
+      expect(STEPGLAM_TEMPLATE.brandName).toBe('StepGlam')
+      expect(STEPGLAM_TEMPLATE.accentColor).toBe('#581d4e')
+      expect(STEPGLAM_TEMPLATE.features).toContain('Direct [6] [7] [8] Size Button Selectors on Product Cards')
+    })
+
+    it('registers all 9 shoe templates under shoes category in TEMPLATE_REGISTRY', () => {
       const shoesEntry = TEMPLATE_REGISTRY['shoes']
       expect(shoesEntry).toBeDefined()
       expect(shoesEntry.displayName).toBe('Shoes Store')
-      expect(shoesEntry.templates).toHaveLength(7)
+      expect(shoesEntry.templates).toHaveLength(9)
       const slugs = shoesEntry.templates.map((t) => t.slug)
       expect(slugs).toContain('shoes-happy-feet')
       expect(slugs).toContain('shoes-shoezone')
@@ -152,6 +185,8 @@ describe('Shoes Templates Suite (7 Complete Shoe Store Themes)', () => {
       expect(slugs).toContain('shoes-footwear-workdo')
       expect(slugs).toContain('shoes-workdo')
       expect(slugs).toContain('shoes-sensation')
+      expect(slugs).toContain('shoes-giaros')
+      expect(slugs).toContain('shoes-stepglam')
     })
 
     it('resolves correct storefront components from getTemplateComponent', () => {
@@ -162,6 +197,8 @@ describe('Shoes Templates Suite (7 Complete Shoe Store Themes)', () => {
       expect(getTemplateComponent(FOOTWEAR_WORKDO_TEMPLATE)).toBe(FootwearWorkDoStorefront)
       expect(getTemplateComponent(SHOES_WORKDO_TEMPLATE)).toBe(ShoesWorkDoStorefront)
       expect(getTemplateComponent(SENSATION_WORKDO_TEMPLATE)).toBe(SensationStorefront)
+      expect(getTemplateComponent(GIAROS_TEMPLATE)).toBe(GiarosStorefront)
+      expect(getTemplateComponent(STEPGLAM_TEMPLATE)).toBe(StepGlamStorefront)
 
       expect(getTemplateComponent('shoes-happy-feet')).toBe(HappyFeetStorefront)
       expect(getTemplateComponent('shoes-shoezone')).toBe(ShoeZoneStorefront)
@@ -170,6 +207,8 @@ describe('Shoes Templates Suite (7 Complete Shoe Store Themes)', () => {
       expect(getTemplateComponent('shoes-footwear-workdo')).toBe(FootwearWorkDoStorefront)
       expect(getTemplateComponent('shoes-workdo')).toBe(ShoesWorkDoStorefront)
       expect(getTemplateComponent('shoes-sensation')).toBe(SensationStorefront)
+      expect(getTemplateComponent('shoes-giaros')).toBe(GiarosStorefront)
+      expect(getTemplateComponent('shoes-stepglam')).toBe(StepGlamStorefront)
     })
   })
 
@@ -264,6 +303,62 @@ describe('Shoes Templates Suite (7 Complete Shoe Store Themes)', () => {
       expect(SUSIE_TESTIMONIALS.length).toBeGreaterThanOrEqual(2)
       expect(SUSIE_BLOG_POSTS.length).toBeGreaterThanOrEqual(3)
       expect(SUSIE_FEATURE_CARDS.length).toBeGreaterThanOrEqual(3)
+    })
+  })
+
+  describe('Giaros Data Integrity (giaros-store-demo.myshopify.com)', () => {
+    it('has luxury hero slides, model categories, new arrivals, and best sellers', () => {
+      expect(GIAROS_HERO_SLIDES.length).toBeGreaterThanOrEqual(2)
+      expect(GIAROS_HERO_SLIDES[0].title).toBe('Premium Velour Shoes')
+      expect(GIAROS_HERO_SLIDES[0].discountText).toBe('Get UP To 30% Off')
+      expect(GIAROS_MODEL_CATEGORIES).toHaveLength(3)
+      expect(GIAROS_MODEL_CATEGORIES.map((m) => m.title)).toEqual([
+        'Platform Heeled',
+        'Platform Should',
+        'High Heels Boots',
+      ])
+      expect(GIAROS_NEW_ARRIVALS.length).toBeGreaterThanOrEqual(2)
+      expect(GIAROS_NEW_ARRIVALS[0].name).toBe('Ryfon')
+      expect(GIAROS_NEW_ARRIVALS[1].name).toBe('Ebory')
+      expect(GIAROS_BEST_SELLERS.length).toBeGreaterThanOrEqual(8)
+    })
+
+    it('Giaros products have valid prices, categories, and size arrays', () => {
+      for (const product of [...GIAROS_NEW_ARRIVALS, ...GIAROS_BEST_SELLERS]) {
+        expect(product.id).toBeDefined()
+        expect(product.name).toBeDefined()
+        expect(product.price).toBeGreaterThan(0)
+        expect(product.image).toMatch(/^https?:\/\//)
+        expect(product.availableSizes.length).toBeGreaterThanOrEqual(3)
+      }
+    })
+  })
+
+  describe('StepGlam Data Integrity (stepglam-workdo.myshopify.com)', () => {
+    it('has artisanal categories, 5 why-choose-us accordion items, and new collections', () => {
+      expect(STEPGLAM_CATEGORIES).toHaveLength(3)
+      expect(STEPGLAM_CATEGORIES[0].title).toBe('Memory Foam Juttis')
+      expect(STEPGLAM_CATEGORIES[1].title).toBe('Royal Ethnic Mojaris')
+      expect(STEPGLAM_CATEGORIES[2].title).toBe('Artisanal Floral Flats')
+
+      expect(STEPGLAM_ACCORDION_ITEMS).toHaveLength(5)
+      expect(STEPGLAM_ACCORDION_ITEMS[0].title).toBe('Trending Styles')
+      expect(STEPGLAM_ACCORDION_ITEMS[1].title).toBe('Pure Handcrafted Embroidery')
+      expect(STEPGLAM_ACCORDION_ITEMS[2].title).toBe('Double Cushion Memory Foam')
+
+      expect(STEPGLAM_NEW_COLLECTIONS.length).toBeGreaterThanOrEqual(8)
+      expect(STEPGLAM_NEW_COLLECTIONS[0].name).toBe('Sweetheart Cross Slides')
+    })
+
+    it('StepGlam products have valid INR prices, sizes [6, 7, 8], and color swatches', () => {
+      for (const product of STEPGLAM_NEW_COLLECTIONS) {
+        expect(product.id).toBeDefined()
+        expect(product.name).toBeDefined()
+        expect(product.priceInr).toBeGreaterThan(0)
+        expect(product.image).toMatch(/^https?:\/\//)
+        expect(product.availableSizes).toEqual([6, 7, 8])
+        expect(product.colors?.length).toBeGreaterThanOrEqual(2)
+      }
     })
   })
 })

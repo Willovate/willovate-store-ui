@@ -312,6 +312,13 @@ function App() {
             rawHash === 'shoes-sensation' ||
             rawHash === 'sensation-workdo' ||
             rawHash === 'sensation-shoes' ||
+            rawHash === 'giaros' ||
+            rawHash === 'shoes-giaros' ||
+            rawHash === 'giaros-shoes' ||
+            rawHash === 'stepglam' ||
+            rawHash === 'shoes-stepglam' ||
+            rawHash === 'stepglam-workdo' ||
+            rawHash === 'stepglam-shoes' ||
             rawHash === 'fashion-feet' ||
             rawHash === 'fashionfeet' ||
             rawHash === 'shoes-fashion-feet' ||
