@@ -1440,6 +1440,12 @@ export function StorefrontHero() {
 
   // 3. MINIMAL EDITORIAL (Quiet Luxury, Delicate Typography, Understated Elegance)
   if (heroLayout === 'minimal-editorial') {
+    const hasCustomBg = Boolean(
+      overrides.style_backgroundImage &&
+      !isGenericPlaceholder(overrides.style_backgroundImage) &&
+      overrides.style_backgroundImage !== theme.hero.image
+    );
+
     return (
       <EditableSection
         id="hero"
@@ -1451,135 +1457,213 @@ export function StorefrontHero() {
           className="fs-hero fs-hero-editorial"
           style={{
             position: 'relative',
-            minHeight: '85vh',
+            minHeight: '84vh',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '6rem 2rem 5rem 2rem',
-            backgroundColor: theme.palette.surface,
+            padding: '5rem 2rem 4rem 2rem',
+            background: hasCustomBg
+              ? `linear-gradient(180deg, rgba(253, 251, 247, 0.92) 0%, rgba(247, 241, 228, 0.95) 100%), url(${overrides.style_backgroundImage}) center/cover no-repeat`
+              : `radial-gradient(ellipse at 80% 35%, ${theme.palette.primary}15 0%, transparent 65%), linear-gradient(180deg, ${theme.palette.surface} 0%, ${theme.palette.background} 100%)`,
             color: theme.palette.text,
-            textAlign: 'center',
+            overflow: 'hidden',
           }}
         >
-          <div style={{ maxWidth: '960px', margin: '0 auto', width: '100%' }}>
-            {/* Delicate Eyebrow */}
-            <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
-              <span style={{ height: '1px', width: '40px', backgroundColor: theme.palette.border }} />
-              <span
+          <div
+            style={{
+              maxWidth: '1360px',
+              margin: '0 auto',
+              width: '100%',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(400px, 100%), 1fr))',
+              gap: '3.5rem',
+              alignItems: 'center',
+            }}
+          >
+            {/* Left Column: Editorial Narrative & CTAs */}
+            <div>
+              {/* Delicate Eyebrow with hairline rules */}
+              <div style={{ marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                <span style={{ height: '1px', width: '36px', backgroundColor: theme.palette.primary }} />
+                <span
+                  style={{
+                    fontSize: '0.78rem',
+                    fontWeight: 700,
+                    letterSpacing: '0.22em',
+                    textTransform: 'uppercase',
+                    color: theme.palette.primary,
+                  }}
+                >
+                  {overrides.eyebrow || theme.hero.badge}
+                </span>
+                <span style={{ height: '1px', width: '36px', backgroundColor: theme.palette.primary }} />
+              </div>
+
+              {/* Editorial Headline */}
+              <h1
+                className="fs-hero-title"
                 style={{
-                  fontSize: '0.75rem',
+                  fontFamily: theme.typography.headingFont,
+                  fontSize: 'clamp(2.4rem, 4.4vw, 4rem)',
                   fontWeight: 700,
-                  letterSpacing: '0.2em',
-                  textTransform: 'uppercase',
-                  color: theme.palette.primary,
-                }}
-              >
-                {overrides.eyebrow || theme.hero.badge}
-              </span>
-              <span style={{ height: '1px', width: '40px', backgroundColor: theme.palette.border }} />
-            </div>
-
-            {/* Headline */}
-            <h1
-              className="fs-hero-title"
-              style={{
-                fontFamily: theme.typography.headingFont,
-                fontSize: 'clamp(2.5rem, 5vw, 4.4rem)',
-                fontWeight: 600,
-                lineHeight: 1.15,
-                letterSpacing: '-0.02em',
-                margin: '0 0 1.5rem 0',
-                color: theme.palette.text,
-              }}
-            >
-              {overrides.title || theme.hero.headline}
-            </h1>
-
-            {/* Subheadline */}
-            <p
-              className="fs-hero-desc"
-              style={{
-                fontSize: 'clamp(1rem, 1.6vw, 1.25rem)',
-                lineHeight: 1.7,
-                color: theme.palette.textMuted,
-                margin: '0 auto 2.5rem auto',
-                maxWidth: '680px',
-              }}
-            >
-              {overrides.subtitle || theme.hero.subheadline}
-            </p>
-
-            {/* CTAs */}
-            <div
-              className="fs-hero-actions"
-              style={{
-                display: 'flex',
-                gap: '1.25rem',
-                justifyContent: 'center',
-                flexWrap: 'wrap',
-                marginBottom: '3rem',
-              }}
-            >
-              <button
-                onClick={() => setActivePage((theme.hero.primaryCtaPage as StorefrontPage) || 'menu')}
-                style={{
-                  backgroundColor: theme.palette.primary,
-                  color: '#ffffff',
-                  border: 'none',
-                  padding: '1rem 2.5rem',
-                  borderRadius: '999px',
-                  fontSize: '0.95rem',
-                  fontWeight: 700,
-                  letterSpacing: '0.04em',
-                  cursor: 'pointer',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                }}
-              >
-                <span>{overrides.buttonText || theme.hero.primaryCtaText}</span>
-                <ArrowRight size={16} />
-              </button>
-
-              <button
-                onClick={() => setActivePage((theme.hero.secondaryCtaPage as StorefrontPage) || 'inquiry')}
-                style={{
-                  backgroundColor: 'transparent',
+                  lineHeight: 1.12,
+                  letterSpacing: '-0.025em',
+                  margin: '0 0 1.35rem 0',
                   color: theme.palette.text,
-                  border: `1px solid ${theme.palette.border}`,
-                  padding: '1rem 2.2rem',
-                  borderRadius: '999px',
-                  fontSize: '0.95rem',
-                  fontWeight: 600,
-                  cursor: 'pointer',
                 }}
               >
-                {overrides.secondaryButtonText || theme.hero.secondaryCtaText}
-              </button>
+                {overrides.title || theme.hero.headline}
+              </h1>
+
+              {/* Subheadline */}
+              <p
+                className="fs-hero-desc"
+                style={{
+                  fontSize: 'clamp(1.02rem, 1.5vw, 1.18rem)',
+                  lineHeight: 1.7,
+                  color: theme.palette.textMuted,
+                  margin: '0 0 2.25rem 0',
+                  maxWidth: '560px',
+                }}
+              >
+                {overrides.subtitle || theme.hero.subheadline}
+              </p>
+
+              {/* CTAs */}
+              <div
+                className="fs-hero-actions"
+                style={{
+                  display: 'flex',
+                  gap: '1.2rem',
+                  flexWrap: 'wrap',
+                  marginBottom: '2.5rem',
+                }}
+              >
+                <button
+                  onClick={() => setActivePage((theme.hero.primaryCtaPage as StorefrontPage) || 'menu')}
+                  style={{
+                    backgroundColor: theme.palette.primary,
+                    color: '#ffffff',
+                    border: 'none',
+                    padding: '1.05rem 2.5rem',
+                    borderRadius: '999px',
+                    fontSize: '0.95rem',
+                    fontWeight: 700,
+                    letterSpacing: '0.03em',
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    boxShadow: `0 8px 24px ${theme.palette.primary}36`,
+                    transition: 'all 0.2s ease',
+                  }}
+                >
+                  <span>{overrides.buttonText || theme.hero.primaryCtaText}</span>
+                  <ArrowRight size={17} />
+                </button>
+
+                <button
+                  onClick={() => setActivePage((theme.hero.secondaryCtaPage as StorefrontPage) || 'inquiry')}
+                  style={{
+                    backgroundColor: 'transparent',
+                    color: theme.palette.text,
+                    border: `1.5px solid ${theme.palette.border}`,
+                    padding: '1.05rem 2.2rem',
+                    borderRadius: '999px',
+                    fontSize: '0.95rem',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                  }}
+                >
+                  {overrides.secondaryButtonText || theme.hero.secondaryCtaText}
+                </button>
+              </div>
+
+              {/* Key Proof Highlights Strip */}
+              {theme.proofBadges && theme.proofBadges.length > 0 && (
+                <div
+                  style={{
+                    display: 'flex',
+                    gap: '1.25rem',
+                    flexWrap: 'wrap',
+                    borderTop: `1px solid ${theme.palette.border}`,
+                    paddingTop: '1.5rem',
+                  }}
+                >
+                  {theme.proofBadges.slice(0, 3).map((badge, idx) => (
+                    <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <span style={{ fontSize: '1.15rem' }}>{badge.icon}</span>
+                      <div>
+                        <span style={{ fontSize: '0.82rem', fontWeight: 700, color: theme.palette.text, display: 'block', lineHeight: 1.2 }}>
+                          {badge.title}
+                        </span>
+                        <span style={{ fontSize: '0.74rem', color: theme.palette.textMuted }}>
+                          {badge.subtitle}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
-            {/* Framed Window */}
-            <div
-              style={{
-                borderRadius: '20px',
-                overflow: 'hidden',
-                aspectRatio: '21/9',
-                maxHeight: '440px',
-                boxShadow: '0 20px 48px -12px rgba(0,0,0,0.2)',
-                border: `1px solid ${theme.palette.border}`,
-                margin: '0 auto',
-              }}
-            >
-              <img
-                src={bgImage}
-                alt={theme.hero.imageAlt}
+            {/* Right Column: Architectural Hero Showcase Frame */}
+            <div style={{ position: 'relative' }}>
+              <div
                 style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  display: 'block',
+                  borderRadius: '24px',
+                  overflow: 'hidden',
+                  aspectRatio: '4/3',
+                  maxHeight: '520px',
+                  boxShadow: '0 24px 60px -12px rgba(46, 28, 17, 0.22)',
+                  border: `1px solid ${theme.palette.border}`,
+                  position: 'relative',
+                  backgroundColor: theme.palette.surface,
                 }}
-              />
+              >
+                <img
+                  src={bgImage}
+                  alt={theme.hero.imageAlt}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    display: 'block',
+                  }}
+                />
+                <div
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 45%)',
+                  }}
+                />
+                {/* Floating Artisan / Quality Badge */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: '18px',
+                    left: '18px',
+                    backgroundColor: 'rgba(255, 255, 255, 0.94)',
+                    backdropFilter: 'blur(10px)',
+                    padding: '0.55rem 1.1rem',
+                    borderRadius: '999px',
+                    boxShadow: '0 8px 24px rgba(0,0,0,0.16)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    color: '#2a1a10',
+                    fontSize: '0.8rem',
+                    fontWeight: 700,
+                    letterSpacing: '0.02em',
+                    border: '1px solid rgba(0,0,0,0.06)',
+                  }}
+                >
+                  <Sparkles size={14} color={theme.palette.primary} />
+                  <span>{theme.hero.badge || 'Crafted Daily by Hand'}</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
