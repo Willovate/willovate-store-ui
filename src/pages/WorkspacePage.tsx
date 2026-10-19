@@ -3,7 +3,14 @@ import { useParams, useSearchParams, useLocation } from 'react-router-dom'
 import Workspace from '../pages/Workspace'
 import { getWebsites } from '../lib/workspace-api'
 
-export default function WorkspacePage() {
+export interface WorkspacePageProps {
+  selectedTemplateTitle?: string
+  onViewStore?: () => void
+  onBackToTemplates?: () => void
+  [key: string]: unknown
+}
+
+export function WorkspacePage(_props?: WorkspacePageProps) {
   const { websiteId: paramWebsiteId, tab } = useParams<{ websiteId?: string; tab?: string }>()
   const [searchParams] = useSearchParams()
   const location = useLocation()
@@ -79,4 +86,7 @@ export default function WorkspacePage() {
 
   return <Workspace websiteId={effectiveId} initialTab={tab} forceEditorView={isEditTemplatesRoute} />
 }
+
+export default WorkspacePage
+
 

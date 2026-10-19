@@ -1,35 +1,6 @@
+export * from './types/index'
 
-export interface Product {
-  id: string
-  slug: string
-  name: string
-  description: string
-  category: string
-  price: number
-  compareAtPrice?: number | null
-  stockQuantity?: number
-  visualTheme?: string
-  isFeatured: boolean
-  imageUrl?: string
-  isAvailable?: boolean
-  createdAt?: string
-  updatedAt?: string
-}
-
-export interface PagedResponse<T> {
-  items: T[]
-  page: number
-  pageSize: number
-  totalItems: number
-  totalPages: number
-}
-
-export interface CartItem {
-  product: Product
-  quantity: number
-}
-
-// Workspace types
+// Workspace and Page Builder types
 export interface Website {
   id: string
   name: string

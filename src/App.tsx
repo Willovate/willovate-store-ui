@@ -3,7 +3,14 @@ import './App.css'
 import { getProducts } from './lib/api'
 import { formatCurrency } from './lib/currency'
 import { useCart } from './hooks/useCart'
+import { useAuth } from './auth/AuthContext'
+import { ProgressSteps } from './auth/ProgressSteps'
+import SignupPage from './pages/SignupPage'
+import LoginPage from './pages/LoginPage'
 import type { Product } from './types'
+import { AdminApp } from './admin/AdminApp'
+import { useHashRoute } from './admin/hooks/useHashRoute'
+
 
 const FEATURED_PRODUCTS = [
   {
@@ -119,14 +126,18 @@ function FeaturedCard({
 
 function ProductCard({
   product,
+  onAdd,
 }: {
   product: Product | any
+  onAdd?: (product: Product) => void
 }) {
-  const img = getProductImage(product.name) || product.image
+  const img = getProductImage(product.name) || product.image || product.imageUrls?.[0]
+  const hasDiscount = product.compareAtPrice !== null && product.compareAtPrice !== undefined
 
   return (
     <article className="luxe-product-card">
       <div className="luxe-product-image-wrap">
+        {product.isFeatured && <span className="luxe-badge">Editor's pick</span>}
         {img ? (
           <img src={img} alt={product.name} className="luxe-product-image" loading="lazy" />
         ) : (
@@ -134,18 +145,31 @@ function ProductCard({
             <span>{product.name.slice(0, 1)}</span>
           </div>
         )}
+        {onAdd && (
+          <button
+            className="quick-add"
+            type="button"
+            onClick={() => onAdd(product)}
+            aria-label={`Add ${product.name} to cart`}
+          >
+            +
+          </button>
+        )}
       </div>
       <div className="luxe-product-info">
         <h3 className="luxe-product-name">{product.name}</h3>
         <div className="luxe-price-row">
           <span className="luxe-product-price">{formatCurrency(product.price)}</span>
+          {hasDiscount && (
+            <del style={{ marginLeft: '8px', opacity: 0.6 }}>{formatCurrency(product.compareAtPrice as number)}</del>
+          )}
         </div>
       </div>
     </article>
   )
 }
 
-function App() {
+function MainApp() {
   const [products, setProducts] = useState<Product[]>([])
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('All')
@@ -155,8 +179,10 @@ function App() {
   const [cartOpen, setCartOpen] = useState(false)
   const [newsletterSent, setNewsletterSent] = useState(false)
   const [addedToast, setAddedToast] = useState<string | null>(null)
+  const [currentView, setCurrentView] = useState<'store' | 'signup' | 'login' | 'tell-us-your-idea'>('store')
   const deferredSearch = useDeferredValue(search)
   const cart = useCart()
+  const { isAuthenticated, customer, logout } = useAuth()
 
   useEffect(() => {
     const controller = new AbortController()
@@ -193,6 +219,50 @@ function App() {
     }
   }
 
+  if (currentView === 'signup') {
+    return (
+      <SignupPage
+        onNavigateToLogin={() => setCurrentView('login')}
+        onNavigateHome={() => setCurrentView('store')}
+        onAuthSuccess={() => setCurrentView('tell-us-your-idea')}
+      />
+    )
+  }
+
+  if (currentView === 'login') {
+    return (
+      <LoginPage
+        onNavigateToSignup={() => setCurrentView('signup')}
+        onNavigateHome={() => setCurrentView('store')}
+        onAuthSuccess={() => setCurrentView('tell-us-your-idea')}
+      />
+    )
+  }
+
+  if (currentView === 'tell-us-your-idea') {
+    return (
+      <div style={{ padding: '3rem', textAlign: 'center', fontFamily: 'sans-serif', maxWidth: '600px', margin: '0 auto' }}>
+        <div style={{ background: '#080d2a', padding: '1.5rem', borderRadius: '12px', marginBottom: '2rem' }}>
+          <ProgressSteps currentStep={2} />
+        </div>
+        <p className="kicker" style={{ color: 'var(--color-primary, #4f46e5)', fontWeight: 600 }}>Willovate One Onboarding · Step 02/03</p>
+        <h2>Tell Us Your Idea</h2>
+        <p style={{ maxWidth: '400px', margin: '1rem auto', color: '#666' }}>
+          Welcome, <strong>{customer?.firstName || 'Creator'}</strong>! This step is currently under development by the onboarding team.
+        </p>
+        <button
+          type="button"
+          onClick={() => setCurrentView('store')}
+          className="primary-link"
+          style={{ cursor: 'pointer', margin: '0 auto' }}
+        >
+          Return to Store
+        </button>
+      </div>
+    )
+  }
+
+
   return (
     <div className="luxe-shell">
       {/* Toast */}
@@ -210,34 +280,64 @@ function App() {
 
       {/* Header */}
       <header className="luxe-header">
-        <a className="luxe-logo" href="#top" aria-label="Luxora home">LUXORA</a>
+        <a className="wordmark" href="#top" aria-label="Willovate One home" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+          <img src="/willovate-one-logo.png" alt="Willovate One" style={{ height: '28px', width: 'auto', objectFit: 'contain' }} />
+        </a>
         <nav className="luxe-nav" aria-label="Main navigation">
           <a href="#top" className="active">Home</a>
           <a href="#featured">Shop</a>
-          <a href="#catalog">Collections</a>
+          <a href="/browse-templates">Templates</a>
           <a href="#story">About Us</a>
-          <a href="#contact">Contact</a>
+          <a href="/workspace/a1b2c3d4-0000-0000-0000-000000000001" className="nav-workspace-link">Workspace</a>
         </nav>
-        <div className="luxe-header-actions">
-          <button type="button" className="luxe-icon-btn" aria-label="Search">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-            </svg>
-          </button>
-          <a href="/workspace/a1b2c3d4-0000-0000-0000-000000000001" className="luxe-icon-btn" aria-label="Account">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-            </svg>
-          </a>
+        <div className="luxe-header-actions" style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+          {isAuthenticated ? (
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', fontSize: '0.875rem' }}>
+              <span>Hi, {customer?.firstName || 'Account'}</span>
+              <button
+                type="button"
+                onClick={logout}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline', color: '#666' }}
+              >
+                Log out
+              </button>
+            </div>
+          ) : (
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+              <button
+                type="button"
+                onClick={() => setCurrentView('login')}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '0.875rem' }}
+              >
+                Log in
+              </button>
+              <button
+                type="button"
+                onClick={() => setCurrentView('signup')}
+                style={{
+                  padding: '0.4rem 0.8rem',
+                  borderRadius: '9999px',
+                  border: '1px solid #111',
+                  background: '#111',
+                  color: '#fff',
+                  cursor: 'pointer',
+                  fontSize: '0.875rem',
+                }}
+              >
+                Sign up
+              </button>
+            </div>
+          )}
           <button type="button" className="luxe-cart-btn" onClick={() => setCartOpen(true)} aria-label="Shopping cart">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
               <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
             </svg>
-            <span className="luxe-cart-count">{cart.count > 0 ? cart.count : 2}</span>
+            <span className="luxe-cart-count">{cart.count}</span>
           </button>
         </div>
       </header>
+
 
       <main id="top">
         {/* Hero Section */}
@@ -347,7 +447,7 @@ function App() {
           <h2>Join our newsletter</h2>
           <p>Get updates on new arrivals and exclusive offers.</p>
           {newsletterSent ? (
-            <p className="luxe-newsletter-success" role="status">You're on the list. Welcome!</p>
+            <p className="luxe-newsletter-success newsletter-success" role="status">You're on the list. Welcome to Willovate.</p>
           ) : (
             <form className="luxe-newsletter-form" onSubmit={(e) => { e.preventDefault(); setNewsletterSent(true) }}>
               <label className="sr-only" htmlFor="newsletter-email">Email address</label>
@@ -360,8 +460,10 @@ function App() {
 
       <footer className="luxe-footer">
         <div className="luxe-footer-brand-col">
-          <a className="luxe-logo" href="#top">LUXORA</a>
-          <p>Timeless pieces for modern living.</p>
+          <a className="wordmark" href="#top" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+            <img src="/willovate-one-logo.png" alt="Willovate One" style={{ height: '26px', width: 'auto', objectFit: 'contain' }} />
+          </a>
+          <p>Thoughtful goods for modern life.</p>
         </div>
         <div className="luxe-footer-links-col">
           <strong>Shop</strong>
@@ -402,7 +504,11 @@ function App() {
           </div>
         </div>
         <div className="luxe-footer-copy">
-          <p>© 2026 Luxora. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} Willovate Store
+            {' · '}
+            <a href="#/admin/products" style={{ fontSize: '11px', opacity: 0.65 }}>Admin</a>
+          </p>
         </div>
       </footer>
 
@@ -467,4 +573,21 @@ function App() {
   )
 }
 
-export default App
+// ── App — thin hash router with AuthProvider ───────────────────────────────
+
+import { AuthProvider } from './auth/AuthContext'
+
+function AppRouter() {
+  const hash = useHashRoute()
+  if (hash.startsWith('#/admin')) return <AdminApp hash={hash} />
+  return <MainApp />
+}
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <AppRouter />
+    </AuthProvider>
+  )
+}
+

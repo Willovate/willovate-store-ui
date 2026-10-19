@@ -1,0 +1,1956 @@
+/* ==========================================================================
+   BAGGO HANDCRAFTED BAGS & LEATHER LIFESTYLE THEME STYLING
+   Authentic to: https://baggo-theme.myshopify.com/
+   Identity: Deep Oxford Navy (#27314C), Saddle Cognac (#CC824C), Warm Parchment (#FAF3EE)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;800&family=Cambay:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  --baggo-navy: #27314C;
+  --baggo-navy-dark: #1A2236;
+  --baggo-cognac: #CC824C;
+  --baggo-cognac-hover: #B8723E;
+  --baggo-amber: #BD7A4A;
+  --baggo-parchment: #FAF3EE;
+  --baggo-parchment-soft: #F6ECE4;
+  --baggo-text-dark: #27314C;
+  --baggo-text-muted: #535353;
+  --baggo-border: #E8DED6;
+  --baggo-font-serif: 'Frank Ruhl Libre', Georgia, serif;
+  --baggo-font-sans: 'Cambay', -apple-system, BlinkMacSystemFont, sans-serif;
+  --baggo-shadow-card: 0 10px 30px rgba(39, 49, 76, 0.06);
+  --baggo-shadow-hover: 0 16px 40px rgba(204, 130, 76, 0.16);
+}
+
+.baggo-root {
+  font-family: var(--baggo-font-sans);
+  color: var(--baggo-text-dark);
+  background-color: #FFFFFF;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  box-sizing: border-box;
+}
+
+.baggo-root * {
+  box-sizing: border-box;
+}
+
+.baggo-container {
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* TOP NOTIFICATION BAR */
+.baggo-top-bar {
+  background: var(--baggo-navy-dark);
+  color: #FFFFFF;
+  padding: 8px 0;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.baggo-top-bar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.baggo-top-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.02em;
+}
+
+.baggo-top-highlight {
+  color: var(--baggo-cognac);
+  font-weight: 700;
+}
+
+/* HEADER */
+.baggo-header {
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--baggo-border);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.baggo-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+.baggo-logo {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.baggo-logo-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--baggo-navy);
+  color: var(--baggo-cognac);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  border: 1px solid var(--baggo-cognac);
+}
+
+.baggo-logo-title {
+  font-family: var(--baggo-font-serif);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--baggo-navy);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.baggo-logo-sub {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--baggo-cognac);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.baggo-mobile-menu-btn {
+  display: none;
+}
+
+.baggo-nav-list {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.baggo-nav-link {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--baggo-navy);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 6px 0;
+  position: relative;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.baggo-nav-link:hover,
+.baggo-nav-link.active {
+  color: var(--baggo-cognac);
+}
+
+.baggo-nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--baggo-cognac);
+}
+
+.baggo-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.baggo-action-btn {
+  background: none;
+  border: 1px solid var(--baggo-border);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--baggo-navy);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.baggo-action-btn:hover {
+  background: var(--baggo-parchment);
+  border-color: var(--baggo-cognac);
+  color: var(--baggo-cognac);
+  transform: translateY(-2px);
+}
+
+.baggo-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--baggo-cognac);
+  color: #FFFFFF;
+  font-size: 10px;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* BUTTONS */
+.baggo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--baggo-font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  border: none;
+  outline: none;
+}
+
+.baggo-btn-primary {
+  background: var(--baggo-navy);
+  color: #FFFFFF;
+  border: 1px solid var(--baggo-navy);
+}
+
+.baggo-btn-primary:hover {
+  background: var(--baggo-cognac);
+  border-color: var(--baggo-cognac);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(204, 130, 76, 0.3);
+}
+
+.baggo-btn-cognac {
+  background: var(--baggo-cognac);
+  color: #FFFFFF;
+  border: 1px solid var(--baggo-cognac);
+}
+
+.baggo-btn-cognac:hover {
+  background: var(--baggo-cognac-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(204, 130, 76, 0.35);
+}
+
+.baggo-btn-outline {
+  background: transparent;
+  color: var(--baggo-navy);
+  border: 1px solid var(--baggo-navy);
+}
+
+.baggo-btn-outline:hover {
+  background: var(--baggo-navy);
+  color: #FFFFFF;
+}
+
+/* SECTION 1: HERO SLIDER */
+.baggo-hero {
+  position: relative;
+  background-color: var(--baggo-parchment);
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--baggo-border);
+}
+
+.baggo-hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
+  padding: 60px 0;
+}
+
+.baggo-hero-subtitle {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--baggo-cognac);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.baggo-hero-title {
+  font-family: var(--baggo-font-serif);
+  font-size: 54px;
+  font-weight: 700;
+  color: var(--baggo-navy);
+  line-height: 1.15;
+  margin: 0 0 18px;
+}
+
+.baggo-hero-desc {
+  font-size: 16px;
+  color: var(--baggo-text-muted);
+  line-height: 1.7;
+  margin-bottom: 32px;
+  max-width: 480px;
+}
+
+.baggo-hero-image-wrap {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(39, 49, 76, 0.15);
+  height: 440px;
+}
+
+.baggo-hero-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.baggo-hero-image-wrap:hover img {
+  transform: scale(1.03);
+}
+
+/* SECTION 2: 3 CATEGORY CARDS ("Choose your style") */
+.baggo-section {
+  padding: 80px 0;
+}
+
+.baggo-section-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.baggo-section-subtitle {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--baggo-cognac);
+  margin-bottom: 8px;
+}
+
+.baggo-section-title {
+  font-family: var(--baggo-font-serif);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--baggo-navy);
+  margin: 0 0 12px;
+}
+
+.baggo-section-line {
+  width: 60px;
+  height: 2px;
+  background: var(--baggo-cognac);
+  margin: 14px auto 0;
+}
+
+.baggo-cat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.baggo-cat-card {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  height: 380px;
+  box-shadow: var(--baggo-shadow-card);
+  cursor: pointer;
+  border: 1px solid var(--baggo-border);
+}
+
+.baggo-cat-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.baggo-cat-card:hover img {
+  transform: scale(1.08);
+}
+
+.baggo-cat-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(39, 49, 76, 0.1) 0%, rgba(39, 49, 76, 0.85) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 30px;
+  color: #FFFFFF;
+}
+
+.baggo-cat-card-title {
+  font-family: var(--baggo-font-serif);
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.baggo-cat-card-desc {
+  font-size: 13px;
+  opacity: 0.85;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+/* SECTION 3: PRODUCT GRID / CAROUSEL */
+.baggo-products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+.baggo-product-card {
+  background: #FFFFFF;
+  border: 1px solid var(--baggo-border);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.baggo-product-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--baggo-cognac);
+  box-shadow: var(--baggo-shadow-hover);
+}
+
+.baggo-product-media {
+  position: relative;
+  height: 290px;
+  background: #F8F9FA;
+  overflow: hidden;
+}
+
+.baggo-product-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.baggo-product-card:hover .baggo-product-media img {
+  transform: scale(1.05);
+}
+
+.baggo-product-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--baggo-cognac);
+  color: #FFFFFF;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 4px 8px;
+  border-radius: 2px;
+}
+
+.baggo-card-actions {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  transform: translateX(8px);
+  transition: all 0.3s ease;
+  z-index: 5;
+}
+
+.baggo-product-card:hover .baggo-card-actions {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.baggo-card-action-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1px solid var(--baggo-border);
+  color: var(--baggo-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.baggo-card-action-btn:hover,
+.baggo-card-action-btn.active {
+  background: var(--baggo-navy);
+  color: #FFFFFF;
+}
+
+.baggo-product-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.baggo-product-vendor {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--baggo-cognac);
+  margin-bottom: 4px;
+}
+
+.baggo-product-title {
+  font-family: var(--baggo-font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--baggo-navy);
+  margin: 0 0 8px;
+  cursor: pointer;
+  line-height: 1.35;
+  transition: color 0.2s ease;
+}
+
+.baggo-product-title:hover {
+  color: var(--baggo-cognac);
+}
+
+.baggo-product-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #D97706;
+  margin-bottom: 12px;
+}
+
+.baggo-leather-pill {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--baggo-text-muted);
+  background: var(--baggo-parchment);
+  padding: 3px 8px;
+  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.baggo-color-swatches {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.baggo-color-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.baggo-color-dot.active {
+  outline: 2px solid var(--baggo-navy);
+  outline-offset: 1px;
+}
+
+.baggo-product-footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid #F1ECE7;
+}
+
+.baggo-price {
+  font-family: var(--baggo-font-serif);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--baggo-navy);
+}
+
+.baggo-compare-price {
+  font-size: 13px;
+  color: #9CA3AF;
+  text-decoration: line-through;
+  margin-left: 6px;
+}
+
+.baggo-add-btn {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 8px 14px;
+  border-radius: 3px;
+  background: var(--baggo-parchment);
+  color: var(--baggo-navy);
+  border: 1px solid var(--baggo-border);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.baggo-add-btn:hover {
+  background: var(--baggo-navy);
+  color: #FFFFFF;
+  border-color: var(--baggo-navy);
+}
+
+/* SECTION 4: VALUE PILLARS */
+.baggo-pillars-section {
+  background: var(--baggo-parchment);
+  border-top: 1px solid var(--baggo-border);
+  border-bottom: 1px solid var(--baggo-border);
+  padding: 60px 0;
+}
+
+.baggo-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+.baggo-pillar-card {
+  text-align: center;
+  padding: 20px;
+}
+
+.baggo-pillar-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+.baggo-pillar-title {
+  font-family: var(--baggo-font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--baggo-navy);
+  margin: 0 0 8px;
+}
+
+.baggo-pillar-desc {
+  font-size: 13px;
+  color: var(--baggo-text-muted);
+  line-height: 1.6;
+}
+
+/* SECTION 5: CRAFTSMANSHIP SPLIT BANNER */
+.baggo-split-banner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
+  padding: 60px 0;
+}
+
+.baggo-split-img {
+  border-radius: 8px;
+  overflow: hidden;
+  height: 460px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+}
+
+.baggo-split-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.baggo-split-content {
+  max-width: 480px;
+}
+
+/* SECTION 6: CLIENT TESTIMONIALS */
+.baggo-testimonial-card {
+  background: #FFFFFF;
+  border: 1px solid var(--baggo-border);
+  border-radius: 6px;
+  padding: 40px;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  box-shadow: var(--baggo-shadow-card);
+}
+
+.baggo-testimonial-quote {
+  font-family: var(--baggo-font-serif);
+  font-size: 22px;
+  font-style: italic;
+  color: var(--baggo-navy);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.baggo-testimonial-author {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--baggo-navy);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.baggo-testimonial-sub {
+  font-size: 12px;
+  color: var(--baggo-cognac);
+}
+
+/* SECTION 7: NEWSLETTER BANNER */
+.baggo-newsletter-banner {
+  background: var(--baggo-navy);
+  color: #FFFFFF;
+  border-radius: 8px;
+  padding: 60px 40px;
+  text-align: center;
+}
+
+.baggo-newsletter-title {
+  font-family: var(--baggo-font-serif);
+  font-size: 38px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  color: #FFFFFF;
+}
+
+.baggo-newsletter-desc {
+  font-size: 15px;
+  color: #CBD5E1;
+  max-width: 520px;
+  margin: 0 auto 28px;
+}
+
+.baggo-newsletter-form {
+  display: flex;
+  max-width: 480px;
+  margin: 0 auto;
+  background: #FFFFFF;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.baggo-newsletter-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 12px 18px;
+  font-size: 14px;
+  color: var(--baggo-navy);
+}
+
+/* FOOTER */
+.baggo-footer {
+  background: var(--baggo-navy-dark);
+  color: #E2E8F0;
+  padding: 70px 0 30px;
+  border-top: 3px solid var(--baggo-cognac);
+}
+
+.baggo-footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.baggo-footer-col h4 {
+  font-family: var(--baggo-font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.05em;
+  margin: 0 0 18px;
+}
+
+.baggo-footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.baggo-footer-col li {
+  margin-bottom: 10px;
+}
+
+.baggo-footer-col a {
+  color: #94A3B8;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.baggo-footer-col a:hover {
+  color: var(--baggo-cognac);
+}
+
+.baggo-footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #94A3B8;
+}
+
+/* CART DRAWER */
+.baggo-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.baggo-cart-drawer {
+  width: 440px;
+  max-width: 90vw;
+  background: #FFFFFF;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.25);
+  animation: baggoSlide 0.3s ease;
+}
+
+@keyframes baggoSlide {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.baggo-drawer-header {
+  padding: 24px;
+  border-bottom: 1px solid var(--baggo-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.baggo-drawer-header h3 {
+  font-family: var(--baggo-font-serif);
+  font-size: 22px;
+  margin: 0;
+  color: var(--baggo-navy);
+}
+
+.baggo-drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+.baggo-drawer-item {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--baggo-border);
+}
+
+.baggo-drawer-item img {
+  width: 75px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.baggo-drawer-footer {
+  padding: 24px;
+  border-top: 1px solid var(--baggo-border);
+  background: var(--baggo-parchment);
+}
+
+.baggo-drawer-subtotal {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--baggo-font-serif);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+/* ==========================================================================
+   MOBILE & PREVIEW FRAME RESPONSIVE STYLES
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .baggo-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .baggo-hero-inner {
+    grid-template-columns: 1fr;
+  }
+  .baggo-split-banner {
+    grid-template-columns: 1fr;
+  }
+  .baggo-pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px),
+  screen and (max-width: 768px) {
+  .baggo-top-extra {
+    display: none !important;
+  }
+  .baggo-top-bar-inner {
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 6px 12px !important;
+  }
+  .baggo-top-notice {
+    font-size: 11px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  .baggo-mobile-menu-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 36px !important;
+    height: 36px !important;
+    background: none !important;
+    border: 1px solid var(--baggo-border) !important;
+    border-radius: 4px !important;
+    font-size: 20px !important;
+    color: var(--baggo-navy) !important;
+    cursor: pointer !important;
+    flex-shrink: 0 !important;
+  }
+  .baggo-nav-desktop {
+    display: none !important;
+  }
+  .baggo-header .baggo-container {
+    padding: 0 10px !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  .baggo-header-inner {
+    display: grid !important;
+    grid-template-columns: 1fr auto 1fr !important;
+    align-items: center !important;
+    min-height: 56px !important;
+    height: 56px !important;
+    padding: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    position: static !important;
+    gap: 4px !important;
+  }
+  .baggo-mobile-menu-btn {
+    justify-self: start !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 34px !important;
+    height: 34px !important;
+    background: none !important;
+    border: 1px solid var(--baggo-border) !important;
+    border-radius: 4px !important;
+    font-size: 19px !important;
+    color: var(--baggo-navy) !important;
+    cursor: pointer !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+    position: static !important;
+    z-index: auto !important;
+  }
+  .baggo-logo {
+    justify-self: center !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    margin: 0 !important;
+    position: static !important;
+    transform: none !important;
+    left: auto !important;
+    top: auto !important;
+    z-index: auto !important;
+    white-space: nowrap !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+  }
+  .baggo-logo-icon {
+    width: 26px !important;
+    height: 26px !important;
+    font-size: 13px !important;
+    border-radius: 6px !important;
+    flex-shrink: 0 !important;
+  }
+  .baggo-logo-title {
+    font-size: 16px !important;
+    font-weight: 800 !important;
+    line-height: 1.05 !important;
+  }
+  .baggo-logo-sub {
+    font-size: 6.5px !important;
+    letter-spacing: 0.12em !important;
+    line-height: 1 !important;
+  }
+  .baggo-actions {
+    justify-self: end !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    margin: 0 !important;
+    flex-shrink: 0 !important;
+    position: static !important;
+    z-index: auto !important;
+  }
+  .baggo-actions .baggo-compare-btn {
+    display: none !important;
+  }
+  .baggo-action-btn {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 13px !important;
+    border-radius: 50% !important;
+    flex-shrink: 0 !important;
+  }
+  .baggo-action-btn .baggo-badge {
+    width: 15px !important;
+    height: 15px !important;
+    font-size: 9px !important;
+    top: -3px !important;
+    right: -3px !important;
+  }
+  .baggo-hero-inner {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    padding: 24px 0 !important;
+    text-align: center !important;
+  }
+  .baggo-hero-title {
+    font-size: 32px !important;
+    line-height: 1.2 !important;
+    margin-bottom: 12px !important;
+  }
+  .baggo-hero-desc {
+    font-size: 14px !important;
+    margin: 0 auto 20px !important;
+    max-width: 100% !important;
+  }
+  .baggo-hero-actions {
+    display: flex !important;
+    gap: 10px !important;
+    justify-content: center !important;
+    width: 100% !important;
+  }
+  .baggo-hero-actions .baggo-btn {
+    flex: 1 !important;
+    padding: 12px 8px !important;
+    font-size: 11px !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+  }
+  .baggo-hero-img-wrap {
+    height: 250px !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+  }
+  .baggo-cat-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .baggo-cat-card {
+    height: 220px !important;
+  }
+  .baggo-cat-card-title {
+    font-size: 20px !important;
+  }
+  .baggo-cat-card-desc {
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  .baggo-cat-overlay {
+    padding: 16px 20px !important;
+  }
+  .baggo-products-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+  .baggo-product-card {
+    border-radius: 4px !important;
+    overflow: hidden !important;
+  }
+  .baggo-product-media {
+    height: 170px !important;
+    position: relative !important;
+  }
+  .baggo-product-body {
+    padding: 10px 8px !important;
+  }
+  .baggo-product-title {
+    font-size: 13.5px !important;
+    line-height: 1.3 !important;
+    min-height: 36px !important;
+    margin-bottom: 6px !important;
+  }
+  .baggo-product-vendor {
+    font-size: 9.5px !important;
+    letter-spacing: 0.05em !important;
+    margin-bottom: 2px !important;
+  }
+  .baggo-product-rating {
+    font-size: 11px !important;
+    margin-bottom: 6px !important;
+  }
+  .baggo-leather-pill {
+    font-size: 10px !important;
+    padding: 2px 6px !important;
+    margin-bottom: 8px !important;
+  }
+  .baggo-color-swatches {
+    gap: 4px !important;
+    margin-bottom: 8px !important;
+  }
+  .baggo-color-dot {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  .baggo-price {
+    font-size: 15px !important;
+  }
+  .baggo-compare-price {
+    font-size: 11px !important;
+    margin-left: 4px !important;
+  }
+  .baggo-product-footer {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 6px !important;
+    padding-top: 8px !important;
+  }
+  .baggo-add-btn {
+    width: 100% !important;
+    text-align: center !important;
+    padding: 6px 4px !important;
+    font-size: 11px !important;
+    white-space: nowrap !important;
+    letter-spacing: 0.02em !important;
+  }
+  .baggo-card-actions {
+    opacity: 1 !important;
+    transform: none !important;
+    top: 6px !important;
+    right: 6px !important;
+    gap: 6px !important;
+  }
+  .baggo-card-action-btn {
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 13px !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+  }
+  .baggo-split-banner {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    padding: 24px 0 !important;
+  }
+  .baggo-split-img {
+    width: 100% !important;
+    height: 220px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+  }
+  .baggo-split-content {
+    max-width: 100% !important;
+    text-align: center !important;
+  }
+  .baggo-split-content h2 {
+    font-size: 24px !important;
+    line-height: 1.25 !important;
+  }
+  .baggo-split-content p {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    margin-bottom: 16px !important;
+  }
+  .baggo-split-content .baggo-btn {
+    width: 100% !important;
+  }
+  .baggo-monogram-banner {
+    grid-template-columns: 1fr !important;
+    padding: 24px 16px !important;
+    gap: 24px !important;
+    text-align: center !important;
+  }
+  .baggo-pillars-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .baggo-testimonial-card {
+    padding: 24px 16px !important;
+  }
+  .baggo-testimonial-quote {
+    font-size: 16px !important;
+  }
+  .baggo-footer {
+    padding: 40px 0 24px !important;
+  }
+  .baggo-footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+    text-align: left !important;
+  }
+  .baggo-footer-bottom {
+    flex-direction: column !important;
+    gap: 12px !important;
+    text-align: center !important;
+    align-items: center !important;
+  }
+  .baggo-cart-drawer {
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+  .baggo-quickview-modal {
+    width: 95% !important;
+    padding: 20px 16px !important;
+  }
+  .baggo-quickview-layout {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .baggo-pdp-layout {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  .baggo-pdp-main-img-wrap {
+    height: 300px !important;
+  }
+}
+
+/* Simulated frame and mobile classes */
+.baggo-root.device-mobile .baggo-top-extra,
+.baggo-root.is-mobile .baggo-top-extra,
+.baggo-root.baggo-mobile .baggo-top-extra {
+  display: none !important;
+}
+
+.baggo-root.device-mobile .baggo-top-bar-inner,
+.baggo-root.is-mobile .baggo-top-bar-inner,
+.baggo-root.baggo-mobile .baggo-top-bar-inner {
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 6px 12px !important;
+}
+
+.baggo-root.device-mobile .baggo-top-notice,
+.baggo-root.is-mobile .baggo-top-notice,
+.baggo-root.baggo-mobile .baggo-top-notice {
+  font-size: 11px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.baggo-root.device-mobile .baggo-nav-desktop,
+.baggo-root.is-mobile .baggo-nav-desktop,
+.baggo-root.baggo-mobile .baggo-nav-desktop {
+  display: none !important;
+}
+
+.baggo-root.device-mobile .baggo-header .baggo-container,
+.baggo-root.is-mobile .baggo-header .baggo-container,
+.baggo-root.baggo-mobile .baggo-header .baggo-container {
+  padding: 0 10px !important;
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+.baggo-root.device-mobile .baggo-header-inner,
+.baggo-root.is-mobile .baggo-header-inner,
+.baggo-root.baggo-mobile .baggo-header-inner {
+  display: grid !important;
+  grid-template-columns: 1fr auto 1fr !important;
+  align-items: center !important;
+  min-height: 56px !important;
+  height: 56px !important;
+  padding: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  position: static !important;
+  gap: 4px !important;
+}
+
+.baggo-root.device-mobile .baggo-mobile-menu-btn,
+.baggo-root.is-mobile .baggo-mobile-menu-btn,
+.baggo-root.baggo-mobile .baggo-mobile-menu-btn {
+  justify-self: start !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 34px !important;
+  height: 34px !important;
+  background: none !important;
+  border: 1px solid var(--baggo-border) !important;
+  border-radius: 4px !important;
+  font-size: 19px !important;
+  color: var(--baggo-navy) !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  margin: 0 !important;
+  position: static !important;
+  z-index: auto !important;
+}
+
+.baggo-root.device-mobile .baggo-logo,
+.baggo-root.is-mobile .baggo-logo,
+.baggo-root.baggo-mobile .baggo-logo {
+  justify-self: center !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin: 0 !important;
+  position: static !important;
+  transform: none !important;
+  left: auto !important;
+  top: auto !important;
+  z-index: auto !important;
+  white-space: nowrap !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+}
+
+.baggo-root.device-mobile .baggo-logo-icon,
+.baggo-root.is-mobile .baggo-logo-icon,
+.baggo-root.baggo-mobile .baggo-logo-icon {
+  width: 26px !important;
+  height: 26px !important;
+  font-size: 13px !important;
+  border-radius: 6px !important;
+  flex-shrink: 0 !important;
+}
+
+.baggo-root.device-mobile .baggo-logo-title,
+.baggo-root.is-mobile .baggo-logo-title,
+.baggo-root.baggo-mobile .baggo-logo-title {
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  line-height: 1.05 !important;
+}
+
+.baggo-root.device-mobile .baggo-logo-sub,
+.baggo-root.is-mobile .baggo-logo-sub,
+.baggo-root.baggo-mobile .baggo-logo-sub {
+  font-size: 6.5px !important;
+  letter-spacing: 0.12em !important;
+  line-height: 1 !important;
+}
+
+.baggo-root.device-mobile .baggo-actions,
+.baggo-root.is-mobile .baggo-actions,
+.baggo-root.baggo-mobile .baggo-actions {
+  justify-self: end !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  margin: 0 !important;
+  flex-shrink: 0 !important;
+  position: static !important;
+  z-index: auto !important;
+}
+
+.baggo-root.device-mobile .baggo-actions .baggo-compare-btn,
+.baggo-root.is-mobile .baggo-actions .baggo-compare-btn,
+.baggo-root.baggo-mobile .baggo-actions .baggo-compare-btn {
+  display: none !important;
+}
+
+.baggo-root.device-mobile .baggo-action-btn,
+.baggo-root.is-mobile .baggo-action-btn,
+.baggo-root.baggo-mobile .baggo-action-btn {
+  width: 32px !important;
+  height: 32px !important;
+  font-size: 13px !important;
+  border-radius: 50% !important;
+  flex-shrink: 0 !important;
+}
+
+.baggo-root.device-mobile .baggo-action-btn .baggo-badge,
+.baggo-root.is-mobile .baggo-action-btn .baggo-badge,
+.baggo-root.baggo-mobile .baggo-action-btn .baggo-badge {
+  width: 15px !important;
+  height: 15px !important;
+  font-size: 9px !important;
+  top: -3px !important;
+  right: -3px !important;
+}
+
+.baggo-root.device-mobile .baggo-hero-inner,
+.baggo-root.is-mobile .baggo-hero-inner,
+.baggo-root.baggo-mobile .baggo-hero-inner {
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+  padding: 24px 0 !important;
+  text-align: center !important;
+}
+
+.baggo-root.device-mobile .baggo-hero-title,
+.baggo-root.is-mobile .baggo-hero-title,
+.baggo-root.baggo-mobile .baggo-hero-title {
+  font-size: 32px !important;
+  line-height: 1.2 !important;
+  margin-bottom: 12px !important;
+}
+
+.baggo-root.device-mobile .baggo-hero-desc,
+.baggo-root.is-mobile .baggo-hero-desc,
+.baggo-root.baggo-mobile .baggo-hero-desc {
+  font-size: 14px !important;
+  margin: 0 auto 20px !important;
+  max-width: 100% !important;
+}
+
+.baggo-root.device-mobile .baggo-hero-actions,
+.baggo-root.is-mobile .baggo-hero-actions,
+.baggo-root.baggo-mobile .baggo-hero-actions {
+  display: flex !important;
+  gap: 10px !important;
+  justify-content: center !important;
+  width: 100% !important;
+}
+
+.baggo-root.device-mobile .baggo-hero-actions .baggo-btn,
+.baggo-root.is-mobile .baggo-hero-actions .baggo-btn,
+.baggo-root.baggo-mobile .baggo-hero-actions .baggo-btn {
+  flex: 1 !important;
+  padding: 12px 8px !important;
+  font-size: 11px !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+}
+
+.baggo-root.device-mobile .baggo-hero-img-wrap,
+.baggo-root.is-mobile .baggo-hero-img-wrap,
+.baggo-root.baggo-mobile .baggo-hero-img-wrap {
+  height: 250px !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+
+.baggo-root.device-mobile .baggo-cat-grid,
+.baggo-root.is-mobile .baggo-cat-grid,
+.baggo-root.baggo-mobile .baggo-cat-grid {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+.baggo-root.device-mobile .baggo-cat-card,
+.baggo-root.is-mobile .baggo-cat-card,
+.baggo-root.baggo-mobile .baggo-cat-card {
+  height: 220px !important;
+}
+
+.baggo-root.device-mobile .baggo-cat-card-title,
+.baggo-root.is-mobile .baggo-cat-card-title,
+.baggo-root.baggo-mobile .baggo-cat-card-title {
+  font-size: 20px !important;
+}
+
+.baggo-root.device-mobile .baggo-cat-card-desc,
+.baggo-root.is-mobile .baggo-cat-card-desc,
+.baggo-root.baggo-mobile .baggo-cat-card-desc {
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+.baggo-root.device-mobile .baggo-cat-overlay,
+.baggo-root.is-mobile .baggo-cat-overlay,
+.baggo-root.baggo-mobile .baggo-cat-overlay {
+  padding: 16px 20px !important;
+}
+
+.baggo-root.device-mobile .baggo-products-grid,
+.baggo-root.is-mobile .baggo-products-grid,
+.baggo-root.baggo-mobile .baggo-products-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.baggo-root.device-mobile .baggo-product-card,
+.baggo-root.is-mobile .baggo-product-card,
+.baggo-root.baggo-mobile .baggo-product-card {
+  border-radius: 4px !important;
+  overflow: hidden !important;
+}
+
+.baggo-root.device-mobile .baggo-product-media,
+.baggo-root.is-mobile .baggo-product-media,
+.baggo-root.baggo-mobile .baggo-product-media {
+  height: 170px !important;
+  position: relative !important;
+}
+
+.baggo-root.device-mobile .baggo-product-body,
+.baggo-root.is-mobile .baggo-product-body,
+.baggo-root.baggo-mobile .baggo-product-body {
+  padding: 10px 8px !important;
+}
+
+.baggo-root.device-mobile .baggo-product-title,
+.baggo-root.is-mobile .baggo-product-title,
+.baggo-root.baggo-mobile .baggo-product-title {
+  font-size: 13.5px !important;
+  line-height: 1.3 !important;
+  min-height: 36px !important;
+  margin-bottom: 6px !important;
+}
+
+.baggo-root.device-mobile .baggo-product-vendor,
+.baggo-root.is-mobile .baggo-product-vendor,
+.baggo-root.baggo-mobile .baggo-product-vendor {
+  font-size: 9.5px !important;
+  letter-spacing: 0.05em !important;
+  margin-bottom: 2px !important;
+}
+
+.baggo-root.device-mobile .baggo-product-rating,
+.baggo-root.is-mobile .baggo-product-rating,
+.baggo-root.baggo-mobile .baggo-product-rating {
+  font-size: 11px !important;
+  margin-bottom: 6px !important;
+}
+
+.baggo-root.device-mobile .baggo-leather-pill,
+.baggo-root.is-mobile .baggo-leather-pill,
+.baggo-root.baggo-mobile .baggo-leather-pill {
+  font-size: 10px !important;
+  padding: 2px 6px !important;
+  margin-bottom: 8px !important;
+}
+
+.baggo-root.device-mobile .baggo-color-swatches,
+.baggo-root.is-mobile .baggo-color-swatches,
+.baggo-root.baggo-mobile .baggo-color-swatches {
+  gap: 4px !important;
+  margin-bottom: 8px !important;
+}
+
+.baggo-root.device-mobile .baggo-color-dot,
+.baggo-root.is-mobile .baggo-color-dot,
+.baggo-root.baggo-mobile .baggo-color-dot {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+.baggo-root.device-mobile .baggo-price,
+.baggo-root.is-mobile .baggo-price,
+.baggo-root.baggo-mobile .baggo-price {
+  font-size: 15px !important;
+}
+
+.baggo-root.device-mobile .baggo-compare-price,
+.baggo-root.is-mobile .baggo-compare-price,
+.baggo-root.baggo-mobile .baggo-compare-price {
+  font-size: 11px !important;
+  margin-left: 4px !important;
+}
+
+.baggo-root.device-mobile .baggo-product-footer,
+.baggo-root.is-mobile .baggo-product-footer,
+.baggo-root.baggo-mobile .baggo-product-footer {
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 6px !important;
+  padding-top: 8px !important;
+}
+
+.baggo-root.device-mobile .baggo-add-btn,
+.baggo-root.is-mobile .baggo-add-btn,
+.baggo-root.baggo-mobile .baggo-add-btn {
+  width: 100% !important;
+  text-align: center !important;
+  padding: 6px 4px !important;
+  font-size: 11px !important;
+  white-space: nowrap !important;
+  letter-spacing: 0.02em !important;
+}
+
+.baggo-root.device-mobile .baggo-card-actions,
+.baggo-root.is-mobile .baggo-card-actions,
+.baggo-root.baggo-mobile .baggo-card-actions {
+  opacity: 1 !important;
+  transform: none !important;
+  top: 6px !important;
+  right: 6px !important;
+  gap: 6px !important;
+}
+
+.baggo-root.device-mobile .baggo-card-action-btn,
+.baggo-root.is-mobile .baggo-card-action-btn,
+.baggo-root.baggo-mobile .baggo-card-action-btn {
+  width: 30px !important;
+  height: 30px !important;
+  font-size: 13px !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+}
+
+.baggo-root.device-mobile .baggo-split-banner,
+.baggo-root.is-mobile .baggo-split-banner,
+.baggo-root.baggo-mobile .baggo-split-banner {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+  padding: 24px 0 !important;
+}
+
+.baggo-root.device-mobile .baggo-split-img,
+.baggo-root.is-mobile .baggo-split-img,
+.baggo-root.baggo-mobile .baggo-split-img {
+  width: 100% !important;
+  height: 220px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+}
+
+.baggo-root.device-mobile .baggo-split-content,
+.baggo-root.is-mobile .baggo-split-content,
+.baggo-root.baggo-mobile .baggo-split-content {
+  max-width: 100% !important;
+  text-align: center !important;
+}
+
+.baggo-root.device-mobile .baggo-split-content h2,
+.baggo-root.is-mobile .baggo-split-content h2,
+.baggo-root.baggo-mobile .baggo-split-content h2 {
+  font-size: 24px !important;
+  line-height: 1.25 !important;
+}
+
+.baggo-root.device-mobile .baggo-split-content p,
+.baggo-root.is-mobile .baggo-split-content p,
+.baggo-root.baggo-mobile .baggo-split-content p {
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+  margin-bottom: 16px !important;
+}
+
+.baggo-root.device-mobile .baggo-split-content .baggo-btn,
+.baggo-root.is-mobile .baggo-split-content .baggo-btn,
+.baggo-root.baggo-mobile .baggo-split-content .baggo-btn {
+  width: 100% !important;
+}
+
+.baggo-root.device-mobile .baggo-monogram-banner,
+.baggo-root.is-mobile .baggo-monogram-banner,
+.baggo-root.baggo-mobile .baggo-monogram-banner {
+  grid-template-columns: 1fr !important;
+  padding: 24px 16px !important;
+  gap: 24px !important;
+  text-align: center !important;
+}
+
+.baggo-root.device-mobile .baggo-pillars-grid,
+.baggo-root.is-mobile .baggo-pillars-grid,
+.baggo-root.baggo-mobile .baggo-pillars-grid {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+.baggo-root.device-mobile .baggo-testimonial-card,
+.baggo-root.is-mobile .baggo-testimonial-card,
+.baggo-root.baggo-mobile .baggo-testimonial-card {
+  padding: 24px 16px !important;
+}
+
+.baggo-root.device-mobile .baggo-testimonial-quote,
+.baggo-root.is-mobile .baggo-testimonial-quote,
+.baggo-root.baggo-mobile .baggo-testimonial-quote {
+  font-size: 16px !important;
+}
+
+.baggo-root.device-mobile .baggo-footer,
+.baggo-root.is-mobile .baggo-footer,
+.baggo-root.baggo-mobile .baggo-footer {
+  padding: 40px 0 24px !important;
+}
+
+.baggo-root.device-mobile .baggo-footer-grid,
+.baggo-root.is-mobile .baggo-footer-grid,
+.baggo-root.baggo-mobile .baggo-footer-grid {
+  grid-template-columns: 1fr !important;
+  gap: 28px !important;
+  text-align: left !important;
+}
+
+.baggo-root.device-mobile .baggo-footer-bottom,
+.baggo-root.is-mobile .baggo-footer-bottom,
+.baggo-root.baggo-mobile .baggo-footer-bottom {
+  flex-direction: column !important;
+  gap: 12px !important;
+  text-align: center !important;
+  align-items: center !important;
+}
+
+.baggo-root.device-mobile .baggo-cart-drawer,
+.baggo-root.is-mobile .baggo-cart-drawer,
+.baggo-root.baggo-mobile .baggo-cart-drawer {
+  width: 100% !important;
+  max-width: 100vw !important;
+}
+
+.baggo-root.device-mobile .baggo-quickview-modal,
+.baggo-root.is-mobile .baggo-quickview-modal,
+.baggo-root.baggo-mobile .baggo-quickview-modal {
+  width: 95% !important;
+  padding: 20px 16px !important;
+}
+
+.baggo-root.device-mobile .baggo-quickview-layout,
+.baggo-root.is-mobile .baggo-quickview-layout,
+.baggo-root.baggo-mobile .baggo-quickview-layout {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+.baggo-root.device-mobile .baggo-pdp-layout,
+.baggo-root.is-mobile .baggo-pdp-layout,
+.baggo-root.baggo-mobile .baggo-pdp-layout {
+  grid-template-columns: 1fr !important;
+  gap: 24px !important;
+}
+
+.baggo-root.device-mobile .baggo-pdp-main-img-wrap,
+.baggo-root.is-mobile .baggo-pdp-main-img-wrap,
+.baggo-root.baggo-mobile .baggo-pdp-main-img-wrap {
+  height: 300px !important;
+}
+
+/* =========================================================================
+   DEDICATED TABLET VIEW (768px - 1024px & SIMULATED TABLET)
+   ========================================================================= */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .baggo-root {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .baggo-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    box-sizing: border-box !important;
+  }
+
+  .baggo-top-bar {
+    padding: 6px 0 !important;
+    font-size: 11px !important;
+  }
+
+  .baggo-top-bar-inner,
+  .baggo-top-notice {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+  }
+
+  .baggo-top-extra {
+    display: none !important;
+  }
+
+  .baggo-header-inner {
+    padding: 12px 0 !important;
+  }
+
+  .baggo-logo-title {
+    font-size: 26px !important;
+  }
+
+  .baggo-nav-list {
+    display: flex !important;
+    gap: 16px !important;
+  }
+
+  .baggo-nav-link {
+    font-size: 13px !important;
+  }
+
+  .baggo-mobile-menu-btn {
+    display: none !important;
+  }
+
+  .baggo-actions {
+    gap: 10px !important;
+  }
+
+  .baggo-products-grid,
+  .baggo-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+
+  .baggo-collections-grid,
+  .baggo-cat-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+
+  .baggo-pillars-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+
+  .baggo-footer-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 24px !important;
+  }
+
+  .baggo-pdp-layout {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 24px !important;
+  }
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .baggo-root.baggo-tablet) .baggo-root,
+.baggo-root.baggo-tablet {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .baggo-root.baggo-tablet) .baggo-container,
+.baggo-root.baggo-tablet .baggo-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  box-sizing: border-box !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .baggo-root.baggo-tablet) .baggo-top-bar,
+.baggo-root.baggo-tablet .baggo-top-bar {
+  padding: 6px 0 !important;
+  font-size: 11px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .baggo-root.baggo-tablet) .baggo-top-bar-inner,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .baggo-root.baggo-tablet) .baggo-top-notice,
+.baggo-root.baggo-tablet .baggo-top-bar-inner,
+.baggo-root.baggo-tablet .baggo-top-notice {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+  margin: 0 auto !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .baggo-root.baggo-tablet) .baggo-top-extra,
+.baggo-root.baggo-tablet .baggo-top-extra {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .baggo-root.baggo-tablet) .baggo-header-inner,
+.baggo-root.baggo-tablet .baggo-header-inner {
+  padding: 12px 0 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .baggo-root.baggo-tablet) .baggo-logo-title,
+.baggo-root.baggo-tablet .baggo-logo-title {
+  font-size: 26px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .baggo-root.baggo-tablet) .baggo-nav-list,
+.baggo-root.baggo-tablet .baggo-nav-list {
+  display: flex !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .baggo-root.baggo-tablet) .baggo-nav-link,
+.baggo-root.baggo-tablet .baggo-nav-link {
+  font-size: 13px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .baggo-root.baggo-tablet) .baggo-mobile-menu-btn,
+.baggo-root.baggo-tablet .baggo-mobile-menu-btn {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .baggo-root.baggo-tablet) .baggo-actions,
+.baggo-root.baggo-tablet .baggo-actions {
+  gap: 10px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .baggo-root.baggo-tablet) .baggo-products-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .baggo-root.baggo-tablet) .baggo-grid,
+.baggo-root.baggo-tablet .baggo-products-grid,
+.baggo-root.baggo-tablet .baggo-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .baggo-root.baggo-tablet) .baggo-collections-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .baggo-root.baggo-tablet) .baggo-cat-grid,
+.baggo-root.baggo-tablet .baggo-collections-grid,
+.baggo-root.baggo-tablet .baggo-cat-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .baggo-root.baggo-tablet) .baggo-pillars-grid,
+.baggo-root.baggo-tablet .baggo-pillars-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .baggo-root.baggo-tablet) .baggo-footer-grid,
+.baggo-root.baggo-tablet .baggo-footer-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 24px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .baggo-root.baggo-tablet) .baggo-pdp-layout,
+.baggo-root.baggo-tablet .baggo-pdp-layout {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 24px !important;
+}

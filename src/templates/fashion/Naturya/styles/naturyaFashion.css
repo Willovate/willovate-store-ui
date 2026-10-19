@@ -1,0 +1,2111 @@
+/* Naturya - Clean, Contemporary Earth-Tone Fashion & Lifestyle Storefront */
+
+:root {
+  --nat-bg: #fbfbfb;
+  --nat-card-bg: #ffffff;
+  --nat-text: #181818;
+  --nat-dark: #181818;
+  --nat-highlight: #a79d80;
+  --nat-highlight-hover: #93896d;
+  --nat-highlight-light: #f7f5f0;
+  --nat-muted: #7b7b7b;
+  --nat-light-gray: #f3f3f3;
+  --nat-border: #eeeeee;
+  --nat-border-dark: #333333;
+  --nat-sale: #a79d80;
+  --nat-star: #a79d80;
+  --nat-radius-btn: 0.375rem;
+  --nat-radius-input: 0.375rem;
+  --nat-radius-img: 5px;
+  --nat-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04);
+  --nat-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --nat-shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.08);
+  --nat-font-heading: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --nat-font-body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --nat-font-accent: "Playfair Display", Georgia, serif;
+  --nat-transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.naturya-root {
+  font-family: var(--nat-font-body);
+  color: var(--nat-text);
+  background-color: var(--nat-bg);
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+.naturya-root * {
+  box-sizing: border-box;
+}
+
+.naturya-container {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 32px;
+  padding-right: 32px;
+  box-sizing: border-box;
+}
+
+/* =========================================================================
+   TOP ANNOUNCEMENT BAR
+   ========================================================================= */
+.naturya-announcement-bar {
+  background-color: var(--nat-dark);
+  color: #ffffff;
+  font-size: 13px;
+  padding: 10px 0;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.naturya-announcement-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.naturya-announcement-content strong {
+  color: var(--nat-highlight);
+  font-weight: 600;
+}
+
+.naturya-announcement-link {
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  margin-left: 6px;
+  background: transparent;
+  border: none;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+/* =========================================================================
+   MAIN HEADER & NAVIGATION
+   ========================================================================= */
+.naturya-header {
+  background: #ffffff;
+  border-bottom: 1px solid var(--nat-border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition: var(--nat-transition);
+}
+
+.naturya-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+}
+
+/* LEFT NAVIGATION */
+.naturya-nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.naturya-nav-link {
+  background: transparent;
+  border: none;
+  font-family: var(--nat-font-body);
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--nat-text);
+  cursor: pointer;
+  padding: 8px 0;
+  position: relative;
+  transition: var(--nat-transition);
+  text-decoration: none;
+}
+
+.naturya-nav-link:hover,
+.naturya-nav-link.active {
+  color: var(--nat-highlight);
+}
+
+.naturya-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--nat-highlight);
+  transition: width 0.25s ease;
+}
+
+.naturya-nav-link:hover::after,
+.naturya-nav-link.active::after {
+  width: 100%;
+}
+
+/* CENTER LOGO */
+.naturya-logo {
+  font-family: var(--nat-font-heading);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--nat-dark);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* RIGHT ACTIONS */
+.naturya-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.naturya-action-btn {
+  background: transparent;
+  border: none;
+  color: var(--nat-text);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  position: relative;
+  transition: var(--nat-transition);
+}
+
+.naturya-action-btn:hover {
+  color: var(--nat-highlight);
+}
+
+.naturya-cart-badge {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  background: var(--nat-highlight);
+  color: #ffffff;
+  font-size: 10.5px;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =========================================================================
+   HERO SLIDER
+   ========================================================================= */
+.naturya-hero-section {
+  position: relative;
+  overflow: hidden;
+  background: #f0ede6;
+  min-height: 640px;
+}
+
+.naturya-hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s ease-in-out, visibility 0.6s;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+}
+
+.naturya-hero-slide.active {
+  opacity: 1;
+  visibility: visible;
+  position: relative;
+  min-height: 640px;
+}
+
+.naturya-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.75) 45%, rgba(255, 255, 255, 0.1) 100%);
+}
+
+.naturya-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 580px;
+  padding: 60px 0;
+}
+
+.naturya-hero-subtitle {
+  font-family: var(--nat-font-accent);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 19px;
+  color: var(--nat-highlight);
+  margin-bottom: 12px;
+  letter-spacing: 0.02em;
+}
+
+.naturya-hero-title {
+  font-family: var(--nat-font-heading);
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--nat-dark);
+  margin: 0 0 18px 0;
+}
+
+.naturya-hero-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #555555;
+  margin-bottom: 32px;
+}
+
+.naturya-btn-discovery {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--nat-dark);
+  color: #ffffff;
+  border: 1px solid var(--nat-dark);
+  padding: 14px 32px;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border-radius: var(--nat-radius-btn);
+  cursor: pointer;
+  transition: var(--nat-transition);
+  text-decoration: none;
+}
+
+.naturya-btn-discovery:hover {
+  background: var(--nat-highlight);
+  border-color: var(--nat-highlight);
+  color: #ffffff;
+}
+
+/* HERO SLIDER CONTROLS (Page 1, Page 2, Page 3) */
+.naturya-hero-pagination {
+  position: absolute;
+  bottom: 28px;
+  left: 32px;
+  z-index: 10;
+  display: flex;
+  gap: 12px;
+}
+
+.naturya-page-dot {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--nat-border);
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--nat-muted);
+  cursor: pointer;
+  border-radius: var(--nat-radius-btn);
+  transition: var(--nat-transition);
+}
+
+.naturya-page-dot:hover,
+.naturya-page-dot.active {
+  background: var(--nat-dark);
+  color: #ffffff;
+  border-color: var(--nat-dark);
+}
+
+/* =========================================================================
+   VALUE PROMISES STRIP
+   ========================================================================= */
+.naturya-promises-section {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid var(--nat-border);
+  background: #ffffff;
+}
+
+.naturya-promises-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+.naturya-promise-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.naturya-promise-icon {
+  font-size: 26px;
+  color: var(--nat-highlight);
+  flex-shrink: 0;
+}
+
+.naturya-promise-title {
+  font-family: var(--nat-font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--nat-dark);
+  margin: 0 0 3px 0;
+}
+
+.naturya-promise-desc {
+  font-size: 13px;
+  color: var(--nat-muted);
+  margin: 0;
+}
+
+/* =========================================================================
+   TRIPLE EDITORIAL BANNER TRIO
+   ========================================================================= */
+.naturya-trio-section {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+.naturya-trio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.naturya-trio-card {
+  position: relative;
+  aspect-ratio: 4/5;
+  border-radius: var(--nat-radius-img);
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px 28px;
+  color: #ffffff;
+  box-shadow: var(--nat-shadow-sm);
+  cursor: pointer;
+  transition: var(--nat-transition);
+}
+
+.naturya-trio-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 30%, rgba(24, 24, 24, 0.75) 100%);
+  transition: opacity 0.3s ease;
+}
+
+.naturya-trio-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--nat-shadow-md);
+}
+
+.naturya-trio-content {
+  position: relative;
+  z-index: 2;
+}
+
+.naturya-trio-subtitle {
+  font-family: var(--nat-font-accent);
+  font-style: italic;
+  font-size: 15px;
+  color: #e6e6e6;
+  margin-bottom: 6px;
+}
+
+.naturya-trio-title {
+  font-family: var(--nat-font-heading);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0 0 14px 0;
+}
+
+.naturya-trio-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+/* =========================================================================
+   "YOU ARE INTERESTED IN" COLLECTION TABS
+   ========================================================================= */
+.naturya-collection-section {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.naturya-section-header {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 36px auto;
+}
+
+.naturya-section-title {
+  font-family: var(--nat-font-heading);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--nat-dark);
+  margin: 0 0 12px 0;
+  letter-spacing: -0.02em;
+}
+
+.naturya-tabs-wrap {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.naturya-tab-pill {
+  background: transparent;
+  border: 1px solid var(--nat-border);
+  padding: 8px 24px;
+  border-radius: var(--nat-radius-btn);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--nat-text);
+  cursor: pointer;
+  transition: var(--nat-transition);
+}
+
+.naturya-tab-pill:hover,
+.naturya-tab-pill.active {
+  background: var(--nat-dark);
+  color: #ffffff;
+  border-color: var(--nat-dark);
+}
+
+.naturya-section-subtext {
+  font-size: 14px;
+  color: var(--nat-muted);
+  line-height: 1.6;
+}
+
+/* PRODUCT CARD COMPONENT */
+.naturya-products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.naturya-product-card {
+  background: var(--nat-card-bg);
+  border-radius: var(--nat-radius-img);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: var(--nat-transition);
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.naturya-product-card:hover {
+  box-shadow: var(--nat-shadow-md);
+}
+
+.naturya-card-media {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: #f7f7f7;
+  border-radius: var(--nat-radius-img);
+  cursor: pointer;
+}
+
+.naturya-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.35s ease, transform 0.4s ease;
+}
+
+.naturya-card-img.alt {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.naturya-product-card:hover .naturya-card-img.main {
+  transform: scale(1.03);
+}
+
+.naturya-product-card:hover .naturya-card-img.alt {
+  opacity: 1;
+  transform: scale(1.03);
+}
+
+.naturya-card-sale-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--nat-highlight);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  z-index: 5;
+}
+
+/* ACTION OVERLAYS */
+.naturya-card-actions {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  gap: 8px;
+  z-index: 6;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 0.25s ease;
+}
+
+.naturya-product-card:hover .naturya-card-actions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.naturya-btn-card-action {
+  flex: 1;
+  background: #ffffff;
+  color: var(--nat-dark);
+  border: 1px solid var(--nat-border);
+  padding: 9px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: var(--nat-radius-btn);
+  cursor: pointer;
+  transition: var(--nat-transition);
+  text-align: center;
+}
+
+.naturya-btn-card-action:hover {
+  background: var(--nat-dark);
+  color: #ffffff;
+  border-color: var(--nat-dark);
+}
+
+/* PRODUCT BODY */
+.naturya-card-body {
+  padding: 16px 4px 8px 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.naturya-vendor-tag {
+  font-size: 11.5px;
+  color: var(--nat-muted);
+  margin-bottom: 4px;
+}
+
+.naturya-card-title {
+  font-family: var(--nat-font-body);
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--nat-dark);
+  margin: 0 0 6px 0;
+  line-height: 1.35;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.naturya-card-title:hover {
+  color: var(--nat-highlight);
+}
+
+.naturya-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.naturya-price-current {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--nat-dark);
+}
+
+.naturya-price-compare {
+  font-size: 13px;
+  color: var(--nat-muted);
+  text-decoration: line-through;
+}
+
+/* =========================================================================
+   "SHOP BY CATEGORY" PILLS
+   ========================================================================= */
+.naturya-categories-section {
+  padding-top: 40px;
+  padding-bottom: 60px;
+}
+
+.naturya-cat-pills-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 18px;
+}
+
+.naturya-cat-pill-card {
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--nat-transition);
+}
+
+.naturya-cat-pill-card:hover {
+  transform: translateY(-4px);
+}
+
+.naturya-cat-pill-img-wrap {
+  aspect-ratio: 1/1;
+  border-radius: var(--nat-radius-img);
+  overflow: hidden;
+  background: #f1ede6;
+  margin-bottom: 10px;
+}
+
+.naturya-cat-pill-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.naturya-cat-pill-card:hover .naturya-cat-pill-img {
+  transform: scale(1.06);
+}
+
+.naturya-cat-pill-title {
+  font-family: var(--nat-font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--nat-dark);
+  margin: 0;
+}
+
+/* =========================================================================
+   "URBAN OASIS" EDITORIAL SPLIT
+   ========================================================================= */
+.naturya-oasis-section {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background: #ffffff;
+}
+
+.naturya-oasis-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.naturya-oasis-media {
+  aspect-ratio: 16/11;
+  border-radius: var(--nat-radius-img);
+  overflow: hidden;
+}
+
+.naturya-oasis-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.naturya-oasis-text {
+  max-width: 500px;
+}
+
+.naturya-oasis-tag {
+  font-family: var(--nat-font-accent);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--nat-highlight);
+  margin-bottom: 8px;
+}
+
+.naturya-oasis-title {
+  font-family: var(--nat-font-heading);
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--nat-dark);
+  margin: 0 0 16px 0;
+}
+
+.naturya-oasis-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--nat-muted);
+  margin-bottom: 28px;
+}
+
+/* =========================================================================
+   "HAPPY CLIENTS" (JUDGE.ME DESIGN)
+   ========================================================================= */
+.naturya-reviews-section {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.naturya-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.naturya-review-card {
+  background: #ffffff;
+  border: 1px solid var(--nat-border);
+  border-radius: var(--nat-radius-img);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+.naturya-review-stars {
+  color: var(--nat-star);
+  font-size: 15px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.naturya-review-cat {
+  font-family: var(--nat-font-heading);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--nat-dark);
+  margin-bottom: 8px;
+}
+
+.naturya-review-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555555;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.naturya-review-footer {
+  padding-top: 14px;
+  border-top: 1px solid var(--nat-border);
+}
+
+.naturya-review-author {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--nat-dark);
+  margin: 0 0 2px 0;
+}
+
+.naturya-review-role {
+  font-size: 12px;
+  color: var(--nat-muted);
+  margin: 0 0 8px 0;
+}
+
+.naturya-review-prod-tag {
+  display: inline-block;
+  font-size: 11px;
+  color: var(--nat-highlight);
+  background: var(--nat-highlight-light);
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+/* =========================================================================
+   "INSTAGRAM SHOP" UGC CAROUSEL
+   ========================================================================= */
+.naturya-instagram-section {
+  padding-top: 50px;
+  padding-bottom: 70px;
+}
+
+.naturya-ig-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
+}
+
+.naturya-ig-item {
+  position: relative;
+  aspect-ratio: 1/1;
+  border-radius: var(--nat-radius-img);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.naturya-ig-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.naturya-ig-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(24, 24, 24, 0.6);
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  padding: 12px;
+  text-align: center;
+  transition: opacity 0.25s ease;
+}
+
+.naturya-ig-item:hover .naturya-ig-overlay {
+  opacity: 1;
+}
+
+.naturya-ig-item:hover .naturya-ig-img {
+  transform: scale(1.08);
+}
+
+.naturya-ig-icon {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.naturya-ig-handle {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* =========================================================================
+   FOOTER
+   ========================================================================= */
+.naturya-footer {
+  background: var(--nat-dark);
+  color: #e5e5e5;
+  padding: 70px 0 28px 0;
+}
+
+.naturya-footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.3fr;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.naturya-footer-col h4 {
+  font-family: var(--nat-font-heading);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  letter-spacing: 0.02em;
+}
+
+.naturya-footer-about {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: #999999;
+  margin-bottom: 20px;
+}
+
+.naturya-social-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.naturya-social-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: var(--nat-transition);
+}
+
+.naturya-social-btn:hover {
+  background: var(--nat-highlight);
+}
+
+.naturya-footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.naturya-footer-links button,
+.naturya-footer-links a {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: #999999;
+  font-size: 13.5px;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: left;
+  transition: var(--nat-transition);
+}
+
+.naturya-footer-links button:hover,
+.naturya-footer-links a:hover {
+  color: #ffffff;
+  padding-left: 3px;
+}
+
+.naturya-newsletter-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.naturya-newsletter-form {
+  display: flex;
+  gap: 8px;
+}
+
+.naturya-newsletter-input {
+  flex: 1;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--nat-radius-input);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-size: 13.5px;
+  outline: none;
+}
+
+.naturya-newsletter-input::placeholder {
+  color: #888888;
+}
+
+.naturya-newsletter-submit {
+  background: var(--nat-highlight);
+  color: #ffffff;
+  border: none;
+  padding: 0 18px;
+  border-radius: var(--nat-radius-btn);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--nat-transition);
+}
+
+.naturya-newsletter-submit:hover {
+  background: var(--nat-highlight-hover);
+}
+
+.naturya-footer-bottom {
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 12.5px;
+  color: #777777;
+}
+
+/* =========================================================================
+   CART DRAWER SLIDE-OVER
+   ========================================================================= */
+.naturya-cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  z-index: 100;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.naturya-cart-drawer {
+  width: 100%;
+  max-width: 440px;
+  height: 100%;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  animation: slideInRight 0.25s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.naturya-cart-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--nat-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.naturya-cart-header h3 {
+  font-family: var(--nat-font-heading);
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.naturya-cart-close {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--nat-muted);
+}
+
+/* FREE SHIPPING PROGRESS GOAL */
+.naturya-free-ship-box {
+  background: var(--nat-highlight-light);
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--nat-border);
+}
+
+.naturya-free-ship-text {
+  font-size: 12.5px;
+  color: var(--nat-dark);
+  margin-bottom: 6px;
+}
+
+.naturya-free-ship-bar {
+  width: 100%;
+  height: 5px;
+  background: #e2ddd3;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.naturya-free-ship-fill {
+  height: 100%;
+  background: var(--nat-highlight);
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+/* CART ITEMS LIST */
+.naturya-cart-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.naturya-cart-item {
+  display: flex;
+  gap: 14px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--nat-border);
+}
+
+.naturya-cart-thumb {
+  width: 70px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: var(--nat-radius-img);
+}
+
+.naturya-cart-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.naturya-cart-prod-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  margin: 0 0 3px 0;
+}
+
+.naturya-cart-variant-tag {
+  font-size: 12px;
+  color: var(--nat-muted);
+  margin-bottom: 8px;
+}
+
+.naturya-cart-row-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.naturya-qty-control {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--nat-border);
+  border-radius: var(--nat-radius-btn);
+}
+
+.naturya-qty-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.naturya-qty-val {
+  width: 28px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.naturya-cart-price {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--nat-dark);
+}
+
+.naturya-cart-footer {
+  padding: 20px 24px;
+  border-top: 1px solid var(--nat-border);
+  background: #ffffff;
+}
+
+.naturya-cart-subtotal-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.naturya-checkout-btn {
+  width: 100%;
+  background: var(--nat-dark);
+  color: #ffffff;
+  border: none;
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border-radius: var(--nat-radius-btn);
+  cursor: pointer;
+  transition: var(--nat-transition);
+}
+
+.naturya-checkout-btn:hover {
+  background: var(--nat-highlight);
+}
+
+/* =========================================================================
+   PDP (PRODUCT DETAIL PAGE)
+   ========================================================================= */
+.naturya-pdp-section {
+  padding-top: 40px;
+  padding-bottom: 80px;
+}
+
+.naturya-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--nat-muted);
+  margin-bottom: 28px;
+}
+
+.naturya-breadcrumb button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--nat-muted);
+  cursor: pointer;
+}
+
+.naturya-breadcrumb button:hover {
+  color: var(--nat-dark);
+}
+
+.naturya-pdp-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  margin-bottom: 60px;
+}
+
+.naturya-pdp-gallery-wrap {
+  display: flex;
+  gap: 16px;
+}
+
+.naturya-pdp-thumbs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 80px;
+}
+
+.naturya-pdp-thumb-btn {
+  width: 80px;
+  height: 100px;
+  border: 1px solid var(--nat-border);
+  border-radius: var(--nat-radius-img);
+  overflow: hidden;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+}
+
+.naturya-pdp-thumb-btn.active {
+  border-color: var(--nat-highlight);
+}
+
+.naturya-pdp-thumb-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.naturya-pdp-main-media {
+  flex: 1;
+  aspect-ratio: 3/4;
+  border-radius: var(--nat-radius-img);
+  overflow: hidden;
+  background: #f8f8f8;
+}
+
+.naturya-pdp-main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* DETAILS */
+.naturya-pdp-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.naturya-pdp-vendor {
+  font-size: 13px;
+  color: var(--nat-highlight);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.naturya-pdp-title {
+  font-family: var(--nat-font-heading);
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--nat-dark);
+  margin: 0 0 12px 0;
+}
+
+.naturya-pdp-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--nat-muted);
+  margin-bottom: 18px;
+}
+
+.naturya-pdp-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.naturya-pdp-price {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--nat-dark);
+}
+
+.naturya-pdp-compare {
+  font-size: 18px;
+  color: var(--nat-muted);
+  text-decoration: line-through;
+}
+
+.naturya-pdp-desc {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: #444444;
+  margin-bottom: 24px;
+}
+
+/* SWATCHES & SIZES */
+.naturya-variant-group {
+  margin-bottom: 20px;
+}
+
+.naturya-variant-label {
+  font-size: 13.5px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.naturya-color-swatches {
+  display: flex;
+  gap: 10px;
+}
+
+.naturya-swatch-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border: 1px solid var(--nat-border);
+  border-radius: var(--nat-radius-btn);
+  font-size: 12.5px;
+  cursor: pointer;
+  background: #ffffff;
+}
+
+.naturya-swatch-chip.active {
+  border-color: var(--nat-dark);
+  background: var(--nat-light-gray);
+}
+
+.naturya-swatch-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid #d4d4d4;
+}
+
+.naturya-size-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.naturya-size-pill {
+  min-width: 44px;
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid var(--nat-border);
+  border-radius: var(--nat-radius-btn);
+  background: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.naturya-size-pill.active {
+  background: var(--nat-dark);
+  color: #ffffff;
+  border-color: var(--nat-dark);
+}
+
+.naturya-pdp-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.naturya-btn-add-pdp {
+  flex: 1;
+  background: var(--nat-dark);
+  color: #ffffff;
+  border: 1px solid var(--nat-dark);
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--nat-radius-btn);
+  cursor: pointer;
+  transition: var(--nat-transition);
+}
+
+.naturya-btn-add-pdp:hover {
+  background: var(--nat-highlight);
+  border-color: var(--nat-highlight);
+}
+
+.naturya-btn-buy-pdp {
+  flex: 1;
+  background: var(--nat-highlight);
+  color: #ffffff;
+  border: 1px solid var(--nat-highlight);
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--nat-radius-btn);
+  cursor: pointer;
+  transition: var(--nat-transition);
+}
+
+.naturya-btn-buy-pdp:hover {
+  background: var(--nat-highlight-hover);
+}
+
+/* ACCORDIONS */
+.naturya-accordion-item {
+  border-top: 1px solid var(--nat-border);
+  padding: 14px 0;
+}
+
+.naturya-accordion-header {
+  width: 100%;
+  background: transparent;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--nat-dark);
+  cursor: pointer;
+  padding: 0;
+}
+
+.naturya-accordion-body {
+  padding-top: 10px;
+  font-size: 13.5px;
+  color: #555555;
+  line-height: 1.6;
+}
+
+/* =========================================================================
+   COLLECTION / FILTER VIEW
+   ========================================================================= */
+.naturya-collection-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 40px;
+  padding: 40px 0 80px 0;
+}
+
+.naturya-filter-sidebar {
+  background: #ffffff;
+  border: 1px solid var(--nat-border);
+  border-radius: var(--nat-radius-img);
+  padding: 24px;
+  height: fit-content;
+}
+
+.naturya-filter-title {
+  font-family: var(--nat-font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.naturya-filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.naturya-filter-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  color: var(--nat-text);
+  cursor: pointer;
+}
+
+.naturya-sort-select {
+  padding: 8px 12px;
+  border: 1px solid var(--nat-border);
+  border-radius: var(--nat-radius-btn);
+  font-size: 13px;
+  background: #ffffff;
+  outline: none;
+  cursor: pointer;
+}
+
+/* =========================================================================
+   MODALS & TOAST
+   ========================================================================= */
+.naturya-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  z-index: 110;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.naturya-modal-box {
+  background: #ffffff;
+  border-radius: var(--nat-radius-img);
+  max-width: 600px;
+  width: 100%;
+  padding: 28px;
+  position: relative;
+  box-shadow: var(--nat-shadow-lg);
+}
+
+.naturya-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--nat-dark);
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: var(--nat-radius-btn);
+  z-index: 120;
+  font-size: 13.5px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--nat-shadow-lg);
+  border-left: 3px solid var(--nat-highlight);
+}
+
+/* =========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================= */
+@media (max-width: 1024px) {
+  .naturya-trio-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .naturya-products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .naturya-cat-pills-grid,
+  .naturya-ig-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .naturya-promises-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .naturya-footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.naturya-mobile-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  padding: 6px 4px;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  width: 28px;
+}
+
+.naturya-mobile-hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--nat-dark);
+  border-radius: 2px;
+}
+
+.naturya-quickview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .naturya-container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box !important;
+  }
+  .naturya-nav-menu {
+    display: none;
+  }
+  .naturya-mobile-hamburger {
+    display: flex;
+  }
+  .naturya-header-inner {
+    height: 62px;
+  }
+  .naturya-hero-title {
+    font-size: 28px;
+    line-height: 1.15;
+  }
+  .naturya-hero-desc {
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  .naturya-oasis-grid,
+  .naturya-pdp-layout {
+    grid-template-columns: 1fr;
+  }
+  .naturya-trio-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .naturya-trio-card {
+    aspect-ratio: 16/10;
+    padding: 20px 18px;
+  }
+  .naturya-trio-title {
+    font-size: 19px;
+    margin-bottom: 8px;
+  }
+  .naturya-products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px 10px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+  }
+  .naturya-product-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+  .naturya-card-actions {
+    display: none !important;
+  }
+  .naturya-cat-pills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px 10px;
+  }
+  .naturya-cat-pill-title {
+    font-size: 12.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .naturya-reviews-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .naturya-review-card {
+    padding: 20px 16px;
+  }
+  .naturya-ig-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .naturya-promises-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .naturya-collection-layout {
+    grid-template-columns: 1fr;
+  }
+  .naturya-filter-sidebar {
+    display: none;
+  }
+  .naturya-quickview-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .naturya-footer {
+    padding-top: 44px;
+    padding-bottom: 24px;
+  }
+  .naturya-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+  .naturya-newsletter-form {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+  }
+  .naturya-newsletter-input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+  .naturya-newsletter-submit {
+    padding: 0 18px;
+    font-size: 14px;
+  }
+  .naturya-footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+    padding-top: 20px;
+  }
+  .naturya-cart-drawer {
+    width: 100%;
+    max-width: 100%;
+  }
+  .naturya-modal-box {
+    width: 95%;
+    max-width: 95%;
+    max-height: 85vh;
+    padding: 20px 16px;
+    overflow-y: auto;
+  }
+}
+
+/* Explicit device-mobile & is-mobile support */
+.naturya-root.device-mobile,
+.naturya-root.is-mobile {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.naturya-root.device-mobile .naturya-container,
+.naturya-root.is-mobile .naturya-container {
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
+.naturya-root.device-mobile .naturya-nav-menu,
+.naturya-root.is-mobile .naturya-nav-menu {
+  display: none !important;
+}
+
+.naturya-root.device-mobile .naturya-mobile-hamburger,
+.naturya-root.is-mobile .naturya-mobile-hamburger {
+  display: flex !important;
+}
+
+.naturya-root.device-mobile .naturya-trio-grid,
+.naturya-root.is-mobile .naturya-trio-grid {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+.naturya-root.device-mobile .naturya-trio-card,
+.naturya-root.is-mobile .naturya-trio-card {
+  aspect-ratio: 16/10 !important;
+  padding: 20px 18px !important;
+}
+
+.naturya-root.device-mobile .naturya-products-grid,
+.naturya-root.is-mobile .naturya-products-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 12px 10px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+}
+
+.naturya-root.device-mobile .naturya-product-card,
+.naturya-root.is-mobile .naturya-product-card {
+  width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.naturya-root.device-mobile .naturya-card-actions,
+.naturya-root.is-mobile .naturya-card-actions {
+  display: none !important;
+}
+
+.naturya-root.device-mobile .naturya-cat-pills-grid,
+.naturya-root.is-mobile .naturya-cat-pills-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 14px 10px !important;
+}
+
+.naturya-root.device-mobile .naturya-cat-pill-title,
+.naturya-root.is-mobile .naturya-cat-pill-title {
+  font-size: 12.5px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.naturya-root.device-mobile .naturya-reviews-grid,
+.naturya-root.is-mobile .naturya-reviews-grid {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+.naturya-root.device-mobile .naturya-footer-grid,
+.naturya-root.is-mobile .naturya-footer-grid {
+  grid-template-columns: 1fr !important;
+  gap: 32px !important;
+  margin-bottom: 32px !important;
+}
+
+.naturya-root.device-mobile .naturya-newsletter-form,
+.naturya-root.is-mobile .naturya-newsletter-form {
+  display: flex !important;
+  gap: 8px !important;
+  width: 100% !important;
+}
+
+.naturya-root.device-mobile .naturya-cart-drawer,
+.naturya-root.is-mobile .naturya-cart-drawer {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* =========================================================================
+   DEDICATED TABLET VIEW (768px - 1024px & SIMULATED TABLET)
+   ========================================================================= */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .naturya-root {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .naturya-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    box-sizing: border-box !important;
+  }
+
+  .naturya-announcement-bar {
+    padding: 8px 16px !important;
+    font-size: 12px !important;
+    text-align: center !important;
+  }
+
+  .naturya-announcement-content {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .naturya-header-inner {
+    height: 70px !important;
+    padding: 0 4px !important;
+  }
+
+  .naturya-nav-menu {
+    display: flex !important;
+    gap: 16px !important;
+  }
+
+  .naturya-nav-link {
+    font-size: 13px !important;
+    padding: 6px 0 !important;
+  }
+
+  .naturya-mobile-hamburger {
+    display: none !important;
+  }
+
+  .naturya-logo {
+    font-size: 24px !important;
+  }
+
+  .naturya-header-actions {
+    gap: 14px !important;
+  }
+
+  .naturya-trio-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+
+  .naturya-products-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+
+  .naturya-cat-pills-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+
+  .naturya-reviews-grid,
+  .naturya-promises-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 18px !important;
+  }
+
+  .naturya-pdp-layout {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 24px !important;
+  }
+
+  .naturya-footer-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 28px !important;
+  }
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-root,
+.naturya-root.naturya-tablet,
+.naturya-root.device-tablet {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-container,
+.naturya-root.naturya-tablet .naturya-container,
+.naturya-root.device-tablet .naturya-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+  box-sizing: border-box !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-announcement-bar,
+.naturya-root.naturya-tablet .naturya-announcement-bar,
+.naturya-root.device-tablet .naturya-announcement-bar {
+  padding: 8px 16px !important;
+  font-size: 12px !important;
+  text-align: center !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-announcement-content,
+.naturya-root.naturya-tablet .naturya-announcement-content,
+.naturya-root.device-tablet .naturya-announcement-content {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-header-inner,
+.naturya-root.naturya-tablet .naturya-header-inner,
+.naturya-root.device-tablet .naturya-header-inner {
+  height: 70px !important;
+  padding: 0 4px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-nav-menu,
+.naturya-root.naturya-tablet .naturya-nav-menu,
+.naturya-root.device-tablet .naturya-nav-menu {
+  display: flex !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-nav-link,
+.naturya-root.naturya-tablet .naturya-nav-link,
+.naturya-root.device-tablet .naturya-nav-link {
+  font-size: 13px !important;
+  padding: 6px 0 !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-mobile-hamburger,
+.naturya-root.naturya-tablet .naturya-mobile-hamburger,
+.naturya-root.device-tablet .naturya-mobile-hamburger {
+  display: none !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-logo,
+.naturya-root.naturya-tablet .naturya-logo,
+.naturya-root.device-tablet .naturya-logo {
+  font-size: 24px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-header-actions,
+.naturya-root.naturya-tablet .naturya-header-actions,
+.naturya-root.device-tablet .naturya-header-actions {
+  gap: 14px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-trio-grid,
+.naturya-root.naturya-tablet .naturya-trio-grid,
+.naturya-root.device-tablet .naturya-trio-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-products-grid,
+.naturya-root.naturya-tablet .naturya-products-grid,
+.naturya-root.device-tablet .naturya-products-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-cat-pills-grid,
+.naturya-root.naturya-tablet .naturya-cat-pills-grid,
+.naturya-root.device-tablet .naturya-cat-pills-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-reviews-grid,
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-promises-grid,
+.naturya-root.naturya-tablet .naturya-reviews-grid,
+.naturya-root.naturya-tablet .naturya-promises-grid,
+.naturya-root.device-tablet .naturya-reviews-grid,
+.naturya-root.device-tablet .naturya-promises-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-pdp-layout,
+.naturya-root.naturya-tablet .naturya-pdp-layout,
+.naturya-root.device-tablet .naturya-pdp-layout {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 24px !important;
+}
+
+:is(.simulated-frame.frame-tablet, .preview-viewport-container.device-tablet, [data-device-view='tablet'], .naturya-root.naturya-tablet, .naturya-root.device-tablet) .naturya-footer-grid,
+.naturya-root.naturya-tablet .naturya-footer-grid,
+.naturya-root.device-tablet .naturya-footer-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 28px !important;
+}
