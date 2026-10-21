@@ -5,12 +5,18 @@ import {
   GLOWING_TEMPLATE,
   FABISH_TEMPLATE,
   ORGANICA_TEMPLATE,
+  SHADES_TEMPLATE,
+  BELLETNY_TEMPLATE,
 } from '../../data/cosmeticsTemplatesData'
 import {
   TEMPLATE_REGISTRY,
   getTemplateCategoryKey,
   getTemplateComponent,
+  getTemplateIdFromPrompt,
+  isBelleFashionTemplate,
+  isCosmeticsPrompt,
 } from '../../data/templateRegistry'
+import { BELLE_FASHION_TEMPLATE } from '../../data/fashionTemplatesData'
 import {
   BEAUX_LOGO,
   BEAUX_HERO_SLIDES,
@@ -51,20 +57,50 @@ import {
   ORGANICA_TESTIMONIAL,
   ORGANICA_BLOG_POSTS,
 } from './Organica/data/organicaData'
+import {
+  SHADES_LOGO,
+  SHADES_HERO_SLIDES,
+  SHADES_MEGA_MENU_ITEMS,
+  SHADES_3_CATEGORY_CARDS,
+  SHADES_STYLIST_BANNER,
+  SHADES_PRODUCTS,
+  SHADES_2_MIDDLE_BANNERS,
+  SHADES_READY_TO_IMPRESS,
+  SHADES_TESTIMONIAL,
+  SHADES_BLOG_POSTS,
+  SHADES_GALLERY_IMAGES,
+} from './Shades/data/shadesData'
+import {
+  BELLETNY_LOGO,
+  BELLETNY_PHONE,
+  BELLETNY_HERO_SLIDES,
+  BELLETNY_CATEGORIES,
+  BELLETNY_MIDDLE_BANNERS,
+  BELLETNY_PROD_WIDE_BANNER,
+  BELLETNY_TRUST_BADGES,
+  BELLETNY_PRODUCTS,
+  BELLETNY_TESTIMONIAL,
+  BELLETNY_BLOG_POSTS,
+  BELLETNY_BRAND_LOGOS,
+} from './Belletny/data/belletnyData'
 import { BeauxStorefront } from './Beaux/BeauxStorefront'
 import { GlowingStorefront } from './Glowing/GlowingStorefront'
 import { FabishStorefront } from './Fabish/FabishStorefront'
 import { OrganicaStorefront } from './Organica/OrganicaStorefront'
+import { ShadesStorefront } from './Shades/ShadesStorefront'
+import { BelletnyStorefront } from './Belletny/BelletnyStorefront'
 
 describe('Cosmetics & Beauty Templates Verification', () => {
   describe('Marketplace Template Metadata', () => {
-    it('contains all 4 templates (Beaux, Glowing, Fabish, Organica) in ALL_COSMETICS_MARKETPLACE_TEMPLATES', () => {
-      expect(ALL_COSMETICS_MARKETPLACE_TEMPLATES).toHaveLength(4)
+    it('contains all 6 templates in ALL_COSMETICS_MARKETPLACE_TEMPLATES', () => {
+      expect(ALL_COSMETICS_MARKETPLACE_TEMPLATES).toHaveLength(6)
       const ids = ALL_COSMETICS_MARKETPLACE_TEMPLATES.map((t) => t.id)
       expect(ids).toContain('cosmetics-beaux')
       expect(ids).toContain('cosmetics-glowing')
       expect(ids).toContain('cosmetics-fabish')
       expect(ids).toContain('cosmetics-organica')
+      expect(ids).toContain('cosmetics-shades')
+      expect(ids).toContain('cosmetics-belletny')
     })
 
     it('has valid metadata for Beaux Template matching live Shopify theme', () => {
@@ -107,18 +143,41 @@ describe('Cosmetics & Beauty Templates Verification', () => {
       expect(ORGANICA_TEMPLATE.thumbnailUrl).toContain('organica-1.myshopify.com')
       expect(ORGANICA_TEMPLATE.headline).toContain('Face Cleanser')
     })
+
+    it('has valid metadata for Shades Template matching live Shopify theme & screenshot', () => {
+      expect(SHADES_TEMPLATE.brandName).toBe('Shades')
+      expect(SHADES_TEMPLATE.businessType).toBe('health-beauty')
+      expect(SHADES_TEMPLATE.style).toBe('dark')
+      expect(SHADES_TEMPLATE.isDark).toBe(true)
+      expect(SHADES_TEMPLATE.rating).toBeGreaterThanOrEqual(4.9)
+      expect(SHADES_TEMPLATE.fullPreviewUrl).toBe('https://theme-shade.myshopify.com/?pb=0')
+      expect(SHADES_TEMPLATE.thumbnailUrl).toContain('theme-shade.myshopify.com')
+      expect(SHADES_TEMPLATE.headline).toBe('Beauty - Makeup Compact 5/Skintones')
+    })
+
+    it('has valid metadata for Belletny Template matching live Shopify theme & screenshot', () => {
+      expect(BELLETNY_TEMPLATE.brandName).toBe('Belletny')
+      expect(BELLETNY_TEMPLATE.businessType).toBe('health-beauty')
+      expect(BELLETNY_TEMPLATE.style).toBe('modern')
+      expect(BELLETNY_TEMPLATE.rating).toBeGreaterThanOrEqual(4.8)
+      expect(BELLETNY_TEMPLATE.fullPreviewUrl).toBe('https://belletny-codezeel.myshopify.com/')
+      expect(BELLETNY_TEMPLATE.thumbnailUrl).toContain('belletny-codezeel.myshopify.com')
+      expect(BELLETNY_TEMPLATE.headline).toBe('Clean Matte Liquid Foundation')
+    })
   })
 
   describe('Template Registry & Routing', () => {
-    it('registers health-beauty in TEMPLATE_REGISTRY with 4 cosmetics templates', () => {
+    it('registers health-beauty in TEMPLATE_REGISTRY with 6 cosmetics templates', () => {
       const category = TEMPLATE_REGISTRY['health-beauty']
       expect(category).toBeDefined()
       expect(category.displayName).toBe('Cosmetics & Beauty')
-      expect(category.templates).toHaveLength(4)
+      expect(category.templates).toHaveLength(6)
       expect(category.templates[0].id).toBe('cosmetics-beaux')
       expect(category.templates[1].id).toBe('cosmetics-glowing')
       expect(category.templates[2].id).toBe('cosmetics-fabish')
       expect(category.templates[3].id).toBe('cosmetics-organica')
+      expect(category.templates[4].id).toBe('cosmetics-shades')
+      expect(category.templates[5].id).toBe('cosmetics-belletny')
     })
 
     it('resolves cosmetic category keys in getTemplateCategoryKey', () => {
@@ -131,6 +190,25 @@ describe('Cosmetics & Beauty Templates Verification', () => {
       expect(getTemplateCategoryKey('glowing')).toBe('health-beauty')
       expect(getTemplateCategoryKey('fabish')).toBe('health-beauty')
       expect(getTemplateCategoryKey('organica')).toBe('health-beauty')
+      expect(getTemplateCategoryKey('shades')).toBe('health-beauty')
+      expect(getTemplateCategoryKey('belletny')).toBe('health-beauty')
+    })
+
+    it('recognizes branded organic beauty prompts as cosmetics', () => {
+      expect(isCosmeticsPrompt('Belletny Organic Beauty')).toBe(true)
+      expect(isCosmeticsPrompt('Organic skincare and makeup store')).toBe(true)
+      expect(isCosmeticsPrompt('Luxury fashion boutique')).toBe(false)
+    })
+
+    it('selects the named cosmetics template from a branded prompt', () => {
+      expect(
+        getTemplateIdFromPrompt('Belletny Organic Beauty', ALL_COSMETICS_MARKETPLACE_TEMPLATES),
+      ).toBe(BELLETNY_TEMPLATE.id)
+    })
+
+    it('does not treat Belletny as the Belle fashion template', () => {
+      expect(isBelleFashionTemplate(BELLETNY_TEMPLATE)).toBe(false)
+      expect(isBelleFashionTemplate(BELLE_FASHION_TEMPLATE)).toBe(true)
     })
 
     it('resolves getTemplateComponent correctly for Beaux', () => {
@@ -155,6 +233,18 @@ describe('Cosmetics & Beauty Templates Verification', () => {
       expect(getTemplateComponent('cosmetics-organica')).toBe(OrganicaStorefront)
       expect(getTemplateComponent('organica')).toBe(OrganicaStorefront)
       expect(getTemplateComponent(ORGANICA_TEMPLATE)).toBe(OrganicaStorefront)
+    })
+
+    it('resolves getTemplateComponent correctly for Shades', () => {
+      expect(getTemplateComponent('cosmetics-shades')).toBe(ShadesStorefront)
+      expect(getTemplateComponent('shades')).toBe(ShadesStorefront)
+      expect(getTemplateComponent(SHADES_TEMPLATE)).toBe(ShadesStorefront)
+    })
+
+    it('resolves getTemplateComponent correctly for Belletny', () => {
+      expect(getTemplateComponent('cosmetics-belletny')).toBe(BelletnyStorefront)
+      expect(getTemplateComponent('belletny')).toBe(BelletnyStorefront)
+      expect(getTemplateComponent(BELLETNY_TEMPLATE)).toBe(BelletnyStorefront)
     })
   })
 
@@ -213,6 +303,41 @@ describe('Cosmetics & Beauty Templates Verification', () => {
       expect(ORGANICA_CATEGORY_BOXES).toHaveLength(3)
       expect(ORGANICA_TESTIMONIAL.author).toBe('Mr Right!')
       expect(ORGANICA_BLOG_POSTS).toHaveLength(3)
+    })
+  })
+
+  describe('Shades Storefront Data Integrity', () => {
+    it('has authentic Shades assets matching live theme and user screenshot', () => {
+      expect(SHADES_LOGO).toContain('theme-shade.myshopify.com')
+      expect(SHADES_HERO_SLIDES).toHaveLength(2)
+      expect(SHADES_HERO_SLIDES[0].headline).toBe('MAKEUP COMPACT')
+      expect(SHADES_MEGA_MENU_ITEMS).toHaveLength(8)
+      expect(SHADES_3_CATEGORY_CARDS).toHaveLength(3)
+      expect(SHADES_STYLIST_BANNER.title).toBe('OUR BEAUTY STYLIST')
+      expect(SHADES_PRODUCTS.length).toBeGreaterThanOrEqual(6)
+      expect(SHADES_PRODUCTS[0].name).toBe('Midnight Eye Mascara Tales')
+      expect(SHADES_2_MIDDLE_BANNERS).toHaveLength(2)
+      expect(SHADES_READY_TO_IMPRESS.title).toBe('READY TO IMPRESS')
+      expect(SHADES_TESTIMONIAL.author).toBe('John Doe')
+      expect(SHADES_BLOG_POSTS).toHaveLength(2)
+      expect(SHADES_GALLERY_IMAGES).toHaveLength(6)
+    })
+  })
+
+  describe('Belletny Storefront Data Integrity', () => {
+    it('has authentic Belletny assets matching live theme and user screenshot', () => {
+      expect(BELLETNY_LOGO).toContain('belletny-codezeel.myshopify.com')
+      expect(BELLETNY_PHONE).toBe('(+01)123-456-789')
+      expect(BELLETNY_HERO_SLIDES).toHaveLength(2)
+      expect(BELLETNY_HERO_SLIDES[0].title).toBe('Clean Matte Liquid Foundation')
+      expect(BELLETNY_CATEGORIES).toHaveLength(5)
+      expect(BELLETNY_MIDDLE_BANNERS).toHaveLength(2)
+      expect(BELLETNY_PROD_WIDE_BANNER.title).toBe('Face Masks For Skin Care Based')
+      expect(BELLETNY_TRUST_BADGES).toHaveLength(3)
+      expect(BELLETNY_PRODUCTS.length).toBeGreaterThanOrEqual(10)
+      expect(BELLETNY_TESTIMONIAL.author).toBe('Chrs Nichols')
+      expect(BELLETNY_BLOG_POSTS).toHaveLength(3)
+      expect(BELLETNY_BRAND_LOGOS).toHaveLength(5)
     })
   })
 })

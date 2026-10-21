@@ -164,9 +164,93 @@ export const ORGANICA_TEMPLATE: MarketplaceTemplate = {
   createdDate: '2026-10-21',
 }
 
+export const SHADES_TEMPLATE: MarketplaceTemplate = {
+  id: 'cosmetics-shades',
+  slug: 'cosmetics-shades',
+  name: 'Shades Luxury Makeup',
+  businessType: 'health-beauty',
+  tags: ['Cosmetics', 'Makeup', 'Beauty', 'Dark Shades', 'Powder Compact', 'Luxury', 'Lipstick'],
+  shortDescription:
+    'High-end luxury dark beauty & makeup storefront with gold brush lettering, 8-item mega menu dropdown, trending products catalog, and high-fashion editorial styling.',
+  thumbnailUrl:
+    'https://theme-shade.myshopify.com/cdn/shop/files/slider-01_1903x.jpg',
+  fullPreviewUrl: 'https://theme-shade.myshopify.com/?pb=0',
+  popularityScore: 99,
+  isActive: true,
+  brandName: 'Shades',
+  headline: 'Beauty - Makeup Compact 5/Skintones',
+  subtitle:
+    'High-impact powder compact, velvet matte formulations, and luminous skintone perfecting pigments.',
+  buttonText: 'Shop Now',
+  buttonColor: '#e5a93c',
+  isDark: true,
+  modelImage:
+    'https://theme-shade.myshopify.com/cdn/shop/files/slider-01_1903x.jpg',
+  style: 'dark',
+  catalogSize: 'medium',
+  features: [
+    'Dark Luxury Aesthetic with Gold Accents',
+    '8-Card Visual Mega Menu Dropdown with Thumbnails',
+    'Hero Slider with Skintones Makeup Compact',
+    '3 Highlight Promo Cards (Dark Cosmetics, Night Elegance)',
+    'Trending Products Tabbed by Most Popular & Best Seller',
+    'Ready To Impress Split Feature & 6-Item Photo Gallery',
+  ],
+  badge: 'trending',
+  accentColor: '#e5a93c',
+  rating: 5.0,
+  reviewCount: 184,
+  layoutType: 'editorial',
+  industryCategory: 'Cosmetics & Skincare',
+  createdDate: '2026-10-21',
+}
+
+export const BELLETNY_TEMPLATE: MarketplaceTemplate = {
+  id: 'cosmetics-belletny',
+  slug: 'cosmetics-belletny',
+  name: 'Belletny Organic Beauty',
+  businessType: 'health-beauty',
+  tags: ['Cosmetics', 'Skincare', 'Foundation', 'Hair Cream', 'Organic', 'Clean Beauty', 'Makeup'],
+  shortDescription:
+    'Chic berry maroon beauty products storefront with customer service header, 5 circular category icons, 10-item trending products grid, and handmade botanical trust badges.',
+  thumbnailUrl:
+    'https://belletny-codezeel.myshopify.com/cdn/shop/files/main-banner-01.jpg',
+  fullPreviewUrl: 'https://belletny-codezeel.myshopify.com/',
+  popularityScore: 98,
+  isActive: true,
+  brandName: 'Belletny',
+  headline: 'Clean Matte Liquid Foundation',
+  subtitle:
+    'Sale up to 50% off on clean matte liquid foundation, herbal hair creams, and organic botanical cosmetics.',
+  buttonText: 'Shop Now',
+  buttonColor: '#8e2043',
+  isDark: false,
+  modelImage:
+    'https://belletny-codezeel.myshopify.com/cdn/shop/files/main-banner-01.jpg',
+  style: 'modern',
+  catalogSize: 'medium',
+  features: [
+    'Deep Maroon Header with Customer Service Line',
+    '5 Circular Category Icons (Hair Cream, Brushes, Perfumes)',
+    'Dual Middle Promotional Banners (Concealer & Hydrated Skin)',
+    '10-Product Trending Grid with Round Discount Badges',
+    '3 Handmade Botanical Trust Badges',
+    'Split Client Testimonial & Editorial Blog Cards',
+  ],
+  badge: 'new',
+  accentColor: '#8e2043',
+  rating: 4.9,
+  reviewCount: 162,
+  layoutType: 'split',
+  industryCategory: 'Cosmetics & Skincare',
+  createdDate: '2026-10-21',
+}
+
 export const ALL_COSMETICS_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   BEAUX_TEMPLATE,
   GLOWING_TEMPLATE,
   FABISH_TEMPLATE,
   ORGANICA_TEMPLATE,
+  SHADES_TEMPLATE,
+  BELLETNY_TEMPLATE,
 ]

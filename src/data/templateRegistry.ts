@@ -40,6 +40,8 @@ import {
   GlowingStorefront,
   FabishStorefront,
   OrganicaStorefront,
+  ShadesStorefront,
+  BelletnyStorefront,
 } from '../templates/cosmetics'
 import {
   HappyFeetStorefront,
@@ -156,6 +158,8 @@ export function getTemplateCategoryKey(categoryKey: string): string {
     norm.includes('glowing') ||
     norm.includes('fabish') ||
     norm.includes('organica') ||
+    norm.includes('shade') ||
+    norm.includes('belletny') ||
     norm.includes('skincare')
   ) {
     return 'health-beauty'
@@ -173,6 +177,48 @@ export function getTemplateCategoryKey(categoryKey: string): string {
     return 'shoes'
   }
   return categoryKey
+}
+
+export function isCosmeticsPrompt(prompt: string): boolean {
+  const normalizedPrompt = prompt.toLowerCase()
+  return [
+    'belletny',
+    'beaux',
+    'glowing',
+    'fabish',
+    'organica',
+    'shades',
+    'cosmetic',
+    'skincare',
+    'skin care',
+    'makeup',
+    'make-up',
+    'beauty',
+  ].some((keyword) => normalizedPrompt.includes(keyword))
+}
+
+export function getTemplateIdFromPrompt(
+  prompt: string,
+  templates: MarketplaceTemplate[],
+): string | null {
+  const normalizedPrompt = prompt.trim().toLowerCase()
+  if (!normalizedPrompt) return null
+
+  const match = templates.find((template) =>
+    [template.brandName, template.slug, template.name].some(
+      (identifier) => identifier && normalizedPrompt.includes(identifier.toLowerCase()),
+    ),
+  )
+  return match?.id ?? null
+}
+
+export function isBelleFashionTemplate(template: MarketplaceTemplate | Template): boolean {
+  return (
+    template.id === 'fashion-belle' ||
+    template.slug === 'fashion-belle' ||
+    template.name?.toLowerCase() === 'belle fashion' ||
+    template.brandName?.toLowerCase() === 'belle'
+  )
 }
 
 export function getTemplateComponent(input?: MarketplaceTemplate | Template | string | null): ComponentType<any> {
@@ -230,6 +276,32 @@ export function getTemplateComponent(input?: MarketplaceTemplate | Template | st
       template.brandName?.toLowerCase().includes('organica'))
   ) {
     return OrganicaStorefront
+  }
+
+  if (
+    template &&
+    (template.slug === 'cosmetics-shades' ||
+      template.id === 'cosmetics-shades' ||
+      template.slug === 'shades' ||
+      template.id === 'shades' ||
+      template.slug === 'theme-shade' ||
+      template.name?.toLowerCase().includes('shade') ||
+      template.brandName?.toLowerCase().includes('shade'))
+  ) {
+    return ShadesStorefront
+  }
+
+  if (
+    template &&
+    (template.slug === 'cosmetics-belletny' ||
+      template.id === 'cosmetics-belletny' ||
+      template.slug === 'belletny' ||
+      template.id === 'belletny' ||
+      template.slug === 'belletny-codezeel' ||
+      template.name?.toLowerCase().includes('belletny') ||
+      template.brandName?.toLowerCase().includes('belletny'))
+  ) {
+    return BelletnyStorefront
   }
 
   if (
@@ -607,9 +679,7 @@ export function getTemplateComponent(input?: MarketplaceTemplate | Template | st
   }
   if (
     template &&
-    (template.slug === 'fashion-belle' ||
-      template.id === 'fashion-belle' ||
-      template.name?.toLowerCase().includes('belle') ||
+    (isBelleFashionTemplate(template) ||
       template.businessType === 'clothing-store')
   ) {
     return BelleFashionStorefront

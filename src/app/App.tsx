@@ -232,7 +232,15 @@ function App() {
             rawHash === 'organica' ||
             rawHash === 'cosmetics-organica' ||
             rawHash === 'organica-1' ||
-            rawHash === 'organica-theme'
+            rawHash === 'organica-theme' ||
+            rawHash === 'shades' ||
+            rawHash === 'cosmetics-shades' ||
+            rawHash === 'theme-shade' ||
+            rawHash === 'shade' ||
+            rawHash === 'belletny' ||
+            rawHash === 'cosmetics-belletny' ||
+            rawHash === 'belletny-codezeel' ||
+            rawHash === 'belletny-theme'
           )) ||
           (key === 'jewelry-accessories' && (
             rawHash === 'jewelry' ||

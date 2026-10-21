@@ -84,6 +84,8 @@ import {
   GLOWING_TEMPLATE,
   FABISH_TEMPLATE,
   ORGANICA_TEMPLATE,
+  SHADES_TEMPLATE,
+  BELLETNY_TEMPLATE,
   ALL_COSMETICS_MARKETPLACE_TEMPLATES,
 } from '../../data/cosmeticsTemplatesData'
 import {
@@ -91,8 +93,10 @@ import {
   GlowingStorefront,
   FabishStorefront,
   OrganicaStorefront,
+  ShadesStorefront,
+  BelletnyStorefront,
 } from '../../templates/cosmetics'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront, VtOlightStorefront, SwarnaStorefront, JewStorefront, HappyFeetStorefront, ShoeZoneStorefront, SusieShoesStorefront, FashionFeetStorefront, FootwearWorkDoStorefront, ShoesWorkDoStorefront, SensationStorefront, GiarosStorefront, StepGlamStorefront, ApShoesStorefront, BeauxStorefront, GlowingStorefront, FabishStorefront, OrganicaStorefront, HAPPY_FEET_TEMPLATE, SHOE_ZONE_TEMPLATE, SUSIE_SHOES_TEMPLATE, FASHION_FEET_TEMPLATE, FOOTWEAR_WORKDO_TEMPLATE, SHOES_WORKDO_TEMPLATE, SENSATION_WORKDO_TEMPLATE, GIAROS_TEMPLATE, STEPGLAM_TEMPLATE, AP_SHOES_TEMPLATE, BEAUX_TEMPLATE, GLOWING_TEMPLATE, FABISH_TEMPLATE, ORGANICA_TEMPLATE, ALL_COSMETICS_MARKETPLACE_TEMPLATES }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront, VtOlightStorefront, SwarnaStorefront, JewStorefront, HappyFeetStorefront, ShoeZoneStorefront, SusieShoesStorefront, FashionFeetStorefront, FootwearWorkDoStorefront, ShoesWorkDoStorefront, SensationStorefront, GiarosStorefront, StepGlamStorefront, ApShoesStorefront, BeauxStorefront, GlowingStorefront, FabishStorefront, OrganicaStorefront, ShadesStorefront, BelletnyStorefront, HAPPY_FEET_TEMPLATE, SHOE_ZONE_TEMPLATE, SUSIE_SHOES_TEMPLATE, FASHION_FEET_TEMPLATE, FOOTWEAR_WORKDO_TEMPLATE, SHOES_WORKDO_TEMPLATE, SENSATION_WORKDO_TEMPLATE, GIAROS_TEMPLATE, STEPGLAM_TEMPLATE, AP_SHOES_TEMPLATE, BEAUX_TEMPLATE, GLOWING_TEMPLATE, FABISH_TEMPLATE, ORGANICA_TEMPLATE, SHADES_TEMPLATE, BELLETNY_TEMPLATE, ALL_COSMETICS_MARKETPLACE_TEMPLATES }
 
 
 // Re-export domain types
@@ -175,7 +179,13 @@ export {
   getAllMarketplaceTemplates,
 } from '../../data/marketplaceTemplatesData'
 
-import { getTemplateCategoryKey, TEMPLATE_REGISTRY } from '../../data/templateRegistry'
+import {
+  getTemplateCategoryKey,
+  getTemplateIdFromPrompt,
+  isBelleFashionTemplate,
+  isCosmeticsPrompt,
+  TEMPLATE_REGISTRY,
+} from '../../data/templateRegistry'
 import { ALL_SPORTS_MARKETPLACE_TEMPLATES } from '../../data/sportsTemplatesData'
 /* =========================================================================
    INLINE WILLOVATE ONE LOGO
@@ -808,10 +818,7 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
 
   if (
     template &&
-    (template.slug === 'fashion-belle' ||
-      template.id === 'fashion-belle' ||
-      template.name?.toLowerCase().includes('belle') ||
-      template.businessType === 'clothing-store')
+    (isBelleFashionTemplate(template) || template.businessType === 'clothing-store')
   ) {
     return (
       <BelleFashionStorefront
@@ -923,6 +930,44 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   ) {
     return (
       <OrganicaStorefront
+        template={template}
+        device={device === 'fullscreen' ? 'desktop' : device}
+        onBack={onClose}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'cosmetics-shades' ||
+      template.id === 'cosmetics-shades' ||
+      template.slug === 'shades' ||
+      template.id === 'shades' ||
+      template.slug === 'theme-shade' ||
+      template.name?.toLowerCase().includes('shade') ||
+      template.brandName?.toLowerCase().includes('shade'))
+  ) {
+    return (
+      <ShadesStorefront
+        template={template}
+        device={device === 'fullscreen' ? 'desktop' : device}
+        onBack={onClose}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'cosmetics-belletny' ||
+      template.id === 'cosmetics-belletny' ||
+      template.slug === 'belletny' ||
+      template.id === 'belletny' ||
+      template.slug === 'belletny-codezeel' ||
+      template.name?.toLowerCase().includes('belletny') ||
+      template.brandName?.toLowerCase().includes('belletny'))
+  ) {
+    return (
+      <BelletnyStorefront
         template={template}
         device={device === 'fullscreen' ? 'desktop' : device}
         onBack={onClose}
@@ -1700,6 +1745,21 @@ export function TemplateDirectoryPage({
       }
 
       if (
+        lower.includes('salon') ||
+        lower.includes('barber') ||
+        lower.includes('spa') ||
+        lower.includes('beauty parlor')
+      ) {
+        onSelectBusinessType('salon', 'Salon', customPrompt.trim())
+        return
+      }
+
+      if (isCosmeticsPrompt(lower)) {
+        onSelectBusinessType('health-beauty', 'Cosmetics & Beauty', customPrompt.trim())
+        return
+      }
+
+      if (
         lower.includes('fashion') ||
         lower.includes('cloth') ||
         lower.includes('apparel') ||
@@ -1711,11 +1771,8 @@ export function TemplateDirectoryPage({
       }
 
       if (
-        lower.includes('salon') ||
         lower.includes('hair') ||
-        lower.includes('barber') ||
-        lower.includes('spa') ||
-        lower.includes('beauty parlor')
+        lower.includes('hairdresser')
       ) {
         onSelectBusinessType('salon', 'Salon', customPrompt.trim())
         return
@@ -2009,7 +2066,9 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
   }, [categoryKey, displayTitle, isShoePrompt])
 
   // Selection state
-  const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(categoryTemplates[0]?.id || null)
+  const defaultTemplateId =
+    getTemplateIdFromPrompt(customPrompt || '', categoryTemplates) || categoryTemplates[0]?.id || null
+  const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(defaultTemplateId)
 
   // Sub-filter & sort state within this chosen category
   const [activeTag, setActiveTag] = useState<string>('All')
@@ -2049,6 +2108,22 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
       rawHash === 'organica-theme'
     ) {
       return ORGANICA_TEMPLATE
+    }
+    if (
+      rawHash === 'shades' ||
+      rawHash === 'cosmetics-shades' ||
+      rawHash === 'theme-shade' ||
+      rawHash === 'shade'
+    ) {
+      return SHADES_TEMPLATE
+    }
+    if (
+      rawHash === 'belletny' ||
+      rawHash === 'cosmetics-belletny' ||
+      rawHash === 'belletny-codezeel' ||
+      rawHash === 'belletny-theme'
+    ) {
+      return BELLETNY_TEMPLATE
     }
     if (
       rawHash === 'shoes-workdo' ||
@@ -2308,10 +2383,10 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
   useEffect(() => {
     if (previousBusinessType.current === businessType) return
     previousBusinessType.current = businessType
-    setSelectedTemplateId(categoryTemplates[0]?.id || null)
+    setSelectedTemplateId(defaultTemplateId)
     setActiveTag('All')
     setPreviewTemplate(null)
-  }, [businessType, categoryTemplates])
+  }, [businessType, categoryTemplates, defaultTemplateId])
 
   // Auto-launch preview if URL hash changes to sports, fashion, jewelry, or shoes presets
   useEffect(() => {
@@ -2345,6 +2420,20 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
         rawHash === 'organica-theme'
       ) {
         setPreviewTemplate(ORGANICA_TEMPLATE)
+      } else if (
+        rawHash === 'shades' ||
+        rawHash === 'cosmetics-shades' ||
+        rawHash === 'theme-shade' ||
+        rawHash === 'shade'
+      ) {
+        setPreviewTemplate(SHADES_TEMPLATE)
+      } else if (
+        rawHash === 'belletny' ||
+        rawHash === 'cosmetics-belletny' ||
+        rawHash === 'belletny-codezeel' ||
+        rawHash === 'belletny-theme'
+      ) {
+        setPreviewTemplate(BELLETNY_TEMPLATE)
       } else if (
         rawHash === 'shoes-workdo' ||
         rawHash === 'shoesworkdo' ||
