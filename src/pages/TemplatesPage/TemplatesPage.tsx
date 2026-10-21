@@ -79,7 +79,16 @@ import {
   AP_SHOES_TEMPLATE,
   ALL_SHOES_MARKETPLACE_TEMPLATES,
 } from '../../data/shoesTemplatesData'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront, VtOlightStorefront, SwarnaStorefront, JewStorefront, HappyFeetStorefront, ShoeZoneStorefront, SusieShoesStorefront, FashionFeetStorefront, FootwearWorkDoStorefront, ShoesWorkDoStorefront, SensationStorefront, GiarosStorefront, StepGlamStorefront, ApShoesStorefront, HAPPY_FEET_TEMPLATE, SHOE_ZONE_TEMPLATE, SUSIE_SHOES_TEMPLATE, FASHION_FEET_TEMPLATE, FOOTWEAR_WORKDO_TEMPLATE, SHOES_WORKDO_TEMPLATE, SENSATION_WORKDO_TEMPLATE, GIAROS_TEMPLATE, STEPGLAM_TEMPLATE, AP_SHOES_TEMPLATE }
+import {
+  BEAUX_TEMPLATE,
+  GLOWING_TEMPLATE,
+  ALL_COSMETICS_MARKETPLACE_TEMPLATES,
+} from '../../data/cosmeticsTemplatesData'
+import {
+  BeauxStorefront,
+  GlowingStorefront,
+} from '../../templates/cosmetics'
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront, VtOlightStorefront, SwarnaStorefront, JewStorefront, HappyFeetStorefront, ShoeZoneStorefront, SusieShoesStorefront, FashionFeetStorefront, FootwearWorkDoStorefront, ShoesWorkDoStorefront, SensationStorefront, GiarosStorefront, StepGlamStorefront, ApShoesStorefront, BeauxStorefront, GlowingStorefront, HAPPY_FEET_TEMPLATE, SHOE_ZONE_TEMPLATE, SUSIE_SHOES_TEMPLATE, FASHION_FEET_TEMPLATE, FOOTWEAR_WORKDO_TEMPLATE, SHOES_WORKDO_TEMPLATE, SENSATION_WORKDO_TEMPLATE, GIAROS_TEMPLATE, STEPGLAM_TEMPLATE, AP_SHOES_TEMPLATE, BEAUX_TEMPLATE, GLOWING_TEMPLATE, ALL_COSMETICS_MARKETPLACE_TEMPLATES }
 
 
 // Re-export domain types
@@ -823,6 +832,50 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   ) {
     return (
       <ShoesWorkDoStorefront
+        template={template}
+        device={device === 'fullscreen' ? 'desktop' : device}
+        customAccentColor={customAccentColor || undefined}
+        onUseTemplate={() => {
+          onUseTemplate?.(template.id)
+          onClose?.()
+        }}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'cosmetics-beaux' ||
+      template.id === 'cosmetics-beaux' ||
+      template.slug === 'beaux' ||
+      template.id === 'beaux' ||
+      template.name?.toLowerCase().includes('beaux') ||
+      template.brandName?.toLowerCase().includes('beaux'))
+  ) {
+    return (
+      <BeauxStorefront
+        template={template}
+        device={device === 'fullscreen' ? 'desktop' : device}
+        customAccentColor={customAccentColor || undefined}
+        onUseTemplate={() => {
+          onUseTemplate?.(template.id)
+          onClose?.()
+        }}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'cosmetics-glowing' ||
+      template.id === 'cosmetics-glowing' ||
+      template.slug === 'glowing' ||
+      template.id === 'glowing' ||
+      template.name?.toLowerCase().includes('glowing') ||
+      template.brandName?.toLowerCase().includes('glowing'))
+  ) {
+    return (
+      <GlowingStorefront
         template={template}
         device={device === 'fullscreen' ? 'desktop' : device}
         customAccentColor={customAccentColor || undefined}
@@ -1841,6 +1894,17 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
 
   const displayTitle = useMemo(() => {
     if (
+      categoryKey === 'health-beauty' ||
+      categoryKey === 'cosmetics' ||
+      categoryKey === 'cosmetic' ||
+      categoryKey === 'cosmetic-store' ||
+      categoryKey === 'beauty' ||
+      businessType?.toLowerCase().includes('cosmetic') ||
+      businessTypeDisplay?.toLowerCase().includes('cosmetic')
+    ) {
+      return 'Cosmetic Store'
+    }
+    if (
       categoryKey === 'shoes' ||
       isShoePrompt ||
       businessType?.toLowerCase().includes('shoe') ||
@@ -1851,8 +1915,20 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
     return businessTypeDisplay || resolvedCategory?.displayName || 'Online Store'
   }, [categoryKey, isShoePrompt, businessType, businessTypeDisplay, resolvedCategory])
 
-  // Sports keeps its full catalog; clothing-store uses fashion templates; jewelry uses jewelry templates; shoes uses shoes templates.
+  // Sports keeps its full catalog; clothing-store uses fashion templates; jewelry uses jewelry templates; shoes uses shoes templates; health-beauty uses cosmetics templates.
   const categoryTemplates: MarketplaceTemplate[] = useMemo(() => {
+    if (
+      categoryKey === 'health-beauty' ||
+      categoryKey === 'cosmetics' ||
+      categoryKey === 'cosmetic' ||
+      categoryKey === 'cosmetic-store' ||
+      categoryKey === 'beauty' ||
+      displayTitle.toLowerCase().includes('cosmetic') ||
+      displayTitle.toLowerCase().includes('beauty') ||
+      displayTitle.toLowerCase().includes('skincare')
+    ) {
+      return ALL_COSMETICS_MARKETPLACE_TEMPLATES
+    }
     if (
       categoryKey === 'shoes' ||
       categoryKey === 'shoes-store' ||
@@ -1899,6 +1975,22 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
   // Preview Modal state
   const [previewTemplate, setPreviewTemplate] = useState<MarketplaceTemplate | null>(() => {
     const rawHash = typeof window !== 'undefined' ? window.location.hash.toLowerCase().replace(/^#/, '') : ''
+    if (
+      rawHash === 'beaux' ||
+      rawHash === 'cosmetics-beaux' ||
+      rawHash === 'beaux-theme' ||
+      rawHash === 'beaux-skincare'
+    ) {
+      return BEAUX_TEMPLATE
+    }
+    if (
+      rawHash === 'glowing' ||
+      rawHash === 'cosmetics-glowing' ||
+      rawHash === 'glowing-theme' ||
+      rawHash === 'glowing-skincare'
+    ) {
+      return GLOWING_TEMPLATE
+    }
     if (
       rawHash === 'shoes-workdo' ||
       rawHash === 'shoesworkdo' ||
@@ -2167,6 +2259,20 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
     const handleHash = () => {
       const rawHash = window.location.hash.toLowerCase().replace(/^#/, '')
       if (
+        rawHash === 'beaux' ||
+        rawHash === 'cosmetics-beaux' ||
+        rawHash === 'beaux-theme' ||
+        rawHash === 'beaux-skincare'
+      ) {
+        setPreviewTemplate(BEAUX_TEMPLATE)
+      } else if (
+        rawHash === 'glowing' ||
+        rawHash === 'cosmetics-glowing' ||
+        rawHash === 'glowing-theme' ||
+        rawHash === 'glowing-skincare'
+      ) {
+        setPreviewTemplate(GLOWING_TEMPLATE)
+      } else if (
         rawHash === 'shoes-workdo' ||
         rawHash === 'shoesworkdo' ||
         rawHash === 'workdo-shoes-store'

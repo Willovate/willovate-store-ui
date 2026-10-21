@@ -1,0 +1,966 @@
+/* Beaux Theme Styles - Exact Shopify Theme Replication */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Great+Vibes&display=swap');
+
+:root {
+  --beaux-primary: #e87868;
+  --beaux-accent: #fce8e6;
+  --beaux-dark: #222222;
+  --beaux-muted: #666666;
+  --beaux-border: #f0e2dd;
+  --beaux-gold: #e2a03f;
+  --beaux-font-serif: 'Playfair Display', Georgia, serif;
+  --beaux-font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --beaux-font-script: 'Great Vibes', cursive;
+}
+
+.beaux-wrapper {
+  font-family: var(--beaux-font-sans);
+  color: var(--beaux-dark);
+  background-color: #ffffff;
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.beaux-wrapper *, .beaux-wrapper *::before, .beaux-wrapper *::after {
+  box-sizing: border-box;
+}
+
+.beaux-wrapper.device-mobile {
+  max-width: 420px;
+  margin: 0 auto;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+  border-radius: 24px;
+}
+
+.beaux-wrapper.device-tablet {
+  max-width: 768px;
+  margin: 0 auto;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+}
+
+.beaux-container {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Announcement Bar */
+.beaux-announcement-bar {
+  background-color: #feebe7;
+  color: #333333;
+  text-align: center;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.beaux-announcement-bar span {
+  text-transform: capitalize;
+}
+
+.beaux-announcement-bar strong {
+  font-weight: 700;
+  color: #c53929;
+}
+
+/* Header */
+.beaux-header-main {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--beaux-border);
+  background: #ffffff;
+}
+
+.beaux-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.beaux-header-left, .beaux-header-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex: 1;
+}
+
+.beaux-header-right {
+  justify-content: flex-end;
+}
+
+.beaux-header-center {
+  flex: 1;
+  text-align: center;
+}
+
+.beaux-logo-img {
+  height: 48px;
+  object-fit: contain;
+  display: inline-block;
+}
+
+.beaux-icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  color: #333333;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.beaux-icon-btn:hover {
+  color: var(--beaux-primary);
+}
+
+.beaux-badge-count {
+  position: absolute;
+  top: -2px;
+  right: -4px;
+  background-color: var(--beaux-primary);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.beaux-currency-select {
+  border: 1px solid var(--beaux-border);
+  background: #ffffff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #555555;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Nav Bar */
+.beaux-navbar {
+  border-bottom: 1px solid var(--beaux-border);
+  background: #ffffff;
+}
+
+.beaux-nav-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+  margin: 0;
+  padding: 14px 0;
+}
+
+.beaux-nav-item {
+  position: relative;
+}
+
+.beaux-nav-link {
+  text-decoration: none;
+  color: #333333;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 6px 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.2s ease;
+}
+
+.beaux-nav-link:hover, .beaux-nav-link.active {
+  color: var(--beaux-primary);
+}
+
+.beaux-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  min-width: 190px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  border-radius: 6px;
+  padding: 10px 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 100;
+}
+
+.beaux-nav-item:hover .beaux-dropdown {
+  opacity: 1;
+  visibility: visible;
+}
+
+.beaux-dropdown-link {
+  display: block;
+  padding: 8px 18px;
+  font-size: 13px;
+  color: #555555;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.beaux-dropdown-link:hover {
+  background: #feebe7;
+  color: var(--beaux-primary);
+  padding-left: 22px;
+}
+
+/* Hero Section */
+.beaux-hero-section {
+  position: relative;
+  background-color: #feebe7;
+  overflow: hidden;
+  min-height: 560px;
+}
+
+.beaux-hero-slide-bg {
+  position: relative;
+  min-height: 560px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  transition: all 0.5s ease;
+}
+
+.beaux-hero-slide-content {
+  max-width: 580px;
+  padding: 60px 0;
+}
+
+.beaux-hero-eyebrow {
+  font-family: var(--beaux-font-script);
+  font-size: 34px;
+  color: var(--beaux-primary);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.beaux-hero-title {
+  font-family: var(--beaux-font-serif);
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #222222;
+  margin: 0 0 18px 0;
+}
+
+.beaux-hero-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #555555;
+  margin-bottom: 28px;
+}
+
+.beaux-hero-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 36px;
+  background: #ffffff;
+  color: #222222;
+  border: 1px solid #222222;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.beaux-hero-btn:hover {
+  background: var(--beaux-primary);
+  color: #ffffff;
+  border-color: var(--beaux-primary);
+}
+
+.beaux-hero-nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--beaux-border);
+  color: #333333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.beaux-hero-nav-arrow:hover {
+  background: #ffffff;
+  color: var(--beaux-primary);
+}
+
+.beaux-hero-nav-arrow.prev { left: 24px; }
+.beaux-hero-nav-arrow.next { right: 24px; }
+
+/* Beauty Deal Banner */
+.beaux-deal-banner {
+  background: #ffffff;
+  padding: 48px 20px;
+  text-align: center;
+  border-bottom: 1px solid var(--beaux-border);
+}
+
+.beaux-deal-title {
+  font-family: var(--beaux-font-serif);
+  font-size: 32px;
+  font-weight: 700;
+  color: #222222;
+  margin: 0 0 10px 0;
+  letter-spacing: 2px;
+}
+
+.beaux-deal-text {
+  font-size: 15px;
+  color: #777777;
+  margin: 0;
+}
+
+/* Special Collections 3-Grid */
+.beaux-special-col-section {
+  padding: 70px 0;
+  background: #ffffff;
+}
+
+.beaux-section-head-center {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.beaux-sub-script {
+  font-family: var(--beaux-font-script);
+  font-size: 32px;
+  color: var(--beaux-primary);
+  margin-bottom: 4px;
+}
+
+.beaux-head-title {
+  font-family: var(--beaux-font-serif);
+  font-size: 36px;
+  font-weight: 700;
+  color: #222222;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.beaux-special-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.beaux-special-card {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 440px;
+  display: flex;
+  align-items: flex-end;
+  padding: 30px;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.4s ease;
+}
+
+.beaux-special-card:hover {
+  transform: translateY(-4px);
+}
+
+.beaux-special-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 50%, rgba(0,0,0,0.6) 100%);
+  pointer-events: none;
+}
+
+.beaux-special-content {
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+  width: 100%;
+}
+
+.beaux-special-card-title {
+  font-family: var(--beaux-font-serif);
+  font-size: 26px;
+  margin: 0 0 6px 0;
+  font-weight: 700;
+}
+
+.beaux-special-card-sub {
+  font-size: 13px;
+  color: #fce8e6;
+  margin: 0 0 12px 0;
+}
+
+.beaux-special-link {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Full Width Banner (Bring out the hidden beauty) */
+.beaux-hidden-beauty-banner {
+  position: relative;
+  min-height: 480px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 20px;
+  color: #222222;
+}
+
+.beaux-hidden-beauty-box {
+  background: rgba(255, 255, 255, 0.92);
+  padding: 40px 60px;
+  border-radius: 8px;
+  max-width: 600px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+.beaux-hidden-beauty-title {
+  font-family: var(--beaux-font-serif);
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0 0 14px 0;
+  line-height: 1.25;
+}
+
+.beaux-hidden-beauty-desc {
+  font-size: 15px;
+  color: #666666;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.beaux-btn-secondary {
+  padding: 12px 32px;
+  background: #222222;
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.beaux-btn-secondary:hover {
+  background: var(--beaux-primary);
+}
+
+/* Products Grids */
+.beaux-products-section {
+  padding: 70px 0;
+}
+
+.beaux-products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 26px;
+}
+
+.beaux-prod-card {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid var(--beaux-border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.beaux-prod-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+}
+
+.beaux-prod-img-box {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  background: #faf8f7;
+}
+
+.beaux-prod-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.beaux-prod-card:hover .beaux-prod-img-box img {
+  transform: scale(1.05);
+}
+
+.beaux-prod-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  background: #feebe7;
+  color: #c53929;
+  z-index: 2;
+}
+
+.beaux-prod-actions {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.beaux-prod-card:hover .beaux-prod-actions {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.beaux-action-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid var(--beaux-border);
+  color: #333333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: all 0.2s ease;
+}
+
+.beaux-action-btn:hover {
+  background: var(--beaux-primary);
+  color: #ffffff;
+  border-color: var(--beaux-primary);
+}
+
+.beaux-action-btn.active {
+  background: var(--beaux-primary);
+  color: #ffffff;
+}
+
+.beaux-prod-info {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  text-align: center;
+}
+
+.beaux-prod-name {
+  font-family: var(--beaux-font-serif);
+  font-size: 16px;
+  font-weight: 600;
+  color: #222222;
+  margin: 0 0 8px 0;
+  line-height: 1.35;
+}
+
+.beaux-prod-rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--beaux-gold);
+  margin-bottom: 8px;
+}
+
+.beaux-prod-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.beaux-current-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: #222222;
+}
+
+.beaux-old-price {
+  font-size: 13px;
+  color: #999999;
+  text-decoration: line-through;
+}
+
+.beaux-card-add-btn {
+  margin-top: 14px;
+  padding: 8px 0;
+  width: 100%;
+  background: #feebe7;
+  color: #222222;
+  border: 1px solid #f6cfc7;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.beaux-card-add-btn:hover {
+  background: var(--beaux-primary);
+  color: #ffffff;
+  border-color: var(--beaux-primary);
+}
+
+/* Blog Section */
+.beaux-blog-section {
+  padding: 70px 0;
+  background: #faf8f7;
+}
+
+.beaux-blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.beaux-blog-card {
+  border: 1px solid var(--beaux-border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.beaux-blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+}
+
+.beaux-blog-img-box {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+}
+
+.beaux-blog-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.beaux-blog-card:hover .beaux-blog-img-box img {
+  transform: scale(1.06);
+}
+
+.beaux-blog-body {
+  padding: 24px;
+}
+
+.beaux-blog-date {
+  font-size: 12px;
+  color: var(--beaux-primary);
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.beaux-blog-title {
+  font-family: var(--beaux-font-serif);
+  font-size: 18px;
+  font-weight: 600;
+  color: #222222;
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+}
+
+.beaux-blog-excerpt {
+  font-size: 13px;
+  color: #666666;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.beaux-blog-link {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--beaux-primary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Instagram Gallery */
+.beaux-insta-section {
+  padding: 50px 0 0 0;
+}
+
+.beaux-insta-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 0;
+}
+
+.beaux-insta-item {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.beaux-insta-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.beaux-insta-item:hover img {
+  transform: scale(1.1);
+}
+
+.beaux-insta-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(232, 120, 104, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 20px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.beaux-insta-item:hover .beaux-insta-overlay {
+  opacity: 1;
+}
+
+/* Newsletter Bar */
+.beaux-newsletter-bar {
+  background: #feebe7;
+  padding: 60px 20px;
+  text-align: center;
+  border-top: 1px solid var(--beaux-border);
+}
+
+.beaux-newsletter-title {
+  font-family: var(--beaux-font-serif);
+  font-size: 32px;
+  font-weight: 700;
+  color: #222222;
+  margin: 0 0 8px 0;
+}
+
+.beaux-newsletter-sub {
+  font-size: 14px;
+  color: #666666;
+  margin-bottom: 24px;
+}
+
+.beaux-newsletter-form {
+  display: flex;
+  gap: 8px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.beaux-newsletter-input {
+  flex: 1;
+  padding: 14px 20px;
+  border: 1px solid var(--beaux-border);
+  border-radius: 30px;
+  font-size: 14px;
+  outline: none;
+  background: #ffffff;
+}
+
+.beaux-newsletter-btn {
+  padding: 14px 32px;
+  background: #222222;
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.beaux-newsletter-btn:hover {
+  background: var(--beaux-primary);
+}
+
+/* Footer */
+.beaux-footer {
+  background: #1e1e1e;
+  color: #b0b0b0;
+  padding: 70px 0 30px 0;
+}
+
+.beaux-footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.beaux-footer-col h4 {
+  font-family: var(--beaux-font-serif);
+  font-size: 18px;
+  color: #ffffff;
+  margin: 0 0 20px 0;
+}
+
+.beaux-footer-logo-img {
+  filter: brightness(0) invert(1);
+  height: 40px;
+  object-fit: contain;
+  margin-bottom: 16px;
+}
+
+.beaux-footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.beaux-footer-links li {
+  margin-bottom: 10px;
+}
+
+.beaux-footer-links a {
+  color: #b0b0b0;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.beaux-footer-links a:hover {
+  color: #ffffff;
+}
+
+.beaux-footer-bottom {
+  padding-top: 30px;
+  border-top: 1px solid #2d2d2d;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #777777;
+}
+
+/* Drawer & Modals */
+.beaux-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.beaux-drawer {
+  width: 100%;
+  max-width: 420px;
+  height: 100%;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  animation: slideBeauxDrawer 0.3s ease-out;
+}
+
+@keyframes slideBeauxDrawer {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.beaux-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #222222;
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  z-index: 1100;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .beaux-special-grid, .beaux-products-grid, .beaux-blog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .beaux-footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .beaux-insta-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .beaux-special-grid, .beaux-products-grid, .beaux-blog-grid {
+    grid-template-columns: 1fr;
+  }
+  .beaux-nav-menu {
+    display: none;
+  }
+  .beaux-footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .beaux-insta-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .beaux-hero-title {
+    font-size: 32px;
+  }
+}

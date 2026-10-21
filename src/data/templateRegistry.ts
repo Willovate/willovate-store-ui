@@ -34,6 +34,8 @@ import { ALL_SPORTS_MARKETPLACE_TEMPLATES } from './sportsTemplatesData'
 import { ALL_FASHION_MARKETPLACE_TEMPLATES } from './fashionTemplatesData'
 import { ALL_JEWELRY_MARKETPLACE_TEMPLATES } from './jewelryTemplatesData'
 import { ALL_SHOES_MARKETPLACE_TEMPLATES } from './shoesTemplatesData'
+import { ALL_COSMETICS_MARKETPLACE_TEMPLATES } from './cosmeticsTemplatesData'
+import { BeauxStorefront, GlowingStorefront } from '../templates/cosmetics'
 import {
   HappyFeetStorefront,
   ShoeZoneStorefront,
@@ -48,6 +50,13 @@ import {
 } from '../templates/shoes'
 
 export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
+  'health-beauty': {
+    displayName: 'Cosmetics & Beauty',
+    badgeIcon: '💄',
+    description: 'Luxury botanical skincare, clean certified organic beauty, active serums, and radiant cosmetics.',
+    filterTags: ['All', 'Skincare', 'Serums', 'Cleansers', 'Moisturizers', 'Makeup', 'Organic', 'Botanical', 'Vegan'],
+    templates: ALL_COSMETICS_MARKETPLACE_TEMPLATES,
+  },
   'shoes': {
     displayName: 'Shoes Store',
     badgeIcon: '👟',
@@ -130,6 +139,21 @@ export const TEMPLATE_REGISTRY: Record<string, CategoryData> = {
 export function getTemplateCategoryKey(categoryKey: string): string {
   const norm = (categoryKey || '').toLowerCase().trim()
   if (
+    norm === 'health-beauty' ||
+    norm === 'cosmetics' ||
+    norm === 'cosmetic' ||
+    norm === 'cosmetic-store' ||
+    norm === 'beauty' ||
+    norm === 'skincare' ||
+    norm === 'cosmetics-beauty' ||
+    norm.includes('cosmetic') ||
+    norm.includes('beaux') ||
+    norm.includes('glowing') ||
+    norm.includes('skincare')
+  ) {
+    return 'health-beauty'
+  }
+  if (
     norm === 'shoes' ||
     norm === 'shoes-store' ||
     norm === 'shoes-footwear' ||
@@ -149,6 +173,31 @@ export function getTemplateComponent(input?: MarketplaceTemplate | Template | st
     typeof input === 'string'
       ? ({ id: input, slug: input, name: input } as unknown as MarketplaceTemplate)
       : input || null
+
+  if (
+    template &&
+    (template.slug === 'cosmetics-beaux' ||
+      template.id === 'cosmetics-beaux' ||
+      template.slug === 'beaux' ||
+      template.id === 'beaux' ||
+      template.name?.toLowerCase().includes('beaux') ||
+      template.brandName?.toLowerCase().includes('beaux'))
+  ) {
+    return BeauxStorefront
+  }
+
+  if (
+    template &&
+    (template.slug === 'cosmetics-glowing' ||
+      template.id === 'cosmetics-glowing' ||
+      template.slug === 'glowing' ||
+      template.id === 'glowing' ||
+      template.name?.toLowerCase().includes('glowing') ||
+      template.brandName?.toLowerCase().includes('glowing'))
+  ) {
+    return GlowingStorefront
+  }
+
   if (
     template &&
     (template.slug === 'shoes-giaros' ||
