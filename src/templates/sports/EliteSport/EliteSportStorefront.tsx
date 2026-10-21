@@ -113,7 +113,7 @@ export const ELITE_PRODUCTS: EliteProduct[] = [
     gender: 'Men',
     price: 11200,
     image: image('photo-1552902865-b72c031ac5ea'),
-    alternateImage: image('photo-1506629905607-d9f9f6bb4f96'),
+    alternateImage: image('photo-1461896836934-ffe607ba8211'),
     color: 'Graphite',
     colorHex: '#454642',
     sizes: apparelSizes,

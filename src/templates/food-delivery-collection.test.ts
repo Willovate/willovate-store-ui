@@ -7,6 +7,12 @@ import { midnightMunchConfig } from './food-restaurants/food-delivery/MidnightMu
 import { freshRouteConfig } from './food-restaurants/food-delivery/FreshRoute';
 import { tiffinTrailConfig } from './food-restaurants/food-delivery/TiffinTrail';
 import { feastFleetConfig } from './food-restaurants/food-delivery/FeastFleet';
+import {
+  POPULAR_PINCODES,
+  TIFFIN_MEAL_PLANS,
+  LATE_NIGHT_MUNCHIES,
+  GROUP_CATERING_PLATTERS,
+} from './food-restaurants/components/FoodDeliveryEnhancements';
 
 describe('Food Delivery Template Collection Verification — 5 Distinct Production Themes', () => {
   const foodCategory = templateCategories.find(c => c.id === 'food-and-restaurant');
@@ -258,6 +264,72 @@ describe('Food Delivery Template Collection Verification — 5 Distinct Producti
       expect(feastFleetConfig.palette.primary).toBe('#6366f1');
       expect(feastFleetConfig.announcement.text).toContain('5 Kitchens');
       expect(feastFleetConfig.products.length).toBeGreaterThanOrEqual(20);
+    });
+
+    it('all 5 food-delivery themes should feature delivery enhancements in sectionOrder', () => {
+      [swiftBiteConfig, midnightMunchConfig, freshRouteConfig, tiffinTrailConfig, feastFleetConfig].forEach(config => {
+        const order = config.layoutOptions?.sectionOrder;
+        expect(order).toBeDefined();
+        expect(order).toContain('expressRadar');
+        expect(order).toContain('tiffinSubscription');
+        expect(order).toContain('lateNightLab');
+        expect(order).toContain('groupCatering');
+      });
+    });
+
+    it('all 5 food-delivery themes should have distinct sectionOrder configurations', () => {
+      const orders = [
+        swiftBiteConfig.layoutOptions?.sectionOrder?.join(','),
+        midnightMunchConfig.layoutOptions?.sectionOrder?.join(','),
+        freshRouteConfig.layoutOptions?.sectionOrder?.join(','),
+        tiffinTrailConfig.layoutOptions?.sectionOrder?.join(','),
+        feastFleetConfig.layoutOptions?.sectionOrder?.join(','),
+      ];
+
+      const uniqueOrders = new Set(orders);
+      expect(uniqueOrders.size).toBe(5);
+    });
+
+    it('Popular Pincodes should have verified dispatch times, active couriers and SLAs', () => {
+      const pins = Object.values(POPULAR_PINCODES);
+      expect(pins.length).toBeGreaterThanOrEqual(5);
+      pins.forEach(pin => {
+        expect(pin.pincode).toBeTruthy();
+        expect(pin.neighborhood).toBeTruthy();
+        expect(pin.avgTimeMins).toBeGreaterThan(0);
+        expect(pin.activeCouriers).toBeGreaterThan(0);
+      });
+    });
+
+    it('Tiffin Meal Plans should feature rotational weekly menus and macro tracking', () => {
+      expect(TIFFIN_MEAL_PLANS.length).toBeGreaterThanOrEqual(3);
+      TIFFIN_MEAL_PLANS.forEach(plan => {
+        expect(plan.id).toBeTruthy();
+        expect(plan.name).toBeTruthy();
+        expect(plan.pricePerDay).toBeGreaterThan(0);
+        expect(plan.sampleDays.length).toBe(5);
+        expect(plan.vessel).toBeTruthy();
+      });
+    });
+
+    it('Late Night Munchies should have calorie specs and spice ratings', () => {
+      expect(LATE_NIGHT_MUNCHIES.length).toBeGreaterThanOrEqual(4);
+      LATE_NIGHT_MUNCHIES.forEach(item => {
+        expect(item.name).toBeTruthy();
+        expect(item.price).toBeGreaterThan(0);
+        expect(item.calories).toBeTruthy();
+      });
+    });
+
+    it('Group Catering Platters should have guest counts and setup gear', () => {
+      expect(GROUP_CATERING_PLATTERS.length).toBeGreaterThanOrEqual(2);
+      GROUP_CATERING_PLATTERS.forEach(platter => {
+        expect(platter.name).toBeTruthy();
+        expect(platter.price).toBeGreaterThan(0);
+        expect(platter.servesCount).toBeTruthy();
+        expect(platter.itemsIncluded.length).toBeGreaterThanOrEqual(4);
+        expect(platter.setupGear).toBeTruthy();
+      });
     });
   });
 

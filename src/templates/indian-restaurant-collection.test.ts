@@ -7,6 +7,13 @@ import { sattvaKitchenConfig } from './food-restaurants/indian/SattvaKitchen';
 import { bombayChowkConfig } from './food-restaurants/indian/BombayChowk';
 import { tandoorAndTadkaConfig } from './food-restaurants/indian/TandoorAndTadka';
 import { dakshinHouseConfig } from './food-restaurants/indian/DakshinHouse';
+import {
+  DUM_BIRYANI_ITEMS,
+  TANDOOR_SKEWERS,
+  SPICE_TERROIR_LIST,
+  GRAND_THALIS,
+  ROYAL_BEVERAGES
+} from './food-restaurants/components/IndianEnhancements';
 
 describe('Indian Restaurant Template Collection Verification', () => {
   const foodCategory = templateCategories.find(c => c.id === 'food-and-restaurant');
@@ -108,6 +115,16 @@ describe('Indian Restaurant Template Collection Verification', () => {
         expect(config.location.email).toBeTruthy();
       });
 
+      it('should feature Indian culinary enhancements in sectionOrder', () => {
+        const order = config.layoutOptions?.sectionOrder;
+        expect(order).toBeDefined();
+        expect(order).toContain('biryaniAtelier');
+        expect(order).toContain('tandoorGrill');
+        expect(order).toContain('spiceTerroir');
+        expect(order).toContain('thaliCurator');
+        expect(order).toContain('chaiBar');
+      });
+
       it('should load component dynamically from registry', async () => {
         const template = findTemplateInRegistry(slug);
         expect(template).toBeDefined();
@@ -117,6 +134,77 @@ describe('Indian Restaurant Template Collection Verification', () => {
         expect(mod).toBeDefined();
         expect(typeof mod.default).toBe('function');
       });
+    });
+  });
+
+  describe('Indian Culinary Enhancements & Industry Standards Verification', () => {
+    it('Dum Biryani Atelier items should be populated with grain length and purdah seal', () => {
+      expect(DUM_BIRYANI_ITEMS.length).toBeGreaterThanOrEqual(4);
+      DUM_BIRYANI_ITEMS.forEach(item => {
+        expect(item.id).toBeTruthy();
+        expect(item.name).toBeTruthy();
+        expect(item.price).toBeGreaterThan(0);
+        expect(item.grainLength).toBeTruthy();
+        expect(item.aromaNotes.length).toBeGreaterThanOrEqual(3);
+        expect(item.sealType).toBeTruthy();
+        expect(item.image).toContain('images.unsplash.com');
+      });
+    });
+
+    it('Tandoor Live Skewers should have hearth temperatures, marinades and chutney pairings', () => {
+      expect(TANDOOR_SKEWERS.length).toBeGreaterThanOrEqual(6);
+      TANDOOR_SKEWERS.forEach(skewer => {
+        expect(skewer.name).toBeTruthy();
+        expect(skewer.price).toBeGreaterThan(0);
+        expect(skewer.clayOvenTemp).toContain('°F');
+        expect(skewer.chutneyPairing).toBeTruthy();
+        expect(skewer.chefTechnique).toBeTruthy();
+      });
+    });
+
+    it('Spice Terroir list should contain single-origin provenances and Ayurvedic benefits', () => {
+      expect(SPICE_TERROIR_LIST.length).toBeGreaterThanOrEqual(6);
+      SPICE_TERROIR_LIST.forEach(spice => {
+        expect(spice.name).toBeTruthy();
+        expect(spice.hindiName).toBeTruthy();
+        expect(spice.region).toBeTruthy();
+        expect(spice.ayurvedaBenefit).toBeTruthy();
+      });
+    });
+
+    it('Grand Thalis should have multi-katori item counts and custom bread selections', () => {
+      expect(GRAND_THALIS.length).toBeGreaterThanOrEqual(4);
+      GRAND_THALIS.forEach(thali => {
+        expect(thali.name).toBeTruthy();
+        expect(thali.price).toBeGreaterThan(0);
+        expect(thali.katorisCount).toBeGreaterThanOrEqual(8);
+        expect(thali.itemsList.length).toBeGreaterThanOrEqual(8);
+        expect(thali.defaultBread).toBeTruthy();
+        expect(thali.defaultDessert).toBeTruthy();
+      });
+    });
+
+    it('Royal Beverages should have authentic subcontinental serving vessels and brewing methods', () => {
+      expect(ROYAL_BEVERAGES.length).toBeGreaterThanOrEqual(5);
+      ROYAL_BEVERAGES.forEach(bev => {
+        expect(bev.name).toBeTruthy();
+        expect(bev.price).toBeGreaterThan(0);
+        expect(bev.vessel).toBeTruthy();
+        expect(bev.brewMethod).toBeTruthy();
+      });
+    });
+
+    it('all 5 Indian themes should have unique sectionOrder configurations', () => {
+      const orders = [
+        maharajasTableConfig.layoutOptions?.sectionOrder?.join(','),
+        sattvaKitchenConfig.layoutOptions?.sectionOrder?.join(','),
+        bombayChowkConfig.layoutOptions?.sectionOrder?.join(','),
+        tandoorAndTadkaConfig.layoutOptions?.sectionOrder?.join(','),
+        dakshinHouseConfig.layoutOptions?.sectionOrder?.join(','),
+      ];
+
+      const uniqueOrders = new Set(orders);
+      expect(uniqueOrders.size).toBe(5);
     });
   });
 

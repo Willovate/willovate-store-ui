@@ -2318,7 +2318,7 @@ function FooterSection() {
           <div className="footer-brand-col">
             <div className="footer-logo-row">
               <img
-                src="/willovate-one-logo.png"
+                src="/willovate-one-logo-white.png"
                 alt="Willovate One"
                 className="footer-logo-img"
               />

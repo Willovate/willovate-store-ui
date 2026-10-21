@@ -13,7 +13,7 @@ export const burgerBlitzConfig: StorefrontThemeConfig = {
     storyLayout: 'split-right',
     featuresLayout: 'cards-grid',
     galleryLayout: 'masonry',
-    sectionOrder: ['hero', 'products', 'promo', 'features', 'gallery', 'reviews', 'story', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'flashDeals', 'craveCombo', 'products', 'heatMatrix', 'features', 'sauceBar', 'speedGuarantee', 'story', 'craft', 'promo', 'gallery', 'reviews', 'location', 'newsletter'],
   },
   name: 'Burger Blitz',
   tagline: '100% Certified Angus smash burgers, crispy crinkle fries, and handcrafted thick malts',

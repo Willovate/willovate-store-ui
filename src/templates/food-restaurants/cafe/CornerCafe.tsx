@@ -13,7 +13,7 @@ export const cornerCafeConfig: StorefrontThemeConfig = {
     storyLayout: 'split-left',
     featuresLayout: 'pills-row',
     galleryLayout: 'grid-3x2',
-    sectionOrder: ['hero', 'products', 'features', 'promo', 'gallery', 'story', 'reviews', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'amenities', 'features', 'products', 'customizer', 'flights', 'promo', 'gallery', 'story', 'beanPassport', 'reviews', 'location', 'newsletter'],
   },
   name: 'Corner Café',
   tagline: 'Bright botanical neighborhood sanctuary with sunlit window seating and fresh bakes',

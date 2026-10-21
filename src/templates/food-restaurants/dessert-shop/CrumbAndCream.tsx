@@ -14,7 +14,7 @@ export const crumbAndCreamConfig: StorefrontThemeConfig = {
     storyLayout: 'stats-prominent',
     featuresLayout: 'strip-4',
     galleryLayout: 'editorial-collage',
-    sectionOrder: ['hero', 'features', 'products', 'story', 'promo', 'craft', 'gallery', 'reviews', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'cakeStudio', 'macaronBox', 'products', 'gelatoLab', 'cacaoRadar', 'features', 'craft', 'story', 'promo', 'gallery', 'reviews', 'location', 'newsletter'],
   },
   name: 'Crumb & Cream',
   tagline: 'Artisanal celebration cakes, bespoke wedding tiers, and minimalist bento desserts hand-piped with care',

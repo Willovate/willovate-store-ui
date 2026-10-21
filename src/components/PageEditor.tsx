@@ -664,7 +664,7 @@ export default function PageEditor({ website, page, selectedElement, selectedEle
   return (
     <div
       key={`ecommerce-${templateId}`}
-      className={`pe-template ws-canvas-${previewMode}`}
+      className="pe-template"
       data-template-id={templateId}
       data-viewport={previewMode}
     >

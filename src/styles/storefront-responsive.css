@@ -62,6 +62,42 @@
   pointer-events: none !important;
 }
 
+/* Universal max-width and overflow containment for tablet & mobile views */
+.ws-canvas-tablet,
+.ws-canvas-mobile,
+[data-viewport="tablet"],
+[data-viewport="mobile"] {
+  overflow-x: clip !important;
+}
+
+.ws-canvas-tablet > *,
+.ws-canvas-mobile > *,
+[data-viewport="tablet"] > *,
+[data-viewport="mobile"] > * {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Hide brand taglines, sub-brands, and secondary slogans in mobile and tablet headers */
+.ws-canvas-tablet .fs-brand-sub,
+.ws-canvas-mobile .fs-brand-sub,
+[data-viewport="tablet"] .fs-brand-sub,
+[data-viewport="mobile"] .fs-brand-sub,
+.ws-canvas-tablet [class*="brand-sub"],
+.ws-canvas-mobile [class*="brand-sub"],
+[data-viewport="tablet"] [class*="brand-sub"],
+[data-viewport="mobile"] [class*="brand-sub"],
+.ws-canvas-tablet [class*="brand-tagline"],
+.ws-canvas-mobile [class*="brand-tagline"],
+[data-viewport="tablet"] [class*="brand-tagline"],
+[data-viewport="mobile"] [class*="brand-tagline"],
+.ws-canvas-tablet [class*="brand-slogan"],
+.ws-canvas-mobile [class*="brand-slogan"],
+[data-viewport="tablet"] [class*="brand-slogan"],
+[data-viewport="mobile"] [class*="brand-slogan"] {
+  display: none !important;
+}
+
 
 /* ==========================================================================
    ── 1B. DESKTOP PREVIEW RULES (Width: >= 841px / default 1200px)
@@ -288,6 +324,14 @@
    Applies to .ws-canvas-tablet, [data-viewport="tablet"], and @container (min-width: 501px) and (max-width: 840px)
    ========================================================================== */
 
+.ws-canvas-desktop .rt-brand,
+[data-viewport="desktop"] .rt-brand,
+.ws-canvas-desktop .fs-brand-name,
+[data-viewport="desktop"] .fs-brand-name {
+  margin-right: clamp(1.25rem, 2cqw, 2.5rem) !important;
+  flex-shrink: 0 !important;
+}
+
 /* Tablet Canvas Device Frame Dimensions */
 .ws-canvas-tablet {
   width: 768px !important;
@@ -295,42 +339,96 @@
   margin-left: auto !important;
   margin-right: auto !important;
   box-sizing: border-box !important;
+  overflow-x: clip !important;
 }
 
-/* Navigation & Header */
-.ws-canvas-tablet .fs-desktop-nav,
-[data-viewport="tablet"] .fs-desktop-nav {
-  gap: 0.85rem !important;
+/* Tablet Nav Bar Header Layout & Brand */
+.ws-canvas-tablet header,
+.ws-canvas-tablet nav,
+.ws-canvas-tablet .fs-header-inner,
+[data-viewport="tablet"] header,
+[data-viewport="tablet"] nav,
+[data-viewport="tablet"] .fs-header-inner {
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+  box-sizing: border-box !important;
 }
 
-.ws-canvas-tablet .fs-desktop-nav button,
-[data-viewport="tablet"] .fs-desktop-nav button {
-  font-size: 0.76rem !important;
-  letter-spacing: 0.05em !important;
-  padding: 0.35rem 0 !important;
+.ws-canvas-tablet .fs-brand-name,
+.ws-canvas-tablet .rt-brand,
+.ws-canvas-tablet .fd-brand,
+.ws-canvas-tablet .cafe-brand,
+.ws-canvas-tablet .mr-brand,
+.ws-canvas-tablet .rws-brand,
+.ws-canvas-tablet [class*="brand-name"],
+.ws-canvas-tablet [class*="brand-title"],
+.ws-canvas-tablet [class*="brand-logo"],
+[data-viewport="tablet"] .fs-brand-name,
+[data-viewport="tablet"] .rt-brand,
+[data-viewport="tablet"] .fd-brand,
+[data-viewport="tablet"] .cafe-brand,
+[data-viewport="tablet"] .mr-brand,
+[data-viewport="tablet"] .rws-brand,
+[data-viewport="tablet"] [class*="brand-name"],
+[data-viewport="tablet"] [class*="brand-title"],
+[data-viewport="tablet"] [class*="brand-logo"] {
+  max-width: 240px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
-.ws-canvas-tablet .rt-desktop-nav,
-[data-viewport="tablet"] .rt-desktop-nav {
+/* Tablet Category Filter Pills & Menu Sizing */
+.ws-canvas-tablet .fs-category-pills,
+[data-viewport="tablet"] .fs-category-pills {
   display: flex !important;
-  gap: 0.85rem !important;
+  gap: 0.5rem !important;
+  flex-wrap: wrap !important;
+  max-width: 100% !important;
 }
 
-.ws-canvas-tablet .rt-desktop-nav a,
-[data-viewport="tablet"] .rt-desktop-nav a {
-  font-size: 0.76rem !important;
-  letter-spacing: 0.05em !important;
-  padding: 0.35rem 0 !important;
+.ws-canvas-tablet .fs-menu-container,
+[data-viewport="tablet"] .fs-menu-container {
+  padding: 2.5rem 1.25rem !important;
+  box-sizing: border-box !important;
+}
+
+.ws-canvas-tablet .fs-menu-toolbar,
+[data-viewport="tablet"] .fs-menu-toolbar {
+  padding: 1.25rem !important;
+  gap: 1rem !important;
+  box-sizing: border-box !important;
+}
+
+/* Navigation & Header — Shopify Tablet Navigation Drawer */
+.ws-canvas-tablet .fs-desktop-nav,
+[data-viewport="tablet"] .fs-desktop-nav,
+.ws-canvas-tablet .rt-desktop-nav,
+[data-viewport="tablet"] .rt-desktop-nav,
+.ws-canvas-tablet .fd-nav nav,
+.ws-canvas-tablet .cafe-header nav,
+.ws-canvas-tablet .mr-header nav,
+.ws-canvas-tablet .cc-nav nav,
+.ws-canvas-tablet .ll-nav nav,
+.ws-canvas-tablet .dg-nav nav,
+.ws-canvas-tablet .rws-nav nav,
+.ws-canvas-tablet [class*="desktop-nav"] {
+  display: none !important;
 }
 
 .ws-canvas-tablet .rt-mobile-toggle,
-[data-viewport="tablet"] .rt-mobile-toggle {
-  display: none !important;
-}
-
+[data-viewport="tablet"] .rt-mobile-toggle,
 .ws-canvas-tablet .fs-mobile-toggle,
-[data-viewport="tablet"] .fs-mobile-toggle {
-  display: none !important;
+[data-viewport="tablet"] .fs-mobile-toggle,
+.ws-canvas-tablet .fd-hamburger,
+[data-viewport="tablet"] .fd-hamburger,
+.ws-canvas-tablet .cafe-toggle,
+[data-viewport="tablet"] .cafe-toggle,
+.ws-canvas-tablet .rws-mobile,
+[data-viewport="tablet"] .rws-mobile,
+.ws-canvas-tablet [class*="mobile-toggle"] {
+  display: flex !important;
+  align-items: center !important;
 }
 
 /* Compact action buttons on tablet to avoid any header collision */
@@ -484,6 +582,7 @@
   margin-left: auto !important;
   margin-right: auto !important;
   box-sizing: border-box !important;
+  overflow-x: clip !important;
 }
 
 /* Universal Mobile Overflow Guard — Applied to Content INSIDE Mobile Viewport */
@@ -561,24 +660,103 @@
 /* Mobile Nav Bar Header Layout */
 .ws-canvas-mobile header,
 .ws-canvas-mobile nav,
+.ws-canvas-mobile .fs-header-inner,
 [data-viewport="mobile"] header,
-[data-viewport="mobile"] nav {
+[data-viewport="mobile"] nav,
+[data-viewport="mobile"] .fs-header-inner {
   padding-left: 0.85rem !important;
   padding-right: 0.85rem !important;
+  box-sizing: border-box !important;
 }
 
-/* Mobile Brand Logo Size */
+/* Mobile Brand Logo Size (Excludes taglines/subtitles to prevent vertical word fragmentation) */
 .ws-canvas-mobile .fs-brand-name,
 .ws-canvas-mobile .rt-brand,
 .ws-canvas-mobile .fd-brand,
 .ws-canvas-mobile .cafe-brand,
 .ws-canvas-mobile .mr-brand,
 .ws-canvas-mobile .rws-brand,
-.ws-canvas-mobile [class*="brand"],
-[data-viewport="mobile"] [class*="brand"] {
-  font-size: clamp(1.15rem, 5.5cqw, 1.4rem) !important;
+.ws-canvas-mobile [class*="brand-name"],
+.ws-canvas-mobile [class*="brand-title"],
+.ws-canvas-mobile [class*="brand-logo"],
+[data-viewport="mobile"] .fs-brand-name,
+[data-viewport="mobile"] .rt-brand,
+[data-viewport="mobile"] .fd-brand,
+[data-viewport="mobile"] .cafe-brand,
+[data-viewport="mobile"] .mr-brand,
+[data-viewport="mobile"] .rws-brand,
+[data-viewport="mobile"] [class*="brand-name"],
+[data-viewport="mobile"] [class*="brand-title"],
+[data-viewport="mobile"] [class*="brand-logo"] {
+  font-size: clamp(1.15rem, 5.5cqw, 1.35rem) !important;
   line-height: 1.15 !important;
-  max-width: 160px !important;
+  max-width: 185px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.ws-canvas-mobile .fs-brand-btn,
+[data-viewport="mobile"] .fs-brand-btn {
+  margin-right: 0.5rem !important;
+  max-width: 185px !important;
+  overflow: hidden !important;
+}
+
+/* Mobile Catalog & Category Filter Scrolling */
+.ws-canvas-mobile .fs-menu-container,
+[data-viewport="mobile"] .fs-menu-container {
+  padding: 2rem 0.85rem !important;
+  box-sizing: border-box !important;
+}
+
+.ws-canvas-mobile .fs-menu-toolbar,
+[data-viewport="mobile"] .fs-menu-toolbar {
+  padding: 1rem 0.85rem !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 1rem !important;
+  box-sizing: border-box !important;
+}
+
+.ws-canvas-mobile .fs-pincode-form,
+[data-viewport="mobile"] .fs-pincode-form {
+  width: 100% !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.5rem !important;
+}
+
+.ws-canvas-mobile .fs-pincode-form input,
+[data-viewport="mobile"] .fs-pincode-form input {
+  flex: 1 1 100px !important;
+  max-width: none !important;
+  width: auto !important;
+}
+
+.ws-canvas-mobile .fs-category-pills,
+[data-viewport="mobile"] .fs-category-pills {
+  display: flex !important;
+  gap: 0.4rem !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: none !important;
+  padding-bottom: 0.35rem !important;
+  max-width: 100% !important;
+}
+
+.ws-canvas-mobile .fs-category-pills::-webkit-scrollbar,
+[data-viewport="mobile"] .fs-category-pills::-webkit-scrollbar {
+  display: none !important;
+}
+
+.ws-canvas-mobile .fs-category-pills button,
+[data-viewport="mobile"] .fs-category-pills button {
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+  padding: 0.45rem 0.95rem !important;
+  font-size: 0.8rem !important;
 }
 
 /* Mobile Action Buttons (Selection & Book a Table) */
@@ -925,23 +1103,46 @@
    ========================================================================== */
 
 @container storefront (max-width: 840px) {
-  .fs-desktop-nav {
-    gap: 0.85rem !important;
+  .fs-desktop-nav,
+  .rt-desktop-nav,
+  .fd-nav nav,
+  .cafe-header nav,
+  .mr-header nav,
+  .cc-nav nav,
+  .ll-nav nav,
+  .dg-nav nav,
+  .rws-nav nav,
+  [class*="desktop-nav"] {
+    display: none !important;
   }
 
-  .fs-desktop-nav button {
-    font-size: 0.76rem !important;
-    letter-spacing: 0.05em !important;
-  }
-
-  .rt-desktop-nav {
+  .fs-mobile-toggle,
+  .rt-mobile-toggle,
+  .fd-hamburger,
+  .cafe-toggle,
+  .rws-mobile,
+  [class*="mobile-toggle"] {
     display: flex !important;
-    gap: 0.85rem !important;
+    align-items: center !important;
   }
 
-  .rt-desktop-nav a {
-    font-size: 0.76rem !important;
-    letter-spacing: 0.05em !important;
+  .fs-brand-sub,
+  [class*="brand-sub"],
+  [class*="brand-tagline"],
+  [class*="brand-slogan"] {
+    display: none !important;
+  }
+
+  .fs-brand-name,
+  .rt-brand,
+  .fd-brand,
+  .cafe-brand,
+  .mr-brand,
+  .rws-brand {
+    max-width: 240px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
   }
 
   .fs-product-grid,
@@ -984,6 +1185,47 @@
   .rt-mobile {
     display: flex !important;
     display: inline-flex !important;
+  }
+
+  .fs-brand-sub,
+  [class*="brand-sub"],
+  [class*="brand-tagline"],
+  [class*="brand-slogan"] {
+    display: none !important;
+  }
+
+  .fs-brand-name,
+  .rt-brand,
+  .fd-brand,
+  .cafe-brand,
+  .mr-brand,
+  .rws-brand {
+    max-width: 185px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .fs-category-pills {
+    display: flex !important;
+    gap: 0.4rem !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    padding-bottom: 0.35rem !important;
+    max-width: 100% !important;
+  }
+
+  .fs-category-pills::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .fs-category-pills button {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    padding: 0.45rem 0.95rem !important;
+    font-size: 0.8rem !important;
   }
 
   h1,

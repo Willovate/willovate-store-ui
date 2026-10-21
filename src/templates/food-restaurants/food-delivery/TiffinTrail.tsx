@@ -14,7 +14,7 @@ export const tiffinTrailConfig: StorefrontThemeConfig = {
     featuresLayout: 'pills-row',
     storyLayout: 'card-overlay',
     galleryLayout: 'editorial-collage',
-    sectionOrder: ['hero', 'features', 'products', 'craft', 'story', 'gallery', 'promo', 'reviews', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'tiffinSubscription', 'products', 'expressRadar', 'groupCatering', 'features', 'craft', 'lateNightLab', 'story', 'gallery', 'reviews', 'promo', 'location', 'newsletter'],
   },
   name: 'TiffinTrail',
   tagline: 'Homestyle Indian meal delivery, regional thalis, and daily lunch subscriptions cooked with pure ghee and mother’s touch',

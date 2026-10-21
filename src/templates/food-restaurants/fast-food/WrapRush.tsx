@@ -13,7 +13,7 @@ export const wrapRushConfig: StorefrontThemeConfig = {
     storyLayout: 'stats-prominent',
     featuresLayout: 'strip-4',
     galleryLayout: 'masonry',
-    sectionOrder: ['hero', 'features', 'products', 'story', 'promo', 'craft', 'gallery', 'reviews', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'craveCombo', 'features', 'products', 'speedGuarantee', 'flashDeals', 'sauceBar', 'heatMatrix', 'story', 'craft', 'promo', 'gallery', 'reviews', 'location', 'newsletter'],
   },
   name: 'Wrap Rush',
   tagline: 'Toasted pressed wraps, artisan smash patty melts, crinkle beer cheese fries, and thick malt shakes',

@@ -528,7 +528,7 @@ export const DiamondWorkDoStorefront: React.FC<DiamondWorkDoStorefrontProps> = (
                 <div
                   className="dwd-cat-promo-card"
                   style={{
-                    backgroundImage: 'url(https://images.unsplash.com/photo-1611591475870-87a414605ea2?w=900&auto=format&fit=crop&q=80)',
+                    backgroundImage: 'url(https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900&auto=format&fit=crop&q=80)',
                   }}
                   onClick={() => {
                     setFilters((f) => ({ ...f, category: 'Bracelets' }))

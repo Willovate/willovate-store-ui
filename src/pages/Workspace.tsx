@@ -19,6 +19,7 @@ import MarketingModule from '../components/dashboard/MarketingModule'
 import SettingsModule from '../components/dashboard/SettingsModule'
 import WillovateLogo from '../components/WillovateLogo'
 import {
+  ArrowLeft,
   Home,
   ShoppingBag,
   Folder,
@@ -253,39 +254,49 @@ export default function Workspace({ websiteId, initialTab, forceEditorView }: Wo
 
     const updateScale = () => {
       if (!frame || !canvas) return
-      const designWidth = previewMode === 'desktop' ? 1200 : previewMode === 'tablet' ? 768 : 390
-      // Keep the storefront large while retaining a small, even canvas gutter.
-      const available = frame.clientWidth - 32
-      const scale = available >= designWidth ? 1 : Math.max(available / designWidth, 0.2)
 
-      // Apply scale transform
-      canvas.style.transform = `scale(${scale})`
-      canvas.style.transformOrigin = 'top left'
-      canvas.style.width = `${designWidth}px`
+      // Design widths for the storefront content inside each device
+      const contentWidth = previewMode === 'desktop' ? 1200 : previewMode === 'tablet' ? 768 : 390
 
-      // Size the wrapper so it occupies the right space (transform doesn't affect layout)
-      const wrapper = canvas.parentElement
-      if (wrapper && wrapper.classList.contains('ws-canvas-wrapper')) {
-        wrapper.style.width = `${designWidth * scale}px`
-        // Height is unknown until canvas renders; use a small delay trick via ResizeObserver
-        wrapper.style.height = `${canvas.scrollHeight * scale}px`
-        // Center the wrapper in the container
-        wrapper.style.marginLeft = 'auto'
-        wrapper.style.marginRight = 'auto'
-      }
+      // Ensure canvas always renders at its natural design width (no scaling on canvas itself)
+      canvas.style.transform = 'none'
+      canvas.style.width = `${contentWidth}px`
+
+      // Walk up to find the device frame shell (.ws-device-*)
+      const deviceFrame = canvas.closest('.ws-device-desktop, .ws-device-tablet, .ws-device-mobile') as HTMLElement | null
+      const wrapper = canvas.closest('.ws-canvas-wrapper') as HTMLElement | null
+
+      if (!deviceFrame || !wrapper) return
+
+      // Reset any prior transform so we can read the natural size
+      deviceFrame.style.transform = 'none'
+      deviceFrame.style.transformOrigin = 'top center'
+
+      // Force layout so offsetWidth reflects the natural frame width
+      const naturalW = deviceFrame.offsetWidth
+      const naturalH = deviceFrame.scrollHeight
+
+      // Available space with some breathing room
+      const available = frame.clientWidth - 48
+      const scale = naturalW > 0 && available < naturalW
+        ? Math.max(available / naturalW, 0.2)
+        : 1
+
+      // Apply scale to the device frame
+      deviceFrame.style.transform = `scale(${scale})`
+      deviceFrame.style.transformOrigin = 'top center'
+
+      // Make wrapper hold the scaled size so container scrolls correctly
+      wrapper.style.width = `${naturalW * scale}px`
+      wrapper.style.minHeight = `${naturalH * scale}px`
     }
 
-    // Observe both the frame (for resize) and the canvas (for content height changes)
-    const ro = new ResizeObserver(() => {
-      updateScale()
-    })
+    const ro = new ResizeObserver(() => { updateScale() })
     ro.observe(frame)
     ro.observe(canvas)
 
     updateScale()
-    // Extra pass after a tick to catch fonts/images settling
-    const t = setTimeout(updateScale, 200)
-
+    const t = setTimeout(updateScale, 300)
     return () => { ro.disconnect(); clearTimeout(t) }
   }, [previewMode, viewMode, selectedPage])
 
@@ -476,15 +487,44 @@ export default function Workspace({ websiteId, initialTab, forceEditorView }: Wo
           )}
           {/* ── GLOBAL DASHBOARD HEADER ── */}
           <header className="ws-topbar ws-dashboard-topbar" style={{ display: 'flex', justifyContent: 'space-between', padding: '0 1.25rem', height: '60px', background: '#fff', borderBottom: '1px solid #eef0f5', flexShrink: 0, zIndex: 90 }}>
-            <div className="ws-topbar-left" style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+            <div className="ws-topbar-left" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
               <WillovateLogo
                 height={34}
-                onClick={() => {
-                  setActiveNav('workspace');
-                  setViewMode('dashboard');
-                }}
+                onClick={() => navigate('/')}
+                title="Go to Willovate Main Store"
                 style={{ cursor: 'pointer' }}
               />
+              <button
+                onClick={() => navigate('/')}
+                title="Return to Willovate One Main Store"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  background: '#f8fafc',
+                  border: '1px solid #e2e8f0',
+                  color: '#475569',
+                  padding: '0.4rem 0.85rem',
+                  borderRadius: '8px',
+                  fontWeight: 600,
+                  fontSize: '13px',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                }}
+                onMouseOver={e => {
+                  e.currentTarget.style.backgroundColor = '#eef2ff';
+                  e.currentTarget.style.color = '#4338ca';
+                  e.currentTarget.style.borderColor = '#c7d2fe';
+                }}
+                onMouseOut={e => {
+                  e.currentTarget.style.backgroundColor = '#f8fafc';
+                  e.currentTarget.style.color = '#475569';
+                  e.currentTarget.style.borderColor = '#e2e8f0';
+                }}
+              >
+                <Store size={15} />
+                <span>Main Store</span>
+              </button>
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <SaveIndicator status={saveStatus} hasUnsavedChanges={hasUnsavedChanges} onSave={handleSave} />
               </div>
@@ -504,6 +544,7 @@ export default function Workspace({ websiteId, initialTab, forceEditorView }: Wo
             {/* ── DASHBOARD SIDEBAR ── */}
             <aside className="ws-sidebar ws-dashboard-sidebar" style={{ width: '260px', borderRight: '1px solid #eef0f5', background: '#fff', display: 'flex', flexDirection: 'column', flexShrink: 0, overflow: 'hidden' }}>
               <nav className="ws-sidebar-nav" style={{ padding: '1rem', flex: 1, display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
+
                 <p className="ws-sidebar-section-label" style={{ color: '#1e1b4b', fontSize: '0.7rem', fontWeight: 800, letterSpacing: '1px', marginBottom: '0.4rem', padding: '0 0.5rem' }}>MAIN MENU</p>
                 <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem', padding: 0, margin: 0, listStyle: 'none' }}>
                   <li
@@ -712,23 +753,79 @@ export default function Workspace({ websiteId, initialTab, forceEditorView }: Wo
       ) : (
         <div className="editor-layout">
           <header className="ws-topbar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 1rem', background: '#fff', borderBottom: '1px solid #e5e7eb', gridColumn: '1 / -1', gridRow: '1', zIndex: 10 }}>
-              <div className="ws-topbar-left" style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+              <div className="ws-topbar-left" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <WillovateLogo
                   height={30}
-                  onClick={() => setViewMode('dashboard')}
+                  onClick={() => navigate('/')}
+                  title="Go to Willovate Main Store"
                   style={{ cursor: 'pointer' }}
                 />
-                <button className="ws-page-switcher" onClick={() => setShowPageManager(true)} title="Manage pages" style={{ background: '#fff', border: '1px solid var(--line)', color: 'var(--ink)', borderRadius: '8px', padding: '0 1rem', fontWeight: 500, fontSize: '14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '235px', height: '36px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><Home size={16} color="var(--muted)"/> {selectedPage?.title || 'Home'}</div> <ChevronDown size={16} color="var(--muted)" />
+                <button
+                  onClick={() => navigate('/')}
+                  title="Return to Willovate One Main Store"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '5px',
+                    background: '#f8fafc',
+                    border: '1px solid #e2e8f0',
+                    color: '#475569',
+                    padding: '0.35rem 0.7rem',
+                    borderRadius: '7px',
+                    fontWeight: 600,
+                    fontSize: '12px',
+                    cursor: 'pointer',
+                    transition: 'all 0.15s ease',
+                  }}
+                  onMouseOver={e => {
+                    e.currentTarget.style.backgroundColor = '#eef2ff';
+                    e.currentTarget.style.color = '#4338ca';
+                    e.currentTarget.style.borderColor = '#c7d2fe';
+                  }}
+                  onMouseOut={e => {
+                    e.currentTarget.style.backgroundColor = '#f8fafc';
+                    e.currentTarget.style.color = '#475569';
+                    e.currentTarget.style.borderColor = '#e2e8f0';
+                  }}
+                >
+                  <Store size={14} />
+                  <span>Main Store</span>
+                </button>
+                <button className="ws-page-switcher" onClick={() => setShowPageManager(true)} title="Manage pages" style={{ background: '#fff', border: '1px solid var(--line)', color: 'var(--ink)', borderRadius: '8px', padding: '0 0.85rem', fontWeight: 500, fontSize: '13px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '200px', height: '36px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><Home size={15} color="var(--muted)"/> {selectedPage?.title || 'Home'}</div> <ChevronDown size={15} color="var(--muted)" />
                 </button>
                 <SaveIndicator status={saveStatus} hasUnsavedChanges={hasUnsavedChanges} onSave={handleSave} />
               </div>
-              <div className="ws-topbar-center" style={{ display: 'flex', position: 'absolute', left: '50%', transform: 'translateX(-50%)', alignItems: 'center' }}>
-                <div style={{ display: 'flex', gap: '4px' }}>
-                  <button className={`ws-viewport-btn ${previewMode === 'desktop' ? 'active' : ''}`} onClick={() => setPreviewMode('desktop')} title="Desktop view"><Monitor size={18} strokeWidth={1.5} /></button>
-                  <button className={`ws-viewport-btn ${previewMode === 'tablet' ? 'active' : ''}`} onClick={() => setPreviewMode('tablet')} title="Tablet view"><Tablet size={18} strokeWidth={1.5} /></button>
-                  <button className={`ws-viewport-btn ${previewMode === 'mobile' ? 'active' : ''}`} onClick={() => setPreviewMode('mobile')} title="Mobile view"><Smartphone size={18} strokeWidth={1.5} /></button>
+              <div className="ws-topbar-center">
+                <div className="ws-viewport-controls">
+                  <button
+                    className={`ws-viewport-btn ${previewMode === 'desktop' ? 'active' : ''}`}
+                    onClick={() => setPreviewMode('desktop')}
+                    title="Desktop view (1200px)"
+                  >
+                    <Monitor size={14} strokeWidth={1.8} />
+                    <span>Desktop</span>
+                  </button>
+                  <button
+                    className={`ws-viewport-btn ${previewMode === 'tablet' ? 'active' : ''}`}
+                    onClick={() => setPreviewMode('tablet')}
+                    title="Tablet view (768px)"
+                  >
+                    <Tablet size={14} strokeWidth={1.8} />
+                    <span>Tablet</span>
+                  </button>
+                  <button
+                    className={`ws-viewport-btn ${previewMode === 'mobile' ? 'active' : ''}`}
+                    onClick={() => setPreviewMode('mobile')}
+                    title="Mobile view (390px)"
+                  >
+                    <Smartphone size={14} strokeWidth={1.8} />
+                    <span>Mobile</span>
+                  </button>
                 </div>
+                <span className="ws-viewport-width-badge">
+                  {previewMode === 'desktop' ? '1200px' : previewMode === 'tablet' ? '768px' : '390px'}
+                </span>
               </div>
               <div className="ws-topbar-right" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <button className={`ws-btn ${showAI ? 'ws-btn-ai-active' : 'ws-btn-outline'}`} onClick={() => { setShowAI(!showAI); if (!showAI) setSelectedElement(null) }} style={{ height: '36px', borderRadius: '8px', color: '#5c3ce6', borderColor: '#ddd6fe', background: '#fcfaff', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: 600, padding: '0 12px' }}>
@@ -829,24 +926,95 @@ export default function Workspace({ websiteId, initialTab, forceEditorView }: Wo
             <main className="ws-canvas-area" style={{ gridColumn: '3', gridRow: '2', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
               <div className="storefront-frame-container" ref={frameRef}>
                 <div className="ws-canvas-wrapper">
-                  <div className={`ws-canvas ws-canvas-${previewMode}`} ref={canvasRef} data-viewport={previewMode}>
-                    {selectedPage ? (
-                      <PageEditor
-                        website={website}
-                        page={selectedPage}
-                        selectedElement={selectedElement}
-                        selectedElementId={selectedElement?.id}
-                        previewMode={previewMode}
-                        onSelectElement={(el) => {
-                          setSelectedElement(el)
-                          setShowAI(false)
-                        }}
-                        onAddElement={handleAddElement}
-                      />
-                    ) : (
-                      <div className="ws-canvas-empty">No page selected</div>
-                    )}
-                  </div>
+
+                  {/* ── DESKTOP: Browser-chrome frame ── */}
+                  {previewMode === 'desktop' && (
+                    <div className="ws-device-desktop" style={{ width: '1200px' }}>
+                      <div className="ws-device-chrome">
+                        <div className="ws-device-chrome-dots">
+                          <span /><span /><span />
+                        </div>
+                        <div className="ws-device-chrome-bar">
+                          <svg viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+                          </svg>
+                          <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '260px' }}>
+                            {window.location.hostname}/preview
+                          </span>
+                        </div>
+                      </div>
+                      <div style={{ overflow: 'hidden' }}>
+                        <div className={`ws-canvas ws-canvas-desktop`} ref={canvasRef} data-viewport="desktop">
+                          {selectedPage ? (
+                            <PageEditor
+                              website={website}
+                              page={selectedPage}
+                              selectedElement={selectedElement}
+                              selectedElementId={selectedElement?.id}
+                              previewMode={previewMode}
+                              onSelectElement={(el) => { setSelectedElement(el); setShowAI(false) }}
+                              onAddElement={handleAddElement}
+                            />
+                          ) : (
+                            <div className="ws-canvas-empty">No page selected</div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* ── TABLET: iPad-style frame ── */}
+                  {previewMode === 'tablet' && (
+                    <div className="ws-device-tablet">
+                      <div className="ws-device-tablet-camera" />
+                      <div className="ws-device-tablet-screen">
+                        <div className={`ws-canvas ws-canvas-tablet`} ref={canvasRef} data-viewport="tablet">
+                          {selectedPage ? (
+                            <PageEditor
+                              website={website}
+                              page={selectedPage}
+                              selectedElement={selectedElement}
+                              selectedElementId={selectedElement?.id}
+                              previewMode={previewMode}
+                              onSelectElement={(el) => { setSelectedElement(el); setShowAI(false) }}
+                              onAddElement={handleAddElement}
+                            />
+                          ) : (
+                            <div className="ws-canvas-empty">No page selected</div>
+                          )}
+                        </div>
+                      </div>
+                      <div className="ws-device-tablet-home" />
+                    </div>
+                  )}
+
+                  {/* ── MOBILE: iPhone-style frame ── */}
+                  {previewMode === 'mobile' && (
+                    <div className="ws-device-mobile">
+                      <div className="ws-device-mobile-notch">
+                        <div className="ws-device-mobile-island" />
+                      </div>
+                      <div className="ws-device-mobile-screen">
+                        <div className={`ws-canvas ws-canvas-mobile`} ref={canvasRef} data-viewport="mobile">
+                          {selectedPage ? (
+                            <PageEditor
+                              website={website}
+                              page={selectedPage}
+                              selectedElement={selectedElement}
+                              selectedElementId={selectedElement?.id}
+                              previewMode={previewMode}
+                              onSelectElement={(el) => { setSelectedElement(el); setShowAI(false) }}
+                              onAddElement={handleAddElement}
+                            />
+                          ) : (
+                            <div className="ws-canvas-empty">No page selected</div>
+                          )}
+                        </div>
+                      </div>
+                      <div className="ws-device-mobile-home" />
+                    </div>
+                  )}
+
                 </div>
               </div>
             </main>

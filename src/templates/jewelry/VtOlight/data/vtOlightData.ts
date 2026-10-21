@@ -178,7 +178,7 @@ export const VT_OLIGHT_PRODUCTS: VtOlightProduct[] = [
     compareAtPrice: 1680,
     images: [
       'https://jewels-workdo.myshopify.com/cdn/shop/files/1_da685243-7a33-4972-bccc-bab233289372_600x600.png?v=1698727817',
-      'https://images.unsplash.com/photo-1611591475870-87a414605ea2?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80',
     ],
     caratWeight: '2.80 ct',
     diamondCut: 'Round Brilliant Channel',

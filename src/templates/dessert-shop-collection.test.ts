@@ -7,6 +7,11 @@ import { chocoCraftConfig } from './food-restaurants/dessert-shop/ChocoCraft';
 import { scoopSocietyConfig } from './food-restaurants/dessert-shop/ScoopSociety';
 import { crumbAndCreamConfig } from './food-restaurants/dessert-shop/CrumbAndCream';
 import { sugarStreetConfig } from './food-restaurants/dessert-shop/SugarStreet';
+import {
+  MACARON_FLAVORS,
+  CACAO_ORIGINS,
+  GELATO_ITEMS,
+} from './food-restaurants/components/DessertEnhancements';
 
 describe('Dessert Shop Theme Collection Verification', () => {
   const foodCategory = templateCategories.find(c => c.id === 'food-and-restaurant');
@@ -102,6 +107,15 @@ describe('Dessert Shop Theme Collection Verification', () => {
         expect(config.location.email).toBeTruthy();
       });
 
+      it('should feature dessert confectionery enhancements in sectionOrder', () => {
+        const order = config.layoutOptions?.sectionOrder;
+        expect(order).toBeDefined();
+        expect(order).toContain('macaronBox');
+        expect(order).toContain('cakeStudio');
+        expect(order).toContain('gelatoLab');
+        expect(order).toContain('cacaoRadar');
+      });
+
       it('should load component dynamically from registry', async () => {
         const template = findTemplateInRegistry(slug);
         expect(template).toBeDefined();
@@ -111,6 +125,56 @@ describe('Dessert Shop Theme Collection Verification', () => {
         expect(mod).toBeDefined();
         expect(typeof mod.default).toBe('function');
       });
+    });
+  });
+
+  describe('Dessert Confectionery Enhancements & Industry Standards Verification', () => {
+    it('Macaron Flavors should contain authentic French ganaches and provenance', () => {
+      expect(MACARON_FLAVORS.length).toBeGreaterThanOrEqual(6);
+      MACARON_FLAVORS.forEach(flavor => {
+        expect(flavor.id).toBeTruthy();
+        expect(flavor.name).toBeTruthy();
+        expect(flavor.frenchName).toBeTruthy();
+        expect(flavor.filling).toBeTruthy();
+        expect(flavor.provenance).toBeTruthy();
+        expect(flavor.color).toBeTruthy();
+        expect(flavor.image).toContain('images.unsplash.com');
+      });
+    });
+
+    it('Cacao Origins should feature single-origin estates and conching hours', () => {
+      expect(CACAO_ORIGINS.length).toBeGreaterThanOrEqual(3);
+      CACAO_ORIGINS.forEach(origin => {
+        expect(origin.origin).toBeTruthy();
+        expect(origin.percentage).toContain('%');
+        expect(origin.concheHours).toContain('Hours');
+        expect(origin.farmerEstate).toBeTruthy();
+        expect(origin.notes.length).toBeGreaterThanOrEqual(3);
+      });
+    });
+
+    it('Gelato Scoop Lab items should feature small-batch churning and dairy base', () => {
+      expect(GELATO_ITEMS.length).toBeGreaterThanOrEqual(4);
+      GELATO_ITEMS.forEach(item => {
+        expect(item.name).toBeTruthy();
+        expect(item.italianName).toBeTruthy();
+        expect(item.churnMethod).toBeTruthy();
+        expect(item.dairyBase).toBeTruthy();
+        expect(item.price).toBeGreaterThan(0);
+      });
+    });
+
+    it('all 5 Dessert themes should have unique sectionOrder configurations', () => {
+      const orders = [
+        sugarAtelierConfig.layoutOptions?.sectionOrder?.join(','),
+        chocoCraftConfig.layoutOptions?.sectionOrder?.join(','),
+        scoopSocietyConfig.layoutOptions?.sectionOrder?.join(','),
+        crumbAndCreamConfig.layoutOptions?.sectionOrder?.join(','),
+        sugarStreetConfig.layoutOptions?.sectionOrder?.join(','),
+      ];
+
+      const uniqueOrders = new Set(orders);
+      expect(uniqueOrders.size).toBe(5);
     });
   });
 

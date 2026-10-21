@@ -75,7 +75,7 @@ export const templateCategories: TemplateCategory[] = [{
     fineDining,
     cafe,
     curatedSection('bakery', 'Bakery', 'Fresh-from-the-oven brands with a distinct point of view.', [
-      ['Butter & Bloom', 'butter-and-bloom', 'golden-crumb', 'photo-1509440159596-0249088772ff', 'A floral, handcrafted bakehouse in butter yellow and soft green.', ['bakery', 'organic', 'serif']],
+      ['Butter & Bloom', 'butter-and-bloom', 'butter-and-bloom', 'photo-1555507036-ab1f4038808a', 'A floral, handcrafted bakehouse in butter yellow and soft green.', ['bakery', 'organic', 'serif']],
       ['Oven & Crumb', 'oven-and-crumb', 'rustic-oven', 'photo-1589367920969-ab8e050bbb04', 'Rustic, grain-led baking with terracotta warmth and wood texture.', ['artisan', 'rustic', 'warm']],
       ['Parisian Crust', 'parisian-crust', 'patisserie-lune', 'photo-1603532648955-039310d9ed75', 'A refined French bakery with editorial cream and burgundy details.', ['french', 'editorial', 'bistro']],
       ['Golden Loaf', 'golden-loaf', 'rise-and-knead', 'photo-1612201142855-7873bc1661b4', 'Luxury food photography and a dominant artisan-bread hero.', ['premium', 'golden', 'artisan']],

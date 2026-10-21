@@ -13,7 +13,7 @@ export const crunchBoxConfig: StorefrontThemeConfig = {
     storyLayout: 'card-overlay',
     featuresLayout: 'cards-grid',
     galleryLayout: 'editorial-collage',
-    sectionOrder: ['hero', 'features', 'products', 'promo', 'craft', 'gallery', 'reviews', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'heatMatrix', 'flashDeals', 'craveCombo', 'products', 'features', 'sauceBar', 'craft', 'speedGuarantee', 'story', 'promo', 'gallery', 'reviews', 'location', 'newsletter'],
   },
   name: 'Crunch Box',
   tagline: '24-hour buttermilk-brined crispy fried chicken, hand-breaded tenders, bone-in buckets, and honey butter biscuits',

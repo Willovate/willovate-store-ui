@@ -245,7 +245,7 @@ export const PROGEAR_PRODUCTS: ProGearProduct[] = [
     image: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&auto=format&fit=crop&q=80',
     gallery: [
       'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1519766304817-4f37bda74a29?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&auto=format&fit=crop&q=80',
     ],
     sizes: ['Size 7 (Official Men 29.5")', 'Size 6 (Women 28.5")'],
     material: 'High-Traction Composite Moisture Leather',
@@ -277,9 +277,9 @@ export const PROGEAR_PRODUCTS: ProGearProduct[] = [
     reviewCount: 42,
     inStock: true,
     badge: 'HOME ARENA',
-    image: 'https://images.unsplash.com/photo-1519766304817-4f37bda74a29?w=800&auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&auto=format&fit=crop&q=80',
     gallery: [
-      'https://images.unsplash.com/photo-1519766304817-4f37bda74a29?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&auto=format&fit=crop&q=80',
     ],
     sizes: ['Adjustable 7.5ft to 10ft (Official Regulation)'],
     material: 'Tempered Polycarbonate Backboard & Powder-Coated Steel',

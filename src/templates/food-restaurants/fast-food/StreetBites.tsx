@@ -13,7 +13,7 @@ export const streetBitesConfig: StorefrontThemeConfig = {
     storyLayout: 'split-left',
     featuresLayout: 'pills-row',
     galleryLayout: 'editorial-collage',
-    sectionOrder: ['hero', 'products', 'features', 'promo', 'gallery', 'reviews', 'story', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'flashDeals', 'heatMatrix', 'craveCombo', 'products', 'features', 'sauceBar', 'speedGuarantee', 'gallery', 'story', 'promo', 'reviews', 'location', 'newsletter'],
   },
   name: 'Street Bites',
   tagline: 'High-heat urban night market tacos, pillowy steamed baos, loaded waffle fries, and street churros',

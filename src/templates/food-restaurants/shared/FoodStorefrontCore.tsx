@@ -7,6 +7,82 @@ import {
   ChevronDown, ChevronUp, ChevronRight, Award, Compass, Heart,
   ShieldCheck, AlertCircle, Calendar, Truck, Coffee, Cake, ExternalLink
 } from 'lucide-react';
+import {
+  BeanPassportSection,
+  ArtisanDrinkBuilderSection,
+  CafeAmenitiesSection,
+  RoastersClubSubscriptionSection,
+  BaristaFlightsSection,
+  LiveCafeStatusBar,
+} from '../components/CafeEnhancements';
+import {
+  BakeScheduleSection,
+  PastryBoxBuilderSection,
+  FlourStarterProvenanceSection,
+  HearthBreadClubSection,
+  BreadCareReheatingSection,
+  LiveBakeryStatusBar,
+} from '../components/BakeryEnhancements';
+import {
+  CraveComboBuilderSection,
+  HeatScaleMatrixSection,
+  FlashCraveDealsSection,
+  SecretSauceBarSection,
+  ExpressSpeedGuaranteeSection,
+  LiveFastFoodStatusBar,
+} from '../components/FastFoodEnhancements';
+import {
+  VirtualBrandsSection,
+  PackagingTechSection,
+  DeliveryRadarSection,
+  MealPrepPlansSection,
+  LiveCloudKitchenStatusBar,
+} from '../components/CloudKitchenEnhancements';
+import {
+  PizzaCrafterSection,
+  WoodFiredTelemetrySection,
+  PizzaFeastBundlesSection,
+  CrustDipsSection,
+  LivePizzaStatusBar,
+} from '../components/PizzaEnhancements';
+import {
+  DumBiryaniAtelierSection,
+  TandoorLiveGrillSection,
+  SpiceTerroirSection,
+  RoyalThaliCuratorSection,
+  ChaiLassiBarSection,
+  LiveIndianStatusBar,
+} from '../components/IndianEnhancements';
+import {
+  MacaronBoxBuilderSection,
+  BespokeCakeStudioSection,
+  GelatoScoopLabSection,
+  CacaoOriginRadarSection,
+  LiveDessertStatusBar,
+} from '../components/DessertEnhancements';
+import {
+  ExpressDeliveryRadarSection,
+  TiffinSubscriptionBuilderSection,
+  LateNightCraveLabSection,
+  MultiKitchenCateringSection,
+  LiveFoodDeliveryStatusBar,
+} from '../components/FoodDeliveryEnhancements';
+import {
+  PitmasterSmokerTelemetrySection,
+  ButcherPaperPlatterSection,
+  MangalGrillSkewerSection,
+  LiveBbqGrillStatusBar,
+} from '../components/BbqGrillEnhancements';
+
+export const FALLBACK_FOOD_IMAGE = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80';
+
+export function handleFoodImageError(e: React.SyntheticEvent<HTMLImageElement, Event>) {
+  const target = e.currentTarget;
+  if (target.src !== FALLBACK_FOOD_IMAGE) {
+    target.onerror = null;
+    target.src = FALLBACK_FOOD_IMAGE;
+  }
+}
 
 // ─── TYPES & INTERFACES ──────────────────────────────────────────────────────
 
@@ -41,17 +117,25 @@ export interface StoreProduct {
   name: string;
   price: number;
   compareAtPrice?: number;
+  originalPrice?: number;
   description: string;
   category: string;
   image: string;
   imageAlt?: string;
   tags?: string[];
   allergens?: string[];
+  ingredients?: string[];
   weightOrSize?: string;
-  calories?: string;
+  portion?: string;
+  calories?: string | number;
   leadTime?: string;
   available?: boolean;
   featured?: boolean;
+  badge?: string;
+  popular?: boolean;
+  spicy?: boolean;
+  vegetarian?: boolean;
+  inStock?: boolean;
   options?: ProductOption[];
   dietary?: 'veg' | 'non-veg' | 'vegan' | 'egg' | string | string[];
   spiceLevel?: number;
@@ -113,7 +197,7 @@ export interface StorefrontLayoutOptions {
   storyLayout?: 'split-right' | 'split-left' | 'card-overlay' | 'stats-prominent';
   featuresLayout?: 'strip-4' | 'cards-grid' | 'pills-row';
   galleryLayout?: 'grid-3x2' | 'masonry' | 'editorial-collage';
-  sectionOrder?: Array<'hero' | 'features' | 'products' | 'craft' | 'story' | 'promo' | 'gallery' | 'reviews' | 'location' | 'newsletter'>;
+  sectionOrder?: string[];
 }
 
 export interface StorefrontThemeConfig {
@@ -184,6 +268,8 @@ export interface StorefrontThemeConfig {
     founderQuote?: string;
     founderName?: string;
     stats?: Array<{ value: string; label: string }>;
+    ctaText?: string;
+    ctaPage?: string;
   };
   promo: {
     badge: string;
@@ -195,6 +281,10 @@ export interface StorefrontThemeConfig {
     imageAlt: string;
   };
   gallery: Array<{
+    id?: string;
+    title?: string;
+    category?: string;
+    image?: string;
     src: string;
     alt: string;
     caption: string;
@@ -203,16 +293,45 @@ export interface StorefrontThemeConfig {
   testimonials: ReviewItem[];
   location: {
     address: string;
-    neighborhood: string;
-    hoursWeekdays: string;
-    hoursWeekends: string;
+    neighborhood?: string;
+    city?: string;
+    hoursWeekdays?: string;
+    hoursWeekends?: string;
+    hours?: Array<{ days: string; time: string }>;
     phone: string;
     email: string;
-    pickupNotice: string;
+    pickupNotice?: string;
     mapEmbedUrl?: string;
+    parkingInfo?: string;
+    deliveryRadius?: string;
   };
   customInquiry: CustomInquiryConfig;
   faqs: FaqItem[];
+  articles?: BlogArticle[];
+  craft?: any;
+  reviews?: any[];
+  catering?: any;
+}
+
+export interface BlogArticle {
+  id: string;
+  slug: string;
+  title: string;
+  subtitle?: string;
+  excerpt: string;
+  content: string[];
+  date: string;
+  readTime: string;
+  author: {
+    name: string;
+    role: string;
+    avatar: string;
+  };
+  image: string;
+  imageAlt: string;
+  category: string;
+  tags?: string[];
+  featured?: boolean;
 }
 
 export interface CartLineItem {
@@ -227,9 +346,12 @@ export interface CartLineItem {
 export type StorefrontPage =
   | 'home'
   | 'menu'
+  | 'product-detail'
   | 'collections'
   | 'about'
   | 'gallery'
+  | 'blog'
+  | 'article'
   | 'inquiry'
   | 'contact'
   | 'faq'
@@ -252,6 +374,10 @@ interface StorefrontContextType {
   quickViewProduct: StoreProduct | null;
   openQuickView: (product: StoreProduct) => void;
   closeQuickView: () => void;
+  selectedProduct: StoreProduct | null;
+  openProductDetail: (product: StoreProduct) => void;
+  selectedArticle: BlogArticle | null;
+  openArticle: (article: BlogArticle) => void;
   activeLightbox: { src: string; caption: string; alt: string } | null;
   openLightbox: (img: { src: string; caption: string; alt: string }) => void;
   closeLightbox: () => void;
@@ -305,7 +431,24 @@ function ActiveFoodStorefrontCore({ theme }: { theme: StorefrontThemeConfig }) {
   const isEditor = Boolean(websiteCtx?.onSelectElement);
 
   const [activePage, setActivePage] = useState<StorefrontPage>('home');
-  const [cart, setCart] = useState<CartLineItem[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<StoreProduct | null>(() => theme.products[0] || null);
+  const [selectedArticle, setSelectedArticle] = useState<BlogArticle | null>(() => (theme.articles && theme.articles[0]) || null);
+
+  const [cart, setCart] = useState<CartLineItem[]>(() => {
+    try {
+      const saved = localStorage.getItem(`willovate_cart_${theme.id}`);
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(`willovate_cart_${theme.id}`, JSON.stringify(cart));
+    } catch {}
+  }, [cart, theme.id]);
+
   const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false);
   const [isReservationOpen, setIsReservationOpen] = useState(false);
   const [bookingConfirmed, setBookingConfirmed] = useState<{
@@ -392,6 +535,18 @@ function ActiveFoodStorefrontCore({ theme }: { theme: StorefrontThemeConfig }) {
   };
   const closeQuickView = () => setQuickViewProduct(null);
 
+  const openProductDetail = (product: StoreProduct) => {
+    setSelectedProduct(product);
+    setActivePage('product-detail');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const openArticle = (article: BlogArticle) => {
+    setSelectedArticle(article);
+    setActivePage('article');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const openLightbox = (img: { src: string; caption: string; alt: string }) => {
     setActiveLightbox(img);
   };
@@ -424,6 +579,10 @@ function ActiveFoodStorefrontCore({ theme }: { theme: StorefrontThemeConfig }) {
     quickViewProduct,
     openQuickView,
     closeQuickView,
+    selectedProduct,
+    openProductDetail,
+    selectedArticle,
+    openArticle,
     activeLightbox,
     openLightbox,
     closeLightbox,
@@ -463,9 +622,12 @@ function ActiveFoodStorefrontCore({ theme }: { theme: StorefrontThemeConfig }) {
         <main style={{ flex: 1 }}>
           {activePage === 'home' && <HomePageView />}
           {activePage === 'menu' && <MenuPageView />}
+          {activePage === 'product-detail' && <ProductDetailPageView />}
           {activePage === 'collections' && <CollectionsPageView />}
           {activePage === 'about' && <AboutPageView />}
           {activePage === 'gallery' && <GalleryPageView />}
+          {activePage === 'blog' && <BlogPageView />}
+          {activePage === 'article' && <ArticlePageView />}
           {activePage === 'inquiry' && <InquiryPageView />}
           {activePage === 'contact' && <ContactPageView />}
           {activePage === 'faq' && <FaqPageView />}
@@ -492,6 +654,15 @@ function ActiveFoodStorefrontCore({ theme }: { theme: StorefrontThemeConfig }) {
           />
         )}
         {toast && <ToastPopup message={toast} />}
+        {activeTheme.kind === 'cafe' && <LiveCafeStatusBar />}
+        {activeTheme.kind === 'bakery' && <LiveBakeryStatusBar />}
+        {activeTheme.kind === 'fast-food' && <LiveFastFoodStatusBar />}
+        {activeTheme.kind === 'cloud-kitchen' && <LiveCloudKitchenStatusBar />}
+        {(activeTheme.kind === 'pizza' || activeTheme.id === 'mammas-table') && <LivePizzaStatusBar />}
+        {activeTheme.kind === 'indian' && <LiveIndianStatusBar />}
+        {activeTheme.kind === 'dessert' && <LiveDessertStatusBar />}
+        {activeTheme.kind === 'food-delivery' && <LiveFoodDeliveryStatusBar />}
+        {(activeTheme.kind === 'bbq-grill' || activeTheme.kind === 'bbq') && <LiveBbqGrillStatusBar />}
       </div>
     </StorefrontContext.Provider>
   );
@@ -514,6 +685,7 @@ export function StorefrontAnnouncementBar() {
       defaultProps={overrides}
     >
       <div
+        className="fs-announcement"
         style={{
           backgroundColor: theme.palette.secondary,
           color: '#ffffff',
@@ -528,6 +700,8 @@ export function StorefrontAnnouncementBar() {
           fontWeight: 500,
           borderBottom: '1px solid rgba(255,255,255,0.08)',
           zIndex: 40,
+          width: '100%',
+          boxSizing: 'border-box',
         }}
       >
         <span
@@ -585,73 +759,27 @@ export function StorefrontHeader() {
   const overrides = useEditableOverrides('nav', {
     logoText: theme.name,
     tagline: theme.tagline,
+    logoImage: '',
+    style_backgroundColor: '',
+    style_textColor: '',
   });
+
+  const headerBg = overrides.style_backgroundColor || theme.palette.background;
+  const headerTextColor = overrides.style_textColor || theme.palette.text;
 
   const cartTotalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   const navLinks = [
+    { label: 'Home', page: 'home' as StorefrontPage, sectionId: 'home' },
     { label: 'Menu', page: 'menu' as StorefrontPage, sectionId: 'menu' },
     { label: 'Our Story', page: 'about' as StorefrontPage, sectionId: 'story' },
-    { label: 'Experience', page: 'collections' as StorefrontPage, sectionId: 'experience' },
     { label: 'Gallery', page: 'gallery' as StorefrontPage, sectionId: 'gallery' },
-    { label: 'Visit & Hours', page: 'contact' as StorefrontPage, sectionId: 'visit' },
+    { label: 'Stories & Blog', page: 'blog' as StorefrontPage, sectionId: 'blog' },
+    { label: 'Contact & Hours', page: 'contact' as StorefrontPage, sectionId: 'visit' },
   ];
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const sectionIds = ['menu', 'story', 'experience', 'gallery', 'visit'];
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 180 && rect.bottom >= 80) {
-            setActiveSection(id);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true, capture: true });
-    return () => window.removeEventListener('scroll', handleScroll, true);
-  }, [setActiveSection]);
 
   const handleNavLinkClick = (link: typeof navLinks[0]) => {
     setMobileMenuOpen(false);
-    if (activePage === 'home') {
-      const el = document.getElementById(link.sectionId);
-      if (el) {
-        let scrollContainer: HTMLElement | null = null;
-        let curr = el.parentElement;
-        while (curr && curr !== document.body) {
-          const style = window.getComputedStyle(curr);
-          if ((style.overflowY === 'auto' || style.overflowY === 'scroll') && curr.scrollHeight > curr.clientHeight) {
-            scrollContainer = curr;
-            break;
-          }
-          curr = curr.parentElement;
-        }
-
-        if (scrollContainer) {
-          const containerRect = scrollContainer.getBoundingClientRect();
-          const elRect = el.getBoundingClientRect();
-          const targetScrollTop = scrollContainer.scrollTop + (elRect.top - containerRect.top) - 76;
-          scrollContainer.scrollTo({ top: Math.max(0, targetScrollTop), behavior: 'smooth' });
-        } else {
-          const navHeight = 76;
-          const elementPosition = el.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + (window.pageYOffset || document.documentElement.scrollTop || 0) - navHeight;
-          window.scrollTo({ top: Math.max(0, offsetPosition), behavior: 'smooth' });
-        }
-
-        try {
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        } catch {}
-
-        setActiveSection(link.sectionId);
-        return;
-      }
-    }
     setActivePage(link.page);
     setActiveSection(link.sectionId);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -676,13 +804,14 @@ export function StorefrontHeader() {
           position: 'sticky',
           top: 0,
           zIndex: 50,
-          backgroundColor: theme.palette.background,
+          backgroundColor: headerBg,
           borderBottom: `1px solid ${theme.palette.border}`,
           backdropFilter: 'blur(8px)',
           transition: 'all 0.2s ease',
         }}
       >
         <div
+          className="fs-header-inner"
           style={{
             maxWidth: '1360px',
             margin: '0 auto',
@@ -691,10 +820,13 @@ export function StorefrontHeader() {
             alignItems: 'center',
             justifyContent: 'space-between',
             gap: '1.5rem',
+            width: '100%',
+            boxSizing: 'border-box',
           }}
         >
           {/* Brand Logo */}
           <button
+            className="fs-brand-btn"
             onClick={() => {
               setActivePage('home');
               window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -708,21 +840,32 @@ export function StorefrontHeader() {
               display: 'flex',
               flexDirection: 'column',
               flexShrink: 0,
+              minWidth: 0,
+              maxWidth: '100%',
+              marginRight: 'clamp(1rem, 2cqw, 2.5rem)',
+              overflow: 'hidden',
             }}
           >
-            <span
-              className="fs-brand-name"
-              style={{
-                fontFamily: theme.typography.headingFont,
-                fontSize: '1.5rem',
-                fontWeight: 700,
-                color: theme.palette.text,
-                letterSpacing: '-0.02em',
-                lineHeight: 1.1,
-              }}
-            >
-              {overrides.logoText || theme.name}
-            </span>
+            {overrides.logoImage ? (
+              <img src={overrides.logoImage} alt={overrides.logoText || theme.name} style={{ maxHeight: '40px', maxWidth: '180px', objectFit: 'contain' }} />
+            ) : (
+              <span
+                className="fs-brand-name"
+                style={{
+                  fontFamily: theme.typography.headingFont,
+                  fontSize: '1.5rem',
+                  fontWeight: 700,
+                  color: headerTextColor,
+                  letterSpacing: '-0.02em',
+                  lineHeight: 1.1,
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                }}
+              >
+                {overrides.logoText || theme.name}
+              </span>
+            )}
             <span
               className="fs-brand-sub"
               style={{
@@ -732,6 +875,11 @@ export function StorefrontHeader() {
                 textTransform: 'uppercase',
                 fontWeight: 600,
                 marginTop: '2px',
+                maxWidth: '360px',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                display: 'inline-block',
               }}
             >
               {overrides.tagline || theme.brandSub}
@@ -743,7 +891,8 @@ export function StorefrontHeader() {
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '2rem',
+              gap: 'clamp(0.85rem, 1.25cqw, 2rem)',
+              flexShrink: 1,
             }}
             className="fs-desktop-nav"
           >
@@ -1014,11 +1163,23 @@ export function StorefrontHero() {
     buttonText: theme.hero.primaryCtaText,
     secondaryButtonText: theme.hero.secondaryCtaText,
     style_backgroundImage: theme.hero.image,
+    image: theme.hero.image,
+    style_backgroundColor: '',
+    style_textColor: '',
+    style_buttonColor: '',
+    style_buttonTextColor: '',
   });
 
-  const bgImage = (overrides.style_backgroundImage && !isGenericPlaceholder(overrides.style_backgroundImage))
-    ? overrides.style_backgroundImage
-    : theme.hero.image;
+  const bgImage = (overrides.image && !isGenericPlaceholder(overrides.image))
+    ? overrides.image
+    : (overrides.style_backgroundImage && !isGenericPlaceholder(overrides.style_backgroundImage))
+      ? overrides.style_backgroundImage
+      : theme.hero.image;
+
+  const heroBg = overrides.style_backgroundColor || '';
+  const heroTextColor = overrides.style_textColor || '';
+  const heroBtnColor = overrides.style_buttonColor || theme.palette.primary;
+  const heroBtnTextColor = overrides.style_buttonTextColor || '#ffffff';
 
   const heroLayout = theme.layoutOptions?.heroLayout || 'centered';
 
@@ -1035,12 +1196,15 @@ export function StorefrontHero() {
           className="fs-hero fs-hero-split"
           style={{
             position: 'relative',
-            minHeight: '85vh',
+            minHeight: 'clamp(540px, 78vh, 820px)',
             display: 'flex',
             alignItems: 'center',
-            padding: '5rem 2rem',
-            backgroundColor: theme.palette.background,
-            color: theme.palette.text,
+            padding: 'clamp(3rem, 6vh, 5.5rem) clamp(1.25rem, 3vw, 2.5rem)',
+            backgroundColor: heroBg || theme.palette.surface,
+            backgroundImage: heroBg ? 'none' : `linear-gradient(135deg, ${theme.palette.surface}F2 0%, ${theme.palette.background}E6 60%, ${theme.palette.background}F7 100%), url(${bgImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            color: heroTextColor || theme.palette.text,
             overflow: 'hidden',
           }}
         >
@@ -1074,7 +1238,7 @@ export function StorefrontHero() {
                     border: `1px solid ${theme.palette.border}`,
                   }}
                 >
-                  <Sparkles size={13} color={theme.palette.primary} />
+                  <Sparkles size={13} color={heroBtnColor} />
                   {overrides.eyebrow || theme.hero.badge}
                 </span>
               </div>
@@ -1088,7 +1252,7 @@ export function StorefrontHero() {
                   lineHeight: 1.1,
                   letterSpacing: '-0.03em',
                   margin: '0 0 1.5rem 0',
-                  color: theme.palette.text,
+                  color: heroTextColor || theme.palette.text,
                 }}
               >
                 {overrides.title || theme.hero.headline}
@@ -1099,7 +1263,7 @@ export function StorefrontHero() {
                 style={{
                   fontSize: 'clamp(1.05rem, 1.8vw, 1.25rem)',
                   lineHeight: 1.65,
-                  color: theme.palette.textMuted,
+                  color: heroTextColor || theme.palette.textMuted,
                   margin: '0 0 2.5rem 0',
                   maxWidth: '580px',
                 }}
@@ -1119,8 +1283,8 @@ export function StorefrontHero() {
                 <button
                   onClick={() => setActivePage((theme.hero.primaryCtaPage as StorefrontPage) || 'menu')}
                   style={{
-                    backgroundColor: theme.palette.primary,
-                    color: '#ffffff',
+                    backgroundColor: heroBtnColor,
+                    color: heroBtnTextColor,
                     border: 'none',
                     padding: '1.1rem 2.4rem',
                     borderRadius: '999px',
@@ -1131,7 +1295,7 @@ export function StorefrontHero() {
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '0.5rem',
-                    boxShadow: `0 8px 24px ${theme.palette.primary}40`,
+                    boxShadow: `0 8px 24px ${heroBtnColor}40`,
                     transition: 'transform 0.2s ease',
                   }}
                 >
@@ -1268,12 +1432,15 @@ export function StorefrontHero() {
           className="fs-hero fs-hero-asymmetric"
           style={{
             position: 'relative',
-            minHeight: '85vh',
+            minHeight: 'clamp(540px, 78vh, 820px)',
             display: 'flex',
             alignItems: 'center',
-            padding: '5.5rem 2rem 4rem 2rem',
-            backgroundColor: theme.palette.background,
-            color: theme.palette.text,
+            padding: 'clamp(3rem, 6vh, 5.5rem) clamp(1.25rem, 3vw, 2.5rem)',
+            backgroundColor: heroBg || theme.palette.surface,
+            backgroundImage: heroBg ? 'none' : `linear-gradient(135deg, ${theme.palette.surface}F0 0%, ${theme.palette.background}E6 60%, ${theme.palette.background}F5 100%), url(${bgImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            color: heroTextColor || theme.palette.text,
             overflow: 'hidden',
           }}
         >
@@ -1296,7 +1463,7 @@ export function StorefrontHero() {
                   border: `1px solid ${theme.palette.border}`,
                 }}
               >
-                <Sparkles size={13} color={theme.palette.primary} />
+                <Sparkles size={13} color={heroBtnColor} />
                 {overrides.eyebrow || theme.hero.badge}
               </span>
             </div>
@@ -1305,8 +1472,8 @@ export function StorefrontHero() {
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(min(400px, 100%), 1fr))',
-                gap: '3.5rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))',
+                gap: 'clamp(2rem, 3.5vw, 3.5rem)',
                 alignItems: 'center',
               }}
             >
@@ -1320,7 +1487,7 @@ export function StorefrontHero() {
                     lineHeight: 1.08,
                     letterSpacing: '-0.03em',
                     margin: '0 0 1.5rem 0',
-                    color: theme.palette.text,
+                    color: heroTextColor || theme.palette.text,
                   }}
                 >
                   {overrides.title || theme.hero.headline}
@@ -1330,7 +1497,7 @@ export function StorefrontHero() {
                   style={{
                     fontSize: 'clamp(1.05rem, 1.8vw, 1.25rem)',
                     lineHeight: 1.6,
-                    color: theme.palette.textMuted,
+                    color: heroTextColor || theme.palette.textMuted,
                     margin: '0 0 2rem 0',
                     maxWidth: '560px',
                   }}
@@ -1349,8 +1516,8 @@ export function StorefrontHero() {
                   <button
                     onClick={() => setActivePage((theme.hero.primaryCtaPage as StorefrontPage) || 'menu')}
                     style={{
-                      backgroundColor: theme.palette.primary,
-                      color: '#ffffff',
+                      backgroundColor: heroBtnColor,
+                      color: heroBtnTextColor,
                       border: 'none',
                       padding: '1.1rem 2.4rem',
                       borderRadius: '8px',
@@ -1360,7 +1527,7 @@ export function StorefrontHero() {
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '0.5rem',
-                      boxShadow: `0 8px 24px ${theme.palette.primary}44`,
+                      boxShadow: `0 8px 24px ${heroBtnColor}40`,
                     }}
                   >
                     <span>{overrides.buttonText || theme.hero.primaryCtaText}</span>
@@ -1457,14 +1624,14 @@ export function StorefrontHero() {
           className="fs-hero fs-hero-editorial"
           style={{
             position: 'relative',
-            minHeight: '84vh',
+            minHeight: 'clamp(520px, 75vh, 780px)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '5rem 2rem 4rem 2rem',
+            padding: 'clamp(3rem, 6vh, 5.5rem) clamp(1.25rem, 3vw, 2.5rem)',
             background: hasCustomBg
               ? `linear-gradient(180deg, rgba(253, 251, 247, 0.92) 0%, rgba(247, 241, 228, 0.95) 100%), url(${overrides.style_backgroundImage}) center/cover no-repeat`
-              : `radial-gradient(ellipse at 80% 35%, ${theme.palette.primary}15 0%, transparent 65%), linear-gradient(180deg, ${theme.palette.surface} 0%, ${theme.palette.background} 100%)`,
+              : `radial-gradient(ellipse at 85% 35%, ${theme.palette.primary}25 0%, transparent 60%), radial-gradient(ellipse at 15% 85%, ${theme.palette.secondary}12 0%, transparent 55%), linear-gradient(180deg, ${theme.palette.surface} 0%, ${theme.palette.background} 100%)`,
             color: theme.palette.text,
             overflow: 'hidden',
           }}
@@ -1475,8 +1642,8 @@ export function StorefrontHero() {
               margin: '0 auto',
               width: '100%',
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(400px, 100%), 1fr))',
-              gap: '3.5rem',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))',
+              gap: 'clamp(2rem, 3.5vw, 3.5rem)',
               alignItems: 'center',
             }}
           >
@@ -1509,7 +1676,7 @@ export function StorefrontHero() {
                   lineHeight: 1.12,
                   letterSpacing: '-0.025em',
                   margin: '0 0 1.35rem 0',
-                  color: theme.palette.text,
+                  color: heroTextColor || theme.palette.text,
                 }}
               >
                 {overrides.title || theme.hero.headline}
@@ -1521,7 +1688,7 @@ export function StorefrontHero() {
                 style={{
                   fontSize: 'clamp(1.02rem, 1.5vw, 1.18rem)',
                   lineHeight: 1.7,
-                  color: theme.palette.textMuted,
+                  color: heroTextColor || theme.palette.textMuted,
                   margin: '0 0 2.25rem 0',
                   maxWidth: '560px',
                 }}
@@ -1735,7 +1902,7 @@ export function StorefrontHero() {
                   lineHeight: 1.1,
                   letterSpacing: '-0.02em',
                   margin: '0 0 1.2rem 0',
-                  color: '#ffffff',
+                  color: heroTextColor || '#ffffff',
                 }}
               >
                 {overrides.title || theme.hero.headline}
@@ -1746,7 +1913,7 @@ export function StorefrontHero() {
                 style={{
                   fontSize: 'clamp(1rem, 1.6vw, 1.2rem)',
                   lineHeight: 1.6,
-                  color: 'rgba(255,255,255,0.85)',
+                  color: heroTextColor || 'rgba(255,255,255,0.85)',
                   margin: '0 0 2rem 0',
                 }}
               >
@@ -1865,6 +2032,7 @@ export function StorefrontHero() {
               lineHeight: 1.08,
               letterSpacing: '-0.03em',
               margin: '0 0 1.5rem 0',
+              color: heroTextColor || '#ffffff',
               textShadow: '0 2px 18px rgba(0,0,0,0.4)',
             }}
           >
@@ -1877,7 +2045,7 @@ export function StorefrontHero() {
             style={{
               fontSize: 'clamp(1.05rem, 1.8vw, 1.35rem)',
               lineHeight: 1.6,
-              color: 'rgba(255,255,255,0.92)',
+              color: heroTextColor || 'rgba(255,255,255,0.92)',
               margin: '0 auto 2.5rem auto',
               maxWidth: '680px',
               textShadow: '0 1px 10px rgba(0,0,0,0.3)',
@@ -2156,7 +2324,12 @@ export function SignatureProductGrid() {
   const overrides = useEditableOverrides('prod-grid', {
     title: 'Signature Creations & Daily Bestsellers',
     subtitle: 'Hand-crafted every morning in limited quantities. Available until sold out.',
+    style_backgroundColor: '',
+    style_textColor: '',
   });
+
+  const gridBg = overrides.style_backgroundColor || 'transparent';
+  const gridTextColor = overrides.style_textColor || theme.palette.text;
 
   const productLayout = theme.layoutOptions?.productLayout || 'grid-3';
   const itemCount = productLayout === 'grid-4' ? 8 : productLayout === 'editorial-2' ? 4 : 6;
@@ -2184,6 +2357,7 @@ export function SignatureProductGrid() {
           padding: '5.5rem 2rem',
           maxWidth: '1360px',
           margin: '0 auto',
+          backgroundColor: gridBg,
         }}
       >
         {/* Section Heading */}
@@ -2207,12 +2381,12 @@ export function SignatureProductGrid() {
               fontSize: 'clamp(2rem, 3.8vw, 3rem)',
               fontWeight: 700,
               margin: '0 0 1rem 0',
-              color: theme.palette.text,
+              color: gridTextColor,
             }}
           >
             {overrides.title}
           </h2>
-          <p style={{ fontSize: '1.05rem', color: theme.palette.textMuted, lineHeight: 1.6, margin: 0 }}>
+          <p style={{ fontSize: '1.05rem', color: gridTextColor === theme.palette.text ? theme.palette.textMuted : gridTextColor, lineHeight: 1.6, margin: 0 }}>
             {overrides.subtitle}
           </p>
         </div>
@@ -2394,7 +2568,12 @@ export function StoryEditorialSection() {
     title: theme.story.title,
     content: theme.story.paragraphs.join('\n\n'),
     image: theme.story.image,
+    style_backgroundColor: '',
+    style_textColor: '',
   });
+
+  const storyBg = overrides.style_backgroundColor || 'transparent';
+  const storyTextColor = overrides.style_textColor || theme.palette.text;
 
   const storyLayout = theme.layoutOptions?.storyLayout || 'split-right';
 
@@ -2412,6 +2591,7 @@ export function StoryEditorialSection() {
           padding: '6rem 2rem',
           maxWidth: '1360px',
           margin: '0 auto',
+          backgroundColor: storyBg,
         }}
       >
         <div
@@ -2506,7 +2686,7 @@ export function StoryEditorialSection() {
                 fontWeight: 700,
                 lineHeight: 1.15,
                 margin: '0 0 1.75rem 0',
-                color: theme.palette.text,
+                color: storyTextColor || theme.palette.text,
               }}
             >
               {overrides.title}
@@ -2518,7 +2698,7 @@ export function StoryEditorialSection() {
                 style={{
                   fontSize: '1.05rem',
                   lineHeight: 1.7,
-                  color: theme.palette.textMuted,
+                  color: storyTextColor === theme.palette.text ? theme.palette.textMuted : storyTextColor,
                   marginBottom: '1.25rem',
                 }}
               >
@@ -3194,8 +3374,11 @@ export function NewsletterSection() {
       <section
         style={{
           backgroundColor: theme.palette.secondary,
+          backgroundImage: `linear-gradient(135deg, rgba(20, 30, 24, 0.92) 0%, rgba(36, 64, 48, 0.94) 100%), url(${theme.hero.image})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
           color: '#ffffff',
-          padding: '5rem 2rem',
+          padding: '6rem 2rem',
           textAlign: 'center',
         }}
       >
@@ -3313,7 +3496,12 @@ export function StorefrontFooter() {
   const overrides = useEditableOverrides('footer', {
     brand: theme.name,
     tagline: theme.tagline,
+    style_backgroundColor: '',
+    style_textColor: '',
   });
+
+  const footerBg = overrides.style_backgroundColor || '#0f172a';
+  const footerTextColor = overrides.style_textColor || '#e2e8f0';
 
   return (
     <EditableSection
@@ -3325,8 +3513,8 @@ export function StorefrontFooter() {
       <footer
         className="fs-footer"
         style={{
-          backgroundColor: '#0f172a',
-          color: '#e2e8f0',
+          backgroundColor: footerBg,
+          color: footerTextColor,
           padding: '4.5rem 2rem 2.5rem 2rem',
           borderTop: '1px solid rgba(255,255,255,0.1)',
         }}
@@ -3372,9 +3560,9 @@ export function StorefrontFooter() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', fontSize: '0.88rem' }}>
               <button onClick={() => setActivePage('home')} style={footerLinkStyle}>Home</button>
               <button onClick={() => setActivePage('menu')} style={footerLinkStyle}>Order & Menu</button>
-              <button onClick={() => setActivePage('collections')} style={footerLinkStyle}>Collections</button>
               <button onClick={() => setActivePage('about')} style={footerLinkStyle}>Our Story</button>
-              <button onClick={() => setActivePage('gallery')} style={footerLinkStyle}>Atmosphere</button>
+              <button onClick={() => setActivePage('gallery')} style={footerLinkStyle}>Gallery & Atmosphere</button>
+              <button onClick={() => setActivePage('blog')} style={footerLinkStyle}>Stories & Blog</button>
             </div>
           </div>
 
@@ -3454,18 +3642,172 @@ const footerLinkStyle: React.CSSProperties = {
 
 function HomePageView() {
   const { theme } = useStorefront();
-  const defaultOrder = [
-    'hero',
-    'features',
-    'products',
-    'craft',
-    'story',
-    'promo',
-    'gallery',
-    'reviews',
-    'location',
-    'newsletter',
-  ];
+  const defaultOrder = theme.kind === 'cafe'
+    ? [
+        'hero',
+        'features',
+        'beanPassport',
+        'products',
+        'customizer',
+        'craft',
+        'story',
+        'amenities',
+        'subscription',
+        'flights',
+        'promo',
+        'gallery',
+        'reviews',
+        'location',
+        'newsletter',
+      ]
+    : theme.kind === 'bakery'
+    ? [
+        'hero',
+        'features',
+        'bakeSchedule',
+        'products',
+        'pastryBox',
+        'craft',
+        'flourProvenance',
+        'breadClub',
+        'story',
+        'breadCare',
+        'promo',
+        'gallery',
+        'reviews',
+        'location',
+        'newsletter',
+      ]
+    : theme.kind === 'fast-food'
+    ? [
+        'hero',
+        'flashDeals',
+        'craveCombo',
+        'products',
+        'heatMatrix',
+        'features',
+        'sauceBar',
+        'speedGuarantee',
+        'craft',
+        'promo',
+        'gallery',
+        'reviews',
+        'location',
+        'newsletter',
+      ]
+    : theme.kind === 'cloud-kitchen'
+    ? [
+        'hero',
+        'multiBrand',
+        'deliveryRadar',
+        'products',
+        'packagingTech',
+        'features',
+        'mealPrep',
+        'craft',
+        'promo',
+        'gallery',
+        'reviews',
+        'location',
+        'newsletter',
+      ]
+    : theme.kind === 'pizza'
+    ? [
+        'hero',
+        'pizzaBundles',
+        'pizzaCrafter',
+        'products',
+        'ovenTelemetry',
+        'features',
+        'crustDips',
+        'craft',
+        'story',
+        'promo',
+        'gallery',
+        'reviews',
+        'location',
+        'newsletter',
+      ]
+    : theme.kind === 'indian'
+    ? [
+        'hero',
+        'biryaniAtelier',
+        'tandoorGrill',
+        'products',
+        'thaliCurator',
+        'spiceTerroir',
+        'features',
+        'chaiBar',
+        'craft',
+        'story',
+        'promo',
+        'gallery',
+        'reviews',
+        'location',
+        'newsletter',
+      ]
+    : theme.kind === 'dessert'
+    ? [
+        'hero',
+        'macaronBox',
+        'cakeStudio',
+        'products',
+        'gelatoLab',
+        'cacaoRadar',
+        'features',
+        'craft',
+        'story',
+        'promo',
+        'gallery',
+        'reviews',
+        'location',
+        'newsletter',
+      ]
+    : theme.kind === 'food-delivery'
+    ? [
+        'hero',
+        'expressRadar',
+        'products',
+        'tiffinSubscription',
+        'lateNightLab',
+        'groupCatering',
+        'features',
+        'craft',
+        'story',
+        'promo',
+        'gallery',
+        'reviews',
+        'location',
+        'newsletter',
+      ]
+    : (theme.kind === 'bbq-grill' || theme.kind === 'bbq')
+    ? [
+        'hero',
+        'smokerTelemetry',
+        'butcherPlatter',
+        'products',
+        'mangalGrill',
+        'features',
+        'craft',
+        'story',
+        'promo',
+        'gallery',
+        'reviews',
+        'location',
+        'newsletter',
+      ]
+    : [
+        'hero',
+        'features',
+        'products',
+        'craft',
+        'story',
+        'promo',
+        'gallery',
+        'reviews',
+        'location',
+        'newsletter',
+      ];
   const order = theme.layoutOptions?.sectionOrder || defaultOrder;
 
   const sectionMap: Record<string, React.ReactNode> = {
@@ -3479,6 +3821,45 @@ function HomePageView() {
     reviews: <ReviewsTestimonialsSection key="reviews" />,
     location: <LocationHoursSection key="location" />,
     newsletter: <NewsletterSection key="newsletter" />,
+    beanPassport: <BeanPassportSection key="beanPassport" />,
+    customizer: <ArtisanDrinkBuilderSection key="customizer" />,
+    amenities: <CafeAmenitiesSection key="amenities" />,
+    subscription: <RoastersClubSubscriptionSection key="subscription" />,
+    flights: <BaristaFlightsSection key="flights" />,
+    bakeSchedule: <BakeScheduleSection key="bakeSchedule" />,
+    pastryBox: <PastryBoxBuilderSection key="pastryBox" />,
+    flourProvenance: <FlourStarterProvenanceSection key="flourProvenance" />,
+    breadClub: <HearthBreadClubSection key="breadClub" />,
+    breadCare: <BreadCareReheatingSection key="breadCare" />,
+    craveCombo: <CraveComboBuilderSection key="craveCombo" />,
+    heatMatrix: <HeatScaleMatrixSection key="heatMatrix" />,
+    flashDeals: <FlashCraveDealsSection key="flashDeals" />,
+    sauceBar: <SecretSauceBarSection key="sauceBar" />,
+    speedGuarantee: <ExpressSpeedGuaranteeSection key="speedGuarantee" />,
+    multiBrand: <VirtualBrandsSection key="multiBrand" />,
+    packagingTech: <PackagingTechSection key="packagingTech" />,
+    deliveryRadar: <DeliveryRadarSection key="deliveryRadar" />,
+    mealPrep: <MealPrepPlansSection key="mealPrep" />,
+    pizzaCrafter: <PizzaCrafterSection key="pizzaCrafter" />,
+    ovenTelemetry: <WoodFiredTelemetrySection key="ovenTelemetry" />,
+    pizzaBundles: <PizzaFeastBundlesSection key="pizzaBundles" />,
+    crustDips: <CrustDipsSection key="crustDips" />,
+    biryaniAtelier: <DumBiryaniAtelierSection key="biryaniAtelier" />,
+    tandoorGrill: <TandoorLiveGrillSection key="tandoorGrill" />,
+    spiceTerroir: <SpiceTerroirSection key="spiceTerroir" />,
+    thaliCurator: <RoyalThaliCuratorSection key="thaliCurator" />,
+    chaiBar: <ChaiLassiBarSection key="chaiBar" />,
+    macaronBox: <MacaronBoxBuilderSection key="macaronBox" />,
+    cakeStudio: <BespokeCakeStudioSection key="cakeStudio" />,
+    gelatoLab: <GelatoScoopLabSection key="gelatoLab" />,
+    cacaoRadar: <CacaoOriginRadarSection key="cacaoRadar" />,
+    expressRadar: <ExpressDeliveryRadarSection key="expressRadar" />,
+    tiffinSubscription: <TiffinSubscriptionBuilderSection key="tiffinSubscription" />,
+    lateNightLab: <LateNightCraveLabSection key="lateNightLab" />,
+    groupCatering: <MultiKitchenCateringSection key="groupCatering" />,
+    smokerTelemetry: <PitmasterSmokerTelemetrySection key="smokerTelemetry" />,
+    butcherPlatter: <ButcherPaperPlatterSection key="butcherPlatter" />,
+    mangalGrill: <MangalGrillSkewerSection key="mangalGrill" />,
   };
 
   return (
@@ -3565,7 +3946,7 @@ function MenuPageView() {
   };
 
   return (
-    <div style={{ maxWidth: '1360px', margin: '0 auto', padding: '3.5rem 2rem' }}>
+    <div className="fs-menu-container" style={{ maxWidth: '1360px', margin: '0 auto', padding: '3.5rem 2rem', width: '100%', boxSizing: 'border-box' }}>
       {/* Header */}
       <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 3rem auto' }}>
         <span
@@ -3599,6 +3980,7 @@ function MenuPageView() {
 
       {/* Pincode & Order Mode Strip */}
       <div
+        className="fs-menu-toolbar"
         style={{
           backgroundColor: theme.palette.surface,
           borderRadius: '16px',
@@ -3610,6 +3992,8 @@ function MenuPageView() {
           alignItems: 'center',
           flexWrap: 'wrap',
           gap: '1.25rem',
+          width: '100%',
+          boxSizing: 'border-box',
         }}
       >
         {/* Order Mode Toggle */}
@@ -3650,7 +4034,7 @@ function MenuPageView() {
         </div>
 
         {/* Pincode eligibility form */}
-        <form onSubmit={handlePincodeCheck} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <form onSubmit={handlePincodeCheck} className="fs-pincode-form" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
           <label htmlFor="menu-pincode" style={{ fontSize: '0.85rem', fontWeight: 600, color: theme.palette.textMuted }}>
             Check Delivery Zip:
           </label>
@@ -3668,6 +4052,7 @@ function MenuPageView() {
               color: theme.palette.text,
               fontSize: '0.85rem',
               width: '120px',
+              maxWidth: '100%',
             }}
           />
           <button
@@ -3700,6 +4085,7 @@ function MenuPageView() {
           flexDirection: 'column',
           gap: '1.25rem',
           marginBottom: '2rem',
+          width: '100%',
         }}
       >
         {/* Virtual Brand Switcher Pills (for multi-brand cloud kitchens like The Cloud Collective) */}
@@ -3751,10 +4137,11 @@ function MenuPageView() {
             alignItems: 'center',
             gap: '1.25rem',
             flexWrap: 'wrap',
+            width: '100%',
           }}
         >
           {/* Category Pills */}
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+          <div className="fs-category-pills" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', maxWidth: '100%' }}>
             {categories.map(cat => {
               const active = menuFilterCategory === cat;
               return (
@@ -3900,7 +4287,7 @@ function ProductCard({
   onQuickView: () => void;
   onAddToCart: () => void;
 }) {
-  const { theme } = useStorefront();
+  const { theme, openProductDetail } = useStorefront();
 
   return (
     <article
@@ -3925,12 +4312,13 @@ function ProductCard({
           backgroundColor: '#f1f5f9',
           cursor: 'pointer',
         }}
-        onClick={onQuickView}
+        onClick={() => openProductDetail(product)}
       >
         <img
-          src={product.image}
+          src={product.image || FALLBACK_FOOD_IMAGE}
           alt={product.imageAlt || product.name}
           loading="lazy"
+          onError={handleFoodImageError}
           style={{
             width: '100%',
             height: '100%',
@@ -4058,7 +4446,7 @@ function ProductCard({
           {/* Product Title */}
           <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.5rem', marginBottom: '0.35rem' }}>
             <h3
-              onClick={onQuickView}
+              onClick={() => openProductDetail(product)}
               style={{
                 fontFamily: theme.typography.headingFont,
                 fontSize: '1.18rem',
@@ -4140,23 +4528,45 @@ function ProductCard({
         )}
 
         {/* Buttons */}
-        <div style={{ display: 'flex', gap: '0.65rem', marginTop: 'auto' }}>
+        <div style={{ display: 'flex', gap: '0.5rem', marginTop: 'auto' }}>
           <button
-            onClick={onQuickView}
+            onClick={() => openProductDetail(product)}
             style={{
               flex: 1,
               backgroundColor: 'transparent',
               color: theme.palette.text,
               border: `1px solid ${theme.palette.border}`,
-              padding: '0.65rem',
+              padding: '0.65rem 0.5rem',
               borderRadius: '8px',
-              fontSize: '0.85rem',
+              fontSize: '0.82rem',
               fontWeight: 600,
               cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '0.3rem',
             }}
           >
-            Customize
+            <span>View Details</span>
           </button>
+          {product.options && product.options.length > 0 && (
+            <button
+              onClick={onQuickView}
+              style={{
+                backgroundColor: 'transparent',
+                color: theme.palette.textMuted,
+                border: `1px solid ${theme.palette.border}`,
+                padding: '0.65rem',
+                borderRadius: '8px',
+                fontSize: '0.82rem',
+                fontWeight: 600,
+                cursor: 'pointer',
+              }}
+              title="Quick Options"
+            >
+              Options
+            </button>
+          )}
           <button
             onClick={onAddToCart}
             style={{
@@ -4164,18 +4574,18 @@ function ProductCard({
               backgroundColor: theme.palette.secondary,
               color: '#ffffff',
               border: 'none',
-              padding: '0.65rem',
+              padding: '0.65rem 0.5rem',
               borderRadius: '8px',
-              fontSize: '0.85rem',
+              fontSize: '0.82rem',
               fontWeight: 700,
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '0.4rem',
+              gap: '0.35rem',
             }}
           >
-            <Plus size={16} />
+            <Plus size={15} />
             <span>Add</span>
           </button>
         </div>
@@ -4401,11 +4811,18 @@ function AboutPageView() {
 // ─── GALLERY / JOURNAL PAGE VIEW ─────────────────────────────────────────────
 
 function GalleryPageView() {
-  const { theme, openLightbox } = useStorefront();
+  const { theme, openLightbox, setActivePage } = useStorefront();
+  const [selectedTag, setSelectedTag] = useState<string>('All');
+
+  const distinctTags = ['All', ...Array.from(new Set(theme.gallery.map(g => g.tag).filter(Boolean))) as string[]];
+
+  const filteredGallery = selectedTag === 'All'
+    ? theme.gallery
+    : theme.gallery.filter(g => g.tag === selectedTag);
 
   return (
     <div style={{ maxWidth: '1360px', margin: '0 auto', padding: '4rem 2rem' }}>
-      <div style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto 3.5rem auto' }}>
+      <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 3rem auto' }}>
         <span
           style={{
             fontSize: '0.82rem',
@@ -4417,7 +4834,7 @@ function GalleryPageView() {
             marginBottom: '0.5rem',
           }}
         >
-          PHOTOGRAPHY & JOURNAL
+          EDITORIAL PHOTOGRAPHY & ARCHIVE
         </span>
         <h1
           style={{
@@ -4431,18 +4848,47 @@ function GalleryPageView() {
           Moments From the Hearth
         </h1>
         <p style={{ fontSize: '1.1rem', color: theme.palette.textMuted, lineHeight: 1.6, margin: 0 }}>
-          Click any frame for high-resolution inspection. All photography captured on-site during active bake and brew shifts.
+          High-resolution frames captured at dawn in our lamination room and stone deck ovens. Click any photograph to inspect in lightbox.
         </p>
       </div>
 
+      {/* Category Filter Pills */}
+      {distinctTags.length > 2 && (
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.65rem', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
+          {distinctTags.map(tag => {
+            const active = selectedTag === tag;
+            return (
+              <button
+                key={tag}
+                onClick={() => setSelectedTag(tag)}
+                style={{
+                  backgroundColor: active ? theme.palette.primary : theme.palette.surface,
+                  color: active ? '#ffffff' : theme.palette.text,
+                  border: `1px solid ${active ? theme.palette.primary : theme.palette.border}`,
+                  padding: '0.5rem 1.15rem',
+                  borderRadius: '999px',
+                  fontSize: '0.85rem',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                {tag}
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Gallery Grid */}
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '1.5rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gap: '1.75rem',
         }}
       >
-        {theme.gallery.map((img, idx) => (
+        {filteredGallery.map((img, idx) => (
           <div
             key={idx}
             onClick={() => openLightbox(img)}
@@ -4452,29 +4898,1281 @@ function GalleryPageView() {
               cursor: 'pointer',
               backgroundColor: theme.palette.surface,
               border: `1px solid ${theme.palette.border}`,
-              boxShadow: '0 4px 14px rgba(0,0,0,0.05)',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.04)',
+              transition: 'transform 0.2s ease, box-shadow 0.2s ease',
             }}
+            className="fs-gallery-card"
           >
-            <div style={{ aspectRatio: '4/3', overflow: 'hidden' }}>
+            <div style={{ aspectRatio: '4/3', overflow: 'hidden', position: 'relative' }}>
               <img
                 src={img.src}
                 alt={img.alt}
                 loading="lazy"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.35s ease' }}
               />
+              <span
+                style={{
+                  position: 'absolute',
+                  top: '12px',
+                  left: '12px',
+                  backgroundColor: 'rgba(0,0,0,0.65)',
+                  backdropFilter: 'blur(4px)',
+                  color: '#ffffff',
+                  padding: '0.2rem 0.55rem',
+                  borderRadius: '6px',
+                  fontSize: '0.72rem',
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.04em',
+                }}
+              >
+                {img.tag || 'Daily Bake'}
+              </span>
             </div>
             <div style={{ padding: '1.25rem' }}>
-              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: theme.palette.primary, textTransform: 'uppercase' }}>
-                {img.tag || 'Daily Moment'}
-              </span>
-              <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.92rem', color: theme.palette.text, fontWeight: 600 }}>
+              <p style={{ margin: '0', fontSize: '0.95rem', color: theme.palette.text, fontWeight: 600, lineHeight: 1.4 }}>
                 {img.caption}
               </p>
             </div>
           </div>
         ))}
       </div>
+
+      {/* Footer CTA */}
+      <div style={{ textAlign: 'center', marginTop: '4rem', paddingTop: '2.5rem', borderTop: `1px solid ${theme.palette.border}` }}>
+        <h3 style={{ fontFamily: theme.typography.headingFont, fontSize: '1.8rem', margin: '0 0 0.75rem 0' }}>
+          Taste What You See
+        </h3>
+        <p style={{ color: theme.palette.textMuted, maxWidth: '540px', margin: '0 auto 1.5rem auto', fontSize: '0.95rem' }}>
+          Fresh viennoiserie, hearth sourdough loaves, and botanical fruit patisserie baked hot at 6:00 AM every morning.
+        </p>
+        <button
+          onClick={() => setActivePage('menu')}
+          style={{
+            backgroundColor: theme.palette.primary,
+            color: '#ffffff',
+            border: 'none',
+            padding: '0.9rem 2.2rem',
+            borderRadius: '999px',
+            fontWeight: 700,
+            cursor: 'pointer',
+            fontSize: '0.95rem',
+          }}
+        >
+          Browse Today's Menu →
+        </button>
+      </div>
     </div>
+  );
+}
+
+// ─── PRODUCT DETAIL PAGE VIEW ────────────────────────────────────────────────
+
+function ProductDetailPageView() {
+  const {
+    theme,
+    selectedProduct,
+    openProductDetail,
+    addToCart,
+    setActivePage,
+    setMenuFilterCategory,
+  } = useStorefront();
+
+  const product = selectedProduct || theme.products[0];
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+  const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>(() => {
+    const init: Record<string, string> = {};
+    if (product?.options) {
+      product.options.forEach(opt => {
+        const choices = getOptionChoices(opt);
+        if (choices[0]) init[opt.name] = choices[0].label;
+      });
+    }
+    return init;
+  });
+
+  if (!product) {
+    return (
+      <div style={{ padding: '5rem 2rem', textAlign: 'center' }}>
+        <h2>Product not found</h2>
+        <button
+          onClick={() => setActivePage('menu')}
+          style={{
+            backgroundColor: theme.palette.primary,
+            color: '#ffffff',
+            padding: '0.8rem 1.8rem',
+            borderRadius: '999px',
+            border: 'none',
+            cursor: 'pointer',
+            marginTop: '1rem',
+          }}
+        >
+          Return to Menu
+        </button>
+      </div>
+    );
+  }
+
+  // Create thumbnail gallery array using product image + relevant theme gallery images
+  const galleryImages = [
+    product.image,
+    ...theme.gallery.filter(g => g.src !== product.image).map(g => g.src).slice(0, 3)
+  ];
+
+  // Dynamic price calculation
+  let dynamicPrice = product.price;
+  if (product.options) {
+    product.options.forEach(opt => {
+      const choices = getOptionChoices(opt);
+      const choice = choices.find(c => c.label === selectedOptions[opt.name]);
+      if (choice?.priceDelta) dynamicPrice += choice.priceDelta;
+    });
+  }
+
+  // Related products from same category or catalog
+  const relatedProducts = theme.products
+    .filter(p => p.id !== product.id && (p.category === product.category || true))
+    .slice(0, 3);
+
+  const handleAdd = () => {
+    addToCart(product, selectedOptions, quantity);
+  };
+
+  return (
+    <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '2.5rem 2rem 5rem 2rem' }}>
+      {/* 1. Breadcrumb Navigation */}
+      <nav
+        aria-label="Breadcrumb"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+          fontSize: '0.84rem',
+          color: theme.palette.textMuted,
+          marginBottom: '2rem',
+          flexWrap: 'wrap',
+        }}
+      >
+        <button
+          onClick={() => setActivePage('home')}
+          style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', padding: 0, textDecoration: 'underline' }}
+        >
+          Home
+        </button>
+        <span>/</span>
+        <button
+          onClick={() => setActivePage('menu')}
+          style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', padding: 0, textDecoration: 'underline' }}
+        >
+          Menu
+        </button>
+        <span>/</span>
+        <button
+          onClick={() => {
+            setMenuFilterCategory(product.category);
+            setActivePage('menu');
+          }}
+          style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', padding: 0, textDecoration: 'underline' }}
+        >
+          {product.category}
+        </button>
+        <span>/</span>
+        <span style={{ color: theme.palette.text, fontWeight: 700 }}>{product.name}</span>
+      </nav>
+
+      {/* 2. Main Two-Column Product Layout */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
+          gap: '3.5rem',
+          alignItems: 'flex-start',
+          marginBottom: '5rem',
+        }}
+      >
+        {/* Left Column: Image Gallery */}
+        <div>
+          {/* Main Display Image */}
+          <div
+            style={{
+              position: 'relative',
+              borderRadius: '20px',
+              overflow: 'hidden',
+              backgroundColor: theme.palette.surface,
+              border: `1px solid ${theme.palette.border}`,
+              aspectRatio: '4/3',
+              boxShadow: '0 12px 36px rgba(0,0,0,0.06)',
+              marginBottom: '1rem',
+            }}
+          >
+            <img
+              src={galleryImages[activeImageIndex] || product.image || FALLBACK_FOOD_IMAGE}
+              alt={product.imageAlt || product.name}
+              onError={handleFoodImageError}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                display: 'block',
+                transition: 'opacity 0.25s ease',
+              }}
+            />
+            {/* Badges Overlay */}
+            <div style={{ position: 'absolute', top: '16px', left: '16px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <span
+                style={{
+                  backgroundColor: theme.palette.badgeBg,
+                  color: theme.palette.badgeText,
+                  padding: '0.25rem 0.65rem',
+                  borderRadius: '6px',
+                  fontSize: '0.74rem',
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.04em',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                }}
+              >
+                Fresh Morning Batch
+              </span>
+              {product.tags && product.tags[0] && (
+                <span
+                  style={{
+                    backgroundColor: theme.palette.secondary,
+                    color: '#ffffff',
+                    padding: '0.25rem 0.65rem',
+                    borderRadius: '6px',
+                    fontSize: '0.74rem',
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.04em',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                  }}
+                >
+                  {product.tags[0]}
+                </span>
+              )}
+            </div>
+          </div>
+
+          {/* Clickable Thumbnail Row */}
+          <div style={{ display: 'flex', gap: '0.75rem', overflowX: 'auto', paddingBottom: '0.5rem' }}>
+            {galleryImages.map((src, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveImageIndex(i)}
+                style={{
+                  width: '80px',
+                  height: '65px',
+                  borderRadius: '10px',
+                  overflow: 'hidden',
+                  border: `2px solid ${activeImageIndex === i ? theme.palette.primary : theme.palette.border}`,
+                  padding: 0,
+                  backgroundColor: theme.palette.surface,
+                  cursor: 'pointer',
+                  flexShrink: 0,
+                  opacity: activeImageIndex === i ? 1 : 0.65,
+                  transition: 'all 0.2s ease',
+                }}
+              >
+                <img src={src} alt={`Thumbnail ${i + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              </button>
+            ))}
+          </div>
+
+          {/* Artisan Quality Guarantee Pill */}
+          <div
+            style={{
+              marginTop: '1.5rem',
+              padding: '1.25rem',
+              borderRadius: '14px',
+              backgroundColor: theme.palette.surface,
+              border: `1px solid ${theme.palette.border}`,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '1rem',
+            }}
+          >
+            <div
+              style={{
+                width: '42px',
+                height: '42px',
+                borderRadius: '50%',
+                backgroundColor: theme.palette.badgeBg,
+                color: theme.palette.badgeText,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+              }}
+            >
+              <Award size={20} />
+            </div>
+            <div style={{ fontSize: '0.85rem' }}>
+              <strong style={{ display: 'block', color: theme.palette.text, marginBottom: '2px' }}>
+                Artisan Quality Commitment
+              </strong>
+              <span style={{ color: theme.palette.textMuted, lineHeight: 1.4 }}>
+                100% Normandy cultured butter, organic heritage grain flours, and traditional slow cold fermentation.
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: Product Info & Purchase Controls */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          {/* Category & Status */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+            <span
+              style={{
+                fontSize: '0.8rem',
+                fontWeight: 700,
+                textTransform: 'uppercase',
+                letterSpacing: '0.08em',
+                color: theme.palette.primary,
+              }}
+            >
+              {product.category}
+            </span>
+            <span style={{ color: theme.palette.border }}>•</span>
+            <span
+              style={{
+                fontSize: '0.8rem',
+                color: '#16a34a',
+                fontWeight: 700,
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.3rem',
+              }}
+            >
+              <CheckCircle size={14} /> Available Today (Dawn Pull)
+            </span>
+          </div>
+
+          {/* Product Title */}
+          <h1
+            style={{
+              fontFamily: theme.typography.headingFont,
+              fontSize: 'clamp(2rem, 3.5vw, 2.8rem)',
+              fontWeight: 800,
+              lineHeight: 1.2,
+              margin: 0,
+              color: theme.palette.text,
+            }}
+          >
+            {product.name}
+          </h1>
+
+          {/* Price & Portion Row */}
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: '1rem', flexWrap: 'wrap' }}>
+            <span style={{ fontSize: '2rem', fontWeight: 800, color: theme.palette.primary }}>
+              {formatPrice(dynamicPrice, theme.currencySymbol || '$')}
+            </span>
+            {product.compareAtPrice && (
+              <span style={{ textDecoration: 'line-through', fontSize: '1.2rem', color: theme.palette.textMuted }}>
+                {formatPrice(product.compareAtPrice, theme.currencySymbol || '$')}
+              </span>
+            )}
+            {product.weightOrSize && (
+              <span style={{ fontSize: '0.9rem', color: theme.palette.textMuted, fontWeight: 500 }}>
+                ({product.weightOrSize})
+              </span>
+            )}
+          </div>
+
+          {/* Dietary & Macro Pills */}
+          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+            {product.dietary && (
+              <span
+                style={{
+                  backgroundColor: theme.palette.surface,
+                  border: `1px solid ${theme.palette.border}`,
+                  padding: '0.3rem 0.75rem',
+                  borderRadius: '999px',
+                  fontSize: '0.8rem',
+                  fontWeight: 600,
+                }}
+              >
+                🌱 {Array.isArray(product.dietary) ? product.dietary.join(', ') : product.dietary}
+              </span>
+            )}
+            {product.calories && (
+              <span
+                style={{
+                  backgroundColor: theme.palette.surface,
+                  border: `1px solid ${theme.palette.border}`,
+                  padding: '0.3rem 0.75rem',
+                  borderRadius: '999px',
+                  fontSize: '0.8rem',
+                  fontWeight: 600,
+                  color: theme.palette.textMuted,
+                }}
+              >
+                🔥 {product.calories} kcal
+              </span>
+            )}
+            {product.leadTime && (
+              <span
+                style={{
+                  backgroundColor: theme.palette.surface,
+                  border: `1px solid ${theme.palette.border}`,
+                  padding: '0.3rem 0.75rem',
+                  borderRadius: '999px',
+                  fontSize: '0.8rem',
+                  fontWeight: 600,
+                  color: theme.palette.textMuted,
+                }}
+              >
+                ⏰ {product.leadTime}
+              </span>
+            )}
+          </div>
+
+          {/* Description */}
+          <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: theme.palette.textMuted, margin: 0 }}>
+            {product.description}
+          </p>
+
+          {/* Options / Variant Selector */}
+          {product.options && product.options.length > 0 && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', padding: '1.25rem 0', borderTop: `1px solid ${theme.palette.border}` }}>
+              {product.options.map(opt => {
+                const choices = getOptionChoices(opt);
+                return (
+                  <div key={opt.name}>
+                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                      {opt.name}:
+                    </label>
+                    <div style={{ display: 'flex', gap: '0.65rem', flexWrap: 'wrap' }}>
+                      {choices.map(c => {
+                        const selected = selectedOptions[opt.name] === c.label;
+                        return (
+                          <button
+                            key={c.label}
+                            onClick={() => setSelectedOptions(prev => ({ ...prev, [opt.name]: c.label }))}
+                            style={{
+                              backgroundColor: selected ? theme.palette.primary : theme.palette.surface,
+                              color: selected ? '#ffffff' : theme.palette.text,
+                              border: `1.5px solid ${selected ? theme.palette.primary : theme.palette.border}`,
+                              padding: '0.55rem 1rem',
+                              borderRadius: '8px',
+                              fontSize: '0.85rem',
+                              fontWeight: 600,
+                              cursor: 'pointer',
+                              transition: 'all 0.15s ease',
+                            }}
+                          >
+                            {c.label}
+                            {c.priceDelta ? ` (+${formatPrice(c.priceDelta, theme.currencySymbol || '$')})` : ''}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Quantity & Add to Basket Row */}
+          <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap', paddingTop: '0.5rem' }}>
+            {/* Quantity Stepper */}
+            <div
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                backgroundColor: theme.palette.surface,
+                borderRadius: '12px',
+                border: `1.5px solid ${theme.palette.border}`,
+                padding: '4px',
+              }}
+            >
+              <button
+                onClick={() => setQuantity(q => Math.max(1, q - 1))}
+                aria-label="Decrease quantity"
+                style={{
+                  width: '38px',
+                  height: '38px',
+                  border: 'none',
+                  background: 'transparent',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: theme.palette.text,
+                }}
+              >
+                <Minus size={16} />
+              </button>
+              <span style={{ width: '40px', textAlign: 'center', fontWeight: 700, fontSize: '1rem', color: theme.palette.text }}>
+                {quantity}
+              </span>
+              <button
+                onClick={() => setQuantity(q => q + 1)}
+                aria-label="Increase quantity"
+                style={{
+                  width: '38px',
+                  height: '38px',
+                  border: 'none',
+                  background: 'transparent',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: theme.palette.text,
+                }}
+              >
+                <Plus size={16} />
+              </button>
+            </div>
+
+            {/* Add to Basket Button */}
+            <button
+              onClick={handleAdd}
+              style={{
+                flex: 1,
+                minWidth: '220px',
+                backgroundColor: theme.palette.primary,
+                color: '#ffffff',
+                border: 'none',
+                padding: '1rem 2rem',
+                borderRadius: '12px',
+                fontSize: '1rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.65rem',
+                boxShadow: `0 8px 24px ${theme.palette.primary}44`,
+                transition: 'transform 0.15s ease',
+              }}
+              onMouseOver={e => (e.currentTarget.style.transform = 'translateY(-2px)')}
+              onMouseOut={e => (e.currentTarget.style.transform = 'none')}
+            >
+              <ShoppingBag size={18} />
+              <span>Add to Basket · {formatPrice(dynamicPrice * quantity, theme.currencySymbol || '$')}</span>
+            </button>
+          </div>
+
+          {/* Transparency Accordion / Tabs */}
+          <div
+            style={{
+              marginTop: '1.5rem',
+              borderTop: `1px solid ${theme.palette.border}`,
+              paddingTop: '1.5rem',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1.25rem',
+            }}
+          >
+            {/* Ingredients Transparency */}
+            <div>
+              <h3 style={{ fontSize: '0.95rem', fontWeight: 700, margin: '0 0 0.5rem 0', color: theme.palette.text, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                🌾 Ingredients & Origin
+              </h3>
+              <p style={{ fontSize: '0.88rem', color: theme.palette.textMuted, lineHeight: 1.6, margin: 0 }}>
+                {product.ingredients && product.ingredients.length > 0
+                  ? product.ingredients.join(', ')
+                  : 'Normandy cultured pasture butter (84% butterfat), unbleached cold stone-ground wheat flour, mountain spring water, raw floral honey, sea salt.'}
+              </p>
+            </div>
+
+            {/* Allergens & Dietary */}
+            {product.allergens && product.allergens.length > 0 && (
+              <div>
+                <h3 style={{ fontSize: '0.95rem', fontWeight: 700, margin: '0 0 0.5rem 0', color: theme.palette.text, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  ⚠️ Allergen Information
+                </h3>
+                <p style={{ fontSize: '0.88rem', color: theme.palette.textMuted, lineHeight: 1.6, margin: 0 }}>
+                  Contains: {product.allergens.join(', ')}. Prepared in an artisan bakehouse where tree nuts, dairy, and sesame are handled.
+                </p>
+              </div>
+            )}
+
+            {/* Pastry Care & Reheating */}
+            <div>
+              <h3 style={{ fontSize: '0.95rem', fontWeight: 700, margin: '0 0 0.5rem 0', color: theme.palette.text, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                🔥 Care & Reheating Guide
+              </h3>
+              <p style={{ fontSize: '0.88rem', color: theme.palette.textMuted, lineHeight: 1.6, margin: 0 }}>
+                Best enjoyed the day of purchase. To restore morning crispness, warm in a preheated oven at 175°C (350°F) for 3–4 minutes. Do not microwave.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 3. Related Artisan Bakes Grid */}
+      {relatedProducts.length > 0 && (
+        <section style={{ borderTop: `1px solid ${theme.palette.border}`, paddingTop: '4rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1rem' }}>
+            <div>
+              <span style={{ fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, color: theme.palette.primary }}>
+                COMPLEMENTARY BAKES
+              </span>
+              <h2 style={{ fontFamily: theme.typography.headingFont, fontSize: '2rem', margin: '0.25rem 0 0 0' }}>
+                You May Also Enjoy
+              </h2>
+            </div>
+            <button
+              onClick={() => setActivePage('menu')}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: theme.palette.primary,
+                fontWeight: 700,
+                cursor: 'pointer',
+                fontSize: '0.92rem',
+                textDecoration: 'underline',
+              }}
+            >
+              View Full Menu →
+            </button>
+          </div>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '2rem',
+            }}
+          >
+            {relatedProducts.map(p => (
+              <ProductCard
+                key={p.id}
+                product={p}
+                onQuickView={() => openProductDetail(p)}
+                onAddToCart={() => addToCart(p)}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+  );
+}
+
+// ─── BLOG / STORIES PAGE VIEW ────────────────────────────────────────────────
+
+function BlogPageView() {
+  const { theme, openArticle, setActivePage } = useStorefront();
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+
+  // Use theme articles or default fallback bakery articles
+  const articles: BlogArticle[] = theme.articles && theme.articles.length > 0
+    ? theme.articles
+    : [
+        {
+          id: 'article-1',
+          slug: '72-hour-lamination-process',
+          title: 'The Art of 72-Hour Lamination: Why We Never Rush the Honeycomb',
+          subtitle: 'Inside our humidity-controlled dough room, where twenty-seven golden butter folds take three days of patience.',
+          excerpt: 'True viennoiserie cannot be rushed. Discover why our three-day cold retardation produces that audible, honeycomb shatter at dawn.',
+          content: [
+            'Every evening around 9:00 PM, while the city sleeps, our pastry kitchen begins the lamination cycle for pastries that will not touch the deck ovens until seventy-two hours later.',
+            'The secret lies in the equilibrium between lactic acid fermentation and butterfat plasticity. We use genuine 84% butterfat Normandy cultured pasture butter, rolled and folded into cold leavened dough across three precise turns.',
+            'When the croissants hit our 220°C volcanic stone hearth decks under steam injection, the moisture in the butter layers instantly vaporizes into steam, puffing the twenty-seven delicate dough sheets into an airy, translucent honeycomb matrix.',
+          ],
+          date: 'October 16, 2026',
+          readTime: '5 min read',
+          author: {
+            name: 'Camille Laurent',
+            role: 'Head Pastry Chef & Co-Founder',
+            avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+          },
+          image: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=1200&q=85',
+          imageAlt: 'Golden crisp honeycomb layers of freshly baked croissants',
+          category: 'Baking Craft',
+          tags: ['Viennoiserie', 'Normandy Butter', 'Technique'],
+          featured: true,
+        },
+        {
+          id: 'article-2',
+          slug: 'botanical-foraging-and-infusions',
+          title: 'Wild Botanical Foraging: High-Altitude Lavender & Bitter Orange Blossom',
+          subtitle: 'The aromatic journey from Provencal hillsides to our morning pastry glazes and frangipane.',
+          excerpt: 'How hand-harvested culinary flowers and citrus essences bring poetic nuance to traditional French breakfast pastries.',
+          content: [
+            'Botanicals have always belonged in the bakehouse. Before commercial extracts existed, historic French bakers steeped bitter orange blossoms and mountain herbs into their morning doughs.',
+            'We source our culinary lavender exclusively from organic high-altitude farms where the flowers are dried in the shade to preserve their volatile oils. When steeped into warm cream, the flavor is gentle, herbal, and sweet—never soapy.',
+            'Combined with our signature wildflower blossom syrups, these botanical notes transform a simple butter croissant into an unforgettable morning ritual.',
+          ],
+          date: 'October 10, 2026',
+          readTime: '4 min read',
+          author: {
+            name: 'Ananya Sharma',
+            role: 'Botanical Recipe Director',
+            avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80',
+          },
+          image: 'https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&w=1200&q=85',
+          imageAlt: 'Fresh botanical tartlets with edible violas and fresh blackberries',
+          category: 'Ingredients & Sourcing',
+          tags: ['Botanicals', 'Lavender', 'Pastry'],
+        },
+        {
+          id: 'article-3',
+          slug: 'normandy-butter-84-percent-revolution',
+          title: 'Normandy Cultured Butter: Why That 2% Extra Milkfat Changes Everything',
+          subtitle: 'The physical science and rich hazelnut aromatics behind Beurre d’Isigny.',
+          excerpt: 'Standard supermarket butter contains 80% butterfat. Here is why the extra 4% in Normandy butter completely alters pastry lamination.',
+          content: [
+            'In pastry baking, water is the enemy of crisp lamination. Standard commercial butter can contain up to 18% moisture. When baked, that excess water boils off too aggressively, turning delicate dough layers soggy.',
+            'Beurre d’Isigny, slow-fermented with ancestral lactic cultures for 24 hours, boasts a minimum of 84% butterfat. Its melting point is higher, its texture is velvety and pliable, and its taste carries distinct hazelnut and pasture flower notes.',
+            'It is the single most expensive ingredient in our bakehouse, and we refuse to bake with anything else.',
+          ],
+          date: 'October 04, 2026',
+          readTime: '6 min read',
+          author: {
+            name: 'Camille Laurent',
+            role: 'Head Pastry Chef & Co-Founder',
+            avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+          },
+          image: 'https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?auto=format&fit=crop&w=1200&q=85',
+          imageAlt: 'Farmhouse cultured butter logs with flaked sea salt',
+          category: 'Ingredients & Sourcing',
+          tags: ['Cultured Butter', 'Normandy', 'Science'],
+        },
+        {
+          id: 'article-4',
+          slug: 'forty-year-heritage-sourdough-mother',
+          title: 'Forty Years of Wild Leaven: The Living Heart of Our Sourdough Hearth',
+          subtitle: 'Meet Aurelia, the four-decade-old heritage sourdough starter fed twice daily with organic spelt.',
+          excerpt: 'How wild yeasts and beneficial lactobacilli create sourdough loaves with complex aroma and supreme digestibility.',
+          content: [
+            'Our hearth bakery does not purchase commercial baker’s yeast. Every loaf of sourdough that leaves our cooling racks is leavened by Aurelia, a mother culture originating from a mountain bakery in 1986.',
+            'Fed with stone-ground unbleached organic flours and filtered spring water every twelve hours, Aurelia maintains a perfect colony of wild yeasts and friendly lactic acid bacteria.',
+            'This natural fermentation breaks down complex starches and phytic acid, resulting in a blistered loaf that stays fresh on your kitchen counter for days.',
+          ],
+          date: 'September 28, 2026',
+          readTime: '5 min read',
+          author: {
+            name: 'Marcus Sterling',
+            role: 'Master Baker',
+            avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
+          },
+          image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=85',
+          imageAlt: 'Artisan baker scoring decorative leaf patterns onto naturally leavened sourdough',
+          category: 'Behind the Scenes',
+          tags: ['Sourdough', 'Fermentation', 'Hearth Baking'],
+        },
+      ];
+
+  const categories = ['All', ...Array.from(new Set(articles.map(a => a.category)))];
+  const filteredArticles = selectedCategory === 'All'
+    ? articles
+    : articles.filter(a => a.category === selectedCategory);
+
+  const featuredArticle = articles.find(a => a.featured) || articles[0];
+
+  return (
+    <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '4rem 2rem' }}>
+      {/* Editorial Header */}
+      <div style={{ textAlign: 'center', maxWidth: '740px', margin: '0 auto 3.5rem auto' }}>
+        <span
+          style={{
+            fontSize: '0.82rem',
+            textTransform: 'uppercase',
+            letterSpacing: '0.12em',
+            fontWeight: 700,
+            color: theme.palette.primary,
+            display: 'block',
+            marginBottom: '0.5rem',
+          }}
+        >
+          THE BAKEHOUSE CHRONICLE · STORIES FROM THE HEARTH
+        </span>
+        <h1
+          style={{
+            fontFamily: theme.typography.headingFont,
+            fontSize: 'clamp(2.4rem, 4vw, 3.5rem)',
+            fontWeight: 800,
+            margin: '0 0 1rem 0',
+            color: theme.palette.text,
+          }}
+        >
+          Stories, Craft & Botanicals
+        </h1>
+        <p style={{ fontSize: '1.1rem', color: theme.palette.textMuted, lineHeight: 1.6, margin: 0 }}>
+          Reflections on heirloom grain milling, three-day cold lamination, edible floral infusions, and daily life around our volcanic stone decks.
+        </p>
+      </div>
+
+      {/* Category Filter Pills */}
+      <div className="fs-category-pills" style={{ display: 'flex', justifyContent: 'center', gap: '0.65rem', flexWrap: 'wrap', marginBottom: '3.5rem' }}>
+        {categories.map(cat => {
+          const active = selectedCategory === cat;
+          return (
+            <button
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              style={{
+                backgroundColor: active ? theme.palette.primary : theme.palette.surface,
+                color: active ? '#ffffff' : theme.palette.text,
+                border: `1.5px solid ${active ? theme.palette.primary : theme.palette.border}`,
+                padding: '0.55rem 1.25rem',
+                borderRadius: '999px',
+                fontSize: '0.86rem',
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'all 0.15s ease',
+              }}
+            >
+              {cat}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Featured Article Hero Card */}
+      {featuredArticle && selectedCategory === 'All' && (
+        <article
+          onClick={() => openArticle(featuredArticle)}
+          style={{
+            backgroundColor: theme.palette.surface,
+            borderRadius: '24px',
+            overflow: 'hidden',
+            border: `1px solid ${theme.palette.border}`,
+            boxShadow: '0 12px 36px rgba(0,0,0,0.06)',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
+            marginBottom: '4rem',
+            cursor: 'pointer',
+            transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+          }}
+          className="fs-featured-article"
+        >
+          <div style={{ aspectRatio: '16/10', overflow: 'hidden' }}>
+            <img
+              src={featuredArticle.image}
+              alt={featuredArticle.imageAlt}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.35s ease' }}
+            />
+          </div>
+          <div style={{ padding: 'clamp(2rem, 3.5vw, 3.5rem)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
+                <span
+                  style={{
+                    backgroundColor: theme.palette.badgeBg,
+                    color: theme.palette.badgeText,
+                    padding: '0.25rem 0.65rem',
+                    borderRadius: '6px',
+                    fontSize: '0.74rem',
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.04em',
+                  }}
+                >
+                  Featured Story
+                </span>
+                <span style={{ fontSize: '0.84rem', color: theme.palette.textMuted }}>
+                  {featuredArticle.date} · {featuredArticle.readTime}
+                </span>
+              </div>
+              <h2
+                style={{
+                  fontFamily: theme.typography.headingFont,
+                  fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)',
+                  fontWeight: 800,
+                  lineHeight: 1.25,
+                  margin: '0 0 1rem 0',
+                  color: theme.palette.text,
+                }}
+              >
+                {featuredArticle.title}
+              </h2>
+              <p style={{ fontSize: '1.05rem', color: theme.palette.textMuted, lineHeight: 1.6, margin: '0 0 1.5rem 0' }}>
+                {featuredArticle.excerpt}
+              </p>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: `1px solid ${theme.palette.border}`, paddingTop: '1.25rem', marginTop: '1rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <img
+                  src={featuredArticle.author.avatar}
+                  alt={featuredArticle.author.name}
+                  style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover' }}
+                />
+                <div>
+                  <strong style={{ display: 'block', fontSize: '0.88rem', color: theme.palette.text }}>
+                    {featuredArticle.author.name}
+                  </strong>
+                  <span style={{ fontSize: '0.76rem', color: theme.palette.textMuted }}>
+                    {featuredArticle.author.role}
+                  </span>
+                </div>
+              </div>
+              <span style={{ color: theme.palette.primary, fontWeight: 700, fontSize: '0.92rem', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                Read Story <ArrowRight size={16} />
+              </span>
+            </div>
+          </div>
+        </article>
+      )}
+
+      {/* Grid of Other Articles */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gap: '2.5rem',
+        }}
+      >
+        {filteredArticles.map(article => (
+          <article
+            key={article.id}
+            onClick={() => openArticle(article)}
+            style={{
+              backgroundColor: theme.palette.surface,
+              borderRadius: '18px',
+              overflow: 'hidden',
+              border: `1px solid ${theme.palette.border}`,
+              boxShadow: '0 4px 16px rgba(0,0,0,0.04)',
+              cursor: 'pointer',
+              display: 'flex',
+              flexDirection: 'column',
+              transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+            }}
+            className="fs-article-card"
+          >
+            <div style={{ aspectRatio: '16/10', overflow: 'hidden' }}>
+              <img
+                src={article.image}
+                alt={article.imageAlt}
+                loading="lazy"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.35s ease' }}
+              />
+            </div>
+            <div style={{ padding: '1.75rem', display: 'flex', flexDirection: 'column', flex: 1, justifyContent: 'space-between' }}>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.75rem', fontSize: '0.78rem' }}>
+                  <span style={{ color: theme.palette.primary, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                    {article.category}
+                  </span>
+                  <span style={{ color: theme.palette.textMuted }}>•</span>
+                  <span style={{ color: theme.palette.textMuted }}>{article.readTime}</span>
+                </div>
+                <h3
+                  style={{
+                    fontFamily: theme.typography.headingFont,
+                    fontSize: '1.25rem',
+                    fontWeight: 700,
+                    lineHeight: 1.35,
+                    margin: '0 0 0.75rem 0',
+                    color: theme.palette.text,
+                  }}
+                >
+                  {article.title}
+                </h3>
+                <p
+                  style={{
+                    fontSize: '0.9rem',
+                    color: theme.palette.textMuted,
+                    lineHeight: 1.6,
+                    margin: 0,
+                    display: '-webkit-box',
+                    WebkitLineClamp: 3,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden',
+                  }}
+                >
+                  {article.excerpt}
+                </p>
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: `1px solid ${theme.palette.border}`, paddingTop: '1rem', marginTop: '1.5rem' }}>
+                <span style={{ fontSize: '0.8rem', color: theme.palette.textMuted }}>
+                  By {article.author.name}
+                </span>
+                <span style={{ color: theme.palette.primary, fontWeight: 700, fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                  Read Article <ArrowRight size={14} />
+                </span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─── ARTICLE DETAIL PAGE VIEW ────────────────────────────────────────────────
+
+function ArticlePageView() {
+  const { theme, selectedArticle, openArticle, setActivePage } = useStorefront();
+
+  // Fallback article
+  const article: BlogArticle = selectedArticle || {
+    id: 'article-1',
+    slug: '72-hour-lamination-process',
+    title: 'The Art of 72-Hour Lamination: Why We Never Rush the Honeycomb',
+    subtitle: 'Inside our humidity-controlled dough room, where twenty-seven golden butter folds take three days of patience.',
+    excerpt: 'True viennoiserie cannot be rushed. Discover why our three-day cold retardation produces that audible, honeycomb shatter at dawn.',
+    content: [
+      'Every evening around 9:00 PM, while the city sleeps, our pastry kitchen begins the lamination cycle for pastries that will not touch the deck ovens until seventy-two hours later.',
+      'The secret lies in the equilibrium between lactic acid fermentation and butterfat plasticity. We use genuine 84% butterfat Normandy cultured pasture butter, rolled and folded into cold leavened dough across three precise turns.',
+      'When the croissants hit our 220°C volcanic stone hearth decks under steam injection, the moisture in the butter layers instantly vaporizes into steam, puffing the twenty-seven delicate dough sheets into an airy, translucent honeycomb matrix.',
+      'The result is an audible crunch when broken, yielding to a tender, honeycombed interior filled with the rich, nutty perfume of fermented mountain pasture cream.',
+    ],
+    date: 'October 16, 2026',
+    readTime: '5 min read',
+    author: {
+      name: 'Camille Laurent',
+      role: 'Head Pastry Chef & Co-Founder',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+    },
+    image: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=1200&q=85',
+    imageAlt: 'Golden crisp honeycomb layers of freshly baked croissants',
+    category: 'Baking Craft',
+    tags: ['Viennoiserie', 'Normandy Butter', 'Technique'],
+  };
+
+  const relatedArticles = (theme.articles || []).filter(a => a.id !== article.id).slice(0, 2);
+
+  return (
+    <article style={{ maxWidth: '880px', margin: '0 auto', padding: '3rem 2rem 6rem 2rem' }}>
+      {/* Breadcrumb */}
+      <nav
+        aria-label="Breadcrumb"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+          fontSize: '0.84rem',
+          color: theme.palette.textMuted,
+          marginBottom: '2rem',
+          flexWrap: 'wrap',
+        }}
+      >
+        <button
+          onClick={() => setActivePage('home')}
+          style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', padding: 0, textDecoration: 'underline' }}
+        >
+          Home
+        </button>
+        <span>/</span>
+        <button
+          onClick={() => setActivePage('blog')}
+          style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', padding: 0, textDecoration: 'underline' }}
+        >
+          Stories & Blog
+        </button>
+        <span>/</span>
+        <span style={{ color: theme.palette.text, fontWeight: 700 }}>{article.title}</span>
+      </nav>
+
+      {/* Article Header Meta */}
+      <div style={{ marginBottom: '1.5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
+          <span
+            style={{
+              backgroundColor: theme.palette.badgeBg,
+              color: theme.palette.badgeText,
+              padding: '0.25rem 0.65rem',
+              borderRadius: '6px',
+              fontSize: '0.76rem',
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: '0.04em',
+            }}
+          >
+            {article.category}
+          </span>
+          <span style={{ fontSize: '0.85rem', color: theme.palette.textMuted }}>
+            {article.date} · {article.readTime}
+          </span>
+        </div>
+
+        <h1
+          style={{
+            fontFamily: theme.typography.headingFont,
+            fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)',
+            fontWeight: 800,
+            lineHeight: 1.2,
+            margin: '0 0 1rem 0',
+            color: theme.palette.text,
+          }}
+        >
+          {article.title}
+        </h1>
+
+        {article.subtitle && (
+          <p style={{ fontSize: '1.2rem', lineHeight: 1.6, color: theme.palette.textMuted, margin: 0, fontStyle: 'italic' }}>
+            {article.subtitle}
+          </p>
+        )}
+      </div>
+
+      {/* Author Byline */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '1rem',
+          padding: '1.25rem 0',
+          borderTop: `1px solid ${theme.palette.border}`,
+          borderBottom: `1px solid ${theme.palette.border}`,
+          marginBottom: '2.5rem',
+        }}
+      >
+        <img
+          src={article.author.avatar}
+          alt={article.author.name}
+          style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover' }}
+        />
+        <div>
+          <strong style={{ display: 'block', fontSize: '0.95rem', color: theme.palette.text }}>
+            {article.author.name}
+          </strong>
+          <span style={{ fontSize: '0.82rem', color: theme.palette.textMuted }}>
+            {article.author.role}
+          </span>
+        </div>
+      </div>
+
+      {/* Hero Photography */}
+      <div
+        style={{
+          borderRadius: '20px',
+          overflow: 'hidden',
+          marginBottom: '3rem',
+          boxShadow: '0 12px 36px rgba(0,0,0,0.08)',
+          backgroundColor: theme.palette.surface,
+          border: `1px solid ${theme.palette.border}`,
+        }}
+      >
+        <img
+          src={article.image}
+          alt={article.imageAlt}
+          style={{ width: '100%', maxHeight: '520px', objectFit: 'cover', display: 'block' }}
+        />
+        <div style={{ padding: '0.85rem 1.25rem', fontSize: '0.82rem', color: theme.palette.textMuted, fontStyle: 'italic', backgroundColor: theme.palette.surface }}>
+          {article.imageAlt}
+        </div>
+      </div>
+
+      {/* Body Content */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem', fontSize: '1.15rem', lineHeight: 1.8, color: theme.palette.text }}>
+        {article.content.map((paragraph, index) => (
+          <p key={index} style={{ margin: 0 }}>
+            {index === 0 ? (
+              <span
+                style={{
+                  float: 'left',
+                  fontSize: '3.8rem',
+                  lineHeight: '0.8',
+                  paddingTop: '6px',
+                  paddingRight: '12px',
+                  fontFamily: theme.typography.headingFont,
+                  color: theme.palette.primary,
+                  fontWeight: 800,
+                }}
+              >
+                {paragraph.charAt(0)}
+              </span>
+            ) : null}
+            {index === 0 ? paragraph.slice(1) : paragraph}
+          </p>
+        ))}
+
+        {/* Editorial Pullquote */}
+        <blockquote
+          style={{
+            margin: '2rem 0',
+            padding: '1.5rem 2rem',
+            borderLeft: `4px solid ${theme.palette.primary}`,
+            backgroundColor: theme.palette.surface,
+            borderRadius: '0 16px 16px 0',
+            fontFamily: theme.typography.headingFont,
+            fontSize: '1.35rem',
+            lineHeight: 1.5,
+            fontStyle: 'italic',
+            color: theme.palette.text,
+          }}
+        >
+          "When you refuse to rush the fermentation, the grain reveals floral and caramel complexities that no commercial enhancer could ever replicate."
+        </blockquote>
+      </div>
+
+      {/* Author Bio Box */}
+      <div
+        style={{
+          marginTop: '4rem',
+          padding: '2rem',
+          borderRadius: '16px',
+          backgroundColor: theme.palette.surface,
+          border: `1px solid ${theme.palette.border}`,
+          display: 'flex',
+          gap: '1.5rem',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+        }}
+      >
+        <img
+          src={article.author.avatar}
+          alt={article.author.name}
+          style={{ width: '64px', height: '64px', borderRadius: '50%', objectFit: 'cover' }}
+        />
+        <div style={{ flex: 1, minWidth: '240px' }}>
+          <strong style={{ fontSize: '1.05rem', display: 'block', color: theme.palette.text, marginBottom: '4px' }}>
+            About {article.author.name}
+          </strong>
+          <p style={{ margin: 0, fontSize: '0.88rem', color: theme.palette.textMuted, lineHeight: 1.5 }}>
+            {article.author.role} at Butter & Bloom. Passionate about slow fermentation, traditional European viennoiserie, and pairing wild culinary herbs with pasture cream.
+          </p>
+        </div>
+      </div>
+
+      {/* Bottom Navigation CTAs */}
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginTop: '3.5rem',
+          paddingTop: '2rem',
+          borderTop: `1px solid ${theme.palette.border}`,
+          flexWrap: 'wrap',
+          gap: '1rem',
+        }}
+      >
+        <button
+          onClick={() => setActivePage('blog')}
+          style={{
+            backgroundColor: 'transparent',
+            border: `1px solid ${theme.palette.border}`,
+            color: theme.palette.text,
+            padding: '0.75rem 1.5rem',
+            borderRadius: '999px',
+            fontWeight: 600,
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+          }}
+        >
+          <ArrowLeft size={16} /> Back to All Stories
+        </button>
+
+        <button
+          onClick={() => setActivePage('menu')}
+          style={{
+            backgroundColor: theme.palette.primary,
+            border: 'none',
+            color: '#ffffff',
+            padding: '0.75rem 1.75rem',
+            borderRadius: '999px',
+            fontWeight: 700,
+            cursor: 'pointer',
+          }}
+        >
+          Explore Morning Pastries →
+        </button>
+      </div>
+    </article>
   );
 }
 
@@ -6433,8 +8131,9 @@ function ProductQuickViewModal({
         {/* Modal Image */}
         <div style={{ height: '100%', minHeight: '340px' }}>
           <img
-            src={product.image}
+            src={product.image || FALLBACK_FOOD_IMAGE}
             alt={product.name}
+            onError={handleFoodImageError}
             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           />
         </div>

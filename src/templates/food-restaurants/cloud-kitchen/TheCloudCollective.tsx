@@ -14,7 +14,7 @@ export const theCloudCollectiveConfig: StorefrontThemeConfig = {
     storyLayout: 'stats-prominent',
     featuresLayout: 'strip-4',
     galleryLayout: 'masonry',
-    sectionOrder: ['hero', 'features', 'products', 'story', 'promo', 'craft', 'gallery', 'reviews', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'multiBrand', 'deliveryRadar', 'products', 'mealPrep', 'packagingTech', 'features', 'story', 'promo', 'craft', 'gallery', 'reviews', 'location', 'newsletter'],
   },
   name: 'The Cloud Collective',
   tagline: 'Multi-Brand Virtual Food Hall — 4 Distinct Restaurant Brands in One Order with a Single Delivery Fee',
@@ -402,7 +402,7 @@ export const theCloudCollectiveConfig: StorefrontThemeConfig = {
       category: 'SweetLab · Artisan Desserts',
       price: 199,
       compareAtPrice: 240,
-      image: img('photo-1505253758473-96b3015f240a'),
+      image: img('photo-1512621776951-a57141f2eefd'),
       imageAlt: 'Golden fried cinnamon-sugar dusted pastry loops served with warm cup of pure hazelnut Nutella',
       description:
         'Crispy exterior, soft airy interior. Freshly piped and fried golden, rolled in Ceylon cinnamon and raw cane sugar. Accompanied by a cup of warm melted Nutella.',

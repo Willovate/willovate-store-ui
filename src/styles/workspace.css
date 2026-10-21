@@ -552,27 +552,19 @@ html, body, #root {
 }
 
 .ws-topbar-center {
-  flex: 1;
+  /* stacks viewport controls + width badge vertically, perfectly centered */
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 3px;
+  flex: 1;
 }
 
-/* Keep the desktop toolbar in one horizontal flow.  The previous absolutely
-   centered viewport picker could sit on top of the Saved indicator when the
-   page selector was wide. */
+/* Keep the desktop toolbar in one natural flex flow. */
 @media (min-width: 901px) {
   .ws-topbar {
     justify-content: flex-start;
-  }
-
-  .ws-topbar-center {
-    position: static !important;
-    left: auto !important;
-    transform: none !important;
-    flex: 0 0 auto;
-    margin-left: auto;
-    margin-right: 0.75rem;
   }
 
   .ws-topbar-right {
@@ -657,78 +649,252 @@ html, body, #root {
   background: #f0f0f2;
 }
 
+/* ============================================================
+   CANVAS AREA & FRAME CONTAINER
+   ============================================================ */
 .storefront-frame-container {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 16px 14px 48px 14px;
   position: relative;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
+  background: #f0f0f2;
+  padding: 16px 14px 48px 14px;
 }
 
 /* ws-canvas-wrapper: dynamically sized by JS to match scaled canvas */
 .ws-canvas-wrapper {
   flex-shrink: 0;
-  margin: 0 auto;
   position: relative;
-  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* ── DEVICE FRAME SHELLS ── */
+
+/* Desktop: browser-chrome frame */
+.ws-device-desktop {
+  display: flex;
+  flex-direction: column;
+  background: #e8eaed;
+  border-radius: 10px 10px 6px 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06), 0 8px 32px rgba(0,0,0,0.10);
+  overflow: hidden;
+  transform-origin: top center;
+}
+
+.ws-device-chrome {
+  height: 38px;
+  background: #f1f3f6;
+  border-bottom: 1px solid #d1d5db;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.ws-device-chrome-dots {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.ws-device-chrome-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: block;
+}
+
+.ws-device-chrome-dots span:nth-child(1) { background: #ff5f56; }
+.ws-device-chrome-dots span:nth-child(2) { background: #ffbd2e; }
+.ws-device-chrome-dots span:nth-child(3) { background: #27c93f; }
+
+.ws-device-chrome-bar {
+  flex: 1;
+  height: 22px;
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 10px;
+  color: #9ca3af;
+  font-family: -apple-system, sans-serif;
+  padding: 0 8px;
+}
+
+.ws-device-chrome-bar svg {
+  width: 10px;
+  height: 10px;
+  stroke: #9ca3af;
+  flex-shrink: 0;
+}
+
+/* Tablet: iPad-style frame */
+.ws-device-tablet {
+  display: flex;
+  flex-direction: column;
+  background: #1c1c1e;
+  border-radius: 28px;
+  box-shadow:
+    0 0 0 2px #3a3a3c,
+    0 25px 50px -8px rgba(0,0,0,0.4),
+    0 10px 20px rgba(0,0,0,0.15);
+  overflow: hidden;
+  padding: 14px 10px 10px;
+  transform-origin: top center;
+  position: relative;
+}
+
+.ws-device-tablet-camera {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3a3a3c;
+  box-shadow: inset 0 0 0 1.5px #555;
+}
+
+.ws-device-tablet-screen {
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  flex: 1;
+}
+
+.ws-device-tablet-home {
+  height: 4px;
+  width: 40%;
+  background: #3a3a3c;
+  border-radius: 4px;
+  margin: 8px auto 0;
+}
+
+/* Mobile: iPhone-style frame */
+.ws-device-mobile {
+  display: flex;
+  flex-direction: column;
+  background: #1c1c1e;
+  border-radius: 44px;
+  box-shadow:
+    0 0 0 2px #3a3a3c,
+    0 0 0 6px #1c1c1e,
+    0 0 0 7px #3a3a3c,
+    0 30px 60px -12px rgba(0,0,0,0.5),
+    0 14px 28px rgba(0,0,0,0.15);
+  overflow: hidden;
+  padding: 12px 8px 8px;
+  transform-origin: top center;
+  position: relative;
+}
+
+/* Side buttons (volume + power) */
+.ws-device-mobile::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: 90px;
+  width: 3px;
+  height: 30px;
+  background: #3a3a3c;
+  border-radius: 2px 0 0 2px;
+  box-shadow: 0 40px 0 #3a3a3c, 0 80px 0 #3a3a3c;
+}
+
+.ws-device-mobile::after {
+  content: '';
+  position: absolute;
+  right: -2px;
+  top: 120px;
+  width: 3px;
+  height: 54px;
+  background: #3a3a3c;
+  border-radius: 0 2px 2px 0;
+}
+
+.ws-device-mobile-notch {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 4px;
+  flex-shrink: 0;
+}
+
+.ws-device-mobile-island {
+  width: 100px;
+  height: 26px;
+  background: #000;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+}
+
+.ws-device-mobile-island::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #1c1c1e;
+  box-shadow: inset 0 0 0 2px #2a2a2a, 0 0 0 1.5px #111;
+}
+
+.ws-device-mobile-screen {
+  background: #fff;
+  border-radius: 34px;
+  overflow: hidden;
+  flex: 1;
+}
+
+.ws-device-mobile-home {
+  height: 4px;
+  width: 36%;
+  background: #3a3a3c;
+  border-radius: 4px;
+  margin: 8px auto 0;
+}
+
+/* ── THE ACTUAL STOREFRONT CANVAS ── */
 .ws-canvas {
   background: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10), 0 8px 24px rgba(0, 0, 0, 0.07);
   transform-origin: top left;
-  /* NOT absolute - let it be in flow, wrapper JS sets its height */
   position: relative;
   max-width: none;
   box-sizing: border-box;
   container-type: inline-size;
   container-name: storefront;
+  display: block;
 }
 
 .ws-canvas-desktop {
   width: 1200px;
-  border-radius: 6px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   box-sizing: border-box;
 }
-
 .ws-canvas-tablet {
   width: 768px;
-  border-radius: 20px;
-  border: 8px solid #334155;
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
   box-sizing: border-box;
+  max-width: 100%;
+  overflow-x: clip;
 }
-
 .ws-canvas-mobile {
   width: 390px;
-  border-radius: 36px;
-  border: 8px solid #1e293b;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  overflow: hidden;
-  position: relative;
   box-sizing: border-box;
-}
-
-.ws-canvas-mobile::before {
-  content: '';
-  position: sticky;
-  top: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 16px;
-  background: #1e293b;
-  border-radius: 12px;
-  z-index: 9999;
-  display: block;
-  margin: 0 auto -16px;
-  pointer-events: none !important;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 /* Responsive Canvas Adaptations for Mobile Preview Frame */
@@ -811,38 +977,55 @@ html, body, #root {
   font-size: 0.9rem;
 }
 
-/* Viewport controls */
+/* ── SHOPIFY-STYLE VIEWPORT CONTROLS ── */
 .ws-viewport-controls {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.25rem;
-  flex-shrink: 0;
+  gap: 0;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 9px;
+  padding: 3px;
 }
 
 .ws-viewport-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 7px;
-  border: 1px solid #e2e8f0;
-  background: #fff;
-  color: #a0aec0;
+  gap: 5px;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #6b7280;
   cursor: pointer;
   transition: all 0.15s;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .ws-viewport-btn:hover {
-  background: #f7f8fb;
-  color: #4a5568;
+  background: rgba(255,255,255,0.7);
+  color: #374151;
 }
 
 .ws-viewport-btn.active {
-  background: #f5f3ff;
-  color: #5c3ce6;
-  border-color: #ddd6fe;
+  background: #fff;
+  color: #111827;
+  border-color: #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  font-weight: 600;
+}
+
+/* Width badge shown below the viewport switcher */
+.ws-viewport-width-badge {
+  font-size: 11px;
+  color: #9ca3af;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  line-height: 1;
 }
 
 /* Add element */

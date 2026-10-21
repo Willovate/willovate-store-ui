@@ -1,5 +1,5 @@
 import { lazy, Suspense, useState, useEffect, Component, type ReactNode } from 'react'
-import { ArrowLeft, Monitor, Tablet, Smartphone, Maximize2, Minimize2, Sparkles } from 'lucide-react'
+import { ArrowLeft, Monitor, Tablet, Smartphone, Maximize2, Minimize2, Sparkles, Store } from 'lucide-react'
 import { Link, useParams, useNavigate, useSearchParams } from 'react-router-dom'
 import { templateCategories } from '../data/templateCategories'
 import { createWebsite, updateWebsite } from '../lib/workspace-api'
@@ -178,13 +178,42 @@ export default function BrowseThemePreview() {
         }}
       >
         {/* Left: Back & Theme Identity */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
           <Link
-            to={targetWebsiteId ? `/workspace/${targetWebsiteId}` : '/templates'}
-            title="Willovate One Home"
+            to="/"
+            title="Return to Willovate One Main Store"
             style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }}
           >
             <WillovateLogo height={26} variant="dark" style={{ cursor: 'pointer' }} />
+          </Link>
+          <Link
+            to="/"
+            title="Return to Willovate One Main Store"
+            style={{
+              textDecoration: 'none',
+              color: '#cbd5e1',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.35rem',
+              fontWeight: 600,
+              fontSize: '12px',
+              padding: '0.35rem 0.65rem',
+              borderRadius: '6px',
+              backgroundColor: 'rgba(255, 255, 255, 0.05)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              transition: 'all 0.2s ease',
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.color = '#ffffff'
+              e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.12)'
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.color = '#cbd5e1'
+              e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.05)'
+            }}
+          >
+            <Store size={13} />
+            <span>Main Store</span>
           </Link>
           <Link
             to={`/browse-templates/${categorySlug}/${subsectionSlug}${targetWebsiteId ? `?websiteId=${targetWebsiteId}` : ''}`}

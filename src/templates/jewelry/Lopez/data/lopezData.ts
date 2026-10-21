@@ -35,7 +35,7 @@ export const LOPEZ_CATEGORIES: LopezCategoryCard[] = [
   {
     id: 'cat-bracelets',
     name: 'Bracelets',
-    image: 'https://images.unsplash.com/photo-1611591475882-720448148e65?w=600&auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&auto=format&fit=crop&q=80',
     startingPrice: 'From $35.00',
     itemCount: 19,
     tagline: 'Bangles & Minimalist Cuffs',

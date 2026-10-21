@@ -262,7 +262,7 @@ export const DIAMOND_WORKDO_PRODUCTS: DiamondWorkDoProduct[] = [
     compareAtPrice: 890,
     images: [
       'https://jewels-workdo.myshopify.com/cdn/shop/files/card-img-2.png?v=1698821196',
-      'https://images.unsplash.com/photo-1611591475870-87a414605ea2?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80',
     ],
     caratWeight: '1.40 ct',
     diamondCut: 'Round Brilliant Accent',
@@ -322,7 +322,7 @@ export const DIAMOND_WORKDO_PRODUCTS: DiamondWorkDoProduct[] = [
     compareAtPrice: 1950,
     images: [
       'https://jewels-workdo.myshopify.com/cdn/shop/files/1_8c9c63cc-e5ec-4d20-a0df-16e44ae29972_600x600.png?v=1698727649',
-      'https://images.unsplash.com/photo-1611591475870-87a414605ea2?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80',
     ],
     caratWeight: '3.00 ct',
     diamondCut: 'Round Brilliant',

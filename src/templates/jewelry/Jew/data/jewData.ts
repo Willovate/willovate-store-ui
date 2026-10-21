@@ -114,7 +114,7 @@ export const JEW_PRODUCTS: JewProduct[] = [
     rating: 5,
     reviewCount: 24,
     isSoldOut: false,
-    image: 'https://images.unsplash.com/photo-1611591475155-4284ec289e61?w=800&auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&auto=format&fit=crop&q=80',
     hoverImage: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80',
     description: 'Double openwork geometric gold cuff adorned with graduated natural freshwater pearls. Features an invisible spring hinge for effortless daily wear.',
     metals: ['18K Solid Gold', '22K Gold Vermeil'],

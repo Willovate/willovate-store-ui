@@ -31,9 +31,10 @@ export const SECTION_SCHEMAS: SectionSchema[] = [
       { name: 'eyebrow', label: 'Eyebrow', type: 'text', placeholder: 'e.g. NEW COLLECTION', tab: 'content' },
       { name: 'title', label: 'Heading', type: 'textarea', placeholder: 'Timeless pieces made for you', tab: 'content' },
       { name: 'subtitle', label: 'Description', type: 'textarea', placeholder: 'Discover our new collection...', tab: 'content' },
+      { name: 'image', label: 'Hero Image', type: 'image', tab: 'content' },
       { name: 'buttonText', label: 'Button text', type: 'text', placeholder: 'Shop Now', tab: 'content' },
       { name: 'buttonLink', label: 'Button link', type: 'link', placeholder: '/collections/all', tab: 'content' },
-      { name: 'style_backgroundImage', label: 'Image', type: 'image', tab: 'style' },
+      { name: 'style_backgroundImage', label: 'Background / Hero Image', type: 'image', tab: 'style' },
       { name: 'style_backgroundColor', label: 'Background color', type: 'color', tab: 'style' },
       { name: 'style_textColor', label: 'Text color', type: 'color', tab: 'style' },
       { name: 'style_buttonColor', label: 'Button color', type: 'color', tab: 'style' },
@@ -65,6 +66,8 @@ export const SECTION_SCHEMAS: SectionSchema[] = [
     settings: [
       { name: 'logoText', label: 'Logo text', type: 'text', tab: 'content' },
       { name: 'logoImage', label: 'Logo image', type: 'image', tab: 'content' },
+      { name: 'style_backgroundColor', label: 'Header Background color', type: 'color', tab: 'style' },
+      { name: 'style_textColor', label: 'Nav Text color', type: 'color', tab: 'style' },
     ],
     blocks: {
       type: 'menu_link',
@@ -83,6 +86,8 @@ export const SECTION_SCHEMAS: SectionSchema[] = [
       { name: 'collection', label: 'Collection', type: 'collection_picker', tab: 'content' },
       { name: 'productsToShow', label: 'Products to show', type: 'number', tab: 'style' },
       { name: 'columns', label: 'Columns', type: 'number', tab: 'style' },
+      { name: 'style_backgroundColor', label: 'Background color', type: 'color', tab: 'style' },
+      { name: 'style_textColor', label: 'Text color', type: 'color', tab: 'style' },
     ]
   },
   {
@@ -91,6 +96,7 @@ export const SECTION_SCHEMAS: SectionSchema[] = [
     settings: [
       { name: 'content', label: 'Heading', type: 'text', tab: 'content' },
       { name: 'alignment', label: 'Alignment', type: 'select', options: [{label: 'Left', value: 'left'}, {label: 'Center', value: 'center'}, {label: 'Right', value: 'right'}], tab: 'style' },
+      { name: 'style_textColor', label: 'Text color', type: 'color', tab: 'style' },
     ]
   },
   {
@@ -98,8 +104,12 @@ export const SECTION_SCHEMAS: SectionSchema[] = [
     name: 'Product grid',
     settings: [
       { name: 'title', label: 'Heading', type: 'text', tab: 'content' },
+      { name: 'subtitle', label: 'Description', type: 'textarea', tab: 'content' },
       { name: 'productsToShow', label: 'Products to show', type: 'number', tab: 'style' },
       { name: 'columns', label: 'Columns', type: 'number', tab: 'style' },
+      { name: 'style_backgroundColor', label: 'Background color', type: 'color', tab: 'style' },
+      { name: 'style_textColor', label: 'Text color', type: 'color', tab: 'style' },
+      { name: 'style_cardColor', label: 'Card background color', type: 'color', tab: 'style' },
     ],
     blocks: {
       type: 'product',
@@ -114,6 +124,8 @@ export const SECTION_SCHEMAS: SectionSchema[] = [
     name: 'Collection list',
     settings: [
       { name: 'title', label: 'Heading', type: 'text', tab: 'content' },
+      { name: 'style_backgroundColor', label: 'Background color', type: 'color', tab: 'style' },
+      { name: 'style_textColor', label: 'Text color', type: 'color', tab: 'style' },
     ],
     blocks: {
       type: 'collection',
@@ -132,6 +144,10 @@ export const SECTION_SCHEMAS: SectionSchema[] = [
       { name: 'content', label: 'Text', type: 'textarea', tab: 'content' },
       { name: 'buttonText', label: 'Button label', type: 'text', tab: 'content' },
       { name: 'buttonLink', label: 'Button link', type: 'link', tab: 'content' },
+      { name: 'style_backgroundColor', label: 'Background color', type: 'color', tab: 'style' },
+      { name: 'style_textColor', label: 'Text color', type: 'color', tab: 'style' },
+      { name: 'style_buttonColor', label: 'Button color', type: 'color', tab: 'style' },
+      { name: 'style_buttonTextColor', label: 'Button text color', type: 'color', tab: 'style' },
     ]
   },
   {
@@ -141,6 +157,8 @@ export const SECTION_SCHEMAS: SectionSchema[] = [
       { name: 'title', label: 'Heading', type: 'text', tab: 'content' },
       { name: 'subtitle', label: 'Subtext', type: 'textarea', tab: 'content' },
       { name: 'buttonText', label: 'Button text', type: 'text', tab: 'content' },
+      { name: 'style_backgroundColor', label: 'Background color', type: 'color', tab: 'style' },
+      { name: 'style_textColor', label: 'Text color', type: 'color', tab: 'style' },
     ]
   },
   {
@@ -151,6 +169,10 @@ export const SECTION_SCHEMAS: SectionSchema[] = [
       { name: 'subtext', label: 'Subtext', type: 'textarea', tab: 'content' },
       { name: 'placeholder', label: 'Input placeholder', type: 'text', tab: 'content' },
       { name: 'buttonText', label: 'Button text', type: 'text', tab: 'content' },
+      { name: 'style_backgroundColor', label: 'Background color', type: 'color', tab: 'style' },
+      { name: 'style_textColor', label: 'Text color', type: 'color', tab: 'style' },
+      { name: 'style_buttonColor', label: 'Button color', type: 'color', tab: 'style' },
+      { name: 'style_buttonTextColor', label: 'Button text color', type: 'color', tab: 'style' },
     ]
   },
   {
@@ -160,6 +182,8 @@ export const SECTION_SCHEMAS: SectionSchema[] = [
       { name: 'brand', label: 'Brand name', type: 'text', tab: 'content' },
       { name: 'tagline', label: 'Tagline', type: 'textarea', tab: 'content' },
       { name: 'showSocial', label: 'Show social links', type: 'toggle', tab: 'content' },
+      { name: 'style_backgroundColor', label: 'Background color', type: 'color', tab: 'style' },
+      { name: 'style_textColor', label: 'Text color', type: 'color', tab: 'style' },
     ],
     blocks: {
       type: 'link_column',
@@ -286,7 +310,9 @@ export const SECTION_SCHEMAS: SectionSchema[] = [
     name: 'Features & Highlights',
     settings: [
       { name: 'title', label: 'Section Title', type: 'text', tab: 'content' },
-      { name: 'subtitle', label: 'Description', type: 'textarea', tab: 'content' }
+      { name: 'subtitle', label: 'Description', type: 'textarea', tab: 'content' },
+      { name: 'style_backgroundColor', label: 'Background color', type: 'color', tab: 'style' },
+      { name: 'style_textColor', label: 'Text color', type: 'color', tab: 'style' },
     ]
   },
   {
@@ -295,7 +321,10 @@ export const SECTION_SCHEMAS: SectionSchema[] = [
     settings: [
       { name: 'title', label: 'Experience Heading', type: 'text', tab: 'content' },
       { name: 'subtitle', label: 'Description', type: 'textarea', tab: 'content' },
-      { name: 'price', label: 'Price per Guest', type: 'text', tab: 'content' }
+      { name: 'price', label: 'Price per Guest', type: 'text', tab: 'content' },
+      { name: 'image', label: 'Experience Image', type: 'image', tab: 'content' },
+      { name: 'style_backgroundColor', label: 'Background color', type: 'color', tab: 'style' },
+      { name: 'style_textColor', label: 'Text color', type: 'color', tab: 'style' },
     ]
   },
   {
@@ -304,7 +333,12 @@ export const SECTION_SCHEMAS: SectionSchema[] = [
     settings: [
       { name: 'title', label: 'Headline', type: 'text', tab: 'content' },
       { name: 'description', label: 'Description', type: 'textarea', tab: 'content' },
-      { name: 'ctaText', label: 'Button text', type: 'text', tab: 'content' }
+      { name: 'ctaText', label: 'Button text', type: 'text', tab: 'content' },
+      { name: 'image', label: 'Promo Image', type: 'image', tab: 'content' },
+      { name: 'style_backgroundColor', label: 'Background color', type: 'color', tab: 'style' },
+      { name: 'style_textColor', label: 'Text color', type: 'color', tab: 'style' },
+      { name: 'style_buttonColor', label: 'Button color', type: 'color', tab: 'style' },
+      { name: 'style_buttonTextColor', label: 'Button text color', type: 'color', tab: 'style' },
     ]
   },
   {
@@ -312,7 +346,9 @@ export const SECTION_SCHEMAS: SectionSchema[] = [
     name: 'Atmosphere Gallery',
     settings: [
       { name: 'title', label: 'Gallery Heading', type: 'text', tab: 'content' },
-      { name: 'subtitle', label: 'Subtitle', type: 'textarea', tab: 'content' }
+      { name: 'subtitle', label: 'Subtitle', type: 'textarea', tab: 'content' },
+      { name: 'style_backgroundColor', label: 'Background color', type: 'color', tab: 'style' },
+      { name: 'style_textColor', label: 'Text color', type: 'color', tab: 'style' },
     ]
   },
   {
@@ -321,7 +357,10 @@ export const SECTION_SCHEMAS: SectionSchema[] = [
     settings: [
       { name: 'address', label: 'Address', type: 'textarea', tab: 'content' },
       { name: 'hours', label: 'Hours of Operation', type: 'textarea', tab: 'content' },
-      { name: 'phone', label: 'Phone Number', type: 'text', tab: 'content' }
+      { name: 'phone', label: 'Phone Number', type: 'text', tab: 'content' },
+      { name: 'image', label: 'Location Photo / Map', type: 'image', tab: 'content' },
+      { name: 'style_backgroundColor', label: 'Background color', type: 'color', tab: 'style' },
+      { name: 'style_textColor', label: 'Text color', type: 'color', tab: 'style' },
     ]
   },
   {
@@ -329,7 +368,9 @@ export const SECTION_SCHEMAS: SectionSchema[] = [
     name: 'Reviews & Acclaim',
     settings: [
       { name: 'title', label: 'Heading', type: 'text', tab: 'content' },
-      { name: 'subtitle', label: 'Subtitle', type: 'text', tab: 'content' }
+      { name: 'subtitle', label: 'Subtitle', type: 'text', tab: 'content' },
+      { name: 'style_backgroundColor', label: 'Background color', type: 'color', tab: 'style' },
+      { name: 'style_textColor', label: 'Text color', type: 'color', tab: 'style' },
     ]
   }
 ];

@@ -5,6 +5,7 @@ export interface WillovateLogoProps {
   className?: string;
   onClick?: () => void;
   style?: React.CSSProperties;
+  title?: string;
   /**
    * 'light' for light backgrounds (default: dark typography)
    * 'dark' for dark backgrounds (white typography)
@@ -19,6 +20,7 @@ export default function WillovateLogo({
   className = '',
   onClick,
   style = {},
+  title,
   variant = 'light',
   inverted = false,
 }: WillovateLogoProps) {
@@ -52,7 +54,7 @@ export default function WillovateLogo({
         flexShrink: 0,
         ...style
       }}
-      title="Willovate One"
+      title={title || "Willovate One"}
     >
       <img
         src={src}

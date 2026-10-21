@@ -13,7 +13,7 @@ export const sugarPetalConfig: StorefrontThemeConfig = {
     storyLayout: 'split-right',
     featuresLayout: 'cards-grid',
     galleryLayout: 'masonry',
-    sectionOrder: ['hero', 'products', 'promo', 'features', 'gallery', 'reviews', 'story', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'pastryBox', 'products', 'features', 'bakeSchedule', 'story', 'breadClub', 'craft', 'flourProvenance', 'breadCare', 'promo', 'gallery', 'reviews', 'location', 'newsletter'],
   },
   name: 'Sugar Petal',
   tagline: 'Sculptural modern desserts, botanical infusions, and architectural celebration cakes',
@@ -29,6 +29,7 @@ export const sugarPetalConfig: StorefrontThemeConfig = {
     border: 'rgba(219, 39, 119, 0.15)',
     badgeBg: '#fce7f3',
     badgeText: '#9d174d',
+    heroOverlay: 'linear-gradient(135deg, rgba(15,23,42,0.8) 0%, rgba(219,39,119,0.45) 100%)',
   },
   typography: {
     headingFont: '"Playfair Display", Georgia, serif',

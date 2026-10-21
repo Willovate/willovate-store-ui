@@ -115,7 +115,7 @@ export const PSJEWELSHOP_PRODUCTS: PSJewelshopProduct[] = [
     rating: 5,
     reviewCount: 67,
     images: [
-      'https://images.unsplash.com/photo-1611591475816-15e8b6283b03?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80',
       'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=800&auto=format&fit=crop&q=80',
     ],
     badge: 'HOT',

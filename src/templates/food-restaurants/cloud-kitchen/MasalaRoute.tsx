@@ -14,7 +14,7 @@ export const masalaRouteConfig: StorefrontThemeConfig = {
     storyLayout: 'card-overlay',
     featuresLayout: 'cards-grid',
     galleryLayout: 'editorial-collage',
-    sectionOrder: ['hero', 'features', 'craft', 'products', 'story', 'promo', 'gallery', 'reviews', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'packagingTech', 'products', 'features', 'deliveryRadar', 'multiBrand', 'mealPrep', 'craft', 'story', 'promo', 'gallery', 'reviews', 'location', 'newsletter'],
   },
   name: 'Masala Route',
   tagline: 'Authentic Indian Delivery Kitchen — Dum Biryanis, Clay-Pot Curries, and Tandoori Charcoal Grills',
@@ -432,7 +432,7 @@ export const masalaRouteConfig: StorefrontThemeConfig = {
       category: 'Royal Desserts & Shakes',
       price: 189,
       compareAtPrice: 220,
-      image: img('photo-1505253758473-96b3015f240a'),
+      image: img('photo-1512621776951-a57141f2eefd'),
       imageAlt: 'Traditional Kashmiri rice pudding ground coarse and simmered in full-cream milk with saffron and pistachios',
       description:
         'Traditional Kashmiri style rice pudding ground coarse, simmered in full-cream milk with Kashmiri saffron threads and green cardamom. Set in porous unglazed clay shikoras and chilled to perfection.',

@@ -14,7 +14,7 @@ export const dakshinHouseConfig: StorefrontThemeConfig = {
     featuresLayout: 'pills-row',
     storyLayout: 'card-overlay',
     galleryLayout: 'editorial-collage',
-    sectionOrder: ['hero', 'features', 'products', 'craft', 'story', 'gallery', 'reviews', 'promo', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'thaliCurator', 'spiceTerroir', 'chaiBar', 'products', 'biryaniAtelier', 'tandoorGrill', 'features', 'craft', 'story', 'gallery', 'reviews', 'promo', 'location', 'newsletter'],
   },
   name: 'Dakshin House',
   tagline: 'Artisanal South Indian coastal and regional heritage, stone-ground fermented dosas, and Kumbakonam degree coffee',

@@ -53,7 +53,7 @@ export const registry: TemplateGroup[] = [{
       ['Morning Ritual', 'morning-ritual', 'MorningRitual'], ['Brew House', 'brew-house', 'BrewHouse', true], ['Corner Cafe', 'corner-cafe', 'CornerCafe'], ['Latte Lane', 'latte-lane', 'LatteLane', true], ['The Daily Grind', 'the-daily-grind', 'DailyGrind'],
     ]),
     createCategory('bakery', 'Bakery', 'bakery', palettes.bakery, [
-      ['Golden Crumb', 'golden-crumb', 'GoldenCrumb'], ['Patisserie Lune', 'patisserie-lune', 'PatisserieLune', true], ['Rise & Knead', 'rise-and-knead', 'RiseAndKnead'], ['Rustic Oven', 'rustic-oven', 'RusticOven', true], ['Sugar Petal', 'sugar-petal', 'SugarPetal'],
+      ['Butter & Bloom', 'butter-and-bloom', 'ButterAndBloom'], ['Golden Crumb', 'golden-crumb', 'GoldenCrumb'], ['Patisserie Lune', 'patisserie-lune', 'PatisserieLune', true], ['Rise & Knead', 'rise-and-knead', 'RiseAndKnead'], ['Rustic Oven', 'rustic-oven', 'RusticOven', true], ['Sugar Petal', 'sugar-petal', 'SugarPetal'],
     ]),
     createCategory('fast-food', 'Fast Food', 'fast-food', palettes.fast, [
       ['Burger Blitz', 'burger-blitz', 'BurgerBlitz'], ['Crunch Box', 'crunch-box', 'CrunchBox', true], ['Quick Bowl', 'quick-bowl', 'QuickBowl'], ['Street Bites', 'street-bites', 'StreetBites', true], ['Wrap Rush', 'wrap-rush', 'WrapRush'],

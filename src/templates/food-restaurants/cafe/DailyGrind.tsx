@@ -13,7 +13,7 @@ export const dailyGrindConfig: StorefrontThemeConfig = {
     storyLayout: 'split-right',
     featuresLayout: 'cards-grid',
     galleryLayout: 'editorial-collage',
-    sectionOrder: ['hero', 'products', 'promo', 'features', 'gallery', 'reviews', 'story', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'products', 'customizer', 'subscription', 'features', 'amenities', 'beanPassport', 'promo', 'gallery', 'reviews', 'story', 'location', 'newsletter'],
   },
   name: 'The Daily Grind',
   tagline: 'Bold urban dark roast espresso bar with 60-second commuter pickup and high-octane energy',

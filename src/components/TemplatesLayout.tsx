@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import {
   Home, ShoppingBag, Folder, Users, TrendingUp, Megaphone,
-  SlidersHorizontal, Bookmark, Settings, HelpCircle, ChevronDown
+  SlidersHorizontal, Bookmark, Settings, HelpCircle, ChevronDown, Store
 } from 'lucide-react';
 import '../styles/workspace.css';
 import { useState } from 'react';
@@ -20,9 +20,40 @@ export default function TemplatesLayout({ children }: { children: ReactNode }) {
     <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100vh', background: '#f8fafc' }}>
       {/* ── GLOBAL DASHBOARD HEADER ── */}
       <header className="ws-topbar" style={{ display: 'flex', justifyContent: 'space-between', padding: '0 1.25rem', height: '60px', background: '#fff', borderBottom: '1px solid #eef0f5', flexShrink: 0, zIndex: 90 }}>
-        <div className="ws-topbar-left" style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
-          <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }}>
+        <div className="ws-topbar-left" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <Link to="/" title="Return to Willovate One Main Store" style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }}>
             <WillovateLogo height={34} style={{ cursor: 'pointer' }} />
+          </Link>
+          <Link
+            to="/"
+            title="Return to Willovate One Main Store"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              background: '#f8fafc',
+              border: '1px solid #e2e8f0',
+              color: '#475569',
+              padding: '0.4rem 0.85rem',
+              borderRadius: '8px',
+              fontWeight: 600,
+              fontSize: '13px',
+              textDecoration: 'none',
+              transition: 'all 0.15s ease',
+            }}
+            onMouseOver={e => {
+              e.currentTarget.style.backgroundColor = '#eef2ff';
+              e.currentTarget.style.color = '#4338ca';
+              e.currentTarget.style.borderColor = '#c7d2fe';
+            }}
+            onMouseOut={e => {
+              e.currentTarget.style.backgroundColor = '#f8fafc';
+              e.currentTarget.style.color = '#475569';
+              e.currentTarget.style.borderColor = '#e2e8f0';
+            }}
+          >
+            <Store size={15} />
+            <span>Main Store</span>
           </Link>
         </div>
         <div className="ws-topbar-right" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -37,6 +68,7 @@ export default function TemplatesLayout({ children }: { children: ReactNode }) {
         {/* ── DASHBOARD SIDEBAR ── */}
         <aside className="ws-sidebar ws-dashboard-sidebar" style={{ width: '260px', borderRight: '1px solid #eef0f5', background: '#fff', display: 'flex', flexDirection: 'column', flexShrink: 0, overflow: 'hidden' }}>
           <nav className="ws-sidebar-nav" style={{ padding: '1rem', flex: 1, display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
+
             <p className="ws-sidebar-section-label" style={{ color: '#1e1b4b', fontSize: '0.7rem', fontWeight: 800, letterSpacing: '1px', marginBottom: '0.4rem', padding: '0 0.5rem' }}>MAIN MENU</p>
             <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem', padding: 0, margin: 0, listStyle: 'none' }}>
               <li>

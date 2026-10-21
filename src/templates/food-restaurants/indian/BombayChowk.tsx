@@ -14,7 +14,7 @@ export const bombayChowkConfig: StorefrontThemeConfig = {
     featuresLayout: 'cards-grid',
     storyLayout: 'stats-prominent',
     galleryLayout: 'masonry',
-    sectionOrder: ['hero', 'products', 'craft', 'features', 'promo', 'story', 'gallery', 'reviews', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'thaliCurator', 'chaiBar', 'tandoorGrill', 'products', 'features', 'biryaniAtelier', 'spiceTerroir', 'craft', 'promo', 'story', 'gallery', 'reviews', 'location', 'newsletter'],
   },
   name: 'Bombay Chowk',
   tagline: 'High-energy contemporary Mumbai street food, sizzling tawa classics, crispy chaats, and late-night cutting chai',

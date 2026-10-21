@@ -14,7 +14,7 @@ export const sattvaKitchenConfig: StorefrontThemeConfig = {
     featuresLayout: 'pills-row',
     storyLayout: 'split-right',
     galleryLayout: 'masonry',
-    sectionOrder: ['hero', 'craft', 'features', 'products', 'story', 'gallery', 'promo', 'reviews', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'spiceTerroir', 'thaliCurator', 'products', 'chaiBar', 'tandoorGrill', 'features', 'biryaniAtelier', 'craft', 'story', 'gallery', 'reviews', 'promo', 'location', 'newsletter'],
   },
   name: 'Sattva Kitchen',
   tagline: 'Mindful contemporary Indian vegetarian gastronomy celebrating seasonal harvests and farm-to-table purity',

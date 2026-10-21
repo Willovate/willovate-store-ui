@@ -13,7 +13,7 @@ export const kebabKingdomConfig: StorefrontThemeConfig = {
     featuresLayout: 'pills-row',
     storyLayout: 'split-right',
     galleryLayout: 'masonry',
-    sectionOrder: ['hero', 'craft', 'features', 'products', 'promo', 'story', 'gallery', 'reviews', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'mangalGrill', 'butcherPlatter', 'products', 'smokerTelemetry', 'features', 'craft', 'story', 'promo', 'gallery', 'reviews', 'location', 'newsletter'],
   },
   name: 'Kebab Kingdom',
   tagline: 'Royal Middle Eastern & Awadhi Charcoal Grills, Seekh Kebabs & Shahi Feasts',
