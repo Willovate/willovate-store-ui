@@ -1,0 +1,687 @@
+/* Dezel Luxury Perfume Theme Styles */
+:root {
+  --dezel-teal: #082e38;
+  --dezel-teal-dark: #051e25;
+  --dezel-gold: #c59d5f;
+  --dezel-bg: #ffffff;
+  --dezel-card-bg: #ffffff;
+  --dezel-border: #e2ece9;
+  --dezel-text: #1d2f33;
+  --dezel-text-muted: #698187;
+}
+
+.dezel-storefront {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--dezel-text);
+  background-color: var(--dezel-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Header */
+.dezel-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--dezel-teal);
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dezel-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.dezel-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+.dezel-logo-img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.dezel-nav-menu {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dezel-nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: color 0.2s ease;
+}
+
+.dezel-nav-link:hover,
+.dezel-nav-link.active {
+  color: var(--dezel-gold);
+}
+
+.dezel-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.dezel-icon-btn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.dezel-icon-btn:hover {
+  color: var(--dezel-gold);
+}
+
+.dezel-cart-badge {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  background-color: var(--dezel-gold);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Split Hero Section */
+.dezel-hero-section {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  min-height: 600px;
+  background-color: #f7faf9;
+}
+
+.dezel-hero-left {
+  background-color: var(--dezel-teal);
+  color: #ffffff;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.dezel-hero-prod-card {
+  background-color: #ffffff;
+  border-radius: 4px;
+  padding: 24px;
+  text-align: center;
+  color: var(--dezel-text);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  margin-top: 40px;
+}
+
+.dezel-hero-prod-img {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  margin-bottom: 14px;
+}
+
+.dezel-hero-prod-title {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.dezel-hero-prod-price {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a6f82;
+  margin-bottom: 12px;
+}
+
+.dezel-hero-add-link {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--dezel-text);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.dezel-hero-left-bottom {
+  margin-top: 40px;
+}
+
+.dezel-hero-quote {
+  font-size: 13px;
+  line-height: 1.6;
+  opacity: 0.85;
+  margin-bottom: 16px;
+}
+
+.dezel-hero-arrows {
+  display: flex;
+  gap: 16px;
+}
+
+.dezel-arrow-btn {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.dezel-arrow-btn:hover {
+  border-color: var(--dezel-gold);
+  color: var(--dezel-gold);
+}
+
+.dezel-hero-right {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 80px 80px;
+  background-image: url('https://dezel-perfume.myshopify.com/cdn/shop/files/1_768x940.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.dezel-hero-watermark {
+  position: absolute;
+  bottom: 20px;
+  left: 60px;
+  font-family: 'Brush Script MT', cursive;
+  font-size: 110px;
+  color: rgba(26, 111, 130, 0.12);
+  pointer-events: none;
+}
+
+.dezel-hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 560px;
+}
+
+.dezel-hero-h1 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 52px;
+  line-height: 1.15;
+  color: var(--dezel-teal);
+  margin-bottom: 20px;
+}
+
+.dezel-hero-sub {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--dezel-text-muted);
+  margin-bottom: 30px;
+}
+
+.dezel-btn-explore {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--dezel-teal);
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.dezel-btn-explore:hover {
+  color: var(--dezel-gold);
+}
+
+/* 2 Middle Promo Grid */
+.dezel-promos-section {
+  padding: 60px 0;
+}
+
+.dezel-promos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.dezel-promo-banner {
+  position: relative;
+  height: 320px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+.dezel-promo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.dezel-promo-banner:hover .dezel-promo-img {
+  transform: scale(1.04);
+}
+
+.dezel-promo-content {
+  position: absolute;
+  inset: 0;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 320px;
+}
+
+.dezel-promo-title {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 26px;
+  color: var(--dezel-teal);
+  line-height: 1.25;
+  margin-bottom: 12px;
+}
+
+.dezel-promo-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--dezel-text-muted);
+}
+
+/* 4 Fragrance Note Badges */
+.dezel-notes-section {
+  padding: 40px 0 70px;
+}
+
+.dezel-notes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  text-align: center;
+}
+
+.dezel-note-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dezel-note-icon {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  margin-bottom: 16px;
+}
+
+.dezel-note-title {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 17px;
+  margin-bottom: 4px;
+}
+
+.dezel-note-sub {
+  font-size: 12px;
+  color: var(--dezel-text-muted);
+}
+
+/* Transparent Glow Feature Section */
+.dezel-glow-section {
+  padding: 60px 0;
+  background-color: #f7faf9;
+}
+
+.dezel-glow-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
+}
+
+.dezel-glow-img {
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Most Popular Perfumes */
+.dezel-popular-section {
+  padding: 80px 0;
+  text-align: center;
+}
+
+.dezel-section-h2 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 36px;
+  color: var(--dezel-teal);
+  margin-bottom: 48px;
+}
+
+.dezel-popular-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.dezel-perfume-card {
+  background-color: #ffffff;
+  border: 1px solid var(--dezel-border);
+  border-radius: 4px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.dezel-perfume-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(8, 46, 56, 0.1);
+  border-color: #a8cfd6;
+}
+
+.dezel-card-img {
+  width: 180px;
+  height: 200px;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+
+.dezel-card-name {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 18px;
+  color: var(--dezel-teal);
+  margin-bottom: 6px;
+}
+
+.dezel-card-notes {
+  font-size: 12px;
+  color: var(--dezel-text-muted);
+  margin-bottom: 12px;
+}
+
+.dezel-card-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a6f82;
+  margin-bottom: 16px;
+}
+
+.dezel-card-btn {
+  background-color: var(--dezel-teal);
+  color: #ffffff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.dezel-card-btn:hover {
+  background-color: var(--dezel-gold);
+}
+
+/* Testimonial Section */
+.dezel-test-section {
+  padding: 70px 0;
+  background-color: #f7faf9;
+  text-align: center;
+}
+
+.dezel-test-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 18px;
+  border: 2px solid var(--dezel-teal);
+}
+
+.dezel-test-content {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--dezel-text);
+  font-style: italic;
+  max-width: 680px;
+  margin: 0 auto 16px;
+}
+
+.dezel-test-author {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 18px;
+  color: var(--dezel-teal);
+}
+
+/* Blog Section */
+.dezel-blog-section {
+  padding: 80px 0;
+  text-align: center;
+}
+
+.dezel-blog-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  text-align: left;
+}
+
+.dezel-blog-card {
+  border: 1px solid var(--dezel-border);
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.dezel-blog-thumb {
+  height: 260px;
+  overflow: hidden;
+}
+
+.dezel-blog-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.dezel-blog-card:hover .dezel-blog-img {
+  transform: scale(1.05);
+}
+
+.dezel-blog-body {
+  padding: 24px;
+}
+
+.dezel-blog-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: #1a6f82;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.dezel-blog-title {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 20px;
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+
+.dezel-blog-excerpt {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--dezel-text-muted);
+  margin-bottom: 16px;
+}
+
+.dezel-blog-link {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--dezel-teal);
+  text-decoration: underline;
+}
+
+/* Teal Footer */
+.dezel-footer {
+  background-color: var(--dezel-teal-dark);
+  color: #a8cfd6;
+  padding: 60px 0 30px;
+}
+
+.dezel-footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: 36px;
+  margin-bottom: 40px;
+}
+
+.dezel-footer-h4 {
+  color: #ffffff;
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 17px;
+  margin-bottom: 18px;
+}
+
+.dezel-footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dezel-footer-link {
+  color: #a8cfd6;
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s ease;
+}
+
+.dezel-footer-link:hover {
+  color: #ffffff;
+}
+
+.dezel-footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #a8cfd6;
+}
+
+/* Drawer / Modal */
+.dezel-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.55);
+  z-index: 200;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dezel-drawer {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.dezel-drawer-header {
+  padding: 20px;
+  border-bottom: 1px solid var(--dezel-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--dezel-teal);
+  color: #ffffff;
+}
+
+.dezel-drawer-body {
+  padding: 20px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.dezel-drawer-footer {
+  padding: 20px;
+  border-top: 1px solid var(--dezel-border);
+  background-color: #f7faf9;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .dezel-hero-section {
+    grid-template-columns: 1fr;
+  }
+  .dezel-promos-grid {
+    grid-template-columns: 1fr;
+  }
+  .dezel-notes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .dezel-glow-grid {
+    grid-template-columns: 1fr;
+  }
+  .dezel-popular-grid {
+    grid-template-columns: 1fr;
+  }
+  .dezel-blog-grid {
+    grid-template-columns: 1fr;
+  }
+  .dezel-footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dezel-nav-menu {
+    display: none;
+  }
+  .dezel-hero-h1 {
+    font-size: 36px;
+  }
+  .dezel-notes-grid {
+    grid-template-columns: 1fr;
+  }
+  .dezel-footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

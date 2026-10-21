@@ -240,7 +240,17 @@ function App() {
             rawHash === 'belletny' ||
             rawHash === 'cosmetics-belletny' ||
             rawHash === 'belletny-codezeel' ||
-            rawHash === 'belletny-theme'
+            rawHash === 'belletny-theme' ||
+            rawHash === 'smetic' ||
+            rawHash === 'cosmetics-smetic' ||
+            rawHash === 'smetic-store' ||
+            rawHash === 'smetic-theme' ||
+            rawHash === 'smetic-store-demo' ||
+            rawHash === 'dezel' ||
+            rawHash === 'cosmetics-dezel' ||
+            rawHash === 'dezel-perfume' ||
+            rawHash === 'dezel-theme' ||
+            rawHash === 'perfume'
           )) ||
           (key === 'jewelry-accessories' && (
             rawHash === 'jewelry' ||

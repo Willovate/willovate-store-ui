@@ -7,6 +7,8 @@ import {
   ORGANICA_TEMPLATE,
   SHADES_TEMPLATE,
   BELLETNY_TEMPLATE,
+  SMETIC_TEMPLATE,
+  DEZEL_TEMPLATE,
 } from '../../data/cosmeticsTemplatesData'
 import {
   TEMPLATE_REGISTRY,
@@ -83,17 +85,36 @@ import {
   BELLETNY_BLOG_POSTS,
   BELLETNY_BRAND_LOGOS,
 } from './Belletny/data/belletnyData'
+import {
+  SMETIC_LOGO,
+  SMETIC_HERO_SLIDES,
+  SMETIC_TRUST_ITEMS,
+  SMETIC_PRODUCTS,
+  SMETIC_PROMO_CARDS,
+  SMETIC_WIDE_BANNER,
+} from './Smetic/data/smeticData'
+import {
+  DEZEL_LOGO,
+  DEZEL_HERO_SLIDES,
+  DEZEL_NOTE_BADGES,
+  DEZEL_PRODUCTS,
+  DEZEL_2_MIDDLE_BANNERS,
+  DEZEL_TESTIMONIAL,
+  DEZEL_BLOG_POSTS,
+} from './Dezel/data/dezelData'
 import { BeauxStorefront } from './Beaux/BeauxStorefront'
 import { GlowingStorefront } from './Glowing/GlowingStorefront'
 import { FabishStorefront } from './Fabish/FabishStorefront'
 import { OrganicaStorefront } from './Organica/OrganicaStorefront'
 import { ShadesStorefront } from './Shades/ShadesStorefront'
 import { BelletnyStorefront } from './Belletny/BelletnyStorefront'
+import { SmeticStorefront } from './Smetic/SmeticStorefront'
+import { DezelStorefront } from './Dezel/DezelStorefront'
 
 describe('Cosmetics & Beauty Templates Verification', () => {
   describe('Marketplace Template Metadata', () => {
-    it('contains all 6 templates in ALL_COSMETICS_MARKETPLACE_TEMPLATES', () => {
-      expect(ALL_COSMETICS_MARKETPLACE_TEMPLATES).toHaveLength(6)
+    it('contains all 8 templates in ALL_COSMETICS_MARKETPLACE_TEMPLATES', () => {
+      expect(ALL_COSMETICS_MARKETPLACE_TEMPLATES).toHaveLength(8)
       const ids = ALL_COSMETICS_MARKETPLACE_TEMPLATES.map((t) => t.id)
       expect(ids).toContain('cosmetics-beaux')
       expect(ids).toContain('cosmetics-glowing')
@@ -101,6 +122,8 @@ describe('Cosmetics & Beauty Templates Verification', () => {
       expect(ids).toContain('cosmetics-organica')
       expect(ids).toContain('cosmetics-shades')
       expect(ids).toContain('cosmetics-belletny')
+      expect(ids).toContain('cosmetics-smetic')
+      expect(ids).toContain('cosmetics-dezel')
     })
 
     it('has valid metadata for Beaux Template matching live Shopify theme', () => {
@@ -164,20 +187,47 @@ describe('Cosmetics & Beauty Templates Verification', () => {
       expect(BELLETNY_TEMPLATE.thumbnailUrl).toContain('belletny-codezeel.myshopify.com')
       expect(BELLETNY_TEMPLATE.headline).toBe('Clean Matte Liquid Foundation')
     })
+
+    it('has valid metadata for Smetic Template matching live Shopify theme & screenshot', () => {
+      expect(SMETIC_TEMPLATE.brandName).toBe('Smetic')
+      expect(SMETIC_TEMPLATE.businessType).toBe('health-beauty')
+      expect(SMETIC_TEMPLATE.style).toBe('clean')
+      expect(SMETIC_TEMPLATE.rating).toBeGreaterThanOrEqual(4.8)
+      expect(SMETIC_TEMPLATE.fullPreviewUrl).toBe('https://smetic-store-demo.myshopify.com/?pb=0')
+      expect(SMETIC_TEMPLATE.thumbnailUrl).toContain('smetic-store-demo.myshopify.com')
+      expect(SMETIC_TEMPLATE.thumbnailUrl).toBe(
+        'https://smetic-store-demo.myshopify.com/cdn/shop/files/slide1.1.jpg',
+      )
+      expect(SMETIC_TEMPLATE.modelImage).toBe(SMETIC_TEMPLATE.thumbnailUrl)
+      expect(SMETIC_TEMPLATE.headline).toBe('Cosmetic & Beauty Natural Products')
+    })
+
+    it('has valid metadata for Dezel Template matching live Shopify theme & screenshot', () => {
+      expect(DEZEL_TEMPLATE.brandName).toBe('Dezel')
+      expect(DEZEL_TEMPLATE.businessType).toBe('health-beauty')
+      expect(DEZEL_TEMPLATE.style).toBe('luxury')
+      expect(DEZEL_TEMPLATE.isDark).toBe(true)
+      expect(DEZEL_TEMPLATE.rating).toBeGreaterThanOrEqual(4.8)
+      expect(DEZEL_TEMPLATE.fullPreviewUrl).toBe('https://dezel-perfume.myshopify.com/')
+      expect(DEZEL_TEMPLATE.thumbnailUrl).toContain('dezel-perfume.myshopify.com')
+      expect(DEZEL_TEMPLATE.headline).toBe('Fragrance of Love with perfume')
+    })
   })
 
   describe('Template Registry & Routing', () => {
-    it('registers health-beauty in TEMPLATE_REGISTRY with 6 cosmetics templates', () => {
+    it('registers health-beauty in TEMPLATE_REGISTRY with 8 cosmetics templates', () => {
       const category = TEMPLATE_REGISTRY['health-beauty']
       expect(category).toBeDefined()
       expect(category.displayName).toBe('Cosmetics & Beauty')
-      expect(category.templates).toHaveLength(6)
+      expect(category.templates).toHaveLength(8)
       expect(category.templates[0].id).toBe('cosmetics-beaux')
       expect(category.templates[1].id).toBe('cosmetics-glowing')
       expect(category.templates[2].id).toBe('cosmetics-fabish')
       expect(category.templates[3].id).toBe('cosmetics-organica')
       expect(category.templates[4].id).toBe('cosmetics-shades')
       expect(category.templates[5].id).toBe('cosmetics-belletny')
+      expect(category.templates[6].id).toBe('cosmetics-smetic')
+      expect(category.templates[7].id).toBe('cosmetics-dezel')
     })
 
     it('resolves cosmetic category keys in getTemplateCategoryKey', () => {
@@ -192,10 +242,15 @@ describe('Cosmetics & Beauty Templates Verification', () => {
       expect(getTemplateCategoryKey('organica')).toBe('health-beauty')
       expect(getTemplateCategoryKey('shades')).toBe('health-beauty')
       expect(getTemplateCategoryKey('belletny')).toBe('health-beauty')
+      expect(getTemplateCategoryKey('smetic')).toBe('health-beauty')
+      expect(getTemplateCategoryKey('dezel')).toBe('health-beauty')
+      expect(getTemplateCategoryKey('perfume')).toBe('health-beauty')
     })
 
     it('recognizes branded organic beauty prompts as cosmetics', () => {
       expect(isCosmeticsPrompt('Belletny Organic Beauty')).toBe(true)
+      expect(isCosmeticsPrompt('Smetic Natural Blush')).toBe(true)
+      expect(isCosmeticsPrompt('Dezel Luxury Perfume')).toBe(true)
       expect(isCosmeticsPrompt('Organic skincare and makeup store')).toBe(true)
       expect(isCosmeticsPrompt('Luxury fashion boutique')).toBe(false)
     })
@@ -204,6 +259,12 @@ describe('Cosmetics & Beauty Templates Verification', () => {
       expect(
         getTemplateIdFromPrompt('Belletny Organic Beauty', ALL_COSMETICS_MARKETPLACE_TEMPLATES),
       ).toBe(BELLETNY_TEMPLATE.id)
+      expect(
+        getTemplateIdFromPrompt('Smetic Organic Cosmetic', ALL_COSMETICS_MARKETPLACE_TEMPLATES),
+      ).toBe(SMETIC_TEMPLATE.id)
+      expect(
+        getTemplateIdFromPrompt('Dezel Luxury Parfumerie', ALL_COSMETICS_MARKETPLACE_TEMPLATES),
+      ).toBe(DEZEL_TEMPLATE.id)
     })
 
     it('does not treat Belletny as the Belle fashion template', () => {
@@ -245,6 +306,18 @@ describe('Cosmetics & Beauty Templates Verification', () => {
       expect(getTemplateComponent('cosmetics-belletny')).toBe(BelletnyStorefront)
       expect(getTemplateComponent('belletny')).toBe(BelletnyStorefront)
       expect(getTemplateComponent(BELLETNY_TEMPLATE)).toBe(BelletnyStorefront)
+    })
+
+    it('resolves getTemplateComponent correctly for Smetic', () => {
+      expect(getTemplateComponent('cosmetics-smetic')).toBe(SmeticStorefront)
+      expect(getTemplateComponent('smetic')).toBe(SmeticStorefront)
+      expect(getTemplateComponent(SMETIC_TEMPLATE)).toBe(SmeticStorefront)
+    })
+
+    it('resolves getTemplateComponent correctly for Dezel', () => {
+      expect(getTemplateComponent('cosmetics-dezel')).toBe(DezelStorefront)
+      expect(getTemplateComponent('dezel')).toBe(DezelStorefront)
+      expect(getTemplateComponent(DEZEL_TEMPLATE)).toBe(DezelStorefront)
     })
   })
 
@@ -338,6 +411,36 @@ describe('Cosmetics & Beauty Templates Verification', () => {
       expect(BELLETNY_TESTIMONIAL.author).toBe('Chrs Nichols')
       expect(BELLETNY_BLOG_POSTS).toHaveLength(3)
       expect(BELLETNY_BRAND_LOGOS).toHaveLength(5)
+    })
+  })
+
+  describe('Smetic Storefront Data Integrity', () => {
+    it('has authentic Smetic assets matching live theme and user screenshot', () => {
+      expect(SMETIC_LOGO).toContain('smetic-store-demo.myshopify.com')
+      expect(SMETIC_HERO_SLIDES).toHaveLength(2)
+      expect(SMETIC_HERO_SLIDES[0].eyebrow).toBe('COSMETIC & BEAUTY')
+      expect(SMETIC_HERO_SLIDES[0].title).toBe('Natural Products')
+      expect(SMETIC_HERO_SLIDES[0].image).toContain('smetic-store-demo.myshopify.com')
+      expect(SMETIC_TRUST_ITEMS).toHaveLength(4)
+      expect(SMETIC_PRODUCTS.length).toBeGreaterThanOrEqual(8)
+      expect(SMETIC_PRODUCTS[0].name).toBe('Cleansing Melt Spa')
+      expect(SMETIC_PROMO_CARDS).toHaveLength(3)
+      expect(SMETIC_WIDE_BANNER.heading).toContain('Buyer Protection')
+    })
+  })
+
+  describe('Dezel Storefront Data Integrity', () => {
+    it('has authentic Dezel assets matching live theme and user screenshot', () => {
+      expect(DEZEL_LOGO).toContain('dezel-perfume.myshopify.com')
+      expect(DEZEL_HERO_SLIDES).toHaveLength(2)
+      expect(DEZEL_HERO_SLIDES[0].title).toBe('Fragrance of Love with perfume')
+      expect(DEZEL_HERO_SLIDES[0].featuredProduct.name).toBe('Prismatic Perfume')
+      expect(DEZEL_NOTE_BADGES).toHaveLength(4)
+      expect(DEZEL_PRODUCTS.length).toBeGreaterThanOrEqual(6)
+      expect(DEZEL_PRODUCTS[0].name).toBe('Tocca Perfume')
+      expect(DEZEL_2_MIDDLE_BANNERS).toHaveLength(2)
+      expect(DEZEL_TESTIMONIAL.author).toBe('Amelia Rose')
+      expect(DEZEL_BLOG_POSTS).toHaveLength(2)
     })
   })
 })

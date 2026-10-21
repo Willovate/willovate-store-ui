@@ -86,6 +86,8 @@ import {
   ORGANICA_TEMPLATE,
   SHADES_TEMPLATE,
   BELLETNY_TEMPLATE,
+  SMETIC_TEMPLATE,
+  DEZEL_TEMPLATE,
   ALL_COSMETICS_MARKETPLACE_TEMPLATES,
 } from '../../data/cosmeticsTemplatesData'
 import {
@@ -95,8 +97,10 @@ import {
   OrganicaStorefront,
   ShadesStorefront,
   BelletnyStorefront,
+  SmeticStorefront,
+  DezelStorefront,
 } from '../../templates/cosmetics'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront, VtOlightStorefront, SwarnaStorefront, JewStorefront, HappyFeetStorefront, ShoeZoneStorefront, SusieShoesStorefront, FashionFeetStorefront, FootwearWorkDoStorefront, ShoesWorkDoStorefront, SensationStorefront, GiarosStorefront, StepGlamStorefront, ApShoesStorefront, BeauxStorefront, GlowingStorefront, FabishStorefront, OrganicaStorefront, ShadesStorefront, BelletnyStorefront, HAPPY_FEET_TEMPLATE, SHOE_ZONE_TEMPLATE, SUSIE_SHOES_TEMPLATE, FASHION_FEET_TEMPLATE, FOOTWEAR_WORKDO_TEMPLATE, SHOES_WORKDO_TEMPLATE, SENSATION_WORKDO_TEMPLATE, GIAROS_TEMPLATE, STEPGLAM_TEMPLATE, AP_SHOES_TEMPLATE, BEAUX_TEMPLATE, GLOWING_TEMPLATE, FABISH_TEMPLATE, ORGANICA_TEMPLATE, SHADES_TEMPLATE, BELLETNY_TEMPLATE, ALL_COSMETICS_MARKETPLACE_TEMPLATES }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront, VtOlightStorefront, SwarnaStorefront, JewStorefront, HappyFeetStorefront, ShoeZoneStorefront, SusieShoesStorefront, FashionFeetStorefront, FootwearWorkDoStorefront, ShoesWorkDoStorefront, SensationStorefront, GiarosStorefront, StepGlamStorefront, ApShoesStorefront, BeauxStorefront, GlowingStorefront, FabishStorefront, OrganicaStorefront, ShadesStorefront, BelletnyStorefront, SmeticStorefront, DezelStorefront, HAPPY_FEET_TEMPLATE, SHOE_ZONE_TEMPLATE, SUSIE_SHOES_TEMPLATE, FASHION_FEET_TEMPLATE, FOOTWEAR_WORKDO_TEMPLATE, SHOES_WORKDO_TEMPLATE, SENSATION_WORKDO_TEMPLATE, GIAROS_TEMPLATE, STEPGLAM_TEMPLATE, AP_SHOES_TEMPLATE, BEAUX_TEMPLATE, GLOWING_TEMPLATE, FABISH_TEMPLATE, ORGANICA_TEMPLATE, SHADES_TEMPLATE, BELLETNY_TEMPLATE, SMETIC_TEMPLATE, DEZEL_TEMPLATE, ALL_COSMETICS_MARKETPLACE_TEMPLATES }
 
 
 // Re-export domain types
@@ -968,6 +972,46 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   ) {
     return (
       <BelletnyStorefront
+        template={template}
+        device={device === 'fullscreen' ? 'desktop' : device}
+        onBack={onClose}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'cosmetics-smetic' ||
+      template.id === 'cosmetics-smetic' ||
+      template.slug === 'smetic' ||
+      template.id === 'smetic' ||
+      template.slug === 'smetic-store-demo' ||
+      template.name?.toLowerCase() === 'smetic' ||
+      template.name?.toLowerCase().startsWith('smetic') ||
+      template.name?.toLowerCase().includes('smetic organic') ||
+      template.brandName?.toLowerCase() === 'smetic')
+  ) {
+    return (
+      <SmeticStorefront
+        template={template}
+        device={device === 'fullscreen' ? 'desktop' : device}
+        onBack={onClose}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'cosmetics-dezel' ||
+      template.id === 'cosmetics-dezel' ||
+      template.slug === 'dezel' ||
+      template.id === 'dezel' ||
+      template.slug === 'dezel-perfume' ||
+      template.name?.toLowerCase().includes('dezel') ||
+      template.brandName?.toLowerCase().includes('dezel'))
+  ) {
+    return (
+      <DezelStorefront
         template={template}
         device={device === 'fullscreen' ? 'desktop' : device}
         onBack={onClose}
@@ -2126,6 +2170,24 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
       return BELLETNY_TEMPLATE
     }
     if (
+      rawHash === 'smetic' ||
+      rawHash === 'cosmetics-smetic' ||
+      rawHash === 'smetic-store' ||
+      rawHash === 'smetic-theme' ||
+      rawHash === 'smetic-store-demo'
+    ) {
+      return SMETIC_TEMPLATE
+    }
+    if (
+      rawHash === 'dezel' ||
+      rawHash === 'cosmetics-dezel' ||
+      rawHash === 'dezel-perfume' ||
+      rawHash === 'dezel-theme' ||
+      rawHash === 'perfume'
+    ) {
+      return DEZEL_TEMPLATE
+    }
+    if (
       rawHash === 'shoes-workdo' ||
       rawHash === 'shoesworkdo' ||
       rawHash === 'workdo-shoes-store'
@@ -2434,6 +2496,22 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
         rawHash === 'belletny-theme'
       ) {
         setPreviewTemplate(BELLETNY_TEMPLATE)
+      } else if (
+        rawHash === 'smetic' ||
+        rawHash === 'cosmetics-smetic' ||
+        rawHash === 'smetic-store' ||
+        rawHash === 'smetic-theme' ||
+        rawHash === 'smetic-store-demo'
+      ) {
+        setPreviewTemplate(SMETIC_TEMPLATE)
+      } else if (
+        rawHash === 'dezel' ||
+        rawHash === 'cosmetics-dezel' ||
+        rawHash === 'dezel-perfume' ||
+        rawHash === 'dezel-theme' ||
+        rawHash === 'perfume'
+      ) {
+        setPreviewTemplate(DEZEL_TEMPLATE)
       } else if (
         rawHash === 'shoes-workdo' ||
         rawHash === 'shoesworkdo' ||

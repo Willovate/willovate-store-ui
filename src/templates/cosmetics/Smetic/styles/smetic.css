@@ -1,0 +1,695 @@
+/* Smetic Organic Cosmetics Theme Styles */
+:root {
+  --smetic-coral: #f99191;
+  --smetic-coral-hover: #e67a7a;
+  --smetic-coral-light: #fef4f4;
+  --smetic-bg: #ffffff;
+  --smetic-text: #282828;
+  --smetic-text-muted: #777777;
+  --smetic-border: #f0f0f0;
+}
+
+.smetic-storefront {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--smetic-text);
+  background-color: var(--smetic-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Header */
+.smetic-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--smetic-border);
+}
+
+.smetic-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.smetic-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0;
+}
+
+.smetic-logo-img {
+  height: 46px;
+  width: auto;
+  object-fit: contain;
+}
+
+.smetic-nav-menu {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.smetic-nav-item {
+  position: relative;
+}
+
+.smetic-nav-link {
+  color: var(--smetic-text);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.smetic-nav-link:hover,
+.smetic-nav-link.active {
+  color: var(--smetic-coral);
+}
+
+.smetic-badge-hot {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  background-color: #d84524;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 5px;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+.smetic-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.smetic-icon-btn {
+  background: none;
+  border: none;
+  color: var(--smetic-text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 6px;
+  transition: color 0.2s ease;
+}
+
+.smetic-icon-btn:hover {
+  color: var(--smetic-coral);
+}
+
+.smetic-cart-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--smetic-coral);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hero Section */
+.smetic-hero-section {
+  position: relative;
+  background-color: #fcfbfb;
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+}
+
+.smetic-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.smetic-hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 520px;
+  padding: 60px 0;
+  margin-left: auto;
+}
+
+.smetic-hero-eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #555555;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.smetic-hero-title {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 52px;
+  line-height: 1.15;
+  color: var(--smetic-text);
+  margin-bottom: 20px;
+}
+
+.smetic-hero-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--smetic-text-muted);
+  margin-bottom: 30px;
+}
+
+.smetic-btn-coral {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--smetic-coral);
+  color: #ffffff;
+  border: none;
+  padding: 14px 36px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+}
+
+.smetic-btn-coral:hover {
+  background-color: var(--smetic-coral-hover);
+}
+
+.smetic-hero-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 1px solid var(--smetic-border);
+  color: var(--smetic-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.smetic-hero-arrow:hover {
+  background-color: var(--smetic-coral);
+  color: #ffffff;
+  border-color: var(--smetic-coral);
+}
+
+.smetic-hero-arrow.prev {
+  left: 24px;
+}
+
+.smetic-hero-arrow.next {
+  right: 24px;
+}
+
+/* Trust Badges Strip */
+.smetic-trust-section {
+  padding: 40px 0;
+  border-bottom: 1px solid var(--smetic-border);
+  background-color: #ffffff;
+}
+
+.smetic-trust-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.smetic-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px;
+}
+
+.smetic-trust-icon {
+  font-size: 32px;
+}
+
+.smetic-trust-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.smetic-trust-sub {
+  font-size: 12px;
+  color: var(--smetic-text-muted);
+}
+
+/* Best Seller Grid */
+.smetic-products-section {
+  padding: 60px 0;
+}
+
+.smetic-section-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.smetic-section-title h2 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 32px;
+  margin-bottom: 6px;
+}
+
+.smetic-section-title p {
+  font-size: 13px;
+  color: var(--smetic-text-muted);
+}
+
+.smetic-products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.smetic-product-card {
+  background-color: #ffffff;
+  border: 1px solid var(--smetic-border);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.smetic-product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+  border-color: #f7d2d2;
+}
+
+.smetic-card-thumb {
+  position: relative;
+  aspect-ratio: 1;
+  background-color: #fafafa;
+  overflow: hidden;
+}
+
+.smetic-product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.smetic-product-card:hover .smetic-product-img {
+  transform: scale(1.05);
+}
+
+.smetic-badge-corner {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #e54d42;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 3px;
+}
+
+.smetic-card-body {
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.smetic-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.smetic-prices-row {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.smetic-price {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--smetic-coral);
+}
+
+.smetic-orig-price {
+  font-size: 12px;
+  color: var(--smetic-text-muted);
+  text-decoration: line-through;
+}
+
+.smetic-swatches-row {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.smetic-swatch-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+}
+
+/* 3 Middle Promo Cards */
+.smetic-promos-section {
+  padding: 30px 0 60px;
+}
+
+.smetic-promos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.smetic-promo-card {
+  text-align: center;
+  cursor: pointer;
+}
+
+.smetic-promo-img-wrap {
+  position: relative;
+  height: 260px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.smetic-promo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.smetic-promo-card:hover .smetic-promo-img {
+  transform: scale(1.05);
+}
+
+.smetic-promo-title {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.smetic-promo-sub {
+  font-size: 13px;
+  color: var(--smetic-text-muted);
+}
+
+/* Tabbed Our Best Seller */
+.smetic-tabs-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+.smetic-tab-btn {
+  background: none;
+  border: 1px solid var(--smetic-border);
+  color: var(--smetic-text);
+  padding: 8px 24px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.smetic-tab-btn:hover {
+  border-color: var(--smetic-coral);
+  color: var(--smetic-coral);
+}
+
+.smetic-tab-btn.active {
+  background-color: var(--smetic-coral);
+  border-color: var(--smetic-coral);
+  color: #ffffff;
+}
+
+/* Middle Wide Banner */
+.smetic-wide-banner {
+  position: relative;
+  height: 380px;
+  margin: 60px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.smetic-wide-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.smetic-wide-content {
+  position: relative;
+  z-index: 10;
+  max-width: 600px;
+  padding: 0 24px;
+  color: #ffffff;
+}
+
+/* 3-Column Mini Showcase Strip */
+.smetic-mini-section {
+  padding: 40px 0 70px;
+}
+
+.smetic-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+}
+
+.smetic-mini-col-title {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 20px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--smetic-coral);
+}
+
+.smetic-mini-item {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--smetic-border);
+  cursor: pointer;
+}
+
+.smetic-mini-thumb {
+  width: 70px;
+  height: 70px;
+  border-radius: 4px;
+  object-fit: cover;
+  background-color: #fafafa;
+}
+
+.smetic-mini-info h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+
+/* Footer */
+.smetic-footer {
+  background-color: #fafafa;
+  border-top: 1px solid var(--smetic-border);
+  padding: 60px 0 30px;
+}
+
+.smetic-footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1.2fr 1.4fr;
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+.smetic-footer-h4 {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 18px;
+}
+
+.smetic-footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.smetic-footer-link {
+  color: var(--smetic-text-muted);
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s ease;
+}
+
+.smetic-footer-link:hover {
+  color: var(--smetic-coral);
+}
+
+.smetic-nl-input-row {
+  display: flex;
+  margin-top: 14px;
+}
+
+.smetic-nl-input {
+  flex: 1;
+  background-color: #ffffff;
+  border: 1px solid var(--smetic-border);
+  padding: 10px 14px;
+  font-size: 13px;
+  outline: none;
+}
+
+.smetic-nl-btn {
+  background-color: #111111;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.smetic-nl-btn:hover {
+  background-color: var(--smetic-coral);
+}
+
+.smetic-footer-bottom {
+  border-top: 1px solid var(--smetic-border);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--smetic-text-muted);
+}
+
+/* Drawer / Modal */
+.smetic-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  z-index: 200;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.smetic-drawer {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.smetic-drawer-header {
+  padding: 20px;
+  border-bottom: 1px solid var(--smetic-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.smetic-drawer-body {
+  padding: 20px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.smetic-drawer-footer {
+  padding: 20px;
+  border-top: 1px solid var(--smetic-border);
+  background-color: var(--smetic-coral-light);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .smetic-trust-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .smetic-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .smetic-promos-grid {
+    grid-template-columns: 1fr;
+  }
+  .smetic-mini-grid {
+    grid-template-columns: 1fr;
+  }
+  .smetic-footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .smetic-nav-menu {
+    display: none;
+  }
+  .smetic-hero-title {
+    font-size: 36px;
+  }
+  .smetic-trust-grid {
+    grid-template-columns: 1fr;
+  }
+  .smetic-products-grid {
+    grid-template-columns: 1fr;
+  }
+  .smetic-footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

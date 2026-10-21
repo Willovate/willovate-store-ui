@@ -246,6 +246,88 @@ export const BELLETNY_TEMPLATE: MarketplaceTemplate = {
   createdDate: '2026-10-21',
 }
 
+export const SMETIC_TEMPLATE: MarketplaceTemplate = {
+  id: 'cosmetics-smetic',
+  slug: 'cosmetics-smetic',
+  name: 'Smetic Organic Cosmetic',
+  businessType: 'health-beauty',
+  tags: ['Cosmetics', 'Makeup', 'Organic', 'Skincare', 'Natural', 'Blush', 'Beauty'],
+  shortDescription:
+    'Soft coral & blush pink organic cosmetic storefront with cursive script logo, model blush hero banner, 4 trust badges, and 3-tab best sellers catalog.',
+  thumbnailUrl:
+    'https://smetic-store-demo.myshopify.com/cdn/shop/files/slide1.1.jpg',
+  fullPreviewUrl: 'https://smetic-store-demo.myshopify.com/?pb=0',
+  popularityScore: 99,
+  isActive: true,
+  brandName: 'Smetic',
+  headline: 'Cosmetic & Beauty Natural Products',
+  subtitle:
+    'Pure organic ingredients formulated to nourish and enhance natural radiance. Certified eco-friendly and cruelty free.',
+  buttonText: 'Shop Now',
+  buttonColor: '#f99191',
+  isDark: false,
+  modelImage:
+    'https://smetic-store-demo.myshopify.com/cdn/shop/files/slide1.1.jpg',
+  style: 'clean',
+  catalogSize: 'medium',
+  features: [
+    'Soft Coral Cursive Brand Header & Search Drawer',
+    'Model Blush Hero Slider with Coral Highlights',
+    '4 Trust Value Props (Free Shipping, 100% Payment, 14 Day Return, Organic)',
+    '8-Grid Best Seller with Percentage Badges & Swatches',
+    '3 Promo Story Cards (Best Selling, Face Masks, Detox & Revive)',
+    'Tabbed Showcase (New Arrival, Best Sellers, Top Rates)',
+  ],
+  badge: 'trending',
+  accentColor: '#f99191',
+  rating: 5.0,
+  reviewCount: 195,
+  layoutType: 'card-grid',
+  industryCategory: 'Cosmetics & Skincare',
+  createdDate: '2026-10-21',
+}
+
+export const DEZEL_TEMPLATE: MarketplaceTemplate = {
+  id: 'cosmetics-dezel',
+  slug: 'cosmetics-dezel',
+  name: 'Dezel Luxury Parfumerie',
+  businessType: 'health-beauty',
+  tags: ['Perfume', 'Fragrance', 'Luxury', 'Haute Parfumerie', 'Botanical', 'Scents', 'Clean'],
+  shortDescription:
+    'French haute parfumerie storefront with deep teal luxury aesthetics, split hero with Prismatic Perfume, 4 fragrance note badges, and artisanal crystal flacons.',
+  thumbnailUrl:
+    'https://dezel-perfume.myshopify.com/cdn/shop/files/1_768x940.jpg',
+  fullPreviewUrl: 'https://dezel-perfume.myshopify.com/',
+  popularityScore: 99,
+  isActive: true,
+  brandName: 'Dezel',
+  headline: 'Fragrance of Love with perfume',
+  subtitle:
+    'Exquisite botanical accords extracted from rare Mediterranean bergamot, Turkish damask rose, and wild iris blossoms.',
+  buttonText: 'Explore Now',
+  buttonColor: '#082e38',
+  isDark: true,
+  modelImage:
+    'https://dezel-perfume.myshopify.com/cdn/shop/files/header.png',
+  style: 'luxury',
+  catalogSize: 'medium',
+  features: [
+    'Deep Teal Luxury Aesthetic with Gold Accents',
+    'Split Hero Slider with Direct Add to Cart & Watermark',
+    '4 Fragrance Note Badges (Fruit, Spice, Flower, Citrus)',
+    '2 Promo Banners for Glamour & Outfit Scents',
+    'Transparent Glow Feature & Grasse Longevity Stats',
+    'Most Popular Perfumes 3-Flacon Grid with Rs. Currency',
+  ],
+  badge: "editor's pick",
+  accentColor: '#082e38',
+  rating: 5.0,
+  reviewCount: 178,
+  layoutType: 'split',
+  industryCategory: 'Cosmetics & Skincare',
+  createdDate: '2026-10-21',
+}
+
 export const ALL_COSMETICS_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   BEAUX_TEMPLATE,
   GLOWING_TEMPLATE,
@@ -253,4 +335,6 @@ export const ALL_COSMETICS_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   ORGANICA_TEMPLATE,
   SHADES_TEMPLATE,
   BELLETNY_TEMPLATE,
+  SMETIC_TEMPLATE,
+  DEZEL_TEMPLATE,
 ]
