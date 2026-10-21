@@ -6,4 +6,7 @@ export * from './Shades'
 export * from './Belletny'
 export * from './Smetic'
 export * from './Dezel'
+export * from './DtSpalab'
+export * from './Lipura'
+
 

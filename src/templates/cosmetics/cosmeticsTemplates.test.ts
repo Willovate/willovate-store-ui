@@ -9,6 +9,8 @@ import {
   BELLETNY_TEMPLATE,
   SMETIC_TEMPLATE,
   DEZEL_TEMPLATE,
+  DTSPALAB_TEMPLATE,
+  LIPURA_TEMPLATE,
 } from '../../data/cosmeticsTemplatesData'
 import {
   TEMPLATE_REGISTRY,
@@ -102,6 +104,23 @@ import {
   DEZEL_TESTIMONIAL,
   DEZEL_BLOG_POSTS,
 } from './Dezel/data/dezelData'
+import {
+  DTSPALAB_LOGO,
+  DTSPALAB_TOP_BAR,
+  DTSPALAB_HERO_SLIDE,
+  DTSPALAB_CATEGORIES,
+  DTSPALAB_PROMO_CARDS,
+  DTSPALAB_PRODUCTS,
+  DTSPALAB_STATS,
+} from './DtSpalab/data/dtSpalabData'
+import {
+  LIPURA_LOGO,
+  LIPURA_HERO_SLIDE,
+  LIPURA_PROMO_BANNERS,
+  LIPURA_PRODUCTS,
+  LIPURA_ATTRIBUTES,
+  LIPURA_LUXURY_AWAIT,
+} from './Lipura/data/lipuraData'
 import { BeauxStorefront } from './Beaux/BeauxStorefront'
 import { GlowingStorefront } from './Glowing/GlowingStorefront'
 import { FabishStorefront } from './Fabish/FabishStorefront'
@@ -110,11 +129,13 @@ import { ShadesStorefront } from './Shades/ShadesStorefront'
 import { BelletnyStorefront } from './Belletny/BelletnyStorefront'
 import { SmeticStorefront } from './Smetic/SmeticStorefront'
 import { DezelStorefront } from './Dezel/DezelStorefront'
+import { DtSpalabStorefront } from './DtSpalab/DtSpalabStorefront'
+import { LipuraStorefront } from './Lipura/LipuraStorefront'
 
 describe('Cosmetics & Beauty Templates Verification', () => {
   describe('Marketplace Template Metadata', () => {
-    it('contains all 8 templates in ALL_COSMETICS_MARKETPLACE_TEMPLATES', () => {
-      expect(ALL_COSMETICS_MARKETPLACE_TEMPLATES).toHaveLength(8)
+    it('contains all 10 templates in ALL_COSMETICS_MARKETPLACE_TEMPLATES', () => {
+      expect(ALL_COSMETICS_MARKETPLACE_TEMPLATES).toHaveLength(10)
       const ids = ALL_COSMETICS_MARKETPLACE_TEMPLATES.map((t) => t.id)
       expect(ids).toContain('cosmetics-beaux')
       expect(ids).toContain('cosmetics-glowing')
@@ -124,6 +145,8 @@ describe('Cosmetics & Beauty Templates Verification', () => {
       expect(ids).toContain('cosmetics-belletny')
       expect(ids).toContain('cosmetics-smetic')
       expect(ids).toContain('cosmetics-dezel')
+      expect(ids).toContain('cosmetics-dt-spalab')
+      expect(ids).toContain('cosmetics-lipura')
     })
 
     it('has valid metadata for Beaux Template matching live Shopify theme', () => {
@@ -212,14 +235,34 @@ describe('Cosmetics & Beauty Templates Verification', () => {
       expect(DEZEL_TEMPLATE.thumbnailUrl).toContain('dezel-perfume.myshopify.com')
       expect(DEZEL_TEMPLATE.headline).toBe('Fragrance of Love with perfume')
     })
+
+    it('has valid metadata for Dt-Spalab Template matching live Shopify theme & screenshot', () => {
+      expect(DTSPALAB_TEMPLATE.brandName).toBe('Dt-Spalab')
+      expect(DTSPALAB_TEMPLATE.businessType).toBe('health-beauty')
+      expect(DTSPALAB_TEMPLATE.style).toBe('modern')
+      expect(DTSPALAB_TEMPLATE.rating).toBeGreaterThanOrEqual(4.8)
+      expect(DTSPALAB_TEMPLATE.fullPreviewUrl).toBe('https://dt-spalab.myshopify.com/')
+      expect(DTSPALAB_TEMPLATE.thumbnailUrl).toContain('dt-spalab.myshopify.com')
+      expect(DTSPALAB_TEMPLATE.headline).toBe('Laser Facial Hair Removal Clinics')
+    })
+
+    it('has valid metadata for Lipura Template matching live Shopify theme & screenshot', () => {
+      expect(LIPURA_TEMPLATE.brandName).toBe('Lipura')
+      expect(LIPURA_TEMPLATE.businessType).toBe('health-beauty')
+      expect(LIPURA_TEMPLATE.style).toBe('editorial')
+      expect(LIPURA_TEMPLATE.rating).toBeGreaterThanOrEqual(4.8)
+      expect(LIPURA_TEMPLATE.fullPreviewUrl).toBe('https://lipura-store-newdemo.myshopify.com/?pb=0')
+      expect(LIPURA_TEMPLATE.thumbnailUrl).toContain('lipura-store-newdemo.myshopify.com')
+      expect(LIPURA_TEMPLATE.headline).toBe('Classic Lipsticks in Matte')
+    })
   })
 
   describe('Template Registry & Routing', () => {
-    it('registers health-beauty in TEMPLATE_REGISTRY with 8 cosmetics templates', () => {
+    it('registers health-beauty in TEMPLATE_REGISTRY with 10 cosmetics templates', () => {
       const category = TEMPLATE_REGISTRY['health-beauty']
       expect(category).toBeDefined()
       expect(category.displayName).toBe('Cosmetics & Beauty')
-      expect(category.templates).toHaveLength(8)
+      expect(category.templates).toHaveLength(10)
       expect(category.templates[0].id).toBe('cosmetics-beaux')
       expect(category.templates[1].id).toBe('cosmetics-glowing')
       expect(category.templates[2].id).toBe('cosmetics-fabish')
@@ -228,6 +271,8 @@ describe('Cosmetics & Beauty Templates Verification', () => {
       expect(category.templates[5].id).toBe('cosmetics-belletny')
       expect(category.templates[6].id).toBe('cosmetics-smetic')
       expect(category.templates[7].id).toBe('cosmetics-dezel')
+      expect(category.templates[8].id).toBe('cosmetics-dt-spalab')
+      expect(category.templates[9].id).toBe('cosmetics-lipura')
     })
 
     it('resolves cosmetic category keys in getTemplateCategoryKey', () => {
@@ -245,12 +290,17 @@ describe('Cosmetics & Beauty Templates Verification', () => {
       expect(getTemplateCategoryKey('smetic')).toBe('health-beauty')
       expect(getTemplateCategoryKey('dezel')).toBe('health-beauty')
       expect(getTemplateCategoryKey('perfume')).toBe('health-beauty')
+      expect(getTemplateCategoryKey('dt-spalab')).toBe('health-beauty')
+      expect(getTemplateCategoryKey('spalab')).toBe('health-beauty')
+      expect(getTemplateCategoryKey('lipura')).toBe('health-beauty')
     })
 
     it('recognizes branded organic beauty prompts as cosmetics', () => {
       expect(isCosmeticsPrompt('Belletny Organic Beauty')).toBe(true)
       expect(isCosmeticsPrompt('Smetic Natural Blush')).toBe(true)
       expect(isCosmeticsPrompt('Dezel Luxury Perfume')).toBe(true)
+      expect(isCosmeticsPrompt('Dt-Spalab Wellness & Beauty')).toBe(true)
+      expect(isCosmeticsPrompt('Lipura Luxury Lipstick')).toBe(true)
       expect(isCosmeticsPrompt('Organic skincare and makeup store')).toBe(true)
       expect(isCosmeticsPrompt('Luxury fashion boutique')).toBe(false)
     })
@@ -265,6 +315,12 @@ describe('Cosmetics & Beauty Templates Verification', () => {
       expect(
         getTemplateIdFromPrompt('Dezel Luxury Parfumerie', ALL_COSMETICS_MARKETPLACE_TEMPLATES),
       ).toBe(DEZEL_TEMPLATE.id)
+      expect(
+        getTemplateIdFromPrompt('Dt-Spalab Wellness & Beauty', ALL_COSMETICS_MARKETPLACE_TEMPLATES),
+      ).toBe(DTSPALAB_TEMPLATE.id)
+      expect(
+        getTemplateIdFromPrompt('Lipura Luxury Lip Atelier', ALL_COSMETICS_MARKETPLACE_TEMPLATES),
+      ).toBe(LIPURA_TEMPLATE.id)
     })
 
     it('does not treat Belletny as the Belle fashion template', () => {
@@ -318,6 +374,18 @@ describe('Cosmetics & Beauty Templates Verification', () => {
       expect(getTemplateComponent('cosmetics-dezel')).toBe(DezelStorefront)
       expect(getTemplateComponent('dezel')).toBe(DezelStorefront)
       expect(getTemplateComponent(DEZEL_TEMPLATE)).toBe(DezelStorefront)
+    })
+
+    it('resolves getTemplateComponent correctly for Dt-Spalab', () => {
+      expect(getTemplateComponent('cosmetics-dt-spalab')).toBe(DtSpalabStorefront)
+      expect(getTemplateComponent('dt-spalab')).toBe(DtSpalabStorefront)
+      expect(getTemplateComponent(DTSPALAB_TEMPLATE)).toBe(DtSpalabStorefront)
+    })
+
+    it('resolves getTemplateComponent correctly for Lipura', () => {
+      expect(getTemplateComponent('cosmetics-lipura')).toBe(LipuraStorefront)
+      expect(getTemplateComponent('lipura')).toBe(LipuraStorefront)
+      expect(getTemplateComponent(LIPURA_TEMPLATE)).toBe(LipuraStorefront)
     })
   })
 
@@ -441,6 +509,32 @@ describe('Cosmetics & Beauty Templates Verification', () => {
       expect(DEZEL_2_MIDDLE_BANNERS).toHaveLength(2)
       expect(DEZEL_TESTIMONIAL.author).toBe('Amelia Rose')
       expect(DEZEL_BLOG_POSTS).toHaveLength(2)
+    })
+  })
+
+  describe('Dt-Spalab Storefront Data Integrity', () => {
+    it('has authentic Dt-Spalab assets matching live theme and user screenshot', () => {
+      expect(DTSPALAB_LOGO).toContain('dt-spalab.myshopify.com')
+      expect(DTSPALAB_TOP_BAR).toContain('10% Discount')
+      expect(DTSPALAB_HERO_SLIDE.title).toBe('Laser Facial Hair Removal Clinics')
+      expect(DTSPALAB_HERO_SLIDE.eyebrow).toBe('LONG-LASTING & PAINLESS')
+      expect(DTSPALAB_CATEGORIES).toHaveLength(4)
+      expect(DTSPALAB_PROMO_CARDS).toHaveLength(4)
+      expect(DTSPALAB_PRODUCTS.length).toBeGreaterThanOrEqual(8)
+      expect(DTSPALAB_PRODUCTS[0].name).toBe('Facial Lotion')
+      expect(DTSPALAB_STATS).toHaveLength(4)
+    })
+  })
+
+  describe('Lipura Storefront Data Integrity', () => {
+    it('has authentic Lipura assets matching live theme and user screenshot', () => {
+      expect(LIPURA_LOGO).toContain('lipura-store-newdemo.myshopify.com')
+      expect(LIPURA_HERO_SLIDE.title).toBe('Classic Lipsticks in Matte')
+      expect(LIPURA_PROMO_BANNERS).toHaveLength(2)
+      expect(LIPURA_PRODUCTS.length).toBeGreaterThanOrEqual(8)
+      expect(LIPURA_PRODUCTS[0].name).toBe('Lipstick Cupcake Pink')
+      expect(LIPURA_ATTRIBUTES).toHaveLength(4)
+      expect(LIPURA_LUXURY_AWAIT.title).toBe('Luxury Lips Await')
     })
   })
 })

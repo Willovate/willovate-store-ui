@@ -44,6 +44,8 @@ import {
   BelletnyStorefront,
   SmeticStorefront,
   DezelStorefront,
+  DtSpalabStorefront,
+  LipuraStorefront,
 } from '../templates/cosmetics'
 import {
   HappyFeetStorefront,
@@ -165,6 +167,10 @@ export function getTemplateCategoryKey(categoryKey: string): string {
     norm.includes('smetic') ||
     norm.includes('dezel') ||
     norm.includes('perfume') ||
+    norm.includes('spalab') ||
+    norm.includes('spa') ||
+    norm.includes('lipura') ||
+    norm.includes('lipstick') ||
     norm.includes('skincare')
   ) {
     return 'health-beauty'
@@ -187,6 +193,11 @@ export function getTemplateCategoryKey(categoryKey: string): string {
 export function isCosmeticsPrompt(prompt: string): boolean {
   const normalizedPrompt = prompt.toLowerCase()
   return [
+    'lipura',
+    'lipstick',
+    'spalab',
+    'dt-spalab',
+    'spa',
     'smetic',
     'dezel',
     'perfume',
@@ -339,6 +350,34 @@ export function getTemplateComponent(input?: MarketplaceTemplate | Template | st
       template.brandName?.toLowerCase().includes('dezel'))
   ) {
     return DezelStorefront
+  }
+
+  if (
+    template &&
+    (template.slug === 'cosmetics-dt-spalab' ||
+      template.id === 'cosmetics-dt-spalab' ||
+      template.slug === 'dt-spalab' ||
+      template.id === 'dt-spalab' ||
+      template.slug === 'spalab' ||
+      template.id === 'spalab' ||
+      template.name?.toLowerCase().includes('dt-spalab') ||
+      template.name?.toLowerCase().includes('spalab') ||
+      template.brandName?.toLowerCase().includes('spalab'))
+  ) {
+    return DtSpalabStorefront
+  }
+
+  if (
+    template &&
+    (template.slug === 'cosmetics-lipura' ||
+      template.id === 'cosmetics-lipura' ||
+      template.slug === 'lipura' ||
+      template.id === 'lipura' ||
+      template.slug === 'lipura-store-newdemo' ||
+      template.name?.toLowerCase().includes('lipura') ||
+      template.brandName?.toLowerCase().includes('lipura'))
+  ) {
+    return LipuraStorefront
   }
 
   if (

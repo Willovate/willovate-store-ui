@@ -1,0 +1,583 @@
+/* Lipura Luxury Lipstick Atelier Styles */
+:root {
+  --lipura-black: #111111;
+  --lipura-gold: #c59d5f;
+  --lipura-red: #d32f2f;
+  --lipura-border: #e5e5e5;
+  --lipura-text: #222222;
+  --lipura-text-muted: #777777;
+}
+
+.lipura-storefront {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: var(--lipura-text);
+  background-color: #ffffff;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Header */
+.lipura-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--lipura-border);
+}
+
+.lipura-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.lipura-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 0;
+}
+
+.lipura-brand-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #000000;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.lipura-nav-menu {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lipura-nav-link {
+  color: #111111;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.lipura-nav-link:hover,
+.lipura-nav-link.active {
+  color: var(--lipura-red);
+}
+
+.lipura-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.lipura-icon-btn {
+  background: none;
+  border: none;
+  color: #111111;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.lipura-icon-btn:hover {
+  color: var(--lipura-red);
+}
+
+.lipura-cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background-color: var(--lipura-red);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hero Section */
+.lipura-hero {
+  position: relative;
+  min-height: 680px;
+  display: flex;
+  align-items: flex-end;
+  background-size: cover;
+  background-position: center;
+  padding-bottom: 90px;
+}
+
+.lipura-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.1) 60%, rgba(0, 0, 0, 0) 100%);
+}
+
+.lipura-hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 600px;
+  color: #ffffff;
+}
+
+.lipura-hero-h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.lipura-hero-sub {
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin-bottom: 28px;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
+
+.lipura-btn-white {
+  background-color: #ffffff;
+  color: #111111;
+  border: none;
+  padding: 14px 36px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.lipura-btn-white:hover {
+  background-color: #111111;
+  color: #ffffff;
+}
+
+/* 2 Middle Promo Grid */
+.lipura-promos-section {
+  padding: 60px 0;
+}
+
+.lipura-promos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.lipura-promo-card {
+  position: relative;
+  height: 480px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.lipura-promo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.lipura-promo-card:hover .lipura-promo-img {
+  transform: scale(1.04);
+}
+
+.lipura-promo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 40px;
+  color: #ffffff;
+}
+
+.lipura-promo-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.lipura-promo-link {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+
+/* Products Section */
+.lipura-products-section {
+  padding: 60px 0 80px;
+}
+
+.lipura-filter-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+.lipura-filter-tab {
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--lipura-text-muted);
+  cursor: pointer;
+  padding-bottom: 8px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.lipura-filter-tab.active,
+.lipura-filter-tab:hover {
+  color: #111111;
+  border-bottom-color: #111111;
+}
+
+.lipura-products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.lipura-prod-card {
+  position: relative;
+  background-color: #fafafa;
+  border-radius: 2px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.lipura-prod-card:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.lipura-ribbon {
+  position: absolute;
+  top: 14px;
+  right: -28px;
+  background-color: var(--lipura-red);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 4px 30px;
+  transform: rotate(45deg);
+  z-index: 5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.lipura-prod-img-wrap {
+  position: relative;
+  height: 280px;
+  background-color: #f7f7f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.lipura-prod-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.lipura-prod-card:hover .lipura-prod-img {
+  transform: scale(1.05);
+}
+
+.lipura-prod-body {
+  padding: 20px;
+  text-align: center;
+  background-color: #ffffff;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.lipura-prod-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #111111;
+  margin-bottom: 4px;
+}
+
+.lipura-prod-shade {
+  font-size: 12px;
+  color: var(--lipura-text-muted);
+  margin-bottom: 12px;
+}
+
+.lipura-prod-price {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111111;
+  margin-bottom: 16px;
+}
+
+.lipura-prod-btn {
+  background-color: #111111;
+  color: #ffffff;
+  border: none;
+  padding: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: 100%;
+}
+
+.lipura-prod-btn:hover {
+  background-color: var(--lipura-red);
+}
+
+/* Luxury Lips Await Editorial */
+.lipura-await-section {
+  padding: 90px 0;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.lipura-await-content {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.lipura-await-h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.lipura-await-desc {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--lipura-text-muted);
+  margin-bottom: 32px;
+}
+
+/* Attributes 4-Strip */
+.lipura-attrs-section {
+  padding: 50px 0;
+  border-top: 1px solid var(--lipura-border);
+  border-bottom: 1px solid var(--lipura-border);
+}
+
+.lipura-attrs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  text-align: center;
+}
+
+.lipura-attr-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.lipura-attr-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.lipura-attr-desc {
+  font-size: 12px;
+  color: var(--lipura-text-muted);
+}
+
+/* Ultra Luxury Split Feature */
+.lipura-ultra-section {
+  padding: 90px 0;
+}
+
+.lipura-ultra-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  align-items: center;
+  gap: 70px;
+}
+
+.lipura-ultra-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--lipura-red);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.lipura-ultra-h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 42px;
+  margin-bottom: 24px;
+  line-height: 1.15;
+}
+
+.lipura-ultra-desc {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--lipura-text-muted);
+  margin-bottom: 36px;
+}
+
+.lipura-ultra-img {
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Footer */
+.lipura-footer {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 80px 0 30px;
+}
+
+.lipura-footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.3fr;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.lipura-footer-logo {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+.lipura-footer-phone {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 14px;
+}
+
+.lipura-footer-h4 {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.lipura-footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lipura-footer-link {
+  color: #888888;
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s ease;
+}
+
+.lipura-footer-link:hover {
+  color: #ffffff;
+}
+
+.lipura-footer-bottom {
+  border-top: 1px solid #222222;
+  padding-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #666666;
+}
+
+/* Modals */
+.lipura-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.65);
+  z-index: 200;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.lipura-drawer {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 420px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .lipura-promos-grid {
+    grid-template-columns: 1fr;
+  }
+  .lipura-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .lipura-attrs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .lipura-ultra-grid {
+    grid-template-columns: 1fr;
+  }
+  .lipura-footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .lipura-nav-menu {
+    display: none;
+  }
+  .lipura-hero-h1 {
+    font-size: 36px;
+  }
+  .lipura-products-grid {
+    grid-template-columns: 1fr;
+  }
+  .lipura-footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

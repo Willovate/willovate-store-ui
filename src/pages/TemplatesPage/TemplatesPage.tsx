@@ -88,6 +88,8 @@ import {
   BELLETNY_TEMPLATE,
   SMETIC_TEMPLATE,
   DEZEL_TEMPLATE,
+  DTSPALAB_TEMPLATE,
+  LIPURA_TEMPLATE,
   ALL_COSMETICS_MARKETPLACE_TEMPLATES,
 } from '../../data/cosmeticsTemplatesData'
 import {
@@ -99,8 +101,10 @@ import {
   BelletnyStorefront,
   SmeticStorefront,
   DezelStorefront,
+  DtSpalabStorefront,
+  LipuraStorefront,
 } from '../../templates/cosmetics'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront, VtOlightStorefront, SwarnaStorefront, JewStorefront, HappyFeetStorefront, ShoeZoneStorefront, SusieShoesStorefront, FashionFeetStorefront, FootwearWorkDoStorefront, ShoesWorkDoStorefront, SensationStorefront, GiarosStorefront, StepGlamStorefront, ApShoesStorefront, BeauxStorefront, GlowingStorefront, FabishStorefront, OrganicaStorefront, ShadesStorefront, BelletnyStorefront, SmeticStorefront, DezelStorefront, HAPPY_FEET_TEMPLATE, SHOE_ZONE_TEMPLATE, SUSIE_SHOES_TEMPLATE, FASHION_FEET_TEMPLATE, FOOTWEAR_WORKDO_TEMPLATE, SHOES_WORKDO_TEMPLATE, SENSATION_WORKDO_TEMPLATE, GIAROS_TEMPLATE, STEPGLAM_TEMPLATE, AP_SHOES_TEMPLATE, BEAUX_TEMPLATE, GLOWING_TEMPLATE, FABISH_TEMPLATE, ORGANICA_TEMPLATE, SHADES_TEMPLATE, BELLETNY_TEMPLATE, SMETIC_TEMPLATE, DEZEL_TEMPLATE, ALL_COSMETICS_MARKETPLACE_TEMPLATES }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront, VtOlightStorefront, SwarnaStorefront, JewStorefront, HappyFeetStorefront, ShoeZoneStorefront, SusieShoesStorefront, FashionFeetStorefront, FootwearWorkDoStorefront, ShoesWorkDoStorefront, SensationStorefront, GiarosStorefront, StepGlamStorefront, ApShoesStorefront, BeauxStorefront, GlowingStorefront, FabishStorefront, OrganicaStorefront, ShadesStorefront, BelletnyStorefront, SmeticStorefront, DezelStorefront, DtSpalabStorefront, LipuraStorefront, HAPPY_FEET_TEMPLATE, SHOE_ZONE_TEMPLATE, SUSIE_SHOES_TEMPLATE, FASHION_FEET_TEMPLATE, FOOTWEAR_WORKDO_TEMPLATE, SHOES_WORKDO_TEMPLATE, SENSATION_WORKDO_TEMPLATE, GIAROS_TEMPLATE, STEPGLAM_TEMPLATE, AP_SHOES_TEMPLATE, BEAUX_TEMPLATE, GLOWING_TEMPLATE, FABISH_TEMPLATE, ORGANICA_TEMPLATE, SHADES_TEMPLATE, BELLETNY_TEMPLATE, SMETIC_TEMPLATE, DEZEL_TEMPLATE, DTSPALAB_TEMPLATE, LIPURA_TEMPLATE, ALL_COSMETICS_MARKETPLACE_TEMPLATES }
 
 
 // Re-export domain types
@@ -1012,6 +1016,46 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
   ) {
     return (
       <DezelStorefront
+        template={template}
+        device={device === 'fullscreen' ? 'desktop' : device}
+        onBack={onClose}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'cosmetics-dt-spalab' ||
+      template.id === 'cosmetics-dt-spalab' ||
+      template.slug === 'dt-spalab' ||
+      template.id === 'dt-spalab' ||
+      template.slug === 'spalab' ||
+      template.id === 'spalab' ||
+      template.name?.toLowerCase().includes('dt-spalab') ||
+      template.name?.toLowerCase().includes('spalab') ||
+      template.brandName?.toLowerCase().includes('spalab'))
+  ) {
+    return (
+      <DtSpalabStorefront
+        template={template}
+        device={device === 'fullscreen' ? 'desktop' : device}
+        onBack={onClose}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'cosmetics-lipura' ||
+      template.id === 'cosmetics-lipura' ||
+      template.slug === 'lipura' ||
+      template.id === 'lipura' ||
+      template.slug === 'lipura-store-newdemo' ||
+      template.name?.toLowerCase().includes('lipura') ||
+      template.brandName?.toLowerCase().includes('lipura'))
+  ) {
+    return (
+      <LipuraStorefront
         template={template}
         device={device === 'fullscreen' ? 'desktop' : device}
         onBack={onClose}
@@ -2188,6 +2232,24 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
       return DEZEL_TEMPLATE
     }
     if (
+      rawHash === 'dt-spalab' ||
+      rawHash === 'cosmetics-dt-spalab' ||
+      rawHash === 'spalab' ||
+      rawHash === 'spa-lab' ||
+      rawHash === 'dt-spa'
+    ) {
+      return DTSPALAB_TEMPLATE
+    }
+    if (
+      rawHash === 'lipura' ||
+      rawHash === 'cosmetics-lipura' ||
+      rawHash === 'lipura-store' ||
+      rawHash === 'lipura-theme' ||
+      rawHash === 'lipura-store-newdemo'
+    ) {
+      return LIPURA_TEMPLATE
+    }
+    if (
       rawHash === 'shoes-workdo' ||
       rawHash === 'shoesworkdo' ||
       rawHash === 'workdo-shoes-store'
@@ -2512,6 +2574,22 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
         rawHash === 'perfume'
       ) {
         setPreviewTemplate(DEZEL_TEMPLATE)
+      } else if (
+        rawHash === 'dt-spalab' ||
+        rawHash === 'cosmetics-dt-spalab' ||
+        rawHash === 'spalab' ||
+        rawHash === 'spa-lab' ||
+        rawHash === 'dt-spa'
+      ) {
+        setPreviewTemplate(DTSPALAB_TEMPLATE)
+      } else if (
+        rawHash === 'lipura' ||
+        rawHash === 'cosmetics-lipura' ||
+        rawHash === 'lipura-store' ||
+        rawHash === 'lipura-theme' ||
+        rawHash === 'lipura-store-newdemo'
+      ) {
+        setPreviewTemplate(LIPURA_TEMPLATE)
       } else if (
         rawHash === 'shoes-workdo' ||
         rawHash === 'shoesworkdo' ||

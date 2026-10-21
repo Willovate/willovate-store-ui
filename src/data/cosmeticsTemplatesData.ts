@@ -328,6 +328,88 @@ export const DEZEL_TEMPLATE: MarketplaceTemplate = {
   createdDate: '2026-10-21',
 }
 
+export const DTSPALAB_TEMPLATE: MarketplaceTemplate = {
+  id: 'cosmetics-dt-spalab',
+  slug: 'cosmetics-dt-spalab',
+  name: 'Dt-Spalab Wellness & Beauty',
+  businessType: 'health-beauty',
+  tags: ['Cosmetics', 'Spa', 'Skincare', 'Massage', 'Wellness', 'Aromatherapy', 'Beauty'],
+  shortDescription:
+    'Regal purple spa and aesthetic clinic storefront with overlapping photo frames, massage discounts, 4 service circles, and organic skincare formulations.',
+  thumbnailUrl:
+    'https://dt-spalab.myshopify.com/cdn/shop/files/slider_1.jpg',
+  fullPreviewUrl: 'https://dt-spalab.myshopify.com/',
+  popularityScore: 99,
+  isActive: true,
+  brandName: 'Dt-Spalab',
+  headline: 'Laser Facial Hair Removal Clinics',
+  subtitle:
+    'In hac habitasse platea dictumst. Etiam dictum, lectus feugiat maximus volutpat, est enim cursus elit, ut luctus sapien ante id mi.',
+  buttonText: 'Shop Now',
+  buttonColor: '#56236b',
+  isDark: false,
+  modelImage:
+    'https://dt-spalab.myshopify.com/cdn/shop/files/White_and_Peach_Simple_Treatment_Spa_Banner_copy_2x_278680ea-d379-4573-a482-1754625b1c42.jpg',
+  style: 'modern',
+  catalogSize: 'medium',
+  features: [
+    'Deep Purple Header with 10% Discount Top Notice',
+    'Laser Hair Removal Hero with Overlapping Framed Treatment Photos',
+    'Curved Massage Banner with 50% Off Special Badge',
+    '4 Circular Service Icons (Face Treatment, Body Massage, Pedicure, Aromatherapy)',
+    '4-Grid Promo Cards with Rich Botanical Visuals',
+    'Featured Products Grid with Ratings and Add to Cart',
+  ],
+  badge: 'trending',
+  accentColor: '#56236b',
+  rating: 4.9,
+  reviewCount: 186,
+  layoutType: 'card-grid',
+  industryCategory: 'Cosmetics & Skincare',
+  createdDate: '2026-10-21',
+}
+
+export const LIPURA_TEMPLATE: MarketplaceTemplate = {
+  id: 'cosmetics-lipura',
+  slug: 'cosmetics-lipura',
+  name: 'Lipura Luxury Lip Atelier',
+  businessType: 'health-beauty',
+  tags: ['Lipstick', 'Cosmetics', 'Luxury', 'Makeup', 'Matte', 'Velvet', 'Beauty'],
+  shortDescription:
+    'High-fashion lipstick atelier storefront with full-bleed matte lips hero, dual model campaign cards, red corner ribbon product cards, and Ultra Luxury Beauty feature.',
+  thumbnailUrl:
+    'https://lipura-store-newdemo.myshopify.com/cdn/shop/files/home1.jpg',
+  fullPreviewUrl: 'https://lipura-store-newdemo.myshopify.com/?pb=0',
+  popularityScore: 99,
+  isActive: true,
+  brandName: 'Lipura',
+  headline: 'Classic Lipsticks in Matte',
+  subtitle:
+    'Discover the perfect luxury gift this holiday season. Plus, make it extra special with engraving.',
+  buttonText: 'Shop Collection',
+  buttonColor: '#111111',
+  isDark: false,
+  modelImage:
+    'https://lipura-store-newdemo.myshopify.com/cdn/shop/files/home1.jpg',
+  style: 'editorial',
+  catalogSize: 'medium',
+  features: [
+    'Minimalist Monochrome Header with Red Accent Indicators',
+    'Full-Bleed Close-up Matte Lips Hero Slide',
+    'Dual Model Campaign Cards (Flawless Finish & Sculpt Lips)',
+    'Lipstick Catalog with Red Corner Ribbon Badges (HOT & NEW)',
+    'Luxury Lips Await Editorial Story Block',
+    'Ultra Luxury Beauty Split Section with Dual Portrait Collage',
+  ],
+  badge: "editor's pick",
+  accentColor: '#d32f2f',
+  rating: 5.0,
+  reviewCount: 214,
+  layoutType: 'editorial',
+  industryCategory: 'Cosmetics & Skincare',
+  createdDate: '2026-10-21',
+}
+
 export const ALL_COSMETICS_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   BEAUX_TEMPLATE,
   GLOWING_TEMPLATE,
@@ -337,4 +419,6 @@ export const ALL_COSMETICS_MARKETPLACE_TEMPLATES: MarketplaceTemplate[] = [
   BELLETNY_TEMPLATE,
   SMETIC_TEMPLATE,
   DEZEL_TEMPLATE,
+  DTSPALAB_TEMPLATE,
+  LIPURA_TEMPLATE,
 ]

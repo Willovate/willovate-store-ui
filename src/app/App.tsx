@@ -250,7 +250,16 @@ function App() {
             rawHash === 'cosmetics-dezel' ||
             rawHash === 'dezel-perfume' ||
             rawHash === 'dezel-theme' ||
-            rawHash === 'perfume'
+            rawHash === 'perfume' ||
+            rawHash === 'dt-spalab' ||
+            rawHash === 'cosmetics-dt-spalab' ||
+            rawHash === 'spalab' ||
+            rawHash === 'spa-lab' ||
+            rawHash === 'lipura' ||
+            rawHash === 'cosmetics-lipura' ||
+            rawHash === 'lipura-store' ||
+            rawHash === 'lipura-theme' ||
+            rawHash === 'lipura-store-newdemo'
           )) ||
           (key === 'jewelry-accessories' && (
             rawHash === 'jewelry' ||
