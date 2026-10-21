@@ -1,7 +1,6 @@
 import { useDeferredValue, useEffect, useMemo, useState } from 'react'
 import '../App.css'
 import { getProducts } from '../lib/api'
-import { formatCurrency } from '../lib/currency'
 import { useCart } from '../hooks/useCart'
 import type { Product } from '../types'
 
@@ -17,19 +16,24 @@ function ArrowIcon() {
 
 import { ProductCard } from '../components/ProductCard'
 import { StoreMenu } from '../components/sections/StoreMenu'
+import { CartDrawer } from '../components/CartDrawer'
+import { WishlistDrawer } from '../components/WishlistDrawer'
+import { SearchOverlay } from '../components/SearchOverlay'
+import { useWishlist } from '../hooks/useWishlist'
 
 export default function DefaultWillovateTemplate() {
   const [products, setProducts] = useState<Product[]>([])
   const [search, setSearch] = useState('')
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [category, setCategory] = useState('All')
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [reloadKey, setReloadKey] = useState(0)
-  const [cartOpen, setCartOpen] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [newsletterSent, setNewsletterSent] = useState(false)
   const deferredSearch = useDeferredValue(search)
   const cart = useCart()
+  const wishlist = useWishlist()
 
   useEffect(() => {
     const controller = new AbortController()
@@ -60,7 +64,7 @@ export default function DefaultWillovateTemplate() {
 
   const addToCart = (product: Product) => {
     cart.add(product)
-    setCartOpen(true)
+    cart.setIsCartOpen(true)
   }
 
   return (
@@ -132,19 +136,11 @@ export default function DefaultWillovateTemplate() {
           <a href="#newsletter">Journal</a>
         </nav>
         
-        <div className="header-right" style={{ display: 'flex', alignItems: 'center', gap: '20px', justifySelf: 'end' }}>
+        <div className="header-right" style={{ display: 'flex', alignItems: 'center', gap: '16px', justifySelf: 'end' }}>
           <button 
+            type="button"
             aria-label="Search products" 
-            onClick={() => {
-              const catalog = document.getElementById('catalog')
-              if (catalog) {
-                catalog.scrollIntoView({ behavior: 'smooth' })
-                setTimeout(() => {
-                  const input = catalog.querySelector('input[type="search"]') as HTMLInputElement
-                  if (input) input.focus()
-                }, 500)
-              }
-            }} 
+            onClick={() => setIsSearchOpen(true)} 
             style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px' }}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -153,7 +149,20 @@ export default function DefaultWillovateTemplate() {
             </svg>
           </button>
 
-          <button className="cart-trigger" type="button" onClick={() => setCartOpen(true)} aria-label={`Shopping cart, ${cart.count} items`} style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '8px', background: 'transparent', border: 'none', cursor: 'pointer', color: 'inherit', font: 'inherit' }}>
+          <button 
+            className="wishlist-trigger" 
+            type="button" 
+            onClick={() => wishlist.setIsWishlistOpen(true)} 
+            aria-label={`Wishlist, ${wishlist.count} items`} 
+            style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '8px', background: 'transparent', border: 'none', cursor: 'pointer', color: 'inherit', font: 'inherit' }}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill={wishlist.count > 0 ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            <span>{wishlist.count}</span>
+          </button>
+
+          <button className="cart-trigger" type="button" onClick={() => cart.setIsCartOpen(true)} aria-label={`Shopping cart, ${cart.count} items`} style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '8px', background: 'transparent', border: 'none', cursor: 'pointer', color: 'inherit', font: 'inherit' }}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
               <circle cx="9" cy="21" r="1"></circle>
               <circle cx="20" cy="21" r="1"></circle>
@@ -321,45 +330,9 @@ export default function DefaultWillovateTemplate() {
         <p>© {new Date().getFullYear()} Willovate one</p>
       </footer>
 
-      {cartOpen && (
-        <div className="cart-layer" role="dialog" aria-modal="true" aria-label="Shopping bag">
-          <button className="cart-backdrop" aria-label="Close shopping bag" onClick={() => setCartOpen(false)} />
-          <aside className="cart-drawer">
-            <div className="cart-heading">
-              <div><p className="kicker">Your selection</p><h2>Shopping bag</h2></div>
-              <button type="button" onClick={() => setCartOpen(false)} aria-label="Close shopping bag">×</button>
-            </div>
-            {cart.items.length === 0 ? (
-              <div className="empty-cart"><span>W</span><p>Your bag is ready for something lovely.</p></div>
-            ) : (
-              <>
-                <div className="cart-items">
-                  {cart.items.map((item) => (
-                    <article key={item.product.id}>
-                      <div className={`cart-thumbnail theme-${item.product.visualTheme}`}>{item.product.name[0]}</div>
-                      <div className="cart-item-copy">
-                        <h3>{item.product.name}</h3>
-                        <p>{formatCurrency(item.product.price)}</p>
-                        <div className="quantity-control" aria-label={`Quantity for ${item.product.name}`}>
-                          <button type="button" onClick={() => cart.decrease(item.product.id)}>−</button>
-                          <span>{item.quantity}</span>
-                          <button type="button" onClick={() => cart.add(item.product)}>+</button>
-                        </div>
-                      </div>
-                      <button className="remove-item" type="button" onClick={() => cart.remove(item.product.id)}>Remove</button>
-                    </article>
-                  ))}
-                </div>
-                <div className="cart-summary">
-                  <div><span>Subtotal</span><strong>{formatCurrency(cart.subtotal)}</strong></div>
-                  <p>Shipping and taxes are calculated at checkout.</p>
-                  <button type="button" onClick={() => window.alert('Checkout is the next API module for the team to connect.')}>Continue to checkout</button>
-                </div>
-              </>
-            )}
-          </aside>
-        </div>
-      )}
+      <CartDrawer />
+      <WishlistDrawer />
+      <SearchOverlay isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} templateId="template-01" />
 
       <StoreMenu 
         isOpen={isMenuOpen} 
@@ -372,8 +345,11 @@ export default function DefaultWillovateTemplate() {
         ]}
         features={[
           { id: 'search', label: 'Search products', description: 'Find your everyday favourite.' },
+          { id: 'wishlist', label: 'Wishlist', description: 'View your saved favourites.' },
           { id: 'about', label: 'About Willovate', description: 'Buy less. Choose beautifully.' }
         ]}
+        onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenWishlist={() => wishlist.setIsWishlistOpen(true)}
       />
     </div>
   )

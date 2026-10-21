@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { TemplateConfig, TemplateSectionConfig } from '../types/template'
 import DefaultWillovateTemplate from '../templates/DefaultWillovateTemplate'
 import { HeroSection } from './sections/HeroSection'
@@ -19,10 +20,29 @@ import { ProductSpotlightSection } from './sections/ProductSpotlightSection'
 import { ShopTheLookSection } from './sections/ShopTheLookSection'
 import { MaterialGridSection } from './sections/MaterialGridSection'
 import { CraftsmanshipSection } from './sections/CraftsmanshipSection'
+import { WishlistScopeProvider } from '../lib/WishlistContext'
+import { CartScopeProvider } from '../lib/CartContext'
+import { CategoryFilterContext } from '../lib/categoryFilterContextDef'
 
 export function TemplateRenderer({ template }: { template: TemplateConfig }) {
+  const [currentTemplateId, setCurrentTemplateId] = useState(template.id)
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+
+  if (currentTemplateId !== template.id) {
+    setCurrentTemplateId(template.id)
+    setSelectedCategory(null)
+  }
+
   if (template.id === 'template-01') {
-    return <DefaultWillovateTemplate />
+    return (
+      <CategoryFilterContext.Provider value={{ selectedCategory, setSelectedCategory }}>
+        <CartScopeProvider scope="template-01">
+          <WishlistScopeProvider scope="template-01">
+            <DefaultWillovateTemplate />
+          </WishlistScopeProvider>
+        </CartScopeProvider>
+      </CategoryFilterContext.Provider>
+    )
   }
 
   // Inject CSS variables for the theme
@@ -50,8 +70,10 @@ export function TemplateRenderer({ template }: { template: TemplateConfig }) {
       case 'split-hero':
         return <SplitHeroSection key={section.id} {...section.props} />
       case 'full-hero':
+      case 'full-width-hero':
         return <FullWidthHeroSection key={section.id} {...section.props} />
       case 'promo':
+      case 'promo-banner':
         return <PromoBannerSection key={section.id} {...section.props} />
       case 'editorial-grid':
         return <EditorialGridSection key={section.id} {...section.props} />
@@ -98,9 +120,15 @@ export function TemplateRenderer({ template }: { template: TemplateConfig }) {
   ]
 
   return (
-    <div className={`template-preview ${template.id}`} style={style}>
-      {sections.map(renderSection)}
-    </div>
+    <CategoryFilterContext.Provider value={{ selectedCategory, setSelectedCategory }}>
+      <CartScopeProvider scope={template.id}>
+        <WishlistScopeProvider scope={template.id}>
+          <div className={`template-preview ${template.id}`} style={style}>
+            {sections.map(renderSection)}
+          </div>
+        </WishlistScopeProvider>
+      </CartScopeProvider>
+    </CategoryFilterContext.Provider>
   )
 }
 

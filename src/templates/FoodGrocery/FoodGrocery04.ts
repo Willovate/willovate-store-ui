@@ -62,9 +62,9 @@ export const FoodGrocery04: TemplateConfig = {
     { id: 's7', type: 'bento-grid', props: {
       title: 'YOUR EVERYDAY PICKS',
       items: [
-        { title: 'The Pantry Basics', image: 'https://images.unsplash.com/photo-1596181657683-1ceea98c25db?auto=format&fit=crop&q=80&w=800', span: 2 },
-        { title: 'Household Cleaning', image: 'https://images.unsplash.com/photo-1584820927498-cafe3c157921?auto=format&fit=crop&q=80&w=800', span: 1 },
-        { title: 'Quick Meals', image: 'https://images.unsplash.com/photo-1551224976-b33365fa316d?auto=format&fit=crop&q=80&w=800', span: 1 },
+        { title: 'The Pantry Basics', image: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=800', span: 2 },
+        { title: 'Household Cleaning', image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=80&w=800', span: 1 },
+        { title: 'Quick Meals', image: 'https://images.unsplash.com/photo-1517673132405-a56a62b18caf?auto=format&fit=crop&q=80&w=800', span: 1 },
         { title: 'Paper Essentials', image: 'https://images.unsplash.com/photo-1584556812952-905ffd0c611a?auto=format&fit=crop&q=80&w=800', span: 2 }
       ]
     }},
@@ -77,9 +77,9 @@ export const FoodGrocery04: TemplateConfig = {
     { id: 's9', type: 'catalog', props: {
       title: 'Snacks & Drinks',
       products: [
-        { id: 'df-9', name: 'Potato Chips', description: 'Classic Salted, 150g', price: 50.00, imageUrl: 'https://images.unsplash.com/photo-1566478989037-e98748d5bbf8?auto=format&fit=crop&q=80&w=600', category: 'Snacks', stockQuantity: 100, visualTheme: 'default', isFeatured: false, slug: 'potato-chips', compareAtPrice: null },
-        { id: 'df-10', name: 'Mixed Nuts', description: 'Roasted & Salted, 200g', price: 299.00, imageUrl: 'https://images.unsplash.com/photo-1599598425947-3300262b7194?auto=format&fit=crop&q=80&w=600', category: 'Snacks', stockQuantity: 50, visualTheme: 'default', isFeatured: false, slug: 'mixed-nuts', compareAtPrice: null },
-        { id: 'df-11', name: 'Sparkling Water', description: '6-Pack Cans', price: 150.00, imageUrl: 'https://images.unsplash.com/photo-1621262963391-729048a97753?auto=format&fit=crop&q=80&w=600', category: 'Drinks', stockQuantity: 40, visualTheme: 'default', isFeatured: false, slug: 'sparkling-water', compareAtPrice: null },
+        { id: 'df-9', name: 'Potato Chips', description: 'Classic Salted, 150g', price: 50.00, imageUrl: 'https://images.unsplash.com/photo-1628088062854-d1870b4553da?auto=format&fit=crop&q=80&w=600', category: 'Snacks', stockQuantity: 100, visualTheme: 'default', isFeatured: false, slug: 'potato-chips', compareAtPrice: null },
+        { id: 'df-10', name: 'Mixed Nuts', description: 'Roasted & Salted, 200g', price: 299.00, imageUrl: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600', category: 'Snacks', stockQuantity: 50, visualTheme: 'default', isFeatured: false, slug: 'mixed-nuts', compareAtPrice: null },
+        { id: 'df-11', name: 'Sparkling Water', description: '6-Pack Cans', price: 150.00, imageUrl: 'https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&q=80&w=600', category: 'Drinks', stockQuantity: 40, visualTheme: 'default', isFeatured: false, slug: 'sparkling-water', compareAtPrice: null },
         { id: 'df-12', name: 'Iced Tea', description: 'Peach Flavor, 500ml', price: 60.00, imageUrl: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&q=80&w=600', category: 'Drinks', stockQuantity: 80, visualTheme: 'default', isFeatured: false, slug: 'iced-tea', compareAtPrice: null }
       ]
     }},

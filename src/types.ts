@@ -9,6 +9,8 @@ export interface Product {
   stockQuantity: number
   visualTheme: string
   isFeatured: boolean
+  imageUrl?: string
+  image?: string
 }
 
 export interface PagedResponse<T> {

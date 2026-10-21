@@ -39,7 +39,7 @@ export const Electronics09: TemplateConfig = {
       title: 'Everyday Carry',
       items: [
         { title: 'The Essentials', description: 'Curated for the daily commute.', size: 'large', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=800' },
-        { title: 'True Wireless', description: 'Zero tangles.', size: 'small', image: 'https://images.unsplash.com/photo-1608223652618-9730eb5eb803?auto=format&fit=crop&q=80&w=400' },
+        { title: 'True Wireless', description: 'Zero tangles.', size: 'small', image: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&q=80&w=400' },
         { title: 'Compact Power', description: 'Magnetic banks.', size: 'small', image: 'https://images.unsplash.com/photo-1609081524998-a1163e2d44cb?auto=format&fit=crop&q=80&w=400' },
         { title: 'Connected Time', description: 'Travel alerts on wrist.', size: 'small', image: 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&q=80&w=400' }
       ]
@@ -58,7 +58,7 @@ export const Electronics09: TemplateConfig = {
       products: [
         { id: 'p1', name: 'MagBank Pro', description: '10,000mAh Magnetic Wireless', price: 79, imageUrl: 'https://images.unsplash.com/photo-1628126235206-5260b9ea6441?auto=format&fit=crop&q=80&w=600' },
         { id: 'p2', name: 'GaN Travel Hub', description: '65W Multi-Port Fast Charge', price: 59, imageUrl: 'https://images.unsplash.com/photo-1622445275463-afa2ab738c34?auto=format&fit=crop&q=80&w=600' },
-        { id: 'p3', name: 'Universal Adapter', description: '150+ Countries Compatible', price: 49, imageUrl: 'https://images.unsplash.com/photo-1585805562768-4505374465df?auto=format&fit=crop&q=80&w=600' }
+        { id: 'p3', name: 'Universal Adapter', description: '150+ Countries Compatible', price: 49, imageUrl: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
     { id: 's8', type: 'bento-grid', props: { 
@@ -67,14 +67,14 @@ export const Electronics09: TemplateConfig = {
         { title: 'Mobile Productivity', description: 'Tablets designed to replace laptops on the road.', size: 'large', image: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&fit=crop&q=80&w=800' },
         { title: 'Ultra-Light Computing', description: 'Sub-2lb laptops.', size: 'small', image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=400' },
         { title: 'Foldable Input', description: 'Travel keyboards.', size: 'small', image: 'https://images.unsplash.com/photo-1529336953128-a85760f58cb5?auto=format&fit=crop&q=80&w=400' },
-        { title: 'Compact Display', description: '15" portable monitors.', size: 'small', image: 'https://images.unsplash.com/photo-1527443154391-607cf9eb76a5?auto=format&fit=crop&q=80&w=400' }
+        { title: 'Compact Display', description: '15" portable monitors.', size: 'small', image: 'https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?auto=format&fit=crop&q=80&w=400' }
       ]
     } },
     { id: 's9', type: 'catalog', props: {
       title: 'Capture the Journey',
       products: [
         { id: 'c1', name: 'Action Cam 360', description: 'Rugged Dual Lens', price: 399, imageUrl: 'https://images.unsplash.com/photo-1516724562728-afc824a36e84?auto=format&fit=crop&q=80&w=600' },
-        { id: 'c2', name: 'Travel Gimbal', description: 'Ultra-Compact Stabilizer', price: 149, imageUrl: 'https://images.unsplash.com/photo-1575005081014-998877526715?auto=format&fit=crop&q=80&w=600' },
+        { id: 'c2', name: 'Travel Gimbal', description: 'Ultra-Compact Stabilizer', price: 149, imageUrl: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&q=80&w=600' },
         { id: 'c3', name: 'Mini Drone', description: '249g Folding Quadcopter', price: 499, imageUrl: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&q=80&w=600' },
         { id: 'c4', name: 'Pocket Creator Cam', description: '1-inch Sensor Compact', price: 749, imageUrl: 'https://images.unsplash.com/photo-1512753360435-329c4535a9a7?auto=format&fit=crop&q=80&w=600' }
       ]
@@ -90,7 +90,7 @@ export const Electronics09: TemplateConfig = {
     { id: 's11', type: 'bento-grid', props: { 
       title: 'Connectivity Hub',
       items: [
-        { title: 'Global 5G Hotspot', description: 'Stay online in 150+ countries.', size: 'small', image: 'https://images.unsplash.com/photo-1516428731057-08ab3475be8c?auto=format&fit=crop&q=80&w=400' },
+        { title: 'Global 5G Hotspot', description: 'Stay online in 150+ countries.', size: 'small', image: 'https://images.unsplash.com/photo-1527443195645-1133f7f28990?auto=format&fit=crop&q=80&w=400' },
         { title: 'Travel Router', description: 'Secure hotel Wi-Fi.', size: 'small', image: 'https://images.unsplash.com/photo-1584905066893-7d5c142ba4e1?auto=format&fit=crop&q=80&w=400' },
         { title: 'Bluetooth Tracker', description: 'Never lose your bag.', size: 'small', image: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&q=80&w=400' }
       ]
@@ -98,7 +98,7 @@ export const Electronics09: TemplateConfig = {
     { id: 's12', type: 'catalog', props: {
       title: 'Portable Entertainment',
       products: [
-        { id: 'e1', name: 'Orbit Handheld', description: 'Cloud Gaming Device', price: 349, imageUrl: 'https://images.unsplash.com/photo-1592840062402-4fc99b79412d?auto=format&fit=crop&q=80&w=600' },
+        { id: 'e1', name: 'Orbit Handheld', description: 'Cloud Gaming Device', price: 349, imageUrl: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&q=80&w=600' },
         { id: 'e2', name: 'Oasis E-Reader', description: 'Glare-Free Paper Display', price: 179, imageUrl: 'https://images.unsplash.com/photo-1592496001020-d31bd830651f?auto=format&fit=crop&q=80&w=600' },
         { id: 'e3', name: 'Travel VR Headset', description: 'Standalone Virtual Reality', price: 499, imageUrl: 'https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?auto=format&fit=crop&q=80&w=600' }
       ]

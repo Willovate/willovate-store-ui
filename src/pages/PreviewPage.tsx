@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { templates } from '../data/templates'
-import { useTemplate } from '../lib/TemplateContext'
+import { useTemplate } from '../hooks/useTemplate'
 import { TemplateRenderer } from '../components/TemplateRenderer'
 
 export default function PreviewPage() {

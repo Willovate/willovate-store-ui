@@ -33,7 +33,7 @@ export const HomeFurniture16: TemplateConfig = {
       ] 
     } },
     { id: 's5', type: 'product-spotlight', props: {
-      image: 'https://images.unsplash.com/photo-1524758658008-1417b1eb2ba8?auto=format&fit=crop&q=80&w=800',
+      image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=800',
       name: 'Arne Lounge Chair',
       category: 'Seating',
       description: 'The epitome of Scandinavian functionalism. Crafted from solid ash wood with a natural linen seat, designed for hours of comfortable sitting in any light-filled room.',
@@ -45,8 +45,8 @@ export const HomeFurniture16: TemplateConfig = {
       title: 'Design Principles',
       items: [
         { title: 'Form Follows Function', description: 'Quiet utility.', size: 'large', image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&q=80&w=800' },
-        { title: 'Natural Materials', description: 'Oak, ash, wool.', size: 'small', image: 'https://images.unsplash.com/photo-1505692694935-ceb8c4c3e80c?auto=format&fit=crop&q=80&w=400' },
-        { title: 'Modular Living', description: 'Adaptable space.', size: 'small', image: 'https://images.unsplash.com/photo-1493663284031-b7e3aef926ec?auto=format&fit=crop&q=80&w=400' }
+        { title: 'Natural Materials', description: 'Oak, ash, wool.', size: 'small', image: 'https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?auto=format&fit=crop&q=80&w=400' },
+        { title: 'Modular Living', description: 'Adaptable space.', size: 'small', image: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&q=80&w=400' }
       ]
     } },
     { id: 's7', type: 'catalog', props: {
@@ -61,7 +61,7 @@ export const HomeFurniture16: TemplateConfig = {
       title: 'Quiet Morning',
       image: 'https://images.unsplash.com/photo-1585412727339-54e4bae3bbf9?auto=format&fit=crop&q=80&w=1200',
       hotspots: [
-        { x: 50, y: 70, product: { name: 'Oak Dining Table', price: 1200, imageUrl: 'https://images.unsplash.com/photo-1580828369631-01be14a9a468?auto=format&fit=crop&q=80&w=600' } },
+        { x: 50, y: 70, product: { name: 'Oak Dining Table', price: 1200, imageUrl: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=600' } },
         { x: 30, y: 60, product: { name: 'Linen Chair', price: 350, imageUrl: 'https://images.unsplash.com/photo-1628126235206-5260b9ea6441?auto=format&fit=crop&q=80&w=600' } },
         { x: 50, y: 20, product: { name: 'Pendant Light', price: 220, imageUrl: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&q=80&w=600' } },
         { x: 60, y: 50, product: { name: 'Ceramic Vase', price: 85, imageUrl: 'https://images.unsplash.com/photo-1533228100845-08145b01de14?auto=format&fit=crop&q=80&w=600' } }
@@ -79,7 +79,7 @@ export const HomeFurniture16: TemplateConfig = {
     { id: 's11', type: 'story', props: {
       title: 'Designed for everyday living.',
       text: 'Our philosophy is rooted in the belief that functional design brings calm to the home. Every piece is crafted with longevity in mind, honoring simplicity and traditional craftsmanship.',
-      image: 'https://images.unsplash.com/photo-1493150134366-2cb83dd11ce2?auto=format&fit=crop&q=80&w=800'
+      image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&q=80&w=800'
     } },
     { id: 's12', type: 'testimonials', props: {
       title: 'Community',

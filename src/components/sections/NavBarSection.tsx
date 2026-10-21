@@ -3,12 +3,16 @@ import { StoreMenu } from './StoreMenu'
 import { SectionContainer } from './SectionContainer'
 import type { TemplateConfig } from '../../types/template'
 import { useCart } from '../../hooks/useCart'
+import { useWishlist } from '../../hooks/useWishlist'
 import { SearchOverlay } from '../SearchOverlay'
+import { CartDrawer } from '../CartDrawer'
+import { WishlistDrawer } from '../WishlistDrawer'
 
 export function NavBarSection({ brand = 'Store', style = 'minimal', template }: { brand?: string, style?: 'minimal' | 'center' | 'utility', template?: TemplateConfig }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const cart = useCart()
+  const wishlist = useWishlist()
   const isCenter = style === 'center'
   const isUtility = style === 'utility'
   
@@ -52,13 +56,17 @@ export function NavBarSection({ brand = 'Store', style = 'minimal', template }: 
             align-items: center;
             min-width: 0;
             overflow: hidden;
-            padding-inline: 8px;
+            padding-inline: 4px;
           }
           .nav-mobile-grid > .nav-right {
             grid-column: 3;
             grid-row: 1;
             justify-self: end;
             min-width: 0;
+            gap: 2px !important;
+          }
+          .nav-right button {
+            padding: 6px 4px !important;
           }
           .desktop-brand {
             display: none !important;
@@ -90,16 +98,16 @@ export function NavBarSection({ brand = 'Store', style = 'minimal', template }: 
 
             {isCenter ? (
               <div className="nav-desktop-only" style={{ display: 'flex', gap: '20px' }}>
-                <button aria-label="Navigate" style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 'inherit', color: 'inherit', fontFamily: 'inherit', whiteSpace: 'nowrap' }}>Shop</button>
-                <button aria-label="Navigate" style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 'inherit', color: 'inherit', fontFamily: 'inherit', whiteSpace: 'nowrap' }}>About</button>
+                <button type="button" style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 'inherit', color: 'inherit', fontFamily: 'inherit', whiteSpace: 'nowrap' }}>Shop</button>
+                <button type="button" style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 'inherit', color: 'inherit', fontFamily: 'inherit', whiteSpace: 'nowrap' }}>About</button>
               </div>
             ) : (
               <>
                 <div className="nav-brand-text desktop-brand" style={{ fontSize: '1.5rem', fontWeight: 'bold', fontFamily: 'var(--template-heading-font)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', flexShrink: 1, minWidth: 0 }}>{brand}</div>
                 <div className="nav-desktop-only" style={{ display: 'flex', gap: '20px', marginLeft: '20px' }}>
-                  <button aria-label="Navigate" style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 'inherit', color: 'inherit', fontFamily: 'inherit', whiteSpace: 'nowrap' }}>Shop</button>
-                  {isUtility && <button aria-label="Navigate" style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 'inherit', color: 'inherit', fontFamily: 'inherit', whiteSpace: 'nowrap' }}>Categories</button>}
-                  <button aria-label="Navigate" style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 'inherit', color: 'inherit', fontFamily: 'inherit', whiteSpace: 'nowrap' }}>About</button>
+                  <button type="button" style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 'inherit', color: 'inherit', fontFamily: 'inherit', whiteSpace: 'nowrap' }}>Shop</button>
+                  {isUtility && <button type="button" style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 'inherit', color: 'inherit', fontFamily: 'inherit', whiteSpace: 'nowrap' }}>Categories</button>}
+                  <button type="button" style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 'inherit', color: 'inherit', fontFamily: 'inherit', whiteSpace: 'nowrap' }}>About</button>
                 </div>
               </>
             )}
@@ -112,18 +120,38 @@ export function NavBarSection({ brand = 'Store', style = 'minimal', template }: 
             </div>
           </div>
 
-          {/* Right Side */}
+          {/* Right Side - Exactly one search entry point, wishlist, and cart */}
           <div className="nav-right" style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '4px', minWidth: 0, flexShrink: 0 }}>
-            {isUtility && !isCenter && <button aria-label="Navigate" className="nav-desktop-only" style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 'inherit', color: 'inherit', fontFamily: 'inherit', whiteSpace: 'nowrap', padding: '8px' }}>Search</button>}
-            
-            <button aria-label="Search products" onClick={() => setIsSearchOpen(true)} style={{ flexShrink: 0, background: 'transparent', border: 'none', cursor: 'pointer', color: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px' }}>
+            <button 
+              type="button" 
+              aria-label="Search products" 
+              onClick={() => setIsSearchOpen(true)} 
+              style={{ flexShrink: 0, background: 'transparent', border: 'none', cursor: 'pointer', color: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px' }}
+            >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
             </button>
 
-            <button aria-label={`Shopping cart, ${cart.count} items`} style={{ flexShrink: 0, background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 'inherit', color: 'inherit', fontFamily: 'inherit', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: '6px', padding: '8px' }}>
+            <button 
+              type="button"
+              aria-label={`Wishlist, ${wishlist.count} items`} 
+              onClick={() => wishlist.setIsWishlistOpen(true)}
+              style={{ flexShrink: 0, background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 'inherit', color: 'inherit', fontFamily: 'inherit', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: '6px', padding: '8px' }}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill={wishlist.count > 0 ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+              <span>{wishlist.count}</span>
+            </button>
+
+            <button 
+              type="button"
+              aria-label={`Shopping cart, ${cart.count} items`} 
+              onClick={() => cart.setIsCartOpen(true)}
+              style={{ flexShrink: 0, background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 'inherit', color: 'inherit', fontFamily: 'inherit', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: '6px', padding: '8px' }}
+            >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="9" cy="21" r="1"></circle>
                 <circle cx="20" cy="21" r="1"></circle>
@@ -141,13 +169,13 @@ export function NavBarSection({ brand = 'Store', style = 'minimal', template }: 
           brandName={brand}
           navigation={template.navigation}
           features={template.features}
+          onOpenSearch={() => setIsSearchOpen(true)}
+          onOpenWishlist={() => wishlist.setIsWishlistOpen(true)}
         />
       )}
       <SearchOverlay isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} templateId={template?.id} />
+      <CartDrawer />
+      <WishlistDrawer />
     </nav>
   )
 }
-
-
-
-

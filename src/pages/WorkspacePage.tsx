@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useTemplate } from '../lib/TemplateContext'
+import { useTemplate } from '../hooks/useTemplate'
 
 export default function WorkspacePage() {
   const { selectedTemplate } = useTemplate()

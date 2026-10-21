@@ -30,9 +30,9 @@ export const Electronics06: TemplateConfig = {
         { name: 'Displays', image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=600' }, 
         { name: 'Cameras', image: 'https://images.unsplash.com/photo-1516961642265-531546e84af2?auto=format&fit=crop&q=80&w=600' }, 
         { name: 'Tablets', image: 'https://images.unsplash.com/photo-1585790050230-5dd28404ccb9?auto=format&fit=crop&q=80&w=600' }, 
-        { name: 'Creator Gear', image: 'https://images.unsplash.com/photo-1620052329302-36cce5634da2?auto=format&fit=crop&q=80&w=600' },
+        { name: 'Creator Gear', image: 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&q=80&w=600' },
         { name: 'Desk Tech', image: 'https://images.unsplash.com/photo-1598550476439-6847785fcea6?auto=format&fit=crop&q=80&w=600' },
-        { name: 'Accessories', image: 'https://images.unsplash.com/photo-1512295767273-ac10bd3667af?auto=format&fit=crop&q=80&w=600' }
+        { name: 'Accessories', image: 'https://images.unsplash.com/photo-1572981779307-38b8cabb2407?auto=format&fit=crop&q=80&w=600' }
       ] 
     } },
     { id: 's5', type: 'catalog', props: {
@@ -80,8 +80,8 @@ export const Electronics06: TemplateConfig = {
       products: [
         { id: 'pt1', name: 'Nomad Tablet', description: 'Liquid AMOLED display', price: 699, imageUrl: 'https://images.unsplash.com/photo-1561154464-82e9adf32764?auto=format&fit=crop&q=80&w=600' },
         { id: 'pt2', name: 'Precision Stylus', description: '4096 Pressure Levels', price: 99, imageUrl: 'https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?auto=format&fit=crop&q=80&w=600' },
-        { id: 'pt3', name: 'Portable Monitor', description: '15.6" USB-C Display', price: 249, imageUrl: 'https://images.unsplash.com/photo-1593640495253-23d96b424c22?auto=format&fit=crop&q=80&w=600' },
-        { id: 'pt4', name: 'Travel Keyboard', description: 'Ultra-slim Bluetooth', price: 79, imageUrl: 'https://images.unsplash.com/photo-1595009622879-1bf452077b94?auto=format&fit=crop&q=80&w=600' }
+        { id: 'pt3', name: 'Portable Monitor', description: '15.6" USB-C Display', price: 249, imageUrl: 'https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?auto=format&fit=crop&q=80&w=600' },
+        { id: 'pt4', name: 'Travel Keyboard', description: 'Ultra-slim Bluetooth', price: 79, imageUrl: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
     { id: 's11', type: 'feature-comparison', props: { 
@@ -100,10 +100,10 @@ export const Electronics06: TemplateConfig = {
     } },
     { id: 's12', type: 'catalog', props: {
       products: [
-        { id: 'pa1', name: 'V-90 SD Card 128GB', description: '300MB/s Transfer', price: 129, imageUrl: 'https://images.unsplash.com/photo-1531299243346-608f6580f5d0?auto=format&fit=crop&q=80&w=600' },
-        { id: 'pa2', name: 'Aluminum Tablet Stand', description: 'Adjustable Angle', price: 49, imageUrl: 'https://images.unsplash.com/photo-1592890278964-b676f9d2737c?auto=format&fit=crop&q=80&w=600' },
+        { id: 'pa1', name: 'V-90 SD Card 128GB', description: '300MB/s Transfer', price: 129, imageUrl: 'https://images.unsplash.com/photo-1533228100845-08145b01de14?auto=format&fit=crop&q=80&w=600' },
+        { id: 'pa2', name: 'Aluminum Tablet Stand', description: 'Adjustable Angle', price: 49, imageUrl: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&q=80&w=600' },
         { id: 'pa3', name: 'Creator Hub', description: 'USB-C and Card Reader', price: 89, imageUrl: 'https://images.unsplash.com/photo-1574634534894-89d7576c8259?auto=format&fit=crop&q=80&w=600' },
-        { id: 'pa4', name: 'SSD Armor 2TB', description: 'Rugged USB 3.2', price: 199, imageUrl: 'https://images.unsplash.com/photo-1621288424161-00030560a289?auto=format&fit=crop&q=80&w=600' }
+        { id: 'pa4', name: 'SSD Armor 2TB', description: 'Rugged USB 3.2', price: 199, imageUrl: 'https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
     { id: 's13', type: 'full-hero', props: { 

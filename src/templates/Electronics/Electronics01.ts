@@ -8,7 +8,7 @@ export const Electronics01: TemplateConfig = {
   tags: [{ id: 'premium', name: 'Premium' }, { id: 'minimal', name: 'Minimal' }],
   thumbnailUrl: 'https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1580828369631-01be14a9a468?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: true,
   theme: {

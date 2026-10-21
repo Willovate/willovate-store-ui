@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import type { TemplateConfig } from '../types/template'
-import { useTemplate } from '../lib/TemplateContext'
+import { useTemplate } from '../hooks/useTemplate'
 
 export function TemplateCard({ template }: { template: TemplateConfig }) {
   const { setSelectedTemplate, selectedTemplate } = useTemplate()

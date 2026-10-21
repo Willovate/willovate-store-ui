@@ -29,7 +29,7 @@ export const FoodGrocery09: TemplateConfig = {
     { id: 's3', type: 'split-hero', props: { 
       title: 'FROM OUR FIELDS TO YOUR TABLE.', 
       subtitle: 'Good food starts at the farm. Discover seasonal harvests, traditional farmhouse goods, and simple, honest ingredients grown with care.', 
-      image: 'https://images.unsplash.com/photo-1592424041796-7bb09153be03?auto=format&fit=crop&q=80&w=1600', 
+      image: 'https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&q=80&w=1600', 
       ctaLabel: 'SHOP THE FARM',
       secondaryCtaLabel: 'OUR STORY'
     }},
@@ -38,8 +38,8 @@ export const FoodGrocery09: TemplateConfig = {
       categories: [
         { id: 'c1', name: 'Fresh Harvest', imageUrl: 'https://images.unsplash.com/photo-1590779033100-9f60a05a013d?auto=format&fit=crop&q=80&w=600' },
         { id: 'c2', name: 'Dairy & Eggs', imageUrl: 'https://images.unsplash.com/photo-1598514982205-f36b96d1e8d4?auto=format&fit=crop&q=80&w=600' },
-        { id: 'c3', name: 'Farmhouse Pantry', imageUrl: 'https://images.unsplash.com/photo-1601002360251-24855d0a688b?auto=format&fit=crop&q=80&w=600' },
-        { id: 'c4', name: 'Farm Goods', imageUrl: 'https://images.unsplash.com/photo-1595843468007-df08e9a12cc9?auto=format&fit=crop&q=80&w=600' }
+        { id: 'c3', name: 'Farmhouse Pantry', imageUrl: 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&q=80&w=600' },
+        { id: 'c4', name: 'Farm Goods', imageUrl: 'https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
     { id: 's5', type: 'catalog', props: {
@@ -54,7 +54,7 @@ export const FoodGrocery09: TemplateConfig = {
     { id: 's6', type: 'catalog', props: {
       title: 'Dairy & Farmhouse Goods',
       products: [
-        { id: 'fs-5', name: 'Golden Harvest Eggs', description: 'Pasture Raised, Dozen', price: 8.00, imageUrl: 'https://images.unsplash.com/photo-1506976773555-b3e1bb18bfa6?auto=format&fit=crop&q=80&w=600', category: 'Dairy', stockQuantity: 20, visualTheme: 'default', isFeatured: true, slug: 'harvest-eggs', compareAtPrice: null },
+        { id: 'fs-5', name: 'Golden Harvest Eggs', description: 'Pasture Raised, Dozen', price: 8.00, imageUrl: 'https://images.unsplash.com/photo-1577234286642-fc512a5f8f11?auto=format&fit=crop&q=80&w=600', category: 'Dairy', stockQuantity: 20, visualTheme: 'default', isFeatured: true, slug: 'harvest-eggs', compareAtPrice: null },
         { id: 'fs-6', name: 'Farmhouse Whole Milk', description: 'Glass Bottle, 1L', price: 6.00, imageUrl: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600', category: 'Dairy', stockQuantity: 30, visualTheme: 'default', isFeatured: false, slug: 'whole-milk', compareAtPrice: null },
         { id: 'fs-7', name: 'Cultured Butter', description: 'Hand-churned, Salted', price: 9.50, imageUrl: 'https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?auto=format&fit=crop&q=80&w=600', category: 'Dairy', stockQuantity: 15, visualTheme: 'default', isFeatured: false, slug: 'cultured-butter', compareAtPrice: null },
         { id: 'fs-8', name: 'Aged Farm Cheddar', description: 'Sharp, 8oz', price: 12.00, imageUrl: 'https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&q=80&w=600', category: 'Dairy', stockQuantity: 25, visualTheme: 'default', isFeatured: false, slug: 'aged-cheddar', compareAtPrice: null }
@@ -63,10 +63,10 @@ export const FoodGrocery09: TemplateConfig = {
     { id: 's7', type: 'catalog', props: {
       title: 'Pantry & Preserves',
       products: [
-        { id: 'fs-9', name: 'Apple Orchard Preserve', description: 'Seasonal Batch', price: 9.00, imageUrl: 'https://images.unsplash.com/photo-1506802913710-1ce82987a0fc?auto=format&fit=crop&q=80&w=600', category: 'Pantry', stockQuantity: 40, visualTheme: 'default', isFeatured: false, slug: 'apple-preserve', compareAtPrice: null },
+        { id: 'fs-9', name: 'Apple Orchard Preserve', description: 'Seasonal Batch', price: 9.00, imageUrl: 'https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&q=80&w=600', category: 'Pantry', stockQuantity: 40, visualTheme: 'default', isFeatured: false, slug: 'apple-preserve', compareAtPrice: null },
         { id: 'fs-10', name: 'Stone-Milled Farm Flour', description: 'Whole Wheat, 5lb', price: 11.00, imageUrl: 'https://images.unsplash.com/photo-1505253758473-96b7015fcd40?auto=format&fit=crop&q=80&w=600', category: 'Pantry', stockQuantity: 30, visualTheme: 'default', isFeatured: false, slug: 'stone-flour', compareAtPrice: null },
-        { id: 'fs-11', name: 'Cellar Pickles', description: 'Garlic & Dill', price: 8.50, imageUrl: 'https://images.unsplash.com/photo-1560706240-3b47bd2ed0db?auto=format&fit=crop&q=80&w=600', category: 'Pantry', stockQuantity: 20, visualTheme: 'default', isFeatured: false, slug: 'cellar-pickles', compareAtPrice: null },
-        { id: 'fs-12', name: 'Wildflower Honey', description: 'Raw & Unfiltered', price: 14.50, imageUrl: 'https://images.unsplash.com/photo-1587049352858-8d4e8941552e?auto=format&fit=crop&q=80&w=600', category: 'Pantry', stockQuantity: 50, visualTheme: 'default', isFeatured: false, slug: 'wildflower-honey', compareAtPrice: null }
+        { id: 'fs-11', name: 'Cellar Pickles', description: 'Garlic & Dill', price: 8.50, imageUrl: 'https://images.unsplash.com/photo-1590779033100-9f60a05a013d?auto=format&fit=crop&q=80&w=600', category: 'Pantry', stockQuantity: 20, visualTheme: 'default', isFeatured: false, slug: 'cellar-pickles', compareAtPrice: null },
+        { id: 'fs-12', name: 'Wildflower Honey', description: 'Raw & Unfiltered', price: 14.50, imageUrl: 'https://images.unsplash.com/photo-1598514982205-f36b96d1e8d4?auto=format&fit=crop&q=80&w=600', category: 'Pantry', stockQuantity: 50, visualTheme: 'default', isFeatured: false, slug: 'wildflower-honey', compareAtPrice: null }
       ]
     }},
     { id: 's8', type: 'split-hero', props: { 
@@ -86,9 +86,9 @@ export const FoodGrocery09: TemplateConfig = {
     { id: 's10', type: 'bento-grid', props: {
       title: 'Farmstead Bundles',
       items: [
-        { title: 'The Weekend Harvest', image: 'https://images.unsplash.com/photo-1511210878235-ee8da2eb6098?auto=format&fit=crop&q=80&w=800', span: 2 },
+        { title: 'The Weekend Harvest', image: 'https://images.unsplash.com/photo-1561136594-7f68413baa99?auto=format&fit=crop&q=80&w=800', span: 2 },
         { title: 'The Farmhouse Breakfast', image: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&q=80&w=800', span: 1 },
-        { title: 'The Pantry Box', image: 'https://images.unsplash.com/photo-1584285422409-e1eef45c55d0?auto=format&fit=crop&q=80&w=800', span: 1 },
+        { title: 'The Pantry Box', image: 'https://images.unsplash.com/photo-1447175008436-054170c2e979?auto=format&fit=crop&q=80&w=800', span: 1 },
         { title: 'The Sunday Table', image: 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&q=80&w=800', span: 2 }
       ]
     }},
@@ -97,7 +97,7 @@ export const FoodGrocery09: TemplateConfig = {
       subtitle: 'We believe that good food follows the seasons. Thoughtful sourcing, simple ingredients, and farm-to-table values are at the heart of everything we do.',
       images: [
         'https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&q=80&w=800',
-        'https://images.unsplash.com/photo-1595856453612-4c220f8623bd?auto=format&fit=crop&q=80&w=800'
+        'https://images.unsplash.com/photo-1518977822534-7049a61ee0c2?auto=format&fit=crop&q=80&w=800'
       ]
     }},
     { id: 's12', type: 'testimonials', props: { 

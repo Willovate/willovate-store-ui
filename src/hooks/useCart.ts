@@ -1,31 +1,60 @@
-import { useEffect, useMemo, useReducer } from 'react'
-import { cartReducer, cartSubtotal } from '../lib/cart'
-import type { CartItem, Product } from '../types'
+import { useContext, useMemo } from 'react'
+import { CartContext, CartScopeContext, type CartContextValue } from '../lib/cartContextDef'
+import { cartSubtotal } from '../lib/cart'
+import type { Product } from '../types'
 
-const STORAGE_KEY = 'willovate-store-cart'
+export type { CartContextValue }
 
-function initialCart(): CartItem[] {
-  try {
-    const value = localStorage.getItem(STORAGE_KEY)
-    return value ? JSON.parse(value) as CartItem[] : []
-  } catch {
-    return []
-  }
+const fallbackCart: CartContextValue = {
+  scope: 'global',
+  setScope: () => {},
+  items: [],
+  count: 0,
+  subtotal: 0,
+  isCartOpen: false,
+  add: () => {},
+  decrease: () => {},
+  remove: () => {},
+  clear: () => {},
+  setIsCartOpen: () => {},
 }
 
-export function useCart() {
-  const [items, dispatch] = useReducer(cartReducer, [], initialCart)
+export function useCart(explicitScope?: string): CartContextValue {
+  const context = useContext(CartContext)
+  const ambientScope = useContext(CartScopeContext)
 
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
-  }, [items])
+  return useMemo(() => {
+    if (!context) {
+      return fallbackCart
+    }
 
-  return useMemo(() => ({
-    items,
-    count: items.reduce((total, item) => total + item.quantity, 0),
-    subtotal: cartSubtotal(items),
-    add: (product: Product) => dispatch({ type: 'add', product }),
-    decrease: (productId: string) => dispatch({ type: 'decrease', productId }),
-    remove: (productId: string) => dispatch({ type: 'remove', productId }),
-  }), [items])
+    const effectiveScope = explicitScope || ambientScope || context.scope || 'global'
+
+    if (!effectiveScope || effectiveScope === context.scope) {
+      return context
+    }
+
+    const items = context.getScopedItems ? context.getScopedItems(effectiveScope) : context.items
+    const count = context.getScopedCount ? context.getScopedCount(effectiveScope) : items.reduce((acc, item) => acc + item.quantity, 0)
+    const subtotal = context.getScopedSubtotal ? context.getScopedSubtotal(effectiveScope) : cartSubtotal(items)
+
+    return {
+      scope: effectiveScope,
+      setScope: context.setScope,
+      items,
+      count,
+      subtotal,
+      isCartOpen: context.isCartOpen,
+      setIsCartOpen: context.setIsCartOpen,
+      add: (product: Product) => context.add(product, effectiveScope),
+      decrease: (productId: string) => context.decrease(productId, effectiveScope),
+      remove: (productId: string) => context.remove(productId, effectiveScope),
+      clear: () => context.clear(effectiveScope),
+      getScopedItems: context.getScopedItems,
+      getScopedCount: context.getScopedCount,
+      getScopedSubtotal: context.getScopedSubtotal,
+    }
+  }, [context, ambientScope, explicitScope])
 }
+
+

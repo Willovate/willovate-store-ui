@@ -54,14 +54,14 @@ export const Electronics08: TemplateConfig = {
       items: [
         { title: 'Mechanical Precision', description: 'Tactile typing for developers.', size: 'large', image: 'https://images.unsplash.com/photo-1589578228447-e1a4e481c6c8?auto=format&fit=crop&q=80&w=800' },
         { title: 'Ergonomic Control', description: 'Vertical mouse.', size: 'small', image: 'https://images.unsplash.com/photo-1605773527852-c546a8584ea3?auto=format&fit=crop&q=80&w=400' },
-        { title: 'Digital Canvas', description: 'Pro drawing tablets.', size: 'small', image: 'https://images.unsplash.com/photo-1580983584852-520e55648058?auto=format&fit=crop&q=80&w=400' },
-        { title: 'Audio Surface', description: 'Tactile faders.', size: 'small', image: 'https://images.unsplash.com/photo-1516280440502-861f438eb140?auto=format&fit=crop&q=80&w=400' }
+        { title: 'Digital Canvas', description: 'Pro drawing tablets.', size: 'small', image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&q=80&w=400' },
+        { title: 'Audio Surface', description: 'Tactile faders.', size: 'small', image: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&q=80&w=400' }
       ]
     } },
     { id: 's8', type: 'catalog', props: {
       products: [
         { id: 'a1', name: 'Studio Condenser Mic', description: 'Cardioid Vocal Capture', price: 349, imageUrl: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&q=80&w=600' },
-        { id: 'a2', name: 'USB Audio Interface', description: 'Low Latency Preamps', price: 229, imageUrl: 'https://images.unsplash.com/photo-1519782808034-7cecb1d061f0?auto=format&fit=crop&q=80&w=600' },
+        { id: 'a2', name: 'USB Audio Interface', description: 'Low Latency Preamps', price: 229, imageUrl: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=600' },
         { id: 'a3', name: 'Reference Headphones', description: 'Open-Back Monitoring', price: 499, imageUrl: 'https://images.unsplash.com/photo-1612222869049-d8ec83637a3c?auto=format&fit=crop&q=80&w=600' },
         { id: 'a4', name: 'Active Studio Monitors', description: 'Flat Frequency Response', price: 699, imageUrl: 'https://images.unsplash.com/photo-1545128485-c400e7702796?auto=format&fit=crop&q=80&w=600' }
       ]
@@ -69,7 +69,7 @@ export const Electronics08: TemplateConfig = {
     { id: 's9', type: 'editorial-grid', props: { 
       title: 'Developer Workspace', 
       images: [
-        'https://images.unsplash.com/photo-1515347619152-19e42c55452d?auto=format&fit=crop&q=80&w=800', 
+        'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&q=80&w=800', 
         'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=800',
         'https://images.unsplash.com/photo-1550439062-609e1531270e?auto=format&fit=crop&q=80&w=800'
       ] 
@@ -77,7 +77,7 @@ export const Electronics08: TemplateConfig = {
     { id: 's10', type: 'bento-grid', props: { 
       title: 'Build Your Desk',
       items: [
-        { title: 'The Foundation', description: 'Solid wood standing desks.', size: 'large', image: 'https://images.unsplash.com/photo-1497215848121-70a4c28f323a?auto=format&fit=crop&q=80&w=800' },
+        { title: 'The Foundation', description: 'Solid wood standing desks.', size: 'large', image: 'https://images.unsplash.com/photo-1502899576159-f224dc2349fa?auto=format&fit=crop&q=80&w=800' },
         { title: 'Posture Support', description: 'Ergonomic seating.', size: 'small', image: 'https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?auto=format&fit=crop&q=80&w=400' },
         { title: 'Task Lighting', description: 'Eye-care lamps.', size: 'small', image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=400' },
         { title: 'Desk Accessories', description: 'Cable management.', size: 'small', image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&q=80&w=400' }

@@ -27,19 +27,19 @@ export const Electronics05: TemplateConfig = {
     { id: 's4', type: 'category-grid', props: { 
       title: 'Shop Your Routine', 
       categories: [
-        { name: 'Morning', image: 'https://images.unsplash.com/photo-1505739998589-00fe190cece5?auto=format&fit=crop&q=80&w=600' }, 
+        { name: 'Morning', image: 'https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&q=80&w=600' }, 
         { name: 'Focus', image: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&q=80&w=600' }, 
         { name: 'Move', image: 'https://images.unsplash.com/photo-1534258936925-c58bed479fcb?auto=format&fit=crop&q=80&w=600' }, 
         { name: 'Listen', image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=600' },
         { name: 'Recover', image: 'https://images.unsplash.com/photo-1524135329990-07660cd5bf10?auto=format&fit=crop&q=80&w=600' },
-        { name: 'Unwind', image: 'https://images.unsplash.com/photo-1515022361661-bc7306eb5535?auto=format&fit=crop&q=80&w=600' }
+        { name: 'Unwind', image: 'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&q=80&w=600' }
       ] 
     } },
     { id: 's5', type: 'catalog', props: {
       title: 'Personal Audio',
       products: [
         { id: 'a1', name: 'Luma Silence Over-Ear', description: 'Adaptive Noise Cancellation', price: 349, imageUrl: 'https://images.unsplash.com/photo-1613040809024-b4ef7ba99bc3?auto=format&fit=crop&q=80&w=600' },
-        { id: 'a2', name: 'Aura True Wireless', description: 'All-Day Comfort Fit', price: 179, imageUrl: 'https://images.unsplash.com/photo-1608223653139-494b914d3393?auto=format&fit=crop&q=80&w=600' },
+        { id: 'a2', name: 'Aura True Wireless', description: 'All-Day Comfort Fit', price: 179, imageUrl: 'https://images.unsplash.com/photo-1628126235206-5260b9ea6441?auto=format&fit=crop&q=80&w=600' },
         { id: 'a3', name: 'Resonance Home Speaker', description: 'Room-Filling Warmth', price: 249, imageUrl: 'https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
@@ -47,17 +47,17 @@ export const Electronics05: TemplateConfig = {
       title: 'Wearables',
       products: [
         { id: 'w1', name: 'Vitality Smart Watch', description: 'Holistic Health Tracking', price: 299, imageUrl: 'https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?auto=format&fit=crop&q=80&w=600' },
-        { id: 'w2', name: 'Minimal Fitness Band', description: 'Discreet Activity Monitor', price: 99, imageUrl: 'https://images.unsplash.com/photo-1557180295-763d25626a8d?auto=format&fit=crop&q=80&w=600' },
-        { id: 'w3', name: 'Sleep & Recovery Ring', description: 'Advanced Nightly Insights', price: 299, imageUrl: 'https://images.unsplash.com/photo-1603513360481-98782a22bece?auto=format&fit=crop&q=80&w=600' }
+        { id: 'w2', name: 'Minimal Fitness Band', description: 'Discreet Activity Monitor', price: 99, imageUrl: 'https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&q=80&w=600' },
+        { id: 'w3', name: 'Sleep & Recovery Ring', description: 'Advanced Nightly Insights', price: 299, imageUrl: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
     { id: 's7', type: 'bento-grid', props: { 
       title: 'Morning Technology',
       items: [
-        { title: 'Gentle Awakening', description: 'Sunrise simulation alarm clock.', size: 'large', image: 'https://images.unsplash.com/photo-1584615377546-a36ff8363be5?auto=format&fit=crop&q=80&w=800' },
-        { title: 'Valet Tray', description: 'Qi-certified wireless charging mat.', size: 'small', image: 'https://images.unsplash.com/photo-1610425712176-59b34a6efc19?auto=format&fit=crop&q=80&w=400' },
-        { title: 'Morning Air', description: 'Smart ultrasonic diffuser.', size: 'small', image: 'https://images.unsplash.com/photo-1582215394236-4e5a953e5dc7?auto=format&fit=crop&q=80&w=400' },
-        { title: 'Morning Audio', description: 'Warm sound to start the day.', size: 'small', image: 'https://images.unsplash.com/photo-1544837562-b903e07f6f56?auto=format&fit=crop&q=80&w=400' }
+        { title: 'Gentle Awakening', description: 'Sunrise simulation alarm clock.', size: 'large', image: 'https://images.unsplash.com/photo-1542393545-10f5cde2c810?auto=format&fit=crop&q=80&w=800' },
+        { title: 'Valet Tray', description: 'Qi-certified wireless charging mat.', size: 'small', image: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=80&w=400' },
+        { title: 'Morning Air', description: 'Smart ultrasonic diffuser.', size: 'small', image: 'https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&q=80&w=400' },
+        { title: 'Morning Audio', description: 'Warm sound to start the day.', size: 'small', image: 'https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&q=80&w=400' }
       ]
     } },
     { id: 's8', type: 'catalog', props: {
@@ -71,8 +71,8 @@ export const Electronics05: TemplateConfig = {
     { id: 's9', type: 'catalog', props: {
       title: 'Move With You',
       products: [
-        { id: 'm1', name: 'Active True Wireless', description: 'Secure Fit for Movement', price: 169, imageUrl: 'https://images.unsplash.com/photo-1628205739504-20d40faee887?auto=format&fit=crop&q=80&w=600' },
-        { id: 'm2', name: 'Pace Sport Watch', description: 'GPS & Heart Rate', price: 249, imageUrl: 'https://images.unsplash.com/photo-1575311373937-040b8e1fd5b0?auto=format&fit=crop&q=80&w=600' },
+        { id: 'm1', name: 'Active True Wireless', description: 'Secure Fit for Movement', price: 169, imageUrl: 'https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?auto=format&fit=crop&q=80&w=600' },
+        { id: 'm2', name: 'Pace Sport Watch', description: 'GPS & Heart Rate', price: 249, imageUrl: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&q=80&w=600' },
         { id: 'm3', name: 'Smart Hydration', description: 'UV Purification Tech', price: 89, imageUrl: 'https://images.unsplash.com/photo-1545665277-5937489579f2?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
@@ -80,14 +80,14 @@ export const Electronics05: TemplateConfig = {
       title: 'Sleep & Recovery',
       products: [
         { id: 'r1', name: 'Blackout Sleep Mask', description: 'Integrated Binaural Beats', price: 129, imageUrl: 'https://images.unsplash.com/photo-1541604193435-22287d32c2c2?auto=format&fit=crop&q=80&w=600' },
-        { id: 'r2', name: 'Percussion Massager', description: 'Ultra-Quiet Muscle Relief', price: 199, imageUrl: 'https://images.unsplash.com/photo-1611756515865-eb738fba9006?auto=format&fit=crop&q=80&w=600' },
+        { id: 'r2', name: 'Percussion Massager', description: 'Ultra-Quiet Muscle Relief', price: 199, imageUrl: 'https://images.unsplash.com/photo-1612444530582-fc66183b16f7?auto=format&fit=crop&q=80&w=600' },
         { id: 'r3', name: 'Ambient Sound Machine', description: 'Organic Sleep Sounds', price: 79, imageUrl: 'https://images.unsplash.com/photo-1614113489855-66422ad300a4?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
     { id: 's11', type: 'editorial-grid', props: { 
       title: 'Personal Tech Essentials', 
       images: [
-        'https://images.unsplash.com/photo-1518331539949-6f2bfbdc32ce?auto=format&fit=crop&q=80&w=800', 
+        'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&q=80&w=800', 
         'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&q=80&w=800',
         'https://images.unsplash.com/photo-1507206130118-b5907f817163?auto=format&fit=crop&q=80&w=800'
       ] 
@@ -95,7 +95,7 @@ export const Electronics05: TemplateConfig = {
     { id: 's12', type: 'bento-grid', props: { 
       title: 'Build Your Routine',
       items: [
-        { title: 'The Morning Ritual', description: 'Wake up naturally.', size: 'small', image: 'https://images.unsplash.com/photo-1517420879255-ae465737bfa3?auto=format&fit=crop&q=80&w=400' },
+        { title: 'The Morning Ritual', description: 'Wake up naturally.', size: 'small', image: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&q=80&w=400' },
         { title: 'The Focus Hour', description: 'Block out the noise.', size: 'small', image: 'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&q=80&w=400' },
         { title: 'The Daily Movement', description: 'Track your progress.', size: 'small', image: 'https://images.unsplash.com/photo-1538805060514-97d9cc17730c?auto=format&fit=crop&q=80&w=400' },
         { title: 'The Evening Wind Down', description: 'Prepare for rest.', size: 'small', image: 'https://images.unsplash.com/photo-1505330622279-bf7d7fc918f4?auto=format&fit=crop&q=80&w=400' }

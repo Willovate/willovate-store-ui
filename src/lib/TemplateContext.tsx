@@ -1,13 +1,7 @@
-import { createContext, useContext, useState, useEffect } from 'react'
-import type { TemplateConfig } from '../types/template'
+import { useState, useEffect } from 'react'
 import { templates } from '../data/templates'
-
-interface TemplateContextType {
-  selectedTemplate: TemplateConfig | null
-  setSelectedTemplate: (id: string) => void
-}
-
-const TemplateContext = createContext<TemplateContextType | undefined>(undefined)
+import { TemplateContext } from './templateContextDef'
+export type { TemplateContextType } from './templateContextDef'
 
 export function TemplateProvider({ children }: { children: React.ReactNode }) {
   const [selectedId, setSelectedId] = useState<string | null>(() => {
@@ -33,9 +27,4 @@ export function TemplateProvider({ children }: { children: React.ReactNode }) {
   )
 }
 
-export function useTemplate() {
-  const context = useContext(TemplateContext)
-  if (!context) throw new Error('useTemplate must be used within TemplateProvider')
-  return context
-}
 

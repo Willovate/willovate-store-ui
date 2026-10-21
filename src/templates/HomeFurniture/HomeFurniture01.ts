@@ -29,7 +29,7 @@ export const HomeFurniture01: TemplateConfig = {
       categories: [
         { name: 'Seating', image: 'https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&q=80&w=600' }, 
         { name: 'Tables', image: 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&q=80&w=600' },
-        { name: 'Storage', image: 'https://images.unsplash.com/photo-1595514535312-70b5ee2e690f?auto=format&fit=crop&q=80&w=600' },
+        { name: 'Storage', image: 'https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?auto=format&fit=crop&q=80&w=600' },
         { name: 'Lighting', image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=600' },
         { name: 'Objects', image: 'https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?auto=format&fit=crop&q=80&w=600' },
         { name: 'Outdoor', image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=600' }
@@ -57,7 +57,7 @@ export const HomeFurniture01: TemplateConfig = {
       subtitle: 'Selected for character and longevity.',
       materials: [
         { id: 'm1', name: 'Oak', description: 'White oak with a natural matte finish.', image: 'https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&q=80&w=600' },
-        { id: 'm2', name: 'Stone', description: 'Honed travertine and marble.', image: 'https://images.unsplash.com/photo-1621274403997-393c87e4ec82?auto=format&fit=crop&q=80&w=600' },
+        { id: 'm2', name: 'Stone', description: 'Honed travertine and marble.', image: 'https://images.unsplash.com/photo-1549187774-b4e9b0445b41?auto=format&fit=crop&q=80&w=600' },
         { id: 'm3', name: 'Linen', description: 'Heavyweight Belgian linen.', image: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&q=80&w=600' },
         { id: 'm4', name: 'Steel', description: 'Powder-coated structural steel.', image: 'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&q=80&w=600' }
       ]
@@ -66,12 +66,12 @@ export const HomeFurniture01: TemplateConfig = {
       products: [
         { id: 'ca1', name: 'Casa Lounge Chair', description: 'Seating', price: 1400, imageUrl: 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80&w=600' },
         { id: 'ca2', name: 'Monument Side Table', description: 'Tables', price: 850, imageUrl: 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&q=80&w=600' },
-        { id: 'ca3', name: 'Linea Credenza', description: 'Storage', price: 3200, imageUrl: 'https://images.unsplash.com/photo-1595514535312-70b5ee2e690f?auto=format&fit=crop&q=80&w=600' },
+        { id: 'ca3', name: 'Linea Credenza', description: 'Storage', price: 3200, imageUrl: 'https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?auto=format&fit=crop&q=80&w=600' },
         { id: 'ca4', name: 'Arc Pendant', description: 'Lighting', price: 620, imageUrl: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=600' },
         { id: 'ca5', name: 'Forma Dining Chair', description: 'Seating', price: 450, imageUrl: 'https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&q=80&w=600' },
         { id: 'ca6', name: 'Plinth Console', description: 'Storage', price: 1100, imageUrl: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=600' },
         { id: 'ca7', name: 'Studio Floor Lamp', description: 'Lighting', price: 780, imageUrl: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&q=80&w=600' },
-        { id: 'ca8', name: 'Casa Bench', description: 'Seating', price: 890, imageUrl: 'https://images.unsplash.com/photo-1550226891-ef816aeb4ba0?auto=format&fit=crop&q=80&w=600' }
+        { id: 'ca8', name: 'Casa Bench', description: 'Seating', price: 890, imageUrl: 'https://images.unsplash.com/photo-1547587091-f883cf8f0c12?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
     { id: 's9', type: 'shop-the-look', props: {

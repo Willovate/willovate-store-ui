@@ -1,6 +1,6 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { templates } from '../data/templates'
-import { useTemplate } from '../lib/TemplateContext'
+import { useTemplate } from '../hooks/useTemplate'
 
 export default function TemplateDetailsPage() {
   const { id } = useParams()

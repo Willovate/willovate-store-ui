@@ -21,7 +21,7 @@ export const Electronics07: TemplateConfig = {
     { id: 's3', type: 'split-hero', props: { 
       title: 'Technology, quietly at home.', 
       subtitle: 'Discover ambient sensors, intelligent lighting, and automated climate systems that blend seamlessly into your interior design.', 
-      image: 'https://images.unsplash.com/photo-1575414003593-0a373d5a5700?auto=format&fit=crop&q=80&w=1600', 
+      image: 'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&q=80&w=1600', 
       ctaLabel: 'Shop Ecosystem' 
     } },
     { id: 's4', type: 'category-grid', props: { 
@@ -43,19 +43,19 @@ export const Electronics07: TemplateConfig = {
     } },
     { id: 's6', type: 'catalog', props: {
       products: [
-        { id: 'l1', name: 'Aura Pendant', description: 'Adaptive Color Temperature', price: 249, imageUrl: 'https://images.unsplash.com/photo-1507652313519-d4e917428fbb?auto=format&fit=crop&q=80&w=600' },
+        { id: 'l1', name: 'Aura Pendant', description: 'Adaptive Color Temperature', price: 249, imageUrl: 'https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&q=80&w=600' },
         { id: 'l2', name: 'Lumina Strip', description: 'Architectural Accent Lighting', price: 89, imageUrl: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=600' },
-        { id: 'l3', name: 'Sol Floor Lamp', description: 'Circadian Rhythm Sync', price: 399, imageUrl: 'https://images.unsplash.com/photo-1513506003901-1e6a229e9d15?auto=format&fit=crop&q=80&w=600' },
+        { id: 'l3', name: 'Sol Floor Lamp', description: 'Circadian Rhythm Sync', price: 399, imageUrl: 'https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?auto=format&fit=crop&q=80&w=600' },
         { id: 'l4', name: 'Halo Sconce', description: 'Minimalist Wall Fixture', price: 159, imageUrl: 'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
     { id: 's7', type: 'bento-grid', props: { 
       title: 'Connected Living Room',
       items: [
-        { title: 'Acoustic Fidelity', description: 'Room-filling smart audio.', size: 'large', image: 'https://images.unsplash.com/photo-1543661845-d850c95029e2?auto=format&fit=crop&q=80&w=800' },
+        { title: 'Acoustic Fidelity', description: 'Room-filling smart audio.', size: 'large', image: 'https://images.unsplash.com/photo-1550989460-0adf9ea622e2?auto=format&fit=crop&q=80&w=800' },
         { title: 'Central Command', description: 'Touch interfaces.', size: 'small', image: 'https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?auto=format&fit=crop&q=80&w=400' },
         { title: 'Visual Media', description: 'Seamless casting.', size: 'small', image: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&q=80&w=400' },
-        { title: 'Automated Shades', description: 'Light control.', size: 'small', image: 'https://images.unsplash.com/photo-1502672260266-1c1585bd3abe?auto=format&fit=crop&q=80&w=400' }
+        { title: 'Automated Shades', description: 'Light control.', size: 'small', image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&q=80&w=400' }
       ]
     } },
     { id: 's8', type: 'bento-grid', props: { 
@@ -69,15 +69,15 @@ export const Electronics07: TemplateConfig = {
     } },
     { id: 's9', type: 'catalog', props: {
       products: [
-        { id: 'sec1', name: 'Aeris Cam Pro', description: '4K Object Recognition', price: 299, imageUrl: 'https://images.unsplash.com/photo-1557438159-51eecce89612?auto=format&fit=crop&q=80&w=600' },
-        { id: 'sec2', name: 'Entry Sensor', description: 'Invisible Contact Sensor', price: 49, imageUrl: 'https://images.unsplash.com/photo-1582298538104-e3fb6b872b77?auto=format&fit=crop&q=80&w=600' },
-        { id: 'sec3', name: 'Smart Deadbolt', description: 'Biometric Access', price: 229, imageUrl: 'https://images.unsplash.com/photo-1510525048601-526b3be31e4f?auto=format&fit=crop&q=80&w=600' },
-        { id: 'sec4', name: 'Motion Detector', description: 'Pet-Immune Sensing', price: 59, imageUrl: 'https://images.unsplash.com/photo-1551651767-d5fdcb3ac92c?auto=format&fit=crop&q=80&w=600' }
+        { id: 'sec1', name: 'Aeris Cam Pro', description: '4K Object Recognition', price: 299, imageUrl: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=600' },
+        { id: 'sec2', name: 'Entry Sensor', description: 'Invisible Contact Sensor', price: 49, imageUrl: 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&q=80&w=600' },
+        { id: 'sec3', name: 'Smart Deadbolt', description: 'Biometric Access', price: 229, imageUrl: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=600' },
+        { id: 'sec4', name: 'Motion Detector', description: 'Pet-Immune Sensing', price: 59, imageUrl: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
     { id: 's10', type: 'catalog', props: {
       products: [
-        { id: 'c1', name: 'Aeris Thermostat', description: 'Learning Climate Control', price: 249, imageUrl: 'https://images.unsplash.com/photo-1545259733-41f221415df5?auto=format&fit=crop&q=80&w=600' },
+        { id: 'c1', name: 'Aeris Thermostat', description: 'Learning Climate Control', price: 249, imageUrl: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&q=80&w=600' },
         { id: 'c2', name: 'Air Purifier X', description: 'HEPA & VOC Filtration', price: 499, imageUrl: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=600' },
         { id: 'c3', name: 'Smart Humidifier', description: 'Ultrasonic Mist', price: 129, imageUrl: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=600' },
         { id: 'c4', name: 'Air Quality Monitor', description: 'CO2 & Particulate Tracking', price: 149, imageUrl: 'https://images.unsplash.com/photo-1592839719941-8e2651039d01?auto=format&fit=crop&q=80&w=600' }
@@ -87,8 +87,8 @@ export const Electronics07: TemplateConfig = {
       title: 'Intelligent Kitchen', 
       images: [
         'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&q=80&w=800', 
-        'https://images.unsplash.com/photo-1556909128-4dc01e0a9693?auto=format&fit=crop&q=80&w=800',
-        'https://images.unsplash.com/photo-1556910113-685d0d829dc7?auto=format&fit=crop&q=80&w=800'
+        'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=800',
+        'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&q=80&w=800'
       ] 
     } },
     { id: 's12', type: 'product-spotlight', props: { 

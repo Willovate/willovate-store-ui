@@ -27,12 +27,12 @@ export const HomeFurniture17: TemplateConfig = {
     { id: 's4', type: 'category-grid', props: { 
       title: 'Shop by Room', 
       categories: [
-        { name: 'Living Room', image: 'https://images.unsplash.com/photo-1617104424032-b9eb6ac1ca45?auto=format&fit=crop&q=80&w=600' }, 
-        { name: 'Dining', image: 'https://images.unsplash.com/photo-1520209255694-a7fbce2ef8e7?auto=format&fit=crop&q=80&w=600' }, 
-        { name: 'Kitchen', image: 'https://images.unsplash.com/photo-1604145023961-0bc4b998cfb6?auto=format&fit=crop&q=80&w=600' },
-        { name: 'Bedroom', image: 'https://images.unsplash.com/photo-1606240213824-c1044431d102?auto=format&fit=crop&q=80&w=600' },
-        { name: 'Lighting', image: 'https://images.unsplash.com/photo-1513506003901-1e6a200e1d1f?auto=format&fit=crop&q=80&w=600' },
-        { name: 'Decor', image: 'https://images.unsplash.com/photo-1618220179428-22790b46a016?auto=format&fit=crop&q=80&w=600' }
+        { name: 'Living Room', image: 'https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&q=80&w=600' }, 
+        { name: 'Dining', image: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&q=80&w=600' }, 
+        { name: 'Kitchen', image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=600' },
+        { name: 'Bedroom', image: 'https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&q=80&w=600' },
+        { name: 'Lighting', image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=600' },
+        { name: 'Decor', image: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&q=80&w=600' }
       ] 
     } },
     { id: 's5', type: 'bento-grid', props: { 
@@ -44,7 +44,7 @@ export const HomeFurniture17: TemplateConfig = {
       ]
     } },
     { id: 's6', type: 'product-spotlight', props: {
-      image: 'https://images.unsplash.com/photo-1600121848594-d6a90236aee0?auto=format&fit=crop&q=80&w=800',
+      image: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&q=80&w=800',
       name: 'Oakridge Farm Table',
       category: 'Dining',
       description: 'A substantial centerpiece for your dining room. Handcrafted from reclaimed oak with traditional mortise and tenon joinery, designed to host generations of family gatherings.',
@@ -54,12 +54,12 @@ export const HomeFurniture17: TemplateConfig = {
     } },
     { id: 's7', type: 'shop-the-look', props: {
       title: 'Sunday Kitchen',
-      image: 'https://images.unsplash.com/photo-1556910103190-2d922a967441?auto=format&fit=crop&q=80&w=1200',
+      image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=1200',
       hotspots: [
-        { x: 50, y: 70, product: { name: 'Farmhouse Dining Table', price: 1800, imageUrl: 'https://images.unsplash.com/photo-1572569438068-409b60e40854?auto=format&fit=crop&q=80&w=600' } },
-        { x: 30, y: 60, product: { name: 'Upholstered Chair', price: 350, imageUrl: 'https://images.unsplash.com/photo-1599669500515-9b40924d5189?auto=format&fit=crop&q=80&w=600' } },
-        { x: 50, y: 55, product: { name: 'Ceramic Serving Bowl', price: 65, imageUrl: 'https://images.unsplash.com/photo-1589256469067-ea9912224858?auto=format&fit=crop&q=80&w=600' } },
-        { x: 60, y: 50, product: { name: 'Linen Runner', price: 45, imageUrl: 'https://images.unsplash.com/photo-1584006682522-dc17d6c0d06e?auto=format&fit=crop&q=80&w=600' } }
+        { x: 50, y: 70, product: { name: 'Farmhouse Dining Table', price: 1800, imageUrl: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=600' } },
+        { x: 30, y: 60, product: { name: 'Upholstered Chair', price: 350, imageUrl: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80&w=600' } },
+        { x: 50, y: 55, product: { name: 'Ceramic Serving Bowl', price: 65, imageUrl: 'https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&q=80&w=600' } },
+        { x: 60, y: 50, product: { name: 'Linen Runner', price: 45, imageUrl: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=600' } }
       ]
     } },
     { id: 's8', type: 'catalog', props: {
@@ -73,7 +73,7 @@ export const HomeFurniture17: TemplateConfig = {
     { id: 's9', type: 'craftsmanship', props: {
       title: 'Artisan Production',
       description: 'Every piece tells a story. We embrace the natural variation of reclaimed wood, celebrating knots and grain patterns. Our traditional joinery ensures your furniture stands the test of time in a busy, warm home.',
-      mainImage: 'https://images.unsplash.com/photo-1531835567308-a83fcde833eb?auto=format&fit=crop&q=80&w=600',
+      mainImage: 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&q=80&w=600',
       metadata: [
         { label: 'Materials', value: 'Reclaimed Timber' },
         { label: 'Construction', value: 'Traditional Joinery' }

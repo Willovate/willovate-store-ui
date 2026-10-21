@@ -37,9 +37,9 @@ export const FoodGrocery07: TemplateConfig = {
       title: 'Shop by Market Stall',
       categories: [
         { id: 'c1', name: 'Fresh Produce', imageUrl: 'https://images.unsplash.com/photo-1518843875459-f738682238a6?auto=format&fit=crop&q=80&w=600' },
-        { id: 'c2', name: 'Bakery Counter', imageUrl: 'https://images.unsplash.com/photo-1555507036-ab1f40ce88cb?auto=format&fit=crop&q=80&w=600' },
+        { id: 'c2', name: 'Bakery Counter', imageUrl: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&q=80&w=600' },
         { id: 'c3', name: 'Local Dairy', imageUrl: 'https://images.unsplash.com/photo-1559598467-f8b76c8155d0?auto=format&fit=crop&q=80&w=600' },
-        { id: 'c4', name: 'Neighborhood Pantry', imageUrl: 'https://images.unsplash.com/photo-1584473457406-6240486414e9?auto=format&fit=crop&q=80&w=600' }
+        { id: 'c4', name: 'Neighborhood Pantry', imageUrl: 'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
     { id: 's5', type: 'catalog', props: {
@@ -47,14 +47,14 @@ export const FoodGrocery07: TemplateConfig = {
       products: [
         { id: 'md-1', name: 'Market Day Tomatoes', description: 'Vine-ripened, Sweet', price: 4.50, imageUrl: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&q=80&w=600', category: 'Produce', stockQuantity: 50, visualTheme: 'default', isFeatured: true, slug: 'market-tomatoes', compareAtPrice: null },
         { id: 'md-2', name: 'Local Spring Mix', description: 'Fresh Cut Greens', price: 5.00, imageUrl: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=600', category: 'Produce', stockQuantity: 40, visualTheme: 'default', isFeatured: false, slug: 'spring-mix', compareAtPrice: null },
-        { id: 'md-3', name: 'Golden Apple Basket', description: 'Crisp & Sweet', price: 6.50, imageUrl: 'https://images.unsplash.com/photo-1560806887-1e4cd0b6fac6?auto=format&fit=crop&q=80&w=600', category: 'Produce', stockQuantity: 60, visualTheme: 'default', isFeatured: false, slug: 'golden-apples', compareAtPrice: null },
+        { id: 'md-3', name: 'Golden Apple Basket', description: 'Crisp & Sweet', price: 6.50, imageUrl: 'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?auto=format&fit=crop&q=80&w=600', category: 'Produce', stockQuantity: 60, visualTheme: 'default', isFeatured: false, slug: 'golden-apples', compareAtPrice: null },
         { id: 'md-4', name: 'Bunched Carrots', description: 'With Tops', price: 3.50, imageUrl: 'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&q=80&w=600', category: 'Produce', stockQuantity: 30, visualTheme: 'default', isFeatured: false, slug: 'bunched-carrots', compareAtPrice: null }
       ]
     }},
     { id: 's6', type: 'catalog', props: {
       title: 'From the Bakery Counter',
       products: [
-        { id: 'md-5', name: 'Country Sourdough', description: 'Fresh Baked Daily', price: 7.00, imageUrl: 'https://images.unsplash.com/photo-1585478259715-876a6a81fa08?auto=format&fit=crop&q=80&w=600', category: 'Bakery', stockQuantity: 20, visualTheme: 'default', isFeatured: true, slug: 'country-sourdough', compareAtPrice: null },
+        { id: 'md-5', name: 'Country Sourdough', description: 'Fresh Baked Daily', price: 7.00, imageUrl: 'https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&q=80&w=600', category: 'Bakery', stockQuantity: 20, visualTheme: 'default', isFeatured: true, slug: 'country-sourdough', compareAtPrice: null },
         { id: 'md-6', name: 'Rustic Baguette', description: 'Crisp Crust', price: 4.50, imageUrl: 'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?auto=format&fit=crop&q=80&w=600', category: 'Bakery', stockQuantity: 30, visualTheme: 'default', isFeatured: false, slug: 'rustic-baguette', compareAtPrice: null },
         { id: 'md-7', name: 'Morning Croissants', description: '2 Pack, Buttery', price: 6.00, imageUrl: 'https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&q=80&w=600', category: 'Bakery', stockQuantity: 15, visualTheme: 'default', isFeatured: false, slug: 'morning-croissants', compareAtPrice: null },
         { id: 'md-8', name: 'Blueberry Muffins', description: '4 Pack', price: 8.50, imageUrl: 'https://images.unsplash.com/photo-1558401391-7899b4bd5bbf?auto=format&fit=crop&q=80&w=600', category: 'Bakery', stockQuantity: 25, visualTheme: 'default', isFeatured: false, slug: 'blueberry-muffins', compareAtPrice: null }
@@ -64,9 +64,9 @@ export const FoodGrocery07: TemplateConfig = {
       title: 'Local Pantry Favorites',
       products: [
         { id: 'md-9', name: 'House Blend Coffee', description: 'Whole Bean, 12oz', price: 14.00, imageUrl: 'https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&q=80&w=600', category: 'Pantry', stockQuantity: 40, visualTheme: 'default', isFeatured: false, slug: 'house-coffee', compareAtPrice: null },
-        { id: 'md-10', name: 'Strawberry Preserve', description: 'Small Batch', price: 8.00, imageUrl: 'https://images.unsplash.com/photo-1584473457409-f64f433fbd48?auto=format&fit=crop&q=80&w=600', category: 'Pantry', stockQuantity: 30, visualTheme: 'default', isFeatured: false, slug: 'strawberry-preserve', compareAtPrice: null },
-        { id: 'md-11', name: 'Wildflower Honey', description: 'Local Apiary', price: 11.50, imageUrl: 'https://images.unsplash.com/photo-1587049352851-8d4e8941552e?auto=format&fit=crop&q=80&w=600', category: 'Pantry', stockQuantity: 20, visualTheme: 'default', isFeatured: false, slug: 'wildflower-honey', compareAtPrice: null },
-        { id: 'md-12', name: 'Bronze Die Penne', description: 'Artisan Pasta', price: 5.50, imageUrl: 'https://images.unsplash.com/photo-1621996316220-3b47bd2ed0db?auto=format&fit=crop&q=80&w=600', category: 'Pantry', stockQuantity: 50, visualTheme: 'default', isFeatured: false, slug: 'bronze-die-penne', compareAtPrice: null }
+        { id: 'md-10', name: 'Strawberry Preserve', description: 'Small Batch', price: 8.00, imageUrl: 'https://images.unsplash.com/photo-1558401391-7899b4bd5bbf?auto=format&fit=crop&q=80&w=600', category: 'Pantry', stockQuantity: 30, visualTheme: 'default', isFeatured: false, slug: 'strawberry-preserve', compareAtPrice: null },
+        { id: 'md-11', name: 'Wildflower Honey', description: 'Local Apiary', price: 11.50, imageUrl: 'https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&q=80&w=600', category: 'Pantry', stockQuantity: 20, visualTheme: 'default', isFeatured: false, slug: 'wildflower-honey', compareAtPrice: null },
+        { id: 'md-12', name: 'Bronze Die Penne', description: 'Artisan Pasta', price: 5.50, imageUrl: 'https://images.unsplash.com/photo-1471194402529-8e0f5a675de6?auto=format&fit=crop&q=80&w=600', category: 'Pantry', stockQuantity: 50, visualTheme: 'default', isFeatured: false, slug: 'bronze-die-penne', compareAtPrice: null }
       ]
     }},
     { id: 's8', type: 'editorial-grid', props: { 
@@ -77,9 +77,9 @@ export const FoodGrocery07: TemplateConfig = {
     { id: 's9', type: 'bento-grid', props: {
       title: 'Market Baskets',
       items: [
-        { title: 'Weekend Market Basket', image: 'https://images.unsplash.com/photo-1584844626154-15c0e0b3eec6?auto=format&fit=crop&q=80&w=800', span: 2 },
+        { title: 'Weekend Market Basket', image: 'https://images.unsplash.com/photo-1519999482648-25049ddd37b1?auto=format&fit=crop&q=80&w=800', span: 2 },
         { title: 'Breakfast for Two', image: 'https://images.unsplash.com/photo-1495214783159-3503fd1b572d?auto=format&fit=crop&q=80&w=800', span: 1 },
-        { title: 'The Baker\'s Picks', image: 'https://images.unsplash.com/photo-1555507036-ab1f40ce88cb?auto=format&fit=crop&q=80&w=800', span: 1 },
+        { title: 'The Baker\'s Picks', image: 'https://images.unsplash.com/photo-1495214783159-3503fd1b572d?auto=format&fit=crop&q=80&w=800', span: 1 },
         { title: 'Family Pantry Box', image: 'https://images.unsplash.com/photo-1606914501449-5a96b6ce24ca?auto=format&fit=crop&q=80&w=800', span: 2 }
       ]
     }},

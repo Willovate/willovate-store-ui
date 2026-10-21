@@ -8,7 +8,7 @@ export const Electronics03: TemplateConfig = {
   tags: [{ id: 'audio', name: 'Audio' }, { id: 'luxury', name: 'Luxury' }],
   thumbnailUrl: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1595123049187-573e3a4e9b92?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {
@@ -17,7 +17,7 @@ export const Electronics03: TemplateConfig = {
   },
   sections: [
     { id: 's1', type: 'navbar', props: { brand: 'SONORA', style: 'center' } },
-    { id: 's2', type: 'full-hero', props: { title: 'Pure Fidelity.', subtitle: 'Discover the warmth of analogue sound with modern wireless convenience.', image: 'https://images.unsplash.com/photo-1528317424683-11bb58763dc0?auto=format&fit=crop&q=80&w=1600', ctaLabel: 'Explore Audio' } },
+    { id: 's2', type: 'full-hero', props: { title: 'Pure Fidelity.', subtitle: 'Discover the warmth of analogue sound with modern wireless convenience.', image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1600', ctaLabel: 'Explore Audio' } },
     { id: 's3', type: 'product-spotlight', props: { image: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&q=80&w=800', name: 'Sonora X1 Over-Ear', category: 'Headphones', description: 'Crafted with premium lambskin leather and custom 40mm beryllium drivers for an unmatched soundscape.', price: 450, features: ['Active Noise Cancellation', 'Lambskin Leather', '40mm Beryllium Drivers'], imageRight: false } },
     { id: 's4', type: 'category-grid', props: { title: 'Sound by Category', categories: [{ name: 'Over-Ear', image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=600' }, { name: 'In-Ear', image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&q=80&w=600' }, { name: 'Speakers', image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&q=80&w=600' }] } },
     { id: 's5', type: 'editorial-grid', props: { title: 'Designed for the senses.', images: ['https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&q=80&w=600', 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=600'] } },

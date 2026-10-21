@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { SectionContainer } from './SectionContainer'
+import { formatCurrency } from '../../lib/currency'
 
 interface ProductHotspot {
   x: number // percentage
@@ -104,7 +105,7 @@ export function ShopTheLookSection({ title, subtitle, image, hotspots }: Props) 
                   />
                 )}
                 <div style={{ fontWeight: 600, fontSize: '14px', marginBottom: '4px' }}>{hotspot.product.name}</div>
-                <div style={{ fontSize: '14px', color: '#666666' }}>${hotspot.product.price}</div>
+                <div style={{ fontSize: '14px', color: '#666666' }}>{formatCurrency(hotspot.product.price)}</div>
               </div>
             </div>
           ))}
@@ -126,7 +127,7 @@ export function ShopTheLookSection({ title, subtitle, image, hotspots }: Props) 
               )}
               <div>
                 <div style={{ fontWeight: 600, fontSize: '14px' }}>{hotspot.product.name}</div>
-                <div style={{ fontSize: '14px', color: 'var(--template-accent)' }}>${hotspot.product.price}</div>
+                <div style={{ fontSize: '14px', color: 'var(--template-accent)' }}>{formatCurrency(hotspot.product.price)}</div>
               </div>
             </div>
           ))}

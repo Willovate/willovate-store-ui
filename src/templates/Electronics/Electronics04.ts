@@ -27,10 +27,10 @@ export const Electronics04: TemplateConfig = {
     { id: 's4', type: 'category-grid', props: { 
       title: 'SYSTEM CATEGORIES', 
       categories: [
-        { name: 'Laptops', image: 'https://images.unsplash.com/photo-1593642702821-c823b13eb2a2?auto=format&fit=crop&q=80&w=600' }, 
+        { name: 'Laptops', image: 'https://images.unsplash.com/photo-1449247709967-d4461a6a6103?auto=format&fit=crop&q=80&w=600' }, 
         { name: 'Displays', image: 'https://images.unsplash.com/photo-1527443195645-1133f7f28990?auto=format&fit=crop&q=80&w=600' }, 
         { name: 'Components', image: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&q=80&w=600' }, 
-        { name: 'Peripherals', image: 'https://images.unsplash.com/photo-1615663245857-ac93bb5c9023?auto=format&fit=crop&q=80&w=600' },
+        { name: 'Peripherals', image: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&q=80&w=600' },
         { name: 'Networking', image: 'https://images.unsplash.com/photo-1558227691-41ea78d1f631?auto=format&fit=crop&q=80&w=600' },
         { name: 'Storage', image: 'https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&q=80&w=600' }
       ] 
@@ -38,7 +38,7 @@ export const Electronics04: TemplateConfig = {
     { id: 's5', type: 'catalog', props: {
       products: [
         { id: 'chk1', name: 'Workstation M1', description: 'Intel i9 / 64GB RAM / RTX 4080', price: 2899, imageUrl: 'https://images.unsplash.com/photo-1537498425277-c283d32ef9db?auto=format&fit=crop&q=80&w=600' },
-        { id: 'chk2', name: 'ProDisplay 27', description: '4K IPS / 99% DCI-P3 / 144Hz', price: 699, imageUrl: 'https://images.unsplash.com/photo-1552831388-6a0b35077328?auto=format&fit=crop&q=80&w=600' },
+        { id: 'chk2', name: 'ProDisplay 27', description: '4K IPS / 99% DCI-P3 / 144Hz', price: 699, imageUrl: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80&w=600' },
         { id: 'chk3', name: 'MechBoard TKL', description: 'Hot-swappable MX Cherry', price: 149, imageUrl: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=600' },
         { id: 'chk4', name: 'NetCore AXE11000', description: 'Tri-Band Wi-Fi 6E Router', price: 349, imageUrl: 'https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&q=80&w=600' }
       ]
@@ -59,7 +59,7 @@ export const Electronics04: TemplateConfig = {
       items: [
         { title: 'Core Architecture', description: 'Motherboards & Platforms', size: 'large', image: 'https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&q=80&w=800' },
         { title: 'Graphics Processing', description: 'GPUs & Acceleration', size: 'small', image: 'https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&q=80&w=400' },
-        { title: 'Volatile Memory', description: 'DDR5 Kits', size: 'small', image: 'https://images.unsplash.com/photo-1562976540-1502f6e4a282?auto=format&fit=crop&q=80&w=400' },
+        { title: 'Volatile Memory', description: 'DDR5 Kits', size: 'small', image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=400' },
         { title: 'Power Delivery', description: '80+ Platinum PSUs', size: 'small', image: 'https://images.unsplash.com/photo-1555680202-c86f0e12f086?auto=format&fit=crop&q=80&w=400' }
       ]
     } },
@@ -90,9 +90,9 @@ export const Electronics04: TemplateConfig = {
     { id: 's10', type: 'catalog', props: {
       products: [
         { id: 'cp1', name: 'UltraWide 34"', description: 'WQHD Curved Monitor', price: 799, imageUrl: 'https://images.unsplash.com/photo-1582966772680-860e372bb558?auto=format&fit=crop&q=80&w=600' },
-        { id: 'cp2', name: 'Precision Mouse', description: '16000 DPI Sensor', price: 89, imageUrl: 'https://images.unsplash.com/photo-1527814050087-37938154791f?auto=format&fit=crop&q=80&w=600' },
-        { id: 'cp3', name: 'Vision Pro Cam', description: '4K/60fps Webcam', price: 199, imageUrl: 'https://images.unsplash.com/photo-1596752763294-f252ebbf77d7?auto=format&fit=crop&q=80&w=600' },
-        { id: 'cp4', name: 'Thunderbolt 4 Hub', description: '40Gbps Data Transfer', price: 299, imageUrl: 'https://images.unsplash.com/photo-1596753063548-8422116035ec?auto=format&fit=crop&q=80&w=600' }
+        { id: 'cp2', name: 'Precision Mouse', description: '16000 DPI Sensor', price: 89, imageUrl: 'https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&q=80&w=600' },
+        { id: 'cp3', name: 'Vision Pro Cam', description: '4K/60fps Webcam', price: 199, imageUrl: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=600' },
+        { id: 'cp4', name: 'Thunderbolt 4 Hub', description: '40Gbps Data Transfer', price: 299, imageUrl: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
     { id: 's11', type: 'editorial-grid', props: { 
@@ -113,7 +113,7 @@ export const Electronics04: TemplateConfig = {
       products: [
         { id: 'ce1', name: 'Circuit NVMe 2TB', description: '7300MB/s Read Speed', price: 189, imageUrl: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80&w=600' },
         { id: 'ce2', name: 'Circuit Ext-SSD 1TB', description: 'Rugged USB-C 3.2', price: 149, imageUrl: 'https://images.unsplash.com/photo-1563298723-dcfebaa392e3?auto=format&fit=crop&q=80&w=600' },
-        { id: 'ce3', name: 'Thermal Compound', description: 'Liquid Metal Paste', price: 19, imageUrl: 'https://images.unsplash.com/photo-1611078449428-79d123e7dc3f?auto=format&fit=crop&q=80&w=600' },
+        { id: 'ce3', name: 'Thermal Compound', description: 'Liquid Metal Paste', price: 19, imageUrl: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&q=80&w=600' },
         { id: 'ce4', name: 'Thunderbolt 4 Cable', description: 'Active 2m Cord', price: 39, imageUrl: 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&q=80&w=600' }
       ]
     }},

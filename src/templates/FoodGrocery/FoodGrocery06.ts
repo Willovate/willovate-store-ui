@@ -31,7 +31,7 @@ export const FoodGrocery06: TemplateConfig = {
       { name: 'Plant-Based', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=600' },
       { name: 'Superfoods', image: 'https://images.unsplash.com/photo-1505253758473-96b7015fcd40?auto=format&fit=crop&q=80&w=600' },
       { name: 'Healthy Snacks', image: 'https://images.unsplash.com/photo-1604514628550-37477afdf4e3?auto=format&fit=crop&q=80&w=600' },
-      { name: 'Tea & Infusions', image: 'https://images.unsplash.com/photo-1576092762791-dd9e2220abd4?auto=format&fit=crop&q=80&w=600' },
+      { name: 'Tea & Infusions', image: 'https://images.unsplash.com/photo-1559598467-f8b76c8155d0?auto=format&fit=crop&q=80&w=600' },
       { name: 'Better Breakfast', image: 'https://images.unsplash.com/photo-1494390248081-4e521a5940db?auto=format&fit=crop&q=80&w=600' }
     ] } },
     { id: 's5', type: 'catalog', props: {

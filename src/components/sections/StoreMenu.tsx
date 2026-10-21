@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import type { StoreMenuFeature } from '../../types/template'
 
@@ -8,16 +8,21 @@ interface StoreMenuProps {
   brandName?: string
   navigation?: { label: string; href: string }[]
   features?: StoreMenuFeature[]
+  onOpenSearch?: () => void
+  onOpenWishlist?: () => void
 }
 
-export function StoreMenu({ isOpen, onClose, brandName = 'Store', navigation = [], features = [] }: StoreMenuProps) {
-  const [mounted, setMounted] = useState(false)
+export function StoreMenu({ 
+  isOpen, 
+  onClose, 
+  brandName = 'Store', 
+  navigation = [], 
+  features = [],
+  onOpenSearch,
+  onOpenWishlist,
+}: StoreMenuProps) {
   const filteredFeatures = features.filter(f => f.id !== 'cart' && f.label.toLowerCase() !== 'cart' && f.label.toLowerCase() !== 'shopping bag')
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-  
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
@@ -39,7 +44,7 @@ export function StoreMenu({ isOpen, onClose, brandName = 'Store', navigation = [
     return () => document.removeEventListener('keydown', handleEscape)
   }, [isOpen, onClose])
 
-  if (!isOpen || !mounted) return null
+  if (!isOpen || typeof document === 'undefined') return null
 
   const content = (
     <div 
@@ -140,7 +145,17 @@ export function StoreMenu({ isOpen, onClose, brandName = 'Store', navigation = [
                 {filteredFeatures.map((feature) => (
                   <li key={feature.id}>
                     <button
-                      onClick={onClose}
+                      type="button"
+                      onClick={() => {
+                        onClose()
+                        const id = feature.id.toLowerCase()
+                        const label = feature.label.toLowerCase()
+                        if (id === 'search' || label.includes('search')) {
+                          onOpenSearch?.()
+                        } else if (id === 'wishlist' || label.includes('wishlist') || label.includes('favourite')) {
+                          onOpenWishlist?.()
+                        }
+                      }}
                       style={{
                         background: 'transparent',
                         border: 'none',
