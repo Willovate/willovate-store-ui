@@ -224,7 +224,15 @@ function App() {
             rawHash === 'glowing' ||
             rawHash === 'cosmetics-glowing' ||
             rawHash === 'glowing-theme' ||
-            rawHash === 'glowing-skincare'
+            rawHash === 'glowing-skincare' ||
+            rawHash === 'fabish' ||
+            rawHash === 'cosmetics-fabish' ||
+            rawHash === 'fabish-theme' ||
+            rawHash === 'fabish-cosmetics' ||
+            rawHash === 'organica' ||
+            rawHash === 'cosmetics-organica' ||
+            rawHash === 'organica-1' ||
+            rawHash === 'organica-theme'
           )) ||
           (key === 'jewelry-accessories' && (
             rawHash === 'jewelry' ||

@@ -1,0 +1,1090 @@
+/* Organica Theme Styles */
+:root {
+  --organica-green: #77a43b;
+  --organica-green-dark: #5e842c;
+  --organica-green-light: #f1f7ea;
+  --organica-text: #2c3328;
+  --organica-text-muted: #757d72;
+  --organica-border: #e3e8de;
+  --organica-bg: #fdfdfc;
+  --organica-accent: #f28b27;
+}
+
+.organica-storefront {
+  font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--organica-text);
+  background-color: var(--organica-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Announcement Top Bar */
+.organica-top-announcement {
+  background-color: var(--organica-green);
+  color: #ffffff;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+/* Header Middle */
+.organica-header-mid {
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--organica-border);
+  padding: 20px 0;
+}
+
+.organica-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.organica-mid-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.organica-phone-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--organica-text-muted);
+}
+
+.organica-phone-box strong {
+  color: var(--organica-green);
+  font-size: 15px;
+}
+
+.organica-logo-img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Search Bar with Category Dropdown */
+.organica-search-bar {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--organica-green);
+  border-radius: 30px;
+  overflow: hidden;
+  max-width: 520px;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.organica-category-select {
+  border: none;
+  background-color: transparent;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--organica-text);
+  outline: none;
+  border-right: 1px solid var(--organica-border);
+  cursor: pointer;
+}
+
+.organica-search-input {
+  flex: 1;
+  border: none;
+  padding: 10px 16px;
+  font-size: 13px;
+  outline: none;
+}
+
+.organica-search-btn {
+  background-color: var(--organica-green);
+  color: #ffffff;
+  border: none;
+  padding: 10px 22px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.organica-search-btn:hover {
+  background-color: var(--organica-green-dark);
+}
+
+/* Header User Controls */
+.organica-header-user {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.organica-wishlist-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--organica-text);
+  font-weight: 500;
+}
+
+.organica-cart-pill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--organica-green-light);
+  border: 1px solid var(--organica-border);
+  border-radius: 30px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.organica-cart-pill:hover {
+  border-color: var(--organica-green);
+  box-shadow: 0 4px 12px rgba(119, 164, 59, 0.15);
+}
+
+.organica-cart-icon-wrap {
+  position: relative;
+  color: var(--organica-green);
+  display: flex;
+  align-items: center;
+}
+
+.organica-cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background-color: var(--organica-green);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.organica-cart-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.organica-cart-label {
+  font-size: 11px;
+  color: var(--organica-text-muted);
+}
+
+.organica-cart-total {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--organica-green);
+}
+
+/* Main Navigation Bar */
+.organica-nav-bar {
+  background-color: #ffffff;
+  border-bottom: 2px solid var(--organica-green-light);
+}
+
+.organica-nav-list {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.organica-nav-link {
+  display: block;
+  padding: 14px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--organica-text);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.organica-nav-link:hover,
+.organica-nav-link.active {
+  color: var(--organica-green);
+}
+
+.organica-nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--organica-green);
+}
+
+/* Trust / Policy Strip */
+.organica-trust-strip {
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--organica-border);
+  padding: 24px 0;
+}
+
+.organica-trust-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.organica-trust-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background-color: var(--organica-green-light);
+  border: 1px dashed #d1e2bf;
+}
+
+.organica-trust-icon {
+  font-size: 28px;
+}
+
+.organica-trust-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--organica-text);
+  margin-bottom: 2px;
+}
+
+.organica-trust-subtitle {
+  font-size: 12px;
+  color: var(--organica-text-muted);
+}
+
+/* Hero Section with Side Cards */
+.organica-hero-section {
+  padding: 30px 0;
+}
+
+.organica-hero-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+.organica-hero-main {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 480px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.organica-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.organica-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.4) 65%, transparent 100%);
+  display: flex;
+  align-items: center;
+  padding: 40px 48px;
+}
+
+.organica-hero-content {
+  max-width: 480px;
+}
+
+.organica-hero-script {
+  font-family: 'Georgia', serif;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--organica-green);
+  margin-bottom: 6px;
+}
+
+.organica-hero-title {
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--organica-text);
+  margin-bottom: 8px;
+}
+
+.organica-hero-highlight {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--organica-accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.organica-hero-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--organica-text-muted);
+  margin-bottom: 24px;
+}
+
+.organica-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--organica-green);
+  color: #ffffff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 25px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.organica-btn:hover {
+  background-color: var(--organica-green-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(119, 164, 59, 0.3);
+}
+
+/* Side Banners */
+.organica-hero-side {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.organica-side-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 228px;
+  cursor: pointer;
+}
+
+.organica-side-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.organica-side-card:hover .organica-side-img {
+  transform: scale(1.05);
+}
+
+.organica-side-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.65) 100%);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: #ffffff;
+}
+
+.organica-side-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.organica-side-subtitle {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+/* Brands Strip */
+.organica-brands-strip {
+  padding: 30px 0;
+  border-top: 1px solid var(--organica-border);
+  border-bottom: 1px solid var(--organica-border);
+  background-color: #ffffff;
+}
+
+.organica-brands-flex {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.organica-brand-item {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #a4aca0;
+  text-transform: uppercase;
+}
+
+/* Section Headers */
+.organica-section-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.organica-script-subtitle {
+  font-family: 'Georgia', serif;
+  font-style: italic;
+  font-size: 20px;
+  color: var(--organica-green);
+  margin-bottom: 4px;
+}
+
+.organica-title-main {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--organica-text);
+  letter-spacing: -0.2px;
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 12px;
+}
+
+.organica-title-main::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: var(--organica-green);
+  border-radius: 2px;
+}
+
+/* Product Cards Grid */
+.organica-products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.organica-product-card {
+  background-color: #ffffff;
+  border: 1px solid var(--organica-border);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.organica-product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  border-color: var(--organica-green);
+}
+
+.organica-card-thumb {
+  position: relative;
+  aspect-ratio: 1;
+  background-color: #fafbfa;
+  overflow: hidden;
+}
+
+.organica-product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.organica-product-card:hover .organica-product-img {
+  transform: scale(1.05);
+}
+
+.organica-badge-sale {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: var(--organica-green);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.organica-hover-actions {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: all 0.25s ease;
+}
+
+.organica-product-card:hover .organica-hover-actions {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.organica-action-circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 1px solid var(--organica-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--organica-text);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.organica-action-circle:hover {
+  background-color: var(--organica-green);
+  color: #ffffff;
+  border-color: var(--organica-green);
+}
+
+.organica-card-info {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.organica-stars {
+  color: #f59e0b;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.organica-prod-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--organica-text);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.organica-card-bottom {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.organica-prices {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.organica-price {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--organica-green);
+}
+
+.organica-price-orig {
+  font-size: 13px;
+  color: var(--organica-text-muted);
+  text-decoration: line-through;
+}
+
+.organica-add-cart-btn {
+  background-color: var(--organica-green-light);
+  border: 1px solid var(--organica-green);
+  color: var(--organica-green);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.organica-add-cart-btn:hover {
+  background-color: var(--organica-green);
+  color: #ffffff;
+}
+
+/* Dual Middle Banners */
+.organica-dual-section {
+  padding: 50px 0;
+}
+
+.organica-dual-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.organica-dual-banner {
+  position: relative;
+  height: 280px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.organica-dual-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.organica-dual-banner:hover .organica-dual-img {
+  transform: scale(1.04);
+}
+
+.organica-dual-content {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.2) 70%, transparent 100%);
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.organica-dual-tag {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--organica-accent);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.organica-dual-title {
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.organica-dual-sub {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-bottom: 18px;
+  max-width: 320px;
+}
+
+/* 3 Dark Organic Boxes */
+.organica-boxes-section {
+  padding: 40px 0;
+}
+
+.organica-boxes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.organica-box-card {
+  position: relative;
+  height: 240px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.organica-box-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.organica-box-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(20, 35, 15, 0.85) 100%);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: #ffffff;
+}
+
+.organica-box-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.organica-box-sub {
+  font-size: 13px;
+  color: #d1ded0;
+  margin-bottom: 14px;
+}
+
+.organica-box-link {
+  color: var(--organica-accent);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Testimonial Section */
+.organica-testimonial-section {
+  padding: 50px 0;
+  background-color: var(--organica-green-light);
+  margin: 40px 0;
+}
+
+.organica-testimonial-box {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px;
+}
+
+.organica-quote-icon {
+  font-size: 40px;
+  color: var(--organica-green);
+  margin-bottom: 12px;
+}
+
+.organica-testimonial-text {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--organica-text);
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.organica-testimonial-user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.organica-user-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--organica-green);
+}
+
+.organica-user-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--organica-text);
+}
+
+/* Blog Posts Section */
+.organica-blog-section {
+  padding: 50px 0;
+}
+
+.organica-blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.organica-blog-item {
+  background-color: #ffffff;
+  border: 1px solid var(--organica-border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.organica-blog-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.organica-blog-thumb {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.organica-blog-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.organica-date-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background-color: var(--organica-green);
+  color: #ffffff;
+  text-align: center;
+  padding: 6px 10px;
+  border-radius: 6px;
+  line-height: 1.1;
+}
+
+.organica-date-day {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.organica-date-month {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.organica-blog-body {
+  padding: 20px;
+}
+
+.organica-blog-author {
+  font-size: 12px;
+  color: var(--organica-green);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.organica-blog-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  line-height: 1.35;
+}
+
+.organica-blog-excerpt {
+  font-size: 13px;
+  color: var(--organica-text-muted);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.organica-blog-read-more {
+  color: var(--organica-green);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* Newsletter Strip */
+.organica-newsletter-strip {
+  background-color: #273822;
+  color: #ffffff;
+  padding: 40px 0;
+  margin-top: 50px;
+}
+
+.organica-newsletter-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.organica-newsletter-title {
+  font-size: 24px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.organica-newsletter-sub {
+  font-size: 13px;
+  color: #a9baa4;
+}
+
+.organica-newsletter-form {
+  display: flex;
+  max-width: 480px;
+  width: 100%;
+}
+
+.organica-nl-input {
+  flex: 1;
+  background-color: #ffffff;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 30px 0 0 30px;
+  font-size: 13px;
+  outline: none;
+}
+
+.organica-nl-btn {
+  background-color: var(--organica-green);
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 0 30px 30px 0;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.organica-nl-btn:hover {
+  background-color: var(--organica-green-dark);
+}
+
+/* Footer */
+.organica-footer {
+  background-color: #1f2b1a;
+  color: #a4b39e;
+  padding: 60px 0 30px;
+}
+
+.organica-footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 36px;
+  margin-bottom: 40px;
+}
+
+.organica-footer-h5 {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 18px;
+}
+
+.organica-footer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.organica-footer-link {
+  color: #a4b39e;
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s ease;
+}
+
+.organica-footer-link:hover {
+  color: #ffffff;
+}
+
+.organica-footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+/* Drawer & Modal Overlay */
+.organica-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 200;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.organica-drawer {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 420px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.15);
+}
+
+.organica-drawer-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--organica-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.organica-drawer-body {
+  padding: 20px 24px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.organica-drawer-footer {
+  padding: 20px 24px;
+  border-top: 1px solid var(--organica-border);
+  background-color: var(--organica-green-light);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .organica-hero-grid {
+    grid-template-columns: 1fr;
+  }
+  .organica-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .organica-dual-grid {
+    grid-template-columns: 1fr;
+  }
+  .organica-boxes-grid {
+    grid-template-columns: 1fr;
+  }
+  .organica-blog-grid {
+    grid-template-columns: 1fr;
+  }
+  .organica-footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .organica-mid-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .organica-search-bar {
+    max-width: 100%;
+  }
+  .organica-nav-list {
+    display: none;
+  }
+  .organica-trust-grid {
+    grid-template-columns: 1fr;
+  }
+  .organica-products-grid {
+    grid-template-columns: 1fr;
+  }
+  .organica-newsletter-inner {
+    flex-direction: column;
+  }
+  .organica-footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

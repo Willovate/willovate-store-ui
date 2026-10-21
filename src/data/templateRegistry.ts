@@ -35,7 +35,12 @@ import { ALL_FASHION_MARKETPLACE_TEMPLATES } from './fashionTemplatesData'
 import { ALL_JEWELRY_MARKETPLACE_TEMPLATES } from './jewelryTemplatesData'
 import { ALL_SHOES_MARKETPLACE_TEMPLATES } from './shoesTemplatesData'
 import { ALL_COSMETICS_MARKETPLACE_TEMPLATES } from './cosmeticsTemplatesData'
-import { BeauxStorefront, GlowingStorefront } from '../templates/cosmetics'
+import {
+  BeauxStorefront,
+  GlowingStorefront,
+  FabishStorefront,
+  OrganicaStorefront,
+} from '../templates/cosmetics'
 import {
   HappyFeetStorefront,
   ShoeZoneStorefront,
@@ -149,6 +154,8 @@ export function getTemplateCategoryKey(categoryKey: string): string {
     norm.includes('cosmetic') ||
     norm.includes('beaux') ||
     norm.includes('glowing') ||
+    norm.includes('fabish') ||
+    norm.includes('organica') ||
     norm.includes('skincare')
   ) {
     return 'health-beauty'
@@ -196,6 +203,33 @@ export function getTemplateComponent(input?: MarketplaceTemplate | Template | st
       template.brandName?.toLowerCase().includes('glowing'))
   ) {
     return GlowingStorefront
+  }
+
+  if (
+    template &&
+    (template.slug === 'cosmetics-fabish' ||
+      template.id === 'cosmetics-fabish' ||
+      template.slug === 'fabish' ||
+      template.id === 'fabish' ||
+      template.slug === 'fabish-theme' ||
+      template.name?.toLowerCase().includes('fabish') ||
+      template.brandName?.toLowerCase().includes('fabish'))
+  ) {
+    return FabishStorefront
+  }
+
+  if (
+    template &&
+    (template.slug === 'cosmetics-organica' ||
+      template.id === 'cosmetics-organica' ||
+      template.slug === 'organica' ||
+      template.id === 'organica' ||
+      template.slug === 'organica-1' ||
+      template.slug === 'organica-theme' ||
+      template.name?.toLowerCase().includes('organica') ||
+      template.brandName?.toLowerCase().includes('organica'))
+  ) {
+    return OrganicaStorefront
   }
 
   if (

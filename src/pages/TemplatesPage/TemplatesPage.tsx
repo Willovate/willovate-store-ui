@@ -82,13 +82,17 @@ import {
 import {
   BEAUX_TEMPLATE,
   GLOWING_TEMPLATE,
+  FABISH_TEMPLATE,
+  ORGANICA_TEMPLATE,
   ALL_COSMETICS_MARKETPLACE_TEMPLATES,
 } from '../../data/cosmeticsTemplatesData'
 import {
   BeauxStorefront,
   GlowingStorefront,
+  FabishStorefront,
+  OrganicaStorefront,
 } from '../../templates/cosmetics'
-export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront, VtOlightStorefront, SwarnaStorefront, JewStorefront, HappyFeetStorefront, ShoeZoneStorefront, SusieShoesStorefront, FashionFeetStorefront, FootwearWorkDoStorefront, ShoesWorkDoStorefront, SensationStorefront, GiarosStorefront, StepGlamStorefront, ApShoesStorefront, BeauxStorefront, GlowingStorefront, HAPPY_FEET_TEMPLATE, SHOE_ZONE_TEMPLATE, SUSIE_SHOES_TEMPLATE, FASHION_FEET_TEMPLATE, FOOTWEAR_WORKDO_TEMPLATE, SHOES_WORKDO_TEMPLATE, SENSATION_WORKDO_TEMPLATE, GIAROS_TEMPLATE, STEPGLAM_TEMPLATE, AP_SHOES_TEMPLATE, BEAUX_TEMPLATE, GLOWING_TEMPLATE, ALL_COSMETICS_MARKETPLACE_TEMPLATES }
+export { VelocityStorefront, ArenaStorefront, SprintStorefront, ProGearStorefront, FitCoreStorefront, GameDayStorefront, PeakStorefront, StreetAthleteStorefront, EliteSportStorefront, MotionStorefront, BelleFashionStorefront, VogalFashionStorefront, OptimalFashionStorefront, NaturyaFashionStorefront, TrendyFashionStorefront, FragranceFashionStorefront, JenieFashionStorefront, ChuttiFashionStorefront, BaggoFashionStorefront, MrTevorFashionStorefront, DiamondJewelryStorefront, JoharyJewelryStorefront, LopezJewelryStorefront, PSJewelshopStorefront, TimzeeStorefront, JewelsWorkDoStorefront, DiamondWorkDoStorefront, VtOlightStorefront, SwarnaStorefront, JewStorefront, HappyFeetStorefront, ShoeZoneStorefront, SusieShoesStorefront, FashionFeetStorefront, FootwearWorkDoStorefront, ShoesWorkDoStorefront, SensationStorefront, GiarosStorefront, StepGlamStorefront, ApShoesStorefront, BeauxStorefront, GlowingStorefront, FabishStorefront, OrganicaStorefront, HAPPY_FEET_TEMPLATE, SHOE_ZONE_TEMPLATE, SUSIE_SHOES_TEMPLATE, FASHION_FEET_TEMPLATE, FOOTWEAR_WORKDO_TEMPLATE, SHOES_WORKDO_TEMPLATE, SENSATION_WORKDO_TEMPLATE, GIAROS_TEMPLATE, STEPGLAM_TEMPLATE, AP_SHOES_TEMPLATE, BEAUX_TEMPLATE, GLOWING_TEMPLATE, FABISH_TEMPLATE, ORGANICA_TEMPLATE, ALL_COSMETICS_MARKETPLACE_TEMPLATES }
 
 
 // Re-export domain types
@@ -883,6 +887,45 @@ export const SportsStorefront: React.FC<SportsStorefrontProps> = ({
           onUseTemplate?.(template.id)
           onClose?.()
         }}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'cosmetics-fabish' ||
+      template.id === 'cosmetics-fabish' ||
+      template.slug === 'fabish' ||
+      template.id === 'fabish' ||
+      template.slug === 'fabish-theme' ||
+      template.name?.toLowerCase().includes('fabish') ||
+      template.brandName?.toLowerCase().includes('fabish'))
+  ) {
+    return (
+      <FabishStorefront
+        template={template}
+        device={device === 'fullscreen' ? 'desktop' : device}
+        onBack={onClose}
+      />
+    )
+  }
+
+  if (
+    template &&
+    (template.slug === 'cosmetics-organica' ||
+      template.id === 'cosmetics-organica' ||
+      template.slug === 'organica' ||
+      template.id === 'organica' ||
+      template.slug === 'organica-1' ||
+      template.slug === 'organica-theme' ||
+      template.name?.toLowerCase().includes('organica') ||
+      template.brandName?.toLowerCase().includes('organica'))
+  ) {
+    return (
+      <OrganicaStorefront
+        template={template}
+        device={device === 'fullscreen' ? 'desktop' : device}
+        onBack={onClose}
       />
     )
   }
@@ -1992,6 +2035,22 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
       return GLOWING_TEMPLATE
     }
     if (
+      rawHash === 'fabish' ||
+      rawHash === 'cosmetics-fabish' ||
+      rawHash === 'fabish-theme' ||
+      rawHash === 'fabish-cosmetics'
+    ) {
+      return FABISH_TEMPLATE
+    }
+    if (
+      rawHash === 'organica' ||
+      rawHash === 'cosmetics-organica' ||
+      rawHash === 'organica-1' ||
+      rawHash === 'organica-theme'
+    ) {
+      return ORGANICA_TEMPLATE
+    }
+    if (
       rawHash === 'shoes-workdo' ||
       rawHash === 'shoesworkdo' ||
       rawHash === 'workdo-shoes-store'
@@ -2272,6 +2331,20 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
         rawHash === 'glowing-skincare'
       ) {
         setPreviewTemplate(GLOWING_TEMPLATE)
+      } else if (
+        rawHash === 'fabish' ||
+        rawHash === 'cosmetics-fabish' ||
+        rawHash === 'fabish-theme' ||
+        rawHash === 'fabish-cosmetics'
+      ) {
+        setPreviewTemplate(FABISH_TEMPLATE)
+      } else if (
+        rawHash === 'organica' ||
+        rawHash === 'cosmetics-organica' ||
+        rawHash === 'organica-1' ||
+        rawHash === 'organica-theme'
+      ) {
+        setPreviewTemplate(ORGANICA_TEMPLATE)
       } else if (
         rawHash === 'shoes-workdo' ||
         rawHash === 'shoesworkdo' ||
