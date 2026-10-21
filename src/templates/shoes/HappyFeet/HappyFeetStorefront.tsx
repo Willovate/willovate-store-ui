@@ -184,15 +184,13 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
           </div>
         </a>
 
-        {device !== 'mobile' && (
-          <ul className="hf-nav-menu">
-            <li className="hf-nav-item active">Home</li>
-            <li className="hf-nav-item">Shop ▾</li>
-            <li className="hf-nav-item">Blog</li>
-            <li className="hf-nav-item">Pages ▾</li>
-            <li className="hf-nav-item">About</li>
-          </ul>
-        )}
+        <ul className="hf-nav-menu">
+          <li className="hf-nav-item active">Home</li>
+          <li className="hf-nav-item">Shop ▾</li>
+          <li className="hf-nav-item">Blog</li>
+          <li className="hf-nav-item">Pages ▾</li>
+          <li className="hf-nav-item">About</li>
+        </ul>
 
         <div className="hf-header-actions">
           <form className="hf-search-form" onSubmit={(e) => e.preventDefault()}>

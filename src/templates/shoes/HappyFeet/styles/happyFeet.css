@@ -1861,3 +1861,50 @@
     text-align: center;
   }
 }
+
+@media (max-width: 600px) {
+  .hf-storefront-root {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+  }
+
+  .hf-storefront-root [class*='container'] {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding-right: 16px;
+    padding-left: 16px;
+    box-sizing: border-box;
+  }
+
+  .hf-products-grid,
+  .hf-categories-grid,
+  .hf-deals-grid,
+  .hf-brands-cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .hf-nav-menu {
+    display: flex;
+    max-width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    gap: 20px;
+  }
+
+  .hf-hero-container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .hf-hero-headline {
+    font-size: clamp(30px, 9vw, 42px);
+  }
+
+  .hf-storefront-root img {
+    max-width: 100%;
+  }
+}

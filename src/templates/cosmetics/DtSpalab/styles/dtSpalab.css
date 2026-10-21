@@ -650,3 +650,59 @@
   }
 }
 
+@media (max-width: 600px) {
+  .dtspa-storefront {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+  }
+
+  .dtspa-container {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding-right: 16px;
+    padding-left: 16px;
+    box-sizing: border-box;
+  }
+
+  .dtspa-categories-grid,
+  .dtspa-promos-grid,
+  .dtspa-products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .dtspa-header-inner {
+    flex-wrap: wrap;
+  }
+
+  .dtspa-header-inner nav {
+    flex: 1 0 100%;
+    order: 3;
+    min-width: 0;
+  }
+
+  .dtspa-nav-menu {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+
+  .dtspa-hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .dtspa-hero-h1 {
+    font-size: clamp(28px, 8vw, 36px);
+  }
+
+  .dtspa-storefront img {
+    max-width: 100%;
+  }
+}

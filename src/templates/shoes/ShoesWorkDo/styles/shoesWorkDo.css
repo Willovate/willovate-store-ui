@@ -995,3 +995,36 @@
   max-width: 320px;
 }
 
+@media (max-width: 600px) {
+  .swd-wrapper {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+  }
+
+  .swd-wrapper [class*='container'] {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding-right: 16px;
+    padding-left: 16px;
+    box-sizing: border-box;
+  }
+
+  .swd-categories-grid,
+  .swd-products-grid,
+  .swd-loved-grid,
+  .swd-retro-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .swd-hero-container {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .swd-wrapper img {
+    max-width: 100%;
+  }
+}

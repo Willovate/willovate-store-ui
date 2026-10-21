@@ -1417,3 +1417,49 @@
 .sz-root.device-tablet .sz-value-props-grid {
   grid-template-columns: repeat(2, 1fr);
 }
+
+@media (max-width: 600px) {
+  .sz-root {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+  }
+
+  .sz-root :is(.sz-categories-section, .sz-promo-container) {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .sz-root.device-mobile .sz-header {
+    flex-wrap: wrap;
+  }
+
+  .sz-root.device-mobile .sz-nav {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    order: 3;
+  }
+
+  .sz-category-grid,
+  .sz-product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .sz-hero-container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .sz-hero-title {
+    font-size: clamp(30px, 9vw, 42px);
+  }
+
+  .sz-root img {
+    max-width: 100%;
+  }
+}

@@ -1303,3 +1303,42 @@
   grid-template-columns: 1fr;
   padding: 20px;
 }
+
+@media (max-width: 600px) {
+  .susie-root {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+  }
+
+  .susie-root.device-mobile .susie-nav-bar {
+    display: block;
+  }
+
+  .susie-nav-links {
+    display: flex;
+    max-width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+
+  .susie-products-grid,
+  .susie-collage-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .susie-hero-container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .susie-hero-title {
+    font-size: clamp(30px, 9vw, 42px);
+  }
+
+  .susie-root img {
+    max-width: 100%;
+  }
+}

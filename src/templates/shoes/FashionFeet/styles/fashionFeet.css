@@ -1152,3 +1152,69 @@
   }
 }
 
+@media (max-width: 600px) {
+  .ff-root {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+  }
+
+  .ff-header-inner,
+  .ff-bestsale-container,
+  .ff-showcase-grid,
+  .ff-products-grid,
+  .ff-brands-container,
+  .ff-reviews-container,
+  .ff-blog-container,
+  .ff-footer-grid {
+    min-width: 0;
+  }
+
+  .ff-bestsale-container,
+  .ff-showcase-grid,
+  .ff-products-grid,
+  .ff-brands-container,
+  .ff-reviews-container,
+  .ff-blog-container {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .ff-header-inner {
+    flex-wrap: wrap;
+  }
+
+  .ff-nav-left {
+    display: flex;
+    flex: 1 0 100%;
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    order: 3;
+  }
+
+  .ff-products-grid,
+  .ff-brands-container,
+  .ff-reviews-container,
+  .ff-blog-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .ff-hero-container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .ff-hero-title {
+    font-size: clamp(32px, 9vw, 44px);
+  }
+
+  .ff-hero-visual img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}

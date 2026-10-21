@@ -1266,3 +1266,44 @@
   }
 }
 
+@media (max-width: 600px) {
+  .fabish-storefront {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+  }
+
+  .fabish-products-grid,
+  .fabish-collage-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .fabish-header-inner {
+    flex-wrap: wrap;
+  }
+
+  .fabish-nav-menu {
+    display: flex;
+    flex: 1 0 100%;
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+
+  .fabish-hero-container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .fabish-hero-title {
+    font-size: clamp(28px, 8vw, 36px);
+  }
+
+  .fabish-storefront img {
+    max-width: 100%;
+  }
+}

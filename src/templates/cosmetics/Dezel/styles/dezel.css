@@ -685,3 +685,48 @@
   }
 }
 
+@media (max-width: 600px) {
+  .dezel-storefront {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+  }
+
+  .dezel-container {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding-right: 16px;
+    padding-left: 16px;
+    box-sizing: border-box;
+  }
+
+  .dezel-promos-grid,
+  .dezel-popular-grid,
+  .dezel-glow-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .dezel-nav-menu {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+
+  .dezel-hero-section {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dezel-hero-h1 {
+    font-size: clamp(28px, 8vw, 36px);
+  }
+
+  .dezel-storefront img {
+    max-width: 100%;
+  }
+}

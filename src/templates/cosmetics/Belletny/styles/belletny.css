@@ -857,3 +857,43 @@
   }
 }
 
+@media (max-width: 600px) {
+  .belletny-storefront {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+  }
+
+  .belletny-container {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding-right: 16px;
+    padding-left: 16px;
+    box-sizing: border-box;
+  }
+
+  .belletny-products-grid,
+  .belletny-mid-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .belletny-nav-list {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+
+  .belletny-hero-title {
+    font-size: clamp(28px, 8vw, 36px);
+  }
+
+  .belletny-storefront img {
+    max-width: 100%;
+  }
+}

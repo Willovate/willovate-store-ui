@@ -1301,3 +1301,58 @@
   }
 }
 
+@media (max-width: 600px) {
+  .ap-storefront {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+  }
+
+  .ap-header-inner,
+  .ap-hero-container,
+  .ap-products-grid,
+  .ap-value-props-grid,
+  .ap-banners-grid,
+  .ap-testimonial-grid,
+  .ap-prefooter-grid,
+  .ap-insta-grid {
+    min-width: 0;
+  }
+
+  .ap-header-inner,
+  .ap-hero-container {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .ap-header-inner {
+    flex-wrap: wrap;
+  }
+
+  .ap-nav {
+    display: flex;
+    flex: 1 0 100%;
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    order: 3;
+    justify-content: flex-start;
+  }
+
+  .ap-products-grid,
+  .ap-banners-grid,
+  .ap-insta-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .ap-hero-container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .ap-hero-title {
+    font-size: clamp(30px, 9vw, 42px);
+  }
+}
