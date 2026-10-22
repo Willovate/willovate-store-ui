@@ -2320,15 +2320,8 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
       return SHOE_ZONE_TEMPLATE
     }
     if (
-      rawHash === 'shoes' ||
-      rawHash === 'shoes-store' ||
-      rawHash === 'shoes-footwear' ||
       rawHash === 'happy-feet' ||
-      rawHash === 'shoes-happy-feet' ||
-      rawHash === 'shoes-templates' ||
-      rawHash === 'shoes-template' ||
-      rawHash === 'footwear' ||
-      rawHash === 'sneakers'
+      rawHash === 'shoes-happy-feet'
     ) {
       return HAPPY_FEET_TEMPLATE
     }
@@ -2652,17 +2645,20 @@ export const CategoryTemplatesPage: React.FC<CategoryTemplatesPageProps> = ({
       ) {
         setPreviewTemplate(SHOE_ZONE_TEMPLATE)
       } else if (
+        rawHash === 'happy-feet' ||
+        rawHash === 'shoes-happy-feet'
+      ) {
+        setPreviewTemplate(HAPPY_FEET_TEMPLATE)
+      } else if (
         rawHash === 'shoes' ||
         rawHash === 'shoes-store' ||
         rawHash === 'shoes-footwear' ||
-        rawHash === 'happy-feet' ||
-        rawHash === 'shoes-happy-feet' ||
         rawHash === 'shoes-templates' ||
         rawHash === 'shoes-template' ||
         rawHash === 'footwear' ||
         rawHash === 'sneakers'
       ) {
-        setPreviewTemplate(HAPPY_FEET_TEMPLATE)
+        setPreviewTemplate(null)
       } else if (rawHash === 'sports-storefront' || rawHash === 'velocity' || rawHash === 'sports-preview' || rawHash === 'velocity-preview') {
         const match = ALL_SPORTS_MARKETPLACE_TEMPLATES[0]
         if (match) setPreviewTemplate(match)

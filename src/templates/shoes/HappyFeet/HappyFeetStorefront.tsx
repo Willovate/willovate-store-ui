@@ -38,6 +38,7 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
 }) => {
   const effectiveDevice = deviceView || device || 'desktop'
   // State
+  const [currency, setCurrency] = useState<'INR' | 'USD'>('INR')
   const [activeHeroSlide, setActiveHeroSlide] = useState(0)
   const [freshCategoryTab, setFreshCategoryTab] = useState<'All' | 'Men' | 'Women' | 'Kids' | 'Unisex'>('All')
   const [suggestedTab, setSuggestedTab] = useState<'All' | 'Men' | 'Women' | 'Unisex'>('All')
@@ -178,6 +179,14 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
     0
   )
 
+  const formatPrice = (inrAmount: number) => {
+    if (currency === 'USD') {
+      const usd = Math.round(inrAmount / 83)
+      return `$${usd}.00 USD`
+    }
+    return `Rs. ${inrAmount.toLocaleString('en-IN')}.00`
+  }
+
   const filteredFreshPicks =
     freshCategoryTab === 'All'
       ? HAPPY_FEET_FRESH_PICKS
@@ -205,9 +214,17 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
           <a href="#instagram" className="hf-social-pill" title="Instagram">📸</a>
         </div>
         <div className="hf-utility-right">
-          <div className="hf-utility-dropdown">
-            <span>IN</span>
-            <span style={{ fontSize: '10px' }}>▼</span>
+          <div className="hf-utility-dropdown" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <span>{currency === 'INR' ? '🇮🇳' : '🇺🇸'}</span>
+            <select
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value as 'INR' | 'USD')}
+              style={{ background: 'transparent', border: 'none', color: 'inherit', fontWeight: 600, cursor: 'pointer', outline: 'none' }}
+              aria-label="Currency Selector"
+            >
+              <option value="INR" style={{ color: '#000' }}>INR (Rs.)</option>
+              <option value="USD" style={{ color: '#000' }}>USD ($)</option>
+            </select>
           </div>
           <div className="hf-utility-dropdown">
             <span>English</span>
@@ -517,11 +534,11 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
                 <div className="hf-product-price-row">
                   <div className="hf-price-box">
                     <span className="hf-current-price">
-                      Rs. {product.price.toLocaleString('en-IN')}.00
+                      {formatPrice(product.price)}
                     </span>
                     {product.originalPrice && (
                       <span className="hf-original-price">
-                        Rs. {product.originalPrice.toLocaleString('en-IN')}.00
+                        {formatPrice(product.originalPrice)}
                       </span>
                     )}
                   </div>
@@ -634,11 +651,11 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
                   <div className="hf-product-price-row">
                     <div className="hf-price-box">
                       <span className="hf-current-price">
-                        Rs. {deal.price.toLocaleString('en-IN')}.00
+                        {formatPrice(deal.price)}
                       </span>
                       {deal.originalPrice && (
                         <span className="hf-original-price">
-                          Rs. {deal.originalPrice.toLocaleString('en-IN')}.00
+                          {formatPrice(deal.originalPrice)}
                         </span>
                       )}
                     </div>
@@ -772,7 +789,7 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
                   <span>★★★★★</span>
                 </div>
                 <div className="hf-suggested-price">
-                  Rs. {item.price.toLocaleString('en-IN')}.00
+                  {formatPrice(item.price)}
                 </div>
               </div>
               <button
@@ -1051,7 +1068,7 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
                     <div className="hf-cart-item-info">
                       <div className="hf-cart-item-name">{item.product.name}</div>
                       <div className="hf-cart-item-price">
-                        Rs. {item.product.price.toLocaleString('en-IN')}.00
+                        {formatPrice(item.product.price)}
                       </div>
                       <div className="hf-cart-qty-ctrl">
                         <button
@@ -1082,7 +1099,7 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
               <div className="hf-drawer-footer">
                 <div className="hf-drawer-subtotal">
                   <span>Subtotal:</span>
-                  <span>Rs. {cartSubtotal.toLocaleString('en-IN')}.00</span>
+                  <span>{formatPrice(cartSubtotal)}</span>
                 </div>
                 <button
                   type="button"
@@ -1157,7 +1174,7 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
                   ★★★★★ ({selectedProduct.reviewCount} reviews)
                 </div>
                 <div style={{ fontSize: '22px', fontWeight: 800, marginBottom: '14px' }}>
-                  Rs. {selectedProduct.price.toLocaleString('en-IN')}.00
+                  {formatPrice(selectedProduct.price)}
                 </div>
                 <p style={{ fontSize: '13px', color: '#666', lineHeight: '1.6' }}>
                   {selectedProduct.description ||
@@ -1197,6 +1214,8 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
           if (fullProd) setSelectedProduct(fullProd)
         }}
         accentColor={customAccentColor || '#e1680b'}
+        currencyPrefix={currency === 'USD' ? '$' : 'Rs. '}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         placeholder="Search running shoes, fresh picks, deals..."
         popularTags={['Sneakers', 'Running', 'Deals', 'Unisex']}
       />
@@ -1214,6 +1233,8 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
           image: p.image,
           category: p.category,
         }))}
+        currencyPrefix={currency === 'USD' ? '$' : 'Rs. '}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         onRemoveWishlist={toggleWishlist}
         onAddToCart={(p) => {
           const fullProd = [...HAPPY_FEET_FRESH_PICKS, ...HAPPY_FEET_FEATURED_DEALS, ...HAPPY_FEET_SUGGESTED_PRODUCTS].find((x) => x.id === p.id)

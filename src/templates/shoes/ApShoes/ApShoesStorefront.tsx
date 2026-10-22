@@ -53,6 +53,14 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
   const [newsletterEmail, setNewsletterEmail] = useState<string>('')
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false)
   const [searchQuery, setSearchQuery] = useState<string>('')
+  const [currency, setCurrency] = useState<'USD' | 'INR'>('USD')
+
+  const formatPrice = (usdAmount: number) => {
+    if (currency === 'INR') {
+      return `₹${Math.round(usdAmount * 83).toLocaleString('en-IN')}`
+    }
+    return `$${usdAmount.toFixed(2)}`
+  }
 
   // Toast Helper
   const showToast = (msg: string) => {
@@ -179,6 +187,48 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
           : undefined
       }
     >
+      {/* Top Announcement & Utility Bar */}
+      <div
+        className="ap-top-bar"
+        style={{
+          background: '#111827',
+          color: '#e5e7eb',
+          fontSize: '12px',
+          padding: '6px 24px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          borderBottom: '1px solid rgba(255,255,255,0.08)',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span>Free express delivery on orders over {formatPrice(120)}</span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ fontSize: '11px', color: '#9ca3af' }}>Currency:</span>
+            <select
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value as 'USD' | 'INR')}
+              aria-label="Select Currency"
+              style={{
+                background: '#1f2937',
+                color: '#fff',
+                border: '1px solid #374151',
+                borderRadius: '4px',
+                padding: '2px 6px',
+                fontSize: '11px',
+                cursor: 'pointer',
+                fontWeight: 600,
+              }}
+            >
+              <option value="USD">🇺🇸 USD ($)</option>
+              <option value="INR">🇮🇳 INR (₹)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
       {/* ----------------------------------------------------------------------
           HEADER
          ---------------------------------------------------------------------- */}
@@ -554,9 +604,9 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
 
               <div className="ap-prod-price-row">
                 {prod.originalPrice && (
-                  <span className="ap-price-orig">${prod.originalPrice.toFixed(2)}</span>
+                  <span className="ap-price-orig">{formatPrice(prod.originalPrice)}</span>
                 )}
-                <span className="ap-price-current">${prod.price.toFixed(2)}</span>
+                <span className="ap-price-current">{formatPrice(prod.price)}</span>
               </div>
 
               {/* 3 Cyan Circular Action Buttons */}
@@ -873,7 +923,7 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
                         Size: {item.selectedSize}
                       </div>
                       <div className="ap-drawer-item-price">
-                        ${item.product.price.toFixed(2)}
+                        {formatPrice(item.product.price * item.quantity)}
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 6 }}>
                         <button
@@ -914,7 +964,7 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
               <div className="ap-drawer-footer">
                 <div className="ap-drawer-subtotal">
                   <span>Subtotal:</span>
-                  <span>${cartSubtotal.toFixed(2)}</span>
+                  <span>{formatPrice(cartSubtotal)}</span>
                 </div>
                 <button
                   type="button"
@@ -957,7 +1007,7 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
             <div className="ap-modal-details">
               <h3 className="ap-modal-title">{quickViewProduct.name}</h3>
               <div className="ap-modal-price">
-                ${quickViewProduct.price.toFixed(2)}
+                {formatPrice(quickViewProduct.price)}
               </div>
               <p className="ap-modal-desc">{quickViewProduct.description}</p>
 
@@ -1019,6 +1069,8 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
             setSelectedQuickViewSize(fullProd.availableSizes[0] || 9)
           }
         }}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         accentColor={customAccentColor || '#ea580c'}
         placeholder="Search casual sneakers, loafers, skate shoes..."
         popularTags={['Sneakers', 'Skate', 'Loafers', 'Running']}
@@ -1037,6 +1089,8 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
           image: p.image,
           category: p.subtitle || 'Shoes',
         }))}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         onRemoveWishlist={toggleWishlist}
         onAddToCart={(p) => {
           const fullProd = AP_SHOES_NEW_PRODUCTS.find((x) => x.id === p.id)

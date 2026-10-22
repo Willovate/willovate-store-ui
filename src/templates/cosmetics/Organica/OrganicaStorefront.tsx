@@ -52,6 +52,14 @@ export function OrganicaStorefront({
   const [isAccountOpen, setIsAccountOpen] = useState(false)
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
   const [wishlist, setWishlist] = useState<string[]>([])
+  const [currency, setCurrency] = useState<'USD' | 'INR'>('USD')
+
+  const formatPrice = (usdAmount: number) => {
+    if (currency === 'INR') {
+      return `₹${Math.round(usdAmount * 83).toLocaleString('en-IN')}`
+    }
+    return `$${usdAmount.toFixed(2)}`
+  }
 
   // Cart
   const [cartItems, setCartItems] = useState<OrganicaCartItem[]>([
@@ -164,7 +172,33 @@ export function OrganicaStorefront({
     >
       {/* 1. Announcement Top Bar */}
       <div className="organica-top-announcement">
-        {ORGANICA_ANNOUNCEMENT}
+        <div
+          className="organica-container"
+          style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+        >
+          <span>{ORGANICA_ANNOUNCEMENT}</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ fontSize: '11px', opacity: 0.9 }}>Currency:</span>
+            <select
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value as 'USD' | 'INR')}
+              aria-label="Select Currency"
+              style={{
+                background: 'rgba(0,0,0,0.18)',
+                color: '#ffffff',
+                border: '1px solid rgba(255,255,255,0.4)',
+                borderRadius: '4px',
+                padding: '2px 6px',
+                fontSize: '11px',
+                cursor: 'pointer',
+                fontWeight: 600,
+              }}
+            >
+              <option value="USD" style={{ color: '#000' }}>🇺🇸 USD ($)</option>
+              <option value="INR" style={{ color: '#000' }}>🇮🇳 INR (₹)</option>
+            </select>
+          </div>
+        </div>
       </div>
 
       {/* 2. Header Middle with Phone, Logo, Search, Wishlist, Cart */}
@@ -264,7 +298,7 @@ export function OrganicaStorefront({
                 </div>
                 <div className="organica-cart-info">
                   <span className="organica-cart-label">Shopping Cart</span>
-                  <span className="organica-cart-total">${cartSubtotal.toFixed(2)}</span>
+                  <span className="organica-cart-total">{formatPrice(cartSubtotal)}</span>
                 </div>
               </div>
             </div>
@@ -473,9 +507,9 @@ export function OrganicaStorefront({
                 <h3 className="organica-prod-name">{product.name}</h3>
                 <div className="organica-card-bottom">
                   <div className="organica-prices">
-                    <span className="organica-price">${product.price.toFixed(2)}</span>
+                    <span className="organica-price">{formatPrice(product.price)}</span>
                     {product.originalPrice && (
-                      <span className="organica-price-orig">${product.originalPrice.toFixed(2)}</span>
+                      <span className="organica-price-orig">{formatPrice(product.originalPrice)}</span>
                     )}
                   </div>
                   <button
@@ -596,9 +630,9 @@ export function OrganicaStorefront({
                 <h3 className="organica-prod-name">{product.name}</h3>
                 <div className="organica-card-bottom">
                   <div className="organica-prices">
-                    <span className="organica-price">${product.price.toFixed(2)}</span>
+                    <span className="organica-price">{formatPrice(product.price)}</span>
                     {product.originalPrice && (
-                      <span className="organica-price-orig">${product.originalPrice.toFixed(2)}</span>
+                      <span className="organica-price-orig">{formatPrice(product.originalPrice)}</span>
                     )}
                   </div>
                   <button
@@ -825,7 +859,7 @@ export function OrganicaStorefront({
                     <div style={{ flex: 1 }}>
                       <div style={{ fontWeight: 600, fontSize: '14px' }}>{item.product.name}</div>
                       <div style={{ color: '#77a43b', fontWeight: 700, fontSize: '13px', margin: '4px 0' }}>
-                        ${item.product.price.toFixed(2)}
+                        {formatPrice(item.product.price * item.quantity)}
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <button
@@ -864,12 +898,12 @@ export function OrganicaStorefront({
               <div className="organica-drawer-footer">
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '16px', fontWeight: 700 }}>
                   <span>Subtotal</span>
-                  <span style={{ color: '#77a43b' }}>${cartSubtotal.toFixed(2)}</span>
+                  <span style={{ color: '#77a43b' }}>{formatPrice(cartSubtotal)}</span>
                 </div>
                 <button
                   className="organica-btn"
                   style={{ width: '100%', marginTop: '16px', justifyContent: 'center' }}
-                  onClick={() => alert(`Checking out with total: $${cartSubtotal.toFixed(2)}`)}
+                  onClick={() => alert(`Checking out with total: ${formatPrice(cartSubtotal)}`)}
                 >
                   Proceed to Checkout
                 </button>
@@ -930,10 +964,10 @@ export function OrganicaStorefront({
                 {'★'.repeat(Math.round(quickViewProduct.rating))} ({quickViewProduct.reviewCount} reviews)
               </div>
               <div style={{ fontSize: '20px', fontWeight: 700, color: '#77a43b', marginBottom: '14px' }}>
-                ${quickViewProduct.price.toFixed(2)}
+                {formatPrice(quickViewProduct.price)}
                 {quickViewProduct.originalPrice && (
                   <span style={{ fontSize: '14px', color: '#757d72', textDecoration: 'line-through', marginLeft: '8px' }}>
-                    ${quickViewProduct.originalPrice.toFixed(2)}
+                    {formatPrice(quickViewProduct.originalPrice)}
                   </span>
                 )}
               </div>
@@ -948,7 +982,7 @@ export function OrganicaStorefront({
                   setQuickViewProduct(null)
                 }}
               >
-                Add to Cart • ${quickViewProduct.price.toFixed(2)}
+                Add to Cart • {formatPrice(quickViewProduct.price)}
               </button>
             </div>
           </div>
@@ -972,6 +1006,8 @@ export function OrganicaStorefront({
           if (fullProd) setQuickViewProduct(fullProd)
         }}
         accentColor={customAccentColor || '#77a43b'}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         placeholder="Search organic teas, skincare, supplements..."
         popularTags={['Beauty', 'Health', 'Food']}
       />
@@ -989,6 +1025,8 @@ export function OrganicaStorefront({
           image: p.image,
           category: p.category,
         }))}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         onRemoveWishlist={toggleWishlist}
         onAddToCart={(p) => {
           const fullProd = ORGANICA_PRODUCTS.find((x) => x.id === p.id)

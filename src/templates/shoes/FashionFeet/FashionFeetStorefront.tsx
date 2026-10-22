@@ -29,6 +29,7 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
   onUseTemplate,
   onClose,
 }) => {
+  const [currency, setCurrency] = useState<'USD' | 'INR'>('USD')
   const [currentSlide, setCurrentSlide] = useState(0)
   const [cart, setCart] = useState<FashionFeetCartItem[]>([
     {
@@ -146,6 +147,13 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
     0
   )
 
+  const formatPrice = (usdAmount: number) => {
+    if (currency === 'INR') {
+      return `₹${Math.round(usdAmount * 83).toLocaleString('en-IN')}`
+    }
+    return `$${usdAmount.toFixed(2)}`
+  }
+
   const slide = FASHIONFEET_HERO_SLIDES[currentSlide]
 
   return (
@@ -213,6 +221,18 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
             <a href="#track">Track Order</a>
             <a href="#help">Help Center</a>
             <a href="#stores">Stores</a>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', marginLeft: '8px' }}>
+              <span>{currency === 'USD' ? '🇺🇸' : '🇮🇳'}</span>
+              <select
+                value={currency}
+                onChange={(e) => setCurrency(e.target.value as 'USD' | 'INR')}
+                style={{ background: 'transparent', color: 'inherit', border: 'none', cursor: 'pointer', outline: 'none', fontSize: '11px', fontWeight: 600 }}
+                aria-label="Currency Selector"
+              >
+                <option value="USD" style={{ color: '#000' }}>USD ($)</option>
+                <option value="INR" style={{ color: '#000' }}>INR (₹)</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
@@ -436,10 +456,10 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
                     <span className="ff-card-category">{product.category}</span>
                     <h4 className="ff-card-title">{product.name}</h4>
                     <div className="ff-card-price-row">
-                      <span className="ff-price">${product.price.toFixed(2)}</span>
+                      <span className="ff-price">{formatPrice(product.price)}</span>
                       {product.originalPrice && (
                         <span className="ff-original-price">
-                          ${product.originalPrice.toFixed(2)}
+                          {formatPrice(product.originalPrice)}
                         </span>
                       )}
                     </div>
@@ -738,11 +758,11 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
               </h3>
               <div className="ff-card-price-row" style={{ marginBottom: '16px' }}>
                 <span className="ff-price" style={{ fontSize: '22px' }}>
-                  ${quickViewProduct.price.toFixed(2)}
+                  {formatPrice(quickViewProduct.price)}
                 </span>
                 {quickViewProduct.originalPrice && (
                   <span className="ff-original-price">
-                    ${quickViewProduct.originalPrice.toFixed(2)}
+                    {formatPrice(quickViewProduct.originalPrice)}
                   </span>
                 )}
               </div>
@@ -782,7 +802,7 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
                   setQuickViewProduct(null)
                 }}
               >
-                ADD TO CART • ${quickViewProduct.price.toFixed(2)}
+                ADD TO CART • {formatPrice(quickViewProduct.price)}
               </button>
             </div>
           </div>
@@ -824,7 +844,7 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
                         </div>
                       )}
                       <div className="ff-drawer-item-price">
-                        ${(item.product.price * item.quantity).toFixed(2)}
+                        {formatPrice(item.product.price * item.quantity)}
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px' }}>
                         <button
@@ -872,7 +892,7 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
                 >
                   <span>Subtotal</span>
                   <span style={{ color: 'var(--ff-primary)' }}>
-                    ${cartSubtotal.toFixed(2)}
+                    {formatPrice(cartSubtotal)}
                   </span>
                 </div>
                 <button
@@ -906,6 +926,8 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
             setSelectedSize(9)
           }
         }}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         accentColor={activeColor}
         placeholder="Search men's shoes, loafers, boots, oxfords..."
         popularTags={['Loafers', 'Boots', 'Oxfords', 'Sneakers']}
@@ -936,6 +958,8 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
             setSelectedSize(9)
           }
         }}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         accentColor={activeColor}
       />
 

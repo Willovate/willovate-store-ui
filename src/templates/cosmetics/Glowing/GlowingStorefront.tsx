@@ -52,6 +52,14 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
   const [wishlist, setWishlist] = useState<string[]>([])
   const [toastMessage, setToastMessage] = useState<string | null>(null)
   const [newsletterEmail, setNewsletterEmail] = useState('')
+  const [currency, setCurrency] = useState<'USD' | 'INR'>('USD')
+
+  const formatPrice = (usdAmount: number) => {
+    if (currency === 'INR') {
+      return `₹${Math.round(usdAmount * 83).toLocaleString('en-IN')}`
+    }
+    return `$${usdAmount.toFixed(2)}`
+  }
 
   const navItems: MobileNavItem[] = [
     {
@@ -167,15 +175,32 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
       {/* Announcement Bar */}
       <div className="glowing-announcement-bar">
         <div>
-          Free shipping on all U.S. orders $50+{' '}
+          Free shipping on all U.S. orders {formatPrice(50)}+{' '}
           <a href="#shipping" onClick={(e) => { e.preventDefault(); showToast('Free shipping details applied!') }}>
             Learn More
           </a>
         </div>
-        <div className="glowing-announcement-right">
+        <div className="glowing-announcement-right" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span>Need Help? +1 800 456-GLOW</span>
           <span>•</span>
-          <span>USD ($)</span>
+          <select
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value as 'USD' | 'INR')}
+            aria-label="Select Currency"
+            style={{
+              background: 'rgba(0,0,0,0.1)',
+              color: 'inherit',
+              border: '1px solid rgba(0,0,0,0.2)',
+              borderRadius: '4px',
+              padding: '2px 6px',
+              fontSize: '11px',
+              cursor: 'pointer',
+              fontWeight: 600,
+            }}
+          >
+            <option value="USD" style={{ color: '#000' }}>🇺🇸 USD ($)</option>
+            <option value="INR" style={{ color: '#000' }}>🇮🇳 INR (₹)</option>
+          </select>
         </div>
       </div>
 
@@ -370,9 +395,9 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
 
                     <div className="glowing-card-bottom">
                       <div className="glowing-card-price">
-                        <span className="glowing-price-curr">${prod.price.toFixed(2)}</span>
+                        <span className="glowing-price-curr">{formatPrice(prod.price)}</span>
                         {prod.originalPrice && (
-                          <span className="glowing-price-old">${prod.originalPrice.toFixed(2)}</span>
+                          <span className="glowing-price-old">{formatPrice(prod.originalPrice)}</span>
                         )}
                       </div>
                       <button
@@ -494,7 +519,7 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
                   </div>
                   <div className="glowing-fav-card-info">
                     <h4 className="glowing-fav-name">{prod.name}</h4>
-                    <div className="glowing-fav-price">${prod.price.toFixed(2)}</div>
+                    <div className="glowing-fav-price">{formatPrice(prod.price)}</div>
                     <button
                       className="glowing-fav-btn"
                       onClick={() => handleAddToCart(prod)}
@@ -635,7 +660,7 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
                   <img src={item.product.image} alt={item.product.name} style={{ width: '64px', height: '64px', objectFit: 'cover', borderRadius: '4px' }} />
                   <div style={{ flex: 1 }}>
                     <h4 style={{ margin: '0 0 4px 0', fontSize: '14px', fontWeight: '700', color: '#193833' }}>{item.product.name}</h4>
-                    <div style={{ fontSize: '13px', color: '#666', marginBottom: '8px' }}>${item.product.price.toFixed(2)}</div>
+                    <div style={{ fontSize: '13px', color: '#666', marginBottom: '8px' }}>{formatPrice(item.product.price * item.quantity)}</div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                       <button style={{ width: '24px', height: '24px', border: '1px solid #ccc', background: '#fafafa', cursor: 'pointer' }} onClick={() => handleUpdateCartQty(item.product.id, -1)}>-</button>
                       <span>{item.quantity}</span>
@@ -649,7 +674,7 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
             <div style={{ padding: '20px 24px', borderTop: '1px solid #e6e5df', background: '#fcfcfc' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '16px', fontWeight: '700', color: '#193833', marginBottom: '16px' }}>
                 <span>Subtotal:</span>
-                <span>${cartTotal.toFixed(2)}</span>
+                <span>{formatPrice(cartTotal)}</span>
               </div>
               <button
                 style={{ width: '100%', padding: '14px', background: '#193833', color: '#ffffff', border: 'none', borderRadius: '4px', fontSize: '14px', fontWeight: '700', cursor: 'pointer' }}
@@ -658,7 +683,7 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
                   if (onUseTemplate) onUseTemplate('cosmetics-glowing')
                 }}
               >
-                Checkout • ${cartTotal.toFixed(2)}
+                Checkout • {formatPrice(cartTotal)}
               </button>
             </div>
           </div>
@@ -683,7 +708,7 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
               <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', color: '#777' }}>{quickViewProduct.category}</span>
               <h3 style={{ margin: '8px 0', fontSize: '20px', color: '#193833' }}>{quickViewProduct.name}</h3>
               <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#193833', marginBottom: '14px' }}>
-                ${quickViewProduct.price.toFixed(2)}
+                {formatPrice(quickViewProduct.price)}
               </div>
               <p style={{ fontSize: '13px', lineHeight: '1.6', color: '#666', marginBottom: '16px' }}>{quickViewProduct.description}</p>
               <button
@@ -718,6 +743,8 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
           if (fullProd) setQuickViewProduct(fullProd)
         }}
         accentColor={customAccentColor || '#193833'}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         placeholder="Search botanical serums, oils, moisturizers..."
         popularTags={['Serum', 'Face Oil', 'Moisturizer', 'Cleanser']}
       />
@@ -735,6 +762,8 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
           image: p.image,
           category: p.category,
         }))}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         onRemoveWishlist={toggleWishlist}
         onAddToCart={(p) => {
           const fullProd = [...GLOWING_FEATURED_PRODUCTS, ...GLOWING_FAVORITE_PRODUCTS].find((x) => x.id === p.id)

@@ -32,6 +32,7 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
   const effectiveDevice = deviceView || device || 'desktop'
 
   // State
+  const [currency, setCurrency] = useState<'USD' | 'INR'>('USD')
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
   const [activeTab, setActiveTab] = useState<'Women Heels' | 'Boots Shoes' | 'Flats'>('Women Heels')
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
@@ -107,6 +108,13 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
   )
   const cartItemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0)
 
+  const formatPrice = (usdAmount: number) => {
+    if (currency === 'INR') {
+      return `₹${Math.round(usdAmount * 83).toLocaleString('en-IN')}`
+    }
+    return `$${usdAmount.toFixed(2)}`
+  }
+
   const filteredBestSellers = GIAROS_BEST_SELLERS.filter(
     (p) => p.category === activeTab
   )
@@ -158,6 +166,23 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
       className={`gia-wrapper device-${effectiveDevice}`}
       style={customAccentColor ? ({ '--gia-accent': customAccentColor } as any) : undefined}
     >
+      {/* Top Utility Bar */}
+      <div className="gia-topbar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '6px 24px', background: '#0b1120', color: '#94a3b8', fontSize: '12px' }}>
+        <span>⚡ Free Express Delivery on orders over {currency === 'INR' ? '₹12,000' : '$150'} &bull; 30-Day Easy Returns</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <span>{currency === 'USD' ? '🇺🇸' : '🇮🇳'}</span>
+          <select
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value as 'USD' | 'INR')}
+            style={{ background: 'transparent', color: '#f8fafc', border: 'none', cursor: 'pointer', outline: 'none', fontSize: '12px', fontWeight: 600 }}
+            aria-label="Currency Selector"
+          >
+            <option value="USD" style={{ color: '#000' }}>USD ($)</option>
+            <option value="INR" style={{ color: '#000' }}>INR (₹)</option>
+          </select>
+        </div>
+      </div>
+
       {/* Header */}
       <header className="gia-header">
         <div className="gia-header-inner">
@@ -342,7 +367,7 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
               </button>
               <img src={prod.image} alt={prod.name} className="gia-arrival-img" />
               <div className="gia-arrival-name">{prod.name}</div>
-              <div className="gia-arrival-price">${prod.price.toFixed(2)}</div>
+              <div className="gia-arrival-price">{formatPrice(prod.price)}</div>
             </div>
           ))}
         </div>
@@ -411,9 +436,9 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
                 </div>
                 <div className="gia-prod-name">{prod.name}</div>
                 <div className="gia-prod-price">
-                  ${prod.price.toFixed(2)}
+                  {formatPrice(prod.price)}
                   {prod.originalPrice && (
-                    <span className="gia-prod-compare">${prod.originalPrice.toFixed(2)}</span>
+                    <span className="gia-prod-compare">{formatPrice(prod.originalPrice)}</span>
                   )}
                 </div>
               </div>
@@ -619,7 +644,7 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
                   {quickViewProduct.name}
                 </h3>
                 <div style={{ fontSize: 18, fontWeight: 800, color: '#e11d48', marginBottom: 12 }}>
-                  ${quickViewProduct.price.toFixed(2)}
+                  {formatPrice(quickViewProduct.price)}
                 </div>
                 <p style={{ fontSize: 13, color: '#555555', lineHeight: 1.5, marginBottom: 18 }}>
                   {quickViewProduct.description}
@@ -760,7 +785,7 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
                         Size: {item.selectedSize}
                       </div>
                       <div style={{ fontSize: 13, fontWeight: 800, color: '#e11d48', marginTop: 4 }}>
-                        ${item.product.price.toFixed(2)}
+                        {formatPrice(item.product.price)}
                       </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -789,7 +814,7 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 16 }}>
                 <span style={{ fontSize: 13, color: '#666666' }}>Subtotal</span>
                 <span style={{ fontSize: 16, fontWeight: 800, color: '#000000' }}>
-                  ${cartTotal.toFixed(2)} USD
+                  {formatPrice(cartTotal)}
                 </span>
               </div>
               <button
@@ -828,6 +853,8 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
           }
         }}
         accentColor={customAccentColor || '#111827'}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         placeholder="Search luxury heels, boots, flats..."
         popularTags={['Heels', 'Boots', 'Flats', 'Sandals']}
       />
@@ -845,6 +872,8 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
           image: p.image,
           category: p.category,
         }))}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         onRemoveWishlist={toggleWishlist}
         onAddToCart={(p) => {
           const fullProd = [...GIAROS_NEW_ARRIVALS, ...GIAROS_BEST_SELLERS].find((x) => x.id === p.id)

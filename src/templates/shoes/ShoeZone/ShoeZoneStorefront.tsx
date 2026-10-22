@@ -35,6 +35,7 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
   const effectiveDevice = deviceView || device || 'desktop'
 
   // State
+  const [currency, setCurrency] = useState<'USD' | 'INR'>('USD')
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
   const [activeTab, setActiveTab] = useState<'Men' | 'Women' | 'Sneakers' | 'Boots'>('Men')
   const [cartItems, setCartItems] = useState<ShoeZoneCartItem[]>([
@@ -130,6 +131,13 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
     0
   )
 
+  const formatPrice = (usdAmount: number) => {
+    if (currency === 'INR') {
+      return `₹${Math.round(usdAmount * 83).toLocaleString('en-IN')}`
+    }
+    return `$${usdAmount.toFixed(2)}`
+  }
+
   const filteredBestSellers =
     activeTab === 'Men'
       ? SHOEZONE_BEST_SELLERS.filter((p) => p.gender === 'Men')
@@ -202,7 +210,19 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
             Track Your Order
           </a>
           <span className="sz-topbar-sep">|</span>
-          <span className="sz-topbar-item">USD ▾</span>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+            <span>{currency === 'USD' ? '🇺🇸' : '🇮🇳'}</span>
+            <select
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value as 'USD' | 'INR')}
+              className="sz-topbar-select"
+              style={{ background: 'transparent', color: 'inherit', border: 'none', cursor: 'pointer', outline: 'none', fontWeight: 600, fontSize: '12px' }}
+              aria-label="Currency selector"
+            >
+              <option value="USD" style={{ color: '#000' }}>USD ($)</option>
+              <option value="INR" style={{ color: '#000' }}>INR (₹)</option>
+            </select>
+          </div>
         </div>
       </div>
 
@@ -477,10 +497,10 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
                     {product.name}
                   </h3>
                   <div className="sz-prod-price-row">
-                    <span className="sz-prod-price">${product.price.toFixed(2)}</span>
+                    <span className="sz-prod-price">{formatPrice(product.price)}</span>
                     {product.originalPrice && (
                       <span className="sz-prod-compare-price">
-                        ${product.originalPrice.toFixed(2)}
+                        {formatPrice(product.originalPrice)}
                       </span>
                     )}
                   </div>
@@ -612,10 +632,10 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
                     {product.name}
                   </h3>
                   <div className="sz-prod-price-row">
-                    <span className="sz-prod-price">${product.price.toFixed(2)}</span>
+                    <span className="sz-prod-price">{formatPrice(product.price)}</span>
                     {product.originalPrice && (
                       <span className="sz-prod-compare-price">
-                        ${product.originalPrice.toFixed(2)}
+                        {formatPrice(product.originalPrice)}
                       </span>
                     )}
                   </div>
@@ -756,7 +776,7 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
                     <div className="sz-drawer-item-info">
                       <h4 className="sz-drawer-item-title">{item.product.name}</h4>
                       <p className="sz-drawer-item-price">
-                        ${(item.product.price * item.quantity).toFixed(2)}
+                        {formatPrice(item.product.price * item.quantity)}
                       </p>
                       <div className="sz-drawer-qty-row">
                         <button
@@ -787,7 +807,7 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
             <div className="sz-drawer-foot">
               <div className="sz-drawer-subtotal">
                 <span>Subtotal</span>
-                <span>${cartSubtotal.toFixed(2)}</span>
+                <span>{formatPrice(cartSubtotal)}</span>
               </div>
               <button
                 type="button"
@@ -797,7 +817,7 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
                   showToast('Proceeding to checkout with ShoeZone!')
                 }}
               >
-                CHECKOUT NOW (${cartSubtotal.toFixed(2)})
+                CHECKOUT NOW ({formatPrice(cartSubtotal)})
               </button>
             </div>
           </div>
@@ -826,7 +846,7 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
 
             <div className="sz-qv-details">
               <h3 className="sz-qv-title">{quickViewProduct.name}</h3>
-              <div className="sz-qv-price">${quickViewProduct.price.toFixed(2)}</div>
+              <div className="sz-qv-price">{formatPrice(quickViewProduct.price)}</div>
               <p className="sz-qv-desc">
                 {quickViewProduct.description ||
                   'Constructed with top tier materials, shock-absorbent cushioning, and ergonomic footbed support for maximum comfort.'}
@@ -883,6 +903,8 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
           }
         }}
         accentColor={customAccentColor || '#571f7c'}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         placeholder="Search boots, running shoes, sneakers, climbing..."
         popularTags={['Running Shoes', 'Boots', 'Sneakers', 'Climbing']}
       />
@@ -900,6 +922,8 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
           image: p.image,
           category: p.category,
         }))}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         onRemoveWishlist={toggleWishlist}
         onAddToCart={(p) => {
           const fullProd = [...SHOEZONE_NEW_ARRIVALS, ...SHOEZONE_BEST_SELLERS].find((x) => x.id === p.id)

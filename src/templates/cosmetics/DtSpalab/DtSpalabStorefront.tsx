@@ -51,6 +51,14 @@ export function DtSpalabStorefront({
   const [wishlist, setWishlist] = useState<string[]>([])
   const [newsletterEmail, setNewsletterEmail] = useState('')
   const [newsletterDone, setNewsletterDone] = useState(false)
+  const [currency, setCurrency] = useState<'USD' | 'INR'>('USD')
+
+  const formatPrice = (usdAmount: number) => {
+    if (currency === 'INR') {
+      return `₹${Math.round(usdAmount * 83).toLocaleString('en-IN')}`
+    }
+    return `$${usdAmount.toFixed(2)}`
+  }
 
   // Cart
   const [cartItems, setCartItems] = useState<DtSpalabCartItem[]>([
@@ -161,7 +169,30 @@ export function DtSpalabStorefront({
     >
       {/* Top Banner Notice */}
       <div className="dtspa-topbar">
-        {DTSPALAB_TOP_BAR}
+        <div className="dtspa-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span>{DTSPALAB_TOP_BAR}</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ fontSize: '11px', opacity: 0.85 }}>Currency:</span>
+            <select
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value as 'USD' | 'INR')}
+              aria-label="Select Currency"
+              style={{
+                background: 'rgba(255,255,255,0.12)',
+                color: '#ffffff',
+                border: '1px solid rgba(255,255,255,0.3)',
+                borderRadius: '4px',
+                padding: '2px 6px',
+                fontSize: '11px',
+                cursor: 'pointer',
+                fontWeight: 600,
+              }}
+            >
+              <option value="USD" style={{ color: '#000' }}>🇺🇸 USD ($)</option>
+              <option value="INR" style={{ color: '#000' }}>🇮🇳 INR (₹)</option>
+            </select>
+          </div>
+        </div>
       </div>
 
       {/* Main Header */}
@@ -479,10 +510,10 @@ export function DtSpalabStorefront({
 
                 <div className="dtspa-prod-name">{prod.name}</div>
                 <div className="dtspa-prod-price">
-                  {prod.currencyPrefix || '$'}{prod.price.toFixed(2)}
+                  {formatPrice(prod.price)}
                   {prod.originalPrice && (
                     <span style={{ fontSize: '13px', textDecoration: 'line-through', color: '#999', marginLeft: '8px', fontWeight: 400 }}>
-                      {prod.currencyPrefix || '$'}{prod.originalPrice.toFixed(2)}
+                      {formatPrice(prod.originalPrice)}
                     </span>
                   )}
                 </div>
@@ -764,7 +795,7 @@ export function DtSpalabStorefront({
                       <div style={{ flex: 1 }}>
                         <div style={{ fontWeight: 600, fontSize: '14px', color: '#56236b' }}>{item.product.name}</div>
                         <div style={{ fontSize: '13px', color: '#736b68', margin: '4px 0' }}>
-                          ${item.product.price.toFixed(2)}
+                          {formatPrice(item.product.price * item.quantity)}
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <button
@@ -792,12 +823,12 @@ export function DtSpalabStorefront({
               <div style={{ padding: '20px', borderTop: '1px solid #ede1d3', backgroundColor: '#fdf8f4' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px', fontWeight: 700, color: '#56236b' }}>
                   <span>Subtotal:</span>
-                  <span>${cartSubtotal.toFixed(2)}</span>
+                  <span>{formatPrice(cartSubtotal)}</span>
                 </div>
                 <button
                   className="dtspa-btn-primary"
                   style={{ width: '100%', justifyContent: 'center' }}
-                  onClick={() => alert(`Proceeding to checkout with total: $${cartSubtotal.toFixed(2)}`)}
+                  onClick={() => alert(`Proceeding to checkout with total: ${formatPrice(cartSubtotal)}`)}
                 >
                   CHECKOUT
                 </button>
@@ -856,7 +887,7 @@ export function DtSpalabStorefront({
                   {quickViewProduct.name}
                 </h3>
                 <div style={{ fontSize: '20px', fontWeight: 700, color: '#56236b', marginBottom: '16px' }}>
-                  ${quickViewProduct.price.toFixed(2)}
+                  {formatPrice(quickViewProduct.price)}
                 </div>
                 <p style={{ fontSize: '13px', lineHeight: 1.6, color: '#736b68', marginBottom: '20px' }}>
                   {quickViewProduct.description}
@@ -900,6 +931,8 @@ export function DtSpalabStorefront({
         onClose={() => setIsSearchOpen(false)}
         brandName="Dt-Spalab"
         accentColor={customAccentColor || '#56236b'}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         products={DTSPALAB_PRODUCTS.map((p) => ({
           id: p.id,
           name: p.name,
@@ -926,6 +959,8 @@ export function DtSpalabStorefront({
         onToggleWishlist={toggleWishlist}
         brandName="Dt-Spalab"
         accentColor={customAccentColor || '#56236b'}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         products={DTSPALAB_PRODUCTS.map((p) => ({
           id: p.id,
           name: p.name,

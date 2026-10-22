@@ -46,6 +46,14 @@ export function LipuraStorefront({
   const [wishlist, setWishlist] = useState<string[]>([])
   const [newsletterEmail, setNewsletterEmail] = useState('')
   const [newsletterDone, setNewsletterDone] = useState(false)
+  const [currency, setCurrency] = useState<'USD' | 'INR'>('USD')
+
+  const formatPrice = (usdAmount: number) => {
+    if (currency === 'INR') {
+      return `₹${Math.round(usdAmount * 83).toLocaleString('en-IN')}`
+    }
+    return `$${usdAmount.toFixed(2)}`
+  }
 
   // Cart
   const [cartItems, setCartItems] = useState<LipuraCartItem[]>([
@@ -153,8 +161,31 @@ export function LipuraStorefront({
       }
     >
       {/* Top Banner Notice */}
-      <div style={{ backgroundColor: '#111111', color: '#ffffff', fontSize: '12px', padding: '8px 0', textAlign: 'center', letterSpacing: '1px' }}>
-        COMPLIMENTARY LUXURY GIFT PACKAGING &bull; FREE EXPRESS SHIPPING OVER $100
+      <div style={{ backgroundColor: '#111111', color: '#ffffff', fontSize: '12px', padding: '6px 20px', letterSpacing: '1px' }}>
+        <div className="lipura-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span>COMPLIMENTARY LUXURY GIFT PACKAGING &bull; FREE EXPRESS SHIPPING OVER {formatPrice(100)}</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ fontSize: '11px', opacity: 0.85 }}>Currency:</span>
+            <select
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value as 'USD' | 'INR')}
+              aria-label="Select Currency"
+              style={{
+                background: 'rgba(255,255,255,0.12)',
+                color: '#ffffff',
+                border: '1px solid rgba(255,255,255,0.3)',
+                borderRadius: '4px',
+                padding: '2px 6px',
+                fontSize: '11px',
+                cursor: 'pointer',
+                fontWeight: 600,
+              }}
+            >
+              <option value="USD" style={{ color: '#000' }}>🇺🇸 USD ($)</option>
+              <option value="INR" style={{ color: '#000' }}>🇮🇳 INR (₹)</option>
+            </select>
+          </div>
+        </div>
       </div>
 
       {/* Main Header */}
@@ -363,10 +394,10 @@ export function LipuraStorefront({
                     <h3 className="lipura-prod-name">{prod.name}</h3>
                     <div className="lipura-prod-shade">{prod.shade}</div>
                     <div className="lipura-prod-price">
-                      {prod.currencyPrefix || '$'}{prod.price.toFixed(2)}
+                      {formatPrice(prod.price)}
                       {prod.originalPrice && (
                         <span style={{ fontSize: '13px', textDecoration: 'line-through', color: '#999', marginLeft: '8px', fontWeight: 400 }}>
-                          {prod.currencyPrefix || '$'}{prod.originalPrice.toFixed(2)}
+                          {formatPrice(prod.originalPrice)}
                         </span>
                       )}
                     </div>
@@ -585,7 +616,7 @@ export function LipuraStorefront({
                         <div style={{ fontWeight: 700, fontSize: '14px', color: '#111' }}>{item.product.name}</div>
                         <div style={{ fontSize: '12px', color: '#777', margin: '4px 0' }}>{item.product.shade}</div>
                         <div style={{ fontSize: '13px', fontWeight: 700, marginBottom: '8px' }}>
-                          ${item.product.price.toFixed(2)}
+                          {formatPrice(item.product.price * item.quantity)}
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                           <button
@@ -613,12 +644,12 @@ export function LipuraStorefront({
               <div style={{ padding: '24px', borderTop: '1px solid #eee', backgroundColor: '#fafafa' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '18px', fontWeight: 700 }}>
                   <span>SUBTOTAL:</span>
-                  <span>${cartSubtotal.toFixed(2)}</span>
+                  <span>{formatPrice(cartSubtotal)}</span>
                 </div>
                 <button
                   className="lipura-btn-white"
                   style={{ width: '100%', backgroundColor: '#111111', color: '#ffffff', textAlign: 'center' }}
-                  onClick={() => alert(`Proceeding to checkout with total: $${cartSubtotal.toFixed(2)}`)}
+                  onClick={() => alert(`Proceeding to checkout with total: ${formatPrice(cartSubtotal)}`)}
                 >
                   PROCEED TO CHECKOUT
                 </button>
@@ -680,7 +711,7 @@ export function LipuraStorefront({
                   Shade: <strong>{quickViewProduct.shade}</strong>
                 </div>
                 <div style={{ fontSize: '20px', fontWeight: 700, color: '#111', marginBottom: '16px' }}>
-                  ${quickViewProduct.price.toFixed(2)}
+                  {formatPrice(quickViewProduct.price)}
                 </div>
                 <p style={{ fontSize: '13px', lineHeight: 1.7, color: '#777', marginBottom: '24px' }}>
                   {quickViewProduct.description}
@@ -723,6 +754,8 @@ export function LipuraStorefront({
         onClose={() => setIsSearchOpen(false)}
         brandName="LIPURA"
         accentColor={customAccentColor || '#d32f2f'}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         products={LIPURA_PRODUCTS.map((p) => ({
           id: p.id,
           name: p.name,
@@ -749,6 +782,8 @@ export function LipuraStorefront({
         onToggleWishlist={toggleWishlist}
         brandName="LIPURA"
         accentColor={customAccentColor || '#d32f2f'}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         products={LIPURA_PRODUCTS.map((p) => ({
           id: p.id,
           name: p.name,

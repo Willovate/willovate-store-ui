@@ -37,6 +37,7 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
   const effectiveDevice = deviceView || device || 'desktop'
 
   // State
+  const [currency, setCurrency] = useState<'USD' | 'INR'>('USD')
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
   const [activeCategoryTab, setActiveCategoryTab] = useState<'All' | 'Girls' | 'Boys' | 'Toddler' | 'Baby'>('All')
   const [cartItems, setCartItems] = useState<SusieCartItem[]>([
@@ -140,6 +141,13 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
     0
   )
 
+  const formatPrice = (usdAmount: number) => {
+    if (currency === 'INR') {
+      return `₹${Math.round(usdAmount * 83).toLocaleString('en-IN')}`
+    }
+    return `$${usdAmount.toFixed(2)}`
+  }
+
   const filteredProducts =
     activeCategoryTab === 'All'
       ? SUSIE_KIDS_PRODUCTS
@@ -216,7 +224,18 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
           >
             <span>👤</span>
           </button>
-          <span className="susie-header-action">USD ▾</span>
+          <div className="susie-header-action" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+            <span>{currency === 'USD' ? '🇺🇸' : '🇮🇳'}</span>
+            <select
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value as 'USD' | 'INR')}
+              style={{ background: 'transparent', color: 'inherit', border: 'none', cursor: 'pointer', outline: 'none', fontWeight: 600, fontSize: '12px' }}
+              aria-label="Currency selector"
+            >
+              <option value="USD" style={{ color: '#000' }}>USD ($)</option>
+              <option value="INR" style={{ color: '#000' }}>INR (₹)</option>
+            </select>
+          </div>
           <button
             type="button"
             className="susie-cart-icon-btn"
@@ -469,10 +488,10 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
 
               <div className="susie-prod-price-row">
                 <div>
-                  <span className="susie-price-num">${product.price.toFixed(2)}</span>
+                  <span className="susie-price-num">{formatPrice(product.price)}</span>
                   {product.originalPrice && (
                     <span className="susie-compare-price">
-                      ${product.originalPrice.toFixed(2)}
+                      {formatPrice(product.originalPrice)}
                     </span>
                   )}
                 </div>
@@ -595,7 +614,7 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
                 />
                 <h4 style={{ fontSize: 13, fontWeight: 800, margin: '0 0 4px' }}>{drop.name}</h4>
                 <span style={{ color: 'var(--susie-pink)', fontWeight: 900, fontSize: 14 }}>
-                  ${drop.price.toFixed(2)}
+                  {formatPrice(drop.price)}
                 </span>
               </div>
             ))}
@@ -709,7 +728,7 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
                     <div className="susie-drawer-item-info">
                       <h4 className="susie-drawer-item-title">{item.product.name}</h4>
                       <p className="susie-drawer-item-price">
-                        ${(item.product.price * item.quantity).toFixed(2)}
+                        {formatPrice(item.product.price * item.quantity)}
                       </p>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                         <button
@@ -754,7 +773,7 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
             <div className="susie-drawer-foot">
               <div className="susie-drawer-subtotal">
                 <span>Subtotal</span>
-                <span style={{ color: 'var(--susie-pink)' }}>${cartSubtotal.toFixed(2)}</span>
+                <span style={{ color: 'var(--susie-pink)' }}>{formatPrice(cartSubtotal)}</span>
               </div>
               <button
                 type="button"
@@ -764,7 +783,7 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
                   showToast('Proceeding to checkout with Susie Kids Shoes!')
                 }}
               >
-                CHECKOUT (${cartSubtotal.toFixed(2)})
+                CHECKOUT ({formatPrice(cartSubtotal)})
               </button>
             </div>
           </div>
@@ -793,7 +812,7 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
 
             <div className="susie-qv-details">
               <h3 className="susie-qv-title">{quickViewProduct.name}</h3>
-              <div className="susie-qv-price">${quickViewProduct.price.toFixed(2)}</div>
+              <div className="susie-qv-price">{formatPrice(quickViewProduct.price)}</div>
               <p className="susie-qv-desc">{quickViewProduct.description}</p>
 
               <div style={{ marginBottom: 20 }}>
@@ -849,6 +868,8 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
           }
         }}
         accentColor={customAccentColor || '#ff2d87'}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         placeholder="Search kids sneakers, light-up shoes, boots..."
         popularTags={['Girls', 'Boys', 'Toddler', 'Baby']}
       />
@@ -866,6 +887,8 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
           image: p.image,
           category: p.category,
         }))}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         onRemoveWishlist={toggleWishlist}
         onAddToCart={(p) => {
           const fullProd = [...SUSIE_KIDS_PRODUCTS, ...SUSIE_RECENT_DROPS].find((x) => x.id === p.id)

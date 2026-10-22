@@ -36,7 +36,7 @@ export const BeauxStorefront: React.FC<BeauxStorefrontProps> = ({
 
   // State
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
-  const [currency, setCurrency] = useState<'USD' | 'EUR' | 'GBP'>('USD')
+  const [currency, setCurrency] = useState<'USD' | 'INR' | 'EUR' | 'GBP'>('USD')
   const [cartItems, setCartItems] = useState<BeauxCartItem[]>([
     {
       product: BEAUX_WHATS_NEW_PRODUCTS[0],
@@ -91,6 +91,9 @@ export const BeauxStorefront: React.FC<BeauxStorefrontProps> = ({
   }
 
   const formatPrice = (priceInUsd: number) => {
+    if (currency === 'INR') {
+      return `₹${Math.round(priceInUsd * 83).toLocaleString('en-IN')}`
+    }
     if (currency === 'EUR') {
       return `€${(priceInUsd * 0.92).toFixed(2)}`
     }
@@ -196,11 +199,13 @@ export const BeauxStorefront: React.FC<BeauxStorefrontProps> = ({
             <select
               className="beaux-currency-select"
               value={currency}
-              onChange={(e) => setCurrency(e.target.value as 'USD' | 'EUR' | 'GBP')}
+              onChange={(e) => setCurrency(e.target.value as 'USD' | 'INR' | 'EUR' | 'GBP')}
+              aria-label="Select Currency"
             >
-              <option value="USD">USD ($)</option>
-              <option value="EUR">EUR (€)</option>
-              <option value="GBP">GBP (£)</option>
+              <option value="USD">🇺🇸 USD ($)</option>
+              <option value="INR">🇮🇳 INR (₹)</option>
+              <option value="EUR">🇪🇺 EUR (€)</option>
+              <option value="GBP">🇬🇧 GBP (£)</option>
             </select>
           </div>
 
@@ -690,6 +695,7 @@ export const BeauxStorefront: React.FC<BeauxStorefrontProps> = ({
           if (fullProd) setQuickViewProduct(fullProd)
         }}
         accentColor={customAccentColor || '#e87868'}
+        currencyPrefix={currency === 'INR' ? '₹' : currency === 'EUR' ? '€' : currency === 'GBP' ? '£' : '$'}
         formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         placeholder="Search clean serums, creams, lip balms..."
         popularTags={['Serum', 'Creams', 'Masks', 'Cleanser']}
@@ -718,6 +724,7 @@ export const BeauxStorefront: React.FC<BeauxStorefrontProps> = ({
           if (fullProd) setQuickViewProduct(fullProd)
         }}
         accentColor={customAccentColor || '#e87868'}
+        currencyPrefix={currency === 'INR' ? '₹' : currency === 'EUR' ? '€' : currency === 'GBP' ? '£' : '$'}
         formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
       />
 

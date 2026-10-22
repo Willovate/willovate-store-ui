@@ -50,6 +50,14 @@ export function ShadesStorefront({
   const [isAccountOpen, setIsAccountOpen] = useState(false)
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
   const [wishlist, setWishlist] = useState<string[]>([])
+  const [currency, setCurrency] = useState<'USD' | 'INR'>('USD')
+
+  const formatPrice = (usdAmount: number) => {
+    if (currency === 'INR') {
+      return `₹${Math.round(usdAmount * 83).toLocaleString('en-IN')}`
+    }
+    return `$${usdAmount.toFixed(2)}`
+  }
 
   // Cart
   const [cartItems, setCartItems] = useState<ShadesCartItem[]>([
@@ -161,6 +169,43 @@ export function ShadesStorefront({
           : undefined
       }
     >
+      {/* Top Announcement Bar */}
+      <div
+        className="shades-top-bar"
+        style={{
+          background: '#111111',
+          color: '#ffffff',
+          fontSize: '12px',
+          padding: '6px 24px',
+          borderBottom: '1px solid rgba(255,255,255,0.1)',
+        }}
+      >
+        <div style={{ maxWidth: '1440px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span>COMPLIMENTARY SHIPPING ON ORDERS OVER {formatPrice(75)} &bull; EXCLUSIVE GLAMOUR EDITIONS</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ fontSize: '11px', opacity: 0.85 }}>Currency:</span>
+            <select
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value as 'USD' | 'INR')}
+              aria-label="Select Currency"
+              style={{
+                background: 'rgba(255,255,255,0.12)',
+                color: '#ffffff',
+                border: '1px solid rgba(255,255,255,0.3)',
+                borderRadius: '4px',
+                padding: '2px 6px',
+                fontSize: '11px',
+                cursor: 'pointer',
+                fontWeight: 600,
+              }}
+            >
+              <option value="USD" style={{ color: '#000' }}>🇺🇸 USD ($)</option>
+              <option value="INR" style={{ color: '#000' }}>🇮🇳 INR (₹)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
       {/* 1. Header with Mega Menu */}
       <header className="shades-header">
         <div className="shades-header-inner">
@@ -428,9 +473,9 @@ export function ShadesStorefront({
                   {'★'.repeat(Math.round(product.rating))}
                 </div>
                 <div className="shades-card-prices">
-                  <span className="shades-card-price">${product.price.toFixed(2)}</span>
+                  <span className="shades-card-price">{formatPrice(product.price)}</span>
                   {product.originalPrice && (
-                    <span className="shades-card-orig">${product.originalPrice.toFixed(2)}</span>
+                    <span className="shades-card-orig">{formatPrice(product.originalPrice)}</span>
                   )}
                 </div>
                 <button
@@ -677,7 +722,7 @@ export function ShadesStorefront({
                         {item.product.name}
                       </div>
                       <div style={{ color: '#e5a93c', fontWeight: 800, fontSize: '14px' }}>
-                        ${item.product.price.toFixed(2)}
+                        {formatPrice(item.product.price * item.quantity)}
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px' }}>
                         <button
@@ -718,12 +763,12 @@ export function ShadesStorefront({
               <div className="shades-drawer-footer">
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '16px', fontWeight: 800 }}>
                   <span>Subtotal</span>
-                  <span style={{ color: '#e5a93c' }}>${cartSubtotal.toFixed(2)}</span>
+                  <span style={{ color: '#e5a93c' }}>{formatPrice(cartSubtotal)}</span>
                 </div>
                 <button
                   className="shades-btn-gold"
                   style={{ width: '100%', marginTop: '16px', padding: '14px' }}
-                  onClick={() => alert(`Checking out: $${cartSubtotal.toFixed(2)}`)}
+                  onClick={() => alert(`Checking out: ${formatPrice(cartSubtotal)}`)}
                 >
                   Checkout Now
                 </button>
@@ -782,10 +827,10 @@ export function ShadesStorefront({
                 {'★'.repeat(Math.round(quickViewProduct.rating))} ({quickViewProduct.reviewCount} reviews)
               </div>
               <div style={{ fontSize: '22px', fontWeight: 800, color: '#e5a93c', marginBottom: '14px' }}>
-                ${quickViewProduct.price.toFixed(2)}
+                {formatPrice(quickViewProduct.price)}
                 {quickViewProduct.originalPrice && (
                   <span style={{ fontSize: '14px', color: '#888', textDecoration: 'line-through', marginLeft: '10px' }}>
-                    ${quickViewProduct.originalPrice.toFixed(2)}
+                    {formatPrice(quickViewProduct.originalPrice)}
                   </span>
                 )}
               </div>
@@ -800,7 +845,7 @@ export function ShadesStorefront({
                   setQuickViewProduct(null)
                 }}
               >
-                Add to Cart • ${quickViewProduct.price.toFixed(2)}
+                Add to Cart • {formatPrice(quickViewProduct.price)}
               </button>
             </div>
           </div>
@@ -824,6 +869,8 @@ export function ShadesStorefront({
           if (fullProd) setQuickViewProduct(fullProd)
         }}
         accentColor={customAccentColor || '#e5a93c'}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         placeholder="Search glamorous shades, lip kits, foundations..."
         popularTags={['Most Popular', 'Special', 'Best Seller']}
       />
@@ -841,6 +888,8 @@ export function ShadesStorefront({
           image: p.image,
           category: p.category,
         }))}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         onRemoveWishlist={toggleWishlist}
         onAddToCart={(p) => {
           const fullProd = SHADES_PRODUCTS.find((x) => x.id === p.id)

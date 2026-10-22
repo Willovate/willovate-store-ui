@@ -45,6 +45,14 @@ export function SmeticStorefront({
   const [isAccountOpen, setIsAccountOpen] = useState(false)
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
   const [wishlist, setWishlist] = useState<string[]>([])
+  const [currency, setCurrency] = useState<'USD' | 'INR'>('USD')
+
+  const formatPrice = (usdAmount: number) => {
+    if (currency === 'INR') {
+      return `₹${Math.round(usdAmount * 83).toLocaleString('en-IN')}`
+    }
+    return `$${usdAmount.toFixed(2)}`
+  }
 
   // Cart
   const [cartItems, setCartItems] = useState<SmeticCartItem[]>([
@@ -151,6 +159,42 @@ export function SmeticStorefront({
           : undefined
       }
     >
+      {/* Top Announcement Bar */}
+      <div
+        className="smetic-top-bar"
+        style={{
+          background: '#2c2523',
+          color: '#ffffff',
+          fontSize: '12px',
+          padding: '6px 20px',
+        }}
+      >
+        <div className="smetic-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span>100% ORGANIC CERTIFIED &bull; FREE WORLDWIDE DELIVERY OVER {formatPrice(50)}</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ fontSize: '11px', opacity: 0.85 }}>Currency:</span>
+            <select
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value as 'USD' | 'INR')}
+              aria-label="Select Currency"
+              style={{
+                background: 'rgba(255,255,255,0.12)',
+                color: '#ffffff',
+                border: '1px solid rgba(255,255,255,0.3)',
+                borderRadius: '4px',
+                padding: '2px 6px',
+                fontSize: '11px',
+                cursor: 'pointer',
+                fontWeight: 600,
+              }}
+            >
+              <option value="USD" style={{ color: '#000' }}>🇺🇸 USD ($)</option>
+              <option value="INR" style={{ color: '#000' }}>🇮🇳 INR (₹)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
       {/* 1. Header */}
       <header className="smetic-header">
         <div className="smetic-container">
@@ -358,9 +402,9 @@ export function SmeticStorefront({
                 <div className="smetic-card-body">
                   <div className="smetic-card-title">{prod.name}</div>
                   <div className="smetic-prices-row">
-                    <span className="smetic-price">${prod.price.toFixed(2)}</span>
+                    <span className="smetic-price">{formatPrice(prod.price)}</span>
                     {prod.originalPrice && (
-                      <span className="smetic-orig-price">${prod.originalPrice.toFixed(2)}</span>
+                      <span className="smetic-orig-price">{formatPrice(prod.originalPrice)}</span>
                     )}
                   </div>
                   {prod.swatches && (
@@ -468,9 +512,9 @@ export function SmeticStorefront({
                 <div className="smetic-card-body">
                   <div className="smetic-card-title">{prod.name}</div>
                   <div className="smetic-prices-row">
-                    <span className="smetic-price">${prod.price.toFixed(2)}</span>
+                    <span className="smetic-price">{formatPrice(prod.price)}</span>
                     {prod.originalPrice && (
-                      <span className="smetic-orig-price">${prod.originalPrice.toFixed(2)}</span>
+                      <span className="smetic-orig-price">{formatPrice(prod.originalPrice)}</span>
                     )}
                   </div>
                   <button
@@ -680,7 +724,7 @@ export function SmeticStorefront({
                     <div style={{ flex: 1 }}>
                       <div style={{ fontWeight: 600, fontSize: '14px' }}>{item.product.name}</div>
                       <div style={{ color: '#f99191', fontWeight: 700, fontSize: '14px', margin: '4px 0' }}>
-                        ${item.product.price.toFixed(2)}
+                        {formatPrice(item.product.price * item.quantity)}
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <button
@@ -719,12 +763,12 @@ export function SmeticStorefront({
               <div className="smetic-drawer-footer">
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '16px', fontWeight: 700 }}>
                   <span>Subtotal</span>
-                  <span style={{ color: '#f99191' }}>${cartSubtotal.toFixed(2)}</span>
+                  <span style={{ color: '#f99191' }}>{formatPrice(cartSubtotal)}</span>
                 </div>
                 <button
                   className="smetic-btn-coral"
                   style={{ width: '100%', marginTop: '16px', justifyContent: 'center' }}
-                  onClick={() => alert(`Checking out: $${cartSubtotal.toFixed(2)}`)}
+                  onClick={() => alert(`Checking out: ${formatPrice(cartSubtotal)}`)}
                 >
                   Proceed to Checkout
                 </button>
@@ -781,7 +825,7 @@ export function SmeticStorefront({
                 {'★'.repeat(Math.round(quickViewProduct.rating))} ({quickViewProduct.reviewCount} reviews)
               </div>
               <div style={{ fontSize: '20px', fontWeight: 700, color: '#f99191', marginBottom: '12px' }}>
-                ${quickViewProduct.price.toFixed(2)}
+                {formatPrice(quickViewProduct.price)}
               </div>
               <p style={{ fontSize: '13px', lineHeight: 1.6, color: '#666', marginBottom: '20px' }}>
                 {quickViewProduct.description}
@@ -794,7 +838,7 @@ export function SmeticStorefront({
                   setQuickViewProduct(null)
                 }}
               >
-                Add to Cart
+                Add to Cart • {formatPrice(quickViewProduct.price)}
               </button>
             </div>
           </div>
@@ -818,6 +862,8 @@ export function SmeticStorefront({
           if (fullProd) setQuickViewProduct(fullProd)
         }}
         accentColor={customAccentColor || '#f99191'}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         placeholder="Search natural face oils, powders, lipsticks..."
         popularTags={['New Arrivals', 'Best Sellers', 'Top Rates']}
       />
@@ -835,6 +881,8 @@ export function SmeticStorefront({
           image: p.image,
           category: p.category,
         }))}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         onRemoveWishlist={toggleWishlist}
         onAddToCart={(p) => {
           const fullProd = SMETIC_PRODUCTS.find((x) => x.id === p.id)

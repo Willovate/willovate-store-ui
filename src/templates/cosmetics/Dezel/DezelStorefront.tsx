@@ -48,6 +48,14 @@ export function DezelStorefront({
   const [wishlist, setWishlist] = useState<string[]>([])
   const [newsletterEmail, setNewsletterEmail] = useState('')
   const [newsletterDone, setNewsletterDone] = useState(false)
+  const [currency, setCurrency] = useState<'USD' | 'INR'>('USD')
+
+  const formatPrice = (usdAmount: number) => {
+    if (currency === 'INR') {
+      return `₹${Math.round(usdAmount * 83).toLocaleString('en-IN')}`
+    }
+    return `$${usdAmount.toFixed(2)}`
+  }
 
   // Cart
   const [cartItems, setCartItems] = useState<DezelCartItem[]>([
@@ -147,8 +155,31 @@ export function DezelStorefront({
       }
     >
       {/* Top Banner Notice */}
-      <div style={{ backgroundColor: '#051e25', color: '#c59d5f', fontSize: '12px', padding: '8px 0', textAlign: 'center', letterSpacing: '1px' }}>
-        COMPLIMENTARY LUXURY GIFT SAMPLE ON ORDERS OVER Rs. 150 &bull; FREE WORLDWIDE SHIPPING
+      <div style={{ backgroundColor: '#051e25', color: '#c59d5f', fontSize: '12px', padding: '6px 20px', letterSpacing: '1px' }}>
+        <div className="dezel-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span>COMPLIMENTARY LUXURY GIFT SAMPLE ON ORDERS OVER {formatPrice(150)} &bull; FREE WORLDWIDE SHIPPING</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ fontSize: '11px', opacity: 0.85 }}>Currency:</span>
+            <select
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value as 'USD' | 'INR')}
+              aria-label="Select Currency"
+              style={{
+                background: 'rgba(255,255,255,0.1)',
+                color: '#c59d5f',
+                border: '1px solid rgba(197,157,95,0.4)',
+                borderRadius: '4px',
+                padding: '2px 6px',
+                fontSize: '11px',
+                cursor: 'pointer',
+                fontWeight: 600,
+              }}
+            >
+              <option value="USD" style={{ color: '#000' }}>🇺🇸 USD ($)</option>
+              <option value="INR" style={{ color: '#000' }}>🇮🇳 INR (₹)</option>
+            </select>
+          </div>
+        </div>
       </div>
 
       {/* Main Header */}
@@ -287,7 +318,7 @@ export function DezelStorefront({
                 className="dezel-hero-prod-img"
               />
               <div className="dezel-hero-prod-title">{currentSlide.featuredProduct.name}</div>
-              <div className="dezel-hero-prod-price">Rs. {currentSlide.featuredProduct.price.toFixed(2)}</div>
+              <div className="dezel-hero-prod-price">{formatPrice(currentSlide.featuredProduct.price)}</div>
               <div
                 className="dezel-hero-add-link"
                 onClick={() => {
@@ -462,10 +493,10 @@ export function DezelStorefront({
                 <h3 className="dezel-card-name">{prod.name}</h3>
                 <div className="dezel-card-notes">{prod.scentNotes}</div>
                 <div className="dezel-card-price">
-                  {prod.currencyPrefix || 'Rs. '}{prod.price.toFixed(2)}
+                  {formatPrice(prod.price)}
                   {prod.originalPrice && (
                     <span style={{ fontSize: '13px', textDecoration: 'line-through', color: '#999', marginLeft: '8px', fontWeight: 400 }}>
-                      {prod.currencyPrefix || 'Rs. '}{prod.originalPrice.toFixed(2)}
+                      {formatPrice(prod.originalPrice)}
                     </span>
                   )}
                 </div>
@@ -681,7 +712,7 @@ export function DezelStorefront({
                       <div style={{ flex: 1 }}>
                         <div style={{ fontWeight: 600, fontSize: '14px', color: '#082e38' }}>{item.product.name}</div>
                         <div style={{ fontSize: '13px', color: '#1a6f82', margin: '4px 0' }}>
-                          Rs. {item.product.price.toFixed(2)}
+                          {formatPrice(item.product.price * item.quantity)}
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <button
@@ -709,12 +740,12 @@ export function DezelStorefront({
               <div className="dezel-drawer-footer">
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px', fontWeight: 600 }}>
                   <span>Subtotal:</span>
-                  <span style={{ color: '#082e38' }}>Rs. {cartSubtotal.toFixed(2)}</span>
+                  <span style={{ color: '#082e38' }}>{formatPrice(cartSubtotal)}</span>
                 </div>
                 <button
                   className="dezel-card-btn"
                   style={{ width: '100%', padding: '14px', borderRadius: '4px' }}
-                  onClick={() => alert(`Proceeding to checkout with total: Rs. ${cartSubtotal.toFixed(2)}`)}
+                  onClick={() => alert(`Proceeding to checkout with total: ${formatPrice(cartSubtotal)}`)}
                 >
                   PROCEED TO SECURE CHECKOUT
                 </button>
@@ -776,7 +807,7 @@ export function DezelStorefront({
                   {quickViewProduct.scentNotes}
                 </div>
                 <div style={{ fontSize: '20px', fontWeight: 700, color: '#1a6f82', marginBottom: '16px' }}>
-                  Rs. {quickViewProduct.price.toFixed(2)}
+                  {formatPrice(quickViewProduct.price)}
                 </div>
                 <p style={{ fontSize: '13px', lineHeight: 1.6, color: '#698187', marginBottom: '20px' }}>
                   {quickViewProduct.description}
@@ -820,7 +851,8 @@ export function DezelStorefront({
         onClose={() => setIsSearchOpen(false)}
         brandName="DEZEL PERFUMES"
         accentColor={customAccentColor || '#1a6f82'}
-        currencyPrefix="Rs. "
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         products={DEZEL_PRODUCTS.map((p) => ({
           id: p.id,
           name: p.name,
@@ -847,7 +879,8 @@ export function DezelStorefront({
         onToggleWishlist={toggleWishlist}
         brandName="DEZEL PERFUMES"
         accentColor={customAccentColor || '#1a6f82'}
-        currencyPrefix="Rs. "
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         products={DEZEL_PRODUCTS.map((p) => ({
           id: p.id,
           name: p.name,

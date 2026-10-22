@@ -51,6 +51,14 @@ export function FabishStorefront({
   const [isAccountOpen, setIsAccountOpen] = useState(false)
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
   const [showToast, setShowToast] = useState(true)
+  const [currency, setCurrency] = useState<'USD' | 'INR'>('USD')
+
+  const formatPrice = (usdAmount: number) => {
+    if (currency === 'INR') {
+      return `₹${Math.round(usdAmount * 83).toLocaleString('en-IN')}`
+    }
+    return `$${usdAmount.toFixed(2)}`
+  }
 
   // Interactive Collections
   const [wishlist, setWishlist] = useState<string[]>([])
@@ -176,8 +184,25 @@ export function FabishStorefront({
           <span>USD $</span>
         </div>
         <div className="fabish-announcement-text">{FABISH_ANNOUNCEMENT}</div>
-        <div className="fabish-announcement-links">
-          <span>USD $</span>
+        <div className="fabish-announcement-links" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <select
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value as 'USD' | 'INR')}
+            aria-label="Select Currency"
+            style={{
+              background: 'rgba(0,0,0,0.15)',
+              color: '#ffffff',
+              border: '1px solid rgba(255,255,255,0.4)',
+              borderRadius: '4px',
+              padding: '2px 6px',
+              fontSize: '11px',
+              cursor: 'pointer',
+              fontWeight: 600,
+            }}
+          >
+            <option value="USD" style={{ color: '#000' }}>🇺🇸 USD ($)</option>
+            <option value="INR" style={{ color: '#000' }}>🇮🇳 INR (₹)</option>
+          </select>
           <span>English</span>
           <button
             type="button"
@@ -415,7 +440,7 @@ export function FabishStorefront({
             </ul>
             <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
               <span style={{ fontSize: '28px', fontWeight: 700, color: '#2e5b4b' }}>
-                {FABISH_SERUM_STORY.price}
+                {formatPrice(27)}
               </span>
               <button
                 className="fabish-hero-btn"
@@ -567,9 +592,9 @@ export function FabishStorefront({
                 {product.volume && <span className="fabish-card-volume">{product.volume}</span>}
                 <div className="fabish-card-footer">
                   <div className="fabish-card-prices">
-                    <span className="fabish-card-price">${product.price.toFixed(2)}</span>
+                    <span className="fabish-card-price">{formatPrice(product.price)}</span>
                     {product.originalPrice && (
-                      <span className="fabish-card-original">${product.originalPrice.toFixed(2)}</span>
+                      <span className="fabish-card-original">{formatPrice(product.originalPrice)}</span>
                     )}
                   </div>
                   <button
@@ -796,7 +821,7 @@ export function FabishStorefront({
                         {item.product.name}
                       </div>
                       <div style={{ fontSize: '13px', color: '#2e5b4b', fontWeight: 700 }}>
-                        ${item.product.price.toFixed(2)}
+                        {formatPrice(item.product.price * item.quantity)}
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px' }}>
                         <button
@@ -837,14 +862,14 @@ export function FabishStorefront({
               <div className="fabish-drawer-footer">
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '16px', fontWeight: 700 }}>
                   <span>Subtotal</span>
-                  <span style={{ color: '#2e5b4b' }}>${cartSubtotal.toFixed(2)}</span>
+                  <span style={{ color: '#2e5b4b' }}>{formatPrice(cartSubtotal)}</span>
                 </div>
                 <p style={{ fontSize: '12px', color: '#6b7a72', margin: '6px 0 12px' }}>
                   Taxes and shipping calculated at checkout
                 </p>
                 <button
                   className="fabish-checkout-btn"
-                  onClick={() => alert(`Proceeding to checkout with subtotal: $${cartSubtotal.toFixed(2)}`)}
+                  onClick={() => alert(`Proceeding to checkout with subtotal: ${formatPrice(cartSubtotal)}`)}
                 >
                   Proceed to Checkout →
                 </button>
@@ -881,10 +906,10 @@ export function FabishStorefront({
                 <span className="fabish-card-reviews">({quickViewProduct.reviewCount} customer reviews)</span>
               </div>
               <div style={{ fontSize: '22px', fontWeight: 700, color: '#2e5b4b', marginBottom: '16px' }}>
-                ${quickViewProduct.price.toFixed(2)}
+                {formatPrice(quickViewProduct.price)}
                 {quickViewProduct.originalPrice && (
                   <span style={{ fontSize: '15px', color: '#6b7a72', textDecoration: 'line-through', marginLeft: '10px' }}>
-                    ${quickViewProduct.originalPrice.toFixed(2)}
+                    {formatPrice(quickViewProduct.originalPrice)}
                   </span>
                 )}
               </div>
@@ -899,7 +924,7 @@ export function FabishStorefront({
                   setQuickViewProduct(null)
                 }}
               >
-                Add to Cart • ${quickViewProduct.price.toFixed(2)}
+                Add to Cart • {formatPrice(quickViewProduct.price)}
               </button>
             </div>
           </div>
@@ -923,6 +948,8 @@ export function FabishStorefront({
           if (fullProd) setQuickViewProduct(fullProd)
         }}
         accentColor={customAccentColor || '#2e5b4b'}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         placeholder="Search skincare, hair serum, lotion..."
         popularTags={['Skin Care', 'Body Care', 'Hair Care']}
       />
@@ -940,6 +967,8 @@ export function FabishStorefront({
           image: p.image,
           category: p.category,
         }))}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         onRemoveWishlist={toggleWishlist}
         onAddToCart={(p) => {
           const fullProd = FABISH_PRODUCTS.find((x) => x.id === p.id)

@@ -50,6 +50,14 @@ export function BelletnyStorefront({
   const [isAccountOpen, setIsAccountOpen] = useState(false)
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
   const [wishlist, setWishlist] = useState<string[]>([])
+  const [currency, setCurrency] = useState<'USD' | 'INR'>('USD')
+
+  const formatPrice = (usdAmount: number) => {
+    if (currency === 'INR') {
+      return `₹${Math.round(usdAmount * 83).toLocaleString('en-IN')}`
+    }
+    return `$${usdAmount.toFixed(2)}`
+  }
 
   // Cart
   const [cartItems, setCartItems] = useState<BelletnyCartItem[]>([
@@ -174,9 +182,29 @@ export function BelletnyStorefront({
               ☰
             </button>
 
-            {/* Phone */}
-            <div className="belletny-service-text">
-              Customer Service : {BELLETNY_PHONE}
+            {/* Phone & Currency */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <div className="belletny-service-text">
+                Customer Service : {BELLETNY_PHONE}
+              </div>
+              <select
+                value={currency}
+                onChange={(e) => setCurrency(e.target.value as 'USD' | 'INR')}
+                aria-label="Select Currency"
+                style={{
+                  background: 'rgba(0,0,0,0.2)',
+                  color: '#ffffff',
+                  border: '1px solid rgba(255,255,255,0.4)',
+                  borderRadius: '4px',
+                  padding: '2px 6px',
+                  fontSize: '11px',
+                  cursor: 'pointer',
+                  fontWeight: 600,
+                }}
+              >
+                <option value="USD" style={{ color: '#000' }}>🇺🇸 USD ($)</option>
+                <option value="INR" style={{ color: '#000' }}>🇮🇳 INR (₹)</option>
+              </select>
             </div>
 
             {/* Logo */}
@@ -438,9 +466,9 @@ export function BelletnyStorefront({
                   </div>
                   <h3 className="belletny-prod-title">{product.name}</h3>
                   <div className="belletny-prices-row">
-                    <span className="belletny-price">${product.price.toFixed(2)}</span>
+                    <span className="belletny-price">{formatPrice(product.price)}</span>
                     {product.originalPrice && (
-                      <span className="belletny-orig-price">${product.originalPrice.toFixed(2)}</span>
+                      <span className="belletny-orig-price">{formatPrice(product.originalPrice)}</span>
                     )}
                   </div>
                   <button
@@ -690,7 +718,7 @@ export function BelletnyStorefront({
                     <div style={{ flex: 1 }}>
                       <div style={{ fontWeight: 600, fontSize: '14px' }}>{item.product.name}</div>
                       <div style={{ color: '#8e2043', fontWeight: 700, fontSize: '13px', margin: '4px 0' }}>
-                        ${item.product.price.toFixed(2)}
+                        {formatPrice(item.product.price * item.quantity)}
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <button
@@ -729,12 +757,12 @@ export function BelletnyStorefront({
               <div className="belletny-drawer-footer">
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '16px', fontWeight: 700 }}>
                   <span>Subtotal</span>
-                  <span style={{ color: '#8e2043' }}>${cartSubtotal.toFixed(2)}</span>
+                  <span style={{ color: '#8e2043' }}>{formatPrice(cartSubtotal)}</span>
                 </div>
                 <button
                   className="belletny-btn-maroon"
                   style={{ width: '100%', marginTop: '16px', justifyContent: 'center' }}
-                  onClick={() => alert(`Proceeding to checkout with total: $${cartSubtotal.toFixed(2)}`)}
+                  onClick={() => alert(`Proceeding to checkout with total: ${formatPrice(cartSubtotal)}`)}
                 >
                   Proceed to Checkout
                 </button>
@@ -791,7 +819,7 @@ export function BelletnyStorefront({
                 {'★'.repeat(Math.round(quickViewProduct.rating))} ({quickViewProduct.reviewCount} reviews)
               </div>
               <div style={{ fontSize: '20px', fontWeight: 700, color: '#8e2043', marginBottom: '12px' }}>
-                ${quickViewProduct.price.toFixed(2)}
+                {formatPrice(quickViewProduct.price)}
               </div>
               <p style={{ fontSize: '13px', lineHeight: 1.6, color: '#666', marginBottom: '20px' }}>
                 {quickViewProduct.description}
@@ -804,7 +832,7 @@ export function BelletnyStorefront({
                   setQuickViewProduct(null)
                 }}
               >
-                Add to Cart
+                Add to Cart • {formatPrice(quickViewProduct.price)}
               </button>
             </div>
           </div>
@@ -828,6 +856,8 @@ export function BelletnyStorefront({
           if (fullProd) setQuickViewProduct(fullProd)
         }}
         accentColor={customAccentColor || '#8e2043'}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         placeholder="Search hair creams, makeup brushes, concealers..."
         popularTags={['Hair Cream', 'Concealer', 'Brushes']}
       />
@@ -845,6 +875,8 @@ export function BelletnyStorefront({
           image: p.image,
           category: p.category,
         }))}
+        currencyPrefix={currency === 'INR' ? '₹' : '$'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
         onRemoveWishlist={toggleWishlist}
         onAddToCart={(p) => {
           const fullProd = BELLETNY_PRODUCTS.find((x) => x.id === p.id)
