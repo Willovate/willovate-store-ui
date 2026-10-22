@@ -14,7 +14,7 @@ export const maharajasTableConfig: StorefrontThemeConfig = {
     featuresLayout: 'cards-grid',
     storyLayout: 'card-overlay',
     galleryLayout: 'editorial-collage',
-    sectionOrder: ['hero', 'features', 'craft', 'products', 'story', 'promo', 'gallery', 'reviews', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'biryaniAtelier', 'thaliCurator', 'spiceTerroir', 'products', 'tandoorGrill', 'features', 'chaiBar', 'craft', 'story', 'gallery', 'reviews', 'promo', 'location', 'newsletter'],
   },
   name: "Maharaja's Table",
   tagline: 'Imperial Awadhi and Mughal court culinary heritage presented with contemporary fine dining poise',

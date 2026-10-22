@@ -14,7 +14,7 @@ export const scoopSocietyConfig: StorefrontThemeConfig = {
     storyLayout: 'split-left',
     featuresLayout: 'pills-row',
     galleryLayout: 'grid-3x2',
-    sectionOrder: ['hero', 'products', 'features', 'promo', 'gallery', 'story', 'reviews', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'gelatoLab', 'macaronBox', 'products', 'cakeStudio', 'cacaoRadar', 'features', 'promo', 'craft', 'story', 'gallery', 'reviews', 'location', 'newsletter'],
   },
   name: 'Scoop Society',
   tagline: 'Small-batch craft ice creams, slow-churned dairy gelatos, and plant-based fruit sorbettos',

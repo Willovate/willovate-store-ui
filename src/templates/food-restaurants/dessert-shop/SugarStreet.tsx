@@ -14,7 +14,7 @@ export const sugarStreetConfig: StorefrontThemeConfig = {
     storyLayout: 'split-right',
     featuresLayout: 'cards-grid',
     galleryLayout: 'masonry',
-    sectionOrder: ['hero', 'products', 'promo', 'features', 'gallery', 'reviews', 'story', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'gelatoLab', 'macaronBox', 'cakeStudio', 'products', 'cacaoRadar', 'features', 'promo', 'gallery', 'story', 'reviews', 'location', 'newsletter'],
   },
   name: 'Sugar Street',
   tagline: 'Gooey NYC cookies, fudgy brownie slabs, brioche donuts, dessert jars, and crazy freakshakes',

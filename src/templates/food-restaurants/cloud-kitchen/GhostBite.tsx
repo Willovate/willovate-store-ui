@@ -14,7 +14,7 @@ export const ghostBiteConfig: StorefrontThemeConfig = {
     storyLayout: 'split-right',
     featuresLayout: 'cards-grid',
     galleryLayout: 'masonry',
-    sectionOrder: ['hero', 'products', 'promo', 'features', 'gallery', 'reviews', 'story', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'multiBrand', 'deliveryRadar', 'products', 'packagingTech', 'mealPrep', 'features', 'promo', 'gallery', 'reviews', 'story', 'location', 'newsletter'],
   },
   name: 'GhostBite',
   tagline: 'Urban dark kitchen engineered for high-heat smash burgers, crispy chicken tenders, and late-night cravings',

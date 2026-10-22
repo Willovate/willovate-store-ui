@@ -14,7 +14,7 @@ export const greenFuelConfig: StorefrontThemeConfig = {
     storyLayout: 'split-left',
     featuresLayout: 'pills-row',
     galleryLayout: 'grid-3x2',
-    sectionOrder: ['hero', 'features', 'products', 'story', 'craft', 'gallery', 'promo', 'reviews', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'mealPrep', 'features', 'products', 'packagingTech', 'deliveryRadar', 'multiBrand', 'story', 'craft', 'promo', 'gallery', 'reviews', 'location', 'newsletter'],
   },
   name: 'GreenFuel',
   tagline: 'Clean eating cloud kitchen — macro-counted grain bowls, organic salads, and chef-curated weekly meal prep',

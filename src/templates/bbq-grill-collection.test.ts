@@ -7,6 +7,12 @@ import { grillRepublicConfig } from './food-restaurants/bbq-grill/GrillRepublic'
 import { fireAndRibConfig } from './food-restaurants/bbq-grill/FireAndRib';
 import { backyardBarbequeConfig } from './food-restaurants/bbq-grill/BackyardBarbeque';
 import { kebabKingdomConfig } from './food-restaurants/bbq-grill/KebabKingdom';
+import {
+  SMOKED_MEAT_CUTS,
+  PIT_SIDES,
+  BBQ_SAUCES,
+  MANGAL_KEBABS,
+} from './food-restaurants/components/BbqGrillEnhancements';
 
 describe('Barbecue / Grill Restaurant Template Collection Verification — 5 Distinct Production Themes', () => {
   const foodCategory = templateCategories.find(c => c.id === 'food-and-restaurant');
@@ -243,6 +249,71 @@ describe('Barbecue / Grill Restaurant Template Collection Verification — 5 Dis
       const dastarkhwan = kebabKingdomConfig.products.find(p => p.id === 'kk-grand-sultan-dastarkhwan');
       expect(dastarkhwan).toBeDefined();
       expect(dastarkhwan?.category).toBe('Royal Kebab Dastarkhwans');
+    });
+  });
+
+  describe('Interactive Barbecue & Grill Culinary Enhancements & Layout Order', () => {
+    it('provides authentic Texas pitmaster smoked meat telemetry data', () => {
+      expect(SMOKED_MEAT_CUTS.length).toBeGreaterThanOrEqual(4);
+      SMOKED_MEAT_CUTS.forEach(cut => {
+        expect(cut.id).toBeTruthy();
+        expect(cut.name).toBeTruthy();
+        expect(cut.woodType).toBeTruthy();
+        expect(cut.smokeHours).toBeTruthy();
+        expect(cut.pricePerPortion).toBeGreaterThan(0);
+        expect(cut.portionUnit).toBeTruthy();
+      });
+    });
+
+    it('provides signature pit sides and regional mop sauces', () => {
+      expect(PIT_SIDES.length).toBeGreaterThanOrEqual(4);
+      PIT_SIDES.forEach(side => {
+        expect(side.id).toBeTruthy();
+        expect(side.name).toBeTruthy();
+        expect(side.price).toBeGreaterThan(0);
+      });
+
+      expect(BBQ_SAUCES.length).toBeGreaterThanOrEqual(4);
+      BBQ_SAUCES.forEach(sauce => {
+        expect(sauce.id).toBeTruthy();
+        expect(sauce.name).toBeTruthy();
+        expect(sauce.region).toBeTruthy();
+        expect(sauce.spiceLevel).toBeGreaterThanOrEqual(1);
+      });
+    });
+
+    it('provides live Mangal charcoal skewers with mezze pairings', () => {
+      expect(MANGAL_KEBABS.length).toBeGreaterThanOrEqual(3);
+      MANGAL_KEBABS.forEach(kebab => {
+        expect(kebab.id).toBeTruthy();
+        expect(kebab.name).toBeTruthy();
+        expect(kebab.arabicName).toBeTruthy();
+        expect(kebab.price).toBeGreaterThan(0);
+        expect(kebab.mezzePairing).toBeTruthy();
+      });
+    });
+
+    it('features custom BBQ & Grill enhancements in sectionOrder for all 5 themes', () => {
+      expectedThemes.forEach(({ name, config }) => {
+        const order = config.layoutOptions?.sectionOrder;
+        expect(order, `${name} has sectionOrder configured`).toBeDefined();
+        expect(order).toContain('smokerTelemetry');
+        expect(order).toContain('butcherPlatter');
+        expect(order).toContain('mangalGrill');
+      });
+    });
+
+    it('all 5 BBQ themes have distinct sectionOrder configurations', () => {
+      const orders = [
+        smokehouse77Config.layoutOptions?.sectionOrder?.join(','),
+        grillRepublicConfig.layoutOptions?.sectionOrder?.join(','),
+        fireAndRibConfig.layoutOptions?.sectionOrder?.join(','),
+        backyardBarbequeConfig.layoutOptions?.sectionOrder?.join(','),
+        kebabKingdomConfig.layoutOptions?.sectionOrder?.join(','),
+      ];
+
+      const uniqueOrders = new Set(orders);
+      expect(uniqueOrders.size).toBe(5);
     });
   });
 

@@ -14,7 +14,7 @@ export const feastFleetConfig: StorefrontThemeConfig = {
     featuresLayout: 'cards-grid',
     storyLayout: 'stats-prominent',
     galleryLayout: 'masonry',
-    sectionOrder: ['hero', 'products', 'craft', 'features', 'promo', 'story', 'gallery', 'reviews', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'groupCatering', 'expressRadar', 'products', 'lateNightLab', 'tiffinSubscription', 'features', 'craft', 'promo', 'story', 'gallery', 'reviews', 'location', 'newsletter'],
   },
   name: 'FeastFleet',
   tagline: 'Modern multi-restaurant food delivery marketplace uniting top neighborhood kitchens, diverse cuisines, and one seamless cart',

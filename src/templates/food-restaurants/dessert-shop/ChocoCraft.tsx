@@ -14,7 +14,7 @@ export const chocoCraftConfig: StorefrontThemeConfig = {
     storyLayout: 'split-right',
     featuresLayout: 'cards-grid',
     galleryLayout: 'editorial-collage',
-    sectionOrder: ['hero', 'features', 'craft', 'products', 'story', 'promo', 'gallery', 'reviews', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'cacaoRadar', 'macaronBox', 'products', 'gelatoLab', 'cakeStudio', 'features', 'craft', 'story', 'promo', 'gallery', 'reviews', 'location', 'newsletter'],
   },
   name: 'ChocoCraft',
   tagline: 'Artisanal bean-to-bar single-origin chocolates, hand-rolled truffles, and copper-kettle confections',

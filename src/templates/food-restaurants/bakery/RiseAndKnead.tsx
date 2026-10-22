@@ -13,7 +13,7 @@ export const riseAndKneadConfig: StorefrontThemeConfig = {
     storyLayout: 'stats-prominent',
     featuresLayout: 'strip-4',
     galleryLayout: 'editorial-collage',
-    sectionOrder: ['hero', 'features', 'products', 'story', 'promo', 'craft', 'gallery', 'reviews', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'features', 'flourProvenance', 'products', 'bakeSchedule', 'breadClub', 'pastryBox', 'craft', 'story', 'breadCare', 'promo', 'gallery', 'reviews', 'location', 'newsletter'],
   },
   name: 'Rise & Knead',
   tagline: 'Bespoke multi-tiered wedding cakes, milestone celebrations, and artisanal celebratory confections',
@@ -29,6 +29,7 @@ export const riseAndKneadConfig: StorefrontThemeConfig = {
     border: 'rgba(202, 138, 4, 0.18)',
     badgeBg: '#fef08a',
     badgeText: '#854d0e',
+    heroOverlay: 'linear-gradient(135deg, rgba(28,25,23,0.75) 0%, rgba(202,138,4,0.45) 100%)',
   },
   typography: {
     headingFont: '"Playfair Display", Georgia, serif',
@@ -39,7 +40,7 @@ export const riseAndKneadConfig: StorefrontThemeConfig = {
     subheadline:
       'Hand-sculpted sugar floristry, champagne-infused Swiss meringue buttercreams, and architectural tiers crafted for unforgettable milestone celebrations and grand ballroom receptions.',
     badge: 'BESPOKE CAKE ATELIER & TASTING SUITE',
-    image: img('photo-1555507036-ab1f4038808a'),
+    image: img('photo-1589367920969-ab8e050bbb04'),
     imageAlt: 'Grand multi-tiered white wedding cake decorated with delicate hand-crafted white sugar flowers',
     primaryCtaText: 'Explore Celebration Cakes',
     primaryCtaPage: 'menu',

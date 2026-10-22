@@ -14,7 +14,7 @@ export const umamiExpressConfig: StorefrontThemeConfig = {
     storyLayout: 'split-left',
     featuresLayout: 'pills-row',
     galleryLayout: 'editorial-collage',
-    sectionOrder: ['hero', 'products', 'features', 'promo', 'gallery', 'reviews', 'story', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'packagingTech', 'multiBrand', 'products', 'deliveryRadar', 'features', 'mealPrep', 'promo', 'gallery', 'reviews', 'story', 'location', 'newsletter'],
   },
   name: 'Umami Express',
   tagline: 'Asian Fusion & Craft Ramen Delivery Kitchen — Separated Broth Packaging, Handcrafted Baos, and Wok-Fired Bowls',
@@ -442,7 +442,7 @@ export const umamiExpressConfig: StorefrontThemeConfig = {
       category: 'Boba Teas & Asian Sweets',
       price: 249,
       compareAtPrice: 280,
-      image: img('photo-1558857563-b37cf5a23f11'),
+      image: img('photo-1569718212165-3a8278d5f624'),
       imageAlt: 'Slow-cooked warm tapioca pearls coated in Okinawa brown sugar syrup with fresh cream milk',
       description:
         'Chewy brown sugar boba pearls cooked for 2 hours in dark Muscovado molasses, swirled around iced full cream milk creating signature tiger stripes. Delivered with vacuum seal and wide boba straw.',
@@ -459,7 +459,7 @@ export const umamiExpressConfig: StorefrontThemeConfig = {
       category: 'Boba Teas & Asian Sweets',
       price: 239,
       compareAtPrice: 270,
-      image: img('photo-1505253758473-96b3015f240a'),
+      image: img('photo-1512621776951-a57141f2eefd'),
       imageAlt: 'Jiggly Japanese soufflé cheesecake infused with first-harvest ceremonial Uji green tea',
       description:
         'Melt-in-your-mouth soufflé-style Japanese cotton cheesecake infused with organic ceremonial grade Uji matcha from Kyoto, dusted with powdered sugar.',

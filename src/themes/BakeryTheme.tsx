@@ -72,6 +72,7 @@ function BakeryQuickViewModal({ item, image, onClose }: { item: string[], image:
   )
 }
 
+import ButterAndBloom from '../templates/food-restaurants/bakery/ButterAndBloom'
 import GoldenCrumb from '../templates/food-restaurants/bakery/GoldenCrumb'
 import PatisserieLune from '../templates/food-restaurants/bakery/PatisserieLune'
 import RusticOven from '../templates/food-restaurants/bakery/RusticOven'
@@ -79,7 +80,8 @@ import SugarPetal from '../templates/food-restaurants/bakery/SugarPetal'
 import RiseAndKnead from '../templates/food-restaurants/bakery/RiseAndKnead'
 
 export default function BakeryTheme({ theme }: { theme: RestaurantThemePreset }) {
-  if (theme.id === 'butter-and-bloom' || theme.id === 'golden-crumb') return <GoldenCrumb />
+  if (theme.id === 'butter-and-bloom') return <ButterAndBloom />
+  if (theme.id === 'golden-crumb') return <GoldenCrumb />
   if (theme.id === 'parisian-crust' || theme.id === 'patisserie-lune') return <PatisserieLune />
   if (theme.id === 'oven-and-crumb' || theme.id === 'rustic-oven') return <RusticOven />
   if (theme.id === 'daily-bread-co' || theme.id === 'sugar-petal') return <SugarPetal />

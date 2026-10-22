@@ -79,7 +79,7 @@ export const DIAMOND_CATEGORIES: DiamondCategoryCard[] = [
     id: 'cat-bracelets',
     name: 'Tennis Bracelets & Bangles',
     categoryKey: 'Bracelets',
-    image: 'https://images.unsplash.com/photo-1611591475870-87a414605ea2?w=800&auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80',
     startingPrice: 'From $1,250',
     itemCount: 24,
     tagline: 'Continuous seamless diamond rows with double-security clasps.',
@@ -134,7 +134,7 @@ export const DIAMOND_PRODUCTS: DiamondJewelryProduct[] = [
     price: 4890,
     compareAtPrice: 5900,
     images: [
-      'https://images.unsplash.com/photo-1611591475870-87a414605ea2?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80',
       'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80',
     ],
     caratWeight: '5.50 ct',
@@ -379,7 +379,7 @@ export const DIAMOND_PRODUCTS: DiamondJewelryProduct[] = [
     compareAtPrice: 4600,
     images: [
       'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1611591475870-87a414605ea2?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80',
     ],
     caratWeight: '2.80 ct',
     diamondCut: 'Round Brilliant',

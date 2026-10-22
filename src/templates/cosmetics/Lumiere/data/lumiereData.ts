@@ -5,7 +5,7 @@ export const LUMIERE_SAMPLE_PRODUCTS: LumiereProduct[] = [
     title: 'Élixir Royal Caviar Infusion',
     price: '$185.00',
     tag: 'Caviar Extract',
-    img: 'https://images.unsplash.com/photo-1608248597359-597519159954?w=600&auto=format&fit=crop&q=80',
+    img: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop&q=80',
   },
   {
     title: "Lumière L'Or Satin Crème",

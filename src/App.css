@@ -567,6 +567,51 @@ img { display: block; max-width: 100%; }
   text-align: center;
 }
 
+/* Catalog section header: space-between layout for heading and search input */
+.luxe-catalog {
+  padding: 52px clamp(16px, 4vw, 64px);
+}
+
+.luxe-catalog .luxe-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  margin-bottom: 28px;
+  width: 100%;
+}
+
+.luxe-catalog .luxe-section-header h2 {
+  text-align: left;
+  margin: 0;
+  flex: 0 0 auto;
+}
+
+.luxe-catalog .luxe-search {
+  margin-left: auto;
+  width: min(320px, 100%);
+  flex: 0 1 320px;
+}
+
+@media (max-width: 640px) {
+  .luxe-catalog .luxe-section-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .luxe-catalog .luxe-section-header h2 {
+    text-align: left;
+    width: 100%;
+  }
+
+  .luxe-catalog .luxe-search {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
 /* ========================================
    FEATURED GRID
    ======================================== */

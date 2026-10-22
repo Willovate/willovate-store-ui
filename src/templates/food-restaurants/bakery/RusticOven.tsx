@@ -8,12 +8,12 @@ export const rusticOvenConfig: StorefrontThemeConfig = {
   kind: 'bakery',
   currencySymbol: '₹',
   layoutOptions: {
-    heroLayout: 'split',
+    heroLayout: 'centered',
     productLayout: 'grid-3',
     storyLayout: 'card-overlay',
     featuresLayout: 'cards-grid',
     galleryLayout: 'editorial-collage',
-    sectionOrder: ['hero', 'features', 'craft', 'products', 'story', 'promo', 'gallery', 'reviews', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'bakeSchedule', 'features', 'products', 'flourProvenance', 'breadClub', 'pastryBox', 'story', 'craft', 'breadCare', 'promo', 'gallery', 'reviews', 'location', 'newsletter'],
   },
   name: 'Rustic Oven',
   tagline: 'Wood-fired hearth baking, stone-ground local flours, and cast-iron kitchen comfort',
@@ -29,6 +29,7 @@ export const rusticOvenConfig: StorefrontThemeConfig = {
     border: 'rgba(69, 26, 3, 0.12)',
     badgeBg: '#fef3c7',
     badgeText: '#92400e',
+    heroOverlay: 'linear-gradient(135deg, rgba(45,24,8,0.75) 0%, rgba(180,83,9,0.5) 100%)',
   },
   typography: {
     headingFont: '"Playfair Display", Georgia, serif',

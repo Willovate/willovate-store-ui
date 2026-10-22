@@ -134,4 +134,29 @@ describe('Store Editor Responsive Preview Architecture', () => {
     // pe-template should not have ws-canvas-${previewMode}
     expect(content).not.toContain('pe-template pe-template--restaurant ws-canvas');
   });
+
+  it('Tablet and mobile viewports must strictly contain overflow and suppress header taglines', () => {
+    const cssContent = fs.readFileSync(cssPath, 'utf-8');
+
+    // Overflow containment on tablet and mobile frames
+    expect(cssContent).toContain('.ws-canvas-tablet');
+    expect(cssContent).toContain('.ws-canvas-mobile');
+    expect(cssContent).toContain('overflow-x: clip !important;');
+
+    // Header brand tagline suppression on tablet and mobile
+    expect(cssContent).toContain('.ws-canvas-tablet .fs-brand-sub');
+    expect(cssContent).toContain('.ws-canvas-mobile .fs-brand-sub');
+    expect(cssContent).toContain('display: none !important;');
+
+    // Single-line truncated brand title
+    expect(cssContent).toContain('.ws-canvas-mobile .fs-brand-name');
+    expect(cssContent).toContain('overflow: hidden !important;');
+    expect(cssContent).toContain('text-overflow: ellipsis !important;');
+    expect(cssContent).toContain('white-space: nowrap !important;');
+
+    // Contained category pills with touch scrolling on mobile
+    expect(cssContent).toContain('.ws-canvas-mobile .fs-category-pills');
+    expect(cssContent).toContain('overflow-x: auto !important;');
+  });
 });
+

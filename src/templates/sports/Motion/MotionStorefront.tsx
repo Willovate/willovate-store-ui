@@ -195,7 +195,7 @@ export const MOTION_PRODUCTS: MotionProduct[] = [
     price: 7999,
     compareAtPrice: 9499,
     image: 'https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=1000&auto=format&fit=crop&q=85',
-    alternateImage: 'https://images.unsplash.com/photo-1506629905607-d9f9f6bb4f96?w=1000&auto=format&fit=crop&q=85',
+    alternateImage: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=1000&auto=format&fit=crop&q=85',
     technologyBadge: 'FAR-INFRARED 3D',
     technology: 'Far-infrared bio-mineral grid embedded into cellular matrix',
     performance: 'Reflects body FIR energy to accelerate micro-vascular blood flow',
@@ -657,7 +657,7 @@ export const MotionStorefront: React.FC<MotionStorefrontProps> = ({
                 <div className="mo-tech-card">
                   <div className="mo-tech-card-image">
                     <img
-                      src="https://images.unsplash.com/photo-1510519138195-068d828884bb?w=800&auto=format&fit=crop&q=85"
+                      src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&auto=format&fit=crop&q=85"
                       alt="Precision Sensory Feedback"
                     />
                     <div className="mo-tech-card-overlay" />

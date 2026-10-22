@@ -461,7 +461,7 @@ function MainApp() {
       <footer className="luxe-footer">
         <div className="luxe-footer-brand-col">
           <a className="wordmark" href="#top" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-            <img src="/willovate-one-logo.png" alt="Willovate One" style={{ height: '26px', width: 'auto', objectFit: 'contain' }} />
+            <img src="/willovate-one-logo-white.png" alt="Willovate One" style={{ height: '26px', width: 'auto', objectFit: 'contain' }} />
           </a>
           <p>Thoughtful goods for modern life.</p>
         </div>

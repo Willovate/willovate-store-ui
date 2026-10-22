@@ -14,7 +14,7 @@ export const tandoorAndTadkaConfig: StorefrontThemeConfig = {
     featuresLayout: 'strip-4',
     storyLayout: 'split-left',
     galleryLayout: 'grid-3x2',
-    sectionOrder: ['hero', 'features', 'products', 'craft', 'promo', 'story', 'gallery', 'reviews', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'tandoorGrill', 'biryaniAtelier', 'products', 'thaliCurator', 'features', 'spiceTerroir', 'chaiBar', 'craft', 'story', 'promo', 'gallery', 'reviews', 'location', 'newsletter'],
   },
   name: 'Tandoor & Tadka',
   tagline: 'Authentic fire-forward Punjabi clay oven grilling, 24-hour slow dal, and legendary Old Delhi tandoori roasts',
@@ -391,7 +391,7 @@ export const tandoorAndTadkaConfig: StorefrontThemeConfig = {
         desc: 'Freshly roasted meats are basted with white butter and chaat masala, sizzling immediately upon arrival at your table.',
       },
     ],
-    image: img('photo-1508615070457-7baeba4003ab'),
+    image: img('photo-1565557623262-b51c2513a641'),
   },
   story: {
     badge: 'HEARTH HERITAGE',

@@ -13,7 +13,7 @@ export const brewHouseConfig: StorefrontThemeConfig = {
     storyLayout: 'card-overlay',
     featuresLayout: 'cards-grid',
     galleryLayout: 'editorial-collage',
-    sectionOrder: ['hero', 'features', 'craft', 'products', 'story', 'promo', 'gallery', 'reviews', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'features', 'beanPassport', 'craft', 'products', 'customizer', 'subscription', 'story', 'amenities', 'flights', 'promo', 'gallery', 'reviews', 'location', 'newsletter'],
   },
   name: 'Brew House',
   tagline: 'Industrial specialty coffee roastery with dialed-in extractions and bean origin storytelling',

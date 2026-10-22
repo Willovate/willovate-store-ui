@@ -13,7 +13,7 @@ export const latteLaneConfig: StorefrontThemeConfig = {
     storyLayout: 'stats-prominent',
     featuresLayout: 'strip-4',
     galleryLayout: 'masonry',
-    sectionOrder: ['hero', 'features', 'products', 'promo', 'story', 'craft', 'gallery', 'reviews', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'customizer', 'features', 'products', 'flights', 'craft', 'story', 'amenities', 'subscription', 'promo', 'gallery', 'reviews', 'location', 'newsletter'],
   },
   name: 'Latte Lane',
   tagline: 'Sophisticated playful terracotta coffee atelier with swan latte art and drink customization',

@@ -753,7 +753,7 @@ function App() {
           style={{ display: 'inline-flex', alignItems: 'center' }}
         >
           <img
-            src="/willovate-one-logo.png"
+            src="/willovate-one-logo-white.png"
             alt="Willovate One"
             style={{ height: '26px', width: 'auto', objectFit: 'contain' }}
           />

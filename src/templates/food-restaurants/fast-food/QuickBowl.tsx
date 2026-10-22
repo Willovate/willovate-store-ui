@@ -13,7 +13,7 @@ export const quickBowlConfig: StorefrontThemeConfig = {
     storyLayout: 'split-left',
     featuresLayout: 'pills-row',
     galleryLayout: 'grid-3x2',
-    sectionOrder: ['hero', 'features', 'products', 'story', 'craft', 'gallery', 'promo', 'reviews', 'location', 'newsletter'],
+    sectionOrder: ['hero', 'features', 'craveCombo', 'products', 'speedGuarantee', 'flashDeals', 'sauceBar', 'heatMatrix', 'story', 'craft', 'promo', 'gallery', 'reviews', 'location', 'newsletter'],
   },
   name: 'Quick Bowl',
   tagline: 'Fresh grilled protein bowls, wholesome family dinner bundles, crisp greens, and cold-pressed juices',

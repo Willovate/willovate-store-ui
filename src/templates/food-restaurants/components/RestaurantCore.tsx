@@ -7,13 +7,50 @@
  */
 
 import React, { useState, useEffect, useRef, createContext, useContext } from 'react';
-import { EditableSection, useEditableOverrides } from '../../../context/WebsiteContext';
+import { EditableSection, useEditableOverrides, isGenericPlaceholder } from '../../../context/WebsiteContext';
 import {
   ArrowRight, MapPin, Clock, Phone, Star, ChevronLeft, ChevronRight,
   ShoppingBag, X, Calendar, Users, CheckCircle, Wine, Sparkles,
   Plus, Minus, Info, Menu as MenuIcon, Utensils, Award, Compass, Heart,
-  Trash2, Copy, Check
+  Trash2, Copy, Check, Search, Filter
 } from 'lucide-react';
+import {
+  type AccoladeItem,
+  type PrivateDiningRoom,
+  type PrivateDiningConfig,
+  type HospitalityPolicy,
+  type GiftExperience,
+  type SommelierBottle,
+  type SommelierReserveConfig,
+  type ServiceStatusConfig,
+  AccoladesStrip,
+  HospitalityGuideSection,
+  PrivateDiningSection,
+  PrivateDiningModal,
+  SommelierReserveSection,
+  GiftExperienceSection,
+  GiftCardModal,
+  LiveFloatingBar
+} from './FineDiningEnhancements';
+
+export {
+  type AccoladeItem,
+  type PrivateDiningRoom,
+  type PrivateDiningConfig,
+  type HospitalityPolicy,
+  type GiftExperience,
+  type SommelierBottle,
+  type SommelierReserveConfig,
+  type ServiceStatusConfig,
+  AccoladesStrip,
+  HospitalityGuideSection,
+  PrivateDiningSection,
+  PrivateDiningModal,
+  SommelierReserveSection,
+  GiftExperienceSection,
+  GiftCardModal,
+  LiveFloatingBar
+};
 
 // ─── SAFE SCROLL REVEAL HOOK ────────────────────────────────────────────────
 // Safely enhances elements without ever trapping them at opacity 0 if IntersectionObserver fails
@@ -84,7 +121,11 @@ export interface ReservationDetails {
   referenceCode: string;
 }
 
+export type FineDiningPage = 'home' | 'menu' | 'story' | 'experience' | 'gallery' | 'visit' | 'private-dining' | 'cellar';
+
 interface RestaurantContextType {
+  activePage: FineDiningPage;
+  setActivePage: (page: FineDiningPage) => void;
   isReservationOpen: boolean;
   openReservation: () => void;
   closeReservation: () => void;
@@ -107,6 +148,8 @@ interface RestaurantContextType {
 }
 
 const RestaurantContext = createContext<RestaurantContextType>({
+  activePage: 'home',
+  setActivePage: () => {},
   isReservationOpen: false,
   openReservation: () => {},
   closeReservation: () => {},
@@ -230,7 +273,12 @@ export interface RestaurantThemeConfig {
   tastingCourses?: TastingCourse[];
   features?: string[];
   videoSrc?: string;
-  accolades?: Array<{ year: string; title: string; organization: string }>;
+  accolades?: AccoladeItem[];
+  privateDining?: PrivateDiningConfig;
+  hospitalityGuide?: HospitalityPolicy[];
+  giftExperiences?: GiftExperience[];
+  sommelierReserve?: SommelierReserveConfig;
+  serviceStatus?: ServiceStatusConfig;
 }
 
 // ─── ANNOUNCEMENT BAR ────────────────────────────────────────────────────────
@@ -298,64 +346,35 @@ export function RestaurantNavbar({ theme }: { theme: RestaurantThemeConfig }) {
   }, []);
 
   const totalCartCount = store.cart.reduce((sum, item) => sum + item.quantity, 0);
-  const navLinks = [
-    { label: 'Menu', href: '#menu', id: 'menu' },
-    { label: 'Our Story', href: '#story', id: 'story' },
-    { label: 'Experience', href: '#tasting', id: 'tasting' },
-    { label: 'Gallery', href: '#gallery', id: 'gallery' },
-    { label: 'Visit & Hours', href: '#visit', id: 'visit' },
+  const navLinks: Array<{ label: string; page: FineDiningPage; id: string }> = [
+    { label: 'Home', page: 'home', id: 'home' },
+    { label: 'Menu', page: 'menu', id: 'menu' },
+    { label: 'Our Story', page: 'story', id: 'story' },
+    { label: 'Experience', page: 'experience', id: 'experience' },
+    { label: 'Gallery', page: 'gallery', id: 'gallery' },
+    { label: 'Visit & Hours', page: 'visit', id: 'visit' },
   ];
 
-  const scrollToSection = (e: React.MouseEvent, href: string) => {
+  const navigateToPage = (e: React.MouseEvent, page: FineDiningPage) => {
     e.preventDefault();
-    const id = href.replace('#', '');
-    const el = document.getElementById(id);
-    if (el) {
-      // Find nearest scrollable container (e.g. <main> in preview, or editor canvas)
-      let scrollContainer: HTMLElement | null = null;
-      let curr = el.parentElement;
-      while (curr && curr !== document.body) {
-        const style = window.getComputedStyle(curr);
-        if ((style.overflowY === 'auto' || style.overflowY === 'scroll') && curr.scrollHeight > curr.clientHeight) {
-          scrollContainer = curr;
-          break;
-        }
-        curr = curr.parentElement;
-      }
-
-      if (scrollContainer) {
-        const containerRect = scrollContainer.getBoundingClientRect();
-        const elRect = el.getBoundingClientRect();
-        const targetScrollTop = scrollContainer.scrollTop + (elRect.top - containerRect.top) - 76;
-        scrollContainer.scrollTo({
-          top: Math.max(0, targetScrollTop),
-          behavior: 'smooth',
-        });
-      } else {
-        const navHeight = 80;
-        const elementPosition = el.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + (window.pageYOffset || document.documentElement.scrollTop || 0) - navHeight;
-        window.scrollTo({
-          top: Math.max(0, offsetPosition),
-          behavior: 'smooth',
-        });
-      }
-
-      try {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } catch {}
-
-      setActiveSection(id);
-    }
+    store.setActivePage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     setMobileMenuOpen(false);
   };
 
-  const bg = scrolled ? theme.palette.surface : 'transparent';
-  const textColor = scrolled ? theme.palette.text : '#ffffff';
+  const overrides = useEditableOverrides('nav', {
+    logoText: theme.name,
+    logoImage: '',
+    style_backgroundColor: '',
+    style_textColor: '',
+  });
+
+  const bg = overrides.style_backgroundColor || (scrolled ? theme.palette.surface : 'transparent');
+  const textColor = overrides.style_textColor || (scrolled ? theme.palette.text : '#ffffff');
   const borderColor = scrolled ? (theme.palette.border || `${theme.palette.text}15`) : 'transparent';
 
   return (
-    <EditableSection id="nav" elementType="nav" name="Navigation" defaultProps={{ logoText: theme.name }}>
+    <EditableSection id="nav" elementType="nav" name="Navigation" defaultProps={overrides}>
       <nav style={{
         position: 'sticky',
         top: 0,
@@ -374,41 +393,17 @@ export function RestaurantNavbar({ theme }: { theme: RestaurantThemeConfig }) {
         justifyContent: 'space-between',
         boxShadow: scrolled ? '0 10px 30px rgba(0,0,0,0.1)' : 'none',
       }}>
-        {/* Brand & Back Button */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexShrink: 0, minWidth: 'max-content' }}>
-          <a
-            href={`/browse-templates/food-and-restaurant/${theme.category}`}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.4rem',
-              color: scrolled ? theme.palette.textLight : 'rgba(255,255,255,0.78)',
-              textDecoration: 'none',
-              fontSize: '0.82rem',
-              fontWeight: 600,
-              fontFamily: theme.typography.body,
-              letterSpacing: '0.04em',
-              transition: 'color 0.2s',
-              whiteSpace: 'nowrap',
-              flexShrink: 0,
-            }}
-            onMouseOver={e => e.currentTarget.style.color = theme.palette.primary}
-            onMouseOut={e => e.currentTarget.style.color = scrolled ? theme.palette.textLight : 'rgba(255,255,255,0.78)'}
-          >
-            <ChevronLeft size={16} /> Catalog
-          </a>
+        {/* Brand Logo / Identity */}
+        <div style={{ display: 'flex', alignItems: 'center', flexShrink: 0, minWidth: 0, marginRight: 'clamp(1rem, 2cqw, 2.5rem)' }}>
           <a
             href="#top"
-            onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
+            onClick={(e) => navigateToPage(e, 'home')}
             className="rt-brand"
             style={{
               fontFamily: theme.typography.heading,
               fontSize: 'clamp(1.2rem, 1.8cqw, 1.65rem)',
               fontWeight: 800,
-              color: scrolled ? theme.palette.primary : '#ffffff',
+              color: overrides.style_textColor || (scrolled ? theme.palette.primary : '#ffffff'),
               letterSpacing: '-0.02em',
               textDecoration: 'none',
               transition: 'color 0.2s',
@@ -417,7 +412,11 @@ export function RestaurantNavbar({ theme }: { theme: RestaurantThemeConfig }) {
               display: 'inline-block',
             }}
           >
-            {useEditableOverrides('nav', { logoText: theme.name }).logoText}
+            {overrides.logoImage ? (
+              <img src={overrides.logoImage} alt={overrides.logoText || theme.name} style={{ maxHeight: '42px', maxWidth: '180px', objectFit: 'contain' }} />
+            ) : (
+              overrides.logoText || theme.name
+            )}
           </a>
         </div>
 
@@ -446,22 +445,15 @@ export function RestaurantNavbar({ theme }: { theme: RestaurantThemeConfig }) {
             }
             .ws-canvas-tablet .rt-desktop-nav,
             [data-viewport="tablet"] .rt-desktop-nav {
-              display: flex !important;
-              gap: 0.75rem !important;
-            }
-            .ws-canvas-tablet .rt-desktop-nav a,
-            [data-viewport="tablet"] .rt-desktop-nav a {
-              font-size: 0.76rem !important;
-              letter-spacing: 0.03em !important;
-            }
-            .ws-canvas-tablet .rt-desktop-nav button,
-            [data-viewport="tablet"] .rt-desktop-nav button {
-              padding: 0.45rem 0.85rem !important;
-              font-size: 0.78rem !important;
+              display: none !important;
             }
             .ws-canvas-tablet .rt-mobile-toggle,
             [data-viewport="tablet"] .rt-mobile-toggle {
-              display: none !important;
+              display: flex !important;
+            }
+            @container storefront (max-width: 840px) {
+              .rt-desktop-nav { display: none !important; }
+              .rt-mobile-toggle { display: flex !important; }
             }
             @container storefront (max-width: 680px) {
               .rt-desktop-nav { display: none !important; }
@@ -469,12 +461,12 @@ export function RestaurantNavbar({ theme }: { theme: RestaurantThemeConfig }) {
             }
           `}</style>
           {navLinks.map(link => {
-            const isActive = activeSection === link.id;
+            const isActive = store.activePage === link.page;
             return (
               <a
                 key={link.label}
-                href={link.href}
-                onClick={(e) => scrollToSection(e, link.href)}
+                href={`#${link.id}`}
+                onClick={(e) => navigateToPage(e, link.page)}
                 style={{
                   fontFamily: theme.typography.body,
                   fontSize: '0.88rem',
@@ -705,13 +697,13 @@ export function RestaurantNavbar({ theme }: { theme: RestaurantThemeConfig }) {
             {navLinks.map(link => (
               <a
                 key={link.label}
-                href={link.href}
-                onClick={(e) => scrollToSection(e, link.href)}
+                href={`#${link.id}`}
+                onClick={(e) => navigateToPage(e, link.page)}
                 style={{
                   fontFamily: theme.typography.body,
                   fontSize: '1.1rem',
                   fontWeight: 600,
-                  color: activeSection === link.id ? theme.palette.primary : theme.palette.text,
+                  color: store.activePage === link.page ? theme.palette.primary : theme.palette.text,
                   textDecoration: 'none',
                   padding: '0.65rem 0',
                   borderBottom: `1px solid ${theme.palette.text}10`,
@@ -721,7 +713,7 @@ export function RestaurantNavbar({ theme }: { theme: RestaurantThemeConfig }) {
                 }}
               >
                 <span>{link.label}</span>
-                {activeSection === link.id && <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: theme.palette.primary }} />}
+                {store.activePage === link.page && <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: theme.palette.primary }} />}
               </a>
             ))}
             <button
@@ -773,7 +765,23 @@ export function RestaurantHero({ theme }: { theme: RestaurantThemeConfig }) {
     subtitle: theme.content.heroSub,
     buttonText: theme.content.ctaPrimary,
     style_backgroundImage: theme.images.hero,
+    image: theme.images.hero,
+    style_backgroundColor: '',
+    style_textColor: '',
+    style_buttonColor: '',
+    style_buttonTextColor: '',
   });
+
+  const heroImageSrc = (overrides.image && !isGenericPlaceholder(overrides.image))
+    ? overrides.image
+    : (overrides.style_backgroundImage && !isGenericPlaceholder(overrides.style_backgroundImage))
+      ? overrides.style_backgroundImage
+      : theme.images.hero;
+
+  const heroBg = overrides.style_backgroundColor || theme.palette.secondary;
+  const heroTextColor = overrides.style_textColor || '#ffffff';
+  const heroBtnColor = overrides.style_buttonColor || theme.palette.primary;
+  const heroBtnTextColor = overrides.style_buttonTextColor || '#ffffff';
 
   return (
     <EditableSection id="hero" elementType="hero" name="Hero" defaultProps={overrides}>
@@ -783,7 +791,7 @@ export function RestaurantHero({ theme }: { theme: RestaurantThemeConfig }) {
         display: 'flex',
         alignItems: 'center',
         overflow: 'hidden',
-        backgroundColor: theme.palette.secondary,
+        backgroundColor: heroBg,
       }}>
         {/* Background Image / Video with Ken Burns subtle breathing */}
         <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
@@ -799,7 +807,7 @@ export function RestaurantHero({ theme }: { theme: RestaurantThemeConfig }) {
             </video>
           ) : (
             <img
-              src={overrides.style_backgroundImage}
+              src={heroImageSrc}
               alt={theme.images.heroAlt}
               onLoad={() => setImgLoaded(true)}
               onError={(e) => {
@@ -819,7 +827,7 @@ export function RestaurantHero({ theme }: { theme: RestaurantThemeConfig }) {
           <div style={{
             position: 'absolute',
             inset: 0,
-            background: theme.palette.heroOverlay,
+            background: overrides.style_backgroundColor ? `linear-gradient(to bottom, transparent, ${heroBg})` : theme.palette.heroOverlay,
           }} />
         </div>
 
@@ -840,7 +848,7 @@ export function RestaurantHero({ theme }: { theme: RestaurantThemeConfig }) {
             fontWeight: 700,
             textTransform: 'uppercase',
             letterSpacing: '0.22em',
-            color: theme.palette.primary,
+            color: heroBtnColor,
             marginBottom: '1.75rem',
             backgroundColor: 'rgba(0,0,0,0.4)',
             padding: '0.45rem 1.1rem',
@@ -856,7 +864,7 @@ export function RestaurantHero({ theme }: { theme: RestaurantThemeConfig }) {
             fontFamily: theme.typography.heading,
             fontSize: 'clamp(3.2rem, 7.5vw, 6.5rem)',
             fontWeight: 900,
-            color: '#ffffff',
+            color: heroTextColor,
             lineHeight: 1.02,
             marginBottom: '1.75rem',
             textShadow: '0 4px 30px rgba(0,0,0,0.5)',
@@ -869,7 +877,7 @@ export function RestaurantHero({ theme }: { theme: RestaurantThemeConfig }) {
           <p style={{
             fontFamily: theme.typography.body,
             fontSize: 'clamp(1.1rem, 2vw, 1.35rem)',
-            color: 'rgba(255,255,255,0.92)',
+            color: heroTextColor === '#ffffff' ? 'rgba(255,255,255,0.92)' : heroTextColor,
             marginBottom: '2.75rem',
             maxWidth: '640px',
             lineHeight: 1.65,
@@ -883,8 +891,8 @@ export function RestaurantHero({ theme }: { theme: RestaurantThemeConfig }) {
             <button
               onClick={() => store.openReservation()}
               style={{
-                backgroundColor: theme.palette.primary,
-                color: '#ffffff',
+                backgroundColor: heroBtnColor,
+                color: heroBtnTextColor,
                 border: 'none',
                 borderRadius: '10px',
                 padding: '1.2rem 2.6rem',
@@ -896,15 +904,15 @@ export function RestaurantHero({ theme }: { theme: RestaurantThemeConfig }) {
                 alignItems: 'center',
                 gap: '0.6rem',
                 transition: 'transform 0.2s, box-shadow 0.2s',
-                boxShadow: `0 8px 30px ${theme.palette.primary}77`,
+                boxShadow: `0 8px 30px ${heroBtnColor}77`,
               }}
               onMouseOver={e => {
                 e.currentTarget.style.transform = 'translateY(-3px)';
-                e.currentTarget.style.boxShadow = `0 12px 36px ${theme.palette.primary}88`;
+                e.currentTarget.style.boxShadow = `0 12px 36px ${heroBtnColor}88`;
               }}
               onMouseOut={e => {
                 e.currentTarget.style.transform = 'none';
-                e.currentTarget.style.boxShadow = `0 8px 30px ${theme.palette.primary}77`;
+                e.currentTarget.style.boxShadow = `0 8px 30px ${heroBtnColor}77`;
               }}
             >
               <Calendar size={18} />
@@ -914,6 +922,11 @@ export function RestaurantHero({ theme }: { theme: RestaurantThemeConfig }) {
 
             <a
               href="#menu"
+              onClick={(e) => {
+                e.preventDefault();
+                store.setActivePage('menu');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
               style={{
                 backgroundColor: 'rgba(255,255,255,0.08)',
                 color: '#ffffff',
@@ -1028,10 +1041,21 @@ export function RestaurantMenu({ theme }: { theme: RestaurantThemeConfig }) {
   const [activeTab, setActiveTab] = useState(0);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
   const [addedItem, setAddedItem] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filterTag, setFilterTag] = useState('All');
   const store = useRestaurantStore();
   const ref = useReveal();
 
-  const overrides = useEditableOverrides('prod-grid', { title: 'Curated Menus & Offerings' });
+  const overrides = useEditableOverrides('prod-grid', {
+    title: 'Curated Menus & Offerings',
+    style_backgroundColor: '',
+    style_textColor: '',
+    style_cardColor: '',
+  });
+
+  const menuBg = overrides.style_backgroundColor || theme.palette.background;
+  const menuTextColor = overrides.style_textColor || theme.palette.text;
+  const menuCardBg = overrides.style_cardColor || theme.palette.surface;
 
   const handleAddItem = (item: MenuItem, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -1040,12 +1064,29 @@ export function RestaurantMenu({ theme }: { theme: RestaurantThemeConfig }) {
     setTimeout(() => setAddedItem(null), 1800);
   };
 
+  const categoryItems = theme.menu[activeTab]?.items || [];
+  const filteredItems = categoryItems.filter(item => {
+    const q = searchQuery.toLowerCase().trim();
+    const matchSearch = !q ||
+      item.name.toLowerCase().includes(q) ||
+      item.desc.toLowerCase().includes(q) ||
+      (item.winePairing && item.winePairing.toLowerCase().includes(q)) ||
+      (item.tags && item.tags.some(t => t.toLowerCase().includes(q)));
+    if (!matchSearch) return false;
+    if (filterTag === 'All') return true;
+    if (filterTag === "Chef's Pick") return item.tags?.some(t => t.toLowerCase().includes('chef') || t.toLowerCase().includes('signature'));
+    if (filterTag === 'Wine Pairing') return Boolean(item.winePairing);
+    if (filterTag === 'Vegetarian') return item.tags?.some(t => t.toLowerCase().includes('veg')) || item.desc.toLowerCase().includes('vegetarian');
+    if (filterTag === 'Signature') return item.tags?.some(t => t.toLowerCase().includes('signature') || t.toLowerCase().includes('cellar'));
+    return true;
+  });
+
   return (
     <EditableSection id="prod-grid" elementType="prod-grid" name="Menu Section" defaultProps={overrides}>
       <section id="menu" style={{
-        backgroundColor: theme.palette.background,
+        backgroundColor: menuBg,
         padding: '7rem 5%',
-        color: theme.palette.text,
+        color: menuTextColor,
         scrollMarginTop: '80px',
       }}>
         <div ref={ref as any} style={{ maxWidth: '1240px', margin: '0 auto' }}>
@@ -1089,13 +1130,13 @@ export function RestaurantMenu({ theme }: { theme: RestaurantThemeConfig }) {
             display: 'flex',
             justifyContent: 'center',
             gap: '0.75rem',
-            marginBottom: '3.5rem',
+            marginBottom: '2rem',
             flexWrap: 'wrap',
           }}>
             {theme.menu.map((cat, i) => (
               <button
                 key={i}
-                onClick={() => setActiveTab(i)}
+                onClick={() => { setActiveTab(i); setFilterTag('All'); }}
                 style={{
                   padding: '0.75rem 2rem',
                   borderRadius: '99px',
@@ -1115,6 +1156,91 @@ export function RestaurantMenu({ theme }: { theme: RestaurantThemeConfig }) {
             ))}
           </div>
 
+          {/* Search & Filter Bar */}
+          <div style={{
+            maxWidth: '720px',
+            margin: '0 auto 3rem auto',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1rem',
+          }}>
+            <div style={{ position: 'relative' }}>
+              <input
+                type="text"
+                placeholder="Search dishes, ingredients, or pairings (e.g. Wagyu, Caviar, Truffle, Chablis)..."
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '0.85rem 1.2rem 0.85rem 2.8rem',
+                  borderRadius: '99px',
+                  border: `1.5px solid ${theme.palette.border || `${theme.palette.text}20`}`,
+                  backgroundColor: theme.palette.surface,
+                  color: theme.palette.text,
+                  fontFamily: theme.typography.body,
+                  fontSize: '0.92rem',
+                  outline: 'none',
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+                }}
+              />
+              <Search
+                size={18}
+                style={{
+                  position: 'absolute',
+                  left: '1rem',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  color: theme.palette.primary,
+                }}
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  style={{
+                    position: 'absolute',
+                    right: '1rem',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    background: 'none',
+                    border: 'none',
+                    color: theme.palette.textLight,
+                    cursor: 'pointer',
+                  }}
+                >
+                  <X size={16} />
+                </button>
+              )}
+            </div>
+
+            {/* Quick Dietary Filters */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '0.5rem',
+              flexWrap: 'wrap',
+            }}>
+              {['All', "Chef's Pick", 'Wine Pairing', 'Vegetarian', 'Signature'].map(tag => (
+                <button
+                  key={tag}
+                  onClick={() => setFilterTag(tag)}
+                  style={{
+                    padding: '0.35rem 0.9rem',
+                    borderRadius: '99px',
+                    border: filterTag === tag ? `1.5px solid ${theme.palette.primary}` : `1px solid ${theme.palette.text}18`,
+                    backgroundColor: filterTag === tag ? `${theme.palette.primary}18` : 'transparent',
+                    color: filterTag === tag ? theme.palette.primary : theme.palette.textLight,
+                    fontSize: '0.78rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    transition: 'all 0.2s',
+                  }}
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* Dish Cards Grid */}
           <div
             className="rt-dish-grid"
@@ -1124,14 +1250,18 @@ export function RestaurantMenu({ theme }: { theme: RestaurantThemeConfig }) {
               gap: '2rem',
             }}
           >
-            {theme.menu[activeTab]?.items.map((item, i) => (
+            {filteredItems.length === 0 ? (
+              <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '3rem', color: theme.palette.textLight }}>
+                No dishes matching "{searchQuery}" under this category. Clear search to view all courses.
+              </div>
+            ) : filteredItems.map((item, i) => (
               <article
                 key={i}
                 onClick={() => store.openDishModal(item)}
                 onMouseEnter={() => setHoveredItem(i)}
                 onMouseLeave={() => setHoveredItem(null)}
                 style={{
-                  backgroundColor: theme.palette.surface,
+                  backgroundColor: menuCardBg,
                   borderRadius: '18px',
                   padding: '2rem',
                   border: hoveredItem === i
@@ -1203,7 +1333,7 @@ export function RestaurantMenu({ theme }: { theme: RestaurantThemeConfig }) {
                       fontFamily: theme.typography.heading,
                       fontSize: '1.28rem',
                       fontWeight: 800,
-                      color: theme.palette.text,
+                      color: menuTextColor || theme.palette.text,
                       margin: 0,
                       flex: 1,
                       paddingRight: '1rem',
@@ -1225,7 +1355,7 @@ export function RestaurantMenu({ theme }: { theme: RestaurantThemeConfig }) {
                   <p style={{
                     fontFamily: theme.typography.body,
                     fontSize: '0.94rem',
-                    color: theme.palette.textLight,
+                    color: menuTextColor === theme.palette.text ? theme.palette.textLight : menuTextColor,
                     margin: '0 0 1rem 0',
                     lineHeight: 1.55,
                   }}>
@@ -1628,13 +1758,18 @@ export function RestaurantStory({ theme }: { theme: RestaurantThemeConfig }) {
     title: theme.content.storyTitle,
     content: theme.content.storyBody.join('\n\n'),
     image: theme.images.story,
+    style_backgroundColor: '',
+    style_textColor: '',
   });
+
+  const storyBg = overrides.style_backgroundColor || theme.palette.surface;
+  const storyTextColor = overrides.style_textColor || theme.palette.text;
 
   return (
     <EditableSection id="img-text" elementType="img-text" name="Our Story" defaultProps={overrides}>
       <section id="story" style={{
-      backgroundColor: theme.palette.surface,
-      color: theme.palette.text,
+      backgroundColor: storyBg,
+      color: storyTextColor,
       padding: '7rem 5%',
       borderTop: `1px solid ${theme.palette.border || `${theme.palette.text}10`}`,
       scrollMarginTop: '80px',
@@ -1725,9 +1860,9 @@ export function RestaurantStory({ theme }: { theme: RestaurantThemeConfig }) {
             fontWeight: 900,
             lineHeight: 1.1,
             marginBottom: '1.75rem',
-            color: theme.palette.text,
+            color: storyTextColor || theme.palette.text,
           }}>
-            {theme.content.storyTitle}
+            {overrides.title || theme.content.storyTitle}
           </h2>
 
           {theme.content.storyBody.map((para, i) => (
@@ -1737,7 +1872,7 @@ export function RestaurantStory({ theme }: { theme: RestaurantThemeConfig }) {
                 fontFamily: theme.typography.body,
                 fontSize: '1.08rem',
                 lineHeight: 1.8,
-                color: theme.palette.textLight,
+                color: storyTextColor === theme.palette.text ? theme.palette.textLight : storyTextColor,
                 marginBottom: '1.4rem',
               }}
             >
@@ -2713,27 +2848,34 @@ export function RestaurantFooter({ theme }: { theme: RestaurantThemeConfig }) {
             </h4>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {[
-                { label: 'Dinner & Tasting Menu', href: '#menu' },
-                { label: 'Culinary Philosophy', href: '#story' },
-                { label: 'The Degustation Journey', href: '#tasting' },
-                { label: 'Visual Gallery', href: '#gallery' },
-                { label: 'Location & Private Dining', href: '#visit' },
+                { label: 'Dinner & Tasting Menu', page: 'menu' as FineDiningPage },
+                { label: 'Culinary Philosophy', page: 'story' as FineDiningPage },
+                { label: 'The Degustation Journey', page: 'experience' as FineDiningPage },
+                { label: 'Visual Gallery', page: 'gallery' as FineDiningPage },
+                { label: 'Location & Private Dining', page: 'visit' as FineDiningPage },
               ].map((l, i) => (
                 <li key={i}>
-                  <a
-                    href={l.href}
+                  <button
+                    onClick={() => {
+                      store.setActivePage(l.page);
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
                     style={{
+                      background: 'none',
+                      border: 'none',
+                      padding: 0,
                       color: '#94a3b8',
-                      textDecoration: 'none',
+                      cursor: 'pointer',
                       fontSize: '0.92rem',
                       fontFamily: theme.typography.body,
+                      textAlign: 'left',
                       transition: 'color 0.2s',
                     }}
                     onMouseOver={e => e.currentTarget.style.color = theme.palette.primary}
                     onMouseOut={e => e.currentTarget.style.color = '#94a3b8'}
                   >
                     {l.label}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -4315,6 +4457,1569 @@ export function GalleryLightbox({ theme }: { theme: RestaurantThemeConfig }) {
   );
 }
 
+// ─── DEDICATED MULTI-PAGE SUBVIEWS FOR FINE DINING ──────────────────────────
+
+function FineDiningBreadcrumb({ current, onHome }: { current: string; onHome: () => void }) {
+  return (
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.5rem',
+      fontSize: '0.82rem',
+      textTransform: 'uppercase',
+      letterSpacing: '0.12em',
+      color: '#94a3b8',
+      marginBottom: '1.25rem',
+    }}>
+      <button
+        onClick={onHome}
+        style={{
+          background: 'none',
+          border: 'none',
+          padding: 0,
+          color: '#94a3b8',
+          cursor: 'pointer',
+          fontSize: 'inherit',
+          textTransform: 'inherit',
+          letterSpacing: 'inherit',
+        }}
+        onMouseOver={e => e.currentTarget.style.color = '#ffffff'}
+        onMouseOut={e => e.currentTarget.style.color = '#94a3b8'}
+      >
+        Home
+      </button>
+      <span>/</span>
+      <span style={{ color: '#ffffff', fontWeight: 600 }}>{current}</span>
+    </div>
+  );
+}
+
+// 1. DEDICATED MENU PAGE VIEW
+export function FineDiningMenuView({ theme }: { theme: RestaurantThemeConfig }) {
+  const store = useRestaurantStore();
+  const [activeTab, setActiveTab] = useState<number>(-1); // -1 = All
+  const [searchQuery, setSearchQuery] = useState('');
+  const [dietaryFilter, setDietaryFilter] = useState<string>('all');
+  const [addedItem, setAddedItem] = useState<string | null>(null);
+
+  const allCategories = theme.menu;
+  const filteredDishes = allCategories.flatMap(cat => cat.items).filter(item => {
+    if (activeTab >= 0 && theme.menu[activeTab]) {
+      const isInCategory = theme.menu[activeTab].items.some(i => i.name === item.name);
+      if (!isInCategory) return false;
+    }
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      const matchName = item.name.toLowerCase().includes(q);
+      const matchDesc = item.desc.toLowerCase().includes(q);
+      const matchWine = item.winePairing?.toLowerCase().includes(q);
+      if (!matchName && !matchDesc && !matchWine) return false;
+    }
+    if (dietaryFilter === 'pairing' && !item.winePairing) return false;
+    if (dietaryFilter === 'special' && (!item.tags || item.tags.length === 0)) return false;
+    return true;
+  });
+
+  const handleAddItem = (item: MenuItem, e: React.MouseEvent) => {
+    e.stopPropagation();
+    store.addToCart(item);
+    setAddedItem(item.name);
+    setTimeout(() => setAddedItem(null), 1800);
+  };
+
+  return (
+    <div style={{ backgroundColor: theme.palette.background, minHeight: '100vh', color: theme.palette.text, paddingBottom: '6rem' }}>
+      {/* Page Header Banner */}
+      <section style={{
+        backgroundColor: theme.palette.secondary,
+        color: '#ffffff',
+        padding: '5rem 5% 4rem',
+        borderBottom: `1px solid ${theme.palette.border || `${theme.palette.text}15`}`,
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
+        <div style={{ maxWidth: '1240px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
+          <FineDiningBreadcrumb current="Dinner & Degustation Menus" onHome={() => store.setActivePage('home')} />
+          <div style={{
+            fontSize: '0.85rem',
+            fontFamily: theme.typography.body,
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '0.2em',
+            color: theme.palette.primary,
+            marginBottom: '0.85rem',
+          }}>
+            {theme.category.replace('-', ' ')} · Repertoire
+          </div>
+          <h1 style={{
+            fontFamily: theme.typography.heading,
+            fontSize: 'clamp(2.6rem, 5.5vw, 4.4rem)',
+            fontWeight: 900,
+            lineHeight: 1.05,
+            margin: '0 0 1.25rem 0',
+          }}>
+            Tasting & À La Carte Menus
+          </h1>
+          <p style={{
+            fontFamily: theme.typography.body,
+            fontSize: '1.15rem',
+            color: 'rgba(255,255,255,0.85)',
+            maxWidth: '680px',
+            lineHeight: 1.65,
+            margin: '0 0 2.5rem 0',
+          }}>
+            Every cut and harvest is prepared over live white oak fires and aged in-house. Sourced daily from independent smallholders, day-boat divers, and biodynamic orchards.
+          </p>
+
+          {/* Search & Dietary Controls */}
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '1rem',
+            alignItems: 'center',
+            backgroundColor: 'rgba(255,255,255,0.06)',
+            padding: '0.85rem 1.25rem',
+            borderRadius: '14px',
+            border: '1px solid rgba(255,255,255,0.12)',
+            maxWidth: '820px',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flex: '1 1 240px' }}>
+              <Search size={18} color={theme.palette.primary} />
+              <input
+                type="text"
+                placeholder="Search cuts, seafood, or wine pairings…"
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: '#ffffff',
+                  fontSize: '0.95rem',
+                  fontFamily: theme.typography.body,
+                  outline: 'none',
+                  width: '100%',
+                }}
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', padding: 0 }}
+                >
+                  <X size={16} />
+                </button>
+              )}
+            </div>
+
+            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+              {[
+                { id: 'all', label: 'All Items' },
+                { id: 'pairing', label: '🍷 Sommelier Pairing' },
+                { id: 'special', label: '★ Signature Cuts' },
+              ].map(pill => (
+                <button
+                  key={pill.id}
+                  onClick={() => setDietaryFilter(pill.id)}
+                  style={{
+                    backgroundColor: dietaryFilter === pill.id ? theme.palette.primary : 'rgba(255,255,255,0.08)',
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: '99px',
+                    padding: '0.45rem 1rem',
+                    fontSize: '0.82rem',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    transition: 'all 0.2s',
+                  }}
+                >
+                  {pill.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Main Menu Grid Area */}
+      <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '3.5rem 5% 0' }}>
+        {/* Course Tabs */}
+        <div style={{
+          display: 'flex',
+          gap: '0.65rem',
+          overflowX: 'auto',
+          paddingBottom: '0.75rem',
+          marginBottom: '3rem',
+          scrollbarWidth: 'none',
+        }}>
+          <button
+            onClick={() => setActiveTab(-1)}
+            style={{
+              padding: '0.65rem 1.6rem',
+              borderRadius: '99px',
+              border: activeTab === -1 ? 'none' : `1.5px solid ${theme.palette.text}22`,
+              backgroundColor: activeTab === -1 ? theme.palette.primary : 'transparent',
+              color: activeTab === -1 ? '#ffffff' : theme.palette.textLight,
+              fontFamily: theme.typography.body,
+              fontWeight: 700,
+              fontSize: '0.88rem',
+              cursor: 'pointer',
+              whiteSpace: 'nowrap',
+              transition: 'all 0.2s',
+            }}
+          >
+            All Courses ({theme.menu.reduce((sum, c) => sum + c.items.length, 0)})
+          </button>
+          {theme.menu.map((cat, i) => (
+            <button
+              key={cat.tab}
+              onClick={() => setActiveTab(i)}
+              style={{
+                padding: '0.65rem 1.6rem',
+                borderRadius: '99px',
+                border: activeTab === i ? 'none' : `1.5px solid ${theme.palette.text}22`,
+                backgroundColor: activeTab === i ? theme.palette.primary : 'transparent',
+                color: activeTab === i ? '#ffffff' : theme.palette.textLight,
+                fontFamily: theme.typography.body,
+                fontWeight: 700,
+                fontSize: '0.88rem',
+                cursor: 'pointer',
+                whiteSpace: 'nowrap',
+                transition: 'all 0.2s',
+              }}
+            >
+              {cat.tab} ({cat.items.length})
+            </button>
+          ))}
+        </div>
+
+        {/* Empty State */}
+        {filteredDishes.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '5rem 2rem', opacity: 0.7 }}>
+            <p style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>No dishes matching your current selection.</p>
+            <button
+              onClick={() => { setSearchQuery(''); setActiveTab(-1); setDietaryFilter('all'); }}
+              style={{
+                backgroundColor: theme.palette.primary,
+                color: '#ffffff',
+                border: 'none',
+                borderRadius: '8px',
+                padding: '0.75rem 1.5rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+              }}
+            >
+              Reset Filters
+            </button>
+          </div>
+        ) : (
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(340px, 100%), 1fr))',
+            gap: '2.5rem',
+          }}>
+            {filteredDishes.map((item, idx) => (
+              <article
+                key={item.name + idx}
+                onClick={() => store.openDishModal(item)}
+                style={{
+                  backgroundColor: theme.palette.surface,
+                  borderRadius: '18px',
+                  padding: '2rem',
+                  border: `1.5px solid ${theme.palette.border || `${theme.palette.text}12`}`,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  transition: 'transform 0.25s, box-shadow 0.25s, border-color 0.25s',
+                  position: 'relative',
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.transform = 'translateY(-6px)';
+                  e.currentTarget.style.borderColor = theme.palette.primary;
+                  e.currentTarget.style.boxShadow = `0 16px 36px ${theme.palette.primary}18`;
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.transform = 'none';
+                  e.currentTarget.style.borderColor = theme.palette.border || `${theme.palette.text}12`;
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                <div>
+                  {item.image && (
+                    <div style={{
+                      height: '220px',
+                      marginBottom: '1.5rem',
+                      borderRadius: '12px',
+                      overflow: 'hidden',
+                      position: 'relative',
+                    }}>
+                      <img
+                        src={item.image}
+                        alt={item.imageAlt || item.name}
+                        loading="lazy"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      />
+                      {item.tags && item.tags.length > 0 && (
+                        <div style={{
+                          position: 'absolute',
+                          top: '12px',
+                          left: '12px',
+                          display: 'flex',
+                          gap: '0.4rem',
+                          flexWrap: 'wrap',
+                        }}>
+                          {item.tags.map(t => (
+                            <span
+                              key={t}
+                              style={{
+                                backgroundColor: theme.palette.secondary,
+                                color: theme.palette.primary,
+                                fontSize: '0.72rem',
+                                fontWeight: 800,
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.08em',
+                                padding: '0.25rem 0.65rem',
+                                borderRadius: '6px',
+                                backdropFilter: 'blur(8px)',
+                              }}
+                            >
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.75rem' }}>
+                    <h3 style={{
+                      fontFamily: theme.typography.heading,
+                      fontSize: '1.45rem',
+                      fontWeight: 800,
+                      margin: 0,
+                      color: theme.palette.text,
+                    }}>
+                      {item.name}
+                    </h3>
+                    <span style={{
+                      fontSize: '1.25rem',
+                      fontFamily: theme.typography.body,
+                      fontWeight: 800,
+                      color: theme.palette.primary,
+                      marginLeft: '0.75rem',
+                    }}>
+                      {item.price.startsWith(theme.currencySymbol || '₹') ? item.price : `${theme.currencySymbol || '₹'}${item.price.replace(/[^0-9.]/g, '')}`}
+                    </span>
+                  </div>
+
+                  <p style={{
+                    fontFamily: theme.typography.body,
+                    fontSize: '0.94rem',
+                    color: theme.palette.textLight,
+                    lineHeight: 1.6,
+                    margin: '0 0 1.25rem 0',
+                  }}>
+                    {item.desc}
+                  </p>
+
+                  {item.winePairing && (
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.4rem',
+                      fontSize: '0.82rem',
+                      color: theme.palette.primary,
+                      backgroundColor: `${theme.palette.primary}12`,
+                      padding: '0.4rem 0.75rem',
+                      borderRadius: '8px',
+                      marginBottom: '1.5rem',
+                    }}>
+                      <Wine size={14} />
+                      <span style={{ fontWeight: 600 }}>Pairing: {item.winePairing}</span>
+                    </div>
+                  )}
+                </div>
+
+                <div style={{ display: 'flex', gap: '0.75rem', marginTop: 'auto', paddingTop: '1rem', borderTop: `1px solid ${theme.palette.text}10` }}>
+                  <button
+                    onClick={(e) => handleAddItem(item, e)}
+                    style={{
+                      flex: 1,
+                      backgroundColor: addedItem === item.name ? '#15803d' : theme.palette.primary,
+                      color: '#ffffff',
+                      border: 'none',
+                      borderRadius: '8px',
+                      padding: '0.75rem',
+                      fontSize: '0.85rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '0.4rem',
+                      transition: 'background-color 0.2s',
+                    }}
+                  >
+                    {addedItem === item.name ? (
+                      <><Check size={16} /> Selected</>
+                    ) : (
+                      <><ShoppingBag size={16} /> Add to Selection</>
+                    )}
+                  </button>
+                  <button
+                    onClick={() => store.openDishModal(item)}
+                    style={{
+                      backgroundColor: 'transparent',
+                      color: theme.palette.text,
+                      border: `1.5px solid ${theme.palette.border || `${theme.palette.text}22`}`,
+                      borderRadius: '8px',
+                      padding: '0.75rem 1rem',
+                      fontSize: '0.85rem',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    Notes
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+
+        {/* Sommelier Degustation Wine Pairings Banner */}
+        <div style={{
+          marginTop: '5rem',
+          backgroundColor: theme.palette.secondary,
+          color: '#ffffff',
+          borderRadius: '24px',
+          padding: '3.5rem',
+          border: `1px solid ${theme.palette.primary}44`,
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '2.5rem',
+          alignItems: 'center',
+        }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: theme.palette.primary, fontSize: '0.85rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '0.75rem' }}>
+              <Wine size={16} /> Sommelier Wine Reserve
+            </div>
+            <h2 style={{ fontFamily: theme.typography.heading, fontSize: '2.4rem', fontWeight: 900, margin: '0 0 1rem 0' }}>
+              Curated Cellar Pairings
+            </h2>
+            <p style={{ color: 'rgba(255,255,255,0.85)', lineHeight: 1.65, margin: '0 0 1.5rem 0' }}>
+              Pair your evening menu with allocations from our underground cellar. Featuring single-vineyard Burgundies, library Barolos, and rare peated Islay single malts poured tableside.
+            </p>
+            <button
+              onClick={() => store.openReservation()}
+              style={{
+                backgroundColor: theme.palette.primary,
+                color: '#ffffff',
+                border: 'none',
+                borderRadius: '8px',
+                padding: '0.85rem 1.8rem',
+                fontFamily: theme.typography.body,
+                fontWeight: 700,
+                fontSize: '0.92rem',
+                cursor: 'pointer',
+                boxShadow: `0 4px 18px ${theme.palette.primary}55`,
+              }}
+            >
+              Reserve Table With Pairings
+            </button>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ backgroundColor: 'rgba(255,255,255,0.06)', padding: '1.25rem 1.5rem', borderRadius: '14px', border: '1px solid rgba(255,255,255,0.1)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, color: theme.palette.primary, marginBottom: '0.3rem' }}>
+                <span>Prestige European Pairing</span>
+                <span>+{theme.currencySymbol || '₹'}4,500 / guest</span>
+              </div>
+              <p style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.75)', margin: 0 }}>
+                Five glasses selected across Champagne, coastal Chablis Premier Cru, and aged Piedmont Nebbiolo.
+              </p>
+            </div>
+            <div style={{ backgroundColor: 'rgba(255,255,255,0.06)', padding: '1.25rem 1.5rem', borderRadius: '14px', border: '1px solid rgba(255,255,255,0.1)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, color: theme.palette.primary, marginBottom: '0.3rem' }}>
+                <span>Grand Cru & Rare Cask Reserve</span>
+                <span>+{theme.currencySymbol || '₹'}8,500 / guest</span>
+              </div>
+              <p style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.75)', margin: 0 }}>
+                Seven library selections including First-Growth Bordeaux vintages and 21-year Japanese single malts.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 2. DEDICATED PHILOSOPHY & STORY PAGE VIEW
+export function FineDiningStoryView({ theme }: { theme: RestaurantThemeConfig }) {
+  const store = useRestaurantStore();
+
+  return (
+    <div style={{ backgroundColor: theme.palette.background, minHeight: '100vh', color: theme.palette.text, paddingBottom: '6rem' }}>
+      <section style={{
+        backgroundColor: theme.palette.secondary,
+        color: '#ffffff',
+        padding: '5rem 5% 4rem',
+        borderBottom: `1px solid ${theme.palette.border || `${theme.palette.text}15`}`,
+      }}>
+        <div style={{ maxWidth: '1240px', margin: '0 auto' }}>
+          <FineDiningBreadcrumb current="Culinary Philosophy & Heritage" onHome={() => store.setActivePage('home')} />
+          <div style={{
+            fontSize: '0.85rem',
+            fontFamily: theme.typography.body,
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '0.2em',
+            color: theme.palette.primary,
+            marginBottom: '0.85rem',
+          }}>
+            Our Heritage
+          </div>
+          <h1 style={{
+            fontFamily: theme.typography.heading,
+            fontSize: 'clamp(2.6rem, 5.5vw, 4.4rem)',
+            fontWeight: 900,
+            lineHeight: 1.05,
+            margin: '0 0 1.25rem 0',
+          }}>
+            The Ritual of Hearth, Time & Restraint
+          </h1>
+          <p style={{
+            fontFamily: theme.typography.body,
+            fontSize: '1.15rem',
+            color: 'rgba(255,255,255,0.85)',
+            maxWidth: '680px',
+            lineHeight: 1.65,
+            margin: 0,
+          }}>
+            {theme.tagline}
+          </p>
+        </div>
+      </section>
+
+      {/* Narrative & Craft Pillars */}
+      <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '4.5rem 5% 0' }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gap: '3.5rem',
+          alignItems: 'center',
+          marginBottom: '5rem',
+        }}>
+          <div>
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              color: theme.palette.primary,
+              fontSize: '0.82rem',
+              fontWeight: 800,
+              textTransform: 'uppercase',
+              letterSpacing: '0.15em',
+              marginBottom: '0.75rem',
+            }}>
+              <Sparkles size={16} /> Culinary Conviction
+            </div>
+            <h2 style={{
+              fontFamily: theme.typography.heading,
+              fontSize: 'clamp(2rem, 3.8vw, 3.2rem)',
+              fontWeight: 900,
+              lineHeight: 1.15,
+              margin: '0 0 1.5rem 0',
+              color: theme.palette.text,
+            }}>
+              {theme.content.storyTitle}
+            </h2>
+            {theme.content.storyBody.map((paragraph, i) => (
+              <p
+                key={i}
+                style={{
+                  fontFamily: theme.typography.body,
+                  fontSize: '1.05rem',
+                  lineHeight: 1.75,
+                  color: theme.palette.textLight,
+                  marginBottom: '1.25rem',
+                }}
+              >
+                {paragraph}
+              </p>
+            ))}
+            <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem' }}>
+              <button
+                onClick={() => store.setActivePage('menu')}
+                style={{
+                  backgroundColor: theme.palette.primary,
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '8px',
+                  padding: '0.85rem 1.8rem',
+                  fontWeight: 700,
+                  fontSize: '0.92rem',
+                  cursor: 'pointer',
+                }}
+              >
+                View The Seasonal Menu →
+              </button>
+            </div>
+          </div>
+          <div style={{ borderRadius: '20px', overflow: 'hidden', boxShadow: '0 20px 50px rgba(0,0,0,0.15)' }}>
+            <img
+              src={theme.images.story}
+              alt={theme.images.storyAlt}
+              style={{ width: '100%', height: '520px', objectFit: 'cover', display: 'block' }}
+            />
+          </div>
+        </div>
+
+        {/* The 3 Craft Pillars */}
+        <h3 style={{
+          fontFamily: theme.typography.heading,
+          fontSize: '2rem',
+          fontWeight: 900,
+          textAlign: 'center',
+          marginBottom: '2.5rem',
+        }}>
+          Pillars of Our Discipline
+        </h3>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '2rem',
+          marginBottom: '5rem',
+        }}>
+          {[
+            {
+              icon: '🔥',
+              title: 'Live White Oak Hearth',
+              desc: 'We cook entirely without gas or electricity on the hearth. Argentine parrillagrills fueled by white oak and binchotan coals at 900°F sear in natural succulence.',
+            },
+            {
+              icon: '⏳',
+              title: 'In-House 45-Day Aging',
+              desc: 'Our dedicated Himalayan pink salt maturation vault controls air velocity and humidity to unlock concentrated hazelnut aromas and tender marbling.',
+            },
+            {
+              icon: '🍷',
+              title: 'Curated 1,400-Bottle Cellar',
+              desc: 'From vintage Barolos and Premier Cru Champagnes to single-barrel Islay malts, our Sommelier pairs every course with thoughtful terroir.',
+            },
+          ].map((pillar, i) => (
+            <div
+              key={i}
+              style={{
+                backgroundColor: theme.palette.surface,
+                borderRadius: '16px',
+                padding: '2.25rem',
+                border: `1px solid ${theme.palette.border || `${theme.palette.text}15`}`,
+              }}
+            >
+              <span style={{ fontSize: '2.5rem', display: 'block', marginBottom: '1rem' }}>{pillar.icon}</span>
+              <h4 style={{ fontFamily: theme.typography.heading, fontSize: '1.35rem', fontWeight: 800, margin: '0 0 0.75rem 0' }}>
+                {pillar.title}
+              </h4>
+              <p style={{ color: theme.palette.textLight, lineHeight: 1.6, fontSize: '0.95rem', margin: 0 }}>
+                {pillar.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* Accolades Strip */}
+        <div style={{
+          backgroundColor: theme.palette.secondary,
+          color: '#ffffff',
+          borderRadius: '20px',
+          padding: '3rem 2.5rem',
+          textAlign: 'center',
+        }}>
+          <Award size={28} color={theme.palette.primary} style={{ marginBottom: '1rem' }} />
+          <h3 style={{ fontFamily: theme.typography.heading, fontSize: '2rem', fontWeight: 800, margin: '0 0 1rem 0' }}>
+            Recognized by Gastronomic Critics
+          </h3>
+          <p style={{ maxWidth: '620px', margin: '0 auto 2rem auto', color: 'rgba(255,255,255,0.85)', lineHeight: 1.6 }}>
+            "A masterclass in restraint and deep flavor. One of the finest destination dining rooms operating today."
+          </p>
+          <button
+            onClick={() => store.openReservation()}
+            style={{
+              backgroundColor: theme.palette.primary,
+              color: '#ffffff',
+              border: 'none',
+              borderRadius: '8px',
+              padding: '0.85rem 2rem',
+              fontWeight: 700,
+              cursor: 'pointer',
+            }}
+          >
+            Reserve Your Evening
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 3. DEDICATED EXPERIENCE & DEGUSTATION PAGE VIEW
+export function FineDiningExperienceView({ theme }: { theme: RestaurantThemeConfig }) {
+  const store = useRestaurantStore();
+  const [inquiryName, setInquiryName] = useState('');
+  const [inquiryEmail, setInquiryEmail] = useState('');
+  const [inquiryGuests, setInquiryGuests] = useState('12');
+  const [inquirySubmitted, setInquirySubmitted] = useState(false);
+
+  const courses = theme.tastingCourses && theme.tastingCourses.length > 0 ? theme.tastingCourses : [
+    {
+      courseNumber: 'Course I',
+      title: "L'Amuse-Bouche",
+      dishName: 'Smoked Scallop Tartlet',
+      description: 'Hand-dived scallop kissed with white oak smoke, sturgeon caviar, and Meyer lemon sabayon.',
+      winePairing: '2016 Grand Cuvée Champagne',
+      wineOrigin: 'Reims, France',
+    },
+    {
+      courseNumber: 'Course II',
+      title: 'La Mer',
+      dishName: 'Charred Brittany Turbot',
+      description: 'Line-caught turbot cooked over binchotan coals with coastal sea greens and saffron fumet.',
+      winePairing: '2020 Chablis Premier Cru',
+      wineOrigin: 'Burgundy, France',
+    },
+    {
+      courseNumber: 'Course III',
+      title: 'La Terre',
+      dishName: 'Winter Black Truffle Agnolotti',
+      description: 'Hand-rolled pasta filled with 36-month Parmigiano Reggiano and fresh Périgord truffle butter.',
+      winePairing: '2018 Barolo Cannubi',
+      wineOrigin: 'Piedmont, Italy',
+    },
+    {
+      courseNumber: 'Course IV',
+      title: 'Le Prime Hearth',
+      dishName: '45-Day Dry-Aged Wagyu Ribeye',
+      description: 'A5 Miyazaki Wagyu charred over live white oak with roasted marrow jus and smoked sea salt.',
+      winePairing: '2015 Pauillac Grand Cru Classé',
+      wineOrigin: 'Bordeaux, France',
+    },
+    {
+      courseNumber: 'Course V',
+      title: 'Le Fromage & Douceur',
+      dishName: 'Smoked Dark Chocolate Ganache',
+      description: 'Valrhona 72% dark chocolate infused with peated whisky smoke and candied blood orange.',
+      winePairing: 'Rare 25-Year Islay Single Malt',
+      wineOrigin: 'Islay, Scotland',
+    },
+  ];
+
+  const handleInquirySubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setInquirySubmitted(true);
+  };
+
+  return (
+    <div style={{ backgroundColor: theme.palette.background, minHeight: '100vh', color: theme.palette.text, paddingBottom: '6rem' }}>
+      <section style={{
+        backgroundColor: theme.palette.secondary,
+        color: '#ffffff',
+        padding: '5rem 5% 4rem',
+        borderBottom: `1px solid ${theme.palette.border || `${theme.palette.text}15`}`,
+      }}>
+        <div style={{ maxWidth: '1240px', margin: '0 auto' }}>
+          <FineDiningBreadcrumb current="The Tasting Experience & Private Dining" onHome={() => store.setActivePage('home')} />
+          <div style={{
+            fontSize: '0.85rem',
+            fontFamily: theme.typography.body,
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '0.2em',
+            color: theme.palette.primary,
+            marginBottom: '0.85rem',
+          }}>
+            Chef's Grand Degustation
+          </div>
+          <h1 style={{
+            fontFamily: theme.typography.heading,
+            fontSize: 'clamp(2.6rem, 5.5vw, 4.4rem)',
+            fontWeight: 900,
+            lineHeight: 1.05,
+            margin: '0 0 1.25rem 0',
+          }}>
+            The Evening Tasting Journey
+          </h1>
+          <p style={{
+            fontFamily: theme.typography.body,
+            fontSize: '1.15rem',
+            color: 'rgba(255,255,255,0.85)',
+            maxWidth: '680px',
+            lineHeight: 1.65,
+            margin: 0,
+          }}>
+            An intentional progression of flavor, texture, temperature, and emotion. Accompanied by our Head Sommelier's cellar pairings.
+          </p>
+        </div>
+      </section>
+
+      {/* Courses Walkthrough */}
+      <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '4.5rem 5% 0' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', marginBottom: '5rem' }}>
+          {courses.map((course, idx) => (
+            <div
+              key={idx}
+              style={{
+                backgroundColor: theme.palette.surface,
+                borderRadius: '18px',
+                padding: '2.5rem',
+                border: `1px solid ${theme.palette.border || `${theme.palette.text}15`}`,
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+                gap: '2rem',
+                alignItems: 'center',
+              }}
+            >
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+                  <span style={{
+                    backgroundColor: theme.palette.primary,
+                    color: '#ffffff',
+                    fontWeight: 800,
+                    fontSize: '0.75rem',
+                    padding: '0.2rem 0.6rem',
+                    borderRadius: '6px',
+                    letterSpacing: '0.05em',
+                  }}>
+                    {course.courseNumber}
+                  </span>
+                  <span style={{ fontSize: '0.88rem', color: theme.palette.textLight, fontWeight: 600 }}>
+                    {course.title}
+                  </span>
+                </div>
+                <h3 style={{ fontFamily: theme.typography.heading, fontSize: '1.8rem', fontWeight: 900, margin: '0 0 0.85rem 0' }}>
+                  {course.dishName}
+                </h3>
+                <p style={{ color: theme.palette.textLight, lineHeight: 1.65, fontSize: '1rem', margin: '0 0 1.25rem 0' }}>
+                  {course.description}
+                </p>
+                <div style={{
+                  backgroundColor: `${theme.palette.primary}12`,
+                  padding: '0.65rem 1rem',
+                  borderRadius: '10px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.65rem',
+                  fontSize: '0.88rem',
+                  color: theme.palette.primary,
+                  fontWeight: 600,
+                }}>
+                  <Wine size={16} />
+                  <span>Pairing: {course.winePairing} ({course.wineOrigin})</span>
+                </div>
+              </div>
+              <div style={{ textAlign: 'right' }}>
+                <button
+                  onClick={() => {
+                    store.addToCart({
+                      name: `${course.courseNumber}: ${course.dishName}`,
+                      price: '₹3,500',
+                      desc: `${course.description} | Wine: ${course.winePairing}`,
+                    });
+                  }}
+                  style={{
+                    backgroundColor: theme.palette.primary,
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: '8px',
+                    padding: '0.85rem 1.6rem',
+                    fontWeight: 700,
+                    fontSize: '0.88rem',
+                    cursor: 'pointer',
+                  }}
+                >
+                  Add Course to Tasting List
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Private Dining Salon Hire Inquiry */}
+        <div style={{
+          backgroundColor: theme.palette.secondary,
+          color: '#ffffff',
+          borderRadius: '24px',
+          padding: '3.5rem',
+          border: `1.5px solid ${theme.palette.primary}55`,
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gap: '3rem',
+          alignItems: 'center',
+        }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: theme.palette.primary, fontSize: '0.85rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '0.75rem' }}>
+              <Users size={16} /> Exclusive Hire
+            </div>
+            <h2 style={{ fontFamily: theme.typography.heading, fontSize: '2.4rem', fontWeight: 900, margin: '0 0 1rem 0' }}>
+              The Private Salon & Wine Vault
+            </h2>
+            <p style={{ color: 'rgba(255,255,255,0.85)', lineHeight: 1.65, margin: '0 0 1.5rem 0' }}>
+              Host up to 24 guests in our secluded private dining salon with a dedicated sommelier team, bespoke custom menus designed alongside our Executive Chef, and private terrace access.
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.9rem', color: 'rgba(255,255,255,0.75)' }}>
+              <div>✓ Dedicated Sommelier & Kitchen Brigade</div>
+              <div>✓ Tailored 7 or 9-course Tasting Menus</div>
+              <div>✓ AV equipped for private presentations</div>
+            </div>
+          </div>
+
+          <div style={{ backgroundColor: 'rgba(255,255,255,0.06)', padding: '2rem', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.12)' }}>
+            {inquirySubmitted ? (
+              <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
+                <CheckCircle size={36} color={theme.palette.primary} style={{ marginBottom: '1rem' }} />
+                <h4 style={{ fontFamily: theme.typography.heading, fontSize: '1.4rem', margin: '0 0 0.5rem 0' }}>Inquiry Received</h4>
+                <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.9rem' }}>Our Private Dining Director will contact you within 24 hours.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleInquirySubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <h4 style={{ fontFamily: theme.typography.heading, fontSize: '1.25rem', margin: '0 0 0.5rem 0' }}>Private Event Inquiry</h4>
+                <div>
+                  <label style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.7)', display: 'block', marginBottom: '0.3rem' }}>Your Name *</label>
+                  <input
+                    type="text"
+                    required
+                    value={inquiryName}
+                    onChange={e => setInquiryName(e.target.value)}
+                    style={{ width: '100%', padding: '0.65rem 0.85rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.2)', backgroundColor: 'rgba(0,0,0,0.3)', color: '#fff', boxSizing: 'border-box' }}
+                  />
+                </div>
+                <div>
+                  <label style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.7)', display: 'block', marginBottom: '0.3rem' }}>Email Address *</label>
+                  <input
+                    type="email"
+                    required
+                    value={inquiryEmail}
+                    onChange={e => setInquiryEmail(e.target.value)}
+                    style={{ width: '100%', padding: '0.65rem 0.85rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.2)', backgroundColor: 'rgba(0,0,0,0.3)', color: '#fff', boxSizing: 'border-box' }}
+                  />
+                </div>
+                <div>
+                  <label style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.7)', display: 'block', marginBottom: '0.3rem' }}>Estimated Guests</label>
+                  <select
+                    value={inquiryGuests}
+                    onChange={e => setInquiryGuests(e.target.value)}
+                    style={{ width: '100%', padding: '0.65rem 0.85rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.2)', backgroundColor: '#181716', color: '#fff', boxSizing: 'border-box' }}
+                  >
+                    <option value="6">6 to 10 Guests (Chef's Counter)</option>
+                    <option value="12">12 to 18 Guests (Private Salon)</option>
+                    <option value="24">20 to 24 Guests (Full Private Vault)</option>
+                  </select>
+                </div>
+                <button
+                  type="submit"
+                  style={{
+                    backgroundColor: theme.palette.primary,
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: '8px',
+                    padding: '0.85rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    marginTop: '0.5rem',
+                  }}
+                >
+                  Send Private Event Inquiry
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 4. DEDICATED GALLERY PAGE VIEW
+export function FineDiningGalleryView({ theme }: { theme: RestaurantThemeConfig }) {
+  const store = useRestaurantStore();
+
+  return (
+    <div style={{ backgroundColor: theme.palette.background, minHeight: '100vh', color: theme.palette.text, paddingBottom: '6rem' }}>
+      <section style={{
+        backgroundColor: theme.palette.secondary,
+        color: '#ffffff',
+        padding: '5rem 5% 4rem',
+        borderBottom: `1px solid ${theme.palette.border || `${theme.palette.text}15`}`,
+      }}>
+        <div style={{ maxWidth: '1240px', margin: '0 auto' }}>
+          <FineDiningBreadcrumb current="Atmosphere & Culinary Gallery" onHome={() => store.setActivePage('home')} />
+          <div style={{
+            fontSize: '0.85rem',
+            fontFamily: theme.typography.body,
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '0.2em',
+            color: theme.palette.primary,
+            marginBottom: '0.85rem',
+          }}>
+            Visual Repertoire
+          </div>
+          <h1 style={{
+            fontFamily: theme.typography.heading,
+            fontSize: 'clamp(2.6rem, 5.5vw, 4.4rem)',
+            fontWeight: 900,
+            lineHeight: 1.05,
+            margin: '0 0 1.25rem 0',
+          }}>
+            Atmosphere, Cellar & Culinary Craft
+          </h1>
+          <p style={{
+            fontFamily: theme.typography.body,
+            fontSize: '1.15rem',
+            color: 'rgba(255,255,255,0.85)',
+            maxWidth: '680px',
+            lineHeight: 1.65,
+            margin: 0,
+          }}>
+            A visual glimpse into our candlelit dining rooms, live hardwood hearths, and meticulously plated creations.
+          </p>
+        </div>
+      </section>
+
+      {/* Gallery Grid */}
+      <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '4.5rem 5% 0' }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(min(340px, 100%), 1fr))',
+          gap: '2rem',
+          marginBottom: '5rem',
+        }}>
+          {theme.images.gallery.map((imgItem, i) => (
+            <div
+              key={i}
+              onClick={() => store.openLightbox(i)}
+              style={{
+                borderRadius: '16px',
+                overflow: 'hidden',
+                backgroundColor: theme.palette.surface,
+                border: `1px solid ${theme.palette.border || `${theme.palette.text}15`}`,
+                cursor: 'pointer',
+                transition: 'transform 0.3s, box-shadow 0.3s',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.transform = 'translateY(-6px)';
+                e.currentTarget.style.boxShadow = `0 16px 36px ${theme.palette.primary}22`;
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.transform = 'none';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              <div style={{ height: '280px', overflow: 'hidden' }}>
+                <img
+                  src={imgItem.src}
+                  alt={imgItem.alt}
+                  loading="lazy"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                />
+              </div>
+              <div style={{ padding: '1.25rem 1.5rem' }}>
+                <p style={{ fontFamily: theme.typography.body, fontSize: '0.92rem', color: theme.palette.text, margin: 0, fontWeight: 600 }}>
+                  {imgItem.alt}
+                </p>
+                <span style={{ fontSize: '0.8rem', color: theme.palette.primary, marginTop: '0.25rem', display: 'block' }}>
+                  Click to Expand Photo ↗
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div style={{ textAlign: 'center' }}>
+          <button
+            onClick={() => store.openReservation()}
+            style={{
+              backgroundColor: theme.palette.primary,
+              color: '#ffffff',
+              border: 'none',
+              borderRadius: '8px',
+              padding: '1rem 2.5rem',
+              fontWeight: 800,
+              fontSize: '1rem',
+              cursor: 'pointer',
+            }}
+          >
+            Experience It In Person · Book a Table
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 5. DEDICATED VISIT, HOURS & RESERVATIONS PAGE VIEW
+export function FineDiningVisitView({ theme }: { theme: RestaurantThemeConfig }) {
+  const store = useRestaurantStore();
+  const [copied, setCopied] = useState(false);
+  const [guests, setGuests] = useState(2);
+  const [date, setDate] = useState(() => {
+    const d = new Date();
+    d.setDate(d.getDate() + 1);
+    return d.toISOString().split('T')[0];
+  });
+  const [time, setTime] = useState('7:30 PM');
+  const [seating, setSeating] = useState('Main Dining Room');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [requests, setRequests] = useState('');
+
+  const handleCopyAddress = () => {
+    navigator.clipboard?.writeText(theme.content.address);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleBook = (e: React.FormEvent) => {
+    e.preventDefault();
+    const refCode = `RES-${Math.floor(100000 + Math.random() * 900000)}`;
+    store.setBookingConfirmed({
+      date,
+      time,
+      guests,
+      seatingArea: seating,
+      occasion: 'Dinner',
+      specialRequests: requests,
+      guestName: name,
+      guestEmail: email,
+      guestPhone: phone,
+      referenceCode: refCode,
+    });
+  };
+
+  return (
+    <div style={{ backgroundColor: theme.palette.background, minHeight: '100vh', color: theme.palette.text, paddingBottom: '6rem' }}>
+      <section style={{
+        backgroundColor: theme.palette.secondary,
+        color: '#ffffff',
+        padding: '5rem 5% 4rem',
+        borderBottom: `1px solid ${theme.palette.border || `${theme.palette.text}15`}`,
+      }}>
+        <div style={{ maxWidth: '1240px', margin: '0 auto' }}>
+          <FineDiningBreadcrumb current="Visit, Location & Reservations" onHome={() => store.setActivePage('home')} />
+          <div style={{
+            fontSize: '0.85rem',
+            fontFamily: theme.typography.body,
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '0.2em',
+            color: theme.palette.primary,
+            marginBottom: '0.85rem',
+          }}>
+            Hospitality & Service
+          </div>
+          <h1 style={{
+            fontFamily: theme.typography.heading,
+            fontSize: 'clamp(2.6rem, 5.5vw, 4.4rem)',
+            fontWeight: 900,
+            lineHeight: 1.05,
+            margin: '0 0 1.25rem 0',
+          }}>
+            Plan Your Visit & Reserve a Table
+          </h1>
+          <p style={{
+            fontFamily: theme.typography.body,
+            fontSize: '1.15rem',
+            color: 'rgba(255,255,255,0.85)',
+            maxWidth: '680px',
+            lineHeight: 1.65,
+            margin: 0,
+          }}>
+            We welcome guests for dinner service. Advance bookings are recommended due to limited daily covers.
+          </p>
+        </div>
+      </section>
+
+      {/* Two Column Layout: Reservation Form + Practical Guidelines */}
+      <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '4.5rem 5% 0' }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+          gap: '3.5rem',
+          alignItems: 'start',
+        }}>
+          {/* Reservation Card */}
+          <div style={{
+            backgroundColor: theme.palette.surface,
+            borderRadius: '24px',
+            padding: '3rem 2.5rem',
+            border: `1.5px solid ${theme.palette.primary}44`,
+            boxShadow: '0 20px 50px rgba(0,0,0,0.1)',
+          }}>
+            {store.bookingConfirmed ? (
+              <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
+                <CheckCircle size={48} color="#22c55e" style={{ marginBottom: '1.25rem' }} />
+                <h3 style={{ fontFamily: theme.typography.heading, fontSize: '2rem', margin: '0 0 0.5rem 0' }}>
+                  Reservation Confirmed!
+                </h3>
+                <p style={{ color: theme.palette.primary, fontWeight: 700, fontSize: '1.2rem', marginBottom: '1rem' }}>
+                  Booking Reference: {store.bookingConfirmed.referenceCode}
+                </p>
+                <div style={{
+                  backgroundColor: `${theme.palette.primary}12`,
+                  padding: '1.25rem',
+                  borderRadius: '12px',
+                  textAlign: 'left',
+                  fontSize: '0.95rem',
+                  lineHeight: 1.6,
+                  marginBottom: '1.5rem',
+                }}>
+                  <div><strong>Date:</strong> {store.bookingConfirmed.date}</div>
+                  <div><strong>Time:</strong> {store.bookingConfirmed.time}</div>
+                  <div><strong>Party:</strong> {store.bookingConfirmed.guests} Guests ({store.bookingConfirmed.seatingArea})</div>
+                  <div><strong>Name:</strong> {store.bookingConfirmed.guestName}</div>
+                </div>
+                <p style={{ fontSize: '0.85rem', color: theme.palette.textLight, marginBottom: '1.5rem' }}>
+                  A confirmation SMS and calendar invite have been dispatched to your contact details.
+                </p>
+                <button
+                  onClick={() => store.setBookingConfirmed(null)}
+                  style={{
+                    backgroundColor: 'transparent',
+                    border: `1px solid ${theme.palette.primary}`,
+                    color: theme.palette.primary,
+                    borderRadius: '8px',
+                    padding: '0.65rem 1.5rem',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                  }}
+                >
+                  Make Another Booking
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleBook} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                <div style={{ marginBottom: '0.5rem' }}>
+                  <h3 style={{ fontFamily: theme.typography.heading, fontSize: '1.8rem', fontWeight: 800, margin: '0 0 0.35rem 0' }}>
+                    Reserve Your Table
+                  </h3>
+                  <span style={{ fontSize: '0.88rem', color: theme.palette.textLight }}>Select party size, date and preferred seating atmosphere.</span>
+                </div>
+
+                {/* Party Size */}
+                <div>
+                  <label style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block', marginBottom: '0.5rem' }}>
+                    Guests
+                  </label>
+                  <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                    {[1, 2, 4, 6, 8, 10].map(n => (
+                      <button
+                        key={n}
+                        type="button"
+                        onClick={() => setGuests(n)}
+                        style={{
+                          padding: '0.5rem 1rem',
+                          borderRadius: '8px',
+                          border: `1.5px solid ${guests === n ? theme.palette.primary : `${theme.palette.text}20`}`,
+                          backgroundColor: guests === n ? theme.palette.primary : 'transparent',
+                          color: guests === n ? '#ffffff' : theme.palette.text,
+                          fontWeight: 700,
+                          cursor: 'pointer',
+                        }}
+                      >
+                        {n} {n === 1 ? 'Guest' : 'Guests'}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Date & Time */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '1rem' }}>
+                  <div>
+                    <label style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block', marginBottom: '0.4rem' }}>
+                      Date
+                    </label>
+                    <input
+                      type="date"
+                      required
+                      value={date}
+                      onChange={e => setDate(e.target.value)}
+                      style={{
+                        width: '100%',
+                        padding: '0.75rem',
+                        borderRadius: '8px',
+                        border: `1px solid ${theme.palette.border || `${theme.palette.text}20`}`,
+                        backgroundColor: theme.palette.background,
+                        color: theme.palette.text,
+                        boxSizing: 'border-box',
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <label style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block', marginBottom: '0.4rem' }}>
+                      Seating Area
+                    </label>
+                    <select
+                      value={seating}
+                      onChange={e => setSeating(e.target.value)}
+                      style={{
+                        width: '100%',
+                        padding: '0.75rem',
+                        borderRadius: '8px',
+                        border: `1px solid ${theme.palette.border || `${theme.palette.text}20`}`,
+                        backgroundColor: theme.palette.background,
+                        color: theme.palette.text,
+                        boxSizing: 'border-box',
+                      }}
+                    >
+                      <option value="Main Dining Room">Main Dining Room</option>
+                      <option value="Chef Hearth Counter">Chef's Hearth Counter</option>
+                      <option value="Private Salon">Private Salon</option>
+                      <option value="Terrace Garden">Terrace Garden</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Time Slots */}
+                <div>
+                  <label style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block', marginBottom: '0.5rem' }}>
+                    Available Evening Slots
+                  </label>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem' }}>
+                    {['5:30 PM', '6:15 PM', '7:00 PM', '7:45 PM', '8:30 PM', '9:15 PM'].map(t => (
+                      <button
+                        key={t}
+                        type="button"
+                        onClick={() => setTime(t)}
+                        style={{
+                          padding: '0.5rem 0',
+                          borderRadius: '8px',
+                          border: `1px solid ${time === t ? theme.palette.primary : `${theme.palette.text}20`}`,
+                          backgroundColor: time === t ? `${theme.palette.primary}20` : 'transparent',
+                          color: time === t ? theme.palette.primary : theme.palette.text,
+                          fontWeight: 700,
+                          fontSize: '0.85rem',
+                          cursor: 'pointer',
+                        }}
+                      >
+                        {t}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Contact info */}
+                <div>
+                  <label style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block', marginBottom: '0.4rem' }}>
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Eleanor Vance"
+                    value={name}
+                    onChange={e => setName(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem',
+                      borderRadius: '8px',
+                      border: `1px solid ${theme.palette.border || `${theme.palette.text}20`}`,
+                      backgroundColor: theme.palette.background,
+                      color: theme.palette.text,
+                      boxSizing: 'border-box',
+                    }}
+                  />
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '1rem' }}>
+                  <div>
+                    <label style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block', marginBottom: '0.4rem' }}>
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="eleanor@example.com"
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
+                      style={{
+                        width: '100%',
+                        padding: '0.75rem',
+                        borderRadius: '8px',
+                        border: `1px solid ${theme.palette.border || `${theme.palette.text}20`}`,
+                        backgroundColor: theme.palette.background,
+                        color: theme.palette.text,
+                        boxSizing: 'border-box',
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <label style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block', marginBottom: '0.4rem' }}>
+                      Phone Number *
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      placeholder="+91 (555) 234-5678"
+                      value={phone}
+                      onChange={e => setPhone(e.target.value)}
+                      style={{
+                        width: '100%',
+                        padding: '0.75rem',
+                        borderRadius: '8px',
+                        border: `1px solid ${theme.palette.border || `${theme.palette.text}20`}`,
+                        backgroundColor: theme.palette.background,
+                        color: theme.palette.text,
+                        boxSizing: 'border-box',
+                      }}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label style={{ fontSize: '0.82rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block', marginBottom: '0.4rem' }}>
+                    Occasion / Dietary Preferences (Optional)
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Birthday celebration, shellfish allergy, quiet booth"
+                    value={requests}
+                    onChange={e => setRequests(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem',
+                      borderRadius: '8px',
+                      border: `1px solid ${theme.palette.border || `${theme.palette.text}20`}`,
+                      backgroundColor: theme.palette.background,
+                      color: theme.palette.text,
+                      boxSizing: 'border-box',
+                    }}
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  style={{
+                    backgroundColor: theme.palette.primary,
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: '10px',
+                    padding: '1rem',
+                    fontWeight: 800,
+                    fontSize: '1rem',
+                    cursor: 'pointer',
+                    marginTop: '0.5rem',
+                    boxShadow: `0 4px 18px ${theme.palette.primary}55`,
+                  }}
+                >
+                  Confirm Table Reservation
+                </button>
+              </form>
+            )}
+          </div>
+
+          {/* Practical Guest Information */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+            <div style={{
+              backgroundColor: theme.palette.surface,
+              borderRadius: '20px',
+              padding: '2.5rem',
+              border: `1px solid ${theme.palette.border || `${theme.palette.text}15`}`,
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', color: theme.palette.primary, fontWeight: 700, textTransform: 'uppercase', fontSize: '0.82rem', letterSpacing: '0.12em', marginBottom: '0.85rem' }}>
+                <Clock size={16} /> Service Hours
+              </div>
+              <h3 style={{ fontFamily: theme.typography.heading, fontSize: '1.6rem', fontWeight: 800, margin: '0 0 1rem 0' }}>
+                Dinner & Late Cellar
+              </h3>
+              <p style={{ lineHeight: 1.6, color: theme.palette.textLight, margin: '0 0 0.5rem 0' }}>
+                {theme.content.hours}
+              </p>
+              <span style={{ fontSize: '0.85rem', color: theme.palette.textLight, opacity: 0.8 }}>
+                Kitchen final order is taken 45 minutes prior to closing.
+              </span>
+            </div>
+
+            <div style={{
+              backgroundColor: theme.palette.surface,
+              borderRadius: '20px',
+              padding: '2.5rem',
+              border: `1px solid ${theme.palette.border || `${theme.palette.text}15`}`,
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', color: theme.palette.primary, fontWeight: 700, textTransform: 'uppercase', fontSize: '0.82rem', letterSpacing: '0.12em', marginBottom: '0.85rem' }}>
+                <MapPin size={16} /> Location & Arrival
+              </div>
+              <h3 style={{ fontFamily: theme.typography.heading, fontSize: '1.6rem', fontWeight: 800, margin: '0 0 0.75rem 0' }}>
+                Address & Directions
+              </h3>
+              <p style={{ lineHeight: 1.6, color: theme.palette.textLight, margin: '0 0 1.25rem 0' }}>
+                {theme.content.address}
+              </p>
+              <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                <button
+                  onClick={handleCopyAddress}
+                  style={{
+                    backgroundColor: 'transparent',
+                    border: `1px solid ${theme.palette.border || `${theme.palette.text}22`}`,
+                    color: theme.palette.text,
+                    borderRadius: '8px',
+                    padding: '0.55rem 1rem',
+                    fontSize: '0.85rem',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.4rem',
+                  }}
+                >
+                  {copied ? <Check size={14} color="#22c55e" /> : <Copy size={14} />}
+                  <span>{copied ? 'Copied!' : 'Copy Address'}</span>
+                </button>
+                <a
+                  href={`https://maps.google.com/?q=${encodeURIComponent(theme.content.address)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    backgroundColor: `${theme.palette.primary}12`,
+                    border: `1px solid ${theme.palette.primary}33`,
+                    color: theme.palette.primary,
+                    borderRadius: '8px',
+                    padding: '0.55rem 1rem',
+                    fontSize: '0.85rem',
+                    fontWeight: 600,
+                    textDecoration: 'none',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.4rem',
+                  }}
+                >
+                  <Compass size={14} /> Open in Google Maps ↗
+                </a>
+              </div>
+            </div>
+
+            <div style={{
+              backgroundColor: theme.palette.surface,
+              borderRadius: '20px',
+              padding: '2.5rem',
+              border: `1px solid ${theme.palette.border || `${theme.palette.text}15`}`,
+            }}>
+              <h4 style={{ fontFamily: theme.typography.heading, fontSize: '1.25rem', fontWeight: 800, margin: '0 0 1rem 0' }}>
+                Guest Guidelines & Policies
+              </h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.9rem', color: theme.palette.textLight, lineHeight: 1.6 }}>
+                <div><strong>Dress Code:</strong> Smart Elegant. Tailored attire is recommended; athletic wear, beachwear, and baseball caps are respectfully declined.</div>
+                <div><strong>Valet Parking:</strong> Complimentary curbside valet is available directly in front of the main entrance from 5:00 PM.</div>
+                <div><strong>Corkage:</strong> $60 per 750ml bottle, limited to two bottles per reservation, for labels not currently represented on our cellar list.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── MASTER PAGE CONTAINER ──────────────────────────────────────────────────
 
 export function RestaurantPage({
@@ -4324,12 +6029,17 @@ export function RestaurantPage({
   theme: RestaurantThemeConfig;
   children?: React.ReactNode;
 }) {
+  const [activePage, setActivePage] = useState<FineDiningPage>('home');
   const [isReservationOpen, setIsReservationOpen] = useState(false);
   const [selectedDish, setSelectedDish] = useState<MenuItem | null>(null);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [activeLightboxIndex, setActiveLightboxIndex] = useState<number | null>(null);
   const [bookingConfirmed, setBookingConfirmed] = useState<ReservationDetails | null>(null);
+  const [isPrivateDiningOpen, setIsPrivateDiningOpen] = useState(false);
+  const [isGiftModalOpen, setIsGiftModalOpen] = useState(false);
+  const [selectedGiftExp, setSelectedGiftExp] = useState<GiftExperience | null>(null);
+  const [preselectedSalon, setPreselectedSalon] = useState<string>('');
 
   const openReservation = () => setIsReservationOpen(true);
   const closeReservation = () => setIsReservationOpen(false);
@@ -4375,7 +6085,14 @@ export function RestaurantPage({
   const openLightbox = (index: number) => setActiveLightboxIndex(index);
   const closeLightbox = () => setActiveLightboxIndex(null);
 
+  const handleNavigatePage = (page: FineDiningPage) => {
+    setActivePage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const storeValue: RestaurantContextType = {
+    activePage,
+    setActivePage: handleNavigatePage,
     isReservationOpen,
     openReservation,
     closeReservation,
@@ -4405,20 +6122,199 @@ export function RestaurantPage({
         fontFamily: theme.typography.body,
         overflowX: 'hidden',
         minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
       }}>
         <AnnouncementBar text={`🍽️  ${theme.tagline} · Evening Bookings Now Open`} palette={theme.palette} />
         <RestaurantNavbar theme={theme} />
-        <RestaurantHero theme={theme} />
-        <FeaturesStrip theme={theme} />
-        <RestaurantMenu theme={theme} />
-        <TastingMenuExperience theme={theme} />
-        <RestaurantStory theme={theme} />
-        <PromoSection theme={theme} />
-        <RestaurantGallery theme={theme} />
-        <Testimonials theme={theme} />
-        <LocationCTA theme={theme} />
-        <NewsletterSection theme={theme} />
-        {children}
+
+        <main style={{ flex: 1 }}>
+          {activePage === 'home' && (
+            <>
+              <RestaurantHero theme={theme} />
+              <AccoladesStrip theme={theme} />
+              <FeaturesStrip theme={theme} />
+              <RestaurantMenu theme={theme} />
+              <div style={{ textAlign: 'center', padding: '1.5rem 0 3.5rem', backgroundColor: theme.palette.background }}>
+                <button
+                  onClick={() => handleNavigatePage('menu')}
+                  style={{
+                    backgroundColor: 'transparent',
+                    border: `1.5px solid ${theme.palette.primary}`,
+                    color: theme.palette.primary,
+                    borderRadius: '99px',
+                    padding: '0.85rem 2.2rem',
+                    fontFamily: theme.typography.body,
+                    fontWeight: 700,
+                    fontSize: '0.92rem',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s',
+                  }}
+                  onMouseOver={e => {
+                    e.currentTarget.style.backgroundColor = theme.palette.primary;
+                    e.currentTarget.style.color = '#ffffff';
+                  }}
+                  onMouseOut={e => {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                    e.currentTarget.style.color = theme.palette.primary;
+                  }}
+                >
+                  Explore Full Tasting & À La Carte Menus →
+                </button>
+              </div>
+              <TastingMenuExperience theme={theme} />
+              <div style={{ textAlign: 'center', padding: '1.5rem 0 3.5rem', backgroundColor: theme.palette.secondary }}>
+                <button
+                  onClick={() => handleNavigatePage('experience')}
+                  style={{
+                    backgroundColor: 'transparent',
+                    border: `1.5px solid ${theme.palette.primary}`,
+                    color: theme.palette.primary,
+                    borderRadius: '99px',
+                    padding: '0.85rem 2.2rem',
+                    fontFamily: theme.typography.body,
+                    fontWeight: 700,
+                    fontSize: '0.92rem',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s',
+                  }}
+                  onMouseOver={e => {
+                    e.currentTarget.style.backgroundColor = theme.palette.primary;
+                    e.currentTarget.style.color = '#ffffff';
+                  }}
+                  onMouseOut={e => {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                    e.currentTarget.style.color = theme.palette.primary;
+                  }}
+                >
+                  View Complete Degustation & Wine Pairings →
+                </button>
+              </div>
+              <SommelierReserveSection theme={theme} />
+              <PrivateDiningSection
+                theme={theme}
+                onOpenInquiry={(room) => {
+                  setPreselectedSalon(room || '');
+                  setIsPrivateDiningOpen(true);
+                }}
+              />
+              <RestaurantStory theme={theme} />
+              <div style={{ textAlign: 'center', padding: '1.5rem 0 3.5rem', backgroundColor: theme.palette.background }}>
+                <button
+                  onClick={() => handleNavigatePage('story')}
+                  style={{
+                    backgroundColor: 'transparent',
+                    border: `1.5px solid ${theme.palette.primary}`,
+                    color: theme.palette.primary,
+                    borderRadius: '99px',
+                    padding: '0.85rem 2.2rem',
+                    fontFamily: theme.typography.body,
+                    fontWeight: 700,
+                    fontSize: '0.92rem',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s',
+                  }}
+                  onMouseOver={e => {
+                    e.currentTarget.style.backgroundColor = theme.palette.primary;
+                    e.currentTarget.style.color = '#ffffff';
+                  }}
+                  onMouseOut={e => {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                    e.currentTarget.style.color = theme.palette.primary;
+                  }}
+                >
+                  Discover Our Full Heritage & Philosophy →
+                </button>
+              </div>
+              <PromoSection theme={theme} />
+              <GiftExperienceSection
+                theme={theme}
+                onOpenGiftModal={(exp) => {
+                  setSelectedGiftExp(exp || null);
+                  setIsGiftModalOpen(true);
+                }}
+              />
+              <HospitalityGuideSection theme={theme} />
+              <RestaurantGallery theme={theme} />
+              <div style={{ textAlign: 'center', padding: '1.5rem 0 3.5rem', backgroundColor: theme.palette.background }}>
+                <button
+                  onClick={() => handleNavigatePage('gallery')}
+                  style={{
+                    backgroundColor: 'transparent',
+                    border: `1.5px solid ${theme.palette.primary}`,
+                    color: theme.palette.primary,
+                    borderRadius: '99px',
+                    padding: '0.85rem 2.2rem',
+                    fontFamily: theme.typography.body,
+                    fontWeight: 700,
+                    fontSize: '0.92rem',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s',
+                  }}
+                  onMouseOver={e => {
+                    e.currentTarget.style.backgroundColor = theme.palette.primary;
+                    e.currentTarget.style.color = '#ffffff';
+                  }}
+                  onMouseOut={e => {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                    e.currentTarget.style.color = theme.palette.primary;
+                  }}
+                >
+                  View All Atmospheric & Culinary Photos →
+                </button>
+              </div>
+              <Testimonials theme={theme} />
+              <LocationCTA theme={theme} />
+              <div style={{ textAlign: 'center', padding: '1.5rem 0 3.5rem', backgroundColor: theme.palette.secondary }}>
+                <button
+                  onClick={() => handleNavigatePage('visit')}
+                  style={{
+                    backgroundColor: theme.palette.primary,
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: '99px',
+                    padding: '0.95rem 2.4rem',
+                    fontFamily: theme.typography.body,
+                    fontWeight: 800,
+                    fontSize: '0.95rem',
+                    cursor: 'pointer',
+                    boxShadow: `0 4px 20px ${theme.palette.primary}66`,
+                  }}
+                >
+                  Detailed Directions, Hours & Reservations →
+                </button>
+              </div>
+              <NewsletterSection theme={theme} />
+            </>
+          )}
+
+          {activePage === 'menu' && <FineDiningMenuView theme={theme} />}
+          {activePage === 'story' && <FineDiningStoryView theme={theme} />}
+          {activePage === 'experience' && <FineDiningExperienceView theme={theme} />}
+          {activePage === 'gallery' && <FineDiningGalleryView theme={theme} />}
+          {activePage === 'visit' && <FineDiningVisitView theme={theme} />}
+          {activePage === 'private-dining' && (
+            <div>
+              <PrivateDiningSection
+                theme={theme}
+                onOpenInquiry={(room) => {
+                  setPreselectedSalon(room || '');
+                  setIsPrivateDiningOpen(true);
+                }}
+              />
+              <HospitalityGuideSection theme={theme} />
+            </div>
+          )}
+          {activePage === 'cellar' && (
+            <div>
+              <SommelierReserveSection theme={theme} />
+              <TastingMenuExperience theme={theme} />
+            </div>
+          )}
+
+          {children}
+        </main>
+
         <RestaurantFooter theme={theme} />
 
         {/* Global Modals & Drawers */}
@@ -4426,6 +6322,26 @@ export function RestaurantPage({
         <DishQuickViewModal theme={theme} />
         <OrderDrawer theme={theme} />
         <GalleryLightbox theme={theme} />
+        <PrivateDiningModal
+          theme={theme}
+          isOpen={isPrivateDiningOpen}
+          onClose={() => setIsPrivateDiningOpen(false)}
+          preselectedRoom={preselectedSalon}
+        />
+        <GiftCardModal
+          theme={theme}
+          isOpen={isGiftModalOpen}
+          onClose={() => setIsGiftModalOpen(false)}
+          initialExp={selectedGiftExp}
+        />
+        <LiveFloatingBar
+          theme={theme}
+          onOpenReservation={openReservation}
+          onOpenPrivateDining={() => {
+            setPreselectedSalon('');
+            setIsPrivateDiningOpen(true);
+          }}
+        />
       </div>
     </RestaurantContext.Provider>
   );
