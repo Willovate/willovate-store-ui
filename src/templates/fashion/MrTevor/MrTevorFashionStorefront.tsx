@@ -1445,6 +1445,16 @@ export const MrTevorFashionStorefront: React.FC<MrTevorStorefrontProps> = ({
                 </p>
 
                 <button
+                  type="button"
+                  className="wv-full-pdp-btn"
+                  onClick={() => {
+                    handleOpenPDP(quickViewProduct)
+                    setQuickViewProduct(null)
+                  }}
+                >
+                  Full Description View →
+                </button>
+                <button
                   className="mt-btn-primary"
                   style={{ width: '100%', justifyContent: 'center', marginBottom: '10px' }}
                   onClick={() => {

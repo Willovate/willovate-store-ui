@@ -1441,17 +1441,29 @@ export const DiamondWorkDoStorefront: React.FC<DiamondWorkDoStorefrontProps> = (
                 <p style={{ fontSize: 12.5, color: '#637570', lineHeight: 1.6, marginBottom: 16 }}>
                   {quickViewProduct.description}
                 </p>
-                <button
-                  type="button"
-                  className="dwd-pill-btn dwd-pill-btn-forest"
-                  style={{ width: '100%', padding: '10px 18px', fontSize: 12 }}
-                  onClick={() => {
-                    addToCart(quickViewProduct, quickViewProduct.metals[0].name, 'US 6.5', undefined, 1)
-                    setIsQuickViewOpen(false)
-                  }}
-                >
-                  Add to Cart <span className="dwd-arrow">➔</span>
-                </button>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  <button
+                    type="button"
+                    className="wv-full-pdp-btn"
+                    onClick={() => {
+                      setIsQuickViewOpen(false)
+                      openPdp(quickViewProduct)
+                    }}
+                  >
+                    Full Description View →
+                  </button>
+                  <button
+                    type="button"
+                    className="dwd-pill-btn dwd-pill-btn-forest"
+                    style={{ width: '100%', padding: '10px 18px', fontSize: 12 }}
+                    onClick={() => {
+                      addToCart(quickViewProduct, quickViewProduct.metals[0].name, 'US 6.5', undefined, 1)
+                      setIsQuickViewOpen(false)
+                    }}
+                  >
+                    Add to Cart <span className="dwd-arrow">➔</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>

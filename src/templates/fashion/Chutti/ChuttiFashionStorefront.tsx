@@ -1505,16 +1505,28 @@ export const ChuttiFashionStorefront: React.FC<ChuttiStorefrontProps> = ({
                 <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.6, marginBottom: 20 }}>
                   {quickViewProduct.description}
                 </p>
-                <button
-                  className="chutti-btn chutti-btn-coral"
-                  style={{ width: '100%' }}
-                  onClick={() => {
-                    addToCart(quickViewProduct, quickViewProduct.sizes[0] || '1-2Y', quickViewProduct.colors[0]?.name || 'Default', 1)
-                    setIsQuickViewOpen(false)
-                  }}
-                >
-                  Add to Bag
-                </button>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  <button
+                    type="button"
+                    className="wv-full-pdp-btn"
+                    onClick={() => {
+                      setIsQuickViewOpen(false)
+                      openPdp(quickViewProduct)
+                    }}
+                  >
+                    Full Description View →
+                  </button>
+                  <button
+                    className="chutti-btn chutti-btn-coral"
+                    style={{ width: '100%' }}
+                    onClick={() => {
+                      addToCart(quickViewProduct, quickViewProduct.sizes[0] || '1-2Y', quickViewProduct.colors[0]?.name || 'Default', 1)
+                      setIsQuickViewOpen(false)
+                    }}
+                  >
+                    Add to Bag
+                  </button>
+                </div>
               </div>
             </div>
           </div>

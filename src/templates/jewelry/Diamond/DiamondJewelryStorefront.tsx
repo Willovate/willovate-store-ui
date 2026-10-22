@@ -1818,13 +1818,13 @@ export const DiamondJewelryStorefront: React.FC<DiamondStorefrontProps> = ({
                   </button>
                   <button
                     type="button"
-                    className="dia-btn dia-btn-outline"
+                    className="wv-full-pdp-btn"
                     onClick={() => {
                       setIsQuickViewOpen(false)
                       openPdp(quickViewProduct)
                     }}
                   >
-                    Full Details →
+                    Full Description View →
                   </button>
                 </div>
               </div>

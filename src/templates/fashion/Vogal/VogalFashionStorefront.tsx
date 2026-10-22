@@ -1661,28 +1661,27 @@ export const VogalFashionStorefront: React.FC<VogalStorefrontProps> = ({
                   ))}
                 </div>
 
-                <div style={{ display: 'flex', gap: '12px', marginTop: '16px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: '16px' }}>
+                  <button
+                    type="button"
+                    className="wv-full-pdp-btn"
+                    onClick={() => {
+                      setQuickViewProduct(null)
+                      openProduct(quickViewProduct.id)
+                    }}
+                  >
+                    Full Description View →
+                  </button>
                   <button
                     type="button"
                     className="vogal-btn-dark"
-                    style={{ flex: 1 }}
+                    style={{ width: '100%' }}
                     onClick={() => {
                       addToCart(quickViewProduct, qvSize || quickViewProduct.sizes[0], qvColor || quickViewProduct.colors[0]?.name || 'Standard', 1)
                       setQuickViewProduct(null)
                     }}
                   >
                     ADD TO BAG
-                  </button>
-                  <button
-                    type="button"
-                    className="vogal-btn-secondary"
-                    style={{ color: '#09090b', borderColor: '#09090b' }}
-                    onClick={() => {
-                      setQuickViewProduct(null)
-                      openProduct(quickViewProduct.id)
-                    }}
-                  >
-                    VIEW PDP →
                   </button>
                 </div>
               </div>

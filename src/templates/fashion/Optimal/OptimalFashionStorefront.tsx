@@ -2579,14 +2579,13 @@ export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
                 </button>
                 <button
                   type="button"
-                  className="optimal-btn-outline"
-                  style={{ color: 'var(--opt-dark)', borderColor: 'var(--opt-border)' }}
+                  className="wv-full-pdp-btn"
                   onClick={() => {
                     handleOpenPdp(quickViewProduct)
                     setQuickViewProduct(null)
                   }}
                 >
-                  View Full Product Details
+                  Full Description View →
                 </button>
               </div>
             </div>

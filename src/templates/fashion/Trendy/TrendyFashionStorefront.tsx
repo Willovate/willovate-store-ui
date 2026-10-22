@@ -2011,40 +2011,52 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: '4px' }}>
                   <button
                     type="button"
-                    className="trendy-btn-primary"
-                    style={{ flex: 1 }}
+                    className="wv-full-pdp-btn"
                     onClick={() => {
-                      addToCart(
-                        quickViewProduct,
-                        quickViewProduct.sizes[0] || 'M',
-                        quickViewProduct.colors[0]?.name || 'Standard'
-                      )
                       setIsQuickViewOpen(false)
+                      navigateToPDP(quickViewProduct)
                     }}
                   >
-                    Add to Cart
+                    Full Description View →
                   </button>
-                  <button
-                    type="button"
-                    className="trendy-icon-btn"
-                    style={{
-                      border: '1px solid var(--tr-border)',
-                      width: '44px',
-                      height: '44px',
-                      borderRadius: 'var(--tr-radius)',
-                      fontSize: '18px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                    title={wishlistIds.includes(quickViewProduct.id) ? 'Remove from Wishlist' : 'Save to Wishlist'}
-                    onClick={() => toggleWishlist(quickViewProduct.id)}
-                  >
-                    {wishlistIds.includes(quickViewProduct.id) ? '❤️' : '🤍'}
-                  </button>
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    <button
+                      type="button"
+                      className="trendy-btn-primary"
+                      style={{ flex: 1 }}
+                      onClick={() => {
+                        addToCart(
+                          quickViewProduct,
+                          quickViewProduct.sizes[0] || 'M',
+                          quickViewProduct.colors[0]?.name || 'Standard'
+                        )
+                        setIsQuickViewOpen(false)
+                      }}
+                    >
+                      Add to Cart
+                    </button>
+                    <button
+                      type="button"
+                      className="trendy-icon-btn"
+                      style={{
+                        border: '1px solid var(--tr-border)',
+                        width: '44px',
+                        height: '44px',
+                        borderRadius: 'var(--tr-radius)',
+                        fontSize: '18px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                      title={wishlistIds.includes(quickViewProduct.id) ? 'Remove from Wishlist' : 'Save to Wishlist'}
+                      onClick={() => toggleWishlist(quickViewProduct.id)}
+                    >
+                      {wishlistIds.includes(quickViewProduct.id) ? '❤️' : '🤍'}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

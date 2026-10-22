@@ -20,6 +20,7 @@ import {
   StorefrontMobileNavDrawer,
   type MobileNavItem,
 } from '../../common/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
 import './styles/glowing.css'
 
 export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
@@ -35,6 +36,8 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
   const effectiveDevice = deviceView || device || 'desktop'
 
   // State
+  const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
+  const [selectedProduct, setSelectedProduct] = useState<GlowingProduct | null>(null)
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0)
   const [activeTab, setActiveTab] = useState<'All Products' | 'Best Seller' | 'New Arrival' | 'On Sale'>('All Products')
   const [cartItems, setCartItems] = useState<GlowingCartItem[]>([
@@ -206,65 +209,43 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
       {/* Main Header */}
       <header className="glowing-header">
         <div className="glowing-container glowing-header-inner">
-          {/* Mobile Hamburger Button */}
-          <button
-            type="button"
-            className="glowing-hamburger-btn"
-            onClick={() => setIsMobileNavOpen(true)}
-            title="Menu"
-            aria-label="Open mobile menu"
-          >
-            ☰
-          </button>
+          <div className="glowing-header-left">
+            {/* Mobile Hamburger Button */}
+            <button
+              type="button"
+              className="glowing-hamburger-btn"
+              onClick={() => setIsMobileNavOpen(true)}
+              title="Menu"
+              aria-label="Open mobile menu"
+            >
+              ☰
+            </button>
 
-          <nav className="glowing-nav-left">
-            {navItems.map((item) => (
-              <div key={item.label} className="wv-nav-dropdown-wrap">
-                <span
-                  className="glowing-nav-link"
-                  onClick={() => {
-                    if (item.children && item.children.length > 0) {
-                      item.children[0].onClick?.()
-                    } else {
-                      item.onClick?.()
-                    }
-                  }}
-                >
-                  {item.label} {item.children ? '▾' : ''}
-                </span>
-                {item.children && (
-                  <div className="wv-desktop-dropdown">
-                    {item.children.map((sub) => (
-                      <div
-                        key={sub.label}
-                        className="wv-desktop-dropdown-item"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          sub.onClick?.()
-                        }}
-                      >
-                        {sub.label}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </nav>
-
-          <div className="glowing-logo-center">
-            <a href="#home">
-              <img src={GLOWING_LOGO} alt="GLOWING" className="glowing-logo-img" />
-            </a>
-          </div>
-
-          <div className="glowing-actions-right">
             <button className="glowing-action-btn" title="Search" onClick={() => setIsSearchOpen(true)}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="11" cy="11" r="8" />
                 <line x1="21" y1="21" x2="16.65" y2="16.65" />
               </svg>
             </button>
+
+            <select
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value as 'USD' | 'INR')}
+              aria-label="Select Currency"
+              className="glowing-currency-select"
+            >
+              <option value="USD">🇺🇸 USD ($)</option>
+              <option value="INR">🇮🇳 INR (₹)</option>
+            </select>
+          </div>
+
+          <div className="glowing-logo-center">
+            <a href="#home" onClick={(e) => { e.preventDefault(); setViewMode('home'); setSelectedProduct(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
+              <img src={GLOWING_LOGO} alt="GLOWING" className="glowing-logo-img" />
+            </a>
+          </div>
+
+          <div className="glowing-actions-right">
             <button className="glowing-action-btn" title="Account" onClick={() => setIsAccountOpen(true)}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
@@ -289,11 +270,86 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
         </div>
       </header>
 
-      {/* Hero Slideshow */}
-      <section
-        className="glowing-hero"
-        style={{ backgroundImage: `url(${heroSlide.image})` }}
-      >
+      {/* Dedicated Centered Navigation Bar */}
+      <nav className="glowing-navbar">
+        <div className="glowing-container">
+          <ul className="glowing-nav-menu">
+            {navItems.map((item) => (
+              <li key={item.label} className="glowing-nav-item wv-nav-dropdown-wrap">
+                <span
+                  className="glowing-nav-link"
+                  onClick={() => {
+                    if (viewMode === 'pdp') {
+                      setViewMode('home')
+                      setSelectedProduct(null)
+                    }
+                    if (item.children && item.children.length > 0) {
+                      item.children[0].onClick?.()
+                    } else {
+                      item.onClick?.()
+                    }
+                  }}
+                >
+                  {item.label} {item.children ? '▾' : ''}
+                </span>
+                {item.children && (
+                  <div className="wv-desktop-dropdown">
+                    {item.children.map((sub) => (
+                      <div
+                        key={sub.label}
+                        className="wv-desktop-dropdown-item"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          if (viewMode === 'pdp') {
+                            setViewMode('home')
+                            setSelectedProduct(null)
+                          }
+                          sub.onClick?.()
+                        }}
+                      >
+                        {sub.label}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </nav>
+
+      {viewMode === 'pdp' && selectedProduct ? (
+        <StorefrontProductDetailPage
+          product={selectedProduct}
+          brandName="Glowing"
+          accentColor="#193833"
+          currencyPrefix={currency === 'INR' ? '₹' : '$'}
+          formatPrice={formatPrice}
+          onBack={() => {
+            setViewMode('home')
+            setSelectedProduct(null)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          onAddToCart={(prod) => handleAddToCart(prod)}
+          onBuyNow={(prod) => {
+            handleAddToCart(prod)
+            showToast('Instant checkout initiated!')
+          }}
+          relatedProducts={[...GLOWING_FEATURED_PRODUCTS, ...GLOWING_FAVORITE_PRODUCTS].filter(
+            (p) => p.id !== selectedProduct.id
+          )}
+          onSelectRelated={(p) => {
+            setSelectedProduct(p as GlowingProduct)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+        />
+      ) : (
+        <>
+          {/* Hero Slideshow */}
+          <section
+            className="glowing-hero"
+            style={{ backgroundImage: `url(${heroSlide.image})` }}
+          >
         <div className="glowing-container">
           <div className="glowing-hero-content">
             <span className="glowing-hero-eyebrow">{heroSlide.eyebrow}</span>
@@ -643,6 +699,8 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
           </div>
         </div>
       </footer>
+      </>
+      )}
 
       {/* Bag Drawer */}
       {isCartOpen && (
@@ -719,6 +777,18 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
                 }}
               >
                 Add To Cart
+              </button>
+              <button
+                type="button"
+                className="wv-full-pdp-btn"
+                onClick={() => {
+                  setSelectedProduct(quickViewProduct)
+                  setViewMode('pdp')
+                  setQuickViewProduct(null)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                Full Description View →
               </button>
             </div>
           </div>

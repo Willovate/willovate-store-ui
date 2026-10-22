@@ -18,6 +18,7 @@ import {
   StorefrontMobileNavDrawer,
   type MobileNavItem,
 } from '../../common/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
 import './styles/sensation.css'
 
 export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
@@ -33,6 +34,8 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
   const effectiveDevice = deviceView || device || 'desktop'
 
   // State
+  const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
+  const [selectedProduct, setSelectedProduct] = useState<SensationProduct | null>(null)
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
   const [currency, setCurrency] = useState<'USD' | 'INR' | 'EUR'>('USD')
   const [language, setLanguage] = useState<'English' | 'Spanish' | 'French'>('English')
@@ -477,8 +480,76 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section
+      {viewMode === 'pdp' && selectedProduct ? (
+        <StorefrontProductDetailPage
+          product={{
+            id: selectedProduct.id,
+            name: selectedProduct.name,
+            price: selectedProduct.price,
+            originalPrice: selectedProduct.originalPrice,
+            image: selectedProduct.image,
+            description: selectedProduct.description,
+            category: selectedProduct.category,
+            rating: selectedProduct.rating || 4.9,
+            reviewsCount: selectedProduct.reviewCount || 48,
+            inStock: true,
+            sku: `SEN-${selectedProduct.id.toUpperCase()}`,
+            gallery: [selectedProduct.image],
+            colors: selectedProduct.colors?.map((c) => ({ name: c.name, hex: c.hex })) || ['#18181b', '#656c4d'],
+            sizes: selectedProduct.sizes || ['6', '7', '8', '9', '10', '11'],
+            specs: {
+              Material: 'Premium Canvas & Italian Suede',
+              Sole: 'Vibram Traction Rubber',
+              Origin: 'Handcrafted in Portugal',
+              Care: 'Spot clean with suede brush',
+            },
+            features: [
+              'Ergonomic shock-absorbing memory foam footbed',
+              'Breathable organic cotton lining for all-day freshness',
+              'Non-slip vulcanized outsole with all-terrain grip',
+              'Reinforced double-stitched stress zones',
+            ],
+          }}
+          brandName="Sensation"
+          accentColor={customAccentColor || '#656c4d'}
+          currencyPrefix={currency === 'INR' ? '₹' : currency === 'EUR' ? '€' : '$'}
+          formatPrice={formatPrice}
+          relatedProducts={[...SENSATION_TRENDING_PRODUCTS, ...SENSATION_SUNGLASSES_PRODUCTS]
+            .filter((p) => p.id !== selectedProduct.id)
+            .slice(0, 4)
+            .map((p) => ({
+              id: p.id,
+              name: p.name,
+              price: p.price,
+              originalPrice: p.originalPrice,
+              image: p.image,
+              category: p.category,
+              rating: p.rating || 4.8,
+            }))}
+          onBack={() => {
+            setViewMode('home')
+            setSelectedProduct(null)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          onAddToCart={(_prod, col, sz, qty) => {
+            for (let i = 0; i < (qty || 1); i++) {
+              handleAddToCart(selectedProduct, col, sz)
+            }
+          }}
+          onBuyNow={(_prod, col, sz, qty) => {
+            for (let i = 0; i < (qty || 1); i++) {
+              handleAddToCart(selectedProduct, col, sz)
+            }
+            setIsCartOpen(true)
+            showToast('Instant checkout initiated!')
+          }}
+          onToggleWishlist={(id) => toggleWishlist(id)}
+          isWishlisted={wishlist.includes(selectedProduct.id)}
+        />
+      ) : (
+        <>
+          {/* Hero Section */}
+          <section
         className="sen-hero"
         style={{ backgroundImage: `url(${activeSlide.image})` }}
       >
@@ -1108,6 +1179,8 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
           </div>
         </div>
       </section>
+        </>
+      )}
 
       {/* Footer */}
       <footer className="sen-footer">
@@ -1333,16 +1406,30 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
                 )}
               </div>
 
-              <button
-                type="button"
-                className="sen-add-cart-btn"
-                onClick={() => {
-                  handleAddToCart(quickViewProduct, selectedProductColor, selectedProductSize)
-                  setQuickViewProduct(null)
-                }}
-              >
-                Add to Cart 🛍️
-              </button>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <button
+                  type="button"
+                  className="wv-full-pdp-btn"
+                  onClick={() => {
+                    setSelectedProduct(quickViewProduct)
+                    setViewMode('pdp')
+                    setQuickViewProduct(null)
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                  }}
+                >
+                  Full Description View →
+                </button>
+                <button
+                  type="button"
+                  className="sen-add-cart-btn"
+                  onClick={() => {
+                    handleAddToCart(quickViewProduct, selectedProductColor, selectedProductSize)
+                    setQuickViewProduct(null)
+                  }}
+                >
+                  Add to Cart 🛍️
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -1489,9 +1576,10 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
         onSelectProduct={(p) => {
           const fullProd = [...SENSATION_TRENDING_PRODUCTS, ...SENSATION_SUNGLASSES_PRODUCTS].find((x) => x.id === p.id)
           if (fullProd) {
-            setQuickViewProduct(fullProd)
-            setSelectedProductSize(fullProd.sizes?.[0] || '7')
-            setSelectedProductColor(fullProd.colors?.[0]?.name || 'Standard')
+            setSelectedProduct(fullProd)
+            setViewMode('pdp')
+            setIsSearchOpen(false)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
           }
         }}
         accentColor={customAccentColor || '#656c4d'}
@@ -1521,9 +1609,10 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
         onOpenProduct={(p) => {
           const fullProd = [...SENSATION_TRENDING_PRODUCTS, ...SENSATION_SUNGLASSES_PRODUCTS].find((x) => x.id === p.id)
           if (fullProd) {
-            setQuickViewProduct(fullProd)
-            setSelectedProductSize(fullProd.sizes?.[0] || '7')
-            setSelectedProductColor(fullProd.colors?.[0]?.name || 'Standard')
+            setSelectedProduct(fullProd)
+            setViewMode('pdp')
+            setIsWishlistOpen(false)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
           }
         }}
         accentColor={customAccentColor || '#656c4d'}

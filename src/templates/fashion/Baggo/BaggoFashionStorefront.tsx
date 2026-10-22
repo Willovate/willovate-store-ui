@@ -1676,27 +1676,39 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
                 <p style={{ fontSize: 13, color: '#535353', lineHeight: 1.7, marginBottom: 20 }}>
                   {quickViewProduct.description}
                 </p>
-                <div style={{ display: 'flex', gap: 10 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                   <button
                     type="button"
-                    className="baggo-btn baggo-btn-cognac"
-                    style={{ flex: 1 }}
+                    className="wv-full-pdp-btn"
                     onClick={() => {
-                      addToCart(quickViewProduct, quickViewProduct.colors[0]?.name || 'Default', undefined, 1)
                       setIsQuickViewOpen(false)
+                      openPdp(quickViewProduct)
                     }}
                   >
-                    Add to Bag
+                    Full Description View →
                   </button>
-                  <button
-                    type="button"
-                    className={`baggo-action-btn ${wishlistIds.includes(quickViewProduct.id) ? 'active' : ''}`}
-                    onClick={() => toggleWishlist(quickViewProduct.id)}
-                    style={{ width: 44, height: 44, borderRadius: 4 }}
-                    title={wishlistIds.includes(quickViewProduct.id) ? 'Remove from Wishlist' : 'Save to Wishlist'}
-                  >
-                    {wishlistIds.includes(quickViewProduct.id) ? '♥' : '♡'}
-                  </button>
+                  <div style={{ display: 'flex', gap: 10 }}>
+                    <button
+                      type="button"
+                      className="baggo-btn baggo-btn-cognac"
+                      style={{ flex: 1 }}
+                      onClick={() => {
+                        addToCart(quickViewProduct, quickViewProduct.colors[0]?.name || 'Default', undefined, 1)
+                        setIsQuickViewOpen(false)
+                      }}
+                    >
+                      Add to Bag
+                    </button>
+                    <button
+                      type="button"
+                      className={`baggo-action-btn ${wishlistIds.includes(quickViewProduct.id) ? 'active' : ''}`}
+                      onClick={() => toggleWishlist(quickViewProduct.id)}
+                      style={{ width: 44, height: 44, borderRadius: 4 }}
+                      title={wishlistIds.includes(quickViewProduct.id) ? 'Remove from Wishlist' : 'Save to Wishlist'}
+                    >
+                      {wishlistIds.includes(quickViewProduct.id) ? '♥' : '♡'}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

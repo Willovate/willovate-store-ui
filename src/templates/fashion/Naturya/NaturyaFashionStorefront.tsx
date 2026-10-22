@@ -1395,21 +1395,13 @@ export const NaturyaFashionStorefront: React.FC<NaturyaStorefrontProps> = ({
                 </button>
                 <button
                   type="button"
-                  style={{
-                    background: 'transparent',
-                    border: '1px solid var(--nat-border)',
-                    padding: '12px',
-                    borderRadius: 'var(--nat-radius-btn)',
-                    fontSize: '13px',
-                    fontWeight: 600,
-                    cursor: 'pointer',
-                  }}
+                  className="wv-full-pdp-btn"
                   onClick={() => {
                     handleOpenPdp(quickViewProduct)
                     setQuickViewProduct(null)
                   }}
                 >
-                  View full details →
+                  Full Description View →
                 </button>
               </div>
             </div>

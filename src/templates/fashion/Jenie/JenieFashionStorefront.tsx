@@ -1489,15 +1489,27 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
                 <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.6, marginBottom: 16 }}>
                   {quickViewProduct.description}
                 </p>
-                <button
-                  className="jenie-btn jenie-btn-primary"
-                  onClick={() => {
-                    addToCart(quickViewProduct, quickViewProduct.sizes[0] || '28', quickViewProduct.wash, 1)
-                    setIsQuickViewOpen(false)
-                  }}
-                >
-                  Add to Bag
-                </button>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  <button
+                    type="button"
+                    className="wv-full-pdp-btn"
+                    onClick={() => {
+                      setIsQuickViewOpen(false)
+                      openPdp(quickViewProduct)
+                    }}
+                  >
+                    Full Description View →
+                  </button>
+                  <button
+                    className="jenie-btn jenie-btn-primary"
+                    onClick={() => {
+                      addToCart(quickViewProduct, quickViewProduct.sizes[0] || '28', quickViewProduct.wash, 1)
+                      setIsQuickViewOpen(false)
+                    }}
+                  >
+                    Add to Bag
+                  </button>
+                </div>
               </div>
             </div>
           </div>

@@ -24,6 +24,7 @@ import {
   StorefrontMobileNavDrawer,
   type MobileNavItem,
 } from '../../common/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
 import './styles/dtSpalab.css'
 
 export function DtSpalabStorefront({
@@ -39,6 +40,8 @@ export function DtSpalabStorefront({
   const effectiveDevice = (deviceView as string) || device || 'desktop'
 
   // Category filter state
+  const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
+  const [selectedProduct, setSelectedProduct] = useState<DtSpalabProduct | null>(null)
   const [activeCategory, setActiveCategory] = useState<'all' | 'facial' | 'massage' | 'pedicure' | 'aromatherapy'>('all')
 
   // Modals & Drawers
@@ -216,7 +219,7 @@ export function DtSpalabStorefront({
 
             {/* Brand Logo - User constraint: ONLY name show, no password buddha */}
             <div style={{ display: 'flex', alignItems: 'center' }}>
-              <a href="#hero" className="dtspa-logo-title">
+              <a href="#hero" className="dtspa-logo-title" onClick={(e) => { e.preventDefault(); setViewMode('home'); setSelectedProduct(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
                 Dt-Spalab
               </a>
             </div>
@@ -225,37 +228,37 @@ export function DtSpalabStorefront({
             <nav className="dtspa-nav">
               <ul className="dtspa-nav-menu">
                 <li className="wv-nav-dropdown-wrap">
-                  <a href="#hero" className="dtspa-nav-link active">HOME ▾</a>
+                  <a href="#hero" className="dtspa-nav-link active" onClick={() => { setViewMode('home'); setSelectedProduct(null) }}>HOME ▾</a>
                   <div className="wv-desktop-dropdown">
-                    <a href="#hero">Spa Sanctuary</a>
-                    <a href="#about">Special Offers</a>
+                    <a href="#hero" onClick={() => { setViewMode('home'); setSelectedProduct(null) }}>Spa Sanctuary</a>
+                    <a href="#about" onClick={() => { setViewMode('home'); setSelectedProduct(null) }}>Special Offers</a>
                   </div>
                 </li>
                 <li className="wv-nav-dropdown-wrap">
-                  <a href="#about" className="dtspa-nav-link">ABOUT ▾</a>
+                  <a href="#about" className="dtspa-nav-link" onClick={() => { setViewMode('home'); setSelectedProduct(null) }}>ABOUT ▾</a>
                   <div className="wv-desktop-dropdown">
-                    <a href="#about">Our Philosophy</a>
-                    <a href="#testimonials">Client Stories</a>
+                    <a href="#about" onClick={() => { setViewMode('home'); setSelectedProduct(null) }}>Our Philosophy</a>
+                    <a href="#testimonials" onClick={() => { setViewMode('home'); setSelectedProduct(null) }}>Client Stories</a>
                   </div>
                 </li>
                 <li className="wv-nav-dropdown-wrap">
-                  <a href="#services" className="dtspa-nav-link">SERVICES ▾</a>
+                  <a href="#services" className="dtspa-nav-link" onClick={() => { setViewMode('home'); setSelectedProduct(null) }}>SERVICES ▾</a>
                   <div className="wv-desktop-dropdown">
-                    <button onClick={() => { setActiveCategory('facial'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>Facial Mask</button>
-                    <button onClick={() => { setActiveCategory('massage'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>Therapeutic Massage</button>
-                    <button onClick={() => { setActiveCategory('pedicure'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>Pedicure Care</button>
-                    <button onClick={() => { setActiveCategory('aromatherapy'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>Aromatherapy</button>
+                    <button onClick={() => { setViewMode('home'); setSelectedProduct(null); setActiveCategory('facial'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>Facial Mask</button>
+                    <button onClick={() => { setViewMode('home'); setSelectedProduct(null); setActiveCategory('massage'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>Therapeutic Massage</button>
+                    <button onClick={() => { setViewMode('home'); setSelectedProduct(null); setActiveCategory('pedicure'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>Pedicure Care</button>
+                    <button onClick={() => { setViewMode('home'); setSelectedProduct(null); setActiveCategory('aromatherapy'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>Aromatherapy</button>
                   </div>
                 </li>
                 <li className="wv-nav-dropdown-wrap">
-                  <a href="#products" className="dtspa-nav-link">SHOP ▾</a>
+                  <a href="#products" className="dtspa-nav-link" onClick={() => { setViewMode('home'); setSelectedProduct(null) }}>SHOP ▾</a>
                   <div className="wv-desktop-dropdown">
-                    <button onClick={() => { setActiveCategory('all'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>All Formulations</button>
-                    <a href="#products">Popular Products</a>
+                    <button onClick={() => { setViewMode('home'); setSelectedProduct(null); setActiveCategory('all'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>All Formulations</button>
+                    <a href="#products" onClick={() => { setViewMode('home'); setSelectedProduct(null) }}>Popular Products</a>
                   </div>
                 </li>
-                <li><a href="#blog" className="dtspa-nav-link">BLOG</a></li>
-                <li><a href="#footer" className="dtspa-nav-link">CONTACT</a></li>
+                <li><a href="#blog" className="dtspa-nav-link" onClick={() => { setViewMode('home'); setSelectedProduct(null) }}>BLOG</a></li>
+                <li><a href="#footer" className="dtspa-nav-link" onClick={() => { setViewMode('home'); setSelectedProduct(null) }}>CONTACT</a></li>
               </ul>
             </nav>
 
@@ -315,8 +318,33 @@ export function DtSpalabStorefront({
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="dtspa-hero" id="hero">
+      {viewMode === 'pdp' && selectedProduct ? (
+        <StorefrontProductDetailPage
+          product={selectedProduct}
+          brandName="Dt-Spalab"
+          accentColor="#56236b"
+          currencyPrefix={currency === 'INR' ? '₹' : '$'}
+          formatPrice={formatPrice}
+          onBack={() => {
+            setViewMode('home')
+            setSelectedProduct(null)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          onAddToCart={(prod) => handleAddToCart(prod)}
+          onBuyNow={(prod) => {
+            handleAddToCart(prod)
+            showToast('Instant checkout initiated!')
+          }}
+          relatedProducts={DTSPALAB_PRODUCTS.filter((p) => p.id !== selectedProduct.id)}
+          onSelectRelated={(p) => {
+            setSelectedProduct(p as DtSpalabProduct)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+        />
+      ) : (
+        <>
+          {/* Hero Section */}
+          <section className="dtspa-hero" id="hero">
         <div className="dtspa-container">
           <div className="dtspa-hero-grid">
             <div>
@@ -762,6 +790,8 @@ export function DtSpalabStorefront({
           </div>
         </div>
       </footer>
+      </>
+      )}
 
       {/* Cart Drawer */}
       {isCartOpen && (
@@ -925,6 +955,18 @@ export function DtSpalabStorefront({
                     </svg>
                   </button>
                 </div>
+                <button
+                  type="button"
+                  className="wv-full-pdp-btn"
+                  onClick={() => {
+                    setSelectedProduct(quickViewProduct)
+                    setViewMode('pdp')
+                    setQuickViewProduct(null)
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                  }}
+                >
+                  Full Description View →
+                </button>
               </div>
             </div>
           </div>

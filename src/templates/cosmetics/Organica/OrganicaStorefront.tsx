@@ -25,6 +25,7 @@ import {
   StorefrontMobileNavDrawer,
   type MobileNavItem,
 } from '../../common/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
 import './styles/organica.css'
 
 export function OrganicaStorefront({
@@ -40,6 +41,8 @@ export function OrganicaStorefront({
   const effectiveDevice = (deviceView as string) || device || 'desktop'
 
   // Navigation & Category Tab state
+  const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
+  const [selectedProduct, setSelectedProduct] = useState<OrganicaProduct | null>(null)
   const [activeTab, setActiveTab] = useState<'all' | 'beauty' | 'health' | 'newest'>('all')
   const [selectedSearchCategory, setSelectedSearchCategory] = useState('All Categories')
   const [activeSlide, setActiveSlide] = useState(0)
@@ -232,7 +235,7 @@ export function OrganicaStorefront({
             </div>
 
             {/* Logo */}
-            <a href="#organica" style={{ display: 'flex', alignItems: 'center' }}>
+            <a href="#organica" style={{ display: 'flex', alignItems: 'center' }} onClick={(e) => { e.preventDefault(); setViewMode('home'); setSelectedProduct(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
               <img src={ORGANICA_LOGO} alt="Organica" className="organica-logo-img" />
             </a>
 
@@ -321,6 +324,10 @@ export function OrganicaStorefront({
                 <span
                   className="organica-nav-link"
                   onClick={() => {
+                    if (viewMode === 'pdp') {
+                      setViewMode('home')
+                      setSelectedProduct(null)
+                    }
                     if (item.children && item.children.length > 0) {
                       item.children[0].onClick?.()
                     } else {
@@ -369,8 +376,33 @@ export function OrganicaStorefront({
         </div>
       </section>
 
-      {/* 5. Split Hero Section (Main Slider + 2 Side Banners) */}
-      <section className="organica-hero-section">
+      {viewMode === 'pdp' && selectedProduct ? (
+        <StorefrontProductDetailPage
+          product={selectedProduct}
+          brandName="Organica"
+          accentColor="#77a43b"
+          currencyPrefix={currency === 'INR' ? '₹' : '$'}
+          formatPrice={formatPrice}
+          onBack={() => {
+            setViewMode('home')
+            setSelectedProduct(null)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          onAddToCart={(prod) => handleAddToCart(prod)}
+          onBuyNow={(prod) => {
+            handleAddToCart(prod)
+            showToast('Instant checkout initiated!')
+          }}
+          relatedProducts={ORGANICA_PRODUCTS.filter((p) => p.id !== selectedProduct.id)}
+          onSelectRelated={(p) => {
+            setSelectedProduct(p as OrganicaProduct)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+        />
+      ) : (
+        <>
+          {/* 5. Split Hero Section (Main Slider + 2 Side Banners) */}
+          <section className="organica-hero-section">
         <div className="organica-container">
           <div className="organica-hero-grid">
             {/* Main Hero Slider */}
@@ -823,6 +855,8 @@ export function OrganicaStorefront({
           </div>
         </div>
       </footer>
+      </>
+      )}
 
       {/* Cart Drawer */}
       {isCartOpen && (
@@ -989,6 +1023,18 @@ export function OrganicaStorefront({
                 }}
               >
                 Add to Cart • {formatPrice(quickViewProduct.price)}
+              </button>
+              <button
+                type="button"
+                className="wv-full-pdp-btn"
+                onClick={() => {
+                  setSelectedProduct(quickViewProduct)
+                  setViewMode('pdp')
+                  setQuickViewProduct(null)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                Full Description View →
               </button>
             </div>
           </div>

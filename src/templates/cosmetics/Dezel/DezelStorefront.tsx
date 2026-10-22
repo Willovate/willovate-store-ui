@@ -20,6 +20,7 @@ import {
   StorefrontMobileNavDrawer,
   type MobileNavItem,
 } from '../../common/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
 import './styles/dezel.css'
 
 export function DezelStorefront({
@@ -34,7 +35,9 @@ export function DezelStorefront({
 }: DezelStorefrontProps) {
   const effectiveDevice = (deviceView as string) || device || 'desktop'
 
-  // Slide state
+  // State
+  const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
+  const [selectedProduct, setSelectedProduct] = useState<DezelProduct | null>(null)
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
   const currentSlide = DEZEL_HERO_SLIDES[currentSlideIndex] || DEZEL_HERO_SLIDES[0]
 
@@ -204,7 +207,7 @@ export function DezelStorefront({
             </button>
 
             {/* Logo */}
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }} onClick={() => { setViewMode('home'); setSelectedProduct(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
               <img src={DEZEL_LOGO} alt="Dezel Perfume" className="dezel-logo-img" />
             </div>
 
@@ -216,6 +219,10 @@ export function DezelStorefront({
                     <span
                       className="dezel-nav-link"
                       onClick={() => {
+                        if (viewMode === 'pdp') {
+                          setViewMode('home')
+                          setSelectedProduct(null)
+                        }
                         if (item.children && item.children.length > 0) {
                           item.children[0].onClick?.()
                         } else {
@@ -303,8 +310,33 @@ export function DezelStorefront({
         </div>
       </header>
 
-      {/* Split Hero Section */}
-      <section className="dezel-hero-section" id="hero">
+      {viewMode === 'pdp' && selectedProduct ? (
+        <StorefrontProductDetailPage
+          product={selectedProduct}
+          brandName="Dezel"
+          accentColor="#1a6f82"
+          currencyPrefix={currency === 'INR' ? '₹' : '$'}
+          formatPrice={formatPrice}
+          onBack={() => {
+            setViewMode('home')
+            setSelectedProduct(null)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          onAddToCart={(prod) => handleAddToCart(prod)}
+          onBuyNow={(prod) => {
+            handleAddToCart(prod)
+            showToast('Instant checkout initiated!')
+          }}
+          relatedProducts={DEZEL_PRODUCTS.filter((p) => p.id !== selectedProduct.id)}
+          onSelectRelated={(p) => {
+            setSelectedProduct(p as DezelProduct)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+        />
+      ) : (
+        <>
+          {/* Split Hero Section */}
+          <section className="dezel-hero-section" id="hero">
         {/* Left Teal Column */}
         <div className="dezel-hero-left">
           <div>
@@ -671,6 +703,8 @@ export function DezelStorefront({
           </div>
         </div>
       </footer>
+      </>
+      )}
 
       {/* Cart Drawer */}
       {isCartOpen && (
@@ -845,6 +879,18 @@ export function DezelStorefront({
                     </svg>
                   </button>
                 </div>
+                <button
+                  type="button"
+                  className="wv-full-pdp-btn"
+                  onClick={() => {
+                    setSelectedProduct(quickViewProduct)
+                    setViewMode('pdp')
+                    setQuickViewProduct(null)
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                  }}
+                >
+                  Full Description View →
+                </button>
               </div>
             </div>
           </div>

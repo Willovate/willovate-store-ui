@@ -21,6 +21,7 @@ import {
   StorefrontMobileNavDrawer,
   type MobileNavItem,
 } from '../../common/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
 import './styles/shoesWorkDo.css'
 
 export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
@@ -36,6 +37,8 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
   const effectiveDevice = deviceView || device || 'desktop'
 
   // State
+  const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
+  const [selectedProduct, setSelectedProduct] = useState<ShoesWorkDoProduct | null>(null)
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
   const [activeCategory, setActiveCategory] = useState('all')
   const [currency, setCurrency] = useState<'INR' | 'USD'>('INR')
@@ -310,8 +313,76 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
         </div>
       </header>
 
-      {/* Hero & Category Sidebar Section */}
-      <section className="swd-hero-section">
+      {viewMode === 'pdp' && selectedProduct ? (
+        <StorefrontProductDetailPage
+          product={{
+            id: selectedProduct.id,
+            name: selectedProduct.name,
+            price: selectedProduct.price,
+            originalPrice: selectedProduct.originalPrice,
+            image: selectedProduct.image,
+            description: selectedProduct.description,
+            category: selectedProduct.category,
+            rating: selectedProduct.rating || 4.9,
+            reviewsCount: selectedProduct.reviewCount || 42,
+            inStock: true,
+            sku: `SWD-${selectedProduct.id.toUpperCase()}`,
+            gallery: [selectedProduct.image],
+            colors: ['#0f172a', '#ef4444', '#ffffff'],
+            sizes: selectedProduct.availableSizes?.map(String) || ['7', '8', '9', '10', '11'],
+            specs: {
+              Brand: selectedProduct.brand || 'WorkDo Performance',
+              Category: selectedProduct.category,
+              Sole: 'Multi-Directional Rubber Lug Outsole',
+              Insole: 'Ortholite High Rebound Sockliner',
+            },
+            features: [
+              'High-abrasion rubber compound for all-day grip',
+              'Breathable mesh construction keeps feet cool',
+              'Energy-returning cushioning system',
+              'Comfort padded collar and tongue',
+            ],
+          }}
+          brandName="Shoes WorkDo"
+          accentColor={customAccentColor || '#ef4444'}
+          currencyPrefix={currency === 'USD' ? '$' : '₹'}
+          formatPrice={(p) => formatPrice(p)}
+          relatedProducts={[...SHOES_WORKDO_TODAY_DISCOUNTS, ...SHOES_WORKDO_BESTSELLERS]
+            .filter((p) => p.id !== selectedProduct.id)
+            .slice(0, 4)
+            .map((p) => ({
+              id: p.id,
+              name: p.name,
+              price: p.price,
+              originalPrice: p.originalPrice,
+              image: p.image,
+              category: p.category,
+              rating: p.rating || 4.8,
+            }))}
+          onBack={() => {
+            setViewMode('home')
+            setSelectedProduct(null)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          onAddToCart={(_prod, _col, sz, qty) => {
+            for (let i = 0; i < (qty || 1); i++) {
+              handleAddToCart(selectedProduct, sz ? Number(sz) : undefined)
+            }
+          }}
+          onBuyNow={(_prod, _col, sz, qty) => {
+            for (let i = 0; i < (qty || 1); i++) {
+              handleAddToCart(selectedProduct, sz ? Number(sz) : undefined)
+            }
+            setIsCartOpen(true)
+            showToast('Instant checkout initiated!')
+          }}
+          onToggleWishlist={(id) => toggleWishlist(id)}
+          isWishlisted={wishlist.includes(selectedProduct.id)}
+        />
+      ) : (
+        <>
+          {/* Hero & Category Sidebar Section */}
+          <section className="swd-hero-section">
         <div className="swd-hero-container">
           {/* Left Column: Sidebar Menu + 24h Delivery Promo */}
           <div className="swd-sidebar">
@@ -1018,6 +1089,8 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
           </div>
         </div>
       </section>
+        </>
+      )}
 
       {/* Footer */}
       <footer className="swd-footer">
@@ -1236,16 +1309,30 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
                 </div>
               </div>
 
-              <button
-                type="button"
-                className="swd-add-cart-btn"
-                onClick={() => {
-                  handleAddToCart(quickViewProduct)
-                  setQuickViewProduct(null)
-                }}
-              >
-                Add to Cart ›
-              </button>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <button
+                  type="button"
+                  className="wv-full-pdp-btn"
+                  onClick={() => {
+                    setSelectedProduct(quickViewProduct)
+                    setViewMode('pdp')
+                    setQuickViewProduct(null)
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                  }}
+                >
+                  Full Description View →
+                </button>
+                <button
+                  type="button"
+                  className="swd-add-cart-btn"
+                  onClick={() => {
+                    handleAddToCart(quickViewProduct)
+                    setQuickViewProduct(null)
+                  }}
+                >
+                  Add to Cart ›
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -1390,7 +1477,12 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
         }))}
         onSelectProduct={(p) => {
           const fullProd = [...SHOES_WORKDO_TODAY_DISCOUNTS, ...SHOES_WORKDO_BESTSELLERS, ...SHOES_WORKDO_RETRO_SHOES].find((x) => x.id === p.id)
-          if (fullProd) setQuickViewProduct(fullProd)
+          if (fullProd) {
+            setSelectedProduct(fullProd)
+            setViewMode('pdp')
+            setIsSearchOpen(false)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }
         }}
         accentColor={customAccentColor || '#f97316'}
         formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
@@ -1418,7 +1510,12 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
         }}
         onOpenProduct={(p) => {
           const fullProd = [...SHOES_WORKDO_TODAY_DISCOUNTS, ...SHOES_WORKDO_BESTSELLERS, ...SHOES_WORKDO_RETRO_SHOES].find((x) => x.id === p.id)
-          if (fullProd) setQuickViewProduct(fullProd)
+          if (fullProd) {
+            setSelectedProduct(fullProd)
+            setViewMode('pdp')
+            setIsWishlistOpen(false)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }
         }}
         accentColor={customAccentColor || '#f97316'}
         formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}

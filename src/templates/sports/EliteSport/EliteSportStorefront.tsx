@@ -983,15 +983,27 @@ export function EliteSportStorefront({
                   </button>
                 ))}
               </div>
-              <button
-                className="el-add-button"
-                onClick={() => {
-                  addToCart(quickViewProduct, quickViewSize, quickViewProduct.color)
-                  setQuickViewProduct(null)
-                }}
-              >
-                ADD TO BAG <span>{formatPrice(quickViewProduct.price)} ↗</span>
-              </button>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <button
+                  type="button"
+                  className="wv-full-pdp-btn"
+                  onClick={() => {
+                    openProduct(quickViewProduct)
+                    setQuickViewProduct(null)
+                  }}
+                >
+                  Full Description View →
+                </button>
+                <button
+                  className="el-add-button"
+                  onClick={() => {
+                    addToCart(quickViewProduct, quickViewSize, quickViewProduct.color)
+                    setQuickViewProduct(null)
+                  }}
+                >
+                  ADD TO BAG <span>{formatPrice(quickViewProduct.price)} ↗</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -24,6 +24,7 @@ import {
   StorefrontMobileNavDrawer,
   type MobileNavItem,
 } from '../../common/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
 import './styles/belletny.css'
 
 export function BelletnyStorefront({
@@ -39,6 +40,8 @@ export function BelletnyStorefront({
   const effectiveDevice = (deviceView as string) || device || 'desktop'
 
   // Navigation & Tabs
+  const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
+  const [selectedProduct, setSelectedProduct] = useState<BelletnyProduct | null>(null)
   const [activeSlide, setActiveSlide] = useState(0)
   const [activeTab, setActiveTab] = useState<'all' | 'featured' | 'latest' | 'bestseller'>('featured')
 
@@ -214,7 +217,7 @@ export function BelletnyStorefront({
             </div>
 
             {/* Logo */}
-            <a href="#belletny" className="belletny-logo-wrap">
+            <a href="#belletny" className="belletny-logo-wrap" onClick={(e) => { e.preventDefault(); setViewMode('home'); setSelectedProduct(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
               <img src={BELLETNY_LOGO} alt="Belletny" className="belletny-logo-img" />
             </a>
 
@@ -295,6 +298,10 @@ export function BelletnyStorefront({
                 <span
                   className="belletny-nav-link"
                   onClick={() => {
+                    if (viewMode === 'pdp') {
+                      setViewMode('home')
+                      setSelectedProduct(null)
+                    }
                     if (item.children && item.children.length > 0) {
                       item.children[0].onClick?.()
                     } else {
@@ -326,8 +333,33 @@ export function BelletnyStorefront({
         </div>
       </nav>
 
-      {/* 3. Hero Section Slider */}
-      <section className="belletny-hero-section">
+      {viewMode === 'pdp' && selectedProduct ? (
+        <StorefrontProductDetailPage
+          product={selectedProduct}
+          brandName="Belletny"
+          accentColor="#8e2043"
+          currencyPrefix={currency === 'INR' ? '₹' : '$'}
+          formatPrice={formatPrice}
+          onBack={() => {
+            setViewMode('home')
+            setSelectedProduct(null)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          onAddToCart={(prod) => handleAddToCart(prod)}
+          onBuyNow={(prod) => {
+            handleAddToCart(prod)
+            showToast('Instant checkout initiated!')
+          }}
+          relatedProducts={BELLETNY_PRODUCTS.filter((p) => p.id !== selectedProduct.id)}
+          onSelectRelated={(p) => {
+            setSelectedProduct(p as BelletnyProduct)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+        />
+      ) : (
+        <>
+          {/* 3. Hero Section Slider */}
+          <section className="belletny-hero-section">
         <img src={currentSlide.image} alt={currentSlide.title} className="belletny-hero-bg" />
         <div className="belletny-container" style={{ width: '100%' }}>
           <div className="belletny-hero-content">
@@ -682,6 +714,8 @@ export function BelletnyStorefront({
           </div>
         </div>
       </footer>
+      </>
+      )}
 
       {/* Cart Drawer */}
       {isCartOpen && (
@@ -839,6 +873,18 @@ export function BelletnyStorefront({
                 }}
               >
                 Add to Cart • {formatPrice(quickViewProduct.price)}
+              </button>
+              <button
+                type="button"
+                className="wv-full-pdp-btn"
+                onClick={() => {
+                  setSelectedProduct(quickViewProduct)
+                  setViewMode('pdp')
+                  setQuickViewProduct(null)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                Full Description View →
               </button>
             </div>
           </div>

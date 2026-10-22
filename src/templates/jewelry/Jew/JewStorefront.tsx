@@ -1550,17 +1550,29 @@ export const JewStorefront: React.FC<JewStorefrontProps> = ({
                 <p style={{ fontSize: '13px', lineHeight: 1.6, color: '#666', marginBottom: '20px' }}>
                   {quickViewProduct.description}
                 </p>
-                <button
-                  type="button"
-                  className="jew-hero-btn"
-                  style={{ width: '100%' }}
-                  onClick={() => {
-                    handleAddToCart(quickViewProduct)
-                    setIsQuickViewOpen(false)
-                  }}
-                >
-                  Add to Cart
-                </button>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  <button
+                    type="button"
+                    className="wv-full-pdp-btn"
+                    onClick={() => {
+                      setIsQuickViewOpen(false)
+                      openPdp(quickViewProduct)
+                    }}
+                  >
+                    Full Description View →
+                  </button>
+                  <button
+                    type="button"
+                    className="jew-hero-btn"
+                    style={{ width: '100%' }}
+                    onClick={() => {
+                      handleAddToCart(quickViewProduct)
+                      setIsQuickViewOpen(false)
+                    }}
+                  >
+                    Add to Cart
+                  </button>
+                </div>
               </div>
             </div>
           </div>

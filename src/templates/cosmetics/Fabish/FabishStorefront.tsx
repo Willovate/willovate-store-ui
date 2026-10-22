@@ -25,6 +25,7 @@ import {
   StorefrontMobileNavDrawer,
   type MobileNavItem,
 } from '../../common/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
 import './styles/fabish.css'
 
 export function FabishStorefront({
@@ -40,6 +41,8 @@ export function FabishStorefront({
   const effectiveDevice = (deviceView as string) || device || 'desktop'
 
   // Navigation & Category Tab state
+  const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
+  const [selectedProduct, setSelectedProduct] = useState<FabishProduct | null>(null)
   const [activeTab, setActiveTab] = useState<'all' | 'skin-care' | 'body-care' | 'hair-care'>('all')
   const [activeSlide, setActiveSlide] = useState(0)
 
@@ -235,7 +238,7 @@ export function FabishStorefront({
           </button>
 
           {/* Logo */}
-          <a href="#fabish" className="fabish-logo-link">
+          <a href="#fabish" className="fabish-logo-link" onClick={(e) => { e.preventDefault(); setViewMode('home'); setSelectedProduct(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
             <img src={FABISH_LOGO} alt="Fabish" className="fabish-logo-img" />
           </a>
 
@@ -247,6 +250,10 @@ export function FabishStorefront({
                   <span
                     className="fabish-nav-link"
                     onClick={() => {
+                      if (viewMode === 'pdp') {
+                        setViewMode('home')
+                        setSelectedProduct(null)
+                      }
                       if (item.children && item.children.length > 0) {
                         item.children[0].onClick?.()
                       } else {
@@ -332,8 +339,33 @@ export function FabishStorefront({
         </div>
       </header>
 
-      {/* 3. Hero Section Slider */}
-      <section className="fabish-hero-section">
+      {viewMode === 'pdp' && selectedProduct ? (
+        <StorefrontProductDetailPage
+          product={selectedProduct}
+          brandName="Fabish"
+          accentColor="#2e5b4b"
+          currencyPrefix={currency === 'INR' ? '₹' : '$'}
+          formatPrice={formatPrice}
+          onBack={() => {
+            setViewMode('home')
+            setSelectedProduct(null)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          onAddToCart={(prod) => handleAddToCart(prod)}
+          onBuyNow={(prod) => {
+            handleAddToCart(prod)
+            displayToast('Instant checkout initiated!')
+          }}
+          relatedProducts={FABISH_PRODUCTS.filter((p) => p.id !== selectedProduct.id)}
+          onSelectRelated={(p) => {
+            setSelectedProduct(p as FabishProduct)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+        />
+      ) : (
+        <>
+          {/* 3. Hero Section Slider */}
+          <section className="fabish-hero-section">
         <div className="fabish-hero-container">
           <div className="fabish-hero-content">
             <span className="fabish-hero-eyebrow">{currentSlide.eyebrow}</span>
@@ -787,6 +819,8 @@ export function FabishStorefront({
           </button>
         </div>
       )}
+      </>
+      )}
 
       {/* 14. Cart Drawer */}
       {isCartOpen && (
@@ -931,6 +965,18 @@ export function FabishStorefront({
                 }}
               >
                 Add to Cart • {formatPrice(quickViewProduct.price)}
+              </button>
+              <button
+                type="button"
+                className="wv-full-pdp-btn"
+                onClick={() => {
+                  setSelectedProduct(quickViewProduct)
+                  setViewMode('pdp')
+                  setQuickViewProduct(null)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                Full Description View →
               </button>
             </div>
           </div>

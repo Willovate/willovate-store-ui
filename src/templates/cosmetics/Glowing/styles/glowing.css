@@ -74,7 +74,7 @@
 
 /* Header */
 .glowing-header {
-  padding: 20px 0;
+  padding: 16px 0;
   border-bottom: 1px solid var(--glowing-border);
   background: #ffffff;
   position: sticky;
@@ -88,6 +88,30 @@
   justify-content: space-between;
 }
 
+.glowing-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+.glowing-currency-select {
+  background: #f8fafc;
+  color: #111827;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.glowing-currency-select:hover {
+  border-color: #cbd5e1;
+}
+
 .glowing-nav-left {
   display: flex;
   align-items: center;
@@ -95,23 +119,12 @@
   flex: 1;
 }
 
-.glowing-nav-link {
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 600;
-  color: #222222;
-  letter-spacing: 0.5px;
-  transition: color 0.2s ease;
-  padding: 4px 0;
-}
-
-.glowing-nav-link:hover, .glowing-nav-link.active {
-  color: var(--glowing-accent);
-}
-
 .glowing-logo-center {
   flex: 1;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .glowing-logo-img {
@@ -125,6 +138,49 @@
   justify-content: flex-end;
   gap: 18px;
   flex: 1;
+}
+
+/* Dedicated Centered Navbar */
+.glowing-navbar {
+  background: #ffffff;
+  border-bottom: 1px solid var(--glowing-border);
+  padding: 12px 0;
+}
+
+.glowing-nav-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.glowing-nav-item {
+  position: relative;
+}
+
+.glowing-nav-link {
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #222222;
+  letter-spacing: 0.5px;
+  transition: color 0.2s ease;
+  padding: 4px 0;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.glowing-nav-link:hover, .glowing-nav-link.active {
+  color: var(--glowing-accent);
+}
+
+@media (max-width: 768px) {
+  .glowing-navbar {
+    display: none !important;
+  }
 }
 
 .glowing-action-btn {

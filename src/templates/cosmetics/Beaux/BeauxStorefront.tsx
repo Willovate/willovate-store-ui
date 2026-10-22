@@ -20,6 +20,7 @@ import {
   StorefrontMobileNavDrawer,
   type MobileNavItem,
 } from '../../common/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
 import './styles/beaux.css'
 
 export const BeauxStorefront: React.FC<BeauxStorefrontProps> = ({
@@ -35,6 +36,8 @@ export const BeauxStorefront: React.FC<BeauxStorefrontProps> = ({
   const effectiveDevice = deviceView || device || 'desktop'
 
   // State
+  const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
+  const [selectedProduct, setSelectedProduct] = useState<BeauxProduct | null>(null)
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
   const [currency, setCurrency] = useState<'USD' | 'INR' | 'EUR' | 'GBP'>('USD')
   const [cartItems, setCartItems] = useState<BeauxCartItem[]>([
@@ -209,7 +212,7 @@ export const BeauxStorefront: React.FC<BeauxStorefrontProps> = ({
           </div>
 
           <div className="beaux-header-center">
-            <a href="#home">
+            <a href="#home" onClick={(e) => { e.preventDefault(); setViewMode('home'); setSelectedProduct(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
               <img src={BEAUX_LOGO} alt="Beaux Skincare" className="beaux-logo-img" />
             </a>
           </div>
@@ -248,6 +251,10 @@ export const BeauxStorefront: React.FC<BeauxStorefrontProps> = ({
                 <span
                   className="beaux-nav-link"
                   onClick={() => {
+                    if (viewMode === 'pdp') {
+                      setViewMode('home')
+                      setSelectedProduct(null)
+                    }
                     if (item.children && item.children.length > 0) {
                       item.children[0].onClick?.()
                     } else {
@@ -279,8 +286,35 @@ export const BeauxStorefront: React.FC<BeauxStorefrontProps> = ({
         </div>
       </nav>
 
-      {/* Hero Slideshow */}
-      <section className="beaux-hero-section">
+      {viewMode === 'pdp' && selectedProduct ? (
+        <StorefrontProductDetailPage
+          product={selectedProduct}
+          brandName="Beaux"
+          accentColor="#e87868"
+          currencyPrefix={currency === 'INR' ? '₹' : currency === 'EUR' ? '€' : currency === 'GBP' ? '£' : '$'}
+          formatPrice={formatPrice}
+          onBack={() => {
+            setViewMode('home')
+            setSelectedProduct(null)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          onAddToCart={(prod) => handleAddToCart(prod)}
+          onBuyNow={(prod) => {
+            handleAddToCart(prod)
+            showToast('Instant checkout initiated!')
+          }}
+          relatedProducts={[...BEAUX_WHATS_NEW_PRODUCTS, ...BEAUX_BLOCKBUSTER_PRODUCTS].filter(
+            (p) => p.id !== selectedProduct.id
+          )}
+          onSelectRelated={(p) => {
+            setSelectedProduct(p as BeauxProduct)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+        />
+      ) : (
+        <>
+          {/* Hero Slideshow */}
+          <section className="beaux-hero-section">
         <button className="beaux-hero-nav-arrow prev" onClick={handlePrevSlide} aria-label="Previous Slide">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <polyline points="15 18 9 12 15 6" />
@@ -599,6 +633,8 @@ export const BeauxStorefront: React.FC<BeauxStorefrontProps> = ({
           </div>
         </div>
       </footer>
+      </>
+      )}
 
       {/* Shopping Bag Drawer */}
       {isCartOpen && (
@@ -671,6 +707,18 @@ export const BeauxStorefront: React.FC<BeauxStorefrontProps> = ({
                 }}
               >
                 Add To Cart
+              </button>
+              <button
+                type="button"
+                className="wv-full-pdp-btn"
+                onClick={() => {
+                  setSelectedProduct(quickViewProduct)
+                  setViewMode('pdp')
+                  setQuickViewProduct(null)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                Full Description View →
               </button>
             </div>
           </div>

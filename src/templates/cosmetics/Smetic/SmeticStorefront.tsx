@@ -19,6 +19,7 @@ import {
   StorefrontMobileNavDrawer,
   type MobileNavItem,
 } from '../../common/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
 import './styles/smetic.css'
 
 export function SmeticStorefront({
@@ -34,6 +35,8 @@ export function SmeticStorefront({
   const effectiveDevice = (deviceView as string) || device || 'desktop'
 
   // Slider & Tabs
+  const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
+  const [selectedProduct, setSelectedProduct] = useState<SmeticProduct | null>(null)
   const [activeSlide, setActiveSlide] = useState(0)
   const [activeTab, setActiveTab] = useState<'all' | 'new-arrivals' | 'best-sellers' | 'top-rates'>('new-arrivals')
 
@@ -217,7 +220,7 @@ export function SmeticStorefront({
             </button>
 
             {/* Logo */}
-            <a href="#smetic" style={{ display: 'flex', alignItems: 'center' }}>
+            <a href="#smetic" style={{ display: 'flex', alignItems: 'center' }} onClick={(e) => { e.preventDefault(); setViewMode('home'); setSelectedProduct(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
               <img src={SMETIC_LOGO} alt="Smetic Organic Cosmetic" className="smetic-logo-img" />
             </a>
 
@@ -229,6 +232,10 @@ export function SmeticStorefront({
                     <span
                       className="smetic-nav-link"
                       onClick={() => {
+                        if (viewMode === 'pdp') {
+                          setViewMode('home')
+                          setSelectedProduct(null)
+                        }
                         if (item.children && item.children.length > 0) {
                           item.children[0].onClick?.()
                         } else {
@@ -319,8 +326,33 @@ export function SmeticStorefront({
         </div>
       </header>
 
-      {/* 2. Hero Section Slider */}
-      <section className="smetic-hero-section">
+      {viewMode === 'pdp' && selectedProduct ? (
+        <StorefrontProductDetailPage
+          product={selectedProduct}
+          brandName="Smetic"
+          accentColor="#f99191"
+          currencyPrefix={currency === 'INR' ? '₹' : '$'}
+          formatPrice={formatPrice}
+          onBack={() => {
+            setViewMode('home')
+            setSelectedProduct(null)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          onAddToCart={(prod) => handleAddToCart(prod)}
+          onBuyNow={(prod) => {
+            handleAddToCart(prod)
+            showToast('Instant checkout initiated!')
+          }}
+          relatedProducts={SMETIC_PRODUCTS.filter((p) => p.id !== selectedProduct.id)}
+          onSelectRelated={(p) => {
+            setSelectedProduct(p as SmeticProduct)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+        />
+      ) : (
+        <>
+          {/* 2. Hero Section Slider */}
+          <section className="smetic-hero-section">
         <img src={currentSlide.image} alt={currentSlide.title} className="smetic-hero-bg" />
         <div className="smetic-container" style={{ width: '100%' }}>
           <div className="smetic-hero-content">
@@ -688,6 +720,8 @@ export function SmeticStorefront({
           </div>
         </div>
       </footer>
+      </>
+      )}
 
       {/* Cart Drawer */}
       {isCartOpen && (
@@ -845,6 +879,18 @@ export function SmeticStorefront({
                 }}
               >
                 Add to Cart • {formatPrice(quickViewProduct.price)}
+              </button>
+              <button
+                type="button"
+                className="wv-full-pdp-btn"
+                onClick={() => {
+                  setSelectedProduct(quickViewProduct)
+                  setViewMode('pdp')
+                  setQuickViewProduct(null)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                Full Description View →
               </button>
             </div>
           </div>

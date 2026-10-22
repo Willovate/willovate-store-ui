@@ -20,6 +20,7 @@ import {
   StorefrontMobileNavDrawer,
   type MobileNavItem,
 } from '../../common/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
 import './styles/fashionFeet.css'
 
 export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
@@ -29,6 +30,8 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
   onUseTemplate,
   onClose,
 }) => {
+  const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
+  const [selectedProduct, setSelectedProduct] = useState<FashionFeetProduct | null>(null)
   const [currency, setCurrency] = useState<'USD' | 'INR'>('USD')
   const [currentSlide, setCurrentSlide] = useState(0)
   const [cart, setCart] = useState<FashionFeetCartItem[]>([
@@ -336,8 +339,76 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
         </div>
       </header>
 
-      {/* Hero Slider */}
-      <section className="ff-hero">
+      {viewMode === 'pdp' && selectedProduct ? (
+        <StorefrontProductDetailPage
+          product={{
+            id: selectedProduct.id,
+            name: selectedProduct.name,
+            price: selectedProduct.price,
+            originalPrice: selectedProduct.originalPrice,
+            image: selectedProduct.image,
+            description: selectedProduct.description,
+            category: selectedProduct.category,
+            rating: 4.9,
+            reviewsCount: 38,
+            inStock: true,
+            sku: `FF-${selectedProduct.id.toUpperCase()}`,
+            gallery: [selectedProduct.image],
+            colors: ['#3d5afe', '#111827', '#ffffff'],
+            sizes: selectedProduct.sizes?.map(String) || ['7', '8', '9', '10', '11'],
+            specs: {
+              Upper: 'Handcrafted Premium Burnished Leather',
+              Insole: 'Breathable Memory Gel Cushioning',
+              Outsole: 'Flexible Non-Marking Crepe Rubber',
+              Style: selectedProduct.category || 'Mens Loafers',
+            },
+            features: [
+              'Supple glove leather lining prevents friction and hotspots',
+              'Slip-on design with elasticated instep gusseting',
+              'Shock-dampening rubber sole ensures all-day comfort',
+              'Stitched welt construction for longevity',
+            ],
+          }}
+          brandName="Fashion Feet"
+          accentColor={activeColor}
+          currencyPrefix={currency === 'INR' ? '₹' : '$'}
+          formatPrice={(p) => formatPrice(p)}
+          relatedProducts={FASHIONFEET_BEST_SALE_PRODUCTS
+            .filter((p) => p.id !== selectedProduct.id)
+            .slice(0, 4)
+            .map((p) => ({
+              id: p.id,
+              name: p.name,
+              price: p.price,
+              originalPrice: p.originalPrice,
+              image: p.image,
+              category: p.category,
+              rating: 4.8,
+            }))}
+          onBack={() => {
+            setViewMode('home')
+            setSelectedProduct(null)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          onAddToCart={(_prod, _col, sz, qty) => {
+            for (let i = 0; i < (qty || 1); i++) {
+              handleAddToCart(selectedProduct, sz ? Number(sz) : 9)
+            }
+          }}
+          onBuyNow={(_prod, _col, sz, qty) => {
+            for (let i = 0; i < (qty || 1); i++) {
+              handleAddToCart(selectedProduct, sz ? Number(sz) : 9)
+            }
+            setIsCartOpen(true)
+            showToast('Instant checkout initiated!')
+          }}
+          onToggleWishlist={(id) => toggleWishlist(id, selectedProduct.name)}
+          isWishlisted={wishlist.includes(selectedProduct.id)}
+        />
+      ) : (
+        <>
+          {/* Hero Slider */}
+          <section className="ff-hero">
         <button
           className="ff-slider-nav-btn ff-slider-prev"
           onClick={() =>
@@ -642,6 +713,8 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
           </form>
         </div>
       </section>
+        </>
+      )}
 
       {/* Footer */}
       <footer className="ff-footer">
@@ -793,16 +866,31 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
                 </div>
               </div>
 
-              <button
-                className="ff-card-add-btn"
-                style={{ marginTop: 'auto', padding: '14px 0' }}
-                onClick={() => {
-                  handleAddToCart(quickViewProduct, selectedSize)
-                  setQuickViewProduct(null)
-                }}
-              >
-                ADD TO CART • {formatPrice(quickViewProduct.price)}
-              </button>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 'auto' }}>
+                <button
+                  type="button"
+                  className="wv-full-pdp-btn"
+                  onClick={() => {
+                    setSelectedProduct(quickViewProduct)
+                    setViewMode('pdp')
+                    setQuickViewProduct(null)
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                  }}
+                >
+                  Full Description View →
+                </button>
+                <button
+                  type="button"
+                  className="ff-card-add-btn"
+                  style={{ padding: '14px 0' }}
+                  onClick={() => {
+                    handleAddToCart(quickViewProduct, selectedSize)
+                    setQuickViewProduct(null)
+                  }}
+                >
+                  ADD TO CART • {formatPrice(quickViewProduct.price)}
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -921,8 +1009,10 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
         onSelectProduct={(p) => {
           const fullProd = FASHIONFEET_BEST_SALE_PRODUCTS.find((x) => x.id === p.id)
           if (fullProd) {
-            setQuickViewProduct(fullProd)
-            setSelectedSize(9)
+            setSelectedProduct(fullProd)
+            setViewMode('pdp')
+            setIsSearchOpen(false)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
           }
         }}
         currencyPrefix={currency === 'INR' ? '₹' : '$'}
@@ -953,8 +1043,10 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
         onOpenProduct={(p) => {
           const fullProd = FASHIONFEET_BEST_SALE_PRODUCTS.find((x) => x.id === p.id)
           if (fullProd) {
-            setQuickViewProduct(fullProd)
-            setSelectedSize(9)
+            setSelectedProduct(fullProd)
+            setViewMode('pdp')
+            setIsWishlistOpen(false)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
           }
         }}
         currencyPrefix={currency === 'INR' ? '₹' : '$'}

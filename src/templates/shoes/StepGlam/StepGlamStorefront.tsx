@@ -18,6 +18,7 @@ import {
   StorefrontMobileNavDrawer,
   type MobileNavItem,
 } from '../../common/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
 import './styles/stepglam.css'
 
 export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
@@ -33,6 +34,8 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
   const effectiveDevice = deviceView || device || 'desktop'
 
   // State
+  const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
+  const [selectedProduct, setSelectedProduct] = useState<StepGlamProduct | null>(null)
   const [currency, setCurrency] = useState<'INR' | 'USD'>('USD')
   const [activeCategoryTab, setActiveCategoryTab] = useState<'All' | 'Juttis' | 'Mojaris' | 'Flats' | 'Slip-Ons'>('All')
   const [openAccordionId, setOpenAccordionId] = useState<string>('acc-1')
@@ -322,8 +325,76 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="sg-hero">
+      {viewMode === 'pdp' && selectedProduct ? (
+        <StorefrontProductDetailPage
+          product={{
+            id: selectedProduct.id,
+            name: selectedProduct.name,
+            price: selectedProduct.priceInr,
+            originalPrice: selectedProduct.originalPriceInr,
+            image: selectedProduct.image,
+            description: selectedProduct.description,
+            category: selectedProduct.category,
+            rating: 4.9,
+            reviewsCount: 42,
+            inStock: true,
+            sku: `SG-${selectedProduct.id.toUpperCase()}`,
+            gallery: [selectedProduct.image],
+            colors: ['#4a044e', '#f472b6', '#fef08a'],
+            sizes: selectedProduct.availableSizes?.map(String) || ['6', '7', '8', '9'],
+            specs: {
+              Embroidery: 'Handcrafted Zardozi & Threadwork',
+              Lining: 'Pure Vegetable Tanned Leather',
+              Insole: 'Triple Layered Dual-Density Foam',
+              Sole: 'Anti-Slip Genuine Buffalo Leather',
+            },
+            features: [
+              'Zero-bite design with cushioned heel padding',
+              'Artisan hand-embroidered by master craftsmen',
+              'Breathable leather sole molds to the feet',
+              'Includes bespoke satin travel pouch',
+            ],
+          }}
+          brandName="StepGlam"
+          accentColor={customAccentColor || '#4a044e'}
+          currencyPrefix={currency === 'INR' ? '₹' : '$'}
+          formatPrice={(p) => formatPrice(p)}
+          relatedProducts={STEPGLAM_NEW_COLLECTIONS
+            .filter((p) => p.id !== selectedProduct.id)
+            .slice(0, 4)
+            .map((p) => ({
+              id: p.id,
+              name: p.name,
+              price: p.priceInr,
+              originalPrice: p.originalPriceInr,
+              image: p.image,
+              category: p.category,
+              rating: 4.8,
+            }))}
+          onBack={() => {
+            setViewMode('home')
+            setSelectedProduct(null)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          onAddToCart={(_prod, _col, sz, qty) => {
+            for (let i = 0; i < (qty || 1); i++) {
+              handleAddToCart(selectedProduct, sz ? Number(sz) : 7)
+            }
+          }}
+          onBuyNow={(_prod, _col, sz, qty) => {
+            for (let i = 0; i < (qty || 1); i++) {
+              handleAddToCart(selectedProduct, sz ? Number(sz) : 7)
+            }
+            setIsCartOpen(true)
+            showToast('Instant checkout initiated!')
+          }}
+          onToggleWishlist={(id) => toggleWishlist(id)}
+          isWishlisted={wishlist.includes(selectedProduct.id)}
+        />
+      ) : (
+        <>
+          {/* Hero Section */}
+          <section className="sg-hero">
         <div className="sg-hero-left">
           <div>
             <h1 className="sg-hero-title">
@@ -758,6 +829,8 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
           ))}
         </div>
       </section>
+        </>
+      )}
 
       {/* Footer */}
       <footer className="sg-footer">
@@ -922,31 +995,45 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
                 </div>
               </div>
 
-              <div style={{ display: 'flex', gap: 10 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 <button
                   type="button"
-                  className="sg-btn-plum"
-                  style={{ flex: 1, textAlign: 'center' }}
+                  className="wv-full-pdp-btn"
                   onClick={() => {
-                    handleAddToCart(quickViewProduct)
+                    setSelectedProduct(quickViewProduct)
+                    setViewMode('pdp')
                     setQuickViewProduct(null)
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
                   }}
                 >
-                  Add To Bag 🛍️
+                  Full Description View →
                 </button>
-                <button
-                  type="button"
-                  style={{
-                    padding: '10px 14px',
-                    border: '1px solid #e5e7eb',
-                    borderRadius: 9999,
-                    background: '#fff',
-                    cursor: 'pointer',
-                  }}
-                  onClick={() => toggleWishlist(quickViewProduct.id)}
-                >
-                  {wishlist.includes(quickViewProduct.id) ? '❤️' : '🤍'}
-                </button>
+                <div style={{ display: 'flex', gap: 10 }}>
+                  <button
+                    type="button"
+                    className="sg-btn-plum"
+                    style={{ flex: 1, textAlign: 'center' }}
+                    onClick={() => {
+                      handleAddToCart(quickViewProduct)
+                      setQuickViewProduct(null)
+                    }}
+                  >
+                    Add To Bag 🛍️
+                  </button>
+                  <button
+                    type="button"
+                    style={{
+                      padding: '10px 14px',
+                      border: '1px solid #e5e7eb',
+                      borderRadius: 9999,
+                      background: '#fff',
+                      cursor: 'pointer',
+                    }}
+                    onClick={() => toggleWishlist(quickViewProduct.id)}
+                  >
+                    {wishlist.includes(quickViewProduct.id) ? '❤️' : '🤍'}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -1092,7 +1179,12 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
         }))}
         onSelectProduct={(p) => {
           const fullProd = STEPGLAM_NEW_COLLECTIONS.find((x) => x.id === p.id)
-          if (fullProd) setQuickViewProduct(fullProd)
+          if (fullProd) {
+            setSelectedProduct(fullProd)
+            setViewMode('pdp')
+            setIsSearchOpen(false)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }
         }}
         accentColor={customAccentColor || '#d946ef'}
         formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
@@ -1120,7 +1212,12 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
         }}
         onOpenProduct={(p) => {
           const fullProd = STEPGLAM_NEW_COLLECTIONS.find((x) => x.id === p.id)
-          if (fullProd) setQuickViewProduct(fullProd)
+          if (fullProd) {
+            setSelectedProduct(fullProd)
+            setViewMode('pdp')
+            setIsWishlistOpen(false)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }
         }}
         accentColor={customAccentColor || '#d946ef'}
         formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}

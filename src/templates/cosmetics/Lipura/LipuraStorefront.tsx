@@ -19,6 +19,7 @@ import {
   StorefrontMobileNavDrawer,
   type MobileNavItem,
 } from '../../common/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
 import './styles/lipura.css'
 
 export function LipuraStorefront({
@@ -34,6 +35,8 @@ export function LipuraStorefront({
   const effectiveDevice = (deviceView as string) || device || 'desktop'
 
   // Filter state
+  const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
+  const [selectedProduct, setSelectedProduct] = useState<LipuraProduct | null>(null)
   const [activeFinish, setActiveFinish] = useState<'all' | 'matte' | 'satin' | 'velvet'>('all')
 
   // Modals & Drawers
@@ -208,7 +211,7 @@ export function LipuraStorefront({
             </button>
 
             {/* Logo */}
-            <a href="#hero" className="lipura-brand-name">
+            <a href="#hero" className="lipura-brand-name" onClick={(e) => { e.preventDefault(); setViewMode('home'); setSelectedProduct(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
               LIPURA
             </a>
 
@@ -216,29 +219,29 @@ export function LipuraStorefront({
             <nav className="lipura-nav">
               <ul className="lipura-nav-menu">
                 <li className="wv-nav-dropdown-wrap">
-                  <a href="#hero" className="lipura-nav-link active">HOME ▾</a>
+                  <a href="#hero" className="lipura-nav-link active" onClick={() => { setViewMode('home'); setSelectedProduct(null) }}>HOME ▾</a>
                   <div className="wv-desktop-dropdown">
-                    <a href="#hero">Couture Collection</a>
-                    <a href="#promos">Lookbook Edition</a>
+                    <a href="#hero" onClick={() => { setViewMode('home'); setSelectedProduct(null) }}>Couture Collection</a>
+                    <a href="#promos" onClick={() => { setViewMode('home'); setSelectedProduct(null) }}>Lookbook Edition</a>
                   </div>
                 </li>
                 <li className="wv-nav-dropdown-wrap">
-                  <a href="#promos" className="lipura-nav-link">SHOPS ▾</a>
+                  <a href="#promos" className="lipura-nav-link" onClick={() => { setViewMode('home'); setSelectedProduct(null) }}>SHOPS ▾</a>
                   <div className="wv-desktop-dropdown">
-                    <button onClick={() => { setActiveFinish('matte'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>Matte Collection</button>
-                    <button onClick={() => { setActiveFinish('satin'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>Satin Cream</button>
-                    <button onClick={() => { setActiveFinish('velvet'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>Velvet Pigment</button>
+                    <button onClick={() => { setViewMode('home'); setSelectedProduct(null); setActiveFinish('matte'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>Matte Collection</button>
+                    <button onClick={() => { setViewMode('home'); setSelectedProduct(null); setActiveFinish('satin'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>Satin Cream</button>
+                    <button onClick={() => { setViewMode('home'); setSelectedProduct(null); setActiveFinish('velvet'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>Velvet Pigment</button>
                   </div>
                 </li>
                 <li className="wv-nav-dropdown-wrap">
-                  <a href="#products" className="lipura-nav-link">PRODUCTS ▾</a>
+                  <a href="#products" className="lipura-nav-link" onClick={() => { setViewMode('home'); setSelectedProduct(null) }}>PRODUCTS ▾</a>
                   <div className="wv-desktop-dropdown">
-                    <button onClick={() => { setActiveFinish('all'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>All Lipstick Shades</button>
-                    <a href="#products">Trending Now</a>
+                    <button onClick={() => { setViewMode('home'); setSelectedProduct(null); setActiveFinish('all'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>All Lipstick Shades</button>
+                    <a href="#products" onClick={() => { setViewMode('home'); setSelectedProduct(null) }}>Trending Now</a>
                   </div>
                 </li>
-                <li><a href="#await" className="lipura-nav-link">EDITORIAL</a></li>
-                <li><a href="#footer" className="lipura-nav-link">PAGES</a></li>
+                <li><a href="#await" className="lipura-nav-link" onClick={() => { setViewMode('home'); setSelectedProduct(null) }}>EDITORIAL</a></li>
+                <li><a href="#footer" className="lipura-nav-link" onClick={() => { setViewMode('home'); setSelectedProduct(null) }}>PAGES</a></li>
               </ul>
             </nav>
 
@@ -298,12 +301,37 @@ export function LipuraStorefront({
         </div>
       </header>
 
-      {/* Giant Hero Section */}
-      <section
-        className="lipura-hero"
-        id="hero"
-        style={{ backgroundImage: `url(${LIPURA_HERO_SLIDE.image})` }}
-      >
+      {viewMode === 'pdp' && selectedProduct ? (
+        <StorefrontProductDetailPage
+          product={selectedProduct}
+          brandName="LIPURA"
+          accentColor="#d32f2f"
+          currencyPrefix={currency === 'INR' ? '₹' : '$'}
+          formatPrice={formatPrice}
+          onBack={() => {
+            setViewMode('home')
+            setSelectedProduct(null)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          onAddToCart={(prod) => handleAddToCart(prod)}
+          onBuyNow={(prod) => {
+            handleAddToCart(prod)
+            showToast('Instant checkout initiated!')
+          }}
+          relatedProducts={LIPURA_PRODUCTS.filter((p) => p.id !== selectedProduct.id)}
+          onSelectRelated={(p) => {
+            setSelectedProduct(p as LipuraProduct)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+        />
+      ) : (
+        <>
+          {/* Giant Hero Section */}
+          <section
+            className="lipura-hero"
+            id="hero"
+            style={{ backgroundImage: `url(${LIPURA_HERO_SLIDE.image})` }}
+          >
         <div className="lipura-hero-overlay" />
         <div className="lipura-container" style={{ position: 'relative', width: '100%' }}>
           <div className="lipura-hero-content">
@@ -576,6 +604,8 @@ export function LipuraStorefront({
           </div>
         </div>
       </footer>
+      </>
+      )}
 
       {/* Cart Drawer */}
       {isCartOpen && (
@@ -748,6 +778,18 @@ export function LipuraStorefront({
                     </svg>
                   </button>
                 </div>
+                <button
+                  type="button"
+                  className="wv-full-pdp-btn"
+                  onClick={() => {
+                    setSelectedProduct(quickViewProduct)
+                    setViewMode('pdp')
+                    setQuickViewProduct(null)
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                  }}
+                >
+                  Full Description View →
+                </button>
               </div>
             </div>
           </div>

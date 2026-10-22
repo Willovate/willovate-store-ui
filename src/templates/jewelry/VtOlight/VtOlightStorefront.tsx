@@ -1686,27 +1686,27 @@ export const VtOlightStorefront: React.FC<VtOlightStorefrontProps> = ({
                   {quickViewProduct.description}
                 </p>
 
-                <div style={{ display: 'flex', gap: 12 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  <button
+                    type="button"
+                    className="wv-full-pdp-btn"
+                    onClick={() => {
+                      setIsQuickViewOpen(false)
+                      openPdp(quickViewProduct)
+                    }}
+                  >
+                    Full Description View →
+                  </button>
                   <button
                     type="button"
                     className="vto-pill-btn vto-pill-btn-gold"
-                    style={{ flex: 1, justifyContent: 'center' }}
+                    style={{ width: '100%', justifyContent: 'center' }}
                     onClick={() => {
                       handleAddToCart(quickViewProduct)
                       setIsQuickViewOpen(false)
                     }}
                   >
                     Add to Bag
-                  </button>
-                  <button
-                    type="button"
-                    className="vto-pill-btn vto-pill-btn-outline"
-                    onClick={() => {
-                      setIsQuickViewOpen(false)
-                      openPdp(quickViewProduct)
-                    }}
-                  >
-                    View Details
                   </button>
                 </div>
               </div>

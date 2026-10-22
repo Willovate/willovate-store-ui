@@ -3310,17 +3310,30 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
                   {quickViewProduct.description}
                 </p>
 
-                <button
-                  type="button"
-                  className="ruby-btn ruby-btn-primary"
-                  style={{ width: '100%' }}
-                  onClick={() => {
-                    addToCart(quickViewProduct)
-                    setQuickViewProduct(null)
-                  }}
-                >
-                  Add To Bag +
-                </button>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  <button
+                    type="button"
+                    className="wv-full-pdp-btn"
+                    onClick={() => {
+                      setQuickViewProduct(null)
+                      openPdp(quickViewProduct)
+                      window.scrollTo({ top: 0, behavior: 'smooth' })
+                    }}
+                  >
+                    Full Description View →
+                  </button>
+                  <button
+                    type="button"
+                    className="ruby-btn ruby-btn-primary"
+                    style={{ width: '100%' }}
+                    onClick={() => {
+                      addToCart(quickViewProduct)
+                      setQuickViewProduct(null)
+                    }}
+                  >
+                    Add To Bag +
+                  </button>
+                </div>
               </div>
             </div>
           </div>

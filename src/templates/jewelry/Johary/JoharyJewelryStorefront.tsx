@@ -2989,16 +2989,28 @@ export const JoharyJewelryStorefront: React.FC<JoharyStorefrontProps> = ({
                 <p style={{ fontSize: '13px', color: '#666', lineHeight: '1.5', marginBottom: '20px' }}>
                   {quickViewProduct.subtitle}
                 </p>
-                <button
-                  className="jh-btn-primary"
-                  style={{ width: '100%', padding: '12px 0' }}
-                  onClick={() => {
-                    handleAddToCart(quickViewProduct)
-                    setQuickViewProduct(null)
-                  }}
-                >
-                  Add To Bag
-                </button>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  <button
+                    type="button"
+                    className="wv-full-pdp-btn"
+                    onClick={() => {
+                      openPdp(quickViewProduct)
+                      setQuickViewProduct(null)
+                    }}
+                  >
+                    Full Description View →
+                  </button>
+                  <button
+                    className="jh-btn-primary"
+                    style={{ width: '100%', padding: '12px 0' }}
+                    onClick={() => {
+                      handleAddToCart(quickViewProduct)
+                      setQuickViewProduct(null)
+                    }}
+                  >
+                    Add To Bag
+                  </button>
+                </div>
               </div>
             </div>
           </div>

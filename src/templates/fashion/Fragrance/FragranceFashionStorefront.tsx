@@ -1801,15 +1801,27 @@ export const FragranceFashionStorefront: React.FC<FragranceStorefrontProps> = ({
                 <p style={{ fontSize: 13, color: '#5C6E72', lineHeight: 1.6, marginBottom: 16 }}>
                   {quickViewProduct.description}
                 </p>
-                <button
-                  className="fragrance-btn-primary"
-                  onClick={() => {
-                    addToCart(quickViewProduct, quickViewProduct.volumes[0] || '50ml', 1)
-                    setIsQuickViewOpen(false)
-                  }}
-                >
-                  Add to Cart
-                </button>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  <button
+                    type="button"
+                    className="wv-full-pdp-btn"
+                    onClick={() => {
+                      setIsQuickViewOpen(false)
+                      openPdp(quickViewProduct)
+                    }}
+                  >
+                    Full Description View →
+                  </button>
+                  <button
+                    className="fragrance-btn-primary"
+                    onClick={() => {
+                      addToCart(quickViewProduct, quickViewProduct.volumes[0] || '50ml', 1)
+                      setIsQuickViewOpen(false)
+                    }}
+                  >
+                    Add to Cart
+                  </button>
+                </div>
               </div>
             </div>
           </div>

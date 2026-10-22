@@ -1425,17 +1425,29 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = ({
                 <p style={{ fontSize: 13, color: '#4b5563', lineHeight: 1.6, marginBottom: 20 }}>
                   {quickViewProduct.description}
                 </p>
-                <button
-                  type="button"
-                  className="swarna-gold-btn"
-                  style={{ width: '100%', justifyContent: 'center' }}
-                  onClick={() => {
-                    handleAddToCart(quickViewProduct)
-                    setIsQuickViewOpen(false)
-                  }}
-                >
-                  Add to Cart ➔
-                </button>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  <button
+                    type="button"
+                    className="wv-full-pdp-btn"
+                    onClick={() => {
+                      setIsQuickViewOpen(false)
+                      openPdp(quickViewProduct)
+                    }}
+                  >
+                    Full Description View →
+                  </button>
+                  <button
+                    type="button"
+                    className="swarna-gold-btn"
+                    style={{ width: '100%', justifyContent: 'center' }}
+                    onClick={() => {
+                      handleAddToCart(quickViewProduct)
+                      setIsQuickViewOpen(false)
+                    }}
+                  >
+                    Add to Cart ➔
+                  </button>
+                </div>
               </div>
             </div>
           </div>

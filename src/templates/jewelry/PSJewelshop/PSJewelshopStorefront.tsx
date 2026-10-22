@@ -1422,18 +1422,7 @@ export const PSJewelshopStorefront: React.FC<PSJewelshopStorefrontProps> = ({
                   {quickViewProduct.description}
                 </p>
 
-                <div style={{ display: 'flex', gap: '10px' }}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      addToCart(quickViewProduct)
-                      setQuickViewProduct(null)
-                    }}
-                    className="psj-btn psj-btn-rose psj-btn-pill"
-                    style={{ flex: 1 }}
-                  >
-                    Add to Bag
-                  </button>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   <button
                     type="button"
                     onClick={() => {
@@ -1441,9 +1430,20 @@ export const PSJewelshopStorefront: React.FC<PSJewelshopStorefrontProps> = ({
                       setCurrentView('product-detail')
                       setQuickViewProduct(null)
                     }}
-                    className="psj-btn psj-btn-outline psj-btn-pill"
+                    className="wv-full-pdp-btn"
                   >
-                    Full Details
+                    Full Description View →
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      addToCart(quickViewProduct)
+                      setQuickViewProduct(null)
+                    }}
+                    className="psj-btn psj-btn-rose psj-btn-pill"
+                    style={{ width: '100%' }}
+                  >
+                    Add to Bag
                   </button>
                 </div>
               </div>

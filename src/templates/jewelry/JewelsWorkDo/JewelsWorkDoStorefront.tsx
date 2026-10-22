@@ -10,6 +10,7 @@ import {
   JEWELS_TESTIMONIALS,
   JEWELS_TRUST_FEATURES,
 } from './data/jewelsData'
+import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
 import './styles/jewelsWorkDo.css'
 
 export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = ({
@@ -37,6 +38,8 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = ({
   const [isCartOpen, setIsCartOpen] = useState(false)
 
   // Quick View Modal state
+  const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
+  const [pdpProduct, setPdpProduct] = useState<JewelsProduct | null>(null)
   const [quickViewProduct, setQuickViewProduct] = useState<JewelsProduct | null>(null)
 
   // Wishlist state
@@ -413,8 +416,10 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = ({
                     key={prod.id}
                     className="jwd-search-result-item"
                     onClick={() => {
-                      setQuickViewProduct(prod)
+                      setPdpProduct(prod)
+                      setViewMode('pdp')
                       setIsSearchOpen(false)
+                      window.scrollTo({ top: 0, behavior: 'smooth' })
                     }}
                   >
                     <img src={prod.image} alt={prod.title} className="jwd-search-thumb" />
@@ -430,8 +435,76 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = ({
         )}
       </header>
 
-      {/* MOBILE NAVIGATION DRAWER */}
-      {isMobileMenuOpen && (
+      {viewMode === 'pdp' && pdpProduct ? (
+        <StorefrontProductDetailPage
+          product={{
+            id: pdpProduct.id,
+            name: pdpProduct.title,
+            price: pdpProduct.price,
+            originalPrice: pdpProduct.originalPrice,
+            image: pdpProduct.image,
+            description: pdpProduct.description || '',
+            category: pdpProduct.category,
+            rating: 4.9,
+            reviewsCount: 46,
+            inStock: true,
+            sku: `JWD-${pdpProduct.id.toUpperCase()}`,
+            gallery: [pdpProduct.image],
+            colors: ['#c9a96e', '#c0c0c0', '#1e293b'],
+            sizes: [],
+            specs: {
+              Metal: pdpProduct.materialOptions?.[0] || '22K Gold',
+              Weight: 'Standard Weight (Approx. 4.5g - 8.2g)',
+              Hallmark: 'BIS Hallmarked',
+              Origin: 'Handcrafted in India',
+            },
+            features: [
+              'Crafted by skilled artisans with generation expertise',
+              'BIS Hallmarked for purity assurance',
+              'Available with custom engraving service',
+              'Comes in luxury velvet gift box',
+            ],
+          }}
+          brandName="Jewels WorkDo"
+          accentColor="#c9a96e"
+          currencyPrefix="₹"
+          formatPrice={(p) => `Rs. ${Math.round(p).toLocaleString()}.00 INR`}
+          relatedProducts={[...JEWELS_PRODUCTS, ...JEWELS_REGAL_PRODUCTS]
+            .filter((p) => p.id !== pdpProduct.id)
+            .slice(0, 4)
+            .map((p) => ({
+              id: p.id,
+              name: p.title,
+              price: p.price,
+              originalPrice: p.originalPrice,
+              image: p.image,
+              category: p.category,
+              rating: 4.8,
+            }))}
+          onBack={() => {
+            setViewMode('home')
+            setPdpProduct(null)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          onAddToCart={(_prod, _col, _sz, qty) => {
+            for (let i = 0; i < (qty || 1); i++) {
+              handleAddToCart(pdpProduct)
+            }
+          }}
+          onBuyNow={(_prod, _col, _sz, qty) => {
+            for (let i = 0; i < (qty || 1); i++) {
+              handleAddToCart(pdpProduct)
+            }
+            setIsCartOpen(true)
+            showToast('Instant checkout initiated!')
+          }}
+          onToggleWishlist={(id) => toggleWishlist(id)}
+          isWishlisted={wishlistIds.includes(pdpProduct.id)}
+        />
+      ) : (
+        <>
+          {/* MOBILE NAVIGATION DRAWER */}
+          {isMobileMenuOpen && (
         <div className="jwd-drawer-overlay" onClick={() => setIsMobileMenuOpen(false)}>
           <div className="jwd-mobile-nav-drawer" onClick={(e) => e.stopPropagation()}>
             <div className="jwd-mobile-nav-header">
@@ -1538,6 +1611,8 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = ({
           ))}
         </div>
       </section>
+        </>
+      )}
 
       {/* =====================================================================
           15. PURE WHITE LUXURY FOOTER (MATCHING SCREENSHOT 100%)
@@ -1888,16 +1963,30 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = ({
               >
                 Rs. {quickViewProduct.price.toLocaleString()}.00 INR
               </div>
-              <button
-                className="jwd-btn-gold"
-                style={{ width: '100%' }}
-                onClick={() => {
-                  handleAddToCart(quickViewProduct)
-                  setQuickViewProduct(null)
-                }}
-              >
-                Add to Cart
-              </button>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <button
+                  type="button"
+                  className="wv-full-pdp-btn"
+                  onClick={() => {
+                    setPdpProduct(quickViewProduct)
+                    setViewMode('pdp')
+                    setQuickViewProduct(null)
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                  }}
+                >
+                  Full Description View →
+                </button>
+                <button
+                  className="jwd-btn-gold"
+                  style={{ width: '100%' }}
+                  onClick={() => {
+                    handleAddToCart(quickViewProduct)
+                    setQuickViewProduct(null)
+                  }}
+                >
+                  Add to Cart
+                </button>
+              </div>
             </div>
             <button
               onClick={() => setQuickViewProduct(null)}

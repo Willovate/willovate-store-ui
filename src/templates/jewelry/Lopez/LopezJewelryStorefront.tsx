@@ -1588,6 +1588,18 @@ export const LopezJewelryStorefront: React.FC<LopezStorefrontProps> = ({
                 </p>
                 <button
                   type="button"
+                  className="wv-full-pdp-btn"
+                  style={{ width: '100%', marginBottom: '8px' }}
+                  onClick={() => {
+                    const p = quickViewProduct
+                    setQuickViewProduct(null)
+                    openProductDetail(p)
+                  }}
+                >
+                  Full Description View →
+                </button>
+                <button
+                  type="button"
                   onClick={() => {
                     addToCart(quickViewProduct)
                     setQuickViewProduct(null)

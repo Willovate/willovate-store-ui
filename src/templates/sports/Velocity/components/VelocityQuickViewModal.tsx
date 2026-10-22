@@ -237,13 +237,13 @@ const VelocityQuickViewContent: React.FC<VelocityQuickViewContentProps> = ({
 
             <button
               type="button"
-              className="quickview-full-page-btn"
+              className="wv-full-pdp-btn quickview-full-page-btn"
               onClick={() => {
                 onClose()
                 onSelectProduct(product)
               }}
             >
-              View Full Product Specifications &amp; Sizing →
+              Full Description View →
             </button>
           </div>
         </div>

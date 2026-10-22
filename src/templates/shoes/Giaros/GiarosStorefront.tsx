@@ -17,6 +17,7 @@ import {
   StorefrontMobileNavDrawer,
   type MobileNavItem,
 } from '../../common/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
 import './styles/giaros.css'
 
 export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
@@ -32,6 +33,8 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
   const effectiveDevice = deviceView || device || 'desktop'
 
   // State
+  const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
+  const [selectedProduct, setSelectedProduct] = useState<GiarosProduct | null>(null)
   const [currency, setCurrency] = useState<'USD' | 'INR'>('USD')
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
   const [activeTab, setActiveTab] = useState<'Women Heels' | 'Boots Shoes' | 'Flats'>('Women Heels')
@@ -278,8 +281,76 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="gia-hero">
+      {viewMode === 'pdp' && selectedProduct ? (
+        <StorefrontProductDetailPage
+          product={{
+            id: selectedProduct.id,
+            name: selectedProduct.name,
+            price: selectedProduct.price,
+            originalPrice: selectedProduct.originalPrice,
+            image: selectedProduct.image,
+            description: selectedProduct.description,
+            category: selectedProduct.category,
+            rating: selectedProduct.rating || 4.9,
+            reviewsCount: selectedProduct.reviewCount || 42,
+            inStock: true,
+            sku: `GIA-${selectedProduct.id.toUpperCase()}`,
+            gallery: [selectedProduct.image],
+            colors: ['#000000', '#f59e0b', '#ef4444'],
+            sizes: selectedProduct.availableSizes?.map(String) || ['5', '6', '7', '8', '9', '10'],
+            specs: {
+              Upper: 'Full-Grain Italian Calfskin Leather',
+              Lining: 'Supple Nappa Leather Insole',
+              Heel: 'Architectural Sculpted Block Heel (85mm)',
+              Sole: 'Hand-Finished Genuine Leather Outsole',
+            },
+            features: [
+              'Custom memory foam footbed absorbs high-impact strides',
+              'Reinforced steel shank provides effortless balance and posture',
+              'Non-slip rubber tip injected into leather sole',
+              'Handmade in Florence, Italy by artisan cordwainers',
+            ],
+          }}
+          brandName="Giaros"
+          accentColor={customAccentColor || '#000000'}
+          currencyPrefix={currency === 'INR' ? '₹' : '$'}
+          formatPrice={(p) => formatPrice(p)}
+          relatedProducts={[...GIAROS_NEW_ARRIVALS, ...GIAROS_BEST_SELLERS]
+            .filter((p) => p.id !== selectedProduct.id)
+            .slice(0, 4)
+            .map((p) => ({
+              id: p.id,
+              name: p.name,
+              price: p.price,
+              originalPrice: p.originalPrice,
+              image: p.image,
+              category: p.category,
+              rating: p.rating || 4.8,
+            }))}
+          onBack={() => {
+            setViewMode('home')
+            setSelectedProduct(null)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          onAddToCart={(_prod, _col, sz, qty) => {
+            for (let i = 0; i < (qty || 1); i++) {
+              handleAddToCart(selectedProduct, sz ? Number(sz) : 7)
+            }
+          }}
+          onBuyNow={(_prod, _col, sz, qty) => {
+            for (let i = 0; i < (qty || 1); i++) {
+              handleAddToCart(selectedProduct, sz ? Number(sz) : 7)
+            }
+            setIsCartOpen(true)
+            showToast('Instant checkout initiated!')
+          }}
+          onToggleWishlist={(id) => toggleWishlist(id)}
+          isWishlisted={wishlist.includes(selectedProduct.id)}
+        />
+      ) : (
+        <>
+          {/* Hero Section */}
+          <section className="gia-hero">
         <div className="gia-hero-visual-wrap">
           <img
             src={activeSlide.heroImage}
@@ -510,6 +581,8 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
           </button>
         </div>
       </section>
+        </>
+      )}
 
       {/* Footer */}
       <footer className="gia-footer">
@@ -719,31 +792,45 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
                 </div>
               </div>
 
-              <div style={{ display: 'flex', gap: 10 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 <button
                   type="button"
-                  className="gia-btn-black"
-                  style={{ flex: 1, backgroundColor: '#000000', color: '#ffffff', textAlign: 'center' }}
+                  className="wv-full-pdp-btn"
                   onClick={() => {
-                    handleAddToCart(quickViewProduct, selectedSize)
+                    setSelectedProduct(quickViewProduct)
+                    setViewMode('pdp')
                     setQuickViewProduct(null)
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
                   }}
                 >
-                  ADD TO BAG
+                  Full Description View →
                 </button>
-                <button
-                  type="button"
-                  style={{
-                    padding: '12px 16px',
-                    border: '1px solid #dddddd',
-                    background: '#ffffff',
-                    cursor: 'pointer',
-                    fontSize: 16,
-                  }}
-                  onClick={() => toggleWishlist(quickViewProduct.id)}
-                >
-                  {wishlist.includes(quickViewProduct.id) ? '❤️' : '🤍'}
-                </button>
+                <div style={{ display: 'flex', gap: 10 }}>
+                  <button
+                    type="button"
+                    className="gia-btn-black"
+                    style={{ flex: 1, backgroundColor: '#000000', color: '#ffffff', textAlign: 'center' }}
+                    onClick={() => {
+                      handleAddToCart(quickViewProduct, selectedSize)
+                      setQuickViewProduct(null)
+                    }}
+                  >
+                    ADD TO BAG
+                  </button>
+                  <button
+                    type="button"
+                    style={{
+                      padding: '12px 16px',
+                      border: '1px solid #dddddd',
+                      background: '#ffffff',
+                      cursor: 'pointer',
+                      fontSize: 16,
+                    }}
+                    onClick={() => toggleWishlist(quickViewProduct.id)}
+                  >
+                    {wishlist.includes(quickViewProduct.id) ? '❤️' : '🤍'}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -890,8 +977,10 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
         onSelectProduct={(p) => {
           const fullProd = [...GIAROS_NEW_ARRIVALS, ...GIAROS_BEST_SELLERS].find((x) => x.id === p.id)
           if (fullProd) {
-            setQuickViewProduct(fullProd)
-            setSelectedSize(fullProd.availableSizes[0] || 7)
+            setSelectedProduct(fullProd)
+            setViewMode('pdp')
+            setIsSearchOpen(false)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
           }
         }}
         accentColor={customAccentColor || '#111827'}
@@ -924,8 +1013,10 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
         onOpenProduct={(p) => {
           const fullProd = [...GIAROS_NEW_ARRIVALS, ...GIAROS_BEST_SELLERS].find((x) => x.id === p.id)
           if (fullProd) {
-            setQuickViewProduct(fullProd)
-            setSelectedSize(fullProd.availableSizes[0] || 7)
+            setSelectedProduct(fullProd)
+            setViewMode('pdp')
+            setIsWishlistOpen(false)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
           }
         }}
         accentColor={customAccentColor || '#111827'}

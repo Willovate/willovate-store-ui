@@ -19,6 +19,7 @@ import {
   StorefrontMobileNavDrawer,
   type MobileNavItem,
 } from '../../common/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
 import './styles/apShoes.css'
 
 export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
@@ -34,6 +35,8 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
   const currentDevice = deviceView || (device === 'fullscreen' ? 'desktop' : device)
 
   // State
+  const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
+  const [selectedProduct, setSelectedProduct] = useState<ApShoesProduct | null>(null)
   const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0)
   const [wishlist, setWishlist] = useState<string[]>([])
   const [cart, setCart] = useState<ApShoesCartItem[]>([
@@ -418,8 +421,76 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
         )}
       </header>
 
-      {/* Floating Settings Side Tab */}
-      <div className="ap-side-settings-tab" title="Theme Quick Options">
+      {viewMode === 'pdp' && selectedProduct ? (
+        <StorefrontProductDetailPage
+          product={{
+            id: selectedProduct.id,
+            name: selectedProduct.name,
+            price: selectedProduct.price,
+            originalPrice: selectedProduct.originalPrice,
+            image: selectedProduct.image,
+            description: selectedProduct.description,
+            category: selectedProduct.subtitle || 'Footwear',
+            rating: selectedProduct.rating || 4.9,
+            reviewsCount: selectedProduct.reviewCount || 45,
+            inStock: true,
+            sku: `AP-${selectedProduct.id.toUpperCase()}`,
+            gallery: [selectedProduct.image],
+            colors: ['#000000', '#f97316', '#3b82f6'],
+            sizes: selectedProduct.availableSizes?.map(String) || ['7', '8', '9', '10', '11'],
+            specs: {
+              Upper: 'Ultra-Flex Performance Knit & Leather Trim',
+              Sole: 'Anti-Skid Vulcanized Rubber Soling',
+              Insole: 'Anatomic Orthopedic Arch Support Foam',
+              Closure: 'Classic Cotton Lace-Up',
+            },
+            features: [
+              'High-elasticity shock absorption system',
+              'Reinforced toe bumper for skateboard / street resilience',
+              'Anti-odor antimicrobial footbed lining',
+              'Lightweight ergonomic construction',
+            ],
+          }}
+          brandName="AP Shoes"
+          accentColor={customAccentColor || '#ff4500'}
+          currencyPrefix={currency === 'INR' ? '₹' : '$'}
+          formatPrice={(p) => formatPrice(p)}
+          relatedProducts={AP_SHOES_NEW_PRODUCTS
+            .filter((p) => p.id !== selectedProduct.id)
+            .slice(0, 4)
+            .map((p) => ({
+              id: p.id,
+              name: p.name,
+              price: p.price,
+              originalPrice: p.originalPrice,
+              image: p.image,
+              category: p.subtitle || 'Footwear',
+              rating: p.rating || 4.8,
+            }))}
+          onBack={() => {
+            setViewMode('home')
+            setSelectedProduct(null)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          onAddToCart={(_prod, _col, sz, qty) => {
+            for (let i = 0; i < (qty || 1); i++) {
+              addToCart(selectedProduct, sz ? Number(sz) : 9)
+            }
+          }}
+          onBuyNow={(_prod, _col, sz, qty) => {
+            for (let i = 0; i < (qty || 1); i++) {
+              addToCart(selectedProduct, sz ? Number(sz) : 9)
+            }
+            setIsCartOpen(true)
+            showToast('Instant checkout initiated!')
+          }}
+          onToggleWishlist={(id) => toggleWishlist(id)}
+          isWishlisted={wishlist.includes(selectedProduct.id)}
+        />
+      ) : (
+        <>
+          {/* Floating Settings Side Tab */}
+          <div className="ap-side-settings-tab" title="Theme Quick Options">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6b7280" strokeWidth="2">
           <line x1="4" y1="21" x2="4" y2="14" />
           <line x1="4" y1="10" x2="4" y2="3" />
@@ -772,6 +843,8 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
           </form>
         </div>
       </section>
+        </>
+      )}
 
       {/* ----------------------------------------------------------------------
           6-COLUMN FOOTER
@@ -1034,16 +1107,30 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
                 ))}
               </div>
 
-              <button
-                type="button"
-                className="ap-btn-add"
-                onClick={() => {
-                  addToCart(quickViewProduct, selectedQuickViewSize)
-                  setQuickViewProduct(null)
-                }}
-              >
-                Add To Cart
-              </button>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 16 }}>
+                <button
+                  type="button"
+                  className="wv-full-pdp-btn"
+                  onClick={() => {
+                    setSelectedProduct(quickViewProduct)
+                    setViewMode('pdp')
+                    setQuickViewProduct(null)
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                  }}
+                >
+                  Full Description View →
+                </button>
+                <button
+                  type="button"
+                  className="ap-btn-add"
+                  onClick={() => {
+                    addToCart(quickViewProduct, selectedQuickViewSize)
+                    setQuickViewProduct(null)
+                  }}
+                >
+                  Add To Cart
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -1064,8 +1151,10 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
         onSelectProduct={(p) => {
           const fullProd = AP_SHOES_NEW_PRODUCTS.find((x) => x.id === p.id)
           if (fullProd) {
-            setQuickViewProduct(fullProd)
-            setSelectedQuickViewSize(fullProd.availableSizes[0] || 9)
+            setSelectedProduct(fullProd)
+            setViewMode('pdp')
+            setIsSearchOpen(false)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
           }
         }}
         currencyPrefix={currency === 'INR' ? '₹' : '$'}
@@ -1098,8 +1187,10 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
         onOpenProduct={(p) => {
           const fullProd = AP_SHOES_NEW_PRODUCTS.find((x) => x.id === p.id)
           if (fullProd) {
-            setQuickViewProduct(fullProd)
-            setSelectedQuickViewSize(fullProd.availableSizes[0] || 9)
+            setSelectedProduct(fullProd)
+            setViewMode('pdp')
+            setIsWishlistOpen(false)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
           }
         }}
         accentColor={customAccentColor || '#ea580c'}

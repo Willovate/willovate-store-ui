@@ -20,6 +20,7 @@ import {
   StorefrontMobileNavDrawer,
   type MobileNavItem,
 } from '../../common/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
 import './styles/shoeZone.css'
 
 export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
@@ -35,6 +36,8 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
   const effectiveDevice = deviceView || device || 'desktop'
 
   // State
+  const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
+  const [selectedProduct, setSelectedProduct] = useState<ShoeZoneProduct | null>(null)
   const [currency, setCurrency] = useState<'USD' | 'INR'>('USD')
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
   const [activeTab, setActiveTab] = useState<'Men' | 'Women' | 'Sneakers' | 'Boots'>('Men')
@@ -343,8 +346,76 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
         </div>
       </header>
 
-      {/* 3. HERO SLIDER */}
-      <section className="sz-hero-stage">
+      {viewMode === 'pdp' && selectedProduct ? (
+        <StorefrontProductDetailPage
+          product={{
+            id: selectedProduct.id,
+            name: selectedProduct.name,
+            price: selectedProduct.price,
+            originalPrice: selectedProduct.originalPrice,
+            image: selectedProduct.image,
+            description: selectedProduct.description,
+            category: selectedProduct.category,
+            rating: selectedProduct.rating || 4.9,
+            reviewsCount: selectedProduct.reviewCount || 54,
+            inStock: true,
+            sku: `SZ-${selectedProduct.id.toUpperCase()}`,
+            gallery: [selectedProduct.image],
+            colors: ['#0f172a', '#e11d48', '#ffffff'],
+            sizes: selectedProduct.sizes?.map(String) || ['7', '8', '9', '10', '11'],
+            specs: {
+              Upper: 'Breathable Dynamic Engineered Mesh',
+              Sole: 'DuraGrip High Abrasion Rubber',
+              Insole: 'Shock-Absorbing Memory Cushion',
+              Fit: 'True to Size athletic fit',
+            },
+            features: [
+              'Impact-damping heel pod technology',
+              'Breathable mesh with thermo-welded overlays',
+              'Omni-directional tread for superior grip',
+              'Padded ankle collar for blister-free comfort',
+            ],
+          }}
+          brandName="ShoeZone"
+          accentColor={customAccentColor || '#e11d48'}
+          currencyPrefix={currency === 'USD' ? '$' : '₹'}
+          formatPrice={(p) => formatPrice(p)}
+          relatedProducts={[...SHOEZONE_NEW_ARRIVALS, ...SHOEZONE_BEST_SELLERS]
+            .filter((p) => p.id !== selectedProduct.id)
+            .slice(0, 4)
+            .map((p) => ({
+              id: p.id,
+              name: p.name,
+              price: p.price,
+              originalPrice: p.originalPrice,
+              image: p.image,
+              category: p.category,
+              rating: p.rating || 4.8,
+            }))}
+          onBack={() => {
+            setViewMode('home')
+            setSelectedProduct(null)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          onAddToCart={(_prod, _col, sz, qty) => {
+            for (let i = 0; i < (qty || 1); i++) {
+              handleAddToCart(selectedProduct, sz ? Number(sz) : 9)
+            }
+          }}
+          onBuyNow={(_prod, _col, sz, qty) => {
+            for (let i = 0; i < (qty || 1); i++) {
+              handleAddToCart(selectedProduct, sz ? Number(sz) : 9)
+            }
+            setIsCartOpen(true)
+            showToast('Instant checkout initiated!')
+          }}
+          onToggleWishlist={(id) => toggleWishlist(id)}
+          isWishlisted={wishlist.includes(selectedProduct.id)}
+        />
+      ) : (
+        <>
+          {/* 3. HERO SLIDER */}
+          <section className="sz-hero-stage">
         <div className="sz-hero-watermark">{activeSlide.tag}</div>
 
         <div className="sz-hero-container">
@@ -691,6 +762,8 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
           </form>
         </div>
       </section>
+        </>
+      )}
 
       {/* 10. DARK FOOTER */}
       <footer className="sz-footer">
@@ -867,16 +940,30 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
                 </div>
               </div>
 
-              <button
-                type="button"
-                className="sz-qv-cart-btn"
-                onClick={() => {
-                  handleAddToCart(quickViewProduct, selectedSize)
-                  setQuickViewProduct(null)
-                }}
-              >
-                <span>🛍️</span> Add to Shopping Bag
-              </button>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <button
+                  type="button"
+                  className="wv-full-pdp-btn"
+                  onClick={() => {
+                    setSelectedProduct(quickViewProduct)
+                    setViewMode('pdp')
+                    setQuickViewProduct(null)
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                  }}
+                >
+                  Full Description View →
+                </button>
+                <button
+                  type="button"
+                  className="sz-qv-cart-btn"
+                  onClick={() => {
+                    handleAddToCart(quickViewProduct, selectedSize)
+                    setQuickViewProduct(null)
+                  }}
+                >
+                  <span>🛍️</span> Add to Shopping Bag
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -897,8 +984,10 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
         onSelectProduct={(p) => {
           const fullProd = [...SHOEZONE_NEW_ARRIVALS, ...SHOEZONE_BEST_SELLERS].find((x) => x.id === p.id)
           if (fullProd) {
-            setQuickViewProduct(fullProd)
-            setSelectedSize(fullProd.sizes?.[0] || 9)
+            setSelectedProduct(fullProd)
+            setViewMode('pdp')
+            setIsSearchOpen(false)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
           }
         }}
         accentColor={customAccentColor || '#571f7c'}
@@ -931,8 +1020,10 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
         onOpenProduct={(p) => {
           const fullProd = [...SHOEZONE_NEW_ARRIVALS, ...SHOEZONE_BEST_SELLERS].find((x) => x.id === p.id)
           if (fullProd) {
-            setQuickViewProduct(fullProd)
-            setSelectedSize(fullProd.sizes?.[0] || 9)
+            setSelectedProduct(fullProd)
+            setViewMode('pdp')
+            setIsWishlistOpen(false)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
           }
         }}
         accentColor={customAccentColor || '#571f7c'}

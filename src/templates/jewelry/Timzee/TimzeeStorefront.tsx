@@ -14,6 +14,7 @@ import {
   TIMZEE_BRAND_PARTNERS,
   TIMZEE_APP_LOGOS,
 } from './data/timzeeData'
+import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
 import './styles/timzee.css'
 
 export const TimzeeStorefront: React.FC<TimzeeStorefrontProps> = ({
@@ -62,6 +63,8 @@ export const TimzeeStorefront: React.FC<TimzeeStorefrontProps> = ({
   const [isWishlistOpen, setIsWishlistOpen] = useState(false)
 
   // Quick View Modal
+  const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
+  const [pdpProduct, setPdpProduct] = useState<TimzeeProduct | null>(null)
   const [quickViewProduct, setQuickViewProduct] = useState<TimzeeProduct | null>(null)
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
 
@@ -75,6 +78,13 @@ export const TimzeeStorefront: React.FC<TimzeeStorefrontProps> = ({
   // Currency
   const [currency, setCurrency] = useState('USD')
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const formatPrice = (p: number) => {
+    if (currency === 'INR') return '₹' + Math.round(p * 83).toLocaleString()
+    if (currency === 'EUR') return '€' + Math.round(p * 0.92).toLocaleString()
+    if (currency === 'GBP') return '£' + Math.round(p * 0.79).toLocaleString()
+    return '$' + p.toLocaleString()
+  }
 
   // Newsletter
   const [newsletterEmail, setNewsletterEmail] = useState('')
@@ -325,8 +335,76 @@ export const TimzeeStorefront: React.FC<TimzeeStorefrontProps> = ({
         </div>
       </header>
 
-      {/* MOBILE NAVIGATION DRAWER */}
-      {isMobileMenuOpen && (
+      {viewMode === 'pdp' && pdpProduct ? (
+        <StorefrontProductDetailPage
+          product={{
+            id: pdpProduct.id,
+            name: pdpProduct.name,
+            price: pdpProduct.price,
+            originalPrice: pdpProduct.compareAtPrice,
+            image: pdpProduct.images?.[0] || '',
+            description: pdpProduct.description,
+            category: pdpProduct.category || 'Watches',
+            rating: pdpProduct.rating || 4.9,
+            reviewsCount: pdpProduct.reviewCount || 58,
+            inStock: pdpProduct.inStock,
+            sku: `TMZ-${pdpProduct.id.toUpperCase()}`,
+            gallery: pdpProduct.images,
+            colors: ['#1a1a1a', '#c9a96e', '#ffffff'],
+            sizes: [],
+            specs: {
+              Movement: pdpProduct.movement || 'Swiss Automatic',
+              'Case Diameter': pdpProduct.caseDiameter || '42mm',
+              'Water Resistance': pdpProduct.waterResistance || '50m',
+              'Strap Material': pdpProduct.strapMaterial || 'Genuine Leather',
+            },
+            features: [
+              'Swiss Made precision movement with 38-hour power reserve',
+              'Sapphire crystal glass with anti-reflective coating',
+              'Luminous hands and hour markers for low-light reading',
+              'Screwed crown for enhanced water resistance',
+            ],
+          }}
+          brandName="Timzee"
+          accentColor="#c9a96e"
+          currencyPrefix={currency === 'INR' ? '₹' : currency === 'EUR' ? '€' : currency === 'GBP' ? '£' : '$'}
+          formatPrice={(p) => formatPrice(p)}
+          relatedProducts={TIMZEE_PRODUCTS
+            .filter((p) => p.id !== pdpProduct.id)
+            .slice(0, 4)
+            .map((p) => ({
+              id: p.id,
+              name: p.name,
+              price: p.price,
+              originalPrice: p.compareAtPrice,
+              image: p.images?.[0] || '',
+              category: p.category || 'Watches',
+              rating: p.rating || 4.8,
+            }))}
+          onBack={() => {
+            setViewMode('home')
+            setPdpProduct(null)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          onAddToCart={(_prod, _col, _sz, qty) => {
+            for (let i = 0; i < (qty || 1); i++) {
+              addToCart(pdpProduct)
+            }
+          }}
+          onBuyNow={(_prod, _col, _sz, qty) => {
+            for (let i = 0; i < (qty || 1); i++) {
+              addToCart(pdpProduct)
+            }
+            setIsCartOpen(true)
+            showToast('Instant checkout initiated!')
+          }}
+          onToggleWishlist={(id) => toggleWishlist(id)}
+          isWishlisted={wishlistIds.includes(pdpProduct.id)}
+        />
+      ) : (
+        <>
+          {/* MOBILE NAVIGATION DRAWER */}
+          {isMobileMenuOpen && (
         <div className="tmz-drawer-overlay" onClick={() => setIsMobileMenuOpen(false)}>
           <div className="tmz-mobile-nav-drawer" onClick={(e) => e.stopPropagation()}>
             <div className="tmz-mobile-nav-header">
@@ -1037,6 +1115,8 @@ export const TimzeeStorefront: React.FC<TimzeeStorefrontProps> = ({
           </div>
         </div>
       </section>
+        </>
+      )}
 
       {/* ================= 13. FOOTER WITH WATCH WATERMARK ================= */}
       <footer id="footer" className="tmz-footer-watermark">
@@ -1456,16 +1536,30 @@ export const TimzeeStorefront: React.FC<TimzeeStorefrontProps> = ({
                 </div>
               </div>
 
-              <button
-                className="tmz-btn-shopnow-box"
-                style={{ width: '100%', margin: 0, textAlign: 'center' }}
-                onClick={() => {
-                  addToCart(quickViewProduct)
-                  setQuickViewProduct(null)
-                }}
-              >
-                Add to Shopping Bag
-              </button>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <button
+                  type="button"
+                  className="wv-full-pdp-btn"
+                  onClick={() => {
+                    setPdpProduct(quickViewProduct)
+                    setViewMode('pdp')
+                    setQuickViewProduct(null)
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                  }}
+                >
+                  Full Description View →
+                </button>
+                <button
+                  className="tmz-btn-shopnow-box"
+                  style={{ width: '100%', margin: 0, textAlign: 'center' }}
+                  onClick={() => {
+                    addToCart(quickViewProduct)
+                    setQuickViewProduct(null)
+                  }}
+                >
+                  Add to Shopping Bag
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -1500,8 +1594,10 @@ export const TimzeeStorefront: React.FC<TimzeeStorefrontProps> = ({
                   key={p.id}
                   style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '8px 0', borderBottom: '1px solid rgba(255,255,255,0.08)', cursor: 'pointer' }}
                   onClick={() => {
-                    setQuickViewProduct(p)
+                    setPdpProduct(p)
+                    setViewMode('pdp')
                     setIsSearchOpen(false)
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
                   }}
                 >
                   <img src={p.images[0]} alt={p.name} style={{ width: '40px', height: '40px', objectFit: 'contain', background: '#000' }} />

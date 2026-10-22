@@ -24,6 +24,7 @@ import {
   StorefrontMobileNavDrawer,
   type MobileNavItem,
 } from '../../common/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
 import './styles/happyFeet.css'
 
 export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
@@ -38,6 +39,8 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
 }) => {
   const effectiveDevice = deviceView || device || 'desktop'
   // State
+  const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
+  const [pdpProduct, setPdpProduct] = useState<HappyFeetProduct | null>(null)
   const [currency, setCurrency] = useState<'INR' | 'USD'>('INR')
   const [activeHeroSlide, setActiveHeroSlide] = useState(0)
   const [freshCategoryTab, setFreshCategoryTab] = useState<'All' | 'Men' | 'Women' | 'Kids' | 'Unisex'>('All')
@@ -352,8 +355,76 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
         </div>
       </header>
 
-      {/* 3. HERO BANNER STAGE */}
-      <section className="hf-hero-section">
+      {viewMode === 'pdp' && pdpProduct ? (
+        <StorefrontProductDetailPage
+          product={{
+            id: pdpProduct.id,
+            name: pdpProduct.name,
+            price: pdpProduct.price,
+            originalPrice: pdpProduct.originalPrice,
+            image: pdpProduct.image,
+            description: pdpProduct.description,
+            category: pdpProduct.category,
+            rating: 4.9,
+            reviewsCount: pdpProduct.reviewCount || 42,
+            inStock: true,
+            sku: `HF-${pdpProduct.id.toUpperCase()}`,
+            gallery: [pdpProduct.image],
+            colors: pdpProduct.colors || ['#e1680b', '#1e293b', '#ffffff'],
+            sizes: pdpProduct.sizes?.map(String) || ['7', '8', '9', '10', '11'],
+            specs: {
+              Upper: 'Breathable Honeycomb AirMesh',
+              Insole: 'Orthopedic Gel Heel Cushion',
+              Outsole: 'High-Durability Traction Carbon Rubber',
+              Drop: '8mm Heel-To-Toe Drop',
+            },
+            features: [
+              'Zero-pinch seamless internal bootie construct',
+              'Energy-returning reactive foam underfoot',
+              'Reinforced rubber pods at high-abrasion wear areas',
+              'Machine washable on cold cycle',
+            ],
+          }}
+          brandName="Happy Feet"
+          accentColor={customAccentColor || '#e1680b'}
+          currencyPrefix={currency === 'USD' ? '$' : '₹'}
+          formatPrice={(p) => formatPrice(p)}
+          relatedProducts={[...HAPPY_FEET_FRESH_PICKS, ...HAPPY_FEET_FEATURED_DEALS]
+            .filter((p) => p.id !== pdpProduct.id)
+            .slice(0, 4)
+            .map((p) => ({
+              id: p.id,
+              name: p.name,
+              price: p.price,
+              originalPrice: p.originalPrice,
+              image: p.image,
+              category: p.category,
+              rating: 4.8,
+            }))}
+          onBack={() => {
+            setViewMode('home')
+            setPdpProduct(null)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          onAddToCart={(_prod, _col, _sz, qty) => {
+            for (let i = 0; i < (qty || 1); i++) {
+              handleAddToCart(pdpProduct)
+            }
+          }}
+          onBuyNow={(_prod, _col, _sz, qty) => {
+            for (let i = 0; i < (qty || 1); i++) {
+              handleAddToCart(pdpProduct)
+            }
+            setIsCartOpen(true)
+            showToast('Instant checkout initiated!')
+          }}
+          onToggleWishlist={(id) => toggleWishlist(id)}
+          isWishlisted={wishlist.includes(pdpProduct.id)}
+        />
+      ) : (
+        <>
+          {/* 3. HERO BANNER STAGE */}
+          <section className="hf-hero-section">
         <div className="hf-hero-container">
           <div className="hf-hero-content">
             <div className="hf-hero-pill-edition">{currentSlide.edition}</div>
@@ -960,6 +1031,8 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
           </div>
         ))}
       </div>
+        </>
+      )}
 
       {/* 17. DARK FOOTER */}
       <footer className="hf-footer">
@@ -1180,17 +1253,30 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
                   {selectedProduct.description ||
                     'Engineered with high-traction rubber outsole and dual-layer breathable knit canvas for unmatched support.'}
                 </p>
-                <button
-                  type="button"
-                  className="hf-checkout-btn"
-                  style={{ marginTop: '16px' }}
-                  onClick={() => {
-                    handleAddToCart(selectedProduct)
-                    setSelectedProduct(null)
-                  }}
-                >
-                  Add to Cart
-                </button>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: '16px' }}>
+                  <button
+                    type="button"
+                    className="wv-full-pdp-btn"
+                    onClick={() => {
+                      setPdpProduct(selectedProduct)
+                      setViewMode('pdp')
+                      setSelectedProduct(null)
+                      window.scrollTo({ top: 0, behavior: 'smooth' })
+                    }}
+                  >
+                    Full Description View →
+                  </button>
+                  <button
+                    type="button"
+                    className="hf-checkout-btn"
+                    onClick={() => {
+                      handleAddToCart(selectedProduct)
+                      setSelectedProduct(null)
+                    }}
+                  >
+                    Add to Cart
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -1211,7 +1297,12 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
         }))}
         onSelectProduct={(p) => {
           const fullProd = [...HAPPY_FEET_FRESH_PICKS, ...HAPPY_FEET_FEATURED_DEALS, ...HAPPY_FEET_SUGGESTED_PRODUCTS].find((x) => x.id === p.id)
-          if (fullProd) setSelectedProduct(fullProd)
+          if (fullProd) {
+            setPdpProduct(fullProd)
+            setViewMode('pdp')
+            setIsSearchOpen(false)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }
         }}
         accentColor={customAccentColor || '#e1680b'}
         currencyPrefix={currency === 'USD' ? '$' : 'Rs. '}
@@ -1242,7 +1333,12 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
         }}
         onOpenProduct={(p) => {
           const fullProd = [...HAPPY_FEET_FRESH_PICKS, ...HAPPY_FEET_FEATURED_DEALS, ...HAPPY_FEET_SUGGESTED_PRODUCTS].find((x) => x.id === p.id)
-          if (fullProd) setSelectedProduct(fullProd)
+          if (fullProd) {
+            setPdpProduct(fullProd)
+            setViewMode('pdp')
+            setIsWishlistOpen(false)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }
         }}
         accentColor={customAccentColor || '#e1680b'}
       />

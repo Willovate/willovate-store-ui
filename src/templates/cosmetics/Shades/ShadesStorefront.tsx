@@ -23,6 +23,7 @@ import {
   StorefrontMobileNavDrawer,
   type MobileNavItem,
 } from '../../common/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
 import './styles/shades.css'
 
 export function ShadesStorefront({
@@ -38,6 +39,8 @@ export function ShadesStorefront({
   const effectiveDevice = (deviceView as string) || device || 'desktop'
 
   // Navigation & Mega menu
+  const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
+  const [selectedProduct, setSelectedProduct] = useState<ShadesProduct | null>(null)
   const [_isMegaMenuOpen, _setIsMegaMenuOpen] = useState(false)
   const [activeSlide, setActiveSlide] = useState(0)
   const [activeTab, setActiveTab] = useState<'all' | 'most-popular' | 'special' | 'best-seller'>('most-popular')
@@ -227,7 +230,7 @@ export function ShadesStorefront({
           </button>
 
           {/* Logo */}
-          <a href="#shades" style={{ display: 'flex', alignItems: 'center' }}>
+          <a href="#shades" style={{ display: 'flex', alignItems: 'center' }} onClick={(e) => { e.preventDefault(); setViewMode('home'); setSelectedProduct(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
             <img src={SHADES_LOGO} alt="Shades" className="shades-logo-img" />
           </a>
 
@@ -239,6 +242,10 @@ export function ShadesStorefront({
                   <span
                     className="shades-nav-link"
                     onClick={() => {
+                      if (viewMode === 'pdp') {
+                        setViewMode('home')
+                        setSelectedProduct(null)
+                      }
                       if (item.children && item.children.length > 0) {
                         item.children[0].onClick?.()
                       } else {
@@ -325,8 +332,33 @@ export function ShadesStorefront({
         </div>
       </header>
 
-      {/* 2. Hero Section Slider */}
-      <section className="shades-hero-section">
+      {viewMode === 'pdp' && selectedProduct ? (
+        <StorefrontProductDetailPage
+          product={selectedProduct}
+          brandName="Shades"
+          accentColor="#e5a93c"
+          currencyPrefix={currency === 'INR' ? '₹' : '$'}
+          formatPrice={formatPrice}
+          onBack={() => {
+            setViewMode('home')
+            setSelectedProduct(null)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          onAddToCart={(prod) => handleAddToCart(prod)}
+          onBuyNow={(prod) => {
+            handleAddToCart(prod)
+            showToast('Instant checkout initiated!')
+          }}
+          relatedProducts={SHADES_PRODUCTS.filter((p) => p.id !== selectedProduct.id)}
+          onSelectRelated={(p) => {
+            setSelectedProduct(p as ShadesProduct)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+        />
+      ) : (
+        <>
+          {/* 2. Hero Section Slider */}
+          <section className="shades-hero-section">
         <img src={currentSlide.image} alt={currentSlide.headline} className="shades-hero-bg" />
         <div className="shades-hero-container">
           <div className="shades-hero-content">
@@ -684,6 +716,8 @@ export function ShadesStorefront({
           </div>
         </div>
       </footer>
+      </>
+      )}
 
       {/* Cart Drawer */}
       {isCartOpen && (
@@ -852,6 +886,18 @@ export function ShadesStorefront({
                 }}
               >
                 Add to Cart • {formatPrice(quickViewProduct.price)}
+              </button>
+              <button
+                type="button"
+                className="wv-full-pdp-btn"
+                onClick={() => {
+                  setSelectedProduct(quickViewProduct)
+                  setViewMode('pdp')
+                  setQuickViewProduct(null)
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                Full Description View →
               </button>
             </div>
           </div>
