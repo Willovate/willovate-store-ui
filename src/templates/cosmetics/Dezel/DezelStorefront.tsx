@@ -13,12 +13,27 @@ import {
   DEZEL_TESTIMONIAL,
   DEZEL_BLOG_POSTS,
 } from './data/dezelData'
+import {
+  StorefrontSearchModal,
+  StorefrontWishlistDrawer,
+  StorefrontAccountModal,
+  StorefrontMobileNavDrawer,
+  type MobileNavItem,
+} from '../../common/StorefrontModals'
 import './styles/dezel.css'
 
 export function DezelStorefront({
   template: _template,
+  device = 'desktop',
+  deviceView,
+  customAccentColor,
   onColorChange: _onColorChange,
+  onUseTemplate: _onUseTemplate,
+  onClose: _onClose,
+  onBack: _onBack,
 }: DezelStorefrontProps) {
+  const effectiveDevice = (deviceView as string) || device || 'desktop'
+
   // Slide state
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
   const currentSlide = DEZEL_HERO_SLIDES[currentSlideIndex] || DEZEL_HERO_SLIDES[0]
@@ -27,7 +42,9 @@ export function DezelStorefront({
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [quickViewProduct, setQuickViewProduct] = useState<DezelProduct | null>(null)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false)
+  const [isAccountOpen, setIsAccountOpen] = useState(false)
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
   const [wishlist, setWishlist] = useState<string[]>([])
   const [newsletterEmail, setNewsletterEmail] = useState('')
   const [newsletterDone, setNewsletterDone] = useState(false)
@@ -37,6 +54,45 @@ export function DezelStorefront({
     { product: DEZEL_PRODUCTS[0], quantity: 1 },
     { product: DEZEL_PRODUCTS[1], quantity: 1 },
   ])
+
+  const navItems: MobileNavItem[] = [
+    {
+      label: 'HOME',
+      children: [
+        { label: 'Atelier Hero', onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
+        { label: 'Featured Essences', onClick: () => { const el = document.getElementById('popular'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'COLLECTIONS',
+      children: [
+        { label: 'Luxury Parfums', onClick: () => { const el = document.getElementById('popular'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Scent Stories', onClick: () => { const el = document.getElementById('notes'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'BEST SELLERS',
+      children: [
+        { label: 'Trending Fragrances', onClick: () => { const el = document.getElementById('popular'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'FRAGRANCE NOTES',
+      children: [
+        { label: 'Citrus, Amber & Rose', onClick: () => { const el = document.getElementById('notes'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'JOURNAL',
+      children: [
+        { label: 'The Art of Perfumery', onClick: () => { const el = document.getElementById('blog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'CONTACT',
+      onClick: () => alert('Atelier Concierge: concierge@dezelperfume.com'),
+    },
+  ]
 
   // Cart stats
   const cartSubtotal = useMemo(() => {
@@ -81,19 +137,15 @@ export function DezelStorefront({
     )
   }
 
-  const searchResults = useMemo(() => {
-    if (!searchQuery.trim()) return []
-    const q = searchQuery.toLowerCase()
-    return DEZEL_PRODUCTS.filter(
-      (p) =>
-        p.name.toLowerCase().includes(q) ||
-        p.description.toLowerCase().includes(q) ||
-        p.scentNotes?.toLowerCase().includes(q)
-    )
-  }, [searchQuery])
-
   return (
-    <div className="dezel-storefront">
+    <div
+      className={`dezel-storefront device-${effectiveDevice}`}
+      style={
+        customAccentColor
+          ? ({ '--dezel-gold': customAccentColor } as React.CSSProperties)
+          : undefined
+      }
+    >
       {/* Top Banner Notice */}
       <div style={{ backgroundColor: '#051e25', color: '#c59d5f', fontSize: '12px', padding: '8px 0', textAlign: 'center', letterSpacing: '1px' }}>
         COMPLIMENTARY LUXURY GIFT SAMPLE ON ORDERS OVER Rs. 150 &bull; FREE WORLDWIDE SHIPPING
@@ -103,6 +155,17 @@ export function DezelStorefront({
       <header className="dezel-header">
         <div className="dezel-container">
           <div className="dezel-header-inner">
+            {/* Mobile Hamburger Button */}
+            <button
+              type="button"
+              className="dezel-hamburger-btn"
+              onClick={() => setIsMobileNavOpen(true)}
+              title="Menu"
+              aria-label="Open mobile menu"
+            >
+              ☰
+            </button>
+
             {/* Logo */}
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <img src={DEZEL_LOGO} alt="Dezel Perfume" className="dezel-logo-img" />
@@ -111,12 +174,38 @@ export function DezelStorefront({
             {/* Nav */}
             <nav>
               <ul className="dezel-nav-menu">
-                <li><a href="#hero" className="dezel-nav-link active">HOME</a></li>
-                <li><a href="#promos" className="dezel-nav-link">COLLECTIONS</a></li>
-                <li><a href="#popular" className="dezel-nav-link">BEST SELLERS</a></li>
-                <li><a href="#notes" className="dezel-nav-link">FRAGRANCE NOTES</a></li>
-                <li><a href="#blog" className="dezel-nav-link">JOURNAL</a></li>
-                <li><a href="#footer" className="dezel-nav-link">CONTACT</a></li>
+                {navItems.map((item) => (
+                  <li key={item.label} className="wv-nav-dropdown-wrap">
+                    <span
+                      className="dezel-nav-link"
+                      onClick={() => {
+                        if (item.children && item.children.length > 0) {
+                          item.children[0].onClick?.()
+                        } else {
+                          item.onClick?.()
+                        }
+                      }}
+                    >
+                      {item.label} {item.children ? '▾' : ''}
+                    </span>
+                    {item.children && (
+                      <div className="wv-desktop-dropdown">
+                        {item.children.map((sub) => (
+                          <div
+                            key={sub.label}
+                            className="wv-desktop-dropdown-item"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              sub.onClick?.()
+                            }}
+                          >
+                            {sub.label}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </li>
+                ))}
               </ul>
             </nav>
 
@@ -136,14 +225,22 @@ export function DezelStorefront({
 
               <button
                 className="dezel-icon-btn"
-                onClick={() => {
-                  if (wishlist.length > 0) {
-                    const firstWishlistProd = DEZEL_PRODUCTS.find((p) => p.id === wishlist[0])
-                    if (firstWishlistProd) setQuickViewProduct(firstWishlistProd)
-                  }
-                }}
+                onClick={() => setIsAccountOpen(true)}
+                title="Atelier Account"
+                aria-label="Atelier Account"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+              </button>
+
+              <button
+                className="dezel-icon-btn"
+                onClick={() => setIsWishlistOpen(true)}
                 title={`Wishlist (${wishlist.length})`}
                 aria-label={`Wishlist (${wishlist.length})`}
+                style={{ position: 'relative' }}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill={wishlist.length > 0 ? '#c59d5f' : 'none'} stroke={wishlist.length > 0 ? '#c59d5f' : 'currentColor'} strokeWidth="2">
                   <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
@@ -349,24 +446,16 @@ export function DezelStorefront({
                 <div style={{ position: 'relative', width: '100%' }}>
                   <img src={prod.image} alt={prod.name} className="dezel-card-img" />
                   <button
+                    type="button"
+                    className={`wv-card-wish-btn ${wishlist.includes(prod.id) ? 'active' : ''}`}
                     onClick={(e) => {
                       e.stopPropagation()
                       toggleWishlist(prod.id)
                     }}
-                    style={{
-                      position: 'absolute',
-                      top: '0',
-                      right: '0',
-                      background: 'none',
-                      border: 'none',
-                      cursor: 'pointer',
-                      padding: '4px',
-                    }}
-                    title="Add to Wishlist"
+                    title={wishlist.includes(prod.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                    aria-label="Toggle Wishlist"
                   >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill={wishlist.includes(prod.id) ? '#c59d5f' : 'none'} stroke={wishlist.includes(prod.id) ? '#c59d5f' : '#698187'} strokeWidth="2">
-                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                    </svg>
+                    {wishlist.includes(prod.id) ? '❤️' : '🤍'}
                   </button>
                 </div>
 
@@ -725,84 +814,77 @@ export function DezelStorefront({
         </div>
       )}
 
-      {/* Search Modal */}
-      {isSearchOpen && (
-        <div className="dezel-drawer-overlay" onClick={() => setIsSearchOpen(false)} style={{ alignItems: 'flex-start', paddingTop: '80px', justifyContent: 'center' }}>
-          <div
-            style={{
-              backgroundColor: '#ffffff',
-              borderRadius: '6px',
-              maxWidth: '560px',
-              width: '90%',
-              padding: '24px',
-              boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-              <h4 style={{ margin: 0, color: '#082e38' }}>Search Fragrance Atelier</h4>
-              <button
-                onClick={() => setIsSearchOpen(false)}
-                style={{ background: 'none', border: 'none', fontSize: '20px', cursor: 'pointer' }}
-                aria-label="Close search modal"
-              >
-                &times;
-              </button>
-            </div>
-            <input
-              type="text"
-              placeholder="Search by perfume name, note (amber, rose, cedar)..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              autoFocus
-              style={{
-                width: '100%',
-                padding: '12px',
-                border: '1px solid #e2ece9',
-                borderRadius: '4px',
-                outline: 'none',
-                boxSizing: 'border-box',
-                marginBottom: '16px',
-              }}
-            />
+      {/* Shared Interactive Modals & Drawers */}
+      <StorefrontSearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        brandName="DEZEL PERFUMES"
+        accentColor={customAccentColor || '#1a6f82'}
+        currencyPrefix="Rs. "
+        products={DEZEL_PRODUCTS.map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category || 'Parfums',
+          rating: p.rating,
+        }))}
+        onAddToCart={(prod) => {
+          const matched = DEZEL_PRODUCTS.find((p) => p.id === prod.id)
+          if (matched) handleAddToCart(matched)
+        }}
+        onViewProduct={(prod) => {
+          const matched = DEZEL_PRODUCTS.find((p) => p.id === prod.id)
+          if (matched) setQuickViewProduct(matched)
+        }}
+      />
 
-            {searchResults.length > 0 && (
-              <div style={{ maxHeight: '280px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                {searchResults.map((prod) => (
-                  <div
-                    key={prod.id}
-                    onClick={() => {
-                      setQuickViewProduct(prod)
-                      setIsSearchOpen(false)
-                    }}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '12px',
-                      padding: '8px',
-                      borderRadius: '4px',
-                      cursor: 'pointer',
-                      border: '1px solid #f0f0f0',
-                    }}
-                  >
-                    <img src={prod.image} alt={prod.name} style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
-                    <div style={{ flex: 1 }}>
-                      <div style={{ fontWeight: 600, fontSize: '13px', color: '#082e38' }}>{prod.name}</div>
-                      <div style={{ fontSize: '11px', color: '#698187' }}>{prod.scentNotes}</div>
-                    </div>
-                    <div style={{ fontWeight: 600, fontSize: '13px', color: '#1a6f82' }}>Rs. {prod.price.toFixed(2)}</div>
-                  </div>
-                ))}
-              </div>
-            )}
-            {searchQuery && searchResults.length === 0 && (
-              <div style={{ textAlign: 'center', color: '#698187', padding: '20px 0', fontSize: '13px' }}>
-                No fragrances matched &ldquo;{searchQuery}&rdquo;.
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+      <StorefrontWishlistDrawer
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
+        wishlistIds={wishlist}
+        onToggleWishlist={toggleWishlist}
+        brandName="DEZEL PERFUMES"
+        accentColor={customAccentColor || '#1a6f82'}
+        currencyPrefix="Rs. "
+        products={DEZEL_PRODUCTS.map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category || 'Parfums',
+          rating: p.rating,
+        }))}
+        onAddToCart={(prod) => {
+          const matched = DEZEL_PRODUCTS.find((p) => p.id === prod.id)
+          if (matched) handleAddToCart(matched)
+        }}
+        onViewProduct={(prod) => {
+          const matched = DEZEL_PRODUCTS.find((p) => p.id === prod.id)
+          if (matched) setQuickViewProduct(matched)
+        }}
+      />
+
+      <StorefrontAccountModal
+        isOpen={isAccountOpen}
+        onClose={() => setIsAccountOpen(false)}
+        brandName="DEZEL PERFUMES"
+        accentColor={customAccentColor || '#1a6f82'}
+      />
+
+      <StorefrontMobileNavDrawer
+        isOpen={isMobileNavOpen}
+        onClose={() => setIsMobileNavOpen(false)}
+        items={navItems}
+        brandName="DEZEL PERFUMES"
+        accentColor={customAccentColor || '#1a6f82'}
+        contactEmail="concierge@dezelperfume.com"
+        onOpenAccount={() => setIsAccountOpen(true)}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        wishlistCount={wishlist.length}
+      />
     </div>
   )
 }

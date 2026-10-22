@@ -1,0 +1,786 @@
+/* =============================================================================
+   SHOES STOREFRONTS - MASTER RESPONSIVE MOBILE STYLESHEET
+   1. Real mobile viewports (@media (max-width: 768px))
+   2. Simulated mobile device preview frames (.frame-mobile, .device-mobile, .is-mobile)
+   ============================================================================= */
+
+@media (max-width: 768px) {
+  :is(
+    .sg-wrapper,
+    .gia-wrapper,
+    .ap-storefront,
+    .swd-wrapper,
+    .sen-wrapper,
+    .fwd-root,
+    .ff-root,
+    .sz-root,
+    .hf-storefront-root,
+    .susie-root
+  ) {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ---------------------------------------------------------------------------
+     1. COMMON CONTAINER & SECTION PADDING
+     --------------------------------------------------------------------------- */
+  :is(
+    .sg-wrapper,
+    .gia-wrapper,
+    .ap-storefront,
+    .swd-wrapper,
+    .sen-wrapper,
+    .fwd-root,
+    .ff-root,
+    .sz-root,
+    .hf-storefront-root,
+    .susie-root
+  ) :is(
+    .sg-section,
+    .gia-container,
+    .ap-container,
+    .swd-container,
+    .sen-container,
+    .fwd-container,
+    .ff-container,
+    .sz-container,
+    .hf-container,
+    .susie-container
+  ) {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ---------------------------------------------------------------------------
+     2. TOP UTILITY BARS (Wrap cleanly, reduce font size)
+     --------------------------------------------------------------------------- */
+  :is(
+    .sg-wrapper,
+    .gia-wrapper,
+    .ap-storefront,
+    .swd-wrapper,
+    .sen-wrapper,
+    .fwd-root,
+    .ff-root,
+    .sz-root,
+    .hf-storefront-root,
+    .susie-root
+  ) :is(
+    .sg-topbar,
+    .gia-topbar,
+    .ap-topbar,
+    .swd-topbar,
+    .sen-topbar,
+    .fwd-top-bar,
+    .ff-top-bar,
+    .sz-topbar,
+    .hf-utility-bar,
+    .susie-topbar
+  ) {
+    padding: 6px 10px !important;
+    font-size: 11px !important;
+    flex-wrap: wrap !important;
+    gap: 4px 10px !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  /* ---------------------------------------------------------------------------
+     3. HEADER LAYOUT (Fixes Screenshot 2!)
+     Hide desktop horizontal nav menu, show mobile hamburger, center logo
+     --------------------------------------------------------------------------- */
+  :is(
+    .sg-wrapper,
+    .gia-wrapper,
+    .ap-storefront,
+    .swd-wrapper,
+    .sen-wrapper,
+    .fwd-root,
+    .ff-root,
+    .sz-root,
+    .hf-storefront-root,
+    .susie-root
+  ) :is(
+    .sg-header-inner,
+    .gia-header-inner,
+    .ap-header-inner,
+    .swd-header-inner,
+    .sen-header-inner,
+    .fwd-header-inner,
+    .ff-header-inner,
+    .sz-header-inner,
+    .hf-header-inner,
+    .susie-header-inner
+  ) {
+    padding: 10px 14px !important;
+    gap: 10px !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+  }
+
+  /* HIDE ALL DESKTOP NAV MENUS ON MOBILE */
+  :is(
+    .sg-wrapper,
+    .gia-wrapper,
+    .ap-storefront,
+    .swd-wrapper,
+    .sen-wrapper,
+    .fwd-root,
+    .ff-root,
+    .sz-root,
+    .hf-storefront-root,
+    .susie-root
+  ) :is(
+    .sg-nav-left,
+    .gia-nav,
+    .ap-main-nav,
+    .ap-nav,
+    .swd-nav,
+    .sen-nav,
+    .fwd-nav-bar,
+    .fwd-nav-links,
+    .ff-nav-list,
+    .ff-main-nav,
+    .sz-nav-center,
+    .sz-nav-links,
+    .hf-nav,
+    .hf-nav-links,
+    .hf-nav-menu,
+    .susie-nav,
+    .susie-nav-links,
+    .susie-nav-bar,
+    .wv-desktop-dropdown
+  ) {
+    display: none !important;
+  }
+
+  /* SHOW MOBILE HAMBURGER BUTTONS */
+  :is(
+    .sg-wrapper,
+    .gia-wrapper,
+    .ap-storefront,
+    .swd-wrapper,
+    .sen-wrapper,
+    .fwd-root,
+    .ff-root,
+    .sz-root,
+    .hf-storefront-root,
+    .susie-root
+  ) :is(
+    .sg-hamburger-btn,
+    .gia-hamburger-btn,
+    .ap-hamburger-btn,
+    .swd-hamburger-btn,
+    .sen-hamburger-btn,
+    .fwd-hamburger-btn,
+    .ff-hamburger-btn,
+    .sz-hamburger-btn,
+    .hf-hamburger-btn,
+    .susie-hamburger-btn
+  ) {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 6px;
+    color: inherit;
+    line-height: 1;
+  }
+
+  /* LOGO PROPORTIONS */
+  :is(
+    .sg-wrapper,
+    .gia-wrapper,
+    .ap-storefront,
+    .swd-wrapper,
+    .sen-wrapper,
+    .fwd-root,
+    .ff-root,
+    .sz-root,
+    .hf-storefront-root,
+    .susie-root
+  ) :is(
+    .sg-logo,
+    .gia-logo,
+    .ap-logo,
+    .swd-logo,
+    .sen-logo,
+    .fwd-logo,
+    .ff-logo,
+    .sz-logo,
+    .hf-logo,
+    .susie-logo
+  ) {
+    font-size: 20px !important;
+    max-height: 28px !important;
+    margin: 0 !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* ACTION BUTTONS ON HEADER RIGHT */
+  :is(
+    .sg-wrapper,
+    .gia-wrapper,
+    .ap-storefront,
+    .swd-wrapper,
+    .sen-wrapper,
+    .fwd-root,
+    .ff-root,
+    .sz-root,
+    .hf-storefront-root,
+    .susie-root
+  ) :is(
+    .sg-actions-right,
+    .gia-actions,
+    .ap-header-actions,
+    .swd-header-actions,
+    .sen-actions,
+    .fwd-header-actions,
+    .ff-actions,
+    .sz-actions,
+    .hf-actions,
+    .susie-actions
+  ) {
+    gap: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  :is(
+    .sg-wrapper,
+    .gia-wrapper,
+    .ap-storefront,
+    .swd-wrapper,
+    .sen-wrapper,
+    .fwd-root,
+    .ff-root,
+    .sz-root,
+    .hf-storefront-root,
+    .susie-root
+  ) :is(
+    .sg-action-btn,
+    .gia-icon-btn,
+    .ap-icon-btn,
+    .swd-action-btn,
+    .sen-action-btn,
+    .fwd-icon-btn,
+    .ff-icon-btn,
+    .sz-icon-btn,
+    .hf-icon-btn,
+    .susie-icon-btn
+  ) {
+    padding: 6px !important;
+    font-size: 16px !important;
+  }
+
+  /* ---------------------------------------------------------------------------
+     4. HERO SECTION / BANNER
+     --------------------------------------------------------------------------- */
+  :is(
+    .sg-wrapper,
+    .gia-wrapper,
+    .ap-storefront,
+    .swd-wrapper,
+    .sen-wrapper,
+    .fwd-root,
+    .ff-root,
+    .sz-root,
+    .hf-storefront-root,
+    .susie-root
+  ) :is(
+    .sg-hero,
+    .gia-hero,
+    .ap-hero-container,
+    .swd-hero-wrap,
+    .sen-hero,
+    .fwd-hero,
+    .ff-hero-container,
+    .sz-hero-slider,
+    .hf-hero-container,
+    .susie-hero
+  ) {
+    grid-template-columns: minmax(0, 1fr) !important;
+    flex-direction: column !important;
+    padding: 24px 14px !important;
+    gap: 20px !important;
+    min-height: auto !important;
+  }
+
+  :is(
+    .sg-wrapper,
+    .gia-wrapper,
+    .ap-storefront,
+    .swd-wrapper,
+    .sen-wrapper,
+    .fwd-root,
+    .ff-root,
+    .sz-root,
+    .hf-storefront-root,
+    .susie-root
+  ) :is(
+    .sg-hero-title,
+    .gia-hero-title,
+    .ap-hero-title,
+    .swd-hero-title,
+    .sen-hero-title,
+    .fwd-hero-title,
+    .ff-hero-title,
+    .sz-hero-title,
+    .hf-hero-title,
+    .susie-hero-title
+  ) {
+    font-size: clamp(22px, 6vw, 32px) !important;
+    line-height: 1.25 !important;
+  }
+
+  /* ---------------------------------------------------------------------------
+     5. PRODUCT GRIDS: 2 COLUMNS ON MOBILE
+     --------------------------------------------------------------------------- */
+  :is(
+    .sg-wrapper,
+    .gia-wrapper,
+    .ap-storefront,
+    .swd-wrapper,
+    .sen-wrapper,
+    .fwd-root,
+    .ff-root,
+    .sz-root,
+    .hf-storefront-root,
+    .susie-root
+  ) :is(
+    .sg-products-grid,
+    .gia-products-grid,
+    .ap-product-grid,
+    .swd-products-grid,
+    .sen-products-grid,
+    .fwd-grid-3,
+    .fwd-bestseller-grid,
+    .ff-products-grid,
+    .ff-bestsale-grid,
+    .sz-products-grid,
+    .sz-bestseller-grid,
+    .hf-product-grid,
+    .hf-suggested-grid,
+    .susie-products-grid,
+    [class*="products-grid"],
+    [class*="product-grid"]
+  ) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  /* Product Card Padding and Image Box */
+  :is(
+    .sg-wrapper,
+    .gia-wrapper,
+    .ap-storefront,
+    .swd-wrapper,
+    .sen-wrapper,
+    .fwd-root,
+    .ff-root,
+    .sz-root,
+    .hf-storefront-root,
+    .susie-root
+  ) :is(
+    .sg-product-card,
+    .gia-product-card,
+    .ap-product-card,
+    .swd-product-card,
+    .sen-card,
+    .fwd-card-dark,
+    .ff-product-card,
+    .sz-product-card,
+    .hf-product-card,
+    .susie-card
+  ) {
+    padding: 10px !important;
+    position: relative !important;
+    box-sizing: border-box !important;
+  }
+
+  :is(
+    .sg-wrapper,
+    .gia-wrapper,
+    .ap-storefront,
+    .swd-wrapper,
+    .sen-wrapper,
+    .fwd-root,
+    .ff-root,
+    .sz-root,
+    .hf-storefront-root,
+    .susie-root
+  ) :is(
+    .sg-prod-img-box,
+    .gia-card-thumb,
+    .ap-card-img-wrap,
+    .swd-card-thumb,
+    .sen-card-img-wrap,
+    .fwd-card-thumb-area,
+    .ff-card-thumb,
+    .sz-card-thumb,
+    .hf-card-thumb,
+    .susie-card-thumb
+  ) {
+    height: 160px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  :is(
+    .sg-wrapper,
+    .gia-wrapper,
+    .ap-storefront,
+    .swd-wrapper,
+    .sen-wrapper,
+    .fwd-root,
+    .ff-root,
+    .sz-root,
+    .hf-storefront-root,
+    .susie-root
+  ) :is(
+    .sg-prod-img-box img,
+    .gia-card-thumb img,
+    .ap-card-img-wrap img,
+    .swd-card-thumb img,
+    .sen-card-img-wrap img,
+    .fwd-card-thumb-area img,
+    .ff-card-thumb img,
+    .sz-card-thumb img,
+    .hf-card-thumb img,
+    .susie-card-thumb img
+  ) {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+  }
+
+  /* Product Title & Prices */
+  :is(
+    .sg-wrapper,
+    .gia-wrapper,
+    .ap-storefront,
+    .swd-wrapper,
+    .sen-wrapper,
+    .fwd-root,
+    .ff-root,
+    .sz-root,
+    .hf-storefront-root,
+    .susie-root
+  ) :is(
+    .sg-prod-name,
+    .gia-card-title,
+    .ap-card-title,
+    .swd-card-title,
+    .sen-card-title,
+    .ff-card-title,
+    .sz-prod-title,
+    .hf-card-title,
+    .susie-card-title
+  ) {
+    font-size: 13px !important;
+    line-height: 1.3 !important;
+    max-height: 2.6em !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    margin-top: 6px !important;
+  }
+
+  /* Add to Cart / Bag buttons on cards */
+  :is(
+    .sg-wrapper,
+    .gia-wrapper,
+    .ap-storefront,
+    .swd-wrapper,
+    .sen-wrapper,
+    .fwd-root,
+    .ff-root,
+    .sz-root,
+    .hf-storefront-root,
+    .susie-root
+  ) :is(
+    .sg-add-btn,
+    .gia-add-btn,
+    .ap-add-to-cart,
+    .swd-card-add-btn,
+    .sen-card-add-btn,
+    .fwd-add-btn,
+    .ff-add-btn,
+    .sz-add-btn,
+    .hf-card-add-btn,
+    .susie-card-add-btn
+  ) {
+    padding: 7px 10px !important;
+    font-size: 11px !important;
+    width: 100% !important;
+  }
+
+  /* ---------------------------------------------------------------------------
+     6. CATEGORY BANNERS & SPLIT SECTIONS (Stack to 1 column)
+     --------------------------------------------------------------------------- */
+  :is(
+    .sg-wrapper,
+    .gia-wrapper,
+    .ap-storefront,
+    .swd-wrapper,
+    .sen-wrapper,
+    .fwd-root,
+    .ff-root,
+    .sz-root,
+    .hf-storefront-root,
+    .susie-root
+  ) :is(
+    .sg-arch-grid,
+    .sg-plum-inner,
+    .gia-promo-grid,
+    .gia-split-grid,
+    .ap-categories-grid,
+    .ap-banner-grid,
+    .swd-banner-grid,
+    .sen-banner-grid,
+    .fwd-featured-banner,
+    .ff-banner-grid,
+    .sz-banner-grid,
+    .hf-arch-frame-container,
+    .susie-banners-grid
+  ) {
+    grid-template-columns: minmax(0, 1fr) !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+  }
+
+  /* ---------------------------------------------------------------------------
+     7. FOOTER GRID (Stack cleanly)
+     --------------------------------------------------------------------------- */
+  :is(
+    .sg-wrapper,
+    .gia-wrapper,
+    .ap-storefront,
+    .swd-wrapper,
+    .sen-wrapper,
+    .fwd-root,
+    .ff-root,
+    .sz-root,
+    .hf-storefront-root,
+    .susie-root
+  ) :is(
+    .sg-footer-grid,
+    .gia-footer-grid,
+    .ap-footer-grid,
+    .swd-footer-grid,
+    .sen-footer-grid,
+    .fwd-footer-grid,
+    .ff-footer-grid,
+    .sz-footer-grid,
+    .hf-footer-grid,
+    .susie-footer-grid
+  ) {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 24px !important;
+    text-align: center !important;
+  }
+}
+
+/* =============================================================================
+   SIMULATED MOBILE PREVIEW FRAMES (Desktop mode previewing mobile)
+   ============================================================================= */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile
+) :is(
+  .sg-wrapper,
+  .gia-wrapper,
+  .ap-storefront,
+  .swd-wrapper,
+  .sen-wrapper,
+  .fwd-root,
+  .ff-root,
+  .sz-root,
+  .hf-storefront-root,
+  .susie-root
+) {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile
+) :is(
+  .sg-nav-left,
+  .gia-nav,
+  .ap-main-nav,
+  .ap-nav,
+  .swd-nav,
+  .sen-nav,
+  .fwd-nav-bar,
+  .fwd-nav-links,
+  .ff-nav-list,
+  .ff-main-nav,
+  .sz-nav-center,
+  .sz-nav-links,
+  .hf-nav,
+  .hf-nav-links,
+  .hf-nav-menu,
+  .susie-nav,
+  .susie-nav-links,
+  .susie-nav-bar,
+  .wv-desktop-dropdown
+) {
+  display: none !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile
+) :is(
+  .sg-hamburger-btn,
+  .gia-hamburger-btn,
+  .ap-hamburger-btn,
+  .swd-hamburger-btn,
+  .sen-hamburger-btn,
+  .fwd-hamburger-btn,
+  .ff-hamburger-btn,
+  .sz-hamburger-btn,
+  .hf-hamburger-btn,
+  .susie-hamburger-btn
+) {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 6px;
+  color: inherit;
+  line-height: 1;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile
+) :is(
+  .sg-header-inner,
+  .gia-header-inner,
+  .ap-header-inner,
+  .swd-header-inner,
+  .sen-header-inner,
+  .fwd-header-inner,
+  .ff-header-inner,
+  .sz-header-inner,
+  .hf-header-inner,
+  .susie-header-inner
+) {
+  padding: 10px 14px !important;
+  gap: 10px !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile
+) :is(
+  .sg-products-grid,
+  .gia-products-grid,
+  .ap-product-grid,
+  .swd-products-grid,
+  .sen-products-grid,
+  .fwd-grid-3,
+  .fwd-bestseller-grid,
+  .ff-products-grid,
+  .ff-bestsale-grid,
+  .sz-products-grid,
+  .sz-bestseller-grid,
+  .hf-product-grid,
+  .hf-suggested-grid,
+  .susie-products-grid,
+  [class*="products-grid"],
+  [class*="product-grid"]
+) {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile
+) :is(
+  .sg-topbar,
+  .gia-topbar,
+  .ap-topbar,
+  .swd-topbar,
+  .sen-topbar,
+  .fwd-top-bar,
+  .ff-top-bar,
+  .sz-topbar,
+  .hf-utility-bar,
+  .susie-topbar
+) {
+  padding: 6px 10px !important;
+  font-size: 11px !important;
+  flex-wrap: wrap !important;
+  gap: 4px 10px !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile
+) :is(
+  .sg-hero,
+  .gia-hero,
+  .ap-hero-container,
+  .swd-hero-wrap,
+  .sen-hero,
+  .fwd-hero,
+  .ff-hero-container,
+  .sz-hero-slider,
+  .hf-hero-container,
+  .susie-hero
+) {
+  grid-template-columns: minmax(0, 1fr) !important;
+  flex-direction: column !important;
+  padding: 24px 14px !important;
+  gap: 20px !important;
+  min-height: auto !important;
+}
+
+

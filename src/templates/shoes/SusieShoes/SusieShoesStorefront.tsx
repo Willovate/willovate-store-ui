@@ -15,6 +15,13 @@ import {
   SUSIE_SERVICE_BADGES,
   SUSIE_RECENT_DROPS,
 } from './data/susieShoesData'
+import {
+  StorefrontSearchModal,
+  StorefrontWishlistDrawer,
+  StorefrontAccountModal,
+  StorefrontMobileNavDrawer,
+  type MobileNavItem,
+} from '../../common/StorefrontModals'
 import './styles/susieShoes.css'
 
 export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
@@ -40,9 +47,59 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
     },
   ])
   const [isCartOpen, setIsCartOpen] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false)
+  const [isAccountOpen, setIsAccountOpen] = useState(false)
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
+  const [wishlist, setWishlist] = useState<string[]>([])
   const [quickViewProduct, setQuickViewProduct] = useState<SusieKidsShoeProduct | null>(null)
   const [selectedSize, setSelectedSize] = useState<string>('Kids 8')
   const [toastMessage, setToastMessage] = useState<string | null>(null)
+
+  const toggleWishlist = (productId: string) => {
+    setWishlist((prev) => {
+      const exists = prev.includes(productId)
+      if (exists) {
+        showToast('Removed from Wishlist')
+        return prev.filter((id) => id !== productId)
+      }
+      showToast('Saved to Wishlist ❤️')
+      return [...prev, productId]
+    })
+  }
+
+  const navItems: MobileNavItem[] = [
+    {
+      label: 'Home',
+      children: [
+        { label: 'Kids Hero Droplist', onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
+        { label: 'Color Play Collection', onClick: () => { const el = document.getElementById('susie-collage-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Collection',
+      children: [
+        { label: 'Girls Collection', onClick: () => { setActiveCategoryTab('Girls'); const el = document.getElementById('susie-bestsellers-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Boys Collection', onClick: () => { setActiveCategoryTab('Boys'); const el = document.getElementById('susie-bestsellers-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Toddler Shoes', onClick: () => { setActiveCategoryTab('Toddler'); const el = document.getElementById('susie-bestsellers-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Baby Soft Steps', onClick: () => { setActiveCategoryTab('Baby'); const el = document.getElementById('susie-bestsellers-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Shop',
+      children: [
+        { label: 'Best Sellers', onClick: () => { setActiveCategoryTab('All'); const el = document.getElementById('susie-bestsellers-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Recent Drops', onClick: () => { const el = document.getElementById('susie-recent-drops'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Pages',
+      children: [
+        { label: 'Parent Reviews', onClick: () => { const el = document.getElementById('susie-testimonials-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Kids Foot Care Blog', onClick: () => { const el = document.getElementById('susie-blog-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+  ]
 
   const showToast = (msg: string) => {
     setToastMessage(msg)
@@ -108,6 +165,17 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
     >
       {/* 1. TOP HEADER */}
       <header className="susie-top-header">
+        {/* Mobile Hamburger Button */}
+        <button
+          type="button"
+          className="susie-hamburger-btn"
+          onClick={() => setIsMobileNavOpen(true)}
+          title="Menu"
+          aria-label="Open mobile menu"
+        >
+          ☰
+        </button>
+
         <a href="#home" className="susie-logo-link">
           <div className="susie-bunny-avatar">🐰</div>
           <div className="susie-logo-brand">
@@ -117,10 +185,35 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
         </a>
 
         <div className="susie-header-right">
-          <button type="button" className="susie-header-action" aria-label="Search">
+          <button
+            type="button"
+            className="susie-header-action"
+            aria-label="Search"
+            onClick={() => setIsSearchOpen(true)}
+            title="Search shoes"
+          >
             <span>🔍</span>
           </button>
-          <button type="button" className="susie-header-action" aria-label="User Account">
+          <button
+            type="button"
+            className="susie-header-action"
+            aria-label="Wishlist"
+            onClick={() => setIsWishlistOpen(true)}
+            title="Wishlist"
+            style={{ position: 'relative' }}
+          >
+            <span>🤍</span>
+            {wishlist.length > 0 && (
+              <span className="wv-badge-count">{wishlist.length}</span>
+            )}
+          </button>
+          <button
+            type="button"
+            className="susie-header-action"
+            aria-label="User Account"
+            onClick={() => setIsAccountOpen(true)}
+            title="Account"
+          >
             <span>👤</span>
           </button>
           <span className="susie-header-action">USD ▾</span>
@@ -138,13 +231,38 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
       {/* 2. HOT PINK NAVIGATION BAR */}
       <nav className="susie-nav-bar">
         <div className="susie-nav-links">
-          <a href="#home" className="susie-nav-link">Home</a>
-          <a href="#collection" className="susie-nav-link">Collection ▾</a>
-          <a href="#shop" className="susie-nav-link">Shop ▾</a>
-          <a href="#girls" className="susie-nav-link">Girls ▾</a>
-          <a href="#boys" className="susie-nav-link">Boys ▾</a>
-          <a href="#trendy" className="susie-nav-link">Trendy Shoes ▾</a>
-          <a href="#pages" className="susie-nav-link">Pages ▾</a>
+          {navItems.map((item) => (
+            <div key={item.label} className="wv-nav-dropdown-wrap">
+              <span
+                className="susie-nav-link"
+                onClick={() => {
+                  if (item.children && item.children.length > 0) {
+                    item.children[0].onClick?.()
+                  } else {
+                    item.onClick?.()
+                  }
+                }}
+              >
+                {item.label} {item.children ? '▾' : ''}
+              </span>
+              {item.children && (
+                <div className="wv-desktop-dropdown">
+                  {item.children.map((sub) => (
+                    <div
+                      key={sub.label}
+                      className="wv-desktop-dropdown-item"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        sub.onClick?.()
+                      }}
+                    >
+                      {sub.label}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       </nav>
 
@@ -310,7 +428,19 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
 
         <div className="susie-products-grid">
           {filteredProducts.map((product) => (
-            <div key={product.id} className="susie-product-card">
+            <div key={product.id} className="susie-product-card" style={{ position: 'relative' }}>
+              <button
+                type="button"
+                className={`wv-card-wish-btn ${wishlist.includes(product.id) ? 'active' : ''}`}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleWishlist(product.id)
+                }}
+                title={wishlist.includes(product.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                aria-label="Toggle Wishlist"
+              >
+                {wishlist.includes(product.id) ? '❤️' : '🤍'}
+              </button>
               {product.badge && <span className="susie-prod-badge">{product.badge}</span>}
 
               <div
@@ -698,6 +828,83 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
           </div>
         </div>
       )}
+
+      {/* Search Modal */}
+      <StorefrontSearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        products={[...SUSIE_KIDS_PRODUCTS, ...SUSIE_RECENT_DROPS].map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onSelectProduct={(p) => {
+          const fullProd = [...SUSIE_KIDS_PRODUCTS, ...SUSIE_RECENT_DROPS].find((x) => x.id === p.id)
+          if (fullProd) {
+            setQuickViewProduct(fullProd)
+            setSelectedSize(fullProd.sizes?.[0] || 'Kids 8')
+          }
+        }}
+        accentColor={customAccentColor || '#ff2d87'}
+        placeholder="Search kids sneakers, light-up shoes, boots..."
+        popularTags={['Girls', 'Boys', 'Toddler', 'Baby']}
+      />
+
+      {/* Wishlist Drawer */}
+      <StorefrontWishlistDrawer
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
+        wishlistIds={wishlist}
+        allProducts={[...SUSIE_KIDS_PRODUCTS, ...SUSIE_RECENT_DROPS].map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onRemoveWishlist={toggleWishlist}
+        onAddToCart={(p) => {
+          const fullProd = [...SUSIE_KIDS_PRODUCTS, ...SUSIE_RECENT_DROPS].find((x) => x.id === p.id)
+          if (fullProd) handleAddToCart(fullProd)
+        }}
+        onOpenProduct={(p) => {
+          const fullProd = [...SUSIE_KIDS_PRODUCTS, ...SUSIE_RECENT_DROPS].find((x) => x.id === p.id)
+          if (fullProd) {
+            setQuickViewProduct(fullProd)
+            setSelectedSize(fullProd.sizes?.[0] || 'Kids 8')
+          }
+        }}
+        accentColor={customAccentColor || '#ff2d87'}
+      />
+
+      {/* Account Modal */}
+      <StorefrontAccountModal
+        isOpen={isAccountOpen}
+        onClose={() => setIsAccountOpen(false)}
+        brandName="Susie Shoes"
+        accentColor={customAccentColor || '#ff2d87'}
+      />
+
+      {/* Mobile Navigation Drawer */}
+      <StorefrontMobileNavDrawer
+        isOpen={isMobileNavOpen}
+        onClose={() => setIsMobileNavOpen(false)}
+        brandName="Susie Shoes"
+        navItems={navItems}
+        onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenAccount={() => setIsAccountOpen(true)}
+        onOpenCart={() => setIsCartOpen(true)}
+        wishlistCount={wishlist.length}
+        cartCount={cartCount}
+        contactPhone="+1 (800) 999-SUSIE"
+        contactEmail="hello@susieshoes.com"
+        accentColor={customAccentColor || '#ff2d87'}
+      />
 
       {/* TOAST NOTIFICATION */}
       {toastMessage && <div className="susie-toast">{toastMessage}</div>}

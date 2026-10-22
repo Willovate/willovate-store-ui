@@ -17,12 +17,27 @@ import {
   DTSPALAB_BLOG_POSTS,
   DTSPALAB_BRAND_LOGOS,
 } from './data/dtSpalabData'
+import {
+  StorefrontSearchModal,
+  StorefrontWishlistDrawer,
+  StorefrontAccountModal,
+  StorefrontMobileNavDrawer,
+  type MobileNavItem,
+} from '../../common/StorefrontModals'
 import './styles/dtSpalab.css'
 
 export function DtSpalabStorefront({
   template: _template,
+  device = 'desktop',
+  deviceView,
+  customAccentColor,
   onColorChange: _onColorChange,
+  onUseTemplate: _onUseTemplate,
+  onClose: _onClose,
+  onBack: _onBack,
 }: DtSpalabStorefrontProps) {
+  const effectiveDevice = (deviceView as string) || device || 'desktop'
+
   // Category filter state
   const [activeCategory, setActiveCategory] = useState<'all' | 'facial' | 'massage' | 'pedicure' | 'aromatherapy'>('all')
 
@@ -30,7 +45,9 @@ export function DtSpalabStorefront({
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [quickViewProduct, setQuickViewProduct] = useState<DtSpalabProduct | null>(null)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false)
+  const [isAccountOpen, setIsAccountOpen] = useState(false)
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
   const [wishlist, setWishlist] = useState<string[]>([])
   const [newsletterEmail, setNewsletterEmail] = useState('')
   const [newsletterDone, setNewsletterDone] = useState(false)
@@ -40,6 +57,49 @@ export function DtSpalabStorefront({
     { product: DTSPALAB_PRODUCTS[0], quantity: 2 },
     { product: DTSPALAB_PRODUCTS[2], quantity: 1 },
   ])
+
+  const navItems: MobileNavItem[] = [
+    {
+      label: 'HOME',
+      children: [
+        { label: 'Spa Sanctuary Hero', onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
+        { label: 'Special Offers', onClick: () => { const el = document.getElementById('about'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'SERVICES',
+      children: [
+        { label: 'Facial Mask Therapy', onClick: () => { setActiveCategory('facial'); const el = document.getElementById('products'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Body Massage', onClick: () => { setActiveCategory('massage'); const el = document.getElementById('products'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Pedicure & Spa', onClick: () => { setActiveCategory('pedicure'); const el = document.getElementById('products'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Aromatherapy Oils', onClick: () => { setActiveCategory('aromatherapy'); const el = document.getElementById('products'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'SHOP',
+      children: [
+        { label: 'All Formulations', onClick: () => { setActiveCategory('all'); const el = document.getElementById('products'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Bestselling Formulations', onClick: () => { const el = document.getElementById('products'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'ABOUT',
+      children: [
+        { label: 'Our Holistic Approach', onClick: () => { const el = document.getElementById('about'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Client Testimonials', onClick: () => { const el = document.getElementById('testimonials'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'JOURNAL',
+      children: [
+        { label: 'Spa & Wellness Journal', onClick: () => { const el = document.getElementById('blog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'CONTACT',
+      onClick: () => alert('Dt-Spalab Concierge: support@dtspalab.com'),
+    },
+  ]
 
   // Cart calculations
   const cartSubtotal = useMemo(() => {
@@ -90,19 +150,15 @@ export function DtSpalabStorefront({
     )
   }
 
-  const searchResults = useMemo(() => {
-    if (!searchQuery.trim()) return []
-    const q = searchQuery.toLowerCase()
-    return DTSPALAB_PRODUCTS.filter(
-      (p) =>
-        p.name.toLowerCase().includes(q) ||
-        p.description.toLowerCase().includes(q) ||
-        p.category.toLowerCase().includes(q)
-    )
-  }, [searchQuery])
-
   return (
-    <div className="dtspa-storefront">
+    <div
+      className={`dtspa-storefront device-${effectiveDevice}`}
+      style={
+        customAccentColor
+          ? ({ '--dtspa-purple': customAccentColor } as React.CSSProperties)
+          : undefined
+      }
+    >
       {/* Top Banner Notice */}
       <div className="dtspa-topbar">
         {DTSPALAB_TOP_BAR}
@@ -112,6 +168,15 @@ export function DtSpalabStorefront({
       <header className="dtspa-header">
         <div className="dtspa-container">
           <div className="dtspa-header-inner">
+            {/* Mobile Hamburger Button */}
+            <button
+              className="dtspa-hamburger-btn"
+              onClick={() => setIsMobileNavOpen(true)}
+              aria-label="Open mobile navigation menu"
+            >
+              ☰
+            </button>
+
             {/* Brand Logo - User constraint: ONLY name show, no password buddha */}
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <a href="#hero" className="dtspa-logo-title">
@@ -120,12 +185,38 @@ export function DtSpalabStorefront({
             </div>
 
             {/* Nav Menu */}
-            <nav>
+            <nav className="dtspa-nav">
               <ul className="dtspa-nav-menu">
-                <li><a href="#hero" className="dtspa-nav-link active">HOME</a></li>
-                <li><a href="#about" className="dtspa-nav-link">ABOUT</a></li>
-                <li><a href="#services" className="dtspa-nav-link">SERVICES</a></li>
-                <li><a href="#products" className="dtspa-nav-link">SHOP</a></li>
+                <li className="wv-nav-dropdown-wrap">
+                  <a href="#hero" className="dtspa-nav-link active">HOME ▾</a>
+                  <div className="wv-desktop-dropdown">
+                    <a href="#hero">Spa Sanctuary</a>
+                    <a href="#about">Special Offers</a>
+                  </div>
+                </li>
+                <li className="wv-nav-dropdown-wrap">
+                  <a href="#about" className="dtspa-nav-link">ABOUT ▾</a>
+                  <div className="wv-desktop-dropdown">
+                    <a href="#about">Our Philosophy</a>
+                    <a href="#testimonials">Client Stories</a>
+                  </div>
+                </li>
+                <li className="wv-nav-dropdown-wrap">
+                  <a href="#services" className="dtspa-nav-link">SERVICES ▾</a>
+                  <div className="wv-desktop-dropdown">
+                    <button onClick={() => { setActiveCategory('facial'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>Facial Mask</button>
+                    <button onClick={() => { setActiveCategory('massage'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>Therapeutic Massage</button>
+                    <button onClick={() => { setActiveCategory('pedicure'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>Pedicure Care</button>
+                    <button onClick={() => { setActiveCategory('aromatherapy'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>Aromatherapy</button>
+                  </div>
+                </li>
+                <li className="wv-nav-dropdown-wrap">
+                  <a href="#products" className="dtspa-nav-link">SHOP ▾</a>
+                  <div className="wv-desktop-dropdown">
+                    <button onClick={() => { setActiveCategory('all'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>All Formulations</button>
+                    <a href="#products">Popular Products</a>
+                  </div>
+                </li>
                 <li><a href="#blog" className="dtspa-nav-link">BLOG</a></li>
                 <li><a href="#footer" className="dtspa-nav-link">CONTACT</a></li>
               </ul>
@@ -147,12 +238,19 @@ export function DtSpalabStorefront({
 
               <button
                 className="dtspa-icon-btn"
-                onClick={() => {
-                  if (wishlist.length > 0) {
-                    const match = DTSPALAB_PRODUCTS.find((p) => p.id === wishlist[0])
-                    if (match) setQuickViewProduct(match)
-                  }
-                }}
+                onClick={() => setIsAccountOpen(true)}
+                title="Account"
+                aria-label="Account"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+              </button>
+
+              <button
+                className="dtspa-icon-btn"
+                onClick={() => setIsWishlistOpen(true)}
                 title={`Wishlist (${wishlist.length})`}
                 aria-label={`Wishlist (${wishlist.length})`}
               >
@@ -350,6 +448,7 @@ export function DtSpalabStorefront({
                   {prod.badge && <span className="dtspa-prod-badge">{prod.badge}</span>}
                   <img src={prod.image} alt={prod.name} className="dtspa-prod-img" />
                   <button
+                    className="wv-card-wish-btn"
                     onClick={(e) => {
                       e.stopPropagation()
                       toggleWishlist(prod.id)
@@ -368,6 +467,7 @@ export function DtSpalabStorefront({
                       alignItems: 'center',
                       justifyContent: 'center',
                       boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                      zIndex: 3,
                     }}
                     title="Add to Wishlist"
                   >
@@ -794,84 +894,75 @@ export function DtSpalabStorefront({
         </div>
       )}
 
-      {/* Search Modal */}
-      {isSearchOpen && (
-        <div className="dtspa-modal-overlay" onClick={() => setIsSearchOpen(false)} style={{ alignItems: 'flex-start', paddingTop: '80px', justifyContent: 'center' }}>
-          <div
-            style={{
-              backgroundColor: '#ffffff',
-              borderRadius: '6px',
-              maxWidth: '560px',
-              width: '90%',
-              padding: '24px',
-              boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-              <h4 style={{ margin: 0, color: '#56236b' }}>Search Spa Formulations</h4>
-              <button
-                onClick={() => setIsSearchOpen(false)}
-                style={{ background: 'none', border: 'none', fontSize: '20px', cursor: 'pointer' }}
-                aria-label="Close search"
-              >
-                &times;
-              </button>
-            </div>
-            <input
-              type="text"
-              placeholder="Search by product name, category (facial, lotion)..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              autoFocus
-              style={{
-                width: '100%',
-                padding: '12px',
-                border: '1px solid #ede1d3',
-                borderRadius: '4px',
-                outline: 'none',
-                boxSizing: 'border-box',
-                marginBottom: '16px',
-              }}
-            />
+      {/* Shared Interactive Modals & Drawers */}
+      <StorefrontSearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        brandName="Dt-Spalab"
+        accentColor={customAccentColor || '#56236b'}
+        products={DTSPALAB_PRODUCTS.map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+          rating: p.rating,
+        }))}
+        onAddToCart={(prod) => {
+          const matched = DTSPALAB_PRODUCTS.find((p) => p.id === prod.id)
+          if (matched) handleAddToCart(matched)
+        }}
+        onViewProduct={(prod) => {
+          const matched = DTSPALAB_PRODUCTS.find((p) => p.id === prod.id)
+          if (matched) setQuickViewProduct(matched)
+        }}
+      />
 
-            {searchResults.length > 0 && (
-              <div style={{ maxHeight: '280px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                {searchResults.map((prod) => (
-                  <div
-                    key={prod.id}
-                    onClick={() => {
-                      setQuickViewProduct(prod)
-                      setIsSearchOpen(false)
-                    }}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '12px',
-                      padding: '8px',
-                      borderRadius: '4px',
-                      cursor: 'pointer',
-                      border: '1px solid #f0f0f0',
-                    }}
-                  >
-                    <img src={prod.image} alt={prod.name} style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
-                    <div style={{ flex: 1 }}>
-                      <div style={{ fontWeight: 600, fontSize: '13px', color: '#56236b' }}>{prod.name}</div>
-                      <div style={{ fontSize: '11px', color: '#736b68' }}>{prod.category}</div>
-                    </div>
-                    <div style={{ fontWeight: 600, fontSize: '13px', color: '#56236b' }}>${prod.price.toFixed(2)}</div>
-                  </div>
-                ))}
-              </div>
-            )}
-            {searchQuery && searchResults.length === 0 && (
-              <div style={{ textAlign: 'center', color: '#736b68', padding: '20px 0', fontSize: '13px' }}>
-                No spa products matched &ldquo;{searchQuery}&rdquo;.
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+      <StorefrontWishlistDrawer
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
+        wishlistIds={wishlist}
+        onToggleWishlist={toggleWishlist}
+        brandName="Dt-Spalab"
+        accentColor={customAccentColor || '#56236b'}
+        products={DTSPALAB_PRODUCTS.map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+          rating: p.rating,
+        }))}
+        onAddToCart={(prod) => {
+          const matched = DTSPALAB_PRODUCTS.find((p) => p.id === prod.id)
+          if (matched) handleAddToCart(matched)
+        }}
+        onViewProduct={(prod) => {
+          const matched = DTSPALAB_PRODUCTS.find((p) => p.id === prod.id)
+          if (matched) setQuickViewProduct(matched)
+        }}
+      />
+
+      <StorefrontAccountModal
+        isOpen={isAccountOpen}
+        onClose={() => setIsAccountOpen(false)}
+        brandName="Dt-Spalab"
+        accentColor={customAccentColor || '#56236b'}
+      />
+
+      <StorefrontMobileNavDrawer
+        isOpen={isMobileNavOpen}
+        onClose={() => setIsMobileNavOpen(false)}
+        items={navItems}
+        brandName="Dt-Spalab"
+        accentColor={customAccentColor || '#56236b'}
+        contactEmail="support@dtspalab.com"
+        onOpenAccount={() => setIsAccountOpen(true)}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        wishlistCount={wishlist.length}
+      />
     </div>
   )
 }

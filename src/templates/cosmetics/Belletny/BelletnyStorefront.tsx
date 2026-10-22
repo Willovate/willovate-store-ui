@@ -17,20 +17,38 @@ import {
   BELLETNY_BLOG_POSTS,
   BELLETNY_BRAND_LOGOS,
 } from './data/belletnyData'
+import {
+  StorefrontSearchModal,
+  StorefrontWishlistDrawer,
+  StorefrontAccountModal,
+  StorefrontMobileNavDrawer,
+  type MobileNavItem,
+} from '../../common/StorefrontModals'
 import './styles/belletny.css'
 
 export function BelletnyStorefront({
   template: _template,
+  device = 'desktop',
+  deviceView,
+  customAccentColor,
   onColorChange: _onColorChange,
+  onUseTemplate: _onUseTemplate,
+  onClose: _onClose,
+  onBack: _onBack,
 }: BelletnyStorefrontProps) {
+  const effectiveDevice = (deviceView as string) || device || 'desktop'
+
   // Navigation & Tabs
   const [activeSlide, setActiveSlide] = useState(0)
   const [activeTab, setActiveTab] = useState<'all' | 'featured' | 'latest' | 'bestseller'>('featured')
-  const [searchQuery, setSearchQuery] = useState('')
 
   // Modals & Drawers
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [quickViewProduct, setQuickViewProduct] = useState<BelletnyProduct | null>(null)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false)
+  const [isAccountOpen, setIsAccountOpen] = useState(false)
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
   const [wishlist, setWishlist] = useState<string[]>([])
 
   // Cart
@@ -38,6 +56,48 @@ export function BelletnyStorefront({
     { product: BELLETNY_PRODUCTS[0], quantity: 1 },
     { product: BELLETNY_PRODUCTS[6], quantity: 1 },
   ])
+
+  const navItems: MobileNavItem[] = [
+    {
+      label: 'Home',
+      children: [
+        { label: 'Hero Collection', onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
+        { label: 'Categories Overview', onClick: () => { const el = document.getElementById('belletny-categories'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Hair Cream',
+      children: [
+        { label: 'Featured Formulas', onClick: () => { setActiveTab('featured'); const el = document.getElementById('belletny-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Bestseller Creams', onClick: () => { setActiveTab('bestseller'); const el = document.getElementById('belletny-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Collections',
+      children: [
+        { label: 'All Cosmetics', onClick: () => { setActiveTab('all'); const el = document.getElementById('belletny-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Latest Drops', onClick: () => { setActiveTab('latest'); const el = document.getElementById('belletny-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Concealer',
+      children: [
+        { label: 'High Coverage Sticks', onClick: () => { const el = document.getElementById('belletny-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Brushes',
+      children: [
+        { label: 'Professional Set', onClick: () => { const el = document.getElementById('belletny-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Blog',
+      children: [
+        { label: 'Beauty Tips & Tutorials', onClick: () => { const el = document.getElementById('belletny-blog-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+  ]
 
   // Filtered Products
   const filteredProducts = useMemo(() => {
@@ -91,11 +151,29 @@ export function BelletnyStorefront({
   const currentSlide = BELLETNY_HERO_SLIDES[activeSlide]
 
   return (
-    <div className="belletny-storefront">
+    <div
+      className={`belletny-storefront device-${effectiveDevice}`}
+      style={
+        customAccentColor
+          ? ({ '--belletny-maroon': customAccentColor } as React.CSSProperties)
+          : undefined
+      }
+    >
       {/* 1. Maroon Header Top */}
       <div className="belletny-header-top">
         <div className="belletny-container">
           <div className="belletny-top-inner">
+            {/* Mobile Hamburger Button */}
+            <button
+              type="button"
+              className="belletny-hamburger-btn"
+              onClick={() => setIsMobileNavOpen(true)}
+              title="Menu"
+              aria-label="Open mobile menu"
+            >
+              ☰
+            </button>
+
             {/* Phone */}
             <div className="belletny-service-text">
               Customer Service : {BELLETNY_PHONE}
@@ -106,23 +184,23 @@ export function BelletnyStorefront({
               <img src={BELLETNY_LOGO} alt="Belletny" className="belletny-logo-img" />
             </a>
 
-            {/* Search, User, Cart */}
+            {/* Search, Wishlist, User, Cart */}
             <div className="belletny-top-right">
-              <div className="belletny-search-bar">
+              <div className="belletny-search-bar" onClick={() => setIsSearchOpen(true)} style={{ cursor: 'pointer' }}>
                 <input
                   type="text"
+                  readOnly
                   placeholder="Search"
                   className="belletny-search-input"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
                 />
                 <button
+                  type="button"
                   className="belletny-search-icon-btn"
-                  onClick={() => {
-                    if (searchQuery.trim()) {
-                      document.getElementById('belletny-catalog')?.scrollIntoView({ behavior: 'smooth' })
-                    }
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setIsSearchOpen(true)
                   }}
+                  title="Search"
                 >
                   <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <circle cx="11" cy="11" r="8" />
@@ -132,8 +210,22 @@ export function BelletnyStorefront({
               </div>
 
               <button
+                type="button"
                 className="belletny-action-icon"
-                onClick={() => alert(`Saved wishlist items: ${wishlist.length}`)}
+                onClick={() => setIsWishlistOpen(true)}
+                title="Wishlist"
+                style={{ position: 'relative' }}
+              >
+                <svg width="22" height="22" fill={wishlist.length > 0 ? '#8e2043' : 'none'} stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+                {wishlist.length > 0 && <span className="belletny-cart-badge">{wishlist.length}</span>}
+              </button>
+
+              <button
+                type="button"
+                className="belletny-action-icon"
+                onClick={() => setIsAccountOpen(true)}
                 title="Account"
               >
                 <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -143,6 +235,7 @@ export function BelletnyStorefront({
               </button>
 
               <button
+                type="button"
                 className="belletny-action-icon"
                 onClick={() => setIsCartOpen(true)}
                 title="Shopping Bag"
@@ -163,13 +256,38 @@ export function BelletnyStorefront({
       <nav className="belletny-nav-bar">
         <div className="belletny-container">
           <ul className="belletny-nav-list">
-            <li><a href="#home" className="belletny-nav-link active">Home</a></li>
-            <li><a href="#hair-cream" className="belletny-nav-link">Hair Cream ▾</a></li>
-            <li><a href="#collections" className="belletny-nav-link">Collections</a></li>
-            <li><a href="#concealer" className="belletny-nav-link">Concealer ▾</a></li>
-            <li><a href="#brushes" className="belletny-nav-link">Makeup Brushes</a></li>
-            <li><a href="#blog" className="belletny-nav-link">Blog</a></li>
-            <li><a href="#contact" className="belletny-nav-link">Contact</a></li>
+            {navItems.map((item) => (
+              <li key={item.label} className="wv-nav-dropdown-wrap">
+                <span
+                  className="belletny-nav-link"
+                  onClick={() => {
+                    if (item.children && item.children.length > 0) {
+                      item.children[0].onClick?.()
+                    } else {
+                      item.onClick?.()
+                    }
+                  }}
+                >
+                  {item.label} {item.children ? '▾' : ''}
+                </span>
+                {item.children && (
+                  <div className="wv-desktop-dropdown">
+                    {item.children.map((sub) => (
+                      <div
+                        key={sub.label}
+                        className="wv-desktop-dropdown-item"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          sub.onClick?.()
+                        }}
+                      >
+                        {sub.label}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </li>
+            ))}
           </ul>
         </div>
       </nav>
@@ -301,28 +419,16 @@ export function BelletnyStorefront({
                     <span className="belletny-badge-round">{product.discountBadge}</span>
                   )}
                   <button
-                    style={{
-                      position: 'absolute',
-                      top: '12px',
-                      right: '12px',
-                      background: '#ffffff',
-                      border: '1px solid #ebdcdb',
-                      color: wishlist.includes(product.id) ? '#8e2043' : '#888',
-                      width: '30px',
-                      height: '30px',
-                      borderRadius: '50%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer',
-                    }}
+                    type="button"
+                    className={`wv-card-wish-btn ${wishlist.includes(product.id) ? 'active' : ''}`}
                     onClick={(e) => {
                       e.stopPropagation()
                       toggleWishlist(product.id)
                     }}
-                    title="Wishlist"
+                    title={wishlist.includes(product.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                    aria-label="Toggle Wishlist"
                   >
-                    ♥
+                    {wishlist.includes(product.id) ? '❤️' : '🤍'}
                   </button>
                 </div>
 
@@ -704,6 +810,77 @@ export function BelletnyStorefront({
           </div>
         </div>
       )}
+
+      {/* Search Modal */}
+      <StorefrontSearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        products={BELLETNY_PRODUCTS.map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onSelectProduct={(p) => {
+          const fullProd = BELLETNY_PRODUCTS.find((x) => x.id === p.id)
+          if (fullProd) setQuickViewProduct(fullProd)
+        }}
+        accentColor={customAccentColor || '#8e2043'}
+        placeholder="Search hair creams, makeup brushes, concealers..."
+        popularTags={['Hair Cream', 'Concealer', 'Brushes']}
+      />
+
+      {/* Wishlist Drawer */}
+      <StorefrontWishlistDrawer
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
+        wishlistIds={wishlist}
+        allProducts={BELLETNY_PRODUCTS.map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onRemoveWishlist={toggleWishlist}
+        onAddToCart={(p) => {
+          const fullProd = BELLETNY_PRODUCTS.find((x) => x.id === p.id)
+          if (fullProd) handleAddToCart(fullProd)
+        }}
+        onOpenProduct={(p) => {
+          const fullProd = BELLETNY_PRODUCTS.find((x) => x.id === p.id)
+          if (fullProd) setQuickViewProduct(fullProd)
+        }}
+        accentColor={customAccentColor || '#8e2043'}
+      />
+
+      {/* Account Modal */}
+      <StorefrontAccountModal
+        isOpen={isAccountOpen}
+        onClose={() => setIsAccountOpen(false)}
+        brandName="Belletny"
+        accentColor={customAccentColor || '#8e2043'}
+      />
+
+      {/* Mobile Navigation Drawer */}
+      <StorefrontMobileNavDrawer
+        isOpen={isMobileNavOpen}
+        onClose={() => setIsMobileNavOpen(false)}
+        brandName="Belletny"
+        navItems={navItems}
+        onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenAccount={() => setIsAccountOpen(true)}
+        onOpenCart={() => setIsCartOpen(true)}
+        wishlistCount={wishlist.length}
+        cartCount={totalCartCount}
+        contactPhone={BELLETNY_PHONE}
+        contactEmail="service@belletny.com"
+        accentColor={customAccentColor || '#8e2043'}
+      />
     </div>
   )
 }

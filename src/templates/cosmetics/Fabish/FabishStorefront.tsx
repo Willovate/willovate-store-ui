@@ -18,12 +18,27 @@ import {
   FABISH_INSTAGRAM_IMAGES,
   FABISH_RECENT_PURCHASE,
 } from './data/fabishData'
+import {
+  StorefrontSearchModal,
+  StorefrontWishlistDrawer,
+  StorefrontAccountModal,
+  StorefrontMobileNavDrawer,
+  type MobileNavItem,
+} from '../../common/StorefrontModals'
 import './styles/fabish.css'
 
 export function FabishStorefront({
   template: _template,
+  device = 'desktop',
+  deviceView,
+  customAccentColor,
   onColorChange: _onColorChange,
+  onUseTemplate: _onUseTemplate,
+  onClose: _onClose,
+  onBack: _onBack,
 }: FabishStorefrontProps) {
+  const effectiveDevice = (deviceView as string) || device || 'desktop'
+
   // Navigation & Category Tab state
   const [activeTab, setActiveTab] = useState<'all' | 'skin-care' | 'body-care' | 'hair-care'>('all')
   const [activeSlide, setActiveSlide] = useState(0)
@@ -32,7 +47,9 @@ export function FabishStorefront({
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [quickViewProduct, setQuickViewProduct] = useState<FabishProduct | null>(null)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false)
+  const [isAccountOpen, setIsAccountOpen] = useState(false)
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
   const [showToast, setShowToast] = useState(true)
 
   // Interactive Collections
@@ -42,20 +59,54 @@ export function FabishStorefront({
     { product: FABISH_PRODUCTS[3], quantity: 2 },
   ])
 
+  const navItems: MobileNavItem[] = [
+    {
+      label: 'Home',
+      children: [
+        { label: 'Hero Collection', onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
+        { label: 'Collage Highlights', onClick: () => { const el = document.getElementById('fabish-collage-grid'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Shop',
+      children: [
+        { label: 'All Products', onClick: () => { setActiveTab('all'); const el = document.getElementById('fabish-shop-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Skin Care', onClick: () => { setActiveTab('skin-care'); const el = document.getElementById('fabish-shop-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Body Care', onClick: () => { setActiveTab('body-care'); const el = document.getElementById('fabish-shop-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Hair Care', onClick: () => { setActiveTab('hair-care'); const el = document.getElementById('fabish-shop-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Collection',
+      children: [
+        { label: 'Peeling Creams Series', onClick: () => { const el = document.getElementById('fabish-shop-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Hydra Serum Story', onClick: () => { const el = document.getElementById('fabish-shop-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Pages',
+      children: [
+        { label: 'Customer Reviews', onClick: () => { const el = document.getElementById('fabish-testimonials'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Shipping & Delivery', onClick: () => alert('Free shipping worldwide on orders above $60') },
+      ],
+    },
+    {
+      label: 'Blog',
+      children: [
+        { label: 'Natural Glow Articles', onClick: () => { const el = document.getElementById('fabish-blog-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Contact',
+      onClick: () => alert('Customer Support: support@fabishbeauty.com'),
+    },
+  ]
+
   // Filtered Products for Tabs
   const filteredProducts = useMemo(() => {
     if (activeTab === 'all') return FABISH_PRODUCTS
     return FABISH_PRODUCTS.filter((p) => p.category === activeTab)
   }, [activeTab])
-
-  // Search Results
-  const searchResults = useMemo(() => {
-    if (!searchQuery.trim()) return []
-    const q = searchQuery.toLowerCase()
-    return FABISH_PRODUCTS.filter(
-      (p) => p.name.toLowerCase().includes(q) || p.description.toLowerCase().includes(q)
-    )
-  }, [searchQuery])
 
   // Cart Calculations
   const cartSubtotal = useMemo(() => {
@@ -111,7 +162,14 @@ export function FabishStorefront({
   const currentSlide = FABISH_HERO_SLIDES[activeSlide]
 
   return (
-    <div className="fabish-storefront">
+    <div
+      className={`fabish-storefront device-${effectiveDevice}`}
+      style={
+        customAccentColor
+          ? ({ '--fabish-pink': customAccentColor } as React.CSSProperties)
+          : undefined
+      }
+    >
       {/* 1. Announcement Bar */}
       <div className="fabish-announcement">
         <div className="fabish-announcement-links" style={{ visibility: 'hidden' }}>
@@ -121,15 +179,30 @@ export function FabishStorefront({
         <div className="fabish-announcement-links">
           <span>USD $</span>
           <span>English</span>
-          <a href="#account" style={{ color: '#ffffff', textDecoration: 'none' }}>
+          <button
+            type="button"
+            onClick={() => setIsAccountOpen(true)}
+            style={{ color: '#ffffff', background: 'transparent', border: 'none', cursor: 'pointer', padding: 0, font: 'inherit' }}
+          >
             Account
-          </a>
+          </button>
         </div>
       </div>
 
       {/* 2. Main Sticky Header */}
       <header className="fabish-header">
         <div className="fabish-header-inner">
+          {/* Mobile Hamburger Button */}
+          <button
+            type="button"
+            className="fabish-hamburger-btn"
+            onClick={() => setIsMobileNavOpen(true)}
+            title="Menu"
+            aria-label="Open mobile menu"
+          >
+            ☰
+          </button>
+
           {/* Logo */}
           <a href="#fabish" className="fabish-logo-link">
             <img src={FABISH_LOGO} alt="Fabish" className="fabish-logo-img" />
@@ -138,36 +211,38 @@ export function FabishStorefront({
           {/* Navigation Links */}
           <nav>
             <ul className="fabish-nav-menu">
-              <li>
-                <a href="#home" className="fabish-nav-link active">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="#shop" className="fabish-nav-link">
-                  Shop
-                </a>
-              </li>
-              <li>
-                <a href="#collection" className="fabish-nav-link">
-                  Collection
-                </a>
-              </li>
-              <li>
-                <a href="#pages" className="fabish-nav-link">
-                  Pages
-                </a>
-              </li>
-              <li>
-                <a href="#blog" className="fabish-nav-link">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="#contact" className="fabish-nav-link">
-                  Contact
-                </a>
-              </li>
+              {navItems.map((item) => (
+                <li key={item.label} className="wv-nav-dropdown-wrap">
+                  <span
+                    className="fabish-nav-link"
+                    onClick={() => {
+                      if (item.children && item.children.length > 0) {
+                        item.children[0].onClick?.()
+                      } else {
+                        item.onClick?.()
+                      }
+                    }}
+                  >
+                    {item.label} {item.children ? '▾' : ''}
+                  </span>
+                  {item.children && (
+                    <div className="wv-desktop-dropdown">
+                      {item.children.map((sub) => (
+                        <div
+                          key={sub.label}
+                          className="wv-desktop-dropdown-item"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            sub.onClick?.()
+                          }}
+                        >
+                          {sub.label}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </li>
+              ))}
             </ul>
           </nav>
 
@@ -187,7 +262,19 @@ export function FabishStorefront({
 
             <button
               className="fabish-action-btn"
-              onClick={() => alert(`Wishlist contains ${wishlist.length} saved products`)}
+              onClick={() => setIsAccountOpen(true)}
+              aria-label="User Account"
+              title="Account"
+            >
+              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </button>
+
+            <button
+              className="fabish-action-btn"
+              onClick={() => setIsWishlistOpen(true)}
               aria-label="Wishlist"
               title="Saved items"
             >
@@ -408,7 +495,19 @@ export function FabishStorefront({
         {/* Product Grid */}
         <div className="fabish-products-grid">
           {filteredProducts.map((product) => (
-            <div key={product.id} className="fabish-product-card">
+            <div key={product.id} className="fabish-product-card" style={{ position: 'relative' }}>
+              <button
+                type="button"
+                className={`wv-card-wish-btn ${wishlist.includes(product.id) ? 'active' : ''}`}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleWishlist(product.id)
+                }}
+                title={wishlist.includes(product.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                aria-label="Toggle Wishlist"
+              >
+                {wishlist.includes(product.id) ? '❤️' : '🤍'}
+              </button>
               <div className="fabish-card-media">
                 <img
                   src={product.image}
@@ -807,81 +906,76 @@ export function FabishStorefront({
         </div>
       )}
 
-      {/* 16. Search Modal */}
-      {isSearchOpen && (
-        <div className="fabish-modal-overlay" onClick={() => setIsSearchOpen(false)}>
-          <div
-            style={{
-              backgroundColor: '#ffffff',
-              borderRadius: '20px',
-              maxWidth: '600px',
-              width: '100%',
-              padding: '28px',
-              boxShadow: '0 24px 48px rgba(0,0,0,0.2)',
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-              <h3 style={{ margin: 0, fontSize: '20px', fontWeight: 700 }}>Search Fabish Products</h3>
-              <button
-                style={{ background: 'none', border: 'none', fontSize: '20px', cursor: 'pointer', color: '#6b7a72' }}
-                onClick={() => setIsSearchOpen(false)}
-              >
-                ✕
-              </button>
-            </div>
-            <input
-              type="text"
-              autoFocus
-              placeholder="Search skincare, hair serum, lotion..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              style={{
-                width: '100%',
-                padding: '14px 18px',
-                borderRadius: '12px',
-                border: '1px solid #e2e8e2',
-                fontSize: '15px',
-                outline: 'none',
-                boxSizing: 'border-box',
-              }}
-            />
-            {searchResults.length > 0 && (
-              <div style={{ marginTop: '20px', maxHeight: '300px', overflowY: 'auto' }}>
-                {searchResults.map((product) => (
-                  <div
-                    key={product.id}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '12px',
-                      padding: '10px 0',
-                      borderBottom: '1px solid #f0f0f0',
-                      cursor: 'pointer',
-                    }}
-                    onClick={() => {
-                      setQuickViewProduct(product)
-                      setIsSearchOpen(false)
-                    }}
-                  >
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      style={{ width: '48px', height: '48px', borderRadius: '8px', objectFit: 'cover' }}
-                    />
-                    <div style={{ flex: 1 }}>
-                      <div style={{ fontWeight: 600, fontSize: '14px' }}>{product.name}</div>
-                      <div style={{ color: '#2e5b4b', fontWeight: 700, fontSize: '13px' }}>
-                        ${product.price.toFixed(2)}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+      {/* Search Modal */}
+      <StorefrontSearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        products={FABISH_PRODUCTS.map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onSelectProduct={(p) => {
+          const fullProd = FABISH_PRODUCTS.find((x) => x.id === p.id)
+          if (fullProd) setQuickViewProduct(fullProd)
+        }}
+        accentColor={customAccentColor || '#2e5b4b'}
+        placeholder="Search skincare, hair serum, lotion..."
+        popularTags={['Skin Care', 'Body Care', 'Hair Care']}
+      />
+
+      {/* Wishlist Drawer */}
+      <StorefrontWishlistDrawer
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
+        wishlistIds={wishlist}
+        allProducts={FABISH_PRODUCTS.map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onRemoveWishlist={toggleWishlist}
+        onAddToCart={(p) => {
+          const fullProd = FABISH_PRODUCTS.find((x) => x.id === p.id)
+          if (fullProd) handleAddToCart(fullProd)
+        }}
+        onOpenProduct={(p) => {
+          const fullProd = FABISH_PRODUCTS.find((x) => x.id === p.id)
+          if (fullProd) setQuickViewProduct(fullProd)
+        }}
+        accentColor={customAccentColor || '#2e5b4b'}
+      />
+
+      {/* Account Modal */}
+      <StorefrontAccountModal
+        isOpen={isAccountOpen}
+        onClose={() => setIsAccountOpen(false)}
+        brandName="Fabish"
+        accentColor={customAccentColor || '#2e5b4b'}
+      />
+
+      {/* Mobile Navigation Drawer */}
+      <StorefrontMobileNavDrawer
+        isOpen={isMobileNavOpen}
+        onClose={() => setIsMobileNavOpen(false)}
+        brandName="Fabish"
+        navItems={navItems}
+        onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenAccount={() => setIsAccountOpen(true)}
+        onOpenCart={() => setIsCartOpen(true)}
+        wishlistCount={wishlist.length}
+        cartCount={totalCartCount}
+        contactPhone="+1 800 234-FABISH"
+        contactEmail="support@fabishbeauty.com"
+        accentColor={customAccentColor || '#2e5b4b'}
+      />
     </div>
   )
 }

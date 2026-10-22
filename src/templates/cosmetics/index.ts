@@ -1,3 +1,5 @@
+import './cosmeticsMobile.css'
+
 export * from './Beaux'
 export * from './Glowing'
 export * from './Fabish'

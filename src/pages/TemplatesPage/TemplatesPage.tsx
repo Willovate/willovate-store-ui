@@ -44,6 +44,8 @@ import {
 } from '../../templates/shoes'
 import '../../templates/fashion/fashionMobile.css'
 import '../../templates/jewelry/jewelryMobile.css'
+import '../../templates/shoes/shoesMobile.css'
+import '../../templates/cosmetics/cosmeticsMobile.css'
 import {
   BELLE_FASHION_TEMPLATE,
   VOGAL_FASHION_TEMPLATE,

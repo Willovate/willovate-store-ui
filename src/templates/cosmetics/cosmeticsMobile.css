@@ -1,0 +1,665 @@
+/* =============================================================================
+   COSMETICS STOREFRONTS - MASTER RESPONSIVE MOBILE STYLESHEET
+   1. Real mobile viewports (@media (max-width: 768px))
+   2. Simulated mobile device preview frames (.frame-mobile, .device-mobile, .is-mobile)
+   ============================================================================= */
+
+@media (max-width: 768px) {
+  :is(
+    .beaux-wrapper,
+    .glowing-wrapper,
+    .belletny-storefront,
+    .dezel-storefront,
+    .dtspa-storefront,
+    .fabish-storefront,
+    .lipura-storefront,
+    .organica-storefront,
+    .shades-storefront,
+    .smetic-storefront
+  ) {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ---------------------------------------------------------------------------
+     1. CONTAINER & SECTION PADDING
+     --------------------------------------------------------------------------- */
+  :is(
+    .beaux-wrapper,
+    .glowing-wrapper,
+    .belletny-storefront,
+    .dezel-storefront,
+    .dtspa-storefront,
+    .fabish-storefront,
+    .lipura-storefront,
+    .organica-storefront,
+    .shades-storefront,
+    .smetic-storefront
+  ) :is(
+    .beaux-container,
+    .glowing-container,
+    .belletny-container,
+    .dezel-container,
+    .dtspa-container,
+    .fabish-container,
+    .lipura-container,
+    .organica-container,
+    .shades-container,
+    .smetic-container
+  ) {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ---------------------------------------------------------------------------
+     2. ANNOUNCEMENT & TOPBARS
+     --------------------------------------------------------------------------- */
+  :is(
+    .beaux-wrapper,
+    .glowing-wrapper,
+    .belletny-storefront,
+    .dezel-storefront,
+    .dtspa-storefront,
+    .fabish-storefront,
+    .lipura-storefront,
+    .organica-storefront,
+    .shades-storefront,
+    .smetic-storefront
+  ) :is(
+    .beaux-announcement-bar,
+    .glowing-announcement-bar,
+    .belletny-header-top,
+    .dezel-topbar,
+    .dtspa-topbar,
+    .fabish-topbar,
+    .lipura-topbar,
+    .organica-topbar,
+    .shades-topbar,
+    .smetic-topbar
+  ) {
+    padding: 6px 10px !important;
+    font-size: 11px !important;
+    flex-wrap: wrap !important;
+    gap: 4px 10px !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  /* ---------------------------------------------------------------------------
+     3. HEADER LAYOUT
+     Hide desktop nav links, show mobile hamburger, center logo, align actions
+     --------------------------------------------------------------------------- */
+  :is(
+    .beaux-wrapper,
+    .glowing-wrapper,
+    .belletny-storefront,
+    .dezel-storefront,
+    .dtspa-storefront,
+    .fabish-storefront,
+    .lipura-storefront,
+    .organica-storefront,
+    .shades-storefront,
+    .smetic-storefront
+  ) :is(
+    .beaux-header-inner,
+    .glowing-header-inner,
+    .belletny-header-inner,
+    .dezel-header-inner,
+    .dtspa-header-inner,
+    .fabish-header-inner,
+    .lipura-header-inner,
+    .organica-header-inner,
+    .shades-header-inner,
+    .smetic-header-inner
+  ) {
+    padding: 10px 14px !important;
+    gap: 10px !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+  }
+
+  /* HIDE DESKTOP NAV MENUS ON MOBILE */
+  :is(
+    .beaux-wrapper,
+    .glowing-wrapper,
+    .belletny-storefront,
+    .dezel-storefront,
+    .dtspa-storefront,
+    .fabish-storefront,
+    .lipura-storefront,
+    .organica-storefront,
+    .shades-storefront,
+    .smetic-storefront
+  ) :is(
+    .beaux-nav-center,
+    .glowing-nav-left,
+    .glowing-header-nav,
+    .belletny-nav-links,
+    .belletny-nav-row,
+    .dezel-nav,
+    .dezel-nav-row,
+    .dtspa-nav,
+    .fabish-nav-row,
+    .fabish-nav-list,
+    .lipura-nav,
+    .organica-nav-row,
+    .organica-nav-list,
+    .shades-nav,
+    .shades-nav-row,
+    .smetic-nav,
+    .smetic-nav-row,
+    .wv-desktop-dropdown
+  ) {
+    display: none !important;
+  }
+
+  /* SHOW MOBILE HAMBURGER BUTTONS */
+  :is(
+    .beaux-wrapper,
+    .glowing-wrapper,
+    .belletny-storefront,
+    .dezel-storefront,
+    .dtspa-storefront,
+    .fabish-storefront,
+    .lipura-storefront,
+    .organica-storefront,
+    .shades-storefront,
+    .smetic-storefront
+  ) :is(
+    .beaux-hamburger-btn,
+    .glowing-hamburger-btn,
+    .belletny-hamburger-btn,
+    .dezel-hamburger-btn,
+    .dtspa-hamburger-btn,
+    .fabish-hamburger-btn,
+    .lipura-hamburger-btn,
+    .organica-hamburger-btn,
+    .shades-hamburger-btn,
+    .smetic-hamburger-btn
+  ) {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 6px;
+    color: inherit;
+    line-height: 1;
+  }
+
+  /* LOGO PROPORTIONS */
+  :is(
+    .beaux-wrapper,
+    .glowing-wrapper,
+    .belletny-storefront,
+    .dezel-storefront,
+    .dtspa-storefront,
+    .fabish-storefront,
+    .lipura-storefront,
+    .organica-storefront,
+    .shades-storefront,
+    .smetic-storefront
+  ) :is(
+    .beaux-logo-img,
+    .glowing-logo-img,
+    .belletny-logo-img,
+    .dezel-logo-img,
+    .dtspa-logo-img,
+    .fabish-logo-img,
+    .lipura-logo-img,
+    .organica-logo-img,
+    .shades-logo-img,
+    .smetic-logo-img,
+    .beaux-logo-center a,
+    .glowing-logo-center a,
+    .belletny-logo-text,
+    .dezel-logo,
+    .dtspa-logo,
+    .fabish-logo,
+    .lipura-logo,
+    .organica-logo,
+    .shades-logo,
+    .smetic-logo
+  ) {
+    font-size: 20px !important;
+    max-height: 28px !important;
+    margin: 0 !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* ACTION BUTTONS ON HEADER RIGHT */
+  :is(
+    .beaux-wrapper,
+    .glowing-wrapper,
+    .belletny-storefront,
+    .dezel-storefront,
+    .dtspa-storefront,
+    .fabish-storefront,
+    .lipura-storefront,
+    .organica-storefront,
+    .shades-storefront,
+    .smetic-storefront
+  ) :is(
+    .beaux-header-right,
+    .glowing-actions-right,
+    .belletny-top-actions,
+    .dezel-header-actions,
+    .dtspa-header-actions,
+    .fabish-header-actions,
+    .lipura-header-actions,
+    .organica-header-actions,
+    .shades-header-actions,
+    .smetic-header-actions
+  ) {
+    gap: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  /* ---------------------------------------------------------------------------
+     4. HERO SECTIONS / SLIDERS
+     --------------------------------------------------------------------------- */
+  :is(
+    .beaux-wrapper,
+    .glowing-wrapper,
+    .belletny-storefront,
+    .dezel-storefront,
+    .dtspa-storefront,
+    .fabish-storefront,
+    .lipura-storefront,
+    .organica-storefront,
+    .shades-storefront,
+    .smetic-storefront
+  ) :is(
+    .beaux-hero-slider,
+    .glowing-hero-slider,
+    .belletny-hero-slider,
+    .dezel-hero,
+    .dtspa-hero,
+    .fabish-hero,
+    .lipura-hero,
+    .organica-hero,
+    .shades-hero,
+    .smetic-hero
+  ) {
+    grid-template-columns: minmax(0, 1fr) !important;
+    flex-direction: column !important;
+    padding: 24px 14px !important;
+    gap: 20px !important;
+    min-height: auto !important;
+  }
+
+  :is(
+    .beaux-wrapper,
+    .glowing-wrapper,
+    .belletny-storefront,
+    .dezel-storefront,
+    .dtspa-storefront,
+    .fabish-storefront,
+    .lipura-storefront,
+    .organica-storefront,
+    .shades-storefront,
+    .smetic-storefront
+  ) :is(
+    .beaux-slide-title,
+    .glowing-hero-title,
+    .belletny-hero-title,
+    .dezel-hero-title,
+    .dtspa-hero-title,
+    .fabish-hero-title,
+    .lipura-hero-title,
+    .organica-hero-title,
+    .shades-hero-title,
+    .smetic-hero-title
+  ) {
+    font-size: clamp(22px, 6vw, 32px) !important;
+    line-height: 1.25 !important;
+  }
+
+  /* ---------------------------------------------------------------------------
+     5. PRODUCT GRIDS: 2 COLUMNS ON MOBILE
+     --------------------------------------------------------------------------- */
+  :is(
+    .beaux-wrapper,
+    .glowing-wrapper,
+    .belletny-storefront,
+    .dezel-storefront,
+    .dtspa-storefront,
+    .fabish-storefront,
+    .lipura-storefront,
+    .organica-storefront,
+    .shades-storefront,
+    .smetic-storefront
+  ) :is(
+    .beaux-products-grid,
+    .glowing-products-grid,
+    .belletny-products-grid,
+    .dezel-products-grid,
+    .dtspa-products-grid,
+    .fabish-products-grid,
+    .lipura-products-grid,
+    .organica-products-grid,
+    .shades-products-grid,
+    .smetic-products-grid,
+    [class*="products-grid"],
+    [class*="product-grid"]
+  ) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  /* Product Card Padding and Image Box */
+  :is(
+    .beaux-wrapper,
+    .glowing-wrapper,
+    .belletny-storefront,
+    .dezel-storefront,
+    .dtspa-storefront,
+    .fabish-storefront,
+    .lipura-storefront,
+    .organica-storefront,
+    .shades-storefront,
+    .smetic-storefront
+  ) :is(
+    .beaux-card,
+    .glowing-product-card,
+    .belletny-product-card,
+    .dezel-card,
+    .dtspa-card,
+    .fabish-product-card,
+    .lipura-card,
+    .organica-product-card,
+    .shades-card,
+    .smetic-card
+  ) {
+    padding: 10px !important;
+    position: relative !important;
+    box-sizing: border-box !important;
+  }
+
+  :is(
+    .beaux-wrapper,
+    .glowing-wrapper,
+    .belletny-storefront,
+    .dezel-storefront,
+    .dtspa-storefront,
+    .fabish-storefront,
+    .lipura-storefront,
+    .organica-storefront,
+    .shades-storefront,
+    .smetic-storefront
+  ) :is(
+    .beaux-card-thumb,
+    .glowing-card-thumb,
+    .belletny-thumb-box,
+    .dezel-thumb-box,
+    .dtspa-thumb-box,
+    .fabish-card-thumb,
+    .lipura-thumb-box,
+    .organica-card-thumb,
+    .shades-thumb-box,
+    .smetic-thumb-box
+  ) {
+    height: 160px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  :is(
+    .beaux-wrapper,
+    .glowing-wrapper,
+    .belletny-storefront,
+    .dezel-storefront,
+    .dtspa-storefront,
+    .fabish-storefront,
+    .lipura-storefront,
+    .organica-storefront,
+    .shades-storefront,
+    .smetic-storefront
+  ) :is(
+    .beaux-card-thumb img,
+    .glowing-card-thumb img,
+    .belletny-thumb-box img,
+    .dezel-thumb-box img,
+    .dtspa-thumb-box img,
+    .fabish-card-thumb img,
+    .lipura-thumb-box img,
+    .organica-card-thumb img,
+    .shades-thumb-box img,
+    .smetic-thumb-box img
+  ) {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+  }
+
+  /* ---------------------------------------------------------------------------
+     6. FOOTER GRID
+     --------------------------------------------------------------------------- */
+  :is(
+    .beaux-wrapper,
+    .glowing-wrapper,
+    .belletny-storefront,
+    .dezel-storefront,
+    .dtspa-storefront,
+    .fabish-storefront,
+    .lipura-storefront,
+    .organica-storefront,
+    .shades-storefront,
+    .smetic-storefront
+  ) :is(
+    .beaux-footer-grid,
+    .glowing-footer-grid,
+    .belletny-footer-grid,
+    .dezel-footer-grid,
+    .dtspa-footer-grid,
+    .fabish-footer-grid,
+    .lipura-footer-grid,
+    .organica-footer-grid,
+    .shades-footer-grid,
+    .smetic-footer-grid
+  ) {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 24px !important;
+    text-align: center !important;
+  }
+}
+
+/* =============================================================================
+   SIMULATED MOBILE PREVIEW FRAMES (Desktop mode previewing mobile)
+   ============================================================================= */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile
+) :is(
+  .beaux-wrapper,
+  .glowing-wrapper,
+  .belletny-storefront,
+  .dezel-storefront,
+  .dtspa-storefront,
+  .fabish-storefront,
+  .lipura-storefront,
+  .organica-storefront,
+  .shades-storefront,
+  .smetic-storefront
+) {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile
+) :is(
+  .beaux-nav-center,
+  .glowing-nav-left,
+  .glowing-header-nav,
+  .belletny-nav-links,
+  .belletny-nav-row,
+  .dezel-nav,
+  .dezel-nav-row,
+  .dtspa-nav,
+  .fabish-nav-row,
+  .fabish-nav-list,
+  .lipura-nav,
+  .organica-nav-row,
+  .organica-nav-list,
+  .shades-nav,
+  .shades-nav-row,
+  .smetic-nav,
+  .smetic-nav-row,
+  .wv-desktop-dropdown
+) {
+  display: none !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile
+) :is(
+  .beaux-hamburger-btn,
+  .glowing-hamburger-btn,
+  .belletny-hamburger-btn,
+  .dezel-hamburger-btn,
+  .dtspa-hamburger-btn,
+  .fabish-hamburger-btn,
+  .lipura-hamburger-btn,
+  .organica-hamburger-btn,
+  .shades-hamburger-btn,
+  .smetic-hamburger-btn
+) {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 6px;
+  color: inherit;
+  line-height: 1;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile
+) :is(
+  .beaux-header-inner,
+  .glowing-header-inner,
+  .belletny-header-inner,
+  .dezel-header-inner,
+  .dtspa-header-inner,
+  .fabish-header-inner,
+  .lipura-header-inner,
+  .organica-header-inner,
+  .shades-header-inner,
+  .smetic-header-inner
+) {
+  padding: 10px 14px !important;
+  gap: 10px !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile
+) :is(
+  .beaux-products-grid,
+  .glowing-products-grid,
+  .belletny-products-grid,
+  .dezel-products-grid,
+  .dtspa-products-grid,
+  .fabish-products-grid,
+  .lipura-products-grid,
+  .organica-products-grid,
+  .shades-products-grid,
+  .smetic-products-grid,
+  [class*="products-grid"],
+  [class*="product-grid"]
+) {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile
+) :is(
+  .beaux-announcement-bar,
+  .glowing-announcement-bar,
+  .belletny-header-top,
+  .dezel-topbar,
+  .dtspa-topbar,
+  .fabish-topbar,
+  .lipura-topbar,
+  .organica-topbar,
+  .shades-topbar,
+  .smetic-topbar
+) {
+  padding: 6px 10px !important;
+  font-size: 11px !important;
+  flex-wrap: wrap !important;
+  gap: 4px 10px !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile
+) :is(
+  .beaux-hero-slider,
+  .glowing-hero-slider,
+  .belletny-hero-slider,
+  .dezel-hero,
+  .dtspa-hero,
+  .fabish-hero,
+  .lipura-hero,
+  .organica-hero,
+  .shades-hero,
+  .smetic-hero
+) {
+  grid-template-columns: minmax(0, 1fr) !important;
+  flex-direction: column !important;
+  padding: 24px 14px !important;
+  gap: 20px !important;
+  min-height: auto !important;
+}
+
+

@@ -13,6 +13,13 @@ import {
   FASHIONFEET_REVIEWS,
   FASHIONFEET_BLOGS,
 } from './data/fashionFeetData'
+import {
+  StorefrontSearchModal,
+  StorefrontWishlistDrawer,
+  StorefrontAccountModal,
+  StorefrontMobileNavDrawer,
+  type MobileNavItem,
+} from '../../common/StorefrontModals'
 import './styles/fashionFeet.css'
 
 export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
@@ -31,6 +38,10 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
     },
   ])
   const [isCartOpen, setIsCartOpen] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false)
+  const [isAccountOpen, setIsAccountOpen] = useState(false)
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
   const [quickViewProduct, setQuickViewProduct] = useState<FashionFeetProduct | null>(null)
   const [selectedSize, setSelectedSize] = useState<number>(9)
   const [wishlist, setWishlist] = useState<string[]>([])
@@ -95,6 +106,39 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
       }
     })
   }
+
+  const navItems: MobileNavItem[] = [
+    {
+      label: 'Home',
+      children: [
+        { label: 'Home Default', onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
+        { label: 'Men Modern Shoes', onClick: () => { const el = document.getElementById('ff-bestsale-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Shop',
+      children: [
+        { label: 'Best Sellers', onClick: () => { const el = document.getElementById('ff-bestsale-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Loafer Edition', onClick: () => { const el = document.getElementById('ff-loafer-banner'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Top Brands', onClick: () => { const el = document.getElementById('ff-brands-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Pages',
+      children: [
+        { label: 'About Us', onClick: () => { const el = document.getElementById('ff-about-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Customer Reviews', onClick: () => { const el = document.getElementById('ff-reviews-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Help & FAQ', onClick: () => showToast('Help Center: Call +1 (800) 555-FEET') },
+      ],
+    },
+    {
+      label: 'Blogs',
+      children: [
+        { label: 'Style & Trends', onClick: () => { const el = document.getElementById('ff-blog-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Shoe Maintenance Guide', onClick: () => showToast('Reading Shoe Care Guide') },
+      ],
+    },
+  ]
 
   const totalCartCount = cart.reduce((sum, item) => sum + item.quantity, 0)
   const cartSubtotal = cart.reduce(
@@ -176,19 +220,49 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
       {/* Header */}
       <header className="ff-header">
         <div className="ff-header-inner">
+          {/* Mobile Hamburger Button */}
+          <button
+            type="button"
+            className="ff-hamburger-btn"
+            onClick={() => setIsMobileNavOpen(true)}
+            title="Menu"
+            aria-label="Open mobile menu"
+          >
+            ☰
+          </button>
+
           <nav className="ff-nav-left">
-            <a href="#home" className="ff-nav-link active">
-              HOME
-            </a>
-            <a href="#shop" className="ff-nav-link">
-              SHOP ▾
-            </a>
-            <a href="#pages" className="ff-nav-link">
-              PAGES ▾
-            </a>
-            <a href="#products" className="ff-nav-link">
-              PRODUCTS
-            </a>
+            {navItems.map((item) => (
+              <div key={item.label} className="wv-nav-dropdown-wrap">
+                <span
+                  className="ff-nav-link"
+                  onClick={() => {
+                    if (item.children && item.children.length > 0) {
+                      item.children[0].onClick?.()
+                    }
+                  }}
+                >
+                  {item.label} ▾
+                </span>
+                {item.children && item.children.length > 0 && (
+                  <div className="wv-desktop-dropdown">
+                    {item.children.map((sub) => (
+                      <button
+                        key={sub.label}
+                        type="button"
+                        className="wv-dropdown-item"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          sub.onClick?.()
+                        }}
+                      >
+                        {sub.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
           </nav>
 
           <a href="#home" className="ff-brand-logo">
@@ -201,23 +275,35 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
           </a>
 
           <div className="ff-nav-right">
-            <a href="#faq" className="ff-nav-link">
-              FAQ
-            </a>
-            <a href="#blog" className="ff-nav-link">
-              BLOG
-            </a>
-            <a href="#contact" className="ff-nav-link">
-              CONTACT
-            </a>
             <button
+              type="button"
               className="ff-action-btn"
               title="Search footwear"
-              onClick={() => showToast('Search drawer opened')}
+              onClick={() => setIsSearchOpen(true)}
             >
               🔍
             </button>
             <button
+              type="button"
+              className="ff-action-btn"
+              title="Account"
+              onClick={() => setIsAccountOpen(true)}
+            >
+              👤
+            </button>
+            <button
+              type="button"
+              className="ff-action-btn"
+              title="Wishlist"
+              onClick={() => setIsWishlistOpen(true)}
+            >
+              {wishlist.length > 0 ? '❤️' : '🤍'}
+              {wishlist.length > 0 && (
+                <span className="ff-cart-badge">{wishlist.length}</span>
+              )}
+            </button>
+            <button
+              type="button"
               className="ff-action-btn"
               title="View shopping cart"
               onClick={() => setIsCartOpen(true)}
@@ -800,6 +886,83 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
           </div>
         </div>
       )}
+
+      {/* Search Modal */}
+      <StorefrontSearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        products={FASHIONFEET_BEST_SALE_PRODUCTS.map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onSelectProduct={(p) => {
+          const fullProd = FASHIONFEET_BEST_SALE_PRODUCTS.find((x) => x.id === p.id)
+          if (fullProd) {
+            setQuickViewProduct(fullProd)
+            setSelectedSize(9)
+          }
+        }}
+        accentColor={activeColor}
+        placeholder="Search men's shoes, loafers, boots, oxfords..."
+        popularTags={['Loafers', 'Boots', 'Oxfords', 'Sneakers']}
+      />
+
+      {/* Wishlist Drawer */}
+      <StorefrontWishlistDrawer
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
+        wishlistIds={wishlist}
+        allProducts={FASHIONFEET_BEST_SALE_PRODUCTS.map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onRemoveWishlist={(id) => toggleWishlist(id, '')}
+        onAddToCart={(p) => {
+          const fullProd = FASHIONFEET_BEST_SALE_PRODUCTS.find((x) => x.id === p.id)
+          if (fullProd) handleAddToCart(fullProd, 9)
+        }}
+        onOpenProduct={(p) => {
+          const fullProd = FASHIONFEET_BEST_SALE_PRODUCTS.find((x) => x.id === p.id)
+          if (fullProd) {
+            setQuickViewProduct(fullProd)
+            setSelectedSize(9)
+          }
+        }}
+        accentColor={activeColor}
+      />
+
+      {/* Account Modal */}
+      <StorefrontAccountModal
+        isOpen={isAccountOpen}
+        onClose={() => setIsAccountOpen(false)}
+        brandName="FashionFeet"
+        accentColor={activeColor}
+      />
+
+      {/* Mobile Navigation Drawer */}
+      <StorefrontMobileNavDrawer
+        isOpen={isMobileNavOpen}
+        onClose={() => setIsMobileNavOpen(false)}
+        brandName="FashionFeet"
+        navItems={navItems}
+        onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenAccount={() => setIsAccountOpen(true)}
+        onOpenCart={() => setIsCartOpen(true)}
+        wishlistCount={wishlist.length}
+        cartCount={totalCartCount}
+        contactPhone="+1 (800) 555-FEET"
+        contactEmail="concierge@fashionfeet.com"
+        accentColor={activeColor}
+      />
 
       {/* Floating Toast Notification */}
       {toastMessage && <div className="ff-toast">{toastMessage}</div>}

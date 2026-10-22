@@ -17,6 +17,13 @@ import {
   HAPPY_FEET_VALUE_PROPS,
   HAPPY_FEET_INSTA_IMAGES,
 } from './data/happyFeetData'
+import {
+  StorefrontSearchModal,
+  StorefrontWishlistDrawer,
+  StorefrontAccountModal,
+  StorefrontMobileNavDrawer,
+  type MobileNavItem,
+} from '../../common/StorefrontModals'
 import './styles/happyFeet.css'
 
 export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
@@ -49,10 +56,62 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
     },
   ])
   const [isCartOpen, setIsCartOpen] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false)
+  const [isAccountOpen, setIsAccountOpen] = useState(false)
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
+  const [wishlist, setWishlist] = useState<string[]>([])
   const [selectedProduct, setSelectedProduct] = useState<HappyFeetProduct | null>(null)
   const [openFaqId, setOpenFaqId] = useState<string | null>('faq-1')
   const [toastMessage, setToastMessage] = useState<string | null>(null)
   const [countdown, setCountdown] = useState({ hours: 18, minutes: 42, seconds: 15 })
+
+  const toggleWishlist = (productId: string) => {
+    setWishlist((prev) => {
+      const exists = prev.includes(productId)
+      if (exists) {
+        showToast('Removed from Wishlist')
+        return prev.filter((id) => id !== productId)
+      }
+      showToast('Saved to Wishlist ❤️')
+      return [...prev, productId]
+    })
+  }
+
+  const navItems: MobileNavItem[] = [
+    {
+      label: 'Home',
+      children: [
+        { label: 'Featured Drops', onClick: () => { const el = document.getElementById('hf-deals-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Fresh Picks', onClick: () => { const el = document.getElementById('hf-fresh-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Shop',
+      children: [
+        { label: 'Men Sneakers', onClick: () => { setFreshCategoryTab('Men'); const el = document.getElementById('hf-fresh-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Women Running', onClick: () => { setFreshCategoryTab('Women'); const el = document.getElementById('hf-fresh-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Kids Sports', onClick: () => { setFreshCategoryTab('Kids'); const el = document.getElementById('hf-fresh-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Blog',
+      children: [
+        { label: 'Shoe Trends & Care', onClick: () => { const el = document.getElementById('hf-blog-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Pages',
+      children: [
+        { label: 'Brand Stories', onClick: () => { const el = document.getElementById('hf-brands-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Customer FAQ', onClick: () => { const el = document.getElementById('hf-faq-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'About',
+      onClick: () => { const el = document.getElementById('hf-brands-section'); el?.scrollIntoView({ behavior: 'smooth' }) },
+    },
+  ]
 
   // Countdown timer simulation
   useEffect(() => {
@@ -154,15 +213,31 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
             <span>English</span>
             <span style={{ fontSize: '10px' }}>▼</span>
           </div>
-          <a href="#signin" className="hf-utility-auth">
+          <button
+            type="button"
+            className="hf-utility-auth"
+            style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'inherit', display: 'flex', alignItems: 'center', gap: '6px' }}
+            onClick={() => setIsAccountOpen(true)}
+          >
             <span>👤</span>
             <span>Sign in</span>
-          </a>
+          </button>
         </div>
       </div>
 
       {/* 2. MAIN HEADER & NAVBAR */}
       <header className="hf-main-header">
+        {/* Mobile Hamburger Button */}
+        <button
+          type="button"
+          className="hf-hamburger-btn"
+          onClick={() => setIsMobileNavOpen(true)}
+          title="Menu"
+          aria-label="Open mobile menu"
+        >
+          ☰
+        </button>
+
         <a href="#home" className="hf-logo-wrap">
           <svg className="hf-logo-icon-svg" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -185,24 +260,66 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
         </a>
 
         <ul className="hf-nav-menu">
-          <li className="hf-nav-item active">Home</li>
-          <li className="hf-nav-item">Shop ▾</li>
-          <li className="hf-nav-item">Blog</li>
-          <li className="hf-nav-item">Pages ▾</li>
-          <li className="hf-nav-item">About</li>
+          {navItems.map((item) => (
+            <li key={item.label} className="hf-nav-item wv-nav-dropdown-wrap">
+              <span
+                onClick={() => {
+                  if (item.children && item.children.length > 0) {
+                    item.children[0].onClick?.()
+                  } else {
+                    item.onClick?.()
+                  }
+                }}
+              >
+                {item.label} {item.children ? '▾' : ''}
+              </span>
+              {item.children && (
+                <div className="wv-desktop-dropdown">
+                  {item.children.map((sub) => (
+                    <div
+                      key={sub.label}
+                      className="wv-desktop-dropdown-item"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        sub.onClick?.()
+                      }}
+                    >
+                      {sub.label}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </li>
+          ))}
         </ul>
 
         <div className="hf-header-actions">
-          <form className="hf-search-form" onSubmit={(e) => e.preventDefault()}>
+          <form className="hf-search-form" onSubmit={(e) => { e.preventDefault(); setIsSearchOpen(true) }}>
             <input
               type="text"
               className="hf-search-input"
               placeholder="Search shoes..."
+              onFocus={() => setIsSearchOpen(true)}
+              onClick={() => setIsSearchOpen(true)}
+              readOnly
             />
-            <button type="submit" className="hf-search-submit" title="Search">
+            <button type="button" className="hf-search-submit" title="Search" onClick={() => setIsSearchOpen(true)}>
               🔍
             </button>
           </form>
+
+          <button
+            type="button"
+            className="hf-cart-btn"
+            onClick={() => setIsWishlistOpen(true)}
+            title="Wishlist"
+            style={{ position: 'relative' }}
+          >
+            🤍
+            {wishlist.length > 0 && (
+              <span className="hf-cart-badge">{wishlist.length}</span>
+            )}
+          </button>
 
           <button
             type="button"
@@ -342,7 +459,19 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
 
         <div className="hf-products-grid">
           {filteredFreshPicks.map((product) => (
-            <div key={product.id} className="hf-product-card">
+            <div key={product.id} className="hf-product-card" style={{ position: 'relative' }}>
+              <button
+                type="button"
+                className={`wv-card-wish-btn ${wishlist.includes(product.id) ? 'active' : ''}`}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleWishlist(product.id)
+                }}
+                title={wishlist.includes(product.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                aria-label="Toggle Wishlist"
+              >
+                {wishlist.includes(product.id) ? '❤️' : '🤍'}
+              </button>
               <div className="hf-product-img-wrap">
                 <img
                   src={product.image}
@@ -464,7 +593,19 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
               ((deal.soldCount || 10) / (deal.stockCount || 50)) * 100
             )
             return (
-              <div key={deal.id} className="hf-product-card">
+              <div key={deal.id} className="hf-product-card" style={{ position: 'relative' }}>
+                <button
+                  type="button"
+                  className={`wv-card-wish-btn ${wishlist.includes(deal.id) ? 'active' : ''}`}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    toggleWishlist(deal.id)
+                  }}
+                  title={wishlist.includes(deal.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                  aria-label="Toggle Wishlist"
+                >
+                  {wishlist.includes(deal.id) ? '❤️' : '🤍'}
+                </button>
                 <div className="hf-product-img-wrap">
                   <img
                     src={deal.image}
@@ -1038,6 +1179,77 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
           </div>
         </div>
       )}
+
+      {/* Search Modal */}
+      <StorefrontSearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        products={[...HAPPY_FEET_FRESH_PICKS, ...HAPPY_FEET_FEATURED_DEALS, ...HAPPY_FEET_SUGGESTED_PRODUCTS].map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onSelectProduct={(p) => {
+          const fullProd = [...HAPPY_FEET_FRESH_PICKS, ...HAPPY_FEET_FEATURED_DEALS, ...HAPPY_FEET_SUGGESTED_PRODUCTS].find((x) => x.id === p.id)
+          if (fullProd) setSelectedProduct(fullProd)
+        }}
+        accentColor={customAccentColor || '#e1680b'}
+        placeholder="Search running shoes, fresh picks, deals..."
+        popularTags={['Sneakers', 'Running', 'Deals', 'Unisex']}
+      />
+
+      {/* Wishlist Drawer */}
+      <StorefrontWishlistDrawer
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
+        wishlistIds={wishlist}
+        allProducts={[...HAPPY_FEET_FRESH_PICKS, ...HAPPY_FEET_FEATURED_DEALS, ...HAPPY_FEET_SUGGESTED_PRODUCTS].map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onRemoveWishlist={toggleWishlist}
+        onAddToCart={(p) => {
+          const fullProd = [...HAPPY_FEET_FRESH_PICKS, ...HAPPY_FEET_FEATURED_DEALS, ...HAPPY_FEET_SUGGESTED_PRODUCTS].find((x) => x.id === p.id)
+          if (fullProd) handleAddToCart(fullProd)
+        }}
+        onOpenProduct={(p) => {
+          const fullProd = [...HAPPY_FEET_FRESH_PICKS, ...HAPPY_FEET_FEATURED_DEALS, ...HAPPY_FEET_SUGGESTED_PRODUCTS].find((x) => x.id === p.id)
+          if (fullProd) setSelectedProduct(fullProd)
+        }}
+        accentColor={customAccentColor || '#e1680b'}
+      />
+
+      {/* Account Modal */}
+      <StorefrontAccountModal
+        isOpen={isAccountOpen}
+        onClose={() => setIsAccountOpen(false)}
+        brandName="Happy Feet"
+        accentColor={customAccentColor || '#e1680b'}
+      />
+
+      {/* Mobile Navigation Drawer */}
+      <StorefrontMobileNavDrawer
+        isOpen={isMobileNavOpen}
+        onClose={() => setIsMobileNavOpen(false)}
+        brandName="Happy Feet"
+        navItems={navItems}
+        onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenAccount={() => setIsAccountOpen(true)}
+        onOpenCart={() => setIsCartOpen(true)}
+        wishlistCount={wishlist.length}
+        cartCount={totalCartCount}
+        contactPhone="+1 (800) 555-HAPP"
+        contactEmail="support@happyfeet.com"
+        accentColor={customAccentColor || '#e1680b'}
+      />
 
       {/* Toast Notification */}
       {toastMessage && (

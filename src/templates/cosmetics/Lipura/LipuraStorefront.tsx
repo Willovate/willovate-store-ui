@@ -12,12 +12,27 @@ import {
   LIPURA_LUXURY_AWAIT,
   LIPURA_ULTRA_LUXURY,
 } from './data/lipuraData'
+import {
+  StorefrontSearchModal,
+  StorefrontWishlistDrawer,
+  StorefrontAccountModal,
+  StorefrontMobileNavDrawer,
+  type MobileNavItem,
+} from '../../common/StorefrontModals'
 import './styles/lipura.css'
 
 export function LipuraStorefront({
   template: _template,
+  device = 'desktop',
+  deviceView,
+  customAccentColor,
   onColorChange: _onColorChange,
+  onUseTemplate: _onUseTemplate,
+  onClose: _onClose,
+  onBack: _onBack,
 }: LipuraStorefrontProps) {
+  const effectiveDevice = (deviceView as string) || device || 'desktop'
+
   // Filter state
   const [activeFinish, setActiveFinish] = useState<'all' | 'matte' | 'satin' | 'velvet'>('all')
 
@@ -25,7 +40,9 @@ export function LipuraStorefront({
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [quickViewProduct, setQuickViewProduct] = useState<LipuraProduct | null>(null)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false)
+  const [isAccountOpen, setIsAccountOpen] = useState(false)
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
   const [wishlist, setWishlist] = useState<string[]>([])
   const [newsletterEmail, setNewsletterEmail] = useState('')
   const [newsletterDone, setNewsletterDone] = useState(false)
@@ -35,6 +52,47 @@ export function LipuraStorefront({
     { product: LIPURA_PRODUCTS[0], quantity: 1 },
     { product: LIPURA_PRODUCTS[5], quantity: 1 },
   ])
+
+  const navItems: MobileNavItem[] = [
+    {
+      label: 'HOME',
+      children: [
+        { label: 'Couture Hero', onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
+        { label: 'Seasonal Lookbook', onClick: () => { const el = document.getElementById('promos'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'SHOPS',
+      children: [
+        { label: 'Velvet Lipsticks', onClick: () => { setActiveFinish('velvet'); const el = document.getElementById('products'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Matte Liquid Lip', onClick: () => { setActiveFinish('matte'); const el = document.getElementById('products'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Satin Luxury Lacquer', onClick: () => { setActiveFinish('satin'); const el = document.getElementById('products'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'PRODUCTS',
+      children: [
+        { label: 'All Lip Creations', onClick: () => { setActiveFinish('all'); const el = document.getElementById('products'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Bestselling Shades', onClick: () => { const el = document.getElementById('products'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'EDITORIAL',
+      children: [
+        { label: 'Luxury Lips Await', onClick: () => { const el = document.getElementById('await'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'PAGES',
+      children: [
+        { label: 'About Lipura Atelier', onClick: () => { const el = document.getElementById('footer'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'CONTACT',
+      onClick: () => alert('Lipura Concierge: atelier@lipura-beauty.com'),
+    },
+  ]
 
   // Cart stats
   const cartSubtotal = useMemo(() => {
@@ -85,19 +143,15 @@ export function LipuraStorefront({
     )
   }
 
-  const searchResults = useMemo(() => {
-    if (!searchQuery.trim()) return []
-    const q = searchQuery.toLowerCase()
-    return LIPURA_PRODUCTS.filter(
-      (p) =>
-        p.name.toLowerCase().includes(q) ||
-        p.shade.toLowerCase().includes(q) ||
-        p.description.toLowerCase().includes(q)
-    )
-  }, [searchQuery])
-
   return (
-    <div className="lipura-storefront">
+    <div
+      className={`lipura-storefront device-${effectiveDevice}`}
+      style={
+        customAccentColor
+          ? ({ '--lipura-gold': customAccentColor } as React.CSSProperties)
+          : undefined
+      }
+    >
       {/* Top Banner Notice */}
       <div style={{ backgroundColor: '#111111', color: '#ffffff', fontSize: '12px', padding: '8px 0', textAlign: 'center', letterSpacing: '1px' }}>
         COMPLIMENTARY LUXURY GIFT PACKAGING &bull; FREE EXPRESS SHIPPING OVER $100
@@ -107,17 +161,45 @@ export function LipuraStorefront({
       <header className="lipura-header">
         <div className="lipura-container">
           <div className="lipura-header-inner">
+            {/* Mobile Hamburger Button */}
+            <button
+              className="lipura-hamburger-btn"
+              onClick={() => setIsMobileNavOpen(true)}
+              aria-label="Open mobile navigation menu"
+            >
+              ☰
+            </button>
+
             {/* Logo */}
             <a href="#hero" className="lipura-brand-name">
               LIPURA
             </a>
 
             {/* Nav */}
-            <nav>
+            <nav className="lipura-nav">
               <ul className="lipura-nav-menu">
-                <li><a href="#hero" className="lipura-nav-link active">HOME</a></li>
-                <li><a href="#promos" className="lipura-nav-link">SHOPS</a></li>
-                <li><a href="#products" className="lipura-nav-link">PRODUCTS</a></li>
+                <li className="wv-nav-dropdown-wrap">
+                  <a href="#hero" className="lipura-nav-link active">HOME ▾</a>
+                  <div className="wv-desktop-dropdown">
+                    <a href="#hero">Couture Collection</a>
+                    <a href="#promos">Lookbook Edition</a>
+                  </div>
+                </li>
+                <li className="wv-nav-dropdown-wrap">
+                  <a href="#promos" className="lipura-nav-link">SHOPS ▾</a>
+                  <div className="wv-desktop-dropdown">
+                    <button onClick={() => { setActiveFinish('matte'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>Matte Collection</button>
+                    <button onClick={() => { setActiveFinish('satin'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>Satin Cream</button>
+                    <button onClick={() => { setActiveFinish('velvet'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>Velvet Pigment</button>
+                  </div>
+                </li>
+                <li className="wv-nav-dropdown-wrap">
+                  <a href="#products" className="lipura-nav-link">PRODUCTS ▾</a>
+                  <div className="wv-desktop-dropdown">
+                    <button onClick={() => { setActiveFinish('all'); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}>All Lipstick Shades</button>
+                    <a href="#products">Trending Now</a>
+                  </div>
+                </li>
                 <li><a href="#await" className="lipura-nav-link">EDITORIAL</a></li>
                 <li><a href="#footer" className="lipura-nav-link">PAGES</a></li>
               </ul>
@@ -139,16 +221,23 @@ export function LipuraStorefront({
 
               <button
                 className="lipura-icon-btn"
-                onClick={() => {
-                  if (wishlist.length > 0) {
-                    const match = LIPURA_PRODUCTS.find((p) => p.id === wishlist[0])
-                    if (match) setQuickViewProduct(match)
-                  }
-                }}
+                onClick={() => setIsAccountOpen(true)}
+                title="Account"
+                aria-label="Account"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+              </button>
+
+              <button
+                className="lipura-icon-btn"
+                onClick={() => setIsWishlistOpen(true)}
                 title={`Wishlist (${wishlist.length})`}
                 aria-label={`Wishlist (${wishlist.length})`}
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill={wishlist.length > 0 ? '#d32f2f' : 'none'} stroke={wishlist.length > 0 ? '#d32f2f' : 'currentColor'} strokeWidth="2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill={wishlist.length > 0 ? ((customAccentColor as string) || '#d32f2f') : 'none'} stroke={wishlist.length > 0 ? ((customAccentColor as string) || '#d32f2f') : 'currentColor'} strokeWidth="2">
                   <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                 </svg>
                 {wishlist.length > 0 && <span className="lipura-cart-badge">{wishlist.length}</span>}
@@ -235,6 +324,7 @@ export function LipuraStorefront({
                 <div className="lipura-prod-img-wrap">
                   <img src={prod.image} alt={prod.name} className="lipura-prod-img" />
                   <button
+                    className="wv-card-wish-btn"
                     onClick={(e) => {
                       e.stopPropagation()
                       toggleWishlist(prod.id)
@@ -627,83 +717,75 @@ export function LipuraStorefront({
         </div>
       )}
 
-      {/* Search Modal */}
-      {isSearchOpen && (
-        <div className="lipura-modal-overlay" onClick={() => setIsSearchOpen(false)} style={{ alignItems: 'flex-start', paddingTop: '80px', justifyContent: 'center' }}>
-          <div
-            style={{
-              backgroundColor: '#ffffff',
-              borderRadius: '2px',
-              maxWidth: '560px',
-              width: '90%',
-              padding: '28px',
-              boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-              <h4 style={{ margin: 0, color: '#111', textTransform: 'uppercase', letterSpacing: '1px' }}>Search Lipura Shades</h4>
-              <button
-                onClick={() => setIsSearchOpen(false)}
-                style={{ background: 'none', border: 'none', fontSize: '20px', cursor: 'pointer' }}
-                aria-label="Close search"
-              >
-                &times;
-              </button>
-            </div>
-            <input
-              type="text"
-              placeholder="Search shade name (pink, red, nude, mocha)..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              autoFocus
-              style={{
-                width: '100%',
-                padding: '12px',
-                border: '1px solid #e5e5e5',
-                borderRadius: '2px',
-                outline: 'none',
-                boxSizing: 'border-box',
-                marginBottom: '16px',
-              }}
-            />
+      {/* Shared Interactive Modals & Drawers */}
+      <StorefrontSearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        brandName="LIPURA"
+        accentColor={customAccentColor || '#d32f2f'}
+        products={LIPURA_PRODUCTS.map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.shade,
+          rating: p.rating,
+        }))}
+        onAddToCart={(prod) => {
+          const matched = LIPURA_PRODUCTS.find((p) => p.id === prod.id)
+          if (matched) handleAddToCart(matched)
+        }}
+        onViewProduct={(prod) => {
+          const matched = LIPURA_PRODUCTS.find((p) => p.id === prod.id)
+          if (matched) setQuickViewProduct(matched)
+        }}
+      />
 
-            {searchResults.length > 0 && (
-              <div style={{ maxHeight: '280px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                {searchResults.map((prod) => (
-                  <div
-                    key={prod.id}
-                    onClick={() => {
-                      setQuickViewProduct(prod)
-                      setIsSearchOpen(false)
-                    }}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '12px',
-                      padding: '8px',
-                      cursor: 'pointer',
-                      border: '1px solid #f0f0f0',
-                    }}
-                  >
-                    <img src={prod.image} alt={prod.name} style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
-                    <div style={{ flex: 1 }}>
-                      <div style={{ fontWeight: 700, fontSize: '13px', color: '#111' }}>{prod.name}</div>
-                      <div style={{ fontSize: '11px', color: '#777' }}>{prod.shade}</div>
-                    </div>
-                    <div style={{ fontWeight: 700, fontSize: '13px', color: '#111' }}>${prod.price.toFixed(2)}</div>
-                  </div>
-                ))}
-              </div>
-            )}
-            {searchQuery && searchResults.length === 0 && (
-              <div style={{ textAlign: 'center', color: '#777', padding: '20px 0', fontSize: '13px' }}>
-                No lipstick shades matched &ldquo;{searchQuery}&rdquo;.
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+      <StorefrontWishlistDrawer
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
+        wishlistIds={wishlist}
+        onToggleWishlist={toggleWishlist}
+        brandName="LIPURA"
+        accentColor={customAccentColor || '#d32f2f'}
+        products={LIPURA_PRODUCTS.map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.shade,
+          rating: p.rating,
+        }))}
+        onAddToCart={(prod) => {
+          const matched = LIPURA_PRODUCTS.find((p) => p.id === prod.id)
+          if (matched) handleAddToCart(matched)
+        }}
+        onViewProduct={(prod) => {
+          const matched = LIPURA_PRODUCTS.find((p) => p.id === prod.id)
+          if (matched) setQuickViewProduct(matched)
+        }}
+      />
+
+      <StorefrontAccountModal
+        isOpen={isAccountOpen}
+        onClose={() => setIsAccountOpen(false)}
+        brandName="LIPURA"
+        accentColor={customAccentColor || '#d32f2f'}
+      />
+
+      <StorefrontMobileNavDrawer
+        isOpen={isMobileNavOpen}
+        onClose={() => setIsMobileNavOpen(false)}
+        items={navItems}
+        brandName="LIPURA"
+        accentColor={customAccentColor || '#d32f2f'}
+        contactEmail="atelier@lipura-beauty.com"
+        onOpenAccount={() => setIsAccountOpen(true)}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        wishlistCount={wishlist.length}
+      />
     </div>
   )
 }

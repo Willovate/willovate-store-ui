@@ -11,6 +11,13 @@ import {
   STEPGLAM_BLOGS,
   STEPGLAM_INSTAGRAM_IMAGES,
 } from './data/stepglamData'
+import {
+  StorefrontSearchModal,
+  StorefrontWishlistDrawer,
+  StorefrontAccountModal,
+  StorefrontMobileNavDrawer,
+  type MobileNavItem,
+} from '../../common/StorefrontModals'
 import './styles/stepglam.css'
 
 export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
@@ -42,6 +49,10 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
     },
   ])
   const [isCartOpen, setIsCartOpen] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false)
+  const [isAccountOpen, setIsAccountOpen] = useState(false)
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
   const [quickViewProduct, setQuickViewProduct] = useState<StepGlamProduct | null>(null)
   const [wishlist, setWishlist] = useState<string[]>([])
   const [toastMessage, setToastMessage] = useState<string | null>(null)
@@ -146,6 +157,51 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
       ? STEPGLAM_NEW_COLLECTIONS
       : STEPGLAM_NEW_COLLECTIONS.filter((p) => p.category === activeCategoryTab)
 
+  const navItems: MobileNavItem[] = [
+    {
+      label: 'Home',
+      children: [
+        { label: 'Home Default', onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
+        { label: 'Royal Heritage Drop', onClick: () => { const el = document.getElementById('sg-categories-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'New Handmade Arrivals', onClick: () => { const el = document.getElementById('sg-products-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Products',
+      children: [
+        { label: 'Handcrafted Juttis', onClick: () => { setActiveCategoryTab('Juttis'); const el = document.getElementById('sg-products-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Ethnic Mojaris', onClick: () => { setActiveCategoryTab('Mojaris'); const el = document.getElementById('sg-products-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Designer Flats', onClick: () => { setActiveCategoryTab('Flats'); const el = document.getElementById('sg-products-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Slip-On Comfort', onClick: () => { setActiveCategoryTab('Slip-Ons'); const el = document.getElementById('sg-products-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Shop All',
+      children: [
+        { label: 'Complete Collection 2026', onClick: () => { setActiveCategoryTab('All'); const el = document.getElementById('sg-products-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Best Sellers', onClick: () => { const el = document.getElementById('sg-bestsellers-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Limited Edition Drops', onClick: () => { const el = document.getElementById('sg-countdown-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Pages',
+      children: [
+        { label: 'Why Choose Us', onClick: () => { const el = document.getElementById('sg-why-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Size & Fit Guide', onClick: () => showToast('Size Guide: True to EU size, padded memory insole.') },
+        { label: 'Customer Reviews', onClick: () => { const el = document.getElementById('sg-reviews-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'FAQs & Support', onClick: () => showToast('Support available 7 days a week: +2146414547') },
+      ],
+    },
+    {
+      label: 'Blogs',
+      children: [
+        { label: 'The Art of Jutti Making', onClick: () => showToast('Reading: The Art of Traditional Handcrafted Juttis') },
+        { label: 'Wedding Styling Guide', onClick: () => showToast('Reading: 5 Ways to Style Ethnic Mojaris') },
+        { label: 'Pure Leather Care Tips', onClick: () => showToast('Reading: How to Care for Hand-Embroidered Juttis') },
+      ],
+    },
+  ]
+
   return (
     <div
       className={`sg-wrapper device-${effectiveDevice}`}
@@ -176,34 +232,50 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
       {/* Main Header */}
       <header className="sg-header">
         <div className="sg-header-inner">
+          {/* Mobile Hamburger Menu Button */}
+          <button
+            type="button"
+            className="sg-hamburger-btn"
+            onClick={() => setIsMobileNavOpen(true)}
+            title="Menu"
+            aria-label="Open mobile menu"
+          >
+            ☰
+          </button>
+
+          {/* Desktop Nav with Dropdowns */}
           <nav className="sg-nav-left">
-            <span className="sg-nav-item" onClick={() => showToast('Opening Home...')}>
-              Home ▾
-            </span>
-            <span
-              className="sg-nav-item"
-              onClick={() => {
-                const el = document.getElementById('sg-products-section')
-                el?.scrollIntoView({ behavior: 'smooth' })
-              }}
-            >
-              Products ▾
-            </span>
-            <span
-              className="sg-nav-item"
-              onClick={() => {
-                const el = document.getElementById('sg-categories-section')
-                el?.scrollIntoView({ behavior: 'smooth' })
-              }}
-            >
-              Shop All ▾
-            </span>
-            <span className="sg-nav-item" onClick={() => showToast('Opening Pages...')}>
-              Pages ▾
-            </span>
-            <span className="sg-nav-item" onClick={() => showToast('Opening Blogs...')}>
-              Blogs ▾
-            </span>
+            {navItems.map((item) => (
+              <div key={item.label} className="wv-nav-dropdown-wrap">
+                <span
+                  className="sg-nav-item"
+                  onClick={() => {
+                    if (item.children && item.children.length > 0) {
+                      item.children[0].onClick?.()
+                    }
+                  }}
+                >
+                  {item.label} ▾
+                </span>
+                {item.children && item.children.length > 0 && (
+                  <div className="wv-desktop-dropdown">
+                    {item.children.map((sub) => (
+                      <button
+                        key={sub.label}
+                        type="button"
+                        className="wv-dropdown-item"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          sub.onClick?.()
+                        }}
+                      >
+                        {sub.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
           </nav>
 
           <div className="sg-logo" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
@@ -216,7 +288,7 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
             <button
               type="button"
               className="sg-action-btn"
-              onClick={() => showToast('Search handcrafted catalog...')}
+              onClick={() => setIsSearchOpen(true)}
               title="Search"
             >
               🔍
@@ -224,7 +296,7 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
             <button
               type="button"
               className="sg-action-btn"
-              onClick={() => showToast('Account login...')}
+              onClick={() => setIsAccountOpen(true)}
               title="Account"
             >
               👤
@@ -232,10 +304,10 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
             <button
               type="button"
               className="sg-action-btn"
-              onClick={() => showToast(`Wishlist (${wishlist.length} saved)`)}
+              onClick={() => setIsWishlistOpen(true)}
               title="Wishlist"
             >
-              🤍
+              {wishlist.length > 0 ? '❤️' : '🤍'}
               <span className="sg-badge">{wishlist.length}</span>
             </button>
             <button
@@ -438,6 +510,20 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
           {filteredProducts.map((prod) => (
             <div key={prod.id} className="sg-product-card">
               {prod.badge && <span className="sg-badge-pill">{prod.badge}</span>}
+
+              {/* Wishlist Like Button */}
+              <button
+                type="button"
+                className={`wv-card-wish-btn ${wishlist.includes(prod.id) ? 'active' : ''}`}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleWishlist(prod.id)
+                }}
+                title={wishlist.includes(prod.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                aria-label="Toggle Wishlist"
+              >
+                {wishlist.includes(prod.id) ? '❤️' : '🤍'}
+              </button>
 
               <div
                 className="sg-prod-img-box"
@@ -968,6 +1054,79 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
           </div>
         </div>
       )}
+
+      {/* Search Modal */}
+      <StorefrontSearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        products={STEPGLAM_NEW_COLLECTIONS.map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.priceInr,
+          originalPrice: p.originalPriceInr,
+          image: p.image,
+          category: p.category,
+        }))}
+        onSelectProduct={(p) => {
+          const fullProd = STEPGLAM_NEW_COLLECTIONS.find((x) => x.id === p.id)
+          if (fullProd) setQuickViewProduct(fullProd)
+        }}
+        accentColor={customAccentColor || '#d946ef'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
+        placeholder="Search handcrafted juttis, mojaris, flats..."
+        popularTags={['Juttis', 'Mojaris', 'Flats', 'Slip-Ons']}
+      />
+
+      {/* Wishlist Slide-Over Drawer */}
+      <StorefrontWishlistDrawer
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
+        wishlistIds={wishlist}
+        allProducts={STEPGLAM_NEW_COLLECTIONS.map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.priceInr,
+          originalPrice: p.originalPriceInr,
+          image: p.image,
+          category: p.category,
+        }))}
+        onRemoveWishlist={toggleWishlist}
+        onAddToCart={(p) => {
+          const fullProd = STEPGLAM_NEW_COLLECTIONS.find((x) => x.id === p.id)
+          if (fullProd) handleAddToCart(fullProd)
+        }}
+        onOpenProduct={(p) => {
+          const fullProd = STEPGLAM_NEW_COLLECTIONS.find((x) => x.id === p.id)
+          if (fullProd) setQuickViewProduct(fullProd)
+        }}
+        accentColor={customAccentColor || '#d946ef'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
+      />
+
+      {/* Account Modal */}
+      <StorefrontAccountModal
+        isOpen={isAccountOpen}
+        onClose={() => setIsAccountOpen(false)}
+        brandName="StepGlam"
+        accentColor={customAccentColor || '#d946ef'}
+      />
+
+      {/* Mobile Navigation Drawer */}
+      <StorefrontMobileNavDrawer
+        isOpen={isMobileNavOpen}
+        onClose={() => setIsMobileNavOpen(false)}
+        brandName="StepGlam"
+        navItems={navItems}
+        onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenAccount={() => setIsAccountOpen(true)}
+        onOpenCart={() => setIsCartOpen(true)}
+        wishlistCount={wishlist.length}
+        cartCount={cartItemCount}
+        contactPhone="+2146414547"
+        contactEmail="Support@gmail.com"
+        accentColor={customAccentColor || '#d946ef'}
+      />
 
       {/* Floating Toast Notification */}
       {toastMessage && (

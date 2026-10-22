@@ -18,21 +18,39 @@ import {
   ORGANICA_TESTIMONIAL,
   ORGANICA_BLOG_POSTS,
 } from './data/organicaData'
+import {
+  StorefrontSearchModal,
+  StorefrontWishlistDrawer,
+  StorefrontAccountModal,
+  StorefrontMobileNavDrawer,
+  type MobileNavItem,
+} from '../../common/StorefrontModals'
 import './styles/organica.css'
 
 export function OrganicaStorefront({
   template: _template,
+  device = 'desktop',
+  deviceView,
+  customAccentColor,
   onColorChange: _onColorChange,
+  onUseTemplate: _onUseTemplate,
+  onClose: _onClose,
+  onBack: _onBack,
 }: OrganicaStorefrontProps) {
+  const effectiveDevice = (deviceView as string) || device || 'desktop'
+
   // Navigation & Category Tab state
   const [activeTab, setActiveTab] = useState<'all' | 'beauty' | 'health' | 'newest'>('all')
   const [selectedSearchCategory, setSelectedSearchCategory] = useState('All Categories')
-  const [searchQuery, setSearchQuery] = useState('')
   const [activeSlide, setActiveSlide] = useState(0)
 
   // Drawers and Modals
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [quickViewProduct, setQuickViewProduct] = useState<OrganicaProduct | null>(null)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false)
+  const [isAccountOpen, setIsAccountOpen] = useState(false)
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
   const [wishlist, setWishlist] = useState<string[]>([])
 
   // Cart
@@ -40,6 +58,49 @@ export function OrganicaStorefront({
     { product: ORGANICA_PRODUCTS[0], quantity: 2 },
     { product: ORGANICA_PRODUCTS[2], quantity: 1 },
   ])
+
+  const navItems: MobileNavItem[] = [
+    {
+      label: 'Home',
+      children: [
+        { label: 'Organic Philosophy', onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
+        { label: 'Trust & Purity Badges', onClick: () => { const el = document.getElementById('organica-trust-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Organic Food',
+      children: [
+        { label: 'Fresh Greens & Fruits', onClick: () => { setActiveTab('health'); const el = document.getElementById('organica-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Farm Honey & Spices', onClick: () => { setActiveTab('all'); const el = document.getElementById('organica-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Health & Beauty',
+      children: [
+        { label: 'All Skincare & Beauty', onClick: () => { setActiveTab('beauty'); const el = document.getElementById('organica-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'New Arrivals', onClick: () => { setActiveTab('newest'); const el = document.getElementById('organica-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Natural Drinks',
+      children: [
+        { label: 'Pure Detox Cold Juices', onClick: () => { const el = document.getElementById('organica-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Blog',
+      children: [
+        { label: 'Holistic Living Articles', onClick: () => { const el = document.getElementById('organica-blog-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Pages',
+      children: [
+        { label: 'Customer Reviews', onClick: () => { const el = document.getElementById('organica-reviews'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Help & FAQ', onClick: () => alert('Support Helpline: ' + ORGANICA_PHONE) },
+      ],
+    },
+  ]
 
   // Filtered Products for Tabs
   const filteredProducts = useMemo(() => {
@@ -93,7 +154,14 @@ export function OrganicaStorefront({
   const currentSlide = ORGANICA_HERO_SLIDES[activeSlide]
 
   return (
-    <div className="organica-storefront">
+    <div
+      className={`organica-storefront device-${effectiveDevice}`}
+      style={
+        customAccentColor
+          ? ({ '--organica-green': customAccentColor } as React.CSSProperties)
+          : undefined
+      }
+    >
       {/* 1. Announcement Top Bar */}
       <div className="organica-top-announcement">
         {ORGANICA_ANNOUNCEMENT}
@@ -103,6 +171,17 @@ export function OrganicaStorefront({
       <div className="organica-header-mid">
         <div className="organica-container">
           <div className="organica-mid-inner">
+            {/* Mobile Hamburger Button */}
+            <button
+              type="button"
+              className="organica-hamburger-btn"
+              onClick={() => setIsMobileNavOpen(true)}
+              title="Menu"
+              aria-label="Open mobile menu"
+            >
+              ☰
+            </button>
+
             {/* Phone */}
             <div className="organica-phone-box">
               <span>📞</span>
@@ -118,11 +197,14 @@ export function OrganicaStorefront({
             </a>
 
             {/* Search Bar with Category Dropdown */}
-            <div className="organica-search-bar">
+            <div className="organica-search-bar" onClick={() => setIsSearchOpen(true)} style={{ cursor: 'pointer' }}>
               <select
                 className="organica-category-select"
                 value={selectedSearchCategory}
-                onChange={(e) => setSelectedSearchCategory(e.target.value)}
+                onChange={(e) => {
+                  e.stopPropagation()
+                  setSelectedSearchCategory(e.target.value)
+                }}
               >
                 <option value="All Categories">All Categories</option>
                 <option value="Beauty">Beauty & Skincare</option>
@@ -131,28 +213,38 @@ export function OrganicaStorefront({
               </select>
               <input
                 type="text"
+                readOnly
                 placeholder="Search products..."
                 className="organica-search-input"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
               />
               <button
+                type="button"
                 className="organica-search-btn"
-                onClick={() => {
-                  if (searchQuery.trim()) {
-                    document.getElementById('organica-catalog')?.scrollIntoView({ behavior: 'smooth' })
-                  }
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setIsSearchOpen(true)
                 }}
               >
                 SEARCH
               </button>
             </div>
 
-            {/* Wishlist & Cart Pill */}
+            {/* Wishlist, Account & Cart Pill */}
             <div className="organica-header-user">
               <button
+                type="button"
                 className="organica-wishlist-btn"
-                onClick={() => alert(`Wishlist contains ${wishlist.length} items`)}
+                onClick={() => setIsAccountOpen(true)}
+                title="Account"
+              >
+                <span>👤</span>
+                <span>Account</span>
+              </button>
+
+              <button
+                type="button"
+                className="organica-wishlist-btn"
+                onClick={() => setIsWishlistOpen(true)}
                 title="Wishlist"
               >
                 <span>❤️</span>
@@ -184,12 +276,38 @@ export function OrganicaStorefront({
       <nav className="organica-nav-bar">
         <div className="organica-container">
           <ul className="organica-nav-list">
-            <li><a href="#home" className="organica-nav-link active">Home</a></li>
-            <li><a href="#food" className="organica-nav-link">Organic Food</a></li>
-            <li><a href="#beauty" className="organica-nav-link">Health & Beauty</a></li>
-            <li><a href="#drinks" className="organica-nav-link">Natural Drinks</a></li>
-            <li><a href="#blog" className="organica-nav-link">Blog</a></li>
-            <li><a href="#pages" className="organica-nav-link">Pages</a></li>
+            {navItems.map((item) => (
+              <li key={item.label} className="wv-nav-dropdown-wrap">
+                <span
+                  className="organica-nav-link"
+                  onClick={() => {
+                    if (item.children && item.children.length > 0) {
+                      item.children[0].onClick?.()
+                    } else {
+                      item.onClick?.()
+                    }
+                  }}
+                >
+                  {item.label} {item.children ? '▾' : ''}
+                </span>
+                {item.children && (
+                  <div className="wv-desktop-dropdown">
+                    {item.children.map((sub) => (
+                      <div
+                        key={sub.label}
+                        className="wv-desktop-dropdown-item"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          sub.onClick?.()
+                        }}
+                      >
+                        {sub.label}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </li>
+            ))}
           </ul>
         </div>
       </nav>
@@ -301,7 +419,19 @@ export function OrganicaStorefront({
 
         <div className="organica-products-grid">
           {ORGANICA_PRODUCTS.slice(0, 8).map((product) => (
-            <div key={product.id} className="organica-product-card">
+            <div key={product.id} className="organica-product-card" style={{ position: 'relative' }}>
+              <button
+                type="button"
+                className={`wv-card-wish-btn ${wishlist.includes(product.id) ? 'active' : ''}`}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleWishlist(product.id)
+                }}
+                title={wishlist.includes(product.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                aria-label="Toggle Wishlist"
+              >
+                {wishlist.includes(product.id) ? '❤️' : '🤍'}
+              </button>
               <div className="organica-card-thumb">
                 <img
                   src={product.image}
@@ -422,7 +552,19 @@ export function OrganicaStorefront({
         {/* Grid */}
         <div className="organica-products-grid">
           {filteredProducts.map((product) => (
-            <div key={product.id} className="organica-product-card">
+            <div key={product.id} className="organica-product-card" style={{ position: 'relative' }}>
+              <button
+                type="button"
+                className={`wv-card-wish-btn ${wishlist.includes(product.id) ? 'active' : ''}`}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleWishlist(product.id)
+                }}
+                title={wishlist.includes(product.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                aria-label="Toggle Wishlist"
+              >
+                {wishlist.includes(product.id) ? '❤️' : '🤍'}
+              </button>
               <div className="organica-card-thumb">
                 <img src={product.image} alt={product.name} className="organica-product-img" />
                 {product.discountBadge && (
@@ -812,6 +954,77 @@ export function OrganicaStorefront({
           </div>
         </div>
       )}
+
+      {/* Search Modal */}
+      <StorefrontSearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        products={ORGANICA_PRODUCTS.map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onSelectProduct={(p) => {
+          const fullProd = ORGANICA_PRODUCTS.find((x) => x.id === p.id)
+          if (fullProd) setQuickViewProduct(fullProd)
+        }}
+        accentColor={customAccentColor || '#77a43b'}
+        placeholder="Search organic teas, skincare, supplements..."
+        popularTags={['Beauty', 'Health', 'Food']}
+      />
+
+      {/* Wishlist Drawer */}
+      <StorefrontWishlistDrawer
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
+        wishlistIds={wishlist}
+        allProducts={ORGANICA_PRODUCTS.map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onRemoveWishlist={toggleWishlist}
+        onAddToCart={(p) => {
+          const fullProd = ORGANICA_PRODUCTS.find((x) => x.id === p.id)
+          if (fullProd) handleAddToCart(fullProd)
+        }}
+        onOpenProduct={(p) => {
+          const fullProd = ORGANICA_PRODUCTS.find((x) => x.id === p.id)
+          if (fullProd) setQuickViewProduct(fullProd)
+        }}
+        accentColor={customAccentColor || '#77a43b'}
+      />
+
+      {/* Account Modal */}
+      <StorefrontAccountModal
+        isOpen={isAccountOpen}
+        onClose={() => setIsAccountOpen(false)}
+        brandName="Organica"
+        accentColor={customAccentColor || '#77a43b'}
+      />
+
+      {/* Mobile Navigation Drawer */}
+      <StorefrontMobileNavDrawer
+        isOpen={isMobileNavOpen}
+        onClose={() => setIsMobileNavOpen(false)}
+        brandName="Organica"
+        navItems={navItems}
+        onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenAccount={() => setIsAccountOpen(true)}
+        onOpenCart={() => setIsCartOpen(true)}
+        wishlistCount={wishlist.length}
+        cartCount={totalCartCount}
+        contactPhone={ORGANICA_PHONE}
+        contactEmail="service@organica-store.com"
+        accentColor={customAccentColor || '#77a43b'}
+      />
     </div>
   )
 }

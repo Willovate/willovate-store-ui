@@ -13,6 +13,13 @@ import {
   BEAUX_BLOG_POSTS,
   BEAUX_INSTAGRAM_IMAGES,
 } from './data/beauxData'
+import {
+  StorefrontSearchModal,
+  StorefrontWishlistDrawer,
+  StorefrontAccountModal,
+  StorefrontMobileNavDrawer,
+  type MobileNavItem,
+} from '../../common/StorefrontModals'
 import './styles/beaux.css'
 
 export const BeauxStorefront: React.FC<BeauxStorefrontProps> = ({
@@ -37,10 +44,46 @@ export const BeauxStorefront: React.FC<BeauxStorefrontProps> = ({
     },
   ])
   const [isCartOpen, setIsCartOpen] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false)
+  const [isAccountOpen, setIsAccountOpen] = useState(false)
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
   const [quickViewProduct, setQuickViewProduct] = useState<BeauxProduct | null>(null)
   const [wishlist, setWishlist] = useState<string[]>([])
   const [toastMessage, setToastMessage] = useState<string | null>(null)
   const [newsletterEmail, setNewsletterEmail] = useState('')
+
+  const navItems: MobileNavItem[] = [
+    {
+      label: 'Home',
+      children: [
+        { label: 'Featured Collections', onClick: () => { const el = document.getElementById('beaux-collections-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'New Arrivals', onClick: () => { const el = document.getElementById('beaux-whats-new-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Shop',
+      children: [
+        { label: 'All Products', onClick: () => { const el = document.getElementById('beaux-whats-new-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: "What's New", onClick: () => { const el = document.getElementById('beaux-whats-new-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Blockbuster Sellers', onClick: () => { const el = document.getElementById('beaux-blockbuster-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Beauty Deals', onClick: () => showToast('50% Off Beauty Deals applied!') },
+      ],
+    },
+    {
+      label: 'Blog',
+      children: [
+        { label: 'Skincare Secrets', onClick: () => { const el = document.getElementById('beaux-blog-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Pages',
+      children: [
+        { label: 'About Beaux', onClick: () => showToast('Beaux: Clean luxury botanical skincare.') },
+        { label: 'Help & Contact', onClick: () => showToast('Customer Care: care@beauxbeauty.com') },
+      ],
+    },
+  ]
 
   const showToast = (msg: string) => {
     setToastMessage(msg)
@@ -134,7 +177,17 @@ export const BeauxStorefront: React.FC<BeauxStorefrontProps> = ({
       <header className="beaux-header-main">
         <div className="beaux-container beaux-header-inner">
           <div className="beaux-header-left">
-            <button className="beaux-icon-btn" title="Search" onClick={() => showToast('Search skintype or cosmetic...')}>
+            {/* Mobile Hamburger Button */}
+            <button
+              type="button"
+              className="beaux-hamburger-btn"
+              onClick={() => setIsMobileNavOpen(true)}
+              title="Menu"
+              aria-label="Open mobile menu"
+            >
+              ☰
+            </button>
+            <button className="beaux-icon-btn" title="Search" onClick={() => setIsSearchOpen(true)}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="11" cy="11" r="8" />
                 <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -158,13 +211,13 @@ export const BeauxStorefront: React.FC<BeauxStorefrontProps> = ({
           </div>
 
           <div className="beaux-header-right">
-            <button className="beaux-icon-btn" title="Account" onClick={() => showToast('Member Portal: Sign In')}>
+            <button className="beaux-icon-btn" title="Account" onClick={() => setIsAccountOpen(true)}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
               </svg>
             </button>
-            <button className="beaux-icon-btn" title="Wishlist" onClick={() => showToast(`Wishlist contains ${wishlist.length} item(s)`)}>
+            <button className="beaux-icon-btn" title="Wishlist" onClick={() => setIsWishlistOpen(true)}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill={wishlist.length > 0 ? '#e87868' : 'none'} stroke="currentColor" strokeWidth="2">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
               </svg>
@@ -186,29 +239,38 @@ export const BeauxStorefront: React.FC<BeauxStorefrontProps> = ({
       <nav className="beaux-navbar">
         <div className="beaux-container">
           <ul className="beaux-nav-menu">
-            <li className="beaux-nav-item">
-              <a href="#home" className="beaux-nav-link active">Home</a>
-            </li>
-            <li className="beaux-nav-item">
-              <a href="#shop" className="beaux-nav-link">
-                Shop
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
-              </a>
-              <div className="beaux-dropdown">
-                <a href="#shop-all" className="beaux-dropdown-link" onClick={() => showToast('All Cosmetics & Skincare')}>All Products</a>
-                <a href="#shop-new" className="beaux-dropdown-link" onClick={() => showToast('New In Arrivals')}>New In</a>
-                <a href="#shop-bestsellers" className="beaux-dropdown-link" onClick={() => showToast('Blockbuster Collections')}>Best Sellers</a>
-                <a href="#shop-deals" className="beaux-dropdown-link" onClick={() => showToast('50% Off Beauty Deals')}>Beauty Deals</a>
-              </div>
-            </li>
-            <li className="beaux-nav-item">
-              <a href="#blog" className="beaux-nav-link">Blog</a>
-            </li>
-            <li className="beaux-nav-item">
-              <a href="#pages" className="beaux-nav-link">Pages</a>
-            </li>
+            {navItems.map((item) => (
+              <li key={item.label} className="beaux-nav-item wv-nav-dropdown-wrap">
+                <span
+                  className="beaux-nav-link"
+                  onClick={() => {
+                    if (item.children && item.children.length > 0) {
+                      item.children[0].onClick?.()
+                    } else {
+                      item.onClick?.()
+                    }
+                  }}
+                >
+                  {item.label} {item.children ? '▾' : ''}
+                </span>
+                {item.children && (
+                  <div className="wv-desktop-dropdown">
+                    {item.children.map((sub) => (
+                      <div
+                        key={sub.label}
+                        className="wv-desktop-dropdown-item"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          sub.onClick?.()
+                        }}
+                      >
+                        {sub.label}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </li>
+            ))}
           </ul>
         </div>
       </nav>
@@ -610,6 +672,79 @@ export const BeauxStorefront: React.FC<BeauxStorefrontProps> = ({
           </div>
         </div>
       )}
+
+      {/* Search Modal */}
+      <StorefrontSearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        products={[...BEAUX_WHATS_NEW_PRODUCTS, ...BEAUX_BLOCKBUSTER_PRODUCTS].map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onSelectProduct={(p) => {
+          const fullProd = [...BEAUX_WHATS_NEW_PRODUCTS, ...BEAUX_BLOCKBUSTER_PRODUCTS].find((x) => x.id === p.id)
+          if (fullProd) setQuickViewProduct(fullProd)
+        }}
+        accentColor={customAccentColor || '#e87868'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
+        placeholder="Search clean serums, creams, lip balms..."
+        popularTags={['Serum', 'Creams', 'Masks', 'Cleanser']}
+      />
+
+      {/* Wishlist Drawer */}
+      <StorefrontWishlistDrawer
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
+        wishlistIds={wishlist}
+        allProducts={[...BEAUX_WHATS_NEW_PRODUCTS, ...BEAUX_BLOCKBUSTER_PRODUCTS].map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onRemoveWishlist={toggleWishlist}
+        onAddToCart={(p) => {
+          const fullProd = [...BEAUX_WHATS_NEW_PRODUCTS, ...BEAUX_BLOCKBUSTER_PRODUCTS].find((x) => x.id === p.id)
+          if (fullProd) handleAddToCart(fullProd)
+        }}
+        onOpenProduct={(p) => {
+          const fullProd = [...BEAUX_WHATS_NEW_PRODUCTS, ...BEAUX_BLOCKBUSTER_PRODUCTS].find((x) => x.id === p.id)
+          if (fullProd) setQuickViewProduct(fullProd)
+        }}
+        accentColor={customAccentColor || '#e87868'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
+      />
+
+      {/* Account Modal */}
+      <StorefrontAccountModal
+        isOpen={isAccountOpen}
+        onClose={() => setIsAccountOpen(false)}
+        brandName="Beaux Skincare"
+        accentColor={customAccentColor || '#e87868'}
+      />
+
+      {/* Mobile Navigation Drawer */}
+      <StorefrontMobileNavDrawer
+        isOpen={isMobileNavOpen}
+        onClose={() => setIsMobileNavOpen(false)}
+        brandName="Beaux Skincare"
+        navItems={navItems}
+        onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenAccount={() => setIsAccountOpen(true)}
+        onOpenCart={() => setIsCartOpen(true)}
+        wishlistCount={wishlist.length}
+        cartCount={cartCount}
+        contactPhone="+1 (800) 232-BEAUX"
+        contactEmail="care@beauxbeauty.com"
+        accentColor={customAccentColor || '#e87868'}
+      />
 
       {/* Toast Notification */}
       {toastMessage && <div className="beaux-toast">{toastMessage}</div>}

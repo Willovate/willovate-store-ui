@@ -14,6 +14,13 @@ import {
   SHOES_WORKDO_REVIEWS,
   SHOES_WORKDO_BLOGS,
 } from './data/shoesWorkDoData'
+import {
+  StorefrontSearchModal,
+  StorefrontWishlistDrawer,
+  StorefrontAccountModal,
+  StorefrontMobileNavDrawer,
+  type MobileNavItem,
+} from '../../common/StorefrontModals'
 import './styles/shoesWorkDo.css'
 
 export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
@@ -34,8 +41,6 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
   const [currency, setCurrency] = useState<'INR' | 'USD'>('INR')
   const [language, setLanguage] = useState<'English' | 'Spanish' | 'French'>('English')
   const [selectedBestsellerTab, setSelectedBestsellerTab] = useState('All Running Shoe')
-  const [searchQuery, setSearchQuery] = useState('')
-  const [selectedCollection, setSelectedCollection] = useState('All Collections')
 
   // Selected sizes per product id
   const [productSizes, setProductSizes] = useState<Record<string, number>>({
@@ -56,11 +61,27 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
     },
   ])
   const [isCartOpen, setIsCartOpen] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false)
+  const [isAccountOpen, setIsAccountOpen] = useState(false)
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
   const [wishlist, setWishlist] = useState<string[]>([])
   const [quickViewProduct, setQuickViewProduct] = useState<ShoesWorkDoProduct | null>(null)
   const [toastMessage, setToastMessage] = useState<string | null>(null)
   const [newsletterEmail, setNewsletterEmail] = useState('')
   const [showSocialProof, setShowSocialProof] = useState(true)
+
+  const toggleWishlist = (productId: string) => {
+    setWishlist((prev) => {
+      const exists = prev.includes(productId)
+      if (exists) {
+        showToast('Removed from Wishlist')
+        return prev.filter((id) => id !== productId)
+      }
+      showToast('Saved to Wishlist ❤️')
+      return [...prev, productId]
+    })
+  }
 
   // Auto rotate hero slide
   useEffect(() => {
@@ -106,18 +127,6 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
     setIsCartOpen(true)
   }
 
-  const toggleWishlist = (productId: string) => {
-    setWishlist((prev) => {
-      const exists = prev.includes(productId)
-      if (exists) {
-        showToast('Removed item from Wishlist')
-        return prev.filter((id) => id !== productId)
-      }
-      showToast('Saved item to your Wishlist!')
-      return [...prev, productId]
-    })
-  }
-
   const updateQuantity = (productId: string, size: number, delta: number) => {
     setCartItems((prev) =>
       prev
@@ -148,6 +157,35 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
     setNewsletterEmail('')
   }
 
+  const navItems: MobileNavItem[] = [
+    {
+      label: 'Categories',
+      children: SHOES_WORKDO_SIDEBAR_CATEGORIES.map((c) => ({
+        label: c.name,
+        onClick: () => {
+          setActiveCategory(c.id)
+          showToast(`Filtered by ${c.name}`)
+        },
+      })),
+    },
+    {
+      label: 'Featured Collections',
+      children: [
+        { label: 'Running Shoes', onClick: () => { setSelectedBestsellerTab('All Running Shoe'); const el = document.getElementById('swd-bestsellers-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Sneakers & Casuals', onClick: () => { const el = document.getElementById('swd-discounts-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Retro Heritage Edition', onClick: () => { const el = document.getElementById('swd-retro-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Customer Support',
+      children: [
+        { label: 'FAQ', onClick: () => showToast('Opening FAQ...') },
+        { label: 'Contact', onClick: () => showToast('Opening Contact...') },
+        { label: 'About Us', onClick: () => showToast('Opening About Us...') },
+      ],
+    },
+  ]
+
   const activeSlide = SHOES_WORKDO_HERO_SLIDES[currentSlideIndex]
 
   return (
@@ -176,31 +214,31 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
       {/* Main Header */}
       <header className="swd-header">
         <div className="swd-header-inner">
+          {/* Mobile Hamburger Button */}
+          <button
+            type="button"
+            className="swd-hamburger-btn"
+            onClick={() => setIsMobileNavOpen(true)}
+            title="Menu"
+            aria-label="Open mobile menu"
+          >
+            ☰
+          </button>
+
           {/* Logo */}
           <div className="swd-logo" onClick={() => setActiveCategory('all')}>
             Shoes
           </div>
 
           {/* Search bar with collection dropdown */}
-          <div className="swd-search-bar">
+          <div className="swd-search-bar" onClick={() => setIsSearchOpen(true)} style={{ cursor: 'pointer' }}>
             <input
               type="text"
+              readOnly
               placeholder="Search Product..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
               className="swd-search-input"
             />
-            <select
-              value={selectedCollection}
-              onChange={(e) => setSelectedCollection(e.target.value)}
-              className="swd-search-select"
-            >
-              <option value="All Collections">All Collections</option>
-              <option value="Running Shoes">Running Shoes</option>
-              <option value="Football">Football</option>
-              <option value="Sneakers">Sneakers</option>
-              <option value="Walking Shoes">Walking Shoes</option>
-            </select>
+            <span style={{ fontSize: 16, marginRight: 8 }}>🔍</span>
           </div>
 
           {/* Operating hours & support */}
@@ -243,10 +281,21 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
             <button
               type="button"
               className="swd-user-btn"
-              onClick={() => showToast('Opening Account Login...')}
+              onClick={() => setIsAccountOpen(true)}
               title="My Account"
             >
               👤
+            </button>
+
+            <button
+              type="button"
+              className="swd-user-btn"
+              onClick={() => setIsWishlistOpen(true)}
+              title="Wishlist"
+              style={{ position: 'relative' }}
+            >
+              {wishlist.length > 0 ? '❤️' : '🤍'}
+              {wishlist.length > 0 && <span className="swd-cart-badge">{wishlist.length}</span>}
             </button>
 
             <button
@@ -1281,6 +1330,79 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
           </div>
         </div>
       )}
+
+      {/* Search Modal */}
+      <StorefrontSearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        products={[...SHOES_WORKDO_TODAY_DISCOUNTS, ...SHOES_WORKDO_BESTSELLERS, ...SHOES_WORKDO_RETRO_SHOES].map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onSelectProduct={(p) => {
+          const fullProd = [...SHOES_WORKDO_TODAY_DISCOUNTS, ...SHOES_WORKDO_BESTSELLERS, ...SHOES_WORKDO_RETRO_SHOES].find((x) => x.id === p.id)
+          if (fullProd) setQuickViewProduct(fullProd)
+        }}
+        accentColor={customAccentColor || '#f97316'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
+        placeholder="Search running shoes, retro sneakers, football..."
+        popularTags={['Running Shoes', 'Football', 'Sneakers', 'Walking']}
+      />
+
+      {/* Wishlist Drawer */}
+      <StorefrontWishlistDrawer
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
+        wishlistIds={wishlist}
+        allProducts={[...SHOES_WORKDO_TODAY_DISCOUNTS, ...SHOES_WORKDO_BESTSELLERS, ...SHOES_WORKDO_RETRO_SHOES].map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onRemoveWishlist={toggleWishlist}
+        onAddToCart={(p) => {
+          const fullProd = [...SHOES_WORKDO_TODAY_DISCOUNTS, ...SHOES_WORKDO_BESTSELLERS, ...SHOES_WORKDO_RETRO_SHOES].find((x) => x.id === p.id)
+          if (fullProd) handleAddToCart(fullProd, 8)
+        }}
+        onOpenProduct={(p) => {
+          const fullProd = [...SHOES_WORKDO_TODAY_DISCOUNTS, ...SHOES_WORKDO_BESTSELLERS, ...SHOES_WORKDO_RETRO_SHOES].find((x) => x.id === p.id)
+          if (fullProd) setQuickViewProduct(fullProd)
+        }}
+        accentColor={customAccentColor || '#f97316'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
+      />
+
+      {/* Account Modal */}
+      <StorefrontAccountModal
+        isOpen={isAccountOpen}
+        onClose={() => setIsAccountOpen(false)}
+        brandName="Shoes WorkDo"
+        accentColor={customAccentColor || '#f97316'}
+      />
+
+      {/* Mobile Navigation Drawer */}
+      <StorefrontMobileNavDrawer
+        isOpen={isMobileNavOpen}
+        onClose={() => setIsMobileNavOpen(false)}
+        brandName="Shoes WorkDo"
+        navItems={navItems}
+        onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenAccount={() => setIsAccountOpen(true)}
+        onOpenCart={() => setIsCartOpen(true)}
+        wishlistCount={wishlist.length}
+        cartCount={cartItemCount}
+        contactPhone="+12 002-224-111"
+        contactEmail="support@shoesworkdo.com"
+        accentColor={customAccentColor || '#f97316'}
+      />
 
       {/* Floating Toast Notification */}
       {toastMessage && (

@@ -1,3 +1,5 @@
+import './shoesMobile.css'
+
 export * from './HappyFeet'
 export * from './ShoeZone'
 export * from './SusieShoes'

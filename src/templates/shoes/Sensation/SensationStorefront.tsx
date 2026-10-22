@@ -11,6 +11,13 @@ import {
   SENSATION_TESTIMONIALS,
   SENSATION_BLOGS,
 } from './data/sensationData'
+import {
+  StorefrontSearchModal,
+  StorefrontWishlistDrawer,
+  StorefrontAccountModal,
+  StorefrontMobileNavDrawer,
+  type MobileNavItem,
+} from '../../common/StorefrontModals'
 import './styles/sensation.css'
 
 export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
@@ -46,6 +53,11 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
     },
   ])
   const [isCartOpen, setIsCartOpen] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false)
+  const [isAccountOpen, setIsAccountOpen] = useState(false)
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
+  const [wishlist, setWishlist] = useState<string[]>([])
   const [quickViewProduct, setQuickViewProduct] = useState<SensationProduct | null>(null)
   const [selectedProductSize, setSelectedProductSize] = useState<string>('7')
   const [selectedProductColor, setSelectedProductColor] = useState<string>('Black')
@@ -56,6 +68,18 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
   const showToast = (msg: string) => {
     setToastMessage(msg)
     setTimeout(() => setToastMessage(null), 3000)
+  }
+
+  const toggleWishlist = (productId: string) => {
+    setWishlist((prev) => {
+      const exists = prev.includes(productId)
+      if (exists) {
+        showToast('Removed from Wishlist')
+        return prev.filter((id) => id !== productId)
+      }
+      showToast('Saved to Wishlist ❤️')
+      return [...prev, productId]
+    })
   }
 
   const formatPrice = (usdAmount: number) => {
@@ -134,6 +158,33 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
     setNewsletterEmail('')
   }
 
+  const navItems: MobileNavItem[] = [
+    {
+      label: 'Shop Categories',
+      children: [
+        { label: 'Clothes & Apparel', onClick: () => { setSelectedCategory('Clothes'); showToast('Browsing Clothes') } },
+        { label: 'Shoes & Footwear', onClick: () => { setSelectedCategory('Shoes & Footwear'); showToast('Browsing Footwear') } },
+        { label: 'Sandals & Flats', onClick: () => { setSelectedCategory('Sandals & Flats'); showToast('Browsing Sandals') } },
+        { label: 'Accessories & Sunglasses', onClick: () => { setSelectedCategory('Accessories'); showToast('Browsing Accessories') } },
+      ],
+    },
+    {
+      label: 'Featured Brands',
+      children: [
+        { label: 'Trending Picks', onClick: () => { const el = document.getElementById('sen-trending-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Best Sellers', onClick: () => { const el = document.getElementById('sen-sunglasses-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Pages & Support',
+      children: [
+        { label: 'Lookbook Journal', onClick: () => showToast('Opening Lookbook') },
+        { label: 'About Sensation', onClick: () => showToast('About Sensation Atelier') },
+        { label: 'Support 7 Days a Week', onClick: () => showToast('Support: 9am-7pm Daily') },
+      ],
+    },
+  ]
+
   const activeSlide = SENSATION_HERO_SLIDES[currentSlideIndex]
 
   return (
@@ -185,6 +236,17 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
       {/* Main Header */}
       <header className="sen-header">
         <div className="sen-header-inner">
+          {/* Mobile Hamburger Button */}
+          <button
+            type="button"
+            className="sen-hamburger-btn"
+            onClick={() => setIsMobileNavOpen(true)}
+            title="Menu"
+            aria-label="Open mobile menu"
+          >
+            ☰
+          </button>
+
           <div className="sen-logo" onClick={() => setCurrentSlideIndex(0)}>
             Sensation
           </div>
@@ -305,7 +367,7 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
             <button
               type="button"
               className="sen-circle-btn"
-              onClick={() => showToast('Opening search...')}
+              onClick={() => setIsSearchOpen(true)}
               title="Search"
             >
               🔍
@@ -313,10 +375,20 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
             <button
               type="button"
               className="sen-circle-btn"
-              onClick={() => showToast('Opening account...')}
+              onClick={() => setIsAccountOpen(true)}
               title="Account"
             >
               👤
+            </button>
+            <button
+              type="button"
+              className="sen-circle-btn"
+              onClick={() => setIsWishlistOpen(true)}
+              title="Wishlist"
+              style={{ position: 'relative' }}
+            >
+              {wishlist.length > 0 ? '❤️' : '🤍'}
+              {wishlist.length > 0 && <span className="sen-badge">{wishlist.length}</span>}
             </button>
             <button
               type="button"
@@ -401,7 +473,19 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
 
           <div className="sen-products-grid">
             {SENSATION_TRENDING_PRODUCTS.map((prod) => (
-              <div key={prod.id} className="sen-product-card">
+              <div key={prod.id} className="sen-product-card" style={{ position: 'relative' }}>
+                <button
+                  type="button"
+                  className={`wv-card-wish-btn ${wishlist.includes(prod.id) ? 'active' : ''}`}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    toggleWishlist(prod.id)
+                  }}
+                  title={wishlist.includes(prod.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                  aria-label="Toggle Wishlist"
+                >
+                  {wishlist.includes(prod.id) ? '❤️' : '🤍'}
+                </button>
                 {prod.badge && <span className="sen-product-badge">{prod.badge}</span>}
 
                 <div
@@ -598,7 +682,19 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
 
           <div className="sen-products-grid">
             {SENSATION_SUNGLASSES_PRODUCTS.map((prod) => (
-              <div key={prod.id} className="sen-product-card">
+              <div key={prod.id} className="sen-product-card" style={{ position: 'relative' }}>
+                <button
+                  type="button"
+                  className={`wv-card-wish-btn ${wishlist.includes(prod.id) ? 'active' : ''}`}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    toggleWishlist(prod.id)
+                  }}
+                  title={wishlist.includes(prod.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                  aria-label="Toggle Wishlist"
+                >
+                  {wishlist.includes(prod.id) ? '❤️' : '🤍'}
+                </button>
                 {prod.badge && <span className="sen-product-badge">{prod.badge}</span>}
 
                 <div
@@ -1237,6 +1333,87 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
           </div>
         </div>
       )}
+
+      {/* Search Modal */}
+      <StorefrontSearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        products={[...SENSATION_TRENDING_PRODUCTS, ...SENSATION_SUNGLASSES_PRODUCTS].map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onSelectProduct={(p) => {
+          const fullProd = [...SENSATION_TRENDING_PRODUCTS, ...SENSATION_SUNGLASSES_PRODUCTS].find((x) => x.id === p.id)
+          if (fullProd) {
+            setQuickViewProduct(fullProd)
+            setSelectedProductSize(fullProd.sizes?.[0] || '7')
+            setSelectedProductColor(fullProd.colors?.[0]?.name || 'Standard')
+          }
+        }}
+        accentColor={customAccentColor || '#656c4d'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
+        placeholder="Search trending sneakers, sunglasses, accessories..."
+        popularTags={['Footwear', 'Clothes', 'Sunglasses', 'Accessories']}
+      />
+
+      {/* Wishlist Drawer */}
+      <StorefrontWishlistDrawer
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
+        wishlistIds={wishlist}
+        allProducts={[...SENSATION_TRENDING_PRODUCTS, ...SENSATION_SUNGLASSES_PRODUCTS].map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onRemoveWishlist={toggleWishlist}
+        onAddToCart={(p) => {
+          const fullProd = [...SENSATION_TRENDING_PRODUCTS, ...SENSATION_SUNGLASSES_PRODUCTS].find((x) => x.id === p.id)
+          if (fullProd) handleAddToCart(fullProd)
+        }}
+        onOpenProduct={(p) => {
+          const fullProd = [...SENSATION_TRENDING_PRODUCTS, ...SENSATION_SUNGLASSES_PRODUCTS].find((x) => x.id === p.id)
+          if (fullProd) {
+            setQuickViewProduct(fullProd)
+            setSelectedProductSize(fullProd.sizes?.[0] || '7')
+            setSelectedProductColor(fullProd.colors?.[0]?.name || 'Standard')
+          }
+        }}
+        accentColor={customAccentColor || '#656c4d'}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
+      />
+
+      {/* Account Modal */}
+      <StorefrontAccountModal
+        isOpen={isAccountOpen}
+        onClose={() => setIsAccountOpen(false)}
+        brandName="Sensation"
+        accentColor={customAccentColor || '#656c4d'}
+      />
+
+      {/* Mobile Navigation Drawer */}
+      <StorefrontMobileNavDrawer
+        isOpen={isMobileNavOpen}
+        onClose={() => setIsMobileNavOpen(false)}
+        brandName="Sensation"
+        navItems={navItems}
+        onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenAccount={() => setIsAccountOpen(true)}
+        onOpenCart={() => setIsCartOpen(true)}
+        wishlistCount={wishlist.length}
+        cartCount={cartItemCount}
+        contactPhone="+1 (800) 888-SENS"
+        contactEmail="support@sensationstore.com"
+        accentColor={customAccentColor || '#656c4d'}
+      />
 
       {/* Floating Toast Notification */}
       {toastMessage && (

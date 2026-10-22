@@ -7,7 +7,6 @@ import type {
 import {
   SHADES_LOGO,
   SHADES_HERO_SLIDES,
-  SHADES_MEGA_MENU_ITEMS,
   SHADES_3_CATEGORY_CARDS,
   SHADES_STYLIST_BANNER,
   SHADES_PRODUCTS,
@@ -17,14 +16,29 @@ import {
   SHADES_BLOG_POSTS,
   SHADES_GALLERY_IMAGES,
 } from './data/shadesData'
+import {
+  StorefrontSearchModal,
+  StorefrontWishlistDrawer,
+  StorefrontAccountModal,
+  StorefrontMobileNavDrawer,
+  type MobileNavItem,
+} from '../../common/StorefrontModals'
 import './styles/shades.css'
 
 export function ShadesStorefront({
   template: _template,
+  device = 'desktop',
+  deviceView,
+  customAccentColor,
   onColorChange: _onColorChange,
+  onUseTemplate: _onUseTemplate,
+  onClose: _onClose,
+  onBack: _onBack,
 }: ShadesStorefrontProps) {
+  const effectiveDevice = (deviceView as string) || device || 'desktop'
+
   // Navigation & Mega menu
-  const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false)
+  const [_isMegaMenuOpen, _setIsMegaMenuOpen] = useState(false)
   const [activeSlide, setActiveSlide] = useState(0)
   const [activeTab, setActiveTab] = useState<'all' | 'most-popular' | 'special' | 'best-seller'>('most-popular')
 
@@ -32,7 +46,9 @@ export function ShadesStorefront({
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [quickViewProduct, setQuickViewProduct] = useState<ShadesProduct | null>(null)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false)
+  const [isAccountOpen, setIsAccountOpen] = useState(false)
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
   const [wishlist, setWishlist] = useState<string[]>([])
 
   // Cart
@@ -40,6 +56,50 @@ export function ShadesStorefront({
     { product: SHADES_PRODUCTS[0], quantity: 1 },
     { product: SHADES_PRODUCTS[1], quantity: 2 },
   ])
+
+  const navItems: MobileNavItem[] = [
+    {
+      label: 'Home',
+      children: [
+        { label: 'Featured Series', onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
+        { label: 'Category Highlights', onClick: () => { const el = document.getElementById('shades-category-cards'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Catalog',
+      children: [
+        { label: 'Most Popular', onClick: () => { setActiveTab('most-popular'); const el = document.getElementById('shades-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Special Edition', onClick: () => { setActiveTab('special'); const el = document.getElementById('shades-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Best Sellers', onClick: () => { setActiveTab('best-seller'); const el = document.getElementById('shades-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Shop',
+      children: [
+        { label: 'All Shades Makeup', onClick: () => { setActiveTab('all'); const el = document.getElementById('shades-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Stylist Picks', onClick: () => { const el = document.getElementById('shades-stylist-banner'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Products',
+      children: [
+        { label: 'Ready To Impress', onClick: () => { const el = document.getElementById('shades-ready-impress'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Blog',
+      children: [
+        { label: 'Glamour & Shades Journal', onClick: () => { const el = document.getElementById('shades-blog-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'More',
+      children: [
+        { label: 'Customer Reviews', onClick: () => { const el = document.getElementById('shades-testimonials'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Help & FAQ', onClick: () => alert('Customer Support: care@shadescosmetics.com') },
+      ],
+    },
+  ]
 
   // Filtered Products
   const filteredProducts = useMemo(() => {
@@ -93,10 +153,28 @@ export function ShadesStorefront({
   const currentSlide = SHADES_HERO_SLIDES[activeSlide]
 
   return (
-    <div className="shades-storefront">
+    <div
+      className={`shades-storefront device-${effectiveDevice}`}
+      style={
+        customAccentColor
+          ? ({ '--shades-gold': customAccentColor } as React.CSSProperties)
+          : undefined
+      }
+    >
       {/* 1. Header with Mega Menu */}
       <header className="shades-header">
         <div className="shades-header-inner">
+          {/* Mobile Hamburger Button */}
+          <button
+            type="button"
+            className="shades-hamburger-btn"
+            onClick={() => setIsMobileNavOpen(true)}
+            title="Menu"
+            aria-label="Open mobile menu"
+          >
+            ☰
+          </button>
+
           {/* Logo */}
           <a href="#shades" style={{ display: 'flex', alignItems: 'center' }}>
             <img src={SHADES_LOGO} alt="Shades" className="shades-logo-img" />
@@ -105,73 +183,38 @@ export function ShadesStorefront({
           {/* Navigation */}
           <nav>
             <ul className="shades-nav-menu">
-              <li
-                className="shades-nav-item"
-                onMouseEnter={() => setIsMegaMenuOpen(true)}
-                onMouseLeave={() => setIsMegaMenuOpen(false)}
-              >
-                <a
-                  href="#home"
-                  className="shades-nav-link active-gold"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    setIsMegaMenuOpen((prev) => !prev)
-                  }}
-                >
-                  <span className="shades-tag-new">NEW</span>
-                  HOME ▾
-                </a>
-
-                {/* 8-Item Mega Menu Dropdown */}
-                {isMegaMenuOpen && (
-                  <div className="shades-mega-dropdown">
-                    {SHADES_MEGA_MENU_ITEMS.map((item) => (
-                      <div
-                        key={item.id}
-                        className="shades-mega-card"
-                        onClick={() => {
-                          setIsMegaMenuOpen(false)
-                          document.getElementById('shades-catalog')?.scrollIntoView({ behavior: 'smooth' })
-                        }}
-                      >
-                        <div className="shades-mega-card-title">{item.title}</div>
-                        <img src={item.image} alt={item.title} className="shades-mega-thumb" />
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </li>
-
-              <li className="shades-nav-item">
-                <a href="#catalog" className="shades-nav-link">
-                  CATALOG ▾
-                </a>
-              </li>
-
-              <li className="shades-nav-item">
-                <a href="#shop" className="shades-nav-link">
-                  <span className="shades-tag-hot">HOT</span>
-                  SHOP ▾
-                </a>
-              </li>
-
-              <li className="shades-nav-item">
-                <a href="#products" className="shades-nav-link">
-                  PRODUCTS ▾
-                </a>
-              </li>
-
-              <li className="shades-nav-item">
-                <a href="#all-collections" className="shades-nav-link">
-                  ALL COLLECTIONS
-                </a>
-              </li>
-
-              <li className="shades-nav-item">
-                <a href="#more" className="shades-nav-link">
-                  MORE ▾
-                </a>
-              </li>
+              {navItems.map((item) => (
+                <li key={item.label} className="shades-nav-item wv-nav-dropdown-wrap">
+                  <span
+                    className="shades-nav-link"
+                    onClick={() => {
+                      if (item.children && item.children.length > 0) {
+                        item.children[0].onClick?.()
+                      } else {
+                        item.onClick?.()
+                      }
+                    }}
+                  >
+                    {item.label} {item.children ? '▾' : ''}
+                  </span>
+                  {item.children && (
+                    <div className="wv-desktop-dropdown">
+                      {item.children.map((sub) => (
+                        <div
+                          key={sub.label}
+                          className="wv-desktop-dropdown-item"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            sub.onClick?.()
+                          }}
+                        >
+                          {sub.label}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </li>
+              ))}
             </ul>
           </nav>
 
@@ -181,6 +224,7 @@ export function ShadesStorefront({
               className="shades-icon-btn"
               onClick={() => setIsSearchOpen(true)}
               aria-label="Search"
+              title="Search store"
             >
               <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <circle cx="11" cy="11" r="8" />
@@ -190,18 +234,34 @@ export function ShadesStorefront({
 
             <button
               className="shades-icon-btn"
-              onClick={() => alert(`Saved items: ${wishlist.length}`)}
-              aria-label="Wishlist"
+              onClick={() => setIsAccountOpen(true)}
+              aria-label="Account"
+              title="Account"
             >
               <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </button>
+
+            <button
+              className="shades-icon-btn"
+              onClick={() => setIsWishlistOpen(true)}
+              aria-label="Wishlist"
+              title="Wishlist"
+              style={{ position: 'relative' }}
+            >
+              <svg width="20" height="20" fill={wishlist.length > 0 ? '#e5a93c' : 'none'} stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
               </svg>
+              {wishlist.length > 0 && <span className="shades-cart-badge">{wishlist.length}</span>}
             </button>
 
             <button
               className="shades-icon-btn"
               onClick={() => setIsCartOpen(true)}
               aria-label="Cart"
+              title="Cart"
             >
               <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
@@ -349,28 +409,16 @@ export function ShadesStorefront({
                   <span className="shades-discount-badge">{product.discountBadge}</span>
                 )}
                 <button
-                  style={{
-                    position: 'absolute',
-                    top: '12px',
-                    right: '12px',
-                    background: '#1a1a1a',
-                    border: '1px solid #333',
-                    color: wishlist.includes(product.id) ? '#e5a93c' : '#ffffff',
-                    width: '32px',
-                    height: '32px',
-                    borderRadius: '50%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    cursor: 'pointer',
-                  }}
+                  type="button"
+                  className={`wv-card-wish-btn ${wishlist.includes(product.id) ? 'active' : ''}`}
                   onClick={(e) => {
                     e.stopPropagation()
                     toggleWishlist(product.id)
                   }}
-                  title="Wishlist"
+                  title={wishlist.includes(product.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                  aria-label="Toggle Wishlist"
                 >
-                  ♥
+                  {wishlist.includes(product.id) ? '❤️' : '🤍'}
                 </button>
               </div>
 
@@ -685,53 +733,6 @@ export function ShadesStorefront({
         </div>
       )}
 
-      {/* Search Modal */}
-      {isSearchOpen && (
-        <div className="shades-drawer-overlay" onClick={() => setIsSearchOpen(false)}>
-          <div
-            style={{
-              backgroundColor: '#1a1a1a',
-              borderRadius: '16px',
-              maxWidth: '600px',
-              width: '100%',
-              margin: 'auto',
-              padding: '28px',
-              border: '1px solid #2a2a2a',
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-              <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 800, textTransform: 'uppercase' }}>
-                Search Shades Products
-              </h3>
-              <button
-                style={{ background: 'none', border: 'none', color: '#9e9e9e', fontSize: '20px', cursor: 'pointer' }}
-                onClick={() => setIsSearchOpen(false)}
-              >
-                ✕
-              </button>
-            </div>
-            <input
-              type="text"
-              autoFocus
-              placeholder="Search cosmetics, mascara, eyeliner, shades..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              style={{
-                width: '100%',
-                padding: '14px 18px',
-                borderRadius: '8px',
-                background: '#242424',
-                border: '1px solid #3a3a3a',
-                color: '#fff',
-                fontSize: '14px',
-                outline: 'none',
-                boxSizing: 'border-box',
-              }}
-            />
-          </div>
-        </div>
-      )}
       {/* Quick View Modal */}
       {quickViewProduct && (
         <div className="shades-drawer-overlay" onClick={() => setQuickViewProduct(null)}>
@@ -805,6 +806,77 @@ export function ShadesStorefront({
           </div>
         </div>
       )}
+
+      {/* Search Modal */}
+      <StorefrontSearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        products={SHADES_PRODUCTS.map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onSelectProduct={(p) => {
+          const fullProd = SHADES_PRODUCTS.find((x) => x.id === p.id)
+          if (fullProd) setQuickViewProduct(fullProd)
+        }}
+        accentColor={customAccentColor || '#e5a93c'}
+        placeholder="Search glamorous shades, lip kits, foundations..."
+        popularTags={['Most Popular', 'Special', 'Best Seller']}
+      />
+
+      {/* Wishlist Drawer */}
+      <StorefrontWishlistDrawer
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
+        wishlistIds={wishlist}
+        allProducts={SHADES_PRODUCTS.map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onRemoveWishlist={toggleWishlist}
+        onAddToCart={(p) => {
+          const fullProd = SHADES_PRODUCTS.find((x) => x.id === p.id)
+          if (fullProd) handleAddToCart(fullProd)
+        }}
+        onOpenProduct={(p) => {
+          const fullProd = SHADES_PRODUCTS.find((x) => x.id === p.id)
+          if (fullProd) setQuickViewProduct(fullProd)
+        }}
+        accentColor={customAccentColor || '#e5a93c'}
+      />
+
+      {/* Account Modal */}
+      <StorefrontAccountModal
+        isOpen={isAccountOpen}
+        onClose={() => setIsAccountOpen(false)}
+        brandName="Shades"
+        accentColor={customAccentColor || '#e5a93c'}
+      />
+
+      {/* Mobile Navigation Drawer */}
+      <StorefrontMobileNavDrawer
+        isOpen={isMobileNavOpen}
+        onClose={() => setIsMobileNavOpen(false)}
+        brandName="Shades"
+        navItems={navItems}
+        onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenAccount={() => setIsAccountOpen(true)}
+        onOpenCart={() => setIsCartOpen(true)}
+        wishlistCount={wishlist.length}
+        cartCount={totalCartCount}
+        contactPhone="+1 800 999-SHADES"
+        contactEmail="care@shadescosmetics.com"
+        accentColor={customAccentColor || '#e5a93c'}
+      />
     </div>
   )
 }

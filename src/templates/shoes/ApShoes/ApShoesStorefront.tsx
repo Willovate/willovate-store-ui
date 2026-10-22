@@ -12,6 +12,13 @@ import {
   AP_SHOES_TESTIMONIALS,
   AP_SHOES_FOOTER_COLUMNS,
 } from './data/apShoesData'
+import {
+  StorefrontSearchModal,
+  StorefrontWishlistDrawer,
+  StorefrontAccountModal,
+  StorefrontMobileNavDrawer,
+  type MobileNavItem,
+} from '../../common/StorefrontModals'
 import './styles/apShoes.css'
 
 export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
@@ -37,11 +44,14 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
     },
   ])
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false)
+  const [isWishlistOpen, setIsWishlistOpen] = useState<boolean>(false)
+  const [isAccountOpen, setIsAccountOpen] = useState<boolean>(false)
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState<boolean>(false)
   const [quickViewProduct, setQuickViewProduct] = useState<ApShoesProduct | null>(null)
   const [selectedQuickViewSize, setSelectedQuickViewSize] = useState<number>(9)
   const [toastMessage, setToastMessage] = useState<string | null>(null)
   const [newsletterEmail, setNewsletterEmail] = useState<string>('')
-  const [searchOpen, setSearchOpen] = useState<boolean>(false)
+  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false)
   const [searchQuery, setSearchQuery] = useState<string>('')
 
   // Toast Helper
@@ -117,6 +127,49 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
     )
   }
 
+  const navItems: MobileNavItem[] = [
+    {
+      label: 'Home',
+      children: [
+        { label: 'Home Default', onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
+        { label: 'Modern Shoes', onClick: () => showToast('Browsing Modern Shoes') },
+        { label: 'Streetstyle Shoes', onClick: () => showToast('Browsing Streetstyle Shoes') },
+      ],
+    },
+    {
+      label: 'Collections',
+      children: [
+        { label: 'Casual Sneakers', onClick: () => showToast('Browsing Casual Sneakers') },
+        { label: 'Deck Shoes', onClick: () => showToast('Browsing Deck Shoes & Loafers') },
+        { label: 'Skate & Street', onClick: () => showToast('Browsing Skate & Street Shoes') },
+        { label: 'Spring Arrivals', onClick: () => showToast('Browsing Spring Arrivals') },
+      ],
+    },
+    {
+      label: 'Products',
+      children: [
+        { label: 'Product Grid', onClick: () => showToast('Browsing Full Product Grid') },
+        { label: 'Sale Showcase', onClick: () => showToast('Browsing Sale Showcase') },
+        { label: 'New Arrivals', onClick: () => showToast('Browsing New Arrivals') },
+      ],
+    },
+    {
+      label: 'Blog',
+      children: [
+        { label: 'Streetstyle Lookbook', onClick: () => showToast('Reading: Streetstyle Lookbook') },
+        { label: 'Shoe Care Guide', onClick: () => showToast('Reading: Shoe Care Guide') },
+      ],
+    },
+    {
+      label: 'Pages',
+      children: [
+        { label: 'About Us', onClick: () => showToast('About N.O.Z Shoes') },
+        { label: 'Contact Us', onClick: () => showToast('Contact N.O.Z Shoes') },
+        { label: 'FAQs', onClick: () => showToast('N.O.Z Shoes FAQs') },
+      ],
+    },
+  ]
+
   return (
     <div
       className={`ap-storefront device-${currentDevice}`}
@@ -131,6 +184,17 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
          ---------------------------------------------------------------------- */}
       <header className="ap-header">
         <div className="ap-header-inner">
+          {/* Mobile Hamburger Button */}
+          <button
+            type="button"
+            className="ap-hamburger-btn"
+            onClick={() => setIsMobileNavOpen(true)}
+            title="Menu"
+            aria-label="Open mobile menu"
+          >
+            ☰
+          </button>
+
           {/* Logo */}
           <div className="ap-logo" onClick={() => showToast('N.O.Z Shoes Home')}>
             <span>N.</span>
@@ -221,7 +285,7 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
               type="button"
               className="ap-tool-btn"
               title="Search"
-              onClick={() => setSearchOpen(!searchOpen)}
+              onClick={() => setIsSearchOpen(true)}
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="11" cy="11" r="8" />
@@ -233,7 +297,7 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
               type="button"
               className="ap-tool-btn"
               title="Account"
-              onClick={() => showToast('Customer Account sign-in')}
+              onClick={() => setIsAccountOpen(true)}
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
@@ -244,14 +308,18 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
             <button
               type="button"
               className="ap-tool-btn"
-              title="Currency / Language"
-              onClick={() => showToast('Currency: USD $ (English)')}
+              title="Wishlist"
+              onClick={() => setIsWishlistOpen(true)}
+              style={{ position: 'relative' }}
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="12" cy="12" r="10" />
-                <line x1="2" y1="12" x2="22" y2="12" />
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+              <svg width="18" height="18" viewBox="0 0 24 24" fill={wishlist.length > 0 ? '#ea580c' : 'none'} stroke="currentColor" strokeWidth="2">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
               </svg>
+              {wishlist.length > 0 && (
+                <span className="ap-cart-count-badge" style={{ background: '#ea580c' }}>
+                  {wishlist.length}
+                </span>
+              )}
             </button>
 
             {/* Cart Bag */}
@@ -270,7 +338,7 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
         </div>
 
         {/* Search Bar Dropdown */}
-        {searchOpen && (
+        {isSearchOpen && (
           <div style={{ background: '#f9fafb', padding: '12px 24px', borderTop: '1px solid #e5e7eb' }}>
             <div style={{ maxWidth: 600, margin: '0 auto', display: 'flex', gap: 8 }}>
               <input
@@ -291,7 +359,7 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
                 className="ap-nl-btn"
                 onClick={() => {
                   showToast(`Searching for "${searchQuery || 'shoes'}"...`)
-                  setSearchOpen(false)
+                  setIsSearchOpen(false)
                 }}
               >
                 Search
@@ -931,6 +999,83 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
           </div>
         </div>
       )}
+
+      {/* Search Modal */}
+      <StorefrontSearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        products={AP_SHOES_NEW_PRODUCTS.map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.subtitle || 'Shoes',
+        }))}
+        onSelectProduct={(p) => {
+          const fullProd = AP_SHOES_NEW_PRODUCTS.find((x) => x.id === p.id)
+          if (fullProd) {
+            setQuickViewProduct(fullProd)
+            setSelectedQuickViewSize(fullProd.availableSizes[0] || 9)
+          }
+        }}
+        accentColor={customAccentColor || '#ea580c'}
+        placeholder="Search casual sneakers, loafers, skate shoes..."
+        popularTags={['Sneakers', 'Skate', 'Loafers', 'Running']}
+      />
+
+      {/* Wishlist Drawer */}
+      <StorefrontWishlistDrawer
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
+        wishlistIds={wishlist}
+        allProducts={AP_SHOES_NEW_PRODUCTS.map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.subtitle || 'Shoes',
+        }))}
+        onRemoveWishlist={toggleWishlist}
+        onAddToCart={(p) => {
+          const fullProd = AP_SHOES_NEW_PRODUCTS.find((x) => x.id === p.id)
+          if (fullProd) addToCart(fullProd, 9)
+        }}
+        onOpenProduct={(p) => {
+          const fullProd = AP_SHOES_NEW_PRODUCTS.find((x) => x.id === p.id)
+          if (fullProd) {
+            setQuickViewProduct(fullProd)
+            setSelectedQuickViewSize(fullProd.availableSizes[0] || 9)
+          }
+        }}
+        accentColor={customAccentColor || '#ea580c'}
+      />
+
+      {/* Account Modal */}
+      <StorefrontAccountModal
+        isOpen={isAccountOpen}
+        onClose={() => setIsAccountOpen(false)}
+        brandName="N.O.Z Shoes"
+        accentColor={customAccentColor || '#ea580c'}
+      />
+
+      {/* Mobile Navigation Drawer */}
+      <StorefrontMobileNavDrawer
+        isOpen={isMobileNavOpen}
+        onClose={() => setIsMobileNavOpen(false)}
+        brandName="N.O.Z Shoes"
+        navItems={navItems}
+        onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenAccount={() => setIsAccountOpen(true)}
+        onOpenCart={() => setIsCartOpen(true)}
+        wishlistCount={wishlist.length}
+        cartCount={totalCartCount}
+        contactPhone="+1 (800) 456-SHOE"
+        contactEmail="service@nozshoes.com"
+        accentColor={customAccentColor || '#ea580c'}
+      />
 
       {/* ----------------------------------------------------------------------
           TOAST FEEDBACK

@@ -15,6 +15,13 @@ import {
   FOOTWEAR_BLOGS,
   FOOTWEAR_MOST_LOVED_PRODUCTS,
 } from './data/footwearWorkDoData'
+import {
+  StorefrontSearchModal,
+  StorefrontWishlistDrawer,
+  StorefrontAccountModal,
+  StorefrontMobileNavDrawer,
+  type MobileNavItem,
+} from '../../common/StorefrontModals'
 import './styles/footwearWorkDo.css'
 
 export const FootwearWorkDoStorefront: React.FC<FootwearWorkDoStorefrontProps> = ({
@@ -42,6 +49,11 @@ export const FootwearWorkDoStorefront: React.FC<FootwearWorkDoStorefrontProps> =
     },
   ])
   const [isCartOpen, setIsCartOpen] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false)
+  const [isAccountOpen, setIsAccountOpen] = useState(false)
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
+  const [wishlist, setWishlist] = useState<string[]>([])
   const [activeTab, setActiveTab] = useState<'All' | 'Men' | 'Women' | 'Casual'>('All')
   const [toastMessage, setToastMessage] = useState<string | null>(null)
   const [newsletterEmail, setNewsletterEmail] = useState('')
@@ -52,6 +64,18 @@ export const FootwearWorkDoStorefront: React.FC<FootwearWorkDoStorefrontProps> =
   const showToast = (msg: string) => {
     setToastMessage(msg)
     setTimeout(() => setToastMessage(null), 3000)
+  }
+
+  const toggleWishlist = (productId: string) => {
+    setWishlist((prev) => {
+      const exists = prev.includes(productId)
+      if (exists) {
+        showToast('Removed from Wishlist')
+        return prev.filter((id) => id !== productId)
+      }
+      showToast('Saved to Wishlist ❤️')
+      return [...prev, productId]
+    })
   }
 
   const formatPrice = (priceInr: number) => {
@@ -103,6 +127,42 @@ export const FootwearWorkDoStorefront: React.FC<FootwearWorkDoStorefrontProps> =
     (sum, item) => sum + item.product.priceInr * item.quantity,
     0
   )
+
+  const navItems: MobileNavItem[] = [
+    {
+      label: 'All Categories',
+      children: FOOTWEAR_CATEGORIES.map((c) => ({
+        label: c.title,
+        onClick: () => {
+          const el = document.getElementById('fwd-sneakers-section')
+          el?.scrollIntoView({ behavior: 'smooth' })
+        },
+      })),
+    },
+    {
+      label: 'Products',
+      children: [
+        { label: 'Most Loved Sneakers', onClick: () => { const el = document.getElementById('fwd-sneakers-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Best Sellers', onClick: () => { const el = document.getElementById('fwd-bestsellers-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Casual Picks', onClick: () => { setActiveTab('Casual'); const el = document.getElementById('fwd-tabs-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Pages',
+      children: [
+        { label: 'About Footwear Co.', onClick: () => showToast('About Footwear WorkDo') },
+        { label: 'Shipping & Returns', onClick: () => showToast('Free Shipping over ₹999') },
+        { label: 'FAQs', onClick: () => showToast('Footwear WorkDo FAQs') },
+      ],
+    },
+    {
+      label: 'Services',
+      children: [
+        { label: 'Custom Fitting', onClick: () => showToast('Custom Shoe Fitting Service') },
+        { label: 'VIP Sneaker Care', onClick: () => showToast('VIP Sneaker Care & Clean') },
+      ],
+    },
+  ]
 
   const currentSlide = FOOTWEAR_HERO_SLIDES[currentSlideIndex]
 
@@ -208,40 +268,79 @@ export const FootwearWorkDoStorefront: React.FC<FootwearWorkDoStorefrontProps> =
 
       {/* Main Header with Floating Pill Navigation */}
       <header className="fwd-header">
+        {/* Mobile Hamburger Button */}
+        <button
+          type="button"
+          className="fwd-hamburger-btn"
+          onClick={() => setIsMobileNavOpen(true)}
+          title="Menu"
+          aria-label="Open mobile menu"
+        >
+          ☰
+        </button>
+
         <a href="#home" className="fwd-logo">
           Footwear<span>.</span>
         </a>
 
         <div className="fwd-nav-pill-bar">
           <nav className="fwd-nav-links">
-            <span className="fwd-nav-item" onClick={() => showToast('Browsing Categories')}>
-              All Categories ▾
-            </span>
-            <span className="fwd-nav-item" onClick={() => showToast('Browsing Products')}>
-              Products ▾
-            </span>
-            <span className="fwd-nav-item" onClick={() => showToast('Browsing Pages')}>
-              Pages ▾
-            </span>
-            <span className="fwd-nav-item" onClick={() => showToast('Browsing Services')}>
-              Services ▾
-            </span>
+            {navItems.map((item) => (
+              <div key={item.label} className="wv-nav-dropdown-wrap">
+                <span
+                  className="fwd-nav-item"
+                  onClick={() => {
+                    if (item.children && item.children.length > 0) {
+                      item.children[0].onClick?.()
+                    }
+                  }}
+                >
+                  {item.label} ▾
+                </span>
+                {item.children && item.children.length > 0 && (
+                  <div className="wv-desktop-dropdown">
+                    {item.children.map((sub) => (
+                      <button
+                        key={sub.label}
+                        type="button"
+                        className="wv-dropdown-item"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          sub.onClick?.()
+                        }}
+                      >
+                        {sub.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
           </nav>
 
           <div className="fwd-nav-actions">
             <button
+              type="button"
               className="fwd-nav-action-btn"
-              onClick={() => showToast('Search footwear')}
+              onClick={() => setIsSearchOpen(true)}
             >
               🔍 Search
             </button>
             <button
+              type="button"
               className="fwd-nav-action-btn"
-              onClick={() => showToast('Opening profile')}
+              onClick={() => setIsAccountOpen(true)}
             >
-              👤 My Profile
+              👤 Account
             </button>
-            <button className="fwd-cart-btn" onClick={() => setIsCartOpen(true)}>
+            <button
+              type="button"
+              className="fwd-nav-action-btn"
+              onClick={() => setIsWishlistOpen(true)}
+            >
+              {wishlist.length > 0 ? '❤️' : '🤍'} Wishlist ({wishlist.length})
+            </button>
+            <button type="button" className="fwd-cart-btn" onClick={() => setIsCartOpen(true)}>
               🛒 Cart: {formatPrice(cartSubtotalInr)} ({totalCartCount})
             </button>
           </div>
@@ -377,7 +476,19 @@ export const FootwearWorkDoStorefront: React.FC<FootwearWorkDoStorefrontProps> =
           {FOOTWEAR_SNEAKERS_LOVE.map((product) => {
             const currentSize = selectedSizes[product.id] || 8
             return (
-              <div key={product.id} className="fwd-card-dark">
+              <div key={product.id} className="fwd-card-dark" style={{ position: 'relative' }}>
+                <button
+                  type="button"
+                  className={`wv-card-wish-btn ${wishlist.includes(product.id) ? 'active' : ''}`}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    toggleWishlist(product.id)
+                  }}
+                  title={wishlist.includes(product.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                  aria-label="Toggle Wishlist"
+                >
+                  {wishlist.includes(product.id) ? '❤️' : '🤍'}
+                </button>
                 <div
                   className="fwd-card-thumb-area"
                   onClick={() => setQuickViewProduct(product)}
@@ -599,7 +710,19 @@ export const FootwearWorkDoStorefront: React.FC<FootwearWorkDoStorefrontProps> =
           {filteredMostLoved.map((product) => {
             const currentSize = selectedSizes[product.id] || 8
             return (
-              <div key={product.id} className="fwd-card-dark">
+              <div key={product.id} className="fwd-card-dark" style={{ position: 'relative' }}>
+                <button
+                  type="button"
+                  className={`wv-card-wish-btn ${wishlist.includes(product.id) ? 'active' : ''}`}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    toggleWishlist(product.id)
+                  }}
+                  title={wishlist.includes(product.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                  aria-label="Toggle Wishlist"
+                >
+                  {wishlist.includes(product.id) ? '❤️' : '🤍'}
+                </button>
                 <div
                   className="fwd-card-thumb-area"
                   onClick={() => setQuickViewProduct(product)}
@@ -944,6 +1067,79 @@ export const FootwearWorkDoStorefront: React.FC<FootwearWorkDoStorefrontProps> =
           </div>
         </div>
       )}
+
+      {/* Search Modal */}
+      <StorefrontSearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        products={[...FOOTWEAR_SNEAKERS_LOVE, ...FOOTWEAR_BESTSELLERS, ...FOOTWEAR_MOST_LOVED_PRODUCTS].map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.priceInr,
+          originalPrice: p.originalPriceInr,
+          image: p.image,
+          category: p.category,
+        }))}
+        onSelectProduct={(p) => {
+          const fullProd = [...FOOTWEAR_SNEAKERS_LOVE, ...FOOTWEAR_BESTSELLERS, ...FOOTWEAR_MOST_LOVED_PRODUCTS].find((x) => x.id === p.id)
+          if (fullProd) setQuickViewProduct(fullProd)
+        }}
+        accentColor={activeColor}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
+        placeholder="Search running shoes, velocity sneakers, boots..."
+        popularTags={['Sneakers', 'Men', 'Women', 'Casual']}
+      />
+
+      {/* Wishlist Drawer */}
+      <StorefrontWishlistDrawer
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
+        wishlistIds={wishlist}
+        allProducts={[...FOOTWEAR_SNEAKERS_LOVE, ...FOOTWEAR_BESTSELLERS, ...FOOTWEAR_MOST_LOVED_PRODUCTS].map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.priceInr,
+          originalPrice: p.originalPriceInr,
+          image: p.image,
+          category: p.category,
+        }))}
+        onRemoveWishlist={toggleWishlist}
+        onAddToCart={(p) => {
+          const fullProd = [...FOOTWEAR_SNEAKERS_LOVE, ...FOOTWEAR_BESTSELLERS, ...FOOTWEAR_MOST_LOVED_PRODUCTS].find((x) => x.id === p.id)
+          if (fullProd) handleAddToCart(fullProd)
+        }}
+        onOpenProduct={(p) => {
+          const fullProd = [...FOOTWEAR_SNEAKERS_LOVE, ...FOOTWEAR_BESTSELLERS, ...FOOTWEAR_MOST_LOVED_PRODUCTS].find((x) => x.id === p.id)
+          if (fullProd) setQuickViewProduct(fullProd)
+        }}
+        accentColor={activeColor}
+        formatPrice={(p) => (typeof p === 'number' ? formatPrice(p) : String(p))}
+      />
+
+      {/* Account Modal */}
+      <StorefrontAccountModal
+        isOpen={isAccountOpen}
+        onClose={() => setIsAccountOpen(false)}
+        brandName="Footwear WorkDo"
+        accentColor={activeColor}
+      />
+
+      {/* Mobile Navigation Drawer */}
+      <StorefrontMobileNavDrawer
+        isOpen={isMobileNavOpen}
+        onClose={() => setIsMobileNavOpen(false)}
+        brandName="Footwear WorkDo"
+        navItems={navItems}
+        onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenAccount={() => setIsAccountOpen(true)}
+        onOpenCart={() => setIsCartOpen(true)}
+        wishlistCount={wishlist.length}
+        cartCount={totalCartCount}
+        contactPhone="610-403-403"
+        contactEmail="service@footwearworkdo.com"
+        accentColor={activeColor}
+      />
 
       {/* Toast Notification */}
       {toastMessage && <div className="fwd-toast">{toastMessage}</div>}

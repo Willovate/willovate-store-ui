@@ -12,12 +12,27 @@ import {
   SMETIC_PROMO_CARDS,
   SMETIC_WIDE_BANNER,
 } from './data/smeticData'
+import {
+  StorefrontSearchModal,
+  StorefrontWishlistDrawer,
+  StorefrontAccountModal,
+  StorefrontMobileNavDrawer,
+  type MobileNavItem,
+} from '../../common/StorefrontModals'
 import './styles/smetic.css'
 
 export function SmeticStorefront({
   template: _template,
+  device = 'desktop',
+  deviceView,
+  customAccentColor,
   onColorChange: _onColorChange,
+  onUseTemplate: _onUseTemplate,
+  onClose: _onClose,
+  onBack: _onBack,
 }: SmeticStorefrontProps) {
+  const effectiveDevice = (deviceView as string) || device || 'desktop'
+
   // Slider & Tabs
   const [activeSlide, setActiveSlide] = useState(0)
   const [activeTab, setActiveTab] = useState<'all' | 'new-arrivals' | 'best-sellers' | 'top-rates'>('new-arrivals')
@@ -26,7 +41,9 @@ export function SmeticStorefront({
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [quickViewProduct, setQuickViewProduct] = useState<SmeticProduct | null>(null)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false)
+  const [isAccountOpen, setIsAccountOpen] = useState(false)
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
   const [wishlist, setWishlist] = useState<string[]>([])
 
   // Cart
@@ -34,6 +51,45 @@ export function SmeticStorefront({
     { product: SMETIC_PRODUCTS[0], quantity: 1 },
     { product: SMETIC_PRODUCTS[2], quantity: 2 },
   ])
+
+  const navItems: MobileNavItem[] = [
+    {
+      label: 'HOME',
+      children: [
+        { label: 'Hero Collection', onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
+        { label: 'Category Promos', onClick: () => { const el = document.getElementById('smetic-promos'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'SHOP',
+      children: [
+        { label: 'All Products', onClick: () => { setActiveTab('all'); const el = document.getElementById('smetic-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'New Arrivals', onClick: () => { setActiveTab('new-arrivals'); const el = document.getElementById('smetic-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Best Sellers', onClick: () => { setActiveTab('best-sellers'); const el = document.getElementById('smetic-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Top Rates', onClick: () => { setActiveTab('top-rates'); const el = document.getElementById('smetic-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'FEATURED',
+      children: [
+        { label: 'Eco Lipsticks', onClick: () => { const el = document.getElementById('smetic-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Organic Foundation', onClick: () => { const el = document.getElementById('smetic-catalog'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'BLOGS',
+      children: [
+        { label: 'Organic Beauty Journal', onClick: () => { const el = document.getElementById('smetic-blog-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'PAGE',
+      children: [
+        { label: 'About Smetic', onClick: () => alert('Smetic: 100% Organic & Chemical-Free') },
+        { label: 'Contact Us', onClick: () => alert('Contact: support@smeticorganic.com') },
+      ],
+    },
+  ]
 
   // Filtered Products
   const filteredProducts = useMemo(() => {
@@ -87,11 +143,29 @@ export function SmeticStorefront({
   const currentSlide = SMETIC_HERO_SLIDES[activeSlide]
 
   return (
-    <div className="smetic-storefront">
+    <div
+      className={`smetic-storefront device-${effectiveDevice}`}
+      style={
+        customAccentColor
+          ? ({ '--smetic-coral': customAccentColor } as React.CSSProperties)
+          : undefined
+      }
+    >
       {/* 1. Header */}
       <header className="smetic-header">
         <div className="smetic-container">
           <div className="smetic-header-inner">
+            {/* Mobile Hamburger Button */}
+            <button
+              type="button"
+              className="smetic-hamburger-btn"
+              onClick={() => setIsMobileNavOpen(true)}
+              title="Menu"
+              aria-label="Open mobile menu"
+            >
+              ☰
+            </button>
+
             {/* Logo */}
             <a href="#smetic" style={{ display: 'flex', alignItems: 'center' }}>
               <img src={SMETIC_LOGO} alt="Smetic Organic Cosmetic" className="smetic-logo-img" />
@@ -100,16 +174,38 @@ export function SmeticStorefront({
             {/* Navigation */}
             <nav>
               <ul className="smetic-nav-menu">
-                <li><a href="#home" className="smetic-nav-link active">HOME</a></li>
-                <li className="smetic-nav-item">
-                  <a href="#shop" className="smetic-nav-link">
-                    <span className="smetic-badge-hot">HOT</span>
-                    SHOP
-                  </a>
-                </li>
-                <li><a href="#featured" className="smetic-nav-link">FEATURED</a></li>
-                <li><a href="#blogs" className="smetic-nav-link">BLOGS</a></li>
-                <li><a href="#page" className="smetic-nav-link">PAGE</a></li>
+                {navItems.map((item) => (
+                  <li key={item.label} className="wv-nav-dropdown-wrap">
+                    <span
+                      className="smetic-nav-link"
+                      onClick={() => {
+                        if (item.children && item.children.length > 0) {
+                          item.children[0].onClick?.()
+                        } else {
+                          item.onClick?.()
+                        }
+                      }}
+                    >
+                      {item.label} {item.children ? '▾' : ''}
+                    </span>
+                    {item.children && (
+                      <div className="wv-desktop-dropdown">
+                        {item.children.map((sub) => (
+                          <div
+                            key={sub.label}
+                            className="wv-desktop-dropdown-item"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              sub.onClick?.()
+                            }}
+                          >
+                            {sub.label}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </li>
+                ))}
               </ul>
             </nav>
 
@@ -128,7 +224,7 @@ export function SmeticStorefront({
 
               <button
                 className="smetic-icon-btn"
-                onClick={() => alert('Account login/signup')}
+                onClick={() => setIsAccountOpen(true)}
                 title="Account"
               >
                 <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -139,8 +235,9 @@ export function SmeticStorefront({
 
               <button
                 className="smetic-icon-btn"
-                onClick={() => alert(`Saved items in wishlist: ${wishlist.length}`)}
+                onClick={() => setIsWishlistOpen(true)}
                 title="Wishlist"
+                style={{ position: 'relative' }}
               >
                 <svg
                   width="20"
@@ -152,6 +249,7 @@ export function SmeticStorefront({
                 >
                   <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                 </svg>
+                {wishlist.length > 0 && <span className="smetic-cart-badge">{wishlist.length}</span>}
               </button>
 
               <button
@@ -244,28 +342,16 @@ export function SmeticStorefront({
                     <span className="smetic-badge-corner">{prod.discountBadge}</span>
                   )}
                   <button
-                    style={{
-                      position: 'absolute',
-                      top: '10px',
-                      left: '10px',
-                      background: '#ffffff',
-                      border: '1px solid #eee',
-                      color: wishlist.includes(prod.id) ? '#f99191' : '#999',
-                      width: '28px',
-                      height: '28px',
-                      borderRadius: '50%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer',
-                    }}
+                    type="button"
+                    className={`wv-card-wish-btn ${wishlist.includes(prod.id) ? 'active' : ''}`}
                     onClick={(e) => {
                       e.stopPropagation()
                       toggleWishlist(prod.id)
                     }}
-                    title="Wishlist"
+                    title={wishlist.includes(prod.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                    aria-label="Toggle Wishlist"
                   >
-                    ♥
+                    {wishlist.includes(prod.id) ? '❤️' : '🤍'}
                   </button>
                 </div>
 
@@ -365,6 +451,18 @@ export function SmeticStorefront({
                   {prod.discountBadge && (
                     <span className="smetic-badge-corner">{prod.discountBadge}</span>
                   )}
+                  <button
+                    type="button"
+                    className={`wv-card-wish-btn ${wishlist.includes(prod.id) ? 'active' : ''}`}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      toggleWishlist(prod.id)
+                    }}
+                    title={wishlist.includes(prod.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                    aria-label="Toggle Wishlist"
+                  >
+                    {wishlist.includes(prod.id) ? '❤️' : '🤍'}
+                  </button>
                 </div>
 
                 <div className="smetic-card-body">
@@ -704,47 +802,75 @@ export function SmeticStorefront({
       )}
 
       {/* Search Modal */}
-      {isSearchOpen && (
-        <div className="smetic-drawer-overlay" onClick={() => setIsSearchOpen(false)}>
-          <div
-            style={{
-              backgroundColor: '#ffffff',
-              borderRadius: '8px',
-              maxWidth: '550px',
-              width: '100%',
-              margin: 'auto',
-              padding: '24px',
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-              <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 700 }}>Start typing and hit Enter</h3>
-              <button
-                style={{ background: 'none', border: 'none', fontSize: '18px', cursor: 'pointer' }}
-                onClick={() => setIsSearchOpen(false)}
-              >
-                ✕
-              </button>
-            </div>
-            <input
-              type="text"
-              autoFocus
-              placeholder="Search products..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              style={{
-                width: '100%',
-                padding: '12px 14px',
-                border: '1px solid #ddd',
-                borderRadius: '4px',
-                fontSize: '14px',
-                outline: 'none',
-                boxSizing: 'border-box',
-              }}
-            />
-          </div>
-        </div>
-      )}
+      <StorefrontSearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        products={SMETIC_PRODUCTS.map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onSelectProduct={(p) => {
+          const fullProd = SMETIC_PRODUCTS.find((x) => x.id === p.id)
+          if (fullProd) setQuickViewProduct(fullProd)
+        }}
+        accentColor={customAccentColor || '#f99191'}
+        placeholder="Search natural face oils, powders, lipsticks..."
+        popularTags={['New Arrivals', 'Best Sellers', 'Top Rates']}
+      />
+
+      {/* Wishlist Drawer */}
+      <StorefrontWishlistDrawer
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
+        wishlistIds={wishlist}
+        allProducts={SMETIC_PRODUCTS.map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onRemoveWishlist={toggleWishlist}
+        onAddToCart={(p) => {
+          const fullProd = SMETIC_PRODUCTS.find((x) => x.id === p.id)
+          if (fullProd) handleAddToCart(fullProd)
+        }}
+        onOpenProduct={(p) => {
+          const fullProd = SMETIC_PRODUCTS.find((x) => x.id === p.id)
+          if (fullProd) setQuickViewProduct(fullProd)
+        }}
+        accentColor={customAccentColor || '#f99191'}
+      />
+
+      {/* Account Modal */}
+      <StorefrontAccountModal
+        isOpen={isAccountOpen}
+        onClose={() => setIsAccountOpen(false)}
+        brandName="Smetic"
+        accentColor={customAccentColor || '#f99191'}
+      />
+
+      {/* Mobile Navigation Drawer */}
+      <StorefrontMobileNavDrawer
+        isOpen={isMobileNavOpen}
+        onClose={() => setIsMobileNavOpen(false)}
+        brandName="Smetic"
+        navItems={navItems}
+        onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenAccount={() => setIsAccountOpen(true)}
+        onOpenCart={() => setIsCartOpen(true)}
+        wishlistCount={wishlist.length}
+        cartCount={totalCartCount}
+        contactPhone="+1 800 555-SMETIC"
+        contactEmail="support@smeticorganic.com"
+        accentColor={customAccentColor || '#f99191'}
+      />
     </div>
   )
 }

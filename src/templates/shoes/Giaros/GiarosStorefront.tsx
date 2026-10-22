@@ -10,6 +10,13 @@ import {
   GIAROS_NEW_ARRIVALS,
   GIAROS_BEST_SELLERS,
 } from './data/giarosData'
+import {
+  StorefrontSearchModal,
+  StorefrontWishlistDrawer,
+  StorefrontAccountModal,
+  StorefrontMobileNavDrawer,
+  type MobileNavItem,
+} from '../../common/StorefrontModals'
 import './styles/giaros.css'
 
 export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
@@ -31,6 +38,10 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
   const [quickViewProduct, setQuickViewProduct] = useState<GiarosProduct | null>(null)
   const [selectedSize, setSelectedSize] = useState<number>(7)
   const [wishlist, setWishlist] = useState<string[]>([])
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false)
+  const [isAccountOpen, setIsAccountOpen] = useState(false)
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
   const [cartItems, setCartItems] = useState<GiarosCartItem[]>([
     {
       product: GIAROS_NEW_ARRIVALS[0],
@@ -44,6 +55,18 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
   const showToast = (msg: string) => {
     setToastMessage(msg)
     setTimeout(() => setToastMessage(null), 3000)
+  }
+
+  const toggleWishlist = (productId: string) => {
+    setWishlist((prev) => {
+      const exists = prev.includes(productId)
+      if (exists) {
+        showToast('Removed from Wishlist')
+        return prev.filter((id) => id !== productId)
+      }
+      showToast('Added to Wishlist ❤️')
+      return [...prev, productId]
+    })
   }
 
   const handleAddToCart = (product: GiarosProduct, size = 7) => {
@@ -62,18 +85,6 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
     })
     showToast(`Added "${product.name}" (Size ${size}) to shopping bag!`)
     setIsCartOpen(true)
-  }
-
-  const toggleWishlist = (productId: string) => {
-    setWishlist((prev) => {
-      const exists = prev.includes(productId)
-      if (exists) {
-        showToast('Removed from Wishlist')
-        return prev.filter((id) => id !== productId)
-      }
-      showToast('Saved to Wishlist ❤️')
-      return [...prev, productId]
-    })
   }
 
   const updateQuantity = (productId: string, size: number, delta: number) => {
@@ -100,6 +111,46 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
     (p) => p.category === activeTab
   )
 
+  const navItems: MobileNavItem[] = [
+    {
+      label: 'Home',
+      children: [
+        { label: 'Home Default', onClick: () => setCurrentSlideIndex(0) },
+        { label: 'Couture Editorial', onClick: () => { const el = document.getElementById('gia-arrivals-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Shop',
+      children: [
+        { label: 'Women Heels', onClick: () => { setActiveTab('Women Heels'); const el = document.getElementById('gia-bestseller-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Boots Shoes', onClick: () => { setActiveTab('Boots Shoes'); const el = document.getElementById('gia-bestseller-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Flats & Sandals', onClick: () => { setActiveTab('Flats'); const el = document.getElementById('gia-bestseller-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Featured',
+      children: [
+        { label: 'New Arrivals', onClick: () => { const el = document.getElementById('gia-arrivals-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Best Sellers', onClick: () => { const el = document.getElementById('gia-bestseller-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Pages',
+      children: [
+        { label: 'About Giaros Atelier', onClick: () => showToast('Giaros: Handcrafted luxury footwear since 1994.') },
+        { label: 'Size & Fit Guide', onClick: () => showToast('Size Guide: Standard European sizing, true to fit.') },
+        { label: 'Customer Care', onClick: () => showToast('Customer Care: concierge@giaros.com') },
+      ],
+    },
+    {
+      label: 'Blogs',
+      children: [
+        { label: 'The Autumn Heel Guide', onClick: () => showToast('Opening: The Autumn Heel Styling Guide') },
+        { label: 'Italian Leather Craft', onClick: () => showToast('Opening: Heritage of Italian Tuscan Leather') },
+      ],
+    },
+  ]
+
   const activeSlide = GIAROS_HERO_SLIDES[currentSlideIndex]
 
   return (
@@ -110,6 +161,17 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
       {/* Header */}
       <header className="gia-header">
         <div className="gia-header-inner">
+          {/* Mobile Hamburger Button */}
+          <button
+            type="button"
+            className="gia-hamburger-btn"
+            onClick={() => setIsMobileNavOpen(true)}
+            title="Menu"
+            aria-label="Open mobile menu"
+          >
+            ☰
+          </button>
+
           <div className="gia-logo-wrap" onClick={() => setCurrentSlideIndex(0)}>
             <div className="gia-logo">
               <span className="gia-logo-crescent">G</span>IAROS
@@ -118,40 +180,44 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
           </div>
 
           <nav className="gia-nav">
-            <span className="gia-nav-link" onClick={() => setCurrentSlideIndex(0)}>
-              Home
-            </span>
-            <span
-              className="gia-nav-link"
-              onClick={() => {
-                const el = document.getElementById('gia-bestseller-section')
-                el?.scrollIntoView({ behavior: 'smooth' })
-              }}
-            >
-              Shop
-            </span>
-            <span
-              className="gia-nav-link"
-              onClick={() => {
-                const el = document.getElementById('gia-arrivals-section')
-                el?.scrollIntoView({ behavior: 'smooth' })
-              }}
-            >
-              Featured
-            </span>
-            <span className="gia-nav-link" onClick={() => showToast('Opening Lookbook Pages...')}>
-              Pages
-            </span>
-            <span className="gia-nav-link" onClick={() => showToast('Opening Footwear Editorial...')}>
-              Blogs
-            </span>
+            {navItems.map((item) => (
+              <div key={item.label} className="wv-nav-dropdown-wrap">
+                <span
+                  className="gia-nav-link"
+                  onClick={() => {
+                    if (item.children && item.children.length > 0) {
+                      item.children[0].onClick?.()
+                    }
+                  }}
+                >
+                  {item.label} ▾
+                </span>
+                {item.children && item.children.length > 0 && (
+                  <div className="wv-desktop-dropdown">
+                    {item.children.map((sub) => (
+                      <button
+                        key={sub.label}
+                        type="button"
+                        className="wv-dropdown-item"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          sub.onClick?.()
+                        }}
+                      >
+                        {sub.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
           </nav>
 
           <div className="gia-actions">
             <button
               type="button"
               className="gia-icon-btn"
-              onClick={() => showToast('Search catalog...')}
+              onClick={() => setIsSearchOpen(true)}
               title="Search"
             >
               🔍
@@ -159,7 +225,7 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
             <button
               type="button"
               className="gia-icon-btn"
-              onClick={() => showToast('Open account portal...')}
+              onClick={() => setIsAccountOpen(true)}
               title="Account"
             >
               👤
@@ -167,10 +233,10 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
             <button
               type="button"
               className="gia-icon-btn"
-              onClick={() => showToast(`Wishlist (${wishlist.length} saved items)`)}
+              onClick={() => setIsWishlistOpen(true)}
               title="Wishlist"
             >
-              🤍
+              {wishlist.length > 0 ? '❤️' : '🤍'}
               {wishlist.length > 0 && (
                 <span className="gia-badge-count">{wishlist.length}</span>
               )}
@@ -256,11 +322,24 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
             <div
               key={prod.id}
               className="gia-arrival-card"
+              style={{ position: 'relative' }}
               onClick={() => {
                 setQuickViewProduct(prod)
                 setSelectedSize(prod.availableSizes[0] || 7)
               }}
             >
+              <button
+                type="button"
+                className={`wv-card-wish-btn ${wishlist.includes(prod.id) ? 'active' : ''}`}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleWishlist(prod.id)
+                }}
+                title={wishlist.includes(prod.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                aria-label="Toggle Wishlist"
+              >
+                {wishlist.includes(prod.id) ? '❤️' : '🤍'}
+              </button>
               <img src={prod.image} alt={prod.name} className="gia-arrival-img" />
               <div className="gia-arrival-name">{prod.name}</div>
               <div className="gia-arrival-price">${prod.price.toFixed(2)}</div>
@@ -308,11 +387,24 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
               <div
                 key={prod.id}
                 className="gia-product-card"
+                style={{ position: 'relative' }}
                 onClick={() => {
                   setQuickViewProduct(prod)
                   setSelectedSize(prod.availableSizes[0] || 7)
                 }}
               >
+                <button
+                  type="button"
+                  className={`wv-card-wish-btn ${wishlist.includes(prod.id) ? 'active' : ''}`}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    toggleWishlist(prod.id)
+                  }}
+                  title={wishlist.includes(prod.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                  aria-label="Toggle Wishlist"
+                >
+                  {wishlist.includes(prod.id) ? '❤️' : '🤍'}
+                </button>
                 <div className="gia-prod-img-wrap">
                   {prod.badge && <span className="gia-corner-ribbon">{prod.badge}</span>}
                   <img src={prod.image} alt={prod.name} className="gia-prod-img" />
@@ -715,6 +807,83 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
           </div>
         </div>
       )}
+
+      {/* Search Modal */}
+      <StorefrontSearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        products={[...GIAROS_NEW_ARRIVALS, ...GIAROS_BEST_SELLERS].map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onSelectProduct={(p) => {
+          const fullProd = [...GIAROS_NEW_ARRIVALS, ...GIAROS_BEST_SELLERS].find((x) => x.id === p.id)
+          if (fullProd) {
+            setQuickViewProduct(fullProd)
+            setSelectedSize(fullProd.availableSizes[0] || 7)
+          }
+        }}
+        accentColor={customAccentColor || '#111827'}
+        placeholder="Search luxury heels, boots, flats..."
+        popularTags={['Heels', 'Boots', 'Flats', 'Sandals']}
+      />
+
+      {/* Wishlist Drawer */}
+      <StorefrontWishlistDrawer
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
+        wishlistIds={wishlist}
+        allProducts={[...GIAROS_NEW_ARRIVALS, ...GIAROS_BEST_SELLERS].map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onRemoveWishlist={toggleWishlist}
+        onAddToCart={(p) => {
+          const fullProd = [...GIAROS_NEW_ARRIVALS, ...GIAROS_BEST_SELLERS].find((x) => x.id === p.id)
+          if (fullProd) handleAddToCart(fullProd, 7)
+        }}
+        onOpenProduct={(p) => {
+          const fullProd = [...GIAROS_NEW_ARRIVALS, ...GIAROS_BEST_SELLERS].find((x) => x.id === p.id)
+          if (fullProd) {
+            setQuickViewProduct(fullProd)
+            setSelectedSize(fullProd.availableSizes[0] || 7)
+          }
+        }}
+        accentColor={customAccentColor || '#111827'}
+      />
+
+      {/* Account Modal */}
+      <StorefrontAccountModal
+        isOpen={isAccountOpen}
+        onClose={() => setIsAccountOpen(false)}
+        brandName="Giaros"
+        accentColor={customAccentColor || '#111827'}
+      />
+
+      {/* Mobile Navigation Drawer */}
+      <StorefrontMobileNavDrawer
+        isOpen={isMobileNavOpen}
+        onClose={() => setIsMobileNavOpen(false)}
+        brandName="Giaros"
+        navItems={navItems}
+        onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenAccount={() => setIsAccountOpen(true)}
+        onOpenCart={() => setIsCartOpen(true)}
+        wishlistCount={wishlist.length}
+        cartCount={cartItemCount}
+        contactPhone="+1 (800) 555-GIAROS"
+        contactEmail="concierge@giaros.com"
+        accentColor={customAccentColor || '#111827'}
+      />
 
       {/* Floating Toast Notification */}
       {toastMessage && (

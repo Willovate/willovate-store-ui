@@ -13,6 +13,13 @@ import {
   GLOWING_PRESS_QUOTES,
   GLOWING_VALUE_PROPS,
 } from './data/glowingData'
+import {
+  StorefrontSearchModal,
+  StorefrontWishlistDrawer,
+  StorefrontAccountModal,
+  StorefrontMobileNavDrawer,
+  type MobileNavItem,
+} from '../../common/StorefrontModals'
 import './styles/glowing.css'
 
 export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
@@ -37,10 +44,52 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
     },
   ])
   const [isCartOpen, setIsCartOpen] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false)
+  const [isAccountOpen, setIsAccountOpen] = useState(false)
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
   const [quickViewProduct, setQuickViewProduct] = useState<GlowingProduct | null>(null)
   const [wishlist, setWishlist] = useState<string[]>([])
   const [toastMessage, setToastMessage] = useState<string | null>(null)
   const [newsletterEmail, setNewsletterEmail] = useState('')
+
+  const navItems: MobileNavItem[] = [
+    {
+      label: 'Home',
+      children: [
+        { label: 'Clean Philosophy', onClick: () => { const el = document.getElementById('glowing-press-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Hero Collection', onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
+      ],
+    },
+    {
+      label: 'Shop',
+      children: [
+        { label: 'All Products', onClick: () => { setActiveTab('All Products'); const el = document.getElementById('glowing-featured-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Best Sellers', onClick: () => { setActiveTab('Best Seller'); const el = document.getElementById('glowing-featured-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'New Arrivals', onClick: () => { setActiveTab('New Arrival'); const el = document.getElementById('glowing-featured-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'On Sale', onClick: () => { setActiveTab('On Sale'); const el = document.getElementById('glowing-featured-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Pages',
+      children: [
+        { label: 'Our Story & Philosophy', onClick: () => showToast('Glowing: Botanical Clean Beauty.') },
+        { label: 'Customer Care & Shipping', onClick: () => showToast('Help Desk: +1 800 456-GLOW') },
+      ],
+    },
+    {
+      label: 'Blog',
+      children: [
+        { label: 'Wellness & Skin Journal', onClick: () => showToast('Opening Glowing Wellness Journal') },
+      ],
+    },
+    {
+      label: 'Docs',
+      children: [
+        { label: 'Botanical Ingredients Index', onClick: () => showToast('Clean Ingredients Guide: 100% Vegan & Cruelty-Free') },
+      ],
+    },
+  ]
 
   const showToast = (msg: string) => {
     setToastMessage(msg)
@@ -133,12 +182,50 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
       {/* Main Header */}
       <header className="glowing-header">
         <div className="glowing-container glowing-header-inner">
+          {/* Mobile Hamburger Button */}
+          <button
+            type="button"
+            className="glowing-hamburger-btn"
+            onClick={() => setIsMobileNavOpen(true)}
+            title="Menu"
+            aria-label="Open mobile menu"
+          >
+            ☰
+          </button>
+
           <nav className="glowing-nav-left">
-            <a href="#home" className="glowing-nav-link active">Home</a>
-            <a href="#shop" className="glowing-nav-link" onClick={(e) => { e.preventDefault(); showToast('Browsing Clean Skincare Shop') }}>Shop</a>
-            <a href="#pages" className="glowing-nav-link" onClick={(e) => { e.preventDefault(); showToast('Our Story & Philosophy') }}>Pages</a>
-            <a href="#blog" className="glowing-nav-link" onClick={(e) => { e.preventDefault(); showToast('Wellness & Skin Journal') }}>Blog</a>
-            <a href="#docs" className="glowing-nav-link" onClick={(e) => { e.preventDefault(); showToast('Botanical Ingredients Index') }}>Docs</a>
+            {navItems.map((item) => (
+              <div key={item.label} className="wv-nav-dropdown-wrap">
+                <span
+                  className="glowing-nav-link"
+                  onClick={() => {
+                    if (item.children && item.children.length > 0) {
+                      item.children[0].onClick?.()
+                    } else {
+                      item.onClick?.()
+                    }
+                  }}
+                >
+                  {item.label} {item.children ? '▾' : ''}
+                </span>
+                {item.children && (
+                  <div className="wv-desktop-dropdown">
+                    {item.children.map((sub) => (
+                      <div
+                        key={sub.label}
+                        className="wv-desktop-dropdown-item"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          sub.onClick?.()
+                        }}
+                      >
+                        {sub.label}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
           </nav>
 
           <div className="glowing-logo-center">
@@ -148,19 +235,19 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
           </div>
 
           <div className="glowing-actions-right">
-            <button className="glowing-action-btn" title="Search" onClick={() => showToast('Search organic skincare...')}>
+            <button className="glowing-action-btn" title="Search" onClick={() => setIsSearchOpen(true)}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="11" cy="11" r="8" />
                 <line x1="21" y1="21" x2="16.65" y2="16.65" />
               </svg>
             </button>
-            <button className="glowing-action-btn" title="Account" onClick={() => showToast('Sign In / Register')}>
+            <button className="glowing-action-btn" title="Account" onClick={() => setIsAccountOpen(true)}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
               </svg>
             </button>
-            <button className="glowing-action-btn" title="Favorites" onClick={() => showToast(`Favorites: ${wishlist.length} item(s)`)}>
+            <button className="glowing-action-btn" title="Favorites" onClick={() => setIsWishlistOpen(true)}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill={wishlist.length > 0 ? '#193833' : 'none'} stroke="currentColor" strokeWidth="2">
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
               </svg>
@@ -233,7 +320,19 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
             {filteredFeaturedProducts.map((prod) => {
               const isWish = wishlist.includes(prod.id)
               return (
-                <div key={prod.id} className="glowing-product-card">
+                <div key={prod.id} className="glowing-product-card" style={{ position: 'relative' }}>
+                  <button
+                    type="button"
+                    className={`wv-card-wish-btn ${isWish ? 'active' : ''}`}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      toggleWishlist(prod.id)
+                    }}
+                    title={isWish ? 'Remove from Favorites' : 'Add to Favorites'}
+                    aria-label="Toggle Favorites"
+                  >
+                    {isWish ? '❤️' : '🤍'}
+                  </button>
                   <div className="glowing-card-media">
                     <img src={prod.image} alt={prod.name} />
                     {prod.badge && <span className="glowing-badge-pill">{prod.badge}</span>}
@@ -601,6 +700,77 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
           </div>
         </div>
       )}
+
+      {/* Search Modal */}
+      <StorefrontSearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        products={[...GLOWING_FEATURED_PRODUCTS, ...GLOWING_FAVORITE_PRODUCTS].map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onSelectProduct={(p) => {
+          const fullProd = [...GLOWING_FEATURED_PRODUCTS, ...GLOWING_FAVORITE_PRODUCTS].find((x) => x.id === p.id)
+          if (fullProd) setQuickViewProduct(fullProd)
+        }}
+        accentColor={customAccentColor || '#193833'}
+        placeholder="Search botanical serums, oils, moisturizers..."
+        popularTags={['Serum', 'Face Oil', 'Moisturizer', 'Cleanser']}
+      />
+
+      {/* Wishlist Drawer */}
+      <StorefrontWishlistDrawer
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
+        wishlistIds={wishlist}
+        allProducts={[...GLOWING_FEATURED_PRODUCTS, ...GLOWING_FAVORITE_PRODUCTS].map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onRemoveWishlist={toggleWishlist}
+        onAddToCart={(p) => {
+          const fullProd = [...GLOWING_FEATURED_PRODUCTS, ...GLOWING_FAVORITE_PRODUCTS].find((x) => x.id === p.id)
+          if (fullProd) handleAddToCart(fullProd)
+        }}
+        onOpenProduct={(p) => {
+          const fullProd = [...GLOWING_FEATURED_PRODUCTS, ...GLOWING_FAVORITE_PRODUCTS].find((x) => x.id === p.id)
+          if (fullProd) setQuickViewProduct(fullProd)
+        }}
+        accentColor={customAccentColor || '#193833'}
+      />
+
+      {/* Account Modal */}
+      <StorefrontAccountModal
+        isOpen={isAccountOpen}
+        onClose={() => setIsAccountOpen(false)}
+        brandName="Glowing"
+        accentColor={customAccentColor || '#193833'}
+      />
+
+      {/* Mobile Navigation Drawer */}
+      <StorefrontMobileNavDrawer
+        isOpen={isMobileNavOpen}
+        onClose={() => setIsMobileNavOpen(false)}
+        brandName="Glowing"
+        navItems={navItems}
+        onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenAccount={() => setIsAccountOpen(true)}
+        onOpenCart={() => setIsCartOpen(true)}
+        wishlistCount={wishlist.length}
+        cartCount={cartCount}
+        contactPhone="+1 800 456-GLOW"
+        contactEmail="care@glowingclean.com"
+        accentColor={customAccentColor || '#193833'}
+      />
 
       {/* Toast Notification */}
       {toastMessage && <div className="glowing-toast">{toastMessage}</div>}

@@ -13,6 +13,13 @@ import {
   SHOEZONE_PROMO_COUNTDOWN,
   SHOEZONE_VALUE_PROPS,
 } from './data/shoeZoneData'
+import {
+  StorefrontSearchModal,
+  StorefrontWishlistDrawer,
+  StorefrontAccountModal,
+  StorefrontMobileNavDrawer,
+  type MobileNavItem,
+} from '../../common/StorefrontModals'
 import './styles/shoeZone.css'
 
 export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
@@ -38,6 +45,10 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
     },
   ])
   const [isCartOpen, setIsCartOpen] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false)
+  const [isAccountOpen, setIsAccountOpen] = useState(false)
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
   const [quickViewProduct, setQuickViewProduct] = useState<ShoeZoneProduct | null>(null)
   const [selectedSize, setSelectedSize] = useState<number>(9)
   const [wishlist, setWishlist] = useState<string[]>([])
@@ -126,6 +137,40 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
       ? SHOEZONE_BEST_SELLERS.filter((p) => p.gender === 'Women')
       : SHOEZONE_BEST_SELLERS.filter((p) => p.category === activeTab)
 
+  const navItems: MobileNavItem[] = [
+    {
+      label: 'Home',
+      children: [
+        { label: 'Home Default', onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
+        { label: 'Cosmos Special Edition', onClick: () => { const el = document.getElementById('sz-cosmos-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Collection',
+      children: [
+        { label: 'Men Shoes', onClick: () => { setActiveTab('Men'); const el = document.getElementById('sz-bestsellers-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Women Shoes', onClick: () => { setActiveTab('Women'); const el = document.getElementById('sz-bestsellers-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Sneakers & Casuals', onClick: () => { setActiveTab('Sneakers'); const el = document.getElementById('sz-bestsellers-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Boots & Climbing', onClick: () => { setActiveTab('Boots'); const el = document.getElementById('sz-bestsellers-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Shoes',
+      children: [
+        { label: 'New Arrivals', onClick: () => { const el = document.getElementById('sz-arrivals-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+        { label: 'Trending Running Shoes', onClick: () => { const el = document.getElementById('sz-bestsellers-section'); el?.scrollIntoView({ behavior: 'smooth' }) } },
+      ],
+    },
+    {
+      label: 'Pages',
+      children: [
+        { label: 'Store Locator', onClick: () => showToast('ShoeZone Store Locator: 450+ retail locations') },
+        { label: 'Track Order', onClick: () => showToast('Track Your ShoeZone Order') },
+        { label: 'Customer Support', onClick: () => showToast('Support: info@somedomain.com') },
+      ],
+    },
+  ]
+
   const activeSlide = SHOEZONE_HERO_SLIDES[currentSlideIndex]
 
   return (
@@ -163,6 +208,17 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
 
       {/* 2. MAIN HEADER */}
       <header className="sz-header">
+        {/* Mobile Hamburger Button */}
+        <button
+          type="button"
+          className="sz-hamburger-btn"
+          onClick={() => setIsMobileNavOpen(true)}
+          title="Menu"
+          aria-label="Open mobile menu"
+        >
+          ☰
+        </button>
+
         <a href="#home" className="sz-logo-wrap">
           <div className="sz-logo-svg">
             <svg width="40" height="32" viewBox="0 0 100 80" fill="none">
@@ -186,26 +242,71 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
         </a>
 
         <nav className="sz-nav">
-          <a href="#home" className="sz-nav-link active">Home</a>
-          <a href="#collection" className="sz-nav-link">collection ▾</a>
-          <a href="#shoes" className="sz-nav-link">Shoes</a>
-          <a href="#boots" className="sz-nav-link">Boots</a>
-          <a href="#climbing" className="sz-nav-link">Climbing</a>
-          <a href="#pages" className="sz-nav-link">Pages ▾</a>
+          {navItems.map((item) => (
+            <div key={item.label} className="wv-nav-dropdown-wrap">
+              <span
+                className="sz-nav-link"
+                onClick={() => {
+                  if (item.children && item.children.length > 0) {
+                    item.children[0].onClick?.()
+                  }
+                }}
+              >
+                {item.label} ▾
+              </span>
+              {item.children && item.children.length > 0 && (
+                <div className="wv-desktop-dropdown">
+                  {item.children.map((sub) => (
+                    <button
+                      key={sub.label}
+                      type="button"
+                      className="wv-dropdown-item"
+                      onClick={(e) => {
+                        e.preventDefault()
+                        sub.onClick?.()
+                      }}
+                    >
+                      {sub.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
         </nav>
 
         <div className="sz-header-actions">
-          <button type="button" className="sz-action-btn" aria-label="Search">
+          <button
+            type="button"
+            className="sz-action-btn"
+            aria-label="Search"
+            onClick={() => setIsSearchOpen(true)}
+          >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
               <circle cx="11" cy="11" r="8" />
               <line x1="21" y1="21" x2="16.65" y2="16.65" />
             </svg>
           </button>
-          <button type="button" className="sz-action-btn" aria-label="User Account">
+          <button
+            type="button"
+            className="sz-action-btn"
+            aria-label="User Account"
+            onClick={() => setIsAccountOpen(true)}
+          >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
               <circle cx="12" cy="7" r="4" />
             </svg>
+          </button>
+          <button
+            type="button"
+            className="sz-action-btn"
+            aria-label="Wishlist"
+            onClick={() => setIsWishlistOpen(true)}
+            style={{ position: 'relative' }}
+          >
+            <span style={{ fontSize: 18 }}>{wishlist.length > 0 ? '❤️' : '🤍'}</span>
+            {wishlist.length > 0 && <span className="sz-cart-badge">{wishlist.length}</span>}
           </button>
           <button
             type="button"
@@ -761,6 +862,83 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
           </div>
         </div>
       )}
+
+      {/* Search Modal */}
+      <StorefrontSearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        products={[...SHOEZONE_NEW_ARRIVALS, ...SHOEZONE_BEST_SELLERS].map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onSelectProduct={(p) => {
+          const fullProd = [...SHOEZONE_NEW_ARRIVALS, ...SHOEZONE_BEST_SELLERS].find((x) => x.id === p.id)
+          if (fullProd) {
+            setQuickViewProduct(fullProd)
+            setSelectedSize(fullProd.sizes?.[0] || 9)
+          }
+        }}
+        accentColor={customAccentColor || '#571f7c'}
+        placeholder="Search boots, running shoes, sneakers, climbing..."
+        popularTags={['Running Shoes', 'Boots', 'Sneakers', 'Climbing']}
+      />
+
+      {/* Wishlist Drawer */}
+      <StorefrontWishlistDrawer
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
+        wishlistIds={wishlist}
+        allProducts={[...SHOEZONE_NEW_ARRIVALS, ...SHOEZONE_BEST_SELLERS].map((p) => ({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          originalPrice: p.originalPrice,
+          image: p.image,
+          category: p.category,
+        }))}
+        onRemoveWishlist={toggleWishlist}
+        onAddToCart={(p) => {
+          const fullProd = [...SHOEZONE_NEW_ARRIVALS, ...SHOEZONE_BEST_SELLERS].find((x) => x.id === p.id)
+          if (fullProd) handleAddToCart(fullProd, 9)
+        }}
+        onOpenProduct={(p) => {
+          const fullProd = [...SHOEZONE_NEW_ARRIVALS, ...SHOEZONE_BEST_SELLERS].find((x) => x.id === p.id)
+          if (fullProd) {
+            setQuickViewProduct(fullProd)
+            setSelectedSize(fullProd.sizes?.[0] || 9)
+          }
+        }}
+        accentColor={customAccentColor || '#571f7c'}
+      />
+
+      {/* Account Modal */}
+      <StorefrontAccountModal
+        isOpen={isAccountOpen}
+        onClose={() => setIsAccountOpen(false)}
+        brandName="ShoeZone"
+        accentColor={customAccentColor || '#571f7c'}
+      />
+
+      {/* Mobile Navigation Drawer */}
+      <StorefrontMobileNavDrawer
+        isOpen={isMobileNavOpen}
+        onClose={() => setIsMobileNavOpen(false)}
+        brandName="ShoeZone"
+        navItems={navItems}
+        onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenAccount={() => setIsAccountOpen(true)}
+        onOpenCart={() => setIsCartOpen(true)}
+        wishlistCount={wishlist.length}
+        cartCount={cartCount}
+        contactPhone="9876543210"
+        contactEmail="info@somedomain.com"
+        accentColor={customAccentColor || '#571f7c'}
+      />
 
       {/* TOAST MESSAGE */}
       {toastMessage && <div className="sz-toast">{toastMessage}</div>}
