@@ -51,6 +51,12 @@ export function BelletnyStorefront({
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
   const [wishlist, setWishlist] = useState<string[]>([])
   const [currency, setCurrency] = useState<'USD' | 'INR'>('USD')
+  const [toastMessage, setToastMessage] = useState<string | null>(null)
+
+  const showToast = (msg: string) => {
+    setToastMessage(msg)
+    setTimeout(() => setToastMessage(null), 3000)
+  }
 
   const formatPrice = (usdAmount: number) => {
     if (currency === 'INR') {
@@ -133,7 +139,7 @@ export function BelletnyStorefront({
       }
       return [...prev, { product, quantity: 1 }]
     })
-    setIsCartOpen(true)
+    showToast(`Added "${product.name}" to cart!`)
   }
 
   const handleUpdateQuantity = (productId: string, delta: number) => {
@@ -913,6 +919,31 @@ export function BelletnyStorefront({
         contactEmail="service@belletny.com"
         accentColor={customAccentColor || '#8e2043'}
       />
+
+      {/* Floating Toast Notification */}
+      {toastMessage && (
+        <div
+          style={{
+            position: 'fixed',
+            bottom: 24,
+            right: 24,
+            backgroundColor: '#18181b',
+            color: '#ffffff',
+            padding: '12px 24px',
+            borderRadius: 9999,
+            fontSize: 13,
+            fontWeight: 700,
+            boxShadow: '0 8px 24px rgba(0,0,0,0.25)',
+            zIndex: 9999,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10,
+          }}
+        >
+          <span>✓</span>
+          <span>{toastMessage}</span>
+        </div>
+      )}
     </div>
   )
 }

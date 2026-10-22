@@ -147,7 +147,6 @@ export const ProGearStorefront: React.FC<ProGearStorefrontProps> = ({
       ]
     })
     showToast(`Added ${quantity}× ${product.name} to equipment cart!`)
-    setIsCartOpen(true)
   }
 
   const handleAddBundleToCart = (bundle: ProGearBundle) => {

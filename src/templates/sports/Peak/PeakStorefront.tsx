@@ -105,7 +105,6 @@ export const PeakStorefront: React.FC<PeakStorefrontProps> = ({
       return [...previousCart, { product, quantity: 1, selectedSize: size, selectedColor: color }]
     })
     setToastMessage(`${product.name} added to your expedition pack.`)
-    setIsCartOpen(true)
   }
 
   const handleUpdateQuantity = (index: number, quantity: number) => {

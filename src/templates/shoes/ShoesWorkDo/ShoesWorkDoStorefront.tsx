@@ -124,7 +124,6 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
       return [...prev, { product, quantity: 1, selectedSize: finalSize }]
     })
     showToast(`Added "${product.name}" (Size ${finalSize}) to your bag!`)
-    setIsCartOpen(true)
   }
 
   const updateQuantity = (productId: string, size: number, delta: number) => {
@@ -574,14 +573,37 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
                   </select>
                 </div>
 
-                <button
-                  type="button"
-                  className="swd-add-cart-btn"
-                  onClick={() => handleAddToCart(prod)}
-                >
-                  <span>Add to Cart</span>
-                  <span>›</span>
-                </button>
+                <div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
+                  <button
+                    type="button"
+                    className="swd-add-cart-btn"
+                    style={{ flex: 1, margin: 0 }}
+                    onClick={() => handleAddToCart(prod)}
+                  >
+                    <span>Add to Cart</span>
+                    <span>›</span>
+                  </button>
+                  <button
+                    type="button"
+                    title="View Details"
+                    onClick={() => setQuickViewProduct(prod)}
+                    style={{
+                      padding: '8px 14px',
+                      borderRadius: '8px',
+                      border: '1px solid #cbd5e1',
+                      backgroundColor: '#ffffff',
+                      color: '#0f172a',
+                      fontSize: '12px',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                    }}
+                  >
+                    👁️ View
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -589,7 +611,7 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
       </section>
 
       {/* Our Bestsellers (Light Blue Section) */}
-      <section className="swd-blue-section">
+      <section id="swd-bestsellers-section" className="swd-blue-section">
         <div className="swd-section-inner">
           <div className="swd-section-header">
             <h2 className="swd-section-title">Our Bestsellers</h2>
@@ -681,14 +703,37 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
                   </select>
                 </div>
 
-                <button
-                  type="button"
-                  className="swd-add-cart-btn"
-                  onClick={() => handleAddToCart(prod)}
-                >
-                  <span>Add to Cart</span>
-                  <span>›</span>
-                </button>
+                <div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
+                  <button
+                    type="button"
+                    className="swd-add-cart-btn"
+                    style={{ flex: 1, margin: 0 }}
+                    onClick={() => handleAddToCart(prod)}
+                  >
+                    <span>Add to Cart</span>
+                    <span>›</span>
+                  </button>
+                  <button
+                    type="button"
+                    title="View Details"
+                    onClick={() => setQuickViewProduct(prod)}
+                    style={{
+                      padding: '8px 14px',
+                      borderRadius: '8px',
+                      border: '1px solid #cbd5e1',
+                      backgroundColor: '#ffffff',
+                      color: '#0f172a',
+                      fontSize: '12px',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                    }}
+                  >
+                    👁️ View
+                  </button>
+                </div>
               </div>
             ))}
           </div>

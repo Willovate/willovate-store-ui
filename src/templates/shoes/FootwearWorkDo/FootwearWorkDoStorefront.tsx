@@ -106,7 +106,6 @@ export const FootwearWorkDoStorefront: React.FC<FootwearWorkDoStorefrontProps> =
       return [...prev, { product, quantity: 1, selectedSize: chosenSize }]
     })
     showToast(`Added ${product.name} (Size ${chosenSize}) to cart!`)
-    setIsCartOpen(true)
   }
 
   const handleUpdateQty = (index: number, delta: number) => {
@@ -460,7 +459,8 @@ export const FootwearWorkDoStorefront: React.FC<FootwearWorkDoStorefrontProps> =
       </div>
 
       {/* Section 4: Sneakers that you love */}
-      <section className="fwd-section" id="products">
+      <section className="fwd-section" id="fwd-sneakers-section">
+        <div id="products"></div>
         <div className="fwd-section-header">
           <h2 className="fwd-section-title">Sneakers that you love</h2>
           <button
@@ -516,12 +516,35 @@ export const FootwearWorkDoStorefront: React.FC<FootwearWorkDoStorefrontProps> =
                 <div className="fwd-card-price">{formatPrice(product.priceInr)}</div>
                 <div className="fwd-stars">★★★★★</div>
 
-                <button
-                  className="fwd-card-add-btn"
-                  onClick={() => handleAddToCart(product)}
-                >
-                  Add to Cart 🛒
-                </button>
+                <div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
+                  <button
+                    className="fwd-card-add-btn"
+                    style={{ flex: 1, margin: 0 }}
+                    onClick={() => handleAddToCart(product)}
+                  >
+                    Add to Cart 🛒
+                  </button>
+                  <button
+                    type="button"
+                    title="View Details"
+                    onClick={() => setQuickViewProduct(product)}
+                    style={{
+                      padding: '8px 14px',
+                      borderRadius: '8px',
+                      border: '1px solid #e2e8f0',
+                      backgroundColor: '#ffffff',
+                      color: '#0f172a',
+                      fontSize: '12px',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                    }}
+                  >
+                    👁️ View
+                  </button>
+                </div>
               </div>
             )
           })}
@@ -570,7 +593,7 @@ export const FootwearWorkDoStorefront: React.FC<FootwearWorkDoStorefrontProps> =
       </section>
 
       {/* Section 6: Bestseller Highlight Cards on Yellow */}
-      <section className="fwd-section">
+      <section id="fwd-bestsellers-section" className="fwd-section">
         <div className="fwd-section-header">
           <h2 className="fwd-section-title">Bestseller</h2>
           <button
@@ -746,12 +769,35 @@ export const FootwearWorkDoStorefront: React.FC<FootwearWorkDoStorefrontProps> =
                 </div>
                 <div className="fwd-card-price">{formatPrice(product.priceInr)}</div>
                 <div className="fwd-stars">★★★★★</div>
-                <button
-                  className="fwd-card-add-btn"
-                  onClick={() => handleAddToCart(product)}
-                >
-                  Add to Cart 🛒
-                </button>
+                <div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
+                  <button
+                    className="fwd-card-add-btn"
+                    style={{ flex: 1, margin: 0 }}
+                    onClick={() => handleAddToCart(product)}
+                  >
+                    Add to Cart 🛒
+                  </button>
+                  <button
+                    type="button"
+                    title="View Details"
+                    onClick={() => setQuickViewProduct(product)}
+                    style={{
+                      padding: '8px 14px',
+                      borderRadius: '8px',
+                      border: '1px solid #e2e8f0',
+                      backgroundColor: '#ffffff',
+                      color: '#0f172a',
+                      fontSize: '12px',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                    }}
+                  >
+                    👁️ View
+                  </button>
+                </div>
               </div>
             )
           })}

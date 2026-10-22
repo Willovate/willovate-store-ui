@@ -102,7 +102,6 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
       return [...prev, { product, size, color, quantity: qty }]
     })
     showToast(`Added "${product.name}" (${size}) to your cart!`)
-    setIsCartOpen(true)
   }
 
   const updateCartQty = (idx: number, delta: number) => {
@@ -2366,7 +2365,6 @@ export const TrendyFashionStorefront: React.FC<TrendyStorefrontProps> = ({
                       )
                     })
                     setIsWishlistOpen(false)
-                    setIsCartOpen(true)
                   }}
                 >
                   Move All to Cart →

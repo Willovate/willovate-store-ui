@@ -98,7 +98,6 @@ export const JenieFashionStorefront: React.FC<JenieStorefrontProps> = ({
       return [...prev, { product, size, wash, quantity: qty }]
     })
     showToast(`Added "${product.name}" (${size} / ${wash}) to bag!`)
-    setIsCartOpen(true)
   }
 
   const updateCartQty = (idx: number, delta: number) => {

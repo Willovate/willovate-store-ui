@@ -107,7 +107,6 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
       return [...prev, { product, quantity: 1, selectedSize: finalSize }]
     })
     showToast(`Added "${product.name}" (Size ${finalSize}) to your bag!`)
-    setIsCartOpen(true)
   }
 
   const toggleWishlist = (productId: string) => {
@@ -499,6 +498,7 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
 
       {/* Explore Our New Collections */}
       <section id="sg-products-section" className="sg-section">
+        <div id="sg-bestsellers-section"></div>
         <div className="sg-header-centered">
           <h2 className="sg-section-title">Explore Our New Collections</h2>
           <p className="sg-section-desc">
@@ -556,14 +556,37 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
                 ))}
               </div>
 
-              <button
-                type="button"
-                className="sg-add-btn"
-                onClick={() => handleAddToCart(prod)}
-              >
-                <span>Add To Bag</span>
-                <span>🛍️</span>
-              </button>
+              <div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
+                <button
+                  type="button"
+                  className="sg-add-btn"
+                  style={{ flex: 1, margin: 0 }}
+                  onClick={() => handleAddToCart(prod)}
+                >
+                  <span>Add To Bag</span>
+                  <span>🛍️</span>
+                </button>
+                <button
+                  type="button"
+                  title="View Details"
+                  onClick={() => setQuickViewProduct(prod)}
+                  style={{
+                    padding: '8px 14px',
+                    borderRadius: '8px',
+                    border: '1px solid #e5e7eb',
+                    backgroundColor: '#ffffff',
+                    color: '#1f2937',
+                    fontSize: '12px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                  }}
+                >
+                  👁️ View
+                </button>
+              </div>
             </div>
           ))}
         </div>

@@ -85,7 +85,6 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
       return [...prev, { product, quantity: 1, selectedSize: size }]
     })
     showToast(`Added "${product.name}" (Size ${size}) to shopping bag!`)
-    setIsCartOpen(true)
   }
 
   const updateQuantity = (productId: string, size: number, delta: number) => {
@@ -440,6 +439,49 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
                   {prod.originalPrice && (
                     <span className="gia-prod-compare">{formatPrice(prod.originalPrice)}</span>
                   )}
+                </div>
+                <div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
+                  <button
+                    type="button"
+                    style={{
+                      flex: 1,
+                      padding: '8px 12px',
+                      backgroundColor: '#000000',
+                      color: '#ffffff',
+                      border: 'none',
+                      borderRadius: '4px',
+                      fontSize: '12px',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                    }}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      handleAddToCart(prod, prod.availableSizes[0] || 7)
+                    }}
+                  >
+                    Add to Bag
+                  </button>
+                  <button
+                    type="button"
+                    style={{
+                      padding: '8px 12px',
+                      backgroundColor: '#ffffff',
+                      color: '#000000',
+                      border: '1px solid #d4d4d8',
+                      borderRadius: '4px',
+                      fontSize: '12px',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                    }}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setQuickViewProduct(prod)
+                      setSelectedSize(prod.availableSizes[0] || 7)
+                    }}
+                    title="View Details"
+                  >
+                    👁️ View
+                  </button>
                 </div>
               </div>
             )

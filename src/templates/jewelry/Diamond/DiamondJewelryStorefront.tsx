@@ -122,7 +122,6 @@ export const DiamondJewelryStorefront: React.FC<DiamondStorefrontProps> = ({
       ]
     })
     showToast(`Added ${product.name} (${metal}) to bag.`)
-    setIsCartOpen(true)
   }
 
   const updateCartQty = (idx: number, delta: number) => {

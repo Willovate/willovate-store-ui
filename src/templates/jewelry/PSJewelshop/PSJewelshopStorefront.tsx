@@ -225,7 +225,6 @@ export const PSJewelshopStorefront: React.FC<PSJewelshopStorefrontProps> = ({
       return [...prev, { product, selectedMetal: chosenMetal, quantity: 1 }]
     })
     showToast(`Added ${product.name} to Shopping Bag`)
-    setCartOpen(true)
   }
 
   const updateCartQuantity = (productId: string, metal: string, delta: number) => {

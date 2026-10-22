@@ -4,6 +4,48 @@
    2. Simulated mobile device preview frames (.frame-mobile, .device-mobile, .is-mobile)
    ============================================================================= */
 
+/* Universal Hide for Hamburger Buttons on Desktop / Tablet / Fullscreen */
+:is(
+  .sg-hamburger-btn,
+  .gia-hamburger-btn,
+  .ap-hamburger-btn,
+  .swd-hamburger-btn,
+  .sen-hamburger-btn,
+  .fwd-hamburger-btn,
+  .ff-hamburger-btn,
+  .sz-hamburger-btn,
+  .hf-hamburger-btn,
+  .susie-hamburger-btn
+) {
+  display: none !important;
+}
+
+:is(
+  .device-desktop,
+  .device-tablet,
+  .device-fullscreen,
+  .frame-desktop,
+  .frame-tablet,
+  .frame-fullscreen,
+  .preview-viewport-container.device-desktop,
+  .preview-viewport-container.device-tablet,
+  .preview-viewport-container.device-fullscreen,
+  .preview-viewport-container:not(.device-mobile)
+) :is(
+  .sg-hamburger-btn,
+  .gia-hamburger-btn,
+  .ap-hamburger-btn,
+  .swd-hamburger-btn,
+  .sen-hamburger-btn,
+  .fwd-hamburger-btn,
+  .ff-hamburger-btn,
+  .sz-hamburger-btn,
+  .hf-hamburger-btn,
+  .susie-hamburger-btn
+) {
+  display: none !important;
+}
+
 @media (max-width: 768px) {
   :is(
     .sg-wrapper,

@@ -148,7 +148,6 @@ export const SprintStorefront: React.FC<SprintStorefrontProps> = ({
       ]
     })
     showToast(`Added ${product.name} (US ${size}) to bag`)
-    setIsCartOpen(true)
   }
 
   const handleQuickAdd = (product: SprintProduct) => {

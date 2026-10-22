@@ -147,7 +147,6 @@ export const ArenaStorefront: React.FC<ArenaStorefrontProps> = ({
       ]
     })
     showToast(`Added ${product.name} (${size}) to Cart! 🛒`)
-    setIsCartOpen(true)
   }
 
   const handleQuickAdd = (product: ArenaProduct) => {
@@ -254,7 +253,6 @@ export const ArenaStorefront: React.FC<ArenaStorefrontProps> = ({
             <ArenaLimitedDrops
               onClaimDrop={() => {
                 showToast('Drop allocation locked! Code STADIUM20 saved to clipboard.')
-                setIsCartOpen(true)
               }}
             />
 

@@ -180,7 +180,6 @@ export const BelleFashionStorefront: React.FC<BelleStorefrontProps> = ({
       ]
     })
     showToast(`Added ${product.name} to shopping bag.`)
-    setCartOpen(true)
   }
 
   const updateCartQty = (idx: number, delta: number) => {

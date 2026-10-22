@@ -99,7 +99,6 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
       }
       return [...prev, { product, selectedSize: size, quantity: 1 }]
     })
-    setIsCartOpen(true)
     showToast(`Added ${product.name} (Size ${size}) to Cart!`)
   }
 

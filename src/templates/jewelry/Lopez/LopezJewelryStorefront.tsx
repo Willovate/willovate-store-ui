@@ -1215,7 +1215,6 @@ export const LopezJewelryStorefront: React.FC<LopezStorefrontProps> = ({
                     type="button"
                     onClick={() => {
                       addToCart(selectedProduct, pdpSelectedMetal, pdpQuantity)
-                      setCartOpen(true)
                     }}
                     className="lp-btn lp-btn-primary"
                     style={{ flex: 1 }}
@@ -1592,7 +1591,6 @@ export const LopezJewelryStorefront: React.FC<LopezStorefrontProps> = ({
                   onClick={() => {
                     addToCart(quickViewProduct)
                     setQuickViewProduct(null)
-                    setCartOpen(true)
                   }}
                   className="lp-btn lp-btn-primary"
                   style={{ width: '100%', marginBottom: '8px' }}

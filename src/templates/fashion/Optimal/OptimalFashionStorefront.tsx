@@ -182,7 +182,6 @@ export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
     })
     showToast(`Moved all ${likedProducts.length} liked clothes to your bag! 🛍️`)
     setWishlistOpen(false)
-    setCartOpen(true)
   }
 
   // Clear all liked clothes
@@ -206,7 +205,6 @@ export const OptimalFashionStorefront: React.FC<OptimalStorefrontProps> = ({
       }
     })
     showToast(`Added "${product.name}" (${size}) to Cart`)
-    setCartOpen(true)
   }
 
   const updateCartQty = (index: number, delta: number) => {

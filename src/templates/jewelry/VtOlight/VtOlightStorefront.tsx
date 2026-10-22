@@ -103,7 +103,6 @@ export const VtOlightStorefront: React.FC<VtOlightStorefrontProps> = ({
       }
       return [...prev, { product, selectedMetal: chosenMetal, selectedRingSize: chosenSize, quantity: qty }]
     })
-    setIsCartOpen(true)
     showToast(`Added ${product.name} to Shopping Bag`)
   }
 

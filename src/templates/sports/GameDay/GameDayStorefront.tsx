@@ -112,7 +112,6 @@ export const GameDayStorefront: React.FC<GameDayStorefrontProps> = ({
     })
     const nameLabel = customName ? ` (#${customNumber} ${customName})` : ''
     showToast(`Added ${product.name}${nameLabel} to your kit bag.`)
-    setIsCartOpen(true)
   }
 
   const handleUpdateQuantity = (index: number, quantity: number) => {

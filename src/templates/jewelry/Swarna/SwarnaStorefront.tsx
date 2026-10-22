@@ -92,7 +92,6 @@ export const SwarnaStorefront: React.FC<SwarnaStorefrontProps> = ({
       }
       return [...prev, { product, selectedMetal: chosenMetal, selectedRingSize: chosenSize, quantity: qty }]
     })
-    setIsCartOpen(true)
     showToast(`Added ${product.name} to Shopping Bag`)
   }
 

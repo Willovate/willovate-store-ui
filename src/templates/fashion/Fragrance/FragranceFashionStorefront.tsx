@@ -98,7 +98,6 @@ export const FragranceFashionStorefront: React.FC<FragranceStorefrontProps> = ({
       return [...prev, { product, volume, quantity: qty }]
     })
     showToast(`Added "${product.name}" (${volume}) to your cart!`)
-    setIsCartOpen(true)
   }
 
   const updateCartQty = (idx: number, delta: number) => {

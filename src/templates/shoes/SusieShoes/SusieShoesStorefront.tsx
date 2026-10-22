@@ -118,7 +118,6 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
       return [...prev, { product, quantity: 1, selectedSize: size }]
     })
     showToast(`Added ${product.name} to cart!`)
-    setIsCartOpen(true)
   }
 
   const handleUpdateQty = (productId: string, delta: number) => {
@@ -425,7 +424,7 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
       </section>
 
       {/* 6. BEST SELLERS KIDS SHOES GRID */}
-      <section style={{ maxWidth: 1240, margin: '40px auto' }}>
+      <section id="susie-bestsellers-section" style={{ maxWidth: 1240, margin: '40px auto' }}>
         <div className="susie-section-header">
           <h2 className="susie-section-title">Best Sellers For Kids</h2>
           <p className="susie-section-subtitle">
@@ -495,14 +494,30 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
                     </span>
                   )}
                 </div>
-                <button
-                  type="button"
-                  className="susie-add-cart-btn"
-                  onClick={() => handleAddToCart(product)}
-                  aria-label="Add to cart"
-                >
-                  🛍️
-                </button>
+                <div style={{ display: 'flex', gap: '6px' }}>
+                  <button
+                    type="button"
+                    className="susie-add-cart-btn"
+                    onClick={() => handleAddToCart(product)}
+                    aria-label="Add to cart"
+                    title="Add to cart"
+                  >
+                    🛍️
+                  </button>
+                  <button
+                    type="button"
+                    className="susie-add-cart-btn"
+                    style={{ background: '#f1f5f9', color: '#0f172a' }}
+                    onClick={() => {
+                      setQuickViewProduct(product)
+                      setSelectedSize(product.sizes?.[0] || 'Kids 8')
+                    }}
+                    aria-label="Quick view"
+                    title="View Product Details"
+                  >
+                    👁️
+                  </button>
+                </div>
               </div>
             </div>
           ))}

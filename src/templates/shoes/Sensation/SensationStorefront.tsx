@@ -39,6 +39,7 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
   const [selectedCategory, setSelectedCategory] = useState('Clothes')
   const [isCategoryMenuOpen, setIsCategoryMenuOpen] = useState(false)
   const [isShopMenuOpen, setIsShopMenuOpen] = useState(false)
+  const [isPagesMenuOpen, setIsPagesMenuOpen] = useState(false)
 
   // Sunglasses tab
   const [sunglassesTab, setSunglassesTab] = useState<'ALL' | 'ACCESSORIES'>('ALL')
@@ -125,7 +126,6 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
       ]
     })
     showToast(`Added "${product.name}" to cart!`)
-    setIsCartOpen(true)
   }
 
   const updateQuantity = (productId: string, delta: number) => {
@@ -294,6 +294,15 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
                         onClick={() => {
                           setSelectedCategory(cat)
                           setIsCategoryMenuOpen(false)
+                          if (cat === 'Sunglasses' || cat === 'Accessories') {
+                            const el = document.getElementById('sen-sunglasses-section')
+                            el?.scrollIntoView({ behavior: 'smooth' })
+                            if (cat === 'Accessories') setSunglassesTab('ACCESSORIES')
+                            else setSunglassesTab('ALL')
+                          } else {
+                            const el = document.getElementById('sen-trending-section')
+                            el?.scrollIntoView({ behavior: 'smooth' })
+                          }
                           showToast(`Category set to: ${cat}`)
                         }}
                       >
@@ -341,6 +350,8 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
                       }}
                       onClick={() => {
                         setIsShopMenuOpen(false)
+                        const el = document.getElementById('sen-trending-section')
+                        el?.scrollIntoView({ behavior: 'smooth' })
                         showToast(`Opened: ${item}`)
                       }}
                     >
@@ -351,15 +362,80 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
               )}
             </div>
 
-            <span className="sen-nav-link" onClick={() => showToast('Opening Brands...')}>
+            <span
+              className="sen-nav-link"
+              onClick={() => {
+                const el = document.getElementById('sen-brands-section')
+                el?.scrollIntoView({ behavior: 'smooth' })
+                showToast('Browsing Sensation Brands')
+              }}
+            >
               Brands
             </span>
-            <span className="sen-nav-link" onClick={() => showToast('Opening Bestseller...')}>
+            <span
+              className="sen-nav-link"
+              onClick={() => {
+                const el = document.getElementById('sen-trending-section')
+                el?.scrollIntoView({ behavior: 'smooth' })
+                showToast('Viewing Sensation Bestsellers')
+              }}
+            >
               Bestseller
             </span>
-            <span className="sen-nav-link" onClick={() => showToast('Opening Pages...')}>
-              Pages ▾
-            </span>
+
+            {/* Pages Dropdown */}
+            <div style={{ position: 'relative' }}>
+              <span
+                className="sen-nav-link"
+                onClick={() => setIsPagesMenuOpen(!isPagesMenuOpen)}
+              >
+                Pages ▾
+              </span>
+
+              {isPagesMenuOpen && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '100%',
+                    left: 0,
+                    marginTop: 8,
+                    backgroundColor: '#ffffff',
+                    color: '#18181b',
+                    borderRadius: 12,
+                    boxShadow: '0 10px 25px rgba(0,0,0,0.2)',
+                    padding: '8px 0',
+                    minWidth: 180,
+                    zIndex: 200,
+                  }}
+                >
+                  {[
+                    { label: 'About Us', targetId: 'sen-story-section' },
+                    { label: 'Lookbook & Gallery', targetId: 'sen-lookbook-section' },
+                    { label: 'Customer Reviews', targetId: 'sen-reviews-section' },
+                    { label: 'Style Chronicle', targetId: 'sen-chronicle-section' },
+                    { label: 'Delivery Service', targetId: 'sen-delivery-section' },
+                  ].map((page) => (
+                    <div
+                      key={page.label}
+                      style={{
+                        padding: '8px 16px',
+                        fontSize: 13,
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                      }}
+                      onClick={() => {
+                        setIsPagesMenuOpen(false)
+                        const el = document.getElementById(page.targetId)
+                        el?.scrollIntoView({ behavior: 'smooth' })
+                        showToast(`Opened: ${page.label}`)
+                      }}
+                    >
+                      {page.label}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Right Action Icons */}
@@ -525,13 +601,41 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
                   </div>
                 )}
 
-                <button
-                  type="button"
-                  className="sen-add-cart-btn"
-                  onClick={() => handleAddToCart(prod)}
-                >
-                  <span>Add to Cart 🛍️</span>
-                </button>
+                <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
+                  <button
+                    type="button"
+                    className="sen-add-cart-btn"
+                    style={{ flex: 1 }}
+                    onClick={() => handleAddToCart(prod)}
+                  >
+                    <span>Add to Cart 🛍️</span>
+                  </button>
+                  <button
+                    type="button"
+                    title="View Details"
+                    onClick={() => {
+                      setQuickViewProduct(prod)
+                      setSelectedProductSize(prod.sizes?.[0] || '7')
+                      setSelectedProductColor(prod.colors?.[0]?.name || 'Standard')
+                    }}
+                    style={{
+                      padding: '8px 14px',
+                      borderRadius: 9999,
+                      border: '1px solid #d4d4d8',
+                      backgroundColor: '#ffffff',
+                      color: '#18181b',
+                      fontSize: 12,
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 4,
+                      transition: 'all 0.2s',
+                    }}
+                  >
+                    👁️ View
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -539,7 +643,7 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
       </section>
 
       {/* Tale of Exhilaration: Fashion Finds */}
-      <section className="sen-container">
+      <section id="sen-story-section" className="sen-container">
         <div className="sen-tale-banner">
           <div>
             <h2 style={{ fontSize: 32, fontWeight: 800, color: '#18181b', marginBottom: 16 }}>
@@ -570,7 +674,7 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
       </section>
 
       {/* Deep Olive Section: Journey Through Amazing Clothes */}
-      <section className="sen-olive-section">
+      <section id="sen-brands-section" className="sen-olive-section">
         <div className="sen-container">
           <h2 style={{ fontSize: 32, fontWeight: 800, marginBottom: 32 }}>
             Journey Through Amazing Clothes
@@ -642,7 +746,7 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
       </section>
 
       {/* Embracing Allure of Sunglasses */}
-      <section className="sen-section">
+      <section id="sen-sunglasses-section" className="sen-section">
         <div className="sen-container">
           <div className="sen-section-header">
             <div>
@@ -726,13 +830,40 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
                   </div>
                 )}
 
-                <button
-                  type="button"
-                  className="sen-add-cart-btn"
-                  onClick={() => handleAddToCart(prod)}
-                >
-                  <span>Add to Cart 🛍️</span>
-                </button>
+                <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
+                  <button
+                    type="button"
+                    className="sen-add-cart-btn"
+                    style={{ flex: 1 }}
+                    onClick={() => handleAddToCart(prod)}
+                  >
+                    <span>Add to Cart 🛍️</span>
+                  </button>
+                  <button
+                    type="button"
+                    title="View Details"
+                    onClick={() => {
+                      setQuickViewProduct(prod)
+                      setSelectedProductColor(prod.colors?.[0]?.name || 'Standard')
+                    }}
+                    style={{
+                      padding: '8px 14px',
+                      borderRadius: 9999,
+                      border: '1px solid #d4d4d8',
+                      backgroundColor: '#ffffff',
+                      color: '#18181b',
+                      fontSize: 12,
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 4,
+                      transition: 'all 0.2s',
+                    }}
+                  >
+                    👁️ View
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -770,7 +901,7 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
       </section>
 
       {/* Embracing Fashion for Every Body: 3 Visual Category Cards */}
-      <section className="sen-section">
+      <section id="sen-lookbook-section" className="sen-section">
         <div className="sen-container">
           <div className="sen-section-header">
             <div>
@@ -863,7 +994,7 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
       </section>
 
       {/* Fashionably Satisfied (4 Testimonial Cards) */}
-      <section className="sen-section" style={{ backgroundColor: '#fafafa' }}>
+      <section id="sen-reviews-section" className="sen-section" style={{ backgroundColor: '#fafafa' }}>
         <div className="sen-container">
           <div style={{ textAlign: 'center', marginBottom: 40 }}>
             <h2 style={{ fontSize: 32, fontWeight: 800, color: '#18181b', marginBottom: 8 }}>
@@ -895,7 +1026,7 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
       </section>
 
       {/* Exclusive Fashion Delivered to Your Doorstep */}
-      <section className="sen-container">
+      <section id="sen-delivery-section" className="sen-container">
         <div className="sen-doorstep-banner">
           <div style={{ maxWidth: 540, position: 'relative', zIndex: 2 }}>
             <h2 style={{ fontSize: 32, fontWeight: 800, lineHeight: 1.2, marginBottom: 12 }}>
@@ -917,7 +1048,7 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
       </section>
 
       {/* Style Chronicle Blogs */}
-      <section className="sen-section">
+      <section id="sen-chronicle-section" className="sen-section">
         <div className="sen-container">
           <div className="sen-section-header">
             <div>
@@ -1156,12 +1287,21 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
                 <h3 style={{ fontSize: 20, fontWeight: 800, margin: '8px 0', color: '#18181b' }}>
                   {quickViewProduct.name}
                 </h3>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8, fontSize: 13, color: '#f59e0b' }}>
+                  <span>★★★★★</span>
+                  <span style={{ color: '#71717a', fontWeight: 600 }}>4.9 (48 reviews)</span>
+                </div>
                 <div style={{ fontSize: 20, fontWeight: 800, color: '#656c4d', marginBottom: 12 }}>
                   {formatPrice(quickViewProduct.price)}
                 </div>
                 <p style={{ fontSize: 13, color: '#71717a', lineHeight: 1.5, marginBottom: 16 }}>
                   {quickViewProduct.description}
                 </p>
+                <div style={{ display: 'flex', gap: 12, padding: '10px 0', borderTop: '1px solid #f4f4f5', borderBottom: '1px solid #f4f4f5', marginBottom: 14, fontSize: 11, color: '#52525b' }}>
+                  <span>🚚 Free Shipping</span>
+                  <span>🔄 30-Day Returns</span>
+                  <span>🔒 Secure Checkout</span>
+                </div>
 
                 {quickViewProduct.sizes && (
                   <div style={{ marginBottom: 14 }}>

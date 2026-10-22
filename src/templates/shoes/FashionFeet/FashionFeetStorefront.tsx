@@ -79,7 +79,6 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
       return [...prev, { product, quantity: 1, selectedSize: size }]
     })
     showToast(`Added ${product.name} to cart!`)
-    setIsCartOpen(true)
   }
 
   const handleUpdateQuantity = (index: number, delta: number) => {

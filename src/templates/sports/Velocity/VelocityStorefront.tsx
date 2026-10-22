@@ -116,7 +116,6 @@ export const VelocityStorefront: React.FC<VelocityStorefrontProps> = ({
     })
 
     showToast(`Added "${product.name}" (${chosenSize}) to your bag 🛍️`)
-    setCartDrawerOpen(true)
   }
 
   const handleUpdateCartQty = (itemId: string, delta: number) => {

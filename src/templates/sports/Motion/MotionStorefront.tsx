@@ -351,7 +351,6 @@ export const MotionStorefront: React.FC<MotionStorefrontProps> = ({
       return [...current, { product, selectedSize: size, selectedColor: color, quantity: 1 }]
     })
     triggerToast(`Added ${product.name} to telemetry kit`)
-    setCartOpen(true)
   }
 
   const updateCartQty = (index: number, newQty: number) => {

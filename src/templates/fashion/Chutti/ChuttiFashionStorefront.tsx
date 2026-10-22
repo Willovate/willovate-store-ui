@@ -92,7 +92,6 @@ export const ChuttiFashionStorefront: React.FC<ChuttiStorefrontProps> = ({
       return [...prev, { product, size, color, quantity }]
     })
     showToast(`Added "${product.name}" (${size}) to bag!`)
-    setIsCartOpen(true)
   }
 
   const updateCartQty = (idx: number, delta: number) => {

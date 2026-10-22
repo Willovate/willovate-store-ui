@@ -130,7 +130,6 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
       return [...prev, { product, quantity: 1 }]
     })
     showToast(`Added "${product.name}" to cart!`)
-    setIsCartOpen(true)
   }
 
   const handleUpdateCartQty = (productId: string, delta: number) => {

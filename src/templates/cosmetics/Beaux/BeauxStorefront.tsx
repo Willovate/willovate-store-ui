@@ -135,7 +135,6 @@ export const BeauxStorefront: React.FC<BeauxStorefrontProps> = ({
       return [...prev, { product, quantity: 1 }]
     })
     showToast(`Added "${product.name}" to your bag!`)
-    setIsCartOpen(true)
   }
 
   const handleUpdateCartQty = (productId: string, delta: number) => {

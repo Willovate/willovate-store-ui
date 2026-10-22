@@ -45,6 +45,12 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = ({
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [toastMessage, setToastMessage] = useState<string | null>(null)
+
+  const showToast = (msg: string) => {
+    setToastMessage(msg)
+    setTimeout(() => setToastMessage(null), 3000)
+  }
 
   // Video Modal state
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
@@ -108,7 +114,7 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = ({
       }
       return [...prev, { product, quantity: 1, selectedMaterial: mat }]
     })
-    setIsCartOpen(true)
+    showToast(`Added "${product.title}" to cart!`)
   }
 
   const handleRemoveFromCart = (index: number) => {
@@ -1973,6 +1979,31 @@ export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = ({
             </button>
           </div>
         </>
+      )}
+
+      {/* Floating Toast Notification */}
+      {toastMessage && (
+        <div
+          style={{
+            position: 'fixed',
+            bottom: 24,
+            right: 24,
+            backgroundColor: '#18181b',
+            color: '#ffffff',
+            padding: '12px 24px',
+            borderRadius: 9999,
+            fontSize: 13,
+            fontWeight: 700,
+            boxShadow: '0 8px 24px rgba(0,0,0,0.25)',
+            zIndex: 9999,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10,
+          }}
+        >
+          <span>✓</span>
+          <span>{toastMessage}</span>
+        </div>
       )}
     </div>
   )

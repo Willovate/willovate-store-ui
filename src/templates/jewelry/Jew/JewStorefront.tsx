@@ -155,7 +155,6 @@ export const JewStorefront: React.FC<JewStorefrontProps> = ({
       }
       return [...prev, { product, selectedMetal: chosenMetal, quantity: qty }]
     })
-    setIsCartOpen(true)
     showToast(`Added ${product.name} to Shopping Cart`)
   }
 

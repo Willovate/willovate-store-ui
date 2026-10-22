@@ -124,7 +124,6 @@ export const FitCoreStorefront: React.FC<FitCoreStorefrontProps> = ({
       ]
     })
     showToast(`Added ${product.name} (${size}) to your bag.`)
-    setIsCartOpen(true)
   }
 
   const handleAddBundleToCart = (bundle: FitCoreBundle) => {
@@ -155,7 +154,6 @@ export const FitCoreStorefront: React.FC<FitCoreStorefrontProps> = ({
     })
 
     showToast(`Added full ${bundle.title} (4 items) to your bag with ${bundle.discountPercent}% discount!`)
-    setIsCartOpen(true)
   }
 
   const handleUpdateQuantity = (index: number, quantity: number) => {

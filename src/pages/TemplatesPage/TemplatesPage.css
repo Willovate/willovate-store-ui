@@ -2265,6 +2265,32 @@
   box-sizing: border-box !important;
 }
 
+/* Ensure Hamburger button NEVER appears in Desktop, Tablet, or Fullscreen preview modes */
+.preview-viewport-container.device-desktop [class*="hamburger"],
+.preview-viewport-container.device-tablet [class*="hamburger"],
+.preview-viewport-container.device-fullscreen [class*="hamburger"],
+.preview-viewport-container:not(.device-mobile) [class*="hamburger"],
+.preview-viewport-container.device-desktop [class*="-hamburger-btn"],
+.preview-viewport-container.device-tablet [class*="-hamburger-btn"],
+.preview-viewport-container.device-fullscreen [class*="-hamburger-btn"],
+.preview-viewport-container:not(.device-mobile) [class*="-hamburger-btn"],
+.preview-viewport-container.device-desktop [class*="-mobile-hamburger-btn"],
+.preview-viewport-container.device-tablet [class*="-mobile-hamburger-btn"],
+.preview-viewport-container.device-fullscreen [class*="-mobile-hamburger-btn"],
+.preview-viewport-container:not(.device-mobile) [class*="-mobile-hamburger-btn"],
+.preview-viewport-container.device-desktop .sa-hamburger,
+.preview-viewport-container.device-tablet .sa-hamburger,
+.preview-viewport-container.device-fullscreen .sa-hamburger,
+.preview-viewport-container:not(.device-mobile) .sa-hamburger,
+.frame-desktop [class*="hamburger"],
+.frame-tablet [class*="hamburger"],
+.frame-fullscreen [class*="hamburger"],
+.device-desktop [class*="hamburger"],
+.device-tablet [class*="hamburger"],
+.device-fullscreen [class*="hamburger"] {
+  display: none !important;
+}
+
 /* Device Frame Simulation */
 .simulated-frame {
   transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);

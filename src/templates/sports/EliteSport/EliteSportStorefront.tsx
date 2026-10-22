@@ -266,7 +266,6 @@ export function EliteSportStorefront({
         : [...current, { product, size, color, quantity }]
     })
     setNotice(`✓ ${product.name} added to your bag`)
-    setCartOpen(true)
   }
 
   const updateCartQuantity = (index: number, delta: number) => {

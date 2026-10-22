@@ -93,7 +93,6 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
       return [...prev, { product, selectedColor: color, monogramInitials: initials, quantity }]
     })
     showToast(`Added "${product.name}" (${color}) to Bag!`)
-    setIsCartOpen(true)
   }
 
   const updateCartQty = (idx: number, delta: number) => {
@@ -1598,7 +1597,6 @@ export const BaggoFashionStorefront: React.FC<BaggoStorefrontProps> = ({
                       addToCart(p, p.colors[0]?.name || 'Default', undefined, 1)
                     })
                     setIsWishlistOpen(false)
-                    setIsCartOpen(true)
                   }}
                 >
                   Move All to Bag →

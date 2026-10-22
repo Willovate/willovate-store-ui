@@ -96,7 +96,6 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
       return [...prev, { product, quantity: 1, selectedSize: size }]
     })
     showToast(`Added ${product.name} to cart!`)
-    setIsCartOpen(true)
   }
 
   const handleUpdateQty = (productId: string, delta: number) => {
@@ -559,7 +558,7 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
       </section>
 
       {/* 7. BEST SELLERS */}
-      <section className="sz-products-section">
+      <section id="sz-bestsellers-section" className="sz-products-section">
         <div className="sz-section-header">
           <div className="sz-section-title-wrap">
             <span className="sz-title-bar" />

@@ -843,3 +843,180 @@
   color: #ef4444;
 }
 
+/* =============================================================================
+   UNIVERSAL HAMBURGER BUTTON RULES:
+   NEVER show hamburger menu button on desktop, tablet, or fullscreen view.
+   ONLY show on mobile view (device === 'mobile' or <= 768px).
+   ============================================================================= */
+.sen-hamburger-btn,
+.hf-hamburger-btn,
+.ap-hamburger-btn,
+.gia-hamburger-btn,
+.sg-hamburger-btn,
+.swd-hamburger-btn,
+.fwd-hamburger-btn,
+.ff-hamburger-btn,
+.sz-hamburger-btn,
+.susie-hamburger-btn,
+.beaux-hamburger-btn,
+.glowing-hamburger-btn,
+.belletny-hamburger-btn,
+.dezel-hamburger-btn,
+.dtspa-hamburger-btn,
+.fabish-hamburger-btn,
+.lipura-hamburger-btn,
+.organica-hamburger-btn,
+.shades-hamburger-btn,
+.smetic-hamburger-btn,
+.baggo-mobile-hamburger-btn,
+.optimal-mobile-hamburger-btn,
+.trendy-mobile-hamburger-btn,
+.chutti-mobile-hamburger-btn,
+.fragrance-mobile-hamburger-btn,
+.diamond-mobile-hamburger-btn,
+.diamond-hamburger-btn,
+.diamondworkdo-mobile-hamburger-btn,
+.streetathlete-mobile-hamburger-btn,
+.sa-hamburger,
+.wv-hamburger-btn,
+[class*="hamburger"],
+[class*="-hamburger-btn"],
+[class*="-mobile-hamburger-btn"] {
+  display: none !important;
+}
+
+/* Force hide on desktop, tablet, and fullscreen viewports and simulated containers */
+:is(
+  .device-desktop,
+  .device-tablet,
+  .device-fullscreen,
+  .frame-desktop,
+  .frame-tablet,
+  .frame-fullscreen,
+  .preview-viewport-container.device-desktop,
+  .preview-viewport-container.device-tablet,
+  .preview-viewport-container.device-fullscreen,
+  .preview-viewport-container:not(.device-mobile)
+) :is(
+  .sen-hamburger-btn,
+  .hf-hamburger-btn,
+  .ap-hamburger-btn,
+  .gia-hamburger-btn,
+  .sg-hamburger-btn,
+  .swd-hamburger-btn,
+  .fwd-hamburger-btn,
+  .ff-hamburger-btn,
+  .sz-hamburger-btn,
+  .susie-hamburger-btn,
+  .beaux-hamburger-btn,
+  .glowing-hamburger-btn,
+  .belletny-hamburger-btn,
+  .dezel-hamburger-btn,
+  .dtspa-hamburger-btn,
+  .fabish-hamburger-btn,
+  .lipura-hamburger-btn,
+  .organica-hamburger-btn,
+  .shades-hamburger-btn,
+  .smetic-hamburger-btn,
+  .baggo-mobile-hamburger-btn,
+  .optimal-mobile-hamburger-btn,
+  .trendy-mobile-hamburger-btn,
+  .chutti-mobile-hamburger-btn,
+  .fragrance-mobile-hamburger-btn,
+  .diamond-mobile-hamburger-btn,
+  .diamond-hamburger-btn,
+  .diamondworkdo-mobile-hamburger-btn,
+  .streetathlete-mobile-hamburger-btn,
+  .sa-hamburger,
+  .wv-hamburger-btn,
+  [class*="hamburger"],
+  [class*="-hamburger-btn"],
+  [class*="-mobile-hamburger-btn"]
+) {
+  display: none !important;
+}
+
+/* Explicitly display ONLY on mobile device preview or real screen <= 768px */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile
+) :is(
+  .sen-hamburger-btn,
+  .hf-hamburger-btn,
+  .ap-hamburger-btn,
+  .gia-hamburger-btn,
+  .sg-hamburger-btn,
+  .swd-hamburger-btn,
+  .fwd-hamburger-btn,
+  .ff-hamburger-btn,
+  .sz-hamburger-btn,
+  .susie-hamburger-btn,
+  .beaux-hamburger-btn,
+  .glowing-hamburger-btn,
+  .belletny-hamburger-btn,
+  .dezel-hamburger-btn,
+  .dtspa-hamburger-btn,
+  .fabish-hamburger-btn,
+  .lipura-hamburger-btn,
+  .organica-hamburger-btn,
+  .shades-hamburger-btn,
+  .smetic-hamburger-btn,
+  .baggo-mobile-hamburger-btn,
+  .optimal-mobile-hamburger-btn,
+  .trendy-mobile-hamburger-btn,
+  .chutti-mobile-hamburger-btn,
+  .fragrance-mobile-hamburger-btn,
+  .diamond-mobile-hamburger-btn,
+  .diamond-hamburger-btn,
+  .diamondworkdo-mobile-hamburger-btn,
+  .streetathlete-mobile-hamburger-btn,
+  .wv-hamburger-btn,
+  [class*="-hamburger-btn"],
+  [class*="-mobile-hamburger-btn"]
+) {
+  display: flex !important;
+}
+
+@media (max-width: 768px) {
+  :is(body:not(.device-desktop):not(.device-tablet):not(.device-fullscreen)) :is(
+    .sen-hamburger-btn,
+    .hf-hamburger-btn,
+    .ap-hamburger-btn,
+    .gia-hamburger-btn,
+    .sg-hamburger-btn,
+    .swd-hamburger-btn,
+    .fwd-hamburger-btn,
+    .ff-hamburger-btn,
+    .sz-hamburger-btn,
+    .susie-hamburger-btn,
+    .beaux-hamburger-btn,
+    .glowing-hamburger-btn,
+    .belletny-hamburger-btn,
+    .dezel-hamburger-btn,
+    .dtspa-hamburger-btn,
+    .fabish-hamburger-btn,
+    .lipura-hamburger-btn,
+    .organica-hamburger-btn,
+    .shades-hamburger-btn,
+    .smetic-hamburger-btn,
+    .baggo-mobile-hamburger-btn,
+    .optimal-mobile-hamburger-btn,
+    .trendy-mobile-hamburger-btn,
+    .chutti-mobile-hamburger-btn,
+    .fragrance-mobile-hamburger-btn,
+    .diamond-mobile-hamburger-btn,
+    .diamond-hamburger-btn,
+    .diamondworkdo-mobile-hamburger-btn,
+    .streetathlete-mobile-hamburger-btn,
+    .wv-hamburger-btn,
+    [class*="-hamburger-btn"],
+    [class*="-mobile-hamburger-btn"]
+  ) {
+    display: flex !important;
+  }
+}
+
+

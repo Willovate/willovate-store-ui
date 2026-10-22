@@ -94,7 +94,6 @@ export function StreetAthleteStorefront({ deviceView = 'desktop' }: StreetAthlet
         : [...current, { product, size, quantity: 1 }]
     })
     setNotice(`${product.name} added to bag`)
-    setCartOpen(true)
   }
 
   const updateQuantity = (index: number, delta: number) => {
@@ -113,7 +112,6 @@ export function StreetAthleteStorefront({ deviceView = 'desktop' }: StreetAthlet
     const outfit = products.filter((product) => ['after-hours-01', 'off-grid-hoodie', 'track-jogger', 'side-street-cap', 'cross-town-bag'].includes(product.id))
     setCart((current) => [...current, ...outfit.map((product) => ({ product, size: defaultSize(product), quantity: 1 }))])
     setNotice('The full look is in your bag')
-    setCartOpen(true)
   }
 
   const toggleWishlist = (product: StreetProduct) => {

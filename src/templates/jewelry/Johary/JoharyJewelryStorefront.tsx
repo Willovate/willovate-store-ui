@@ -50,6 +50,12 @@ export const JoharyJewelryStorefront: React.FC<JoharyStorefrontProps> = ({
   const [newsletterSuccess, setNewsletterSuccess] = useState(false)
   const [couponCode, setCouponCode] = useState('')
   const [couponApplied, setCouponApplied] = useState(false)
+  const [toastMessage, setToastMessage] = useState<string | null>(null)
+
+  const showToast = (msg: string) => {
+    setToastMessage(msg)
+    setTimeout(() => setToastMessage(null), 3000)
+  }
 
   // Cart & Wishlist state
   const [cartItems, setCartItems] = useState<JoharyCartItem[]>([
@@ -129,7 +135,7 @@ export const JoharyJewelryStorefront: React.FC<JoharyStorefrontProps> = ({
         },
       ]
     })
-    setCartOpen(true)
+    showToast(`Added "${product.name}" to cart!`)
   }
 
   const handleUpdateCartQuantity = (index: number, delta: number) => {
@@ -3043,6 +3049,31 @@ export const JoharyJewelryStorefront: React.FC<JoharyStorefrontProps> = ({
               </div>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Floating Toast Notification */}
+      {toastMessage && (
+        <div
+          style={{
+            position: 'fixed',
+            bottom: 24,
+            right: 24,
+            backgroundColor: '#18181b',
+            color: '#ffffff',
+            padding: '12px 24px',
+            borderRadius: 9999,
+            fontSize: 13,
+            fontWeight: 700,
+            boxShadow: '0 8px 24px rgba(0,0,0,0.25)',
+            zIndex: 9999,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10,
+          }}
+        >
+          <span>✓</span>
+          <span>{toastMessage}</span>
         </div>
       )}
     </div>

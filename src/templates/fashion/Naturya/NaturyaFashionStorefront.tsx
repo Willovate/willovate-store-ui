@@ -103,7 +103,6 @@ export const NaturyaFashionStorefront: React.FC<NaturyaStorefrontProps> = ({
       return [...prev, { product, size, color, quantity: qty }]
     })
     showToast(`Added "${product.name}" to your cart`)
-    setCartOpen(true)
   }
 
   const updateCartQty = (idx: number, delta: number) => {
