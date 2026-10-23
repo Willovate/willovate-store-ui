@@ -38,13 +38,18 @@ export function CartDrawer() {
   }, [setIsCartOpen])
 
   useEffect(() => {
+    const scrollContainer = document.getElementById('storefront-scroll-container')
     if (isCartOpen) {
       document.body.style.overflow = 'hidden'
+      if (scrollContainer) scrollContainer.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = ''
+      if (scrollContainer) scrollContainer.style.overflow = ''
     }
     return () => {
       document.body.style.overflow = ''
+      const sc = document.getElementById('storefront-scroll-container')
+      if (sc) sc.style.overflow = ''
     }
   }, [isCartOpen])
 
@@ -58,15 +63,34 @@ export function CartDrawer() {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [isCartOpen, handleClose])
 
-  if (!isCartOpen) return null
+  const host = typeof document !== 'undefined'
+    ? (document.getElementById('storefront-overlay-host') || document.body)
+    : null
+
+  if (!isCartOpen || !host) return null
+
+  const isFramed = host.id === 'storefront-overlay-host'
 
   const content = (
-    <div className="cart-layer" role="dialog" aria-modal="true" aria-label="Shopping bag">
-      <button 
-        className="cart-backdrop" 
+    <div
+      className="cart-layer"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Shopping bag"
+      style={{
+        position: isFramed ? 'absolute' : 'fixed',
+        inset: 0,
+        zIndex: 9999,
+        display: 'flex',
+        justifyContent: 'flex-end',
+        pointerEvents: 'auto'
+      }}
+    >
+      <button
+        className="cart-backdrop"
         type="button"
-        aria-label="Close shopping bag" 
-        onClick={handleClose} 
+        aria-label="Close shopping bag"
+        onClick={handleClose}
       />
       <aside className="cart-drawer">
         <div className="cart-heading">
@@ -74,23 +98,34 @@ export function CartDrawer() {
             <p className="kicker" style={{ margin: 0, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em', opacity: 0.7 }}>
               Your selection
             </p>
-            <h2>Shopping bag ({count})</h2>
+            <h2 style={{ margin: '4px 0 0', fontSize: '1.4rem' }}>Shopping bag ({count})</h2>
           </div>
-          <button 
-            type="button" 
-            onClick={handleClose} 
+          <button
+            type="button"
+            onClick={handleClose}
             aria-label="Close shopping bag"
-            style={{ cursor: 'pointer', display: 'grid', placeItems: 'center' }}
+            style={{
+              minWidth: '36px',
+              minHeight: '36px',
+              border: '1px solid var(--line)',
+              borderRadius: '50%',
+              background: 'transparent',
+              cursor: 'pointer',
+              display: 'grid',
+              placeItems: 'center',
+              fontSize: '1.25rem',
+              color: 'inherit'
+            }}
           >
             ×
           </button>
         </div>
 
         {items.length === 0 ? (
-          <div className="empty-cart" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '60%' }}>
+          <div className="empty-cart" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '24px 16px', textAlign: 'center' }}>
             <span>W</span>
-            <p style={{ fontSize: '1.1rem', marginTop: '16px' }}>Your bag is empty.</p>
-            <p style={{ fontSize: '0.9rem', color: 'var(--muted)', marginTop: '4px' }}>Add products from the catalog to get started.</p>
+            <p style={{ fontSize: '1.1rem', marginTop: '16px', fontWeight: 600 }}>Your bag is empty.</p>
+            <p style={{ fontSize: '0.85rem', color: 'var(--muted)', marginTop: '4px', maxWidth: '240px', lineHeight: 1.4 }}>Add products from the catalog to get started.</p>
           </div>
         ) : (
           <>
@@ -102,16 +137,16 @@ export function CartDrawer() {
                     <h3>{item.product.name}</h3>
                     <p>{formatCurrency(item.product.price)}</p>
                     <div className="quantity-control" aria-label={`Quantity for ${item.product.name}`}>
-                      <button 
-                        type="button" 
+                      <button
+                        type="button"
                         onClick={() => decrease(item.product.id)}
                         aria-label={`Decrease quantity of ${item.product.name}`}
                       >
                         −
                       </button>
                       <span aria-live="polite">{item.quantity}</span>
-                      <button 
-                        type="button" 
+                      <button
+                        type="button"
                         onClick={() => add(item.product)}
                         aria-label={`Increase quantity of ${item.product.name}`}
                       >
@@ -119,9 +154,9 @@ export function CartDrawer() {
                       </button>
                     </div>
                   </div>
-                  <button 
-                    className="remove-item" 
-                    type="button" 
+                  <button
+                    className="remove-item"
+                    type="button"
                     onClick={() => remove(item.product.id)}
                     aria-label={`Remove ${item.product.name} from cart`}
                   >
@@ -144,17 +179,17 @@ export function CartDrawer() {
                   {checkoutMessage}
                 </div>
               )}
-              <button 
-                type="button" 
+              <button
+                type="button"
                 onClick={() => setCheckoutMessage('Checkout initiated. Store API ready for fulfillment.')}
-                style={{ 
-                  width: '100%', 
-                  padding: '16px', 
-                  background: 'var(--ink)', 
-                  color: 'var(--paper)', 
-                  border: 'none', 
-                  borderRadius: '4px', 
-                  fontWeight: 'bold', 
+                style={{
+                  width: '100%',
+                  padding: '16px',
+                  background: 'var(--ink)',
+                  color: 'var(--paper)',
+                  border: 'none',
+                  borderRadius: '4px',
+                  fontWeight: 'bold',
                   fontSize: '1rem',
                   cursor: 'pointer'
                 }}
@@ -168,5 +203,5 @@ export function CartDrawer() {
     </div>
   )
 
-  return createPortal(content, document.body)
+  return createPortal(content, host)
 }

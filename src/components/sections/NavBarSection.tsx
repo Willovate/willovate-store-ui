@@ -15,9 +15,9 @@ export function NavBarSection({ brand = 'Store', style = 'minimal', template }: 
   const wishlist = useWishlist()
   const isCenter = style === 'center'
   const isUtility = style === 'utility'
-  
+
   return (
-    <nav style={{ 
+    <nav style={{
       borderBottom: isUtility ? '1px solid rgba(0,0,0,0.1)' : 'none',
       background: 'var(--template-background)',
       color: 'var(--template-primary)',
@@ -35,7 +35,7 @@ export function NavBarSection({ brand = 'Store', style = 'minimal', template }: 
           width: 100%;
           gap: 16px;
         }
-        @container (max-width: 576px) {
+        @container (max-width: 768px) {
           .nav-mobile-grid {
             display: grid !important;
             grid-template-columns: auto 1fr auto;
@@ -79,12 +79,12 @@ export function NavBarSection({ brand = 'Store', style = 'minimal', template }: 
 
       <SectionContainer className={`nav-layout nav-${style}`} style={{ paddingBlock: '20px' }}>
         <div className="nav-mobile-grid">
-          
+
           {/* Left Side */}
           <div className="nav-left" style={{ display: 'flex', alignItems: 'center', minWidth: 0, flexShrink: 0 }}>
-            <button 
+            <button
               className="nav-hamburger"
-              aria-label="Open store menu" 
+              aria-label="Open store menu"
               aria-expanded={isMenuOpen}
               onClick={() => setIsMenuOpen(true)}
               style={{ flexShrink: 0, background: 'transparent', border: 'none', cursor: 'pointer', padding: '8px', color: 'inherit', marginLeft: '-8px', display: 'none', alignItems: 'center', justifyContent: 'center' }}
@@ -122,10 +122,10 @@ export function NavBarSection({ brand = 'Store', style = 'minimal', template }: 
 
           {/* Right Side - Exactly one search entry point, wishlist, and cart */}
           <div className="nav-right" style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '4px', minWidth: 0, flexShrink: 0 }}>
-            <button 
-              type="button" 
-              aria-label="Search products" 
-              onClick={() => setIsSearchOpen(true)} 
+            <button
+              type="button"
+              aria-label="Search products"
+              onClick={() => setIsSearchOpen(true)}
               style={{ flexShrink: 0, background: 'transparent', border: 'none', cursor: 'pointer', color: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px' }}
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -134,9 +134,9 @@ export function NavBarSection({ brand = 'Store', style = 'minimal', template }: 
               </svg>
             </button>
 
-            <button 
+            <button
               type="button"
-              aria-label={`Wishlist, ${wishlist.count} items`} 
+              aria-label={`Wishlist, ${wishlist.count} items`}
               onClick={() => wishlist.setIsWishlistOpen(true)}
               style={{ flexShrink: 0, background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 'inherit', color: 'inherit', fontFamily: 'inherit', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: '6px', padding: '8px' }}
             >
@@ -146,9 +146,9 @@ export function NavBarSection({ brand = 'Store', style = 'minimal', template }: 
               <span>{wishlist.count}</span>
             </button>
 
-            <button 
+            <button
               type="button"
-              aria-label={`Shopping cart, ${cart.count} items`} 
+              aria-label={`Shopping cart, ${cart.count} items`}
               onClick={() => cart.setIsCartOpen(true)}
               style={{ flexShrink: 0, background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 'inherit', color: 'inherit', fontFamily: 'inherit', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: '6px', padding: '8px' }}
             >
@@ -163,9 +163,9 @@ export function NavBarSection({ brand = 'Store', style = 'minimal', template }: 
         </div>
       </SectionContainer>
       {template && (
-        <StoreMenu 
-          isOpen={isMenuOpen} 
-          onClose={() => setIsMenuOpen(false)} 
+        <StoreMenu
+          isOpen={isMenuOpen}
+          onClose={() => setIsMenuOpen(false)}
           brandName={brand}
           navigation={template.navigation}
           features={template.features}

@@ -135,7 +135,7 @@ a {
   display: none !important;
 }
 
-@container (max-width: 576px) {
+@container (max-width: 768px) {
   .nav-desktop-only {
     display: none !important;
   }

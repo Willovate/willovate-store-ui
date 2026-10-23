@@ -12,11 +12,11 @@ interface StoreMenuProps {
   onOpenWishlist?: () => void
 }
 
-export function StoreMenu({ 
-  isOpen, 
-  onClose, 
-  brandName = 'Store', 
-  navigation = [], 
+export function StoreMenu({
+  isOpen,
+  onClose,
+  brandName = 'Store',
+  navigation = [],
   features = [],
   onOpenSearch,
   onOpenWishlist,
@@ -24,13 +24,18 @@ export function StoreMenu({
   const filteredFeatures = features.filter(f => f.id !== 'cart' && f.label.toLowerCase() !== 'cart' && f.label.toLowerCase() !== 'shopping bag')
 
   useEffect(() => {
+    const scrollContainer = document.getElementById('storefront-scroll-container')
     if (isOpen) {
       document.body.style.overflow = 'hidden'
+      if (scrollContainer) scrollContainer.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = ''
+      if (scrollContainer) scrollContainer.style.overflow = ''
     }
     return () => {
       document.body.style.overflow = ''
+      const sc = document.getElementById('storefront-scroll-container')
+      if (sc) sc.style.overflow = ''
     }
   }, [isOpen])
 
@@ -44,30 +49,40 @@ export function StoreMenu({
     return () => document.removeEventListener('keydown', handleEscape)
   }, [isOpen, onClose])
 
-  if (!isOpen || typeof document === 'undefined') return null
+  const host = typeof document !== 'undefined'
+    ? (document.getElementById('storefront-overlay-host') || document.body)
+    : null
+
+  if (!isOpen || !host) return null
+
+  const isFramed = host.id === 'storefront-overlay-host'
 
   const content = (
-    <div 
+    <div
+      className="store-menu-layer"
       style={{
-        position: 'fixed',
+        position: isFramed ? 'absolute' : 'fixed',
         top: 0,
         left: 0,
         right: 0,
         bottom: 0,
         zIndex: 9999,
         display: 'flex',
-        justifyContent: 'flex-end',
+        justifyContent: 'flex-start',
+        pointerEvents: 'auto'
       }}
       role="dialog"
       aria-modal="true"
       aria-label="Store menu"
     >
       {/* Backdrop */}
-      <div 
+      <div
         style={{
           position: 'absolute',
           inset: 0,
           background: 'rgba(0,0,0,0.5)',
+          backdropFilter: 'blur(4px)',
+          WebkitBackdropFilter: 'blur(4px)',
           animation: 'fadeIn 0.2s ease-out'
         }}
         onClick={onClose}
@@ -75,73 +90,153 @@ export function StoreMenu({
       />
 
       {/* Drawer */}
-      <div 
+      <div
         style={{
           position: 'relative',
-          width: 'min(90vw, 400px)',
+          width: 'min(88%, 380px)',
+          maxWidth: '100%',
           height: '100%',
           background: 'var(--template-background, #fff)',
           color: 'var(--template-primary, #000)',
           display: 'flex',
           flexDirection: 'column',
-          boxShadow: '-4px 0 24px rgba(0,0,0,0.1)',
-          animation: 'slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+          boxShadow: '8px 0 30px rgba(0,0,0,0.15)',
+          animation: 'slideInLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+          boxSizing: 'border-box',
+          overflow: 'hidden'
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '24px', borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
-          <h2 style={{ margin: 0, fontSize: '1.25rem', fontFamily: 'var(--template-heading-font, inherit)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px', borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
+          <h2 style={{ margin: 0, fontSize: '1.3rem', fontFamily: 'var(--template-heading-font, inherit)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
             {brandName}
           </h2>
-          <button 
+          <button
             onClick={onClose}
             aria-label="Close store menu"
-            style={{ 
-              background: 'transparent', 
-              border: 'none', 
-              cursor: 'pointer', 
-              fontSize: '1.5rem',
+            style={{
+              minWidth: '36px',
+              minHeight: '36px',
+              background: 'transparent',
+              border: '1px solid var(--line, rgba(0,0,0,0.15))',
+              borderRadius: '50%',
+              cursor: 'pointer',
+              fontSize: '1.25rem',
               color: 'inherit',
-              padding: '8px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
+              display: 'grid',
+              placeItems: 'center'
             }}
           >
             ×
           </button>
         </div>
 
-        <div style={{ padding: '24px', overflowY: 'auto', flex: 1 }}>
+        <div style={{ padding: '20px', overflowY: 'auto', flex: 1, minHeight: 0 }}>
           {navigation && navigation.length > 0 && (
-            <div style={{ marginBottom: '40px' }}>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                {navigation.map((item, idx) => (
-                  <li key={idx}>
-                    <a 
-                      href={item.href} 
-                      onClick={onClose}
-                      style={{ 
-                        textDecoration: 'none', 
-                        color: 'inherit', 
-                        fontSize: '1.2rem',
-                        fontWeight: '500',
-                        fontFamily: 'var(--template-heading-font, inherit)'
-                      }}
-                    >
-                      {item.label}
-                    </a>
-                  </li>
-                ))}
+            <div style={{ marginBottom: '24px' }}>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                {navigation.map((item, idx) => {
+                  const subitems = (item as any).children || (item as any).items
+                  return (
+                    <li key={idx}>
+                      <a
+                        href={item.href}
+                        onClick={onClose}
+                        style={{
+                          textDecoration: 'none',
+                          color: 'inherit',
+                          fontSize: '1.15rem',
+                          fontWeight: '500',
+                          fontFamily: 'var(--template-heading-font, inherit)',
+                          display: 'block'
+                        }}
+                      >
+                        {item.label}
+                      </a>
+                      {subitems && subitems.length > 0 && (
+                        <ul style={{ listStyle: 'none', paddingLeft: '16px', marginTop: '8px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                          {subitems.map((sub: any, sIdx: number) => (
+                            <li key={sIdx}>
+                              <a
+                                href={sub.href}
+                                onClick={onClose}
+                                style={{
+                                  textDecoration: 'none',
+                                  color: 'inherit',
+                                  fontSize: '0.95rem',
+                                  opacity: 0.8
+                                }}
+                              >
+                                {sub.label}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  )
+                })}
               </ul>
             </div>
           )}
 
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '16px 0', borderTop: '1px solid rgba(0,0,0,0.08)', marginBottom: '16px' }}>
+            <button
+              type="button"
+              onClick={() => {
+                onClose()
+                onOpenSearch?.()
+              }}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                color: 'inherit',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                padding: '8px 0',
+                fontSize: '1rem',
+                fontWeight: '500'
+              }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <span>Search Catalog</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                onClose()
+                onOpenWishlist?.()
+              }}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                color: 'inherit',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                padding: '8px 0',
+                fontSize: '1rem',
+                fontWeight: '500'
+              }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+              <span>Wishlist</span>
+            </button>
+          </div>
+
           {filteredFeatures && filteredFeatures.length > 0 && (
-            <div>
-              <h3 style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em', opacity: 0.6, marginBottom: '16px' }}>
+            <div style={{ paddingTop: '8px', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
+              <h3 style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.06em', opacity: 0.6, marginBottom: '12px' }}>
                 Store Features
               </h3>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 {filteredFeatures.map((feature) => (
                   <li key={feature.id}>
                     <button
@@ -168,9 +263,9 @@ export function StoreMenu({
                         width: '100%'
                       }}
                     >
-                      <span style={{ fontSize: '1rem', fontWeight: '500' }}>{feature.label}</span>
+                      <span style={{ fontSize: '0.95rem', fontWeight: '500' }}>{feature.label}</span>
                       {feature.description && (
-                        <span style={{ fontSize: '0.85rem', opacity: 0.7, marginTop: '2px' }}>{feature.description}</span>
+                        <span style={{ fontSize: '0.8rem', opacity: 0.7, marginTop: '2px' }}>{feature.description}</span>
                       )}
                     </button>
                   </li>
@@ -180,19 +275,19 @@ export function StoreMenu({
           )}
         </div>
       </div>
-      
+
       <style>{`
         @keyframes fadeIn {
           from { opacity: 0; }
           to { opacity: 1; }
         }
-        @keyframes slideIn {
-          from { transform: translateX(100%); }
+        @keyframes slideInLeft {
+          from { transform: translateX(-100%); }
           to { transform: translateX(0); }
         }
       `}</style>
     </div>
   )
 
-  return createPortal(content, document.body)
+  return createPortal(content, host)
 }

@@ -28,12 +28,12 @@ export default function PreviewPage() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', background: '#e5e5e5' }}>
-      <header style={{ 
-        minHeight: '88px', 
-        background: '#000000', 
-        display: 'flex', 
+      <header style={{
+        minHeight: '88px',
+        background: '#000000',
+        display: 'flex',
         flexWrap: 'wrap',
-        alignItems: 'center', 
+        alignItems: 'center',
         justifyContent: 'space-between',
         padding: '12px clamp(16px, 4vw, 40px)',
         borderBottom: '1px solid rgba(255,255,255,0.1)',
@@ -50,10 +50,10 @@ export default function PreviewPage() {
             ← Exit Preview
           </Link>
         </div>
-        
+
         <div role="group" aria-label="Viewport controls" style={{ display: 'flex', gap: '4px', background: 'rgba(255,255,255,0.1)', padding: '4px', borderRadius: '4px', flexWrap: 'wrap', justifyContent: 'center' }}>
           {(['desktop', 'tablet', 'mobile'] as const).map(v => (
-            <button 
+            <button
               key={v}
               aria-label={`View ${v}`}
               aria-pressed={viewport === v}
@@ -76,7 +76,7 @@ export default function PreviewPage() {
         </div>
 
         <div style={{ flex: '1 1 auto', minWidth: '120px', display: 'flex', justifyContent: 'flex-end' }}>
-          <button 
+          <button
             onClick={handleSelect}
             aria-label="Use Template"
             style={{ padding: '8px 16px', background: 'var(--paper)', color: 'var(--ink)', border: 'none', borderRadius: '4px', fontWeight: 'bold', cursor: 'pointer' }}
@@ -87,17 +87,41 @@ export default function PreviewPage() {
       </header>
 
       <main style={{ flex: 1, overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <div style={{ 
-          width: getWidth(), 
-          height: viewport === 'desktop' ? '100%' : '90%', 
-          background: '#fff',
-          transition: 'width 0.3s ease, height 0.3s ease',
-          boxShadow: viewport !== 'desktop' ? '0 20px 40px rgba(0,0,0,0.2)' : 'none',
-          borderRadius: viewport !== 'desktop' ? '12px' : '0',
-          overflow: 'auto',
-          position: 'relative'
-        }}>
-          <TemplateRenderer template={template} />
+        <div
+          className="storefront-device-frame"
+          style={{
+            width: getWidth(),
+            height: viewport === 'desktop' ? '100%' : '90%',
+            background: '#fff',
+            transition: 'width 0.3s ease, height 0.3s ease',
+            boxShadow: viewport !== 'desktop' ? '0 20px 40px rgba(0,0,0,0.2)' : 'none',
+            borderRadius: viewport !== 'desktop' ? '12px' : '0',
+            overflow: 'hidden',
+            position: 'relative'
+          }}
+        >
+          <div
+            id="storefront-scroll-container"
+            style={{
+              width: '100%',
+              height: '100%',
+              overflowY: 'auto',
+              overflowX: 'hidden',
+              position: 'relative'
+            }}
+          >
+            <TemplateRenderer template={template} />
+          </div>
+          <div
+            id="storefront-overlay-host"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              pointerEvents: 'none',
+              zIndex: 1000,
+              overflow: 'hidden'
+            }}
+          />
         </div>
       </main>
     </div>

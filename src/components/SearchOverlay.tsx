@@ -1,4 +1,4 @@
-import { useState, useEffect, useDeferredValue, useCallback, useMemo } from 'react'
+import { useState, useEffect, useDeferredValue, useCallback, useMemo, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { getProducts } from '../lib/api'
 import { ProductCard, type ProductCardItem } from './ProductCard'
@@ -16,7 +16,7 @@ function extractTemplateProducts(templateId?: string): ProductCardItem[] {
   const template = templates.find(t => t.id === templateId)
   if (!template) return []
   const items: ProductCardItem[] = []
-  
+
   template.sections.forEach(s => {
     if (s.props?.products && Array.isArray(s.props.products)) {
       s.props.products.forEach((p: any) => {
@@ -94,6 +94,7 @@ function extractTemplateProducts(templateId?: string): ProductCardItem[] {
 
 export function SearchOverlay({ isOpen, onClose, templateId }: SearchOverlayProps) {
   const [search, setSearch] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
   const deferredSearch = useDeferredValue(search)
   const [apiProducts, setApiProducts] = useState<ProductCardItem[]>([])
   const [isLoading, setIsLoading] = useState(false)
@@ -134,6 +135,11 @@ export function SearchOverlay({ isOpen, onClose, templateId }: SearchOverlayProp
     }
   }
 
+  const handleClear = () => {
+    setSearch('')
+    inputRef.current?.focus()
+  }
+
   const handleRetry = () => {
     setIsLoading(true)
     setError(null)
@@ -147,11 +153,15 @@ export function SearchOverlay({ isOpen, onClose, templateId }: SearchOverlayProp
   useEffect(() => {
     if (!isOpen) return
 
+    const scrollContainer = document.getElementById('storefront-scroll-container')
     document.body.style.overflow = 'hidden'
+    if (scrollContainer) scrollContainer.style.overflow = 'hidden'
 
     if (localTemplateProducts.length > 0) {
       return () => {
         document.body.style.overflow = ''
+        const sc = document.getElementById('storefront-scroll-container')
+        if (sc) sc.style.overflow = ''
       }
     }
 
@@ -179,6 +189,8 @@ export function SearchOverlay({ isOpen, onClose, templateId }: SearchOverlayProp
     return () => {
       controller.abort()
       document.body.style.overflow = ''
+      const sc = document.getElementById('storefront-scroll-container')
+      if (sc) sc.style.overflow = ''
     }
   }, [isOpen, deferredSearch, retryKey, localTemplateProducts.length])
 
@@ -190,31 +202,48 @@ export function SearchOverlay({ isOpen, onClose, templateId }: SearchOverlayProp
     return () => document.removeEventListener('keydown', handleEscape)
   }, [isOpen, handleClose])
 
-  if (!isOpen) return null
+  const host = typeof document !== 'undefined'
+    ? (document.getElementById('storefront-overlay-host') || document.body)
+    : null
 
-  return createPortal(
-    <div 
-      role="dialog" 
-      aria-modal="true" 
+  if (!isOpen || !host) return null
+
+  const isFramed = host.id === 'storefront-overlay-host'
+
+  const content = (
+    <div
+      className="search-layer"
+      role="dialog"
+      aria-modal="true"
       aria-label="Product search"
       style={{
-        position: 'fixed',
+        position: isFramed ? 'absolute' : 'fixed',
         inset: 0,
         zIndex: 10000,
         background: 'var(--template-background, #fff)',
         color: 'var(--template-primary, #000)',
         display: 'flex',
         flexDirection: 'column',
-        animation: 'fadeIn 0.2s ease-out'
+        animation: 'fadeIn 0.2s ease-out',
+        pointerEvents: 'auto',
+        overflow: 'hidden'
       }}
     >
-      <form 
+      <form
         role="search"
         onSubmit={handleFormSubmit}
-        style={{ padding: '20px', borderBottom: '1px solid rgba(0,0,0,0.1)', display: 'flex', gap: '12px', alignItems: 'center' }}
+        style={{
+          padding: '16px 20px',
+          borderBottom: '1px solid rgba(0,0,0,0.1)',
+          display: 'flex',
+          gap: '12px',
+          alignItems: 'center',
+          boxSizing: 'border-box'
+        }}
       >
         <div style={{ position: 'relative', flex: 1, display: 'flex', alignItems: 'center' }}>
-          <input 
+          <input
+            ref={inputRef}
             autoFocus
             type="search"
             placeholder="Search products..."
@@ -222,8 +251,8 @@ export function SearchOverlay({ isOpen, onClose, templateId }: SearchOverlayProp
             onChange={handleSearchChange}
             style={{
               width: '100%',
-              padding: '12px 44px 12px 16px',
-              fontSize: '1.1rem',
+              padding: '12px 76px 12px 16px',
+              fontSize: '1rem',
               border: '1px solid rgba(0,0,0,0.2)',
               borderRadius: '4px',
               background: 'transparent',
@@ -233,33 +262,64 @@ export function SearchOverlay({ isOpen, onClose, templateId }: SearchOverlayProp
             }}
             aria-label="Search products"
           />
-          <button
-            type="submit"
-            aria-label="Submit search"
-            style={{
-              position: 'absolute',
-              right: '8px',
-              background: 'transparent',
-              border: 'none',
-              cursor: 'pointer',
-              color: 'inherit',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '6px'
-            }}
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-          </button>
+          <div style={{ position: 'absolute', right: '8px', display: 'flex', alignItems: 'center', gap: '2px' }}>
+            {search.trim().length > 0 && (
+              <button
+                type="button"
+                onClick={handleClear}
+                aria-label="Clear search"
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                  color: 'inherit',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '6px',
+                  fontSize: '1.25rem',
+                  lineHeight: 1,
+                  opacity: 0.7
+                }}
+              >
+                ×
+              </button>
+            )}
+            <button
+              type="submit"
+              aria-label="Submit search"
+              style={{
+                background: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                color: 'inherit',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '6px'
+              }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </div>
         </div>
-        <button 
+        <button
           type="button"
           onClick={handleClose}
           aria-label="Close search"
-          style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '1rem', color: 'inherit', whiteSpace: 'nowrap', padding: '8px 12px' }}
+          style={{
+            background: 'transparent',
+            border: 'none',
+            cursor: 'pointer',
+            fontSize: '0.95rem',
+            fontWeight: '500',
+            color: 'inherit',
+            whiteSpace: 'nowrap',
+            padding: '8px 4px'
+          }}
         >
           Cancel
         </button>
@@ -288,7 +348,7 @@ export function SearchOverlay({ isOpen, onClose, templateId }: SearchOverlayProp
             </button>
           </div>
         ) : products.length > 0 ? (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 140px), 1fr))', gap: '16px' }}>
             {products.map(p => (
               <ProductCard key={p.id} product={p} onAdd={(prod) => {
                 cart.add(prod)
@@ -302,7 +362,8 @@ export function SearchOverlay({ isOpen, onClose, templateId }: SearchOverlayProp
           <div style={{ textAlign: 'center', opacity: 0.7, padding: '40px' }}>Start typing to explore our collection.</div>
         )}
       </div>
-    </div>,
-    document.body
+    </div>
   )
+
+  return createPortal(content, host)
 }
