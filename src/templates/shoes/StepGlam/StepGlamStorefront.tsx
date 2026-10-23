@@ -635,7 +635,7 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
                 ))}
               </div>
 
-              <div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
+              <div className="sg-card-actions" style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
                 <button
                   type="button"
                   className="sg-add-btn"
@@ -647,6 +647,7 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
                 </button>
                 <button
                   type="button"
+                  className="sg-view-btn"
                   title="View Details"
                   onClick={() => setQuickViewProduct(prod)}
                   style={{
@@ -714,15 +715,17 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
             </button>
           </div>
 
-          <div style={{ display: 'flex', gap: 16, justifyContent: 'center' }}>
+          <div className="sg-countdown-images" style={{ display: 'flex', gap: 16, justifyContent: 'center' }}>
             <img
               src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=320&q=80"
               alt="Deal shoe 1"
+              className="sg-deal-img"
               style={{ width: '48%', height: 260, objectFit: 'cover', borderRadius: 9999 }}
             />
             <img
               src="https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?auto=format&fit=crop&w=320&q=80"
               alt="Deal shoe 2"
+              className="sg-deal-img"
               style={{ width: '48%', height: 260, objectFit: 'cover', borderRadius: 9999, marginTop: 24 }}
             />
           </div>
@@ -730,9 +733,9 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
       </div>
 
       {/* Customer Story */}
-      <section className="sg-section" style={{ backgroundColor: '#ffffff', borderTop: '1px solid #f3e8f0' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: 40, alignItems: 'center' }}>
-          <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+      <section className="sg-story-section sg-section" style={{ backgroundColor: '#ffffff', borderTop: '1px solid #f3e8f0' }}>
+        <div className="sg-story-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: 40, alignItems: 'center' }}>
+          <div className="sg-story-images" style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
             <img
               src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=200&q=80"
               alt="Customer Shoe"
@@ -745,7 +748,7 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
             />
           </div>
 
-          <div>
+          <div className="sg-story-content">
             <div style={{ fontSize: 16, color: '#f59e0b', marginBottom: 8 }}>★★★★★</div>
             <h3 style={{ fontSize: 26, fontWeight: 800, color: '#2e0929', marginBottom: 12 }}>
               My Story With StepGlam
@@ -792,26 +795,27 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
           </p>
         </div>
 
-        <div className="sg-products-grid">
+        <div className="sg-blogs-grid">
           {STEPGLAM_BLOGS.map((b) => (
-            <div key={b.id} className="sg-product-card">
+            <div key={b.id} className="sg-product-card sg-blog-card">
               <img
                 src={b.image}
                 alt={b.title}
+                className="sg-blog-img"
                 style={{ width: '100%', height: 200, objectFit: 'cover', borderRadius: 12, marginBottom: 14 }}
               />
-              <span style={{ fontSize: 11, fontWeight: 700, color: '#581d4e' }}>
+              <span className="sg-blog-meta" style={{ fontSize: 11, fontWeight: 700, color: '#581d4e' }}>
                 {b.category} • {b.date}
               </span>
-              <h4 style={{ fontSize: 17, fontWeight: 800, color: '#2e0929', margin: '8px 0' }}>
+              <h4 className="sg-blog-title" style={{ fontSize: 17, fontWeight: 800, color: '#2e0929', margin: '8px 0' }}>
                 {b.title}
               </h4>
-              <p style={{ fontSize: 13, color: '#6b7280', lineHeight: 1.5, marginBottom: 16 }}>
+              <p className="sg-blog-excerpt" style={{ fontSize: 13, color: '#6b7280', lineHeight: 1.5, marginBottom: 16 }}>
                 {b.excerpt}
               </p>
               <button
                 type="button"
-                className="sg-btn-plum"
+                className="sg-btn-plum sg-blog-btn"
                 style={{ padding: '6px 18px', fontSize: 11 }}
                 onClick={() => showToast(`Reading "${b.title}"...`)}
               >
@@ -901,6 +905,7 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
         </div>
 
         <div
+          className="sg-footer-bottom"
           style={{
             maxWidth: 1440,
             margin: '0 auto',
@@ -914,7 +919,7 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
           }}
         >
           <div>© 2024, StepGlam Powered by Shopify</div>
-          <div style={{ display: 'flex', gap: 10, fontSize: 16 }}>
+          <div className="sg-footer-payments" style={{ display: 'flex', gap: 10, fontSize: 16 }}>
             <span>💳 Visa</span>
             <span>Mastercard</span>
             <span>Amex</span>

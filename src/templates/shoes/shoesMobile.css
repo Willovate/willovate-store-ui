@@ -348,6 +348,7 @@
     .susie-root
   ) :is(
     .sg-nav-left,
+    .sg-account-btn,
     .gia-nav,
     .ap-nav,
     .ap-main-nav,
@@ -795,6 +796,26 @@
     font-size: 11px !important;
     width: 100% !important;
     border-radius: 6px !important;
+  }
+
+  /* Hide Secondary Quick-View Button on Mobile to Fit 2-Column Product Cards */
+  :is(
+    .sg-wrapper,
+    .gia-wrapper,
+    .ap-storefront,
+    .swd-wrapper,
+    .sen-wrapper,
+    .fwd-root,
+    .ff-root,
+    .sz-root,
+    .hf-storefront-root,
+    .susie-root
+  ) :is(
+    .sg-view-btn,
+    .sg-card-actions .sg-view-btn,
+    .susie-product-card .susie-add-cart-btn:last-child
+  ) {
+    display: none !important;
   }
 
   /* ---------------------------------------------------------------------------
@@ -1429,6 +1450,7 @@
   [data-device-view="mobile"]
 ) :is(
   .sg-nav-left,
+  .sg-account-btn,
   .gia-nav,
   .ap-nav,
   .ap-main-nav,
@@ -1647,6 +1669,40 @@
   display: none !important;
 }
 
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) :is(
+  .sg-view-btn,
+  .sg-card-actions .sg-view-btn
+) {
+  display: none !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) .sg-card-actions .sg-add-btn {
+  width: 100% !important;
+  height: 38px !important;
+  padding: 0 10px !important;
+  font-size: 11.5px !important;
+  border-radius: 20px !important;
+  white-space: nowrap !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+}
+
 .susie-product-card .susie-add-cart-btn {
   width: 32px !important;
   height: 32px !important;
@@ -1774,6 +1830,7 @@
 ) :is(
   .sg-footer-grid,
   .sg-footer-cols,
+  .sg-footer-inner,
   .gia-footer-grid,
   .gia-footer-inner,
   .ap-footer-grid,
