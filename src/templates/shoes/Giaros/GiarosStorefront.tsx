@@ -515,9 +515,10 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
                     <span className="gia-prod-compare">{formatPrice(prod.originalPrice)}</span>
                   )}
                 </div>
-                <div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
+                <div className="gia-card-actions" style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
                   <button
                     type="button"
+                    className="gia-card-add-btn"
                     style={{
                       flex: 1,
                       padding: '8px 12px',
@@ -538,6 +539,7 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
                   </button>
                   <button
                     type="button"
+                    className="gia-card-view-btn"
                     style={{
                       padding: '8px 12px',
                       backgroundColor: '#ffffff',
@@ -643,7 +645,7 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
 
         <div className="gia-footer-bottom">
           <div>© Copyright 2024 - Powered by Shopify / Giaros Footwear Premium</div>
-          <div style={{ display: 'flex', gap: 12, fontSize: 14 }}>
+          <div className="gia-footer-badges" style={{ display: 'flex', gap: 12, fontSize: 14 }}>
             <span>💳 Visa</span>
             <span>Mastercard</span>
             <span>Amex</span>
