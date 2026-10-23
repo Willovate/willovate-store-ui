@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useCart } from '../hooks/useCart'
 import { formatCurrency } from '../lib/currency'
+import { lockScroll } from '../lib/scrollLock'
 import type { Product } from '../types'
 
 function CartItemThumbnail({ product }: { product: Product }) {
@@ -38,19 +39,8 @@ export function CartDrawer() {
   }, [setIsCartOpen])
 
   useEffect(() => {
-    const scrollContainer = document.getElementById('storefront-scroll-container')
-    if (isCartOpen) {
-      document.body.style.overflow = 'hidden'
-      if (scrollContainer) scrollContainer.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-      if (scrollContainer) scrollContainer.style.overflow = ''
-    }
-    return () => {
-      document.body.style.overflow = ''
-      const sc = document.getElementById('storefront-scroll-container')
-      if (sc) sc.style.overflow = ''
-    }
+    if (!isCartOpen) return
+    return lockScroll()
   }, [isCartOpen])
 
   useEffect(() => {

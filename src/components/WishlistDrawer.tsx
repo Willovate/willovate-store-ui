@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 import { useWishlist, type WishlistProduct } from '../hooks/useWishlist'
 import { useCart } from '../hooks/useCart'
 import { formatCurrency } from '../lib/currency'
+import { lockScroll } from '../lib/scrollLock'
 import type { Product } from '../types'
 
 function WishlistItemThumbnail({ item }: { item: WishlistProduct }) {
@@ -40,19 +41,8 @@ export function WishlistDrawer() {
   }, [setIsWishlistOpen])
 
   useEffect(() => {
-    const scrollContainer = document.getElementById('storefront-scroll-container')
-    if (isWishlistOpen) {
-      document.body.style.overflow = 'hidden'
-      if (scrollContainer) scrollContainer.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-      if (scrollContainer) scrollContainer.style.overflow = ''
-    }
-    return () => {
-      document.body.style.overflow = ''
-      const sc = document.getElementById('storefront-scroll-container')
-      if (sc) sc.style.overflow = ''
-    }
+    if (!isWishlistOpen) return
+    return lockScroll()
   }, [isWishlistOpen])
 
   useEffect(() => {

@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { templates } from '../data/templates'
 import { useTemplate } from '../hooks/useTemplate'
 import { TemplateRenderer } from '../components/TemplateRenderer'
+import { forceUnlockScroll } from '../lib/scrollLock'
 
 export default function PreviewPage() {
   const { id } = useParams()
@@ -10,6 +11,12 @@ export default function PreviewPage() {
   const { setSelectedTemplate } = useTemplate()
   const navigate = useNavigate()
   const [viewport, setViewport] = useState<'desktop' | 'tablet' | 'mobile'>('desktop')
+
+  useEffect(() => {
+    return () => {
+      forceUnlockScroll()
+    }
+  }, [])
 
   if (!template) {
     return <div style={{ padding: '100px', textAlign: 'center' }}><h2>Template not found</h2><Link to="/">Back to Marketplace</Link></div>
@@ -86,7 +93,7 @@ export default function PreviewPage() {
         </div>
       </header>
 
-      <main style={{ flex: 1, overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <main style={{ flex: 1, minHeight: 0, overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <div
           className="storefront-device-frame"
           style={{

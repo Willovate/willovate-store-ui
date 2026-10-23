@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
+import { lockScroll } from '../../lib/scrollLock'
 import type { StoreMenuFeature } from '../../types/template'
 
 interface StoreMenuProps {
@@ -24,19 +25,8 @@ export function StoreMenu({
   const filteredFeatures = features.filter(f => f.id !== 'cart' && f.label.toLowerCase() !== 'cart' && f.label.toLowerCase() !== 'shopping bag')
 
   useEffect(() => {
-    const scrollContainer = document.getElementById('storefront-scroll-container')
-    if (isOpen) {
-      document.body.style.overflow = 'hidden'
-      if (scrollContainer) scrollContainer.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-      if (scrollContainer) scrollContainer.style.overflow = ''
-    }
-    return () => {
-      document.body.style.overflow = ''
-      const sc = document.getElementById('storefront-scroll-container')
-      if (sc) sc.style.overflow = ''
-    }
+    if (!isOpen) return
+    return lockScroll()
   }, [isOpen])
 
   useEffect(() => {

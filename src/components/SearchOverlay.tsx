@@ -4,6 +4,7 @@ import { getProducts } from '../lib/api'
 import { ProductCard, type ProductCardItem } from './ProductCard'
 import { useCart } from '../hooks/useCart'
 import { templates } from '../data/templates'
+import { lockScroll } from '../lib/scrollLock'
 
 interface SearchOverlayProps {
   isOpen: boolean
@@ -152,18 +153,11 @@ export function SearchOverlay({ isOpen, onClose, templateId }: SearchOverlayProp
 
   useEffect(() => {
     if (!isOpen) return
+    return lockScroll()
+  }, [isOpen])
 
-    const scrollContainer = document.getElementById('storefront-scroll-container')
-    document.body.style.overflow = 'hidden'
-    if (scrollContainer) scrollContainer.style.overflow = 'hidden'
-
-    if (localTemplateProducts.length > 0) {
-      return () => {
-        document.body.style.overflow = ''
-        const sc = document.getElementById('storefront-scroll-container')
-        if (sc) sc.style.overflow = ''
-      }
-    }
+  useEffect(() => {
+    if (!isOpen || localTemplateProducts.length > 0) return
 
     const controller = new AbortController()
     queueMicrotask(() => {
@@ -188,9 +182,6 @@ export function SearchOverlay({ isOpen, onClose, templateId }: SearchOverlayProp
 
     return () => {
       controller.abort()
-      document.body.style.overflow = ''
-      const sc = document.getElementById('storefront-scroll-container')
-      if (sc) sc.style.overflow = ''
     }
   }, [isOpen, deferredSearch, retryKey, localTemplateProducts.length])
 
