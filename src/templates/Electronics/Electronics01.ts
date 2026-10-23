@@ -16,23 +16,22 @@ export const Electronics01: TemplateConfig = {
     colors: { primary: '#111111', background: '#fbfbfd', accent: '#0066cc' }
   },
   sections: [
-    { id: 's1', type: 'promo', props: { text: 'Free shipping on orders over $50.' } },
+    { id: 's1', type: 'promo', props: { text: 'Complimentary express delivery on all flagship devices.' } },
     { id: 's2', type: 'navbar', props: { brand: 'NOVA', style: 'minimal' } },
-    { id: 's3', type: 'full-hero', props: { title: 'Pro performance. Now in your hands.', subtitle: 'The new Nova X Pro features our most advanced chip yet.', image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&q=80&w=1600', ctaLabel: 'Buy Now' } },
-    { id: 's4', type: 'category-grid', props: { title: '', categories: [{ name: 'Phones', image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=600' }, { name: 'Audio', image: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80&w=600' }, { name: 'Watches', image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=600' }] } },
+    { id: 's3', type: 'full-hero', props: { title: 'Pro performance. Now in your hands.', subtitle: 'The new Nova X Pro features aerospace titanium and our most powerful silicon yet.', image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&q=80&w=1600', ctaLabel: 'Buy Now' } },
+    { id: 's4', type: 'category-grid', props: { title: '', categories: [{ name: 'Phones', image: 'https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&q=80&w=600' }, { name: 'Audio', image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=600' }, { name: 'Watches', image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=600' }] } },
     { id: 's5', type: 'catalog', props: {
       products: [
-        { id: 'n1', name: 'Nova X Pro', description: 'Flagship Smartphone', price: 999, imageUrl: 'https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&q=80&w=600' },
-        { id: 'n2', name: 'AeroBuds Pro', description: 'Active Noise Cancelling', price: 249, imageUrl: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=600' },
-        { id: 'n3', name: 'Nova Watch Series 8', description: 'Advanced Health Tracking', price: 399, imageUrl: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=600' },
-        { id: 'n4', name: 'NovaTab', description: 'Creativity Unleashed', price: 599, imageUrl: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&q=80&w=600' }
+        { id: 'n1', name: 'Nova X Pro', description: 'Flagship Smartphone with Pro Camera', price: 999, imageUrl: 'https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&q=80&w=600' },
+        { id: 'n2', name: 'AeroBuds Pro', description: 'Active Noise Cancelling Wireless Audio', price: 249, imageUrl: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=600' },
+        { id: 'n3', name: 'Nova Watch Ultra', description: 'Advanced Health & Fitness Tracking', price: 399, imageUrl: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=600' },
+        { id: 'n4', name: 'NovaTab Pro', description: 'Liquid Retina Display & M-Series Power', price: 599, imageUrl: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
-    { id: 's6', type: 'bento-grid', props: { title: 'Innovating the Everyday', items: [{ title: 'All-day battery', description: 'Up to 24 hours of use.', image: 'https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&q=80&w=600', size: 'large' }, { title: 'Titanium frame', description: 'Lighter and stronger.' }, { title: 'A17 Chip', description: 'Next-generation performance.' }] } },
-    { id: 's7', type: 'product-spotlight', props: { image: 'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&q=80&w=800', name: 'AeroBuds Pro', category: 'Audio', description: 'Experience sound like never before with industry-leading Active Noise Cancellation and spatial audio.', price: 249, features: ['Active Noise Cancellation', 'Spatial Audio', '30h battery life with case'], imageRight: true, badge: 'New' } },
-    { id: 's8', type: 'testimonials', props: { title: '', testimonials: [{ quote: 'The Nova X Pro is a masterclass in industrial design and raw performance.', author: 'Tech Today', role: 'Editor\'s Choice' }, { quote: 'Unparalleled battery life and the best display on the market right now.', author: 'Marcus C.', role: 'Tech Reviewer' }, { quote: 'The AeroBuds Pro deliver the cleanest sound profile I\'ve experienced in wireless audio.', author: 'Elena S.', role: 'Audio Engineer' }] } },
-    { id: 's9', type: 'feature-comparison', props: { title: 'Compare Models', products: [{ name: 'Nova X', price: 799 }, { name: 'Nova X Pro', price: 999, isHighlighted: true }], rows: [{ label: 'Display', values: ['6.1" OLED, 60Hz', '6.7" OLED, 120Hz ProMotion'] }, { label: 'Processor', values: ['A16 Chip', 'A17 Pro Chip'] }, { label: 'Camera', values: ['Dual 12MP System', 'Pro 48MP System'] }, { label: 'Battery', values: ['Up to 20 hours', 'Up to 24 hours'] }, { label: 'Material', values: ['Aerospace Aluminum', 'Grade 5 Titanium'] }] } },
-    { id: 's10', type: 'catalog', props: {
+    { id: 's6', type: 'bento-grid', props: { title: 'Innovating the Everyday', items: [{ title: 'All-day battery', description: 'Up to 24 hours of sustained playback.', image: 'https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&q=80&w=600', size: 'large' }, { title: 'Titanium Enclosure', description: 'Aerospace-grade durability with lighter weight.' }, { title: 'Pro Silicon Architecture', description: 'Next-generation computational processing.' }] } },
+    { id: 's7', type: 'product-spotlight', props: { image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=800', name: 'AeroBuds Pro', category: 'Audio', description: 'Experience sound like never before with industry-leading Active Noise Cancellation and spatial audio.', price: 249, features: ['Active Noise Cancellation', 'Personalized Spatial Audio', '30h battery life with case'], imageRight: true, badge: 'New Flagship' } },
+    { id: 's8', type: 'feature-comparison', props: { title: 'Compare Flagship Models', products: [{ name: 'Nova X', price: 799 }, { name: 'Nova X Pro', price: 999, isHighlighted: true }], rows: [{ label: 'Display', values: ['6.1" OLED, 60Hz', '6.7" OLED, 120Hz ProMotion'] }, { label: 'Processor', values: ['A16 Bionic', 'A17 Pro Silicon'] }, { label: 'Camera', values: ['Dual 12MP System', 'Pro 48MP Triple Array'] }, { label: 'Battery', values: ['Up to 20 hours', 'Up to 24 hours'] }, { label: 'Enclosure', values: ['Aerospace Aluminum', 'Grade 5 Titanium'] }] } },
+    { id: 's9', type: 'catalog', props: {
       title: 'Complete the Setup',
       products: [
         { id: 'na1', name: 'Nova MagCharge', description: 'Wireless charging accessory', price: 49, imageUrl: 'https://images.unsplash.com/photo-1628126235206-5260b9ea6441?auto=format&fit=crop&q=80&w=600' },
@@ -41,6 +40,7 @@ export const Electronics01: TemplateConfig = {
         { id: 'na4', name: 'Nova Link Cable', description: 'Braided USB-C charging cable', price: 29, imageUrl: 'https://images.unsplash.com/photo-1542393545-10f5cde2c810?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
+    { id: 's10', type: 'testimonials', props: { title: 'Industry Acclaim', testimonials: [{ quote: 'The Nova X Pro is a masterclass in industrial design and raw performance.', author: 'Tech Today', role: 'Editor\'s Choice' }, { quote: 'Unparalleled battery life and the best display on the market right now.', author: 'Marcus C.', role: 'Tech Reviewer' }, { quote: 'The AeroBuds Pro deliver the cleanest sound profile I\'ve experienced in wireless audio.', author: 'Elena S.', role: 'Audio Engineer' }] } },
     { id: 's11', type: 'newsletter', props: {} },
     { id: 's12', type: 'footer', props: {} }
   ],
