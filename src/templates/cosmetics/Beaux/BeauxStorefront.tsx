@@ -34,6 +34,14 @@ export const BeauxStorefront: React.FC<BeauxStorefrontProps> = ({
   onBack: _onBack,
 }) => {
   const effectiveDevice = deviceView || device || 'desktop'
+  const isMobile = effectiveDevice === 'mobile'
+  const isTablet = effectiveDevice === 'tablet'
+
+  const rootDeviceClass = isMobile
+    ? 'beaux-mobile device-mobile is-mobile'
+    : isTablet
+    ? 'beaux-tablet device-tablet is-tablet'
+    : `device-${effectiveDevice}`
 
   // State
   const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
@@ -170,7 +178,11 @@ export const BeauxStorefront: React.FC<BeauxStorefrontProps> = ({
     : {}
 
   return (
-    <div className={`beaux-wrapper device-${effectiveDevice}`} style={wrapperStyle}>
+    <div
+      className={`beaux-wrapper ${rootDeviceClass} device-${effectiveDevice}`}
+      data-device-view={effectiveDevice}
+      style={wrapperStyle}
+    >
       {/* Top Announcement Bar */}
       <div className="beaux-announcement-bar">
         <span>

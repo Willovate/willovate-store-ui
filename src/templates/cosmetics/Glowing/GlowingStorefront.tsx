@@ -34,6 +34,14 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
   onBack: _onBack,
 }) => {
   const effectiveDevice = deviceView || device || 'desktop'
+  const isMobile = effectiveDevice === 'mobile'
+  const isTablet = effectiveDevice === 'tablet'
+
+  const rootDeviceClass = isMobile
+    ? 'glowing-mobile device-mobile is-mobile'
+    : isTablet
+    ? 'glowing-tablet device-tablet is-tablet'
+    : `device-${effectiveDevice}`
 
   // State
   const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
@@ -173,7 +181,11 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
     : {}
 
   return (
-    <div className={`glowing-wrapper device-${effectiveDevice}`} style={wrapperStyle}>
+    <div
+      className={`glowing-wrapper ${rootDeviceClass} device-${effectiveDevice}`}
+      data-device-view={effectiveDevice}
+      style={wrapperStyle}
+    >
       {/* Announcement Bar */}
       <div className="glowing-announcement-bar">
         <div>
@@ -255,7 +267,10 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
               onClick={() => setIsSearchOpen(true)}
               aria-label="Search"
             >
-              <span>🔍</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
             </button>
 
             <button className="glowing-action-btn glowing-account-btn" title="Account" onClick={() => setIsAccountOpen(true)}>
@@ -781,6 +796,7 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
       {quickViewProduct && (
         <div className="glowing-drawer-backdrop" onClick={() => setQuickViewProduct(null)}>
           <div
+            className="glowing-quickview-dialog"
             style={{ background: '#fff', borderRadius: '8px', maxWidth: '700px', width: '90%', margin: 'auto', display: 'grid', gridTemplateColumns: '1fr 1fr', overflow: 'hidden', position: 'relative' }}
             onClick={(e) => e.stopPropagation()}
           >

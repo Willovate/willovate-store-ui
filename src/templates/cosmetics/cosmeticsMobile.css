@@ -555,6 +555,11 @@
   .beaux-nav-center,
   .glowing-nav-left,
   .glowing-header-nav,
+  .glowing-navbar,
+  .glowing-desktop-search,
+  .glowing-currency-select,
+  .glowing-account-btn,
+  .glowing-announcement-right,
   .belletny-nav-links,
   .belletny-nav-row,
   .dezel-nav,
@@ -688,6 +693,7 @@
 ) :is(
   .beaux-hero-slider,
   .glowing-hero-slider,
+  .glowing-hero,
   .belletny-hero-slider,
   .dezel-hero,
   .dtspa-hero,
@@ -702,6 +708,61 @@
   padding: 24px 14px !important;
   gap: 20px !important;
   min-height: auto !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile
+) :is(
+  .glowing-promo-grid,
+  .glowing-fav-split,
+  .glowing-discover-grid,
+  .glowing-props-grid,
+  .glowing-press-grid,
+  .beaux-special-grid,
+  .beaux-blog-grid
+) {
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 14px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile
+) :is(
+  .glowing-fav-grid
+) {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile
+) :is(
+  .beaux-footer-grid,
+  .glowing-footer-grid,
+  .belletny-footer-grid,
+  .dezel-footer-grid,
+  .dtspa-footer-grid,
+  .fabish-footer-grid,
+  .lipura-footer-grid,
+  .organica-footer-grid,
+  .shades-footer-grid,
+  .smetic-footer-grid
+) {
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 24px !important;
+  text-align: center !important;
 }
 
 
