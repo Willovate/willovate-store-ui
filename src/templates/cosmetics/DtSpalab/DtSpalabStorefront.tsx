@@ -38,6 +38,13 @@ export function DtSpalabStorefront({
   onBack: _onBack,
 }: DtSpalabStorefrontProps) {
   const effectiveDevice = (deviceView as string) || device || 'desktop'
+  const isMobile = effectiveDevice === 'mobile'
+  const isTablet = effectiveDevice === 'tablet'
+  const rootDeviceClass = isMobile
+    ? 'dtspa-mobile device-mobile is-mobile'
+    : isTablet
+    ? 'dtspa-tablet device-tablet is-tablet'
+    : 'dtspa-desktop device-desktop'
 
   // Category filter state
   const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
@@ -169,7 +176,8 @@ export function DtSpalabStorefront({
 
   return (
     <div
-      className={`dtspa-storefront device-${effectiveDevice}`}
+      className={`dtspa-storefront ${rootDeviceClass}`}
+      data-device-view={effectiveDevice}
       style={
         customAccentColor
           ? ({ '--dtspa-purple': customAccentColor } as React.CSSProperties)
@@ -178,9 +186,9 @@ export function DtSpalabStorefront({
     >
       {/* Top Banner Notice */}
       <div className="dtspa-topbar">
-        <div className="dtspa-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span>{DTSPALAB_TOP_BAR}</span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div className="dtspa-container dtspa-topbar-inner" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span className="dtspa-topbar-text">{DTSPALAB_TOP_BAR}</span>
+          <div className="dtspa-currency-wrap" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span style={{ fontSize: '11px', opacity: 0.85 }}>Currency:</span>
             <select
               value={currency}
@@ -222,7 +230,7 @@ export function DtSpalabStorefront({
             </button>
 
             {/* Brand Logo - User constraint: ONLY name show, no password buddha */}
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div className="dtspa-logo-wrap" style={{ display: 'flex', alignItems: 'center' }}>
               <a href="#hero" className="dtspa-logo-title" onClick={(e) => { e.preventDefault(); setViewMode('home'); setSelectedProduct(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
                 Dt-Spalab
               </a>

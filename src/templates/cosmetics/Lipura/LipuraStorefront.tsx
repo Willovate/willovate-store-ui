@@ -33,6 +33,13 @@ export function LipuraStorefront({
   onBack: _onBack,
 }: LipuraStorefrontProps) {
   const effectiveDevice = (deviceView as string) || device || 'desktop'
+  const isMobile = effectiveDevice === 'mobile'
+  const isTablet = effectiveDevice === 'tablet'
+  const rootDeviceClass = isMobile
+    ? 'lipura-mobile device-mobile is-mobile'
+    : isTablet
+    ? 'lipura-tablet device-tablet is-tablet'
+    : 'lipura-desktop device-desktop'
 
   // Filter state
   const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
@@ -162,7 +169,8 @@ export function LipuraStorefront({
 
   return (
     <div
-      className={`lipura-storefront device-${effectiveDevice}`}
+      className={`lipura-storefront ${rootDeviceClass}`}
+      data-device-view={effectiveDevice}
       style={
         customAccentColor
           ? ({ '--lipura-gold': customAccentColor } as React.CSSProperties)
@@ -170,10 +178,10 @@ export function LipuraStorefront({
       }
     >
       {/* Top Banner Notice */}
-      <div style={{ backgroundColor: '#111111', color: '#ffffff', fontSize: '12px', padding: '6px 20px', letterSpacing: '1px' }}>
-        <div className="lipura-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span>COMPLIMENTARY LUXURY GIFT PACKAGING &bull; FREE EXPRESS SHIPPING OVER {formatPrice(100)}</span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+      <div className="lipura-top-bar" style={{ backgroundColor: '#111111', color: '#ffffff', fontSize: '12px', padding: '6px 20px', letterSpacing: '1px' }}>
+        <div className="lipura-container lipura-top-bar-inner" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span className="lipura-top-bar-text">COMPLIMENTARY LUXURY GIFT PACKAGING &bull; FREE EXPRESS SHIPPING OVER {formatPrice(100)}</span>
+          <div className="lipura-currency-wrap" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span style={{ fontSize: '11px', opacity: 0.85 }}>Currency:</span>
             <select
               value={currency}
@@ -215,9 +223,11 @@ export function LipuraStorefront({
             </button>
 
             {/* Logo */}
-            <a href="#hero" className="lipura-brand-name" onClick={(e) => { e.preventDefault(); setViewMode('home'); setSelectedProduct(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
-              LIPURA
-            </a>
+            <div className="lipura-logo-wrap" style={{ display: 'flex', alignItems: 'center' }}>
+              <a href="#hero" className="lipura-brand-name" onClick={(e) => { e.preventDefault(); setViewMode('home'); setSelectedProduct(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
+                LIPURA
+              </a>
+            </div>
 
             {/* Nav */}
             <nav className="lipura-nav">

@@ -39,6 +39,13 @@ export function FabishStorefront({
   onBack: _onBack,
 }: FabishStorefrontProps) {
   const effectiveDevice = (deviceView as string) || device || 'desktop'
+  const isMobile = effectiveDevice === 'mobile'
+  const isTablet = effectiveDevice === 'tablet'
+  const rootDeviceClass = isMobile
+    ? 'fabish-mobile device-mobile is-mobile'
+    : isTablet
+    ? 'fabish-tablet device-tablet is-tablet'
+    : 'fabish-desktop device-desktop'
 
   // Navigation & Category Tab state
   const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
@@ -180,7 +187,8 @@ export function FabishStorefront({
 
   return (
     <div
-      className={`fabish-storefront device-${effectiveDevice}`}
+      className={`fabish-storefront ${rootDeviceClass}`}
+      data-device-view={effectiveDevice}
       style={
         customAccentColor
           ? ({ '--fabish-pink': customAccentColor } as React.CSSProperties)
@@ -189,11 +197,11 @@ export function FabishStorefront({
     >
       {/* 1. Announcement Bar */}
       <div className="fabish-announcement">
-        <div className="fabish-announcement-links" style={{ visibility: 'hidden' }}>
+        <div className="fabish-announcement-links fabish-announcement-left" style={{ visibility: 'hidden' }}>
           <span>USD $</span>
         </div>
         <div className="fabish-announcement-text">{FABISH_ANNOUNCEMENT}</div>
-        <div className="fabish-announcement-links" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div className="fabish-announcement-links fabish-currency-wrap" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <select
             value={currency}
             onChange={(e) => setCurrency(e.target.value as 'USD' | 'INR')}
@@ -240,12 +248,12 @@ export function FabishStorefront({
           </button>
 
           {/* Logo */}
-          <a href="#fabish" className="fabish-logo-link" onClick={(e) => { e.preventDefault(); setViewMode('home'); setSelectedProduct(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
+          <a href="#fabish" className="fabish-logo-link fabish-logo-wrap" onClick={(e) => { e.preventDefault(); setViewMode('home'); setSelectedProduct(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
             <img src={FABISH_LOGO} alt="Fabish" className="fabish-logo-img" />
           </a>
 
           {/* Navigation Links */}
-          <nav>
+          <nav className="fabish-nav">
             <ul className="fabish-nav-menu">
               {navItems.map((item) => (
                 <li key={item.label} className="wv-nav-dropdown-wrap">

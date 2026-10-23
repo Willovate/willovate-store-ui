@@ -39,6 +39,13 @@ export function OrganicaStorefront({
   onBack: _onBack,
 }: OrganicaStorefrontProps) {
   const effectiveDevice = (deviceView as string) || device || 'desktop'
+  const isMobile = effectiveDevice === 'mobile'
+  const isTablet = effectiveDevice === 'tablet'
+  const rootDeviceClass = isMobile
+    ? 'organica-mobile device-mobile is-mobile'
+    : isTablet
+    ? 'organica-tablet device-tablet is-tablet'
+    : 'organica-desktop device-desktop'
 
   // Navigation & Category Tab state
   const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
@@ -172,7 +179,8 @@ export function OrganicaStorefront({
 
   return (
     <div
-      className={`organica-storefront device-${effectiveDevice}`}
+      className={`organica-storefront ${rootDeviceClass}`}
+      data-device-view={effectiveDevice}
       style={
         customAccentColor
           ? ({ '--organica-green': customAccentColor } as React.CSSProperties)
@@ -182,11 +190,11 @@ export function OrganicaStorefront({
       {/* 1. Announcement Top Bar */}
       <div className="organica-top-announcement">
         <div
-          className="organica-container"
+          className="organica-container organica-top-announcement-inner"
           style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
         >
-          <span>{ORGANICA_ANNOUNCEMENT}</span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span className="organica-top-announcement-text">{ORGANICA_ANNOUNCEMENT}</span>
+          <div className="organica-currency-wrap" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span style={{ fontSize: '11px', opacity: 0.9 }}>Currency:</span>
             <select
               value={currency}
@@ -237,7 +245,7 @@ export function OrganicaStorefront({
             </div>
 
             {/* Logo */}
-            <a href="#organica" style={{ display: 'flex', alignItems: 'center' }} onClick={(e) => { e.preventDefault(); setViewMode('home'); setSelectedProduct(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
+            <a href="#organica" className="organica-logo-wrap" style={{ display: 'flex', alignItems: 'center' }} onClick={(e) => { e.preventDefault(); setViewMode('home'); setSelectedProduct(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
               <img src={ORGANICA_LOGO} alt="Organica" className="organica-logo-img" />
             </a>
 

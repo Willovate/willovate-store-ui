@@ -38,6 +38,13 @@ export function BelletnyStorefront({
   onBack: _onBack,
 }: BelletnyStorefrontProps) {
   const effectiveDevice = (deviceView as string) || device || 'desktop'
+  const isMobile = effectiveDevice === 'mobile'
+  const isTablet = effectiveDevice === 'tablet'
+  const rootDeviceClass = isMobile
+    ? 'belletny-mobile device-mobile is-mobile'
+    : isTablet
+    ? 'belletny-tablet device-tablet is-tablet'
+    : 'belletny-desktop device-desktop'
 
   // Navigation & Tabs
   const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
@@ -169,7 +176,8 @@ export function BelletnyStorefront({
 
   return (
     <div
-      className={`belletny-storefront device-${effectiveDevice}`}
+      className={`belletny-storefront ${rootDeviceClass}`}
+      data-device-view={effectiveDevice}
       style={
         customAccentColor
           ? ({ '--belletny-maroon': customAccentColor } as React.CSSProperties)
@@ -194,7 +202,7 @@ export function BelletnyStorefront({
             </button>
 
             {/* Phone & Currency */}
-            <div className="belletny-service-wrap" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <div className="belletny-service-wrap belletny-currency-wrap" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
               <div className="belletny-service-text">
                 Customer Service : {BELLETNY_PHONE}
               </div>

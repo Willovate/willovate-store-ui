@@ -547,113 +547,650 @@
   flex-direction: column;
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-  .lipura-promos-grid {
-    grid-template-columns: 1fr;
-  }
-  .lipura-products-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .lipura-attrs-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .lipura-ultra-grid {
-    grid-template-columns: 1fr;
-  }
-  .lipura-footer-grid {
-    grid-template-columns: 1fr 1fr;
-  }
+/* =========================================================================
+   TABLET RESPONSIVE STYLES
+   ========================================================================= */
+:is(
+  .lipura-storefront.device-tablet,
+  .lipura-storefront.lipura-tablet,
+  .simulated-frame.frame-tablet .lipura-storefront,
+  .preview-viewport-container.device-tablet .lipura-storefront
+) {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  overflow-x: hidden !important;
 }
 
-.lipura-hamburger-btn {
+:is(
+  .lipura-storefront.device-tablet,
+  .lipura-storefront.lipura-tablet,
+  .simulated-frame.frame-tablet .lipura-storefront,
+  .preview-viewport-container.device-tablet .lipura-storefront
+) .lipura-container {
+  max-width: 100% !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+
+:is(
+  .lipura-storefront.device-tablet,
+  .lipura-storefront.lipura-tablet,
+  .simulated-frame.frame-tablet .lipura-storefront,
+  .preview-viewport-container.device-tablet .lipura-storefront
+) .lipura-products-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+:is(
+  .lipura-storefront.device-tablet,
+  .lipura-storefront.lipura-tablet,
+  .simulated-frame.frame-tablet .lipura-storefront,
+  .preview-viewport-container.device-tablet .lipura-storefront
+) .lipura-promos-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+:is(
+  .lipura-storefront.device-tablet,
+  .lipura-storefront.lipura-tablet,
+  .simulated-frame.frame-tablet .lipura-storefront,
+  .preview-viewport-container.device-tablet .lipura-storefront
+) .lipura-attrs-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+}
+
+:is(
+  .lipura-storefront.device-tablet,
+  .lipura-storefront.lipura-tablet,
+  .simulated-frame.frame-tablet .lipura-storefront,
+  .preview-viewport-container.device-tablet .lipura-storefront
+) .lipura-footer-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 24px !important;
+}
+
+/* =========================================================================
+   COMPREHENSIVE MOBILE VIEW STYLES (FASHION STORE STANDARD)
+   Applies to:
+   1. Real mobile viewports (@media (max-width: 768px))
+   2. Simulated frames (.device-mobile, .frame-mobile, .is-mobile)
+   ========================================================================= */
+
+/* Desktop defaults: Hide mobile hamburger */
+.lipura-hamburger-btn,
+.lipura-storefront .wv-mobile-hamburger-btn {
   display: none;
 }
 
-.lipura-nl-form {
-  display: flex;
-  gap: 8px;
+/* Base Hamburger button styling */
+.lipura-storefront .wv-mobile-hamburger-btn {
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0;
+  flex-shrink: 0;
+  box-sizing: border-box;
 }
 
+.lipura-storefront .wv-mobile-hamburger-bar {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background-color: #ffffff;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+}
+
+/* 1. Root & Container Layout */
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) img {
+  max-width: 100% !important;
+}
+
+/* 2. Top Announcement Bar */
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-top-bar {
+  padding: 6px 10px !important;
+  font-size: 11px !important;
+  line-height: 1.3 !important;
+  text-align: center !important;
+}
+
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-top-bar-inner {
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-currency-wrap {
+  display: none !important;
+}
+
+/* 3. Header Single-Row Mobile Layout */
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-header {
+  padding: 8px 0 !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 100 !important;
+  background-color: #000000 !important;
+}
+
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-header-inner {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 10px !important;
+  gap: 8px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .wv-mobile-hamburger-btn,
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-hamburger-btn {
+  display: flex !important;
+  flex: 0 0 auto !important;
+}
+
+/* Centered Logo */
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-logo-wrap,
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-header-inner > div:nth-child(2) {
+  flex: 1 1 auto !important;
+  text-align: center !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  min-width: 0 !important;
+  padding: 0 4px !important;
+}
+
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-brand-name {
+  font-size: 20px !important;
+  line-height: 1 !important;
+  margin: 0 auto !important;
+  letter-spacing: 2px !important;
+}
+
+/* Hide desktop nav and account */
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) nav,
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-nav,
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-nav-menu,
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .wv-desktop-dropdown,
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-account-btn {
+  display: none !important;
+}
+
+/* Actions Right */
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-header-actions {
+  flex: 0 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  justify-content: flex-end !important;
+}
+
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .wv-mobile-action-btn,
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-icon-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 8px !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  color: #ffffff !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+  position: relative !important;
+}
+
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) :is(.wv-mobile-badge-counter, .lipura-cart-badge) {
+  position: absolute !important;
+  top: -3px !important;
+  right: -3px !important;
+  background-color: var(--lipura-gold) !important;
+  color: #000000 !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  width: 16px !important;
+  height: 16px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* 4. Hero Section */
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-hero-section {
+  min-height: 380px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  overflow: hidden !important;
+  text-align: center !important;
+}
+
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-hero-content {
+  max-width: 100% !important;
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  margin: 0 auto !important;
+  padding: 30px 14px !important;
+}
+
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-hero-h1 {
+  font-size: clamp(24px, 7vw, 32px) !important;
+  line-height: 1.25 !important;
+  margin-bottom: 12px !important;
+  text-align: center !important;
+}
+
+/* 5. 2 Promo Banners (1-Col Clean Stack) */
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-promos-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 14px !important;
+}
+
+/* 6. Products Grid (2-Col Clean Mobile Grid) */
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-products-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-product-card {
+  padding: 10px !important;
+}
+
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-product-thumb {
+  height: 160px !important;
+}
+
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-product-img {
+  max-height: 140px !important;
+  object-fit: contain !important;
+}
+
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-card-title {
+  font-size: 13px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-card-btn {
+  width: 100% !important;
+  padding: 8px 10px !important;
+  font-size: 11px !important;
+}
+
+/* 7. Attributes Grid (2-Col Clean Mobile Grid) */
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-attrs-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+/* 8. Ultra Luxury Section (1-Col Clean Stack) */
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-ultra-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+  text-align: center !important;
+}
+
+/* 9. Footer */
+:is(
+  .lipura-storefront.device-mobile,
+  .lipura-storefront.lipura-mobile,
+  .lipura-storefront.is-mobile,
+  .lipura-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .lipura-storefront,
+  .preview-viewport-container.device-mobile .lipura-storefront
+) .lipura-footer-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 24px !important;
+  text-align: center !important;
+}
+
+/* =========================================================================
+   MEDIA QUERY FALLBACKS FOR REAL MOBILE VIEWPORTS
+   ========================================================================= */
 @media (max-width: 768px) {
-  .lipura-hamburger-btn {
-    display: flex !important;
-  }
-  .lipura-header-inner {
-    padding: 10px 0;
-    flex-wrap: nowrap;
-  }
-  .lipura-header-actions {
-    gap: 8px;
-  }
-  .lipura-account-btn {
-    display: none !important;
-  }
-  .lipura-nav {
-    display: none !important;
-  }
-  .lipura-nav-menu {
-    display: none !important;
-  }
-  .lipura-nl-form {
-    flex-direction: column;
-    border-radius: 8px;
-  }
-  .lipura-nl-form input {
-    width: 100%;
-  }
-  .lipura-nl-form button {
-    width: 100%;
-    margin-top: 8px;
-  }
-  .lipura-hero-h1 {
-    font-size: 36px;
-  }
-  .lipura-products-grid {
-    grid-template-columns: 1fr;
-  }
-  .lipura-footer-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 600px) {
   .lipura-storefront {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    overflow-x: clip;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
   }
 
   .lipura-container {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    padding-right: 16px;
-    padding-left: 16px;
-    box-sizing: border-box;
+    width: 100% !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
   }
 
-  .lipura-products-grid,
-  .lipura-promos-grid,
+  .lipura-currency-wrap,
+  .lipura-account-btn,
+  .lipura-nav,
+  .lipura-nav-menu,
+  nav {
+    display: none !important;
+  }
+
+  .lipura-hamburger-btn {
+    display: flex !important;
+  }
+
+  .lipura-header {
+    padding: 8px 0 !important;
+  }
+
+  .lipura-header-inner {
+    padding: 0 10px !important;
+    gap: 8px !important;
+  }
+
+  .lipura-logo-wrap,
+  .lipura-header-inner > div:nth-child(2) {
+    flex: 1 1 auto !important;
+    justify-content: center !important;
+  }
+
+  .lipura-brand-name {
+    font-size: 20px !important;
+  }
+
+  .lipura-promos-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .lipura-products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
   .lipura-attrs-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
   }
 
-  .lipura-nav {
-    display: none !important;
+  .lipura-ultra-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
   }
 
-  .lipura-nav-menu {
-    display: none !important;
-  }
-
-  .lipura-hero-h1 {
-    font-size: clamp(28px, 8vw, 36px);
-  }
-
-  .lipura-storefront img {
-    max-width: 100%;
+  .lipura-footer-grid {
+    grid-template-columns: 1fr !important;
+    text-align: center !important;
+    gap: 24px !important;
   }
 }

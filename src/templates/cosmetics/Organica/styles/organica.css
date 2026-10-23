@@ -1041,127 +1041,773 @@
   background-color: var(--organica-green-light);
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-  .organica-hero-grid {
-    grid-template-columns: 1fr;
-  }
-  .organica-products-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .organica-dual-grid {
-    grid-template-columns: 1fr;
-  }
-  .organica-boxes-grid {
-    grid-template-columns: 1fr;
-  }
-  .organica-blog-grid {
-    grid-template-columns: 1fr;
-  }
-  .organica-footer-grid {
-    grid-template-columns: 1fr 1fr;
-  }
+/* =========================================================================
+   TABLET RESPONSIVE STYLES
+   ========================================================================= */
+:is(
+  .organica-storefront.device-tablet,
+  .organica-storefront.organica-tablet,
+  .simulated-frame.frame-tablet .organica-storefront,
+  .preview-viewport-container.device-tablet .organica-storefront
+) {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  overflow-x: hidden !important;
 }
 
+:is(
+  .organica-storefront.device-tablet,
+  .organica-storefront.organica-tablet,
+  .simulated-frame.frame-tablet .organica-storefront,
+  .preview-viewport-container.device-tablet .organica-storefront
+) .organica-container {
+  max-width: 100% !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+
+:is(
+  .organica-storefront.device-tablet,
+  .organica-storefront.organica-tablet,
+  .simulated-frame.frame-tablet .organica-storefront,
+  .preview-viewport-container.device-tablet .organica-storefront
+) .organica-products-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+:is(
+  .organica-storefront.device-tablet,
+  .organica-storefront.organica-tablet,
+  .simulated-frame.frame-tablet .organica-storefront,
+  .preview-viewport-container.device-tablet .organica-storefront
+) .organica-boxes-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+:is(
+  .organica-storefront.device-tablet,
+  .organica-storefront.organica-tablet,
+  .simulated-frame.frame-tablet .organica-storefront,
+  .preview-viewport-container.device-tablet .organica-storefront
+) .organica-trust-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+}
+
+:is(
+  .organica-storefront.device-tablet,
+  .organica-storefront.organica-tablet,
+  .simulated-frame.frame-tablet .organica-storefront,
+  .preview-viewport-container.device-tablet .organica-storefront
+) .organica-footer-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 24px !important;
+}
+
+/* =========================================================================
+   COMPREHENSIVE MOBILE VIEW STYLES (FASHION STORE STANDARD)
+   Applies to:
+   1. Real mobile viewports (@media (max-width: 768px))
+   2. Simulated frames (.device-mobile, .frame-mobile, .is-mobile)
+   ========================================================================= */
+
+/* Desktop defaults: Hide mobile hamburger */
+.organica-hamburger-btn,
+.organica-storefront .wv-mobile-hamburger-btn,
 .organica-mobile-search-btn,
 .organica-mobile-cart-icon {
   display: none;
 }
 
+/* Base Hamburger button styling */
+.organica-storefront .wv-mobile-hamburger-btn {
+  width: 36px;
+  height: 36px;
+  background: var(--organica-green-light);
+  border: 1px solid var(--organica-border);
+  border-radius: 8px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.organica-storefront .wv-mobile-hamburger-bar {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background-color: var(--organica-text);
+  border-radius: 2px;
+  transition: all 0.2s ease;
+}
+
+/* 1. Root & Container Layout */
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) img {
+  max-width: 100% !important;
+}
+
+/* 2. Top Announcement Bar */
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-top-announcement {
+  padding: 6px 10px !important;
+  font-size: 11px !important;
+  line-height: 1.3 !important;
+  text-align: center !important;
+}
+
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-top-announcement-inner {
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-currency-wrap {
+  display: none !important;
+}
+
+/* 3. Header Single-Row Mobile Layout */
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-header-mid {
+  padding: 8px 0 !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 100 !important;
+  background: #ffffff !important;
+}
+
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-mid-inner {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 10px !important;
+  gap: 8px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .wv-mobile-hamburger-btn,
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-hamburger-btn {
+  display: flex !important;
+  flex: 0 0 auto !important;
+}
+
+/* Centered Logo */
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-logo-wrap,
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-mid-inner > a {
+  flex: 1 1 auto !important;
+  text-align: center !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  min-width: 0 !important;
+  padding: 0 4px !important;
+}
+
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-logo-img {
+  max-height: 24px !important;
+  max-width: 120px !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+  margin: 0 auto !important;
+  display: block !important;
+}
+
+/* Hide desktop phone, search bar, account, and desktop cart text */
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-phone-box,
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-search-bar,
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-account-btn,
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-btn-text,
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-desktop-cart-wrap,
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-nav-bar,
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-nav-list,
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .wv-desktop-dropdown {
+  display: none !important;
+}
+
+/* Actions Right */
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-header-user {
+  flex: 0 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  justify-content: flex-end !important;
+}
+
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .wv-mobile-action-btn,
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-mobile-search-btn,
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-wishlist-btn,
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-cart-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 8px !important;
+  background: var(--organica-green-light) !important;
+  border: 1px solid var(--organica-border) !important;
+  color: var(--organica-text) !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+  position: relative !important;
+}
+
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-mobile-cart-icon {
+  display: inline-block !important;
+}
+
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) :is(.wv-mobile-badge-counter, .organica-cart-badge, .organica-badge-counter) {
+  position: absolute !important;
+  top: -3px !important;
+  right: -3px !important;
+  background-color: var(--organica-green) !important;
+  color: #ffffff !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  width: 16px !important;
+  height: 16px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* 4. Hero Section */
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-hero-grid {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+  text-align: center !important;
+}
+
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-hero-side {
+  display: none !important;
+}
+
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-hero-slider {
+  min-height: 340px !important;
+}
+
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-hero-content {
+  padding: 30px 14px !important;
+}
+
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-hero-title {
+  font-size: clamp(24px, 7vw, 32px) !important;
+  line-height: 1.25 !important;
+}
+
+/* 5. Trust Grid (2-Col Clean Mobile Grid) */
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-trust-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+/* 6. Products Grid (2-Col Clean Mobile Grid) */
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-products-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-card {
+  padding: 10px !important;
+}
+
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-card-thumb {
+  height: 160px !important;
+}
+
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-card-img {
+  max-height: 140px !important;
+  object-fit: contain !important;
+}
+
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-card-name {
+  font-size: 13px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* 7. Category Boxes & Dual Banners */
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-boxes-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-dual-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 14px !important;
+}
+
+/* 8. Newsletter */
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-newsletter-inner {
+  flex-direction: column !important;
+  text-align: center !important;
+  gap: 16px !important;
+}
+
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-newsletter-form {
+  flex-direction: column !important;
+  gap: 8px !important;
+  width: 100% !important;
+}
+
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-nl-input {
+  border-radius: 8px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-nl-btn {
+  border-radius: 8px !important;
+  width: 100% !important;
+}
+
+/* 9. Footer */
+:is(
+  .organica-storefront.device-mobile,
+  .organica-storefront.organica-mobile,
+  .organica-storefront.is-mobile,
+  .organica-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .organica-storefront,
+  .preview-viewport-container.device-mobile .organica-storefront
+) .organica-footer-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 24px !important;
+  text-align: center !important;
+}
+
+/* =========================================================================
+   MEDIA QUERY FALLBACKS FOR REAL MOBILE VIEWPORTS
+   ========================================================================= */
 @media (max-width: 768px) {
-  .organica-header-mid {
-    padding: 10px 0 !important;
+  .organica-storefront {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
   }
-  .organica-mid-inner {
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    gap: 8px !important;
+
+  .organica-container {
+    width: 100% !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
   }
+
+  .organica-currency-wrap,
   .organica-phone-box,
   .organica-search-bar,
   .organica-account-btn,
   .organica-btn-text,
-  .organica-desktop-cart-wrap {
+  .organica-desktop-cart-wrap,
+  .organica-nav-bar,
+  .organica-nav-list,
+  nav {
     display: none !important;
   }
+
+  .organica-hamburger-btn {
+    display: flex !important;
+  }
+
   .organica-mobile-search-btn {
     display: inline-flex !important;
   }
+
   .organica-mobile-cart-icon {
     display: inline-block !important;
   }
-  .organica-header-user {
-    display: flex !important;
-    align-items: center !important;
+
+  .organica-header-mid {
+    padding: 8px 0 !important;
+  }
+
+  .organica-mid-inner {
+    padding: 0 10px !important;
     gap: 8px !important;
   }
-  .organica-nav-bar {
-    display: none !important;
-  }
-  .organica-nav-list {
-    display: none;
-  }
-  .organica-trust-grid {
-    grid-template-columns: 1fr;
-  }
-  .organica-products-grid {
-    grid-template-columns: 1fr;
-  }
-  .organica-newsletter-inner {
-    flex-direction: column;
-  }
-  .organica-newsletter-form {
-    flex-wrap: wrap !important;
-  }
-  .organica-footer-grid {
-    grid-template-columns: 1fr;
-  }
-}
 
-@media (max-width: 600px) {
-  .organica-storefront {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    overflow-x: clip;
+  .organica-logo-wrap,
+  .organica-mid-inner > a {
+    flex: 1 1 auto !important;
+    justify-content: center !important;
   }
 
-  .organica-container {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    padding-right: 16px;
-    padding-left: 16px;
-    box-sizing: border-box;
-  }
-
-  .organica-products-grid,
-  .organica-boxes-grid,
-  .organica-dual-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-  }
-
-  .organica-nav-list {
-    display: flex;
-    width: 100%;
-    min-width: 0;
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
+  .organica-logo-img {
+    max-height: 24px !important;
   }
 
   .organica-hero-grid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 20px;
+    grid-template-columns: 1fr !important;
   }
 
-  .organica-hero-title {
-    font-size: clamp(28px, 8vw, 36px);
+  .organica-hero-side {
+    display: none !important;
   }
 
-  .organica-storefront img {
-    max-width: 100%;
+  .organica-trust-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .organica-products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .organica-boxes-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .organica-dual-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .organica-footer-grid {
+    grid-template-columns: 1fr !important;
+    text-align: center !important;
+    gap: 24px !important;
   }
 }
