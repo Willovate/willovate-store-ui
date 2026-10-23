@@ -26,10 +26,14 @@ import './styles/fashionFeet.css'
 export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
   template: _template,
   device = 'desktop',
+  deviceView,
   customAccentColor,
+  onColorChange: _onColorChange,
   onUseTemplate: _onUseTemplate,
   onClose: _onClose,
+  onBack: _onBack,
 }) => {
+  const effectiveDevice = deviceView || device || 'desktop'
   const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
   const [selectedProduct, setSelectedProduct] = useState<FashionFeetProduct | null>(null)
   const [currency, setCurrency] = useState<'USD' | 'INR'>('USD')
@@ -160,7 +164,7 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
 
   return (
     <div
-      className={`ff-root ${device !== 'desktop' ? `ff-device-${device}` : ''}`}
+      className={`ff-root device-${effectiveDevice} ${device !== 'desktop' ? `ff-device-${device}` : ''}`}
       style={{ '--ff-primary': activeColor } as React.CSSProperties}
     >
       {/* Top Notification Bar */}

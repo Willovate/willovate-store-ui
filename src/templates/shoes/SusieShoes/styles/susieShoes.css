@@ -1466,8 +1466,12 @@
   .preview-viewport-container.device-mobile .susie-root,
   [data-device-view="mobile"] .susie-root
 ) .susie-prod-img-wrap {
-  height: 160px !important;
-  max-height: 160px !important;
+  height: 135px !important;
+  max-height: 135px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-bottom: 8px !important;
 }
 
 :is(
@@ -1477,8 +1481,8 @@
   .preview-viewport-container.device-mobile .susie-root,
   [data-device-view="mobile"] .susie-root
 ) .susie-prod-img {
-  width: 100% !important;
-  height: 100% !important;
+  max-width: 90% !important;
+  max-height: 115px !important;
   object-fit: contain !important;
 }
 
@@ -2283,19 +2287,23 @@
   }
 
   .susie-product-card {
-    padding: 8px !important;
+    padding: 10px !important;
     border-radius: 12px !important;
     box-sizing: border-box !important;
   }
 
   .susie-prod-img-wrap {
-    height: 160px !important;
-    max-height: 160px !important;
+    height: 135px !important;
+    max-height: 135px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-bottom: 8px !important;
   }
 
   .susie-prod-img {
-    width: 100% !important;
-    height: 100% !important;
+    max-width: 90% !important;
+    max-height: 115px !important;
     object-fit: contain !important;
   }
 

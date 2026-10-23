@@ -628,6 +628,7 @@
     .sg-product-card,
     .gia-product-card,
     .ap-product-card,
+    .ap-prod-card,
     .swd-product-card,
     .sen-card,
     .fwd-card-dark,
@@ -637,8 +638,8 @@
     .susie-product-card,
     .susie-card
   ) {
-    padding: 8px !important;
-    border-radius: 8px !important;
+    padding: 10px !important;
+    border-radius: 10px !important;
     box-sizing: border-box !important;
     overflow: hidden !important;
   }
@@ -660,23 +661,27 @@
     .gia-card-thumb,
     .gia-prod-img-wrap,
     .ap-card-img-wrap,
+    .ap-prod-thumb-wrap,
     .swd-card-thumb,
     .swd-product-img-wrap,
     .sen-card-img-wrap,
     .fwd-card-thumb-area,
     .ff-card-thumb,
     .sz-card-thumb,
+    .sz-prod-img-wrap,
     .hf-card-thumb,
+    .hf-product-img-wrap,
     .susie-prod-img-wrap,
     .susie-card-thumb
   ) {
-    height: 160px !important;
-    max-height: 160px !important;
+    height: 135px !important;
+    max-height: 135px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     position: relative !important;
     overflow: hidden !important;
+    margin-bottom: 8px !important;
   }
 
   :is(
@@ -696,6 +701,7 @@
     .gia-prod-img-wrap img,
     .gia-prod-img,
     .ap-card-img-wrap img,
+    .ap-prod-thumb,
     .swd-card-thumb img,
     .swd-product-img-wrap img,
     .swd-product-img,
@@ -703,12 +709,14 @@
     .fwd-card-thumb-area img,
     .ff-card-thumb img,
     .sz-card-thumb img,
+    .sz-prod-img,
     .hf-card-thumb img,
+    .hf-product-img,
     .susie-prod-img,
     .susie-card-thumb img
   ) {
-    width: 100% !important;
-    height: 100% !important;
+    max-width: 90% !important;
+    max-height: 115px !important;
     object-fit: contain !important;
   }
 
@@ -756,11 +764,15 @@
     .sg-prod-name,
     .gia-card-title,
     .ap-card-title,
+    .ap-prod-name,
     .swd-card-title,
+    .swd-product-name,
     .sen-card-title,
     .ff-card-title,
     .sz-prod-title,
+    .sz-prod-name,
     .hf-card-title,
+    .hf-product-title,
     .susie-prod-title,
     .susie-card-title
   ) {
@@ -800,7 +812,9 @@
     .fwd-card-add-btn,
     .fwd-card-actions .fwd-card-add-btn,
     .ff-add-btn,
+    .ff-card-add-btn,
     .sz-add-btn,
+    .sz-prod-cart-btn,
     .hf-card-add-btn,
     .susie-card-add-btn
   ) {
@@ -863,13 +877,19 @@
     .swd-banner-grid,
     .swd-outdoor-banner,
     .swd-loved-grid,
+    .swd-dual-statement-grid,
     .sen-banner-grid,
     .fwd-featured-banner,
-  .fwd-promo-banner,
     .fwd-promo-banner,
     .ff-banner-grid,
+    .ff-bestsale-container,
+    .ff-showcase-grid,
     .sz-banner-grid,
+    .sz-cosmos-grid,
+    .sz-countdown-banner,
     .hf-arch-frame-container,
+    .hf-promo-card,
+    .hf-big-sale-banner,
     .susie-banners-grid,
     .susie-collage-grid
   ) {
@@ -2333,15 +2353,20 @@
 ) :is(
   .sg-products-grid,
   .gia-products-grid,
+  .gia-bestseller-grid,
+  .ap-products-grid,
   .ap-product-grid,
   .swd-products-grid,
   .sen-products-grid,
   .fwd-grid-3,
   .ff-products-grid,
   .ff-bestsale-grid,
+  .sz-product-grid,
   .sz-products-grid,
   .sz-bestseller-grid,
+  .hf-products-grid,
   .hf-product-grid,
+  .hf-deals-grid,
   .hf-suggested-grid,
   .susie-products-grid,
   [class*="products-grid"],
@@ -2454,12 +2479,19 @@
   .ap-banners-grid,
   .ap-banner-grid,
   .swd-banner-grid,
+  .swd-dual-statement-grid,
   .sen-banner-grid,
   .fwd-featured-banner,
   .fwd-promo-banner,
   .ff-banner-grid,
+  .ff-bestsale-container,
+  .ff-showcase-grid,
   .sz-banner-grid,
+  .sz-cosmos-grid,
+  .sz-countdown-banner,
   .hf-arch-frame-container,
+  .hf-promo-card,
+  .hf-big-sale-banner,
   .susie-banners-grid,
   .susie-collage-grid
 ) {
@@ -2537,7 +2569,9 @@
   .gia-card-add-btn,
   .gia-card-actions .gia-card-add-btn,
   .swd-card-add-btn,
-  .swd-card-actions .swd-card-add-btn
+  .swd-card-actions .swd-card-add-btn,
+  .ff-card-add-btn,
+  .sz-prod-cart-btn
 ) {
   width: 100% !important;
   height: 38px !important;
@@ -4856,15 +4890,19 @@
     .sg-products-grid,
     .gia-products-grid,
     .gia-bestseller-grid,
+    .ap-products-grid,
     .ap-product-grid,
     .swd-products-grid,
     .sen-products-grid,
     .fwd-grid-3,
     .ff-products-grid,
     .ff-bestsale-grid,
+    .sz-product-grid,
     .sz-products-grid,
     .sz-bestseller-grid,
+    .hf-products-grid,
     .hf-product-grid,
+    .hf-deals-grid,
     .hf-suggested-grid,
     .susie-products-grid
   ) {
@@ -4946,15 +4984,19 @@
 ) :is(
   .sg-products-grid,
   .gia-products-grid,
+  .ap-products-grid,
   .ap-product-grid,
   .swd-products-grid,
   .sen-products-grid,
   .fwd-grid-3,
   .ff-products-grid,
   .ff-bestsale-grid,
+  .sz-product-grid,
   .sz-products-grid,
   .sz-bestseller-grid,
+  .hf-products-grid,
   .hf-product-grid,
+  .hf-deals-grid,
   .hf-suggested-grid,
   .susie-products-grid
 ) {

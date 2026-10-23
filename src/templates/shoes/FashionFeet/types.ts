@@ -53,8 +53,11 @@ export interface FashionFeetCartItem {
 export interface FashionFeetStorefrontProps {
   template?: any
   device?: 'desktop' | 'tablet' | 'mobile'
+  deviceView?: 'desktop' | 'tablet' | 'mobile'
   customAccentColor?: string
+  onColorChange?: (color: string) => void
   onUseTemplate?: () => void
   onClose?: () => void
+  onBack?: () => void
 }
 
