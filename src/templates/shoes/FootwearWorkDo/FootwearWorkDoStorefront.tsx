@@ -29,8 +29,8 @@ export const FootwearWorkDoStorefront: React.FC<FootwearWorkDoStorefrontProps> =
   template: _template,
   device = 'desktop',
   customAccentColor,
-  onUseTemplate,
-  onClose,
+  onUseTemplate: _onUseTemplate,
+  onClose: _onClose,
 }) => {
   const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
   const [selectedProduct, setSelectedProduct] = useState<FootwearWorkDoProduct | null>(null)

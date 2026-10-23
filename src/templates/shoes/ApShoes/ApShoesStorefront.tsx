@@ -28,7 +28,7 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
   deviceView,
   customAccentColor,
   onColorChange: _onColorChange,
-  onUseTemplate,
+  onUseTemplate: _onUseTemplate,
   onClose: _onClose,
   onBack: _onBack,
 }) => {
@@ -942,18 +942,7 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
             <span className="ap-pay-pill">AMEX</span>
           </div>
 
-          {onUseTemplate && (
-            <div style={{ textAlign: 'center', marginTop: 24 }}>
-              <button
-                type="button"
-                className="ap-btn-checkout"
-                style={{ maxWidth: 280, margin: '0 auto', display: 'inline-block' }}
-                onClick={() => onUseTemplate('shoes-ap-shoes')}
-              >
-                USE THIS TEMPLATE
-              </button>
-            </div>
-          )}
+
         </div>
       </footer>
 

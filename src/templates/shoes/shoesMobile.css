@@ -119,6 +119,7 @@
     .swd-topbar,
     .sen-topbar,
     .fwd-top-bar,
+    .fwd-topbar,
     .ff-topbar,
     .ff-top-bar,
     .sz-topbar,
@@ -595,7 +596,6 @@
     .swd-products-grid,
     .sen-products-grid,
     .fwd-grid-3,
-    .fwd-bestseller-grid,
     .ff-products-grid,
     .ff-bestsale-grid,
     .sz-products-grid,
@@ -787,6 +787,8 @@
     .swd-card-add-btn,
     .sen-card-add-btn,
     .fwd-add-btn,
+    .fwd-card-add-btn,
+    .fwd-card-actions .fwd-card-add-btn,
     .ff-add-btn,
     .sz-add-btn,
     .hf-card-add-btn,
@@ -813,6 +815,8 @@
   ) :is(
     .sg-view-btn,
     .sg-card-actions .sg-view-btn,
+    .fwd-card-view-btn,
+    .fwd-card-actions .fwd-card-view-btn,
     .susie-product-card .susie-add-cart-btn:last-child
   ) {
     display: none !important;
@@ -843,6 +847,8 @@
     .swd-banner-grid,
     .sen-banner-grid,
     .fwd-featured-banner,
+  .fwd-promo-banner,
+    .fwd-promo-banner,
     .ff-banner-grid,
     .sz-banner-grid,
     .hf-arch-frame-container,
@@ -979,6 +985,7 @@
     .susie-feature-card,
     .gia-model-card,
     .fwd-visual-card,
+    .fwd-vis-card,
     .sen-visual-cat-card,
     .swd-retro-card
   ) {
@@ -1230,6 +1237,167 @@
     grid-template-columns: minmax(0, 1fr) !important;
     gap: 24px !important;
     text-align: center !important;
+  }
+  /* FootwearWorkDo Mobile Refinements */
+  .fwd-topbar {
+    padding: 6px 12px !important;
+  }
+
+  .fwd-topbar-inner {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  .fwd-topbar-links,
+  .fwd-topbar-phone {
+    display: none !important;
+  }
+
+  .fwd-topbar-controls {
+    display: flex !important;
+    gap: 8px !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
+  }
+
+  .fwd-hero-actions {
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+    max-width: 280px !important;
+    margin: 0 auto !important;
+  }
+
+  .fwd-hero-actions .fwd-btn-primary,
+  .fwd-hero-actions .fwd-btn-video {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 12px 18px !important;
+    box-sizing: border-box !important;
+  }
+
+  .fwd-hex-frame {
+    width: 220px !important;
+    height: 220px !important;
+  }
+
+  .fwd-hero-shoe-img {
+    max-width: 85% !important;
+    max-height: 180px !important;
+    object-fit: contain !important;
+  }
+
+  .fwd-bestseller-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .fwd-bestseller-card {
+    display: grid !important;
+    grid-template-columns: 1.2fr 1fr !important;
+    padding: 18px 16px !important;
+    border-radius: 16px !important;
+    gap: 14px !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+  }
+
+  .fwd-bestseller-card h3 {
+    font-size: 17px !important;
+    line-height: 1.25 !important;
+    margin: 0 0 6px !important;
+  }
+
+  .fwd-bestseller-card p {
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+    margin: 0 0 8px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+
+  .fwd-bestseller-card img {
+    max-height: 140px !important;
+    width: 100% !important;
+    object-fit: contain !important;
+  }
+
+  .fwd-card-view-btn,
+  .fwd-card-actions .fwd-card-view-btn {
+    display: none !important;
+  }
+
+  .fwd-card-add-btn,
+  .fwd-card-actions .fwd-card-add-btn {
+    width: 100% !important;
+    height: 38px !important;
+    padding: 0 10px !important;
+    font-size: 12px !important;
+    border-radius: 20px !important;
+    white-space: nowrap !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+
+  .fwd-promo-banner {
+    grid-template-columns: minmax(0, 1fr) !important;
+    padding: 24px 16px !important;
+    gap: 18px !important;
+    text-align: center !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    margin: 24px auto !important;
+  }
+
+  .fwd-promo-content {
+    padding: 0 !important;
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .fwd-promo-title {
+    font-size: 24px !important;
+    margin: 4px 0 10px !important;
+  }
+
+  .fwd-promo-img {
+    width: 100% !important;
+    max-width: 260px !important;
+    height: 180px !important;
+    object-fit: cover !important;
+    border-radius: 14px !important;
+    margin: 0 auto !important;
+  }
+
+  .fwd-promo-banner .fwd-btn-primary {
+    width: 100% !important;
+    max-width: 240px !important;
+    margin: 12px auto 0 !important;
+    justify-content: center !important;
+  }
+
+  .fwd-visual-categories {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 14px !important;
+    width: 100% !important;
+    padding: 0 14px !important;
+    box-sizing: border-box !important;
+  }
+
+  .fwd-vis-card {
+    height: 180px !important;
+    border-radius: 14px !important;
+    overflow: hidden !important;
   }
 }
 
@@ -1504,7 +1672,6 @@
   .swd-products-grid,
   .sen-products-grid,
   .fwd-grid-3,
-  .fwd-bestseller-grid,
   .ff-products-grid,
   .ff-bestsale-grid,
   .sz-products-grid,
@@ -1624,6 +1791,7 @@
   .swd-banner-grid,
   .sen-banner-grid,
   .fwd-featured-banner,
+  .fwd-promo-banner,
   .ff-banner-grid,
   .sz-banner-grid,
   .hf-arch-frame-container,
@@ -1678,7 +1846,10 @@
   [data-device-view="mobile"]
 ) :is(
   .sg-view-btn,
-  .sg-card-actions .sg-view-btn
+  .sg-card-actions .sg-view-btn,
+  .fwd-card-view-btn,
+  .fwd-card-actions .fwd-card-view-btn,
+  .susie-product-card .susie-add-cart-btn:last-child
 ) {
   display: none !important;
 }
@@ -1690,17 +1861,22 @@
   .frame-mobile,
   .is-mobile,
   [data-device-view="mobile"]
-) .sg-card-actions .sg-add-btn {
+) :is(
+  .sg-card-actions .sg-add-btn,
+  .fwd-card-add-btn,
+  .fwd-card-actions .fwd-card-add-btn
+) {
   width: 100% !important;
   height: 38px !important;
   padding: 0 10px !important;
-  font-size: 11.5px !important;
+  font-size: 12px !important;
   border-radius: 20px !important;
   white-space: nowrap !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   gap: 6px !important;
+  box-sizing: border-box !important;
 }
 
 .susie-product-card .susie-add-cart-btn {
@@ -2430,6 +2606,318 @@
   gap: 20px !important;
 }
 
+/* FootwearWorkDo Simulated Mobile Frame Rules */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) .fwd-topbar {
+  padding: 6px 12px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) .fwd-topbar-inner {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) :is(.fwd-topbar-links, .fwd-topbar-phone) {
+  display: none !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) .fwd-topbar-controls {
+  display: flex !important;
+  gap: 8px !important;
+  justify-content: center !important;
+  margin: 0 auto !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) .fwd-hero-actions {
+  flex-direction: column !important;
+  gap: 10px !important;
+  width: 100% !important;
+  max-width: 280px !important;
+  margin: 0 auto !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) .fwd-hero-actions :is(.fwd-btn-primary, .fwd-btn-video) {
+  width: 100% !important;
+  justify-content: center !important;
+  padding: 12px 18px !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) .fwd-hex-frame {
+  width: 220px !important;
+  height: 220px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) .fwd-hero-shoe-img {
+  max-width: 85% !important;
+  max-height: 180px !important;
+  object-fit: contain !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) .fwd-bestseller-grid {
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 16px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) .fwd-bestseller-card {
+  display: grid !important;
+  grid-template-columns: 1.2fr 1fr !important;
+  padding: 18px 16px !important;
+  border-radius: 16px !important;
+  gap: 14px !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) .fwd-bestseller-card h3 {
+  font-size: 17px !important;
+  line-height: 1.25 !important;
+  margin: 0 0 6px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) .fwd-bestseller-card p {
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+  margin: 0 0 8px !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) .fwd-bestseller-card img {
+  max-height: 140px !important;
+  width: 100% !important;
+  object-fit: contain !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) :is(.fwd-card-view-btn, .fwd-card-actions .fwd-card-view-btn) {
+  display: none !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) :is(.fwd-card-add-btn, .fwd-card-actions .fwd-card-add-btn) {
+  width: 100% !important;
+  height: 38px !important;
+  padding: 0 10px !important;
+  font-size: 12px !important;
+  border-radius: 20px !important;
+  white-space: nowrap !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) .fwd-promo-banner {
+  grid-template-columns: minmax(0, 1fr) !important;
+  padding: 24px 16px !important;
+  gap: 18px !important;
+  text-align: center !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  margin: 24px auto !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) .fwd-promo-content {
+  padding: 0 !important;
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) .fwd-promo-title {
+  font-size: 24px !important;
+  margin: 4px 0 10px !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) .fwd-promo-img {
+  width: 100% !important;
+  max-width: 260px !important;
+  height: 180px !important;
+  object-fit: cover !important;
+  border-radius: 14px !important;
+  margin: 0 auto !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) .fwd-promo-banner .fwd-btn-primary {
+  width: 100% !important;
+  max-width: 240px !important;
+  margin: 12px auto 0 !important;
+  justify-content: center !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) .fwd-visual-categories {
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 14px !important;
+  width: 100% !important;
+  padding: 0 14px !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) .fwd-vis-card {
+  height: 180px !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+}
+
 /* =============================================================================
    4. TABLET VIEWPORTS (769px - 1024px & .device-tablet)
    ============================================================================= */
@@ -2452,7 +2940,6 @@
     .swd-products-grid,
     .sen-products-grid,
     .fwd-grid-3,
-    .fwd-bestseller-grid,
     .ff-products-grid,
     .ff-bestsale-grid,
     .sz-products-grid,
@@ -2543,7 +3030,6 @@
   .swd-products-grid,
   .sen-products-grid,
   .fwd-grid-3,
-  .fwd-bestseller-grid,
   .ff-products-grid,
   .ff-bestsale-grid,
   .sz-products-grid,
@@ -2619,5 +3105,25 @@
   .gia-model-grid
 ) {
   grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+/* FootwearWorkDo Tablet Specific Bestseller Grid */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .fwd-bestseller-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+}
+
+:is(
+  .simulated-frame.frame-tablet,
+  .preview-viewport-container.device-tablet,
+  .device-tablet,
+  .frame-tablet,
+  .is-tablet,
+  [data-device-view="tablet"]
+) .fwd-bestseller-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 16px !important;
 }
