@@ -178,59 +178,6 @@ export const FootwearWorkDoStorefront: React.FC<FootwearWorkDoStorefrontProps> =
       className={`fwd-root ${device !== 'desktop' ? `fwd-device-${device}` : ''}`}
       style={{ '--fwd-primary': activeColor } as React.CSSProperties}
     >
-      {/* Optional Top Preview Banner */}
-      {onUseTemplate && (
-        <div
-          style={{
-            background: '#090a0c',
-            borderBottom: '1px solid #27272a',
-            color: '#ffffff',
-            padding: '8px 24px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            fontSize: '13px',
-            position: 'relative',
-            zIndex: 100,
-          }}
-        >
-          <span>
-            Previewing <strong>Footwear WorkDo Theme</strong>
-          </span>
-          <div style={{ display: 'flex', gap: '12px' }}>
-            <button
-              onClick={onUseTemplate}
-              style={{
-                background: activeColor,
-                color: '#18191c',
-                border: 'none',
-                padding: '6px 14px',
-                borderRadius: '4px',
-                fontWeight: 800,
-                cursor: 'pointer',
-              }}
-            >
-              Use This Template
-            </button>
-            {onClose && (
-              <button
-                onClick={onClose}
-                style={{
-                  background: 'transparent',
-                  color: '#a1a1aa',
-                  border: '1px solid #3f3f46',
-                  padding: '6px 12px',
-                  borderRadius: '4px',
-                  cursor: 'pointer',
-                }}
-              >
-                Close Preview
-              </button>
-            )}
-          </div>
-        </div>
-      )}
-
       {/* Top Utility Bar */}
       <div className="fwd-topbar">
         <div className="fwd-topbar-inner">
@@ -627,7 +574,7 @@ export const FootwearWorkDoStorefront: React.FC<FootwearWorkDoStorefrontProps> =
                 <div className="fwd-card-price">{formatPrice(product.priceInr)}</div>
                 <div className="fwd-stars">★★★★★</div>
 
-                <div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
+                <div className="fwd-card-actions" style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
                   <button
                     className="fwd-card-add-btn"
                     style={{ flex: 1, margin: 0 }}
@@ -637,6 +584,7 @@ export const FootwearWorkDoStorefront: React.FC<FootwearWorkDoStorefrontProps> =
                   </button>
                   <button
                     type="button"
+                    className="fwd-card-view-btn"
                     title="View Details"
                     onClick={() => setQuickViewProduct(product)}
                     style={{
@@ -880,7 +828,7 @@ export const FootwearWorkDoStorefront: React.FC<FootwearWorkDoStorefrontProps> =
                 </div>
                 <div className="fwd-card-price">{formatPrice(product.priceInr)}</div>
                 <div className="fwd-stars">★★★★★</div>
-                <div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
+                <div className="fwd-card-actions" style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
                   <button
                     className="fwd-card-add-btn"
                     style={{ flex: 1, margin: 0 }}
@@ -890,6 +838,7 @@ export const FootwearWorkDoStorefront: React.FC<FootwearWorkDoStorefrontProps> =
                   </button>
                   <button
                     type="button"
+                    className="fwd-card-view-btn"
                     title="View Details"
                     onClick={() => setQuickViewProduct(product)}
                     style={{

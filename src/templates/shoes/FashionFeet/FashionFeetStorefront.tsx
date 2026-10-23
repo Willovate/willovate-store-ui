@@ -163,58 +163,6 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
       className={`ff-root ${device !== 'desktop' ? `ff-device-${device}` : ''}`}
       style={{ '--ff-primary': activeColor } as React.CSSProperties}
     >
-      {/* Optional Template Top Bar */}
-      {onUseTemplate && (
-        <div
-          style={{
-            background: '#1e293b',
-            color: '#ffffff',
-            padding: '8px 24px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            fontSize: '13px',
-            zIndex: 100,
-            position: 'relative',
-          }}
-        >
-          <span>
-            Previewing <strong>FashionFeet Men&apos;s Shoe Store</strong>
-          </span>
-          <div style={{ display: 'flex', gap: '12px' }}>
-            <button
-              onClick={onUseTemplate}
-              style={{
-                background: activeColor,
-                color: '#fff',
-                border: 'none',
-                padding: '6px 14px',
-                borderRadius: '4px',
-                fontWeight: 700,
-                cursor: 'pointer',
-              }}
-            >
-              Use This Template
-            </button>
-            {onClose && (
-              <button
-                onClick={onClose}
-                style={{
-                  background: 'transparent',
-                  color: '#94a3b8',
-                  border: '1px solid #475569',
-                  padding: '6px 12px',
-                  borderRadius: '4px',
-                  cursor: 'pointer',
-                }}
-              >
-                Close Preview
-              </button>
-            )}
-          </div>
-        </div>
-      )}
-
       {/* Top Notification Bar */}
       <div className="ff-topbar">
         <div className="ff-topbar-inner">
