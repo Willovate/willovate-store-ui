@@ -547,11 +547,31 @@
 
 @media (max-width: 768px) {
   .gia-header-inner {
+    display: grid !important;
+    grid-template-columns: 1fr auto 1fr !important;
+    align-items: center !important;
+    min-height: 56px !important;
+    padding: 8px 12px !important;
+    gap: 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .gia-hamburger-btn {
+    justify-self: start !important;
     display: flex !important;
     align-items: center !important;
-    justify-content: space-between !important;
-    padding: 10px 14px !important;
-    gap: 8px !important;
+    justify-content: center !important;
+    width: 36px !important;
+    height: 36px !important;
+  }
+  .gia-logo-wrap,
+  .gia-logo {
+    justify-self: center !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    margin: 0 auto !important;
   }
   .gia-nav {
     display: none !important;
@@ -560,9 +580,11 @@
     display: none !important;
   }
   .gia-actions {
+    justify-self: end !important;
     display: flex !important;
     align-items: center !important;
-    gap: 8px !important;
+    justify-content: flex-end !important;
+    gap: 6px !important;
   }
 }
 

@@ -500,7 +500,7 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
       </section>
 
       {/* 6. BEST SELLERS KIDS SHOES GRID */}
-      <section id="susie-bestsellers-section" style={{ maxWidth: 1240, margin: '40px auto' }}>
+      <section id="susie-bestsellers-section" className="susie-bestsellers-section" style={{ maxWidth: 1240, margin: '40px auto' }}>
         <div className="susie-section-header">
           <h2 className="susie-section-title">Best Sellers For Kids</h2>
           <p className="susie-section-subtitle">
@@ -679,14 +679,14 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
       </section>
 
       {/* 11. RECENT DROPS BANNER */}
-      <section style={{ background: '#fdf2f8', padding: '50px 36px', margin: '40px 0' }}>
+      <section className="susie-recent-drops-section" style={{ background: '#fdf2f8', padding: '50px 36px', margin: '40px 0' }}>
         <div style={{ maxWidth: 1240, margin: '0 auto' }}>
           <div className="susie-section-header">
             <h2 className="susie-section-title">New Little Steps Releases</h2>
             <p className="susie-section-subtitle">Fresh season drops for active girls and boys</p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 16 }}>
+          <div className="susie-recent-drops-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 16 }}>
             {SUSIE_RECENT_DROPS.map((drop) => (
               <div
                 key={drop.id}
