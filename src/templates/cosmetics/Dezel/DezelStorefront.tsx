@@ -34,6 +34,13 @@ export function DezelStorefront({
   onBack: _onBack,
 }: DezelStorefrontProps) {
   const effectiveDevice = (deviceView as string) || device || 'desktop'
+  const isMobile = effectiveDevice === 'mobile'
+  const isTablet = effectiveDevice === 'tablet'
+  const rootDeviceClass = isMobile
+    ? 'dezel-mobile device-mobile is-mobile'
+    : isTablet
+    ? 'dezel-tablet device-tablet is-tablet'
+    : 'dezel-desktop device-desktop'
 
   // State
   const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
@@ -156,7 +163,8 @@ export function DezelStorefront({
 
   return (
     <div
-      className={`dezel-storefront device-${effectiveDevice}`}
+      className={`dezel-storefront ${rootDeviceClass}`}
+      data-device-view={effectiveDevice}
       style={
         customAccentColor
           ? ({ '--dezel-gold': customAccentColor } as React.CSSProperties)
@@ -164,10 +172,10 @@ export function DezelStorefront({
       }
     >
       {/* Top Banner Notice */}
-      <div style={{ backgroundColor: '#051e25', color: '#c59d5f', fontSize: '12px', padding: '6px 20px', letterSpacing: '1px' }}>
-        <div className="dezel-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span>COMPLIMENTARY LUXURY GIFT SAMPLE ON ORDERS OVER {formatPrice(150)} &bull; FREE WORLDWIDE SHIPPING</span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+      <div className="dezel-top-bar" style={{ backgroundColor: '#051e25', color: '#c59d5f', fontSize: '12px', padding: '6px 20px', letterSpacing: '1px' }}>
+        <div className="dezel-container dezel-top-bar-inner" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span className="dezel-top-bar-text">COMPLIMENTARY LUXURY GIFT SAMPLE ON ORDERS OVER {formatPrice(150)} &bull; FREE WORLDWIDE SHIPPING</span>
+          <div className="dezel-currency-wrap" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span style={{ fontSize: '11px', opacity: 0.85 }}>Currency:</span>
             <select
               value={currency}
@@ -209,12 +217,16 @@ export function DezelStorefront({
             </button>
 
             {/* Logo */}
-            <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }} onClick={() => { setViewMode('home'); setSelectedProduct(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
+            <div
+              className="dezel-logo-wrap"
+              style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+              onClick={() => { setViewMode('home'); setSelectedProduct(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+            >
               <img src={DEZEL_LOGO} alt="Dezel Perfume" className="dezel-logo-img" />
             </div>
 
             {/* Nav */}
-            <nav>
+            <nav className="dezel-nav">
               <ul className="dezel-nav-menu">
                 {navItems.map((item) => (
                   <li key={item.label} className="wv-nav-dropdown-wrap">
@@ -802,6 +814,7 @@ export function DezelStorefront({
       {quickViewProduct && (
         <div className="dezel-drawer-overlay" onClick={() => setQuickViewProduct(null)} style={{ alignItems: 'center', justifyContent: 'center' }}>
           <div
+            className="dezel-quickview-dialog"
             style={{
               backgroundColor: '#ffffff',
               borderRadius: '6px',
@@ -831,7 +844,7 @@ export function DezelStorefront({
               &times;
             </button>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+            <div className="dezel-quickview-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
               <div style={{ textAlign: 'center' }}>
                 <img
                   src={quickViewProduct.image}

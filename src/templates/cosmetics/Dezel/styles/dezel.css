@@ -645,116 +645,1138 @@
   background-color: #f7faf9;
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-  .dezel-hero-section {
-    grid-template-columns: 1fr;
-  }
-  .dezel-promos-grid {
-    grid-template-columns: 1fr;
-  }
-  .dezel-notes-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .dezel-glow-grid {
-    grid-template-columns: 1fr;
-  }
-  .dezel-popular-grid {
-    grid-template-columns: 1fr;
-  }
-  .dezel-blog-grid {
-    grid-template-columns: 1fr;
-  }
-  .dezel-footer-grid {
-    grid-template-columns: 1fr 1fr;
-  }
+/* =========================================================================
+   TABLET RESPONSIVE STYLES
+   ========================================================================= */
+:is(
+  .dezel-storefront.device-tablet,
+  .dezel-storefront.dezel-tablet,
+  .simulated-frame.frame-tablet .dezel-storefront,
+  .preview-viewport-container.device-tablet .dezel-storefront
+) {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  overflow-x: hidden !important;
 }
 
-.dezel-hamburger-btn {
+:is(
+  .dezel-storefront.device-tablet,
+  .dezel-storefront.dezel-tablet,
+  .simulated-frame.frame-tablet .dezel-storefront,
+  .preview-viewport-container.device-tablet .dezel-storefront
+) .dezel-container {
+  max-width: 100% !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+
+:is(
+  .dezel-storefront.device-tablet,
+  .dezel-storefront.dezel-tablet,
+  .simulated-frame.frame-tablet .dezel-storefront,
+  .preview-viewport-container.device-tablet .dezel-storefront
+) .dezel-hero-section {
+  grid-template-columns: 1fr !important;
+}
+
+:is(
+  .dezel-storefront.device-tablet,
+  .dezel-storefront.dezel-tablet,
+  .simulated-frame.frame-tablet .dezel-storefront,
+  .preview-viewport-container.device-tablet .dezel-storefront
+) .dezel-promos-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+:is(
+  .dezel-storefront.device-tablet,
+  .dezel-storefront.dezel-tablet,
+  .simulated-frame.frame-tablet .dezel-storefront,
+  .preview-viewport-container.device-tablet .dezel-storefront
+) .dezel-notes-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+:is(
+  .dezel-storefront.device-tablet,
+  .dezel-storefront.dezel-tablet,
+  .simulated-frame.frame-tablet .dezel-storefront,
+  .preview-viewport-container.device-tablet .dezel-storefront
+) .dezel-glow-grid {
+  grid-template-columns: 1fr !important;
+  gap: 24px !important;
+}
+
+:is(
+  .dezel-storefront.device-tablet,
+  .dezel-storefront.dezel-tablet,
+  .simulated-frame.frame-tablet .dezel-storefront,
+  .preview-viewport-container.device-tablet .dezel-storefront
+) .dezel-popular-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+:is(
+  .dezel-storefront.device-tablet,
+  .dezel-storefront.dezel-tablet,
+  .simulated-frame.frame-tablet .dezel-storefront,
+  .preview-viewport-container.device-tablet .dezel-storefront
+) .dezel-blog-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 20px !important;
+}
+
+:is(
+  .dezel-storefront.device-tablet,
+  .dezel-storefront.dezel-tablet,
+  .simulated-frame.frame-tablet .dezel-storefront,
+  .preview-viewport-container.device-tablet .dezel-storefront
+) .dezel-footer-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 24px !important;
+}
+
+/* =========================================================================
+   COMPREHENSIVE MOBILE VIEW STYLES (FASHION STORE STANDARD)
+   Applies to:
+   1. Real mobile viewports (@media (max-width: 768px))
+   2. Simulated frames (.device-mobile, .frame-mobile, .is-mobile)
+   ========================================================================= */
+
+/* Desktop defaults: Hide mobile hamburger */
+.dezel-hamburger-btn,
+.dezel-storefront .wv-mobile-hamburger-btn {
   display: none;
 }
 
-.dezel-nl-form {
-  display: flex;
-  gap: 8px;
+/* Base Hamburger button styling */
+.dezel-storefront .wv-mobile-hamburger-btn {
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(197, 157, 95, 0.4);
+  border-radius: 8px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0;
+  flex-shrink: 0;
+  box-sizing: border-box;
 }
 
+.dezel-storefront .wv-mobile-hamburger-bar {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background-color: var(--dezel-gold);
+  border-radius: 2px;
+  transition: all 0.2s ease;
+}
+
+/* 1. Root & Container Layout */
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) img {
+  max-width: 100% !important;
+}
+
+/* 2. Top Announcement Bar */
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-top-bar {
+  padding: 6px 10px !important;
+  font-size: 11px !important;
+  line-height: 1.3 !important;
+  text-align: center !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-top-bar-inner {
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-currency-wrap {
+  display: none !important;
+}
+
+/* 3. Header Single-Row Mobile Layout */
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-header {
+  padding: 8px 0 !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 100 !important;
+  background-color: var(--dezel-teal) !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-header-inner {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 10px !important;
+  gap: 8px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .wv-mobile-hamburger-btn,
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-hamburger-btn {
+  display: flex !important;
+  flex: 0 0 auto !important;
+}
+
+/* Centered Logo */
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-logo-wrap,
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-header-inner > div {
+  flex: 1 1 auto !important;
+  text-align: center !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  min-width: 0 !important;
+  padding: 0 4px !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-logo-img {
+  max-height: 24px !important;
+  max-width: 120px !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+  margin: 0 auto !important;
+  display: block !important;
+}
+
+/* Hide desktop nav and account */
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) nav,
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-nav,
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-nav-menu,
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .wv-desktop-dropdown,
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-account-btn {
+  display: none !important;
+}
+
+/* Actions Right */
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-header-actions {
+  flex: 0 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  justify-content: flex-end !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .wv-mobile-action-btn,
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-icon-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 8px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(197, 157, 95, 0.4) !important;
+  color: #c59d5f !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+  position: relative !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) :is(.wv-mobile-badge-counter, .dezel-cart-badge) {
+  position: absolute !important;
+  top: -3px !important;
+  right: -3px !important;
+  background-color: var(--dezel-gold) !important;
+  color: #051e25 !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  width: 16px !important;
+  height: 16px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1.5px solid #082e38 !important;
+}
+
+/* 4. Split Hero Section (Stacked Single-Column) */
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-hero-section {
+  grid-template-columns: 1fr !important;
+  min-height: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-hero-right {
+  order: 1 !important;
+  padding: 32px 14px 24px 14px !important;
+  text-align: center !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-hero-watermark {
+  font-size: 60px !important;
+  opacity: 0.05 !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  pointer-events: none !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-hero-content {
+  text-align: center !important;
+  margin: 0 auto !important;
+  max-width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-hero-h1 {
+  font-size: clamp(24px, 7vw, 32px) !important;
+  line-height: 1.25 !important;
+  margin-bottom: 12px !important;
+  text-align: center !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-hero-sub {
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  max-width: 320px !important;
+  margin: 0 auto 16px auto !important;
+  text-align: center !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-btn-explore {
+  display: inline-block !important;
+  padding: 10px 24px !important;
+  font-size: 12px !important;
+  margin: 0 auto !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-hero-left {
+  order: 2 !important;
+  padding: 24px 14px 28px 14px !important;
+  text-align: center !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-hero-prod-card {
+  margin-top: 14px !important;
+  max-width: 260px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 16px !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-hero-prod-img {
+  width: 120px !important;
+  height: 120px !important;
+  margin-bottom: 10px !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-hero-left-bottom {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin-top: 20px !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-hero-quote {
+  font-size: 13px !important;
+  text-align: center !important;
+  max-width: 300px !important;
+  margin: 0 auto !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-hero-arrows {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 12px !important;
+}
+
+/* 5. 2 Middle Promos Grid (1-Col Clean Stack) */
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-promos-section {
+  padding: 30px 0 !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-promos-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 14px !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-promo-banner {
+  min-height: 180px !important;
+  padding: 20px !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-promo-title {
+  font-size: 20px !important;
+}
+
+/* 6. 4 Fragrance Note Badges (2-Col Clean Mobile Grid) */
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-notes-section {
+  padding: 24px 0 !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-notes-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-note-item {
+  padding: 14px 10px !important;
+  text-align: center !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-note-icon {
+  width: 36px !important;
+  height: 36px !important;
+  margin: 0 auto 8px auto !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-note-title {
+  font-size: 13px !important;
+  margin-bottom: 2px !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-note-sub {
+  font-size: 11px !important;
+}
+
+/* 7. Glow Section (Stacked 1-Col) */
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-glow-section {
+  padding: 30px 0 !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-glow-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+  text-align: center !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-glow-img {
+  max-height: 280px !important;
+  margin: 0 auto !important;
+  padding: 20px !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-section-h2 {
+  font-size: 24px !important;
+  text-align: center !important;
+}
+
+/* 8. Most Popular Perfumes (2-Col Clean Mobile Grid) */
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-popular-section {
+  padding: 30px 0 !important;
+  text-align: center !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-popular-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-perfume-card {
+  padding: 10px !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-card-img {
+  height: 140px !important;
+  object-fit: contain !important;
+  margin-bottom: 8px !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-card-name {
+  font-size: 13px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-card-notes {
+  font-size: 11px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  margin-bottom: 6px !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-card-price {
+  font-size: 13px !important;
+  margin-bottom: 8px !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-card-btn {
+  padding: 8px 10px !important;
+  font-size: 11px !important;
+  width: 100% !important;
+}
+
+/* 9. Blog Grid (1-Col Clean Stack) */
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-blog-section {
+  padding: 30px 0 !important;
+  text-align: center !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-blog-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+}
+
+/* 10. Newsletter Form */
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-nl-form {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  width: 100% !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-nl-form input {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-nl-form button {
+  width: 100% !important;
+}
+
+/* 11. Footer (1-Col Centered) */
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-footer-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 24px !important;
+  text-align: center !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-footer-grid > div {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-footer-bottom {
+  flex-direction: column !important;
+  gap: 12px !important;
+  text-align: center !important;
+}
+
+/* 12. Quick View Dialog */
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-quickview-dialog {
+  padding: 18px !important;
+  max-width: 92% !important;
+  max-height: 85vh !important;
+  overflow-y: auto !important;
+}
+
+:is(
+  .dezel-storefront.device-mobile,
+  .dezel-storefront.dezel-mobile,
+  .dezel-storefront.is-mobile,
+  .dezel-storefront[data-device-view="mobile"],
+  .simulated-frame.frame-mobile .dezel-storefront,
+  .preview-viewport-container.device-mobile .dezel-storefront
+) .dezel-quickview-grid {
+  grid-template-columns: 1fr !important;
+  gap: 14px !important;
+}
+
+/* =========================================================================
+   MEDIA QUERY FALLBACKS FOR REAL MOBILE VIEWPORTS
+   ========================================================================= */
 @media (max-width: 768px) {
-  .dezel-hamburger-btn {
-    display: flex !important;
-  }
-  .dezel-header-inner {
-    padding: 10px 0;
-    flex-wrap: nowrap;
-  }
-  .dezel-header-actions {
-    gap: 8px;
-  }
-  .dezel-account-btn {
-    display: none !important;
-  }
-  .dezel-nav-menu {
-    display: none !important;
-  }
-  .dezel-nl-form {
-    flex-direction: column;
-    border-radius: 8px;
-  }
-  .dezel-nl-form input {
-    width: 100%;
-  }
-  .dezel-nl-form button {
-    width: 100%;
-    margin-top: 8px;
-  }
-  .dezel-hero-h1 {
-    font-size: 36px;
-  }
-  .dezel-notes-grid {
-    grid-template-columns: 1fr;
-  }
-  .dezel-footer-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 600px) {
   .dezel-storefront {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    overflow-x: clip;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
   }
 
   .dezel-container {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    padding-right: 16px;
-    padding-left: 16px;
-    box-sizing: border-box;
+    width: 100% !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
   }
 
-  .dezel-promos-grid,
-  .dezel-popular-grid,
-  .dezel-glow-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-  }
-
-  .dezel-nav-menu {
+  .dezel-currency-wrap {
     display: none !important;
   }
 
+  .dezel-header-inner {
+    padding: 8px 10px !important;
+  }
+
+  .dezel-hamburger-btn {
+    display: flex !important;
+  }
+
+  .dezel-logo-wrap,
+  .dezel-header-inner > div:nth-child(2) {
+    flex: 1 1 auto !important;
+    justify-content: center !important;
+  }
+
+  .dezel-logo-img {
+    max-height: 24px !important;
+  }
+
+  .dezel-account-btn,
+  .dezel-nav-menu,
+  .dezel-nav,
+  nav {
+    display: none !important;
+  }
+
+  .dezel-header-actions {
+    gap: 6px !important;
+  }
+
   .dezel-hero-section {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: 1fr !important;
+    min-height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
   }
 
-  .dezel-hero-h1 {
-    font-size: clamp(28px, 8vw, 36px);
+  .dezel-hero-right {
+    order: 1 !important;
+    padding: 30px 14px !important;
   }
 
-  .dezel-storefront img {
-    max-width: 100%;
+  .dezel-hero-left {
+    order: 2 !important;
+    padding: 24px 14px !important;
+  }
+
+  .dezel-hero-prod-card {
+    max-width: 260px !important;
+    margin: 14px auto 0 auto !important;
+  }
+
+  .dezel-promos-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .dezel-notes-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .dezel-glow-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    text-align: center !important;
+  }
+
+  .dezel-popular-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .dezel-blog-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .dezel-footer-grid {
+    grid-template-columns: 1fr !important;
+    text-align: center !important;
+    gap: 24px !important;
+  }
+
+  .dezel-quickview-dialog {
+    padding: 18px !important;
+    max-width: 92% !important;
+  }
+
+  .dezel-quickview-grid {
+    grid-template-columns: 1fr !important;
   }
 }

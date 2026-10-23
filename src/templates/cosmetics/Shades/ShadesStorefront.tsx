@@ -37,6 +37,14 @@ export function ShadesStorefront({
   onBack: _onBack,
 }: ShadesStorefrontProps) {
   const effectiveDevice = (deviceView as string) || device || 'desktop'
+  const isMobile = effectiveDevice === 'mobile'
+  const isTablet = effectiveDevice === 'tablet'
+
+  const rootDeviceClass = isMobile
+    ? 'shades-mobile device-mobile is-mobile'
+    : isTablet
+    ? 'shades-tablet device-tablet is-tablet'
+    : `device-${effectiveDevice}`
 
   // Navigation & Mega menu
   const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
@@ -171,7 +179,8 @@ export function ShadesStorefront({
 
   return (
     <div
-      className={`shades-storefront device-${effectiveDevice}`}
+      className={`shades-storefront ${rootDeviceClass} device-${effectiveDevice}`}
+      data-device-view={effectiveDevice}
       style={
         customAccentColor
           ? ({ '--shades-gold': customAccentColor } as React.CSSProperties)
@@ -191,7 +200,7 @@ export function ShadesStorefront({
       >
         <div style={{ maxWidth: '1440px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <span>COMPLIMENTARY SHIPPING ON ORDERS OVER {formatPrice(75)} &bull; EXCLUSIVE GLAMOUR EDITIONS</span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div className="shades-currency-wrap" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span style={{ fontSize: '11px', opacity: 0.85 }}>Currency:</span>
             <select
               value={currency}
@@ -232,12 +241,12 @@ export function ShadesStorefront({
           </button>
 
           {/* Logo */}
-          <a href="#shades" style={{ display: 'flex', alignItems: 'center' }} onClick={(e) => { e.preventDefault(); setViewMode('home'); setSelectedProduct(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
+          <a href="#shades" className="shades-logo-wrap" style={{ display: 'flex', alignItems: 'center' }} onClick={(e) => { e.preventDefault(); setViewMode('home'); setSelectedProduct(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
             <img src={SHADES_LOGO} alt="Shades" className="shades-logo-img" />
           </a>
 
           {/* Navigation */}
-          <nav>
+          <nav className="shades-nav">
             <ul className="shades-nav-menu">
               {navItems.map((item) => (
                 <li key={item.label} className="shades-nav-item wv-nav-dropdown-wrap">
@@ -825,6 +834,7 @@ export function ShadesStorefront({
       {quickViewProduct && (
         <div className="shades-drawer-overlay" onClick={() => setQuickViewProduct(null)}>
           <div
+            className="shades-quickview-dialog"
             style={{
               backgroundColor: '#1a1a1a',
               borderRadius: '16px',

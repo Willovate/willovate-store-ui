@@ -564,6 +564,9 @@
   .belletny-nav-row,
   .dezel-nav,
   .dezel-nav-row,
+  .dezel-nav-menu,
+  .dezel-account-btn,
+  .dezel-currency-wrap,
   .dtspa-nav,
   .fabish-nav-row,
   .fabish-nav-list,
@@ -572,8 +575,15 @@
   .organica-nav-list,
   .shades-nav,
   .shades-nav-row,
+  .shades-nav-menu,
+  .shades-mega-dropdown,
+  .shades-account-btn,
+  .shades-currency-wrap,
   .smetic-nav,
   .smetic-nav-row,
+  .smetic-nav-menu,
+  .smetic-account-btn,
+  .smetic-currency-wrap,
   .wv-desktop-dropdown
 ) {
   display: none !important;
@@ -696,12 +706,15 @@
   .glowing-hero,
   .belletny-hero-slider,
   .dezel-hero,
+  .dezel-hero-section,
   .dtspa-hero,
   .fabish-hero,
   .lipura-hero,
   .organica-hero,
   .shades-hero,
-  .smetic-hero
+  .shades-hero-section,
+  .smetic-hero,
+  .smetic-hero-section
 ) {
   grid-template-columns: minmax(0, 1fr) !important;
   flex-direction: column !important;
@@ -723,7 +736,17 @@
   .glowing-props-grid,
   .glowing-press-grid,
   .beaux-special-grid,
-  .beaux-blog-grid
+  .beaux-blog-grid,
+  .shades-3cards-section,
+  .shades-stylist-section,
+  .shades-mid-banners-section,
+  .shades-impress-section,
+  .shades-blog-grid,
+  .smetic-promos-grid,
+  .smetic-mini-grid,
+  .dezel-promos-grid,
+  .dezel-glow-grid,
+  .dezel-blog-grid
 ) {
   grid-template-columns: minmax(0, 1fr) !important;
   gap: 14px !important;
@@ -736,7 +759,10 @@
   .frame-mobile,
   .is-mobile
 ) :is(
-  .glowing-fav-grid
+  .glowing-fav-grid,
+  .dezel-notes-grid,
+  .dezel-popular-grid,
+  .smetic-trust-grid
 ) {
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 10px !important;
@@ -758,6 +784,7 @@
   .lipura-footer-grid,
   .organica-footer-grid,
   .shades-footer-grid,
+  .shades-footer-container,
   .smetic-footer-grid
 ) {
   grid-template-columns: minmax(0, 1fr) !important;

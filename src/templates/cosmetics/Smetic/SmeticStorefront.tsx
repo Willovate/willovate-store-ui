@@ -33,6 +33,14 @@ export function SmeticStorefront({
   onBack: _onBack,
 }: SmeticStorefrontProps) {
   const effectiveDevice = (deviceView as string) || device || 'desktop'
+  const isMobile = effectiveDevice === 'mobile'
+  const isTablet = effectiveDevice === 'tablet'
+
+  const rootDeviceClass = isMobile
+    ? 'smetic-mobile device-mobile is-mobile'
+    : isTablet
+    ? 'smetic-tablet device-tablet is-tablet'
+    : `device-${effectiveDevice}`
 
   // Slider & Tabs
   const [viewMode, setViewMode] = useState<'home' | 'pdp'>('home')
@@ -161,7 +169,8 @@ export function SmeticStorefront({
 
   return (
     <div
-      className={`smetic-storefront device-${effectiveDevice}`}
+      className={`smetic-storefront ${rootDeviceClass} device-${effectiveDevice}`}
+      data-device-view={effectiveDevice}
       style={
         customAccentColor
           ? ({ '--smetic-coral': customAccentColor } as React.CSSProperties)
@@ -180,7 +189,7 @@ export function SmeticStorefront({
       >
         <div className="smetic-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <span>100% ORGANIC CERTIFIED &bull; FREE WORLDWIDE DELIVERY OVER {formatPrice(50)}</span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div className="smetic-currency-wrap" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span style={{ fontSize: '11px', opacity: 0.85 }}>Currency:</span>
             <select
               value={currency}
@@ -222,12 +231,12 @@ export function SmeticStorefront({
             </button>
 
             {/* Logo */}
-            <a href="#smetic" style={{ display: 'flex', alignItems: 'center' }} onClick={(e) => { e.preventDefault(); setViewMode('home'); setSelectedProduct(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
+            <a href="#smetic" className="smetic-logo-wrap" style={{ display: 'flex', alignItems: 'center' }} onClick={(e) => { e.preventDefault(); setViewMode('home'); setSelectedProduct(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
               <img src={SMETIC_LOGO} alt="Smetic Organic Cosmetic" className="smetic-logo-img" />
             </a>
 
             {/* Navigation */}
-            <nav>
+            <nav className="smetic-nav">
               <ul className="smetic-nav-menu">
                 {navItems.map((item) => (
                   <li key={item.label} className="wv-nav-dropdown-wrap">
@@ -829,6 +838,7 @@ export function SmeticStorefront({
       {quickViewProduct && (
         <div className="smetic-drawer-overlay" onClick={() => setQuickViewProduct(null)}>
           <div
+            className="smetic-quickview-dialog"
             style={{
               backgroundColor: '#ffffff',
               borderRadius: '8px',
