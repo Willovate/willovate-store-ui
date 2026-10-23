@@ -21,8 +21,8 @@ import {
   StorefrontAccountModal,
   StorefrontMobileNavDrawer,
   type MobileNavItem,
-} from '../../common/StorefrontModals'
-import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
+} from '../../../components/templates/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../../components/templates/StorefrontProductDetailPage'
 import './styles/footwearWorkDo.css'
 
 export const FootwearWorkDoStorefront: React.FC<FootwearWorkDoStorefrontProps> = ({
@@ -273,12 +273,14 @@ export const FootwearWorkDoStorefront: React.FC<FootwearWorkDoStorefrontProps> =
         {/* Mobile Hamburger Button */}
         <button
           type="button"
-          className="fwd-hamburger-btn"
+          className="fwd-hamburger-btn wv-mobile-hamburger-btn"
           onClick={() => setIsMobileNavOpen(true)}
           title="Menu"
           aria-label="Open mobile menu"
         >
-          ☰
+          <span className="wv-mobile-hamburger-bar" />
+          <span className="wv-mobile-hamburger-bar" />
+          <span className="wv-mobile-hamburger-bar" />
         </button>
 
         <a href="#home" className="fwd-logo">
@@ -346,6 +348,42 @@ export const FootwearWorkDoStorefront: React.FC<FootwearWorkDoStorefrontProps> =
               🛒 Cart: {formatPrice(cartSubtotalInr)} ({totalCartCount})
             </button>
           </div>
+        </div>
+
+        <div className="fwd-mobile-actions">
+          <button
+            type="button"
+            className="wv-mobile-action-btn"
+            title="Search"
+            onClick={() => setIsSearchOpen(true)}
+            aria-label="Search"
+          >
+            <span>🔍</span>
+          </button>
+          <button
+            type="button"
+            className="wv-mobile-action-btn"
+            title="Wishlist"
+            onClick={() => setIsWishlistOpen(true)}
+            style={{ position: 'relative' }}
+          >
+            <span>{wishlist.length > 0 ? '❤️' : '🤍'}</span>
+            {wishlist.length > 0 && (
+              <span className="wv-mobile-badge-counter">{wishlist.length}</span>
+            )}
+          </button>
+          <button
+            type="button"
+            className="wv-mobile-action-btn"
+            title="Shopping Cart"
+            onClick={() => setIsCartOpen(true)}
+            style={{ position: 'relative' }}
+          >
+            <span>🛒</span>
+            {totalCartCount > 0 && (
+              <span className="wv-mobile-badge-counter">{totalCartCount}</span>
+            )}
+          </button>
         </div>
       </header>
 

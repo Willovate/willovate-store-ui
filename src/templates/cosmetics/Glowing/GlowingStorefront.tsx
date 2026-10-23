@@ -19,8 +19,8 @@ import {
   StorefrontAccountModal,
   StorefrontMobileNavDrawer,
   type MobileNavItem,
-} from '../../common/StorefrontModals'
-import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
+} from '../../../components/templates/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../../components/templates/StorefrontProductDetailPage'
 import './styles/glowing.css'
 
 export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
@@ -213,15 +213,17 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
             {/* Mobile Hamburger Button */}
             <button
               type="button"
-              className="glowing-hamburger-btn"
+              className="glowing-hamburger-btn wv-mobile-hamburger-btn"
               onClick={() => setIsMobileNavOpen(true)}
               title="Menu"
               aria-label="Open mobile menu"
             >
-              ☰
+              <span className="wv-mobile-hamburger-bar" />
+              <span className="wv-mobile-hamburger-bar" />
+              <span className="wv-mobile-hamburger-bar" />
             </button>
 
-            <button className="glowing-action-btn" title="Search" onClick={() => setIsSearchOpen(true)}>
+            <button className="glowing-action-btn glowing-desktop-search" title="Search" onClick={() => setIsSearchOpen(true)}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="11" cy="11" r="8" />
                 <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -246,25 +248,53 @@ export const GlowingStorefront: React.FC<GlowingStorefrontProps> = ({
           </div>
 
           <div className="glowing-actions-right">
-            <button className="glowing-action-btn" title="Account" onClick={() => setIsAccountOpen(true)}>
+            <button
+              type="button"
+              className="wv-mobile-action-btn glowing-mobile-search-btn"
+              title="Search"
+              onClick={() => setIsSearchOpen(true)}
+              aria-label="Search"
+            >
+              <span>🔍</span>
+            </button>
+
+            <button className="glowing-action-btn glowing-account-btn" title="Account" onClick={() => setIsAccountOpen(true)}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
               </svg>
             </button>
-            <button className="glowing-action-btn" title="Favorites" onClick={() => setIsWishlistOpen(true)}>
+
+            <button
+              type="button"
+              className="wv-mobile-action-btn glowing-action-btn"
+              title="Favorites"
+              onClick={() => setIsWishlistOpen(true)}
+              style={{ position: 'relative' }}
+            >
               <svg width="20" height="20" viewBox="0 0 24 24" fill={wishlist.length > 0 ? '#193833' : 'none'} stroke="currentColor" strokeWidth="2">
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
               </svg>
-              {wishlist.length > 0 && <span className="glowing-badge">{wishlist.length}</span>}
+              {wishlist.length > 0 && (
+                <span className="wv-mobile-badge-counter glowing-badge">{wishlist.length}</span>
+              )}
             </button>
-            <button className="glowing-action-btn" title="Shopping Bag" onClick={() => setIsCartOpen(true)}>
+
+            <button
+              type="button"
+              className="wv-mobile-action-btn glowing-action-btn"
+              title="Shopping Bag"
+              onClick={() => setIsCartOpen(true)}
+              style={{ position: 'relative' }}
+            >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
                 <line x1="3" y1="6" x2="21" y2="6" />
                 <path d="M16 10a4 4 0 0 1-8 0" />
               </svg>
-              <span className="glowing-badge">{cartCount}</span>
+              {cartCount > 0 && (
+                <span className="wv-mobile-badge-counter glowing-badge">{cartCount}</span>
+              )}
             </button>
           </div>
         </div>

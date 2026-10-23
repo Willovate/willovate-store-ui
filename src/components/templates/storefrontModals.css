@@ -1791,5 +1791,116 @@
   color: #0f172a;
 }
 
+/* =============================================================================
+   OPTIMAL-STYLE MOBILE HEADER SYSTEM (UNIVERSAL)
+   Clean 36px hamburger button, centered brand, and 34px rounded action buttons:
+   [ 🔍 ] [ 🤍 2 ] [ 🛍️ 2 ] with badge counters.
+   ============================================================================= */
+
+/* Mobile Hamburger Toggle */
+.wv-mobile-hamburger-btn {
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  padding: 0 !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+  color: #0f172a !important;
+  transition: all 0.15s ease !important;
+  box-sizing: border-box !important;
+}
+
+.wv-mobile-hamburger-btn:hover {
+  background: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+}
+
+.wv-mobile-hamburger-bar {
+  display: block !important;
+  width: 18px !important;
+  height: 2px !important;
+  background-color: currentColor !important;
+  border-radius: 2px !important;
+}
+
+/* Mobile Action Button (Search, Wishlist, Cart) */
+.wv-mobile-action-btn {
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 8px !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+  cursor: pointer !important;
+  position: relative !important;
+  flex-shrink: 0 !important;
+  padding: 0 !important;
+  font-size: 15px !important;
+  color: #0f172a !important;
+  transition: all 0.15s ease !important;
+  box-sizing: border-box !important;
+  text-decoration: none !important;
+}
+
+.wv-mobile-action-btn:hover {
+  background: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Mobile Badge Counter for Wishlist & Cart */
+.wv-mobile-badge-counter {
+  position: absolute !important;
+  top: -6px !important;
+  right: -6px !important;
+  background: #ef4444 !important;
+  color: #ffffff !important;
+  border-radius: 9999px !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  min-width: 17px !important;
+  height: 17px !important;
+  line-height: 17px !important;
+  padding: 0 4px !important;
+  text-align: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
+}
+
+/* Common Mobile Responsive Tweaks for Email & Details */
+@media (max-width: 768px) {
+  .wv-responsive-newsletter {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    box-sizing: border-box !important;
+  }
+  .wv-responsive-newsletter form {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+}
+
+
 
 

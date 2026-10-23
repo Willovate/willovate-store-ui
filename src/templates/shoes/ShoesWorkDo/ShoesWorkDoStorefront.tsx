@@ -20,8 +20,8 @@ import {
   StorefrontAccountModal,
   StorefrontMobileNavDrawer,
   type MobileNavItem,
-} from '../../common/StorefrontModals'
-import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
+} from '../../../components/templates/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../../components/templates/StorefrontProductDetailPage'
 import './styles/shoesWorkDo.css'
 
 export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
@@ -219,12 +219,14 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
           {/* Mobile Hamburger Button */}
           <button
             type="button"
-            className="swd-hamburger-btn"
+            className="swd-hamburger-btn wv-mobile-hamburger-btn"
             onClick={() => setIsMobileNavOpen(true)}
             title="Menu"
             aria-label="Open mobile menu"
           >
-            ☰
+            <span className="wv-mobile-hamburger-bar" />
+            <span className="wv-mobile-hamburger-bar" />
+            <span className="wv-mobile-hamburger-bar" />
           </button>
 
           {/* Logo */}
@@ -257,7 +259,17 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
 
           {/* Currency, Language & Cart */}
           <div className="swd-header-actions">
-            <div className="swd-pill-select">
+            <button
+              type="button"
+              className="wv-mobile-action-btn swd-mobile-search-btn"
+              title="Search Product"
+              onClick={() => setIsSearchOpen(true)}
+              aria-label="Search"
+            >
+              <span>🔍</span>
+            </button>
+
+            <div className="swd-pill-select swd-desktop-pill">
               <span>{currency === 'INR' ? '🇮🇳' : '🇺🇸'}</span>
               <select
                 value={currency}
@@ -268,7 +280,7 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
               </select>
             </div>
 
-            <div className="swd-pill-select">
+            <div className="swd-pill-select swd-desktop-pill">
               <span>🇬🇧</span>
               <select
                 value={language}
@@ -282,7 +294,7 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
 
             <button
               type="button"
-              className="swd-user-btn"
+              className="swd-user-btn swd-account-btn"
               onClick={() => setIsAccountOpen(true)}
               title="My Account"
             >
@@ -291,23 +303,28 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
 
             <button
               type="button"
-              className="swd-user-btn"
+              className="wv-mobile-action-btn swd-user-btn"
               onClick={() => setIsWishlistOpen(true)}
               title="Wishlist"
               style={{ position: 'relative' }}
             >
-              {wishlist.length > 0 ? '❤️' : '🤍'}
-              {wishlist.length > 0 && <span className="swd-cart-badge">{wishlist.length}</span>}
+              <span>{wishlist.length > 0 ? '❤️' : '🤍'}</span>
+              {wishlist.length > 0 && (
+                <span className="wv-mobile-badge-counter swd-cart-badge">{wishlist.length}</span>
+              )}
             </button>
 
             <button
               type="button"
-              className="swd-cart-pill"
+              className="wv-mobile-action-btn swd-cart-pill"
               onClick={() => setIsCartOpen(true)}
+              title="View Cart"
+              style={{ position: 'relative' }}
             >
               <span>🛒</span>
-              <span>My Cart: {formatPrice(cartTotalINR)}</span>
-              <span className="swd-cart-badge">{cartItemCount}</span>
+              {cartItemCount > 0 && <span className="wv-mobile-badge-counter swd-cart-mobile-counter">{cartItemCount}</span>}
+              <span className="swd-cart-text">My Cart: {formatPrice(cartTotalINR)}</span>
+              <span className="swd-cart-badge swd-cart-desktop-counter">{cartItemCount}</span>
             </button>
           </div>
         </div>

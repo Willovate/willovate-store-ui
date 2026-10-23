@@ -566,9 +566,45 @@
   }
 }
 
+.lipura-hamburger-btn {
+  display: none;
+}
+
+.lipura-nl-form {
+  display: flex;
+  gap: 8px;
+}
+
 @media (max-width: 768px) {
+  .lipura-hamburger-btn {
+    display: flex !important;
+  }
+  .lipura-header-inner {
+    padding: 10px 0;
+    flex-wrap: nowrap;
+  }
+  .lipura-header-actions {
+    gap: 8px;
+  }
+  .lipura-account-btn {
+    display: none !important;
+  }
+  .lipura-nav {
+    display: none !important;
+  }
   .lipura-nav-menu {
-    display: none;
+    display: none !important;
+  }
+  .lipura-nl-form {
+    flex-direction: column;
+    border-radius: 8px;
+  }
+  .lipura-nl-form input {
+    width: 100%;
+  }
+  .lipura-nl-form button {
+    width: 100%;
+    margin-top: 8px;
   }
   .lipura-hero-h1 {
     font-size: 36px;
@@ -605,13 +641,12 @@
     gap: 12px;
   }
 
+  .lipura-nav {
+    display: none !important;
+  }
+
   .lipura-nav-menu {
-    display: flex;
-    width: 100%;
-    min-width: 0;
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
+    display: none !important;
   }
 
   .lipura-hero-h1 {

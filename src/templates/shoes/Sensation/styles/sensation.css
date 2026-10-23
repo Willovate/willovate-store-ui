@@ -564,6 +564,28 @@
   max-width: 320px;
 }
 
+@media (max-width: 768px) {
+  .sen-header-inner {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 10px 14px !important;
+    gap: 8px !important;
+  }
+  .sen-nav-group {
+    display: none !important;
+  }
+  .sen-account-btn,
+  .sen-cart-text {
+    display: none !important;
+  }
+  .sen-header-right {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+}
+
 @media (max-width: 600px) {
   .sen-wrapper {
     width: 100%;

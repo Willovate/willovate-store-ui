@@ -632,9 +632,45 @@
   }
 }
 
+.dtspa-hamburger-btn {
+  display: none;
+}
+
+.dtspa-nl-form {
+  display: flex;
+  gap: 8px;
+}
+
 @media (max-width: 768px) {
+  .dtspa-hamburger-btn {
+    display: flex !important;
+  }
+  .dtspa-header-inner {
+    padding: 10px 0;
+    flex-wrap: nowrap;
+  }
+  .dtspa-header-actions {
+    gap: 8px;
+  }
+  .dtspa-account-btn {
+    display: none !important;
+  }
+  .dtspa-nav {
+    display: none !important;
+  }
   .dtspa-nav-menu {
-    display: none;
+    display: none !important;
+  }
+  .dtspa-nl-form {
+    flex-direction: column;
+    border-radius: 8px;
+  }
+  .dtspa-nl-form input {
+    width: 100%;
+  }
+  .dtspa-nl-form button {
+    width: 100%;
+    margin-top: 8px;
   }
   .dtspa-hero-h1 {
     font-size: 34px;
@@ -675,22 +711,15 @@
   }
 
   .dtspa-header-inner {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
 
   .dtspa-header-inner nav {
-    flex: 1 0 100%;
-    order: 3;
-    min-width: 0;
+    display: none !important;
   }
 
   .dtspa-nav-menu {
-    display: flex;
-    width: 100%;
-    min-width: 0;
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
+    display: none !important;
   }
 
   .dtspa-hero-grid {

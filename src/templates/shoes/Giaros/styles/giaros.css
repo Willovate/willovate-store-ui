@@ -545,6 +545,27 @@
   color: #888888;
 }
 
+@media (max-width: 768px) {
+  .gia-header-inner {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 10px 14px !important;
+    gap: 8px !important;
+  }
+  .gia-nav {
+    display: none !important;
+  }
+  .gia-account-btn {
+    display: none !important;
+  }
+  .gia-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+}
+
 @media (max-width: 600px) {
   .gia-wrapper {
     width: 100%;

@@ -995,6 +995,36 @@
   max-width: 320px;
 }
 
+.swd-mobile-search-btn {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .swd-header-inner {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 10px 14px !important;
+    gap: 8px !important;
+  }
+  .swd-mobile-search-btn {
+    display: inline-flex !important;
+  }
+  .swd-search-bar,
+  .swd-support-info,
+  .swd-desktop-pill,
+  .swd-account-btn,
+  .swd-cart-text,
+  .swd-cart-desktop-counter {
+    display: none !important;
+  }
+  .swd-header-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+}
+
 @media (max-width: 600px) {
   .swd-wrapper {
     width: 100%;

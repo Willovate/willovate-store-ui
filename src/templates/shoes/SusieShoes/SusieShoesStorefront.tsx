@@ -21,8 +21,8 @@ import {
   StorefrontAccountModal,
   StorefrontMobileNavDrawer,
   type MobileNavItem,
-} from '../../common/StorefrontModals'
-import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
+} from '../../../components/templates/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../../components/templates/StorefrontProductDetailPage'
 import './styles/susieShoes.css'
 
 export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
@@ -178,12 +178,14 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
         {/* Mobile Hamburger Button */}
         <button
           type="button"
-          className="susie-hamburger-btn"
+          className="susie-hamburger-btn wv-mobile-hamburger-btn"
           onClick={() => setIsMobileNavOpen(true)}
           title="Menu"
           aria-label="Open mobile menu"
         >
-          ☰
+          <span className="wv-mobile-hamburger-bar" />
+          <span className="wv-mobile-hamburger-bar" />
+          <span className="wv-mobile-hamburger-bar" />
         </button>
 
         <a href="#home" className="susie-logo-link">
@@ -197,7 +199,7 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
         <div className="susie-header-right">
           <button
             type="button"
-            className="susie-header-action"
+            className="wv-mobile-action-btn susie-header-action"
             aria-label="Search"
             onClick={() => setIsSearchOpen(true)}
             title="Search shoes"
@@ -206,7 +208,7 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
           </button>
           <button
             type="button"
-            className="susie-header-action"
+            className="wv-mobile-action-btn susie-header-action"
             aria-label="Wishlist"
             onClick={() => setIsWishlistOpen(true)}
             title="Wishlist"
@@ -214,19 +216,19 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
           >
             <span>🤍</span>
             {wishlist.length > 0 && (
-              <span className="wv-badge-count">{wishlist.length}</span>
+              <span className="wv-mobile-badge-counter wv-badge-count">{wishlist.length}</span>
             )}
           </button>
           <button
             type="button"
-            className="susie-header-action"
+            className="susie-header-action susie-account-btn"
             aria-label="User Account"
             onClick={() => setIsAccountOpen(true)}
             title="Account"
           >
             <span>👤</span>
           </button>
-          <div className="susie-header-action" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+          <div className="susie-header-action susie-currency-wrap" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
             <span>{currency === 'USD' ? '🇺🇸' : '🇮🇳'}</span>
             <select
               value={currency}
@@ -240,11 +242,14 @@ export const SusieShoesStorefront: React.FC<SusieShoesStorefrontProps> = ({
           </div>
           <button
             type="button"
-            className="susie-cart-icon-btn"
+            className="wv-mobile-action-btn susie-cart-icon-btn"
             onClick={() => setIsCartOpen(true)}
+            title="Shopping Cart"
+            style={{ position: 'relative' }}
           >
             <span>🛍️</span>
-            <span>{cartCount} Item{cartCount !== 1 ? 's' : ''}</span>
+            {cartCount > 0 && <span className="wv-mobile-badge-counter">{cartCount}</span>}
+            <span className="susie-cart-text">{cartCount} Item{cartCount !== 1 ? 's' : ''}</span>
           </button>
         </div>
       </header>

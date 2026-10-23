@@ -670,9 +670,42 @@
   }
 }
 
+.dezel-hamburger-btn {
+  display: none;
+}
+
+.dezel-nl-form {
+  display: flex;
+  gap: 8px;
+}
+
 @media (max-width: 768px) {
+  .dezel-hamburger-btn {
+    display: flex !important;
+  }
+  .dezel-header-inner {
+    padding: 10px 0;
+    flex-wrap: nowrap;
+  }
+  .dezel-header-actions {
+    gap: 8px;
+  }
+  .dezel-account-btn {
+    display: none !important;
+  }
   .dezel-nav-menu {
-    display: none;
+    display: none !important;
+  }
+  .dezel-nl-form {
+    flex-direction: column;
+    border-radius: 8px;
+  }
+  .dezel-nl-form input {
+    width: 100%;
+  }
+  .dezel-nl-form button {
+    width: 100%;
+    margin-top: 8px;
   }
   .dezel-hero-h1 {
     font-size: 36px;
@@ -710,12 +743,7 @@
   }
 
   .dezel-nav-menu {
-    display: flex;
-    width: 100%;
-    min-width: 0;
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
+    display: none !important;
   }
 
   .dezel-hero-section {

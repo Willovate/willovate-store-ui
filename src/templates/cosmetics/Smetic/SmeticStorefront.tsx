@@ -18,8 +18,8 @@ import {
   StorefrontAccountModal,
   StorefrontMobileNavDrawer,
   type MobileNavItem,
-} from '../../common/StorefrontModals'
-import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
+} from '../../../components/templates/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../../components/templates/StorefrontProductDetailPage'
 import './styles/smetic.css'
 
 export function SmeticStorefront({
@@ -211,12 +211,14 @@ export function SmeticStorefront({
             {/* Mobile Hamburger Button */}
             <button
               type="button"
-              className="smetic-hamburger-btn"
+              className="wv-mobile-hamburger-btn smetic-hamburger-btn"
               onClick={() => setIsMobileNavOpen(true)}
               title="Menu"
               aria-label="Open mobile menu"
             >
-              ☰
+              <span className="wv-mobile-hamburger-bar" />
+              <span className="wv-mobile-hamburger-bar" />
+              <span className="wv-mobile-hamburger-bar" />
             </button>
 
             {/* Logo */}
@@ -269,20 +271,22 @@ export function SmeticStorefront({
             {/* Actions */}
             <div className="smetic-header-actions">
               <button
-                className="smetic-icon-btn"
+                className="wv-mobile-action-btn smetic-icon-btn"
                 onClick={() => setIsSearchOpen(true)}
                 title="Search"
+                aria-label="Search"
               >
-                <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <circle cx="11" cy="11" r="8" />
                   <path d="m21 21-4.35-4.35" />
                 </svg>
               </button>
 
               <button
-                className="smetic-icon-btn"
+                className="smetic-icon-btn smetic-account-btn"
                 onClick={() => setIsAccountOpen(true)}
                 title="Account"
+                aria-label="Account"
               >
                 <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
@@ -291,14 +295,15 @@ export function SmeticStorefront({
               </button>
 
               <button
-                className="smetic-icon-btn"
+                className="wv-mobile-action-btn smetic-icon-btn"
                 onClick={() => setIsWishlistOpen(true)}
                 title="Wishlist"
+                aria-label="Wishlist"
                 style={{ position: 'relative' }}
               >
                 <svg
-                  width="20"
-                  height="20"
+                  width="18"
+                  height="18"
                   fill={wishlist.length > 0 ? '#f99191' : 'none'}
                   stroke="currentColor"
                   strokeWidth="2"
@@ -306,20 +311,22 @@ export function SmeticStorefront({
                 >
                   <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                 </svg>
-                {wishlist.length > 0 && <span className="smetic-cart-badge">{wishlist.length}</span>}
+                {wishlist.length > 0 && <span className="wv-mobile-badge-counter smetic-cart-badge">{wishlist.length}</span>}
               </button>
 
               <button
-                className="smetic-icon-btn"
+                className="wv-mobile-action-btn smetic-icon-btn"
                 onClick={() => setIsCartOpen(true)}
                 title="Cart"
+                aria-label="Cart"
+                style={{ position: 'relative' }}
               >
-                <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
                   <line x1="3" y1="6" x2="21" y2="6" />
                   <path d="M16 10a4 4 0 0 1-8 0" />
                 </svg>
-                <span className="smetic-cart-badge">{totalCartCount}</span>
+                <span className="wv-mobile-badge-counter smetic-cart-badge">{totalCartCount}</span>
               </button>
             </div>
           </div>
@@ -698,7 +705,7 @@ export function SmeticStorefront({
               <p style={{ fontSize: '12px', color: '#777' }}>
                 Be the first may know about our promotions.
               </p>
-              <div className="smetic-nl-input-row">
+              <div className="smetic-nl-input-row wv-responsive-newsletter">
                 <input
                   type="email"
                   placeholder="Your email address"

@@ -675,9 +675,39 @@
   }
 }
 
+.smetic-hamburger-btn {
+  display: none;
+}
+
 @media (max-width: 768px) {
+  .smetic-hamburger-btn {
+    display: flex !important;
+  }
+  .smetic-header-inner {
+    padding: 10px 0;
+    flex-wrap: nowrap;
+  }
+  .smetic-header-actions {
+    gap: 8px;
+  }
+  .smetic-account-btn {
+    display: none !important;
+  }
   .smetic-nav-menu {
-    display: none;
+    display: none !important;
+  }
+  .smetic-nl-input-row {
+    flex-direction: column;
+    border-radius: 12px;
+  }
+  .smetic-nl-input {
+    width: 100%;
+    border-radius: 8px;
+  }
+  .smetic-nl-btn {
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 8px;
   }
   .smetic-hero-title {
     font-size: 36px;
@@ -718,17 +748,11 @@
   }
 
   .smetic-header-inner {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
 
   .smetic-nav-menu {
-    display: flex;
-    flex: 1 0 100%;
-    width: 100%;
-    min-width: 0;
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
+    display: none !important;
   }
 
   .smetic-storefront img {

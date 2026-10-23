@@ -896,9 +896,18 @@
     grid-template-columns: 1fr 1fr;
   }
 }
+.fwd-mobile-actions {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .fwd-nav-pill-bar {
-    display: none;
+    display: none !important;
+  }
+  .fwd-mobile-actions {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
   }
   .fwd-footer-grid {
     grid-template-columns: 1fr;
@@ -911,6 +920,21 @@
     max-width: 100%;
     min-width: 0;
     overflow-x: clip;
+  }
+
+  .fwd-header {
+    padding: 10px 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .fwd-mobile-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
   }
 
   .fwd-header,

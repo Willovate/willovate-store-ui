@@ -19,8 +19,8 @@ import {
   StorefrontAccountModal,
   StorefrontMobileNavDrawer,
   type MobileNavItem,
-} from '../../common/StorefrontModals'
-import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
+} from '../../../components/templates/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../../components/templates/StorefrontProductDetailPage'
 import './styles/dezel.css'
 
 export function DezelStorefront({
@@ -198,12 +198,14 @@ export function DezelStorefront({
             {/* Mobile Hamburger Button */}
             <button
               type="button"
-              className="dezel-hamburger-btn"
+              className="wv-mobile-hamburger-btn dezel-hamburger-btn"
               onClick={() => setIsMobileNavOpen(true)}
               title="Menu"
               aria-label="Open mobile menu"
             >
-              ☰
+              <span className="wv-mobile-hamburger-bar" />
+              <span className="wv-mobile-hamburger-bar" />
+              <span className="wv-mobile-hamburger-bar" />
             </button>
 
             {/* Logo */}
@@ -256,19 +258,19 @@ export function DezelStorefront({
             {/* Actions */}
             <div className="dezel-header-actions">
               <button
-                className="dezel-icon-btn"
+                className="wv-mobile-action-btn dezel-icon-btn"
                 onClick={() => setIsSearchOpen(true)}
                 title="Search Fragrances"
                 aria-label="Search Fragrances"
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <circle cx="11" cy="11" r="8" />
                   <line x1="21" y1="21" x2="16.65" y2="16.65" />
                 </svg>
               </button>
 
               <button
-                className="dezel-icon-btn"
+                className="dezel-icon-btn dezel-account-btn"
                 onClick={() => setIsAccountOpen(true)}
                 title="Atelier Account"
                 aria-label="Atelier Account"
@@ -280,30 +282,31 @@ export function DezelStorefront({
               </button>
 
               <button
-                className="dezel-icon-btn"
+                className="wv-mobile-action-btn dezel-icon-btn"
                 onClick={() => setIsWishlistOpen(true)}
                 title={`Wishlist (${wishlist.length})`}
                 aria-label={`Wishlist (${wishlist.length})`}
                 style={{ position: 'relative' }}
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill={wishlist.length > 0 ? '#c59d5f' : 'none'} stroke={wishlist.length > 0 ? '#c59d5f' : 'currentColor'} strokeWidth="2">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill={wishlist.length > 0 ? '#c59d5f' : 'none'} stroke={wishlist.length > 0 ? '#c59d5f' : 'currentColor'} strokeWidth="2">
                   <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                 </svg>
-                {wishlist.length > 0 && <span className="dezel-cart-badge">{wishlist.length}</span>}
+                {wishlist.length > 0 && <span className="wv-mobile-badge-counter dezel-cart-badge">{wishlist.length}</span>}
               </button>
 
               <button
-                className="dezel-icon-btn"
+                className="wv-mobile-action-btn dezel-icon-btn"
                 onClick={() => setIsCartOpen(true)}
                 title="View Cart"
                 aria-label="View Cart"
+                style={{ position: 'relative' }}
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
                   <line x1="3" y1="6" x2="21" y2="6" />
                   <path d="M16 10a4 4 0 0 1-8 0" />
                 </svg>
-                {totalCartCount > 0 && <span className="dezel-cart-badge">{totalCartCount}</span>}
+                {totalCartCount > 0 && <span className="wv-mobile-badge-counter dezel-cart-badge">{totalCartCount}</span>}
               </button>
             </div>
           </div>
@@ -614,7 +617,7 @@ export function DezelStorefront({
                 e.preventDefault()
                 if (newsletterEmail) setNewsletterDone(true)
               }}
-              style={{ display: 'flex', gap: '8px' }}
+              className="wv-responsive-newsletter dezel-nl-form"
             >
               <input
                 type="email"

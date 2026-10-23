@@ -1063,13 +1063,41 @@
   }
 }
 
+.organica-mobile-search-btn,
+.organica-mobile-cart-icon {
+  display: none;
+}
+
 @media (max-width: 768px) {
-  .organica-mid-inner {
-    flex-direction: column;
-    align-items: flex-start;
+  .organica-header-mid {
+    padding: 10px 0 !important;
   }
-  .organica-search-bar {
-    max-width: 100%;
+  .organica-mid-inner {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+  }
+  .organica-phone-box,
+  .organica-search-bar,
+  .organica-account-btn,
+  .organica-btn-text,
+  .organica-desktop-cart-wrap {
+    display: none !important;
+  }
+  .organica-mobile-search-btn {
+    display: inline-flex !important;
+  }
+  .organica-mobile-cart-icon {
+    display: inline-block !important;
+  }
+  .organica-header-user {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+  .organica-nav-bar {
+    display: none !important;
   }
   .organica-nav-list {
     display: none;
@@ -1082,6 +1110,9 @@
   }
   .organica-newsletter-inner {
     flex-direction: column;
+  }
+  .organica-newsletter-form {
+    flex-wrap: wrap !important;
   }
   .organica-footer-grid {
     grid-template-columns: 1fr;

@@ -17,8 +17,8 @@ import {
   StorefrontAccountModal,
   StorefrontMobileNavDrawer,
   type MobileNavItem,
-} from '../../common/StorefrontModals'
-import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
+} from '../../../components/templates/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../../components/templates/StorefrontProductDetailPage'
 import './styles/sensation.css'
 
 export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
@@ -242,12 +242,14 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
           {/* Mobile Hamburger Button */}
           <button
             type="button"
-            className="sen-hamburger-btn"
+            className="sen-hamburger-btn wv-mobile-hamburger-btn"
             onClick={() => setIsMobileNavOpen(true)}
             title="Menu"
             aria-label="Open mobile menu"
           >
-            ☰
+            <span className="wv-mobile-hamburger-bar" />
+            <span className="wv-mobile-hamburger-bar" />
+            <span className="wv-mobile-hamburger-bar" />
           </button>
 
           <div className="sen-logo" onClick={() => setCurrentSlideIndex(0)}>
@@ -445,36 +447,42 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
           <div className="sen-header-right">
             <button
               type="button"
-              className="sen-circle-btn"
+              className="wv-mobile-action-btn sen-circle-btn"
               onClick={() => setIsSearchOpen(true)}
               title="Search"
             >
-              🔍
+              <span>🔍</span>
             </button>
             <button
               type="button"
-              className="sen-circle-btn"
+              className="sen-circle-btn sen-account-btn"
               onClick={() => setIsAccountOpen(true)}
               title="Account"
             >
-              👤
+              <span>👤</span>
             </button>
             <button
               type="button"
-              className="sen-circle-btn"
+              className="wv-mobile-action-btn sen-circle-btn"
               onClick={() => setIsWishlistOpen(true)}
               title="Wishlist"
               style={{ position: 'relative' }}
             >
-              {wishlist.length > 0 ? '❤️' : '🤍'}
-              {wishlist.length > 0 && <span className="sen-badge">{wishlist.length}</span>}
+              <span>{wishlist.length > 0 ? '❤️' : '🤍'}</span>
+              {wishlist.length > 0 && (
+                <span className="wv-mobile-badge-counter sen-badge">{wishlist.length}</span>
+              )}
             </button>
             <button
               type="button"
-              className="sen-cart-btn"
+              className="wv-mobile-action-btn sen-cart-btn"
               onClick={() => setIsCartOpen(true)}
+              title="Shopping Cart"
+              style={{ position: 'relative' }}
             >
-              <span>Cart: 🛒 {cartItemCount}</span>
+              <span>🛒</span>
+              {cartItemCount > 0 && <span className="wv-mobile-badge-counter sen-cart-mobile-counter">{cartItemCount}</span>}
+              <span className="sen-cart-text">Cart: 🛒 {cartItemCount}</span>
             </button>
           </div>
         </div>

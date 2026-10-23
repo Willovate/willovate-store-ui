@@ -22,8 +22,8 @@ import {
   StorefrontAccountModal,
   StorefrontMobileNavDrawer,
   type MobileNavItem,
-} from '../../common/StorefrontModals'
-import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
+} from '../../../components/templates/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../../components/templates/StorefrontProductDetailPage'
 import './styles/shades.css'
 
 export function ShadesStorefront({
@@ -221,12 +221,14 @@ export function ShadesStorefront({
           {/* Mobile Hamburger Button */}
           <button
             type="button"
-            className="shades-hamburger-btn"
+            className="wv-mobile-hamburger-btn shades-hamburger-btn"
             onClick={() => setIsMobileNavOpen(true)}
             title="Menu"
             aria-label="Open mobile menu"
           >
-            ☰
+            <span className="wv-mobile-hamburger-bar" />
+            <span className="wv-mobile-hamburger-bar" />
+            <span className="wv-mobile-hamburger-bar" />
           </button>
 
           {/* Logo */}
@@ -279,19 +281,19 @@ export function ShadesStorefront({
           {/* Header Action Icons */}
           <div className="shades-header-actions">
             <button
-              className="shades-icon-btn"
+              className="wv-mobile-action-btn shades-icon-btn"
               onClick={() => setIsSearchOpen(true)}
               aria-label="Search"
               title="Search store"
             >
-              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <circle cx="11" cy="11" r="8" />
                 <path d="m21 21-4.35-4.35" />
               </svg>
             </button>
 
             <button
-              className="shades-icon-btn"
+              className="shades-icon-btn shades-account-btn"
               onClick={() => setIsAccountOpen(true)}
               aria-label="Account"
               title="Account"
@@ -303,30 +305,31 @@ export function ShadesStorefront({
             </button>
 
             <button
-              className="shades-icon-btn"
+              className="wv-mobile-action-btn shades-icon-btn"
               onClick={() => setIsWishlistOpen(true)}
               aria-label="Wishlist"
               title="Wishlist"
               style={{ position: 'relative' }}
             >
-              <svg width="20" height="20" fill={wishlist.length > 0 ? '#e5a93c' : 'none'} stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <svg width="18" height="18" fill={wishlist.length > 0 ? '#e5a93c' : 'none'} stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
               </svg>
-              {wishlist.length > 0 && <span className="shades-cart-badge">{wishlist.length}</span>}
+              {wishlist.length > 0 && <span className="wv-mobile-badge-counter shades-cart-badge">{wishlist.length}</span>}
             </button>
 
             <button
-              className="shades-icon-btn"
+              className="wv-mobile-action-btn shades-icon-btn"
               onClick={() => setIsCartOpen(true)}
               aria-label="Cart"
               title="Cart"
+              style={{ position: 'relative' }}
             >
-              <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
                 <line x1="3" y1="6" x2="21" y2="6" />
                 <path d="M16 10a4 4 0 0 1-8 0" />
               </svg>
-              <span className="shades-cart-badge">{totalCartCount}</span>
+              <span className="wv-mobile-badge-counter shades-cart-badge">{totalCartCount}</span>
             </button>
           </div>
         </div>
@@ -641,7 +644,7 @@ export function ShadesStorefront({
           <p style={{ fontSize: '13px', color: '#cccccc' }}>
             Join our VIP beauty club for exclusive seasonal shade palettes, tutorials, and private discounts.
           </p>
-          <div className="shades-nl-form">
+          <div className="shades-nl-form wv-responsive-newsletter">
             <input
               type="email"
               placeholder="Your email address"

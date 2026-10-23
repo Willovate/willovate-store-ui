@@ -716,6 +716,33 @@
   font-size: 12px;
 }
 
+@media (max-width: 768px) {
+  .sg-header-inner {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 10px 14px !important;
+    gap: 8px !important;
+  }
+  .sg-nav-left {
+    display: none !important;
+  }
+  .sg-account-btn {
+    display: none !important;
+  }
+  .sg-actions-right {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+  .sg-footer-cols {
+    grid-template-columns: 1fr !important;
+  }
+  .sg-newsletter-form {
+    flex-wrap: wrap !important;
+  }
+}
+
 @media (max-width: 600px) {
   .sg-wrapper {
     width: 100%;

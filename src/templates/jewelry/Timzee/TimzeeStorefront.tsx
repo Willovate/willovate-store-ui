@@ -14,7 +14,7 @@ import {
   TIMZEE_BRAND_PARTNERS,
   TIMZEE_APP_LOGOS,
 } from './data/timzeeData'
-import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
+import { StorefrontProductDetailPage } from '../../../components/templates/StorefrontProductDetailPage'
 import './styles/timzee.css'
 
 export const TimzeeStorefront: React.FC<TimzeeStorefrontProps> = ({

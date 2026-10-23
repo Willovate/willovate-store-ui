@@ -832,16 +832,54 @@
   }
 }
 
+.belletny-hamburger-btn {
+  display: none;
+}
+.belletny-mobile-search-btn {
+  display: none;
+}
+
 @media (max-width: 768px) {
+  .belletny-hamburger-btn {
+    display: flex !important;
+  }
   .belletny-top-inner {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 10px 0;
+  }
+  .belletny-service-wrap {
+    display: none !important;
   }
   .belletny-search-bar {
-    width: 100%;
+    display: none !important;
+  }
+  .belletny-mobile-search-btn {
+    display: flex !important;
+  }
+  .belletny-account-btn {
+    display: none !important;
+  }
+  .belletny-top-right {
+    gap: 8px;
   }
   .belletny-nav-list {
-    display: none;
+    display: none !important;
+  }
+  .belletny-nl-form {
+    flex-direction: column;
+    border-radius: 12px;
+  }
+  .belletny-nl-input {
+    width: 100%;
+    border-radius: 8px;
+  }
+  .belletny-nl-btn {
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 8px;
   }
   .belletny-hero-title {
     font-size: 34px;
@@ -881,12 +919,7 @@
   }
 
   .belletny-nav-list {
-    display: flex;
-    width: 100%;
-    min-width: 0;
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
+    display: none !important;
   }
 
   .belletny-hero-title {

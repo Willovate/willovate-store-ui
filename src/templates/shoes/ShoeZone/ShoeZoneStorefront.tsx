@@ -19,8 +19,8 @@ import {
   StorefrontAccountModal,
   StorefrontMobileNavDrawer,
   type MobileNavItem,
-} from '../../common/StorefrontModals'
-import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
+} from '../../../components/templates/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../../components/templates/StorefrontProductDetailPage'
 import './styles/shoeZone.css'
 
 export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
@@ -233,12 +233,14 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
         {/* Mobile Hamburger Button */}
         <button
           type="button"
-          className="sz-hamburger-btn"
+          className="sz-hamburger-btn wv-mobile-hamburger-btn"
           onClick={() => setIsMobileNavOpen(true)}
           title="Menu"
           aria-label="Open mobile menu"
         >
-          ☰
+          <span className="wv-mobile-hamburger-bar" />
+          <span className="wv-mobile-hamburger-bar" />
+          <span className="wv-mobile-hamburger-bar" />
         </button>
 
         <a href="#home" className="sz-logo-wrap">
@@ -300,48 +302,47 @@ export const ShoeZoneStorefront: React.FC<ShoeZoneStorefrontProps> = ({
         <div className="sz-header-actions">
           <button
             type="button"
-            className="sz-action-btn"
+            className="wv-mobile-action-btn sz-action-btn"
             aria-label="Search"
             onClick={() => setIsSearchOpen(true)}
+            title="Search"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
+            <span>🔍</span>
           </button>
           <button
             type="button"
-            className="sz-action-btn"
+            className="sz-action-btn sz-account-btn"
             aria-label="User Account"
             onClick={() => setIsAccountOpen(true)}
+            title="Account"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-              <circle cx="12" cy="7" r="4" />
-            </svg>
+            <span>👤</span>
           </button>
           <button
             type="button"
-            className="sz-action-btn"
+            className="wv-mobile-action-btn sz-action-btn"
             aria-label="Wishlist"
             onClick={() => setIsWishlistOpen(true)}
+            title="Wishlist"
             style={{ position: 'relative' }}
           >
-            <span style={{ fontSize: 18 }}>{wishlist.length > 0 ? '❤️' : '🤍'}</span>
-            {wishlist.length > 0 && <span className="sz-cart-badge">{wishlist.length}</span>}
+            <span>🤍</span>
+            {wishlist.length > 0 && (
+              <span className="wv-mobile-badge-counter sz-cart-badge">{wishlist.length}</span>
+            )}
           </button>
           <button
             type="button"
-            className="sz-action-btn"
+            className="wv-mobile-action-btn sz-action-btn"
             aria-label="Shopping Bag Cart"
             onClick={() => setIsCartOpen(true)}
+            title="Shopping Cart"
+            style={{ position: 'relative' }}
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-              <line x1="3" y1="6" x2="21" y2="6" />
-              <path d="M16 10a4 4 0 0 1-8 0" />
-            </svg>
-            <span className="sz-cart-badge">{cartCount}</span>
+            <span>🛍️</span>
+            {cartCount > 0 && (
+              <span className="wv-mobile-badge-counter sz-cart-badge">{cartCount}</span>
+            )}
           </button>
         </div>
       </header>

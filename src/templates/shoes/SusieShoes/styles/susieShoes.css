@@ -1250,7 +1250,42 @@
 
 /* Responsive Overrides */
 .susie-root.device-mobile .susie-top-header {
-  padding: 14px 16px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.susie-root.device-mobile .susie-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.susie-root.device-mobile .susie-logo-brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.susie-root.device-mobile .susie-logo-title {
+  font-size: 20px;
+  line-height: 1.1;
+}
+
+.susie-root.device-mobile .susie-logo-subtitle {
+  font-size: 10px;
+}
+
+.susie-root.device-mobile .susie-footer-newsletter {
+  max-width: 100%;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.susie-root.device-mobile .susie-newsletter-form {
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .susie-root.device-mobile .susie-nav-bar {
@@ -1340,5 +1375,13 @@
 
   .susie-root img {
     max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .susie-account-btn,
+  .susie-currency-wrap,
+  .susie-cart-text {
+    display: none !important;
   }
 }

@@ -23,8 +23,8 @@ import {
   StorefrontAccountModal,
   StorefrontMobileNavDrawer,
   type MobileNavItem,
-} from '../../common/StorefrontModals'
-import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
+} from '../../../components/templates/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../../components/templates/StorefrontProductDetailPage'
 import './styles/happyFeet.css'
 
 export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
@@ -250,12 +250,14 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
         {/* Mobile Hamburger Button */}
         <button
           type="button"
-          className="hf-hamburger-btn"
+          className="hf-hamburger-btn wv-mobile-hamburger-btn"
           onClick={() => setIsMobileNavOpen(true)}
           title="Menu"
           aria-label="Open mobile menu"
         >
-          ☰
+          <span className="wv-mobile-hamburger-bar" />
+          <span className="wv-mobile-hamburger-bar" />
+          <span className="wv-mobile-hamburger-bar" />
         </button>
 
         <a href="#home" className="hf-logo-wrap">
@@ -314,6 +316,16 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
         </ul>
 
         <div className="hf-header-actions">
+          <button
+            type="button"
+            className="wv-mobile-action-btn hf-mobile-search-btn"
+            title="Search"
+            onClick={() => setIsSearchOpen(true)}
+            aria-label="Search"
+          >
+            <span>🔍</span>
+          </button>
+
           <form className="hf-search-form" onSubmit={(e) => { e.preventDefault(); setIsSearchOpen(true) }}>
             <input
               type="text"
@@ -330,26 +342,27 @@ export const HappyFeetStorefront: React.FC<HappyFeetStorefrontProps> = ({
 
           <button
             type="button"
-            className="hf-cart-btn"
+            className="wv-mobile-action-btn hf-cart-btn"
             onClick={() => setIsWishlistOpen(true)}
             title="Wishlist"
             style={{ position: 'relative' }}
           >
-            🤍
+            <span>🤍</span>
             {wishlist.length > 0 && (
-              <span className="hf-cart-badge">{wishlist.length}</span>
+              <span className="wv-mobile-badge-counter hf-cart-badge">{wishlist.length}</span>
             )}
           </button>
 
           <button
             type="button"
-            className="hf-cart-btn"
+            className="wv-mobile-action-btn hf-cart-btn"
             onClick={() => setIsCartOpen(true)}
             title="Shopping Cart"
+            style={{ position: 'relative' }}
           >
-            🛒
+            <span>🛒</span>
             {totalCartCount > 0 && (
-              <span className="hf-cart-badge">{totalCartCount}</span>
+              <span className="wv-mobile-badge-counter hf-cart-badge">{totalCartCount}</span>
             )}
           </button>
         </div>

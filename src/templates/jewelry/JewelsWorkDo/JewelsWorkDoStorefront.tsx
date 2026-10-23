@@ -10,7 +10,7 @@ import {
   JEWELS_TESTIMONIALS,
   JEWELS_TRUST_FEATURES,
 } from './data/jewelsData'
-import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
+import { StorefrontProductDetailPage } from '../../../components/templates/StorefrontProductDetailPage'
 import './styles/jewelsWorkDo.css'
 
 export const JewelsWorkDoStorefront: React.FC<JewelsStorefrontProps> = ({

@@ -16,8 +16,8 @@ import {
   StorefrontAccountModal,
   StorefrontMobileNavDrawer,
   type MobileNavItem,
-} from '../../common/StorefrontModals'
-import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
+} from '../../../components/templates/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../../components/templates/StorefrontProductDetailPage'
 import './styles/giaros.css'
 
 export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
@@ -191,12 +191,14 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
           {/* Mobile Hamburger Button */}
           <button
             type="button"
-            className="gia-hamburger-btn"
+            className="gia-hamburger-btn wv-mobile-hamburger-btn"
             onClick={() => setIsMobileNavOpen(true)}
             title="Menu"
             aria-label="Open mobile menu"
           >
-            ☰
+            <span className="wv-mobile-hamburger-bar" />
+            <span className="wv-mobile-hamburger-bar" />
+            <span className="wv-mobile-hamburger-bar" />
           </button>
 
           <div className="gia-logo-wrap" onClick={() => setCurrentSlideIndex(0)}>
@@ -243,39 +245,41 @@ export const GiarosStorefront: React.FC<GiarosStorefrontProps> = ({
           <div className="gia-actions">
             <button
               type="button"
-              className="gia-icon-btn"
+              className="wv-mobile-action-btn gia-icon-btn"
               onClick={() => setIsSearchOpen(true)}
               title="Search"
             >
-              🔍
+              <span>🔍</span>
             </button>
             <button
               type="button"
-              className="gia-icon-btn"
+              className="gia-icon-btn gia-account-btn"
               onClick={() => setIsAccountOpen(true)}
               title="Account"
             >
-              👤
+              <span>👤</span>
             </button>
             <button
               type="button"
-              className="gia-icon-btn"
+              className="wv-mobile-action-btn gia-icon-btn"
               onClick={() => setIsWishlistOpen(true)}
               title="Wishlist"
+              style={{ position: 'relative' }}
             >
-              {wishlist.length > 0 ? '❤️' : '🤍'}
+              <span>{wishlist.length > 0 ? '❤️' : '🤍'}</span>
               {wishlist.length > 0 && (
-                <span className="gia-badge-count">{wishlist.length}</span>
+                <span className="wv-mobile-badge-counter gia-badge-count">{wishlist.length}</span>
               )}
             </button>
             <button
               type="button"
-              className="gia-icon-btn"
+              className="wv-mobile-action-btn gia-icon-btn"
               onClick={() => setIsCartOpen(true)}
               title="Cart"
+              style={{ position: 'relative' }}
             >
-              🛍️
-              <span className="gia-badge-count">{cartItemCount}</span>
+              <span>🛍️</span>
+              {cartItemCount > 0 && <span className="wv-mobile-badge-counter gia-badge-count">{cartItemCount}</span>}
             </button>
           </div>
         </div>

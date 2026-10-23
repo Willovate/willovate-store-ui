@@ -1266,6 +1266,12 @@
 }
 
 @media (max-width: 768px) {
+  .ap-account-btn {
+    display: none !important;
+  }
+  .ap-nav {
+    display: none !important;
+  }
   .ap-hero-container {
     flex-direction: column;
     padding: 30px 20px;
@@ -1327,17 +1333,22 @@
   }
 
   .ap-header-inner {
-    flex-wrap: wrap;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 10px 14px !important;
+    gap: 8px !important;
+    flex-wrap: nowrap !important;
   }
 
   .ap-nav {
-    display: flex;
-    flex: 1 0 100%;
-    width: 100%;
-    min-width: 0;
-    overflow-x: auto;
-    order: 3;
-    justify-content: flex-start;
+    display: none !important;
+  }
+
+  .ap-header-tools {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
   }
 
   .ap-products-grid,

@@ -28,17 +28,13 @@
   box-sizing: border-box;
 }
 
-.beaux-wrapper.device-mobile {
-  max-width: 420px;
-  margin: 0 auto;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.12);
-  border-radius: 24px;
-}
-
+.beaux-wrapper.device-mobile,
 .beaux-wrapper.device-tablet {
-  max-width: 768px;
-  margin: 0 auto;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  box-shadow: none;
+  border-radius: 0;
 }
 
 .beaux-container {
@@ -962,6 +958,48 @@
   }
   .beaux-hero-title {
     font-size: 32px;
+  }
+}
+
+.beaux-mobile-search-btn {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .beaux-header-main {
+    padding: 10px 0 !important;
+  }
+  .beaux-header-inner {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    padding: 0 14px !important;
+    flex-wrap: nowrap !important;
+  }
+  .beaux-header-left {
+    flex: 0 0 auto !important;
+    gap: 0 !important;
+  }
+  .beaux-mobile-search-btn {
+    display: inline-flex !important;
+  }
+  .beaux-desktop-search,
+  .beaux-desktop-currency,
+  .beaux-account-btn {
+    display: none !important;
+  }
+  .beaux-header-right {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    flex: 0 0 auto !important;
+  }
+  .beaux-navbar {
+    display: none !important;
+  }
+  .beaux-newsletter-form {
+    flex-wrap: wrap !important;
   }
 }
 

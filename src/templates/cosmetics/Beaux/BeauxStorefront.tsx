@@ -19,8 +19,8 @@ import {
   StorefrontAccountModal,
   StorefrontMobileNavDrawer,
   type MobileNavItem,
-} from '../../common/StorefrontModals'
-import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
+} from '../../../components/templates/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../../components/templates/StorefrontProductDetailPage'
 import './styles/beaux.css'
 
 export const BeauxStorefront: React.FC<BeauxStorefrontProps> = ({
@@ -185,21 +185,25 @@ export const BeauxStorefront: React.FC<BeauxStorefrontProps> = ({
             {/* Mobile Hamburger Button */}
             <button
               type="button"
-              className="beaux-hamburger-btn"
+              className="beaux-hamburger-btn wv-mobile-hamburger-btn"
               onClick={() => setIsMobileNavOpen(true)}
               title="Menu"
               aria-label="Open mobile menu"
             >
-              ☰
+              <span className="wv-mobile-hamburger-bar" />
+              <span className="wv-mobile-hamburger-bar" />
+              <span className="wv-mobile-hamburger-bar" />
             </button>
-            <button className="beaux-icon-btn" title="Search" onClick={() => setIsSearchOpen(true)}>
+
+            <button className="beaux-icon-btn beaux-desktop-search" title="Search" onClick={() => setIsSearchOpen(true)}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="11" cy="11" r="8" />
                 <line x1="21" y1="21" x2="16.65" y2="16.65" />
               </svg>
             </button>
+
             <select
-              className="beaux-currency-select"
+              className="beaux-currency-select beaux-desktop-currency"
               value={currency}
               onChange={(e) => setCurrency(e.target.value as 'USD' | 'INR' | 'EUR' | 'GBP')}
               aria-label="Select Currency"
@@ -218,25 +222,53 @@ export const BeauxStorefront: React.FC<BeauxStorefrontProps> = ({
           </div>
 
           <div className="beaux-header-right">
-            <button className="beaux-icon-btn" title="Account" onClick={() => setIsAccountOpen(true)}>
+            <button
+              type="button"
+              className="wv-mobile-action-btn beaux-mobile-search-btn"
+              title="Search"
+              onClick={() => setIsSearchOpen(true)}
+              aria-label="Search"
+            >
+              <span>🔍</span>
+            </button>
+
+            <button className="beaux-icon-btn beaux-account-btn" title="Account" onClick={() => setIsAccountOpen(true)}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
               </svg>
             </button>
-            <button className="beaux-icon-btn" title="Wishlist" onClick={() => setIsWishlistOpen(true)}>
+
+            <button
+              type="button"
+              className="wv-mobile-action-btn beaux-icon-btn"
+              title="Wishlist"
+              onClick={() => setIsWishlistOpen(true)}
+              style={{ position: 'relative' }}
+            >
               <svg width="20" height="20" viewBox="0 0 24 24" fill={wishlist.length > 0 ? '#e87868' : 'none'} stroke="currentColor" strokeWidth="2">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
               </svg>
-              {wishlist.length > 0 && <span className="beaux-badge-count">{wishlist.length}</span>}
+              {wishlist.length > 0 && (
+                <span className="wv-mobile-badge-counter beaux-badge-count">{wishlist.length}</span>
+              )}
             </button>
-            <button className="beaux-icon-btn" title="Shopping Bag" onClick={() => setIsCartOpen(true)}>
+
+            <button
+              type="button"
+              className="wv-mobile-action-btn beaux-icon-btn"
+              title="Shopping Bag"
+              onClick={() => setIsCartOpen(true)}
+              style={{ position: 'relative' }}
+            >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
                 <line x1="3" y1="6" x2="21" y2="6" />
                 <path d="M16 10a4 4 0 0 1-8 0" />
               </svg>
-              <span className="beaux-badge-count">{cartCount}</span>
+              {cartCount > 0 && (
+                <span className="wv-mobile-badge-counter beaux-badge-count">{cartCount}</span>
+              )}
             </button>
           </div>
         </div>

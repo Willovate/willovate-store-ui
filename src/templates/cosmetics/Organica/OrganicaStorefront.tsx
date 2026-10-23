@@ -24,8 +24,8 @@ import {
   StorefrontAccountModal,
   StorefrontMobileNavDrawer,
   type MobileNavItem,
-} from '../../common/StorefrontModals'
-import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
+} from '../../../components/templates/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../../components/templates/StorefrontProductDetailPage'
 import './styles/organica.css'
 
 export function OrganicaStorefront({
@@ -217,15 +217,17 @@ export function OrganicaStorefront({
             {/* Mobile Hamburger Button */}
             <button
               type="button"
-              className="organica-hamburger-btn"
+              className="organica-hamburger-btn wv-mobile-hamburger-btn"
               onClick={() => setIsMobileNavOpen(true)}
               title="Menu"
               aria-label="Open mobile menu"
             >
-              ☰
+              <span className="wv-mobile-hamburger-bar" />
+              <span className="wv-mobile-hamburger-bar" />
+              <span className="wv-mobile-hamburger-bar" />
             </button>
 
-            {/* Phone */}
+            {/* Phone (Desktop Only) */}
             <div className="organica-phone-box">
               <span>📞</span>
               <div>
@@ -239,7 +241,7 @@ export function OrganicaStorefront({
               <img src={ORGANICA_LOGO} alt="Organica" className="organica-logo-img" />
             </a>
 
-            {/* Search Bar with Category Dropdown */}
+            {/* Search Bar with Category Dropdown (Desktop Only) */}
             <div className="organica-search-bar" onClick={() => setIsSearchOpen(true)} style={{ cursor: 'pointer' }}>
               <select
                 className="organica-category-select"
@@ -272,11 +274,21 @@ export function OrganicaStorefront({
               </button>
             </div>
 
-            {/* Wishlist, Account & Cart Pill */}
+            {/* Wishlist, Account & Cart */}
             <div className="organica-header-user">
               <button
                 type="button"
-                className="organica-wishlist-btn"
+                className="wv-mobile-action-btn organica-mobile-search-btn"
+                title="Search"
+                onClick={() => setIsSearchOpen(true)}
+                aria-label="Search"
+              >
+                <span>🔍</span>
+              </button>
+
+              <button
+                type="button"
+                className="organica-wishlist-btn organica-account-btn"
                 onClick={() => setIsAccountOpen(true)}
                 title="Account"
               >
@@ -286,28 +298,41 @@ export function OrganicaStorefront({
 
               <button
                 type="button"
-                className="organica-wishlist-btn"
+                className="wv-mobile-action-btn organica-wishlist-btn"
                 onClick={() => setIsWishlistOpen(true)}
                 title="Wishlist"
+                style={{ position: 'relative' }}
               >
                 <span>❤️</span>
-                <span>Wishlist ({wishlist.length})</span>
+                {wishlist.length > 0 && <span className="wv-mobile-badge-counter organica-badge-counter">{wishlist.length}</span>}
+                <span className="organica-btn-text">Wishlist ({wishlist.length})</span>
               </button>
 
-              <div className="organica-cart-pill" onClick={() => setIsCartOpen(true)}>
-                <div className="organica-cart-icon-wrap">
-                  <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <circle cx="9" cy="21" r="1" />
-                    <circle cx="20" cy="21" r="1" />
-                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-                  </svg>
-                  {totalCartCount > 0 && (
-                    <span className="organica-cart-badge">{totalCartCount}</span>
-                  )}
-                </div>
-                <div className="organica-cart-info">
-                  <span className="organica-cart-label">Shopping Cart</span>
-                  <span className="organica-cart-total">{formatPrice(cartSubtotal)}</span>
+              <div
+                className="wv-mobile-action-btn organica-cart-pill"
+                onClick={() => setIsCartOpen(true)}
+                title="Shopping Cart"
+                style={{ position: 'relative' }}
+              >
+                <span className="organica-mobile-cart-icon">🛍️</span>
+                {totalCartCount > 0 && (
+                  <span className="wv-mobile-badge-counter">{totalCartCount}</span>
+                )}
+                <div className="organica-desktop-cart-wrap" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <div className="organica-cart-icon-wrap">
+                    <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <circle cx="9" cy="21" r="1" />
+                      <circle cx="20" cy="21" r="1" />
+                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                    </svg>
+                    {totalCartCount > 0 && (
+                      <span className="organica-cart-badge">{totalCartCount}</span>
+                    )}
+                  </div>
+                  <div className="organica-cart-info">
+                    <span className="organica-cart-label">Shopping Cart</span>
+                    <span className="organica-cart-total">{formatPrice(cartSubtotal)}</span>
+                  </div>
                 </div>
               </div>
             </div>

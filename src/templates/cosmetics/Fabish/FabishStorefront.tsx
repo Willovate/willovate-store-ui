@@ -24,8 +24,8 @@ import {
   StorefrontAccountModal,
   StorefrontMobileNavDrawer,
   type MobileNavItem,
-} from '../../common/StorefrontModals'
-import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
+} from '../../../components/templates/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../../components/templates/StorefrontProductDetailPage'
 import './styles/fabish.css'
 
 export function FabishStorefront({
@@ -229,12 +229,14 @@ export function FabishStorefront({
           {/* Mobile Hamburger Button */}
           <button
             type="button"
-            className="fabish-hamburger-btn"
+            className="fabish-hamburger-btn wv-mobile-hamburger-btn"
             onClick={() => setIsMobileNavOpen(true)}
             title="Menu"
             aria-label="Open mobile menu"
           >
-            ☰
+            <span className="wv-mobile-hamburger-bar" />
+            <span className="wv-mobile-hamburger-bar" />
+            <span className="wv-mobile-hamburger-bar" />
           </button>
 
           {/* Logo */}
@@ -287,53 +289,51 @@ export function FabishStorefront({
           {/* Header Action Buttons */}
           <div className="fabish-header-actions">
             <button
-              className="fabish-action-btn"
+              type="button"
+              className="wv-mobile-action-btn fabish-action-btn"
               onClick={() => setIsSearchOpen(true)}
               aria-label="Search"
               title="Search store"
             >
-              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <circle cx="11" cy="11" r="8" />
-                <path d="m21 21-4.35-4.35" />
-              </svg>
+              <span>🔍</span>
             </button>
 
             <button
-              className="fabish-action-btn"
+              type="button"
+              className="fabish-action-btn fabish-account-btn"
               onClick={() => setIsAccountOpen(true)}
               aria-label="User Account"
               title="Account"
             >
-              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
+              <span>👤</span>
             </button>
 
             <button
-              className="fabish-action-btn"
+              type="button"
+              className="wv-mobile-action-btn fabish-action-btn"
               onClick={() => setIsWishlistOpen(true)}
               aria-label="Wishlist"
               title="Saved items"
+              style={{ position: 'relative' }}
             >
-              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-              </svg>
-              {wishlist.length > 0 && <span className="fabish-badge-count">{wishlist.length}</span>}
+              <span>{wishlist.length > 0 ? '❤️' : '🤍'}</span>
+              {wishlist.length > 0 && (
+                <span className="wv-mobile-badge-counter fabish-badge-count">{wishlist.length}</span>
+              )}
             </button>
 
             <button
-              className="fabish-action-btn"
+              type="button"
+              className="wv-mobile-action-btn fabish-action-btn"
               onClick={() => setIsCartOpen(true)}
               aria-label="Shopping Cart"
               title="View Cart"
+              style={{ position: 'relative' }}
             >
-              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <path d="M16 10a4 4 0 0 1-8 0" />
-              </svg>
-              {totalCartCount > 0 && <span className="fabish-badge-count">{totalCartCount}</span>}
+              <span>🛍️</span>
+              {totalCartCount > 0 && (
+                <span className="wv-mobile-badge-counter fabish-badge-count">{totalCartCount}</span>
+              )}
             </button>
           </div>
         </div>

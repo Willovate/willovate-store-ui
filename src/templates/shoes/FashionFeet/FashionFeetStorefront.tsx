@@ -19,8 +19,8 @@ import {
   StorefrontAccountModal,
   StorefrontMobileNavDrawer,
   type MobileNavItem,
-} from '../../common/StorefrontModals'
-import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
+} from '../../../components/templates/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../../components/templates/StorefrontProductDetailPage'
 import './styles/fashionFeet.css'
 
 export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
@@ -245,12 +245,14 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
           {/* Mobile Hamburger Button */}
           <button
             type="button"
-            className="ff-hamburger-btn"
+            className="ff-hamburger-btn wv-mobile-hamburger-btn"
             onClick={() => setIsMobileNavOpen(true)}
             title="Menu"
             aria-label="Open mobile menu"
           >
-            ☰
+            <span className="wv-mobile-hamburger-bar" />
+            <span className="wv-mobile-hamburger-bar" />
+            <span className="wv-mobile-hamburger-bar" />
           </button>
 
           <nav className="ff-nav-left">
@@ -299,40 +301,42 @@ export const FashionFeetStorefront: React.FC<FashionFeetStorefrontProps> = ({
           <div className="ff-nav-right">
             <button
               type="button"
-              className="ff-action-btn"
+              className="wv-mobile-action-btn ff-action-btn"
               title="Search footwear"
               onClick={() => setIsSearchOpen(true)}
             >
-              🔍
+              <span>🔍</span>
             </button>
             <button
               type="button"
-              className="ff-action-btn"
+              className="ff-action-btn ff-account-btn"
               title="Account"
               onClick={() => setIsAccountOpen(true)}
             >
-              👤
+              <span>👤</span>
             </button>
             <button
               type="button"
-              className="ff-action-btn"
+              className="wv-mobile-action-btn ff-action-btn"
               title="Wishlist"
               onClick={() => setIsWishlistOpen(true)}
+              style={{ position: 'relative' }}
             >
-              {wishlist.length > 0 ? '❤️' : '🤍'}
+              <span>{wishlist.length > 0 ? '❤️' : '🤍'}</span>
               {wishlist.length > 0 && (
-                <span className="ff-cart-badge">{wishlist.length}</span>
+                <span className="wv-mobile-badge-counter ff-cart-badge">{wishlist.length}</span>
               )}
             </button>
             <button
               type="button"
-              className="ff-action-btn"
+              className="wv-mobile-action-btn ff-action-btn"
               title="View shopping cart"
               onClick={() => setIsCartOpen(true)}
+              style={{ position: 'relative' }}
             >
-              🛒
+              <span>🛒</span>
               {totalCartCount > 0 && (
-                <span className="ff-cart-badge">{totalCartCount}</span>
+                <span className="wv-mobile-badge-counter ff-cart-badge">{totalCartCount}</span>
               )}
             </button>
           </div>

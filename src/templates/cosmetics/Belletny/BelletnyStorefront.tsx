@@ -23,8 +23,8 @@ import {
   StorefrontAccountModal,
   StorefrontMobileNavDrawer,
   type MobileNavItem,
-} from '../../common/StorefrontModals'
-import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
+} from '../../../components/templates/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../../components/templates/StorefrontProductDetailPage'
 import './styles/belletny.css'
 
 export function BelletnyStorefront({
@@ -183,16 +183,18 @@ export function BelletnyStorefront({
             {/* Mobile Hamburger Button */}
             <button
               type="button"
-              className="belletny-hamburger-btn"
+              className="wv-mobile-hamburger-btn belletny-hamburger-btn"
               onClick={() => setIsMobileNavOpen(true)}
               title="Menu"
               aria-label="Open mobile menu"
             >
-              ☰
+              <span className="wv-mobile-hamburger-bar" />
+              <span className="wv-mobile-hamburger-bar" />
+              <span className="wv-mobile-hamburger-bar" />
             </button>
 
             {/* Phone & Currency */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <div className="belletny-service-wrap" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
               <div className="belletny-service-text">
                 Customer Service : {BELLETNY_PHONE}
               </div>
@@ -223,6 +225,7 @@ export function BelletnyStorefront({
 
             {/* Search, Wishlist, User, Cart */}
             <div className="belletny-top-right">
+              {/* Desktop Search Bar */}
               <div className="belletny-search-bar" onClick={() => setIsSearchOpen(true)} style={{ cursor: 'pointer' }}>
                 <input
                   type="text"
@@ -246,24 +249,40 @@ export function BelletnyStorefront({
                 </button>
               </div>
 
+              {/* Mobile Search Button */}
               <button
                 type="button"
-                className="belletny-action-icon"
-                onClick={() => setIsWishlistOpen(true)}
-                title="Wishlist"
-                style={{ position: 'relative' }}
+                className="wv-mobile-action-btn belletny-mobile-search-btn"
+                onClick={() => setIsSearchOpen(true)}
+                title="Search"
+                aria-label="Search"
               >
-                <svg width="22" height="22" fill={wishlist.length > 0 ? '#8e2043' : 'none'} stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="m21 21-4.35-4.35" />
                 </svg>
-                {wishlist.length > 0 && <span className="belletny-cart-badge">{wishlist.length}</span>}
               </button>
 
               <button
                 type="button"
-                className="belletny-action-icon"
+                className="wv-mobile-action-btn belletny-action-icon"
+                onClick={() => setIsWishlistOpen(true)}
+                title="Wishlist"
+                aria-label="Wishlist"
+                style={{ position: 'relative' }}
+              >
+                <svg width="18" height="18" fill={wishlist.length > 0 ? '#8e2043' : 'none'} stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+                {wishlist.length > 0 && <span className="wv-mobile-badge-counter belletny-cart-badge">{wishlist.length}</span>}
+              </button>
+
+              <button
+                type="button"
+                className="belletny-action-icon belletny-account-btn"
                 onClick={() => setIsAccountOpen(true)}
                 title="Account"
+                aria-label="Account"
               >
                 <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
@@ -273,16 +292,18 @@ export function BelletnyStorefront({
 
               <button
                 type="button"
-                className="belletny-action-icon"
+                className="wv-mobile-action-btn belletny-action-icon"
                 onClick={() => setIsCartOpen(true)}
                 title="Shopping Bag"
+                aria-label="Shopping Bag"
+                style={{ position: 'relative' }}
               >
-                <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
                   <line x1="3" y1="6" x2="21" y2="6" />
                   <path d="M16 10a4 4 0 0 1-8 0" />
                 </svg>
-                <span className="belletny-cart-badge">{totalCartCount}</span>
+                <span className="wv-mobile-badge-counter belletny-cart-badge">{totalCartCount}</span>
               </button>
             </div>
           </div>
@@ -687,7 +708,7 @@ export function BelletnyStorefront({
               <p style={{ fontSize: '13px', color: '#ebdcdb' }}>
                 Sign up for our newsletter to receive beauty trends and exclusive discounts.
               </p>
-              <div className="belletny-nl-form">
+              <div className="belletny-nl-form wv-responsive-newsletter">
                 <input
                   type="email"
                   placeholder="Enter your email"

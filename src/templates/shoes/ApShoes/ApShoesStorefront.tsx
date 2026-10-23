@@ -18,8 +18,8 @@ import {
   StorefrontAccountModal,
   StorefrontMobileNavDrawer,
   type MobileNavItem,
-} from '../../common/StorefrontModals'
-import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
+} from '../../../components/templates/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../../components/templates/StorefrontProductDetailPage'
 import './styles/apShoes.css'
 
 export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
@@ -239,12 +239,14 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
           {/* Mobile Hamburger Button */}
           <button
             type="button"
-            className="ap-hamburger-btn"
+            className="ap-hamburger-btn wv-mobile-hamburger-btn"
             onClick={() => setIsMobileNavOpen(true)}
             title="Menu"
             aria-label="Open mobile menu"
           >
-            ☰
+            <span className="wv-mobile-hamburger-bar" />
+            <span className="wv-mobile-hamburger-bar" />
+            <span className="wv-mobile-hamburger-bar" />
           </button>
 
           {/* Logo */}
@@ -335,19 +337,16 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
           <div className="ap-header-tools">
             <button
               type="button"
-              className="ap-tool-btn"
+              className="wv-mobile-action-btn ap-tool-btn"
               title="Search"
               onClick={() => setIsSearchOpen(true)}
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-              </svg>
+              <span>🔍</span>
             </button>
 
             <button
               type="button"
-              className="ap-tool-btn"
+              className="ap-tool-btn ap-account-btn"
               title="Account"
               onClick={() => setIsAccountOpen(true)}
             >
@@ -359,16 +358,14 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
 
             <button
               type="button"
-              className="ap-tool-btn"
+              className="wv-mobile-action-btn ap-tool-btn"
               title="Wishlist"
               onClick={() => setIsWishlistOpen(true)}
               style={{ position: 'relative' }}
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill={wishlist.length > 0 ? '#ea580c' : 'none'} stroke="currentColor" strokeWidth="2">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-              </svg>
+              <span>{wishlist.length > 0 ? '❤️' : '🤍'}</span>
               {wishlist.length > 0 && (
-                <span className="ap-cart-count-badge" style={{ background: '#ea580c' }}>
+                <span className="wv-mobile-badge-counter ap-cart-count-badge" style={{ background: '#ea580c' }}>
                   {wishlist.length}
                 </span>
               )}
@@ -377,14 +374,15 @@ export const ApShoesStorefront: React.FC<ApShoesStorefrontProps> = ({
             {/* Cart Bag */}
             <button
               type="button"
-              className="ap-tool-btn ap-cart-bag"
+              className="wv-mobile-action-btn ap-tool-btn ap-cart-bag"
               title="Shopping Cart"
               onClick={() => setIsCartOpen(true)}
+              style={{ position: 'relative' }}
             >
-              <svg width="22" height="24" viewBox="0 0 24 24" fill="#000000">
-                <path d="M16 7a4 4 0 0 0-8 0v2H4v13h16V9h-4V7zm-6 0a2 2 0 1 1 4 0v2h-4V7z" />
-              </svg>
-              <span className="ap-cart-count-badge">{totalCartCount}</span>
+              <span>🛍️</span>
+              {totalCartCount > 0 && (
+                <span className="wv-mobile-badge-counter ap-cart-count-badge">{totalCartCount}</span>
+              )}
             </button>
           </div>
         </div>

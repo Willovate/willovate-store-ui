@@ -17,8 +17,8 @@ import {
   StorefrontAccountModal,
   StorefrontMobileNavDrawer,
   type MobileNavItem,
-} from '../../common/StorefrontModals'
-import { StorefrontProductDetailPage } from '../../common/StorefrontProductDetailPage'
+} from '../../../components/templates/StorefrontModals'
+import { StorefrontProductDetailPage } from '../../../components/templates/StorefrontProductDetailPage'
 import './styles/stepglam.css'
 
 export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
@@ -237,12 +237,14 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
           {/* Mobile Hamburger Menu Button */}
           <button
             type="button"
-            className="sg-hamburger-btn"
+            className="sg-hamburger-btn wv-mobile-hamburger-btn"
             onClick={() => setIsMobileNavOpen(true)}
             title="Menu"
             aria-label="Open mobile menu"
           >
-            ☰
+            <span className="wv-mobile-hamburger-bar" />
+            <span className="wv-mobile-hamburger-bar" />
+            <span className="wv-mobile-hamburger-bar" />
           </button>
 
           {/* Desktop Nav with Dropdowns */}
@@ -289,37 +291,43 @@ export const StepGlamStorefront: React.FC<StepGlamStorefrontProps> = ({
           <div className="sg-actions-right">
             <button
               type="button"
-              className="sg-action-btn"
+              className="wv-mobile-action-btn sg-action-btn"
               onClick={() => setIsSearchOpen(true)}
               title="Search"
             >
-              🔍
+              <span>🔍</span>
             </button>
             <button
               type="button"
-              className="sg-action-btn"
+              className="sg-action-btn sg-account-btn"
               onClick={() => setIsAccountOpen(true)}
               title="Account"
             >
-              👤
+              <span>👤</span>
             </button>
             <button
               type="button"
-              className="sg-action-btn"
+              className="wv-mobile-action-btn sg-action-btn"
               onClick={() => setIsWishlistOpen(true)}
               title="Wishlist"
+              style={{ position: 'relative' }}
             >
-              {wishlist.length > 0 ? '❤️' : '🤍'}
-              <span className="sg-badge">{wishlist.length}</span>
+              <span>{wishlist.length > 0 ? '❤️' : '🤍'}</span>
+              {wishlist.length > 0 && (
+                <span className="wv-mobile-badge-counter sg-badge">{wishlist.length}</span>
+              )}
             </button>
             <button
               type="button"
-              className="sg-action-btn"
+              className="wv-mobile-action-btn sg-action-btn"
               onClick={() => setIsCartOpen(true)}
               title="Bag"
+              style={{ position: 'relative' }}
             >
-              🛍️
-              <span className="sg-badge">{cartItemCount}</span>
+              <span>🛍️</span>
+              {cartItemCount > 0 && (
+                <span className="wv-mobile-badge-counter sg-badge">{cartItemCount}</span>
+              )}
             </button>
           </div>
         </div>
