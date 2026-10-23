@@ -661,10 +661,10 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
                   </select>
                 </div>
 
-                <div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
+                <div className="swd-card-actions" style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
                   <button
                     type="button"
-                    className="swd-add-cart-btn"
+                    className="swd-card-add-btn swd-add-cart-btn"
                     style={{ flex: 1, margin: 0 }}
                     onClick={() => handleAddToCart(prod)}
                   >
@@ -673,6 +673,7 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
                   </button>
                   <button
                     type="button"
+                    className="swd-card-view-btn"
                     title="View Details"
                     onClick={() => setQuickViewProduct(prod)}
                     style={{
@@ -791,10 +792,10 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
                   </select>
                 </div>
 
-                <div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
+                <div className="swd-card-actions" style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
                   <button
                     type="button"
-                    className="swd-add-cart-btn"
+                    className="swd-card-add-btn swd-add-cart-btn"
                     style={{ flex: 1, margin: 0 }}
                     onClick={() => handleAddToCart(prod)}
                   >
@@ -803,6 +804,7 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
                   </button>
                   <button
                     type="button"
+                    className="swd-card-view-btn"
                     title="View Details"
                     onClick={() => setQuickViewProduct(prod)}
                     style={{
@@ -907,7 +909,7 @@ export const ShoesWorkDoStorefront: React.FC<ShoesWorkDoStorefrontProps> = ({
 
                   <button
                     type="button"
-                    className="swd-add-cart-btn"
+                    className="swd-card-add-btn swd-add-cart-btn"
                     onClick={() => handleAddToCart(prod)}
                   >
                     <span>Add to Cart</span>
