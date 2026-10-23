@@ -631,6 +631,7 @@
     .ap-prod-card,
     .swd-product-card,
     .sen-card,
+    .sen-product-card,
     .fwd-card-dark,
     .ff-product-card,
     .sz-product-card,
@@ -665,6 +666,7 @@
     .swd-card-thumb,
     .swd-product-img-wrap,
     .sen-card-img-wrap,
+    .sen-product-img-wrap,
     .fwd-card-thumb-area,
     .ff-card-thumb,
     .sz-card-thumb,
@@ -706,6 +708,8 @@
     .swd-product-img-wrap img,
     .swd-product-img,
     .sen-card-img-wrap img,
+    .sen-product-img-wrap img,
+    .sen-product-img,
     .fwd-card-thumb-area img,
     .ff-card-thumb img,
     .sz-card-thumb img,
@@ -768,6 +772,7 @@
     .swd-card-title,
     .swd-product-name,
     .sen-card-title,
+    .sen-product-name,
     .ff-card-title,
     .sz-prod-title,
     .sz-prod-name,
@@ -808,6 +813,8 @@
     .ap-add-to-cart,
     .swd-card-add-btn,
     .sen-card-add-btn,
+    .sen-add-cart-btn,
+    .sen-card-actions .sen-add-cart-btn,
     .fwd-add-btn,
     .fwd-card-add-btn,
     .fwd-card-actions .fwd-card-add-btn,
@@ -845,6 +852,8 @@
     .swd-card-actions .swd-card-view-btn,
     .fwd-card-view-btn,
     .fwd-card-actions .fwd-card-view-btn,
+    .sen-card-view-btn,
+    .sen-card-actions .sen-card-view-btn,
     .susie-product-card .susie-add-cart-btn:last-child
   ) {
     display: none !important;
@@ -879,6 +888,10 @@
     .swd-loved-grid,
     .swd-dual-statement-grid,
     .sen-banner-grid,
+    .sen-tale-banner,
+    .sen-journey-grid,
+    .sen-journey-card,
+    .sen-copper-inner,
     .fwd-featured-banner,
     .fwd-promo-banner,
     .ff-banner-grid,
@@ -2376,6 +2389,144 @@
   gap: 10px !important;
 }
 
+/* Product Cards in Simulated Mobile Frame */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) :is(
+  .sg-product-card,
+  .gia-product-card,
+  .ap-product-card,
+  .ap-prod-card,
+  .swd-product-card,
+  .sen-card,
+  .sen-product-card,
+  .fwd-card-dark,
+  .ff-product-card,
+  .sz-product-card,
+  .hf-product-card,
+  .susie-product-card,
+  .susie-card
+) {
+  padding: 10px !important;
+  border-radius: 10px !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+/* Product Card Thumbnail Wrapper in Simulated Frame */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) :is(
+  .sg-prod-img-box,
+  .gia-card-thumb,
+  .gia-prod-img-wrap,
+  .ap-card-img-wrap,
+  .ap-prod-thumb-wrap,
+  .swd-card-thumb,
+  .swd-product-img-wrap,
+  .sen-card-img-wrap,
+  .sen-product-img-wrap,
+  .fwd-card-thumb-area,
+  .ff-card-thumb,
+  .sz-card-thumb,
+  .sz-prod-img-wrap,
+  .hf-card-thumb,
+  .hf-product-img-wrap,
+  .susie-prod-img-wrap,
+  .susie-card-thumb
+) {
+  height: 135px !important;
+  max-height: 135px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  overflow: hidden !important;
+  margin-bottom: 8px !important;
+}
+
+/* Product Card Images in Simulated Frame */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) :is(
+  .sg-prod-img-box img,
+  .gia-card-thumb img,
+  .gia-prod-img-wrap img,
+  .gia-prod-img,
+  .ap-card-img-wrap img,
+  .ap-prod-thumb,
+  .swd-card-thumb img,
+  .swd-product-img-wrap img,
+  .swd-product-img,
+  .sen-card-img-wrap img,
+  .sen-product-img-wrap img,
+  .sen-product-img,
+  .fwd-card-thumb-area img,
+  .ff-card-thumb img,
+  .sz-card-thumb img,
+  .sz-prod-img,
+  .hf-card-thumb img,
+  .hf-product-img,
+  .susie-prod-img,
+  .susie-card-thumb img
+) {
+  max-width: 90% !important;
+  max-height: 115px !important;
+  object-fit: contain !important;
+}
+
+/* Product Card Titles in Simulated Frame */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) :is(
+  .sg-prod-name,
+  .gia-card-title,
+  .ap-card-title,
+  .ap-prod-name,
+  .swd-card-title,
+  .swd-product-name,
+  .sen-card-title,
+  .sen-product-name,
+  .ff-card-title,
+  .sz-prod-title,
+  .sz-prod-name,
+  .hf-card-title,
+  .hf-product-title,
+  .susie-prod-title,
+  .susie-card-title
+) {
+  font-size: 12.5px !important;
+  line-height: 1.3 !important;
+  max-height: 2.6em !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  margin-top: 4px !important;
+  font-weight: 600 !important;
+}
+
 /* Filter Tabs in Simulated Frame */
 :is(
   .simulated-frame.frame-mobile,
@@ -2481,6 +2632,10 @@
   .swd-banner-grid,
   .swd-dual-statement-grid,
   .sen-banner-grid,
+  .sen-tale-banner,
+  .sen-journey-grid,
+  .sen-journey-card,
+  .sen-copper-inner,
   .fwd-featured-banner,
   .fwd-promo-banner,
   .ff-banner-grid,
@@ -2550,6 +2705,8 @@
   .gia-card-actions .gia-card-view-btn,
   .swd-card-view-btn,
   .swd-card-actions .swd-card-view-btn,
+  .sen-card-view-btn,
+  .sen-card-actions .sen-card-view-btn,
   .susie-product-card .susie-add-cart-btn:last-child
 ) {
   display: none !important;
@@ -2570,6 +2727,9 @@
   .gia-card-actions .gia-card-add-btn,
   .swd-card-add-btn,
   .swd-card-actions .swd-card-add-btn,
+  .sen-card-add-btn,
+  .sen-add-cart-btn,
+  .sen-card-actions .sen-add-cart-btn,
   .ff-card-add-btn,
   .sz-prod-cart-btn
 ) {
@@ -3299,6 +3459,144 @@
 ) .wv-pdp-related-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 10px !important;
+}
+
+/* Product Cards in Simulated Mobile Frame */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) :is(
+  .sg-product-card,
+  .gia-product-card,
+  .ap-product-card,
+  .ap-prod-card,
+  .swd-product-card,
+  .sen-card,
+  .sen-product-card,
+  .fwd-card-dark,
+  .ff-product-card,
+  .sz-product-card,
+  .hf-product-card,
+  .susie-product-card,
+  .susie-card
+) {
+  padding: 10px !important;
+  border-radius: 10px !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+/* Product Card Thumbnail Wrapper in Simulated Frame */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) :is(
+  .sg-prod-img-box,
+  .gia-card-thumb,
+  .gia-prod-img-wrap,
+  .ap-card-img-wrap,
+  .ap-prod-thumb-wrap,
+  .swd-card-thumb,
+  .swd-product-img-wrap,
+  .sen-card-img-wrap,
+  .sen-product-img-wrap,
+  .fwd-card-thumb-area,
+  .ff-card-thumb,
+  .sz-card-thumb,
+  .sz-prod-img-wrap,
+  .hf-card-thumb,
+  .hf-product-img-wrap,
+  .susie-prod-img-wrap,
+  .susie-card-thumb
+) {
+  height: 135px !important;
+  max-height: 135px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  overflow: hidden !important;
+  margin-bottom: 8px !important;
+}
+
+/* Product Card Images in Simulated Frame */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) :is(
+  .sg-prod-img-box img,
+  .gia-card-thumb img,
+  .gia-prod-img-wrap img,
+  .gia-prod-img,
+  .ap-card-img-wrap img,
+  .ap-prod-thumb,
+  .swd-card-thumb img,
+  .swd-product-img-wrap img,
+  .swd-product-img,
+  .sen-card-img-wrap img,
+  .sen-product-img-wrap img,
+  .sen-product-img,
+  .fwd-card-thumb-area img,
+  .ff-card-thumb img,
+  .sz-card-thumb img,
+  .sz-prod-img,
+  .hf-card-thumb img,
+  .hf-product-img,
+  .susie-prod-img,
+  .susie-card-thumb img
+) {
+  max-width: 90% !important;
+  max-height: 115px !important;
+  object-fit: contain !important;
+}
+
+/* Product Card Titles in Simulated Frame */
+:is(
+  .simulated-frame.frame-mobile,
+  .preview-viewport-container.device-mobile,
+  .device-mobile,
+  .frame-mobile,
+  .is-mobile,
+  [data-device-view="mobile"]
+) :is(
+  .sg-prod-name,
+  .gia-card-title,
+  .ap-card-title,
+  .ap-prod-name,
+  .swd-card-title,
+  .swd-product-name,
+  .sen-card-title,
+  .sen-product-name,
+  .ff-card-title,
+  .sz-prod-title,
+  .sz-prod-name,
+  .hf-card-title,
+  .hf-product-title,
+  .susie-prod-title,
+  .susie-card-title
+) {
+  font-size: 12.5px !important;
+  line-height: 1.3 !important;
+  max-height: 2.6em !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  margin-top: 4px !important;
+  font-weight: 600 !important;
 }
 
 :is(

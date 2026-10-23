@@ -680,39 +680,25 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
                   </div>
                 )}
 
-                <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
+                <div className="sen-card-actions">
                   <button
                     type="button"
                     className="sen-add-cart-btn"
-                    style={{ flex: 1 }}
                     onClick={() => handleAddToCart(prod)}
                   >
                     <span>Add to Cart 🛍️</span>
                   </button>
                   <button
                     type="button"
+                    className="sen-card-view-btn"
                     title="View Details"
                     onClick={() => {
                       setQuickViewProduct(prod)
                       setSelectedProductSize(prod.sizes?.[0] || '7')
                       setSelectedProductColor(prod.colors?.[0]?.name || 'Standard')
                     }}
-                    style={{
-                      padding: '8px 14px',
-                      borderRadius: 9999,
-                      border: '1px solid #d4d4d8',
-                      backgroundColor: '#ffffff',
-                      color: '#18181b',
-                      fontSize: 12,
-                      fontWeight: 700,
-                      cursor: 'pointer',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: 4,
-                      transition: 'all 0.2s',
-                    }}
                   >
-                    👁️ View
+                    <span>👁️ View</span>
                   </button>
                 </div>
               </div>
@@ -724,11 +710,11 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
       {/* Tale of Exhilaration: Fashion Finds */}
       <section id="sen-story-section" className="sen-container">
         <div className="sen-tale-banner">
-          <div>
-            <h2 style={{ fontSize: 32, fontWeight: 800, color: '#18181b', marginBottom: 16 }}>
+          <div className="sen-tale-content">
+            <h2 className="sen-tale-title">
               Tale of Exhilaration: Fashion Finds
             </h2>
-            <p style={{ fontSize: 14, color: '#52525b', lineHeight: 1.6, marginBottom: 24 }}>
+            <p className="sen-tale-desc">
               Embark on an exhilarating fashion expedition where every discovery is a thrill. From
               head-turning apparel to swoon-worthy shoes and accessories, find pieces that speak to
               your unique aesthetic.
@@ -909,38 +895,24 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
                   </div>
                 )}
 
-                <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
+                <div className="sen-card-actions">
                   <button
                     type="button"
                     className="sen-add-cart-btn"
-                    style={{ flex: 1 }}
                     onClick={() => handleAddToCart(prod)}
                   >
                     <span>Add to Cart 🛍️</span>
                   </button>
                   <button
                     type="button"
+                    className="sen-card-view-btn"
                     title="View Details"
                     onClick={() => {
                       setQuickViewProduct(prod)
                       setSelectedProductColor(prod.colors?.[0]?.name || 'Standard')
                     }}
-                    style={{
-                      padding: '8px 14px',
-                      borderRadius: 9999,
-                      border: '1px solid #d4d4d8',
-                      backgroundColor: '#ffffff',
-                      color: '#18181b',
-                      fontSize: 12,
-                      fontWeight: 700,
-                      cursor: 'pointer',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: 4,
-                      transition: 'all 0.2s',
-                    }}
                   >
-                    👁️ View
+                    <span>👁️ View</span>
                   </button>
                 </div>
               </div>
@@ -952,11 +924,11 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
       {/* Terracotta Banner: Unraveling the Glamour of Fashion */}
       <section className="sen-copper-banner">
         <div className="sen-copper-inner">
-          <div>
-            <h2 style={{ fontSize: 36, fontWeight: 800, marginBottom: 14 }}>
+          <div className="sen-copper-content">
+            <h2 className="sen-copper-title">
               Unraveling the Glamour of Fashion
             </h2>
-            <p style={{ fontSize: 15, lineHeight: 1.6, color: '#fef08a', marginBottom: 24 }}>
+            <p className="sen-copper-desc">
               Step into the enchanted world of fashion where glamour takes center stage, and every
               outfit tells a tale of elegance and opulence.
             </p>
@@ -1261,23 +1233,9 @@ export const SensationStorefront: React.FC<SensationStorefrontProps> = ({
           </div>
         </div>
 
-        <div
-          style={{
-            maxWidth: 1400,
-            margin: '0 auto',
-            padding: '20px 32px 0',
-            borderTop: '1px solid #e4e4e7',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            gap: 12,
-            fontSize: 12,
-            color: '#71717a',
-          }}
-        >
+        <div className="sen-footer-bottom">
           <div>© 2024, Sensation WorkDo Powered by Shopify</div>
-          <div style={{ display: 'flex', gap: 10, fontSize: 16 }}>
+          <div className="sen-footer-payments" style={{ display: 'flex', gap: 10, fontSize: 16 }}>
             <span>💳 Visa</span>
             <span>Mastercard</span>
             <span>Amex</span>
