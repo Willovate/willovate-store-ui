@@ -3,101 +3,99 @@ import type { TemplateConfig } from '../../types/template'
 export const LumaLiving: TemplateConfig = {
   id: 'luma-living',
   name: 'Luma Living',
-  description: 'Warm organic interiors with sunlight-driven photography and tactile natural materials.',
+  description: 'Soft lighting, warm textiles, and calm contemporary living.',
   categories: [{ id: 'home', name: 'Home & Furniture' }],
-  tags: [{ id: 'organic', name: 'Organic' }, { id: 'lifestyle', name: 'Lifestyle' }, { id: 'warm', name: 'Warm' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&q=80&w=800',
+  tags: [{ id: 'soft', name: 'Soft' }, { id: 'lighting', name: 'Lighting' }, { id: 'calm', name: 'Calm' }],
+  thumbnailUrl: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {
     fonts: { heading: 'Georgia, serif', body: 'Inter, sans-serif' },
-    colors: { primary: '#2a2626', background: '#faf9f7', accent: '#c2a386' }
+    colors: { primary: '#232b2b', background: '#f9f8f6', accent: '#c5a059' }
   },
   sections: [
-    { id: 's1', type: 'promo', props: { text: 'Free shipping on all furniture orders.' } },
-    { id: 's2', type: 'navbar', props: { brand: 'LUMA LIVING', style: 'center' } },
-    { id: 's3', type: 'split-hero', props: { 
-      title: 'Spaces that feel like home.', 
-      subtitle: 'Warm sunlight, natural oak, and tactile linen. A collection designed for relaxed, everyday living.', 
-      image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&q=80&w=800', 
-      ctaLabel: 'Shop the Collection' 
+    { id: 's1', type: 'promo', props: { text: 'Free ambient light bulb kit included with every lamp order.' } },
+    { id: 's2', type: 'navbar', props: { brand: 'LUMA', style: 'center' } },
+    { id: 's3', type: 'split-hero', props: {
+      title: 'Illuminating Life at Home',
+      subtitle: 'Soft illumination, natural warmth, and tactile materials crafted for peace of mind.',
+      image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=800',
+      ctaLabel: 'Shop Luma'
     } },
-    { id: 's4', type: 'category-grid', props: { 
-      title: 'Explore by Space', 
+    { id: 's4', type: 'category-grid', props: {
+      title: 'Curated Environments',
       categories: [
-        { name: 'Living Room', image: 'https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&q=80&w=600' }, 
-        { name: 'Bedroom', image: 'https://images.unsplash.com/photo-1512438248247-f0f2a5a8b7f0?auto=format&fit=crop&q=80&w=600' }, 
-        { name: 'Dining', image: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&q=80&w=600' },
-        { name: 'Lighting', image: 'https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&q=80&w=600' }
-      ] 
-    } },
-    { id: 's5', type: 'product-spotlight', props: { 
-      image: 'https://images.unsplash.com/photo-1519682577862-22b62b24e493?auto=format&fit=crop&q=80&w=800', 
-      name: 'The Linen Sofa', 
-      category: 'Seating', 
-      description: 'Generously proportioned and deeply comfortable. Upholstered in pure Belgian linen that softens beautifully over time.', 
-      price: 2600, 
-      features: ['Pure Belgian Linen', 'Down-wrapped Cushions', 'Solid Oak Frame'], 
-      imageRight: false, 
-      badge: 'Bestseller' 
-    } },
-    { id: 's6', type: 'shop-the-look', props: { 
-      title: 'Sunlit Living Room', 
-      subtitle: 'A composed, airy living space grounded by natural textures.', 
-      image: 'https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&q=80&w=1600', 
-      hotspots: [
-        { x: 35, y: 65, product: { name: 'Linen Sofa', price: 2600 } },
-        { x: 65, y: 75, product: { name: 'Oak Coffee Table', price: 850 } },
-        { x: 80, y: 45, product: { name: 'Sculptural Floor Lamp', price: 450 } }
-      ] 
-    } },
-    { id: 's7', type: 'material-grid', props: { 
-      title: 'Our Materials', 
-      subtitle: 'Honest, tactile, and designed to age gracefully.', 
-      materials: [
-        { id: 'm1', name: 'Solid Oak', image: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&q=80&w=600' }, 
-        { id: 'm2', name: 'Washed Linen', image: 'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&q=80&w=600' }, 
-        { id: 'm3', name: 'Natural Wool', image: 'https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?auto=format&fit=crop&q=80&w=600' },
-        { id: 'm4', name: 'Honed Stone', image: 'https://images.unsplash.com/photo-1520699697851-3dc68aa3a474?auto=format&fit=crop&q=80&w=600' }
-      ] 
-    } },
-    { id: 's8', type: 'catalog', props: {
-      products: [
-        { id: 'c1', name: 'Ceramic Table Lamp', description: 'Handcrafted Sand', price: 280, imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=600' },
-        { id: 'c2', name: 'Woven Area Rug', description: 'Natural 8x10', price: 850, imageUrl: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&q=80&w=600' },
-        { id: 'c3', name: 'Linen Accent Pillow', description: 'Ochre', price: 65, imageUrl: 'https://images.unsplash.com/photo-1574634534894-89d7576c8259?auto=format&fit=crop&q=80&w=600' },
-        { id: 'c4', name: 'Oak Side Table', description: 'Matte Finish', price: 320, imageUrl: 'https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600' }
+        { name: 'Living Room', image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80&w=600' },
+        { name: 'Bedroom', image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&q=80&w=600' },
+        { name: 'Dining', image: 'https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&q=80&w=600' },
+        { name: 'Lighting', image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=600' }
       ]
-    }},
-    { id: 's9', type: 'split-hero', props: { 
-      title: 'Thoughtful interiors.', 
-      subtitle: 'We believe in the beauty of slow living. Our collections prioritize comfort, natural light, and timeless materials that bring a sense of calm to your daily rituals.', 
-      image: 'https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&q=80&w=800', 
-      ctaLabel: 'Read Our Story' 
     } },
-    { id: 's10', type: 'testimonials', props: { 
-      title: 'From Our Homes', 
+    { id: 's5', type: 'product-spotlight', props: {
+      image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=800',
+      name: 'Luma Ceramic Ambient Lamp',
+      category: 'Lighting',
+      description: 'Wheel-thrown stoneware base with a textured raw clay wash and a natural pleated linen shade. Emits a comforting, warm diffused glow.',
+      price: 180,
+      features: ['Hand-thrown Stoneware', 'Pleated Belgian Linen', 'Warm Dimming LED Included'],
+      imageRight: false,
+      badge: 'Best Seller'
+    } },
+    { id: 's6', type: 'shop-the-look', props: {
+      title: 'Golden Hour Sanctuary',
+      subtitle: 'Layered illumination and textured linens that transition gracefully from day to dusk.',
+      image: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&q=80&w=1600',
+      hotspots: [
+        { x: 30, y: 70, product: { name: 'Luma Ceramic Ambient Lamp', price: 180 } },
+        { x: 60, y: 65, product: { name: 'Woven Area Rug', price: 650 } }
+      ]
+    } },
+    { id: 's7', type: 'catalog', props: {
+      products: [
+        { id: 'lum1', name: 'Ceramic Table Lamp', description: 'Stoneware Base with Pleated Shade', price: 180, category: 'Lighting', imageUrl: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=600' },
+        { id: 'lum2', name: 'Woven Area Rug', description: 'Hand-Tufted Wool & Flax Meadow', price: 650, category: 'Living Room', imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=600' },
+        { id: 'lum3', name: 'Linen Accent Pillow', description: 'Stonewashed Oatmeal Linen Cushion', price: 65, category: 'Living Room', imageUrl: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&q=80&w=600' },
+        { id: 'lum4', name: 'Oak Side Table', description: 'Sculptural Circular Wood Pedestal', price: 320, category: 'Living Room', imageUrl: 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&q=80&w=600' },
+        { id: 'lum5', name: 'Luma Cloud Sectional', description: 'Deep Feather Filled Modular Couch', price: 2350, category: 'Living Room', imageUrl: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80&w=600' },
+        { id: 'lum6', name: 'Birch Wood Dining Table', description: 'Pale Nordic Solid Timber Table', price: 1450, category: 'Dining', imageUrl: 'https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&q=80&w=600' },
+        { id: 'lum7', name: 'Spindle Back Dining Chair', description: 'Turned Birch Dowel Construction', price: 280, category: 'Dining', imageUrl: 'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&q=80&w=600' },
+        { id: 'lum8', name: 'Upholstered Linen Daybed', description: 'Streamlined Lounging Bench', price: 1250, category: 'Living Room', imageUrl: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=600' },
+        { id: 'lum9', name: 'Linen Covered Queen Bed', description: 'Padded Wing Headboard Platform', price: 1780, category: 'Bedroom', imageUrl: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&q=80&w=600' },
+        { id: 'lum10', name: 'Rounded Birch Nightstand', description: 'Cylindrical 2-Tier Bedside Table', price: 380, category: 'Bedroom', imageUrl: 'https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&q=80&w=600' },
+        { id: 'lum11', name: 'Washi Paper Pendant Light', description: 'Handmade Mulberry Bark Globe', price: 240, category: 'Lighting', imageUrl: 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&q=80&w=600' },
+        { id: 'lum12', name: 'Brass & Linen Floor Lamp', description: 'Slender Brass Stem Diffuser', price: 390, category: 'Lighting', imageUrl: 'https://images.unsplash.com/photo-1520970014086-2208d157c9e2?auto=format&fit=crop&q=80&w=600' },
+        { id: 'lum13', name: 'White Ash Sideboard', description: 'Soft Slotted Storage Cabinet', price: 1620, category: 'Dining', imageUrl: 'https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?auto=format&fit=crop&q=80&w=600' },
+        { id: 'lum14', name: 'Wool & Silk Blend Rug', description: 'Plush Low Pile Ivory Rug', price: 890, category: 'Living Room', imageUrl: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=600' },
+        { id: 'lum15', name: 'Woven Rattan Bench', description: 'Bedroom End of Bed Stool', price: 480, category: 'Bedroom', imageUrl: 'https://images.unsplash.com/photo-1547587091-f883cf8f0c12?auto=format&fit=crop&q=80&w=600' },
+        { id: 'lum16', name: 'Opal Glass Wall Sconce', description: 'Diffused Spherical Wall Light', price: 195, category: 'Lighting', imageUrl: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&q=80&w=600' }
+      ]
+    } },
+    { id: 's8', type: 'testimonials', props: {
+      title: 'Living in Soft Light',
       testimonials: [
-        { quote: 'Luma Living transformed our house. Everything feels so much warmer and incredibly inviting.', author: 'Sarah J., Interior Designer' },
-        { quote: 'The linen sofa is easily the most comfortable piece of furniture we own. Stunning craftsmanship.', author: 'Mark T.' }
-      ] 
+        { quote: 'Luma pieces create an instant feeling of calm and warmth in our apartment. The light quality is unmatched.', author: 'Clara M.' },
+        { quote: 'The ceramic table lamp has become the focal point of our evening living room ritual.', author: 'Julian S.' }
+      ]
     } },
-    { id: 's11', type: 'newsletter', props: { 
-      title: 'Notes for a warmer home.', 
-      description: 'Join our community to receive design inspiration and access to new collections.' 
+    { id: 's9', type: 'newsletter', props: {
+      title: 'Luma Journal',
+      description: 'Sign up for seasonal home stories, lighting guides, and new releases.',
+      buttonText: 'Subscribe'
     } },
-    { id: 's12', type: 'footer', props: {} }
+    { id: 's10', type: 'footer', props: {} }
   ],
   navigation: [
     { label: 'Living', href: '#living' },
-    { label: 'Dining', href: '#dining' },
     { label: 'Bedroom', href: '#bedroom' },
-    { label: 'Journal', href: '#journal' },
+    { label: 'Dining', href: '#dining' },
+    { label: 'Lighting', href: '#lighting' }
   ],
   features: [
     { id: 'wishlist', label: 'Wishlist' },
-    { id: 'cart', label: 'Cart' },
+    { id: 'cart', label: 'Cart' }
   ]
 }
+
+export const HomeFurniture05 = LumaLiving

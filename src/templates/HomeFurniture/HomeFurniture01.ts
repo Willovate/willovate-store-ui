@@ -18,39 +18,39 @@ export const HomeFurniture01: TemplateConfig = {
   sections: [
     { id: 's1', type: 'promo', props: { text: 'Designed for considered living.' } },
     { id: 's2', type: 'navbar', props: { brand: 'CASA', style: 'center' } },
-    { id: 's3', type: 'full-hero', props: { 
-      title: 'Form, Reduced to Its Essence', 
-      subtitle: 'Embracing restraint, proportion, and purposeful design in every piece.', 
-      image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1600', 
-      ctaLabel: 'Explore Collection' 
+    { id: 's3', type: 'full-hero', props: {
+      title: 'Form, Reduced to Its Essence',
+      subtitle: 'Embracing restraint, proportion, and purposeful design in every piece.',
+      image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1600',
+      ctaLabel: 'Explore Collection'
     } },
-    { id: 's4', type: 'category-grid', props: { 
-      title: 'Categories', 
+    { id: 's4', type: 'category-grid', props: {
+      title: 'Categories',
       categories: [
-        { name: 'Seating', image: 'https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&q=80&w=600' }, 
+        { name: 'Seating', image: 'https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&q=80&w=600' },
         { name: 'Tables', image: 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&q=80&w=600' },
         { name: 'Storage', image: 'https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?auto=format&fit=crop&q=80&w=600' },
         { name: 'Lighting', image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=600' },
         { name: 'Objects', image: 'https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?auto=format&fit=crop&q=80&w=600' },
         { name: 'Outdoor', image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=600' }
-      ] 
+      ]
     } },
-    { id: 's5', type: 'editorial-grid', props: { 
-      title: 'Stories', 
+    { id: 's5', type: 'editorial-grid', props: {
+      title: 'Stories',
       images: [
-        'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80&w=600', 
+        'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80&w=600',
         'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&q=80&w=600',
         'https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=600'
-      ] 
+      ]
     } },
-    { id: 's6', type: 'product-spotlight', props: { 
-      image: 'https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&q=80&w=800', 
-      name: 'Casa Lounge Chair', 
-      category: 'Seating', 
-      description: 'A sculptural form balancing negative space and structural integrity.', 
-      price: 1400, 
-      features: ['Solid Oak Frame', 'Textured Linen Blend', 'Architectural Lines'], 
-      imageRight: false 
+    { id: 's6', type: 'product-spotlight', props: {
+      image: 'https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&q=80&w=800',
+      name: 'Casa Lounge Chair',
+      category: 'Seating',
+      description: 'A sculptural form balancing negative space and structural integrity.',
+      price: 1400,
+      features: ['Solid Oak Frame', 'Textured Linen Blend', 'Architectural Lines'],
+      imageRight: false
     } },
     { id: 's7', type: 'material-grid', props: {
       title: 'Materials',
@@ -61,19 +61,27 @@ export const HomeFurniture01: TemplateConfig = {
         { id: 'm3', name: 'Linen', description: 'Heavyweight Belgian linen.', image: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&q=80&w=600' },
         { id: 'm4', name: 'Steel', description: 'Powder-coated structural steel.', image: 'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&q=80&w=600' }
       ]
-    }},
+    } },
     { id: 's8', type: 'catalog', props: {
       products: [
-        { id: 'ca1', name: 'Casa Lounge Chair', description: 'Seating', price: 1400, imageUrl: 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80&w=600' },
-        { id: 'ca2', name: 'Monument Side Table', description: 'Tables', price: 850, imageUrl: 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&q=80&w=600' },
-        { id: 'ca3', name: 'Linea Credenza', description: 'Storage', price: 3200, imageUrl: 'https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?auto=format&fit=crop&q=80&w=600' },
-        { id: 'ca4', name: 'Arc Pendant', description: 'Lighting', price: 620, imageUrl: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=600' },
-        { id: 'ca5', name: 'Forma Dining Chair', description: 'Seating', price: 450, imageUrl: 'https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&q=80&w=600' },
-        { id: 'ca6', name: 'Plinth Console', description: 'Storage', price: 1100, imageUrl: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=600' },
-        { id: 'ca7', name: 'Studio Floor Lamp', description: 'Lighting', price: 780, imageUrl: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&q=80&w=600' },
-        { id: 'ca8', name: 'Casa Bench', description: 'Seating', price: 890, imageUrl: 'https://images.unsplash.com/photo-1547587091-f883cf8f0c12?auto=format&fit=crop&q=80&w=600' }
+        { id: 'ca1', name: 'Casa Lounge Chair', description: 'Sculptural Solid Oak', price: 1400, category: 'Seating', imageUrl: 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80&w=600' },
+        { id: 'ca2', name: 'Monument Side Table', description: 'Honed Travertine', price: 850, category: 'Tables', imageUrl: 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&q=80&w=600' },
+        { id: 'ca3', name: 'Linea Credenza', description: 'Slatted White Oak', price: 3200, category: 'Storage', imageUrl: 'https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?auto=format&fit=crop&q=80&w=600' },
+        { id: 'ca4', name: 'Arc Pendant', description: 'Spun Brass Fixture', price: 620, category: 'Lighting', imageUrl: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=600' },
+        { id: 'ca5', name: 'Forma Dining Chair', description: 'Molded Architectural Wood', price: 450, category: 'Seating', imageUrl: 'https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&q=80&w=600' },
+        { id: 'ca6', name: 'Plinth Console', description: 'Minimalist Stone Table', price: 1100, category: 'Storage', imageUrl: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=600' },
+        { id: 'ca7', name: 'Studio Floor Lamp', description: 'Architectural Diffused Glow', price: 780, category: 'Lighting', imageUrl: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&q=80&w=600' },
+        { id: 'ca8', name: 'Casa Bench', description: 'Upholstered Low Stool', price: 890, category: 'Seating', imageUrl: 'https://images.unsplash.com/photo-1547587091-f883cf8f0c12?auto=format&fit=crop&q=80&w=600' },
+        { id: 'ca9', name: 'Travertine Cocktail Table', description: 'Low Solid Plinth', price: 1350, category: 'Tables', imageUrl: 'https://images.unsplash.com/photo-1530018607912-eff2daa1bac4?auto=format&fit=crop&q=80&w=600' },
+        { id: 'ca10', name: 'Column Bookcase', description: 'Fluted Open Shelving', price: 2100, category: 'Storage', imageUrl: 'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&q=80&w=600' },
+        { id: 'ca11', name: 'Minimalist Daybed', description: 'Belgian Linen Daybed', price: 2250, category: 'Seating', imageUrl: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80&w=600' },
+        { id: 'ca12', name: 'Cast Bronze Sconce', description: 'Sculptural Wall Light', price: 480, category: 'Lighting', imageUrl: 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&q=80&w=600' },
+        { id: 'ca13', name: 'Honed Marble Dining Table', description: 'Calacatta Solid Top', price: 3400, category: 'Tables', imageUrl: 'https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&q=80&w=600' },
+        { id: 'ca14', name: 'Sculptural Terracotta Vessel', description: 'Hand-thrown Object', price: 240, category: 'Objects', imageUrl: 'https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?auto=format&fit=crop&q=80&w=600' },
+        { id: 'ca15', name: 'Monolith Concrete Planter', description: 'Architectural Outdoor Urn', price: 390, category: 'Outdoor', imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=600' },
+        { id: 'ca16', name: 'Slatted Teak Garden Bench', description: 'Weatherproof Teak', price: 1150, category: 'Outdoor', imageUrl: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=600' }
       ]
-    }},
+    } },
     { id: 's9', type: 'shop-the-look', props: {
       title: 'Quiet Residence',
       image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1600',
@@ -89,12 +97,12 @@ export const HomeFurniture01: TemplateConfig = {
       text: 'Our focus is on proportion, function, and restraint. By selecting honest materials and removing the non-essential, we create furniture with longevity at its core.',
       image: 'https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=800'
     } },
-    { id: 's11', type: 'testimonials', props: { 
-      title: 'Design Perspectives', 
+    { id: 's11', type: 'testimonials', props: {
+      title: 'Design Perspectives',
       testimonials: [
         { quote: 'A masterclass in proportions and timeless design. The pieces integrate seamlessly into minimal interiors.', author: 'Architectural Digest' },
         { quote: 'Exceptional quality and restraint. True modern classics.', author: 'Interior Design Quarterly' }
-      ] 
+      ]
     } },
     { id: 's12', type: 'newsletter', props: {
       title: 'Notes on Form',
@@ -115,3 +123,5 @@ export const HomeFurniture01: TemplateConfig = {
     { id: 'cart', label: 'Cart' },
   ]
 }
+
+export const Casa = HomeFurniture01

@@ -17,109 +17,123 @@ export const HomeFurniture02: TemplateConfig = {
   },
   sections: [
     { id: 's1', type: 'navbar', props: { brand: 'FORMA', style: 'utility' } },
-    { id: 's2', type: 'hero', props: { 
-      title: 'Designed by Geometry', 
-      subtitle: 'Proportion, function and architectural clarity.', 
-      image: 'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&q=80&w=1600', 
-      ctaLabel: 'Explore Forma' 
+    { id: 's2', type: 'hero', props: {
+      title: 'Designed by Geometry',
+      subtitle: 'Proportion, function and architectural clarity.',
+      image: 'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&q=80&w=1600',
+      ctaLabel: 'Explore Forma'
     } },
-    { id: 's3', type: 'category-grid', props: { 
-      title: 'Categories', 
+    { id: 's3', type: 'category-grid', props: {
+      title: 'Structural Systems',
       categories: [
-        { name: 'Seating', image: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?auto=format&fit=crop&q=80&w=600' }, 
-        { name: 'Tables', image: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&q=80&w=600' },
-        { name: 'Storage', image: 'https://images.unsplash.com/photo-1501876725168-00c445821c9e?auto=format&fit=crop&q=80&w=600' },
-        { name: 'Lighting', image: 'https://images.unsplash.com/photo-1540932239986-30128078f3c5?auto=format&fit=crop&q=80&w=600' }
-      ] 
-    } },
-    { id: 's4', type: 'product-spotlight', props: { 
-      image: 'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&q=80&w=800', 
-      name: 'Forma Modular Chair', 
-      category: 'Seating', 
-      description: 'A study in geometry and tension. Engineered for perfect proportion and absolute comfort.', 
-      price: 1200, 
-      features: ['Precision Engineered', 'Modular Frame', 'Made in Italy'], 
-      imageRight: false, 
-      badge: 'Signature' 
-    } },
-    { id: 's5', type: 'feature-comparison', props: {
-      title: 'Modular Systems',
-      products: [
-        { name: 'Forma Chair', price: 1200 },
-        { name: 'Forma Lounge', price: 1800, isHighlighted: true },
-        { name: 'Forma Modular', price: 3400 }
-      ],
-      rows: [
-        { label: 'Material', values: ['Steel / Leather', 'Steel / Leather', 'Aluminium / Wool'] },
-        { label: 'Dimensions', values: ['45 x 50 cm', '60 x 75 cm', '180 x 80 cm'] },
-        { label: 'Configuration', values: ['Fixed', 'Fixed', 'Modular'] },
-        { label: 'Finish', values: ['Powder-coated', 'Powder-coated', 'Anodized'] },
-        { label: 'Use', values: ['Dining', 'Living', 'Living'] }
+        { name: 'Seating', image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=600' },
+        { name: 'Tables', image: 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&q=80&w=600' },
+        { name: 'Storage', image: 'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&q=80&w=600' },
+        { name: 'Lighting', image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=600' }
       ]
     } },
-    { id: 's6', type: 'material-grid', props: { 
-      title: 'Materials', 
-      subtitle: 'Architectural grade materials.', 
+    { id: 's4', type: 'product-spotlight', props: {
+      image: 'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&q=80&w=800',
+      name: 'Forma Structural Table',
+      category: 'Tables',
+      description: 'Precision milled aluminum frame with monolithic black quartz surface. Balanced engineering for progressive studios.',
+      price: 1850,
+      features: ['Aircraft Aluminum', 'Precision Milled', 'Anti-Fingerprint Quartz'],
+      imageRight: false,
+      badge: 'Signature'
+    } },
+    { id: 's5', type: 'feature-comparison', props: {
+      title: 'Architectural Specs',
+      products: [
+        { name: 'Forma Console', price: 1200, isHighlighted: false },
+        { name: 'Structural Table', price: 1850, isHighlighted: true },
+        { name: 'Studio Desk', price: 2100, isHighlighted: false }
+      ],
+      rows: [
+        { label: 'Surface', values: ['Solid Quartz', 'Milled Quartz Top', 'Anodized Plate'] },
+        { label: 'Load Rating', values: ['180 kg', '350 kg', '220 kg'] },
+        { label: 'Cable Routing', values: ['Concealed Port', 'Dual Channel Grid', 'Integrated Raceway'] }
+      ]
+    } },
+    { id: 's6', type: 'material-grid', props: {
+      title: 'Precision Materials',
+      subtitle: 'Engineered for enduring utility and architectural rigor.',
       materials: [
-        { id: 'm1', name: 'Italian Leather', description: 'Ages beautifully with use.', image: 'https://images.unsplash.com/photo-1505253758473-96b7015fcd40?auto=format&fit=crop&q=80&w=600' }, 
-        { id: 'm2', name: 'Solid Oak', description: 'Sustainably harvested.', image: 'https://images.unsplash.com/photo-1604514628550-37477afdf4e3?auto=format&fit=crop&q=80&w=600' }, 
-        { id: 'm3', name: 'Powder-coated Steel', description: 'Architectural grade.', image: 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&q=80&w=600' }
-      ] 
+        { id: 'm1', name: 'Black Quartz', description: 'Zero porosity surface with silky tactile finish.', image: 'https://images.unsplash.com/photo-1549187774-b4e9b0445b41?auto=format&fit=crop&q=80&w=600' },
+        { id: 'm2', name: 'Milled Steel', description: 'Structural steel components coated in satin graphite.', image: 'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&q=80&w=600' },
+        { id: 'm3', name: 'Saddle Leather', description: 'Full grain vegetable tanned European hide.', image: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&q=80&w=600' },
+        { id: 'm4', name: 'Smoked Glass', description: 'Tempered optical glass with bronze tinting.', image: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&q=80&w=600' }
+      ]
     } },
     { id: 's7', type: 'catalog', props: {
       products: [
-        { id: 'f1', name: 'Structural Table', description: 'Dining', price: 3200, imageUrl: 'https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&q=80&w=600' },
-        { id: 'f2', name: 'Arc Floor Lamp', description: 'Lighting', price: 850, imageUrl: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=600' },
-        { id: 'f3', name: 'Minimalist Bookshelf', description: 'Storage', price: 1400, imageUrl: 'https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&q=80&w=600' },
-        { id: 'f4', name: 'Leather Lounge', description: 'Seating', price: 4100, imageUrl: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&q=80&w=600' }
+        { id: 'f1', name: 'Structural Table', description: 'Precision Milled Quartz & Aluminum', price: 1850, category: 'Tables', imageUrl: 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&q=80&w=600' },
+        { id: 'f2', name: 'Arc Floor Lamp', description: 'Matte Black Cantilevered Fixture', price: 720, category: 'Lighting', imageUrl: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=600' },
+        { id: 'f3', name: 'Minimalist Bookshelf', description: 'Anodized Steel Modular Stacks', price: 2400, category: 'Storage', imageUrl: 'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&q=80&w=600' },
+        { id: 'f4', name: 'Leather Lounge', description: 'Architectural Saddle Leather Armchair', price: 1600, category: 'Seating', imageUrl: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=600' },
+        { id: 'f5', name: 'Cantilevered Studio Desk', description: 'Integrated Wire Raceway Desk', price: 2100, category: 'Tables', imageUrl: 'https://images.unsplash.com/photo-1544457070-4cd773b4d71e?auto=format&fit=crop&q=80&w=600' },
+        { id: 'f6', name: 'Geometric Dining Chair', description: 'Molded Monolithic Shell', price: 580, category: 'Seating', imageUrl: 'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&q=80&w=600' },
+        { id: 'f7', name: 'Linear Suspension Chandelier', description: 'Architectural Downlight Array', price: 940, category: 'Lighting', imageUrl: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&q=80&w=600' },
+        { id: 'f8', name: 'Modular Wall System', description: 'Wall-Anchored Extruded Shelving', price: 2750, category: 'Storage', imageUrl: 'https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?auto=format&fit=crop&q=80&w=600' },
+        { id: 'f9', name: 'Monolithic Marble Coffee Table', description: 'Solid Nero Marquina Block', price: 1950, category: 'Tables', imageUrl: 'https://images.unsplash.com/photo-1530018607912-eff2daa1bac4?auto=format&fit=crop&q=80&w=600' },
+        { id: 'f10', name: 'Tubular Steel Armchair', description: 'Continuous Bauhaus-Inspired Curve', price: 1250, category: 'Seating', imageUrl: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&q=80&w=600' },
+        { id: 'f11', name: 'Low Profile Media Console', description: 'Perforated Acoustic Steel Doors', price: 1850, category: 'Storage', imageUrl: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=600' },
+        { id: 'f12', name: 'Cylindrical Stone Stool', description: 'Honed Basalt Monolith', price: 420, category: 'Seating', imageUrl: 'https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&q=80&w=600' },
+        { id: 'f13', name: 'Precision Desk Task Lamp', description: 'Counterbalanced Articulated Arm', price: 390, category: 'Lighting', imageUrl: 'https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?auto=format&fit=crop&q=80&w=600' },
+        { id: 'f14', name: 'Glass Top Bistro Table', description: 'Smoked Glass & Cast Iron Base', price: 980, category: 'Tables', imageUrl: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&q=80&w=600' },
+        { id: 'f15', name: 'Architectural Steel Bench', description: 'Slotted Satin Steel Frame', price: 890, category: 'Seating', imageUrl: 'https://images.unsplash.com/photo-1547587091-f883cf8f0c12?auto=format&fit=crop&q=80&w=600' },
+        { id: 'f16', name: 'Fluted Glass Sideboard', description: 'Industrial Frame with Reeded Panes', price: 2300, category: 'Storage', imageUrl: 'https://images.unsplash.com/photo-1516961642265-531546e84af2?auto=format&fit=crop&q=80&w=600' }
       ]
-    }},
-    { id: 's8', type: 'full-hero', props: { 
-      title: 'Structure Meets Living', 
-      subtitle: 'Integrating precision engineering into the home.', 
-      image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1600', 
-      ctaLabel: 'View the Collection' 
+    } },
+    { id: 's8', type: 'full-hero', props: {
+      title: 'Purity in Architecture',
+      subtitle: 'Every joint, radius, and finish is calibrated for enduring geometric balance.',
+      image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1600',
+      ctaLabel: 'View Portfolio'
     } },
     { id: 's9', type: 'shop-the-look', props: {
-      title: 'Linear Residence',
-      image: 'https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?auto=format&fit=crop&q=80&w=1600',
+      title: 'Studio Pavilion',
+      subtitle: 'Configured for focused contemplation and timeless function.',
+      image: 'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&q=80&w=1600',
       hotspots: [
-        { x: 35, y: 75, product: { name: 'Leather Lounge', price: 4100, imageUrl: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&q=80&w=600' } },
-        { x: 65, y: 40, product: { name: 'Arc Floor Lamp', price: 850, imageUrl: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=600' } }
+        { x: 35, y: 65, product: { name: 'Structural Table', price: 1850 } },
+        { x: 68, y: 40, product: { name: 'Arc Floor Lamp', price: 720 } },
+        { x: 80, y: 70, product: { name: 'Leather Lounge', price: 1600 } }
       ]
     } },
-    { id: 's10', type: 'specification-grid', props: { 
-      title: 'Technical Specifications', 
-      specs: [
-        { label: 'Materials', value: 'Aluminium, Steel, Oak' },
-        { label: 'Finish', value: 'Powder-coated, Anodized' },
-        { label: 'Load Rating', value: 'Commercial Grade' },
-        { label: 'Assembly', value: 'Modular System' },
-        { label: 'Warranty', value: '10 Years Structural' }
-      ] 
+    { id: 's10', type: 'specification-grid', props: {
+      title: 'Studio Standards',
+      items: [
+        { label: 'Tolerances', value: '±0.5mm precision across all milled joints' },
+        { label: 'Hardware', value: 'Custom concealed stainless fasteners' },
+        { label: 'Finish', value: 'Dual-pass satin architectural powder coat' },
+        { label: 'Warranty', value: '25-year structural guarantee' }
+      ]
     } },
-    { id: 's11', type: 'testimonials', props: { 
-      title: 'Studio Perspectives', 
+    { id: 's11', type: 'testimonials', props: {
+      title: 'Architect Reviews',
       testimonials: [
-        { quote: 'Precision engineering that does not sacrifice comfort. A triumph of structural design.', author: 'Design Anthology' },
-        { quote: 'These pieces integrate flawlessly into architectural spaces, adding geometry without clutter.', author: 'Modernism Magazine' }
-      ] 
+        { quote: 'Forma represents the peak of contemporary structural design. Nothing extraneous, everything purposeful.', author: 'Kengo Associates' },
+        { quote: 'The craftsmanship and precision tolerances are unlike anything else in modern furniture production.', author: 'Studio Nord' }
+      ]
     } },
     { id: 's12', type: 'newsletter', props: {
-      title: 'Forma Journal',
-      description: 'New collections, material studies, architectural projects and studio notes.',
+      title: 'Forma Technical Journal',
+      description: 'Receive specification releases, structural studies, and private showroom invitations.',
       buttonText: 'Subscribe'
     } },
     { id: 's13', type: 'footer', props: {} }
   ],
   navigation: [
     { label: 'Collection', href: '#collection' },
+    { label: 'Systems', href: '#systems' },
     { label: 'Materials', href: '#materials' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'Journal', href: '#journal' },
+    { label: 'Specifications', href: '#specs' }
   ],
   features: [
-    { id: 'account', label: 'My Account' },
-    { id: 'cart', label: 'Cart' },
+    { id: 'search', label: 'Search' },
+    { id: 'cart', label: 'Cart' }
   ]
 }
+
+export const Forma = HomeFurniture02

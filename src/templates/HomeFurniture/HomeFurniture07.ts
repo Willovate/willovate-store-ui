@@ -3,108 +3,108 @@ import type { TemplateConfig } from '../../types/template'
 export const Nest: TemplateConfig = {
   id: 'nest',
   name: 'Nest',
-  description: 'Warm minimalism, soft textures, and quiet residential storytelling.',
+  description: 'Organic sanctuary, calm neutral textures, and mindful home living.',
   categories: [{ id: 'home', name: 'Home & Furniture' }],
-  tags: [{ id: 'minimalist', name: 'Minimalist' }, { id: 'warm', name: 'Warm' }, { id: 'residential', name: 'Residential' }],
-  thumbnailUrl: 'https://images.unsplash.com/photo-1598550476439-6847785fcea6?auto=format&fit=crop&q=80&w=800',
+  tags: [{ id: 'organic', name: 'Organic' }, { id: 'sanctuary', name: 'Sanctuary' }, { id: 'neutral', name: 'Neutral' }],
+  thumbnailUrl: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=800',
   previewImages: [
-    'https://images.unsplash.com/photo-1598550476439-6847785fcea6?auto=format&fit=crop&q=80&w=1600'
+    'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=1600'
   ],
   isFeatured: false,
   theme: {
-    fonts: { heading: 'Inter, sans-serif', body: 'Inter, sans-serif' },
-    colors: { primary: '#4a4036', background: '#fdfbf7', accent: '#d98a6c' }
+    fonts: { heading: 'Georgia, serif', body: 'Inter, sans-serif' },
+    colors: { primary: '#2b2927', background: '#f7f6f2', accent: '#9e8a78' }
   },
   sections: [
-    { id: 's1', type: 'promo', props: { text: 'Free shipping and extended 60-day returns.' } },
-    { id: 's2', type: 'navbar', props: { brand: 'Nest', style: 'center' } },
-    { id: 's3', type: 'split-hero', props: { 
-      title: 'Made for the everyday moments.', 
-      subtitle: 'Furniture that invites you to settle in. Designed with human scale and tactile materials for a warmer home.', 
-      image: 'https://images.unsplash.com/photo-1598550476439-6847785fcea6?auto=format&fit=crop&q=80&w=800', 
-      ctaLabel: 'Explore the Collection' 
+    { id: 's1', type: 'promo', props: { text: 'Mindfully crafted goods delivered sustainably to your door.' } },
+    { id: 's2', type: 'navbar', props: { brand: 'NEST', style: 'minimal' } },
+    { id: 's3', type: 'split-hero', props: {
+      title: 'A Sanctuary for Thoughtful Living',
+      subtitle: 'Gentle contours, natural fibers, and timeless furniture created to help you unwind.',
+      image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=800',
+      ctaLabel: 'Explore Sanctuary'
     } },
-    { id: 's4', type: 'category-grid', props: { 
-      title: 'Spaces to Live In', 
+    { id: 's4', type: 'category-grid', props: {
+      title: 'Shop by Zone',
       categories: [
-        { name: 'Living', image: 'https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?auto=format&fit=crop&q=80&w=600' }, 
-        { name: 'Dining', image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=600' }, 
-        { name: 'Bedroom', image: 'https://images.unsplash.com/photo-1616423640778-28d1b53229bd?auto=format&fit=crop&q=80&w=600' },
-        { name: 'Objects', image: 'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&q=80&w=600' }
-      ] 
+        { name: 'Living', image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80&w=600' },
+        { name: 'Dining', image: 'https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&q=80&w=600' },
+        { name: 'Bedroom', image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&q=80&w=600' },
+        { name: 'Objects', image: 'https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?auto=format&fit=crop&q=80&w=600' }
+      ]
     } },
-    { id: 's5', type: 'product-spotlight', props: { 
-      image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=800', 
-      name: 'The Gentle Lounge Chair', 
-      category: 'Living', 
-      description: 'Generously proportioned and deeply comforting. Upholstered in brushed cotton that feels like a warm embrace.', 
-      price: 1450, 
-      features: ['Brushed Cotton Blend', 'Feather-wrapped Core', 'Solid Oak Base'], 
-      imageRight: false, 
-      badge: 'New Arrival' 
+    { id: 's5', type: 'product-spotlight', props: {
+      image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=800',
+      name: 'Nest Linen Haven Sofa',
+      category: 'Living',
+      description: 'Generously proportioned down-filled sectional upholstered in heavy raw Belgian linen with double-stitched french seams.',
+      price: 2100,
+      features: ['Raw Belgian Linen', 'Down-Alternative Fill', 'Sustainable FSC Ash'],
+      imageRight: true,
+      badge: 'Core Sanctuary'
     } },
     { id: 's6', type: 'catalog', props: {
       products: [
-        { id: 'c1', name: 'Linen Haven Sofa', description: 'Oatmeal', price: 2900, imageUrl: 'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&q=80&w=600' },
-        { id: 'c2', name: 'Oak Side Table', description: 'Matte Finish', price: 420, imageUrl: 'https://images.unsplash.com/photo-1505685296765-3a2736de412f?auto=format&fit=crop&q=80&w=600' },
-        { id: 'c3', name: 'Platform Bed', description: 'Warm Ash', price: 1800, imageUrl: 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&q=80&w=600' },
-        { id: 'c4', name: 'Ceramic Table Lamp', description: 'Textured Sand', price: 280, imageUrl: 'https://images.unsplash.com/photo-1561154464-82e9adf32764?auto=format&fit=crop&q=80&w=600' }
+        { id: 'nst1', name: 'Linen Haven Sofa', description: 'Raw Flax Down-Filled Sofa', price: 2100, category: 'Living', imageUrl: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80&w=600' },
+        { id: 'nst2', name: 'Oak Side Table', description: 'Honed Circular Ash Pillar', price: 380, category: 'Living', imageUrl: 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&q=80&w=600' },
+        { id: 'nst3', name: 'Platform Bed', description: 'Low Minimal Wood Platform Bed', price: 1650, category: 'Bedroom', imageUrl: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&q=80&w=600' },
+        { id: 'nst4', name: 'Ceramic Table Lamp', description: 'Terracotta Matte Wash Glow', price: 195, category: 'Objects', imageUrl: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=600' },
+        { id: 'nst5', name: 'Organic Oval Dining Table', description: 'Natural Oak Rounded Dining Surface', price: 1550, category: 'Dining', imageUrl: 'https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&q=80&w=600' },
+        { id: 'nst6', name: 'Woven Cane Dining Chair', description: 'Rattan & Solid Birch Armchair', price: 340, category: 'Dining', imageUrl: 'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&q=80&w=600' },
+        { id: 'nst7', name: 'Curved Boucle Armchair', description: 'Cocooning Reading Nook Seat', price: 920, category: 'Living', imageUrl: 'https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&q=80&w=600' },
+        { id: 'nst8', name: 'Low Fluted Media Console', description: 'Tambour Door Low Ash Credenza', price: 1420, category: 'Living', imageUrl: 'https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?auto=format&fit=crop&q=80&w=600' },
+        { id: 'nst9', name: 'Stonewashed Linen Duvet', description: 'Pre-Washed Flax Bedding Ensemble', price: 260, category: 'Bedroom', imageUrl: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&q=80&w=600' },
+        { id: 'nst10', name: 'Soft Edge Wood Nightstand', description: 'Curved Bedside Pedestal Table', price: 390, category: 'Bedroom', imageUrl: 'https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&q=80&w=600' },
+        { id: 'nst11', name: 'Stoneware Clay Vase', description: 'Speckled Studio Pottery Urn', price: 110, category: 'Objects', imageUrl: 'https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?auto=format&fit=crop&q=80&w=600' },
+        { id: 'nst12', name: 'Wool Boucle Area Rug', description: 'Thick Handwoven Organic Wool', price: 780, category: 'Living', imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=600' },
+        { id: 'nst13', name: 'Sculptural Oak Bench', description: 'Low Organic Entry Stool', price: 590, category: 'Living', imageUrl: 'https://images.unsplash.com/photo-1547587091-f883cf8f0c12?auto=format&fit=crop&q=80&w=600' },
+        { id: 'nst14', name: 'Rounded Ash Wardrobe', description: 'Natural Oak Double Closet', price: 2250, category: 'Bedroom', imageUrl: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&q=80&w=600' },
+        { id: 'nst15', name: 'Brass Dome Pendant', description: 'Spun Brass Ceiling Illuminator', price: 320, category: 'Objects', imageUrl: 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&q=80&w=600' },
+        { id: 'nst16', name: 'Round Solid Ash Coffee Table', description: 'Triple Pillar Low Table', price: 640, category: 'Living', imageUrl: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&q=80&w=600' }
       ]
     } },
-    { id: 's7', type: 'shop-the-look', props: { 
-      title: 'A Quiet Living Room', 
-      subtitle: 'Soft textures, morning light, and objects that earn their keep.', 
-      image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1600', 
+    { id: 's7', type: 'shop-the-look', props: {
+      title: 'Restorative Living',
+      subtitle: 'Soft neutrals and layered textures designed for everyday quiet.',
+      image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=1600',
       hotspots: [
-        { x: 35, y: 65, product: { name: 'Linen Sofa', price: 2900 } },
-        { x: 60, y: 75, product: { name: 'Oak Coffee Table', price: 850 } },
-        { x: 75, y: 45, product: { name: 'Ceramic Lamp', price: 280 } }
-      ] 
+        { x: 35, y: 65, product: { name: 'Linen Haven Sofa', price: 2100 } },
+        { x: 65, y: 75, product: { name: 'Round Solid Ash Coffee Table', price: 640 } }
+      ]
     } },
-    { id: 's8', type: 'material-grid', props: { 
-      title: 'Tactile by Nature', 
-      subtitle: 'Materials chosen for how they feel against the skin and how beautifully they age.', 
+    { id: 's8', type: 'material-grid', props: {
+      title: 'Earth & Fiber',
+      subtitle: 'Consciously sourced raw materials that age beautifully with your home.',
       materials: [
-        { id: 'm1', name: 'Solid Oak', image: 'https://images.unsplash.com/photo-1558036117-15d82a90b9b1?auto=format&fit=crop&q=80&w=600' }, 
-        { id: 'm2', name: 'Brushed Cotton', image: 'https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?auto=format&fit=crop&q=80&w=600' }, 
-        { id: 'm3', name: 'Natural Wool', image: 'https://images.unsplash.com/photo-1595878715977-2e8f8df18ea8?auto=format&fit=crop&q=80&w=600' },
-        { id: 'm4', name: 'Warm Stone', image: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&q=80&w=600' }
-      ] 
+        { id: 'm1', name: 'Unbleached Flax', description: 'Pure European linen, untreated and soft.', image: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&q=80&w=600' },
+        { id: 'm2', name: 'Sustainably Harvested Ash', description: 'FSC certified pale ash finished with plant waxes.', image: 'https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&q=80&w=600' },
+        { id: 'm3', name: 'Raw Earthenware', description: 'Local clay fired with mineral oxide glazes.', image: 'https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?auto=format&fit=crop&q=80&w=600' }
+      ]
     } },
-    { id: 's9', type: 'split-hero', props: { 
-      title: 'The rituals of home.', 
-      subtitle: 'We believe your home should be your softest landing. We design furniture that quietly supports your daily rituals, favoring enduring comfort over fleeting trends.', 
-      image: 'https://images.unsplash.com/photo-1558089687-f282ffcbc126?auto=format&fit=crop&q=80&w=800', 
-      ctaLabel: 'Read Our Story' 
-    } },
-    { id: 's10', type: 'testimonials', props: { 
-      title: 'From Our Homes', 
+    { id: 's9', type: 'testimonials', props: {
+      title: 'Life in Nest',
       testimonials: [
-        { quote: 'The Gentle Lounge Chair has become the centerpiece of my mornings. It feels incredibly personal and instantly comforting.', author: 'Elena R.' },
-        { quote: 'Nest designs with such an understated elegance. Their pieces feel like they\'ve always belonged in the room.', author: 'Marcus V., Interior Architect' }
-      ] 
+        { quote: 'Stepping into our home now feels like taking a deep, restorative breath. Nest creates genuine peace.', author: 'Elena Rostova' },
+        { quote: 'The linen quality and joinery on the bed frame exceeded our highest expectations.', author: 'Dr. Timothy Vance' }
+      ]
     } },
-    { id: 's11', type: 'editorial-grid', props: { 
-      title: 'Quiet Corners', 
-      images: [
-        'https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&q=80&w=600', 
-        'https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?auto=format&fit=crop&q=80&w=600'
-      ] 
+    { id: 's10', type: 'newsletter', props: {
+      title: 'Nest Letters',
+      description: 'Mindful home practices, seasonal living guides, and early preview invitations.',
+      buttonText: 'Join Sanctuary'
     } },
-    { id: 's12', type: 'newsletter', props: { 
-      title: 'Notes for living well.', 
-      description: 'Join our community for quiet reflections on home, design, and comfort.' 
-    } },
-    { id: 's13', type: 'footer', props: {} }
+    { id: 's11', type: 'footer', props: {} }
   ],
   navigation: [
     { label: 'Living', href: '#living' },
-    { label: 'Bedroom', href: '#bedroom' },
     { label: 'Dining', href: '#dining' },
-    { label: 'Journal', href: '#journal' },
+    { label: 'Bedroom', href: '#bedroom' },
+    { label: 'Objects', href: '#objects' }
   ],
   features: [
-    { id: 'cart', label: 'Cart' },
-    { id: 'search', label: 'Search' },
+    { id: 'wishlist', label: 'Wishlist' },
+    { id: 'cart', label: 'Cart' }
   ]
 }
+
+export const HomeFurniture07 = Nest

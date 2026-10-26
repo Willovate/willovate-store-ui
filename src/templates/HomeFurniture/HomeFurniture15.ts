@@ -16,32 +16,34 @@ export const HomeFurniture15: TemplateConfig = {
     colors: { primary: '#1a1a1a', background: '#ffffff', accent: '#4f46e5' }
   },
   sections: [
-    { id: 's1', type: 'promo', props: { text: 'New modular pieces for modern rooms.' } },
+    { id: 's1', type: 'promo', props: { text: 'New modular pieces for modern rooms. Scalable design for city homes.' } },
     { id: 's2', type: 'navbar', props: { brand: 'Room & Co.', style: 'center' } },
-    { id: 's3', type: 'full-width-hero', props: { 
-      title: 'Make Room for Better Living.', 
-      subtitle: 'Furniture designed for the way you live now—flexible spaces, considered design, and everyday functionality.', 
+    { id: 's3', type: 'full-width-hero', props: {
+      title: 'Make Room for Better Living.',
+      subtitle: 'Furniture designed for the way you live now—flexible spaces, considered design, and everyday functionality.',
       image: 'https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?auto=format&fit=crop&q=80&w=1600',
-      ctaLabel: 'Shop The Collection' 
+      ctaLabel: 'Shop The Collection'
     } },
-    { id: 's4', type: 'category-grid', props: { 
-      title: 'Spaces', 
+    { id: 's4', type: 'category-grid', props: {
+      title: 'Spaces',
       categories: [
-        { name: 'Living Room', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=600' }, 
-        { name: 'Bedroom', image: 'https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&q=80&w=600' }, 
+        { name: 'Living Room', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=600' },
+        { name: 'Bedroom', image: 'https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&q=80&w=600' },
         { name: 'Dining', image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=600' },
-        { name: 'Home Office', image: 'https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?auto=format&fit=crop&q=80&w=600' }
-      ] 
+        { name: 'Home Office', image: 'https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?auto=format&fit=crop&q=80&w=600' },
+        { name: 'Lighting', image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&q=80&w=600' },
+        { name: 'Decor', image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=600' }
+      ]
     } },
-    { id: 's5', type: 'product-spotlight', props: { 
-      image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=800', 
-      name: 'Metro Modular Sofa', 
-      category: 'Seating', 
-      description: 'A modular sofa designed to adapt as your space changes. Clean lines meet exceptional practical comfort.', 
-      price: 1850, 
-      features: ['Reversible Chaise', 'Stain-Resistant Fabric', 'High-Density Foam'], 
+    { id: 's5', type: 'product-spotlight', props: {
+      image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=800',
+      name: 'Metro Modular Sofa',
+      category: 'Living Room',
+      description: 'A modular sofa designed to adapt as your space changes. Clean lines meet exceptional practical comfort.',
+      price: 1850,
+      features: ['Reversible Chaise', 'Stain-Resistant Fabric', 'High-Density Foam'],
       imageRight: false,
-      badge: 'Bestseller' 
+      badge: 'Bestseller'
     } },
     { id: 's6', type: 'shop-the-look', props: {
       title: 'The Modern Living Room',
@@ -63,15 +65,28 @@ export const HomeFurniture15: TemplateConfig = {
       ]
     } },
     { id: 's8', type: 'catalog', props: {
+      title: 'Modular Urban Collection',
       products: [
-        { id: 'h15_1', name: 'Metro Lounge Sofa', description: 'Living Room', price: 1400, imageUrl: 'https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?auto=format&fit=crop&q=80&w=600' },
-        { id: 'h15_2', name: 'Arc Floor Lamp', description: 'Lighting', price: 250, imageUrl: 'https://images.unsplash.com/photo-1518977822534-7049a61ee0c2?auto=format&fit=crop&q=80&w=600' },
-        { id: 'h15_3', name: 'Grid Coffee Table', description: 'Tables', price: 400, imageUrl: 'https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&q=80&w=600' },
-        { id: 'h15_4', name: 'Loft Area Rug', description: 'Decor', price: 350, imageUrl: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=600' }
+        { id: 'h15_1', name: 'Metro Lounge Sofa', description: 'Modular Living Room Sectional', price: 1400, category: 'Living Room', imageUrl: 'https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?auto=format&fit=crop&q=80&w=600' },
+        { id: 'h15_2', name: 'Arc Floor Lamp', description: 'Minimalist Brass & Steel Lighting', price: 250, category: 'Lighting', imageUrl: 'https://images.unsplash.com/photo-1518977822534-7049a61ee0c2?auto=format&fit=crop&q=80&w=600' },
+        { id: 'h15_3', name: 'Grid Coffee Table', description: 'Compact Powder-Coated Metal & Oak Table', price: 400, category: 'Living Room', imageUrl: 'https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&q=80&w=600' },
+        { id: 'h15_4', name: 'Loft Area Rug', description: 'Low-Profile Graphic Urban Weave', price: 350, category: 'Decor', imageUrl: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=600' },
+        { id: 'h15_5', name: 'Metro Sectional Chaise', description: 'Reversible Left/Right Modular Chaise', price: 1850, category: 'Living Room', imageUrl: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=600' },
+        { id: 'h15_6', name: 'Convertible Studio Desk', description: 'Drop-Leaf Wall-Mounted Solid Oak Workstation', price: 520, category: 'Home Office', imageUrl: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=600' },
+        { id: 'h15_7', name: 'Compact Dining Set', description: 'Round Ash Table with 4 Nesting Padded Chairs', price: 980, category: 'Dining', imageUrl: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=600' },
+        { id: 'h15_8', name: 'Lift-Top Storage Bed', description: 'Gas-Lift Hydraulic Under-Bed Storage Frame', price: 1650, category: 'Bedroom', imageUrl: 'https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&q=80&w=600' },
+        { id: 'h15_9', name: 'Swivel Velvet Armchair', description: 'Cobalt Textured Weave 360-Degree Swivel', price: 580, category: 'Living Room', imageUrl: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&q=80&w=600' },
+        { id: 'h15_10', name: 'Modular Wall Shelf System', description: 'Adjustable 3-Bay Black Steel Frame & Oak Shelves', price: 720, category: 'Home Office', imageUrl: 'https://images.unsplash.com/photo-1504890001746-a9a68eda46e2?auto=format&fit=crop&q=80&w=600' },
+        { id: 'h15_11', name: 'Slimline Shoe Bench', description: 'Upholstered Bench with Dual Under-Seat Wire Racks', price: 290, category: 'Decor', imageUrl: 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&q=80&w=600' },
+        { id: 'h15_12', name: 'Glass Nesting Tables', description: 'Smoked Tempered Glass & Matte Black Steel Trio', price: 340, category: 'Living Room', imageUrl: 'https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?auto=format&fit=crop&q=80&w=600' },
+        { id: 'h15_13', name: 'Acoustic Felt Task Chair', description: 'Recycled Charcoal Felt Shell with Smooth Castors', price: 380, category: 'Home Office', imageUrl: 'https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?auto=format&fit=crop&q=80&w=600' },
+        { id: 'h15_14', name: 'Pivoting Wall Sconce', description: 'Double Articulated Swing Arm in Matte Black', price: 160, category: 'Lighting', imageUrl: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&q=80&w=600' },
+        { id: 'h15_15', name: 'Pill-Shaped Entry Mirror', description: 'Slim Iron Frame with Integrated Key Ledge', price: 195, category: 'Decor', imageUrl: 'https://images.unsplash.com/photo-1628088062854-d1870b4553da?auto=format&fit=crop&q=80&w=600' },
+        { id: 'h15_16', name: 'Extendable Dining Bench', description: 'Solid Oak Bench Expanding from 120cm to 180cm', price: 440, category: 'Dining', imageUrl: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=600' }
       ]
     }},
-    { id: 's9', type: 'material-grid', props: { 
-      title: 'Built for everyday spaces.', 
+    { id: 's9', type: 'material-grid', props: {
+      title: 'Built for everyday spaces.',
       subtitle: 'Materials selected for durability, clean lines, and practical city living.',
       materials: [
         { id: 'm1', name: 'Powder-Coated Steel', description: 'Lightweight structural integrity.', image: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&q=80&w=600' },
@@ -80,20 +95,20 @@ export const HomeFurniture15: TemplateConfig = {
         { id: 'm4', name: 'Tempered Glass', description: 'Creates the illusion of more space.', image: 'https://images.unsplash.com/photo-1506484381205-f7945653044d?auto=format&fit=crop&q=80&w=600' }
       ]
     } },
-    { id: 's10', type: 'editorial-grid', props: { 
-      title: 'Living in the City', 
+    { id: 's10', type: 'editorial-grid', props: {
+      title: 'Living in the City',
       images: [
-        'https://images.unsplash.com/photo-1534080564583-6be75777b70a?auto=format&fit=crop&q=80&w=600', 
-        'https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&q=80&w=600', 
+        'https://images.unsplash.com/photo-1534080564583-6be75777b70a?auto=format&fit=crop&q=80&w=600',
+        'https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&q=80&w=600',
         'https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&q=80&w=600'
-      ] 
+      ]
     } },
-    { id: 's11', type: 'testimonials', props: { 
-      title: 'City Reviews', 
+    { id: 's11', type: 'testimonials', props: {
+      title: 'City Reviews',
       testimonials: [
         { quote: 'The modular design allowed us to actually fit a comfortable sectional into our 1-bedroom layout. Unbelievably practical.', author: 'S. Davies' },
         { quote: 'Sharp, contemporary, and arrived in boxes that fit in the elevator. Essential for city dwellers.', author: 'M. Robinson' }
-      ] 
+      ]
     } },
     { id: 's12', type: 'newsletter', props: {
       title: 'The Room Edit',
@@ -102,13 +117,14 @@ export const HomeFurniture15: TemplateConfig = {
     { id: 's13', type: 'footer', props: {} }
   ],
   navigation: [
-    { label: 'Living', href: '#living' },
-    { label: 'Dining', href: '#dining' },
-    { label: 'Bedroom', href: '#bedroom' },
-    { label: 'Office', href: '#office' },
+    { label: 'Living', href: '#catalog' },
+    { label: 'Dining', href: '#catalog' },
+    { label: 'Office', href: '#catalog' },
+    { label: 'Apartment Edit', href: '#shop' },
   ],
   features: [
     { id: 'search', label: 'Search' },
+    { id: 'wishlist', label: 'Wishlist' },
     { id: 'cart', label: 'Cart' },
   ]
 }
